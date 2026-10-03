@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "clef-use"
+version = "0.1.0"
+description = "A shared, bounded computer-use runtime powered by CLEF and OmniParser"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11,<3.14"
+authors = [{name = "clef-use contributors"}]
+dependencies = [
+  "mcp>=1.30,<2", "pillow>=12.3,<13", "pydantic>=2.13,<3",
+  "tomlkit>=0.15,<1", "ruamel.yaml>=0.18.17,<0.19", "packaging>=26,<27",
+  "huggingface-hub>=1.33,<2", "mss>=10,<11", "pyautogui==0.9.54",
+  "pyperclip>=1.9,<2", "filelock>=3.25,<4",
+]
+
+[project.scripts]
+clef-use = "clef_use.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=9,<10", "pytest-asyncio>=1,<2", "ruff>=0.16,<1", "build>=1.6,<2",
+       "hatchling>=1.27,<2", "setuptools>=82,<83", "wheel>=0.46,<1", "pip>=26.2,<27"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/clef_use"]

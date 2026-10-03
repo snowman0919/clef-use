@@ -1,0 +1,99 @@
+{
+  "session_id": "6e30aee256c64dea95ba89591f220884",
+  "status": "NO_PROGRESS",
+  "steps": 4,
+  "rounds": 4,
+  "last_action": {
+    "id": "a0",
+    "operation": "wait",
+    "target": null
+  },
+  "confidence": 0.6946,
+  "reason": "unchanged or repeated visual state",
+  "summary": "NO_PROGRESS after 4 actions, 4 decisions",
+  "mode": "REAL_MODELS_SYNTHETIC_PIXELS",
+  "native_input": false,
+  "wall_seconds": 358.05509000000166,
+  "rendered_state": 2,
+  "metrics": [
+    {
+      "capture_ms": 14.108916999248322,
+      "parser_ms": 39818.05304199952,
+      "decision_ms": 230035.43587499735,
+      "execution_ms": 0.3909580045728944,
+      "state_change_score": 0.0007325708061002179,
+      "confidence": 0.9141,
+      "progress": 0.27195,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_16aa2e993817"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T15:42:15.666173+00:00",
+      "session_id": "6e30aee256c64dea95ba89591f220884",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 10.074874997371808,
+      "parser_ms": 19046.77462499967,
+      "decision_ms": 15664.077499997802,
+      "execution_ms": 0.5350840001483448,
+      "state_change_score": 0.013118736383442265,
+      "confidence": 0.8806,
+      "progress": 0.36715,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_0b1c000a93ec"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T15:42:50.822681+00:00",
+      "session_id": "6e30aee256c64dea95ba89591f220884",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 11.18566699733492,
+      "parser_ms": 8284.966333005286,
+      "decision_ms": 16783.134833000076,
+      "execution_ms": 0.4657499957829714,
+      "state_change_score": 0.0,
+      "confidence": 0.6272,
+      "progress": 0.587525,
+      "action": {
+        "id": "a0",
+        "operation": "wait",
+        "target": null
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T15:43:16.354798+00:00",
+      "session_id": "6e30aee256c64dea95ba89591f220884",
+      "step": 3,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 6.672833005723078,
+      "parser_ms": 7057.484416000079,
+      "decision_ms": 19481.20841700438,
+      "execution_ms": 0.20049999875482172,
+      "state_change_score": 0.0,
+      "confidence": 0.6946,
+      "progress": 0.611325,
+      "action": {
+        "id": "a0",
+        "operation": "wait",
+        "target": null
+      },
+      "execution_ok": true,
+      "reason": "unchanged or repeated visual state",
+      "timestamp": "2026-10-03T15:43:43.226019+00:00",
+      "session_id": "6e30aee256c64dea95ba89591f220884",
+      "step": 4,
+      "terminal_event": "NO_PROGRESS"
+    }
+  ],
+  "device": "mps",
+  "parser_device": "cpu"
+}

@@ -1,0 +1,59 @@
+{
+  "session_id": "953bb25fa7f64a3fb31f658165219a81",
+  "status": "ERROR",
+  "steps": 1,
+  "rounds": 1,
+  "last_action": {
+    "id": "a9",
+    "operation": "click",
+    "target": "obj_16aa2e993817"
+  },
+  "confidence": 0.8247,
+  "reason": "RuntimeError in runtime backend",
+  "summary": "ERROR after 1 actions, 1 decisions",
+  "mode": "REAL_MODELS_SYNTHETIC_PIXELS",
+  "native_input": false,
+  "wall_seconds": 177.7068634169991,
+  "rendered_state": 1,
+  "metrics": [
+    {
+      "capture_ms": 11.553666001418605,
+      "parser_ms": 52556.61208299716,
+      "decision_ms": 93581.89124999626,
+      "execution_ms": 0.22537499899044633,
+      "state_change_score": 0.0007325708061002179,
+      "confidence": 0.8247,
+      "progress": 0.192275,
+      "goal_probability": 0.0158,
+      "condition_probabilities": [
+        0.006
+      ],
+      "replan_probability": 0.254,
+      "safety_probability": 0.01,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_16aa2e993817"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T15:51:04.451852+00:00",
+      "session_id": "953bb25fa7f64a3fb31f658165219a81",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 3.52670800202759,
+      "parser_ms": 26229.538125000545,
+      "decision_ms": 0.0,
+      "execution_ms": 0.0,
+      "state_change_score": null,
+      "reason": "RuntimeError in runtime backend",
+      "timestamp": "2026-10-03T15:51:35.435830+00:00",
+      "session_id": "953bb25fa7f64a3fb31f658165219a81",
+      "step": 1,
+      "terminal_event": "ERROR"
+    }
+  ],
+  "device": "mps",
+  "parser_device": "cpu"
+}

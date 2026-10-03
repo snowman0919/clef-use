@@ -1,0 +1,17 @@
+name: Bug report
+description: Report a reproducible runtime or installer failure
+body:
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps and expected behavior
+      description: Use a harmless task; exclude secrets and private screenshots.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Actual status and evidence
+      description: Include clef-use version, platform, model revisions and sanitized doctor output.
+    validations:
+      required: true

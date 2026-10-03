@@ -1,0 +1,13 @@
+name: Feature request
+description: Propose a focused capability or measurable improvement
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and desired behavior
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance evidence and alternatives
