@@ -1,0 +1,582 @@
+{
+  "kind": "MEASURED_REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+  "inference_host": "macOS-27.0-arm64-arm-64bit",
+  "input_host": "Windows 11",
+  "models": {
+    "Cloudflare/clef-flash": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "Cloudflare/clef": "2f3de3dd85f379784083b0814d997ab627200f0c",
+    "microsoft/OmniParser-v2.0": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+    "microsoft/Florence-2-base": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+    "microsoft/Florence-2-base-ft": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e"
+  },
+  "omni_source_revision": "354021201345a96178360b28733573e27269f2de",
+  "device": "mps",
+  "parser_device": "cpu",
+  "method": "Same workers/model/task/start UI; balanced order; 500ms delayed GUI rendering; fixed-delay is a diagnostic ablation, not the previous product version.",
+  "repeats_per_variant": 5,
+  "runs": [
+    {
+      "variant": "fixed_delay_no_cache",
+      "phase": "warm-0",
+      "actual_cold_workers": true,
+      "seconds": 72.1503672079998,
+      "status": "ERROR",
+      "reason": "ModelWorkerError in runtime backend",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 6013.28395800374,
+      "clef_ms": 66043.77333300363,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 64.49562500347383,
+          "parser_ms": 6013.28395800374,
+          "decision_ms": 66043.77333300363,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "backend_error": {
+            "code": "ValueError",
+            "frames": [
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "forward",
+                "line": 1572
+              },
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "get_placeholder_mask",
+                "line": 1475
+              },
+              {
+                "file": "import_utils.py",
+                "function": "torch_compilable_check",
+                "line": 1582
+              },
+              {
+                "file": "__init__.py",
+                "function": "_check_with",
+                "line": 1735
+              }
+            ]
+          },
+          "reason": "ModelWorkerError in runtime backend",
+          "timestamp": "2026-10-03T22:14:26.016286+00:00",
+          "session_id": "dae3e0379d12493182bdf594ebe0f57c",
+          "step": 0,
+          "terminal_event": "ERROR"
+        }
+      ],
+      "observed_objects": [
+        {
+          "id": "obj_005270fcbf9d",
+          "bbox": {
+            "x1": 0.044444444444444446,
+            "y1": 0.07666666666666666,
+            "x2": 0.41,
+            "y2": 0.165
+          },
+          "label": "Local test workspace",
+          "role": "text",
+          "confidence": null,
+          "actions": [],
+          "source": [
+            "box_ocr_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        },
+        {
+          "id": "obj_967ceabb4393",
+          "bbox": {
+            "x1": 0.056272242218256,
+            "y1": 0.36865144968032837,
+            "x2": 0.34334442019462585,
+            "y2": 0.4980070888996124
+          },
+          "label": "Continue ",
+          "role": "icon",
+          "confidence": null,
+          "actions": [
+            "double_click",
+            "click"
+          ],
+          "source": [
+            "box_yolo_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        }
+      ]
+    },
+    {
+      "variant": "visual_wait_no_cache",
+      "phase": "warm-0",
+      "actual_cold_workers": true,
+      "seconds": 98.70058495800185,
+      "status": "ERROR",
+      "reason": "ModelWorkerError in runtime backend",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 1,
+      "clef_calls": 2,
+      "parser_calls": 2,
+      "wait_frames": 7,
+      "wait_ms": 1565.8965409966186,
+      "verification_ms": 110.43175101804081,
+      "parser_ms": 14060.712333011907,
+      "clef_ms": 82686.14237500879,
+      "readback": {
+        "stage": 1,
+        "clicks": [
+          "Continue"
+        ],
+        "input_attempts": [
+          {
+            "target_label": "Continue ",
+            "visible_label": "Continue",
+            "correct": true
+          }
+        ],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Confirm",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 741.5963320090668,
+          "parser_ms": 6808.855625000433,
+          "decision_ms": 79573.10937500733,
+          "execution_ms": 95.17645799496677,
+          "verification_ms": 110.43175101804081,
+          "state_change_score": 0.000743282498184459,
+          "capture_calls": 9,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.313875,
+          "decision_mode": "ACT",
+          "mode_confidence": 0.9107,
+          "effect_probability": 0.0735,
+          "goal_probability": 0.0187,
+          "condition_probabilities": [
+            0.0051
+          ],
+          "replan_probability": 0.2422,
+          "safety_probability": 0.0125,
+          "wait_frames": 7,
+          "wait_ms": 1565.8965409966186,
+          "pre_input_readiness": "ALREADY_TRUE",
+          "actionability": {
+            "visible": "DETECTED",
+            "stable": "OBSERVED_PIXELS",
+            "enabled": "UNKNOWN",
+            "editable": "UNKNOWN",
+            "occluded": "UNKNOWN"
+          },
+          "action": {
+            "id": "a0",
+            "operation": "click",
+            "target": "obj_967ceabb4393"
+          },
+          "execution_ok": true,
+          "visual_wait_state": "STABLE",
+          "related_change": true,
+          "expected_effect": "content_change",
+          "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+          "timestamp": "2026-10-03T22:15:54.425254+00:00",
+          "session_id": "12e99f06cd384d368b9634eed44729d1",
+          "step": 1,
+          "terminal_event": "RUNNING"
+        },
+        {
+          "capture_ms": 0.0,
+          "parser_ms": 7251.8567080114735,
+          "decision_ms": 3113.033000001451,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "readiness_frame_reused": true,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "backend_error": {
+            "code": "ValueError",
+            "frames": [
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "forward",
+                "line": 1572
+              },
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "get_placeholder_mask",
+                "line": 1475
+              },
+              {
+                "file": "import_utils.py",
+                "function": "torch_compilable_check",
+                "line": 1582
+              },
+              {
+                "file": "__init__.py",
+                "function": "_check_with",
+                "line": 1735
+              }
+            ]
+          },
+          "reason": "ModelWorkerError in runtime backend",
+          "timestamp": "2026-10-03T22:16:04.818621+00:00",
+          "session_id": "12e99f06cd384d368b9634eed44729d1",
+          "step": 1,
+          "terminal_event": "ERROR"
+        }
+      ],
+      "observed_objects": [
+        {
+          "id": "obj_005270fcbf9d",
+          "bbox": {
+            "x1": 0.044444444444444446,
+            "y1": 0.07666666666666666,
+            "x2": 0.41,
+            "y2": 0.165
+          },
+          "label": "Local test workspace",
+          "role": "text",
+          "confidence": null,
+          "actions": [],
+          "source": [
+            "box_ocr_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        },
+        {
+          "id": "obj_d731c1a58d6a",
+          "bbox": {
+            "x1": 0.055850446224212646,
+            "y1": 0.36893898248672485,
+            "x2": 0.3436712324619293,
+            "y2": 0.49797239899635315
+          },
+          "label": "Confirm ",
+          "role": "icon",
+          "confidence": null,
+          "actions": [
+            "double_click",
+            "click"
+          ],
+          "source": [
+            "box_yolo_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        }
+      ]
+    },
+    {
+      "variant": "visual_wait_cache",
+      "phase": "warm-0",
+      "actual_cold_workers": true,
+      "seconds": 316.9242417499918,
+      "status": "ERROR",
+      "reason": "TimeoutError in runtime backend",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 6729.588417001651,
+      "clef_ms": 306250.7842500054,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 65.33674999081995,
+          "parser_ms": 6729.588417001651,
+          "decision_ms": 306250.7842500054,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "reason": "TimeoutError in runtime backend",
+          "timestamp": "2026-10-03T22:21:21.520624+00:00",
+          "session_id": "31ed4f9c4afa45c89082e5158c46973a",
+          "step": 0,
+          "terminal_event": "ERROR"
+        }
+      ],
+      "observed_objects": [
+        {
+          "id": "obj_005270fcbf9d",
+          "bbox": {
+            "x1": 0.044444444444444446,
+            "y1": 0.07666666666666666,
+            "x2": 0.41,
+            "y2": 0.165
+          },
+          "label": "Local test workspace",
+          "role": "text",
+          "confidence": null,
+          "actions": [],
+          "source": [
+            "box_ocr_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        },
+        {
+          "id": "obj_967ceabb4393",
+          "bbox": {
+            "x1": 0.056272242218256,
+            "y1": 0.36865144968032837,
+            "x2": 0.34334442019462585,
+            "y2": 0.4980070888996124
+          },
+          "label": "Continue ",
+          "role": "icon",
+          "confidence": null,
+          "actions": [
+            "double_click",
+            "click"
+          ],
+          "source": [
+            "box_yolo_content_ocr"
+          ],
+          "sensitive": false,
+          "visible": null,
+          "enabled": null,
+          "editable": null,
+          "focused": null,
+          "occluded": null
+        }
+      ]
+    }
+  ],
+  "cold": {
+    "variant": "visual_wait_no_cache",
+    "phase": "cold",
+    "actual_cold_workers": true,
+    "seconds": 98.96734112499689,
+    "status": "ERROR",
+    "reason": "ModelWorkerError in runtime backend",
+    "success": false,
+    "false_completion": false,
+    "wrong_input": 0,
+    "early_advance": 0,
+    "act": 0,
+    "clef_calls": 1,
+    "parser_calls": 1,
+    "wait_frames": 0,
+    "wait_ms": 0,
+    "verification_ms": 0.0,
+    "parser_ms": 33408.02133300167,
+    "clef_ms": 65442.1220410004,
+    "readback": {
+      "stage": 0,
+      "clicks": [],
+      "input_attempts": [],
+      "render_delay_ms": 500,
+      "no_effect": false,
+      "visible_result": "Continue",
+      "render_pending": false,
+      "desktop": {
+        "session_id": 1,
+        "desktop": "Default",
+        "foreground_window": 394636
+      },
+      "native_input": true
+    },
+    "metrics": [
+      {
+        "capture_ms": 89.94766601244919,
+        "parser_ms": 33408.02133300167,
+        "decision_ms": 65442.1220410004,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "backend_error": {
+          "code": "ValueError",
+          "frames": [
+            {
+              "file": "modeling_qwen3_5.py",
+              "function": "forward",
+              "line": 1572
+            },
+            {
+              "file": "modeling_qwen3_5.py",
+              "function": "get_placeholder_mask",
+              "line": 1475
+            },
+            {
+              "file": "import_utils.py",
+              "function": "torch_compilable_check",
+              "line": 1582
+            },
+            {
+              "file": "__init__.py",
+              "function": "_check_with",
+              "line": 1735
+            }
+          ]
+        },
+        "reason": "ModelWorkerError in runtime backend",
+        "timestamp": "2026-10-03T22:13:13.777120+00:00",
+        "session_id": "99b6b944d4b24f2a898b5d73ec053936",
+        "step": 0,
+        "terminal_event": "ERROR"
+      }
+    ],
+    "observed_objects": [
+      {
+        "id": "obj_005270fcbf9d",
+        "bbox": {
+          "x1": 0.044444444444444446,
+          "y1": 0.07666666666666666,
+          "x2": 0.41,
+          "y2": 0.165
+        },
+        "label": "Local test workspace",
+        "role": "text",
+        "confidence": null,
+        "actions": [],
+        "source": [
+          "box_ocr_content_ocr"
+        ],
+        "sensitive": false,
+        "visible": null,
+        "enabled": null,
+        "editable": null,
+        "focused": null,
+        "occluded": null
+      },
+      {
+        "id": "obj_967ceabb4393",
+        "bbox": {
+          "x1": 0.056272242218256,
+          "y1": 0.36865144968032837,
+          "x2": 0.34334442019462585,
+          "y2": 0.4980070888996124
+        },
+        "label": "Continue ",
+        "role": "icon",
+        "confidence": null,
+        "actions": [
+          "double_click",
+          "click"
+        ],
+        "source": [
+          "box_yolo_content_ocr"
+        ],
+        "sensitive": false,
+        "visible": null,
+        "enabled": null,
+        "editable": null,
+        "focused": null,
+        "occluded": null
+      }
+    ]
+  },
+  "render_delay_ms": 500,
+  "fixed_delay_seconds": 0.3,
+  "screen_interval_seconds": 0.05,
+  "screen_timeout_seconds": 5,
+  "status": "INTERRUPTED_BACKEND_UNAVAILABLE",
+  "completed_runs": 4,
+  "planned_warm_runs": 15,
+  "actual_warm_runs": 0,
+  "successes": 0,
+  "no_effect": {
+    "status": "NOT_RUN",
+    "reason": "Repeated model worker errors; measurement stopped"
+  },
+  "limitations": [
+    "All completed trials restarted at least one model worker; warm p50/p95 are NOT_RUN",
+    "A concurrent MPS context probe confounded host load; latency cannot establish improvement",
+    "Three ModelWorkerError trials and one TimeoutError trial; fourth warm trial interrupted and excluded",
+    "Windows native input; CLEF MPS and OmniParser CPU on macOS via private SSH diagnostic",
+    "Only one native action in these four failed tasks; zero observed wrong input or false completion is not general accuracy evidence",
+    "No accepted no-effect GUI or wait/cache performance ablation"
+  ]
+}

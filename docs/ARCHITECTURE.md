@@ -22,7 +22,8 @@ and documented image generation arguments.
 The decision budget counts model rounds, including completion checks; actions
 are counted separately. Completion needs strong predictions for the goal and
 all supplied conditions on two fresh observations. Changed screens trigger
-replanning. Three unchanged/repeated states stop execution. Session resumption
+replanning. A no-effect action stops at the screen deadline without repeated
+input; repeated visual cycles also stop execution. Session resumption
 never resets the original budget. Sessions live in memory; service restart drops
 resumable context. Step logs survive restart.
 
@@ -49,3 +50,30 @@ Staging installs offline and runs version/state-machine smoke checks before one
 atomic activation. POSIX uses a `current` symlink; Windows atomically replaces a
 managed CMD launcher. Updated clients restart an idle older resident service and
 refuse to switch a service with active desktop ownership.
+
+## Visual readiness revision, 0.1.5
+
+The user requested replacing fixed post-action sleeps with bounded visual
+condition waiting. The selected design keeps one canonical runtime and one joint
+CLEF request: a separate fixed-choice mode selects ACT/WAIT/BLOCKED/NEEDS_REPLAN
+or proposed completion, while existing goal/condition noul checks retain final
+completion authority. Screen polling uses capture/Pillow only, a monotonic
+screen deadline and cancellation-aware sampling; it never consumes model rounds.
+Action targets and nearby expected-result regions drive change/stability checks.
+A changed pixel is readiness evidence, not proof of the requested result.
+
+Action expectations and observed effects become bounded structured history.
+Unknown editability/occlusion remains unknown; explicit negative states refuse
+input. Fresh capture/foreground/geometry and local target differences block stale
+coordinates, including small movement/modals. Text stays exact and scoped.
+No-effect input is not blindly repeated. Exact-image perception caching is one
+entry, pinned to parser identity and full capture geometry/foreground; normalized
+objects can be reused, decisions/completion claims cannot.
+
+References: Playwright actionability/assertions and SikuliX region/change waiting
+inform these principles; their DOM/event guarantees are not claimed by a pixel
+runtime. UFO multi-action and Agent S2 grounding remain measured follow-up options,
+not new frameworks or unsupported CLEF batch generation. See
+VISUAL_READINESS.md for contracts, heuristic limits and the controlled
+wait/cache ablation. Readiness and perception reuse are ablated separately. Repeated MPS backend
+failures prevented an accepted performance comparison; no speed claim is made.

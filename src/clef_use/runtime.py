@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import re
 import threading
 import time
 import uuid
@@ -9,12 +10,24 @@ from contextlib import contextmanager
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
+from types import SimpleNamespace
 
-from .candidates import CandidateBuilder
+from .candidates import CandidateBuilder, effect_region
 from .config import Config
 from .interfaces import ActionBackend, CaptureBackend, DecisionBackend, PerceptionBackend, Verifier
 from .schema import Contract, Observation, Status
-from .verification import ProgressTracker, VisualVerifier
+from .verification import (
+    ProgressTracker,
+    VisualVerifier,
+    VisualWaiter,
+    content_changed,
+    foreground_region,
+    region_change_count,
+    region_changed,
+    same_context,
+    text_effect,
+)
+from .windows_input import WindowsDesktopUnavailable, WindowsForegroundChanged
 
 
 @contextmanager
@@ -41,6 +54,8 @@ class Session:
     cancelled: threading.Event = field(default_factory=threading.Event)
     observation: Observation | None = None
     guidance: list[str] = field(default_factory=list)
+    blocker: dict | None = None
+    last_effect: dict | None = field(default=None, repr=False)
     lock: threading.RLock = field(default_factory=threading.RLock)
 
     def snapshot(self) -> dict:
@@ -53,6 +68,7 @@ class Session:
                 "last_action": self.last_action,
                 "confidence": self.confidence,
                 "reason": self.reason,
+                "blocker": self.blocker,
                 "summary": (
                     f"{self.status.value} after {self.steps} actions, {self.rounds} decisions"
                 ),
@@ -79,6 +95,163 @@ class SessionRuntime:
         self.builder = CandidateBuilder(self.config.max_candidates)
         self.log_path = log_path
         self.desktop_lock = threading.Lock()
+        self.waiter = VisualWaiter(
+            self.config.screen_timeout,
+            self.config.screen_interval,
+            self.config.screen_stable_samples,
+        )
+        self._perception_cache = None
+
+    def _parse(self, frame, row=None):
+        identity = getattr(self.perception, "cache_identity", None)
+        key = None
+        if self.config.perception_cache and identity is not None:
+            key = (
+                identity,
+                frame.image.size,
+                frame.image.mode,
+                frame.origin,
+                frame.logical_size,
+                frame.foreground_window,
+                frame.foreground_bounds,
+                hashlib.sha256(frame.image.tobytes()).digest(),
+            )
+            if self._perception_cache is not None and self._perception_cache[0] == key:
+                if row is not None:
+                    row["perception_cache_hit"] = True
+                    row["parser_calls"] = 0
+                return self._perception_cache[1]
+        if row is not None:
+            row["parser_calls"] = 1
+        objects = self.perception.parse(frame.image)
+        if row is not None:
+            row["perception_cache_hit"] = False
+        self._perception_cache = (key, objects) if key is not None else None
+        return objects
+
+    def _capture(self, row=None):
+        if row is None:
+            return self.capture.capture()
+        row["capture_calls"] = row.get("capture_calls", 0) + 1
+        with _timing(row, "capture_ms"):
+            return self.capture.capture()
+
+    def _context_stale(self, before, fresh):
+        return (
+            not same_context(before, fresh)
+            or self.verifier.change(before, fresh) > 0.08
+            or region_change_count(before, fresh, foreground_region(before)) >= 256
+        )
+
+    def _stale(self, before, fresh, roi):
+        return self._context_stale(before, fresh) or (
+            roi is not None and region_changed(before, fresh, roi)
+        )
+
+    def _target_ready(self, session, before, fresh, roi, row):
+        def reference_matches(candidate):
+            return not self._stale(before, candidate, roi)
+
+        capture = SimpleNamespace(capture=lambda: self._capture(row))
+        result = self.waiter.wait(
+            capture,
+            fresh,
+            roi,
+            session.cancelled,
+            require_change=False,
+            predicate=reference_matches,
+        )
+        row["wait_frames"] = row.get("wait_frames", 0) + result.polls
+        row["wait_ms"] = row.get("wait_ms", 0) + result.elapsed_ms
+        row["verification_ms"] = row.get("verification_ms", 0) + result.verification_ms
+        row["pre_input_readiness"] = result.state
+        if result.state == "CANCELLED":
+            self._finish(session, Status.ABORTED, "abort requested before input")
+        elif result.state not in {"STABLE", "ALREADY_TRUE"}:
+            self._finish(
+                session,
+                Status.NEEDS_REPLAN,
+                "target reference did not recur and stabilize before input",
+            )
+        return result
+
+    def _wait(self, session, frame, roi, row, *, require_change=True, expected_effect=None):
+        predicate = None
+        if require_change and expected_effect in {"content_change", "text_value", "view_change"}:
+
+            def predicate(fresh):
+                return content_changed(frame, fresh, roi)
+
+        capture = SimpleNamespace(capture=lambda: self._capture(row))
+        result = self.waiter.wait(
+            capture,
+            frame,
+            roi,
+            session.cancelled,
+            require_change=require_change,
+            predicate=predicate,
+        )
+        row["wait_frames"] = row.get("wait_frames", 0) + result.polls
+        row["wait_ms"] = row.get("wait_ms", 0) + result.elapsed_ms
+        row["verification_ms"] = row.get("verification_ms", 0) + result.verification_ms
+        row["visual_wait_state"] = result.state
+        row["related_change"] = result.changed
+        if result.state == "CANCELLED":
+            self._finish(session, Status.ABORTED, "abort requested during visual wait")
+        elif result.state == "CONTEXT_CHANGED":
+            self._finish(
+                session, Status.NEEDS_REPLAN, "geometry or foreground changed during visual wait"
+            )
+        elif result.state in {"UNSTABLE", "CONDITION_UNMET"}:
+            self._finish(
+                session,
+                Status.NEEDS_REPLAN,
+                "expected visual readiness unconfirmed before deadline",
+            )
+        return result
+
+    def _wait_region(self, observation, previous):
+        if previous is not None:
+            return previous
+        indicators = [
+            obj
+            for obj in observation.objects
+            if re.search(r"loading|spinner|pending|progress|불러오는|로딩", obj.label, re.I)
+        ]
+        return effect_region(indicators[0].bbox) if indicators else None
+
+    def _visible_effect(self, session, objects, last_effect, row):
+        if (
+            last_effect is None
+            or not last_effect.get("pending", False)
+            or last_effect["candidate"].operation != "type"
+        ):
+            return True
+        last_effect["pending"] = False
+        observed = text_effect(objects, last_effect["target"], last_effect["candidate"].value)
+        last_effect["history"]["verification"] = observed
+        row["postcondition"] = observed
+        if observed == "TEXT_MISMATCH":
+            self._finish(
+                session,
+                Status.NEEDS_REPLAN,
+                "supplied text does not match current visible field text",
+            )
+            return False
+        if observed == "UNVERIFIED":
+            self._blocked(
+                session,
+                "exact supplied field text is not independently observable",
+                observed={"postcondition": "UNVERIFIED"},
+            )
+            return False
+        return True
+
+    def _blocked(
+        self, session, reason, *, observed, resume="new relevant visible state", kind="UNKNOWN"
+    ):
+        session.blocker = {"kind": kind, "observed": observed, "resume_when": resume}
+        return self._finish(session, Status.BLOCKED, reason)
 
     def abort(self, session: Session) -> dict:
         session.cancelled.set()
@@ -119,6 +292,14 @@ class SessionRuntime:
         tracker = ProgressTracker(self.config.no_progress_limit)
         completion_predictions = 0
         row = {}
+        ready_frame = None
+        last_region = None
+        last_effect = session.last_effect
+        session.blocker = None
+        if last_effect is not None and last_effect.get("guidance_count", 0) != len(
+            session.guidance
+        ):
+            last_effect["pending"] = False
         try:
             while session.rounds < session.contract.max_steps:
                 if session.cancelled.is_set():
@@ -128,22 +309,35 @@ class SessionRuntime:
                     "parser_ms": 0.0,
                     "decision_ms": 0.0,
                     "execution_ms": 0.0,
+                    "verification_ms": 0.0,
                     "state_change_score": None,
                 }
-                with _timing(row, "capture_ms"):
-                    frame = self.capture.capture()
+                if ready_frame is not None:
+                    frame, ready_frame = ready_frame, None
+                    row["readiness_frame_reused"] = True
+                else:
+                    frame = self._capture(row)
                 with _timing(row, "parser_ms"):
-                    objects = self.perception.parse(frame.image)
+                    objects = self._parse(frame, row)
                 observation = Observation(uuid.uuid4().hex, frame, objects)
                 with session.lock:
                     session.observation = observation
+                if not self._visible_effect(session, objects, last_effect, row):
+                    return session.snapshot()
                 candidates = self.builder.build(observation, session.contract)
                 history = [{"guidance": g} for g in session.guidance] + session.action_history[-6:]
+                row["clef_calls"] = 1
                 with _timing(row, "decision_ms"):
                     decision = self.decision.decide(
                         observation, session.contract, candidates, history
                     )
-                row.update(confidence=decision.confidence, progress=decision.progress)
+                row.update(
+                    confidence=decision.confidence,
+                    progress=decision.progress,
+                    decision_mode=decision.mode,
+                    mode_confidence=decision.mode_confidence,
+                    effect_probability=decision.effect_probability,
+                )
                 row.update(
                     goal_probability=decision.goal_probability,
                     condition_probabilities=decision.condition_probabilities,
@@ -176,9 +370,8 @@ class SessionRuntime:
                     and all(p >= 0.9 for p in conditions)
                 )
                 if completed:
-                    with _timing(row, "capture_ms"):
-                        fresh = self.capture.capture()
-                    if self.verifier.change(frame, fresh) > 0.08:
+                    fresh = self._capture(row)
+                    if self._stale(frame, fresh, last_region):
                         return self._finish(
                             session,
                             Status.NEEDS_REPLAN,
@@ -191,11 +384,64 @@ class SessionRuntime:
                             Status.COMPLETED,
                             "goal and conditions verified on two fresh observations",
                         )
+                    waiting = self._wait(session, fresh, last_region, row, require_change=False)
+                    if session.status != Status.RUNNING:
+                        return session.snapshot()
+                    if waiting.state not in {"STABLE", "ALREADY_TRUE"}:
+                        return self._finish(
+                            session, Status.NEEDS_REPLAN, "completion pixels did not stabilize"
+                        )
+                    ready_frame = waiting.frame
                     self._record(session, row)
-                    if session.cancelled.wait(self.config.settle_seconds):
-                        return self._finish(session, Status.ABORTED, "abort requested")
                     continue
                 completion_predictions = 0
+                if decision.mode_confidence < session.contract.confidence_threshold:
+                    return self._finish(
+                        session, Status.LOW_CONFIDENCE, "execution mode confidence below threshold"
+                    )
+                if decision.mode == "NEEDS_REPLAN":
+                    return self._finish(
+                        session, Status.NEEDS_REPLAN, "executor mode requests planner guidance"
+                    )
+                if decision.mode == "COMPLETED":
+                    return self._finish(
+                        session,
+                        Status.NEEDS_REPLAN,
+                        "proposed completion lacks required visible condition evidence",
+                    )
+                if decision.mode == "BLOCKED":
+                    return self._blocked(
+                        session,
+                        "current observations do not establish safe actionability",
+                        observed={"actionable_candidates": len(candidates)},
+                    )
+                if decision.mode == "WAIT":
+                    wait_region = self._wait_region(observation, last_region)
+                    if wait_region is None:
+                        return self._blocked(
+                            session,
+                            "no observed region establishes relevant visual waiting",
+                            observed={"related_region": "UNKNOWN"},
+                        )
+                    waiting = self._wait(session, frame, wait_region, row)
+                    if session.status != Status.RUNNING:
+                        return session.snapshot()
+                    if waiting.state == "NO_CHANGE":
+                        return self._blocked(
+                            session,
+                            "no relevant visual change before screen deadline",
+                            observed={"related_change": False, "polls": waiting.polls},
+                        )
+                    ready_frame = waiting.frame
+                    self._record(session, row)
+                    row = {}
+                    continue
+                if not candidates:
+                    return self._blocked(
+                        session,
+                        "no scoped actionable candidate in current observations",
+                        observed={"actionable_candidates": 0},
+                    )
                 if decision.confidence < session.contract.confidence_threshold:
                     return self._finish(
                         session, Status.LOW_CONFIDENCE, "action confidence below threshold"
@@ -205,13 +451,75 @@ class SessionRuntime:
                     return self._finish(
                         session, Status.ERROR, "decision selected an unknown candidate"
                     )
-                # Never act on a screen that materially changed during model inference.
-                with _timing(row, "capture_ms"):
-                    fresh = self.capture.capture()
-                if self.verifier.change(frame, fresh) > 0.08:
+                if last_effect is not None:
+                    same_action = (selected.operation, selected.target) == last_effect["action"]
+                    unchanged = not region_changed(last_effect["frame"], frame, selected.effect_roi)
+                    if (
+                        same_action
+                        and unchanged
+                        and last_effect.get("guidance_count", 0) == len(session.guidance)
+                    ):
+                        return self._blocked(
+                            session,
+                            "unverified action would repeat in the same relevant visual state",
+                            observed={
+                                "expected_effect": selected.expected_effect,
+                                "effect_verified": False,
+                            },
+                        )
+                # Fresh pixels and target-region identity bind every input.
+                fresh = self._capture(row)
+                if self._context_stale(frame, fresh):
                     return self._finish(
                         session, Status.NEEDS_REPLAN, "screen changed during decision"
                     )
+                stable = self._target_ready(session, frame, fresh, selected.effect_roi, row)
+                if session.status != Status.RUNNING:
+                    return session.snapshot()
+                target = next((obj for obj in objects if obj.id == selected.target), None)
+                row["actionability"] = {
+                    "visible": "DETECTED",
+                    "stable": "OBSERVED_PIXELS",
+                    "enabled": "UNKNOWN"
+                    if target is None or target.enabled is None
+                    else target.enabled,
+                    "editable": "UNKNOWN"
+                    if target is None or target.editable is None
+                    else target.editable,
+                    "occluded": "UNKNOWN"
+                    if target is None or target.occluded is None
+                    else target.occluded,
+                }
+                if (
+                    selected.operation == "type"
+                    and text_effect(objects, target, selected.value) == "VISIBLE_TEXT_MATCH"
+                ):
+                    return self._blocked(
+                        session,
+                        "supplied text is already visibly present; duplicate input skipped",
+                        observed={"postcondition": "ALREADY_TRUE"},
+                        resume="planner guidance",
+                    )
+                effect_history = {
+                    "operation": selected.operation,
+                    "description": selected.description,
+                    "target": selected.target,
+                    "expected_effect": selected.expected_effect,
+                    "verification": "PENDING",
+                    "failure_kind": None,
+                }
+                with session.lock:
+                    session.action_history.append(effect_history)
+                last_effect = {
+                    "history": effect_history,
+                    "action": (selected.operation, selected.target),
+                    "frame": stable.frame,
+                    "candidate": selected,
+                    "target": target,
+                    "pending": True,
+                    "guidance_count": len(session.guidance),
+                }
+                session.last_effect = last_effect
                 with _timing(row, "execution_ms"):
                     result = self.action.execute(selected, observation, session.cancelled)
                 row["action"] = selected.audit()
@@ -219,18 +527,40 @@ class SessionRuntime:
                 if session.cancelled.is_set():
                     return self._finish(session, Status.ABORTED, "abort requested")
                 if not result.ok:
+                    effect_history.update(verification="UNVERIFIED", failure_kind="INPUT_REFUSED")
+                    last_effect["pending"] = False
                     return self._finish(
                         session, Status.ERROR, "action adapter refused or failed execution"
                     )
                 with session.lock:
                     session.steps += 1
                     session.last_action = selected.audit()
-                    session.action_history.append(
-                        {"operation": selected.operation, "description": selected.description}
+                last_region = selected.effect_roi
+                waiting = self._wait(
+                    session, frame, last_region, row, expected_effect=selected.expected_effect
+                )
+                effect_history.update(
+                    readiness=waiting.state,
+                    failure_kind=None if waiting.state == "STABLE" else waiting.state,
+                )
+                if session.status != Status.RUNNING:
+                    return session.snapshot()
+                last_effect["result_frame"] = waiting.frame
+                session.action_history[-1]["verification"] = "VISUAL_READINESS_ONLY"
+                session.action_history[-1]["readiness"] = waiting.state
+                session.action_history[-1]["failure_kind"] = (
+                    None if waiting.state == "STABLE" else waiting.state
+                )
+                row["expected_effect"] = selected.expected_effect
+                row["effect_semantics"] = "UNVERIFIED; pixel readiness is not task completion"
+                if waiting.state == "NO_CHANGE":
+                    return self._finish(
+                        session,
+                        Status.NO_PROGRESS,
+                        "no related visible effect before screen deadline; input not repeated",
                     )
-                session.cancelled.wait(self.config.settle_seconds)
-                with _timing(row, "capture_ms"):
-                    after = self.capture.capture()
+                after = waiting.frame
+                ready_frame = after
                 score = self.verifier.change(frame, after)
                 row["state_change_score"] = score
                 if tracker.update(score, self.verifier.fingerprint(after)):
@@ -241,6 +571,18 @@ class SessionRuntime:
                 row = {}
             return self._finish(
                 session, Status.STEP_BUDGET_EXHAUSTED, "hard decision budget exhausted"
+            )
+        except WindowsDesktopUnavailable:
+            return self._blocked(
+                session,
+                "interactive desktop access unavailable",
+                observed={"interactive_desktop": False},
+                kind="ACCESS_UNAVAILABLE",
+                resume="interactive unlocked desktop",
+            )
+        except WindowsForegroundChanged:
+            return self._finish(
+                session, Status.NEEDS_REPLAN, "foreground changed before native input"
             )
         except Exception as exc:
             # Third-party exceptions may contain typed payloads or local credentials.
@@ -264,7 +606,7 @@ class SessionRuntime:
         if refresh and self.desktop_lock.acquire(blocking=False):
             try:
                 frame = self.capture.capture()
-                objects = self.perception.parse(frame.image)
+                objects = self._parse(frame)
                 with session.lock:
                     session.observation = Observation(uuid.uuid4().hex, frame, objects)
                 fresh = True

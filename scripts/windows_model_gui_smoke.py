@@ -21,9 +21,17 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--token-file", type=Path, required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--benchmark", action="store_true")
+    parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--port", type=int, default=37944)
     args = parser.parse_args()
     token = args.token_file.read_text().strip()
+
+    class NoRedirect(urllib.request.HTTPRedirectHandler):
+        def redirect_request(self, *_):
+            raise RuntimeError("diagnostic bridge redirects refused")
+
+    opener = urllib.request.build_opener(NoRedirect)
 
     def request(operation, payload=None):
         req = urllib.request.Request(
@@ -32,7 +40,7 @@ def main():
             headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
         )
         try:
-            with urllib.request.urlopen(req, timeout=30) as response:
+            with opener.open(req, timeout=30) as response:
                 return json.load(response)
         except urllib.error.HTTPError as exc:
             raise RuntimeError(json.load(exc)) from None
@@ -40,8 +48,15 @@ def main():
     class Desktop:
         def capture(self):
             raw = request("capture")
+            self.last_pending = raw.get("render_pending", False)
             image = Image.open(io.BytesIO(base64.b64decode(raw["image"]))).convert("RGB")
-            return Frame(image, tuple(raw["origin"]), tuple(raw["size"]), raw["foreground"])
+            return Frame(
+                image,
+                tuple(raw["origin"]),
+                tuple(raw["size"]),
+                raw["foreground"],
+                tuple(raw["foreground_bounds"]),
+            )
 
         def execute(self, action, observation, cancelled):
             if cancelled.is_set():
@@ -56,6 +71,7 @@ def main():
                     "origin": observation.frame.origin,
                     "size": observation.frame.image.size,
                     "foreground": observation.frame.foreground_window,
+                    "foreground_bounds": observation.frame.foreground_bounds,
                 },
             )
             return ActionResult.model_validate(result)
@@ -65,6 +81,16 @@ def main():
 
     config = load_config()
     perception, decision, desktop = OmniParserBackend(config), ClefBackend(config), Desktop()
+    if args.benchmark:
+        from windows_visual_benchmark import run_benchmark
+
+        try:
+            accepted = run_benchmark(args, config, perception, decision, desktop, request)
+        finally:
+            perception.worker.close()
+            decision.worker.close()
+            request("finish")
+        return 0 if accepted else 1
     session = Session(
         Contract(
             goal="Make Task complete visible using the available Continue and Confirm buttons.",

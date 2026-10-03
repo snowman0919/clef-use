@@ -1,0 +1,16 @@
+{
+  "mode": "PUBLIC_HTTPS_INSTALL",
+  "site": "https://ftp.kotori9.dev/clef-use",
+  "manifest_status": 200,
+  "version": "0.1.3",
+  "targets": 15,
+  "mac_install": "INSTALLED",
+  "windows_powershell_install": "INSTALLED",
+  "mac_self_test": "COMPLETED",
+  "windows_self_test": "COMPLETED",
+  "notes": [
+    "isolated task-owned roots; no persistent PATH/config changes",
+    "self-test is deterministic control flow, not real model or GUI proof",
+    "0.1.5 not publicly deployed"
+  ]
+}

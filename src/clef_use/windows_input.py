@@ -45,11 +45,24 @@ class Point(ctypes.Structure):
     _fields_ = [("x", I32), ("y", I32)]
 
 
+class Rect(ctypes.Structure):
+    _fields_ = [("left", I32), ("top", I32), ("right", I32), ("bottom", I32)]
+
+
+class WindowsDesktopUnavailable(RuntimeError):
+    pass
+
+
+class WindowsForegroundChanged(RuntimeError):
+    pass
+
+
 class WindowsInput:
     FAILSAFE = True
 
     def __init__(self, user32=None, kernel32=None):
         self.unicode_units: set[int] = set()
+        self.key_events: dict[str, Input] = {}
         if user32 is not None:
             self.user, self.kernel = user32, kernel32
             return
@@ -60,10 +73,14 @@ class WindowsInput:
         signatures = {
             "SendInput": ([U32, ctypes.POINTER(Input), ctypes.c_int], U32),
             "GetForegroundWindow": ([], ctypes.c_void_p),
+            "GetWindowRect": ([ctypes.c_void_p, ctypes.POINTER(Rect)], ctypes.c_int),
             "SetCursorPos": ([ctypes.c_int, ctypes.c_int], ctypes.c_int),
             "GetCursorPos": ([ctypes.POINTER(Point)], ctypes.c_int),
             "GetSystemMetrics": ([ctypes.c_int], ctypes.c_int),
-            "MapVirtualKeyW": ([U32, U32], U32),
+            "MapVirtualKeyExW": ([U32, U32, ctypes.c_void_p], U32),
+            "GetWindowThreadProcessId": ([ctypes.c_void_p, ctypes.POINTER(U32)], U32),
+            "GetKeyboardLayout": ([U32], ctypes.c_void_p),
+            "GetClipboardSequenceNumber": ([], U32),
             "OpenInputDesktop": ([U32, ctypes.c_int, U32], ctypes.c_void_p),
             "CloseDesktop": ([ctypes.c_void_p], ctypes.c_int),
             "GetUserObjectInformationW": (
@@ -94,12 +111,12 @@ class WindowsInput:
         if not self.kernel.ProcessIdToSessionId(os.getpid(), ctypes.byref(session)):
             raise RuntimeError("Windows session identification failed")
         if session.value == 0:
-            raise RuntimeError(
+            raise WindowsDesktopUnavailable(
                 "Windows GUI unavailable in SSH/service session 0; use an interactive session"
             )
         desktop = self.user.OpenInputDesktop(0, False, 1)
         if not desktop:
-            raise RuntimeError("Windows input desktop unavailable or locked")
+            raise WindowsDesktopUnavailable("Windows input desktop unavailable or locked")
         try:
             name, required = ctypes.create_unicode_buffer(256), U32()
             if not self.user.GetUserObjectInformationW(
@@ -107,21 +124,29 @@ class WindowsInput:
             ):
                 raise RuntimeError("Windows input desktop identification failed")
             if name.value.lower() != "default":
-                raise RuntimeError("Windows secure/non-default desktop input refused")
+                raise WindowsDesktopUnavailable("Windows secure/non-default desktop input refused")
         finally:
             self.user.CloseDesktop(desktop)
         foreground = self.foreground()
         if not foreground:
-            raise RuntimeError("Windows has no foreground input target")
+            raise WindowsDesktopUnavailable("Windows has no foreground input target")
         return {"session_id": session.value, "desktop": name.value, "foreground_window": foreground}
 
     def foreground(self):
         return self.user.GetForegroundWindow()
 
+    def window_rect(self, target):
+        rect = Rect()
+        if not self.user.GetWindowRect(target, ctypes.byref(rect)):
+            raise WindowsDesktopUnavailable("Windows foreground geometry unavailable")
+        return rect.left, rect.top, rect.right, rect.bottom
+
     def ensure_target(self, expected):
         actual = self.desktop_status()["foreground_window"]
         if expected is not None and actual != expected:
-            raise RuntimeError("Windows foreground changed since capture; no input sent")
+            raise WindowsForegroundChanged(
+                "Windows foreground changed since capture; no input sent"
+            )
         return actual
 
     def _failsafe(self):
@@ -160,15 +185,33 @@ class WindowsInput:
             vk = ord(key.upper())
         if vk is None:
             raise ValueError("unsupported Windows shortcut key")
-        scan = self.user.MapVirtualKeyW(vk, 4)
+        thread = self.user.GetWindowThreadProcessId(self.foreground(), None)
+        layout = self.user.GetKeyboardLayout(thread)
+        if not thread or not layout:
+            raise WindowsDesktopUnavailable("Windows foreground keyboard layout unavailable")
+        scan = self.user.MapVirtualKeyExW(vk, 4, layout)
         flags = (8 if scan else 0) | (1 if scan & 0xFF00 else 0) | (2 if up else 0)
         return Input(type=1, keyboard=KeyboardInput(0 if scan else vk, scan & 0xFF, flags, 0, 0))
 
     def keyDown(self, key, target=None):
-        self._send(self._key(key, False), target)
+        event = self._key(key, False)
+        self.key_events[key] = event
+        self._send(event, target)
 
     def keyUp(self, key):
-        self._send(self._key(key, True))
+        event = self.key_events.get(key)
+        if event is None:
+            return
+        original = event.keyboard
+        self._send(
+            Input(
+                type=1,
+                keyboard=KeyboardInput(
+                    original.vk, original.scan, original.flags | 2, original.time, original.extra
+                ),
+            )
+        )
+        self.key_events.pop(key, None)
 
     def moveTo(self, x, y):
         self._failsafe()

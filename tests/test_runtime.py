@@ -52,7 +52,17 @@ def test_normalization_ids_geometry_and_unknown_confidence():
 
 def test_bounded_candidates_preserve_exact_text_and_observation_binding():
     desktop = FixtureDesktop()
-    obs = Observation("epoch", desktop.capture(), desktop.parse(None))
+    inputs = normalize_omni(
+        [
+            {
+                "type": "input",
+                "content": "Address input",
+                "interactivity": True,
+                "bbox": [0.1, 0.2, 0.6, 0.5],
+            }
+        ]
+    )
+    obs = Observation("epoch", desktop.capture(), inputs)
     candidates = CandidateBuilder(12).build(obs, Contract(goal='Enter "https://example.test"'))
     assert len(candidates) <= 12
     assert all(a.observation_id == "epoch" for a in candidates)
@@ -213,11 +223,16 @@ def test_detect_no_progress_from_actual_unchanged_images():
             pass
 
     executor = SessionRuntime(
-        desktop, desktop, WaitingDecision(), NoopAction(), Config(settle_seconds=0)
+        desktop,
+        desktop,
+        WaitingDecision(),
+        NoopAction(),
+        Config(screen_timeout=0.05, screen_interval=0.005),
     )
     session = Session(Contract(goal="test"))
     executor.execute(session)
-    assert session.status == Status.NO_PROGRESS and session.steps == 3
+    assert session.status == Status.NO_PROGRESS and session.steps == 1
+    assert session.rounds == 1 and session.history[-1]["wait_frames"] >= 2
 
 
 def test_goal_requires_all_success_conditions():

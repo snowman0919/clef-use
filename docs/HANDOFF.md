@@ -1,8 +1,8 @@
 # Engineering handoff
 
 Updated 2026-10-04. Repo clef-use/main, public origin
-https://github.com/snowman0919/clef-use. Previous HEAD efde70d, now owned 0.1.4
-Windows native-input change in progress. Overall goal remains active; numbered
+https://github.com/snowman0919/clef-use. HEAD f130d6f (published 0.1.4), all six source CI jobs passed.
+Owned visual-condition waiting changes are in progress. Overall goal remains active; numbered
 requirements: IMPLEMENTATION.md; evidence: evidence/VALIDATION.md.
 
 Canonical runtime owns capture -> pinned OmniParser -> semantic candidates ->
@@ -65,3 +65,90 @@ Refresh public metadata when an authorized route is available. Public install ca
 and isolated public one-line installs work. Keep Windows-local ML and broader GUI
 coverage explicitly separate. Full Hermes launcher still missing; Codex readback,
 OMP native MCP and official Hermes discovery/handler passed at earlier checkpoint.
+
+Visual iteration: screenshot-only bounded waiter replaces fixed settle delays,
+tracks target/nearby ROI and foreground bounds; ACT/WAIT/BLOCKED/NEEDS_REPLAN/
+COMPLETED remains one joint CLEF request. Unknown actionability stays unknown;
+exact raster/geometry/model cache reuses perception only. Explicit text/goal
+checks remain separate from readiness. Canonical owned snapshot:
+/tmp/clef-use-visual-audit, refreshed by /tmp/clef-use-freeze-visual.py.
+Do not test or publish the combined dirty tree. Next: pure regression checks,
+installed Windows wheel/native smoke, controlled real-model GUI wait/cache
+ablations, source checkpoint and release checks. No speed claim yet.
+
+2026-10-04 visual iteration: own frozen final tree
+/tmp/clef-use-visual-audit-final passes 82 tests, lint and format; installed Windows
+0.1.5 wheel passed 80 tests/6.86s and native GUI. Clipboard sequence is checked
+without reading/writing clipboard. pythonw task could not acquire foreground;
+ordinary console Python task acquired the owned window without bypassing focus
+policy. Public HTTPS 0.1.3 manifest now has 15 targets and isolated Mac/Windows
+installs/self-tests passed; prior 404 blocker is resolved for 0.1.3 only.
+Mode criteria initially stopped with low confidence; actual Omni detected the
+correct Continue target. Clarified goal/evidence criteria + explicit allowed
+candidates yielded ACT .8461 without changing thresholds. Subsequent actual
+Windows run made two correct native clicks, waited for 500ms delayed rendering,
+and app readback Task complete, but final CLEF forward failed in Qwen3.5 image
+placeholder validation. This is ERROR, not completion or performance proof.
+Warm ablation was stopped at failed cold acceptance. All failed results retained.
+Standalone processor CPU/MPS count probe found 532 expected image tokens with
+identical input IDs over eight repetitions. /tmp/clef-use-forward-probe.py now
+runs six actual repeated public-safe completion forwards, preserving exact
+exception/numerical evidence in /tmp/clef-use-forward-diagnostic.json. No blindly
+removed cache clearing or new framework. Next: inspect forward evidence, fix only
+proven cause, rerun controlled GUI benchmark, then source/CI/release.
+
+Latest request-context correction is in the final frozen source: omit null
+actionability metadata from CLEF state, append new mode/effect questions after
+existing questions. Full structured history retained. Completion-image ablation
+then returned goal .949/condition .9638/mode .903, no threshold reduction. Final
+frozen checks now 83 tests. /tmp/clef-use-cache-ablation.py compares CLEAR,
+SYNC_CLEAR (before forward + before clearing), KEEP on the same resident model
+and completion request, rotating order, eight repetitions each; outputs and
+MPS/RSS measurements /tmp/clef-use-cache-ablation.json. Early KEEP reproduced an
+index failure; wait for all measurements before selecting a policy. No production
+model_worker change yet. The diagnostic GUI task is finished, tokens and SSH
+forward remain task-owned for the next bounded run; remove at final cleanup.
+
+Cache policy pilot completed: CLEAR 2/8 errors, SYNC_CLEAR 3/8, KEEP 4/8;
+no reliable fix established and production policy remains unchanged. Runs rotated
+within one resident process, so allocator carryover prevents a standalone policy
+speed claim. Actual model condition/goal requests are now calibrated with full
+history and omitted null metadata, questions appended. Current 15-run Windows
+measurement controller uses /tmp/clef-use-visual-audit-final and writes
+/tmp/clef-use-visual-measurement.json. Every failure is retained; actual cold
+worker restarts are marked explicitly. This is a reliability measurement even
+if backend errors prevent a speed conclusion. GUI owned task has 45min cap.
+
+
+Latest final frozen 0.1.5 source passed 83 tests locally (21.45s), lint/format,
+and wheel build. Final rebuilt noneditable wheel on Windows passed the same
+83 tests in 7.42s with PYTHONPATH removed. The later repeated real model task
+measurement was interrupted after four failed tasks: three ModelWorkerError
+and one TimeoutError; all restarted at least one worker, no actual warm samples.
+Only one accepted native action occurred, with zero observed wrong input,
+early advance or false completion. A concurrent MPS diagnostic confounded host
+load and was stopped; these latency values cannot establish an improvement.
+windows-visual-measurement.json retains every completed task. The fifth task
+was interrupted and excluded. No-effect model task was NOT_RUN. Diagnostics
+now persist interrupted reports and stop after three consecutive backend errors;
+warm percentiles include only actual resident-worker trials.
+The fallback-environment probe was interrupted before producing results;
+PYTORCH_ENABLE_MPS_FALLBACK is not established as the cause. Production model
+worker and allocator policy are unchanged. Windows GUI agent exited and its
+on-demand scheduled task/token were removed. New readiness-only native GUI
+checks are separate from model/task acceptance. Existing unowned MLX/quantization
+and residency changes remain excluded. Public HTTPS still serves 0.1.3; publishing
+0.1.5 requires the assembled release-site delivery. Overall goal remains active.
+
+
+Installed-wheel Windows native readiness smoke passed five delayed transitions
+with unrelated blinking outside the target ROI: actual rendering occurred
+563-578ms after input, and STABLE was returned only afterward, at 781-797ms.
+The no-effect case returned NO_CHANGE at 1046ms against a 1s sampling deadline,
+with one native callback and no repeat input. Six native actions and 57 actual
+screenshot polls used zero model calls. windows-visual-wait.json records the
+readbacks. This uses known owned-widget geometry and tests readiness only;
+it is separate from CLEF task acceptance and supplies no speedup baseline.
+Two harness schema mistakes were corrected before any native action in the
+accepted run. Both disposable windows closed, inputs released, pointer/foreground
+restored; owned scheduled tasks, SSH forward and ephemeral token files removed.

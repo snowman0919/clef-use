@@ -86,3 +86,20 @@ Keep user apps untouched, use only the disposable test window, and restore prior
 pointer/foreground/clipboard state. The diagnostic bridge binds loopback only,
 uses an ephemeral token read from a private file, and requires a private SSH
 forward. Never expose that test endpoint publicly.
+
+## Visual iteration, 0.1.5
+
+Captured physical foreground bounds now guard input against window movement.
+Shortcut scan codes use the foreground thread's keyboard layout, and release
+reuses the original key-down event even after layout changes. Clipboard sequence
+is checked by the diagnostic without reading/writing clipboard. Installed-wheel
+Windows tests and native GUI passed (evidence/windows-015.json and
+windows-native-015.json). pythonw could not acquire foreground in this session;
+the ordinary Python console task acquired the owned test window through normal
+Windows focus calls. Failed admission retained the no-input guard.
+
+The runtime's screenshot-only waiter, explicit modes and exact-image perception
+cache are documented in VISUAL_READINESS.md. Two correct real model-selected
+clicks and app completion readback were observed with 500ms delayed rendering,
+but an MPS backend error interrupted final model verification in the initial
+0.1.5 run. Do not interpret that ERROR as runtime completion.

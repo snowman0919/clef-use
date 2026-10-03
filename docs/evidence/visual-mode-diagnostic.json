@@ -1,0 +1,125 @@
+{
+  "mode": "REAL_CLEF_WINDOWS_PIXELS_DIAGNOSTIC_NO_INPUT",
+  "seconds": 82.25850604199513,
+  "candidates": [
+    "Click icon: Continue "
+  ],
+  "questions": {
+    "mode": {
+      "type": "choice",
+      "instructions": "What should the executor do next toward the submitted goal?",
+      "criteria": {
+        "ACT": "Use an available allowed GUI action to advance the task.",
+        "WAIT": "Wait for visible loading or an ongoing screen transition.",
+        "BLOCKED": "A required control or desktop access is missing or obstructed.",
+        "NEEDS_REPLAN": "Ask the planner for missing information or a revised goal.",
+        "COMPLETED": "The requested final result is already visibly achieved."
+      }
+    },
+    "effect": {
+      "type": "noul",
+      "instructions": "Has the last action's expected_effect visibly occurred? Readiness alone is not semantic proof. No previous action: false."
+    },
+    "action": {
+      "type": "choice",
+      "instructions": "Choose the next allowed GUI action toward the goal.",
+      "criteria": {
+        "a0": "Click icon: Continue "
+      }
+    },
+    "complete": {
+      "type": "noul",
+      "instructions": "Has the goal reached its final successful state? Evaluate the current visible result against all success_conditions. Intermediate clicks need not remain visible."
+    },
+    "replan": {
+      "type": "noul",
+      "instructions": "Is planner intervention required to proceed?"
+    },
+    "unsafe": {
+      "type": "noul",
+      "instructions": "Would the proposed next action violate a constraint, enter a password, send private data, or execute a shell command?"
+    },
+    "progress": {
+      "type": "score",
+      "criteria": [
+        "No progress",
+        "Early progress",
+        "Partial progress",
+        "Almost complete",
+        "Complete"
+      ]
+    },
+    "condition_0": {
+      "type": "noul",
+      "instructions": "Is this condition visibly true now: The text Task complete is visible"
+    }
+  },
+  "reply": {
+    "model": "clef-flash",
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.8461,
+        "probabilities": {
+          "ACT": 0.8461,
+          "WAIT": 0.0242,
+          "BLOCKED": 0.0694,
+          "NEEDS_REPLAN": 0.0507,
+          "COMPLETED": 0.0097
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.0444
+      },
+      "action": {
+        "type": "choice",
+        "choice": "a0",
+        "confidence": 1.0,
+        "probabilities": {
+          "a0": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0132
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0929
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0114
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.9319,
+        "confidence": 0.4806,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.3406,
+          "1": 0.4806,
+          "2": 0.103,
+          "3": 0.0581,
+          "4": 0.0178
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0053
+      }
+    },
+    "usage": {
+      "input_tokens": 1736,
+      "output_tokens": 0
+    }
+  }
+}

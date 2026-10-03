@@ -1,0 +1,368 @@
+{
+  "kind": "MEASURED_REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+  "inference_host": "macOS-27.0-arm64-arm-64bit",
+  "input_host": "Windows 11",
+  "models": {
+    "Cloudflare/clef-flash": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "Cloudflare/clef": "2f3de3dd85f379784083b0814d997ab627200f0c",
+    "microsoft/OmniParser-v2.0": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+    "microsoft/Florence-2-base": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+    "microsoft/Florence-2-base-ft": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e"
+  },
+  "omni_source_revision": "354021201345a96178360b28733573e27269f2de",
+  "device": "mps",
+  "parser_device": "cpu",
+  "method": "Same workers/model/task/start UI; balanced order; 500ms delayed GUI rendering; fixed-delay is a diagnostic ablation, not the previous product version.",
+  "repeats_per_variant": 5,
+  "runs": [
+    {
+      "variant": "fixed_delay_no_cache",
+      "phase": "warm-0",
+      "seconds": 22.114863250011695,
+      "status": "LOW_CONFIDENCE",
+      "reason": "execution mode confidence below threshold",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 6907.340666992241,
+      "clef_ms": 15118.038000000524,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 65.67474998882972,
+          "parser_ms": 6907.340666992241,
+          "decision_ms": 15118.038000000524,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.14685,
+          "decision_mode": "BLOCKED",
+          "effect_probability": 0.0208,
+          "goal_probability": 0.012,
+          "condition_probabilities": [
+            0.0056
+          ],
+          "replan_probability": 0.1382,
+          "safety_probability": 0.0116,
+          "reason": "execution mode confidence below threshold",
+          "timestamp": "2026-10-03T21:39:33.951893+00:00",
+          "session_id": "0e0dc3ca4fdc441a858d3674086c4f18",
+          "step": 0,
+          "terminal_event": "LOW_CONFIDENCE"
+        }
+      ]
+    },
+    {
+      "variant": "visual_wait_no_cache",
+      "phase": "warm-0",
+      "seconds": 21.499008625003626,
+      "status": "LOW_CONFIDENCE",
+      "reason": "execution mode confidence below threshold",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 6980.986333001056,
+      "clef_ms": 14422.325665989774,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 68.79420900077093,
+          "parser_ms": 6980.986333001056,
+          "decision_ms": 14422.325665989774,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.146825,
+          "decision_mode": "BLOCKED",
+          "effect_probability": 0.0208,
+          "goal_probability": 0.012,
+          "condition_probabilities": [
+            0.0056
+          ],
+          "replan_probability": 0.1376,
+          "safety_probability": 0.0116,
+          "reason": "execution mode confidence below threshold",
+          "timestamp": "2026-10-03T21:39:55.536296+00:00",
+          "session_id": "f60d3358551b4cad8a513d3330073935",
+          "step": 0,
+          "terminal_event": "LOW_CONFIDENCE"
+        }
+      ]
+    },
+    {
+      "variant": "visual_wait_cache",
+      "phase": "warm-0",
+      "seconds": 10.80014045900316,
+      "status": "ERROR",
+      "reason": "ModelWorkerError in runtime backend",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 6753.66975000361,
+      "clef_ms": 3940.6623339891667,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 80.07070799067151,
+          "parser_ms": 6753.66975000361,
+          "decision_ms": 3940.6623339891667,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "backend_error": {
+            "code": "ValueError",
+            "frames": [
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "forward",
+                "line": 1572
+              },
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "get_placeholder_mask",
+                "line": 1475
+              },
+              {
+                "file": "import_utils.py",
+                "function": "torch_compilable_check",
+                "line": 1582
+              },
+              {
+                "file": "__init__.py",
+                "function": "_check_with",
+                "line": 1735
+              }
+            ]
+          },
+          "reason": "ModelWorkerError in runtime backend",
+          "timestamp": "2026-10-03T21:40:06.422155+00:00",
+          "session_id": "5c4223e08cdc48a89345b766b20bdbc4",
+          "step": 0,
+          "terminal_event": "ERROR"
+        }
+      ]
+    },
+    {
+      "variant": "visual_wait_no_cache",
+      "phase": "warm-1",
+      "seconds": 66.5103401249944,
+      "status": "ERROR",
+      "reason": "ModelWorkerError in runtime backend",
+      "success": false,
+      "false_completion": false,
+      "wrong_input": 0,
+      "early_advance": 0,
+      "act": 0,
+      "clef_calls": 1,
+      "parser_calls": 1,
+      "wait_frames": 0,
+      "wait_ms": 0,
+      "verification_ms": 0.0,
+      "parser_ms": 5677.795249997871,
+      "clef_ms": 60743.18287501228,
+      "readback": {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Continue",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 394636
+        },
+        "native_input": true
+      },
+      "metrics": [
+        {
+          "capture_ms": 65.56779198581353,
+          "parser_ms": 5677.795249997871,
+          "decision_ms": 60743.18287501228,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "capture_calls": 1,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "backend_error": {
+            "code": "ValueError",
+            "frames": [
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "forward",
+                "line": 1572
+              },
+              {
+                "file": "modeling_qwen3_5.py",
+                "function": "get_placeholder_mask",
+                "line": 1475
+              },
+              {
+                "file": "import_utils.py",
+                "function": "torch_compilable_check",
+                "line": 1582
+              },
+              {
+                "file": "__init__.py",
+                "function": "_check_with",
+                "line": 1735
+              }
+            ]
+          },
+          "reason": "ModelWorkerError in runtime backend",
+          "timestamp": "2026-10-03T21:41:13.023489+00:00",
+          "session_id": "9e7871bb4760475295be83debd7b933f",
+          "step": 0,
+          "terminal_event": "ERROR"
+        }
+      ]
+    }
+  ],
+  "cold": {
+    "variant": "visual_wait_no_cache",
+    "phase": "cold",
+    "seconds": 137.96130441701098,
+    "status": "LOW_CONFIDENCE",
+    "reason": "execution mode confidence below threshold",
+    "success": false,
+    "false_completion": false,
+    "wrong_input": 0,
+    "early_advance": 0,
+    "act": 0,
+    "clef_calls": 1,
+    "parser_calls": 1,
+    "wait_frames": 0,
+    "wait_ms": 0,
+    "verification_ms": 0.0,
+    "parser_ms": 43383.386667002924,
+    "clef_ms": 94421.38366700965,
+    "readback": {
+      "stage": 0,
+      "clicks": [],
+      "input_attempts": [],
+      "render_delay_ms": 500,
+      "no_effect": false,
+      "visible_result": "Continue",
+      "render_pending": false,
+      "desktop": {
+        "session_id": 1,
+        "desktop": "Default",
+        "foreground_window": 394636
+      },
+      "native_input": true
+    },
+    "metrics": [
+      {
+        "capture_ms": 103.89366700837854,
+        "parser_ms": 43383.386667002924,
+        "decision_ms": 94421.38366700965,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.146825,
+        "decision_mode": "BLOCKED",
+        "effect_probability": 0.0208,
+        "goal_probability": 0.012,
+        "condition_probabilities": [
+          0.0056
+        ],
+        "replan_probability": 0.1376,
+        "safety_probability": 0.0116,
+        "reason": "execution mode confidence below threshold",
+        "timestamp": "2026-10-03T21:39:11.749216+00:00",
+        "session_id": "50472dcad5514f2aa1eeb7579d3b74a2",
+        "step": 0,
+        "terminal_event": "LOW_CONFIDENCE"
+      }
+    ]
+  },
+  "render_delay_ms": 500,
+  "fixed_delay_seconds": 0.3,
+  "screen_interval_seconds": 0.05,
+  "screen_timeout_seconds": 5
+}

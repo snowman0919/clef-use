@@ -25,32 +25,59 @@ def main():
     token = (args.root / "gui-token").read_text().strip()
     native, action = WindowsInput(), DesktopAction()
     previous_target, previous_pointer = native.foreground(), Point()
-    native.user.GetCursorPos(ctypes.byref(previous_pointer))
+    with native.physical_coordinates():
+        native.user.GetCursorPos(ctypes.byref(previous_pointer))
     desktop = native.desktop_status()
     root = tk.Tk()
     root.title("clef-use real model GUI validation")
     root.geometry("900x600+500+200")
     root.configure(bg="white")
     root.attributes("-topmost", True)
-    state = {"stage": 0, "clicks": []}
+    state = {
+        "stage": 0,
+        "clicks": [],
+        "input_attempts": [],
+        "render_delay_ms": 0,
+        "no_effect": False,
+        "render_pending": False,
+    }
     tk.Label(root, text="Local test workspace", font=("Segoe UI", 26), bg="white").place(x=40, y=40)
     label = tk.Label(root, text="", font=("Segoe UI", 26), bg="white")
     label.place(x=40, y=200)
 
     def advance():
         state["clicks"].append(button.cget("text"))
+        if state["no_effect"]:
+            return
         state["stage"] += 1
-        if state["stage"] == 1:
-            button.configure(text="Confirm")
+        state["render_pending"] = True
+
+        def render():
+            state["render_pending"] = False
+            if state["stage"] == 1:
+                button.configure(text="Confirm", state="normal")
+            else:
+                button.place_forget()
+                label.configure(text="Task complete")
+
+        if state["render_delay_ms"]:
+            root.after(state["render_delay_ms"], render)
         else:
-            button.destroy()
-            label.configure(text="Task complete")
+            render()
 
     button = tk.Button(root, text="Continue", font=("Segoe UI", 22), command=advance)
     button.place(x=50, y=220, width=260, height=80)
     root.update()
     root.focus_force()
     root.update()
+    native.user.GetAncestor.argtypes = [ctypes.c_void_p, ctypes.c_uint]
+    native.user.GetAncestor.restype = ctypes.c_void_p
+    native.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
+    owned_target = native.user.GetAncestor(root.winfo_id(), 2)
+    native.user.SetForegroundWindow(owned_target)
+    root.update()
+    if native.foreground() != owned_target:
+        raise RuntimeError("owned test window did not become foreground")
     with native.physical_coordinates():
         bounds = (
             root.winfo_rootx(),
@@ -60,11 +87,48 @@ def main():
         )
     target = native.foreground()
 
+    def on_ui(callback):
+        done = Event()
+        reply = {}
+
+        def invoke():
+            try:
+                reply["value"] = callback()
+            except Exception as exc:
+                reply["error"] = exc
+            finally:
+                done.set()
+
+        root.after(0, invoke)
+        if not done.wait(10):
+            raise TimeoutError("owned GUI did not answer")
+        if "error" in reply:
+            raise reply["error"]
+        return reply.get("value")
+
+    def reset(payload):
+        state.update(
+            stage=0,
+            render_pending=False,
+            clicks=[],
+            input_attempts=[],
+            render_delay_ms=int(payload.get("delay_ms", 0)),
+            no_effect=bool(payload.get("no_effect", False)),
+        )
+        label.configure(text="")
+        button.configure(text="Continue", state="normal")
+        button.place(x=50, y=220, width=260, height=80)
+        root.focus_force()
+        root.update_idletasks()
+        return {"reset": True, "stage": 0}
+
     def capture():
         frame = DesktopCapture().capture()
         native.ensure_target(target)
         pixels = frame.image.crop(bounds)
-        return Frame(pixels, bounds[:2], pixels.size, frame.foreground_window)
+        return Frame(
+            pixels, bounds[:2], pixels.size, frame.foreground_window, frame.foreground_bounds
+        )
 
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
@@ -86,6 +150,8 @@ def main():
                         "origin": frame.origin,
                         "size": frame.image.size,
                         "foreground": frame.foreground_window,
+                        "foreground_bounds": frame.foreground_bounds,
+                        "render_pending": state["render_pending"],
                     }
                 elif self.path == "/action":
                     import base64
@@ -96,15 +162,38 @@ def main():
                         tuple(payload["origin"]),
                         tuple(payload["size"]),
                         payload["foreground"],
+                        tuple(payload["foreground_bounds"]),
                     )
                     observation = Observation(
                         payload["id"],
                         frame,
                         tuple(UIObject.model_validate(o) for o in payload["objects"]),
                     )
+                    expected_label = next(
+                        (
+                            o.label
+                            for o in observation.objects
+                            if o.id == payload["action"].get("target")
+                        ),
+                        None,
+                    )
+                    visible_label = on_ui(
+                        lambda: button.cget("text") if state["stage"] < 2 else "Task complete"
+                    )
+                    state["input_attempts"].append(
+                        {
+                            "target_label": expected_label,
+                            "visible_label": visible_label,
+                            "correct": bool(
+                                expected_label and visible_label.lower() in expected_label.lower()
+                            ),
+                        }
+                    )
                     result = action.execute(
                         ActionCandidate.model_validate(payload["action"]), observation, Event()
                     ).model_dump()
+                elif self.path == "/reset":
+                    result = on_ui(lambda: reset(payload))
                 elif self.path == "/release":
                     action.release()
                     result = {"released": True}
@@ -114,9 +203,15 @@ def main():
                     result = {
                         "stage": state["stage"],
                         "clicks": list(state["clicks"]),
-                        "visible_result": "Task complete"
-                        if state["stage"] == 2
-                        else button.cget("text"),
+                        "input_attempts": list(state["input_attempts"]),
+                        "render_delay_ms": state["render_delay_ms"],
+                        "no_effect": state["no_effect"],
+                        "visible_result": on_ui(
+                            lambda: (
+                                label.cget("text") if state["stage"] == 2 else button.cget("text")
+                            )
+                        ),
+                        "render_pending": state["render_pending"],
                         "desktop": desktop,
                         "native_input": True,
                     }
@@ -147,7 +242,7 @@ def main():
     (args.root / "windows-model-agent-ready.json").write_text(
         json.dumps({"session_id": desktop["session_id"], "port": args.port}), encoding="utf-8"
     )
-    root.after(540_000, root.quit)
+    root.after(2_700_000, root.quit)
     try:
         root.mainloop()
     finally:

@@ -30,6 +30,10 @@ class Config(StrictModel):
     confidence_threshold: float = Field(default=0.55, ge=0.05, le=1)
     no_progress_limit: int = Field(default=3, ge=2, le=10)
     settle_seconds: float = Field(default=0.3, ge=0, le=5)
+    screen_timeout: float = Field(default=5, ge=0.05, le=30)
+    screen_interval: float = Field(default=0.05, ge=0.005, le=0.5)
+    screen_stable_samples: int = Field(default=2, ge=2, le=10)
+    perception_cache: bool = True
     backend_timeout: float = Field(default=180, ge=1, le=600)
     max_candidates: int = Field(default=48, ge=12, le=100)
     debug: bool = False

@@ -24,7 +24,8 @@ def main():
     result = {"mode": "REAL_WINDOWS_GUI_NATIVE_ADAPTER", "native_input": True}
     root, gui, action = None, WindowsInput(), DesktopAction()
     previous_target, previous_pointer = gui.foreground(), Point()
-    gui.user.GetCursorPos(ctypes.byref(previous_pointer))
+    with gui.physical_coordinates():
+        gui.user.GetCursorPos(ctypes.byref(previous_pointer))
     try:
         result["desktop"] = gui.desktop_status()
         root = tk.Tk()
@@ -43,6 +44,14 @@ def main():
         root.update()
         entry.focus_force()
         root.update()
+        gui.user.GetAncestor.argtypes = [ctypes.c_void_p, ctypes.c_uint]
+        gui.user.GetAncestor.restype = ctypes.c_void_p
+        gui.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
+        owned_target = gui.user.GetAncestor(root.winfo_id(), 2)
+        gui.user.SetForegroundWindow(owned_target)
+        root.update()
+        if gui.foreground() != owned_target:
+            raise RuntimeError("owned test window did not become foreground")
         time.sleep(0.3)
 
         def snapshot():
@@ -85,19 +94,14 @@ def main():
             root.update()
             return outcome
 
-        import pyperclip
-
-        clipboard = pyperclip.paste()
-        try:
-            pyperclip.copy("clef-use clipboard invariant")
-            text = "Windows 한글 테스트 😀"
-            assert execute("type", text, "entry").ok
-            assert entry.get() == text, repr(entry.get())
-            assert pyperclip.paste() == "clef-use clipboard invariant"
-            result["unicode_readback"] = entry.get()
-            result["clipboard_preserved"] = True
-        finally:
-            pyperclip.copy(clipboard)
+        clipboard_sequence = gui.user.GetClipboardSequenceNumber()
+        text = "Windows 한글 테스트 😀"
+        assert execute("type", text, "entry").ok
+        assert entry.get() == text, repr(entry.get())
+        assert gui.user.GetClipboardSequenceNumber() == clipboard_sequence
+        result["unicode_readback"] = entry.get()
+        result["clipboard_preserved"] = True
+        result["clipboard_verification"] = "sequence unchanged; no clipboard read/write"
         assert execute("hotkey", "ctrl+a").ok
         assert execute("press", "backspace").ok
         assert entry.get() == ""

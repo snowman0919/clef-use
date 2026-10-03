@@ -1,0 +1,10 @@
+{
+  "mode": "INSTALLED_NONEDITABLE_WINDOWS_WHEEL",
+  "version": "0.1.5",
+  "python": "3.12.10",
+  "tests": 83,
+  "seconds": 7.42,
+  "gui_adapter": "PASSED",
+  "note": "Installed noneditable wheel, no PYTHONPATH; model inference on Mac, not Windows-local",
+  "source": "Owned frozen final source, final rebuilt 0.1.5 wheel"
+}

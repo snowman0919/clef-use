@@ -20,6 +20,8 @@ def normalize_omni(raw: list[dict]) -> tuple[UIObject, ...]:
             actions.update(("click", "double_click"))
             if role == "input" or re.search(r"input|field|textbox|search|address", label, re.I):
                 actions.update(("focus", "type"))
+            if re.search(r"scrollbar|scroll bar", label, re.I):
+                actions.add("scroll")
         identity = json.dumps([role, label, [round(c, 4) for c in coords]])
         object_id = "obj_" + hashlib.sha256(identity.encode()).hexdigest()[:12]
         if object_id in seen:

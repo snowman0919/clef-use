@@ -1,0 +1,296 @@
+[
+  {
+    "run": 0,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.7663,
+        "probabilities": {
+          "ACT": 0.7663,
+          "WAIT": 0.0188,
+          "BLOCKED": 0.1398,
+          "NEEDS_REPLAN": 0.0483,
+          "COMPLETED": 0.0268
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.049
+      },
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0183
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.1419
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0148
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.4787,
+        "confidence": 0.7563,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.7563,
+          "1": 0.0981,
+          "2": 0.068,
+          "3": 0.0658,
+          "4": 0.0118
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0148
+      }
+    },
+    "seconds": 18.45350549998693
+  },
+  {
+    "run": 1,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.7663,
+        "probabilities": {
+          "ACT": 0.7663,
+          "WAIT": 0.0188,
+          "BLOCKED": 0.1398,
+          "NEEDS_REPLAN": 0.0483,
+          "COMPLETED": 0.0268
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.049
+      },
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0183
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.1419
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0148
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.4787,
+        "confidence": 0.7563,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.7563,
+          "1": 0.0981,
+          "2": 0.068,
+          "3": 0.0658,
+          "4": 0.0118
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0148
+      }
+    },
+    "seconds": 12.954275125011918
+  },
+  {
+    "run": 2,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.7663,
+        "probabilities": {
+          "ACT": 0.7663,
+          "WAIT": 0.0188,
+          "BLOCKED": 0.1398,
+          "NEEDS_REPLAN": 0.0483,
+          "COMPLETED": 0.0268
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.049
+      },
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0183
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.1419
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0148
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.4787,
+        "confidence": 0.7563,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.7563,
+          "1": 0.0981,
+          "2": 0.068,
+          "3": 0.0658,
+          "4": 0.0118
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0148
+      }
+    },
+    "seconds": 12.85195433300396
+  },
+  {
+    "run": 3,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "error": "index 1059972672 is out of bounds: 0, range 0 to 1",
+    "seconds": 2.208933457994135
+  },
+  {
+    "run": 4,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.7663,
+        "probabilities": {
+          "ACT": 0.7663,
+          "WAIT": 0.0188,
+          "BLOCKED": 0.1398,
+          "NEEDS_REPLAN": 0.0483,
+          "COMPLETED": 0.0268
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.049
+      },
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0183
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.1419
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0148
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.4787,
+        "confidence": 0.7563,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.7563,
+          "1": 0.0981,
+          "2": 0.068,
+          "3": 0.0658,
+          "4": 0.0118
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0148
+      }
+    },
+    "seconds": 13.089684708000277
+  },
+  {
+    "run": 5,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "error": "index -1099383680 is out of bounds: 0, range 0 to 1",
+    "seconds": 2.1569989590061596
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "run": 0,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 1,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 2,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 3,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 4,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 5,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 6,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 7,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 8,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 9,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 10,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 11,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 12,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 13,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 14,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 15,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 16,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 17,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 18,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 19,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 20,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 21,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 22,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  },
+  {
+    "run": 23,
+    "indices_equal": true,
+    "weights_max_diff": 6.496906280517578e-06,
+    "positions_equal": true,
+    "cu_equal": true
+  }
+]

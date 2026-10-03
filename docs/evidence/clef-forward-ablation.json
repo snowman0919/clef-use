@@ -1,0 +1,262 @@
+[
+  {
+    "run": 0,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.7912,
+        "probabilities": {
+          "ACT": 0.7912,
+          "WAIT": 0.0194,
+          "BLOCKED": 0.1148,
+          "NEEDS_REPLAN": 0.0443,
+          "COMPLETED": 0.0303
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.1106
+      },
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0332
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.1017
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0176
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.7643,
+        "confidence": 0.6034,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.6034,
+          "1": 0.1636,
+          "2": 0.1188,
+          "3": 0.0937,
+          "4": 0.0205
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.0177
+      }
+    },
+    "seconds": 15.782122874996276
+  },
+  {
+    "run": 1,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1823,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.0277
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.796
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0146
+      },
+      "progress": {
+        "type": "score",
+        "score": 0.5159,
+        "confidence": 0.738,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.738,
+          "1": 0.1066,
+          "2": 0.07,
+          "3": 0.0722,
+          "4": 0.0132
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.02
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "ACT",
+        "confidence": 0.8457,
+        "probabilities": {
+          "ACT": 0.8457,
+          "WAIT": 0.0151,
+          "BLOCKED": 0.0815,
+          "NEEDS_REPLAN": 0.0336,
+          "COMPLETED": 0.0241
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.0438
+      }
+    },
+    "seconds": 12.61352016699675
+  },
+  {
+    "run": 2,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1432,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9608
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0238
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0171
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5437,
+        "confidence": 0.8102,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0397,
+          "1": 0.049,
+          "2": 0.0496,
+          "3": 0.0515,
+          "4": 0.8102
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9697
+      }
+    },
+    "seconds": 13.056186749992776
+  },
+  {
+    "run": 3,
+    "cpu_tokens": 532,
+    "mps_tokens": 532,
+    "grid": 532,
+    "input_tokens": 1701,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 14.13684941700194
+  }
+]

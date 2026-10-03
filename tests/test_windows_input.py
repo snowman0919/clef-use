@@ -51,6 +51,17 @@ class FakeAPI:
         self.after_input()
         return 1
 
+    def GetWindowThreadProcessId(self, *_):
+        return 9
+
+    def GetKeyboardLayout(self, thread):
+        assert thread == 9
+        return 0x409
+
+    def MapVirtualKeyExW(self, vk, mode, layout):
+        assert layout == 0x409
+        return self.MapVirtualKeyW(vk, mode)
+
     def MapVirtualKeyW(self, vk, _):
         return vk
 
@@ -176,3 +187,13 @@ def test_doctor_reports_session_zero_without_injecting(monkeypatch):
     result = windows_desktop_probe()
     assert result["status"] == "UNAVAILABLE" and "session 0" in result["reason"]
     assert api.events == []
+
+
+def test_key_release_uses_original_scan_even_after_layout_mapping_changes():
+    api, gui = native()
+    gui.keyDown("ctrl")
+    original = api.events[-1]
+    api.MapVirtualKeyW = lambda *_: 0xE030
+    gui.keyUp("ctrl")
+    assert api.events[-1] == (original[0], original[1], original[2] | 2)
+    assert gui.key_events == {}

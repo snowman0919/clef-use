@@ -1,0 +1,85 @@
+{
+  "kind": "REAL_WINDOWS_NATIVE_VISUAL_WAIT",
+  "host": "Windows-11-10.0.26200-SP0",
+  "runs": [
+    {
+      "trial": 0,
+      "no_effect": false,
+      "visual_wait_state": "STABLE",
+      "wait_frames": 9,
+      "wait_ms": 782.0000000065193,
+      "related_change": true,
+      "verification_ms": 4.066000052262098,
+      "visible_text": "Ready",
+      "callbacks": 1,
+      "render_delay_ms": 563.0000000237487
+    },
+    {
+      "trial": 1,
+      "no_effect": false,
+      "visual_wait_state": "STABLE",
+      "wait_frames": 9,
+      "wait_ms": 797.0000000204891,
+      "related_change": true,
+      "verification_ms": 4.357600002549589,
+      "visible_text": "Ready",
+      "callbacks": 2,
+      "render_delay_ms": 563.0000000237487
+    },
+    {
+      "trial": 2,
+      "no_effect": false,
+      "visual_wait_state": "STABLE",
+      "wait_frames": 9,
+      "wait_ms": 795.9999999729916,
+      "related_change": true,
+      "verification_ms": 4.121800069697201,
+      "visible_text": "Ready",
+      "callbacks": 3,
+      "render_delay_ms": 577.9999999795109
+    },
+    {
+      "trial": 3,
+      "no_effect": false,
+      "visual_wait_state": "STABLE",
+      "wait_frames": 9,
+      "wait_ms": 797.0000000204891,
+      "related_change": true,
+      "verification_ms": 4.2505000019446015,
+      "visible_text": "Ready",
+      "callbacks": 4,
+      "render_delay_ms": 577.9999999795109
+    },
+    {
+      "trial": 4,
+      "no_effect": false,
+      "visual_wait_state": "STABLE",
+      "wait_frames": 9,
+      "wait_ms": 781.0000000172295,
+      "related_change": true,
+      "verification_ms": 4.138299962505698,
+      "visible_text": "Ready",
+      "callbacks": 5,
+      "render_delay_ms": 563.0000000237487
+    },
+    {
+      "trial": 5,
+      "no_effect": true,
+      "visual_wait_state": "NO_CHANGE",
+      "wait_frames": 12,
+      "wait_ms": 1045.9999999729916,
+      "related_change": false,
+      "verification_ms": 5.54180023027584,
+      "visible_text": "Pending",
+      "callbacks": 6,
+      "render_delay_ms": null
+    }
+  ],
+  "status": "PASSED",
+  "model_calls": 0,
+  "native_actions": 6,
+  "limitation": "Known widget geometry; readiness only, no model or task benchmark",
+  "source_sha256": "e0b4c2140f4524eabaebf2a33ba623cdb721d2d27cbbf17ac369a661b830c4c2",
+  "installed_wheel_sha256": "cd56b24038307d22f31ada05b00787a3d9e72db0096ccdc2f980754d052a9c55",
+  "development_notes": "Two harness schema errors occurred before any native action; corrected required fields and frozen model_copy before accepted rerun."
+}

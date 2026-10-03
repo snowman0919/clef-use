@@ -1,0 +1,1406 @@
+[
+  {
+    "policy": "CLEAR",
+    "repetition": 0,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 15.746989749997738,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081819648,
+    "rss": 484163584
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 0,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.972587249998469,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081819648,
+    "rss": 537411584
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 0,
+    "error": "index 1044013504 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1572
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_placeholder_mask",
+        "line": 1477
+      },
+      {
+        "file": "_tensor.py",
+        "function": "__format__",
+        "line": 1150
+      }
+    ],
+    "seconds": 2.0661484169977484,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21172355072,
+    "rss": 540409856
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 1,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.790478041992174,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081836032,
+    "rss": 542687232
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 1,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.899199042003602,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21189132288,
+    "rss": 544538624
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 1,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9558
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.025
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0246
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5743,
+        "confidence": 0.8176,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0359,
+          "1": 0.0437,
+          "2": 0.0482,
+          "3": 0.0546,
+          "4": 0.8176
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9667
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9305,
+        "probabilities": {
+          "ACT": 0.0193,
+          "WAIT": 0.0167,
+          "BLOCKED": 0.0184,
+          "NEEDS_REPLAN": 0.0151,
+          "COMPLETED": 0.9305
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8256
+      }
+    },
+    "seconds": 11.897133249993203,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081836032,
+    "rss": 546357248
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 2,
+    "error": "index -1093571584 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1589
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "compute_3d_position_ids",
+        "line": 1510
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_rope_index",
+        "line": 1367
+      }
+    ],
+    "seconds": 2.0861241670063464,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21172355072,
+    "rss": 546586624
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 2,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.772745417008991,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081836032,
+    "rss": 548257792
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 2,
+    "error": "index -1061604416 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1572
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_placeholder_mask",
+        "line": 1477
+      },
+      {
+        "file": "_tensor.py",
+        "function": "__format__",
+        "line": 1150
+      }
+    ],
+    "seconds": 2.118152541006566,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081852416,
+    "rss": 548356096
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 3,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 12.144260832996224,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081852416,
+    "rss": 549978112
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 3,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.794298957989668,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081852416,
+    "rss": 551616512
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 3,
+    "error": "index -1054848768 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1572
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_placeholder_mask",
+        "line": 1477
+      },
+      {
+        "file": "_tensor.py",
+        "function": "__format__",
+        "line": 1150
+      }
+    ],
+    "seconds": 2.0835125419980614,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21172387840,
+    "rss": 551665664
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 4,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.860246457988978,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081868800,
+    "rss": 552894464
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 4,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 11.927988124996773,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21189165056,
+    "rss": 554188800
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 4,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 12.066107375008869,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081868800,
+    "rss": 555827200
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 5,
+    "error": "index -1072846080 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1589
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "compute_3d_position_ids",
+        "line": 1510
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_rope_index",
+        "line": 1367
+      }
+    ],
+    "seconds": 2.141839332995005,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21172387840,
+    "rss": 555843584
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 5,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9558
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.025
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0246
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5743,
+        "confidence": 0.8176,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0359,
+          "1": 0.0437,
+          "2": 0.0482,
+          "3": 0.0546,
+          "4": 0.8176
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9667
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9305,
+        "probabilities": {
+          "ACT": 0.0193,
+          "WAIT": 0.0167,
+          "BLOCKED": 0.0184,
+          "NEEDS_REPLAN": 0.0151,
+          "COMPLETED": 0.9305
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8256
+      }
+    },
+    "seconds": 12.065146915992955,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081868800,
+    "rss": 557268992
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 5,
+    "error": "index 1060025792 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1589
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "compute_3d_position_ids",
+        "line": 1510
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_rope_index",
+        "line": 1367
+      }
+    ],
+    "seconds": 2.174475000007078,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081868800,
+    "rss": 557285376
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 6,
+    "error": "index -1061194560 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1572
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_placeholder_mask",
+        "line": 1477
+      },
+      {
+        "file": "_tensor.py",
+        "function": "__format__",
+        "line": 1150
+      }
+    ],
+    "seconds": 2.3268310410057893,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081885184,
+    "rss": 557301760
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 6,
+    "error": "index -1072650880 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1589
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "compute_3d_position_ids",
+        "line": 1510
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_rope_index",
+        "line": 1367
+      }
+    ],
+    "seconds": 2.44568070799869,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081885184,
+    "rss": 557334528
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 6,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 12.157071042005555,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21189181440,
+    "rss": 558546944
+  },
+  {
+    "policy": "SYNC_CLEAR",
+    "repetition": 7,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9563
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.0243
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0245
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5828,
+        "confidence": 0.8214,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0354,
+          "1": 0.0427,
+          "2": 0.0471,
+          "3": 0.0534,
+          "4": 0.8214
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9673
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9318,
+        "probabilities": {
+          "ACT": 0.0189,
+          "WAIT": 0.0163,
+          "BLOCKED": 0.0182,
+          "NEEDS_REPLAN": 0.0147,
+          "COMPLETED": 0.9318
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8271
+      }
+    },
+    "seconds": 12.187405417003902,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081885184,
+    "rss": 559611904
+  },
+  {
+    "policy": "KEEP",
+    "repetition": 7,
+    "answers": {
+      "action": {
+        "type": "choice",
+        "choice": "none",
+        "confidence": 1.0,
+        "probabilities": {
+          "none": 1.0
+        }
+      },
+      "complete": {
+        "type": "noul",
+        "noul": 0.9558
+      },
+      "replan": {
+        "type": "noul",
+        "noul": 0.025
+      },
+      "unsafe": {
+        "type": "noul",
+        "noul": 0.0246
+      },
+      "progress": {
+        "type": "score",
+        "score": 3.5743,
+        "confidence": 0.8176,
+        "legend": {
+          "0": "No progress",
+          "1": "Early progress",
+          "2": "Partial progress",
+          "3": "Almost complete",
+          "4": "Complete"
+        },
+        "probabilities": {
+          "0": 0.0359,
+          "1": 0.0437,
+          "2": 0.0482,
+          "3": 0.0546,
+          "4": 0.8176
+        }
+      },
+      "condition_0": {
+        "type": "noul",
+        "noul": 0.9667
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.9305,
+        "probabilities": {
+          "ACT": 0.0193,
+          "WAIT": 0.0167,
+          "BLOCKED": 0.0184,
+          "NEEDS_REPLAN": 0.0151,
+          "COMPLETED": 0.9305
+        }
+      },
+      "effect": {
+        "type": "noul",
+        "noul": 0.8256
+      }
+    },
+    "seconds": 12.12958633400558,
+    "mps_allocated": 19063166976,
+    "mps_driver": 21189181440,
+    "rss": 560939008
+  },
+  {
+    "policy": "CLEAR",
+    "repetition": 7,
+    "error": "index -1086899712 is out of bounds: 0, range 0 to 1",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_wrapped_call_impl",
+        "line": 1779
+      },
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "generic.py",
+        "function": "wrapper",
+        "line": 903
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 1589
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "compute_3d_position_ids",
+        "line": 1510
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "get_rope_index",
+        "line": 1367
+      }
+    ],
+    "seconds": 2.6172495000064373,
+    "mps_allocated": 19063166976,
+    "mps_driver": 20081885184,
+    "rss": 561020928
+  }
+]

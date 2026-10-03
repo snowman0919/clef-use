@@ -1,7 +1,7 @@
 import re
 import sys
 
-from .schema import ActionCandidate, Contract, Observation, TextInput
+from .schema import ActionCandidate, BoundingBox, Contract, Observation, TextInput
 
 
 def text_inputs(contract: Contract) -> list[TextInput]:
@@ -13,88 +13,104 @@ def text_inputs(contract: Contract) -> list[TextInput]:
     return [TextInput(value=v) for v in dict.fromkeys(literals + expressions + numbers)][:8]
 
 
+def effect_region(box):
+    return BoundingBox(
+        x1=max(0, box.x1 - 0.1),
+        y1=max(0, box.y1 - 0.2),
+        x2=min(1, box.x2 + 0.1),
+        y2=min(1, box.y2 + 0.2),
+    )
+
+
 class CandidateBuilder:
     def __init__(self, limit: int = 48):
         self.limit = limit
 
     def build(self, observation: Observation, contract: Contract) -> tuple[ActionCandidate, ...]:
         candidates = []
-
-        def add(operation, description, target=None, value=None):
-            candidates.append(
-                ActionCandidate(
-                    id=f"a{len(candidates)}",
-                    operation=operation,
-                    observation_id=observation.id,
-                    target=target,
-                    description=description,
-                    value=value,
-                )
-            )
-
-        add("wait", "Wait briefly for the UI to settle")
-        for key in ("escape", "enter", "tab", "backspace"):
-            add("press", f"Press {key}", value=key)
-        modifier = "command" if sys.platform == "darwin" else "ctrl"
-        for key, description in (
-            ("l", "Focus browser address bar"),
-            ("a", "Select text in focused field"),
-        ):
-            add("hotkey", description, value=f"{modifier}+{key}")
-        for direction in ("up", "down"):
-            add("scroll", f"Scroll {direction}", value=direction)
+        objects = [
+            obj
+            for obj in observation.objects
+            if not obj.sensitive
+            and obj.visible is not False
+            and obj.enabled is not False
+            and obj.occluded is not True
+        ]
         tokens = set(re.findall(r"\w+", contract.goal.lower()))
-        objects = sorted(
-            observation.objects,
+        objects.sort(
             key=lambda o: (
                 -len(tokens & set(re.findall(r"\w+", o.label.lower()))),
                 o.bbox.y1,
                 o.bbox.x1,
                 o.id,
-            ),
+            )
         )
-        # Reserve part of the action budget for exact, planner-supplied text.
+
+        def add(operation, description, obj, value=None, effect="target_change"):
+            if len(candidates) < self.limit:
+                candidates.append(
+                    ActionCandidate(
+                        id=f"a{len(candidates)}",
+                        operation=operation,
+                        observation_id=observation.id,
+                        target=obj.id,
+                        description=description,
+                        value=value,
+                        expected_effect=effect,
+                        effect_roi=effect_region(obj.bbox),
+                    )
+                )
+
         payloads = text_inputs(contract)
         reserve = min(len(payloads), 8)
         for obj in objects:
-            if obj.sensitive:
-                continue
             if len(candidates) >= self.limit - reserve:
                 break
             if "click" in obj.actions:
-                add("click", f"Click {obj.role}: {obj.label or 'unlabelled'}", obj.id)
-            if "focus" in obj.actions and len(candidates) < self.limit - reserve:
-                add("focus", f"Focus input: {obj.label}", obj.id)
+                add(
+                    "click",
+                    f"Click {obj.role}: {obj.label or 'unlabelled'}",
+                    obj,
+                    effect="content_change" if obj.label else "target_change",
+                )
+            if "focus" in obj.actions and obj.editable is not False:
+                add("focus", f"Focus input: {obj.label}", obj, effect="focus_change")
             if "double_click" in obj.actions and re.search(
                 r"double.click|launch|open", contract.goal, re.I
             ):
-                if len(candidates) < self.limit - reserve:
-                    add("double_click", f"Double click {obj.label}", obj.id)
+                add("double_click", f"Double click {obj.label}", obj)
+            if "scroll" in obj.actions:
+                for direction in ("up", "down"):
+                    add("scroll", f"Scroll {direction}", obj, direction, "view_change")
+        inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
         for payload in payloads:
             targets = [
-                o
-                for o in objects
-                if "type" in o.actions
-                and not o.sensitive
-                and (
-                    payload.target_label is None
-                    or payload.target_label.casefold() in o.label.casefold()
-                )
+                obj
+                for obj in inputs
+                if payload.target_label is None
+                or payload.target_label.casefold() in obj.label.casefold()
             ]
             if targets:
                 obj = targets[0]
                 add(
                     "type",
                     f"Enter exact supplied text into {obj.label}: {payload.value!r}",
-                    obj.id,
+                    obj,
                     payload.value,
+                    "text_value",
                 )
-            elif payload.target_label is None:
-                add(
-                    "type",
-                    f"Enter exact supplied text into the focused field: {payload.value!r}",
-                    value=payload.value,
-                )
-            if len(candidates) >= self.limit:
-                break
-        return tuple(candidates[: self.limit])
+        # Focus is unknown for screenshot-only detections; do not synthesize generic
+        # Enter/Backspace/SelectAll into an arbitrary active control.
+        for obj in inputs:
+            if obj.focused is not True:
+                continue
+            for key in ("enter", "tab", "backspace"):
+                add("press", f"Press {key} in focused input", obj, key)
+            modifier = "command" if sys.platform == "darwin" else "ctrl"
+            add("hotkey", "Select text in focused field", obj, f"{modifier}+a")
+        dialogs = [
+            obj for obj in objects if re.search(r"dialog|modal|cancel|close", obj.label, re.I)
+        ]
+        if dialogs:
+            add("press", "Dismiss visible dialog", dialogs[0], "escape", "view_change")
+        return tuple(candidates)

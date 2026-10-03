@@ -84,6 +84,7 @@ class SessionManager:
                 Status.NEEDS_REPLAN,
                 Status.LOW_CONFIDENCE,
                 Status.NO_PROGRESS,
+                Status.BLOCKED,
             }:
                 raise ValueError("session status cannot be resumed")
             if session.rounds >= session.contract.max_steps:

@@ -24,7 +24,7 @@ revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inferenc
 | Codex setup | Entry installed and `codex mcp get clef-use --json` reads enabled stdio server |
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
 | Hermes setup | Official native MCP discovery/handler completed fixture actions; full local Hermes launcher missing, agent conversation NOT_RUN |
-| Public HTTPS hosting | Bootstrap scripts return HTTP 200; latest manifest and SHA256SUMS return HTTP 404; public install is incomplete |
+| Public HTTPS hosting | Bootstrap scripts return HTTP 200; public 0.1.3 manifest has 15 targets and isolated Mac/Windows HTTPS installation plus self-test passed; newer 0.1.5 is not deployed |
 | Windows | 0.1.4 installed wheel: 57 tests, real Unicode/click/wheel/shortcut readback, foreground/cancel/control refusal and released-input state; Windows-local ML NOT_RUN |
 
 Commands:
@@ -61,10 +61,11 @@ not controlled; treat this as a smoke measurement, not a performance benchmark.
 
 ## Remaining limitations
 
-Blocking for production acceptance: the operator has deployed both bootstrap scripts, but public latest
-metadata is still missing (HTTP 404). A usable upload route has not been supplied
-to this task. The complete site must include latest metadata and version artifacts;
-bootstrap HTTP 200 alone does not establish a working one-line installation.
+Public 0.1.3 deployment is now observed working on isolated Mac and Windows
+installations (public-https-013.json). Newer source/release delivery remains a
+separate acceptance gate; the operator upload route is not available to this
+task. Actual 0.1.5 model-loop acceptance is under investigation after an MPS
+image-placeholder error; successful native input is not final goal completion.
 
 Non-blocking implementation limits: sessions are in memory; primary monitor only;
 Wayland and Windows/CUDA model execution are untested; large CLEF is untested;
@@ -317,3 +318,66 @@ rerun also completed two actions/four decisions in 213.569719s, recorded in
 windows-model-gui.json. These are separate cold loads under uncontrolled host load;
 there is no measured speed improvement. Public screenshots contain only the
 test-owned window. Test endpoints and ephemeral tokens are removed after use.
+
+## Visual readiness iteration, 0.1.5
+
+Owned frozen source passes 83 tests plus lint/format. Windows installed-wheel
+checks passed 80 tests/6.86s and native GUI Unicode/shortcut/click/wheel/cancel/
+foreground/cleanup readbacks. The latest diagnostic scripts check clipboard
+sequence without reading or writing clipboard. The independent Windows app
+reported Continue -> Confirm -> Task complete after two correct native actions
+and relevant change/stability waits over 500ms delayed rendering. CLEF failed
+during final verification: windows-visual-initial.json is ERROR, not COMPLETED.
+Warm performance ablation was stopped because the cold task was unaccepted.
+
+Controlled public-safe completion-image probes separate request context from
+MPS execution. Keeping new mode/effect questions after existing questions and
+omitting null actionability metadata produced goal 0.949 / condition 0.9638,
+mode COMPLETED 0.903 with the full structured action history retained. Earlier
+ambiguous context produced goal about 0.02; thresholds were not reduced. Exact
+processor CPU/MPS image token counts matched 532 in eight repetitions. Vision
+metadata indices/positions matched CPU in 24 repeats; maximum interpolation
+weight difference was 6.4969063e-6. These checks do not prove model correctness.
+Repeated real forwards still reproduced index errors; allocator clearing,
+synchronization and retention are being compared with actual outputs/memory.
+See VISUAL_READINESS.md and machine-readable diagnostic files.
+
+The cache policy pilot returned CLEAR 2/8 errors, SYNC_CLEAR 3/8, KEEP 4/8
+(clef-cache-ablation.json), so the production policy is unchanged. Allocator
+state carries between rotated trials; this does not establish an independent
+policy speed improvement or root cause. A subsequent Windows task ablation
+retains every failure and marks actual worker cold restarts explicitly.
+
+
+Latest final frozen 0.1.5 source passed 83 tests locally (21.45s), lint/format,
+and wheel build. Final rebuilt noneditable wheel on Windows passed the same
+83 tests in 7.42s with PYTHONPATH removed. The later repeated real model task
+measurement was interrupted after four failed tasks: three ModelWorkerError
+and one TimeoutError; all restarted at least one worker, no actual warm samples.
+Only one accepted native action occurred, with zero observed wrong input,
+early advance or false completion. A concurrent MPS diagnostic confounded host
+load and was stopped; these latency values cannot establish an improvement.
+windows-visual-measurement.json retains every completed task. The fifth task
+was interrupted and excluded. No-effect model task was NOT_RUN. Diagnostics
+now persist interrupted reports and stop after three consecutive backend errors;
+warm percentiles include only actual resident-worker trials.
+The fallback-environment probe was interrupted before producing results;
+PYTORCH_ENABLE_MPS_FALLBACK is not established as the cause. Production model
+worker and allocator policy are unchanged. Windows GUI agent exited and its
+on-demand scheduled task/token were removed. New readiness-only native GUI
+checks are separate from model/task acceptance. Existing unowned MLX/quantization
+and residency changes remain excluded. Public HTTPS still serves 0.1.3; publishing
+0.1.5 requires the assembled release-site delivery. Overall goal remains active.
+
+
+Installed-wheel Windows native readiness smoke passed five delayed transitions
+with unrelated blinking outside the target ROI: actual rendering occurred
+563-578ms after input, and STABLE was returned only afterward, at 781-797ms.
+The no-effect case returned NO_CHANGE at 1046ms against a 1s sampling deadline,
+with one native callback and no repeat input. Six native actions and 57 actual
+screenshot polls used zero model calls. windows-visual-wait.json records the
+readbacks. This uses known owned-widget geometry and tests readiness only;
+it is separate from CLEF task acceptance and supplies no speedup baseline.
+Two harness schema mistakes were corrected before any native action in the
+accepted run. Both disposable windows closed, inputs released, pointer/foreground
+restored; owned scheduled tasks, SSH forward and ephemeral token files removed.

@@ -62,6 +62,11 @@ class UIObject(StrictModel):
     actions: frozenset[Operation] = frozenset()
     source: tuple[str, ...] = ("vision",)
     sensitive: bool = False
+    visible: bool | None = None
+    enabled: bool | None = None
+    editable: bool | None = None
+    focused: bool | None = None
+    occluded: bool | None = None
 
 
 class ActionCandidate(StrictModel):
@@ -72,11 +77,19 @@ class ActionCandidate(StrictModel):
     description: str
     value: str | None = None
 
+    expected_effect: Literal[
+        "target_change", "content_change", "view_change", "text_value", "focus_change"
+    ] = "target_change"
+    effect_roi: BoundingBox | None = None
+
     def audit(self) -> dict:
         return {"id": self.id, "operation": self.operation, "target": self.target}
 
 
 class Decision(StrictModel):
+    mode: Literal["ACT", "WAIT", "BLOCKED", "NEEDS_REPLAN", "COMPLETED"] = "ACT"
+    mode_confidence: float = Field(default=1, ge=0, le=1)
+    effect_probability: float | None = Field(default=None, ge=0, le=1)
     action: str | None = None
     confidence: float = Field(ge=0, le=1)
     goal_probability: float = Field(default=0, ge=0, le=1)
@@ -102,6 +115,7 @@ class Status(StrEnum):
     STEP_BUDGET_EXHAUSTED = "STEP_BUDGET_EXHAUSTED"
     ERROR = "ERROR"
     ABORTED = "ABORTED"
+    BLOCKED = "BLOCKED"
 
 
 class SessionResult(StrictModel):
@@ -113,6 +127,7 @@ class SessionResult(StrictModel):
     confidence: float | None
     reason: str
     summary: str
+    blocker: dict | None = None
 
 
 @dataclass(frozen=True)
@@ -121,6 +136,7 @@ class Frame:
     origin: tuple[int, int] = (0, 0)
     logical_size: tuple[int, int] | None = None
     foreground_window: int | None = None
+    foreground_bounds: tuple[int, int, int, int] | None = None
 
     def point(self, bbox: BoundingBox) -> tuple[int, int]:
         width, height = self.logical_size or self.image.size
