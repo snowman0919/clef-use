@@ -1,0 +1,111 @@
+{
+  "session_id": "fe0290cfd622407e9812274e7ffae91e",
+  "status": "COMPLETED",
+  "steps": 2,
+  "rounds": 4,
+  "last_action": {
+    "id": "a9",
+    "operation": "click",
+    "target": "obj_0b1c000a93ec"
+  },
+  "confidence": 0.4326,
+  "reason": "goal and conditions verified on two fresh observations",
+  "summary": "COMPLETED after 2 actions, 4 decisions",
+  "mode": "REAL_MODELS_SYNTHETIC_PIXELS",
+  "native_input": false,
+  "wall_seconds": 88.64308466700459,
+  "rendered_state": 2,
+  "metrics": [
+    {
+      "capture_ms": 3.359624999575317,
+      "parser_ms": 12811.184208003397,
+      "decision_ms": 46405.55266600131,
+      "execution_ms": 0.06025000038789585,
+      "state_change_score": 0.0007325708061002179,
+      "confidence": 0.8228,
+      "progress": 0.223225,
+      "goal_probability": 0.0192,
+      "condition_probabilities": [
+        0.0061
+      ],
+      "replan_probability": 0.2299,
+      "safety_probability": 0.0088,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_16aa2e993817"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T16:07:23.976778+00:00",
+      "session_id": "fe0290cfd622407e9812274e7ffae91e",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 2.3537499946542084,
+      "parser_ms": 5355.489000001398,
+      "decision_ms": 7575.756832993648,
+      "execution_ms": 0.019625003915280104,
+      "state_change_score": 0.013118736383442265,
+      "confidence": 0.7671,
+      "progress": 0.230075,
+      "goal_probability": 0.0212,
+      "condition_probabilities": [
+        0.0083
+      ],
+      "replan_probability": 0.2727,
+      "safety_probability": 0.0101,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_0b1c000a93ec"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T16:07:37.217066+00:00",
+      "session_id": "fe0290cfd622407e9812274e7ffae91e",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 0.9689169964985922,
+      "parser_ms": 851.9995419992483,
+      "decision_ms": 6972.227833000943,
+      "execution_ms": 0.0,
+      "state_change_score": null,
+      "confidence": 0.4326,
+      "progress": 0.8425,
+      "goal_probability": 0.9502,
+      "condition_probabilities": [
+        0.9616
+      ],
+      "replan_probability": 0.037,
+      "safety_probability": 0.0083,
+      "timestamp": "2026-10-03T16:07:45.045545+00:00",
+      "session_id": "fe0290cfd622407e9812274e7ffae91e",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 1.183958003821317,
+      "parser_ms": 813.7437089972082,
+      "decision_ms": 6670.98850000184,
+      "execution_ms": 0.0,
+      "state_change_score": null,
+      "confidence": 0.4326,
+      "progress": 0.8425,
+      "goal_probability": 0.9502,
+      "condition_probabilities": [
+        0.9616
+      ],
+      "replan_probability": 0.037,
+      "safety_probability": 0.0083,
+      "reason": "goal and conditions verified on two fresh observations",
+      "timestamp": "2026-10-03T16:07:52.835617+00:00",
+      "session_id": "fe0290cfd622407e9812274e7ffae91e",
+      "step": 2,
+      "terminal_event": "COMPLETED"
+    }
+  ],
+  "device": "mps",
+  "parser_device": "cpu"
+}

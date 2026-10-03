@@ -42,8 +42,9 @@ def merge(inputs, output):
         contents = {path.read_bytes() for path in sources}
         if len(contents) != 1:
             raise ValueError("bootstrap contents differ between platform builds")
+        content = next(iter(contents))
         for destination in (output / name, release / name):
-            destination.write_bytes(contents.pop() if len(contents) else sources[0].read_bytes())
+            destination.write_bytes(content)
             destination.chmod(0o755)
     return combined
 
