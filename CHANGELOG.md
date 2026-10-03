@@ -1,6 +1,13 @@
 # Changelog
 
-## 0.1.1 - Release candidate
+## 0.1.2 - Release candidate
+
+- Track ordinary key presses and ASCII typing before native key-down calls.
+- Release implicit Shift and Windows keyboard-layout modifiers after failures.
+- Attempt every owned key/button release, retaining failed releases for retry.
+- Cover cancellation during a held-key sequence without native GUI input.
+
+## 0.1.1 - Prior candidate
 
 - Correct semantic action history and final-state completion context.
 - Make empty OCR and pinned Florence captions follow the upstream parser contract.

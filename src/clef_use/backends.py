@@ -262,11 +262,11 @@ class DesktopAction:
                     for character in value:
                         if cancelled.is_set():
                             return ActionResult(ok=False, reason="aborted")
-                        gui.write(character)
+                        self._hotkey(gui, (character,), cancelled)
             elif op == "press":
                 if action.value not in {"escape", "enter", "tab", "backspace"}:
                     return ActionResult(ok=False, reason="key not allowed")
-                gui.press(action.value)
+                self._hotkey(gui, (action.value,), cancelled)
             elif op == "hotkey":
                 keys = tuple((action.value or "").split("+"))
                 if keys not in {("ctrl", "a"), ("ctrl", "l"), ("command", "a"), ("command", "l")}:
@@ -298,6 +298,17 @@ class DesktopAction:
             for key in keys:
                 if cancelled.is_set():
                     return
+                # Printable keys may press implicit layout modifiers inside PyAutoGUI.
+                if len(key) == 1:
+                    if gui.isShiftCharacter(key):
+                        self.keys.add("shift")
+                    if sys.platform == "win32":
+                        code = gui.platformModule.keyboardMapping.get(key)
+                        if code is not None and code >= 0:
+                            modifiers = code // 0x100
+                            for flag, modifier in ((1, "shift"), (2, "ctrl"), (4, "alt")):
+                                if modifiers & flag:
+                                    self.keys.add(modifier)
                 self.keys.add(key)
                 gui.keyDown(key)
         finally:
@@ -307,15 +318,25 @@ class DesktopAction:
         # Cleanup must work even when the cursor triggered PyAutoGUI's corner failsafe.
         previous = gui.FAILSAFE
         gui.FAILSAFE = False
+        errors = []
         try:
-            for key in tuple(self.keys):
-                gui.keyUp(key)
-                self.keys.discard(key)
+            modifiers = {"shift", "ctrl", "alt", "command"}
+            for key in sorted(self.keys, key=lambda key: (key in modifiers, key)):
+                try:
+                    gui.keyUp(key)
+                    self.keys.discard(key)
+                except Exception as exc:
+                    errors.append(exc)
             for button in tuple(self.buttons):
-                gui.mouseUp(button=button)
-                self.buttons.discard(button)
+                try:
+                    gui.mouseUp(button=button)
+                    self.buttons.discard(button)
+                except Exception as exc:
+                    errors.append(exc)
         finally:
             gui.FAILSAFE = previous
+        if errors:
+            raise errors[0]
 
     def release(self):
         with self.lock:

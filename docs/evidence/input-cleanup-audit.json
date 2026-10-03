@@ -1,0 +1,29 @@
+{
+  "base_revision": "136ee45",
+  "dependency": "PyAutoGUI 0.9.54",
+  "native_input": false,
+  "reproduction": {
+    "canonical_installed_version": "0.1.1",
+    "command": ".venv/bin/python -m pytest -q tests/test_adapters.py -k plain_key",
+    "failed_cases": [
+      "press-enter",
+      "type-a"
+    ],
+    "failure": "native press was not present in release tracking"
+  },
+  "validation": {
+    "source": "HEAD archive plus owned DesktopAction and adapter tests only",
+    "excluded": "concurrent CLEF/MLX/GPU/quantization changes",
+    "tests_passed": 42,
+    "seconds": 2.37,
+    "lint": "PASS",
+    "format": "PASS"
+  },
+  "protected_invariants": [
+    "plain press and ASCII typing release after keyDown failure",
+    "implicit Shift and Windows layout modifiers release",
+    "cleanup attempts remaining keys and buttons after one failed release",
+    "failed release remains tracked for retry",
+    "abort after first held key prevents the next key"
+  ]
+}

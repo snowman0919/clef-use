@@ -54,3 +54,15 @@ quantization_prepare.py, config.py, cli.py, doctor.py, model_worker.py and
 provision.py. Do not overwrite or include them in this task commits. User
 clarification is pending. Current release acceptance is pinned to 7c734f1,
 not these unvalidated working-tree edits.
+
+
+Continuation completion audit found and reproduced missing ordinary key/ASCII
+cleanup in installed 0.1.1. Only DesktopAction hunks and adapter tests are owned;
+concurrent ClefBackend/MLX edits in the same backends.py file remain unstaged.
+Frozen HEAD + owned input patches passes 42 tests, lint/format. Native event calls
+are simulated; no OS input occurred. Version 0.1.2 prepares this correction and
+must use fresh exact platform archives for update/install validation. Previous
+0.1.1 remains installed until the validated 0.1.2 artifact is available.
+Latest 136ee45 CI run 37138345995 completed successfully in all six jobs.
+Public latest manifest was rechecked and remains 404; Hermes launcher target is
+still absent. GUI deferral, deployment route and unowned-edit clarification remain.

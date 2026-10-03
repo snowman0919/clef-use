@@ -208,3 +208,25 @@ of those separate edits requires its own review and execution evidence.
 availability, PyTorch MPS detection and five real stdio MCP tools. With capture
 disabled it correctly reports ready=false; input and model semantics were not run
 by doctor. Readback used the installed package, not the dirty source tree.
+
+
+## Completion audit: ordinary keyboard cleanup
+
+[Input cleanup regression](input-cleanup-audit.json): the installed 0.1.1 adapter
+failed two real execution-path unit probes when a simulated native key-down
+raised during ordinary press/ASCII typing: neither key was released. This is a
+concrete missing cleanup invariant, not a GUI acceptance claim. PyAutoGUI 0.9.54
+source confirms these convenience methods perform internal key-down/up without
+project-owned tracking.
+
+The adapter now routes ordinary presses and ASCII characters through tracked
+key-down/finally-release. It also tracks implicit Shift and Windows layout
+modifiers. Cleanup attempts every owned key/button even if one release fails;
+failed inputs remain tracked for retry, while failsafe state is restored.
+Cancellation after the first held key stops the next press and releases ownership.
+
+The frozen committed source plus only these owned patches passed 42 tests in
+2.37 seconds, lint and formatting. Concurrent GPU/MLX/quantization source edits
+were excluded, including overlapping edits to the CLEF section of backends.py.
+Tests substitute only native event calls and inject no GUI input. Release 0.1.2
+will carry the correction; 0.1.1 archives remain immutable.
