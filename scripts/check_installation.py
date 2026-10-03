@@ -39,6 +39,7 @@ def check(site):
             CLEF_USE_INSTALL_ROOT=str(root / "installation"),
             CLEF_USE_BIN_DIR=str(root / "bin"),
             CLEF_USE_PYTHON=sys.executable,
+            CLEF_USE_NO_PATH_UPDATE="1",
         )
         launcher = root / "bin" / ("clef-use.cmd" if sys.platform == "win32" else "clef-use")
         results = {}

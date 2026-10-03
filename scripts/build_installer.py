@@ -70,7 +70,7 @@ try {
 } finally { $OutputEncoding = $previousEncoding }
 $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
 $entries = @($userPath -split ';' | Where-Object { $_ })
-if ($entries -notcontains $env:CLEF_USE_BIN_DIR) {
+if (-not $env:CLEF_USE_NO_PATH_UPDATE -and $entries -notcontains $env:CLEF_USE_BIN_DIR) {
     $updatedPath = ($entries + $env:CLEF_USE_BIN_DIR) -join ';'
     [Environment]::SetEnvironmentVariable('Path', $updatedPath, 'User')
 }

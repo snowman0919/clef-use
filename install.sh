@@ -68,7 +68,10 @@ def fetch(url, allow_local=False, limit=512 * 1024 * 1024):
             return super().redirect_request(req, fp, code, msg, headers, newurl)
 
     opener = urllib.request.build_opener(Redirect())
-    with opener.open(url, timeout=45) as response:
+    request = urllib.request.Request(
+        url, headers={"User-Agent": "clef-use/0.1 (+https://github.com/snowman0919/clef-use)"}
+    )
+    with opener.open(request, timeout=45) as response:
         data = response.read(limit + 1)
     if len(data) > limit:
         raise ValueError("download exceeds size limit")
