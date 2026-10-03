@@ -1,6 +1,14 @@
 # Changelog
 
-## 0.1.0 - Unreleased
+## 0.1.1 - Release candidate
+
+- Correct semantic action history and final-state completion context.
+- Make empty OCR and pinned Florence captions follow the upstream parser contract.
+- Identify the HTTPS release client explicitly and isolate Windows test PATH changes.
+- Include the pinned build backend needed for macOS Intel dependency wheels.
+- Keep 0.1.0 installation checkpoints immutable; update them through the same verified installer.
+
+## 0.1.0 - Initial implementation
 
 - Shared resident runtime behind five high-level MCP tools and a thin CLI.
 - Pinned CLEF/CLEF-Flash and OmniParser visual object/action selection.

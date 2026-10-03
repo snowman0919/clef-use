@@ -51,12 +51,15 @@ def build_release(output, base_url, wheelhouse=None):
         check=True,
     )
     wheels = sorted(wheelhouse.glob("*.whl"))
-    requirements, seen = [], set()
+    requirements, included_wheels, seen = [], [], set()
     for wheel in wheels:
         name, package_version, _, _ = parse_wheel_filename(wheel.name)
+        if name == "clef-use" and str(package_version) != version:
+            continue
         if name in seen:
             raise ValueError("wheelhouse must contain one wheel per distribution")
         seen.add(name)
+        included_wheels.append(wheel)
         requirements.append(
             f"{name}=={package_version} --hash=sha256:"
             f"{hashlib.sha256(wheel.read_bytes()).hexdigest()}"
@@ -71,7 +74,7 @@ def build_release(output, base_url, wheelhouse=None):
     archive = release / filename
     with zipfile.ZipFile(archive, "w", compression=zipfile.ZIP_DEFLATED) as payload:
         payload.writestr("requirements.txt", "\n".join(requirements) + "\n")
-        for wheel in wheels:
+        for wheel in included_wheels:
             payload.write(wheel, "wheels/" + wheel.name)
         for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
             if (ROOT / name).exists():

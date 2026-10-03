@@ -1,10 +1,10 @@
 {
   "first_install": "INSTALLED",
-  "initial_version": "0.1.0",
+  "initial_version": "0.1.1",
   "idempotent": "CURRENT",
   "update": "INSTALLED",
   "bad_checksum_preserves_old": true,
   "missing_download_preserves_old": true,
   "failed_smoke_preserves_old": true,
-  "final_version": "0.1.1"
+  "final_version": "0.1.2"
 }
