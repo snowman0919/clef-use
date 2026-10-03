@@ -66,3 +66,30 @@ must use fresh exact platform archives for update/install validation. Previous
 Latest 136ee45 CI run 37138345995 completed successfully in all six jobs.
 Public latest manifest was rechecked and remains 404; Hermes launcher target is
 still absent. GUI deferral, deployment route and unowned-edit clarification remain.
+
+## Current continuation: completion audit and 0.1.3
+
+Installed launcher is exact assembled 0.1.2; repeat CURRENT and fixture self-test
+passed with unchanged config. Release 37139273385 and CI 37139281492 succeeded;
+45 archive hashes for 0.1.0/1/2 verified. Latest transfer is the version-only
+0.1.2 archive in dist (about 362MiB).
+
+Owned pending corrections: runtime failure timing/terminal logs/fresh idle
+observe, service observe lease only, benchmark sample means, Windows Unicode
+installer and native path test, observation tests, Hermes client probe. Frozen
+base ab36b35 plus these changes passes 48 tests/lint/format. Version bumped to
+0.1.3, bootstraps regenerated; package/CI/installed version validation pending.
+Do not include new unowned service model-hold methods, client/CLI residency
+changes, tests/test_protocol additions, test_model_residency.py, GPU/quantization
+files, docs/INSTALL.md or MLX/residency evidence. Stage only owned service hunks
+from the frozen snapshot, preserving the working file.
+
+Clean audit env: /tmp/clef-use-audit-env; frozen owned tree:
+/tmp/clef-use-final-audit. Existing .venv contains a dataless editable pth and
+was concurrently modified; no alteration/removal attempted.
+Remote task clone on ssh win has ONLY our test installer.py/install.sh/install.ps1
+patches; verify and restore those three owned files before pulling 0.1.3, then
+run existing validate.py. GUI remains deferred on both machines. New Hermes
+probe uses official source in /tmp/clef-use-hermes-client-source, installed
+launcher, isolated fixture IPC and HERMES_HOME; actual user config preserved.
+Full Hermes launcher absent, public latest 404, route question pending.

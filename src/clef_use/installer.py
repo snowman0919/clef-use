@@ -150,7 +150,7 @@ def safe_extract(archive: Path, destination: Path):
 def atomic_text(path, text, mode=0o600):
     fd, temporary = tempfile.mkstemp(dir=path.parent, prefix=".clef-use-")
     try:
-        with os.fdopen(fd, "w") as stream:
+        with os.fdopen(fd, "w", encoding="utf-8") as stream:
             stream.write(text)
             stream.flush()
             os.fsync(stream.fileno())
@@ -252,7 +252,10 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
             match = re.search(r'^@"([^"\r\n]+)" %\*$', launcher.read_text(), re.MULTILINE)
             if not match:
                 raise ValueError("managed Windows launcher is malformed")
-            current = Path(match[1]).parent.parent
+            target = match[1]
+            if target.startswith("%~dp0"):
+                target = os.path.normpath(str(bindir / target[5:]))
+            current = Path(target).parent.parent
         if current.exists():
             installed = json.loads((current / "installed.json").read_text())
             if release_version(installed["version"]) > release_version(manifest["version"]):
@@ -319,11 +322,23 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
             if windows:
                 if '"' in str(staged) or "%" in str(staged):
                     raise ValueError("Windows installation path contains unsafe CMD expansion")
+                executable = environment_binary(staged, "clef-use")
+                try:
+                    relative = os.path.relpath(executable, bindir)
+                except ValueError:
+                    relative = None
+                # CMD expands the launcher's Unicode directory without decoding it from a file.
+                if relative is not None and relative.isascii():
+                    target = "%~dp0" + relative
+                elif str(executable).isascii():
+                    target = str(executable)
+                else:
+                    raise ValueError(
+                        "Unicode Windows paths require CLEF_USE_BIN_DIR inside the installation"
+                    )
                 atomic_text(
                     launcher,
-                    '@echo off\nrem clef-use managed launcher\n@"'
-                    + str(environment_binary(staged, "clef-use"))
-                    + '" %*\n',
+                    '@echo off\nrem clef-use managed launcher\n@"' + target + '" %*\n',
                     0o755,
                 )
             else:

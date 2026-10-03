@@ -25,7 +25,8 @@ def check(site):
             pass
 
     with tempfile.TemporaryDirectory(prefix="clef-use-install-test-") as temporary:
-        root = Path(temporary)
+        root = Path(temporary) / "unicode-\ud55c\uae00 path"
+        root.mkdir()
         served = root / "site"
         shutil.copytree(site, served)
         server = ThreadingHTTPServer(

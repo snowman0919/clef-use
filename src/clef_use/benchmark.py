@@ -63,6 +63,11 @@ def fixture_runtime():
     return SessionRuntime(desktop, desktop, desktop, desktop, Config(settle_seconds=0))
 
 
+def _mean_latency(rows, field):
+    measured = [r[field] for r in rows if r.get(field, 0) > 0 and r.get("event") != "terminal"]
+    return statistics.mean(measured) if measured else 0
+
+
 def summarize(session, elapsed):
     rows = session.history
     return {
@@ -71,8 +76,8 @@ def summarize(session, elapsed):
         "wall_seconds": elapsed,
         "low_level_actions": session.steps,
         "outer_llm_interventions": len(session.guidance),
-        "parser_ms_mean": statistics.mean(r.get("parser_ms", 0) for r in rows) if rows else 0,
-        "clef_ms_mean": statistics.mean(r.get("decision_ms", 0) for r in rows) if rows else 0,
+        "parser_ms_mean": _mean_latency(rows, "parser_ms"),
+        "clef_ms_mean": _mean_latency(rows, "decision_ms"),
         "confidence": [r["confidence"] for r in rows if "confidence" in r],
         "no_progress_replan_count": int(session.status.value in {"NO_PROGRESS", "NEEDS_REPLAN"}),
     }
@@ -127,12 +132,8 @@ def desktop_benchmark(tasks_path: Path, repetitions=1):
                     "wall_seconds": elapsed,
                     "low_level_actions": result["steps"],
                     "outer_llm_interventions": 0,
-                    "parser_ms_mean": statistics.mean(r["parser_ms"] for r in rows)
-                    if rows
-                    else None,
-                    "clef_ms_mean": statistics.mean(r["decision_ms"] for r in rows)
-                    if rows
-                    else None,
+                    "parser_ms_mean": _mean_latency(rows, "parser_ms"),
+                    "clef_ms_mean": _mean_latency(rows, "decision_ms"),
                     "confidence": [r["confidence"] for r in rows if "confidence" in r],
                     "no_progress_replan_count": int(
                         result["status"] in {"NO_PROGRESS", "NEEDS_REPLAN"}

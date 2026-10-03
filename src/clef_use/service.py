@@ -11,7 +11,7 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from filelock import FileLock
 
 from . import __version__
-from .backends import encode_image, runtime
+from .backends import runtime
 from .config import load_config, state_dir
 from .runtime import Session
 from .schema import Contract, Status
@@ -115,14 +115,20 @@ class SessionManager:
             session.status, session.reason = Status.ABORTED, "abort requested"
             return session.snapshot()
         if operation == "observe":
-            if not self.runtime:
-                return session.snapshot()
-            result = self.runtime.observe(session)
-            if data.get("include_image") and session.observation:
-                image = session.observation.frame.image.copy()
-                image.thumbnail((1280, 1280))
-                result["image_png"] = encode_image(image)
-            return result
+            with self.lock:
+                if not self.runtime:
+                    return session.snapshot()
+                refresh = not self.busy and not self.stopping
+                if refresh:
+                    self.busy = True
+            try:
+                return self.runtime.observe(
+                    session, refresh=refresh, include_image=bool(data.get("include_image"))
+                )
+            finally:
+                if refresh:
+                    with self.lock:
+                        self.busy = False
         raise ValueError("unknown operation")
 
 

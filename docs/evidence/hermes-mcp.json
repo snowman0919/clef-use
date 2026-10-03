@@ -1,0 +1,26 @@
+{
+  "source": "NousResearch/hermes-agent",
+  "revision": "3c9847f5e86e81c23335a54daa532de28eeffeb3",
+  "transport": "official native MCP discovery and registry handler",
+  "installed_runtime_version": "0.1.2",
+  "tools": [
+    "mcp__clef_use__computer_abort",
+    "mcp__clef_use__computer_continue",
+    "mcp__clef_use__computer_observe",
+    "mcp__clef_use__computer_run",
+    "mcp__clef_use__computer_status"
+  ],
+  "harness_generated_utility_tools": [
+    "mcp__clef_use__get_prompt",
+    "mcp__clef_use__list_prompts",
+    "mcp__clef_use__list_resources",
+    "mcp__clef_use__read_resource"
+  ],
+  "status": "COMPLETED",
+  "actions": 2,
+  "decisions": 4,
+  "native_input": false,
+  "outer_llm_interventions": 0,
+  "configuration_preserved": true,
+  "boundary": "fixture service; existing full Hermes launcher remains unavailable"
+}

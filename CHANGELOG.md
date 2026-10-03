@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.3 - Release candidate
+
+- Refresh idle MCP observations with matching objects and pixels; reserve the desktop during parsing.
+- Record budget/refusal terminal reasons and failed backend elapsed time without phantom benchmark samples.
+- Support Unicode and spaces in per-user Windows installation paths; exercise those paths in native installer checks.
+
 ## 0.1.2 - Release candidate
 
 - Track ordinary key presses and ASCII typing before native key-down calls.

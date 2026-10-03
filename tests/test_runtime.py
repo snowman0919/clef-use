@@ -1,3 +1,4 @@
+import json
 import threading
 
 import pytest
@@ -101,6 +102,51 @@ def test_hard_budget_includes_verification_decisions():
     executor.execute(session)
     assert session.status == Status.STEP_BUDGET_EXHAUSTED
     assert session.steps == 1 and session.rounds == 1
+
+
+def test_budget_exit_records_terminal_reason_without_phantom_inference(tmp_path):
+    from clef_use.benchmark import summarize
+
+    executor = fixture_runtime()
+    executor.log_path = tmp_path / "steps.jsonl"
+    session = Session(Contract(goal="change UI", max_steps=1))
+    executor.execute(session)
+    rows = [json.loads(line) for line in executor.log_path.read_text().splitlines()]
+    assert rows[-1]["terminal_event"] == "STEP_BUDGET_EXHAUSTED"
+    assert rows[-1]["reason"] == session.reason
+    measured = summarize(session, 1)
+    assert measured["parser_ms_mean"] == rows[0]["parser_ms"]
+    assert measured["clef_ms_mean"] == rows[0]["decision_ms"]
+
+
+def test_failed_inference_time_is_retained_in_terminal_log(monkeypatch):
+    import itertools
+
+    class FailedDecision:
+        def decide(self, *args):
+            raise RuntimeError("failure")
+
+    executor = fixture_runtime()
+    executor.decision = FailedDecision()
+    monkeypatch.setattr("clef_use.runtime.time.perf_counter", lambda: next(clock))
+    clock = itertools.count(1.0)
+    session = Session(Contract(goal="test"))
+    executor.execute(session)
+    assert session.status == Status.ERROR
+    assert session.history[-1]["decision_ms"] == 1000
+
+
+def test_exclusive_desktop_refusal_records_reason_without_releasing_owner():
+    executor = fixture_runtime()
+    session = Session(Contract(goal="test"))
+    executor.desktop_lock.acquire()
+    try:
+        executor.execute(session)
+    finally:
+        executor.desktop_lock.release()
+    assert session.status == Status.SAFETY_BLOCK
+    assert session.history[-1]["reason"] == session.reason
+    assert executor.action.released == 0
 
 
 def test_repeated_cycles_and_near_identical_frames():

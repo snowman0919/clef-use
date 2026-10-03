@@ -1,0 +1,26 @@
+{
+  "version_under_test": "0.1.3",
+  "baseline_installed": "0.1.2",
+  "native_input": false,
+  "before": {
+    "budget_terminal_log": "last row remained RUNNING after STEP_BUDGET_EXHAUSTED",
+    "failed_decision_ms": 0,
+    "observe": "cached Settings object after fixture desktop changed to Apply",
+    "windows_unicode_install": "UnicodeEncodeError writing managed launcher"
+  },
+  "after": {
+    "tests": "48 passed in 5.12s",
+    "lint": "PASS",
+    "format": "PASS",
+    "scope": "HEAD ab36b35 plus owned patches, clean dependency environment",
+    "budget": "terminal event and reason recorded without changing inference means",
+    "failed_decision": "1000ms retained with controlled clock",
+    "observe": "fresh idle objects and PNG, cached busy marked, concurrent run refused",
+    "windows_unicode": "native PowerShell install/current/CMD update and all three failed-update preservation cases passed"
+  },
+  "boundaries": [
+    "Windows Unicode test used locally patched 0.1.2 package; version 0.1.3 native rerun pending",
+    "no native GUI task performed",
+    "concurrent acceleration and residency changes excluded"
+  ]
+}

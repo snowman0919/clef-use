@@ -17,8 +17,10 @@ ERROR, ABORTED, plus RUNNING while status is polled.
 
 Continue accepts `session_id` and `instruction`, only for replanning, low
 confidence and no progress, within the remaining original budget. Use a new run
-for an exhausted or aborted session. Observe reads the latest session observation,
-visible objects, recent actions and goal. `include_image=true` returns MCP PNG
+for an exhausted or aborted session. Observe refreshes the screen and object map while the runtime is idle. While
+execution owns the desktop, it returns the latest cached observation with
+`observation_fresh=false`. Objects, image hash and optional PNG share one
+`observation_id`. Observation never consumes the action/decision budget. `include_image=true` returns MCP PNG
 content at up to 1280 pixels; there is no permanent screenshot file or cloud
 upload. Status/abort accept an optional session ID (latest session by default).
 Cancellation of a running MCP request also aborts its session.

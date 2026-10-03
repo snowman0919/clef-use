@@ -62,7 +62,7 @@ def create_server(client=None):
 
     @server.tool()
     async def computer_observe(session_id: str | None = None, include_image: bool = False) -> list:
-        """Read the most recent observation, goal, visible objects, and recent actions."""
+        """Refresh the idle desktop; while running, read an explicitly cached observation."""
         result = await asyncio.to_thread(
             client.request, "observe", session_id=session_id, include_image=include_image
         )

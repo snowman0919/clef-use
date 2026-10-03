@@ -230,3 +230,32 @@ The frozen committed source plus only these owned patches passed 42 tests in
 were excluded, including overlapping edits to the CLEF section of backends.py.
 Tests substitute only native event calls and inject no GUI input. Release 0.1.2
 will carry the correction; 0.1.1 archives remain immutable.
+
+## Completion audit, 0.1.3
+
+Installed 0.1.2 reproduced three contract defects: exhausted budgets lacked a
+terminal log row; failed inference lost its elapsed time; observe returned stale
+objects after a changed fixture scene. The corrections retain failure latency,
+record explicit terminal reasons, refresh idle observations and return matching
+PNG/object epochs. While busy, observe labels its cache and never races parsing.
+A frozen committed base plus only owned patches passed 48 tests in 5.12 seconds
+and lint/format in a clean /tmp environment. Concurrent acceleration, MLX and
+model residency changes are excluded from this result.
+
+Native Windows PowerShell installation in a Korean/space parent path initially
+failed with UnicodeEncodeError. UTF-8 atomic writes and a relative CMD launcher
+fixed first install, CURRENT, update and all three failed-update preservation
+cases. check_installation.py now exercises this path on every native CI target.
+See completion-audit.json; release-specific results follow after packaging.
+
+Hermes official native MCP discovery and registered handler at upstream commit
+3c9847f5e86e81c23335a54daa532de28eeffeb3 initialized the installed 0.1.2 server
+and completed two fixture actions/four decisions without an outer LLM. The five
+canonical tools remain unchanged; four extra resource/prompt utilities are added
+by Hermes itself. Existing Hermes launcher still lacks its runtime, so a full
+agent conversation is NOT_RUN. hermes-mcp.json records this boundary. All setup
+command/config examples across four locales match (localized-commands.json).
+
+The operator deferred native GUI tasks. Latest public manifest was freshly
+rechecked and remains HTTP 404. Neither gate is satisfied by fixture or build
+results; the goal stays active.
