@@ -5,15 +5,15 @@
   "steps": {
     "pull": {
       "exit_code": 0,
-      "seconds": 0.875
+      "seconds": 1.469
     },
     "sync": {
       "exit_code": 0,
-      "seconds": 1.25
+      "seconds": 1.484
     },
     "lint": {
       "exit_code": 0,
-      "seconds": 0.422
+      "seconds": 0.407
     },
     "format": {
       "exit_code": 0,
@@ -21,31 +21,33 @@
     },
     "pytest": {
       "exit_code": 0,
-      "seconds": 4.375
+      "seconds": 5.687
     },
     "build": {
       "exit_code": 0,
-      "seconds": 5.89
+      "seconds": 6.047
     },
     "install": {
       "exit_code": 0,
-      "seconds": 114.297
+      "seconds": 115.406
     },
     "doctor": {
       "exit_code": 2,
-      "seconds": 1.688
+      "seconds": 1.687
     }
   },
-  "head": "7c734f1f84efc7a7ef91cde599d94ad10ad3c389",
+  "head": "000885b8260eed2a1923e15edf6c6530487de325",
   "installer": {
     "first_install": "INSTALLED",
-    "initial_version": "0.1.1",
+    "initial_version": "0.1.3",
     "idempotent": "CURRENT",
     "update": "INSTALLED",
     "bad_checksum_preserves_old": true,
     "missing_download_preserves_old": true,
     "failed_smoke_preserves_old": true,
-    "final_version": "0.1.2"
+    "final_version": "0.1.4"
   },
-  "pytest_result": "35 passed in 3.37s"
+  "pytest_result": "48 passed in 4.71s",
+  "install_path_boundary": "Korean and space parent path; actual PowerShell first install and CMD update",
+  "test_update_version_boundary": "0.1.4 is an isolated synthetic update package, not a published release"
 }

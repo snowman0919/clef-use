@@ -1,7 +1,7 @@
 # Release and hosting
 
 CI builds offline wheel bundles for macOS arm64/x86_64, Linux arm64/x86_64, and
-Windows x86_64 on Python 3.11, 3.12 and 3.13. A tag such as `v0.1.1` must match
+Windows x86_64 on Python 3.11, 3.12 and 3.13. A tag such as `v0.1.3` must match
 `pyproject.toml`. The release workflow merges per-platform artifacts/checksums
 into one site tree. Untested ML/desktop platforms remain experimental even when
 packaging succeeds. Windows ARM64 has no release target yet.
@@ -19,11 +19,11 @@ install.sh
 install.ps1
 latest/manifest.json
 latest/SHA256SUMS
-releases/0.1.1/manifest.json
-releases/0.1.1/SHA256SUMS
-releases/0.1.1/install.sh
-releases/0.1.1/install.ps1
-releases/0.1.1/clef-use-0.1.1-<platform>-<architecture>-py<minor>.zip
+releases/0.1.3/manifest.json
+releases/0.1.3/SHA256SUMS
+releases/0.1.3/install.sh
+releases/0.1.3/install.ps1
+releases/0.1.3/clef-use-0.1.3-<platform>-<architecture>-py<minor>.zip
 ```
 
 Upload immutable version artifacts first, verify public SHA-256 and content,
@@ -42,19 +42,32 @@ blocking necessary bootstrap commits with unavailable reviewers.
 
 ## Validated delivery tree
 
-The local final site is `release-site/`, assembled from native GitHub Actions
-run 37137294737 at revision 7c734f1. Latest is 0.1.1, with 15 native offline
-bundles; the verified earlier 0.1.0 tree is also retained. Every archive matches
-its recorded SHA-256. Upload the entire contents, including both bootstrap files,
-`latest/manifest.json`, `latest/SHA256SUMS` and the `releases/` directories.
+The local site `release-site/` retains immutable 0.1.0, 0.1.1, 0.1.2 and 0.1.3
+releases, 15 native platform/Python artifacts each. All 60 archive hashes were
+verified. Latest 0.1.3 comes from successful Actions run 37143721968, source
+000885b8260eed2a1923e15edf6c6530487de325. CI run 37143721190 passed six jobs.
 
-A transfer bundle is available locally at
-`dist/clef-use-release-site-0.1.1.tar.gz`, with adjacent `.sha256`. It is a hosting
-site transfer archive, not an extra installer payload. Use the exact validated
-archives; do not regenerate a previously published version with different hashes.
-The site tree and transfer archive are generated outputs excluded from Git.
+The transfer archive `dist/clef-use-release-site-0.1.3.tar.gz` contains the new
+version directory, latest metadata and both bootstrap scripts (379,631,809 bytes).
+Its adjacent `.sha256` records:
 
-The currently served bootstrap scripts return HTTP 200 but predate the release
-client User-Agent correction. `latest/manifest.json` and `latest/SHA256SUMS`
-return 404. The public POSIX installer therefore still fails in an isolated test;
-refresh the full tree before declaring public deployment ready.
+```text
+d82252a628f9b65567c91341d4265c7438710ae6e24328b1c5dd82eea93bb114
+```
+
+Extract its contents below the directory serving `/clef-use/`, preserving all
+earlier server release directories. Publish the immutable 0.1.3 directory first,
+then switch latest metadata/bootstraps atomically. The complete local tree also
+contains earlier versions if the host needs those files. Do not regenerate an
+already published version with different hashes.
+
+The exact assembled Mac archive updated the installed user launcher to 0.1.3;
+repeat runs returned CURRENT and config bytes remained unchanged. Windows 11 SSH
+passed 48 tests and native Unicode-path PowerShell installation/CMD update plus
+three failed-update preservation checks. Synthetic test version 0.1.4 is isolated
+and is not a published release.
+
+Public bootstrap scripts were HTTP 200, but latest manifest/SHA256SUMS were HTTP
+404. A full public install remains unverified until the deployment route uploads
+complete metadata and archives. GUI acceptance is also explicitly deferred by
+the operator; these gates prevent a release-ready claim or final version tag.

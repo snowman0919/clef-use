@@ -32,7 +32,9 @@ input after cancellation. Keyboard/mouse cleanup bypasses PyAutoGUI's corner
 failsafe only while releasing tracked inputs. Unicode entry restores the previous
 plain-text clipboard; rich clipboard representations are not preserved.
 
-`computer_observe` returns the most recent session observation and its epoch,
+`computer_observe` refreshes the screen/object map while idle and marks cached
+observations while busy. It reserves the shared desktop during parsing, with
+no decision or input action, and returns one coherent image/object epoch,
 not an independent live desktop poll. Labels/images are returned only on request;
 logs omit goal text, labels and typed values. Diagnostic logging adds object and
 candidate counts, not raw screen content. Constraint decisions are probabilistic;

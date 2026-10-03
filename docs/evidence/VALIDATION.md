@@ -7,7 +7,7 @@ revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
 
 | Gate | Evidence and boundary |
 | --- | --- |
-| Unit/integration tests | 35 passed in 2.38 seconds; includes real loopback HTTP and stdio MCP |
+| Unit/integration tests | 0.1.3: 48 passed locally in 3.10 seconds and Windows SSH in 4.71 seconds; real loopback HTTP/stdio MCP |
 | CLI/MCP shared core | Both reach the same fixture session: two actions, four decisions, COMPLETED |
 | Input cleanup | Exceptions after key/button press release all tracked input and restore failsafe |
 | Runtime bounds | Confidence, safety, replan, hard budget, repeat states, abort and secret-redacted errors tested |
@@ -18,14 +18,14 @@ revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
 | OmniParser pixels | Found Continue button/OCR on generated pixels; empty-OCR image safely returns empty map |
 | Real models, multi-action | COMPLETED: two actual model-selected actions, four decisions, two independent completion observations |
 | Later real-model retries | Earlier NO_PROGRESS/ERROR preserved; semantic context fixed; later full pipeline passed. Transient MPS placeholder error not reproduced in isolated model probes |
-| First/install/update | Actual offline wheel install 0.1.1, repeated CURRENT, update 0.1.2 |
-| Failed update preservation | Bad checksum, missing download and wrong-version smoke all retained working 0.1.2 |
+| First/install/update | Native Windows 0.1.3 first install/CURRENT and isolated synthetic update 0.1.4; installed Mac version tracked in installed-update.json |
+| Failed update preservation | Bad checksum, missing download and wrong-version smoke retain the previous working version, including Unicode paths |
 | Installed MCP | Actual stdio initialization and five high-level tools passed through installed launcher |
 | Codex setup | Entry installed and `codex mcp get clef-use --json` reads enabled stdio server |
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
-| Hermes setup | Entry installed; existing Hermes launcher references a missing runtime, so harness launch NOT_RUN |
+| Hermes setup | Official native MCP discovery/handler completed fixture actions; full local Hermes launcher missing, agent conversation NOT_RUN |
 | Public HTTPS hosting | Bootstrap scripts return HTTP 200; latest manifest and SHA256SUMS return HTTP 404; public install is incomplete |
-| Windows | Windows 11 Pro SSH with Python 3.12.10 passed 35 tests, PowerShell first install, CMD update, rollback and five-tool MCP listing; also Windows 2022 CI; GUI/ML NOT_RUN |
+| Windows | 0.1.3 Windows 11 Pro SSH/Python 3.12.10 passed 48 tests, Unicode PowerShell install/CMD update, rollback and five-tool MCP; GUI/ML NOT_RUN |
 
 Commands:
 
@@ -188,7 +188,7 @@ changed. Refreshing both bootstraps is required alongside the missing latest tre
 
 ## Installed final package and transfer bundle
 
-[Installed update](installed-update.json): the exact assembled 0.1.1 archive was
+Historical 0.1.1 installed update: the exact assembled archive was
 served through the canonical loopback installer. The existing user installation
 updated from 0.1.0 to 0.1.1; repeating returned CURRENT; installed fixture self-test
 completed two actions with no outer planner intervention. The config file bytes
@@ -204,7 +204,7 @@ and excluded from these commits and acceptance claims. This report refers to
 committed implementation 7c734f1 and its exact packaged artifacts. Integration
 of those separate edits requires its own review and execution evidence.
 
-[Installed 0.1.1 doctor](installed-doctor.json) confirmed dependencies, pinned cache
+Historical installed 0.1.1 doctor confirmed dependencies, pinned cache
 availability, PyTorch MPS detection and five real stdio MCP tools. With capture
 disabled it correctly reports ready=false; input and model semantics were not run
 by doctor. Readback used the installed package, not the dirty source tree.
@@ -259,3 +259,21 @@ command/config examples across four locales match (localized-commands.json).
 The operator deferred native GUI tasks. Latest public manifest was freshly
 rechecked and remains HTTP 404. Neither gate is satisfied by fixture or build
 results; the goal stays active.
+
+0.1.3 CI run 37143721190 passed all six native jobs. Windows SSH at
+000885b passed all 48 tests in 4.71 seconds and Unicode installer checks;
+see windows-ssh.json. Aggregate historical model latencies are in
+model-latency-summary.json: warm parser mean 1.236s, CLEF mean 6.784s per
+decision, wall 33.037s. These are generated pixels and simulated actuation,
+with no claim of native GUI speed or comparative performance.
+
+## Final packaged 0.1.3 readback
+
+Release run 37143721968 passed all 15 native jobs and assembly. All 60 archives
+in retained 0.1.0/1/2/3 trees match SHA-256. Exact assembled 0.1.3 updated the
+Mac user installation; repeats returned CURRENT, fixture self-test completed
+two actions/four decisions and config bytes were preserved. Disabled-capture
+doctor correctly reports ready=false, pinned cache/MPS and five MCP tools.
+See release-013-platforms.json, release-tree.json, installed-update.json and
+installed-doctor.json. The transfer archive and deploy order are in RELEASE.md.
+Public HTTPS installation and native GUI remain open acceptance gates.

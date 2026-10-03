@@ -16,10 +16,11 @@
     "budget": "terminal event and reason recorded without changing inference means",
     "failed_decision": "1000ms retained with controlled clock",
     "observe": "fresh idle objects and PNG, cached busy marked, concurrent run refused",
-    "windows_unicode": "native PowerShell install/current/CMD update and all three failed-update preservation cases passed"
+    "windows_unicode": "native PowerShell install/current/CMD update and all three failed-update preservation cases passed",
+    "native_windows_release": "0.1.3, 48 passed in 4.71s; install/current/update and all three preservation cases passed"
   },
   "boundaries": [
-    "Windows Unicode test used locally patched 0.1.2 package; version 0.1.3 native rerun pending",
+    "0.1.3 verified natively on Windows 11; synthetic update version 0.1.4 stays isolated",
     "no native GUI task performed",
     "concurrent acceleration and residency changes excluded"
   ]

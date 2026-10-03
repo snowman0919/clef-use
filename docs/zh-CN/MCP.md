@@ -7,3 +7,5 @@
 ```
 
 [Canonical MCP reference](../MCP.md) | [Harness](HARNESS_SETUP.md)
+
+Observe 在执行空闲时刷新屏幕和对象。执行期间用 `observation_fresh=false` 标明缓存数据。可选 PNG 与对象属于同一次观察，不消耗决策预算。

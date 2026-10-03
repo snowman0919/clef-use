@@ -1,0 +1,88 @@
+{
+  "run": 37143721968,
+  "head": "000885b8260eed2a1923e15edf6c6530487de325",
+  "status": "completed",
+  "conclusion": "success",
+  "jobs": [
+    {
+      "name": "build (ubuntu-24.04, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (ubuntu-24.04-arm, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15-intel, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (ubuntu-24.04-arm, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15-intel, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (ubuntu-24.04, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (ubuntu-24.04-arm, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (ubuntu-24.04, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15-intel, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (windows-2022, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (windows-2022, 3.11)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (macos-15, 3.13)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "build (windows-2022, 3.12)",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "name": "assemble",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

@@ -33,5 +33,23 @@
     "exit_code": 1,
     "diagnostic": "clef-use: HTTPError: HTTP Error 403: Forbidden",
     "native_input": false
+  },
+  "release_013_readback": {
+    "install.sh": {
+      "http_status": 200,
+      "exit_code": 0
+    },
+    "install.ps1": {
+      "http_status": 200,
+      "exit_code": 0
+    },
+    "latest/manifest.json": {
+      "http_status": 404,
+      "exit_code": 0
+    },
+    "latest/SHA256SUMS": {
+      "http_status": 404,
+      "exit_code": 0
+    }
   }
 }

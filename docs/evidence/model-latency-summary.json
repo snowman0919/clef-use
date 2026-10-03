@@ -1,0 +1,34 @@
+{
+  "source": "real-model-repeat.json",
+  "hardware": "macOS arm64 48GiB",
+  "decision_device": "MPS",
+  "parser_device": "CPU",
+  "mode": "real models on generated pixels, simulated actuation",
+  "samples": [
+    {
+      "cold": true,
+      "wall_seconds": 81.66082933399593,
+      "status": "COMPLETED",
+      "actions": 2,
+      "decisions": 4,
+      "outer_llm_interventions": 0,
+      "capture_ms_mean": 3.8383542523661163,
+      "parser_ms_mean": 3754.382937502669,
+      "clef_ms_mean": 16420.880614250564,
+      "simulated_execution_ms_mean": 0.05204200351727195
+    },
+    {
+      "cold": false,
+      "wall_seconds": 33.03729349999776,
+      "status": "COMPLETED",
+      "actions": 2,
+      "decisions": 4,
+      "outer_llm_interventions": 0,
+      "capture_ms_mean": 3.9077497476682765,
+      "parser_ms_mean": 1235.8466252499056,
+      "clef_ms_mean": 6784.44749999835,
+      "simulated_execution_ms_mean": 0.023354001314146444
+    }
+  ],
+  "boundary": "Includes cold load; no native GUI or comparative VLM baseline. Older logs omit additional stale/completion guard capture calls; 0.1.3 includes these captures."
+}

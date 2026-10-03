@@ -1,15 +1,15 @@
 {
-  "release_run": 37139273385,
+  "release_run": 37143721968,
   "native_input": false,
   "update": {
     "status": "INSTALLED",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
   "repeat": {
     "status": "CURRENT",
-    "version": "0.1.2"
+    "version": "0.1.3"
   },
-  "installed_version": "0.1.2",
+  "installed_version": "0.1.3",
   "self_test": {
     "mode": "DETERMINISTIC_FIXTURE",
     "proves": "control flow only; not ML quality or desktop speed",
@@ -17,11 +17,11 @@
       {
         "status": "COMPLETED",
         "task_success": true,
-        "wall_seconds": 0.010329082993848715,
+        "wall_seconds": 0.04435512499912875,
         "low_level_actions": 2,
         "outer_llm_interventions": 0,
-        "parser_ms_mean": 0.053927249609841965,
-        "clef_ms_mean": 0.004416251613292843,
+        "parser_ms_mean": 0.29882324997743126,
+        "clef_ms_mean": 0.02309374940523412,
         "confidence": [
           0.99,
           0.99,
@@ -32,5 +32,10 @@
       }
     ]
   },
-  "config_preserved": true
+  "config_preserved": true,
+  "additional_idempotent_checks": [
+    "CURRENT",
+    "CURRENT"
+  ],
+  "evidence_boundary": "First canonical update installed 0.1.3; extra verification runs returned CURRENT with unchanged config."
 }

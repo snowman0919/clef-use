@@ -7,3 +7,5 @@
 ```
 
 [Canonical MCP reference](../MCP.md) | [Harness](HARNESS_SETUP.md)
+
+Observe는 실행이 쉬고 있을 때 화면과 객체를 갱신합니다. 실행 중에는 `observation_fresh=false`로 캐시 여부를 표시합니다. 선택적 PNG와 객체는 동일한 관측에 속하며 결정 예산을 사용하지 않습니다.

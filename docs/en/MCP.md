@@ -7,3 +7,5 @@ Every harness uses the same clef-use mcp server. computer_run accepts goal, succ
 ```
 
 [Canonical MCP reference](../MCP.md) | [Harness](HARNESS_SETUP.md)
+
+Observe refreshes the screen and objects while idle. During execution it returns cached data with `observation_fresh=false`; optional PNG and objects belong to the same observation. It does not consume the decision budget.

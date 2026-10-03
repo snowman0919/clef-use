@@ -7,3 +7,5 @@
 ```
 
 [Canonical MCP reference](../MCP.md) | [Harness](HARNESS_SETUP.md)
+
+Observe は実行が休止中なら画面とオブジェクトを更新します。実行中は `observation_fresh=false` でキャッシュを示します。任意の PNG とオブジェクトは同じ観測に属し、判断予算を消費しません。

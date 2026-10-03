@@ -1,95 +1,73 @@
 # Engineering handoff
 
-Updated 2026-10-04. Repository: clef-use, main. Public origin:
-https://github.com/snowman0919/clef-use. Implementation base 7c734f1 (0.1.1).
-Final task-owned documentation/evidence records public-host readback and this handoff.
-Objective/invariants: IMPLEMENTATION.md. Observed gates: evidence/VALIDATION.md.
+Updated 2026-10-04. Repo clef-use/main, public origin
+https://github.com/snowman0919/clef-use. Implemented source HEAD 000885b (0.1.3),
+with subsequent owned documentation/evidence update. The goal remains active;
+full numbered requirements and boundaries: IMPLEMENTATION.md; measured evidence:
+evidence/VALIDATION.md.
 
-CLI and five high-level MCP tools share one authenticated resident runtime.
-Actual CLEF MPS + OmniParser CPU models/cache are on the authorized external SSD
-/Volumes/SSD/AI/clef-use; preserve unrelated files and all harness configuration.
-The operator deferred GUI testing: no foreground change or input on Mac/Windows.
-They authorized `ssh win` installation/protocol tests and reported deployment.
+One resident runtime owns screenshot -> pinned OmniParser -> canonical objects
+-> bounded semantic candidates -> joint CLEF choice/noul/score -> deterministic
+input -> verification. CLI and exactly five high-level MCP tools share it.
+No shell capability or per-harness runtime.
 
-35 tests/lint/format pass locally. b352ab9 CI passed six jobs. Complete 0.1.0
-release run 37136579094 passed all 15 native platform/Python jobs plus assembly;
-downloaded to /tmp/clef-use-release-010-complete, all archive hashes verified.
-Initial Intel build failed missing maturin; pinned backend fixed the actual jobs.
-0.1.1 run 37137294737 passed all 15 targets and assembly. Both complete trees
-are hash-verified in release-site, latest 0.1.1, with immutable 0.1.0 retained.
-Installed user launcher updated canonically to exact assembled 0.1.1; repeat
-returned CURRENT, fixture self-test passed, config bytes unchanged. Transfer
-bundle: dist/clef-use-release-site-0.1.1.tar.gz plus adjacent SHA-256.
+Authorization: external SSD /Volumes/SSD/AI/clef-use for models/environments,
+public GitHub repo/push and Windows tests via ssh win. Operator explicitly deferred
+GUI: no foreground/input on either machine. Preserve all user settings/secrets.
+Production deploy route question remains unanswered; no credentials in chat.
 
-Real model run COMPLETED in 88.643 seconds. Two repeated resident-worker samples
-also completed (81.661/33.037 seconds), two actions/four decisions each. All use
-generated pixels and simulated actuation, no native GUI proof. Earlier MPS errors
-remain documented; arbitrary model stability and CUDA are unverified.
+0.1.3 fixes fresh idle observe with coherent PNG/objects and exclusive desktop
+reservation, cached busy reads marked; no extra decisions/actions. Failure
+latency and terminal budget/refusal reasons now survive logs and benchmark means.
+Windows atomic UTF-8 writes and relative CMD launcher fix Unicode parent paths;
+every native installation check includes Korean text and spaces. Earlier 0.1.2
+tracked all ordinary/shift/modifier keys, releases every owned key/button after
+an error and retains failed-release state for retry.
 
-Operator Windows 11 Pro / PowerShell 5.1 / Python 3.12.10 SSH passed all 35 tests,
-packaged first install, CURRENT, CMD update and three rollback cases. Doctor
-initialized five MCP tools, correctly ready=false with missing ML/disabled capture.
-Private task directory: %LOCALAPPDATA%/clef-use-validation-20261004. Repeat on 0.1.1
-also passed; latest report is evidence/windows-ssh.json. Keep input disabled. uv normal stderr caused initial
-PS5 orchestration failure, resolved with Python subprocess logging.
+Owned frozen tree passed 48 tests/lint/format. Source 000885b CI 37143721190
+passed all six jobs; release 37143721968 passed all 15 native targets + assembly.
+Windows 11 Pro/Python 3.12.10 via SSH passed 48 tests in 4.71s, packaged first
+0.1.3 install, CURRENT, synthetic 0.1.4 update and three failed-update preservation
+cases. That synthetic version is private fixture output. No Windows ML/GUI proof.
+Task-owned Windows checkout: %LOCALAPPDATA%/clef-use-validation-20261004/source;
+our old test installer patches were restored before pulling 000885b.
 
-Codex config readback and actual OMP client passed. Hermes config installed but
-existing launcher has missing runtime. No unrelated configurations changed.
-Public install.sh/install.ps1 HTTP 200; latest manifest and SHA256SUMS HTTP 404.
-Earlier 403 was Cloudflare default Python UA; project UA fix committed. Public
-served bootstraps predate that fix. Async deployment-route question pending; need
-existing SSH/SFTP alias/path or exact upload command, never credentials in chat.
+Exact GitHub site downloaded to /tmp/clef-use-release-013-complete. Local
+release-site keeps 0.1.0/1/2/3, 15 artifacts each, all 60 hashes verified. Installed
+Mac launcher canonically updated to exact 0.1.3, repeat CURRENT, self-test
+COMPLETED 2 actions/4 decisions, config byte-preserved. Doctor initialized five
+MCP tools and pinned SSD/MPS cache, correctly ready=false with capture disabled.
+New-version-only transfer: dist/clef-use-release-site-0.1.3.tar.gz (362MiB) and
+adjacent SHA-256; preserve prior server releases. Deploy version first/latest last.
 
-Installed 0.1.1 doctor confirmed five MCP tools, dependencies, pinned cache and MPS;
-ready=false is correct with capture disabled.
+Real model generated-pixel loops completed: cold 81.661s/warm 33.037s, 2 actions/
+4 decisions and zero outer interventions. Warm parser/CLEF mean 1.236s/6.784s.
+Simulated actuation, no native GUI/baseline speed proof. Earlier transient MPS
+errors remain documented; CUDA/larger CLEF not executed by this task.
 
-Next: if deployment
-access is supplied, use the explicit configured route, upload version first/latest
-last and verify public HTTPS install on isolated Mac/Windows. Otherwise provide
-the exact transfer bundle and keep public acceptance open. GUI remains deferred;
-do not mark the goal complete. The goal is active without a token budget.
+Codex configuration/native readback and OMP native MCP client passed. Official
+Hermes MCP source commit 3c9847f5e86e81c23335a54daa532de28eeffeb3 in
+/tmp/clef-use-hermes-client-source discovered canonical tools and its registry
+handler completed fixture actions through installed launcher. Hermes adds four
+resource/prompt utility tools itself; server still exports exactly five. Existing
+full Hermes launcher targets missing files; full agent conversation NOT_RUN.
+All four locale command/config examples match; screenshot data stays private.
 
-Concurrent unowned changes appeared in acceleration.py, quantization.py,
-quantization_prepare.py, config.py, cli.py, doctor.py, model_worker.py and
-provision.py. Do not overwrite or include them in this task commits. User
-clarification is pending. Current release acceptance is pinned to 7c734f1,
-not these unvalidated working-tree edits.
+Unowned concurrent edits are preserved, NOT included in source/CI/artifacts:
+docs/INSTALL.md; backends.py CLEF section; cli/client/config/doctor/model_worker/
+models/provision.py; service.py model holds/unload; tests/test_protocol.py extra
+model-hold tests; acceleration.py, mlx_support.py, quantization.py,
+quantization_prepare.py; test_acceleration_quantization.py and
+test_model_residency.py; MLX/quantization/model-residency evidence.
+Do not stage those or run full dirty-source tests as this release evidence.
+Pure owned service observe hunks were staged separately.
 
+Clean validation env: /tmp/clef-use-audit-env; owned frozen tree
+/tmp/clef-use-final-audit. Existing .venv and some Documents files were dataless/
+concurrently modified, causing slow reads; no removal or alteration attempted.
 
-Continuation completion audit found and reproduced missing ordinary key/ASCII
-cleanup in installed 0.1.1. Only DesktopAction hunks and adapter tests are owned;
-concurrent ClefBackend/MLX edits in the same backends.py file remain unstaged.
-Frozen HEAD + owned input patches passes 42 tests, lint/format. Native event calls
-are simulated; no OS input occurred. Version 0.1.2 prepares this correction and
-must use fresh exact platform archives for update/install validation. Previous
-0.1.1 remains installed until the validated 0.1.2 artifact is available.
-Latest 136ee45 CI run 37138345995 completed successfully in all six jobs.
-Public latest manifest was rechecked and remains 404; Hermes launcher target is
-still absent. GUI deferral, deployment route and unowned-edit clarification remain.
-
-## Current continuation: completion audit and 0.1.3
-
-Installed launcher is exact assembled 0.1.2; repeat CURRENT and fixture self-test
-passed with unchanged config. Release 37139273385 and CI 37139281492 succeeded;
-45 archive hashes for 0.1.0/1/2 verified. Latest transfer is the version-only
-0.1.2 archive in dist (about 362MiB).
-
-Owned pending corrections: runtime failure timing/terminal logs/fresh idle
-observe, service observe lease only, benchmark sample means, Windows Unicode
-installer and native path test, observation tests, Hermes client probe. Frozen
-base ab36b35 plus these changes passes 48 tests/lint/format. Version bumped to
-0.1.3, bootstraps regenerated; package/CI/installed version validation pending.
-Do not include new unowned service model-hold methods, client/CLI residency
-changes, tests/test_protocol additions, test_model_residency.py, GPU/quantization
-files, docs/INSTALL.md or MLX/residency evidence. Stage only owned service hunks
-from the frozen snapshot, preserving the working file.
-
-Clean audit env: /tmp/clef-use-audit-env; frozen owned tree:
-/tmp/clef-use-final-audit. Existing .venv contains a dataless editable pth and
-was concurrently modified; no alteration/removal attempted.
-Remote task clone on ssh win has ONLY our test installer.py/install.sh/install.ps1
-patches; verify and restore those three owned files before pulling 0.1.3, then
-run existing validate.py. GUI remains deferred on both machines. New Hermes
-probe uses official source in /tmp/clef-use-hermes-client-source, installed
-launcher, isolated fixture IPC and HERMES_HOME; actual user config preserved.
-Full Hermes launcher absent, public latest 404, route question pending.
+Next bounded action: with supplied deployment alias/path upload exact release
+files and verify isolated public POSIX/PowerShell first install/CURRENT/update.
+Without route, report public latest 404 and leave acceptance open. GUI remains
+deferred; do not request it again or mark the goal complete. Clarification about
+unowned concurrent work is pending; preserve it. No subagents were delegated.
