@@ -1,7 +1,7 @@
 # Release and hosting
 
 CI builds offline wheel bundles for macOS arm64/x86_64, Linux arm64/x86_64, and
-Windows x86_64 on Python 3.11, 3.12 and 3.13. A tag such as `v0.1.3` must match
+Windows x86_64 on Python 3.11, 3.12 and 3.13. A tag such as `v0.1.5` must match
 `pyproject.toml`. The release workflow merges per-platform artifacts/checksums
 into one site tree. Untested ML/desktop platforms remain experimental even when
 packaging succeeds. Windows ARM64 has no release target yet.
@@ -19,11 +19,11 @@ install.sh
 install.ps1
 latest/manifest.json
 latest/SHA256SUMS
-releases/0.1.3/manifest.json
-releases/0.1.3/SHA256SUMS
-releases/0.1.3/install.sh
-releases/0.1.3/install.ps1
-releases/0.1.3/clef-use-0.1.3-<platform>-<architecture>-py<minor>.zip
+releases/0.1.5/manifest.json
+releases/0.1.5/SHA256SUMS
+releases/0.1.5/install.sh
+releases/0.1.5/install.ps1
+releases/0.1.5/clef-use-0.1.5-<platform>-<architecture>-py<minor>.zip
 ```
 
 Upload immutable version artifacts first, verify public SHA-256 and content,
@@ -67,7 +67,38 @@ passed 48 tests and native Unicode-path PowerShell installation/CMD update plus
 three failed-update preservation checks. Synthetic test version 0.1.4 is isolated
 and is not a published release.
 
-Public bootstrap scripts were HTTP 200, but latest manifest/SHA256SUMS were HTTP
-404. A full public install remains unverified until the deployment route uploads
-complete metadata and archives. GUI acceptance is also explicitly deferred by
-the operator; these gates prevent a release-ready claim or final version tag.
+Public HTTPS latest metadata now returns HTTP 200 with 0.1.3 and 15 targets.
+Isolated macOS/Windows public installs and self-tests passed; the earlier 404
+metadata blocker is resolved for 0.1.3. New 0.1.5 public deployment is pending.
+
+## Source 0.1.5 validation
+
+Source `bd217b06868f49b963b37b21b0d9535ccea24baa` passed all six jobs in
+[CI 37159015133](https://github.com/snowman0919/clef-use/actions/runs/37159015133).
+The installed noneditable Windows wheel and final published source passed 83
+regressions. Real Windows input and screenshot readiness checks passed on the
+owned disposable GUI; Mac foreground input remains deferred.
+
+The initial 0.1.5 real model task made two correct native Windows actions and
+visible app completion, but MPS failed during final CLEF verification. Subsequent
+failed comparisons are retained; no actual warm samples or measured speedup are
+claimed. Windows-local model inference remains NOT_RUN. Package/CI success does
+not establish model reliability or arbitrary-app readiness. See
+VISUAL_READINESS.md and evidence/VALIDATION.md.
+
+[Release workflow 37159016423](https://github.com/snowman0919/clef-use/actions/runs/37159016423)
+completed all 15 native bundles and assembly from that exact source. All 15 new
+archive hashes and 60 prior immutable hashes were verified. The local tree now
+retains those previous versions and adds 0.1.5. No published version checksum was
+changed. The upload archive `dist/clef-use-release-site-0.1.5.tar.gz` contains only
+new 0.1.5 artifacts, latest metadata and both bootstraps (379774706 bytes).
+Its SHA-256 is:
+
+```text
+f6145b1dcfc0553d971fb0f21daa95c249b538e3e1ae6972968b0b4f374cb66a
+```
+
+See evidence/release-015-platforms.json. Upload immutable 0.1.5 files first and
+verify them before switching latest metadata. The public server still serves
+0.1.3, so new public install/update acceptance remains pending. Native GUI success
+and CI do not resolve the documented CLEF MPS execution failures.

@@ -1,0 +1,143 @@
+{
+  "source": "bd217b06868f49b963b37b21b0d9535ccea24baa",
+  "source_ci": 37159015133,
+  "ci_jobs_passed": 6,
+  "release_workflow": 37159016423,
+  "release_targets": 15,
+  "assemble": "PASSED",
+  "new_artifact_hashes_verified": 15,
+  "prior_artifact_hashes_verified": 60,
+  "prior_versions_preserved": [
+    "0.1.0",
+    "0.1.1",
+    "0.1.2",
+    "0.1.3"
+  ],
+  "delivery_bytes": 379774706,
+  "delivery_sha256": "f6145b1dcfc0553d971fb0f21daa95c249b538e3e1ae6972968b0b4f374cb66a",
+  "public_latest": "0.1.3",
+  "public_015": "NOT_DEPLOYED",
+  "models_ready": false,
+  "artifacts": [
+    {
+      "filename": "clef-use-0.1.5-darwin-arm64-py311.zip",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-arm64-py311.zip",
+      "sha256": "5bccf6ce98f080792aa22ace93124a9ba7f96dbbc6ed68224c859c93ee65c5f2"
+    },
+    {
+      "filename": "clef-use-0.1.5-darwin-arm64-py312.zip",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "python": "3.12",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-arm64-py312.zip",
+      "sha256": "cd6e70a1124602dbf2eadf044d7649e3de4d4cb613475a433bbd331cad95a372"
+    },
+    {
+      "filename": "clef-use-0.1.5-darwin-arm64-py313.zip",
+      "platform": "darwin",
+      "architecture": "arm64",
+      "python": "3.13",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-arm64-py313.zip",
+      "sha256": "76946c76da2665380b6ddeb1659a4078528e07dd2240668ed9bac8478ffffe1f"
+    },
+    {
+      "filename": "clef-use-0.1.5-darwin-x86_64-py311.zip",
+      "platform": "darwin",
+      "architecture": "x86_64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-x86_64-py311.zip",
+      "sha256": "89550b1d40e752c04c9c7d09bb410c17d2cd5192456b01824f2377efb5bdfb6c"
+    },
+    {
+      "filename": "clef-use-0.1.5-darwin-x86_64-py312.zip",
+      "platform": "darwin",
+      "architecture": "x86_64",
+      "python": "3.12",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-x86_64-py312.zip",
+      "sha256": "abf8969926c60e86d06ad633241a5449bd9961d8153a58bffc77be6ce7919da6"
+    },
+    {
+      "filename": "clef-use-0.1.5-darwin-x86_64-py313.zip",
+      "platform": "darwin",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-darwin-x86_64-py313.zip",
+      "sha256": "49fdfdf12221461f89222fe9a19f472087b890d140689934c02a272797c16cd3"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-arm64-py311.zip",
+      "platform": "linux",
+      "architecture": "arm64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-arm64-py311.zip",
+      "sha256": "2d7bec27d8d00512bed75746d3b41ee07e73a076747b3f6f2c8beb7190539cfe"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-arm64-py312.zip",
+      "platform": "linux",
+      "architecture": "arm64",
+      "python": "3.12",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-arm64-py312.zip",
+      "sha256": "0b7f8840ac9cc3ad79c7954344ab8fa1502e7e6cac822706a3d26a69f13b6b70"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-arm64-py313.zip",
+      "platform": "linux",
+      "architecture": "arm64",
+      "python": "3.13",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-arm64-py313.zip",
+      "sha256": "75ac234887444f8ab569985b002af201d759c63743a64a8a678e2e8da308d5d0"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-x86_64-py311.zip",
+      "platform": "linux",
+      "architecture": "x86_64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-x86_64-py311.zip",
+      "sha256": "4d328afdcc8802f768527ac37eab17b459cad2ef610440a37cd997e525ad5c52"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-x86_64-py312.zip",
+      "platform": "linux",
+      "architecture": "x86_64",
+      "python": "3.12",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-x86_64-py312.zip",
+      "sha256": "428144a93fa0ccbcae7ef17c2f841f7be61e375df3279418ec3c13e9a4fc152b"
+    },
+    {
+      "filename": "clef-use-0.1.5-linux-x86_64-py313.zip",
+      "platform": "linux",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-linux-x86_64-py313.zip",
+      "sha256": "086fed84b02da3457390b221e4f5486e4f362781dd0963482415a33696e08b82"
+    },
+    {
+      "filename": "clef-use-0.1.5-win32-x86_64-py311.zip",
+      "platform": "win32",
+      "architecture": "x86_64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-win32-x86_64-py311.zip",
+      "sha256": "c730fe87f54393cc9c42e6abff1542334caeccffd47e03e373365e85041ab3c5"
+    },
+    {
+      "filename": "clef-use-0.1.5-win32-x86_64-py312.zip",
+      "platform": "win32",
+      "architecture": "x86_64",
+      "python": "3.12",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-win32-x86_64-py312.zip",
+      "sha256": "c13b0b1546fb2b443a38b7bfebac232b1a88e23117b1b65e90b5e232990c3b6c"
+    },
+    {
+      "filename": "clef-use-0.1.5-win32-x86_64-py313.zip",
+      "platform": "win32",
+      "architecture": "x86_64",
+      "python": "3.13",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.5/clef-use-0.1.5-win32-x86_64-py313.zip",
+      "sha256": "7dab42e650053827636a52ea7b34af1469fe746b490391651f8e0501211c19ed"
+    }
+  ]
+}

@@ -151,4 +151,30 @@ readbacks. This uses known owned-widget geometry and tests readiness only;
 it is separate from CLEF task acceptance and supplies no speedup baseline.
 Two harness schema mistakes were corrected before any native action in the
 accepted run. Both disposable windows closed, inputs released, pointer/foreground
-restored; owned scheduled tasks, SSH forward and ephemeral token files removed.
+restoration requested; owned scheduled tasks, SSH forward and ephemeral token files removed.
+
+
+Source checkpoint bd217b06868f49b963b37b21b0d9535ccea24baa is published on
+origin/main; CI 37159015133 passed all six jobs. Release workflow 37159016423
+passed all 15 builds and assembly; all new 15 and prior 60 archive hashes verified.
+release-site/ retains earlier versions plus 0.1.5, latest now local 0.1.5.
+Upload archive dist/clef-use-release-site-0.1.5.tar.gz is 379774706 bytes,
+SHA256 f6145b1dcfc0553d971fb0f21daa95c249b538e3e1ae6972968b0b4f374cb66a.
+A second durable copy is on /Volumes/SSD/AI/clef-use/releases/0.1.5/.
+Fresh public HTTPS metadata is 0.1.3/15 targets. Do not claim 0.1.5 deployment.
+Windows clean source fast-forwarded to this exact commit and installed wheel
+passed 83 tests in 7.48s, import confirmed site-packages outside source. Native
+readiness/input checks already accepted; do not repeat them without a new change.
+Next bounded work: record assembled native installer readback; operator deployment
+of prepared site; isolated, nonconcurrent CLEF MPS diagnosis if a new concrete
+hypothesis justifies it. Preserve actor-owned dirty files and configs. No source
+model-worker policy change or general speedup is accepted. Goal remains active.
+
+
+Assembled native Windows package install was observed INSTALLED/version 0.1.5;
+repeat bootstrap and update returned CURRENT. Self-test sample COMPLETED and
+persistent user PATH equality passed on the corrected readback script. The first
+diagnostic incorrectly indexed top-level self-test status; this was a report
+parser error after successful installer execution, not a product error. The
+loopback installer server stopped; no background GUI task/token/forward remains.
+Evidence: windows-015-assembled-install.json. Public latest remains 0.1.3.

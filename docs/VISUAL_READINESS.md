@@ -114,4 +114,4 @@ readbacks. This uses known owned-widget geometry and tests readiness only;
 it is separate from CLEF task acceptance and supplies no speedup baseline.
 Two harness schema mistakes were corrected before any native action in the
 accepted run. Both disposable windows closed, inputs released, pointer/foreground
-restored; owned scheduled tasks, SSH forward and ephemeral token files removed.
+restoration requested; owned scheduled tasks, SSH forward and ephemeral token files removed.

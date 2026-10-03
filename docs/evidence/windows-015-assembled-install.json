@@ -1,0 +1,13 @@
+{
+  "initial_install_observed": "INSTALLED",
+  "diagnostic_note": "Initial result parser expected top-level self-test status; corrected to actual samples schema",
+  "first_install": "CURRENT",
+  "version": "0.1.5",
+  "idempotent": "CURRENT",
+  "self_test": "COMPLETED",
+  "status": "PASSED",
+  "mode": "ASSEMBLED_NATIVE_WINDOWS_POWERSHELL_PACKAGE",
+  "source": "bd217b06868f49b963b37b21b0d9535ccea24baa",
+  "persistent_path_changed": false,
+  "gui_or_model_proof": false
+}

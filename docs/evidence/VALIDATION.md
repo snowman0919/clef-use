@@ -380,4 +380,14 @@ readbacks. This uses known owned-widget geometry and tests readiness only;
 it is separate from CLEF task acceptance and supplies no speedup baseline.
 Two harness schema mistakes were corrected before any native action in the
 accepted run. Both disposable windows closed, inputs released, pointer/foreground
-restored; owned scheduled tasks, SSH forward and ephemeral token files removed.
+restoration requested; owned scheduled tasks, SSH forward and ephemeral token files removed.
+
+
+Exact assembled Windows 3.12 archive installed via PowerShell in an isolated
+owned root, version readback 0.1.5; repeated bootstrap/update CURRENT and fixture
+self-test sample COMPLETED. User PATH equality was checked on the corrected
+readback. windows-015-assembled-install.json discloses the initial result-parser
+mistake and the boundary: installation/control flow, not GUI/model proof. Release
+workflow 37159016423 passed 15 builds plus assembly; source CI 37159015133 passed
+six jobs. New 15 and prior 60 archive hashes verified. Source checkpoint bd217b0.
+Public HTTPS latest is still 0.1.3; 0.1.5 upload is prepared, not deployed.
