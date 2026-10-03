@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-04",
+  "client": "clef-use/0.1",
+  "endpoints": [
+    {
+      "url": "https://ftp.kotori9.dev/clef-use/install.sh",
+      "http_status": 200,
+      "bytes": 14918,
+      "sha256": "f99902cb224cde5487cb5147eeec20f3cc8e8f94f018609924df299b8298ddd9"
+    },
+    {
+      "url": "https://ftp.kotori9.dev/clef-use/install.ps1",
+      "http_status": 200,
+      "bytes": 21072,
+      "sha256": "895a4ade1da0a819efe966de66dae6133cfc90fa25729b7f191a414b7fe4c9dc"
+    },
+    {
+      "url": "https://ftp.kotori9.dev/clef-use/latest/manifest.json",
+      "http_status": 404,
+      "bytes": 162,
+      "sha256": null
+    },
+    {
+      "url": "https://ftp.kotori9.dev/clef-use/latest/SHA256SUMS",
+      "http_status": 404,
+      "bytes": 162,
+      "sha256": null
+    }
+  ],
+  "posix_bootstrap": {
+    "command": "curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh",
+    "isolated_installation": true,
+    "exit_code": 1,
+    "diagnostic": "clef-use: HTTPError: HTTP Error 403: Forbidden",
+    "native_input": false
+  }
+}

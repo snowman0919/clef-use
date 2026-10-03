@@ -1,0 +1,36 @@
+{
+  "release_run": 37137294737,
+  "native_input": false,
+  "update": {
+    "status": "INSTALLED",
+    "version": "0.1.1"
+  },
+  "repeat": {
+    "status": "CURRENT",
+    "version": "0.1.1"
+  },
+  "installed_version": "0.1.1",
+  "self_test": {
+    "mode": "DETERMINISTIC_FIXTURE",
+    "proves": "control flow only; not ML quality or desktop speed",
+    "samples": [
+      {
+        "status": "COMPLETED",
+        "task_success": true,
+        "wall_seconds": 0.010223249999398831,
+        "low_level_actions": 2,
+        "outer_llm_interventions": 0,
+        "parser_ms_mean": 0.0622709994786419,
+        "clef_ms_mean": 0.004437499228515662,
+        "confidence": [
+          0.99,
+          0.99,
+          0.99,
+          0.99
+        ],
+        "no_progress_replan_count": 0
+      }
+    ]
+  },
+  "config_preserved": true
+}

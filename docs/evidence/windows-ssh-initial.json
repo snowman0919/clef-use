@@ -5,47 +5,47 @@
   "steps": {
     "pull": {
       "exit_code": 0,
-      "seconds": 0.875
+      "seconds": 1.437
     },
     "sync": {
       "exit_code": 0,
-      "seconds": 1.25
+      "seconds": 4.422
     },
     "lint": {
       "exit_code": 0,
-      "seconds": 0.422
+      "seconds": 0.969
     },
     "format": {
       "exit_code": 0,
-      "seconds": 0.375
+      "seconds": 0.406
     },
     "pytest": {
       "exit_code": 0,
-      "seconds": 4.375
+      "seconds": 14.141
     },
     "build": {
       "exit_code": 0,
-      "seconds": 5.89
+      "seconds": 20.25
     },
     "install": {
       "exit_code": 0,
-      "seconds": 114.297
+      "seconds": 120.031
     },
     "doctor": {
       "exit_code": 2,
-      "seconds": 1.688
+      "seconds": 1.703
     }
   },
-  "head": "7c734f1f84efc7a7ef91cde599d94ad10ad3c389",
+  "head": "b352ab9714ba9006caffba11d7c17c3a6be8bcfc",
   "installer": {
     "first_install": "INSTALLED",
-    "initial_version": "0.1.1",
+    "initial_version": "0.1.0",
     "idempotent": "CURRENT",
     "update": "INSTALLED",
     "bad_checksum_preserves_old": true,
     "missing_download_preserves_old": true,
     "failed_smoke_preserves_old": true,
-    "final_version": "0.1.2"
+    "final_version": "0.1.1"
   },
-  "pytest_result": "35 passed in 3.37s"
+  "pytest_result": "35 passed in 10.46s"
 }

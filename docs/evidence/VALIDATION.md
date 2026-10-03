@@ -7,7 +7,7 @@ revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
 
 | Gate | Evidence and boundary |
 | --- | --- |
-| Unit/integration tests | 35 passed in 2.37 seconds; includes real loopback HTTP and stdio MCP |
+| Unit/integration tests | 35 passed in 2.38 seconds; includes real loopback HTTP and stdio MCP |
 | CLI/MCP shared core | Both reach the same fixture session: two actions, four decisions, COMPLETED |
 | Input cleanup | Exceptions after key/button press release all tracked input and restore failsafe |
 | Runtime bounds | Confidence, safety, replan, hard budget, repeat states, abort and secret-redacted errors tested |
@@ -18,14 +18,14 @@ revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
 | OmniParser pixels | Found Continue button/OCR on generated pixels; empty-OCR image safely returns empty map |
 | Real models, multi-action | COMPLETED: two actual model-selected actions, four decisions, two independent completion observations |
 | Later real-model retries | Earlier NO_PROGRESS/ERROR preserved; semantic context fixed; later full pipeline passed. Transient MPS placeholder error not reproduced in isolated model probes |
-| First/install/update | Actual offline wheel install 0.1.0, repeated CURRENT, update 0.1.1 |
-| Failed update preservation | Bad checksum, missing download and wrong-version smoke all retained working 0.1.1 |
+| First/install/update | Actual offline wheel install 0.1.1, repeated CURRENT, update 0.1.2 |
+| Failed update preservation | Bad checksum, missing download and wrong-version smoke all retained working 0.1.2 |
 | Installed MCP | Actual stdio initialization and five high-level tools passed through installed launcher |
 | Codex setup | Entry installed and `codex mcp get clef-use --json` reads enabled stdio server |
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
 | Hermes setup | Entry installed; existing Hermes launcher references a missing runtime, so harness launch NOT_RUN |
-| Public HTTPS hosting | install.sh, install.ps1 and latest manifest returned HTTP 403; not publicly deployed |
-| Windows | Actual Windows 2022 x86_64 CI passed PowerShell first install, CMD CLI update and rollback on Python 3.11/3.13; GUI/ML NOT_RUN |
+| Public HTTPS hosting | Bootstrap scripts return HTTP 200; latest manifest and SHA256SUMS return HTTP 404; public install is incomplete |
+| Windows | Windows 11 Pro SSH with Python 3.12.10 passed 35 tests, PowerShell first install, CMD update, rollback and five-tool MCP listing; also Windows 2022 CI; GUI/ML NOT_RUN |
 
 Commands:
 
@@ -61,10 +61,11 @@ not controlled; treat this as a smoke measurement, not a performance benchmark.
 
 ## Remaining limitations
 
-Blocking for production acceptance: real desktop task success is deferred;
-hosting upload
-access is absent and the public bootstrap endpoints return 403. Public one-line
-installation is an intended URL, not a currently verified deployment.
+Blocking for production acceptance: real desktop task success is deferred by the
+operator. The operator has deployed both bootstrap scripts, but public latest
+metadata is still missing (HTTP 404). A usable upload route has not been supplied
+to this task. The complete site must include latest metadata and version artifacts;
+bootstrap HTTP 200 alone does not establish a working one-line installation.
 
 Non-blocking implementation limits: sessions are in memory; primary monitor only;
 Wayland and Windows/CUDA model execution are untested; large CLEF is untested;
@@ -122,5 +123,88 @@ passed initialization/listing. Screen capture remained deliberately disabled.
 
 The public repository has Issues, Discussions, Actions and private vulnerability
 reporting enabled, main as default branch, and automatic merged-branch deletion.
-Protection recommendations are documented for collaboration; no tag or production
-host deployment has been published as ready.
+Protection recommendations are documented for collaboration; no tag has been published as ready. The public host currently serves bootstrap
+scripts, with release metadata still missing.
+
+
+## Repeated model validation
+
+[Two resident-worker samples](real-model-repeat.json) both returned COMPLETED
+with two actions, four decisions and zero outer planner interventions. First
+sample: 81.661 seconds. Second, warm sample: 33.037 seconds. Native desktop input
+was disabled; pixels and actuation were generated in the test harness. The result
+confirms repeated execution on these inputs, not arbitrary MPS/model stability
+or a measured advantage over another computer-use system.
+
+## Operator Windows SSH validation
+
+[Windows SSH report](windows-ssh.json) was obtained from the operator-authorized
+`ssh win` machine: Windows 11 Pro x86_64, PowerShell 5.1.26100.9444, Python 3.12.10.
+All 35 tests passed in 10.46 seconds initially and 3.37 seconds on the latest
+0.1.1 revision. Actual packaged PowerShell installation,
+CMD version/update, idempotence and all three failed-update preservation cases
+passed. Doctor initialized the real stdio MCP server and listed the five tools;
+ready=false correctly reports missing ML environments/weights and disabled capture.
+No foreground change or native input occurred. The machine reports about 23.6 GiB
+RAM and AMD Radeon 890M graphics; CUDA/model semantics were not tested.
+
+The first SSH attempt stopped because PowerShell 5.1 treated uv's ordinary stderr
+status output as a terminating error. A Python subprocess driver with separate
+captured logs resolved this orchestration failure; it was not a dependency or
+runtime failure. Test PATH changes were isolated from the persistent user PATH.
+
+## Complete platform release build
+
+[Release run 37136579094](https://github.com/snowman0919/clef-use/actions/runs/37136579094)
+passed all 15 native combinations and final assembly. The downloaded 0.1.0 site
+contains 15 unique platform/architecture/Python targets; every archive SHA-256
+matches metadata. Total tree size is 379,606,200 bytes. macOS Intel cryptography
+requires a local wheel build with its pinned maturin build backend; initial
+missing-backend failure was retained and the corrected native jobs passed.
+[Platform job evidence](release-010-platforms.json) records the exact revision.
+
+0.1.1 retains immutable 0.1.0 checkpoints and delivers subsequent corrections
+through a versioned update. The release builder excludes cached older project
+wheels, preserving exactly one version of clef-use in each bundle. Local 0.1.1
+install/update/rollback passed.
+[0.1.1 release run 37137294737](https://github.com/snowman0919/clef-use/actions/runs/37137294737)
+also passed all 15 native combinations and final assembly.
+[Latest platform jobs](release-011-platforms.json) pin revision 7c734f1.
+
+## Public host readback
+
+[Public endpoints](public-hosting.json): install.sh and install.ps1 are HTTP 200;
+latest/manifest.json and latest/SHA256SUMS are HTTP 404. Earlier Python urllib
+requests received Cloudflare 1010/403; the release client now supplies the project
+User-Agent and reaches the same missing-metadata 404 as curl/PowerShell. The
+served bootstraps predate this correction and must be refreshed from the final
+site tree. Upload version artifacts first, then checksums/manifest and bootstraps.
+
+The public POSIX one-line installer was executed in an isolated temporary install
+root. Bootstrap download succeeded, but its embedded old Python client returned
+HTTP 403 and exit 1 on secondary metadata. No real installation or input was
+changed. Refreshing both bootstraps is required alongside the missing latest tree.
+
+
+## Installed final package and transfer bundle
+
+[Installed update](installed-update.json): the exact assembled 0.1.1 archive was
+served through the canonical loopback installer. The existing user installation
+updated from 0.1.0 to 0.1.1; repeating returned CURRENT; installed fixture self-test
+completed two actions with no outer planner intervention. The config file bytes
+were unchanged. This updates the runtime without duplicating the external ML cache.
+
+[Complete tree](release-tree.json) records all 30 verified archives for 0.1.0 and
+0.1.1, 15 targets each. `release-site/` is the exact upload layout;
+`dist/clef-use-release-site-0.1.1.tar.gz` and its adjacent SHA-256 file package it
+for transfer. These generated bundles are intentionally excluded from Git.
+
+Unowned concurrent GPU/quantization source edits are preserved in the workspace
+and excluded from these commits and acceptance claims. This report refers to
+committed implementation 7c734f1 and its exact packaged artifacts. Integration
+of those separate edits requires its own review and execution evidence.
+
+[Installed 0.1.1 doctor](installed-doctor.json) confirmed dependencies, pinned cache
+availability, PyTorch MPS detection and five real stdio MCP tools. With capture
+disabled it correctly reports ready=false; input and model semantics were not run
+by doctor. Readback used the installed package, not the dirty source tree.
