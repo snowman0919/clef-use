@@ -1,0 +1,88 @@
+# Windows native input and validation
+
+The Windows branch of `DesktopCapture` and `DesktopAction` uses the existing
+semantic action contract with checked Win32 calls in `windows_input.py`.
+macOS/Linux retain their existing input implementation. No additional native
+extension, primitive MCP tool or production remote backend is introduced.
+
+Reference: trycua/cua commit `542046496c4e8867b78bc0fde4f999a226af59cb`:
+
+- [keyboard.rs](https://github.com/trycua/cua/blob/542046496c4e8867b78bc0fde4f999a226af59cb/libs/cua-driver/rust/crates/platform-windows/src/input/keyboard.rs):
+  checked `SendInput`, UTF-16 Unicode input and confirmed foreground targeting.
+- [mouse.rs](https://github.com/trycua/cua/blob/542046496c4e8867b78bc0fde4f999a226af59cb/libs/cua-driver/rust/crates/platform-windows/src/input/mouse.rs):
+  pointer movement/readback and checked mouse injection.
+- [capture_admission.rs](https://github.com/trycua/cua/blob/542046496c4e8867b78bc0fde4f999a226af59cb/libs/cua-driver/rust/crates/platform-windows/src/capture_admission.rs):
+  screenshot/target identity and coordinate invariants.
+- [interactive task packaging](https://github.com/trycua/cua/blob/542046496c4e8867b78bc0fde4f999a226af59cb/libs/cua-spacesd/packaging/windows/install-scheduled-task.ps1):
+  distinction between service session 0 and the user's interactive desktop.
+
+This is an independent Python/stdlib implementation of Windows APIs. No cua
+source, scheduled-task installation, privilege elevation, foreground-assist or
+background-input machinery is copied or installed.
+
+## Invariants
+
+Each screenshot records its foreground HWND and uses physical pixels under a
+restored per-monitor DPI context. Input validates the current interactive/default
+desktop and the captured foreground. A changed target is an error before any new
+press, including a focus change during the corner-failsafe check. A permitted
+click can focus another window; text in the same action still requires the
+original captured foreground. A subsequent observation can establish the new
+window before another action.
+
+Session 0, an unavailable/secure desktop and absent foreground fail explicitly.
+Doctor checks desktop availability without sending input and cannot mark session
+0 ready. This check does not establish permission to inject into elevated apps;
+UIPI can still block input. Every individual `SendInput` must report one inserted
+event; this confirms admission, while visible readback confirms effect.
+
+Windows text uses paired UTF-16 input events, including surrogate pairs, without
+changing the clipboard. Text control characters remain refused. Cancellation and
+focus changes stop later characters. Owned keys/buttons/Unicode units are released
+on errors; failed releases remain tracked for retry. Cleanup bypasses the pointer
+corner failsafe, then restores its setting. Pointer moves are bounded by the
+virtual desktop and require exact position readback.
+
+## Observed evidence, 2026-10-04
+
+Windows 11 Pro x86_64/Python 3.12.10 on Pocket4, session 1/default desktop,
+2560x1440 primary monitor. An on-demand, least-privilege InteractiveToken task
+runs the task-owned validation process; the normal SSH process remains session 0.
+No unlock, security-policy change, autostart task or external app edit is used.
+
+`scripts/windows_gui_smoke.py` creates and closes a disposable native Tk window.
+It checks actual widget readback for Korean/emoji text, Ctrl+A/Backspace, one click
+and two clicks, wheel events, pre-input cancellation and refused control text;
+it checks clipboard preservation, stale-foreground refusal and native held-input
+state after release. Captures are real Windows pixels. Only this window's crop is
+retained as public evidence. See `evidence/windows-native-gui.json`.
+
+`scripts/windows_model_gui_agent.py` plus `windows_model_gui_smoke.py` is a
+**diagnostic-only** SSH loopback bridge. The canonical SessionRuntime, pinned
+OmniParser CPU and CLEF-Flash MPS run on macOS; canonical Windows capture/input
+operate on the disposable real Windows window. There is no per-click outer model
+intervention, manual candidate injection, synthesized screenshot or simulated
+actuation. The application independently reports Continue/Confirm callbacks and
+its visible completion text. This proves that vertical slice; it does not prove
+Windows-local ML, a Windows GPU backend, arbitrary applications or unattended
+locked-desktop operation. It is not a supported deployment/remote backend.
+
+Initial run completed 2 native actions / 4 decisions in 99.334815s, with two fresh
+completion observations and app readback `Task complete`. Model and input hosts
+are explicit in `evidence/windows-model-gui-initial.json`; the final packaged
+adapter rerun completed the same 2 actions/4 decisions in 213.569719s
+(`evidence/windows-model-gui.json`). Both include cold worker loading, with
+uncontrolled host load; this variation is not a measured speed improvement.
+The screenshot is scoped to the test app.
+
+Reproduce adapter validation from an interactive Windows process:
+
+```powershell
+python scripts/windows_gui_smoke.py --output windows-native-gui.json
+```
+
+Running that command in an SSH/service process is expected to refuse session 0.
+Keep user apps untouched, use only the disposable test window, and restore prior
+pointer/foreground/clipboard state. The diagnostic bridge binds loopback only,
+uses an ephemeral token read from a private file, and requires a private SSH
+forward. Never expose that test endpoint publicly.

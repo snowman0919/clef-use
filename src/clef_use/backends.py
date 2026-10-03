@@ -8,6 +8,7 @@ import queue
 import subprocess
 import sys
 import threading
+from contextlib import nullcontext
 from pathlib import Path
 
 from PIL import Image
@@ -16,6 +17,7 @@ from .config import Config
 from .models import MODEL_REVISIONS, snapshot_path
 from .objects import normalize_omni
 from .schema import ActionResult, Decision, Frame
+from .windows_input import WindowsInput
 
 
 class ModelWorkerError(RuntimeError):
@@ -200,26 +202,42 @@ class ClefBackend:
 class DesktopCapture:
     def capture(self):
         import mss
-        import pyautogui
 
-        with mss.MSS() as screen:
-            monitor = screen.monitors[1]
-            shot = screen.grab(monitor)
-        image = Image.frombytes("RGB", shot.size, shot.rgb)
-        logical = tuple(pyautogui.size())
-        return Frame(image, (monitor["left"], monitor["top"]), logical)
+        native = WindowsInput() if sys.platform == "win32" else None
+        target = native.ensure_target(None) if native else None
+        with native.physical_coordinates() if native else nullcontext():
+            with mss.MSS() as screen:
+                monitor = screen.monitors[1]
+                shot = screen.grab(monitor)
+            image = Image.frombytes("RGB", shot.size, shot.rgb)
+            if native:
+                native.ensure_target(target)
+                logical = image.size
+            else:
+                import pyautogui
+
+                logical = tuple(pyautogui.size())
+        return Frame(image, (monitor["left"], monitor["top"]), logical, target)
 
 
 class DesktopAction:
-    def __init__(self):
+    def __init__(self, gui=None):
         self.lock = threading.RLock()
         self.keys = set()
         self.buttons = set()
+        self.gui = gui
 
     def execute(self, action, observation, cancelled):
-        import pyautogui as gui
+        if self.gui is None:
+            if sys.platform == "win32":
+                self.gui = WindowsInput()
+            else:
+                import pyautogui
 
-        with self.lock:
+                self.gui = pyautogui
+        gui = self.gui
+        native = isinstance(gui, WindowsInput)
+        with self.lock, gui.physical_coordinates() if native else nullcontext():
             if cancelled.is_set():
                 return ActionResult(ok=False, reason="aborted")
             if action.observation_id != observation.id:
@@ -230,11 +248,20 @@ class DesktopAction:
             ):
                 return ActionResult(ok=False, reason="invalid or sensitive target")
             op = action.operation
+            if native and op != "wait":
+                gui.ensure_target(observation.frame.foreground_window)
             if op in {"click", "double_click", "focus"}:
                 if target is None:
                     return ActionResult(ok=False, reason="click requires object")
                 x, y = observation.frame.point(target.bbox)
-                self._click(gui, x, y, 2 if op == "double_click" else 1, cancelled)
+                self._click(
+                    gui,
+                    x,
+                    y,
+                    2 if op == "double_click" else 1,
+                    cancelled,
+                    observation.frame.foreground_window,
+                )
             elif op == "type":
                 if target is None and any(o.sensitive for o in observation.objects):
                     return ActionResult(
@@ -245,8 +272,16 @@ class DesktopAction:
                 if any(ord(c) < 32 for c in value):
                     return ActionResult(ok=False, reason="control characters refused")
                 if target:
-                    self._click(gui, *observation.frame.point(target.bbox), 1, cancelled)
-                if not value.isascii():
+                    self._click(
+                        gui,
+                        *observation.frame.point(target.bbox),
+                        1,
+                        cancelled,
+                        observation.frame.foreground_window,
+                    )
+                if native:
+                    gui.type_text(value, cancelled, observation.frame.foreground_window)
+                elif not value.isascii():
                     import pyperclip
 
                     previous = pyperclip.paste()
@@ -266,40 +301,55 @@ class DesktopAction:
             elif op == "press":
                 if action.value not in {"escape", "enter", "tab", "backspace"}:
                     return ActionResult(ok=False, reason="key not allowed")
-                self._hotkey(gui, (action.value,), cancelled)
+                self._hotkey(gui, (action.value,), cancelled, observation.frame.foreground_window)
             elif op == "hotkey":
                 keys = tuple((action.value or "").split("+"))
                 if keys not in {("ctrl", "a"), ("ctrl", "l"), ("command", "a"), ("command", "l")}:
                     return ActionResult(ok=False, reason="hotkey not allowed")
-                self._hotkey(gui, keys, cancelled)
+                self._hotkey(gui, keys, cancelled, observation.frame.foreground_window)
             elif op == "scroll":
                 if action.value not in {"up", "down"}:
                     return ActionResult(ok=False, reason="scroll direction not allowed")
-                gui.scroll(3 if action.value == "up" else -3)
+                clicks = 3 if action.value == "up" else -3
+                if native:
+                    gui.scroll(clicks, observation.frame.foreground_window)
+                else:
+                    gui.scroll(clicks)
             elif op == "wait":
                 cancelled.wait(0.25)
             return ActionResult(ok=not cancelled.is_set())
 
-    def _click(self, gui, x, y, count, cancelled):
+    def _click(self, gui, x, y, count, cancelled, target=None):
+        native = isinstance(gui, WindowsInput)
+        target = gui.ensure_target(target) if native else None
         gui.moveTo(x, y)
         for _ in range(count):
             if cancelled.is_set():
                 return
             try:
                 self.buttons.add("left")
-                gui.mouseDown(button="left")
+                if native:
+                    gui.mouseDown(button="left", target=target)
+                else:
+                    gui.mouseDown(button="left")
             finally:
                 self._release_with(gui)
             if count > 1:
                 cancelled.wait(0.1)
+                if native:
+                    target = gui.ensure_target(None)
 
-    def _hotkey(self, gui, keys, cancelled):
+    def _hotkey(self, gui, keys, cancelled, target=None):
+        native = isinstance(gui, WindowsInput)
+        target = gui.ensure_target(target) if native else None
         try:
             for key in keys:
                 if cancelled.is_set():
                     return
+                if native:
+                    gui.ensure_target(target)
                 # Printable keys may press implicit layout modifiers inside PyAutoGUI.
-                if len(key) == 1:
+                if not native and len(key) == 1:
                     if gui.isShiftCharacter(key):
                         self.keys.add("shift")
                     if sys.platform == "win32":
@@ -310,7 +360,10 @@ class DesktopAction:
                                 if modifiers & flag:
                                     self.keys.add(modifier)
                 self.keys.add(key)
-                gui.keyDown(key)
+                if native:
+                    gui.keyDown(key, target=target)
+                else:
+                    gui.keyDown(key)
         finally:
             self._release_with(gui)
 
@@ -333,6 +386,11 @@ class DesktopAction:
                     self.buttons.discard(button)
                 except Exception as exc:
                     errors.append(exc)
+            if isinstance(gui, WindowsInput):
+                try:
+                    gui.release_text()
+                except Exception as exc:
+                    errors.append(exc)
         finally:
             gui.FAILSAFE = previous
         if errors:
@@ -340,10 +398,8 @@ class DesktopAction:
 
     def release(self):
         with self.lock:
-            if self.keys or self.buttons:
-                import pyautogui
-
-                self._release_with(pyautogui)
+            if self.gui is not None:
+                self._release_with(self.gui)
 
 
 def runtime(config: Config, log_path=None):

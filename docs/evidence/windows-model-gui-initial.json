@@ -1,0 +1,127 @@
+{
+  "session_id": "f5c2b8a90bbd4748b5236a214fb50e73",
+  "status": "COMPLETED",
+  "steps": 2,
+  "rounds": 4,
+  "last_action": {
+    "id": "a9",
+    "operation": "click",
+    "target": "obj_d731c1a58d6a"
+  },
+  "confidence": 0.5297,
+  "reason": "goal and conditions verified on two fresh observations",
+  "summary": "COMPLETED after 2 actions, 4 decisions",
+  "independent_gui_readback": {
+    "stage": 2,
+    "clicks": [
+      "Continue",
+      "Confirm"
+    ],
+    "visible_result": "Task complete",
+    "desktop": {
+      "session_id": 1,
+      "desktop": "Default",
+      "foreground_window": 394636
+    },
+    "native_input": true
+  },
+  "mode": "REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+  "native_input": true,
+  "inference_host": "macOS",
+  "input_host": "Windows 11",
+  "outer_interventions": 0,
+  "wall_seconds": 99.33481525000389,
+  "metrics": [
+    {
+      "capture_ms": 248.16016599652357,
+      "parser_ms": 11149.333374996786,
+      "decision_ms": 53842.9880420008,
+      "execution_ms": 71.13045899313875,
+      "state_change_score": 0.000743282498184459,
+      "confidence": 0.8754,
+      "progress": 0.219925,
+      "goal_probability": 0.0219,
+      "condition_probabilities": [
+        0.0064
+      ],
+      "replan_probability": 0.2553,
+      "safety_probability": 0.0104,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_967ceabb4393"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T19:16:43.874580+00:00",
+      "session_id": "f5c2b8a90bbd4748b5236a214fb50e73",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 177.44000099628465,
+      "parser_ms": 1913.406624997151,
+      "decision_ms": 10168.431833000795,
+      "execution_ms": 26.597874995786697,
+      "state_change_score": 0.005317175018155411,
+      "confidence": 0.8969,
+      "progress": 0.35315,
+      "goal_probability": 0.0292,
+      "condition_probabilities": [
+        0.0082
+      ],
+      "replan_probability": 0.2006,
+      "safety_probability": 0.0103,
+      "action": {
+        "id": "a9",
+        "operation": "click",
+        "target": "obj_d731c1a58d6a"
+      },
+      "execution_ok": true,
+      "timestamp": "2026-10-03T19:16:56.472605+00:00",
+      "session_id": "f5c2b8a90bbd4748b5236a214fb50e73",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 114.17562400310999,
+      "parser_ms": 943.3768749950104,
+      "decision_ms": 9448.285500002385,
+      "execution_ms": 0.0,
+      "state_change_score": null,
+      "confidence": 0.5297,
+      "progress": 0.859725,
+      "goal_probability": 0.9459,
+      "condition_probabilities": [
+        0.9555
+      ],
+      "replan_probability": 0.0333,
+      "safety_probability": 0.0092,
+      "timestamp": "2026-10-03T19:17:06.980942+00:00",
+      "session_id": "f5c2b8a90bbd4748b5236a214fb50e73",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 112.58908399759093,
+      "parser_ms": 863.4258750025765,
+      "decision_ms": 9234.265375001996,
+      "execution_ms": 0.0,
+      "state_change_score": null,
+      "confidence": 0.5297,
+      "progress": 0.859725,
+      "goal_probability": 0.9459,
+      "condition_probabilities": [
+        0.9555
+      ],
+      "replan_probability": 0.0333,
+      "safety_probability": 0.0092,
+      "reason": "goal and conditions verified on two fresh observations",
+      "timestamp": "2026-10-03T19:17:17.516288+00:00",
+      "session_id": "f5c2b8a90bbd4748b5236a214fb50e73",
+      "step": 2,
+      "terminal_event": "COMPLETED"
+    }
+  ],
+  "device": "mps",
+  "parser_device": "cpu"
+}

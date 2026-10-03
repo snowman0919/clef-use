@@ -1,0 +1,19 @@
+{
+  "package_version": "0.1.4",
+  "python": "3.12.10",
+  "platform": "Windows 11 Pro x86_64",
+  "installation": "non-editable wheel in task-owned venv",
+  "tests": {
+    "passed": 57,
+    "seconds": 4.57
+  },
+  "native_gui": "PASSED",
+  "model_gui": {
+    "status": "COMPLETED",
+    "steps": 2,
+    "rounds": 4,
+    "inference_host": "macOS",
+    "wall_seconds": 213.56971945799887
+  },
+  "windows_local_ml": "NOT_RUN"
+}

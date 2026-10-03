@@ -1,73 +1,67 @@
 # Engineering handoff
 
 Updated 2026-10-04. Repo clef-use/main, public origin
-https://github.com/snowman0919/clef-use. Implemented source HEAD 000885b (0.1.3),
-with subsequent owned documentation/evidence update. The goal remains active;
-full numbered requirements and boundaries: IMPLEMENTATION.md; measured evidence:
-evidence/VALIDATION.md.
+https://github.com/snowman0919/clef-use. Previous HEAD efde70d, now owned 0.1.4
+Windows native-input change in progress. Overall goal remains active; numbered
+requirements: IMPLEMENTATION.md; evidence: evidence/VALIDATION.md.
 
-One resident runtime owns screenshot -> pinned OmniParser -> canonical objects
--> bounded semantic candidates -> joint CLEF choice/noul/score -> deterministic
-input -> verification. CLI and exactly five high-level MCP tools share it.
-No shell capability or per-harness runtime.
+Canonical runtime owns capture -> pinned OmniParser -> semantic candidates ->
+joint CLEF choice/noul/score -> deterministic input -> fresh verification. CLI
+and five MCP tools share one resident core. No shell primitive/per-harness core.
 
-Authorization: external SSD /Volumes/SSD/AI/clef-use for models/environments,
-public GitHub repo/push and Windows tests via ssh win. Operator explicitly deferred
-GUI: no foreground/input on either machine. Preserve all user settings/secrets.
-Production deploy route question remains unanswered; no credentials in chat.
+Authorization: external SSD /Volumes/SSD/AI/clef-use, public repo/push, Windows
+ssh win. Latest user explicitly authorized actual Windows GUI and asked to
+reference trycua/cua. The old GUI deferral is superseded for Windows only; Mac
+foreground/input remains deferred. Preserve user settings, apps, changes/secrets.
+Production deployment route is still unanswered; public latest was HTTP 404.
 
-0.1.3 fixes fresh idle observe with coherent PNG/objects and exclusive desktop
-reservation, cached busy reads marked; no extra decisions/actions. Failure
-latency and terminal budget/refusal reasons now survive logs and benchmark means.
-Windows atomic UTF-8 writes and relative CMD launcher fix Unicode parent paths;
-every native installation check includes Korean text and spaces. Earlier 0.1.2
-tracked all ordinary/shift/modifier keys, releases every owned key/button after
-an error and retains failed-release state for retry.
+0.1.4 Windows DesktopCapture/DesktopAction use stdlib ctypes Win32 input, checked
+SendInput counts, physical DPI coordinates, captured foreground identity,
+interactive/default desktop guard, clipboard-free UTF-16 text and tracked cleanup.
+Session 0/secure desktop/changed focus are refused. Doctor probes desktop without
+input. cua source pin, independent design and reproduction: WINDOWS_INPUT.md.
 
-Owned frozen tree passed 48 tests/lint/format. Source 000885b CI 37143721190
-passed all six jobs; release 37143721968 passed all 15 native targets + assembly.
-Windows 11 Pro/Python 3.12.10 via SSH passed 48 tests in 4.71s, packaged first
-0.1.3 install, CURRENT, synthetic 0.1.4 update and three failed-update preservation
-cases. That synthetic version is private fixture output. No Windows ML/GUI proof.
-Task-owned Windows checkout: %LOCALAPPDATA%/clef-use-validation-20261004/source;
-our old test installer patches were restored before pulling 000885b.
+Owned frozen source passed 57 tests, lint/format and wheel build. Task-owned
+Windows Python3.12 installed non-editable 0.1.4 wheel and passed 57 tests/4.57s;
+actual native Tk GUI passed Unicode/emoji, clipboard, shortcut, click/double-click,
+wheel, cancellation/control refusal, changed focus and no-held-input readbacks.
+Real Windows GUI + Mac Omni CPU/CLEF MPS diagnostic loop completed 2 native
+clicks/4 decisions, no outer interventions, 99.334815s; actual app readback
+Continue -> Confirm -> Task complete. Final installed-wheel rerun also completed 2 actions/4 decisions in
+213.569719s; both cold loads vary with uncontrolled host load. No Windows-local ML/GPU, arbitrary app/calculator or Mac-input proof.
+Windows tests use an on-demand least-privilege InteractiveToken task, no security
+policy changes/elevation/autostart. Close only disposable own windows; cleanup
+SSH forward, own finished task and ephemeral tokens before ending the test.
+These resources were removed after final GUI completion.
 
-Exact GitHub site downloaded to /tmp/clef-use-release-013-complete. Local
-release-site keeps 0.1.0/1/2/3, 15 artifacts each, all 60 hashes verified. Installed
-Mac launcher canonically updated to exact 0.1.3, repeat CURRENT, self-test
-COMPLETED 2 actions/4 decisions, config byte-preserved. Doctor initialized five
-MCP tools and pinned SSD/MPS cache, correctly ready=false with capture disabled.
-New-version-only transfer: dist/clef-use-release-site-0.1.3.tar.gz (362MiB) and
-adjacent SHA-256; preserve prior server releases. Deploy version first/latest last.
+Windows workspace: %LOCALAPPDATA%/clef-use-validation-20261004. source/.venv holds
+our 0.1.4 installed wheel; clean Git source remains previous 000885b until own
+push/pull. windows-native-src is a temporary frozen-source diagnostic copy; final
+native reruns import installed wheel. Mac pure tree /tmp/clef-use-windows-audit,
+clean tool env /tmp/clef-use-audit-env. Original project .venv remains unmodified.
 
-Real model generated-pixel loops completed: cold 81.661s/warm 33.037s, 2 actions/
-4 decisions and zero outer interventions. Warm parser/CLEF mean 1.236s/6.784s.
-Simulated actuation, no native GUI/baseline speed proof. Earlier transient MPS
-errors remain documented; CUDA/larger CLEF not executed by this task.
+Earlier 0.1.3 CI 37143721190, release 37143721968 and doc CI 37144979945 passed;
+0.1.3 site had all 15 platforms/Python targets and retained 60 hashes. Installed
+Mac exact assembled 0.1.3 and config byte-preserved. 0.1.4 artifacts/CI to be
+recorded after source push; do not replace existing version hashes. Existing
+transfer dist/clef-use-release-site-0.1.3.tar.gz is now historical; latest delivery
+must include the 0.1.4 release and latest metadata, preserving older versions.
 
-Codex configuration/native readback and OMP native MCP client passed. Official
-Hermes MCP source commit 3c9847f5e86e81c23335a54daa532de28eeffeb3 in
-/tmp/clef-use-hermes-client-source discovered canonical tools and its registry
-handler completed fixture actions through installed launcher. Hermes adds four
-resource/prompt utility tools itself; server still exports exactly five. Existing
-full Hermes launcher targets missing files; full agent conversation NOT_RUN.
-All four locale command/config examples match; screenshot data stays private.
+Unowned edits are preserved and excluded from source/CI/release:
+README.md; docs/INSTALL.md; docs/{ja,ko,zh-CN}/README.md; backends.py worker/CLEF
+sections; cli/client/config/model_worker/models/provision; doctor acceleration
+sections; service model holds/unload; tests/test_protocol.py extra model-hold;
+acceleration.py, mlx_support.py, quantization.py, quantization_prepare.py;
+extra acceleration/model-residency tests and MLX/quantization/residency evidence.
+Stage only owned backends/doctor blobs from the frozen HEAD+owned tree. Do not run
+dirty-source tests or publish unrelated edits. No subagents were delegated.
 
-Unowned concurrent edits are preserved, NOT included in source/CI/artifacts:
-docs/INSTALL.md; backends.py CLEF section; cli/client/config/doctor/model_worker/
-models/provision.py; service.py model holds/unload; tests/test_protocol.py extra
-model-hold tests; acceleration.py, mlx_support.py, quantization.py,
-quantization_prepare.py; test_acceleration_quantization.py and
-test_model_residency.py; MLX/quantization/model-residency evidence.
-Do not stage those or run full dirty-source tests as this release evidence.
-Pure owned service observe hunks were staged separately.
-
-Clean validation env: /tmp/clef-use-audit-env; owned frozen tree
-/tmp/clef-use-final-audit. Existing .venv and some Documents files were dataless/
-concurrently modified, causing slow reads; no removal or alteration attempted.
-
-Next bounded action: with supplied deployment alias/path upload exact release
-files and verify isolated public POSIX/PowerShell first install/CURRENT/update.
-Without route, report public latest 404 and leave acceptance open. GUI remains
-deferred; do not request it again or mark the goal complete. Clarification about
-unowned concurrent work is pending; preserve it. No subagents were delegated.
+Next bounded actions: checkpoint reviewed Windows patches; validate CI/native
+release+installation. Then implement the newly received user-requested visual
+condition waiting, action-effect/stale ROI checks, explicit non-action decisions,
+structured effect history and exact-image perception cache. Preserve strong
+completion checks and bounded cancellation; measure effects before speed claims.
+Refresh public metadata when an authorized route is available. Public install cannot be claimed until latest metadata/artifacts
+and isolated public one-line installs work. Keep Windows-local ML and broader GUI
+coverage explicitly separate. Full Hermes launcher still missing; Codex readback,
+OMP native MCP and official Hermes discovery/handler passed at earlier checkpoint.

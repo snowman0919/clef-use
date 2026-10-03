@@ -1,0 +1,26 @@
+{
+  "mode": "REAL_WINDOWS_GUI_NATIVE_ADAPTER",
+  "native_input": true,
+  "desktop": {
+    "session_id": 1,
+    "desktop": "Default",
+    "foreground_window": 394636
+  },
+  "unicode_readback": "Windows 한글 테스트 😀",
+  "clipboard_preserved": true,
+  "shortcut_readback": "",
+  "click_readback": 3,
+  "wheel_readback": [
+    -360
+  ],
+  "cancelled_before_input": true,
+  "control_characters_refused": true,
+  "foreground_change_refused": "Windows foreground changed since capture; no input sent",
+  "held_inputs_after_release": [],
+  "capture_pixels": [
+    2560,
+    1440
+  ],
+  "physical_coordinates": true,
+  "status": "PASSED"
+}

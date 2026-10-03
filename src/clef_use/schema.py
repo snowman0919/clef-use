@@ -120,6 +120,7 @@ class Frame:
     image: Image.Image
     origin: tuple[int, int] = (0, 0)
     logical_size: tuple[int, int] | None = None
+    foreground_window: int | None = None
 
     def point(self, bbox: BoundingBox) -> tuple[int, int]:
         width, height = self.logical_size or self.image.size

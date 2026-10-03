@@ -28,9 +28,12 @@ resumable context. Step logs survive restart.
 
 Cancellation sets a session event before releasing owned input. A model forward
 pass cannot currently be preempted safely, but its late result cannot trigger
-input after cancellation. Keyboard/mouse cleanup bypasses PyAutoGUI's corner
-failsafe only while releasing tracked inputs. Unicode entry restores the previous
-plain-text clipboard; rich clipboard representations are not preserved.
+input after cancellation. Keyboard/mouse/Unicode cleanup bypasses the corner
+failsafe only while releasing tracked inputs. Windows uses checked Win32 input,
+physical capture coordinates and captured foreground identity; UTF-16 text does
+not change the clipboard. Other platforms restore the previous plain-text
+clipboard for Unicode; rich clipboard representations are not preserved.
+See WINDOWS_INPUT.md for the cua reference and native Windows evidence.
 
 `computer_observe` refreshes the screen/object map while idle and marks cached
 observations while busy. It reserves the shared desktop during parsing, with

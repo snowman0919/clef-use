@@ -53,7 +53,7 @@ class FailingGui:
 def test_plain_key_failure_releases_the_native_press(monkeypatch, operation, value):
     gui = FailingGui(value)
     monkeypatch.setitem(sys.modules, "pyautogui", gui)
-    action = DesktopAction()
+    action = DesktopAction(gui=gui)
     observation = Observation("epoch", Frame(Image.new("RGB", (20, 20))), [])
     candidate = ActionCandidate(
         id="a0", operation=operation, value=value, description="input", observation_id="epoch"

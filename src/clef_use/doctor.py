@@ -38,6 +38,15 @@ def mac_permissions():
     }
 
 
+def windows_desktop_probe():
+    from .windows_input import WindowsInput
+
+    try:
+        return {"status": "OBSERVED", **WindowsInput().desktop_status()}
+    except RuntimeError as exc:
+        return {"status": "UNAVAILABLE", "reason": str(exc)}
+
+
 def doctor(capture: bool = True):
     config = load_config()
     permissions = mac_permissions()
@@ -51,6 +60,8 @@ def doctor(capture: bool = True):
         "models": inventory(config.model_dir, config.decision_model),
         "permissions": permissions,
     }
+    if sys.platform == "win32":
+        report["windows_desktop"] = windows_desktop_probe()
     python = config.clef_python or sys.executable
     try:
         result = subprocess.run(
@@ -87,7 +98,10 @@ def doctor(capture: bool = True):
             report["capture"] = {"status": "ERROR", "type": type(exc).__name__}
     else:
         report["capture"] = {"status": "NOT_RUN", "reason": "disabled or permission unavailable"}
-    report["input"] = {"status": "PERMISSION_CHECK_ONLY", "reason": "doctor does not inject input"}
+    report["input"] = {
+        "status": "DESKTOP_CHECK_ONLY" if sys.platform == "win32" else "PERMISSION_CHECK_ONLY",
+        "reason": "doctor does not inject input",
+    }
     try:
         report["mcp"] = {
             "status": "OBSERVED",
@@ -103,5 +117,6 @@ def doctor(capture: bool = True):
         and report["capture"].get("status") == "OBSERVED"
         and report["capture"].get("nonuniform", False)
         and permissions["input_injection"] is not False
+        and (sys.platform != "win32" or report["windows_desktop"]["status"] == "OBSERVED")
     )
     return report

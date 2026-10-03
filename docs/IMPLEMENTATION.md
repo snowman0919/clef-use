@@ -55,7 +55,7 @@ irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
 Their public end-to-end acceptance remains separate from loopback installation;
-real desktop acceptance remains explicitly deferred. These open gates are not
+a real Windows native-GUI/model vertical slice is now observed (see WINDOWS_INPUT.md). These open gates are not
 converted into completion by passing fixtures, model pixels or packaging tests.
 
 ## Requirement audit
@@ -65,12 +65,12 @@ the stated boundary, never to native input quality from fixture tests.
 
 | Goal | Canonical implementation / acceptance boundary |
 | --- | --- |
-| 1-3 | runtime/service own multiple actions; CLI and five MCP tools share IPC; fixture and real-model generated-pixel loops completed |
+| 1-3 | runtime/service own multiple actions; CLI and five MCP tools share IPC; fixture, generated-pixel and real Windows GUI model loops completed |
 | 4 | Python runtime; upstream ML environments isolated; no native optimization sidecar |
 | 5-6 | pinned OmniParser V2 source/assets, objects.py normalized map and geometry; real pixels parsed |
 | 7-8 | bounded candidates and joint CLEF choices/score/noul; real Flash MPS decisions, optional CLEF larger model not executed |
 | 9-11 | strict small Contract, explicit states, hard budget, visual/repeat-state and independent completion verification; regression tests |
-| 12 | deterministic whitelist input, safe object centers, tracked keys/buttons and cleanup retries; native SDK boundary simulated, actual GUI deferred |
+| 12 | deterministic whitelist input, safe object centers, tracked keys/buttons and cleanup retries; real Windows Unicode/click/scroll/foreground/cleanup readback observed; macOS input deferred |
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
 | 15 | configuration-only Codex readback, OMP native client, official Hermes native discovery/handler; Hermes full launcher missing |
 | 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public manifest 404 keeps public acceptance open |
@@ -80,13 +80,14 @@ the stated boundary, never to native input quality from fixture tests.
 | 27 | documented extension boundaries; DOM/AX/tracking/remote control intentionally future work |
 | 28 | abort, cleanup, bounded confidence/steps/no-progress, safe errors and escalation logs; no shell execution capability in executor |
 | 29-30 | required docs/community files, generated/cache exclusions, coherent commits; unowned concurrent edits preserved separately |
-| 31-32 | shared vertical slice and model semantics observed; actual native GUI and public one-line installation remain unsatisfied acceptance gates |
+| 31-32 | shared vertical slice and model semantics observed; real Windows native GUI observed with Mac inference; public one-line installation remains an unsatisfied gate |
 | 33-34 | architectural choices and measured limits recorded here, ARCHITECTURE.md and evidence/VALIDATION.md; twelve delivery categories linked above |
 | 35 | public main, Issues/Discussions/Actions/security, CI/release machinery, four locale setup trees; command/config parity verified |
 | 36 | first-class PowerShell 5.1/CMD flow, no security policy change, per-user Unicode paths and preservation on three failed update cases observed on ssh win |
 
-Blocking acceptance: operator-deferred real GUI task; incomplete public release
-metadata/deployment route. Non-blocking limitations: full local Hermes launcher
+Blocking acceptance: incomplete public release metadata/deployment route.
+Windows GUI was explicitly authorized and observed on 2026-10-04; macOS native
+input remains deferred. Non-blocking limitations: full local Hermes launcher
 unavailable, larger CLEF and CUDA/Windows ML untested, cross-volume custom Unicode
 Windows bin paths require an ASCII target or the bin directory inside the install.
 Future optimization: measured VLM baseline comparison, temporal/incremental

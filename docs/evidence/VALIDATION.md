@@ -3,17 +3,17 @@
 Observed on 2026-10-04: macOS arm64, Python 3.11.15, 48 GiB unified memory,
 primary screenshot 1800 x 1169, external SSD model cache. PyTorch 2.11.0,
 CLEF Transformers 5.10.2; OmniParser Transformers 4.46.3. Pinned model/source
-revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
+revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inference are NOT_RUN; Windows GUI evidence follows.
 
 | Gate | Evidence and boundary |
 | --- | --- |
-| Unit/integration tests | 0.1.3: 48 passed locally in 3.10 seconds and Windows SSH in 4.71 seconds; real loopback HTTP/stdio MCP |
+| Unit/integration tests | 0.1.4: 57 passed locally in 3.19 seconds and installed-wheel Windows SSH in 4.57 seconds; real loopback HTTP/stdio MCP |
 | CLI/MCP shared core | Both reach the same fixture session: two actions, four decisions, COMPLETED |
 | Input cleanup | Exceptions after key/button press release all tracked input and restore failsafe |
 | Runtime bounds | Confidence, safety, replan, hard budget, repeat states, abort and secret-redacted errors tested |
 | Native desktop capture | Actual nonuniform screenshot captured; no private screenshot published |
 | Native input permission | Screen Recording and Accessibility observed granted; permission is not a GUI task proof |
-| Actual GUI task | NOT_RUN, explicitly deferred by the operator; no foreground window/input now |
+| Actual GUI task | OBSERVED on Windows: disposable real GUI, native input, 2 model-selected actions/4 decisions; inference on Mac; macOS native input deferred |
 | CLEF semantic text | Correct overdue invoice choice (0.9812), amount >1000 probability 0.9673; cold 56.607 seconds |
 | OmniParser pixels | Found Continue button/OCR on generated pixels; empty-OCR image safely returns empty map |
 | Real models, multi-action | COMPLETED: two actual model-selected actions, four decisions, two independent completion observations |
@@ -25,7 +25,7 @@ revisions are in `src/clef_use/models.py`. CUDA and other desktops are NOT_RUN.
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
 | Hermes setup | Official native MCP discovery/handler completed fixture actions; full local Hermes launcher missing, agent conversation NOT_RUN |
 | Public HTTPS hosting | Bootstrap scripts return HTTP 200; latest manifest and SHA256SUMS return HTTP 404; public install is incomplete |
-| Windows | 0.1.3 Windows 11 Pro SSH/Python 3.12.10 passed 48 tests, Unicode PowerShell install/CMD update, rollback and five-tool MCP; GUI/ML NOT_RUN |
+| Windows | 0.1.4 installed wheel: 57 tests, real Unicode/click/wheel/shortcut readback, foreground/cancel/control refusal and released-input state; Windows-local ML NOT_RUN |
 
 Commands:
 
@@ -61,15 +61,14 @@ not controlled; treat this as a smoke measurement, not a performance benchmark.
 
 ## Remaining limitations
 
-Blocking for production acceptance: real desktop task success is deferred by the
-operator. The operator has deployed both bootstrap scripts, but public latest
+Blocking for production acceptance: the operator has deployed both bootstrap scripts, but public latest
 metadata is still missing (HTTP 404). A usable upload route has not been supplied
 to this task. The complete site must include latest metadata and version artifacts;
 bootstrap HTTP 200 alone does not establish a working one-line installation.
 
 Non-blocking implementation limits: sessions are in memory; primary monitor only;
 Wayland and Windows/CUDA model execution are untested; large CLEF is untested;
-plain-text clipboard restoration cannot retain rich clipboard types; model
+non-Windows plain-text clipboard restoration cannot retain rich clipboard types; model
 forward cancellation stops late input but does not immediately interrupt tensor
 computation. Model constraints are probabilistic, not a security sandbox.
 
@@ -256,9 +255,9 @@ by Hermes itself. Existing Hermes launcher still lacks its runtime, so a full
 agent conversation is NOT_RUN. hermes-mcp.json records this boundary. All setup
 command/config examples across four locales match (localized-commands.json).
 
-The operator deferred native GUI tasks. Latest public manifest was freshly
-rechecked and remains HTTP 404. Neither gate is satisfied by fixture or build
-results; the goal stays active.
+At that checkpoint the operator deferred native GUI tasks. This historical
+GUI deferral is superseded for Windows by the authorization and real execution
+below. Public latest metadata was HTTP 404; the overall goal stays active.
 
 0.1.3 CI run 37143721190 passed all six native jobs. Windows SSH at
 000885b passed all 48 tests in 4.71 seconds and Unicode installer checks;
@@ -276,4 +275,45 @@ two actions/four decisions and config bytes were preserved. Disabled-capture
 doctor correctly reports ready=false, pinned cache/MPS and five MCP tools.
 See release-013-platforms.json, release-tree.json, installed-update.json and
 installed-doctor.json. The transfer archive and deploy order are in RELEASE.md.
-Public HTTPS installation and native GUI remain open acceptance gates.
+At the 0.1.3 checkpoint public HTTPS installation and native GUI were open gates.
+The following Windows GUI evidence supersedes the latter for the measured scope.
+
+
+## Windows native input and real model GUI, 0.1.4
+
+The operator explicitly authorized actual Windows GUI testing and requested the
+trycua/cua input reference. WINDOWS_INPUT.md pins that source and describes the
+independent checked Win32 implementation and its boundaries. The five MCP tools
+and semantic action whitelist are unchanged. Mixed/licensed cua source is not
+vendored or installed.
+
+Windows 11/Python 3.12.10 on Pocket4: an InteractiveToken/least-privilege on-demand
+task ran session 1; SSH stayed session 0. No security-policy change, elevation,
+unlock or autostart was used. Installed non-editable 0.1.4 wheel passed 57 tests
+in 4.57s. Windows API fakes in boundary regressions prove zero/partial event
+failure, Unicode surrogate pairing, cancellation/focus checks and release retries;
+actual GUI checks independently establish effects on a disposable native window.
+The initial pytest invocation omitted asyncio_mode=auto outside the repo and
+reported two async collection failures; correcting the configuration passed the
+same suite. It was not a product/input failure.
+
+[Native GUI](windows-native-gui.json): actual entry readback `Windows 한글 테스트 😀`,
+clipboard preserved, Ctrl+A/Backspace cleared text, click+double-click produced
+three callbacks, wheel delivered -360, cancellation/control text sent no payload,
+changed foreground was refused, no held native inputs remained after release.
+2560x1440 screenshot and physical-coordinate mapping were observed. The final
+non-editable wheel rerun passed. [Session zero](windows-session-zero.json) was
+explicitly refused without input. Doctor only checks desktop availability.
+
+[Initial real GUI/model run](windows-model-gui-initial.json) completed two native
+clicks/four decisions in 99.334815s with zero outer interventions. OmniParser CPU
+and CLEF-Flash MPS ran on macOS against actual cropped Windows pixels; Windows
+executed canonical native input. Independent application callback readback was
+Continue, Confirm, Task complete, and completion needed two fresh observations.
+This is an actual disposable Windows GUI vertical slice, not Windows-local ML,
+calculator coverage, every application, a performance comparison, a production
+remote backend or unattended/secure-desktop support. The final packaged adapter
+rerun also completed two actions/four decisions in 213.569719s, recorded in
+windows-model-gui.json. These are separate cold loads under uncontrolled host load;
+there is no measured speed improvement. Public screenshots contain only the
+test-owned window. Test endpoints and ephemeral tokens are removed after use.
