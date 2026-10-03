@@ -27,6 +27,7 @@ class Session:
     last_action: dict | None = None
     reason: str = "execution started"
     history: list[dict] = field(default_factory=list)
+    action_history: list[dict] = field(default_factory=list)
     cancelled: threading.Event = field(default_factory=threading.Event)
     observation: Observation | None = None
     guidance: list[str] = field(default_factory=list)
@@ -126,7 +127,7 @@ class SessionRuntime:
                     session.observation = observation
                 candidates = self.builder.build(observation, session.contract)
                 start = time.perf_counter()
-                history = [{"guidance": g} for g in session.guidance] + session.history[-6:]
+                history = [{"guidance": g} for g in session.guidance] + session.action_history[-6:]
                 decision = self.decision.decide(observation, session.contract, candidates, history)
                 row["decision_ms"] = (time.perf_counter() - start) * 1000
                 row.update(confidence=decision.confidence, progress=decision.progress)
@@ -210,6 +211,9 @@ class SessionRuntime:
                 with session.lock:
                     session.steps += 1
                     session.last_action = selected.audit()
+                    session.action_history.append(
+                        {"operation": selected.operation, "description": selected.description}
+                    )
                 session.cancelled.wait(self.config.settle_seconds)
                 start = time.perf_counter()
                 after = self.capture.capture()

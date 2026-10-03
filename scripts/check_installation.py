@@ -71,7 +71,9 @@ def check(site):
                 else ["sh", str(served / "install.sh")]
             )
             first = invoke([*bootstrap, "--base-url", base, "--allow-insecure-localhost"])
-            results["first_install"] = json.loads(first.stdout)["status"]
+            results["first_install"] = json.JSONDecoder().raw_decode(first.stdout.lstrip())[0][
+                "status"
+            ]
             results["initial_version"] = invoke([str(launcher), "version"]).stdout.strip()
             results["idempotent"] = json.loads(
                 invoke(
