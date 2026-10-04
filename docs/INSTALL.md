@@ -31,7 +31,7 @@ Runtime updates retain downloaded models.
 `models prepare` reports nine setup stages, the selected backends/cache path,
 the current dependency or model being prepared, cached-model skips, and elapsed
 time. Long stages emit a status line every 10 seconds, including model loading.
-Stage counts describe completed setup steps, not a percentage of total time.
+Stage counts identify setup steps, not a percentage of total time.
 Download transfer bars are supplied by Hugging Face when enabled. Stage messages
 use stderr; stdout retains the JSON result. `models prepare --json` suppresses
 setup stage messages. A failed/interrupted stage is identified and configuration

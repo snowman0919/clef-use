@@ -2,7 +2,7 @@
 
 **설치 스크립트는 CLI/MCP 런타임만 설치합니다. 모델 가중치 다운로드와 추론 의존성 설치는 수행하지 않습니다.** 최초 GUI 작업 전 모델 캐시 경로를 정한 뒤 `clef-use models prepare`, `clef-use doctor` 순서로 실행하세요. `models download`는 가중치만 다운로드하므로 모델 준비를 대신하지 않습니다.
 
-venv/pip를 포함한 Python 3.11-3.13을 설치하세요. 모델 준비에는 Python 3.11과 Git이 필요합니다. root나 관리자 권한은 필요하지 않습니다. 다운로드 URL을 사용하기 전에 공개 호스팅 검증 결과를 확인하세요.
+venv/pip를 포함한 Python 3.11-3.13을 설치하세요. 모델 준비에는 Python 3.11/3.12와 Git이 필요합니다(Windows ROCm은 3.12 필요). root나 관리자 권한은 필요하지 않습니다. 다운로드 URL을 사용하기 전에 공개 호스팅 검증 결과를 확인하세요.
 
 ```sh
 curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh

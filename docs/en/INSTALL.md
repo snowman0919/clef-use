@@ -2,7 +2,7 @@
 
 **The installer installs only the CLI/MCP runtime. It does not download model weights or install inference dependencies.** Before the first GUI task, set the model cache path, run `clef-use models prepare`, then `clef-use doctor`. `models download` downloads weights only; it does not complete model setup.
 
-Install Python 3.11-3.13 with venv/pip. Model preparation requires Python 3.11 and Git. No root or Administrator privileges are needed. Public hosting must be verified before using the download URL.
+Install Python 3.11-3.13 with venv/pip. Model preparation requires Python 3.11/3.12 and Git (Windows ROCm requires 3.12). No root or Administrator privileges are needed. Public hosting must be verified before using the download URL.
 
 ```sh
 curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
