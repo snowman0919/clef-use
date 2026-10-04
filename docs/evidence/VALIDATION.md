@@ -676,3 +676,12 @@ preparation, inference or new quantized backend. 0.1.15 release was canceled bef
 deploy after Windows fixture mocked whoami; source fixture fixed in0.1.16.
 Observed monad GPU RTX3080/SM8.6. NVFP4 downloader/loader remains unimplemented;
 load-time4bit is NF4. Evidence [preparation-progress.json](preparation-progress.json).
+
+2026-10-05 / 0.1.17 (`89e65a6`): OBSERVED post-install terminal Y/n choice,
+default Y, invalid-answer retry, EOF/noninteractive/CI/JSON skip and explicit flags.
+Local 182 tests and six CI jobs passed; all 15 packaged installer checks and dev
+deployment passed. Public manifests/bootstrap bytes matched. Fresh PUBLIC-installed
+Mac curl|sh and Windows PowerShell/SSH ConPTY showed question, N skip, exit 0 and
+CLI version 0.1.17. Enter/Y routing invoked owned marker executables. NOT_RUN full
+ML preparation/inference. Existing runtime retained on preparation failure.
+Evidence [installer-model-prompt.json](installer-model-prompt.json).

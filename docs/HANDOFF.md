@@ -764,3 +764,23 @@ Future actor integration must merge canonical README/docs/INSTALL/cli/provision
 help/progress changes in966e6ba as well as prior activity additions inabffff0;
 working draft bytes were intentionally not overwritten. Remove local isolation
 worktree/public-install after checkpoint. Broader serving goal remains deferred.
+
+2026-10-05 installer model prompt task complete, public 0.1.17/source 89e65a6.
+Bootstrap installs runtime then asks Prepare models now? [Y/n] through /dev/tty
+or CONIN$/CONOUT$. Enter/Y invokes installed models prepare; N skips. CI/no tty/
+EOF/JSON skip; explicit --prepare-models/--skip-models override question. Windows
+PowerShell detects redirected console input before piping Python source, restoring
+temporary prompt env in finally. Preparation failure returns nonzero while runtime
+remains installed. Direct install()/CLI update unchanged. No new dependencies.
+Local 182 tests passed; CI37226066243 all six jobs passed 182 each; release
+37226068054 all 15 installer targets/assembly/dev deploy passed. Public manifests,
+15 targets and both bootstrap bytes matched. GitHub v0.1.17 published. Actual fresh
+public Mac/Windows installation -> real prompt -> N -> exit 0 -> version 0.1.17.
+Enter/Y routing used owned marker executables, not real model preparation. No new
+ML inference or foreground GUI. Evidence installer-model-prompt.json.
+Owned Windows stale timed-out probe/process descendants stopped via exact command
+identity. Task-owned local/Windows probe/public-install scopes removed; existing
+validation Python/model/settings retained. All 24 pre-existing actor drafts remain
+excluded/preserved. Future actor integration must merge canonical README/docs/
+INSTALL/cli prompt/help changes from 89e65a6; working draft bytes intentionally
+not overwritten. Broader model/GGUF serving objective remains deferred.

@@ -1,0 +1,29 @@
+{
+  "version": "0.1.17",
+  "source_commit": "89e65a651213f0c951a1b0a11d61764bfb48cf50",
+  "tests": "182 passed in 10.09s; Ruff lint/format, generated bootstrap and lock checks passed",
+  "terminal_checks": {
+    "macos": "Python source supplied through stdin; controlling /dev/tty accepted Enter and invoked owned marker executable with models prepare; N skipped",
+    "windows": "SSH ConPTY + PowerShell source pipeline; CONIN$/CONOUT$ prompt accepted Y and invoked owned .cmd marker with models prepare",
+    "windows_noninteractive": "Console.IsInputRedirected flag suppressed prompt; completed with skip message and exit0"
+  },
+  "scope": "Public terminal checks perform actual installation and N skip. Enter/Y model command routing uses owned marker executables; no fresh full model preparation or inference.",
+  "automation": "Default skip for CI/redirected Windows input/no terminal/EOF/--json; explicit --prepare-models and --skip-models override question; direct install()/CLI update unchanged",
+  "failure": "Model preparation failure returns nonzero and reports runtime remains installed",
+  "ci": {
+    "run": 37226066243,
+    "result": "All six OS/Python jobs passed 182 tests each"
+  },
+  "release": {
+    "run": 37226068054,
+    "result": "All 15 packaged installer targets, assembly and dev deployment passed"
+  },
+  "public": {
+    "version": "0.1.17",
+    "artifacts": 15,
+    "checks": "Latest/immutable manifests and both root/immutable bootstrap byte comparisons passed",
+    "macos": "Fresh public curl | sh with actual installation in isolated temporary root; real /dev/tty prompt N; exit 0; installed CLI version 0.1.17",
+    "windows": "Fresh public PowerShell installation via SSH ConPTY in isolated LOCALAPPDATA scope; actual CONIN$/CONOUT$ prompt N; exit 0; installed CLI version 0.1.17"
+  },
+  "cleanup": "Timed-out owned Windows probe parent/descendants identified by exact encoded command and stopped; temporary installation/probe scopes removed after evidence collection; existing environments/models retained."
+}

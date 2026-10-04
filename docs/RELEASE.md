@@ -196,3 +196,13 @@ artifacts/loader. Fresh public installed CLI checks passed Mac/Linux/Windows.
 0.1.15 release canceled before deploy for a Windows test fixture failure; its tag
 is retained. Immutable earlier versions are untouched. Evidence
 [preparation-progress.json](evidence/preparation-progress.json).
+
+0.1.17 is published: source `89e65a6`,
+[CI](https://github.com/snowman0919/clef-use/actions/runs/37226066243) passed 182 tests
+on all six jobs; [release/deployment](https://github.com/snowman0919/clef-use/actions/runs/37226068054)
+passed all 15 installer targets. After runtime installation, bootstrap asks
+`Prepare models now? [Y/n]`; Enter/Y prepares and N skips. Noninteractive/CI/JSON
+execution skips by default; explicit prepare/skip flags are supported. Fresh public
+Mac/Windows installations showed the actual terminal question and N exit 0.
+Enter/Y invocation used marker executables; full ML preparation was not repeated.
+Evidence [installer-model-prompt.json](evidence/installer-model-prompt.json).
