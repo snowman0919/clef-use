@@ -69,3 +69,21 @@ def test_zip_slip_is_refused(tmp_path):
     with pytest.raises(ValueError, match="unsafe"):
         safe_extract(archive, tmp_path / "destination")
     assert not (tmp_path / "escaped").exists()
+
+
+def test_windows_directory_access_rejects_malformed_identity_without_mutating_acl(monkeypatch):
+    from subprocess import CompletedProcess
+
+    import clef_use.installer as installer
+
+    calls = []
+
+    def identity(argv, **kwargs):
+        calls.append(argv)
+        return CompletedProcess(argv, 0, stdout='"DOMAIN\\user","S-1-5-21-1 /grant Everyone:F"\n')
+
+    monkeypatch.setenv("SystemRoot", "C:\\Windows")
+    monkeypatch.setattr(installer.subprocess, "run", identity)
+    with pytest.raises(RuntimeError, match="invalid Windows installation user SID"):
+        installer.windows_user_access("owned-installation")
+    assert len(calls) == 1

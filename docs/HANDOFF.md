@@ -346,3 +346,36 @@ unpublished, including one minimal owned visual-exclusion correction in their
 untracked quantization.py. Latest authoritative requirement audit now reflects
 Windows-local actual proof and explicitly retains doctor/provisioning open gates.
 Goal remains active; this turn is progress, not full36section completion.
+
+2026-10-04 latest steering: human requires native Windows installation command ->
+runtime execution -> deletion, in addition to prior Windows-local inference.
+Executed public HTTPS0.1.3 full lifecycle and prepared native0.1.6 loopback full
+lifecycle. Details docs/evidence/windows-install-lifecycle.json and VALIDATION.md.
+Actual installed-package ROCm/NF4+CPU Omni GUI completed2correctinputs/4decisions,
+127.9586342s task wall,187.2827891s whole diagnostic. Independent Task complete
+readback and installed core SHA equality. Configured CLI correctly BLOCKED SSH
+Session0 with zero input; canonical released GPU provisioning still open.
+
+Found/fixed real installer ownership issue: OpenSSH Python temp/mode700 folder
+owner Administrators+OWNER RIGHTS rejects same account limited desktop token.
+0.1.6 adds only current TokenUser SID inheritable access on owned install root and
+new stage; no global security change. Failed0.1.5 trials all preserved/cleaned.
+Final0.1.6 normal shutdown/removal and independent process/task/socket readback
+passed; no live model/GUI/service/listener/token/install. Existing PATH/launcher,
+prior isolated install and model cache retained. Full clean
+canonical88/6.02s; native changed-boundary7/.34s; lint/format passed. Full native
+suite/all-target CI to be confirmed after checkpoint. Public currently0.1.3,
+0.1.6 Win/Python3.12 private artifact SHAe25be017ac06e7273f6216876a627fc4fea6191c3cd44e6df6d32bd6f2234510.
+
+Current own uncommitted files: installer.py, __init__.py, pyproject.toml, uv.lock,
+regenerated install.sh/ps1, test_installer.py; worker package-root diagnostic and
+its child-process test; scripts/windows_install_lifecycle.py; lifecycle evidence
+and docs. Source canonical snapshot /tmp/clef-use-doctor-integration-ed54b29,
+Windows release-src-016/site-016; durable SSD validation/windows-lifecycle-20261004.
+Actor24 paths remain intact/unpublished. Preserve them; stage only owned paths.
+Next: reviewed source checkpoint/push, full six-jobCI and15-target release; refresh
+handoff/results. Then doctor prerequisite readiness and canonical Windows-local
+provisioning/quantization integration. Full36-section goal ACTIVE, not achieved.
+Mac input remains deferred. No subagents. Separate minimal launch probe used an
+unnecessary process-only ExecutionPolicy flag; no persistent policy change, all
+subsequent probes and installer/lifecycle commands used EncodedCommand without it.

@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import argparse
 import contextlib
+import csv
 import hashlib
 import json
 import os
@@ -228,6 +229,33 @@ def install_lock(path):
             yield
 
 
+def windows_user_access(path):
+    # OpenSSH can create OWNER RIGHTS directories owned by Administrators. The
+    # same account's limited desktop token then cannot traverse its installation.
+    system = Path(os.environ["SystemRoot"]) / "System32"
+    identity = subprocess.run(
+        [str(system / "whoami.exe"), "/user", "/fo", "csv", "/nh"],
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        timeout=15,
+    )
+    rows = list(csv.reader(identity.stdout.strip().splitlines()))
+    if identity.returncode or len(rows) != 1 or len(rows[0]) != 2:
+        raise RuntimeError("cannot identify the Windows installation user")
+    sid = rows[0][1]
+    if not re.fullmatch(r"S-1(?:-\d+){2,14}", sid):
+        raise RuntimeError("invalid Windows installation user SID")
+    result = subprocess.run(
+        [str(system / "icacls.exe"), str(path), "/grant:r", f"*{sid}:(OI)(CI)F", "/Q"],
+        capture_output=True,
+        timeout=15,
+    )
+    if result.returncode:
+        raise RuntimeError("cannot grant the installation user access to its private directory")
+
+
 def install(base_url=DEFAULT_BASE, allow_local=False):
     if not (3, 11) <= sys.version_info[:2] < (3, 14):
         raise ValueError("Python 3.11, 3.12 or 3.13 with venv and pip is required")
@@ -258,6 +286,8 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
         raise ValueError(
             "existing executable belongs to another installation; choose CLEF_USE_BIN_DIR"
         )
+    if windows:
+        windows_user_access(root)
     with install_lock(root / "install.lock"):
         raw = fetch(base_url + "/latest/manifest.json", allow_local, 1024 * 1024)
         manifest = parse_manifest(raw, base_url, allow_local)
@@ -293,6 +323,8 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
         staged = Path(tempfile.mkdtemp(prefix=manifest["version"] + "-", dir=versions))
         activated = False
         try:
+            if windows:
+                windows_user_access(staged)
             payload = fetch(artifact["url"], allow_local)
             verify_checksum(payload, artifact["sha256"])
             with tempfile.TemporaryDirectory(prefix="clef-use-payload-") as temporary:

@@ -473,3 +473,38 @@ Hermes official CLI/handler evidence is [here](hermes-process-mcp.json): isolate
 Python3.14 client and Python3.11 runtime, five canonical tools, 2 fixture actions/
 4 decisions, exact upstream source tree checked. It does not prove an LLM agent
 conversation. Original user settings and missing-interpreter wrapper are preserved.
+
+2026-10-04 installation-to-removal acceptance: public HTTPS `irm .../install.ps1 |
+iex` installed0.1.3 in a reserved native Windows root, then version/self-test,
+idempotent update/reinstall, real resident service startup, CLI run/status/observe/
+abort and idle shutdown executed. Fresh-install run returned ERROR before input
+because model preparation was not part of the bootstrap. Managed root/launcher,
+service endpoint/process were removed; existing user PATH/launcher remained equal.
+
+The assembled native0.1.6 command additionally connected five actual stdio MCP
+tools, exercised configured CLI refusal of SSH Session0 (`BLOCKED`,
+`ACCESS_UNAVAILABLE`,0actions), then ran the installed package in interactive
+Session1 with native Windows ROCm/NF4 CLEF and CPU Omni. Owned GUI independently
+read `Continue -> Confirm -> Task complete`:2correctinputs/4jointdecisions,
+127.9586342s task wall excluding preinitialization; diagnostic command187.2827891s.
+Installed backends/model_worker/runtime/service SHA matched clean canonical source.
+This uses the experimental loader/bridge, not released default CLI GPU integration.
+
+Earlier0.1.5 attempts found real `0x80070005` limited-token launch denial: Python
+private directories created by OpenSSH had Administrators ownership/OWNER RIGHTS
+and lacked the account SID.0.1.6 grants only that same user inheritable access to
+its installation root/new stage. The unchanged installed interpreter then started
+from a least-privilege interactive task; no global policy change/elevation request.
+Malformed identity is rejected before ACL mutation. All failed trials and cleanup
+are retained. Clean canonical88tests/6.02s; native changed-boundary7tests/0.34s;
+lint/format passed. No actor draft was included.
+
+Normal idle shutdown and removal completed. Independent final CIM/task/socket
+readback found no owned model/GUI processes, tasks,37945/54174listeners, endpoint,
+installed root or launcher. PATH/previous launcher and model cache retained.
+Evidence: [windows-install-lifecycle.json](windows-install-lifecycle.json); raw
+SSD `validation/windows-lifecycle-20261004/raw/`. Public latest remains0.1.3;
+new0.1.6 public delivery, full platform release matrix and canonical local-GPU
+provisioning remain separate gates. One separate launch probe unnecessarily used
+a process-only ExecutionPolicy flag; no machine/user policy was mutated and all
+lifecycle/installer commands used EncodedCommand without that flag.

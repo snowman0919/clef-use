@@ -73,7 +73,7 @@ the stated boundary, never to native input quality from fixture tests.
 | 12 | deterministic whitelist input, safe object centers, tracked keys/buttons and cleanup retries; real Windows Unicode/click/scroll/foreground/cleanup readback observed; macOS input deferred |
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
 | 15 | configuration-only Codex readback, OMP native client; isolated official Hermes CLI MCP connection and native handler completed 0.1.5 fixture; user launcher interpreter still missing |
-| 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS 0.1.3 install passed; 0.1.5 upload pending |
+| 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS 0.1.3 install-to-removal passed; native assembled 0.1.6 installer/MCP/model-diagnostic/removal passed; new upload pending |
 | 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; Windows diagnostic loader is not integrated in released provisioning; doctor ML prerequisite readiness needs correction |
 | 23-24 | private structured latency/action/terminal logs, benchmark with explicit fixture vs desktop modes; no comparative speed claim |
 | 25-26 | unit regressions and actual packaged installs/stdio/IPC; concrete replacement interfaces for capture/perception/decision/action/verifier |
@@ -83,7 +83,7 @@ the stated boundary, never to native input quality from fixture tests.
 | 31-32 | shared vertical slice and model semantics observed; real Windows native GUI passed with earlier Mac inference and later Windows-local ROCm/CPU inference (2 actions/4 decisions/118.6999s after initialization); public 0.1.3 one-line installation passed; 0.1.5 controlled visual GUI trials passed 10/10 and no-effect stopped after one input; new public upload remains open |
 | 33-34 | architectural choices and measured limits recorded here, ARCHITECTURE.md and evidence/VALIDATION.md; twelve delivery categories linked above |
 | 35 | public main, Issues/Discussions/Actions/security, CI/release machinery, four locale setup trees; command/config parity verified |
-| 36 | first-class PowerShell 5.1/CMD flow, no security policy change, per-user Unicode paths and preservation on three failed update cases observed on ssh win |
+| 36 | PowerShell 5.1/CMD installation-to-removal observed; 0.1.6 fixes OpenSSH OWNER RIGHTS limited-token access; user PATH/launcher/cache preserved; prior Unicode/update failure checks retained |
 
 Blocking deployment: new 0.1.5 public upload route is unavailable. Controlled
 owned-GUI visual trials now passed 10/10, without worker restarts; this does not
@@ -101,3 +101,8 @@ cache/capture/MCP alone must not admit missing model dependencies. Broader draft
 accelerator provisioning and checkpoint integration remain separately uncommitted.
 Future optimization: measured VLM baseline comparison, temporal/incremental
 perception, native input/capture acceleration only after profiling.
+
+Latest native installer lifecycle proof is in evidence/windows-install-lifecycle.json.
+0.1.6 installed package completed a Windows-local model GUI diagnostic and was
+fully removed. Public0.1.3 tested separately; new0.1.6 delivery/CI matrix and
+canonical local GPU provisioning remain open. No full-goal completion claim.

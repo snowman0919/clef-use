@@ -1,0 +1,661 @@
+{
+  "mode": "NATIVE_WINDOWS_INSTALL_COMMAND_RUNTIME_AND_REMOVAL",
+  "source_basis": "ed54b29f56409ba14d9bde18b44fe697575bc1e8 plus owned 0.1.6 installer user-access correction",
+  "public_https_013": {
+    "mode": "NATIVE_WINDOWS_INSTALL_COMMAND_TO_REMOVAL",
+    "steps": [
+      {
+        "name": "install-command",
+        "exit_code": 0,
+        "wall_seconds": 45.579202399996575
+      },
+      {
+        "name": "version",
+        "exit_code": 0,
+        "wall_seconds": 0.27932179998606443
+      },
+      {
+        "name": "self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.296846299956087
+      },
+      {
+        "name": "update",
+        "exit_code": 0,
+        "wall_seconds": 1.4149428000091575
+      },
+      {
+        "name": "reinstall-command",
+        "exit_code": 0,
+        "wall_seconds": 1.9656533999950625
+      },
+      {
+        "name": "service-start",
+        "exit_code": 0,
+        "wall_seconds": 0.6426925999694504
+      },
+      {
+        "name": "run",
+        "exit_code": 2,
+        "wall_seconds": 0.4299588999710977
+      },
+      {
+        "name": "status",
+        "exit_code": 0,
+        "wall_seconds": 0.33278659998904914
+      },
+      {
+        "name": "observe",
+        "exit_code": 0,
+        "wall_seconds": 0.29930590000003576
+      },
+      {
+        "name": "abort",
+        "exit_code": 0,
+        "wall_seconds": 0.29437650000909343
+      },
+      {
+        "name": "service-stop",
+        "exit_code": 0,
+        "wall_seconds": 0.28749159997096285
+      },
+      {
+        "name": "process-check",
+        "exit_code": 0,
+        "wall_seconds": 0.4729911999893375
+      }
+    ],
+    "errors": [],
+    "global_install_existed": false,
+    "installation_root": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\lifecycle-public-013-20261004\\managed-install",
+    "installation_command": "irm 'https://ftp.kotori9.dev/clef-use/install.ps1' | iex",
+    "installed_metadata": {
+      "version": "0.1.3",
+      "sha256": "a05f01cf00f157825029fe0634a214b1c55e4935c1cf7666354f12cd6ed95918",
+      "base_url": "https://ftp.kotori9.dev/clef-use"
+    },
+    "self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "proves": "control flow only; not ML quality or desktop speed",
+      "samples": [
+        {
+          "status": "COMPLETED",
+          "task_success": true,
+          "wall_seconds": 0.014923100010491908,
+          "low_level_actions": 2,
+          "outer_llm_interventions": 0,
+          "parser_ms_mean": 0.0804250012151897,
+          "clef_ms_mean": 0.007399998139590025,
+          "confidence": [
+            0.99,
+            0.99,
+            0.99,
+            0.99
+          ],
+          "no_progress_replan_count": 0
+        }
+      ]
+    },
+    "service_health": {
+      "ok": true,
+      "pid": 24252,
+      "version": "0.1.3",
+      "busy": false
+    },
+    "cli_run": {
+      "session_id": "22afe14685d540a39a72470e6fd4f54a",
+      "status": "ERROR",
+      "steps": 0,
+      "rounds": 0,
+      "last_action": null,
+      "confidence": null,
+      "reason": "RuntimeError: runtime initialization failed; run doctor",
+      "summary": "ERROR after 0 actions, 0 decisions"
+    },
+    "run_context": "SSH Session 0; negative execution boundary, not a GUI success assertion",
+    "cleanup": {
+      "shutdown_exit_code": 0,
+      "endpoint_absent": true,
+      "install_root_absent": true,
+      "launcher_absent": true,
+      "user_path_unchanged": true,
+      "existing_launcher_unchanged": true,
+      "owned_processes_absent": true
+    },
+    "lifecycle_executed": true,
+    "model_success_claim": false
+  },
+  "assembled_loopback_016": {
+    "mode": "NATIVE_WINDOWS_INSTALL_COMMAND_TO_REMOVAL",
+    "steps": [
+      {
+        "name": "install-command",
+        "exit_code": 0,
+        "wall_seconds": 37.43458860000828
+      },
+      {
+        "name": "installed-provenance",
+        "exit_code": 0,
+        "wall_seconds": 0.11137030000099912
+      },
+      {
+        "name": "installed-acl",
+        "exit_code": 0,
+        "wall_seconds": 0.32204430003184825
+      },
+      {
+        "name": "version",
+        "exit_code": 0,
+        "wall_seconds": 0.281147499976214
+      },
+      {
+        "name": "self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.741910699987784
+      },
+      {
+        "name": "update",
+        "exit_code": 0,
+        "wall_seconds": 1.4535238000098616
+      },
+      {
+        "name": "reinstall-command",
+        "exit_code": 0,
+        "wall_seconds": 1.533565699995961
+      },
+      {
+        "name": "service-start",
+        "exit_code": 0,
+        "wall_seconds": 0.6394682000391185
+      },
+      {
+        "name": "mcp-handshake",
+        "exit_code": 0,
+        "wall_seconds": 1.4093298999941908
+      },
+      {
+        "name": "run",
+        "exit_code": 2,
+        "wall_seconds": 0.43811309995362535
+      },
+      {
+        "name": "status",
+        "exit_code": 0,
+        "wall_seconds": 0.29273820004891604
+      },
+      {
+        "name": "observe",
+        "exit_code": 1,
+        "wall_seconds": 0.3130002000252716
+      },
+      {
+        "name": "abort",
+        "exit_code": 0,
+        "wall_seconds": 0.31487870001001284
+      },
+      {
+        "name": "gui-task-start",
+        "exit_code": 0,
+        "wall_seconds": 0.6080177999683656
+      },
+      {
+        "name": "gui-task-state",
+        "exit_code": 0,
+        "wall_seconds": 1.9270851999754086
+      },
+      {
+        "name": "installed-model-gui",
+        "exit_code": 0,
+        "wall_seconds": 187.28278910001973
+      },
+      {
+        "name": "gui-task-remove",
+        "exit_code": 0,
+        "wall_seconds": 4.770705500035547
+      },
+      {
+        "name": "gui-listener-check",
+        "exit_code": 0,
+        "wall_seconds": 0.7930750999948941
+      },
+      {
+        "name": "service-stop",
+        "exit_code": 0,
+        "wall_seconds": 0.3315602000220679
+      },
+      {
+        "name": "process-check",
+        "exit_code": 0,
+        "wall_seconds": 0.5193639000062831
+      }
+    ],
+    "errors": [],
+    "configuration_mode": "Existing task-owned models/environments, no global configuration edits",
+    "global_install_existed": false,
+    "installation_root": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\lifecycle-local-016-20261004\\managed-install",
+    "installation_command": "& ([ScriptBlock]::Create((irm 'http://127.0.0.1:54174/install.ps1'))) --allow-insecure-localhost",
+    "installed_metadata": {
+      "version": "0.1.6",
+      "sha256": "e25be017ac06e7273f6216876a627fc4fea6191c3cd44e6df6d32bd6f2234510",
+      "base_url": "http://127.0.0.1:54174"
+    },
+    "installed_provenance": {
+      "version": "0.1.6",
+      "package": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\lifecycle-local-016-20261004\\managed-install\\versions\\0.1.6-ibx62ni2\\Lib\\site-packages\\clef_use",
+      "source_sha256": {
+        "backends.py": "8a6d1e2787a10df1472dde4c0a6e430282d36066c147d0650fc25e6171ca2d5c",
+        "model_worker.py": "e15de69916704b30eb2488bb756e211778b8705c80a2aa4361cc33fb4655e385",
+        "runtime.py": "024c60a19fb181a927364407b58867c4d709e737e8c777897234bd13ef56637d",
+        "service.py": "cfb3f0d8c567891646c0f09a670b504a27f4a521403b7d6ceb0a8e0cb1387cae"
+      }
+    },
+    "self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "proves": "control flow only; not ML quality or desktop speed",
+      "samples": [
+        {
+          "status": "COMPLETED",
+          "task_success": true,
+          "wall_seconds": 0.4585204999893904,
+          "low_level_actions": 2,
+          "outer_llm_interventions": 0,
+          "parser_ms_mean": 0.11452501348685473,
+          "clef_ms_mean": 0.011049996828660369,
+          "confidence": [
+            0.99,
+            0.99,
+            0.99,
+            0.99
+          ],
+          "no_progress_replan_count": 0
+        }
+      ]
+    },
+    "service_health": {
+      "ok": true,
+      "pid": 31628,
+      "version": "0.1.6",
+      "busy": false
+    },
+    "mcp_tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort"
+    ],
+    "cli_run": {
+      "session_id": "8c35a51ec3e848b79877cd76f98a93bc",
+      "status": "BLOCKED",
+      "steps": 0,
+      "rounds": 0,
+      "last_action": null,
+      "confidence": null,
+      "reason": "interactive desktop access unavailable",
+      "blocker": {
+        "kind": "ACCESS_UNAVAILABLE",
+        "observed": {
+          "interactive_desktop": false
+        },
+        "resume_when": "interactive unlocked desktop"
+      },
+      "summary": "BLOCKED after 0 actions, 0 decisions"
+    },
+    "run_context": "SSH Session 0; negative execution boundary, not a GUI success assertion",
+    "gui_task_state": {
+      "State": "Running",
+      "LastTaskResult": 267009
+    },
+    "gui": {
+      "session_id": "5ebcaf78739a4b41b677a6bee1560b94",
+      "status": "COMPLETED",
+      "steps": 2,
+      "rounds": 4,
+      "last_action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_5d55e4049145"
+      },
+      "confidence": 1.0,
+      "reason": "goal and conditions verified on two fresh observations",
+      "blocker": null,
+      "summary": "COMPLETED after 2 actions, 4 decisions",
+      "mode": "REAL_WINDOWS_GUI_LOCAL_ROCM_DIAGNOSTIC",
+      "native_input": true,
+      "inference_host": "Windows 11",
+      "input_host": "Windows 11",
+      "outer_interventions": 0,
+      "wall_seconds": 127.95863419998204,
+      "metrics": [
+        {
+          "capture_ms": 837.5490999897011,
+          "parser_ms": 10219.865099992603,
+          "decision_ms": 17212.628600012977,
+          "execution_ms": 77.52370001981035,
+          "verification_ms": 62.881499936338514,
+          "state_change_score": 0.000743282498184459,
+          "capture_calls": 13,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.338075,
+          "decision_mode": "ACT",
+          "mode_confidence": 0.9236,
+          "effect_probability": 0.0552,
+          "goal_probability": 0.0289,
+          "condition_probabilities": [
+            0.0055
+          ],
+          "replan_probability": 0.2216,
+          "safety_probability": 0.0136,
+          "wait_frames": 11,
+          "wait_ms": 1141.0000000614673,
+          "pre_input_readiness": "ALREADY_TRUE",
+          "actionability": {
+            "visible": "DETECTED",
+            "stable": "OBSERVED_PIXELS",
+            "enabled": "UNKNOWN",
+            "editable": "UNKNOWN",
+            "occluded": "UNKNOWN"
+          },
+          "action": {
+            "id": "a0",
+            "operation": "click",
+            "target": "obj_967ceabb4393"
+          },
+          "execution_ok": true,
+          "visual_wait_state": "STABLE",
+          "related_change": true,
+          "expected_effect": "content_change",
+          "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+          "timestamp": "2026-10-04T07:04:45.358152+00:00",
+          "session_id": "5ebcaf78739a4b41b677a6bee1560b94",
+          "step": 1,
+          "terminal_event": "RUNNING"
+        },
+        {
+          "capture_ms": 554.1366998804733,
+          "parser_ms": 9562.16749997111,
+          "decision_ms": 34384.95470001362,
+          "execution_ms": 26.58000000519678,
+          "verification_ms": 62.62319994857535,
+          "state_change_score": 0.005317175018155411,
+          "readiness_frame_reused": true,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.386175,
+          "decision_mode": "ACT",
+          "mode_confidence": 0.8462,
+          "effect_probability": 0.052,
+          "goal_probability": 0.0207,
+          "condition_probabilities": [
+            0.0074
+          ],
+          "replan_probability": 0.3459,
+          "safety_probability": 0.0112,
+          "capture_calls": 11,
+          "wait_frames": 10,
+          "wait_ms": 1032.0000000065193,
+          "pre_input_readiness": "ALREADY_TRUE",
+          "actionability": {
+            "visible": "DETECTED",
+            "stable": "OBSERVED_PIXELS",
+            "enabled": "UNKNOWN",
+            "editable": "UNKNOWN",
+            "occluded": "UNKNOWN"
+          },
+          "action": {
+            "id": "a0",
+            "operation": "click",
+            "target": "obj_5d55e4049145"
+          },
+          "execution_ok": true,
+          "visual_wait_state": "STABLE",
+          "related_change": true,
+          "expected_effect": "content_change",
+          "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+          "timestamp": "2026-10-04T07:05:30.448541+00:00",
+          "session_id": "5ebcaf78739a4b41b677a6bee1560b94",
+          "step": 2,
+          "terminal_event": "RUNNING"
+        },
+        {
+          "capture_ms": 195.2991999569349,
+          "parser_ms": 18664.85299996566,
+          "decision_ms": 18299.65619998984,
+          "execution_ms": 0.0,
+          "verification_ms": 4.6934999991208315,
+          "state_change_score": null,
+          "readiness_frame_reused": true,
+          "parser_calls": 1,
+          "perception_cache_hit": false,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.861575,
+          "decision_mode": "COMPLETED",
+          "mode_confidence": 0.91,
+          "effect_probability": 0.4735,
+          "goal_probability": 0.9481,
+          "condition_probabilities": [
+            0.9694
+          ],
+          "replan_probability": 0.0375,
+          "safety_probability": 0.0435,
+          "capture_calls": 3,
+          "wait_frames": 2,
+          "wait_ms": 188.00000002374873,
+          "visual_wait_state": "STABLE",
+          "related_change": false,
+          "timestamp": "2026-10-04T07:06:07.678242+00:00",
+          "session_id": "5ebcaf78739a4b41b677a6bee1560b94",
+          "step": 2,
+          "terminal_event": "RUNNING"
+        },
+        {
+          "capture_ms": 50.58100004680455,
+          "parser_ms": 1.5824000001884997,
+          "decision_ms": 16606.098100019153,
+          "execution_ms": 0.0,
+          "verification_ms": 0.0,
+          "state_change_score": null,
+          "readiness_frame_reused": true,
+          "perception_cache_hit": true,
+          "parser_calls": 0,
+          "clef_calls": 1,
+          "confidence": 1.0,
+          "progress": 0.861575,
+          "decision_mode": "COMPLETED",
+          "mode_confidence": 0.91,
+          "effect_probability": 0.4735,
+          "goal_probability": 0.9481,
+          "condition_probabilities": [
+            0.9694
+          ],
+          "replan_probability": 0.0375,
+          "safety_probability": 0.0435,
+          "capture_calls": 1,
+          "reason": "goal and conditions verified on two fresh observations",
+          "timestamp": "2026-10-04T07:06:24.371042+00:00",
+          "session_id": "5ebcaf78739a4b41b677a6bee1560b94",
+          "step": 2,
+          "terminal_event": "COMPLETED"
+        }
+      ],
+      "device": "cuda",
+      "parser_device": "cpu",
+      "quantization": "NF4; FP16 vision/output/joint head",
+      "independent_gui_readback": {
+        "stage": 2,
+        "clicks": [
+          "Continue",
+          "Confirm"
+        ],
+        "input_attempts": [
+          {
+            "target_label": "Continue ",
+            "visible_label": "Continue",
+            "correct": true
+          },
+          {
+            "target_label": "Confirm ",
+            "visible_label": "Confirm",
+            "correct": true
+          }
+        ],
+        "render_delay_ms": 500,
+        "no_effect": false,
+        "visible_result": "Task complete",
+        "render_pending": false,
+        "desktop": {
+          "session_id": 1,
+          "desktop": "Default",
+          "foreground_window": 2883732
+        },
+        "native_input": true
+      }
+    },
+    "gui_scope": "Installed package runtime with experimental NF4 loader and owned GUI bridge; not canonical CLI service GUI",
+    "cleanup": {
+      "gui_task_absent": true,
+      "gui_token_absent": true,
+      "gui_listener_absent": true,
+      "shutdown_exit_code": 0,
+      "endpoint_absent": true,
+      "install_root_absent": true,
+      "launcher_absent": true,
+      "user_path_unchanged": true,
+      "existing_launcher_unchanged": true,
+      "owned_processes_absent": true
+    },
+    "lifecycle_executed": true,
+    "canonical_cli_gui_success": false,
+    "interactive_launch": "Least-privilege interactive task directly runs unchanged installed Python. Installer grants only its same user directory access; no global security policy changes.",
+    "diagnostic_model_gui_success": true
+  },
+  "earlier_015_failures": [
+    {
+      "evidence": "lifecycle-local-015-20261004",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "reason": "owned interactive GUI endpoint did not become ready"
+        }
+      ],
+      "gui_task_state": null,
+      "cleanup": {
+        "gui_task_absent": true,
+        "gui_token_absent": true,
+        "gui_listener_absent": true,
+        "shutdown_exit_code": 0,
+        "endpoint_absent": true,
+        "install_root_absent": true,
+        "launcher_absent": true,
+        "user_path_unchanged": true,
+        "existing_launcher_unchanged": true,
+        "owned_processes_absent": true
+      }
+    },
+    {
+      "evidence": "lifecycle-local-015-recovery-20261004",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "reason": "owned interactive GUI endpoint did not become ready"
+        }
+      ],
+      "gui_task_state": null,
+      "cleanup": {
+        "gui_task_absent": true,
+        "gui_token_absent": true,
+        "gui_listener_absent": true,
+        "shutdown_exit_code": 0,
+        "endpoint_absent": true,
+        "install_root_absent": true,
+        "launcher_absent": true,
+        "user_path_unchanged": true,
+        "existing_launcher_unchanged": true,
+        "owned_processes_absent": true
+      }
+    },
+    {
+      "evidence": "lifecycle-local-015-final-20261004",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "reason": "owned interactive GUI endpoint did not become ready"
+        }
+      ],
+      "gui_task_state": {
+        "State": "Ready",
+        "LastTaskResult": 2147942405
+      },
+      "cleanup": {
+        "gui_task_absent": true,
+        "gui_token_absent": true,
+        "gui_listener_absent": true,
+        "shutdown_exit_code": 0,
+        "endpoint_absent": true,
+        "install_root_absent": true,
+        "launcher_absent": true,
+        "user_path_unchanged": true,
+        "existing_launcher_unchanged": true,
+        "owned_processes_absent": true
+      }
+    },
+    {
+      "evidence": "lifecycle-local-015-child-launch-20261004",
+      "errors": [
+        {
+          "type": "RuntimeError",
+          "reason": "owned interactive GUI endpoint did not become ready"
+        }
+      ],
+      "gui_task_state": {
+        "State": "Ready",
+        "LastTaskResult": 1
+      },
+      "cleanup": {
+        "gui_task_absent": true,
+        "gui_token_absent": true,
+        "gui_listener_absent": true,
+        "shutdown_exit_code": 0,
+        "endpoint_absent": true,
+        "install_root_absent": true,
+        "launcher_absent": true,
+        "user_path_unchanged": true,
+        "existing_launcher_unchanged": true,
+        "owned_processes_absent": true
+      }
+    }
+  ],
+  "independent_final_cleanup": {
+    "owned_model_gui_processes_absent": true,
+    "owned_tasks_absent": true,
+    "owned_listeners_37945_54174_absent": true,
+    "installer_root_absent": true,
+    "existing_model_cache_retained": true,
+    "previous_isolated_install_retained": true
+  },
+  "validation": {
+    "clean_canonical_tests": "88 passed in 6.02s",
+    "native_windows_changed_boundary_tests": "7 passed in 0.34s",
+    "lint_format": "passed",
+    "installed_core_hashes_match_clean_source": true
+  },
+  "permission_fix": {
+    "trigger": "Python 3.12.10 OpenSSH token owns private directories as Administrators; OWNER RIGHTS does not admit same account limited desktop token",
+    "correction": "Only installation root and new staged version explicitly grant current TokenUser SID inheritable FullControl; keep other ACL entries and global security policy",
+    "reference": "https://github.com/python/cpython/issues/128038"
+  },
+  "limits": [
+    "Public URL currently installs 0.1.3. Local 0.1.6 artifact is one native Windows/Python3.12 target, not public deployment or all-target release proof.",
+    "Actual model GUI uses installed package with experimental NF4 loader and an owned private GUI bridge. It does not establish released default CLI/MCP local GPU provisioning.",
+    "Configured installed CLI refuses SSH Session 0 with BLOCKED/ACCESS_UNAVAILABLE and zero input. GUI requires interactive Session1.",
+    "GUI task wall127.9586342s excludes worker preinitialization; full diagnostic command187.2827891s includes initialization. No comparative speed claim.",
+    "Mac input deferred; larger CLEF/NVIDIA CUDA and arbitrary app tasks not run.",
+    "Separate minimal Python launch probe used a transient process-only ExecutionPolicy Bypass flag unnecessarily; no machine/user execution-policy mutation command was issued. Subsequent probes and all installer/lifecycle commands used EncodedCommand without it."
+  ]
+}

@@ -11,11 +11,14 @@ from pathlib import Path
 def start_worker(worker, script, log_path):
     if worker.process is not None:
         raise RuntimeError("diagnostic loader must start before the first model request")
+    import clef_use
+
     child_env = dict(
         os.environ,
         HF_HOME=str(worker.config.model_dir / "huggingface"),
         HF_HUB_OFFLINE="1",
         TOKENIZERS_PARALLELISM="false",
+        CLEF_USE_DIAGNOSTIC_PACKAGE_ROOT=str(Path(clef_use.__file__).parent),
     )
     with Path(log_path).open("xb") as log:
         worker.process = subprocess.Popen(
@@ -40,9 +43,12 @@ def start_worker(worker, script, log_path):
 
 
 def main():
-    import clef_use
+    package_root = os.environ.get("CLEF_USE_DIAGNOSTIC_PACKAGE_ROOT")
+    if package_root is None:
+        import clef_use
 
-    sys.path.insert(0, str(Path(clef_use.__file__).parent))
+        package_root = str(Path(clef_use.__file__).parent)
+    sys.path.insert(0, package_root)
     import model_worker
 
     class RocmQuantizedWorker(model_worker.ClefWorker):
