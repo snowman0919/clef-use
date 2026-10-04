@@ -660,3 +660,19 @@ NOT_RUN Wayland, arbitrary apps, Mac input and new real-model workflows. Owned
 interactive task/temporary installations removed;24existing drafts byte-preserved.
 Full evidence: [activity-overlay.json](activity-overlay.json), [panel](activity-preview.png),
 [cursor](activity-cursor.png); implementation/scope [ACTIVITY.md](../ACTIVITY.md).
+
+2026-10-05 / 0.1.16 (`966e6ba`): OBSERVED readable CLI/bootstrap model setup
+instructions, actual preparation stages and timed heartbeat. Lifecycle tests
+mock heavyweight install/download/model boundaries and check cached skip,
+configuration preservation on failure and saving after both worker initializations.
+Local168tests passed; native installed-wheel Windows4progress tests passed.
+CI [37224051370](https://github.com/snowman0919/clef-use/actions/runs/37224051370)
+passed168tests each on6jobs; release
+[37224052697](https://github.com/snowman0919/clef-use/actions/runs/37224052697)
+passed15installer targets and dev deployment. Fresh PUBLIC-installed Mac/Linux/
+Windows CLI help, actual invalid-Python preparation failure and quiet JSON error
+checks passed. Public0.1.16/15targets/bootstraps verified. NOT_RUN fresh full ML
+preparation, inference or new quantized backend. 0.1.15 release was canceled before
+deploy after Windows fixture mocked whoami; source fixture fixed in0.1.16.
+Observed monad GPU RTX3080/SM8.6. NVFP4 downloader/loader remains unimplemented;
+load-time4bit is NF4. Evidence [preparation-progress.json](preparation-progress.json).

@@ -725,3 +725,42 @@ backends.py/config.py/service.py were deliberately not overwritten: future actor
 integration MUST merge canonical overlay additions from abffff0 into those drafts.
 No active owned GUI/task/listener; remove local isolation worktree after this
 checkpoint. The broader model/GGUF serving goal retains its prior deferred scope.
+
+2026-10-05 CLI/setup feedback task complete, public0.1.16/source966e6ba.
+Root help now describes every command and gives models prepare -> doctor -> run
+first-use sequence. models help distinguishes weights-only download, full setup
+and load-time bitsandbytes NF4. README, installation index and four localized
+installation guides state runtime installation does not download weights or
+install inference dependencies. Bootstrap default prints this boundary and the
+actual prepare command, retaining JSON/direct install contracts.
+Canonical prepare accepts an optional progress callback and reports9current
+stages, selected backends/cache, common/native/quantizer dependencies, model
+names, cached skips, worker initialization and settings save. Owned heartbeat
+thread emits elapsed status every10s during long stages; stops/joins before
+success/failure output. Progress stderr; successful JSON stdout/error JSON stderr
+contracts retained; models --json hides stage messages. Stage number is not ETA.
+Lifecycle tests mock install/download/worker boundaries; config unchanged after
+probe/model failure and saved only after both workers initialize successfully.
+168tests/10.07s local, targeted26/1.88s after boundary fix; installed wheel native
+Windows4tests/0.32s. 0.1.15/source5a37215 release37223828708 canceled before deploy:
+new test's global subprocess mock also affected Windows whoami. Fixed the test's
+permission boundary and used fresh0.1.16; published version/tag never overwritten.
+CI37224051370 all6jobs passed168tests each; release37224052697 all15installer
+checks/assembly/dev deploy passed. Public0.1.16 manifests/15targets/bootstraps
+matched; GitHubv0.1.16 published. Fresh public installations on Mac/Linux/Windows
+passed real help/model-help/invalid-Python preparation stage/error/--json checks.
+These checks did not download fresh ML dependencies/weights or perform inference.
+Evidence preparation-progress.json. Existing runtime/model formats unchanged.
+NVFP4 question: canonical downloads original pinned Cloudflare snapshots; optional
+4bit uses bitsandbytes NF4 during loading, no NVFP4 artifact/loader selection.
+ssh monad observed RTX3080/SM8.6. Community kurcontko/clef-flash-NVFP4 exists;
+author documents Blackwell plus dedicated vLLM plugin, image/video server requests
+rejected. Do not treat presence of any NVIDIA GPU as this package compatibility.
+No community model code was executed or NVFP4 weights published/downloaded.
+Owned Windows help/public-install scope and home wheel/test/scripts removed;
+Linux temporary public install/script/output removed. Existing Python/models/
+settings retained, no GUI/model worker started. All24actor draft hashes preserved.
+Future actor integration must merge canonical README/docs/INSTALL/cli/provision
+help/progress changes in966e6ba as well as prior activity additions inabffff0;
+working draft bytes were intentionally not overwritten. Remove local isolation
+worktree/public-install after checkpoint. Broader serving goal remains deferred.

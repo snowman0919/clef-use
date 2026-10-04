@@ -1,0 +1,128 @@
+{
+  "version": "0.1.16",
+  "help": "usage: clef-use [-h]\n                {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n                ...\n\nLocal GUI automation through a shared CLI/MCP runtime.\n\npositional arguments:\n  {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n    run                 execute a high-level GUI goal\n    status              show session progress and terminal result\n    abort               cancel the active GUI task\n    observe             inspect the session screen and controls\n    continue            resume a session with new guidance\n    doctor              check model readiness and desktop permissions\n    models              prepare inference dependencies and download or inspect\n                        models\n    mcp                 start the MCP server for an AI agent\n    install-mcp         register clef-use with Codex, Hermes or OMP\n    update              update the runtime while retaining model cache\n    version             show the installed runtime version\n    self-test           offline deterministic runtime smoke check\n    benchmark           measure runtime behavior; --tasks performs real GUI\n                        input\n\noptions:\n  -h, --help            show this help message and exit\n\nFirst use (the installer does not download models):\n  clef-use models prepare   # install inference dependencies and download models\n  clef-use doctor           # check models and desktop permissions\n  clef-use run \"your GUI goal\"\n\nModel preparation requires Python 3.11/3.12, Git and sufficient disk space.\nSee: https://github.com/snowman0919/clef-use/blob/main/docs/INSTALL.md\n",
+  "models_help": "usage: clef-use models [-h] [--json] [--python PYTHON] [--rocm-arch ROCM_ARCH]\n                       [--profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}]\n                       [--quantization {none,4bit}]\n                       [{list,download,prepare,profiles}]\n\nModels are not downloaded by the installer. Run 'clef-use models prepare'\nbefore your first GUI task; it installs inference dependencies, downloads\nmissing models and saves configuration after initialization succeeds.\n\npositional arguments:\n  {list,download,prepare,profiles}\n                        list: cached models; download: weights only; prepare:\n                        full setup; profiles: OS/backend choices\n\noptions:\n  -h, --help            show this help message and exit\n  --json                suppress setup progress; emit JSON result\n  --python PYTHON\n  --rocm-arch ROCM_ARCH\n                        Windows ROCm ISA, e.g. gfx1150; autodetected when\n                        available\n  --profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}\n  --quantization {none,4bit}\n                        none: original weights; 4bit: bitsandbytes NF4 during\n                        loading\n",
+  "prepare_failure": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "[1/9] Selecting profiles, Python and existing source\n[1/9] Failed or interrupted: Selecting profiles, Python and existing source\n{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+  },
+  "json_failure": {
+    "returncode": 1,
+    "stdout": "",
+    "stderr": "{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+  },
+  "tests": "168 passed in10.07s before Windows boundary fixture fix; related26 passed in1.88s after fix; installed wheel native Windows4 passed in0.32s",
+  "scope": "Real CLI help/failure formatting and threaded heartbeat; preparation lifecycle uses mocks for heavy external ML/install/download boundaries. No fresh full model preparation or inference performed.",
+  "nvfp4": {
+    "canonical_downloader": "Pinned original Cloudflare snapshots, no NVFP4 artifact selection",
+    "canonical_quantization": "none by default; optional bitsandbytes NF4 during loading",
+    "observed_monad_gpu": "NVIDIA GeForce RTX 3080, compute capability8.6",
+    "reference": "https://huggingface.co/kurcontko/clef-flash-NVFP4",
+    "author_documented_constraints": "Blackwell GPU, pinned vLLM plugin, provided server rejects images/videos"
+  },
+  "cancelled_version": "0.1.15 release37223828708 canceled before deploy after Windows test mock also affected whoami; public remained0.1.14",
+  "source_commit": "966e6ba804386abbacf4630466abf0b52beb3389",
+  "ci": {
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/37224051370",
+    "status": "PASSED",
+    "jobs": 6,
+    "tests_per_job": 168
+  },
+  "release": {
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/37224052697",
+    "status": "PASSED",
+    "installer_targets": 15,
+    "dev_deployment": "PASSED",
+    "public_latest": "0.1.16",
+    "immutable_latest_manifests_and_bootstraps_match": true
+  },
+  "public_installed_checks": {
+    "macos": {
+      "help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use [-h]\n                {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n                ...\n\nLocal GUI automation through a shared CLI/MCP runtime.\n\npositional arguments:\n  {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n    run                 execute a high-level GUI goal\n    status              show session progress and terminal result\n    abort               cancel the active GUI task\n    observe             inspect the session screen and controls\n    continue            resume a session with new guidance\n    doctor              check model readiness and desktop permissions\n    models              prepare inference dependencies and download or inspect\n                        models\n    mcp                 start the MCP server for an AI agent\n    install-mcp         register clef-use with Codex, Hermes or OMP\n    update              update the runtime while retaining model cache\n    version             show the installed runtime version\n    self-test           offline deterministic runtime smoke check\n    benchmark           measure runtime behavior; --tasks performs real GUI\n                        input\n\noptions:\n  -h, --help            show this help message and exit\n\nFirst use (the installer does not download models):\n  clef-use models prepare   # install inference dependencies and download models\n  clef-use doctor           # check models and desktop permissions\n  clef-use run \"your GUI goal\"\n\nModel preparation requires Python 3.11/3.12, Git and sufficient disk space.\nSee: https://github.com/snowman0919/clef-use/blob/main/docs/INSTALL.md\n",
+        "stderr": ""
+      },
+      "models_help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use models [-h] [--json] [--python PYTHON] [--rocm-arch ROCM_ARCH]\n                       [--profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}]\n                       [--quantization {none,4bit}]\n                       [{list,download,prepare,profiles}]\n\nModels are not downloaded by the installer. Run 'clef-use models prepare'\nbefore your first GUI task; it installs inference dependencies, downloads\nmissing models and saves configuration after initialization succeeds.\n\npositional arguments:\n  {list,download,prepare,profiles}\n                        list: cached models; download: weights only; prepare:\n                        full setup; profiles: OS/backend choices\n\noptions:\n  -h, --help            show this help message and exit\n  --json                suppress setup progress; emit JSON result\n  --python PYTHON\n  --rocm-arch ROCM_ARCH\n                        Windows ROCm ISA, e.g. gfx1150; autodetected when\n                        available\n  --profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}\n  --quantization {none,4bit}\n                        none: original weights; 4bit: bitsandbytes NF4 during\n                        loading\n",
+        "stderr": ""
+      },
+      "prepare_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "[1/9] Selecting profiles, Python and existing source\n[1/9] Failed or interrupted: Selecting profiles, Python and existing source\n{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "json_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "status": "PASSED",
+      "version": "0.1.16",
+      "platform": "darwin",
+      "scope": "Installed public CLI help and real invalid-Python failure; no model download or inference",
+      "executable": "/tmp/clef-use-help-public/current/bin/python"
+    },
+    "linux": {
+      "help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use [-h]\n                {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n                ...\n\nLocal GUI automation through a shared CLI/MCP runtime.\n\npositional arguments:\n  {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n    run                 execute a high-level GUI goal\n    status              show session progress and terminal result\n    abort               cancel the active GUI task\n    observe             inspect the session screen and controls\n    continue            resume a session with new guidance\n    doctor              check model readiness and desktop permissions\n    models              prepare inference dependencies and download or inspect\n                        models\n    mcp                 start the MCP server for an AI agent\n    install-mcp         register clef-use with Codex, Hermes or OMP\n    update              update the runtime while retaining model cache\n    version             show the installed runtime version\n    self-test           offline deterministic runtime smoke check\n    benchmark           measure runtime behavior; --tasks performs real GUI\n                        input\n\noptions:\n  -h, --help            show this help message and exit\n\nFirst use (the installer does not download models):\n  clef-use models prepare   # install inference dependencies and download models\n  clef-use doctor           # check models and desktop permissions\n  clef-use run \"your GUI goal\"\n\nModel preparation requires Python 3.11/3.12, Git and sufficient disk space.\nSee: https://github.com/snowman0919/clef-use/blob/main/docs/INSTALL.md\n",
+        "stderr": ""
+      },
+      "models_help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use models [-h] [--json] [--python PYTHON] [--rocm-arch ROCM_ARCH]\n                       [--profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}]\n                       [--quantization {none,4bit}]\n                       [{list,download,prepare,profiles}]\n\nModels are not downloaded by the installer. Run 'clef-use models prepare'\nbefore your first GUI task; it installs inference dependencies, downloads\nmissing models and saves configuration after initialization succeeds.\n\npositional arguments:\n  {list,download,prepare,profiles}\n                        list: cached models; download: weights only; prepare:\n                        full setup; profiles: OS/backend choices\n\noptions:\n  -h, --help            show this help message and exit\n  --json                suppress setup progress; emit JSON result\n  --python PYTHON\n  --rocm-arch ROCM_ARCH\n                        Windows ROCm ISA, e.g. gfx1150; autodetected when\n                        available\n  --profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}\n  --quantization {none,4bit}\n                        none: original weights; 4bit: bitsandbytes NF4 during\n                        loading\n",
+        "stderr": ""
+      },
+      "prepare_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "[1/9] Selecting profiles, Python and existing source\n[1/9] Failed or interrupted: Selecting profiles, Python and existing source\n{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "json_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "status": "PASSED",
+      "version": "0.1.16",
+      "platform": "linux",
+      "scope": "Installed public CLI help and real invalid-Python failure; no model download or inference",
+      "executable": "/tmp/clef-use-help-public/current/bin/python"
+    },
+    "windows": {
+      "help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use [-h]\n                {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n                ...\n\nLocal GUI automation through a shared CLI/MCP runtime.\n\npositional arguments:\n  {run,status,abort,observe,continue,doctor,models,mcp,install-mcp,update,version,self-test,benchmark}\n    run                 execute a high-level GUI goal\n    status              show session progress and terminal result\n    abort               cancel the active GUI task\n    observe             inspect the session screen and controls\n    continue            resume a session with new guidance\n    doctor              check model readiness and desktop permissions\n    models              prepare inference dependencies and download or inspect\n                        models\n    mcp                 start the MCP server for an AI agent\n    install-mcp         register clef-use with Codex, Hermes or OMP\n    update              update the runtime while retaining model cache\n    version             show the installed runtime version\n    self-test           offline deterministic runtime smoke check\n    benchmark           measure runtime behavior; --tasks performs real GUI\n                        input\n\noptions:\n  -h, --help            show this help message and exit\n\nFirst use (the installer does not download models):\n  clef-use models prepare   # install inference dependencies and download models\n  clef-use doctor           # check models and desktop permissions\n  clef-use run \"your GUI goal\"\n\nModel preparation requires Python 3.11/3.12, Git and sufficient disk space.\nSee: https://github.com/snowman0919/clef-use/blob/main/docs/INSTALL.md\n",
+        "stderr": ""
+      },
+      "models_help": {
+        "returncode": 0,
+        "stdout": "usage: clef-use models [-h] [--json] [--python PYTHON] [--rocm-arch ROCM_ARCH]\n                       [--profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}]\n                       [--quantization {none,4bit}]\n                       [{list,download,prepare,profiles}]\n\nModels are not downloaded by the installer. Run 'clef-use models prepare'\nbefore your first GUI task; it installs inference dependencies, downloads\nmissing models and saves configuration after initialization succeeds.\n\npositional arguments:\n  {list,download,prepare,profiles}\n                        list: cached models; download: weights only; prepare:\n                        full setup; profiles: OS/backend choices\n\noptions:\n  -h, --help            show this help message and exit\n  --json                suppress setup progress; emit JSON result\n  --python PYTHON\n  --rocm-arch ROCM_ARCH\n                        Windows ROCm ISA, e.g. gfx1150; autodetected when\n                        available\n  --profile {auto,default,macos-mps,macos-cpu,linux-cuda,linux-rocm,linux-xpu,linux-cpu,windows-cuda,windows-rocm,windows-xpu,windows-cpu}\n  --quantization {none,4bit}\n                        none: original weights; 4bit: bitsandbytes NF4 during\n                        loading\n",
+        "stderr": ""
+      },
+      "prepare_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "[1/9] Selecting profiles, Python and existing source\n[1/9] Failed or interrupted: Selecting profiles, Python and existing source\n{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "json_failure": {
+        "returncode": 1,
+        "stdout": "",
+        "stderr": "{\"status\": \"ERROR\", \"type\": \"RuntimeError\", \"reason\": \"Install Python 3.12 for Windows ROCm or 3.11/3.12 for default ML; pass --python /path/to/python\"}\n"
+      },
+      "status": "PASSED",
+      "version": "0.1.16",
+      "platform": "win32",
+      "scope": "Installed public CLI help and real invalid-Python failure; no model download or inference",
+      "executable": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-help-check-20261005\\public-install\\versions\\0.1.16-180t_m9e\\Scripts\\python.exe"
+    }
+  },
+  "public_installer_outputs": {
+    "macos": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.16 (Python 3.11)\n  Downloading the installation package...\n  Verifying the download...\n  Creating an isolated Python environment...\n  Installing the runtime and dependencies...\n  Checking that clef-use runs correctly...\n  Activating the installation...\n\nInstallation complete.\n  Version: 0.1.16\n  Command: /tmp/clef-use-help-public/bin/clef-use\n\nTo use clef-use by name in this shell:\n  export PATH=/tmp/clef-use-help-public/bin:\"$PATH\"\n\nThis script installs the runtime only. It does not download model weights or install inference dependencies.\nBefore your first GUI task, prepare the models (Python 3.11/3.12 and Git required).\nChoose a model cache path with sufficient free space before preparation.\n\nFirst-use setup:\n  /tmp/clef-use-help-public/bin/clef-use models prepare\n  /tmp/clef-use-help-public/bin/clef-use doctor\n\nModel setup options:\n  /tmp/clef-use-help-public/bin/clef-use models prepare --help\n",
+    "linux": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.16 (Python 3.11)\n  Downloading the installation package...\n  Verifying the download...\n  Creating an isolated Python environment...\n  Installing the runtime and dependencies...\n  Checking that clef-use runs correctly...\n  Activating the installation...\n\nInstallation complete.\n  Version: 0.1.16\n  Command: /tmp/clef-use-help-public/bin/clef-use\n\nTo use clef-use by name in this shell:\n  export PATH=/tmp/clef-use-help-public/bin:\"$PATH\"\n\nThis script installs the runtime only. It does not download model weights or install inference dependencies.\nBefore your first GUI task, prepare the models (Python 3.11/3.12 and Git required).\nChoose a model cache path with sufficient free space before preparation.\n\nFirst-use setup:\n  /tmp/clef-use-help-public/bin/clef-use models prepare\n  /tmp/clef-use-help-public/bin/clef-use doctor\n\nModel setup options:\n  /tmp/clef-use-help-public/bin/clef-use models prepare --help\n"
+  },
+  "cleanup": "Owned Windows/Linux diagnostic and public-install scopes removed; existing environments/models/config preserved. No owned task or model worker started."
+}

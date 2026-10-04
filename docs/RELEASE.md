@@ -186,3 +186,13 @@ The native activity overlay is described in [ACTIVITY.md](ACTIVITY.md).
 Fresh public installations passed macOS display/capture, Windows actual owned
 widget click-through, and Linux X11/Xvfb capture. No new inference or Wayland
 acceptance claim. Immutable earlier releases remain available.
+
+0.1.16 is published: source `966e6ba`,
+[CI](https://github.com/snowman0919/clef-use/actions/runs/37224051370) passed168tests
+on all6jobs and [release/deployment](https://github.com/snowman0919/clef-use/actions/runs/37224052697)
+passed all15installer targets. Help/docs/bootstrap now explain separate model
+preparation; prepare reports stages and elapsed heartbeat without changing model
+artifacts/loader. Fresh public installed CLI checks passed Mac/Linux/Windows.
+0.1.15 release canceled before deploy for a Windows test fixture failure; its tag
+is retained. Immutable earlier versions are untouched. Evidence
+[preparation-progress.json](evidence/preparation-progress.json).
