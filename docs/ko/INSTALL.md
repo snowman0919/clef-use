@@ -1,5 +1,7 @@
 # 설치
 
+**설치 스크립트는 CLI/MCP 런타임만 설치합니다. 모델 가중치 다운로드와 추론 의존성 설치는 수행하지 않습니다.** 최초 GUI 작업 전 모델 캐시 경로를 정한 뒤 `clef-use models prepare`, `clef-use doctor` 순서로 실행하세요. `models download`는 가중치만 다운로드하므로 모델 준비를 대신하지 않습니다.
+
 venv/pip를 포함한 Python 3.11-3.13을 설치하세요. 모델 준비에는 Python 3.11과 Git이 필요합니다. root나 관리자 권한은 필요하지 않습니다. 다운로드 URL을 사용하기 전에 공개 호스팅 검증 결과를 확인하세요.
 
 ```sh
@@ -23,8 +25,8 @@ confidence_threshold = 0.55
 models prepare는 버전을 고정한 ML 환경 두 개를 만들고 공식 snapshot을 다운로드합니다. 업데이트는 캐시를 보존합니다. Python 3.11 명령이 없으면 --python에 실행 파일의 절대 경로를 지정하세요.
 
 ```sh
-clef-use doctor
 clef-use models prepare --python python3.11
+clef-use doctor
 clef-use install-mcp codex
 clef-use install-mcp hermes
 clef-use install-mcp omp
@@ -43,3 +45,7 @@ doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오�
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
 0.1.10은 OS/백엔드 기준으로 프로파일을 구성합니다. macOS는 MPS/CPU, Linux와 Windows는 CUDA/ROCm/XPU/CPU가 지원 대상입니다. `models profiles`로 목록을 확인하고 `models prepare --profile linux-cuda`처럼 선택합니다. 지원하지 않는 조합은 거부하며, 전체 모델 초기화가 성공한 후에 설정을 저장합니다. [배포 계약과 검증 범위](../ARCHITECTURE.md#osbackend-deployment-profiles-0110)를 참고하세요. Windows ROCm은 ISA 자동 감지 또는 GPU에 맞는 `--rocm-arch` 설정이 필요합니다.
+
+`models prepare`는 9개 준비 단계, 선택한 백엔드와 캐시 경로, 설치 중인 의존성이나 모델, 캐시 재사용 여부와 경과 시간을 표시합니다. 오래 걸리는 단계는 10초마다 상태를 출력하며, 모델 로딩 중에도 표시됩니다. 단계 수는 전체 소요 시간의 백분율이 아닙니다. 다운로드 전송 진행률은 Hugging Face의 진행 표시가 활성화된 경우 함께 표시됩니다. 단계 안내는 stderr, 최종 JSON 결과는 stdout으로 출력합니다. `models prepare --json`으로 단계 안내를 끌 수 있습니다. 실패하거나 중단된 단계를 알리고, 두 모델의 초기화가 모두 성공한 후에만 설정을 저장합니다.
+
+현재 다운로더는 모든 백엔드에서 원본 Cloudflare snapshot을 받습니다. `--quantization 4bit`는 로딩 시 bitsandbytes NF4를 적용하며, 사전 양자화된 NVFP4 저장소를 선택하지 않습니다. GPU 감지는 추론 환경 프로파일 선택에만 사용됩니다. 현재 로더에는 NVFP4 지원이 없습니다. [커뮤니티 CLEF-Flash NVFP4](https://huggingface.co/kurcontko/clef-flash-NVFP4)는 제작자 안내상 Blackwell GPU와 전용 vLLM 플러그인을 요구하고, 제공 서버는 이미지와 영상 입력을 거부합니다.

@@ -15,6 +15,7 @@ from .config import config_path
 from .deployment_profiles import resolve_profile, resolve_rocm_arch
 from .harness import atomic_write
 from .models import OMNI_SOURCE_REVISION, download, inventory
+from .preparation_progress import PreparationProgress
 
 
 def select_profile(config, requested):
@@ -96,31 +97,42 @@ def common_ml_requirements(text):
     return "".join(lines)
 
 
-def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=None):
-    profile = select_profile(config, profile)
-    selected = resolve_profile(profile)
-    parser_selected = resolve_profile(
-        "auto", "cpu" if config.parser_device == "auto" else config.parser_device
-    )
-    executable = select_python(
-        python, "windows-rocm" if parser_selected.name == "windows-rocm" else profile
-    )
-    rocm_arch = (
-        resolve_rocm_arch(config, rocm_arch)
-        if "windows-rocm" in {profile, parser_selected.name}
-        else None
-    )
-    quantization = quantization or ("4bit" if profile == "windows-rocm" else config.quantization)
-    if quantization == "4bit" and selected.backend == "mps":
-        raise ValueError("MPS profile currently supports quantization none; MLX remains separate")
-    source = config.omni_source or config.model_dir.parent / "upstream/OmniParser"
-    if source.exists():
-        from .doctor import omni_source_probe
+def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=None, progress=None):
+    report = PreparationProgress(progress)
+    with report.stage("Selecting profiles, Python and existing source"):
+        profile = select_profile(config, profile)
+        selected = resolve_profile(profile)
+        parser_selected = resolve_profile(
+            "auto", "cpu" if config.parser_device == "auto" else config.parser_device
+        )
+        executable = select_python(
+            python, "windows-rocm" if parser_selected.name == "windows-rocm" else profile
+        )
+        rocm_arch = (
+            resolve_rocm_arch(config, rocm_arch)
+            if "windows-rocm" in {profile, parser_selected.name}
+            else None
+        )
+        quantization = quantization or (
+            "4bit" if profile == "windows-rocm" else config.quantization
+        )
+        if quantization == "4bit" and selected.backend == "mps":
+            raise ValueError(
+                "MPS profile currently supports quantization none; MLX remains separate"
+            )
+        source = config.omni_source or config.model_dir.parent / "upstream/OmniParser"
+        if source.exists():
+            from .doctor import omni_source_probe
 
-        if not omni_source_probe(source)["ready"]:
-            raise ValueError("existing OmniParser checkout is modified or has the wrong revision")
+            if not omni_source_probe(source)["ready"]:
+                raise ValueError(
+                    "existing OmniParser checkout is modified or has the wrong revision"
+                )
     parent = config.model_dir.parent
     parent.mkdir(parents=True, exist_ok=True)
+    report.message(
+        f"CLEF: {profile}; OmniParser: {parser_selected.name}; model cache: {config.model_dir}"
+    )
     from .installer import environment_binary
 
     try:
@@ -135,70 +147,90 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
     }
     child_env = dict(os.environ, PIP_CACHE_DIR=str(parent / "pip-cache"))
     for kind, path in paths.items():
-        environment = path.parent.parent
-        if environment.exists() and not (environment / "pyvenv.cfg").exists():
-            raise ValueError("refusing to modify a directory that is not a venv")
-        if not environment.exists():
-            subprocess.run([executable, "-m", "venv", str(environment)], check=True)
-        pip_check = subprocess.run([str(path), "-m", "pip", "--version"], capture_output=True)
-        if pip_check.returncode:
-            subprocess.run([str(path), "-m", "ensurepip"], check=True, capture_output=True)
-        assets = Path(__file__).parent / "assets"
-        lock = assets / f"ml-{kind}.txt"
-        from .native_dependencies import install_native
+        with report.stage(f"Preparing {kind} inference environment"):
+            environment = path.parent.parent
+            if environment.exists() and not (environment / "pyvenv.cfg").exists():
+                raise ValueError("refusing to modify a directory that is not a venv")
+            report.message(f"Creating/checking {kind} Python environment")
+            if not environment.exists():
+                subprocess.run([executable, "-m", "venv", str(environment)], check=True)
+            pip_check = subprocess.run([str(path), "-m", "pip", "--version"], capture_output=True)
+            if pip_check.returncode:
+                subprocess.run([str(path), "-m", "ensurepip"], check=True, capture_output=True)
+            assets = Path(__file__).parent / "assets"
+            lock = assets / f"ml-{kind}.txt"
+            from .native_dependencies import install_native
 
-        with tempfile.TemporaryDirectory(dir=environment) as temporary:
-            common = Path(temporary) / lock.name
-            common.write_text(common_ml_requirements(lock.read_text()))
-            install_lock(path, common, child_env, no_deps=True)
-            install_native(
-                path,
-                selected if kind == "clef" else parser_selected,
-                child_env,
-                lock,
-                rocm_arch=rocm_arch,
-            )
-        if kind == "clef" and quantization == "4bit":
-            install_native(path, selected, child_env, lock, quantizer_only=True)
+            with tempfile.TemporaryDirectory(dir=environment) as temporary:
+                common = Path(temporary) / lock.name
+                common.write_text(common_ml_requirements(lock.read_text()))
+                report.message(f"Installing pinned {kind} common dependencies")
+                install_lock(path, common, child_env, no_deps=True)
+                report.message(
+                    f"Installing {kind} native backend: "
+                    f"{(selected if kind == 'clef' else parser_selected).name}"
+                )
+                install_native(
+                    path,
+                    selected if kind == "clef" else parser_selected,
+                    child_env,
+                    lock,
+                    rocm_arch=rocm_arch,
+                )
+            if kind == "clef" and quantization == "4bit":
+                report.message("Installing 4-bit quantization dependencies")
+                install_native(path, selected, child_env, lock, quantizer_only=True)
     from .doctor import ml_environment_probe
 
-    for kind, path in paths.items():
-        backend = selected.backend if kind == "clef" else parser_selected.backend
-        precision = quantization if kind == "clef" else "none"
-        if not ml_environment_probe(path, kind, backend, precision, rocm_arch)["ready"]:
-            raise RuntimeError(f"{kind} backend/dependency probe failed before model download")
-    if not source.exists():
-        source.parent.mkdir(parents=True, exist_ok=True)
-        subprocess.run(
-            [
-                "git",
-                "clone",
-                "--filter=blob:none",
-                "--sparse",
-                "https://github.com/microsoft/OmniParser.git",
-                str(source),
-            ],
+    with report.stage("Checking installed inference dependencies"):
+        for kind, path in paths.items():
+            backend = selected.backend if kind == "clef" else parser_selected.backend
+            precision = quantization if kind == "clef" else "none"
+            if not ml_environment_probe(path, kind, backend, precision, rocm_arch)["ready"]:
+                raise RuntimeError(f"{kind} backend/dependency probe failed before model download")
+    with report.stage("Preparing pinned OmniParser source"):
+        if not source.exists():
+            source.parent.mkdir(parents=True, exist_ok=True)
+            subprocess.run(
+                [
+                    "git",
+                    "clone",
+                    "--filter=blob:none",
+                    "--sparse",
+                    "https://github.com/microsoft/OmniParser.git",
+                    str(source),
+                ],
+                check=True,
+                capture_output=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(source), "checkout", "--detach", OMNI_SOURCE_REVISION],
+                check=True,
+                capture_output=True,
+            )
+            subprocess.run(
+                ["git", "-C", str(source), "sparse-checkout", "set", "util"],
+                check=True,
+                capture_output=True,
+            )
+        observed = subprocess.run(
+            ["git", "-C", str(source), "rev-parse", "HEAD"],
             check=True,
             capture_output=True,
-        )
-        subprocess.run(
-            ["git", "-C", str(source), "checkout", "--detach", OMNI_SOURCE_REVISION],
-            check=True,
-            capture_output=True,
-        )
-        subprocess.run(
-            ["git", "-C", str(source), "sparse-checkout", "set", "util"],
-            check=True,
-            capture_output=True,
-        )
-    observed = subprocess.run(
-        ["git", "-C", str(source), "rev-parse", "HEAD"], check=True, capture_output=True, text=True
-    ).stdout.strip()
-    if observed != OMNI_SOURCE_REVISION:
-        raise ValueError("existing OmniParser checkout differs from the required revision")
-    for model in inventory(config.model_dir, config.decision_model):
-        if not model["available"]:
-            download(config.model_dir, model["model"])
+            text=True,
+        ).stdout.strip()
+        if observed != OMNI_SOURCE_REVISION:
+            raise ValueError("existing OmniParser checkout differs from the required revision")
+    with report.stage("Downloading required model snapshots"):
+        models = inventory(config.model_dir, config.decision_model)
+        for number, model in enumerate(models, 1):
+            if model["available"]:
+                report.message(
+                    f"Model {number}/{len(models)}: {model['model']} already cached; skipping"
+                )
+            else:
+                report.message(f"Model {number}/{len(models)}: downloading {model['model']}")
+                download(config.model_dir, model["model"])
     updated = config.model_copy(
         update={
             "clef_python": paths["clef"],
@@ -213,33 +245,37 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
     )
     initialized = {}
     for kind in ("clef", "omni"):
-        worker = JsonWorker(paths[kind], kind, updated.model_copy(update={"backend_timeout": 600}))
-        try:
-            initialized[kind] = worker._start()
-        finally:
-            worker.close()
-    path = config_path()
-    data = tomlkit.parse(path.read_text() if path.exists() else "")
-    for field in (
-        "model_dir",
-        "clef_python",
-        "omni_python",
-        "omni_source",
-        "ml_profile",
-        "quantization",
-        "device",
-        "parser_device",
-    ):
-        data[field] = str(getattr(updated, field))
-    if rocm_arch:
-        data["rocm_arch"] = rocm_arch
-    else:
-        data.pop("rocm_arch", None)
-    atomic_write(path, tomlkit.dumps(data))
-    if sys.platform == "win32":
-        from .installer import windows_user_access
+        with report.stage(f"Loading {kind} model and verifying worker initialization"):
+            worker = JsonWorker(
+                paths[kind], kind, updated.model_copy(update={"backend_timeout": 600})
+            )
+            try:
+                initialized[kind] = worker._start()
+            finally:
+                worker.close()
+    with report.stage("Saving verified model configuration"):
+        path = config_path()
+        data = tomlkit.parse(path.read_text() if path.exists() else "")
+        for field in (
+            "model_dir",
+            "clef_python",
+            "omni_python",
+            "omni_source",
+            "ml_profile",
+            "quantization",
+            "device",
+            "parser_device",
+        ):
+            data[field] = str(getattr(updated, field))
+        if rocm_arch:
+            data["rocm_arch"] = rocm_arch
+        else:
+            data.pop("rocm_arch", None)
+        atomic_write(path, tomlkit.dumps(data))
+        if sys.platform == "win32":
+            from .installer import windows_user_access
 
-        windows_user_access(path)
+            windows_user_access(path)
     return {
         "status": "PREPARED",
         "models": inventory(config.model_dir, config.decision_model),

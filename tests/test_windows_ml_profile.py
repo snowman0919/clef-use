@@ -91,7 +91,9 @@ def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatc
             stdout=provision.OMNI_SOURCE_REVISION,
         ),
     )
-    monkeypatch.setattr(provision, "inventory", lambda *_: [{"available": True}])
+    monkeypatch.setattr(
+        provision, "inventory", lambda *_: [{"model": "Cloudflare/clef-flash", "available": True}]
+    )
     monkeypatch.setattr(provision, "download", lambda *_: pytest.fail("cached model downloaded"))
     closed = []
 
@@ -106,8 +108,14 @@ def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatc
             closed.append(self.kind)
 
     monkeypatch.setattr(provision, "JsonWorker", Worker)
+    progress = []
     with pytest.raises(RuntimeError, match="probe failed|model load failed"):
-        provision.prepare(config)
+        provision.prepare(config, progress=progress.append)
+    assert any("Failed or interrupted:" in message for message in progress)
+    assert not any("Saving verified model configuration" in message for message in progress)
+    if failure == "model":
+        assert any("already cached; skipping" in message for message in progress)
+        assert any("Loading clef model" in message for message in progress)
     assert closed == (["clef"] if failure == "model" else [])
     assert config_path.read_text() == "# preserve my config\n"
 

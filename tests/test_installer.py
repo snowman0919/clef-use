@@ -168,6 +168,9 @@ def test_bootstrap_explains_result_and_next_steps(status, heading, tmp_path, mon
     assert "Version: 0.1.12" in output.out
     assert "clef-use doctor" in output.out
     assert "clef-use models prepare --help" in output.out
+    assert "runtime only" in output.out
+    assert "does not download model weights" in output.out
+    assert "clef-use models prepare\n" in output.out
     assert "export PATH=" not in output.out
     assert '"status"' not in output.out
 

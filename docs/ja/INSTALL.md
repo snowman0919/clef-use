@@ -1,5 +1,7 @@
 # インストール
 
+**インストールスクリプトは CLI/MCP ランタイムのみをインストールします。モデルの重みや推論依存関係は含まれません。** 最初の GUI 操作前にモデルキャッシュを設定し、`clef-use models prepare`、`clef-use doctor` の順で実行してください。`models download` は重みのダウンロードのみです。
+
 venv/pip を含む Python 3.11-3.13 をインストールしてください。モデル準備には Python 3.11 と Git が必要です。root や管理者権限は不要です。ダウンロード URL を使う前に公開配備の検証結果を確認してください。
 
 ```sh
@@ -23,8 +25,8 @@ confidence_threshold = 0.55
 models prepare はバージョン固定の独立 ML 環境を二つ作り、公式 snapshot を取得します。更新時もキャッシュを維持します。Python 3.11 が見つからない場合は --python に実行ファイルの絶対パスを指定してください。
 
 ```sh
-clef-use doctor
 clef-use models prepare --python python3.11
+clef-use doctor
 clef-use install-mcp codex
 clef-use install-mcp hermes
 clef-use install-mcp omp
@@ -43,3 +45,5 @@ doctor が失敗したら、権限、snapshot 不足、ML 依存関係、MCP 起
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
 0.1.8の `models prepare` はWindows Radeon 890M (gfx1150)で固定ROCm/NF4構成を自動選択します。Python 3.12とCPU OmniParserを使用し、両方のモデルを初期化してから設定を保存します。明示的な変更は `--profile default` または `--quantization none` を指定してください。検証対象は一つの一時GUIタスクで、公開配布は別途確認します。
+
+`models prepare` は9段階の準備状況、バックエンドとキャッシュ、現在の依存関係やモデル、キャッシュの再利用、経過時間を表示します。長い処理中は10秒ごとに状態を表示します。段階数は全体の所要時間の割合ではありません。`models prepare --json` で段階表示を抑制できます。設定は両方のモデルの初期化が成功した後に保存されます。

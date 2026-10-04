@@ -461,7 +461,17 @@ def main():
                         "\nTo use clef-use by name in this shell:\n"
                         f'  export PATH={shlex.quote(bindir)}:"$PATH"'
                     )
-            print(f"\nNext steps:\n  {command} doctor\n  {command} models prepare --help")
+            print(
+                "\nThis script installs the runtime only. It does not download model weights "
+                "or install inference dependencies.\n"
+                "Before your first GUI task, prepare the models "
+                "(Python 3.11/3.12 and Git required).\n"
+                "Choose a model cache path with sufficient free space before preparation."
+            )
+            print(
+                f"\nFirst-use setup:\n  {command} models prepare\n  {command} doctor\n"
+                f"\nModel setup options:\n  {command} models prepare --help"
+            )
     except Exception as exc:
         if args.json:
             print(f"clef-use: {type(exc).__name__}: {exc}", file=sys.stderr)

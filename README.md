@@ -38,11 +38,20 @@ Windows PowerShell:
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
-**V0 development status:** public hosting must be verified before this command
-is advertised as available. See [validation evidence](docs/evidence/VALIDATION.md).
-The installer source, release generator and local installer tests live in this
-repository. Python 3.11–3.13 with `venv` and `pip` is required; no root is needed.
-Models are downloaded separately and retained across runtime updates.
+The installer installs the CLI/MCP runtime only. **It does not download models
+or install inference dependencies.** Before the first GUI task:
+
+```sh
+clef-use models prepare
+clef-use doctor
+```
+
+`models prepare` installs the inference environments, downloads missing model
+weights, initializes the workers and saves their configuration. Model preparation
+requires Python 3.11/3.12, Git and sufficient disk space. Set `model_dir` to your
+chosen cache or external SSD path before preparation; see [installation](docs/INSTALL.md).
+Runtime installation supports Python 3.11-3.13 with `venv` and `pip`; no root is
+needed. Updates retain the model cache.
 
 For a source checkout:
 
@@ -54,8 +63,8 @@ uv run clef-use doctor
 ## Quick start
 
 ```sh
-clef-use doctor
 clef-use models prepare
+clef-use doctor
 clef-use install-mcp codex
 clef-use install-mcp hermes
 clef-use install-mcp omp

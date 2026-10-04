@@ -13,7 +13,19 @@ from .schema import Contract, TextInput
 
 
 def parser():
-    root = argparse.ArgumentParser(prog="clef-use")
+    root = argparse.ArgumentParser(
+        prog="clef-use",
+        description="Local GUI automation through a shared CLI/MCP runtime.",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=(
+            "First use (the installer does not download models):\n"
+            "  clef-use models prepare   # install inference dependencies and download models\n"
+            "  clef-use doctor           # check models and desktop permissions\n"
+            '  clef-use run "your GUI goal"\n\n'
+            "Model preparation requires Python 3.11/3.12, Git and sufficient disk space.\n"
+            "See: https://github.com/snowman0919/clef-use/blob/main/docs/INSTALL.md"
+        ),
+    )
     commands = root.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="execute a high-level GUI goal")
     run.add_argument("goal")
@@ -23,35 +35,66 @@ def parser():
     run.add_argument("--confidence-threshold", type=float)
     run.add_argument("--text", action="append", default=[])
     for command in ("status", "abort", "observe"):
-        sub = commands.add_parser(command)
+        sub = commands.add_parser(
+            command,
+            help={
+                "status": "show session progress and terminal result",
+                "abort": "cancel the active GUI task",
+                "observe": "inspect the session screen and controls",
+            }[command],
+        )
         sub.add_argument("--session-id")
-    resume = commands.add_parser("continue")
+    resume = commands.add_parser("continue", help="resume a session with new guidance")
     resume.add_argument("session_id")
     resume.add_argument("instruction")
-    doctor = commands.add_parser("doctor")
+    doctor = commands.add_parser("doctor", help="check model readiness and desktop permissions")
     doctor.add_argument("--no-capture", action="store_true")
-    models = commands.add_parser("models")
+    models = commands.add_parser(
+        "models",
+        help="prepare inference dependencies and download or inspect models",
+        description=(
+            "Models are not downloaded by the installer. Run 'clef-use models prepare' "
+            "before your first GUI task; it installs inference dependencies, downloads "
+            "missing models and saves configuration after initialization succeeds."
+        ),
+    )
     models.add_argument(
-        "action", choices=["list", "download", "prepare", "profiles"], nargs="?", default="list"
+        "action",
+        choices=["list", "download", "prepare", "profiles"],
+        nargs="?",
+        default="list",
+        help=(
+            "list: cached models; download: weights only; "
+            "prepare: full setup; profiles: OS/backend choices"
+        ),
+    )
+    models.add_argument(
+        "--json", action="store_true", help="suppress setup progress; emit JSON result"
     )
     models.add_argument("--python")
     models.add_argument(
         "--rocm-arch", help="Windows ROCm ISA, e.g. gfx1150; autodetected when available"
     )
     models.add_argument("--profile", choices=["auto", "default", *PROFILES], default="auto")
-    models.add_argument("--quantization", choices=["none", "4bit"])
-    commands.add_parser("mcp")
-    install = commands.add_parser("install-mcp")
+    models.add_argument(
+        "--quantization",
+        choices=["none", "4bit"],
+        help="none: original weights; 4bit: bitsandbytes NF4 during loading",
+    )
+    commands.add_parser("mcp", help="start the MCP server for an AI agent")
+    install = commands.add_parser("install-mcp", help="register clef-use with Codex, Hermes or OMP")
     install.add_argument("harness", choices=["codex", "hermes", "omp"])
     install.add_argument("--path", type=Path)
     install.add_argument("--command-path")
     install.add_argument("--dry-run", action="store_true")
-    update = commands.add_parser("update")
+    update = commands.add_parser("update", help="update the runtime while retaining model cache")
     update.add_argument("--base-url", default="https://ftp.kotori9.dev/clef-use")
     update.add_argument("--allow-insecure-localhost", action="store_true")
-    commands.add_parser("version")
+    commands.add_parser("version", help="show the installed runtime version")
     commands.add_parser("self-test", help="offline deterministic runtime smoke check")
-    benchmark = commands.add_parser("benchmark")
+    benchmark = commands.add_parser(
+        "benchmark", help="measure runtime behavior; --tasks performs real GUI input"
+    )
     benchmark.add_argument("--repetitions", type=int, default=5)
     benchmark.add_argument(
         "--tasks", type=Path, help="JSON contract list; executes real desktop input"
@@ -106,7 +149,14 @@ def main(argv=None):
                 from .provision import prepare
 
                 result = prepare(
-                    config, args.python, args.profile, args.quantization, args.rocm_arch
+                    config,
+                    args.python,
+                    args.profile,
+                    args.quantization,
+                    args.rocm_arch,
+                    progress=None
+                    if args.json
+                    else lambda message: print(message, file=sys.stderr, flush=True),
                 )
             else:
                 if args.action == "download":

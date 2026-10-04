@@ -1,5 +1,7 @@
 # 安装
 
+**安装脚本仅安装 CLI/MCP 运行时，不会下载模型权重或安装推理依赖。** 首次执行 GUI 任务前，请设置模型缓存路径，依次运行 `clef-use models prepare` 和 `clef-use doctor`。`models download` 仅下载权重，不能代替完整的模型准备。
+
 请安装带有 venv/pip 的 Python 3.11-3.13。模型准备需要 Python 3.11 和 Git。不需要 root 或管理员权限。使用下载 URL 之前，请确认公开部署验证结果。
 
 ```sh
@@ -23,8 +25,8 @@ confidence_threshold = 0.55
 models prepare 创建两个固定版本的独立 ML 环境，并下载官方 snapshot。更新保留缓存。如果找不到 Python 3.11 命令，请用 --python 指定可执行文件的绝对路径。
 
 ```sh
-clef-use doctor
 clef-use models prepare --python python3.11
+clef-use doctor
 clef-use install-mcp codex
 clef-use install-mcp hermes
 clef-use install-mcp omp
@@ -43,3 +45,5 @@ doctor 失败时，请区分权限、缺失 snapshot、ML 依赖和 MCP 启动�
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
 0.1.8 的 `models prepare` 在 Windows Radeon 890M (gfx1150) 上自动选择固定的 ROCm/NF4 配置，使用 Python 3.12 和 CPU OmniParser。两个模型成功初始化后才保存配置。可用 `--profile default` 或 `--quantization none` 显式覆盖。实际验证仅包括一个临时 GUI 任务；公开发布状态另行记录。
+
+`models prepare` 显示9个准备阶段、后端及缓存路径、当前依赖或模型、缓存复用和耗时。长时间运行的阶段每10秒输出状态。阶段数量不代表总耗时百分比。使用 `models prepare --json` 可隐藏阶段提示。两个模型均初始化成功后才会保存配置。
