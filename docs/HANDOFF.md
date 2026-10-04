@@ -672,3 +672,23 @@ CURRENT, installed version0.1.11 and fixture self-test COMPLETED. Own diagnostic
 venvs and fresh-install scope removed, real managed CLI retained. Existing24actor
 draft hashes preserved and excluded. No new model/GUI/performance proof. Evidence
 bootstrap-0.1.11.json. Remove own isolation worktree after doc checkpoint.
+
+2026-10-05 readable installer task completed, public0.1.13/source2910c21.
+Default shell/PowerShell bootstrap emits flushed progress stages, readable
+completion/current heading, version/path and next commands. Unix missing PATH
+gets quoted PATH hint and usable full command. --json retains machine output;
+direct install() and clef-use update dictionary/JSON contracts retained.
+0.1.12/e553160 was pushed/tagged but release37216607091 cancelled before deploy
+after Windows packaged check failed on Unicode path stdout using cp1252.
+PowerShell now scopes UTF-8 stdin/stdout/native decoding and restores prior
+process encodings; packaged checker decodes UTF-8. Native ssh win Korean-path
+current output and strict --json parsing passed; own installation/source removed.
+Clean159tests/9.54s, lint/format, locked metadata passed. CI37216942918 all6jobs
+passed159tests each plus packaged installation checks. Release37216944494 all15
+native install targets, assembly/dev deploy passed. Public0.1.13/15artifacts,
+both bootstrap byte matches verified; GitHubv0.1.13 published. Actual public
+monad curl|sh updated managed0.1.11->0.1.13; isolated fresh/current/--json outputs
+and installed version/fixture self-test passed, isolated scope removed. Evidence
+install-messages-0.1.13.json contains exact output. Existing24actor hashes preserved.
+No model/GUI/performance change or new acceptance claim. Own diagnostic scripts
+and local isolation worktree can be removed after evidence checkpoint.

@@ -635,3 +635,13 @@ all6jobs passed155tests each and packaged install/update/failure preservation.
 Release37214625817 all15native build/install checks plus assembly/dev deployment
 passed. Public manifest15targets and both bootstrap bytes match tested source.
 No model or GUI claims. [Evidence](bootstrap-0.1.11.json).
+
+2026-10-05 installer UI0.1.13/source2910c21: default progress/result/next-command
+output and --json verified via actual public curl|sh on monad for managed update,
+fresh install and current re-run. Native Windows Korean-path output and JSON
+parsing passed. CI37216942918 all6jobs/159tests each plus packaged installer
+checks passed; release37216944494 all15native checks/assembly/deploy passed.
+Public15artifacts and bootstrap bytes match tested source. Earlier0.1.12 was
+cancelled before deploy due to Windows Unicode output encoding; corrected UTF-8
+path passed. No new GUI/model/performance proof.
+[Evidence and exact output](install-messages-0.1.13.json).

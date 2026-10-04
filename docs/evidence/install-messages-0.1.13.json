@@ -1,0 +1,76 @@
+{
+  "date": "2026-10-05",
+  "source_commit": "2910c21de56a2b0fe5777b4bdac27242a80341ff",
+  "behavior": [
+    "Default bootstrap output shows flushed installation stages and readable completion/current result.",
+    "Shows installed version, executable path and usable next commands.",
+    "When command directory is missing from PATH, shows quoted full command and Unix PATH setup.",
+    "--json suppresses human progress and retains the result dictionary.",
+    "CLI update and direct install() callers retain their JSON/dictionary contract.",
+    "PowerShell scopes UTF-8 to installer I/O and restores prior process encodings."
+  ],
+  "local_validation": {
+    "pytest": "159 passed in 9.54s",
+    "ruff": "PASSED",
+    "uv_lock_check": "PASSED"
+  },
+  "native_windows": {
+    "current_output": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.11 (Python 3.12)\n  Checking your existing installation...\n\nAlready up to date. No installation needed.\n  Version: 0.1.11\n  Command: C:\\Users\\dbsgu\\AppData\\Local\\Temp\\clef-use-messages-20261005-\ud55c\uae00 path\\bin\\clef-use.cmd\n\nNext steps:\n  & \"C:\\Users\\dbsgu\\AppData\\Local\\Temp\\clef-use-messages-20261005-\ud55c\uae00 path\\bin\\clef-use.cmd\" doctor\n  & \"C:\\Users\\dbsgu\\AppData\\Local\\Temp\\clef-use-messages-20261005-\ud55c\uae00 path\\bin\\clef-use.cmd\" models prepare --help\n",
+    "json": {
+      "status": "CURRENT",
+      "version": "0.1.11",
+      "executable": "C:\\Users\\dbsgu\\AppData\\Local\\Temp\\clef-use-messages-20261005-\ud55c\uae00 path\\bin\\clef-use.cmd"
+    },
+    "owned_scope_removed": true
+  },
+  "ci_run": 37216942918,
+  "ci_result": "All six jobs passed 159 tests and packaged installation checks.",
+  "release_run": 37216944494,
+  "aborted_0_1_12": {
+    "source": "e553160d7ba5b1723795d744a13306c860ae005d",
+    "ci_run": 37216605546,
+    "release_run": 37216607091,
+    "reason": "Windows human output failed to encode a Korean installation path with cp1252.",
+    "result": "Release cancelled before deployment; version and tag preserved for audit."
+  },
+  "limitations": [
+    "No new GUI/model/performance validation.",
+    "24 pre-existing actor prototype files remain preserved and excluded."
+  ],
+  "publication": {
+    "version": "0.1.13",
+    "artifacts": 15,
+    "bootstraps_match_source": true,
+    "release_result": "All 15 native installer jobs, assembly and dev deployment passed."
+  },
+  "public_monad": {
+    "managed_update_output": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.13 (Python 3.11)\n  Updating 0.1.11 -> 0.1.13...\n  Downloading the installation package...\n  Verifying the download...\n  Creating an isolated Python environment...\n  Installing the runtime and dependencies...\n  Checking that clef-use runs correctly...\n  Activating the installation...\n\nInstallation complete.\n  Version: 0.1.13\n  Command: /home/monad/.local/bin/clef-use\n\nNext steps:\n  clef-use doctor\n  clef-use models prepare --help\n",
+    "fresh": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.13 (Python 3.11)\n  Downloading the installation package...\n  Verifying the download...\n  Creating an isolated Python environment...\n  Installing the runtime and dependencies...\n  Checking that clef-use runs correctly...\n  Activating the installation...\n\nInstallation complete.\n  Version: 0.1.13\n  Command: /tmp/clef-use-messages-public-ug2pry23/bin/clef-use\n\nTo use clef-use by name in this shell:\n  export PATH=/tmp/clef-use-messages-public-ug2pry23/bin:\"$PATH\"\n\nNext steps:\n  /tmp/clef-use-messages-public-ug2pry23/bin/clef-use doctor\n  /tmp/clef-use-messages-public-ug2pry23/bin/clef-use models prepare --help\n",
+    "current": "clef-use installation\n\n  Checking the latest version...\n  Available version: 0.1.13 (Python 3.11)\n  Checking your existing installation...\n\nAlready up to date. No installation needed.\n  Version: 0.1.13\n  Command: /tmp/clef-use-messages-public-ug2pry23/bin/clef-use\n\nTo use clef-use by name in this shell:\n  export PATH=/tmp/clef-use-messages-public-ug2pry23/bin:\"$PATH\"\n\nNext steps:\n  /tmp/clef-use-messages-public-ug2pry23/bin/clef-use doctor\n  /tmp/clef-use-messages-public-ug2pry23/bin/clef-use models prepare --help\n",
+    "json": "{\"status\": \"CURRENT\", \"version\": \"0.1.13\", \"executable\": \"/tmp/clef-use-messages-public-ug2pry23/bin/clef-use\"}\n",
+    "version": "0.1.13",
+    "self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "proves": "control flow only; not ML quality or desktop speed",
+      "samples": [
+        {
+          "status": "COMPLETED",
+          "task_success": true,
+          "wall_seconds": 0.38315613800659776,
+          "low_level_actions": 2,
+          "outer_llm_interventions": 0,
+          "parser_ms_mean": 0.06854474486317486,
+          "clef_ms_mean": 0.005273002898320556,
+          "confidence": [
+            0.99,
+            0.99,
+            0.99,
+            0.99
+          ],
+          "no_progress_replan_count": 0
+        }
+      ]
+    },
+    "isolated_installation_removed": true
+  }
+}

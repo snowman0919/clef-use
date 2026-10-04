@@ -160,3 +160,21 @@ lookup. Windows retains copies. CI37214624770 passed all6jobs/155tests each;
 release37214625817 passed all15native install targets and dev deployment. Actual
 public curl|sh on monad passed both managed update and isolated fresh installation.
 See [evidence](evidence/bootstrap-0.1.11.json).
+
+## Version 0.1.13
+
+[Release v0.1.13](https://github.com/snowman0919/clef-use/releases/tag/v0.1.13)
+shows installation progress and plain-language completion or already-current
+results, with version, command path and next steps. PowerShell preserves Unicode
+paths. Default shell usage remains unchanged; automation can request JSON:
+
+```sh
+curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh -s -- --json
+```
+
+PowerShell also accepts `--json`. The `clef-use update` CLI output stays JSON.
+CI37216942918 passed all6jobs/159tests each; release37216944494 passed all15
+native installation checks and dev deployment. Actual public monad fresh/current
+and native Windows Unicode output passed. Version0.1.12 was cancelled before
+deployment following a Windows output-encoding failure; tag retained for audit.
+[Evidence](evidence/install-messages-0.1.13.json).
