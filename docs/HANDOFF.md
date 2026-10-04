@@ -692,3 +692,36 @@ and installed version/fixture self-test passed, isolated scope removed. Evidence
 install-messages-0.1.13.json contains exact output. Existing24actor hashes preserved.
 No model/GUI/performance change or new acceptance claim. Own diagnostic scripts
 and local isolation worktree can be removed after evidence checkpoint.
+
+2026-10-05 desktop activity task complete, public0.1.14/sourceabffff0. User chose
+screen cursor and status panel. Canonical desktop runtime now reports actual
+phases/target coordinates through an owned, nonactivating, click-through native
+GUI process. CLI run and MCP computer_run share the integration; session schema
+includes activity. Sensitive target labels are hidden; typing values/goals are
+not sent to the renderer. Config activity_overlay=false applies on restart.
+No new Python dependencies, browser server or model-serving changes. Cua agent
+cursor pattern referenced at f83bd7a5c0bbf4213ab8539e9793f53e580297f0;
+no copied code/dependency. docs/ACTIVITY.md describes implementation/scope.
+Clean164tests/10.30s, Ruff and uv lock check passed. CI37221092324 all6jobs passed;
+release37221093811 all15install targets, assembly/dev deploy passed. Publiclatest
+and immutable0.1.14 manifests/15targets, both bootstraps matched source; GitHub
+v0.1.14 published. Source and installed wheel native checks passed macOS,
+Windows and LinuxX11/Xvfb. Fresh PUBLIC bootstrap installations repeated these
+checks using installed packages: Mac front application preserved and native
+capture exclusion/dimensions verified; Windows real owned-widget click through
+marker, foreground/pointer unchanged by display and clean capture; LinuxX11
+capture marker region unchanged. No Mac input, arbitrary app, Wayland or model
+inference validation. Evidence activity-overlay.json and owned-widget screenshots.
+Initial hide/restore added about59ms per capture; native Mac/Win exclusion removes
+that artificial wait. Five uncontrolled warm native samples ~25ms do not prove
+an inference speedup. Linux fallback retains35ms hide settling interval.
+Windows pip --target diagnostic initially failed because OpenSSH temporary files
+lacked limited desktop user read access; bounded own-file RX grant resolved it.
+Canonical PUBLIC installer grants staging user access and passed without a
+manual grant. Owned interactive task, Windows ownscope/archive/debug script and
+Linux temp/public-install scopes removed; existing model/dev environments retained.
+Existing24actor draft hashes preserved/excluded. Their working copies of
+backends.py/config.py/service.py were deliberately not overwritten: future actor
+integration MUST merge canonical overlay additions from abffff0 into those drafts.
+No active owned GUI/task/listener; remove local isolation worktree after this
+checkpoint. The broader model/GGUF serving goal retains its prior deferred scope.

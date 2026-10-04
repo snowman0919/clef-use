@@ -178,3 +178,11 @@ native installation checks and dev deployment. Actual public monad fresh/current
 and native Windows Unicode output passed. Version0.1.12 was cancelled before
 deployment following a Windows output-encoding failure; tag retained for audit.
 [Evidence](evidence/install-messages-0.1.13.json).
+
+0.1.14 is published: source `abffff0`, CI [37221092324](https://github.com/snowman0919/clef-use/actions/runs/37221092324)
+and release/deployment [37221093811](https://github.com/snowman0919/clef-use/actions/runs/37221093811)
+passed. All 15 installer targets and public bootstrap/manifest checks passed.
+The native activity overlay is described in [ACTIVITY.md](ACTIVITY.md).
+Fresh public installations passed macOS display/capture, Windows actual owned
+widget click-through, and Linux X11/Xvfb capture. No new inference or Wayland
+acceptance claim. Immutable earlier releases remain available.

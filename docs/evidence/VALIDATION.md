@@ -645,3 +645,18 @@ Public15artifacts and bootstrap bytes match tested source. Earlier0.1.12 was
 cancelled before deploy due to Windows Unicode output encoding; corrected UTF-8
 path passed. No new GUI/model/performance proof.
 [Evidence and exact output](install-messages-0.1.13.json).
+
+2026-10-05 / 0.1.14 activity overlay (`abffff0`): OBSERVED canonical fixture
+phases/capture guards, typed session status, private payload exclusion and display
+failure cleanup; 164 tests passed in10.30s, lint/format and locked metadata passed.
+All6CI and15release installer targets passed. OBSERVED native displays and fresh
+PUBLIC-installed packages on macOS, Windows and LinuxX11/Xvfb; Windows actual
+owned-widget click delivered through marker, no activation/pointer movement from
+display; capture marker region clean. Mac native exclusion preserves nominal
+capture geometry and visible panels. MEASURED five warm sequential capture samples:
+hide/restore +59.3ms; optimized native capture ~25.3ms, baseline~30.4ms under
+uncontrolled load. Negative delta is noise, not a speedup/inference claim.
+NOT_RUN Wayland, arbitrary apps, Mac input and new real-model workflows. Owned
+interactive task/temporary installations removed;24existing drafts byte-preserved.
+Full evidence: [activity-overlay.json](activity-overlay.json), [panel](activity-preview.png),
+[cursor](activity-cursor.png); implementation/scope [ACTIVITY.md](../ACTIVITY.md).

@@ -52,5 +52,92 @@
   },
   "performance_note": "Five warm sequential captures under uncontrolled host load. Negative native-exclusion delta is noise, not a claimed speedup. Artificial hide waits are removed on supported macOS/Windows paths.",
   "screenshots": "Only owned native overlay windows, no desktop background",
-  "tests": "164 passed in 10.30s; Ruff lint/format and uv lock check passed"
+  "tests": "164 passed in 10.30s; Ruff lint/format and uv lock check passed",
+  "source_commit": "abffff0428b80ec8676cfc3a36de401fe5251651",
+  "wheel_checks": {
+    "macos": {
+      "platform": "darwin",
+      "real_models": false,
+      "window_ids": [
+        11204,
+        11205
+      ],
+      "window_server_hide_restore": "PASSED",
+      "native_exclusion_without_hiding": "PASSED",
+      "status": "PASSED"
+    },
+    "windows": {
+      "platform": "win32",
+      "real_models": false,
+      "window_ids": [
+        2819908,
+        1902528
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "real_click_through": "PASSED",
+      "status": "PASSED"
+    },
+    "linux": {
+      "platform": "linux",
+      "real_models": false,
+      "window_ids": [
+        6291457,
+        6291459
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "status": "PASSED"
+    }
+  },
+  "wheel_sha256": "33b6285c715acdd88855054e985a1661072f5bc656dbac520073e4dd1ca82f99",
+  "windows_diagnostic_note": "pip --target temporary files created through OpenSSH were unreadable by the same user limited desktop token. Explicit read access on the owned diagnostic package fixed import; the canonical installer already grants its user access to staging.",
+  "ci": "https://github.com/snowman0919/clef-use/actions/runs/37221092324",
+  "public_site": {
+    "version": "0.1.14",
+    "targets": 15,
+    "immutable_manifest_matches_latest": true,
+    "shell_powershell_bootstraps_match_source": true,
+    "release_run": "https://github.com/snowman0919/clef-use/actions/runs/37221093811",
+    "ci_run": "https://github.com/snowman0919/clef-use/actions/runs/37221092324"
+  },
+  "public_installed_checks": {
+    "macos": {
+      "platform": "darwin",
+      "real_models": false,
+      "window_ids": [
+        11279,
+        11280
+      ],
+      "window_server_hide_restore": "PASSED",
+      "native_exclusion_without_hiding": "PASSED",
+      "status": "PASSED"
+    },
+    "windows": {
+      "platform": "win32",
+      "real_models": false,
+      "window_ids": [
+        3016516,
+        1968064
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "real_click_through": "PASSED",
+      "status": "PASSED"
+    },
+    "linux": {
+      "platform": "linux",
+      "real_models": false,
+      "window_ids": [
+        6291457,
+        6291459
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "status": "PASSED"
+    }
+  },
+  "windows_public_import": {
+    "version": "0.1.14",
+    "package": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\activity\\public-install\\versions\\0.1.14-do246k_8\\Lib\\site-packages\\clef_use\\__init__.py",
+    "executable": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\activity\\public-install\\versions\\0.1.14-do246k_8\\Scripts\\python.exe"
+  },
+  "public_bootstrap_installation": "INSTALLED 0.1.14 on macOS Python3.11, Linux Python3.11 and Windows Python3.12, isolated task-owned roots; no model downloads or global config/PATH changes",
+  "cleanup": "Owned Windows InteractiveToken task and diagnostic/public-install scope removed; Linux owned temporary scopes removed. Existing environments, models and user settings preserved."
 }
