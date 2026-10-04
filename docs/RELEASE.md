@@ -29,8 +29,7 @@ releases/0.1.5/clef-use-0.1.5-<platform>-<architecture>-py<minor>.zip
 Upload immutable version artifacts first, verify public SHA-256 and content,
 then replace `latest/` metadata and bootstraps. Keep earlier releases available.
 Never edit the checksum for an already published version. Use an atomic server
-rename or the hosting provider's equivalent to switch metadata. Credentials and
-production deployment are intentionally not stored in workflows. GitHub releases
+rename or the hosting provider's equivalent to switch metadata. The deployment job runs locally on the dedicated dev runner. GitHub releases
 are an additional distribution artifact, not a different update protocol.
 
 Enable Issues, Discussions, Actions, releases, private vulnerability reporting,
@@ -102,3 +101,35 @@ See evidence/release-015-platforms.json. Upload immutable 0.1.5 files first and
 verify them before switching latest metadata. The public server still serves
 0.1.3, so new public install/update acceptance remains pending. Native GUI success
 and CI do not resolve the documented CLEF MPS execution failures.
+
+## Automatic dev deployment
+
+`release.yml` builds and tests all 15 bundles on GitHub-hosted runners, assembles
+one site artifact, then publishes it using the repository runner `dev-clef-use`
+(label `clef-use-deploy`). The runner runs as the existing dev user and serves
+`~/share/clef-use` through the existing HTTPS host. The existing printwatch runner
+is independent. No new network ingress or SSH deployment key is required.
+
+Deployment runs for `v*` tag releases or manual dispatch from `main` when the
+repository variable `CLEF_DEPLOY_ENABLED` is `true`. PR workflows keep their
+existing GitHub-hosted runners. The deploy job has read-only repository access,
+serialized execution, and a 15-minute timeout. A tag must match the package version.
+
+`deploy_release.py` reuses the canonical manifest/URL validation, checks all 15
+archive hashes, refuses version replacement or downgrade, publishes the immutable
+version directory, verifies every archive through public HTTPS, then atomically
+replaces each bootstrap/checksum file and switches the manifest last. The manifest
+is the installer's authoritative pointer; this is not a multi-file atomic switch.
+Earlier releases remain available. If public archive verification fails, latest
+is preserved. Rerun the failed deployment job using its original assembled artifact;
+bump the package version before publishing rebuilt artifacts with different hashes.
+
+```sh
+gh workflow run release.yml --ref main
+ssh dev 'systemctl --user status clef-use-actions-runner.service'
+```
+
+Disable future deployments with `gh variable set CLEF_DEPLOY_ENABLED --body false`.
+Stop the runner with `systemctl --user disable --now clef-use-actions-runner.service`
+on dev; unregister it in this repository's Actions runner settings before removing
+`~/actions-runner-clef-use`. Existing served releases remain available.
