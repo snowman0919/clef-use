@@ -501,3 +501,32 @@ release dispatch deploys automatically; rebuild of the same published version is
 refused. Evidence deployment.json; raw SSD validation/deployment-20261004. No
 active foreground/model/service test handles. Dedicated runner remains enabled
 as authorized; goal status not changed. No further feature work in this task.
+
+
+2026-10-04 human authorized GGUF quantization on ssh monad. Standalone artifact
+completed; full goal remains paused and canonical installed runtime unchanged.
+Base main f34f038; existing actor24 files hash-preserved. Added only the two
+standalone prepare/smoke scripts, architecture record and gguf-monad.json evidence.
+Pinned llama.cpp0504396140d1c882f5f6ee34466a42db7ae90114 has native CLEF converter
+and /v1/systemone typed head support. Earlier assumption that head porting was
+required is superseded by this source inspection. CLEF image support is still
+explicitly absent; actual request returned501. No fork, backend or GUI fallback.
+
+monad /home/monad/clef-use-gguf/artifacts/clef-flash-Q4_K_M/clef-flash-Q4_K_M.gguf
+5855598752bytes, SHA2562f211c584176cedce8dae9bb57bef9b6232c0df4bb26073b828d68caff7247ca.
+Original Flash17f0b0ad64efb65d273590632833508766b2aae6 downloaded anonymously after
+an expired implicit-token download failed; account configuration untouched.
+CPU-only tools built in own directory/venv, existing RTX3080 work unaffected.
+Native CLEF architecture,587tensors (219Q4_K/31Q6_K/277F32/59F16/1BF16),159floating
+head tensors verified; original head/config/code sidecars retained. Quantization
+158.439s; preparation293.645s before final file hashes. Independent readback of
+all artifact hashes passed. CPU4threads/ctx1024/batch1024, changed displayed4->5:
+choice/noul/score passed both records,341tokens each,4.284/4.239s. Process load
+2.515s with warm OS file cache, not cold storage. VmHWM9471704KiB. No BF16 parity,
+broad accuracy, GPU/Windows GGUF test, actual GUI, public publication or installed
+runtime integration claimed. Temporary own server stopped; no live owned server
+or pending staging directory, BF16 intermediate removed by staging cleanup.
+Remote source/cache,tools,venv,artifact and raw logs retained for reproducibility.
+Local scripts match remote hashes; ruff lint/format and diff check passed.
+Future GUI GGUF integration depends on upstream image support and separate actual
+visual parity/task validation; do not silently discard screenshots.

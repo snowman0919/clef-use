@@ -1,0 +1,194 @@
+{
+  "date": "2026-10-04",
+  "status": "OBSERVED",
+  "source_basis": "f34f038fd577fc6ae617c688b23cb8db18cd1c8f",
+  "scope": "User-authorized standalone GGUF quantization on ssh monad; no runtime or installer replacement",
+  "remote_artifact": "/home/monad/clef-use-gguf/artifacts/clef-flash-Q4_K_M/clef-flash-Q4_K_M.gguf",
+  "raw_evidence": "ssh monad:/home/monad/clef-use-gguf/logs",
+  "environment": {
+    "host": "monad",
+    "hostname": "mathcat",
+    "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+    "python": "3.12.3",
+    "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           48 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  16\nOn-line CPU(s) list:                     0-15\nVendor ID:                               AuthenticAMD\nModel name:                              AMD Ryzen 7 9700X 8-Core Processor\nCPU family:                              26\nModel:                                   68\nThread(s) per core:                      2\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                0\nFrequency boost:                         enabled\nCPU(s) scaling MHz:                      85%\nCPU max MHz:                             5582.3008\nCPU min MHz:                             605.3100\nBogoMIPS:                                7585.25\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx mmxext fxsr_opt pdpe1gb rdtscp lm constant_tsc rep_good amd_lbr_v2 nopl xtopology nonstop_tsc cpuid extd_apicid aperfmperf rapl pni pclmulqdq monitor ssse3 fma cx16 sse4_1 sse4_2 movbe popcnt aes xsave avx f16c rdrand lahf_lm cmp_legacy svm extapic cr8_legacy abm sse4a misalignsse 3dnowprefetch osvw ibs skinit wdt tce topoext perfctr_core perfctr_nb bpext perfctr_llc mwaitx cpuid_fault cpb cat_l3 cdp_l3 hw_pstate ssbd mba perfmon_v2 ibrs ibpb stibp ibrs_enhanced vmmcall fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid cqm rdt_a avx512f avx512dq rdseed adx smap avx512ifma clflushopt clwb avx512cd sha_ni avx512bw avx512vl xsaveopt xsavec xgetbv1 xsaves cqm_llc cqm_occup_llc cqm_mbm_total cqm_mbm_local user_shstk avx_vnni avx512_bf16 clzero irperf xsaveerptr rdpru wbnoinvd cppc arat npt lbrv svm_lock nrip_save tsc_scale vmcb_clean flushbyasid decodeassists pausefilter pfthreshold avic v_vmsave_vmload vgif x2avic v_spec_ctrl vnmi avx512vbmi umip pku ospke avx512_vbmi2 gfni vaes vpclmulqdq avx512_vnni avx512_bitalg avx512_vpopcntdq rdpid bus_lock_detect movdiri movdir64b overflow_recov succor smca fsrm avx512_vp2intersect flush_l1d amd_lbr_pmc_freeze\nVirtualization:                          AMD-V\nL1d cache:                               384 KiB (8 instances)\nL1i cache:                               256 KiB (8 instances)\nL2 cache:                                8 MiB (8 instances)\nL3 cache:                                32 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-15\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Mitigation; IBPB on VMEXIT only\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; STIBP always-on; PBRSB-eIBRS Not affected; BHI Not affected\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Mitigation; IBPB on VMEXIT\n",
+    "llama_revision": "0504396140d1c882f5f6ee34466a42db7ae90114",
+    "build_backend": "CPU",
+    "gpu": "NVIDIA GeForce RTX 3080, 10240 MiB"
+  },
+  "manifest": {
+    "model": "Cloudflare/clef-flash",
+    "model_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "llama_cpp_revision": "0504396140d1c882f5f6ee34466a42db7ae90114",
+    "quantization": "Q4_K_M",
+    "decision_head": "embedded floating point; original sidecar preserved",
+    "image_input": "UNSUPPORTED by pinned upstream CLEF implementation",
+    "runtime_integration": "NOT_IMPLEMENTED; standalone artifact",
+    "tensor_types": {
+      "F32": 277,
+      "F16": 59,
+      "BF16": 1,
+      "Q6_K": 31,
+      "Q4_K": 219
+    },
+    "decision_head_tensors": 159,
+    "build_seconds": 293.64495794899995,
+    "files": {
+      "README.md": {
+        "bytes": 10222,
+        "sha256": "4aac13b2563900152eab8feaad0b310a91b55a96135abf4ad17ad4a302bd73e6"
+      },
+      "clef-flash-Q4_K_M.gguf": {
+        "bytes": 5855598752,
+        "sha256": "2f211c584176cedce8dae9bb57bef9b6232c0df4bb26073b828d68caff7247ca"
+      },
+      "joint_head.safetensors": {
+        "bytes": 243538016,
+        "sha256": "19cdcec8c81dc9212be320fff47462ab342fbc1278be4368fb3da71241cf5ba0"
+      },
+      "joint_head_config.json": {
+        "bytes": 119,
+        "sha256": "77efe959a38b5b17b241543e129e695f3c77465ece55a25985279bd8176279a0"
+      },
+      "joint_schema_model.py": {
+        "bytes": 23263,
+        "sha256": "0e304cf7c6500e8bb59bef7e2afd2c6373f82596dfb3b57d1aa93c175e2dc3a3"
+      }
+    }
+  },
+  "smoke": {
+    "status": "PASSED",
+    "mode": "CPU text-only",
+    "load_seconds": 2.5151462120120414,
+    "records": [
+      {
+        "displayed": 4,
+        "seconds": 4.283884349017171,
+        "response": {
+          "model": "/home/monad/clef-use-gguf/artifacts/clef-flash-Q4_K_M/clef-flash-Q4_K_M.gguf",
+          "answers": {
+            "number": {
+              "type": "choice",
+              "choice": "4",
+              "probabilities": {
+                "4": 0.980397647987295,
+                "5": 0.019602352012705004
+              },
+              "confidence": 0.96079529597459
+            },
+            "is_four": {
+              "type": "noul",
+              "noul": 0.9494543278526677
+            },
+            "number_score": {
+              "type": "score",
+              "score": 3.9576085839040527,
+              "legend": {
+                "0": "Zero",
+                "1": "One",
+                "2": "Two",
+                "3": "Three",
+                "4": "Four",
+                "5": "Five"
+              },
+              "probabilities": {
+                "0": 0.004430733525193292,
+                "1": 0.005454382546991188,
+                "2": 0.004451875272711071,
+                "3": 0.004881668525715493,
+                "4": 0.975301255412452,
+                "5": 0.005480084716936962
+              },
+              "confidence": 0.9644322763134524
+            }
+          },
+          "usage": {
+            "input_tokens": 341,
+            "output_tokens": 0
+          }
+        }
+      },
+      {
+        "displayed": 5,
+        "seconds": 4.2391757650184445,
+        "response": {
+          "model": "/home/monad/clef-use-gguf/artifacts/clef-flash-Q4_K_M/clef-flash-Q4_K_M.gguf",
+          "answers": {
+            "number": {
+              "type": "choice",
+              "choice": "5",
+              "probabilities": {
+                "4": 0.011322104291599876,
+                "5": 0.9886778957084
+              },
+              "confidence": 0.9773557914168001
+            },
+            "is_four": {
+              "type": "noul",
+              "noul": 0.005838584955268407
+            },
+            "number_score": {
+              "type": "score",
+              "score": 4.943525347429851,
+              "legend": {
+                "0": "Zero",
+                "1": "One",
+                "2": "Two",
+                "3": "Three",
+                "4": "Four",
+                "5": "Five"
+              },
+              "probabilities": {
+                "0": 0.003516013373559039,
+                "1": 0.0037916348211290037,
+                "2": 0.004279187841599968,
+                "3": 0.0034875937029360494,
+                "4": 0.003915295487164867,
+                "5": 0.981010274773611
+              },
+              "confidence": 0.9623502316199013
+            }
+          },
+          "usage": {
+            "input_tokens": 341,
+            "output_tokens": 0
+          }
+        }
+      }
+    ],
+    "image_input": {
+      "http_status": 501,
+      "response": {
+        "error": {
+          "code": 501,
+          "message": "This server does not support image input for decisions. For a model that supports it, start it with `--mmproj`",
+          "type": "not_supported_error"
+        }
+      }
+    },
+    "memory": [
+      "VmHWM:\t 9471704 kB",
+      "VmRSS:\t 9471704 kB"
+    ],
+    "limits": [
+      "No BF16 parity or broad accuracy benchmark",
+      "CLEF image input unsupported",
+      "No canonical runtime integration or GUI input"
+    ]
+  },
+  "readback": {
+    "all_artifact_hashes_verified": true,
+    "live_owned_servers": [],
+    "pending_staging_directories": [],
+    "scripts": {
+      "prepare_clef_gguf.py": "065212c28a9eb4e19fa6c6319d1e7c611119c6649401582e422882dfb32caedb",
+      "smoke_clef_gguf.py": "e475f285f91fb66e79e345081682ffc70f7be79c45256336a79efc8bfbebffbf"
+    }
+  },
+  "load_measurement_note": "Fresh server process after conversion; OS file cache was warm. Not a cold-storage measurement.",
+  "quantization_note": "Q4_K_M mixed precision, not NF4 or every tensor at 4 bits. Decision head retained floating point.",
+  "limitations": [
+    "Pinned upstream CLEF GGUF image input unsupported (observed HTTP 501); does not yet replace canonical screenshot runtime.",
+    "No BF16 parity, broad task accuracy, GPU inference, Windows GGUF inference, or public model publication in this scope.",
+    "Existing dirty actor changes preserved."
+  ]
+}

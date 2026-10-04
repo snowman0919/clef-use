@@ -77,3 +77,29 @@ not new frameworks or unsupported CLEF batch generation. See
 VISUAL_READINESS.md for contracts, heuristic limits and the controlled
 wait/cache ablation. Readiness and perception reuse are ablated separately. Repeated MPS backend
 failures prevented an accepted performance comparison; no speed claim is made.
+
+## Standalone CLEF GGUF preparation
+
+The requested monad conversion uses the original Flash snapshot
+`17f0b0ad64efb65d273590632833508766b2aae6` and llama.cpp
+`0504396140d1c882f5f6ee34466a42db7ae90114`. Upstream now has a dedicated
+`ClefModel` converter and `/v1/systemone` server endpoint. This preserves joint
+typed decisions rather than substituting chat generation. The converter embeds
+the joint head; Q4_K_M quantization keeps `decision.*` and `dec.*` tensors in
+floating point. Original head/config/code sidecars and model-card license text
+are retained for provenance, outside the installed runtime.
+
+`scripts/prepare_clef_gguf.py` checks both source identities, builds in a private
+staging directory, verifies the CLEF architecture and floating head, records
+tensor types and SHA-256 hashes, and activates a new artifact directory only
+after those checks. `scripts/smoke_clef_gguf.py` starts a temporary loopback CPU
+server, checks choice/noul/score responses against a changed numeric input, and
+stops its own server even on failure. This is a small semantic smoke test, not
+a BF16 parity or broad accuracy benchmark.
+
+The pinned upstream CLEF implementation explicitly rejects image input; its
+vision converter raises `NotImplementedError` pending upstream PR 29622.
+Therefore the GGUF is a text-only standalone artifact. It does not replace the
+canonical screenshot decision worker or change deployed installers. Parser
+dependency size is also unchanged. Raw files and logs live on monad under
+`~/clef-use-gguf`; accepted results are recorded in `docs/evidence/gguf-monad.json`.
