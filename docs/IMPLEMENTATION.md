@@ -74,13 +74,13 @@ the stated boundary, never to native input quality from fixture tests.
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
 | 15 | configuration-only Codex readback, OMP native client; isolated official Hermes CLI MCP connection and native handler completed 0.1.5 fixture; user launcher interpreter still missing |
 | 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS 0.1.3 install passed; 0.1.5 upload pending |
-| 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni, CUDA/Windows ML not run |
+| 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; Windows diagnostic loader is not integrated in released provisioning; doctor ML prerequisite readiness needs correction |
 | 23-24 | private structured latency/action/terminal logs, benchmark with explicit fixture vs desktop modes; no comparative speed claim |
 | 25-26 | unit regressions and actual packaged installs/stdio/IPC; concrete replacement interfaces for capture/perception/decision/action/verifier |
 | 27 | documented extension boundaries; DOM/AX/tracking/remote control intentionally future work |
 | 28 | abort, cleanup, bounded confidence/steps/no-progress, safe errors and escalation logs; no shell execution capability in executor |
 | 29-30 | required docs/community files, generated/cache exclusions, coherent commits; unowned concurrent edits preserved separately |
-| 31-32 | shared vertical slice and model semantics observed; real Windows native GUI observed with Mac inference; public 0.1.3 one-line installation passed; 0.1.5 controlled visual GUI trials passed 10/10 and no-effect stopped after one input; new public upload remains open |
+| 31-32 | shared vertical slice and model semantics observed; real Windows native GUI passed with earlier Mac inference and later Windows-local ROCm/CPU inference (2 actions/4 decisions/118.6999s after initialization); public 0.1.3 one-line installation passed; 0.1.5 controlled visual GUI trials passed 10/10 and no-effect stopped after one input; new public upload remains open |
 | 33-34 | architectural choices and measured limits recorded here, ARCHITECTURE.md and evidence/VALIDATION.md; twelve delivery categories linked above |
 | 35 | public main, Issues/Discussions/Actions/security, CI/release machinery, four locale setup trees; command/config parity verified |
 | 36 | first-class PowerShell 5.1/CMD flow, no security policy change, per-user Unicode paths and preservation on three failed update cases observed on ssh win |
@@ -92,7 +92,12 @@ Public HTTPS 0.1.3 metadata and
 Mac/Windows installs passed; the previous HTTP 404 blocker is resolved.
 Windows GUI was explicitly authorized and observed on 2026-10-04; macOS native
 input remains deferred. Non-blocking limitations: user Hermes launcher interpreter
-unavailable (isolated official CLI validated), larger CLEF and CUDA/Windows ML untested, cross-volume custom Unicode
+unavailable (isolated official CLI validated), larger CLEF and NVIDIA CUDA untested, cross-volume custom Unicode
 Windows bin paths require an ASCII target or the bin directory inside the install.
+Windows-local model inference and one owned GUI task passed with the experimental
+diagnostic loader, not the released default configuration. Functional work still
+open: doctor must include actual ML environment/device prerequisites in `ready`;
+cache/capture/MCP alone must not admit missing model dependencies. Broader draft
+accelerator provisioning and checkpoint integration remain separately uncommitted.
 Future optimization: measured VLM baseline comparison, temporal/incremental
 perception, native input/capture acceleration only after profiling.

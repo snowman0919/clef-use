@@ -335,3 +335,14 @@ Next: finish owned review/checkpoint, audit full36section goal; fix doctor ready
 false-positive when ML envs missing/explicitdevice unsupported; review canonical
 Windows provisioning/integration separately. Mac input remains deferred; NVIDIA
 CUDA and largeCLEF NOT_RUN; public new0.1.5 upload route still unavailable.
+
+Windows-local checkpoint: own scripts/test/evidence/docs published at
+main d91c4162095ade8296dbcde56a72096a900ed962. CI37182266000 completed
+success in all6 Mac/Windows/Linux xPython3.11/3.13 jobs; actual logs each
+show86passed. Raw compact six log lines durable SSD windows-local-20261004/
+ci-37182266000-tests.txt. https://github.com/snowman0919/clef-use/actions/runs/37182266000
+No models/GUI/tasks/listeners/tokens remain live. Existing actor24 paths remain
+unpublished, including one minimal owned visual-exclusion correction in their
+untracked quantization.py. Latest authoritative requirement audit now reflects
+Windows-local actual proof and explicitly retains doctor/provisioning open gates.
+Goal remains active; this turn is progress, not full36section completion.
