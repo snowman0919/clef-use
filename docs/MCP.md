@@ -31,7 +31,7 @@ multi-step sessions. No timeout authorizes extra steps. Setup examples are in
 
 ## Startup update request
 
-Since 0.1.9, each stdio MCP launch checks the canonical HTTPS release manifest.
+Since 0.1.10, each stdio MCP launch checks the canonical HTTPS release manifest.
 A newer release must pass the installer's manifest/origin validation and provide
 an artifact for the running OS, architecture and Python version. The server adds
 an update request to `InitializeResult.instructions`, naming the installed/new

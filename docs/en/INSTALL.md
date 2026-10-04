@@ -42,4 +42,4 @@ To uninstall, stop the idle runtime and remove only the managed executable and i
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
-Version 0.1.9 structures deployment profiles by OS/backend: macOS MPS/CPU and Linux/Windows CUDA/ROCm/XPU/CPU. Use `models profiles` to list them and `models prepare --profile linux-cuda` to select one. Unsupported combinations fail explicitly; full worker initialization must pass before configuration is saved. See [deployment contracts and validation limits](../ARCHITECTURE.md#osbackend-deployment-profiles-019). Windows ROCm requires a detected ISA or `--rocm-arch` for your GPU.
+Version 0.1.10 structures deployment profiles by OS/backend: macOS MPS/CPU and Linux/Windows CUDA/ROCm/XPU/CPU. Use `models profiles` to list them and `models prepare --profile linux-cuda` to select one. Unsupported combinations fail explicitly; full worker initialization must pass before configuration is saved. See [deployment contracts and validation limits](../ARCHITECTURE.md#osbackend-deployment-profiles-0110). Windows ROCm requires a detected ISA or `--rocm-arch` for your GPU.

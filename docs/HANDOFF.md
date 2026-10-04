@@ -613,3 +613,22 @@ initialization captured request for a controlled newer compatible release.
 Next: reviewed local source checkpoint, non-force push main and tag v0.1.9;
 wait for all CI/release/native installer jobs and dev deploy, then verify public
 manifest/bootstraps/archive hashes and actual public packaged MCP handshake.
+
+0.1.9 source e28191c pushed, tag preserved. CI37209175551 passed four Mac/Linux
+jobs but failed both Windows jobs. Cancelled release37209176889 before assembly/
+deploy; public latest stayed0.1.8. Failure isolated to doctor readiness fixture
+changing shared sys.platform to Linux without mocking the new host_system
+boundary, corrupting Python platform.uname cache on Windows and contaminating
+later update compatibility fixtures. Fix the test's host_system boundary; runtime
+update code unchanged. Source version advances to0.1.10; do not retag0.1.9 or
+replace immutable artifacts. Local154tests/7.56s and locked metadata check passed.
+Native Windows full test rerun pending; use scoped mcp-update diagnostic source
+with existing source/.venv, no GUI/model/driver changes. Then push/tag0.1.10 and
+repeat CI/release/public validation, keeping the same24 actor bytes untouched.
+Native ssh win Python3.12 source/.venv rerun of the complete clean source tree:
+154passed/11.14s, including real stdio update-request delivery. Initial diagnostic
+archive lacked scripts and could not collect one test; complete tracked tree
+transfer corrected that staging issue before the passing run. No native GUI,
+model load, global package/config/driver or PATH change. Own scope mcp-update/
+holds the frozen source plus logs. Production update code stayed unchanged;
+0.1.10 carries the test fixture correction and correct release version.

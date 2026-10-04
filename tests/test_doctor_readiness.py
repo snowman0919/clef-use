@@ -16,6 +16,7 @@ from clef_use.config import Config
 def test_doctor_refuses_ready_with_cached_models_but_missing_ml_prerequisite(monkeypatch, missing):
     monkeypatch.setattr(diagnostics, "load_config", Config)
     monkeypatch.setattr(diagnostics.sys, "platform", "linux")
+    monkeypatch.setattr("clef_use.deployment_profiles.host_system", lambda: "linux")
     monkeypatch.setattr(
         diagnostics,
         "mac_permissions",
