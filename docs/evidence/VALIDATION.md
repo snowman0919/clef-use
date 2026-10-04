@@ -584,4 +584,8 @@ shutdown/removal passed. SSH CLI correctly blocked Session0 with zero input; thi
 is separate from the normal interactive CLI GUI pass above. Owned new runtime
 and fresh ML environments deleted; previous model cache and user PATH/launcher
 preserved. No live models/GUI/service/task/listener/token remain. Public newest
-upload remains separate; source0.1.8 checkpoint/CI pending at this entry.
+upload remains separate. Source0.1.8 publishededdff3b; CI37193297496 all6success,
+actual106tests per job plus all six build/install-update checks. Native0.1.8
+Win/Python3.12 ZIP hash verified on SSD; full15-target0.1.8 release assembly
+NOT_RUN. Final temporary source/site/lifecycle fixtures also removed. Public
+metadata read through canonical installer remains0.1.3/15targets.
