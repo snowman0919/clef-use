@@ -1,10 +1,11 @@
-"""Real models on macOS controlling the disposable Windows GUI over private SSH."""
+"""Real models controlling the disposable Windows GUI through a private endpoint."""
 
 import argparse
 import base64
 import io
 import json
 import os
+import sys
 import time
 import urllib.error
 import urllib.request
@@ -26,6 +27,7 @@ def main():
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--port", type=int, default=37944)
+    parser.add_argument("--rocm-worker", type=Path)
     args = parser.parse_args()
     if args.output is None:
         args.output = state_dir() / "validation" / f"windows-model-{uuid4().hex}.json"
@@ -93,6 +95,20 @@ def main():
 
     config = load_config()
     perception, decision, desktop = OmniParserBackend(config), ClefBackend(config), Desktop()
+    if args.rocm_worker:
+        if sys.platform != "win32":
+            raise RuntimeError("the ROCm diagnostic worker requires native Windows")
+        from windows_rocm_worker import start_worker
+
+        try:
+            start_worker(decision.worker, args.rocm_worker, args.output.with_suffix(".worker.log"))
+            perception.worker._start()
+            request("reset", {"delay_ms": 500})
+        except BaseException:
+            perception.worker.close()
+            decision.worker.close()
+            request("finish")
+            raise
     if args.benchmark:
         from windows_visual_benchmark import run_benchmark
 
@@ -122,18 +138,24 @@ def main():
     result = {}
     try:
         result = runtime.execute(session)
-        result["independent_gui_readback"] = request("result")
         result.update(
-            mode="REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+            mode="REAL_WINDOWS_GUI_LOCAL_ROCM_DIAGNOSTIC"
+            if args.rocm_worker
+            else "REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
             native_input=True,
-            inference_host="macOS",
+            inference_host="Windows 11" if args.rocm_worker else "macOS",
             input_host="Windows 11",
             outer_interventions=0,
             wall_seconds=time.perf_counter() - started,
             metrics=session.history,
             device=config.device,
             parser_device=config.parser_device,
+            quantization="NF4; FP16 vision/output/joint head" if args.rocm_worker else "none",
         )
+        try:
+            result["independent_gui_readback"] = request("result")
+        except RuntimeError as exc:
+            result["independent_gui_readback"] = {"error": type(exc).__name__}
     finally:
         perception.worker.close()
         decision.worker.close()

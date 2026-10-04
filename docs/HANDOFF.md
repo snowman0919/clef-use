@@ -265,3 +265,73 @@ and evidence, preserving Mac input deferral, Windows-local inference NOT_RUN,
 optional largerCLEF/CUDA untested and new0.1.5 operator upload blocker. Do not
 claim arbitrary-app/model stability or mark goal complete from this narrow smoke.
 All actor-owned MLX/quantization/residency changes remain excluded. No subagents.
+
+
+Final checkpoint of this continuation: main44656b89dab57d8ddc2086b0d108a5005f1b45e3
+is published on origin/main. CI37179676608 completed success, all six jobs:
+macOS15/Ubuntu24.04/Windows2022, Python3.11/3.13, including85 tests, lint/format,
+installer generation and packaged install/update/failure-preservation checks.
+https://github.com/snowman0919/clef-use/actions/runs/37179676608
+Only this final handoff annotation is newly owned/uncommitted; the same24 unowned
+MLX/residency/readme/install/provision paths remain unchanged and excluded.
+All own GUI/model/SSH processes are terminal and tokens/tasks removed. Next bounded
+work is the full requirement/evidence audit; deployment of prepared0.1.5 site is
+still operator-blocked, with fresh canonical public latest0.1.3. Goal remains active.
+
+
+2026-10-04 Windows-local inference steering: user explicitly requested native
+Windows model execution in addition to earlier authorized SSH/GUI validation.
+Native Windows 11 Pro / Python3.12.10 / Ryzen AI9 HX370 / Radeon890M gfx1150.
+Prepared scoped local-inference/ under existing C:\Users\dbsgu\AppData\Local\
+clef-use-validation-20261004, preserving global Python/config/driver/security.
+Native PyTorch2.11.0+rocm7.14.1 / HIP7.14.60850 and gfx1150 wheels from official
+AMD index installed; FP32/FP16/BF16 GPU numeric probes passed. GPU reports
+18099765248bytes total /17939394560free at probe. Existing driver
+32.0.31041.1004; current official driver matrix compliance not established.
+Omni separate native CPU env Torch2.11.0+cpu / TF4.46.3 / NumPy1.26.4.
+CLEF TF5.10.2 / bitsandbytes0.50.2; canonical non-accelerator hashes retained.
+Transferred40 model/cache files20453821318bytes, every SHA256 matched Windows.
+
+Actual NF4 kernels compared against dequantized/original references. Full CLEF
+first attempt stopped before inference: short visual exclusion still quantized
+vision. Inspected pinned TF should_convert_module actual prefix semantics;
+model.visual fixed it. 248 language modules NF4 double-quantized; vision/output/
+typed head floating FP16; 8685396456 modelbytes, 8805743104 GPUallocated at load.
+Positive completion three times goal.9444/condition.9624/modeCOMPLETED.9018;
+absent-condition control goal.0082/condition.0050 rejected completion (modeACT
+with no candidate is not correctBLOCKED proof). Model load21.9039s; cold52.0313s;
+positivewarm15.2816/15.4393s. Omni actual text/box checks2/2: cold8.4064/warm7.8115s
+after24.5651s load. First shell attempt aborted by PowerShell native-stderr warning
+policy; process absence checked before changing to CMD redirection, not model
+incompatibility. All failures retained in scoped raw SSD validation directory.
+
+Native full GUI pipeline (canonical0.1.5 core bd217b0, own experimental loader)
+COMPLETED: 2 correct actual clicks/4decisions/2freshfinalobservations,
+Task complete native callback,500ms delayed rendering,outerinterventions0,
+118.6999419s task wall excludes worker preinitialization. First GUI refused
+foreground change before capture with0inputs/0decisions, closed resources;
+recovery initializes both workers then resets/focuses owned window once. No
+foreground guard bypass. Public evidence docs/evidence/windows-local-inference.json.
+Raw logs/scripts/manifests/reports durable SSD validation/windows-local-20261004;
+Windows env/models retained for reproduction, no cache dependency on /tmp.
+
+Cleanup observed: exact owned task clef-use-local-model-20261004 Ready/action
+reidentified then removed; gui-token removed; loopback37945 listener absent;
+owned model/GUI processes absent. Agent finally requested prior foreground
+restoration, not independently asserted. Native diagnostic/source SHA matched
+canonical runtime bd217b0 and current own scripts. No live own GUI/model/SSH
+forward. New refusal test real subprocess rejects CPU readiness and reaps child:
+1pass/0.27s on native Windows. Clean canonical snapshot +ownedscripts/test:
+86pass/6.02s; lint/formatpass. No actor code included in those tests.
+
+Owned changes: scripts/windows_rocm_worker.py, windows_model_gui_smoke.py,
+tests/test_windows_rocm_worker.py, Windows-input/validation docs/evidence/handoff.
+One bounded correction to existing untracked actor quantization.py: excluded
+module name visual ->model.visual, other contents preserved. That draft file and
+all other existing24 actor paths remain excluded from publication. The public
+0.1.5 production default does not expose this experimental diagnostic NF4 path.
+Do not claim native local production prepare/CLI/MCP integration from this run.
+Next: finish owned review/checkpoint, audit full36section goal; fix doctor ready
+false-positive when ML envs missing/explicitdevice unsupported; review canonical
+Windows provisioning/integration separately. Mac input remains deferred; NVIDIA
+CUDA and largeCLEF NOT_RUN; public new0.1.5 upload route still unavailable.

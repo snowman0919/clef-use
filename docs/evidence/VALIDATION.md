@@ -3,21 +3,23 @@
 Observed on 2026-10-04: macOS arm64, Python 3.11.15, 48 GiB unified memory,
 primary screenshot 1800 x 1169, external SSD model cache. PyTorch 2.11.0,
 CLEF Transformers 5.10.2; OmniParser Transformers 4.46.3. Pinned model/source
-revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inference are NOT_RUN; Windows GUI evidence follows.
+revisions are in `src/clef_use/models.py`. NVIDIA CUDA remains NOT_RUN. Native
+Windows-local AMD ROCm/NF4 and CPU inference passed the narrow diagnostic below;
+it is not the released default model configuration.
 
 | Gate | Evidence and boundary |
 | --- | --- |
-| Unit/integration tests | Published 0.1.5: 83 passed locally and installed-wheel Windows in 7.48s; later diagnostic/reporting snapshot: 85 passed in 7.19s; real loopback HTTP/stdio MCP |
+| Unit/integration tests | Published 0.1.5: 83 passed locally and installed-wheel Windows in 7.48s; latest clean diagnostic snapshot: 86 passed in 6.02s; new worker refusal test passed natively on Windows in 0.27s; real loopback HTTP/stdio MCP |
 | CLI/MCP shared core | Both reach the same fixture session: two actions, four decisions, COMPLETED |
 | Input cleanup | Exceptions after key/button press release all tracked input and restore failsafe |
 | Runtime bounds | Confidence, safety, replan, hard budget, repeat states, abort and secret-redacted errors tested |
 | Native desktop capture | Actual nonuniform screenshot captured; no private screenshot published |
 | Native input permission | Screen Recording and Accessibility observed granted; permission is not a GUI task proof |
-| Actual GUI task | OBSERVED on Windows: disposable real GUI, native input, 2 model-selected actions/4 decisions; inference on Mac; macOS native input deferred |
+| Actual GUI task | OBSERVED on Windows: disposable real GUI, native input, 2 model-selected actions/4 decisions; both earlier Mac inference and later Windows-local ROCm/CPU inference passed; macOS native input deferred |
 | CLEF semantic text | Correct overdue invoice choice (0.9812), amount >1000 probability 0.9673; cold 56.607 seconds |
 | OmniParser pixels | Found Continue button/OCR on generated pixels; empty-OCR image safely returns empty map |
 | Real models, multi-action | COMPLETED: two actual model-selected actions, four decisions, two independent completion observations |
-| Later real-model retries | Earlier NO_PROGRESS/ERROR preserved; semantic context fixed; later full pipeline passed. Transient MPS placeholder error not reproduced in isolated model probes |
+| Later real-model retries | Earlier NO_PROGRESS/ERROR preserved; semantic context fixed; later full pipeline passed. Intermittent MPS placeholder errors remain unresolved; later controlled visual variants completed 10/10 warm tasks |
 | First/install/update | Native Windows 0.1.3 first install/CURRENT and isolated synthetic update 0.1.4; installed Mac version tracked in installed-update.json |
 | Failed update preservation | Bad checksum, missing download and wrong-version smoke retain the previous working version, including Unicode paths |
 | Installed MCP | Actual stdio initialization and five high-level tools passed through installed launcher |
@@ -25,7 +27,7 @@ revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inferenc
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
 | Hermes setup | Isolated official full CLI MCP connection and native discovery/handler completed 0.1.5 fixture actions; original user launcher interpreter missing; agent LLM conversation NOT_RUN |
 | Public HTTPS hosting | Bootstrap scripts return HTTP 200; public 0.1.3 manifest has 15 targets and isolated Mac/Windows HTTPS installation plus self-test passed; newer 0.1.5 is not deployed |
-| Windows | 0.1.5 installed wheel: 83 tests; native Unicode/click/wheel/shortcut/readiness/refusal/cleanup checks; later reporting regressions 2/2; Windows-local ML NOT_RUN |
+| Windows | 0.1.5 installed wheel: 83 tests; native Unicode/click/wheel/shortcut/readiness/refusal/cleanup checks; later reporting regressions 2/2; Windows-local ML and GUI PASSED with an experimental NF4 loader |
 
 Commands:
 
@@ -69,10 +71,49 @@ earlier MPS failures; arbitrary-input stability is unproven. Native input alone
 is not final goal completion.
 
 Non-blocking implementation limits: sessions are in memory; primary monitor only;
-Wayland and Windows/CUDA model execution are untested; large CLEF is untested;
+Wayland and NVIDIA CUDA model execution are untested; large CLEF is untested;
 non-Windows plain-text clipboard restoration cannot retain rich clipboard types; model
 forward cancellation stops late input but does not immediately interrupt tensor
 computation. Model constraints are probabilistic, not a security sandbox.
+
+## Native Windows-local inference
+
+[Windows-local evidence](windows-local-inference.json) records Windows 11 Pro,
+Python 3.12.10, Ryzen AI 9 HX 370 / Radeon 890M (`gfx1150`), PyTorch
+2.11.0+rocm7.14.1, Transformers 5.10.2 and bitsandbytes 0.50.2. The isolated
+OmniParser CPU environment uses PyTorch 2.11.0+cpu and Transformers 4.46.3.
+Forty transferred model/cache files (20,453,821,318 bytes) matched SHA-256 on
+Windows. Drivers, security settings, pagefile and UMA settings were unchanged.
+
+Actual FP32/FP16/BF16 GPU matrix results were finite and compared against a CPU
+reference. The NF4 kernel was compared against its dequantized reference and
+the original weights. Language modules alone were quantized: 248 modules;
+vision, output embeddings and the typed head stayed floating point. The short
+`visual` exclusion failed this invariant before inference; `model.visual`
+matched the actual Transformers module prefix and passed.
+
+CLEF produced three identical positive completion results: goal 0.9444,
+condition 0.9624, COMPLETED confidence 0.9018. Changing the requested condition
+to absent text reduced goal/condition probabilities to 0.0082/0.0050. This
+control rejects false completion; its ACT mode with no allowed action is not
+claimed as correct BLOCKED behavior. Cold forward: 52.0313s; subsequent positive
+forwards: 15.2816s/15.4393s; model load: 21.9039s. OmniParser found the expected
+text and boxes twice: 8.4064s/7.8115s after 24.5651s initialization.
+
+The canonical 0.1.5 runtime then completed the owned Windows GUI using Windows
+models: two correct native clicks, four decisions, two fresh final observations,
+`Task complete` callback readback and zero outer interventions. Task wall time
+was 118.6999s, excluding worker preinitialization. Rendering was delayed 500ms.
+The initial attempt refused a changed foreground before input; it remains in
+the evidence. The recovery initializes both workers before one owned-window
+reset; foreground/geometry guards remain active during the task. Owned workers,
+GUI, task, listener and token were cleaned up. Prior foreground restoration was
+requested but not independently asserted.
+
+This is one narrow native GUI task with an experimental diagnostic loader, not
+a production installer/backend support claim or a controlled speed comparison.
+The wider acceleration/quantization draft is not published, and the released
+default loader does not expose the NF4 path. See [Windows input](../WINDOWS_INPUT.md).
 
 Future optimization: profile cold loading, context size, perception and CLEF
 latency; test CUDA; compare controlled baselines; add DOM/AX fusion and temporal

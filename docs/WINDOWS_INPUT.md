@@ -85,7 +85,7 @@ Running that command in an SSH/service process is expected to refuse session 0.
 Keep user apps untouched, use only the disposable test window, and restore prior
 pointer/foreground/clipboard state. The diagnostic bridge binds loopback only,
 uses an ephemeral token read from a private file, and requires a private SSH
-forward. Never expose that test endpoint publicly.
+forward when its controller runs on macOS. Never expose that test endpoint publicly.
 
 ## Visual iteration, 0.1.5
 
@@ -111,3 +111,52 @@ calls: 4; exact perception cache hits: 1. See
 `evidence/windows-visual-recovery.json`. Inference remained on macOS MPS/CPU;
 input remained on the actual Windows desktop. This single successful run does
 not resolve earlier intermittent MPS failures or establish a latency improvement.
+
+## Windows-local ROCm diagnostic
+
+The native Windows-local run in `evidence/windows-local-inference.json` passed
+with Radeon 890M/gfx1150, Python 3.12.10, PyTorch 2.11.0+rocm7.14.1,
+Transformers 5.10.2 and bitsandbytes 0.50.2. OmniParser ran in a separate CPU
+environment with PyTorch 2.11.0+cpu / Transformers 4.46.3. The original pinned
+models were copied and verified; the vision tower, output embeddings and typed
+head remained FP16 while 248 language modules used NF4 double quantization.
+
+The tested AMD wheel selection for that isolated Python 3.12 environment was:
+
+```powershell
+python -m pip install --index-url https://repo.amd.com/rocm/whl-multi-arch/ `
+  "torch[device-gfx1150]==2.11.0+rocm7.14.1" `
+  "torchvision[device-gfx1150]==0.26.0+rocm7.14.1"
+```
+
+This is a diagnostic environment, separate from the released `models prepare`
+Python 3.11 lock. The remaining CLEF/Omni dependencies used the canonical hashed
+locks with accelerator packages removed, then separate native Torch builds.
+The report records actual installed versions and tested source hashes.
+See [AMD installation](https://rocm.docs.amd.com/projects/ai-ecosystem/en/latest/frameworks/pytorch/install.html)
+and [compatibility](https://rocm.docs.amd.com/en/docs-7.14.1/compatibility/compatibility-matrix.html).
+The test did not change drivers or security settings; compliance of the installed
+driver with the current official matrix was not established.
+
+To reproduce the GUI slice with those prepared environments, use the existing
+owned-window agent in an interactive Windows session, a private generated token
+file, and an isolated `CLEF_USE_CONFIG` pointing to the models and interpreters.
+The controller can run over SSH on the same Windows machine; its endpoint stays
+on Windows loopback, so this mode does not need an SSH port forward.
+
+```powershell
+python scripts/windows_model_gui_smoke.py --token-file "$validationRoot/gui-token" `
+  --port 37945 --rocm-worker scripts/windows_rocm_worker.py `
+  --output "$validationRoot/windows-local-gui.json"
+```
+
+`$validationRoot` is the private directory passed to the agent's `--root`;
+start the agent with the same port. The controller initializes both resident
+workers before resetting and focusing that owned window once. The experimental
+loader reuses the canonical worker protocol, request conversion, typed decision
+backend and runtime. It checks actual quantized module types before admitting
+inference and rejects CPU readiness. It is not the released default backend.
+Keep the original refusal/result files; the controller refuses an existing
+output. One native task completed two clicks/four decisions in 118.6999s after
+preinitialization, with two fresh final observations. No arbitrary-app stability,
+general quantization accuracy or latency improvement is inferred.

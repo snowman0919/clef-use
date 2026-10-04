@@ -1,0 +1,752 @@
+{
+  "status": "PASSED",
+  "date": "2026-10-04",
+  "scope": "Native Windows-local inference and owned GUI through canonical 0.1.5 runtime with an experimental ROCm/NF4 loader; not a released production accelerator configuration",
+  "hardware": {
+    "os": "Microsoft Windows 11 Pro",
+    "os_version": "10.0.26200",
+    "os_build": "26200",
+    "physical_memory_bytes": 25359659008,
+    "free_physical_bytes": 12902084608,
+    "virtual_bytes": 35991498752,
+    "free_virtual_bytes": 5219852288,
+    "cpu": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M           ",
+    "cores": 12,
+    "logical_processors": 24,
+    "gpus": [
+      {
+        "Name": "Virtual Display Driver",
+        "DriverVersion": "11.30.4.434"
+      },
+      {
+        "Name": "AMD Radeon(TM) 890M Graphics",
+        "DriverVersion": "32.0.31041.1004"
+      }
+    ],
+    "disk_free_bytes": 540268732416
+  },
+  "gpu_probe": {
+    "status": "OBSERVED",
+    "torch": "2.11.0+rocm7.14.1",
+    "hip": "7.14.60850",
+    "cuda": null,
+    "available": true,
+    "cpu_fp32_sum": -531.2806396484375,
+    "memory": [
+      17939394560,
+      18099765248
+    ],
+    "kernels": {
+      "float32": {
+        "finite": true,
+        "max_absolute_error": 2.6702880859375e-05,
+        "relative_l2_error": 2.1843391095899278e-07,
+        "elapsed": 0.958914700022433
+      },
+      "float16": {
+        "finite": true,
+        "max_absolute_error": 0.02278900146484375,
+        "relative_l2_error": 0.00035946580464951694,
+        "elapsed": 0.2621843999950215
+      },
+      "bfloat16": {
+        "finite": true,
+        "max_absolute_error": 0.18715667724609375,
+        "relative_l2_error": 0.002879805862903595,
+        "elapsed": 0.13544079998973757
+      }
+    },
+    "elapsed": 7.3743321895599365
+  },
+  "gpu_name": "AMD Radeon 890M / gfx1150",
+  "gpu_reported_memory_bytes": 18099765248,
+  "precision": "NF4 double quantization; FP16 vision tower, output embeddings and typed joint head",
+  "quantization_kernel_probe": {
+    "started": 1791092669.1662838,
+    "rows": [
+      {
+        "device": "cuda",
+        "dtype": "torch.float16",
+        "finite": true,
+        "kernel_relative_error": 0.00044724848703481257,
+        "quantization_relative_error": 0.09140083193778992,
+        "packed_bytes": 8192,
+        "original_bytes": 65536,
+        "seconds": 1.4760939000407234
+      },
+      {
+        "device": "cpu",
+        "dtype": "torch.bfloat16",
+        "finite": true,
+        "kernel_relative_error": 0.0,
+        "quantization_relative_error": 0.09149359911680222,
+        "packed_bytes": 8192,
+        "original_bytes": 65536,
+        "seconds": 0.04308090003905818
+      }
+    ],
+    "torch": "2.11.0+rocm7.14.1",
+    "hip": "7.14.60850",
+    "bitsandbytes": "0.50.2",
+    "elapsed": 8.838847398757935
+  },
+  "clef": {
+    "status": "PASSED",
+    "started": 1791093038.326339,
+    "rows": [
+      {
+        "name": "visible_positive_cold",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.9444
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.0305
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0301
+          },
+          "progress": {
+            "type": "score",
+            "score": 3.4297,
+            "confidence": 0.7697,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.0578,
+              "1": 0.0553,
+              "2": 0.0559,
+              "3": 0.0612,
+              "4": 0.7697
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.9624
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.9018,
+            "probabilities": {
+              "ACT": 0.0392,
+              "WAIT": 0.0157,
+              "BLOCKED": 0.0238,
+              "NEEDS_REPLAN": 0.0195,
+              "COMPLETED": 0.9018
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1801
+          }
+        },
+        "passed": true,
+        "seconds": 52.03129990003072,
+        "gpu_allocated": 8839298048,
+        "gpu_reserved": 9783214080
+      },
+      {
+        "name": "visible_positive_warm",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.9444
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.0305
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0301
+          },
+          "progress": {
+            "type": "score",
+            "score": 3.4297,
+            "confidence": 0.7697,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.0578,
+              "1": 0.0553,
+              "2": 0.0559,
+              "3": 0.0612,
+              "4": 0.7697
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.9624
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.9018,
+            "probabilities": {
+              "ACT": 0.0392,
+              "WAIT": 0.0157,
+              "BLOCKED": 0.0238,
+              "NEEDS_REPLAN": 0.0195,
+              "COMPLETED": 0.9018
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1801
+          }
+        },
+        "passed": true,
+        "seconds": 15.281599899986759,
+        "gpu_allocated": 8839298048,
+        "gpu_reserved": 10074718208
+      },
+      {
+        "name": "absent_condition_control",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0082
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.7796
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0352
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.1336,
+            "confidence": 0.9285,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.9285,
+              "1": 0.0315,
+              "2": 0.024,
+              "3": 0.0098,
+              "4": 0.0061
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.005
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.5367,
+            "probabilities": {
+              "ACT": 0.5367,
+              "WAIT": 0.0285,
+              "BLOCKED": 0.1385,
+              "NEEDS_REPLAN": 0.2887,
+              "COMPLETED": 0.0076
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0302
+          }
+        },
+        "passed": true,
+        "seconds": 16.827476000005845,
+        "gpu_allocated": 8839298048,
+        "gpu_reserved": 9999220736
+      },
+      {
+        "name": "visible_positive_recovery",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.9444
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.0305
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0301
+          },
+          "progress": {
+            "type": "score",
+            "score": 3.4297,
+            "confidence": 0.7697,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.0578,
+              "1": 0.0553,
+              "2": 0.0559,
+              "3": 0.0612,
+              "4": 0.7697
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.9624
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.9018,
+            "probabilities": {
+              "ACT": 0.0392,
+              "WAIT": 0.0157,
+              "BLOCKED": 0.0238,
+              "NEEDS_REPLAN": 0.0195,
+              "COMPLETED": 0.9018
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1801
+          }
+        },
+        "passed": true,
+        "seconds": 15.439254499971867,
+        "gpu_allocated": 8839298048,
+        "gpu_reserved": 10437525504
+      }
+    ],
+    "model_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "precision": "NF4 double-quantization; float16 vision/lm_head/joint head",
+    "limits": "Standalone resident upstream loader; no GUI input; experimental Windows ROCm environment",
+    "torch": "2.11.0+rocm7.14.1",
+    "hip": "7.14.60850",
+    "transformers": "5.10.2",
+    "bitsandbytes": "0.50.2",
+    "load_seconds": 21.90391490003094,
+    "quantized_modules": 248,
+    "quantized_visual": [],
+    "quantized_lm_head": [],
+    "quantized_joint_head": [],
+    "gpu_memory_allocated": 8805743104,
+    "gpu_memory_reserved": 8835301376,
+    "model_bytes": 8685396456,
+    "elapsed": 127.09527969360352
+  },
+  "omni": {
+    "status": "PASSED",
+    "started": 1791093194.90021,
+    "rows": [
+      {
+        "name": "cold",
+        "seconds": 8.406409100047313,
+        "objects": [
+          {
+            "type": "text",
+            "bbox": [
+              0.044444444444444446,
+              0.07666666666666666,
+              0.41,
+              0.165
+            ],
+            "interactivity": false,
+            "content": "Local test workspace",
+            "source": "box_ocr_content_ocr"
+          },
+          {
+            "type": "text",
+            "bbox": [
+              0.042222222222222223,
+              0.3433333333333333,
+              0.30333333333333334,
+              0.43166666666666664
+            ],
+            "interactivity": false,
+            "content": "Task complete",
+            "source": "box_ocr_content_ocr"
+          }
+        ],
+        "passed": true
+      },
+      {
+        "name": "warm",
+        "seconds": 7.8114783999626525,
+        "objects": [
+          {
+            "type": "text",
+            "bbox": [
+              0.044444444444444446,
+              0.07666666666666666,
+              0.41,
+              0.165
+            ],
+            "interactivity": false,
+            "content": "Local test workspace",
+            "source": "box_ocr_content_ocr"
+          },
+          {
+            "type": "text",
+            "bbox": [
+              0.042222222222222223,
+              0.3433333333333333,
+              0.30333333333333334,
+              0.43166666666666664
+            ],
+            "interactivity": false,
+            "content": "Task complete",
+            "source": "box_ocr_content_ocr"
+          }
+        ],
+        "passed": true
+      }
+    ],
+    "load_seconds": 24.565077600011136,
+    "torch": "2.11.0+cpu",
+    "transformers": "4.46.3",
+    "device": "cpu",
+    "omni_revision": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+    "source_revision": "354021201345a96178360b28733573e27269f2de",
+    "elapsed": 43.83066463470459
+  },
+  "gui": {
+    "session_id": "ae1e11369ba644909bc637a6c13dae7f",
+    "status": "COMPLETED",
+    "steps": 2,
+    "rounds": 4,
+    "last_action": {
+      "id": "a0",
+      "operation": "click",
+      "target": "obj_d731c1a58d6a"
+    },
+    "confidence": 1.0,
+    "reason": "goal and conditions verified on two fresh observations",
+    "blocker": null,
+    "summary": "COMPLETED after 2 actions, 4 decisions",
+    "mode": "REAL_WINDOWS_GUI_LOCAL_ROCM_DIAGNOSTIC",
+    "native_input": true,
+    "inference_host": "Windows 11",
+    "input_host": "Windows 11",
+    "outer_interventions": 0,
+    "wall_seconds": 118.6999418999767,
+    "metrics": [
+      {
+        "capture_ms": 878.1592000159435,
+        "parser_ms": 9612.083699961659,
+        "decision_ms": 38737.95069998596,
+        "execution_ms": 108.78089995821938,
+        "verification_ms": 62.6922000083141,
+        "state_change_score": 0.000743282498184459,
+        "capture_calls": 12,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.33515,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.9247,
+        "effect_probability": 0.0554,
+        "goal_probability": 0.0282,
+        "condition_probabilities": [
+          0.0055
+        ],
+        "replan_probability": 0.2147,
+        "safety_probability": 0.0135,
+        "wait_frames": 10,
+        "wait_ms": 1061.9999999762513,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_967ceabb4393"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": true,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-04T06:03:48.151786+00:00",
+        "session_id": "ae1e11369ba644909bc637a6c13dae7f",
+        "step": 1,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 655.7987001724541,
+        "parser_ms": 9149.509000009857,
+        "decision_ms": 17246.871799987275,
+        "execution_ms": 23.16189999692142,
+        "verification_ms": 63.78920009592548,
+        "state_change_score": 0.005317175018155411,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.404475,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.8492,
+        "effect_probability": 0.0505,
+        "goal_probability": 0.0213,
+        "condition_probabilities": [
+          0.0072
+        ],
+        "replan_probability": 0.3431,
+        "safety_probability": 0.011,
+        "capture_calls": 11,
+        "wait_frames": 10,
+        "wait_ms": 1108.9999999967404,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_d731c1a58d6a"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": true,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-04T06:04:15.778922+00:00",
+        "session_id": "ae1e11369ba644909bc637a6c13dae7f",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 178.05699998280033,
+        "parser_ms": 8959.691299998667,
+        "decision_ms": 16029.82360002352,
+        "execution_ms": 0.0,
+        "verification_ms": 3.5670999786816537,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.85765,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.9017,
+        "effect_probability": 0.1793,
+        "goal_probability": 0.9446,
+        "condition_probabilities": [
+          0.9625
+        ],
+        "replan_probability": 0.0305,
+        "safety_probability": 0.0302,
+        "capture_calls": 3,
+        "wait_frames": 2,
+        "wait_ms": 187.99999996554106,
+        "visual_wait_state": "STABLE",
+        "related_change": false,
+        "timestamp": "2026-10-04T06:04:41.021051+00:00",
+        "session_id": "ae1e11369ba644909bc637a6c13dae7f",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 54.080599977169186,
+        "parser_ms": 1.6364000039175153,
+        "decision_ms": 15867.878400022164,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.85765,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.9017,
+        "effect_probability": 0.1793,
+        "goal_probability": 0.9446,
+        "condition_probabilities": [
+          0.9625
+        ],
+        "replan_probability": 0.0305,
+        "safety_probability": 0.0302,
+        "capture_calls": 1,
+        "reason": "goal and conditions verified on two fresh observations",
+        "timestamp": "2026-10-04T06:04:56.980188+00:00",
+        "session_id": "ae1e11369ba644909bc637a6c13dae7f",
+        "step": 2,
+        "terminal_event": "COMPLETED"
+      }
+    ],
+    "device": "cuda",
+    "parser_device": "cpu",
+    "quantization": "NF4; FP16 vision/output/joint head",
+    "independent_gui_readback": {
+      "stage": 2,
+      "clicks": [
+        "Continue",
+        "Confirm"
+      ],
+      "input_attempts": [
+        {
+          "target_label": "Continue ",
+          "visible_label": "Continue",
+          "correct": true
+        },
+        {
+          "target_label": "Confirm ",
+          "visible_label": "Confirm",
+          "correct": true
+        }
+      ],
+      "render_delay_ms": 500,
+      "no_effect": false,
+      "visible_result": "Task complete",
+      "render_pending": false,
+      "desktop": {
+        "session_id": 1,
+        "desktop": "Default",
+        "foreground_window": 2883732
+      },
+      "native_input": true
+    }
+  },
+  "model_transfer": {
+    "files": 40,
+    "bytes": 20453821318,
+    "sha256_all_match": true
+  },
+  "production_runtime_source": "bd217b06868f49b963b37b21b0d9535ccea24baa",
+  "diagnostic_source_hashes": [
+    {
+      "file": "windows_model_gui_smoke.py",
+      "sha256": "71f768fc5daf8c9ea119301dbefb440180c02f21dbcffb8c7178f6d287c705b6"
+    },
+    {
+      "file": "windows_model_gui_agent.py",
+      "sha256": "a09544b175b3dcb870f7e39696a69f5c8863af2b320ab10317cd5f54277c58d2"
+    },
+    {
+      "file": "windows_visual_benchmark.py",
+      "sha256": "d6d5ec4311a0c38fd13c224f2062aaf1ae5f198178955c5049a9bf48a027a674"
+    },
+    {
+      "file": "windows_rocm_worker.py",
+      "sha256": "210ed05f8d590d10c11eb6badba1ddcf8b897e69a816a8e9b16e705849cdac52"
+    },
+    {
+      "file": "model_worker.py",
+      "sha256": "e15de69916704b30eb2488bb756e211778b8705c80a2aa4361cc33fb4655e385"
+    },
+    {
+      "file": "models.py",
+      "sha256": "c64aaad6d6ac95eb0f6ea159f44383b9697ed3793bd5d7045345f44127df7e2b"
+    },
+    {
+      "file": "clef_probe.py",
+      "sha256": "82d4f032393a8a12bb31bf6713daba68f0dce9627c07892a6cfa73b5029e27e2"
+    },
+    {
+      "file": "omni_probe.py",
+      "sha256": "ec5d94edd6806fbed21387348c6603bc4c5277d393a6d0a063da43a19885af3b"
+    }
+  ],
+  "failures_preserved": [
+    {
+      "attempt": "PowerShell warning redirection",
+      "result": "Harness aborted on native stderr warning before model load; process absence observed before corrected CMD redirection"
+    },
+    {
+      "attempt": "Short vision exclusion pattern",
+      "result": "FAILED before inference: visual layers were quantized; corrected to full model.visual path, actual 248 quantized language modules and no quantized vision/output/joint head"
+    },
+    {
+      "attempt": "Initial local GUI",
+      "status": "ERROR",
+      "actions": 0,
+      "decisions": 0,
+      "reason": "Foreground changed before capture; no input sent. Worker and window closed. Recovery initializes both models before one owned-window reset."
+    }
+  ],
+  "cleanup": {
+    "status": "CLEANED",
+    "owned_processes": 0,
+    "task_removed": true,
+    "token_removed": true,
+    "listener_absent": true,
+    "foreground_restore": "requested by agent finally; not independently asserted"
+  },
+  "validation": {
+    "local_clean_snapshot_tests": "86 passed in 6.02s",
+    "lint": "PASSED",
+    "format": "PASSED",
+    "native_windows_worker_refusal_test": "1 passed in 0.27s"
+  },
+  "limitations": [
+    "One actual Windows-local GUI task; no arbitrary-app stability or speedup claim. Task runtime wall excludes resident worker initialization.",
+    "Absent-condition control rejected completion, but chose ACT with no allowed action; no claim of correct BLOCKED mode.",
+    "Small numeric kernel checks and narrow semantic/GUI controls do not establish general quantization accuracy. No Windows full-precision baseline fits the observed GPU budget.",
+    "Installed AMD driver remained 32.0.31041.1004; no driver/security/pagefile/UMA changes. Current official driver matrix compliance was not established.",
+    "Published 0.1.5 default worker/setup does not expose this diagnostic NF4 loader. Existing broader acceleration/quantization draft remains uncommitted.",
+    "Windows uses torch CUDA API for HIP; this is AMD ROCm, not NVIDIA CUDA. Native macOS input remains deferred; public newer release deployment remains separate."
+  ]
+}
