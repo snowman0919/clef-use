@@ -138,3 +138,15 @@ First deployment validated on 2026-10-04: [Actions run 37194265112](https://gith
 passed all 15 builds, assembly and deployment. Public latest is 0.1.8, both
 bootstraps match the tested source, and all previous 0.1.3 archives are preserved.
 See [deployment evidence](evidence/deployment.json).
+
+## Version 0.1.10
+
+[Release v0.1.10](https://github.com/snowman0919/clef-use/releases/tag/v0.1.10)
+from source0dec7a0 includes OS/backend deployment profiles and agent-facing MCP
+startup update requests. [CI37210007755](https://github.com/snowman0919/clef-use/actions/runs/37210007755)
+passed all6jobs/154tests each. [Release37210009186](https://github.com/snowman0919/clef-use/actions/runs/37210009186)
+passed all15native build/install checks, assembly and dev publication. Public
+HTTPS latest0.1.10 and bootstraps were read back; installed packages passed
+Mac/Windows MCP initialization. Prior0.1.3 and0.1.8 archives remain unchanged.
+See [evidence](evidence/release-0.1.10.json) for scope and limitations. Version
+0.1.9 was cancelled before deployment; its tag remains an audit checkpoint.

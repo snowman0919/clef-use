@@ -613,3 +613,16 @@ were present; actual tested operations passed. No new full model load/inference,
 GUI, all-profile installation or CUDA/Linux ROCm/XPU/macOS device proof. Evidence
 [deployment-profiles.json](deployment-profiles.json). Publication remains held;
 public 0.1.8 profile behavior is unchanged.
+
+2026-10-05 source0.1.10 0dec7a0: CI37210007755 all6jobs passed154tests each;
+release37210009186 all15native build/install jobs, assembly and dev deployment
+passed. GitHub release published; canonical public HTTPS latest0.1.10/15targets,
+bootstraps match source. Independent dev readback verified45archives across
+0.1.3/0.1.8/0.1.10 and retained0.1.8 manifest bytes. Actual managed macOS update
+0.1.3->0.1.10 preserved config; actual Windows public installation and fixture
+self-test passed, own installation removed. Actual installed-package stdio MCP
+on Mac/Windows transmitted update requests for a controlled newer version, and
+listed five tools. Current public version initialization also passed. No new
+full-model/real-GUI/performance evidence. Earlier0.1.9 release cancelled before
+deployment due to a Windows test fixture platform-cache failure; corrected native
+Windows154tests and full CI passed. [Evidence](release-0.1.10.json).

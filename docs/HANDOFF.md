@@ -632,3 +632,27 @@ transfer corrected that staging issue before the passing run. No native GUI,
 model load, global package/config/driver or PATH change. Own scope mcp-update/
 holds the frozen source plus logs. Production update code stayed unchanged;
 0.1.10 carries the test fixture correction and correct release version.
+
+2026-10-05 release/update-request task completed. Canonical source0.1.10
+0dec7a01f210e2a36c60944292383cc4f1869873 pushed/tagged; all6CI jobs37210007755
+passed154tests each. Release37210009186 passed all15native build/install jobs,
+assembly and automatic dev deployment. GitHub releasev0.1.10 published. Public
+canonical installer fetch confirms latest0.1.10/15targets; root bootstrap bytes
+match source. Independent dev readback verified all45archives across0.1.3,
+0.1.8 and0.1.10; prior0.1.8 public manifest hash unchanged.
+
+Actual managed macOS CLI updated0.1.3->0.1.10, config bytes preserved. Actual
+Windows HTTPS bootstrap installation0.1.10 and deterministic fixture self-test
+passed in owned isolated root; public installed-package MCP on both OSes passed
+real stdio initialize/list-tools. Public current manifest yielded no update
+request; controlled newer0.1.11 manifest yielded the exact update/reconnect
+request in initialization instructions. Five tools retained. No assertion that
+all harnesses surface/act on instructions, or that future0.1.11 is public.
+Windows owned mcp-update installation/source directory removed after readback;
+prior model/dev environments preserved. No owned foreground/model/server/task/
+listener from this validation remains. Models/GGUF files were not published;
+no new ML/GUI correctness or serving-speed result. Existing24actor draft bytes
+preserved and excluded from releases. Original broader goal keeps its prior
+paused/deferred scope. Evidence release-0.1.10.json. Final doc checkpoint only;
+never rebuild/replace published0.1.10 hashes, use original release artifact for
+retry. Owned local isolation worktree can be removed after checkpoint verification.

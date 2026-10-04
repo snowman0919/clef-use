@@ -1,0 +1,100 @@
+{
+  "date": "2026-10-05",
+  "status": "PASSED",
+  "version": "0.1.10",
+  "source_sha": "0dec7a01f210e2a36c60944292383cc4f1869873",
+  "release_url": "https://github.com/snowman0919/clef-use/releases/tag/v0.1.10",
+  "ci": {
+    "run": 37210007755,
+    "jobs": 6,
+    "tests_per_job": 154,
+    "status": "success",
+    "test_readbacks": [
+      "checks (macos-15, 3.11)\tRun uv run --no-sync pytest -q\t2026-10-04T14:39:34.2210550Z 154 passed in 47.53s",
+      "checks (windows-2022, 3.11)\tRun uv run --no-sync pytest -q\t2026-10-04T14:39:00.6411382Z 154 passed in 11.03s",
+      "checks (macos-15, 3.13)\tRun uv run --no-sync pytest -q\t2026-10-04T14:39:35.5971030Z 154 passed in 47.73s",
+      "checks (ubuntu-24.04, 3.13)\tRun uv run --no-sync pytest -q\t2026-10-04T14:38:52.8256312Z 154 passed in 9.19s",
+      "checks (windows-2022, 3.13)\tRun uv run --no-sync pytest -q\t2026-10-04T14:39:04.5247621Z 154 passed in 13.25s",
+      "checks (ubuntu-24.04, 3.11)\tRun uv run --no-sync pytest -q\t2026-10-04T14:38:54.0356779Z 154 passed in 10.54s"
+    ]
+  },
+  "release": {
+    "run": 37210009186,
+    "native_build_install_jobs": 15,
+    "assembly": "success",
+    "dev_deploy": "success",
+    "github_release": "published"
+  },
+  "public": {
+    "base_url": "https://ftp.kotori9.dev/clef-use",
+    "version": "0.1.10",
+    "artifacts": 15,
+    "bootstrap_sha256": {
+      "install.sh": "5a7285d72e0f0cdea7b829c4ae0b1bf42408592d720514b50212196e7b8878cd",
+      "install.ps1": "efc8c12d66f413b5e65e054eac37050e289291eab47cfb1a7d6964c998c275c3"
+    },
+    "bootstraps_match_source": true
+  },
+  "dev_archive_readback": {
+    "0.1.3": 15,
+    "0.1.8": 15,
+    "0.1.10": 15,
+    "prior_018_manifest_unchanged": true
+  },
+  "macos_managed_update": {
+    "previous_version": "0.1.3",
+    "current_version": "0.1.10",
+    "config_bytes_preserved": true,
+    "mcp": {
+      "status": "PASSED",
+      "version": "0.1.10",
+      "platform": "darwin",
+      "actual_public_manifest_handshake": "CURRENT; no update request",
+      "controlled_newer_manifest_handshake": "Submit bounded GUI goals to computer_run. The local runtime owns all inner-loop actions. Use observe and continue only after escalation; abort stops input. Update requested: clef-use 0.1.11 is available (installed 0.1.10). Update with `clef-use update` when permitted by the user's instructions, then reconnect this MCP server before starting GUI work.",
+      "tools": 5,
+      "gui_model_execution": "NOT_RUN"
+    }
+  },
+  "windows": {
+    "native_source_tests": 154,
+    "native_source_test_seconds": 11.14,
+    "public_https_bootstrap_install": "PASSED",
+    "version": "0.1.10",
+    "fixture_self_test": "PASSED; control flow only",
+    "mcp": {
+      "status": "PASSED",
+      "version": "0.1.10",
+      "platform": "win32",
+      "actual_public_manifest_handshake": "CURRENT; no update request",
+      "controlled_newer_manifest_handshake": "Submit bounded GUI goals to computer_run. The local runtime owns all inner-loop actions. Use observe and continue only after escalation; abort stops input. Update requested: clef-use 0.1.11 is available (installed 0.1.10). Update with `clef-use update` when permitted by the user's instructions, then reconnect this MCP server before starting GUI work.",
+      "tools": 5,
+      "gui_model_execution": "NOT_RUN"
+    },
+    "owned_install_source_directory_cleanup": "PASSED"
+  },
+  "aborted_release": {
+    "version": "0.1.9",
+    "ci_run": 37209175551,
+    "release_run": 37209176889,
+    "publication": "cancelled before assembly/deploy",
+    "cause": "Doctor readiness fixture changed sys.platform without mocking host_system, poisoning Windows platform.uname cache; production update code unchanged",
+    "native_reproduction": {
+      "simulated_linux": [
+        "linux",
+        ""
+      ],
+      "after_restoring_sys_platform": [
+        "linux",
+        ""
+      ]
+    },
+    "resolution": "Mock host_system at the fixture boundary; all six CI jobs and native Windows complete suite passed"
+  },
+  "limits": [
+    "New full CLEF/OmniParser inference and actual GUI execution NOT_RUN for this release task",
+    "Future 0.1.11 notification uses a controlled manifest; it is not a published future release",
+    "Agent receives InitializeResult.instructions; client behavior determines model presentation/action",
+    "No new model weights or GGUF publication"
+  ],
+  "timezone": "Asia/Seoul"
+}
