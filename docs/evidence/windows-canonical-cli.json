@@ -1,0 +1,205 @@
+{
+  "date": "2026-10-04",
+  "status": "OBSERVED",
+  "candidate_version": "0.1.8",
+  "source_basis": "126257b714818e33b16f66de360fcbf8dc8d8803",
+  "scope": "Native Windows CLI/service/worker; separate owned-GUI and installer lifecycle gates",
+  "hardware": {
+    "os": "Windows 11 Pro",
+    "gpu": "AMD Radeon 890M",
+    "arch": "gfx1150",
+    "python": "3.12.10"
+  },
+  "preparation": {
+    "profile": "windows-rocm",
+    "fresh_ml_environments": true,
+    "existing_pinned_models_reused": true,
+    "clef_device": "cuda (ROCm HIP)",
+    "parser_device": "cpu",
+    "nf4_modules": 248,
+    "vision_and_joint_head": "floating point",
+    "both_canonical_workers_initialized": true
+  },
+  "cli_gui": {
+    "mode": "REAL_WINDOWS_CANONICAL_CLI",
+    "uses_action_bridge": false,
+    "exit_code": 0,
+    "runtime": {
+      "session_id": "fccd9028e3324d2a89a12e2fa01023d1",
+      "status": "COMPLETED",
+      "steps": 2,
+      "rounds": 4,
+      "last_action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_35ae6eb45e63"
+      },
+      "confidence": 1.0,
+      "reason": "goal and conditions verified on two fresh observations",
+      "blocker": null,
+      "summary": "COMPLETED after 2 actions, 4 decisions"
+    },
+    "independent_gui_readback": {
+      "stage": 2,
+      "clicks": [
+        "Continue",
+        "Confirm"
+      ],
+      "visible_result": "Task complete",
+      "render_pending": false
+    },
+    "endpoint_removed": true
+  },
+  "earlier_failed_cli": {
+    "mode": "REAL_WINDOWS_CANONICAL_CLI",
+    "uses_action_bridge": false,
+    "exit_code": 2,
+    "runtime": {
+      "session_id": "33034a6bdb034f9483016cf80bd9a4c0",
+      "status": "ERROR",
+      "steps": 0,
+      "rounds": 0,
+      "last_action": null,
+      "confidence": null,
+      "reason": "ModelWorkerError in runtime backend",
+      "blocker": null,
+      "summary": "ERROR after 0 actions, 0 decisions"
+    },
+    "independent_gui_readback": {
+      "stage": 0,
+      "clicks": [],
+      "visible_result": "",
+      "render_pending": false
+    },
+    "endpoint_removed": true
+  },
+  "earlier_backend_error": {
+    "code": "OUT_OF_MEMORY",
+    "frames": [
+      {
+        "file": "module.py",
+        "function": "_call_impl",
+        "line": 1790
+      },
+      {
+        "file": "deprecation.py",
+        "function": "wrapped_func",
+        "line": 171
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "forward",
+        "line": 968
+      },
+      {
+        "file": "modeling_qwen3_5.py",
+        "function": "eager_attention_forward",
+        "line": 633
+      }
+    ]
+  },
+  "pixel_budget_probe": [
+    {
+      "kwargs": {
+        "max_pixels": 262144
+      },
+      "processor": "Qwen2VLImageProcessor",
+      "grid": [
+        1,
+        136,
+        240
+      ],
+      "patches": 32640,
+      "pixels": 8355840
+    },
+    {
+      "kwargs": {
+        "min_pixels": 3136,
+        "max_pixels": 262144
+      },
+      "processor": "Qwen2VLImageProcessor",
+      "grid": [
+        1,
+        24,
+        42
+      ],
+      "patches": 1008,
+      "pixels": 258048
+    }
+  ],
+  "correction": "Pass both pixel bounds required by pinned processor; use existing SDPA on HIP instead of eager attention. No new backend or quantized cache.",
+  "live_cleanup": {
+    "owned_processes": 0,
+    "gui_task_removed": true,
+    "private_token_removed": true,
+    "endpoint_removed": true,
+    "test_listeners": 0
+  },
+  "tests": {
+    "macos_clean": "106 passed in 6.45s",
+    "windows_installed_package": "106 passed in 9.01s",
+    "lint_and_format": "passed"
+  },
+  "raw_evidence": "/Volumes/SSD/AI/clef-use/validation/windows-canonical-20261004",
+  "limits": [
+    "One disposable owned GUI task only; arbitrary applications and larger CLEF not validated.",
+    "Two inference options changed together; pixel-bound effect measured separately, SDPA performance effect not isolated.",
+    "Earlier OOM and pointer-restore failure retained; successful GUI closure independently checked.",
+    "Public latest source/artifact delivery remains separate.",
+    "macOS input remains deferred."
+  ],
+  "external_sources": [
+    "https://huggingface.co/docs/transformers/v5.10.2/model_doc/qwen3_5",
+    "https://rocm.docs.amd.com/en/docs-7.14.0/install/rocm.html"
+  ],
+  "managed_installer_lifecycle": {
+    "mode": "NATIVE_WINDOWS_INSTALL_COMMAND_TO_REMOVAL",
+    "installation_command": "& ([ScriptBlock]::Create((irm 'http://127.0.0.1:37947/install.ps1'))) --allow-insecure-localhost",
+    "lifecycle_executed": true,
+    "mcp_tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort"
+    ],
+    "cli_run": {
+      "session_id": "cd73d0a8e88346c880c9f792ab810e71",
+      "status": "BLOCKED",
+      "steps": 0,
+      "rounds": 0,
+      "last_action": null,
+      "confidence": null,
+      "reason": "interactive desktop access unavailable",
+      "blocker": {
+        "kind": "ACCESS_UNAVAILABLE",
+        "observed": {
+          "interactive_desktop": false
+        },
+        "resume_when": "interactive unlocked desktop"
+      },
+      "summary": "BLOCKED after 0 actions, 0 decisions"
+    },
+    "run_context": "SSH Session 0; negative execution boundary, not a GUI success assertion",
+    "cleanup": {
+      "shutdown_exit_code": 0,
+      "endpoint_absent": true,
+      "install_root_absent": true,
+      "launcher_absent": true,
+      "user_path_unchanged": true,
+      "existing_launcher_unchanged": true,
+      "owned_processes_absent": true
+    },
+    "canonical_cli_gui_success": false,
+    "errors": [],
+    "version": "0.1.8",
+    "boundary": "No GUI inside the installer lifecycle command; independent installed same-version normal CLI GUI proof above."
+  },
+  "environment_cleanup": {
+    "owned_runtime_and_fresh_ml_envs_removed": true,
+    "owned_processes": 0,
+    "test_listeners": 0,
+    "previous_model_cache_preserved": true,
+    "managed_install_removed": true
+  }
+}

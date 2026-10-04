@@ -55,7 +55,7 @@ def test_doctor_refuses_ready_with_cached_models_but_missing_ml_prerequisite(mon
     monkeypatch.setattr(
         diagnostics,
         "ml_environment_probe",
-        lambda _p, kind, _d: {
+        lambda _p, kind, _d, *_: {
             "status": "ERROR" if kind == missing else "OBSERVED",
             "ready": kind != missing,
         },

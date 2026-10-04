@@ -41,3 +41,5 @@ doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오�
 제거하려면 유휴 런타임을 종료하고 관리되는 실행 파일과 설치 디렉터리만 삭제하세요. POSIX는 ~/.local/bin/clef-use와 ~/.local/share/clef-use, Windows는 %LOCALAPPDATA%\clef-use와 해당 사용자 PATH 항목입니다. harness 설정에서는 clef-use만 제거하세요. 명시적으로 삭제하려는 경우가 아니면 캐시와 설정을 보존하세요.
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
+
+0.1.8의 `models prepare`는 Windows Radeon 890M(gfx1150)에서 고정 ROCm/NF4 구성을 자동 선택합니다. Python 3.12와 CPU OmniParser를 사용하며, 두 모델이 실제 초기화된 후 설정을 저장합니다. 명시적으로 바꾸려면 `--profile default` 또는 `--quantization none`을 사용하세요. 실제 검증은 임시 GUI 작업 하나이며, 공개 배포 상태는 별도로 기록합니다.

@@ -33,7 +33,9 @@ def parser():
     models.add_argument(
         "action", choices=["list", "download", "prepare"], nargs="?", default="list"
     )
-    models.add_argument("--python", default="python3.11")
+    models.add_argument("--python")
+    models.add_argument("--profile", choices=["auto", "default", "windows-rocm"], default="auto")
+    models.add_argument("--quantization", choices=["none", "4bit"])
     commands.add_parser("mcp")
     install = commands.add_parser("install-mcp")
     install.add_argument("harness", choices=["codex", "hermes", "omp"])
@@ -96,7 +98,7 @@ def main(argv=None):
             if args.action == "prepare":
                 from .provision import prepare
 
-                result = prepare(config, args.python)
+                result = prepare(config, args.python, args.profile, args.quantization)
             else:
                 if args.action == "download":
                     for model in [

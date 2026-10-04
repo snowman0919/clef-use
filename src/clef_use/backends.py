@@ -78,7 +78,7 @@ class JsonWorker:
         threading.Thread(
             target=self._reader, args=(self.process, self.replies), daemon=True
         ).start()
-        self._receive()
+        return self._receive()
 
     def request(self, payload):
         with self.lock:

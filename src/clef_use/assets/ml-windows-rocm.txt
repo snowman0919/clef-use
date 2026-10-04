@@ -1,0 +1,11 @@
+# Official AMD Windows gfx1150 wheels and SDK; pinned from verified pip resolution.
+torch==2.11.0+rocm7.14.1 --hash=sha256:a82e9ac627d5735c9c17db257a2a1683e579d90a48dc192ca5ed9e9cd7932df0
+torchvision==0.26.0+rocm7.14.1 --hash=sha256:6b0729c322b01330d374c0dfd8e1685e453d6780e333e2b5326c970a75824290
+amd-torch-device-gfx1150==2.11.0+rocm7.14.1 --hash=sha256:6c34e3e867295e2a0403ea5e80b1a47e0d9d63449da3e9158412a7c4c5eb7be3
+amd-torch-device-gfx115x==2.11.0+rocm7.14.1 --hash=sha256:c662762bc67ad33a828be476ca6371a012fd3f4b356f3a82e0921eae54c6dbfe
+amd-torchvision-device-gfx1150==0.26.0+rocm7.14.1 --hash=sha256:e3fd008bfdeb32ee4702f4e6dd136bc24c50ca95b41ee27a1e42081f7ebf893f
+rocm==7.14.1 --hash=sha256:ffea97f6a9da9987a9260f9e635995b27a44dd6985d1b2b1663431356aaf669b
+rocm-sdk-core==7.14.1 --hash=sha256:49eb83cb89d50562944a1f0eaf65f4e21f4557813de53e78d022fee81bbfb6e7
+rocm-sdk-device-gfx1150==7.14.1 --hash=sha256:8995a7c9dc00d3776a599ca896bd9c06c73629f6428e2dcae471502875486060
+rocm-sdk-libraries==7.14.1 --hash=sha256:f5f639b488e3e78a44bebba786e917a98c4386001a3fa2a27393a9ce97e2a32d
+rocm-bootstrap==0.1.0 --hash=sha256:33e3d4dad086b1f0e06bc049a618ca874d4fb72f758fff00676e23d2a644b652

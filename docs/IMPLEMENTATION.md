@@ -74,7 +74,7 @@ the stated boundary, never to native input quality from fixture tests.
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
 | 15 | configuration-only Codex readback, OMP native client; isolated official Hermes CLI MCP connection and native handler completed 0.1.5 fixture; user launcher interpreter still missing |
 | 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS 0.1.3 install-to-removal passed; native assembled 0.1.6 installer/MCP/model-diagnostic/removal passed; new upload pending |
-| 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; Windows diagnostic loader is not integrated in released provisioning; doctor readiness now includes actual ML imports/device initialization and pinned source/cache prerequisites |
+| 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; canonical0.1.8 Windows Radeon890M profile installed fresh ROCm/NF4 CLEF and CPU Omni environments and initialized both workers; installed normal CLI GUI passed2inputs/4decisions; doctor checks real imports/device/NF4 arithmetic and pinned cache/source prerequisites |
 | 23-24 | private structured latency/action/terminal logs, benchmark with explicit fixture vs desktop modes; no comparative speed claim |
 | 25-26 | unit regressions and actual packaged installs/stdio/IPC; concrete replacement interfaces for capture/perception/decision/action/verifier |
 | 27 | documented extension boundaries; DOM/AX/tracking/remote control intentionally future work |
@@ -94,12 +94,12 @@ Windows GUI was explicitly authorized and observed on 2026-10-04; macOS native
 input remains deferred. Non-blocking limitations: user Hermes launcher interpreter
 unavailable (isolated official CLI validated), larger CLEF and NVIDIA CUDA untested, cross-volume custom Unicode
 Windows bin paths require an ASCII target or the bin directory inside the install.
-Windows-local model inference and one owned GUI task passed with the experimental
-diagnostic loader, not the released default configuration. Doctor prerequisite false-readiness is corrected in 0.1.7; tests and actual ML
+Windows-local inference now passed through candidate0.1.8 installed normal CLI
+with two inputs/four decisions and independent owned-GUI completion readback. Doctor prerequisite false-readiness is corrected in 0.1.7; tests and actual ML
 environment/driver probes are in evidence/doctor-readiness.json. Full model load
-is still distinct from device initialization. Canonical Windows GPU/NF4
-provisioning and checkpoint integration remain open; broader prototypes are
-separately uncommitted.
+is still distinct from device initialization. Canonical Windows Radeon890M GPU/NF4 preparation and workers are integrated in
+candidate0.1.8; public newest delivery remains open. Broader prototypes remain
+separately uncommitted; no separate checkpoint cache is required.
 Future optimization: measured VLM baseline comparison, temporal/incremental
 perception, native input/capture acceleration only after profiling.
 

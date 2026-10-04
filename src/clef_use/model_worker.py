@@ -45,32 +45,70 @@ class ClefWorker:
         import torch
 
         self.device = choose_device(torch, config["device"])
+        if config.get("ml_profile") == "windows-rocm":
+            if sys.platform != "win32" or not torch.version.hip or self.device != "cuda":
+                raise RuntimeError("Windows ROCm profile requires native Windows with a HIP GPU")
+            arch = getattr(torch.cuda.get_device_properties(0), "gcnArchName", "").split(":")[0]
+            if arch != "gfx1150":
+                raise RuntimeError("the pinned Windows ROCm profile currently targets gfx1150")
         revision = MODEL_REVISIONS[config["decision_model"]]
         path = model_path(config, config["decision_model"], revision)
         sys.path.insert(0, str(path))
         from joint_schema_model import load_release_model, systemone
 
         self.systemone = systemone
+        quantization = config.get("quantization", "none")
+        if quantization == "4bit" and self.device != "cuda":
+            raise RuntimeError("NF4 requires an available CUDA or ROCm GPU")
         dtype = (
             torch.float32
             if self.device == "cpu"
             else torch.float16
-            if self.device == "mps"
+            if self.device == "mps" or torch.version.hip or quantization == "4bit"
             else torch.bfloat16
         )
+        kwargs = {}
+        if quantization == "4bit":
+            from transformers import BitsAndBytesConfig
+
+            kwargs["quantization_config"] = BitsAndBytesConfig(
+                load_in_4bit=True,
+                bnb_4bit_quant_type="nf4",
+                bnb_4bit_use_double_quant=True,
+                bnb_4bit_compute_dtype=dtype,
+                llm_int8_skip_modules=["lm_head", "model.visual"],
+            )
         self.model, self.processor = load_release_model(
             path,
             device=self.device,
             dtype=dtype,
-            attn_implementation="eager",
+            attn_implementation="sdpa" if torch.version.hip else "eager",
             local_files_only=True,
+            **kwargs,
         )
+        self.quantized_modules = 0
+        if quantization == "4bit":
+            import bitsandbytes as bnb
+
+            names = [
+                name
+                for name, module in self.model.named_modules()
+                if isinstance(module, bnb.nn.Linear4bit)
+            ]
+            if not names or any(
+                ".visual." in name or "lm_head" in name or name.startswith("head.")
+                for name in names
+            ):
+                raise RuntimeError("CLEF NF4 exclusion invariant failed")
+            if not all(parameter.is_floating_point() for parameter in self.model.head.parameters()):
+                raise RuntimeError("CLEF typed head must remain floating point")
+            self.quantized_modules = len(names)
 
     def request(self, record):
         image = record.pop("image", None)
         if image:
             record["images"] = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
-            record["media_kwargs"] = {"max_pixels": 512 * 512}
+            record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
             return self.systemone(self.model, self.processor, record, max_length=8192)
         finally:
@@ -198,7 +236,13 @@ def main():
         config = json.loads(sys.stdin.readline())
         with contextlib.redirect_stdout(sys.stderr):
             worker = ClefWorker(config) if sys.argv[1] == "clef" else OmniWorker(config)
-        emit({"ready": True, "device": worker.device})
+        emit(
+            {
+                "ready": True,
+                "device": worker.device,
+                "quantized_modules": getattr(worker, "quantized_modules", 0),
+            }
+        )
         for line in sys.stdin:
             try:
                 with contextlib.redirect_stdout(sys.stderr):

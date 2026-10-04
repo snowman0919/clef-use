@@ -12,10 +12,10 @@ from .config import load_config
 from .models import OMNI_SOURCE_REVISION, inventory
 
 
-def ml_environment_probe(python, kind, device):
+def ml_environment_probe(python, kind, device, quantization="none"):
     try:
         result = subprocess.run(
-            [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device],
+            [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device, quantization],
             capture_output=True,
             text=True,
             timeout=60,
@@ -128,7 +128,9 @@ def doctor(capture: bool = True):
     except (OSError, ValueError, subprocess.TimeoutExpired):
         report["acceleration"] = "NOT_RUN"
     report["ml_environments"] = {
-        "clef": ml_environment_probe(config.clef_python or sys.executable, "clef", config.device),
+        "clef": ml_environment_probe(
+            config.clef_python or sys.executable, "clef", config.device, config.quantization
+        ),
         "omni": ml_environment_probe(
             config.omni_python or sys.executable, "omni", config.parser_device
         ),

@@ -1,0 +1,1 @@
+bitsandbytes==0.50.2 --hash=sha256:c697963c8fda3dcd0d7ebd9b5211ae4067feef7cd06e0350d4e816a434fe683d

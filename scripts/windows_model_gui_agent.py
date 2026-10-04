@@ -4,7 +4,10 @@ import argparse
 import ctypes
 import hmac
 import json
+import subprocess
+import sys
 import threading
+import time
 import tkinter as tk
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
@@ -21,6 +24,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--port", type=int, default=37943)
+    parser.add_argument("--run-cli", action="store_true")
     args = parser.parse_args()
     token = (args.root / "gui-token").read_text().strip()
     native, action = WindowsInput(), DesktopAction()
@@ -33,6 +37,8 @@ def main():
     root.geometry("900x600+500+200")
     root.configure(bg="white")
     root.attributes("-topmost", True)
+    if args.run_cli:
+        root.attributes("-fullscreen", True)
     state = {
         "stage": 0,
         "clicks": [],
@@ -67,6 +73,11 @@ def main():
 
     button = tk.Button(root, text="Continue", font=("Segoe UI", 22), command=advance)
     button.place(x=50, y=220, width=260, height=80)
+    if args.run_cli:
+        button.configure(font=("Segoe UI", 42))
+        button.place(x=50, y=220, width=420, height=120)
+        label.configure(font=("Segoe UI", 42))
+        state["render_delay_ms"] = 500
     root.update()
     root.focus_force()
     root.update()
@@ -242,6 +253,65 @@ def main():
     (args.root / "windows-model-agent-ready.json").write_text(
         json.dumps({"session_id": desktop["session_id"], "port": args.port}), encoding="utf-8"
     )
+    if args.run_cli:
+
+        def cli_run():
+            from clef_use.client import RuntimeClient
+            from clef_use.config import state_dir
+
+            report = {"mode": "REAL_WINDOWS_CANONICAL_CLI", "uses_action_bridge": False}
+            try:
+                result = subprocess.run(
+                    [
+                        sys.executable,
+                        "-m",
+                        "clef_use.cli",
+                        "run",
+                        "Make Task complete visible using Continue then Confirm.",
+                        "--success",
+                        "Task complete is visible",
+                        "--max-steps",
+                        "8",
+                    ],
+                    capture_output=True,
+                    text=True,
+                    encoding="utf-8",
+                    timeout=600,
+                )
+                (args.root / "cli.stdout.txt").write_text(result.stdout, encoding="utf-8")
+                (args.root / "cli.stderr.txt").write_text(result.stderr, encoding="utf-8")
+                report["exit_code"] = result.returncode
+                report["runtime"] = json.loads(result.stdout)
+                report["independent_gui_readback"] = on_ui(
+                    lambda: {
+                        "stage": state["stage"],
+                        "clicks": list(state["clicks"]),
+                        "visible_result": label.cget("text"),
+                        "render_pending": state["render_pending"],
+                    }
+                )
+            except Exception as exc:
+                report["error"] = type(exc).__name__
+            finally:
+                client = RuntimeClient(start=False)
+                try:
+                    if (state_dir() / "endpoint.json").exists():
+                        if client._send("health", {}).get("busy"):
+                            client._send("abort", {})
+                        client._send("shutdown_idle", {})
+                    for _ in range(100):
+                        if not (state_dir() / "endpoint.json").exists():
+                            break
+                        time.sleep(0.1)
+                    report["endpoint_removed"] = not (state_dir() / "endpoint.json").exists()
+                except Exception as exc:
+                    report["cleanup_error"] = type(exc).__name__
+                (args.root / "canonical-cli-result.json").write_text(
+                    json.dumps(report), encoding="utf-8"
+                )
+                root.after(0, root.quit)
+
+        threading.Thread(target=cli_run, daemon=True).start()
     root.after(2_700_000, root.quit)
     try:
         root.mainloop()

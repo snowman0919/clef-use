@@ -40,11 +40,14 @@ MODULES = {
 }
 
 
-def probe(kind, requested):
+def probe(kind, requested, quantization="none"):
     modules = {}
     errors = {}
     versions = {}
-    for name in MODULES[kind]:
+    required = MODULES[kind] + (
+        ("bitsandbytes",) if kind == "clef" and quantization == "4bit" else ()
+    )
+    for name in required:
         try:
             module = importlib.import_module(name)
             if name == "transformers":
@@ -77,6 +80,19 @@ def probe(kind, requested):
             report["device"] = device
             report["device_operation"] = "OBSERVED"
             report["hip"] = torch.version.hip
+            if kind == "clef" and quantization == "4bit" and "bitsandbytes" in modules:
+                if device != "cuda":
+                    raise RuntimeError("NF4 requires a CUDA or ROCm GPU")
+                source = torch.linspace(-1, 1, 256, device=device, dtype=torch.float16)
+                functional = modules["bitsandbytes"].functional
+                packed, state = functional.quantize_4bit(
+                    source, quant_type="nf4", compress_statistics=True
+                )
+                restored = functional.dequantize_4bit(packed, state)
+                error = (restored.reshape(-1) - source).abs().max().item()
+                if not torch.isfinite(restored).all().item() or error > 0.3:
+                    raise RuntimeError("NF4 arithmetic validation failed")
+                report["nf4"] = {"status": "OBSERVED", "max_abs_error": error, "tolerance": 0.3}
             report["ready"] = not errors
         except Exception as exc:
             report["status"] = "ERROR"
@@ -88,7 +104,7 @@ def probe(kind, requested):
 def main():
     protocol = sys.stdout
     with contextlib.redirect_stdout(sys.stderr):
-        result = probe(sys.argv[1], sys.argv[2])
+        result = probe(sys.argv[1], sys.argv[2], sys.argv[3] if len(sys.argv) > 3 else "none")
     protocol.write(json.dumps(result) + "\n")
 
 

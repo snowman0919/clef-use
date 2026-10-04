@@ -561,3 +561,27 @@ remains canonical Windows GPU/NF4 provisioning/worker integration, with new mode
 GUI proof through normal CLI/MCP and source-pinned environment checks. Existing
 actor24 paths remain intact and unpublished; current owned change is this
 evidence/documentation refresh. Goal ACTIVE; no live model/GUI/service handles.
+
+
+2026-10-04 minimal Windows canonical integration (candidate0.1.8): reuse existing
+CLI/provision/worker; three short hashed Windows torch/NF4 locks reuse the two
+canonical dependency locks. No new backend, quantized checkpoint cache, framework,
+or model-residency feature. Human explicitly requires implementation minimization;
+preserve and exclude the existing actor24 prototypes.
+
+Native Python3.12 fresh ROCm/NF4 CLEF and CPU Omni environments installed through
+`models prepare`; both canonical workers initialized, CLEF248quantized modules,
+vision and typed head floating point. Installed-wheel normal CLI completed the
+owned fullscreen Continue -> Confirm -> Task complete task:2inputs/4decisions,
+no action bridge, independent GUI label/click readback. Earlier default eager
+forward OOM retained. Pinned processor ignored max_pixels alone: actual4K probe
+8,355,840pixels vs258,048with both bounds. Added minimum bound and existing HIP
+SDPA; no isolated SDPA speed claim. Clean tests106/6.45s; native installed106/9.01s;
+lint/format passed. Evidence windows-canonical-cli.json; raw SSD
+validation/windows-canonical-20261004. GUI/service/process/listeners/task/token
+independently absent after run. Prepared0.1.8 native loopback install command/reinstall/update/service/MCP5/idle
+shutdown/removal passed. SSH CLI correctly blocked Session0 with zero input; this
+is separate from the normal interactive CLI GUI pass above. Owned new runtime
+and fresh ML environments deleted; previous model cache and user PATH/launcher
+preserved. No live models/GUI/service/task/listener/token remain. Public newest
+upload remains separate; source0.1.8 checkpoint/CI pending at this entry.

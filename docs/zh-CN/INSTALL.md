@@ -41,3 +41,5 @@ doctor 失败时，请区分权限、缺失 snapshot、ML 依赖和 MCP 启动�
 卸载时先停止空闲运行时，仅删除托管可执行文件和安装目录：POSIX 为 ~/.local/bin/clef-use 和 ~/.local/share/clef-use；Windows 为 %LOCALAPPDATA%\clef-use 及对应用户 PATH 项。仅移除 harness 的 clef-use 配置。除非明确要删除，否则保留缓存和配置。
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
+
+0.1.8 的 `models prepare` 在 Windows Radeon 890M (gfx1150) 上自动选择固定的 ROCm/NF4 配置，使用 Python 3.12 和 CPU OmniParser。两个模型成功初始化后才保存配置。可用 `--profile default` 或 `--quantization none` 显式覆盖。实际验证仅包括一个临时 GUI 任务；公开发布状态另行记录。

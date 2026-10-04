@@ -41,3 +41,5 @@ doctor が失敗したら、権限、snapshot 不足、ML 依存関係、MCP 起
 削除時は待機中のランタイムを停止し、管理された実行ファイルとディレクトリだけを削除します。POSIX は ~/.local/bin/clef-use と ~/.local/share/clef-use、Windows は %LOCALAPPDATA%\clef-use と対応するユーザー PATH 項目です。harness では clef-use 項目だけを削除します。明示的に消したい場合を除きキャッシュと設定を残してください。
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
+
+0.1.8の `models prepare` はWindows Radeon 890M (gfx1150)で固定ROCm/NF4構成を自動選択します。Python 3.12とCPU OmniParserを使用し、両方のモデルを初期化してから設定を保存します。明示的な変更は `--profile default` または `--quantization none` を指定してください。検証対象は一つの一時GUIタスクで、公開配布は別途確認します。

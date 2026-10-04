@@ -41,3 +41,5 @@ If doctor fails, distinguish permissions, missing snapshots, ML dependencies and
 To uninstall, stop the idle runtime and remove only the managed executable and installation directory: ~/.local/bin/clef-use and ~/.local/share/clef-use on POSIX; %LOCALAPPDATA%\clef-use and its user PATH entry on Windows. Remove only clef-use from harness configs. Keep caches/configs unless you explicitly want to delete them.
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
+
+In 0.1.8, `models prepare` automatically selects the pinned native Windows ROCm/NF4 profile for Radeon 890M (gfx1150), using Python 3.12 and CPU OmniParser. Both workers must initialize before configuration is saved. Use `--profile default` or `--quantization none` for an explicit override. This profile has been tested on one owned GUI task; public delivery is tracked separately.
