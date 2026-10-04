@@ -332,7 +332,8 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
                 archive = temporary / "release.zip"
                 archive.write_bytes(payload)
                 safe_extract(archive, temporary / "payload")
-                venv.EnvBuilder(with_pip=True).create(staged)
+                # Match python -m venv: copying uv-managed Unix Python breaks its stdlib lookup.
+                venv.EnvBuilder(with_pip=True, symlinks=not windows).create(staged)
                 package = temporary / "payload"
                 result = subprocess.run(
                     [

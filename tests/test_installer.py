@@ -87,3 +87,55 @@ def test_windows_directory_access_rejects_malformed_identity_without_mutating_ac
     with pytest.raises(RuntimeError, match="invalid Windows installation user SID"):
         installer.windows_user_access("owned-installation")
     assert len(calls) == 1
+
+
+def test_install_bootstraps_pip_without_copying_unix_python(tmp_path, monkeypatch):
+    import io
+    import os
+    import subprocess
+
+    import clef_use.installer as installer
+
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w") as archive:
+        archive.writestr("requirements.txt", "")
+        archive.writestr("wheels/clef_use-0.1.0-py3-none-any.whl", b"fixture")
+    payload = buffer.getvalue()
+    metadata = manifest()
+    artifact = metadata["artifacts"][0]
+    artifact["sha256"] = hashlib.sha256(payload).hexdigest()
+    responses = {
+        "/latest/manifest.json": json.dumps(metadata).encode(),
+        "/latest/SHA256SUMS": f"{artifact['sha256']}  release.zip\n".encode(),
+        "/releases/0.1.0/release.zip": payload,
+    }
+    base = "https://ftp.kotori9.dev/clef-use"
+    monkeypatch.setenv("CLEF_USE_INSTALL_ROOT", str(tmp_path / "installation"))
+    monkeypatch.setenv("CLEF_USE_BIN_DIR", str(tmp_path / "bin"))
+    monkeypatch.setattr(installer, "fetch", lambda url, *args: responses[url[len(base) :]])
+    monkeypatch.setattr(installer, "select_artifact", lambda _: artifact)
+    original_run = subprocess.run
+    checked = []
+
+    def install_wheels(argv, **kwargs):
+        if "--require-hashes" not in argv:
+            return original_run(argv, **kwargs)
+        binary = installer.Path(argv[0])
+        assert binary.is_symlink() == (os.name != "nt")
+        probe = original_run(
+            [str(binary), "-m", "pip", "--version"],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        assert "pip " in probe.stdout
+        checked.append(binary)
+        raise RuntimeError("stop before fixture wheels")
+
+    monkeypatch.setattr(installer.subprocess, "run", install_wheels)
+    with pytest.raises(RuntimeError, match="stop before fixture wheels"):
+        installer.install()
+    assert len(checked) == 1
+    assert not list((tmp_path / "installation" / "versions").iterdir())
+    assert not (tmp_path / "installation" / "current").exists()
+    assert not list((tmp_path / "bin").iterdir())
