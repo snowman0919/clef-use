@@ -431,3 +431,13 @@ six-job CI. Then integrate Windows-local GPU/NF4 preparation into canonical CLI
 and resident worker; preserve actor24 prototype paths. Current branch main,
 basis9bbc497; no live model/GUI/service/task/forwarder handles. Overall full goal
 ACTIVE and Mac input remains deferred. Public last observed0.1.3; no FTP route.
+
+Doctor source0.1.7 published at a009b8b878f5380f78250646607b45759183241b.
+CI37190038155 completed success for all six Mac/Windows/Linux xPython3.11/3.13
+jobs; actual logs each95passed. All six build/install-update checks also passed.
+Compact logs retained SSD validation/doctor-readiness-20261004/ci-37190038155-tests.txt.
+No standalone15-target0.1.7 release assembly/public upload claimed. Next work
+remains canonical Windows GPU/NF4 provisioning/worker integration, with new model
+GUI proof through normal CLI/MCP and source-pinned environment checks. Existing
+actor24 paths remain intact and unpublished; current owned change is this
+evidence/documentation refresh. Goal ACTIVE; no live model/GUI/service handles.

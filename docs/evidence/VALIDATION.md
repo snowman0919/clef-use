@@ -551,3 +551,13 @@ blobs staged separately, no actor acceleration/MLX/quantization change published
 Earlier synthetic0.1.7 update check is unrelated to this new source0.1.7 release.
 Windows install/model-GUI proof remains prior0.1.6. No new GUI input this turn;
 canonical Windows GPU/NF4 provisioning and public newest upload still open.
+
+Doctor source0.1.7 published at a009b8b878f5380f78250646607b45759183241b.
+CI37190038155 completed success for all six Mac/Windows/Linux xPython3.11/3.13
+jobs; actual logs each95passed. All six build/install-update checks also passed.
+Compact logs retained SSD validation/doctor-readiness-20261004/ci-37190038155-tests.txt.
+No standalone15-target0.1.7 release assembly/public upload claimed. Next work
+remains canonical Windows GPU/NF4 provisioning/worker integration, with new model
+GUI proof through normal CLI/MCP and source-pinned environment checks. Existing
+actor24 paths remain intact and unpublished; current owned change is this
+evidence/documentation refresh. Goal ACTIVE; no live model/GUI/service handles.

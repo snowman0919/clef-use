@@ -261,7 +261,14 @@
     "clean_canonical": "95 passed in 6.58s",
     "native_windows_regressions": "7 passed in 0.79s",
     "lint_format": "passed",
-    "wheel_build": "clef_use-0.1.7-py3-none-any.whl; included probe bytes match source"
+    "wheel_build": "clef_use-0.1.7-py3-none-any.whl; included probe bytes match source",
+    "ci": {
+      "run": 37190038155,
+      "source_commit": "a009b8b878f5380f78250646607b45759183241b",
+      "jobs": 6,
+      "all_success": true,
+      "actual_tests_per_job": 95
+    }
   },
   "probe_source_sha256": {
     "doctor.py": "8303390a52028c0004b6911948ffbb0df15c9eb583b88342d8d974b6fe3aff70",
