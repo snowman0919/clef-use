@@ -77,12 +77,15 @@ def probe(kind, requested, quantization="none"):
             value = torch.tensor([1.0, 2.0], device=device).sum().item()
             if value != 3.0:
                 raise RuntimeError("device arithmetic failed")
+            from deployment_profiles import select_backend
+
+            report["backend"] = select_backend(torch, requested)
             report["device"] = device
             report["device_operation"] = "OBSERVED"
             report["hip"] = torch.version.hip
             if kind == "clef" and quantization == "4bit" and "bitsandbytes" in modules:
-                if device != "cuda":
-                    raise RuntimeError("NF4 requires a CUDA or ROCm GPU")
+                if device == "mps":
+                    raise RuntimeError("NF4 is not enabled for MPS")
                 source = torch.linspace(-1, 1, 256, device=device, dtype=torch.float16)
                 functional = modules["bitsandbytes"].functional
                 packed, state = functional.quantize_4bit(

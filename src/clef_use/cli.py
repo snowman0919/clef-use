@@ -8,6 +8,7 @@ from pathlib import Path
 from . import __version__
 from .client import RuntimeClient
 from .config import load_config
+from .deployment_profiles import PROFILES, profile_catalog
 from .schema import Contract, TextInput
 
 
@@ -31,10 +32,13 @@ def parser():
     doctor.add_argument("--no-capture", action="store_true")
     models = commands.add_parser("models")
     models.add_argument(
-        "action", choices=["list", "download", "prepare"], nargs="?", default="list"
+        "action", choices=["list", "download", "prepare", "profiles"], nargs="?", default="list"
     )
     models.add_argument("--python")
-    models.add_argument("--profile", choices=["auto", "default", "windows-rocm"], default="auto")
+    models.add_argument(
+        "--rocm-arch", help="Windows ROCm ISA, e.g. gfx1150; autodetected when available"
+    )
+    models.add_argument("--profile", choices=["auto", "default", *PROFILES], default="auto")
     models.add_argument("--quantization", choices=["none", "4bit"])
     commands.add_parser("mcp")
     install = commands.add_parser("install-mcp")
@@ -95,10 +99,15 @@ def main(argv=None):
             from .models import MODEL_REVISIONS, download, inventory
 
             config = load_config()
+            if args.action == "profiles":
+                print(json.dumps(profile_catalog(), indent=2))
+                return 0
             if args.action == "prepare":
                 from .provision import prepare
 
-                result = prepare(config, args.python, args.profile, args.quantization)
+                result = prepare(
+                    config, args.python, args.profile, args.quantization, args.rocm_arch
+                )
             else:
                 if args.action == "download":
                     for model in [

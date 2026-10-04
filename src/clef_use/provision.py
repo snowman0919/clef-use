@@ -12,36 +12,15 @@ import tomlkit
 
 from .backends import JsonWorker
 from .config import config_path
+from .deployment_profiles import resolve_profile, resolve_rocm_arch
 from .harness import atomic_write
 from .models import OMNI_SOURCE_REVISION, download, inventory
 
 
 def select_profile(config, requested):
     if requested != "auto":
-        if requested == "windows-rocm" and sys.platform != "win32":
-            raise RuntimeError("Windows ROCm profile requires native Windows")
-        return requested
-    if config.ml_profile != "auto":
-        return select_profile(config, config.ml_profile)
-    if sys.platform == "win32" and config.device in {"auto", "cuda"}:
-        result = subprocess.run(
-            [
-                "powershell.exe",
-                "-NoProfile",
-                "-Command",
-                "ConvertTo-Json -Compress -InputObject @(Get-CimInstance Win32_VideoController | "
-                "Select-Object -ExpandProperty Name)",
-            ],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-        if result.returncode:
-            raise RuntimeError("Windows GPU discovery failed; choose --profile explicitly")
-        names = json.loads(result.stdout)
-        if any("890m" in name.lower() for name in names):
-            return "windows-rocm"
-    return "default"
+        return resolve_profile(requested).name
+    return resolve_profile(config.ml_profile, config.device).name
 
 
 def select_python(python, profile):
@@ -105,24 +84,35 @@ def install_lock(path, lock, env, index=None, rocm=False, no_deps=False):
         )
 
 
-def common_windows_requirements(text):
+def common_ml_requirements(text):
     lines, skip = [], False
     for line in text.splitlines(keepends=True):
         if line.strip() and not line[0].isspace() and not line.startswith("#"):
-            skip = line.startswith(("torch==", "torchvision=="))
+            skip = line.startswith(
+                ("torch==", "torchvision==", "triton==", "cuda-", "nvidia-", "intel-")
+            )
         if not skip:
             lines.append(line)
     return "".join(lines)
 
 
-def prepare(config, python=None, profile="auto", quantization=None):
+def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=None):
     profile = select_profile(config, profile)
-    executable = select_python(python, profile)
-    if profile == "windows-rocm" and config.device not in {"auto", "cuda"}:
-        raise ValueError("Windows ROCm requires device auto/cuda")
+    selected = resolve_profile(profile)
+    parser_selected = resolve_profile(
+        "auto", "cpu" if config.parser_device == "auto" else config.parser_device
+    )
+    executable = select_python(
+        python, "windows-rocm" if parser_selected.name == "windows-rocm" else profile
+    )
+    rocm_arch = (
+        resolve_rocm_arch(config, rocm_arch)
+        if "windows-rocm" in {profile, parser_selected.name}
+        else None
+    )
     quantization = quantization or ("4bit" if profile == "windows-rocm" else config.quantization)
-    if quantization == "4bit" and profile != "windows-rocm":
-        raise ValueError("automatic NF4 dependency installation is currently Windows ROCm only")
+    if quantization == "4bit" and selected.backend == "mps":
+        raise ValueError("MPS profile currently supports quantization none; MLX remains separate")
     source = config.omni_source or config.model_dir.parent / "upstream/OmniParser"
     if source.exists():
         from .doctor import omni_source_probe
@@ -133,9 +123,15 @@ def prepare(config, python=None, profile="auto", quantization=None):
     parent.mkdir(parents=True, exist_ok=True)
     from .installer import environment_binary
 
+    try:
+        previous_profile = resolve_profile(config.ml_profile, config.device).name
+    except (ValueError, RuntimeError):
+        previous_profile = None
     paths = {
-        "clef": config.clef_python or environment_binary(parent / "clef-env", "python"),
-        "omni": config.omni_python or environment_binary(parent / "omni-env", "python"),
+        "clef": (config.clef_python if previous_profile == profile else None)
+        or environment_binary(parent / f"clef-env-{profile}", "python"),
+        "omni": config.omni_python
+        or environment_binary(parent / f"omni-env-{parser_selected.name}", "python"),
     }
     child_env = dict(os.environ, PIP_CACHE_DIR=str(parent / "pip-cache"))
     for kind, path in paths.items():
@@ -149,25 +145,28 @@ def prepare(config, python=None, profile="auto", quantization=None):
             subprocess.run([str(path), "-m", "ensurepip"], check=True, capture_output=True)
         assets = Path(__file__).parent / "assets"
         lock = assets / f"ml-{kind}.txt"
-        if profile == "windows-rocm":
-            with tempfile.TemporaryDirectory(dir=environment) as temporary:
-                common = Path(temporary) / lock.name
-                common.write_text(common_windows_requirements(lock.read_text()))
-                install_lock(path, common, child_env, no_deps=True)
-        else:
-            install_lock(path, lock, child_env)
-        if profile == "windows-rocm":
-            install_lock(
+        from .native_dependencies import install_native
+
+        with tempfile.TemporaryDirectory(dir=environment) as temporary:
+            common = Path(temporary) / lock.name
+            common.write_text(common_ml_requirements(lock.read_text()))
+            install_lock(path, common, child_env, no_deps=True)
+            install_native(
                 path,
-                assets / ("ml-windows-rocm.txt" if kind == "clef" else "ml-windows-torch-cpu.txt"),
+                selected if kind == "clef" else parser_selected,
                 child_env,
-                "https://repo.amd.com/rocm/whl-multi-arch/"
-                if kind == "clef"
-                else "https://download.pytorch.org/whl/cpu",
-                rocm=kind == "clef",
+                lock,
+                rocm_arch=rocm_arch,
             )
         if kind == "clef" and quantization == "4bit":
-            install_lock(path, assets / "ml-windows-nf4.txt", child_env, no_deps=True)
+            install_native(path, selected, child_env, lock, quantizer_only=True)
+    from .doctor import ml_environment_probe
+
+    for kind, path in paths.items():
+        backend = selected.backend if kind == "clef" else parser_selected.backend
+        precision = quantization if kind == "clef" else "none"
+        if not ml_environment_probe(path, kind, backend, precision, rocm_arch)["ready"]:
+            raise RuntimeError(f"{kind} backend/dependency probe failed before model download")
     if not source.exists():
         source.parent.mkdir(parents=True, exist_ok=True)
         subprocess.run(
@@ -206,11 +205,10 @@ def prepare(config, python=None, profile="auto", quantization=None):
             "omni_python": paths["omni"],
             "omni_source": source,
             "ml_profile": profile,
+            "rocm_arch": rocm_arch,
             "quantization": quantization,
-            "device": "cuda" if profile == "windows-rocm" else config.device,
-            "parser_device": "cpu"
-            if profile == "windows-rocm" and config.parser_device == "auto"
-            else config.parser_device,
+            "device": selected.backend,
+            "parser_device": parser_selected.backend,
         }
     )
     initialized = {}
@@ -233,6 +231,10 @@ def prepare(config, python=None, profile="auto", quantization=None):
         "parser_device",
     ):
         data[field] = str(getattr(updated, field))
+    if rocm_arch:
+        data["rocm_arch"] = rocm_arch
+    else:
+        data.pop("rocm_arch", None)
     atomic_write(path, tomlkit.dumps(data))
     if sys.platform == "win32":
         from .installer import windows_user_access
@@ -244,5 +246,6 @@ def prepare(config, python=None, profile="auto", quantization=None):
         "omni_source_revision": observed,
         "config": str(path),
         "profile": profile,
+        "parser_profile": parser_selected.name,
         "initialized": initialized,
     }

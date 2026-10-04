@@ -6,28 +6,18 @@ import base64
 import contextlib
 import io
 import json
+import os
 import sys
 import traceback
 from pathlib import Path
 
+from deployment_profiles import resolve_profile, select_backend, torch_device
 from models import MODEL_REVISIONS
 from PIL import Image
 
 
 def choose_device(torch, requested):
-    if requested != "auto":
-        if requested == "cuda" and not torch.cuda.is_available():
-            raise RuntimeError("CUDA unavailable")
-        if requested == "mps" and not torch.backends.mps.is_available():
-            raise RuntimeError("MPS unavailable")
-        return requested
-    return (
-        "cuda"
-        if torch.cuda.is_available()
-        else "mps"
-        if torch.backends.mps.is_available()
-        else "cpu"
-    )
+    return torch_device(select_backend(torch, requested))
 
 
 def model_path(config, repo, revision):
@@ -44,13 +34,11 @@ class ClefWorker:
     def __init__(self, config):
         import torch
 
-        self.device = choose_device(torch, config["device"])
-        if config.get("ml_profile") == "windows-rocm":
-            if sys.platform != "win32" or not torch.version.hip or self.device != "cuda":
-                raise RuntimeError("Windows ROCm profile requires native Windows with a HIP GPU")
-            arch = getattr(torch.cuda.get_device_properties(0), "gcnArchName", "").split(":")[0]
-            if arch != "gfx1150":
-                raise RuntimeError("the pinned Windows ROCm profile currently targets gfx1150")
+        requested = config["device"]
+        if config.get("ml_profile", "auto") not in {"auto", "default"}:
+            requested = resolve_profile(config["ml_profile"], requested).backend
+        self.backend = select_backend(torch, requested)
+        self.device = torch_device(self.backend)
         revision = MODEL_REVISIONS[config["decision_model"]]
         path = model_path(config, config["decision_model"], revision)
         sys.path.insert(0, str(path))
@@ -58,14 +46,16 @@ class ClefWorker:
 
         self.systemone = systemone
         quantization = config.get("quantization", "none")
-        if quantization == "4bit" and self.device != "cuda":
-            raise RuntimeError("NF4 requires an available CUDA or ROCm GPU")
+        if quantization == "4bit" and self.backend == "mps":
+            raise RuntimeError("NF4 is not enabled for the MPS profile")
         dtype = (
             torch.float32
             if self.device == "cpu"
             else torch.float16
             if self.device == "mps" or torch.version.hip or quantization == "4bit"
             else torch.bfloat16
+            if (torch.xpu if self.backend == "xpu" else torch.cuda).is_bf16_supported()
+            else torch.float16
         )
         kwargs = {}
         if quantization == "4bit":
@@ -122,7 +112,8 @@ class OmniWorker:
     def __init__(self, config):
         import torch
 
-        self.device = choose_device(torch, config["parser_device"])
+        self.backend = select_backend(torch, config["parser_device"])
+        self.device = torch_device(self.backend)
         source = config.get("omni_source")
         if not source or not (Path(source) / "util/utils.py").is_file():
             raise RuntimeError("pinned OmniParser source unavailable")
@@ -234,12 +225,15 @@ def main():
 
     try:
         config = json.loads(sys.stdin.readline())
+        if config.get("rocm_arch"):
+            os.environ["ROCM_SDK_TARGET_FAMILY"] = config["rocm_arch"]
         with contextlib.redirect_stdout(sys.stderr):
             worker = ClefWorker(config) if sys.argv[1] == "clef" else OmniWorker(config)
         emit(
             {
                 "ready": True,
                 "device": worker.device,
+                "backend": worker.backend,
                 "quantized_modules": getattr(worker, "quantized_modules", 0),
             }
         )

@@ -4,21 +4,24 @@ import asyncio
 import ctypes
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 from .config import load_config
+from .deployment_profiles import resolve_profile
 from .models import OMNI_SOURCE_REVISION, inventory
 
 
-def ml_environment_probe(python, kind, device, quantization="none"):
+def ml_environment_probe(python, kind, device, quantization="none", rocm_arch=None):
     try:
         result = subprocess.run(
             [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device, quantization],
             capture_output=True,
             text=True,
             timeout=60,
+            env=dict(os.environ, ROCM_SDK_TARGET_FAMILY=rocm_arch) if rocm_arch else None,
         )
         if result.returncode:
             return {"status": "ERROR", "ready": False, "reason": "ML probe failed"}
@@ -108,32 +111,32 @@ def doctor(capture: bool = True):
     }
     if sys.platform == "win32":
         report["windows_desktop"] = windows_desktop_probe()
-    python = config.clef_python or sys.executable
     try:
-        result = subprocess.run(
-            [
-                str(python),
-                "-c",
-                "import torch,json; print(json.dumps({'torch':torch.__version__,"
-                "'cuda':torch.cuda.is_available(),'mps':torch.backends.mps.is_available(),"
-                "'cpu':True}))",
-            ],
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-        report["acceleration"] = (
-            json.loads(result.stdout) if result.returncode == 0 else "ML_DEPENDENCIES_MISSING"
-        )
-    except (OSError, ValueError, subprocess.TimeoutExpired):
-        report["acceleration"] = "NOT_RUN"
+        selected = resolve_profile(config.ml_profile, config.device)
+        report["deployment_profile"] = {"name": selected.name, "status": "TARGET"}
+        requested = selected.backend
+    except (ValueError, RuntimeError, OSError, subprocess.TimeoutExpired) as exc:
+        report["deployment_profile"] = {"status": "ERROR", "reason": str(exc)}
+        requested = config.device
     report["ml_environments"] = {
         "clef": ml_environment_probe(
-            config.clef_python or sys.executable, "clef", config.device, config.quantization
+            config.clef_python or sys.executable,
+            "clef",
+            requested,
+            config.quantization,
+            config.rocm_arch,
         ),
         "omni": ml_environment_probe(
-            config.omni_python or sys.executable, "omni", config.parser_device
+            config.omni_python or sys.executable,
+            "omni",
+            config.parser_device,
+            "none",
+            config.rocm_arch,
         ),
+    }
+    clef_environment = report["ml_environments"]["clef"]
+    report["acceleration"] = {
+        key: clef_environment.get(key) for key in ("backend", "device", "hip", "device_operation")
     }
     report["omni_source"] = omni_source_probe(config.omni_source)
     if capture and permissions["screen_capture"] is not False:
@@ -166,7 +169,8 @@ def doctor(capture: bool = True):
         report["mcp"] = {"status": "ERROR", "type": type(exc).__name__}
     report["models_semantics"] = "NOT_RUN; cache presence is not model inference proof"
     report["ready"] = (
-        all(report["dependencies"].values())
+        report["deployment_profile"]["status"] != "ERROR"
+        and all(report["dependencies"].values())
         and all(env["ready"] for env in report["ml_environments"].values())
         and report["omni_source"]["ready"]
         and report["mcp"].get("status") == "OBSERVED"

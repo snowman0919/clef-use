@@ -42,4 +42,4 @@ doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오�
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
-0.1.8의 `models prepare`는 Windows Radeon 890M(gfx1150)에서 고정 ROCm/NF4 구성을 자동 선택합니다. Python 3.12와 CPU OmniParser를 사용하며, 두 모델이 실제 초기화된 후 설정을 저장합니다. 명시적으로 바꾸려면 `--profile default` 또는 `--quantization none`을 사용하세요. 실제 검증은 임시 GUI 작업 하나이며, 공개 배포 상태는 별도로 기록합니다.
+미배포 소스는 OS/백엔드 기준으로 프로파일을 구성합니다. macOS는 MPS/CPU, Linux와 Windows는 CUDA/ROCm/XPU/CPU가 지원 대상입니다. `models profiles`로 목록을 확인하고 `models prepare --profile linux-cuda`처럼 선택합니다. 지원하지 않는 조합은 거부하며, 전체 모델 초기화가 성공한 후에 설정을 저장합니다. [배포 계약과 검증 범위](../ARCHITECTURE.md#osbackend-deployment-profiles-unreleased-source)를 참고하세요. 공개 0.1.8은 기존 Windows 890M 프로파일을 사용합니다.

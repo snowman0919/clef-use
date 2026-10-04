@@ -156,3 +156,70 @@ Primary references:
 - https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/registry.py
 - https://docs.vllm.ai/en/latest/models/pooling_models/
 - https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html
+
+## OS/backend deployment profiles (unreleased source)
+
+Profiles describe deployment environments; GPU model names belong in validation
+records. `deployment_profiles.py` is the single registry used by configuration,
+CLI preparation, doctor and the isolated model worker. There are ten targets:
+
+| OS | CUDA | ROCm | XPU | MPS | CPU |
+| --- | --- | --- | --- | --- | --- |
+| macOS | unavailable | unavailable | unavailable | macos-mps | macos-cpu |
+| Linux | linux-cuda | linux-rocm | linux-xpu | unavailable | linux-cpu |
+| Windows | windows-cuda | windows-rocm | windows-xpu | unavailable | windows-cpu |
+
+`clef-use models profiles` lists targets and Python requirements. Prepare with,
+for example, `clef-use models prepare --profile linux-cuda`; explicit preparation
+selects that backend even when previous configuration used another one. `auto`
+uses an existing explicit profile or discovers the GPU vendor. Backend presence
+alone is insufficient: explicit requests never silently become CPU or another
+GPU backend. ROCm is persisted as `device = "rocm"`; only the Torch call uses
+`cuda`. Existing 0.1.8 `windows-rocm` configurations with `device = "cuda"` migrate
+without losing their backend identity. The legacy `default` alias selects CPU,
+or MPS on Apple Silicon, and does not remain the saved profile name.
+
+CLEF and OmniParser keep separate environments and Transformers versions.
+OmniParser defaults to CPU and can be configured independently. Switching CLEF
+profiles creates a separate environment instead of overwriting the prior one.
+Official Torch 2.11.0/torchvision 0.26.0 builds are selected from CUDA cu130,
+Linux ROCm rocm7.2, XPU or CPU indexes; macOS uses PyPI. Windows ROCm retains the
+native AMD 2.11.0+rocm7.14.1 provider and Python 3.12 requirement; other targets use
+Python 3.11/3.12. A provider-specific wheel suffix prevents the extra PyPI index
+from substituting a different Torch backend. Common dependency pins remain
+unchanged. The native dependency resolver writes exact artifact URLs and SHA-256
+hashes, installs with `--require-hashes`, and retains its lock/report in the venv.
+The previous gfx1150-only lock no longer determines installation or acceptance.
+Windows ROCm detects the ISA from an existing native Torch environment or
+`offload-arch`, or accepts `--rocm-arch gfx1150` for the actual GPU. This ISA is
+configuration, not another profile. The resolver explicitly selects
+`torch[device-ISA]`, `torchvision[device-ISA]` and `rocm[device-ISA]` and sets
+`ROCM_SDK_TARGET_FAMILY`; it refuses an unknown ISA rather than allowing the AMD
+source package to choose a different default GPU. Fresh Windows installs without
+an ISA detector require this argument. Actual retained Windows detection returned
+gfx1150; full fresh Windows package resolution remains NOT_RUN.
+
+The target requires compatible official wheels, OS, GPU and drivers: it does not
+promise every GPU/CPU architecture. MPS requires Apple Silicon; current macOS
+Torch 2.11 wheels target arm64, so Intel Mac is not validated by this matrix.
+Linux ROCm/XPU and Windows GPU profiles depend on vendor-supported hardware;
+CUDA cu130 also requires a compatible NVIDIA driver. Dependencies and a real
+backend arithmetic operation are checked before downloading weights. Both full
+workers must initialize successfully before configuration is atomically saved.
+An unsupported runtime or model operation is an installation failure, not an
+alternate-backend success. NF4 remains optional and load-time in this source;
+Windows ROCm retains its existing 4bit default. MPS currently uses non-NF4 Torch;
+saved MLX/NF4 serving artifacts remain a separate unfinished investigation.
+
+Observed for this change: fresh native Linux CPU Torch/torchvision installation
+and arithmetic on monad; automatic Windows AMD routing, real ROCm arithmetic and
+NF4 roundtrip using the retained native Windows environment. Neither test reloads
+full CLEF/OmniParser. Prior 0.1.8 Windows 890M full GUI evidence remains historical,
+not proof for other GPUs. New CUDA/Linux ROCm/XPU/macOS full-model paths remain
+NOT_RUN. Profile/unit checks do not certify model accuracy or GUI behavior.
+Evidence: [deployment-profiles.json](evidence/deployment-profiles.json).
+Publication remains on hold; public 0.1.8 does not include these changes.
+
+Primary runtime contracts: [PyTorch installation](https://pytorch.org/get-started/locally/),
+[PyTorch XPU](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html),
+[AMD Windows support matrix](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html).

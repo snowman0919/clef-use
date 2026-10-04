@@ -1,6 +1,5 @@
 import base64
 import io
-import json
 import sys
 from pathlib import Path
 from types import SimpleNamespace
@@ -17,33 +16,33 @@ def test_windows_profile_reuses_lock_hashes_without_generic_torch():
         "torch==2 \\\n    --hash=sha256:generic\n"
         "numpy==3 \\\n    --hash=sha256:also-kept\n"
     )
-    observed = provision.common_windows_requirements(text)
+    observed = provision.common_ml_requirements(text)
     assert "torch==" not in observed and "sha256:generic" not in observed
     assert "pillow==1" in observed and "sha256:kept" in observed
     assert "numpy==3" in observed and "sha256:also-kept" in observed
 
 
 def test_auto_profile_selects_only_observed_windows_gpu(monkeypatch):
-    monkeypatch.setattr(provision.sys, "platform", "win32")
+    monkeypatch.setattr("clef_use.deployment_profiles.host_system", lambda: "windows")
     monkeypatch.setattr(
         provision.subprocess,
         "run",
         lambda *_a, **_kw: SimpleNamespace(
             returncode=0,
-            stdout=json.dumps(["Virtual Display Driver", "AMD Radeon(TM) 890M Graphics"]),
+            stdout="Virtual Display Driver\nAMD Radeon(TM) 890M Graphics\n",
         ),
     )
     assert provision.select_profile(Config(), "auto") == "windows-rocm"
-    assert provision.select_profile(Config(device="cpu"), "auto") == "default"
+    assert provision.select_profile(Config(device="cpu"), "auto") == "windows-cpu"
     monkeypatch.setattr(
         provision.subprocess,
         "run",
         lambda *_a, **_kw: SimpleNamespace(
             returncode=0,
-            stdout=json.dumps(["AMD unknown GPU"]),
+            stdout="AMD Radeon RX 9070 XT",
         ),
     )
-    assert provision.select_profile(Config(), "auto") == "default"
+    assert provision.select_profile(Config(), "auto") == "windows-rocm"
 
 
 def test_rocm_rejects_python311_before_installation(monkeypatch):
@@ -60,18 +59,30 @@ def test_rocm_rejects_python311_before_installation(monkeypatch):
         provision.select_python("python", "windows-rocm")
 
 
-def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatch):
+@pytest.mark.parametrize("failure", ["probe", "model"])
+def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatch, failure):
     config_path = tmp_path / "config.toml"
     config_path.write_text("# preserve my config\n")
     monkeypatch.setenv("CLEF_USE_CONFIG", str(config_path))
-    config = Config(model_dir=tmp_path / "models")
+    config = Config(
+        model_dir=tmp_path / "models",
+        ml_profile="linux-cpu",
+        device="cpu",
+        clef_python=tmp_path / "clef-env" / "bin" / "python",
+        omni_python=tmp_path / "omni-env" / "bin" / "python",
+    )
     for name in ("clef-env", "omni-env"):
         folder = tmp_path / name
         folder.mkdir()
         (folder / "pyvenv.cfg").touch()
     monkeypatch.setattr(provision, "select_python", lambda *_: "python")
-    monkeypatch.setattr(provision, "select_profile", lambda *_: "default")
+    monkeypatch.setattr("clef_use.deployment_profiles.host_system", lambda: "linux")
+    monkeypatch.setattr(provision, "select_profile", lambda *_: "linux-cpu")
+    monkeypatch.setattr("clef_use.native_dependencies.install_native", lambda *_a, **_kw: None)
     monkeypatch.setattr(provision, "install_lock", lambda *_a, **_kw: None)
+    monkeypatch.setattr(
+        "clef_use.doctor.ml_environment_probe", lambda *_: {"ready": failure != "probe"}
+    )
     monkeypatch.setattr(
         provision.subprocess,
         "run",
@@ -95,9 +106,9 @@ def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatc
             closed.append(self.kind)
 
     monkeypatch.setattr(provision, "JsonWorker", Worker)
-    with pytest.raises(RuntimeError, match="model load failed"):
+    with pytest.raises(RuntimeError, match="probe failed|model load failed"):
         provision.prepare(config)
-    assert closed == ["clef"]
+    assert closed == (["clef"] if failure == "model" else [])
     assert config_path.read_text() == "# preserve my config\n"
 
 
@@ -164,7 +175,9 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip):
             systemone=lambda *_: None,
         ),
     )
-    config = Config(model_dir=tmp_path, device="cuda", quantization="4bit").model_dump(mode="json")
+    config = Config(
+        model_dir=tmp_path, device="rocm" if hip else "cuda", quantization="4bit"
+    ).model_dump(mode="json")
     if bad:
         with pytest.raises(RuntimeError, match="invariant|floating point"):
             worker_module.ClefWorker(config)

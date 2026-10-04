@@ -551,3 +551,48 @@ changed-input correctness, p50/p95 and split preprocessing/vision/backbone/head/
 No new GPU/Mac performance run: SSD currently absent from /Volumes. User asked for
 Mac20ms code/timing boundary through optional asynchronous question; unanswered.
 Preserved all24 actor hashes; deployment remains on hold. Full goal remains paused.
+
+2026-10-04 latest authorized task: structure deployment profiles for
+(macOS/Linux/Windows) x (CUDA/ROCm/XPU/MPS/CPU), keep scope minimal. Full original
+goal stays paused; GGUF/model/site publication remains on hold. Main base
+2d2e651; isolated /tmp/clef-use-deployment-profiles built from clean HEAD so the
+24 actor files remain byte-preserved. Canonical changes: shared ten-profile
+registry, generic vendor detection (no 890M/gfx1150 product restriction), explicit
+backend selection, profile-index/hash-based native dependency installation,
+config/CLI/doctor/worker integration. CPU/MPS only on macOS; CUDA/ROCm/XPU/CPU on
+Linux and Windows. Explicit prepare profile overrides previous backend; saved
+ROCm backend maps to Torch cuda only at the execution boundary. Profile switches
+keep prior CLEF venv; Omni defaults CPU. Check backend imports/arithmetic before
+weight download, and both full model workers before atomic config save.
+
+Fresh Linux CPU native installation and arithmetic passed on monad. Initial
+resolution failed because the Torch mirror lacked pinned filelock4.0.9; fixed by
+exact backend build versions plus the official PyPI common-dependency index.
+Windows retained ROCm environment passed generic AMD detection, GPU arithmetic
+and NF4 roundtrip. Clean 144 tests/6.65s and lint/format passed. Evidence
+ deployment-profiles.json and architecture profile section state all limits;
+no new full model/GUI acceptance or ten-hardware claim. Public version stays0.1.8.
+No new resident servers/GUI/tasks/listeners. Existing Windows model environments
+are untouched; own deployment-profiles diagnostic directory contains only source
+and result files. Own monad temporary CPU validation venv is disposable after
+recording evidence; retained GGUF source/cache/venv/artifact are unrelated and
+must remain. Integrate only owned clean-tree blobs into main index; retain actor
+working bytes, checkpoint locally, do not push/tag/dispatch Actions. Final user
+response should distinguish targets from actual validation and publication.
+
+AMD official wheel/source inspection found per-ISA extras and a default gfx1010
+fallback in rocm7.14.1 setup. Prevented that wrong-device path: ISA detection via
+existing native Torch/offload-arch or explicit --rocm-arch; pins device extras for
+Torch/vision/rocm and build/runtime ROCM_SDK_TARGET_FAMILY. Windows actual existing
+Torch properties correctly yielded gfx1150. Fresh Windows dependency resolution
+with this final installer is NOT_RUN; do not claim the old full GUI run validates
+this new installer. Final clean checks: 144 tests/6.65s, lint/format/diff passed.
+Canonical owned blobs are checkpointed into main, while all24 actor working bytes
+remain intact. Tests/package builds must use a clean HEAD snapshot because those
+uncommitted prototype files overlap the canonical implementation. No remote
+publication, tag, Actions dispatch or installed runtime update was performed.
+Package boundary also passed: built clean wheel, installed to isolated target,
+confirmed imported CLI comes from that target and models profiles returns ten
+names. This is not a one-line public or native full-model installation test.
+Own monad /tmp/clef-use-profile-validation directory removed after evidence
+readback; retained GGUF workspace and existing Windows native ML envs preserved.

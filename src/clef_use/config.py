@@ -7,6 +7,7 @@ from typing import Literal
 
 from pydantic import Field
 
+from .deployment_profiles import ProfileName
 from .schema import StrictModel
 
 
@@ -20,10 +21,11 @@ def state_dir() -> Path:
 
 class Config(StrictModel):
     decision_model: Literal["Cloudflare/clef-flash", "Cloudflare/clef"] = "Cloudflare/clef-flash"
-    device: Literal["auto", "cpu", "cuda", "mps"] = "auto"
-    parser_device: Literal["auto", "cpu", "cuda", "mps"] = "auto"
+    device: Literal["auto", "cpu", "cuda", "rocm", "xpu", "mps"] = "auto"
+    parser_device: Literal["auto", "cpu", "cuda", "rocm", "xpu", "mps"] = "auto"
     quantization: Literal["none", "4bit"] = "none"
-    ml_profile: Literal["auto", "default", "windows-rocm"] = "auto"
+    ml_profile: ProfileName = "auto"
+    rocm_arch: str | None = Field(default=None, pattern=r"^gfx[0-9a-f]+$")
     model_dir: Path = Path.home() / ".cache/clef-use/models"
     clef_python: Path | None = None
     omni_python: Path | None = None

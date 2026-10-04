@@ -600,3 +600,16 @@ bootstraps byte-identical to tested source. dev verified15new and15old archive
 hashes, old0.1.3 retained, staging removed. Evidence deployment.json; raw SSD
 validation/deployment-20261004. Future version tags/main manual release dispatch
 publish automatically. This does not add broader ML/GUI acceptance claims.
+
+2026-10-04 unreleased deployment profile restructuring: ten OS/backend targets,
+strict backend routing and backend-specific hashed Torch installation. Clean
+source plus owned changes: 144 tests/6.65s, lint/format passed. Fresh native Linux
+CPU Torch 2.11.0+cpu and torchvision 0.26.0+cpu installation installed 13 packages,
+no CUDA/NVIDIA/triton dependencies; real arithmetic passed on monad with NVIDIA
+GPU present. Retained Windows ROCm environment: generic AMD discovery selected
+windows-rocm, Torch GPU sum and NF4 roundtrip passed (max absolute error
+0.14892578125, tolerance 0.3). Windows provider architecture-detection warnings
+were present; actual tested operations passed. No new full model load/inference,
+GUI, all-profile installation or CUDA/Linux ROCm/XPU/macOS device proof. Evidence
+[deployment-profiles.json](deployment-profiles.json). Publication remains held;
+public 0.1.8 profile behavior is unchanged.

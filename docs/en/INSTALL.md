@@ -42,4 +42,4 @@ To uninstall, stop the idle runtime and remove only the managed executable and i
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
-In 0.1.8, `models prepare` automatically selects the pinned native Windows ROCm/NF4 profile for Radeon 890M (gfx1150), using Python 3.12 and CPU OmniParser. Both workers must initialize before configuration is saved. Use `--profile default` or `--quantization none` for an explicit override. This profile has been tested on one owned GUI task; public delivery is tracked separately.
+The unreleased source structures deployment profiles by OS/backend: macOS MPS/CPU and Linux/Windows CUDA/ROCm/XPU/CPU. Use `models profiles` to list them and `models prepare --profile linux-cuda` to select one. Unsupported combinations fail explicitly; full worker initialization must pass before configuration is saved. See [deployment contracts and validation limits](../ARCHITECTURE.md#osbackend-deployment-profiles-unreleased-source). Public 0.1.8 still uses the earlier Windows 890M profile.
