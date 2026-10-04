@@ -8,7 +8,7 @@ import queue
 import subprocess
 import sys
 import threading
-from contextlib import nullcontext
+from contextlib import contextmanager, nullcontext
 from pathlib import Path
 
 from PIL import Image
@@ -262,6 +262,16 @@ class ClefBackend:
 
 
 class DesktopCapture:
+    native_overlay_exclusion = sys.platform in {"darwin", "win32"}
+
+    @contextmanager
+    def excluding_windows(self, windows):
+        self._excluded_windows = frozenset(windows)
+        try:
+            yield
+        finally:
+            self._excluded_windows = frozenset()
+
     def capture(self):
         import mss
 
@@ -270,8 +280,33 @@ class DesktopCapture:
         with native.physical_coordinates() if native else nullcontext():
             with mss.MSS() as screen:
                 monitor = screen.monitors[1]
-                shot = screen.grab(monitor)
-            image = Image.frombytes("RGB", shot.size, shot.rgb)
+                excluded = getattr(self, "_excluded_windows", ())
+                if excluded and sys.platform == "darwin":
+                    import Quartz
+
+                    windows = Quartz.CGWindowListCreate(Quartz.kCGWindowListOptionOnScreenOnly, 0)
+                    windows = tuple(window for window in windows if window not in excluded)
+                    rect = (
+                        (monitor["left"], monitor["top"]),
+                        (monitor["width"], monitor["height"]),
+                    )
+                    cg = Quartz.CGWindowListCreateImageFromArray(
+                        rect, windows, Quartz.kCGWindowImageNominalResolution
+                    )
+                    if cg is None or Quartz.CGImageGetBitsPerPixel(cg) != 32:
+                        raise RuntimeError("cannot capture desktop without activity windows")
+                    pixels = bytes(Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(cg)))
+                    image = Image.frombytes(
+                        "RGB",
+                        (Quartz.CGImageGetWidth(cg), Quartz.CGImageGetHeight(cg)),
+                        pixels,
+                        "raw",
+                        "BGRX",
+                        Quartz.CGImageGetBytesPerRow(cg),
+                    )
+                else:
+                    shot = screen.grab(monitor)
+                    image = Image.frombytes("RGB", shot.size, shot.rgb)
             if native:
                 native.ensure_target(target)
                 logical = image.size
@@ -475,6 +510,7 @@ class DesktopAction:
 
 
 def runtime(config: Config, log_path=None):
+    from .activity import ActivityOverlay
     from .runtime import SessionRuntime
 
     for repo in (config.decision_model, "microsoft/OmniParser-v2.0"):
@@ -489,4 +525,5 @@ def runtime(config: Config, log_path=None):
         DesktopAction(),
         config,
         log_path=log_path,
+        activity=ActivityOverlay(config.activity_overlay),
     )

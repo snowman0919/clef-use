@@ -40,6 +40,7 @@ class Config(StrictModel):
     perception_cache: bool = True
     backend_timeout: float = Field(default=180, ge=1, le=600)
     max_candidates: int = Field(default=48, ge=12, le=100)
+    activity_overlay: bool = True
     debug: bool = False
 
 

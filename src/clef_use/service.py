@@ -203,6 +203,7 @@ def main():
         finally:
             server.server_close()
             if manager.runtime:
+                manager.runtime.activity.close()
                 for backend in (manager.runtime.perception, manager.runtime.decision):
                     worker = getattr(backend, "worker", None)
                     if worker:

@@ -118,6 +118,13 @@ class Status(StrEnum):
     BLOCKED = "BLOCKED"
 
 
+class ActivityState(StrictModel):
+    phase: str = Field(default="Starting", max_length=80)
+    target: str | None = Field(default=None, max_length=200)
+    point: tuple[int, int] | None = None
+    display: Literal["active", "disabled", "unavailable"] | None = None
+
+
 class SessionResult(StrictModel):
     session_id: str
     status: Status
@@ -128,6 +135,7 @@ class SessionResult(StrictModel):
     reason: str
     summary: str
     blocker: dict | None = None
+    activity: ActivityState = Field(default_factory=ActivityState)
 
 
 @dataclass(frozen=True)

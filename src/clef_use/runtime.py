@@ -12,6 +12,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 from types import SimpleNamespace
 
+from .activity import SilentActivity
 from .candidates import CandidateBuilder, effect_region
 from .config import Config
 from .interfaces import ActionBackend, CaptureBackend, DecisionBackend, PerceptionBackend, Verifier
@@ -55,6 +56,7 @@ class Session:
     observation: Observation | None = None
     guidance: list[str] = field(default_factory=list)
     blocker: dict | None = None
+    activity: dict = field(default_factory=lambda: {"phase": "Starting"})
     last_effect: dict | None = field(default=None, repr=False)
     lock: threading.RLock = field(default_factory=threading.RLock)
 
@@ -69,6 +71,7 @@ class Session:
                 "confidence": self.confidence,
                 "reason": self.reason,
                 "blocker": self.blocker,
+                "activity": dict(self.activity),
                 "summary": (
                     f"{self.status.value} after {self.steps} actions, {self.rounds} decisions"
                 ),
@@ -85,7 +88,9 @@ class SessionRuntime:
         config: Config | None = None,
         verifier: Verifier | None = None,
         log_path: Path | None = None,
+        activity=None,
     ):
+        self.activity = activity or SilentActivity()
         self.capture = capture
         self.perception = perception
         self.decision = decision
@@ -129,12 +134,27 @@ class SessionRuntime:
         self._perception_cache = (key, objects) if key is not None else None
         return objects
 
+    def _phase(self, session, phase, target=None, point=None):
+        with session.lock:
+            if session.cancelled.is_set():
+                phase, target, point = "Cancelling", None, None
+            session.activity = {"phase": phase, "target": target, "point": point}
+        self.activity.update(phase, session, point=point, target=target)
+        if hasattr(self.activity, "enabled"):
+            with session.lock:
+                session.activity["display"] = (
+                    "active"
+                    if self.activity.enabled
+                    else ("unavailable" if self.activity.requested else "disabled")
+                )
+
     def _capture(self, row=None):
-        if row is None:
-            return self.capture.capture()
-        row["capture_calls"] = row.get("capture_calls", 0) + 1
-        with _timing(row, "capture_ms"):
-            return self.capture.capture()
+        with self.activity.capture(self.capture):
+            if row is None:
+                return self.capture.capture()
+            row["capture_calls"] = row.get("capture_calls", 0) + 1
+            with _timing(row, "capture_ms"):
+                return self.capture.capture()
 
     def _context_stale(self, before, fresh):
         return (
@@ -149,6 +169,8 @@ class SessionRuntime:
         )
 
     def _target_ready(self, session, before, fresh, roi, row):
+        self._phase(session, "Checking target")
+
         def reference_matches(candidate):
             return not self._stale(before, candidate, roi)
 
@@ -176,6 +198,12 @@ class SessionRuntime:
         return result
 
     def _wait(self, session, frame, roi, row, *, require_change=True, expected_effect=None):
+        self._phase(
+            session,
+            "Checking result",
+            session.activity.get("target"),
+            session.activity.get("point"),
+        )
         predicate = None
         if require_change and expected_effect in {"content_change", "text_value", "view_change"}:
 
@@ -265,6 +293,7 @@ class SessionRuntime:
         with session.lock:
             session.status = Status.ABORTED if session.cancelled.is_set() else status
             session.reason = "explicit abort requested" if session.cancelled.is_set() else reason
+            session.activity = {"phase": session.status.value.replace("_", " ").title()}
         return session.snapshot()
 
     def _record(self, session: Session, row: dict) -> None:
@@ -301,6 +330,7 @@ class SessionRuntime:
         ):
             last_effect["pending"] = False
         try:
+            self._phase(session, "Starting")
             while session.rounds < session.contract.max_steps:
                 if session.cancelled.is_set():
                     return self._finish(session, Status.ABORTED, "abort requested")
@@ -312,11 +342,13 @@ class SessionRuntime:
                     "verification_ms": 0.0,
                     "state_change_score": None,
                 }
+                self._phase(session, "Reading screen")
                 if ready_frame is not None:
                     frame, ready_frame = ready_frame, None
                     row["readiness_frame_reused"] = True
                 else:
                     frame = self._capture(row)
+                self._phase(session, "Finding controls")
                 with _timing(row, "parser_ms"):
                     objects = self._parse(frame, row)
                 observation = Observation(uuid.uuid4().hex, frame, objects)
@@ -327,6 +359,7 @@ class SessionRuntime:
                 candidates = self.builder.build(observation, session.contract)
                 history = [{"guidance": g} for g in session.guidance] + session.action_history[-6:]
                 row["clef_calls"] = 1
+                self._phase(session, "Choosing next action")
                 with _timing(row, "decision_ms"):
                     decision = self.decision.decide(
                         observation, session.contract, candidates, history
@@ -520,6 +553,13 @@ class SessionRuntime:
                     "guidance_count": len(session.guidance),
                 }
                 session.last_effect = last_effect
+                label = (
+                    "Hidden field"
+                    if target and target.sensitive
+                    else (target.label[:200] if target else None)
+                )
+                point = observation.frame.point(target.bbox) if target else None
+                self._phase(session, selected.operation.replace("_", " ").title(), label, point)
                 with _timing(row, "execution_ms"):
                     result = self.action.execute(selected, observation, session.cancelled)
                 row["action"] = selected.audit()
@@ -594,7 +634,10 @@ class SessionRuntime:
             try:
                 self.action.release()
             finally:
-                self.desktop_lock.release()
+                try:
+                    self.activity.finish(session)
+                finally:
+                    self.desktop_lock.release()
                 if row:
                     row["reason"] = session.reason
                     self._record(session, row)
@@ -605,7 +648,7 @@ class SessionRuntime:
         fresh = False
         if refresh and self.desktop_lock.acquire(blocking=False):
             try:
-                frame = self.capture.capture()
+                frame = self._capture()
                 objects = self._parse(frame)
                 with session.lock:
                     session.observation = Observation(uuid.uuid4().hex, frame, objects)

@@ -1,0 +1,56 @@
+{
+  "version": "0.1.14",
+  "scope": "Native display/capture and Windows owned-widget input; no model inference",
+  "source_reference": "trycua/cua@f83bd7a5c0bbf4213ab8539e9793f53e580297f0",
+  "checks": {
+    "macos-activity": {
+      "platform": "darwin",
+      "real_models": false,
+      "window_ids": [
+        11189,
+        11190
+      ],
+      "window_server_hide_restore": "PASSED",
+      "native_exclusion_without_hiding": "PASSED",
+      "status": "PASSED"
+    },
+    "windows-activity": {
+      "platform": "win32",
+      "real_models": false,
+      "window_ids": [
+        2623300,
+        1836992
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "real_click_through": "PASSED",
+      "status": "PASSED"
+    },
+    "linux-activity": {
+      "platform": "linux",
+      "real_models": false,
+      "window_ids": [
+        6291457,
+        6291459
+      ],
+      "capture_marker_region_unchanged": "PASSED",
+      "status": "PASSED"
+    },
+    "activity-cost": {
+      "samples": 5,
+      "baseline_capture_ms": 23.67040860117413,
+      "overlay_capture_ms": 82.99951660155784,
+      "difference_ms": 59.32910800038371,
+      "scope": "Desktop capture + display barrier only; not model inference."
+    },
+    "activity-cost-native": {
+      "samples": 5,
+      "baseline_capture_ms": 30.388374799804296,
+      "overlay_capture_ms": 25.261041398334783,
+      "difference_ms": -5.127333401469514,
+      "scope": "Desktop capture only, warm sequential samples, uncontrolled host load; not inference."
+    }
+  },
+  "performance_note": "Five warm sequential captures under uncontrolled host load. Negative native-exclusion delta is noise, not a claimed speedup. Artificial hide waits are removed on supported macOS/Windows paths.",
+  "screenshots": "Only owned native overlay windows, no desktop background",
+  "tests": "164 passed in 10.30s; Ruff lint/format and uv lock check passed"
+}
