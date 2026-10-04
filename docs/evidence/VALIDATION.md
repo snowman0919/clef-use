@@ -508,3 +508,21 @@ new0.1.6 public delivery, full platform release matrix and canonical local-GPU
 provisioning remain separate gates. One separate launch probe unnecessarily used
 a process-only ExecutionPolicy flag; no machine/user policy was mutated and all
 lifecycle/installer commands used EncodedCommand without that flag.
+
+0.1.6 source checkpoint84d4aa3 published. CI37185328541 completed success in all
+six jobs, actual logs each88passed. Release37185328391 passed all15 native
+platform/Python build+installer jobs and assembly; downloaded bundle has15unique
+expected targets and everyZIP SHA verified. Existing75archive hashes retained.
+
+Native `scripts/check_installation.py` on ssh win additionally passed managed
+`clef-use.cmd` launches in Unicode/space paths,0.1.6 install/CURRENT, synthetic
+0.1.7 update and preservation on checksum/missing-download/failed-smoke cases.
+Synthetic0.1.7 existed only inside temporary test tree, removed automatically.
+No production0.1.7 release. Durable report `installer-command-016-report.json`.
+
+Delivery `dist/clef-use-release-site-0.1.6.tar.gz`379782678bytes,
+SHAd6d26b72dc45ae21f6b54f2ee50b22735511ee95c4a8296927279c381efaf2ec,
+contains new release/latest/bootstrap only; preserve remote older releases.
+Public metadata fresh read remains0.1.3/15targets; new FTP upload is not observed.
+Source/CI/release delivery is ready, canonical local-GPU model preparation and
+prerequisite doctor correction remain open full-goal work.

@@ -643,7 +643,30 @@
     "clean_canonical_tests": "88 passed in 6.02s",
     "native_windows_changed_boundary_tests": "7 passed in 0.34s",
     "lint_format": "passed",
-    "installed_core_hashes_match_clean_source": true
+    "installed_core_hashes_match_clean_source": true,
+    "ci": {
+      "run": 37185328541,
+      "jobs": 6,
+      "all_success": true,
+      "tests_per_job": 88
+    },
+    "release": {
+      "run": 37185328391,
+      "targets": 15,
+      "all_build_installation_jobs_and_assembly_success": true,
+      "all_downloaded_zip_hashes_verified": true
+    },
+    "native_managed_launcher_update_failures": {
+      "first_install": "INSTALLED",
+      "initial_version": "0.1.6",
+      "idempotent": "CURRENT",
+      "update": "INSTALLED",
+      "bad_checksum_preserves_old": true,
+      "missing_download_preserves_old": true,
+      "failed_smoke_preserves_old": true,
+      "final_version": "0.1.7",
+      "note": "Temporary synthetic update to0.1.7 in checker only; no production0.1.7 release. Unicode/space path command launches and three failed updates observed; test tree automatically removed."
+    }
   },
   "permission_fix": {
     "trigger": "Python 3.12.10 OpenSSH token owns private directories as Administrators; OWNER RIGHTS does not admit same account limited desktop token",
@@ -651,11 +674,21 @@
     "reference": "https://github.com/python/cpython/issues/128038"
   },
   "limits": [
-    "Public URL currently installs 0.1.3. Local 0.1.6 artifact is one native Windows/Python3.12 target, not public deployment or all-target release proof.",
+    "Public URL freshly remains0.1.3/15targets. Source0.1.6 passed sixCIjobs and15target release/installation jobs; native model GUI used a separate verified private Windows/Python3.12 artifact.",
     "Actual model GUI uses installed package with experimental NF4 loader and an owned private GUI bridge. It does not establish released default CLI/MCP local GPU provisioning.",
     "Configured installed CLI refuses SSH Session 0 with BLOCKED/ACCESS_UNAVAILABLE and zero input. GUI requires interactive Session1.",
     "GUI task wall127.9586342s excludes worker preinitialization; full diagnostic command187.2827891s includes initialization. No comparative speed claim.",
     "Mac input deferred; larger CLEF/NVIDIA CUDA and arbitrary app tasks not run.",
     "Separate minimal Python launch probe used a transient process-only ExecutionPolicy Bypass flag unnecessarily; no machine/user execution-policy mutation command was issued. Subsequent probes and all installer/lifecycle commands used EncodedCommand without it."
-  ]
+  ],
+  "source_checkpoint": "84d4aa3ed15711f2d9937cc6682f8071fcf47704",
+  "delivery": {
+    "version": "0.1.6",
+    "targets": 15,
+    "preserved_earlier_archive_hashes": 75,
+    "delivery_archive": "/Users/choiyunhyuk/Documents/Playground/clef-use/dist/clef-use-release-site-0.1.6.tar.gz",
+    "sha256": "d6d26b72dc45ae21f6b54f2ee50b22735511ee95c4a8296927279c381efaf2ec",
+    "bytes": 379782678,
+    "public_upload_observed": false
+  }
 }

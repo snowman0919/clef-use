@@ -104,5 +104,5 @@ perception, native input/capture acceleration only after profiling.
 
 Latest native installer lifecycle proof is in evidence/windows-install-lifecycle.json.
 0.1.6 installed package completed a Windows-local model GUI diagnostic and was
-fully removed. Public0.1.3 tested separately; new0.1.6 delivery/CI matrix and
+fully removed. Public0.1.3 tested separately; new0.1.6 all15release targets/sixCI jobs passed; public upload and
 canonical local GPU provisioning remain open. No full-goal completion claim.

@@ -379,3 +379,24 @@ provisioning/quantization integration. Full36-section goal ACTIVE, not achieved.
 Mac input remains deferred. No subagents. Separate minimal launch probe used an
 unnecessary process-only ExecutionPolicy flag; no persistent policy change, all
 subsequent probes and installer/lifecycle commands used EncodedCommand without it.
+
+Authoritative lifecycle continuation: source published84d4aa3ed15711f2d9937cc6682f8071fcf47704.
+CI37185328541 all6success, eachactual88passed. Release37185328391 all15build/
+installer jobs+assemblysuccess, full bundle downloaded/15hashverified on SSD
+releases/0.1.6/ci-37185328391. Rootrelease-site now latest0.1.6;75priorarchive
+hashes unchanged. Delivery dist/clef-use-release-site-0.1.6.tar.gz379782678bytes,
+SHAd6d26b72dc45ae21f6b54f2ee50b22735511ee95c4a8296927279c381efaf2ec,
+sameSSD/releases/0.1.6; upload append-only/newlatest and keepoldremoteversions.
+Publicfresh0.1.3/15targets; new0.1.6 FTP upload route remains unavailable.
+
+Native commandchecker additionallypassed actual .cmd Unicode/space launches,
+install/CURRENT/synthetic0.1.7 update/3failure-preservationchecks; temporarytesttree
+removed. No0.1.7publicsource/release. ActualGUI2input/4decisions withinstalled0.1.6
+package/experimentalNF4 remains current model proof, notcanonicalCLI GPU setup.
+All owned live model/GUI/task/service/listener/token/installer resources cleaned.
+No active tool sessions remain after artifact prep. Actor24paths stillunpublished.
+Documentation/evidence refresh is the only new owned delta; checkpoint it.
+Next bounded work: actual ML prerequisite/device/source checks in doctor.ready,
+then canonical Windows GPU/quantization provision integration. Preserve actor
+prototypes via separate clean HEAD snapshot; do not publish them wholesale.
+Mac input deferred; overall36section goal ACTIVE; this is progress, notcompletion.
