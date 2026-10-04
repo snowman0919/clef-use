@@ -61,13 +61,18 @@ if (-not $env:CLEF_USE_BIN_DIR) {
 }
 $source = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('__PAYLOAD__'))
 $previousEncoding = $OutputEncoding
+$previousConsoleEncoding = [Console]::OutputEncoding
 try {
     $OutputEncoding = New-Object Text.UTF8Encoding $false
-    $source | & $clefPython - @args
+    [Console]::OutputEncoding = $OutputEncoding
+    $source | & $clefPython -X utf8 - @args
     if ($LASTEXITCODE -ne 0) {
         throw 'Verified clef-use installation failed; previous runtime retained.'
     }
-} finally { $OutputEncoding = $previousEncoding }
+} finally {
+    $OutputEncoding = $previousEncoding
+    [Console]::OutputEncoding = $previousConsoleEncoding
+}
 $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
 $entries = @($userPath -split ';' | Where-Object { $_ })
 if (-not $env:CLEF_USE_NO_PATH_UPDATE -and $entries -notcontains $env:CLEF_USE_BIN_DIR) {

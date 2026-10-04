@@ -47,7 +47,12 @@ def check(site):
 
         def invoke(command, success=True):
             result = subprocess.run(
-                command, env=environment, cwd=root, capture_output=True, text=True, timeout=360
+                command,
+                env=environment,
+                cwd=root,
+                capture_output=True,
+                encoding="utf-8",
+                timeout=360,
             )
             if (result.returncode == 0) != success:
                 raise AssertionError(
