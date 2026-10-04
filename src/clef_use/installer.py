@@ -238,7 +238,8 @@ def windows_user_access(path):
         raise RuntimeError("cannot grant the installation user access to its private directory")
 
 
-def install(base_url=DEFAULT_BASE, allow_local=False):
+def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
+    report = progress if progress is not None else lambda message: None
     if not (3, 11) <= sys.version_info[:2] < (3, 14):
         raise ValueError("Python 3.11, 3.12 or 3.13 with venv and pip is required")
     base_url = base_url.rstrip("/")
@@ -271,9 +272,14 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
     if windows:
         windows_user_access(root)
     with install_lock(root / "install.lock"):
+        report("Checking the latest version...")
         raw = fetch(base_url + "/latest/manifest.json", allow_local, 1024 * 1024)
         manifest = parse_manifest(raw, base_url, allow_local)
         artifact = select_artifact(manifest)
+        report(
+            f"Available version: {manifest['version']} "
+            f"(Python {sys.version_info.major}.{sys.version_info.minor})"
+        )
         sums = fetch(base_url + "/latest/SHA256SUMS", allow_local, 1024 * 1024).decode()
         if f"{artifact['sha256']}  {artifact['filename']}" not in sums.splitlines():
             raise ValueError("release checksum metadata is inconsistent")
@@ -293,12 +299,14 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
             if installed["version"] == manifest["version"]:
                 if installed["sha256"] != artifact["sha256"]:
                     raise ValueError("immutable release changed checksum")
+                report("Checking your existing installation...")
                 smoke(environment_binary(current, "clef-use"), installed["version"])
                 return {
                     "status": "CURRENT",
                     "version": installed["version"],
                     "executable": str(launcher),
                 }
+            report(f"Updating {installed['version']} -> {manifest['version']}...")
         versions = root / "versions"
         versions.mkdir(exist_ok=True)
         # Venv paths are never renamed; only the activation symlink changes.
@@ -307,16 +315,20 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
         try:
             if windows:
                 windows_user_access(staged)
+            report("Downloading the installation package...")
             payload = fetch(artifact["url"], allow_local)
+            report("Verifying the download...")
             verify_checksum(payload, artifact["sha256"])
             with tempfile.TemporaryDirectory(prefix="clef-use-payload-") as temporary:
                 temporary = Path(temporary)
                 archive = temporary / "release.zip"
                 archive.write_bytes(payload)
                 safe_extract(archive, temporary / "payload")
+                report("Creating an isolated Python environment...")
                 # Match python -m venv: copying uv-managed Unix Python breaks its stdlib lookup.
                 venv.EnvBuilder(with_pip=True, symlinks=not windows).create(staged)
                 package = temporary / "payload"
+                report("Installing the runtime and dependencies...")
                 result = subprocess.run(
                     [
                         str(environment_binary(staged, "python")),
@@ -341,7 +353,9 @@ def install(base_url=DEFAULT_BASE, allow_local=False):
                     raise RuntimeError(
                         "verified offline wheel installation failed; previous version preserved"
                     )
+            report("Checking that clef-use runs correctly...")
             smoke(environment_binary(staged, "clef-use"), manifest["version"])
+            report("Activating the installation...")
             atomic_text(
                 staged / "installed.json",
                 json.dumps(
@@ -407,11 +421,56 @@ def main():
         "--base-url", default=os.environ.get("CLEF_USE_RELEASE_BASE_URL", DEFAULT_BASE)
     )
     parser.add_argument("--allow-insecure-localhost", action="store_true")
+    parser.add_argument("--json", action="store_true", help="Emit JSON without progress messages")
     args = parser.parse_args()
+
+    def progress(message):
+        print(f"  {message}", flush=True)
+
+    if not args.json:
+        print("clef-use installation\n", flush=True)
     try:
-        print(json.dumps(install(args.base_url, args.allow_insecure_localhost)))
+        result = install(
+            args.base_url,
+            args.allow_insecure_localhost,
+            progress=None if args.json else progress,
+        )
+        if args.json:
+            print(json.dumps(result))
+        else:
+            heading = (
+                "Already up to date. No installation needed."
+                if result["status"] == "CURRENT"
+                else "Installation complete."
+            )
+            print(f"\n{heading}\n  Version: {result['version']}\n  Command: {result['executable']}")
+            bindir = str(Path(result["executable"]).parent)
+            command = "clef-use"
+            if os.path.normcase(bindir) not in {
+                os.path.normcase(str(Path(entry).absolute()))
+                for entry in os.environ.get("PATH", "").split(os.pathsep)
+                if entry
+            }:
+                command = (
+                    f'& "{result["executable"]}"'
+                    if sys.platform == "win32"
+                    else shlex.quote(result["executable"])
+                )
+                if sys.platform != "win32":
+                    print(
+                        "\nTo use clef-use by name in this shell:\n"
+                        f'  export PATH={shlex.quote(bindir)}:"$PATH"'
+                    )
+            print(f"\nNext steps:\n  {command} doctor\n  {command} models prepare --help")
     except Exception as exc:
-        print(f"clef-use: {type(exc).__name__}: {exc}", file=sys.stderr)
+        if args.json:
+            print(f"clef-use: {type(exc).__name__}: {exc}", file=sys.stderr)
+        else:
+            print(
+                f"\nInstallation failed.\n  {exc}\n\n"
+                "Resolve this error and run the installer again.",
+                file=sys.stderr,
+            )
         return 1
     return 0
 

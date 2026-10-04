@@ -139,3 +139,68 @@ def test_install_bootstraps_pip_without_copying_unix_python(tmp_path, monkeypatc
     assert not list((tmp_path / "installation" / "versions").iterdir())
     assert not (tmp_path / "installation" / "current").exists()
     assert not list((tmp_path / "bin").iterdir())
+
+
+@pytest.mark.parametrize(
+    ("status", "heading"),
+    [
+        ("CURRENT", "Already up to date. No installation needed."),
+        ("INSTALLED", "Installation complete."),
+    ],
+)
+def test_bootstrap_explains_result_and_next_steps(status, heading, tmp_path, monkeypatch, capsys):
+    import os
+
+    import clef_use.installer as installer
+
+    monkeypatch.setattr(installer.sys, "argv", ["installer"])
+    monkeypatch.setenv("PATH", str(tmp_path) + os.pathsep + os.environ.get("PATH", ""))
+
+    def install(*args, progress=None):
+        progress("Checking the latest version...")
+        return {"status": status, "version": "0.1.12", "executable": str(tmp_path / "clef-use")}
+
+    monkeypatch.setattr(installer, "install", install)
+    assert installer.main() == 0
+    output = capsys.readouterr()
+    assert "Checking the latest version..." in output.out
+    assert heading in output.out
+    assert "Version: 0.1.12" in output.out
+    assert "clef-use doctor" in output.out
+    assert "clef-use models prepare --help" in output.out
+    assert "export PATH=" not in output.out
+    assert '"status"' not in output.out
+
+
+def test_bootstrap_json_remains_machine_readable(monkeypatch, capsys):
+    import clef_use.installer as installer
+
+    monkeypatch.setattr(installer.sys, "argv", ["installer", "--json"])
+    result = {"status": "CURRENT", "version": "0.1.12", "executable": "/fixture/clef-use"}
+
+    def install(*args, progress=None):
+        assert progress is None
+        return result
+
+    monkeypatch.setattr(installer, "install", install)
+    assert installer.main() == 0
+    output = capsys.readouterr()
+    assert json.loads(output.out) == result
+    assert output.err == ""
+
+
+def test_failed_bootstrap_does_not_print_success(monkeypatch, capsys):
+    import clef_use.installer as installer
+
+    monkeypatch.setattr(installer.sys, "argv", ["installer"])
+
+    def install(*args, **kwargs):
+        raise ValueError("SHA-256 mismatch; previous installation preserved")
+
+    monkeypatch.setattr(installer, "install", install)
+    assert installer.main() == 1
+    output = capsys.readouterr()
+    assert "Installation complete." not in output.out
+    assert "Installation failed." in output.err
+    assert "SHA-256 mismatch" in output.err
+    assert "Installation complete." not in output.err

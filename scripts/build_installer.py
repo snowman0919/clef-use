@@ -77,6 +77,8 @@ if (-not $env:CLEF_USE_NO_PATH_UPDATE -and $entries -notcontains $env:CLEF_USE_B
 if (($env:Path -split ';') -notcontains $env:CLEF_USE_BIN_DIR) {
     $env:Path += ';' + $env:CLEF_USE_BIN_DIR
 }
-Write-Host 'clef-use installed. Restart other shells to use the updated user PATH.'
+if (@($args) -notcontains '--json' -and -not $env:CLEF_USE_NO_PATH_UPDATE) {
+    Write-Host 'Open a new terminal to use clef-use by name if it is not yet on PATH.'
+}
 """
     (ROOT / "install.ps1").write_text(powershell.replace("__PAYLOAD__", payload), newline="\n")

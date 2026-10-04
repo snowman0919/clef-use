@@ -72,11 +72,18 @@ def check(site):
                 if sys.platform == "win32"
                 else ["sh", str(served / "install.sh")]
             )
-            first = invoke([*bootstrap, "--base-url", base, "--allow-insecure-localhost"])
+            first = invoke([*bootstrap, "--json", "--base-url", base, "--allow-insecure-localhost"])
             results["first_install"] = json.JSONDecoder().raw_decode(first.stdout.lstrip())[0][
                 "status"
             ]
             results["initial_version"] = invoke([str(launcher), "version"]).stdout.strip()
+            human = invoke([*bootstrap, "--base-url", base, "--allow-insecure-localhost"])
+            assert "Already up to date. No installation needed." in human.stdout
+            assert f"Version: {initial['version']}" in human.stdout
+            assert "Checking the latest version..." in human.stdout
+            assert "doctor" in human.stdout
+            results["human_output"] = human.stdout
+
             results["idempotent"] = json.loads(
                 invoke(
                     [str(launcher), "update", "--base-url", base, "--allow-insecure-localhost"]
