@@ -1,0 +1,35 @@
+{
+  "source": "NousResearch/hermes-agent",
+  "revision": "3c9847f5e86e81c23335a54daa532de28eeffeb3",
+  "transport": "official CLI mcp test and native registry handler, separate processes",
+  "cli_exit": 0,
+  "handler_exit": 0,
+  "installed_runtime_version": "0.1.5",
+  "tools": [
+    "mcp__clef_use__computer_abort",
+    "mcp__clef_use__computer_continue",
+    "mcp__clef_use__computer_observe",
+    "mcp__clef_use__computer_run",
+    "mcp__clef_use__computer_status"
+  ],
+  "harness_generated_utility_tools": [
+    "mcp__clef_use__get_prompt",
+    "mcp__clef_use__list_prompts",
+    "mcp__clef_use__list_resources",
+    "mcp__clef_use__read_resource"
+  ],
+  "status": "COMPLETED",
+  "actions": 2,
+  "decisions": 4,
+  "configuration_preserved": true,
+  "client_source_tree_verified": true,
+  "native_input": false,
+  "outer_llm_interventions": 0,
+  "boundary": "isolated fixture service; existing user launcher/settings unchanged; no agent LLM conversation",
+  "official_source_hashes": {
+    "pyproject.toml": "d09cd0a47109e5abb9abeb326224208b857faa0d1e921c515d7f0bc6031d2d73",
+    "uv.lock": "de17d70bc999fb0f8fe50dbf8590ac979f43b5a84cd8320caeac1c695ce63c01",
+    "hermes_cli/main.py": "fabe2bf09e9bacafbe07e8ac7eb5b6a4508221c6d822b464201782065e2a5218",
+    "hermes_cli/mcp_config.py": "febce1d00844265e781e4f59a5b493186dc59afec72218da55f267a77acd4b9e"
+  }
+}

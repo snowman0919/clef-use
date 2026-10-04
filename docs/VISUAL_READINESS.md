@@ -75,6 +75,29 @@ capture/input transport is included. No inference runs inside wait polls. Known 
 runs rather than being described as warm. Small-sample measurements do
 not establish arbitrary-app accuracy or a general speed improvement.
 
+Reports now include successful-warm p50/p95 and sample counts separately from all
+warm attempts. A quick BLOCKED/ERROR trial is not a successful task latency. The
+overall PASSED gate requires the full balanced actual-warm sample, cold accuracy,
+zero wrong/early/false actions and a bounded no-effect trial; per-variant results
+remain available when a deliberately weakened ablation fails that gate.
+
+The controller reserves a new private report before connecting or sending input,
+checkpoints the active trial before reset, and atomically replaces/fsyncs the JSON
+after each completed trial. Existing output files are refused. Without `--output`,
+reports use a unique path in the user's persistent state directory, rather than
+the temporary directory. Keep raw reports and step logs private and retain failures.
+For an authorized interactive Windows test with an already-running private agent
+and SSH forward, run from the matching source snapshot:
+
+```sh
+PYTHONPATH=src python scripts/windows_model_gui_smoke.py \
+  --token-file /path/to/private/gui-token --benchmark --repeats 5
+```
+
+The script prints the reserved report path. A RUNNING checkpoint alone does not
+prove that a process is still live; inspect its process/exec handle before resuming
+or starting a new experiment. The diagnostic bridge remains test-only.
+
 ## Primary references and follow-up decisions
 
 - [Playwright actionability](https://playwright.dev/docs/actionability): separate

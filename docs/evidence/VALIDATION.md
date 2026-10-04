@@ -7,7 +7,7 @@ revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inferenc
 
 | Gate | Evidence and boundary |
 | --- | --- |
-| Unit/integration tests | 0.1.4: 57 passed locally in 3.19 seconds and installed-wheel Windows SSH in 4.57 seconds; real loopback HTTP/stdio MCP |
+| Unit/integration tests | Published 0.1.5: 83 passed locally and installed-wheel Windows in 7.48s; later diagnostic/reporting snapshot: 85 passed in 7.19s; real loopback HTTP/stdio MCP |
 | CLI/MCP shared core | Both reach the same fixture session: two actions, four decisions, COMPLETED |
 | Input cleanup | Exceptions after key/button press release all tracked input and restore failsafe |
 | Runtime bounds | Confidence, safety, replan, hard budget, repeat states, abort and secret-redacted errors tested |
@@ -23,9 +23,9 @@ revisions are in `src/clef_use/models.py`. CUDA and Windows-local model inferenc
 | Installed MCP | Actual stdio initialization and five high-level tools passed through installed launcher |
 | Codex setup | Entry installed and `codex mcp get clef-use --json` reads enabled stdio server |
 | OMP setup | Actual OMP 18.4.8 MCP client initialized and listed all five tools; unrelated settings match backup |
-| Hermes setup | Official native MCP discovery/handler completed fixture actions; full local Hermes launcher missing, agent conversation NOT_RUN |
+| Hermes setup | Isolated official full CLI MCP connection and native discovery/handler completed 0.1.5 fixture actions; original user launcher interpreter missing; agent LLM conversation NOT_RUN |
 | Public HTTPS hosting | Bootstrap scripts return HTTP 200; public 0.1.3 manifest has 15 targets and isolated Mac/Windows HTTPS installation plus self-test passed; newer 0.1.5 is not deployed |
-| Windows | 0.1.4 installed wheel: 57 tests, real Unicode/click/wheel/shortcut readback, foreground/cancel/control refusal and released-input state; Windows-local ML NOT_RUN |
+| Windows | 0.1.5 installed wheel: 83 tests; native Unicode/click/wheel/shortcut/readiness/refusal/cleanup checks; later reporting regressions 2/2; Windows-local ML NOT_RUN |
 
 Commands:
 
@@ -64,8 +64,9 @@ not controlled; treat this as a smoke measurement, not a performance benchmark.
 Public 0.1.3 deployment is now observed working on isolated Mac and Windows
 installations (public-https-013.json). Newer source/release delivery remains a
 separate acceptance gate; the operator upload route is not available to this
-task. Actual 0.1.5 model-loop acceptance is under investigation after an MPS
-image-placeholder error; successful native input is not final goal completion.
+task. Controlled actual 0.1.5 visual variants completed 10/10 warm tasks after
+earlier MPS failures; arbitrary-input stability is unproven. Native input alone
+is not final goal completion.
 
 Non-blocking implementation limits: sessions are in memory; primary monitor only;
 Wayland and Windows/CUDA model execution are untested; large CLEF is untested;
@@ -104,7 +105,9 @@ test protects this separation. Rich per-round telemetry remains in private logs.
 
 [OMP readback](omp-mcp.json) uses the installed harness's real client code,
 not a substitute parser. Codex readback is its installed native CLI. Hermes
-configuration is installed, but its missing runtime remains independent.
+configuration is installed. A later isolated official full CLI MCP probe is recorded
+in [Hermes process evidence](hermes-process-mcp.json); the original user launcher
+still has a missing interpreter and was preserved.
 
 ## Hosted platform verification
 
@@ -123,8 +126,8 @@ passed initialization/listing. Screen capture remained deliberately disabled.
 
 The public repository has Issues, Discussions, Actions and private vulnerability
 reporting enabled, main as default branch, and automatic merged-branch deletion.
-Protection recommendations are documented for collaboration; no tag has been published as ready. The public host currently serves bootstrap
-scripts, with release metadata still missing.
+Protection recommendations are documented for collaboration; no tag has been published as ready.
+Public 0.1.3 metadata and installation are accepted; 0.1.5 upload remains separate.
 
 
 ## Repeated model validation
@@ -391,3 +394,41 @@ mistake and the boundary: installation/control flow, not GUI/model proof. Releas
 workflow 37159016423 passed 15 builds plus assembly; source CI 37159015133 passed
 six jobs. New 15 and prior 60 archive hashes verified. Source checkpoint bd217b0.
 Public HTTPS latest is still 0.1.3; 0.1.5 upload is prepared, not deployed.
+
+
+## Controlled native Windows visual trials, 0.1.5
+
+[Controlled report](windows-visual-controlled.json) used the installed Windows
+native adapter, real owned Tk pixels/input, Mac OmniParser CPU and CLEF-Flash MPS,
+500ms delayed rendering, one resident worker pair and rotating variant order.
+There were no outer model interventions, backend errors or worker restarts.
+Cold visual/no-cache task: COMPLETED, 86.1762s, 2 actions/4 decisions.
+
+| Variant | Warm success | Empirical p50 / p95 | Parser / CLEF calls per task | Early advance |
+| --- | --- | --- | --- | --- |
+| 300ms fixed delay, diagnostic ablation | 0/5, BLOCKED | Successful latency unavailable | 2 / 2 before stopping | 5 |
+| Visual wait without cache | 5/5 | 42.434 / 43.846s | 4 / 4 | 0 |
+| Visual wait with exact cache | 5/5 | 42.694 / 47.114s | 3 / 4 | 0 |
+
+Wrong input and false completion were zero in every variant. Fixed-delay failures
+were safely blocked before repeat input; their shorter failure time is not a
+speedup. The overall all-variant gate is FAILED because the weakened fixed-delay
+ablation fails, while production visual variants completed 10/10 tasks. The real
+no-effect task returned NO_PROGRESS after one correct native input/one CLEF call,
+with no retry: 15.6474s total, 5.2643s screen sampling against a 5s deadline.
+Screen sampling can finish after the deadline because a capture is in flight.
+
+Warm mean parser call latency was 774.8ms without cache and 786.2ms with cache;
+CLEF call latency was 8.871s and 9.266s respectively. Exact cache eliminated one
+parser call per successful task, but this sample demonstrates no end-to-end speed
+improvement. Host load was not controlled; n=5 empirical percentiles are not a
+statistical guarantee. Earlier MPS failure evidence remains intact and its cause
+is unresolved. Windows-local inference, arbitrary apps and macOS input are not
+established by these results. Raw step metrics stay on the authorized SSD.
+
+The later reporting tests passed 2/2 on the actual Windows installed interpreter
+in 0.16s. Pure-source regression suite passed 85/85 in 7.19s; lint/format passed.
+Hermes official CLI/handler evidence is [here](hermes-process-mcp.json): isolated
+Python3.14 client and Python3.11 runtime, five canonical tools, 2 fixture actions/
+4 decisions, exact upstream source tree checked. It does not prove an LLM agent
+conversation. Original user settings and missing-interpreter wrapper are preserved.

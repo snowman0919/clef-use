@@ -103,3 +103,11 @@ cache are documented in VISUAL_READINESS.md. Two correct real model-selected
 clicks and app completion readback were observed with 500ms delayed rendering,
 but an MPS backend error interrupted final model verification in the initial
 0.1.5 run. Do not interpret that ERROR as runtime completion.
+
+A later cold run of the same 0.1.5 canonical runtime completed two correct native
+clicks and four model decisions in 69.990643 seconds, with two fresh completion
+observations and independent `Task complete` readback. Parser calls: 3; CLEF
+calls: 4; exact perception cache hits: 1. See
+`evidence/windows-visual-recovery.json`. Inference remained on macOS MPS/CPU;
+input remained on the actual Windows desktop. This single successful run does
+not resolve earlier intermittent MPS failures or establish a latency improvement.

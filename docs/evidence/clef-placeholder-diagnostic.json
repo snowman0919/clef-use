@@ -1,0 +1,16 @@
+{
+  "torch": "2.11.0",
+  "transformers": "5.10.2",
+  "model_loaded": false,
+  "scope": "Official Transformers 5.10.2 mask/scatter with controlled CPU exact reference, not full model proof",
+  "shape": [
+    1,
+    1781,
+    4096
+  ],
+  "runs": 24,
+  "errors": 0,
+  "mask_and_scatter_exact": true,
+  "dtype": "float16",
+  "expected_image_tokens": 532
+}

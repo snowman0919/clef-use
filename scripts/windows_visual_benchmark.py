@@ -1,20 +1,75 @@
 """Controlled wait/cache ablation using the canonical runtime and real Windows GUI."""
 
+import hashlib
+import inspect
 import json
 import math
+import os
 import platform
 import statistics
+import tempfile
 import time
+from pathlib import Path
 
+from clef_use import __version__
 from clef_use.models import MODEL_REVISIONS, OMNI_SOURCE_REVISION
 from clef_use.runtime import Session, SessionRuntime
 from clef_use.schema import Contract, Status
 from clef_use.verification import VisualWaitResult
 
+VARIANTS = ("fixed_delay_no_cache", "visual_wait_no_cache", "visual_wait_cache")
+
 
 def percentile(values, fraction):
     ordered = sorted(values)
     return ordered[max(0, math.ceil(len(ordered) * fraction) - 1)]
+
+
+def save_report(path, report):
+    """Keep the last complete checkpoint if serialization or replacement fails."""
+    payload = json.dumps(report, indent=2).encode("utf-8") + b"\n"
+    with tempfile.NamedTemporaryFile(dir=path.parent, delete=False) as stream:
+        temporary = stream.name
+        try:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+            stream.close()
+            os.replace(temporary, path)
+        finally:
+            if os.path.exists(temporary):
+                os.unlink(temporary)
+
+
+def accepted_report(report):
+    expected = report["repeats_per_variant"] * 3
+    rows = report["runs"]
+    cold = report.get("cold") or {}
+    no_effect = report.get("no_effect") or {}
+    readback = no_effect.get("readback") or {}
+    # A fast failure and a missing negative trial cannot pass an accuracy benchmark.
+    return (
+        cold.get("success", False)
+        and len(rows) == expected
+        and all(
+            sum(row["variant"] == variant for row in rows) == report["repeats_per_variant"]
+            for variant in VARIANTS
+        )
+        and not any(row["actual_cold_workers"] for row in rows)
+        and all(
+            row["success"]
+            and not any(row[key] for key in ("wrong_input", "early_advance", "false_completion"))
+            for row in [cold, *rows]
+        )
+        and no_effect.get("status") in {"NO_PROGRESS", "NEEDS_REPLAN", "BLOCKED"}
+        and no_effect.get("act", 0) == 1
+        and len(readback.get("input_attempts", [])) == 1
+        and not readback.get("render_pending", True)
+        and readback.get("stage") == 0
+        and not any(
+            no_effect.get(key, True) for key in ("wrong_input", "early_advance", "false_completion")
+        )
+    )
 
 
 class FixedDelayRuntime(SessionRuntime):
@@ -62,6 +117,11 @@ def run_benchmark(args, config, perception, decision, desktop, request):
         raise ValueError("repeats must be 1..10")
     report = {
         "kind": "MEASURED_REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+        "runtime_version": __version__,
+        "runtime_source_sha256": hashlib.sha256(
+            Path(inspect.getfile(SessionRuntime)).read_bytes()
+        ).hexdigest(),
+        "benchmark_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "inference_host": platform.platform(),
         "input_host": "Windows 11",
         "models": MODEL_REVISIONS,
@@ -79,8 +139,17 @@ def run_benchmark(args, config, perception, decision, desktop, request):
         "fixed_delay_seconds": 0.3,
         "screen_interval_seconds": config.screen_interval,
         "screen_timeout_seconds": config.screen_timeout,
+        "limitations": [
+            "Known MPS failures retained; worker restarts are marked actual_cold_workers",
+            "Mixed cold/warm or failed/successful latency cannot establish a speed improvement",
+            "Small empirical sample; not a general app benchmark",
+            "SSH capture/input transport included",
+            "Windows-local model inference not tested",
+            "Pixel readiness is not semantic proof",
+            "Fixed ablation retains new safety/candidate/CLEF contracts",
+        ],
     }
-    variants = ["fixed_delay_no_cache", "visual_wait_no_cache", "visual_wait_cache"]
+    variants = VARIANTS
     runtimes = {}
     for variant in variants:
         cls = MeasuredFixedRuntime if variant.startswith("fixed") else MeasuredRuntime
@@ -88,9 +157,11 @@ def run_benchmark(args, config, perception, decision, desktop, request):
         runtimes[variant] = cls(desktop, perception, decision, desktop, local)
 
     def save():
-        args.output.write_text(json.dumps(report, indent=2), encoding="utf-8")
+        save_report(args.output, report)
 
     def run(variant, phase, *, no_effect=False):
+        report["current_trial"] = {"variant": variant, "phase": phase, "state": "RUNNING"}
+        save()
         request("reset", {"delay_ms": 0 if no_effect else 500, "no_effect": no_effect})
         runtime = runtimes[variant]
         runtime.early_advance = 0
@@ -151,6 +222,7 @@ def run_benchmark(args, config, perception, decision, desktop, request):
             ),
             flush=True,
         )
+        report["current_trial"] = {"variant": variant, "phase": phase, "state": "FINISHED"}
         return measured
 
     def summarize():
@@ -158,6 +230,7 @@ def run_benchmark(args, config, perception, decision, desktop, request):
         for variant in variants:
             rows = [row for row in report["runs"] if row["variant"] == variant]
             warm = [row for row in rows if not row["actual_cold_workers"]]
+            successful_warm = [row for row in warm if row["success"]]
             report["summary"][variant] = {
                 "n": len(rows),
                 "actual_warm_runs": len(warm),
@@ -168,6 +241,17 @@ def run_benchmark(args, config, perception, decision, desktop, request):
                 if warm
                 else None,
                 "successes": sum(row["success"] for row in rows),
+                "successful_warm_runs": len(successful_warm),
+                "successful_warm_p50_seconds": statistics.median(
+                    row["seconds"] for row in successful_warm
+                )
+                if successful_warm
+                else None,
+                "successful_warm_p95_seconds": percentile(
+                    [row["seconds"] for row in successful_warm], 0.95
+                )
+                if successful_warm
+                else None,
                 "actual_cold_runs": sum(row["actual_cold_workers"] for row in rows),
                 **{
                     key: sum(row[key] for row in rows)
@@ -207,9 +291,7 @@ def run_benchmark(args, config, perception, decision, desktop, request):
             report["no_effect"] = {"status": "NOT_RUN", "reason": "Repeated backend errors"}
         else:
             report["no_effect"] = run("visual_wait_cache", "no-effect", no_effect=True)
-            report["status"] = (
-                "PASSED" if all(row["success"] for row in report["runs"]) else "FAILED"
-            )
+            report["status"] = "PASSED" if accepted_report(report) else "FAILED"
     except BaseException as exc:
         report["status"] = "INTERRUPTED" if isinstance(exc, KeyboardInterrupt) else "ERROR"
         report["diagnostic_error"] = type(exc).__name__
@@ -217,15 +299,6 @@ def run_benchmark(args, config, perception, decision, desktop, request):
     finally:
         summarize()
         save()
-    report["limitations"] = [
-        "Known MPS failures retained; worker restarts are marked actual_cold_workers",
-        "Mixed cold/warm latency cannot establish a speed improvement",
-        "Small empirical sample; not a general app benchmark",
-        "SSH capture/input transport included",
-        "Windows-local model inference not tested",
-        "Pixel readiness is not semantic proof",
-        "Fixed ablation retains new safety/candidate/CLEF contracts",
-    ]
     save()
     print(json.dumps(report["summary"], indent=2), flush=True)
     return report["status"] == "PASSED"

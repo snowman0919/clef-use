@@ -1,0 +1,212 @@
+{
+  "session_id": "3d2b075de556491f9abcfdba7dc12b2c",
+  "status": "COMPLETED",
+  "steps": 2,
+  "rounds": 4,
+  "last_action": {
+    "id": "a0",
+    "operation": "click",
+    "target": "obj_5d55e4049145"
+  },
+  "confidence": 1.0,
+  "reason": "goal and conditions verified on two fresh observations",
+  "blocker": null,
+  "summary": "COMPLETED after 2 actions, 4 decisions",
+  "independent_gui_readback": {
+    "stage": 2,
+    "clicks": [
+      "Continue",
+      "Confirm"
+    ],
+    "input_attempts": [
+      {
+        "target_label": "Continue ",
+        "visible_label": "Continue",
+        "correct": true
+      },
+      {
+        "target_label": "Confirm ",
+        "visible_label": "Confirm",
+        "correct": true
+      }
+    ],
+    "render_delay_ms": 500,
+    "no_effect": false,
+    "visible_result": "Task complete",
+    "render_pending": false,
+    "desktop": {
+      "session_id": 1,
+      "desktop": "Default",
+      "foreground_window": 394636
+    },
+    "native_input": true
+  },
+  "mode": "REAL_WINDOWS_GUI_MAC_MODELS_SSH_DIAGNOSTIC",
+  "native_input": true,
+  "inference_host": "macOS",
+  "input_host": "Windows 11",
+  "outer_interventions": 0,
+  "wall_seconds": 69.99064270799863,
+  "metrics": [
+    {
+      "capture_ms": 735.5138749990147,
+      "parser_ms": 8744.650708002155,
+      "decision_ms": 29594.18524999637,
+      "execution_ms": 29.244625009596348,
+      "verification_ms": 28.658792027272284,
+      "state_change_score": 0.000743282498184459,
+      "capture_calls": 11,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.315425,
+      "decision_mode": "ACT",
+      "mode_confidence": 0.9112,
+      "effect_probability": 0.0737,
+      "goal_probability": 0.019,
+      "condition_probabilities": [
+        0.0052
+      ],
+      "replan_probability": 0.2406,
+      "safety_probability": 0.0125,
+      "wait_frames": 9,
+      "wait_ms": 1010.2633329952369,
+      "pre_input_readiness": "ALREADY_TRUE",
+      "actionability": {
+        "visible": "DETECTED",
+        "stable": "OBSERVED_PIXELS",
+        "enabled": "UNKNOWN",
+        "editable": "UNKNOWN",
+        "occluded": "UNKNOWN"
+      },
+      "action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_967ceabb4393"
+      },
+      "execution_ok": true,
+      "visual_wait_state": "STABLE",
+      "related_change": true,
+      "expected_effect": "content_change",
+      "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+      "timestamp": "2026-10-03T23:11:06.418445+00:00",
+      "session_id": "3d2b075de556491f9abcfdba7dc12b2c",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 631.9017929927213,
+      "parser_ms": 963.4185410104692,
+      "decision_ms": 7472.678833000828,
+      "execution_ms": 23.265916999662295,
+      "verification_ms": 28.95162503409665,
+      "state_change_score": 0.005317175018155411,
+      "readiness_frame_reused": true,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.397275,
+      "decision_mode": "ACT",
+      "mode_confidence": 0.8734,
+      "effect_probability": 0.0652,
+      "goal_probability": 0.0205,
+      "condition_probabilities": [
+        0.0058
+      ],
+      "replan_probability": 0.356,
+      "safety_probability": 0.0106,
+      "capture_calls": 10,
+      "wait_frames": 9,
+      "wait_ms": 1017.4968329811236,
+      "pre_input_readiness": "ALREADY_TRUE",
+      "actionability": {
+        "visible": "DETECTED",
+        "stable": "OBSERVED_PIXELS",
+        "enabled": "UNKNOWN",
+        "editable": "UNKNOWN",
+        "occluded": "UNKNOWN"
+      },
+      "action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_5d55e4049145"
+      },
+      "execution_ok": true,
+      "visual_wait_state": "STABLE",
+      "related_change": true,
+      "expected_effect": "content_change",
+      "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+      "timestamp": "2026-10-03T23:11:15.967792+00:00",
+      "session_id": "3d2b075de556491f9abcfdba7dc12b2c",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 171.37891598395072,
+      "parser_ms": 4850.329332999536,
+      "decision_ms": 7941.8762090062955,
+      "execution_ms": 0.0,
+      "verification_ms": 1.2696669873548672,
+      "state_change_score": null,
+      "readiness_frame_reused": true,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.870125,
+      "decision_mode": "COMPLETED",
+      "mode_confidence": 0.9114,
+      "effect_probability": 0.4562,
+      "goal_probability": 0.9475,
+      "condition_probabilities": [
+        0.9686
+      ],
+      "replan_probability": 0.0318,
+      "safety_probability": 0.0334,
+      "capture_calls": 3,
+      "wait_frames": 2,
+      "wait_ms": 177.09887499222532,
+      "visual_wait_state": "STABLE",
+      "related_change": false,
+      "timestamp": "2026-10-03T23:11:28.996688+00:00",
+      "session_id": "3d2b075de556491f9abcfdba7dc12b2c",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 58.030915999552235,
+      "parser_ms": 0.7631250045960769,
+      "decision_ms": 7718.741625008988,
+      "execution_ms": 0.0,
+      "verification_ms": 0.0,
+      "state_change_score": null,
+      "readiness_frame_reused": true,
+      "perception_cache_hit": true,
+      "parser_calls": 0,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.870125,
+      "decision_mode": "COMPLETED",
+      "mode_confidence": 0.9114,
+      "effect_probability": 0.4562,
+      "goal_probability": 0.9475,
+      "condition_probabilities": [
+        0.9686
+      ],
+      "replan_probability": 0.0318,
+      "safety_probability": 0.0334,
+      "capture_calls": 1,
+      "reason": "goal and conditions verified on two fresh observations",
+      "timestamp": "2026-10-03T23:11:36.801217+00:00",
+      "session_id": "3d2b075de556491f9abcfdba7dc12b2c",
+      "step": 2,
+      "terminal_event": "COMPLETED"
+    }
+  ],
+  "device": "mps",
+  "parser_device": "cpu",
+  "source_revision": "84c55c79443da37309cbebf78b606ead6c172d96",
+  "limitation": "Single cold acceptance under host load; intermittent prior MPS failures remain; not a speed comparison"
+}

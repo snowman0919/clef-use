@@ -4,15 +4,17 @@ import argparse
 import base64
 import io
 import json
+import os
 import time
 import urllib.error
 import urllib.request
 from pathlib import Path
+from uuid import uuid4
 
 from PIL import Image
 
 from clef_use.backends import ClefBackend, OmniParserBackend, encode_image
-from clef_use.config import load_config
+from clef_use.config import load_config, state_dir
 from clef_use.runtime import Session, SessionRuntime
 from clef_use.schema import ActionResult, Contract, Frame
 
@@ -20,11 +22,21 @@ from clef_use.schema import ActionResult, Contract, Frame
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--token-file", type=Path, required=True)
-    parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--output", type=Path)
     parser.add_argument("--benchmark", action="store_true")
     parser.add_argument("--repeats", type=int, default=5)
     parser.add_argument("--port", type=int, default=37944)
     args = parser.parse_args()
+    if args.output is None:
+        args.output = state_dir() / "validation" / f"windows-model-{uuid4().hex}.json"
+    args.output.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
+    # Reserve before connecting or injecting input; never overwrite a prior experiment.
+    with args.output.open("x", encoding="utf-8") as stream:
+        os.chmod(args.output, 0o600)
+        json.dump({"status": "STARTING", "benchmark": args.benchmark}, stream)
+        stream.flush()
+        os.fsync(stream.fileno())
+    print(f"Evidence: {args.output.resolve()}", flush=True)
     token = args.token_file.read_text().strip()
 
     class NoRedirect(urllib.request.HTTPRedirectHandler):
@@ -126,7 +138,9 @@ def main():
         perception.worker.close()
         decision.worker.close()
         request("finish")
-        args.output.write_text(json.dumps(result, indent=2), encoding="utf-8")
+        from windows_visual_benchmark import save_report
+
+        save_report(args.output, result)
     print(json.dumps({k: v for k, v in result.items() if k != "metrics"}, indent=2))
     return (
         0

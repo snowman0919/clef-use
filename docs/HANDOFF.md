@@ -1,9 +1,12 @@
 # Engineering handoff
 
 Updated 2026-10-04. Repo clef-use/main, public origin
-https://github.com/snowman0919/clef-use. HEAD f130d6f (published 0.1.4), all six source CI jobs passed.
-Owned visual-condition waiting changes are in progress. Overall goal remains active; numbered
-requirements: IMPLEMENTATION.md; evidence: evidence/VALIDATION.md.
+https://github.com/snowman0919/clef-use. Prior published evidence checkpoint 84c55c7, runtime 0.1.5
+source bd217b0. Source CI/release passed; current owned diagnostic changes passed
+85 tests/7.19s and lint/format. Overall goal active; requirement audit in
+IMPLEMENTATION.md, current evidence in evidence/VALIDATION.md. Entries below
+are chronological history; the continuation block at the end is authoritative
+for live handles and next actions. Preserve unowned MLX/residency changes.
 
 Canonical runtime owns capture -> pinned OmniParser -> semantic candidates ->
 joint CLEF choice/noul/score -> deterministic input -> fresh verification. CLI
@@ -178,3 +181,87 @@ diagnostic incorrectly indexed top-level self-test status; this was a report
 parser error after successful installer execution, not a product error. The
 loopback installer server stopped; no background GUI task/token/forward remains.
 Evidence: windows-015-assembled-install.json. Public latest remains 0.1.3.
+
+
+2026-10-04 continuation: prior turn classified progress (published tested source,
+15-target release and actual native GUI evidence). Current root 84c55c7/main,
+actor-owned 24 dirty/untracked paths still excluded. Official Transformers
+placeholder+scatter mini test at actual [1,1781,4096]/532 image tokens passed
+24 runs exact against CPU; not full-model proof. Canonical environment flags,
+same retained public-safe completion request and one resident Flash MPS process
+returned identical complete .949/condition .9638/mode .903 in four forwards
+(two baseline, two diagnostic CPU-copy hooks). This does not fix intermittent
+MPS failures or isolate their cause. Detailed reproduction scripts/raw records
+are on SSD diagnostics/20261004-boundary; compact evidence in repository.
+Actual 0.1.5 Window GUI rerun with 500ms rendering delay COMPLETED, two correct
+native clicks/four decisions in 69.9906427s; parser 3, CLEF 4, exact cache hit 1,
+20 screen polls, 2204.859ms wait/58.880ms pixel verification, zero outer clicks.
+Single cold run under host load, not speed comparison. Agent closed; token/task/
+forward still owned and pending reuse or cleanup. Do not overwrite earlier failures.
+Hermes user wrapper is present but its target venv/bin/python is absent. Preserve
+it and global configs. Exact official 3c9847f5 source/lock/CLI file hashes verified.
+Isolated Python3.14.2, uv0.12.23 and source on SSD harness-validation/. uv0.9.24
+could not parse newer lock settings; noneditable upstream build is deliberately
+unsupported. Changed only audit setup to official editable installation. Ongoing
+sync handle 58881; GUI client 76812 terminal COMPLETED; private forward 52040 live.
+Next: official isolated Hermes CLI MCP connection, controlled actual-model warm
+wait/cache comparison after installation stops, clean owned resources, update
+acceptance audit. Public latest 0.1.3; new 0.1.5 publishing route unavailable.
+
+
+2026-10-04 durable continuation: previous turn classified progress (actual 0.1.5
+Windows GUI acceptance plus MPS boundary measurements). At resumed inspection,
+old exec handles/processes were absent and /tmp outputs gone; SSD was disconnected.
+User reconnected SSD, confirmed actual paths now present. Old Windows own task
+was Ready, no bootstrap process; exact action ownership checked and task/gui-token
+removed. Old SSH forward absent. No repeat was started from observation timeout.
+New benchmark checkpoints atomically replace/fsync private reports, record the
+active trial before reset/input, reserve unique durable default output, reject
+existing output, separate successful-warm percentiles from all warm attempts.
+Acceptance requires cold success, full balanced actual-warm samples, zero wrong/
+early/false actions and a bounded negative trial with exactly one attempted input.
+Two regression tests cover false acceptance and failed checkpoint replacement.
+
+Isolated official Hermes full CLI mcp test and separate native registry handler
+both exited 0 against canonical 0.1.5 fixture, two actions/four decisions.
+Four upstream files (pyproject, uv.lock, main, mcp_config) byte-matched official
+3c9847f5 raw source. Reproducer is scripts/check_hermes_client.py optional
+--hermes-cli/--hermes-python mode. Report evidence/hermes-process-mcp.json;
+raw compact report on SSD harness-validation/hermes-process-report.json.
+No model/GUI proof from that fixture; original user broken wrapper unchanged.
+
+Controlled measurement finished terminal handle75801 (exit1 from deliberate fixed
+ablation failures, not backend failure). See evidence/windows-visual-controlled.json.
+Cold visual task COMPLETED86.1762s; actual-warm visual variants10/10 COMPLETED,
+zero wrong/early/false inputs and no backend errors/restarts. Per variantn5:
+no-cachep50/p95=42.4343/43.8465s; cache42.6941/47.1135s. Parsercalls4->3,
+CLEF4unchanged; no demonstrated wall-time speedup. Fixed-delay5/5BLOCKED,
+earlyadvance5, no repeated/wrong input; shorter failure times are not speedup.
+No-effectNO_PROGRESS after1correctinput/1CLEF,15.6474s total/5.2643s screen wait.
+Raw full metrics on SSD validation/20261004-controlled-recovery/controlled.json;
+compact public report includes actual callback readback/source hashes and limits.
+Report acceptance intentionally gates all variants; FAILED is explained separately
+from10/10 production visual successes. Historical MPS errors remain unresolved.
+
+Current test snapshot /tmp/clef-use-continuation-audit has published84c55c7 core,
+owned diagnostic scripts copied before measurement (later root changes only
+canonical default report directory and Hermes source provenance). It passed85
+regressions/7.19s and lint/format. Reporting regression tests passed2/2 on native
+Windows installed0.1.5 interpreter in0.16s. Official Hermes CLI+handler rerun
+verified actual client source paths belong to exact upstream source tree and passed.
+
+Cleanup observed: owned GUI process absent, exact task action reidentified then
+clef-use-controlled-validation-20261004 deleted; both gui-token files removed;
+own SSH PID18125 command reidentified and terminated. Agent finally releases
+input, closes own window, restores cursor and requests prior foreground. Foreground
+restoration itself is not independently asserted. No other app/process touched.
+Fresh canonical public manifest: curl and Windows Invoke-RestMethod HTTP200,
+version0.1.3/15targets. Pythonurllib403 is client-specific admission. New0.1.5
+public upload still unobserved, immutable release-site/hash unchanged.
+
+Next bounded action: review/stage/publish only owned diagnostic/docs/evidence;
+monitor resultingCI. Then audit full36-sectiongoal against canonical implementation
+and evidence, preserving Mac input deferral, Windows-local inference NOT_RUN,
+optional largerCLEF/CUDA untested and new0.1.5 operator upload blocker. Do not
+claim arbitrary-app/model stability or mark goal complete from this narrow smoke.
+All actor-owned MLX/quantization/residency changes remain excluded. No subagents.

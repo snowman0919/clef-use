@@ -1,0 +1,166 @@
+{
+  "torch": "2.11.0",
+  "transformers": "5.10.2",
+  "model_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+  "source": "84c55c7 request schema",
+  "canonical_environment_flags": true,
+  "dtype": "float16",
+  "device": "mps",
+  "limitation": "Diagnostic copies synchronize MPS; not a fix or speed comparison",
+  "rows": [
+    {
+      "run": 0,
+      "instrumented": false,
+      "seconds": 8.116043875008472,
+      "boundary": [],
+      "driver_bytes": 20089372672,
+      "completion": {
+        "type": "noul",
+        "noul": 0.949
+      },
+      "condition": {
+        "type": "noul",
+        "noul": 0.9638
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.903,
+        "probabilities": {
+          "ACT": 0.034,
+          "WAIT": 0.0171,
+          "BLOCKED": 0.0241,
+          "NEEDS_REPLAN": 0.0219,
+          "COMPLETED": 0.903
+        }
+      }
+    },
+    {
+      "run": 1,
+      "instrumented": false,
+      "seconds": 7.1143821670120815,
+      "boundary": [],
+      "driver_bytes": 20089372672,
+      "completion": {
+        "type": "noul",
+        "noul": 0.949
+      },
+      "condition": {
+        "type": "noul",
+        "noul": 0.9638
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.903,
+        "probabilities": {
+          "ACT": 0.034,
+          "WAIT": 0.0171,
+          "BLOCKED": 0.0241,
+          "NEEDS_REPLAN": 0.0219,
+          "COMPLETED": 0.903
+        }
+      }
+    },
+    {
+      "run": 2,
+      "instrumented": true,
+      "seconds": 7.132127041986678,
+      "boundary": [
+        {
+          "id_shape": [
+            1,
+            1781
+          ],
+          "expected_image_count": 532,
+          "mps_mask_count": 532,
+          "mask_exact": true,
+          "embedded_shape": [
+            1,
+            1781,
+            4096
+          ],
+          "image_features_shape": [
+            532,
+            4096
+          ],
+          "embedded_finite": true,
+          "features_finite": true,
+          "driver_bytes": 21179891712
+        }
+      ],
+      "driver_bytes": 20089372672,
+      "completion": {
+        "type": "noul",
+        "noul": 0.949
+      },
+      "condition": {
+        "type": "noul",
+        "noul": 0.9638
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.903,
+        "probabilities": {
+          "ACT": 0.034,
+          "WAIT": 0.0171,
+          "BLOCKED": 0.0241,
+          "NEEDS_REPLAN": 0.0219,
+          "COMPLETED": 0.903
+        }
+      }
+    },
+    {
+      "run": 3,
+      "instrumented": true,
+      "seconds": 7.109612959000515,
+      "boundary": [
+        {
+          "id_shape": [
+            1,
+            1781
+          ],
+          "expected_image_count": 532,
+          "mps_mask_count": 532,
+          "mask_exact": true,
+          "embedded_shape": [
+            1,
+            1781,
+            4096
+          ],
+          "image_features_shape": [
+            532,
+            4096
+          ],
+          "embedded_finite": true,
+          "features_finite": true,
+          "driver_bytes": 21179891712
+        }
+      ],
+      "driver_bytes": 20089372672,
+      "completion": {
+        "type": "noul",
+        "noul": 0.949
+      },
+      "condition": {
+        "type": "noul",
+        "noul": 0.9638
+      },
+      "mode": {
+        "type": "choice",
+        "choice": "COMPLETED",
+        "confidence": 0.903,
+        "probabilities": {
+          "ACT": 0.034,
+          "WAIT": 0.0171,
+          "BLOCKED": 0.0241,
+          "NEEDS_REPLAN": 0.0219,
+          "COMPLETED": 0.903
+        }
+      }
+    }
+  ],
+  "answers_equal_at_reported_precision": true,
+  "raw_evidence": "Retained on authorized SSD diagnostics/20261004-boundary/"
+}

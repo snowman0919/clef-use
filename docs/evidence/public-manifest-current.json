@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-10-04T05:15:41.361755+00:00",
+  "url": "https://ftp.kotori9.dev/clef-use/latest/manifest.json",
+  "curl_status": "HTTP_200",
+  "version": "0.1.3",
+  "artifacts": 15,
+  "scope": "fresh metadata only; historical installation proof in public-https-013.json",
+  "python_urllib_status": "HTTP_403; client-specific admission; canonical curl succeeds",
+  "new_release_deployed": false,
+  "windows_invoke_rest_method": {
+    "status": "HTTP_200",
+    "version": "0.1.3",
+    "artifacts": 15
+  }
+}
