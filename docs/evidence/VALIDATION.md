@@ -626,3 +626,12 @@ listed five tools. Current public version initialization also passed. No new
 full-model/real-GUI/performance evidence. Earlier0.1.9 release cancelled before
 deployment due to a Windows test fixture platform-cache failure; corrected native
 Windows154tests and full CI passed. [Evidence](release-0.1.10.json).
+
+2026-10-05 installer0.1.11/source527be32 fixes actual monad uv-managed Python3.11
+ensurepip failure: copied executable cannot find encodings; Unix symlink venv
+succeeds. Actual public curl|sh updated managed CLI to0.1.11 and isolated fresh
+install/repeat/self-test passed (INSTALLED/CURRENT/COMPLETED). CI37214624770
+all6jobs passed155tests each and packaged install/update/failure preservation.
+Release37214625817 all15native build/install checks plus assembly/dev deployment
+passed. Public manifest15targets and both bootstrap bytes match tested source.
+No model or GUI claims. [Evidence](bootstrap-0.1.11.json).

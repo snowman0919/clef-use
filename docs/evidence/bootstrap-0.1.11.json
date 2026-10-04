@@ -1,0 +1,81 @@
+{
+  "date": "2026-10-05",
+  "source_commit": "527be3211e62cae1c1fb29ba183876c80685fbcc",
+  "issue": "uv-managed Python 3.11 copied by EnvBuilder cannot resolve its standard library",
+  "reproduction": {
+    "host": "ssh monad",
+    "os": "Ubuntu 24.04.4 LTS",
+    "python": "uv-managed CPython 3.11.16",
+    "public_0_1_10_bootstrap": "FAILED with identical ensurepip CalledProcessError",
+    "copied_python_exit": 1,
+    "copied_python_stderr": "Could not find platform independent libraries <prefix>\nCould not find platform dependent libraries <exec_prefix>\nPython path configuration:\n  PYTHONHOME = (not set)\n  PYTHONPATH = (not set)\n  program name = '/tmp/clef-use-copy-repro-20261005/bin/python3.11'\n  isolated = 0\n  environment = 1\n  user site = 1\n  safe_path = 0\n  import site = 1\n  is in build tree = 0\n  stdlib dir = '/install/lib/python3.11'\n  sys._base_executable = '/home/monad/.local/bin/python3.11'\n  sys.base_prefix = '/install'\n  sys.base_exec_prefix = '/install'\n  sys.platlibdir = 'lib'\n  sys.executable = '/tmp/clef-use-copy-repro-20261005/bin/python3.11'\n  sys.prefix = '/install'\n  sys.exec_prefix = '/install'\n  sys.path = [\n    '/install/lib/python311.zip',\n    '/install/lib/python3.11',\n    '/install/lib/python3.11/lib-dynload',\n  ]\nFatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding\nPython runtime state: core initialized\nModuleNotFoundError: No module named 'encodings'\n\nCurrent thread 0x0000777970f45740 (most recent call first):\n  <no Python frame>\n",
+    "same_python_cli_venv": "PASSED",
+    "patched_bootstrap_installing_0_1_10": "INSTALLED",
+    "patched_installed_fixture_self_test": "COMPLETED"
+  },
+  "correction": "EnvBuilder(with_pip=True, symlinks=not windows), matching python -m venv",
+  "local_validation": {
+    "tests": 155,
+    "seconds": 10.03,
+    "ruff_check": "PASSED",
+    "ruff_format": "PASSED",
+    "uv_lock_check": "PASSED"
+  },
+  "ci_run": 37214624770,
+  "release_run": 37214625817,
+  "limitations": [
+    "No model or GUI validation in this installer regression fix.",
+    "Existing 24 actor prototype files preserved and excluded."
+  ],
+  "publication": {
+    "version": "0.1.11",
+    "artifact_count": 15,
+    "bootstrap_bytes_match_source": true,
+    "ci": "success, 6 jobs, 155 tests per job",
+    "release": "success, 15 native install checks, assembly and dev deployment"
+  },
+  "public_monad_validation": {
+    "original_command": {
+      "status": "INSTALLED",
+      "version": "0.1.11",
+      "executable": "/home/monad/.local/bin/clef-use",
+      "path_hint": "Add /home/monad/.local/bin to PATH if needed. Previous versions and model cache are retained."
+    },
+    "managed_version": "0.1.11",
+    "fresh_install": {
+      "status": "INSTALLED",
+      "version": "0.1.11",
+      "executable": "/tmp/clef-use-public-fresh-20261005-v2dsgrk7/bin/clef-use",
+      "path_hint": "Add /tmp/clef-use-public-fresh-20261005-v2dsgrk7/bin to PATH if needed. Previous versions and model cache are retained."
+    },
+    "repeat_install": {
+      "status": "CURRENT",
+      "version": "0.1.11",
+      "executable": "/tmp/clef-use-public-fresh-20261005-v2dsgrk7/bin/clef-use"
+    },
+    "fresh_version": "0.1.11",
+    "fresh_self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "proves": "control flow only; not ML quality or desktop speed",
+      "samples": [
+        {
+          "status": "COMPLETED",
+          "task_success": true,
+          "wall_seconds": 0.3837191310012713,
+          "low_level_actions": 2,
+          "outer_llm_interventions": 0,
+          "parser_ms_mean": 0.07167799049057066,
+          "clef_ms_mean": 0.004999754310119897,
+          "confidence": [
+            0.99,
+            0.99,
+            0.99,
+            0.99
+          ],
+          "no_progress_replan_count": 0
+        }
+      ]
+    },
+    "fresh_installation_removed": true
+  }
+}

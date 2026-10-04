@@ -150,3 +150,13 @@ HTTPS latest0.1.10 and bootstraps were read back; installed packages passed
 Mac/Windows MCP initialization. Prior0.1.3 and0.1.8 archives remain unchanged.
 See [evidence](evidence/release-0.1.10.json) for scope and limitations. Version
 0.1.9 was cancelled before deployment; its tag remains an audit checkpoint.
+
+## Version 0.1.11
+
+[Release v0.1.11](https://github.com/snowman0919/clef-use/releases/tag/v0.1.11)
+fixes fresh Unix installations with uv-managed Python: virtual environments use
+symlinks as python -m venv does, avoiding the copied interpreter's broken stdlib
+lookup. Windows retains copies. CI37214624770 passed all6jobs/155tests each;
+release37214625817 passed all15native install targets and dev deployment. Actual
+public curl|sh on monad passed both managed update and isolated fresh installation.
+See [evidence](evidence/bootstrap-0.1.11.json).

@@ -656,3 +656,19 @@ preserved and excluded from releases. Original broader goal keeps its prior
 paused/deferred scope. Evidence release-0.1.10.json. Final doc checkpoint only;
 never rebuild/replace published0.1.10 hashes, use original release artifact for
 retry. Owned local isolation worktree can be removed after checkpoint verification.
+
+2026-10-05 bootstrap regression resolved and published as0.1.11, source527be32.
+Reproduced user's public curl|sh failure on monad with uv-managed CPython3.11.16:
+EnvBuilder default copies the executable; copied Python resolves stdlib under
+/install and cannot import encodings. Same interpreter's python -m venv succeeds.
+Canonical installer now matches CLI defaults: symlinks on Unix, copies on Windows.
+Both generated bootstraps refreshed; no model/provisioning architecture change.
+Clean155tests/10.03s, lint/format and locked metadata passed. CI37214624770
+all6jobs/155tests each passed; release37214625817 all15native installer targets,
+assembly and dev deploy passed. Public0.1.11/15artifacts and both bootstrap bytes
+verified against source. Published GitHubv0.1.11. Actual original curl|sh on monad
+updated managed0.1.10->0.1.11; isolated fresh public install INSTALLED, repeat
+CURRENT, installed version0.1.11 and fixture self-test COMPLETED. Own diagnostic
+venvs and fresh-install scope removed, real managed CLI retained. Existing24actor
+draft hashes preserved and excluded. No new model/GUI/performance proof. Evidence
+bootstrap-0.1.11.json. Remove own isolation worktree after doc checkpoint.
