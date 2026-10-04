@@ -6,9 +6,55 @@ import importlib.util
 import json
 import subprocess
 import sys
+from pathlib import Path
 
 from .config import load_config
-from .models import inventory
+from .models import OMNI_SOURCE_REVISION, inventory
+
+
+def ml_environment_probe(python, kind, device):
+    try:
+        result = subprocess.run(
+            [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device],
+            capture_output=True,
+            text=True,
+            timeout=60,
+        )
+        if result.returncode:
+            return {"status": "ERROR", "ready": False, "reason": "ML probe failed"}
+        report = json.loads(result.stdout)
+        if not isinstance(report, dict) or type(report.get("ready")) is not bool:
+            raise ValueError("invalid ML probe response")
+        return report
+    except (OSError, ValueError, subprocess.TimeoutExpired) as exc:
+        return {"status": "ERROR", "ready": False, "reason": type(exc).__name__}
+
+
+def omni_source_probe(source):
+    if not source or not (source / "util/utils.py").is_file():
+        return {"status": "MISSING", "ready": False}
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(source), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        revision = result.stdout.strip()
+        if result.returncode or revision != OMNI_SOURCE_REVISION:
+            return {"status": "REVISION_MISMATCH", "revision": revision, "ready": False}
+        diff = subprocess.run(
+            ["git", "-C", str(source), "diff", "--quiet", "HEAD", "--", "util"],
+            capture_output=True,
+            timeout=15,
+        )
+        return {
+            "status": "OBSERVED" if diff.returncode == 0 else "MODIFIED",
+            "revision": revision,
+            "ready": diff.returncode == 0,
+        }
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return {"status": "ERROR", "ready": False, "reason": type(exc).__name__}
 
 
 async def mcp_probe():
@@ -81,6 +127,13 @@ def doctor(capture: bool = True):
         )
     except (OSError, ValueError, subprocess.TimeoutExpired):
         report["acceleration"] = "NOT_RUN"
+    report["ml_environments"] = {
+        "clef": ml_environment_probe(config.clef_python or sys.executable, "clef", config.device),
+        "omni": ml_environment_probe(
+            config.omni_python or sys.executable, "omni", config.parser_device
+        ),
+    }
+    report["omni_source"] = omni_source_probe(config.omni_source)
     if capture and permissions["screen_capture"] is not False:
         try:
             from .backends import DesktopCapture
@@ -112,6 +165,8 @@ def doctor(capture: bool = True):
     report["models_semantics"] = "NOT_RUN; cache presence is not model inference proof"
     report["ready"] = (
         all(report["dependencies"].values())
+        and all(env["ready"] for env in report["ml_environments"].values())
+        and report["omni_source"]["ready"]
         and report["mcp"].get("status") == "OBSERVED"
         and all(m["available"] for m in report["models"])
         and report["capture"].get("status") == "OBSERVED"

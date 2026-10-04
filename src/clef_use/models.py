@@ -46,9 +46,31 @@ def inventory(root: Path, decision_model: str) -> list[dict]:
             "config.json",
             "joint_schema_model.py",
             "joint_head.safetensors",
+            "joint_head_config.json",
             "model.safetensors.index.json",
+            "processor_config.json",
+            "tokenizer.json",
+            "tokenizer_config.json",
         ],
-        "microsoft/OmniParser-v2.0": ["icon_detect_v3/model.pt", "icon_caption/model.safetensors"],
+        "microsoft/OmniParser-v2.0": [
+            "icon_detect_v3/model.pt",
+            "icon_caption/model.safetensors",
+            "icon_caption/config.json",
+        ],
+        "microsoft/Florence-2-base": [
+            "config.json",
+            "preprocessor_config.json",
+            "processing_florence2.py",
+            "configuration_florence2.py",
+            "tokenizer.json",
+            "tokenizer_config.json",
+            "vocab.json",
+        ],
+        "microsoft/Florence-2-base-ft": [
+            "config.json",
+            "configuration_florence2.py",
+            "modeling_florence2.py",
+        ],
     }
     result = []
     for repo, filenames in required.items():

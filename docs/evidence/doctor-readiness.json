@@ -1,0 +1,279 @@
+{
+  "mode": "REAL_ML_ENVIRONMENT_DEVICE_INITIALIZATION_NO_WEIGHTS_NO_INPUT",
+  "source_basis": "9bbc497b996076118cdd9f006a726b9b81e97dfd plus owned doctor/cache prerequisite patch",
+  "version": "0.1.7",
+  "requirement": "doctor.ready must include both ML environments, requested usable devices, pinned unmodified OmniParser utilities, all runtime cache assets",
+  "macos_cli": {
+    "python": "3.11.15",
+    "platform": "darwin",
+    "dependencies": {
+      "mcp": true,
+      "PIL": true,
+      "mss": true,
+      "pyautogui": true,
+      "pyperclip": true
+    },
+    "models": [
+      {
+        "model": "Cloudflare/clef-flash",
+        "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+        "path": "/Volumes/SSD/AI/clef-use/models/huggingface/hub/models--Cloudflare--clef-flash/snapshots/17f0b0ad64efb65d273590632833508766b2aae6",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/OmniParser-v2.0",
+        "revision": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+        "path": "/Volumes/SSD/AI/clef-use/models/huggingface/hub/models--microsoft--OmniParser-v2.0/snapshots/f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/Florence-2-base",
+        "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+        "path": "/Volumes/SSD/AI/clef-use/models/huggingface/hub/models--microsoft--Florence-2-base/snapshots/5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/Florence-2-base-ft",
+        "revision": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+        "path": "/Volumes/SSD/AI/clef-use/models/huggingface/hub/models--microsoft--Florence-2-base-ft/snapshots/f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+        "available": true,
+        "missing": []
+      }
+    ],
+    "permissions": {
+      "screen_capture": true,
+      "input_injection": true
+    },
+    "acceleration": {
+      "torch": "2.11.0",
+      "cuda": false,
+      "mps": true,
+      "cpu": true
+    },
+    "ml_environments": {
+      "clef": {
+        "status": "OBSERVED",
+        "requested_device": "mps",
+        "imports": {
+          "torch": "2.11.0",
+          "torchvision": "0.26.0",
+          "transformers": "5.10.2",
+          "accelerate": "1.15.0",
+          "PIL": "12.3.0",
+          "numpy": "2.4.6",
+          "safetensors": "0.8.0",
+          "huggingface_hub": "1.33.0"
+        },
+        "errors": {},
+        "ready": true,
+        "device": "mps",
+        "device_operation": "OBSERVED",
+        "hip": null
+      },
+      "omni": {
+        "status": "OBSERVED",
+        "requested_device": "cpu",
+        "imports": {
+          "torch": "2.11.0",
+          "torchvision": "0.26.0",
+          "transformers": "4.46.3",
+          "accelerate": "1.15.0",
+          "PIL": "12.3.0",
+          "numpy": "1.26.4",
+          "easyocr": "1.7.2",
+          "paddle": "3.2.2",
+          "paddleocr": "2.10.0",
+          "cv2": "4.11.0",
+          "supervision": "0.18.0",
+          "timm": "1.0.22",
+          "einops": "0.8.0",
+          "huggingface_hub": "0.36.2",
+          "requests": "2.34.2",
+          "openai": "1.3.5",
+          "matplotlib": "3.11.2"
+        },
+        "errors": {},
+        "ready": true,
+        "device": "cpu",
+        "device_operation": "OBSERVED",
+        "hip": null
+      }
+    },
+    "omni_source": {
+      "status": "OBSERVED",
+      "revision": "354021201345a96178360b28733573e27269f2de",
+      "ready": true
+    },
+    "capture": {
+      "status": "NOT_RUN",
+      "reason": "disabled or permission unavailable"
+    },
+    "input": {
+      "status": "PERMISSION_CHECK_ONLY",
+      "reason": "doctor does not inject input"
+    },
+    "mcp": {
+      "status": "OBSERVED",
+      "tools": [
+        "computer_run",
+        "computer_continue",
+        "computer_observe",
+        "computer_status",
+        "computer_abort"
+      ]
+    },
+    "models_semantics": "NOT_RUN; cache presence is not model inference proof",
+    "ready": false
+  },
+  "windows_ssh_cli": {
+    "python": "3.12.10",
+    "platform": "win32",
+    "dependencies": {
+      "mcp": true,
+      "PIL": true,
+      "mss": true,
+      "pyautogui": true,
+      "pyperclip": true
+    },
+    "models": [
+      {
+        "model": "Cloudflare/clef-flash",
+        "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+        "path": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\local-inference\\models\\huggingface\\hub\\models--Cloudflare--clef-flash\\snapshots\\17f0b0ad64efb65d273590632833508766b2aae6",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/OmniParser-v2.0",
+        "revision": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+        "path": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\local-inference\\models\\huggingface\\hub\\models--microsoft--OmniParser-v2.0\\snapshots\\f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/Florence-2-base",
+        "revision": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+        "path": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\local-inference\\models\\huggingface\\hub\\models--microsoft--Florence-2-base\\snapshots\\5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
+        "available": true,
+        "missing": []
+      },
+      {
+        "model": "microsoft/Florence-2-base-ft",
+        "revision": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+        "path": "C:\\Users\\dbsgu\\AppData\\Local\\clef-use-validation-20261004\\local-inference\\models\\huggingface\\hub\\models--microsoft--Florence-2-base-ft\\snapshots\\f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+        "available": true,
+        "missing": []
+      }
+    ],
+    "permissions": {
+      "screen_capture": "NOT_PROBED",
+      "input_injection": "NOT_PROBED"
+    },
+    "windows_desktop": {
+      "status": "UNAVAILABLE",
+      "reason": "Windows GUI unavailable in SSH/service session 0; use an interactive session"
+    },
+    "acceleration": {
+      "torch": "2.11.0+rocm7.14.1",
+      "cuda": true,
+      "mps": false,
+      "cpu": true
+    },
+    "ml_environments": {
+      "clef": {
+        "status": "OBSERVED",
+        "requested_device": "cuda",
+        "imports": {
+          "torch": "2.11.0+rocm7.14.1",
+          "torchvision": "0.26.0+rocm7.14.1",
+          "transformers": "5.10.2",
+          "accelerate": "1.15.0",
+          "PIL": "12.3.0",
+          "numpy": "2.4.6",
+          "safetensors": "0.8.0",
+          "huggingface_hub": "1.33.0"
+        },
+        "errors": {},
+        "ready": true,
+        "device": "cuda",
+        "device_operation": "OBSERVED",
+        "hip": "7.14.60850"
+      },
+      "omni": {
+        "status": "OBSERVED",
+        "requested_device": "cpu",
+        "imports": {
+          "torch": "2.11.0+cpu",
+          "torchvision": "0.26.0+cpu",
+          "transformers": "4.46.3",
+          "accelerate": "1.15.0",
+          "PIL": "12.3.0",
+          "numpy": "1.26.4",
+          "easyocr": "1.7.2",
+          "paddle": "3.2.2",
+          "paddleocr": "2.10.0",
+          "cv2": "4.11.0",
+          "supervision": "0.18.0",
+          "timm": "1.0.22",
+          "einops": "0.8.0",
+          "huggingface_hub": "0.36.2",
+          "requests": "2.34.2",
+          "openai": "1.3.5",
+          "matplotlib": "3.11.2"
+        },
+        "errors": {},
+        "ready": true,
+        "device": "cpu",
+        "device_operation": "OBSERVED",
+        "hip": null
+      }
+    },
+    "omni_source": {
+      "status": "OBSERVED",
+      "revision": "354021201345a96178360b28733573e27269f2de",
+      "ready": true
+    },
+    "capture": {
+      "status": "NOT_RUN",
+      "reason": "disabled or permission unavailable"
+    },
+    "input": {
+      "status": "DESKTOP_CHECK_ONLY",
+      "reason": "doctor does not inject input"
+    },
+    "mcp": {
+      "status": "OBSERVED",
+      "tools": [
+        "computer_run",
+        "computer_continue",
+        "computer_observe",
+        "computer_status",
+        "computer_abort"
+      ]
+    },
+    "models_semantics": "NOT_RUN; cache presence is not model inference proof",
+    "ready": false
+  },
+  "tests": {
+    "clean_canonical": "95 passed in 6.58s",
+    "native_windows_regressions": "7 passed in 0.79s",
+    "lint_format": "passed",
+    "wheel_build": "clef_use-0.1.7-py3-none-any.whl; included probe bytes match source"
+  },
+  "probe_source_sha256": {
+    "doctor.py": "8303390a52028c0004b6911948ffbb0df15c9eb583b88342d8d974b6fe3aff70",
+    "ml_probe.py": "9806d9e27600e4097008912d97139f06909ec94e22f05c8c9add5250afd421cd",
+    "models.py": "324ae49de5317312bbd317f73407b205134947c50fe7a0f861158fea4d754380"
+  },
+  "limits": [
+    "No model weights loaded or inference quality measured in this doctor turn. Prior real Windows NF4 GUI evidence remains separate.",
+    "Both diagnostics intentionally used --no-capture. Overall ready false is required; Windows SSH session0 is unavailable for GUI.",
+    "Mac CLI exit2 observed. Windows PowerShell wrapper exit1 observed; inner exit code not separately measured.",
+    "First exploratory import list incorrectly included unused ultralytics; pinned v3 detector uses util.yolov9. Removed it after actual environment errors and direct upstream execution-path inspection.",
+    "Runtime does not claim GPU memory sufficiency/full model load from a small device arithmetic check.",
+    "Windows GPU/NF4 default provisioning and newest public HTTPS deployment remain open."
+  ]
+}

@@ -400,3 +400,34 @@ Next bounded work: actual ML prerequisite/device/source checks in doctor.ready,
 then canonical Windows GPU/quantization provision integration. Preserve actor
 prototypes via separate clean HEAD snapshot; do not publish them wholesale.
 Mac input deferred; overall36section goal ACTIVE; this is progress, notcompletion.
+
+
+2026-10-04 doctor/cache prerequisite correction (source0.1.7): previously cache,
+capture and MCP could admit missing ML environments or unavailable requested GPU.
+Doctor now imports both isolated environment dependency sets and required lazy
+Transformers classes, reuses canonical choose_device and executes a tiny device
+sum. Source check validates exact OmniParser HEAD and tracked util changes; cache
+inventory includes joint-head config/processor/tokenizer and pinned Florence
+processor/caption code. No weights/readers/input loaded by the diagnostic.
+
+Clean canonical tests95passed/6.58s; native Windows focused regressions7/.79s;
+lint/format and wheel build passed, packaged probe bytes equal source. Actual
+Mac MPS+CPU Omni and Windows ROCm+CPU Omni environment/device checks OBSERVED.
+Both real CLI diagnostics intentionally --no-capture: readyfalse, Windows
+SSH Session0 unavailable, five MCP tools observed. These are prerequisite checks,
+not model-load/memory/quality proof. Evidence doctor-readiness.json; raw SSD
+validation/doctor-readiness-20261004. First exploratory probe mistakenly checked
+unused ultralytics; pinned icon_detect_v3 uses util.yolov9, corrected after direct
+upstream inspection; final actual Omni checks pass without optional package.
+
+Existing actor doctor/models edits merged only in working tree; canonical source
+blobs staged separately, no actor acceleration/MLX/quantization change published.
+Earlier synthetic0.1.7 update check is unrelated to this new source0.1.7 release.
+Windows install/model-GUI proof remains prior0.1.6. No new GUI input this turn;
+canonical Windows GPU/NF4 provisioning and public newest upload still open.
+
+Next bounded action: checkpoint/push reviewed doctor/cache source0.1.7, confirm
+six-job CI. Then integrate Windows-local GPU/NF4 preparation into canonical CLI
+and resident worker; preserve actor24 prototype paths. Current branch main,
+basis9bbc497; no live model/GUI/service/task/forwarder handles. Overall full goal
+ACTIVE and Mac input remains deferred. Public last observed0.1.3; no FTP route.
