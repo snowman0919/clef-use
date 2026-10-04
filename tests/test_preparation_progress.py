@@ -56,6 +56,7 @@ def test_canonical_prepare_reports_all_stages_and_saves_after_both_workers(tmp_p
     monkeypatch.setattr("clef_use.deployment_profiles.host_system", lambda: "linux")
     config = Config(model_dir=tmp_path / "models", ml_profile="linux-cpu", device="cpu")
     monkeypatch.setattr(provision, "select_python", lambda *_: "python")
+    monkeypatch.setattr("clef_use.installer.windows_user_access", lambda _path: None)
     monkeypatch.setattr(provision, "install_lock", lambda *_a, **_kw: None)
     monkeypatch.setattr("clef_use.native_dependencies.install_native", lambda *_a, **_kw: None)
     monkeypatch.setattr("clef_use.doctor.ml_environment_probe", lambda *_: {"ready": True})
