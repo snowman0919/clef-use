@@ -58,7 +58,7 @@ def validate_url(url, allow_local=False):
     return parsed
 
 
-def fetch(url, allow_local=False, limit=512 * 1024 * 1024):
+def fetch(url, allow_local=False, limit=512 * 1024 * 1024, timeout=45):
     expected = validate_url(url, allow_local)
 
     class Redirect(urllib.request.HTTPRedirectHandler):
@@ -72,7 +72,7 @@ def fetch(url, allow_local=False, limit=512 * 1024 * 1024):
     request = urllib.request.Request(
         url, headers={"User-Agent": "clef-use/0.1 (+https://github.com/snowman0919/clef-use)"}
     )
-    with opener.open(request, timeout=45) as response:
+    with opener.open(request, timeout=timeout) as response:
         data = response.read(limit + 1)
     if len(data) > limit:
         raise ValueError("download exceeds size limit")

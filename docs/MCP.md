@@ -28,3 +28,20 @@ Cancellation of a running MCP request also aborts its session.
 Use a long harness tool timeout (3600 seconds) for cold model loads and bounded
 multi-step sessions. No timeout authorizes extra steps. Setup examples are in
 [HARNESS_SETUP.md](en/HARNESS_SETUP.md).
+
+## Startup update request
+
+Since 0.1.9, each stdio MCP launch checks the canonical HTTPS release manifest.
+A newer release must pass the installer's manifest/origin validation and provide
+an artifact for the running OS, architecture and Python version. The server adds
+an update request to `InitializeResult.instructions`, naming the installed/new
+versions and asking the agent to run `clef-use update` when authorized, then
+reconnect before GUI work. Clients receive it in the standard initialization
+response; client behavior determines whether it is presented to the model.
+The five GUI tools retain their existing contracts.
+
+The startup wait is capped at three seconds. An offline host, timeout, malformed
+manifest, incompatible artifact or older/equal release leaves normal MCP startup
+available. This check requests an update; it does not install it in the server
+process. Remote metadata contributes only a validated version, never executable
+instructions. Tests include a real stdio initialization readback of the request.

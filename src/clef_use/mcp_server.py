@@ -7,16 +7,17 @@ from mcp.types import ImageContent, TextContent
 from .client import RuntimeClient
 from .config import load_config
 from .schema import Contract, SessionResult, TextInput
+from .update_notice import startup_update_request
 
 
-def create_server(client=None):
+def create_server(client=None, update_request=""):
     client = client or RuntimeClient()
     server = FastMCP(
         "clef-use",
         instructions=(
             "Submit bounded GUI goals to computer_run. The local runtime owns all "
             "inner-loop actions. Use observe and continue only after escalation; "
-            "abort stops input."
+            "abort stops input." + (" " + update_request if update_request else "")
         ),
     )
 
@@ -90,4 +91,4 @@ def create_server(client=None):
 
 
 def main():
-    create_server().run(transport="stdio")
+    create_server(update_request=startup_update_request()).run(transport="stdio")

@@ -596,3 +596,20 @@ confirmed imported CLI comes from that target and models profiles returns ten
 names. This is not a one-line public or native full-model installation test.
 Own monad /tmp/clef-use-profile-validation directory removed after evidence
 readback; retained GGUF workspace and existing Windows native ML envs preserved.
+
+2026-10-04 latest human instruction authorizes remote commit/push and deployment
+of the profile changes plus MCP startup update requests. GGUF weights are not
+part of this code release; serving investigation remains separate. Clean base
+main dc1bbe8; /tmp/clef-use-mcp-update isolates all24 byte-preserved actor drafts.
+Source0.1.9 adds update_notice.py; canonical installer fetch gains a timeout
+argument and both generated bootstraps are refreshed. MCP entrypoint checks the
+canonical HTTPS manifest with a three-second overall startup wait, validates
+version/origin/compatible artifact, and appends an update request to standard
+InitializeResult.instructions. Five tool contracts retained. No self-install in
+the server process; the agent receives clef-use update/reconnect guidance under
+user authorization. Offline/malformed/incompatible/older metadata fail open.
+Clean154tests/7.85s, lint/format and uv locked metadata check passed; actual stdio
+initialization captured request for a controlled newer compatible release.
+Next: reviewed local source checkpoint, non-force push main and tag v0.1.9;
+wait for all CI/release/native installer jobs and dev deploy, then verify public
+manifest/bootstraps/archive hashes and actual public packaged MCP handshake.

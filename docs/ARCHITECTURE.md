@@ -157,7 +157,7 @@ Primary references:
 - https://docs.vllm.ai/en/latest/models/pooling_models/
 - https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html
 
-## OS/backend deployment profiles (unreleased source)
+## OS/backend deployment profiles (0.1.9)
 
 Profiles describe deployment environments; GPU model names belong in validation
 records. `deployment_profiles.py` is the single registry used by configuration,
@@ -218,7 +218,9 @@ full CLEF/OmniParser. Prior 0.1.8 Windows 890M full GUI evidence remains histori
 not proof for other GPUs. New CUDA/Linux ROCm/XPU/macOS full-model paths remain
 NOT_RUN. Profile/unit checks do not certify model accuracy or GUI behavior.
 Evidence: [deployment-profiles.json](evidence/deployment-profiles.json).
-Publication remains on hold; public 0.1.8 does not include these changes.
+These profiles are included in source 0.1.9; public delivery is tracked in
+[evidence/VALIDATION.md](evidence/VALIDATION.md). GGUF model publication remains
+a separate serving investigation.
 
 Primary runtime contracts: [PyTorch installation](https://pytorch.org/get-started/locally/),
 [PyTorch XPU](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html),
