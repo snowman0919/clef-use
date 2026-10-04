@@ -1,6 +1,6 @@
 # 설치
 
-**설치 스크립트는 CLI/MCP 런타임만 설치합니다. 모델 가중치 다운로드와 추론 의존성 설치는 수행하지 않습니다.** 최초 GUI 작업 전 모델 캐시 경로를 정한 뒤 `clef-use models prepare`, `clef-use doctor` 순서로 실행하세요. `models download`는 가중치만 다운로드하므로 모델 준비를 대신하지 않습니다.
+런타임 설치 후 **`Prepare models now? [Y/n]`**으로 모델 준비 여부를 묻습니다. Enter 또는 Y를 누르면 모델 준비를 실행하고, N이면 건너뜁니다. Y를 선택하기 전에 모델 캐시 경로를 설정하세요. 대화형 터미널이 없거나 `--json` 사용 시 기본적으로 건너뜁니다. 자동화에서는 `--prepare-models` 또는 `--skip-models`로 지정할 수 있습니다. 나중에 `clef-use models prepare`를 실행해도 됩니다. `models download`는 가중치만 다운로드합니다.
 
 venv/pip를 포함한 Python 3.11-3.13을 설치하세요. 모델 준비에는 Python 3.11/3.12와 Git이 필요합니다(Windows ROCm은 3.12 필요). root나 관리자 권한은 필요하지 않습니다. 다운로드 URL을 사용하기 전에 공개 호스팅 검증 결과를 확인하세요.
 

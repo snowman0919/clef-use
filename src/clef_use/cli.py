@@ -18,7 +18,7 @@ def parser():
         description="Local GUI automation through a shared CLI/MCP runtime.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
-            "First use (the installer does not download models):\n"
+            "First use (model preparation is required):\n"
             "  clef-use models prepare   # install inference dependencies and download models\n"
             "  clef-use doctor           # check models and desktop permissions\n"
             '  clef-use run "your GUI goal"\n\n'
@@ -53,7 +53,8 @@ def parser():
         "models",
         help="prepare inference dependencies and download or inspect models",
         description=(
-            "Models are not downloaded by the installer. Run 'clef-use models prepare' "
+            "The installer can run model preparation after asking Y/n. "
+            "Run 'clef-use models prepare' "
             "before your first GUI task; it installs inference dependencies, downloads "
             "missing models and saves configuration after initialization succeeds."
         ),

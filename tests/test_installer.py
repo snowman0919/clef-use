@@ -161,6 +161,7 @@ def test_bootstrap_explains_result_and_next_steps(status, heading, tmp_path, mon
         return {"status": status, "version": "0.1.12", "executable": str(tmp_path / "clef-use")}
 
     monkeypatch.setattr(installer, "install", install)
+    monkeypatch.setattr(installer, "ask_model_preparation", lambda: None)
     assert installer.main() == 0
     output = capsys.readouterr()
     assert "Checking the latest version..." in output.out
@@ -168,7 +169,7 @@ def test_bootstrap_explains_result_and_next_steps(status, heading, tmp_path, mon
     assert "Version: 0.1.12" in output.out
     assert "clef-use doctor" in output.out
     assert "clef-use models prepare --help" in output.out
-    assert "runtime only" in output.out
+    assert "Runtime installation" in output.out
     assert "does not download model weights" in output.out
     assert "clef-use models prepare\n" in output.out
     assert "export PATH=" not in output.out
@@ -207,3 +208,109 @@ def test_failed_bootstrap_does_not_print_success(monkeypatch, capsys):
     assert "Installation failed." in output.err
     assert "SHA-256 mismatch" in output.err
     assert "Installation complete." not in output.err
+
+
+@pytest.mark.parametrize(
+    ("answer", "expected"),
+    [("\n", True), ("y\n", True), ("N\n", False), ("wrong\nn\n", False), ("", None)],
+)
+def test_model_prompt_uses_terminal_instead_of_piped_stdin(answer, expected, monkeypatch):
+    import io
+
+    import clef_use.installer as installer
+
+    monkeypatch.delenv("CI", raising=False)
+    monkeypatch.delenv("CLEF_USE_NO_MODEL_PROMPT", raising=False)
+
+    class Terminal(io.StringIO):
+        def isatty(self):
+            return True
+
+        def close(self):
+            pass
+
+    reader, writer = Terminal(answer), Terminal()
+    monkeypatch.setattr(
+        installer,
+        "open",
+        lambda path, mode="r", **_: writer if mode == "w" else reader,
+        raising=False,
+    )
+    assert installer.ask_model_preparation() is expected
+    assert "Prepare models now? [Y/n]" in writer.getvalue()
+
+
+@pytest.mark.parametrize(
+    ("flags", "answer", "runs"),
+    [
+        ([], True, True),
+        ([], False, False),
+        ([], None, False),
+        (["--json"], True, False),
+        (["--skip-models"], True, False),
+        (["--prepare-models"], False, True),
+    ],
+)
+def test_bootstrap_model_selection_and_machine_mode(flags, answer, runs, monkeypatch, capsys):
+    import clef_use.installer as installer
+
+    monkeypatch.setattr(installer.sys, "argv", ["installer", *flags])
+    monkeypatch.setattr(
+        installer,
+        "install",
+        lambda *_a, **_kw: {
+            "status": "CURRENT",
+            "version": "0.1.17",
+            "executable": "/owned/clef-use",
+        },
+    )
+    asked, calls = [], []
+
+    def ask():
+        asked.append(True)
+        return answer
+
+    monkeypatch.setattr(installer, "ask_model_preparation", ask)
+    monkeypatch.setattr(
+        installer,
+        "prepare_installed_models",
+        lambda executable, json_mode: calls.append((executable, json_mode)) or 0,
+    )
+    assert installer.main() == 0
+    assert bool(calls) == runs
+    if flags:
+        assert asked == []
+    else:
+        assert asked == [True]
+    if "--json" in flags:
+        assert json.loads(capsys.readouterr().out)["status"] == "CURRENT"
+
+
+def test_preparation_failure_preserves_installed_runtime_message(monkeypatch, capsys):
+    from types import SimpleNamespace
+
+    import clef_use.installer as installer
+
+    def unavailable(*_a, **_kw):
+        raise OSError("no terminal")
+
+    monkeypatch.setattr(installer, "open", unavailable, raising=False)
+    monkeypatch.setattr(
+        installer.subprocess, "run", lambda *_a, **_kw: SimpleNamespace(returncode=7)
+    )
+    assert installer.prepare_installed_models("/owned/runtime") == 7
+    assert "runtime is installed" in capsys.readouterr().err
+
+
+@pytest.mark.parametrize(("name", "value"), [("CI", "true"), ("CLEF_USE_NO_MODEL_PROMPT", "1")])
+def test_automation_does_not_open_console_input(name, value, monkeypatch):
+    import clef_use.installer as installer
+
+    monkeypatch.setenv(name, value)
+    monkeypatch.setattr(
+        installer,
+        "open",
+        lambda *_a, **_kw: pytest.fail("automation opened console"),
+        raising=False,
+    )
+    assert installer.ask_model_preparation() is None

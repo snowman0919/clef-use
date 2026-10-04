@@ -415,6 +415,80 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 shutil.rmtree(staged)
 
 
+def ask_model_preparation():
+    if os.environ.get("CLEF_USE_NO_MODEL_PROMPT") == "1" or os.environ.get("CI", "").lower() in {
+        "1",
+        "true",
+    }:
+        return None
+    input_path, output_path = (
+        ("CONIN$", "CONOUT$") if sys.platform == "win32" else ("/dev/tty", "/dev/tty")
+    )
+    try:
+        with (
+            open(input_path, encoding="utf-8") as reader,
+            open(output_path, "w", encoding="utf-8") as writer,
+        ):
+            if not reader.isatty():
+                return None
+            while True:
+                writer.write("Prepare models now? [Y/n] ")
+                writer.flush()
+                answer = reader.readline()
+                if not answer:
+                    return None
+                answer = answer.strip().lower()
+                if answer in {"", "y", "yes"}:
+                    return True
+                if answer in {"n", "no"}:
+                    return False
+                writer.write("Enter Y or N.\n")
+    except (OSError, KeyboardInterrupt):
+        return None
+
+
+def prepare_installed_models(executable, json_mode=False):
+    command = [executable, "models", "prepare"]
+    if json_mode:
+        command.append("--json")
+    print(
+        "Preparing models..." if not json_mode else "Model preparation requested.",
+        file=sys.stderr if json_mode else sys.stdout,
+        flush=True,
+    )
+    try:
+        with contextlib.ExitStack() as stack:
+            try:
+                reader = stack.enter_context(
+                    open("CONIN$" if sys.platform == "win32" else "/dev/tty", encoding="utf-8")
+                )
+            except OSError:
+                reader = subprocess.DEVNULL
+            completed = subprocess.run(
+                command,
+                stdin=reader,
+                stdout=sys.stderr if json_mode else None,
+            )
+        if completed.returncode:
+            print(
+                "Model preparation failed; the runtime is installed. "
+                "Resolve the reported error and run clef-use models prepare again.",
+                file=sys.stderr,
+                flush=True,
+            )
+            return completed.returncode
+    except (OSError, KeyboardInterrupt) as exc:
+        print(
+            f"Model preparation stopped; the runtime is installed. {type(exc).__name__}",
+            file=sys.stderr,
+            flush=True,
+        )
+        return 130 if isinstance(exc, KeyboardInterrupt) else 1
+    if not json_mode:
+        print("Model preparation complete.", flush=True)
+    return 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="Install or update clef-use without root")
     parser.add_argument(
@@ -422,6 +496,20 @@ def main():
     )
     parser.add_argument("--allow-insecure-localhost", action="store_true")
     parser.add_argument("--json", action="store_true", help="Emit JSON without progress messages")
+    models = parser.add_mutually_exclusive_group()
+    models.add_argument(
+        "--prepare-models",
+        dest="prepare_models",
+        action="store_true",
+        help="prepare models after runtime installation without prompting",
+    )
+    models.add_argument(
+        "--skip-models",
+        dest="prepare_models",
+        action="store_false",
+        help="install the runtime without model preparation or prompting",
+    )
+    parser.set_defaults(prepare_models=None)
     args = parser.parse_args()
 
     def progress(message):
@@ -462,7 +550,7 @@ def main():
                         f'  export PATH={shlex.quote(bindir)}:"$PATH"'
                     )
             print(
-                "\nThis script installs the runtime only. It does not download model weights "
+                "\nRuntime installation does not download model weights "
                 "or install inference dependencies.\n"
                 "Before your first GUI task, prepare the models "
                 "(Python 3.11/3.12 and Git required).\n"
@@ -472,6 +560,13 @@ def main():
                 f"\nFirst-use setup:\n  {command} models prepare\n  {command} doctor\n"
                 f"\nModel setup options:\n  {command} models prepare --help"
             )
+        choice = args.prepare_models
+        if choice is None and not args.json:
+            choice = ask_model_preparation()
+        if choice:
+            return prepare_installed_models(result["executable"], args.json)
+        if not args.json:
+            print("Model preparation skipped. Run clef-use models prepare when ready.", flush=True)
     except Exception as exc:
         if args.json:
             print(f"clef-use: {type(exc).__name__}: {exc}", file=sys.stderr)

@@ -1,6 +1,6 @@
 # Installation
 
-**The installer installs only the CLI/MCP runtime. It does not download model weights or install inference dependencies.** Before the first GUI task, set the model cache path, run `clef-use models prepare`, then `clef-use doctor`. `models download` downloads weights only; it does not complete model setup.
+After runtime installation, the installer asks **`Prepare models now? [Y/n]`**. Enter or Y runs model preparation; N skips it. Set the model cache path before accepting Y. Without an interactive terminal, or with `--json`, preparation is skipped by default. Use `--prepare-models` or `--skip-models` to choose explicitly. You can run `clef-use models prepare` later; `models download` downloads weights only.
 
 Install Python 3.11-3.13 with venv/pip. Model preparation requires Python 3.11/3.12 and Git (Windows ROCm requires 3.12). No root or Administrator privileges are needed. Public hosting must be verified before using the download URL.
 

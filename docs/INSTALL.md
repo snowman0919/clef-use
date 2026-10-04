@@ -10,9 +10,13 @@ in [RELEASE.md](RELEASE.md).
 
 ## Runtime installation and model preparation
 
-The shell/PowerShell installer installs the CLI/MCP runtime only. It does not
-download model weights or install inference dependencies. `Installation complete`
-means the runtime was installed; GUI automation still needs model preparation.
+After runtime installation, the shell/PowerShell installer asks
+`Prepare models now? [Y/n]`. Enter or Y runs `models prepare` using the installed
+runtime; N skips preparation. `curl | sh` reads the answer from the controlling
+terminal. No interactive terminal, EOF and `--json` skip the prompt and model
+preparation by default. Use `--prepare-models` or `--skip-models` to choose
+explicitly in scripts (including `sh -s -- --skip-models`). Model setup failure
+returns a nonzero status while retaining the installed runtime.
 
 Before the first GUI task, choose a writable `model_dir` with enough free space
 (including an external SSD if needed), then run:

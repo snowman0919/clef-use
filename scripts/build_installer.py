@@ -62,16 +62,21 @@ if (-not $env:CLEF_USE_BIN_DIR) {
 $source = [Text.Encoding]::UTF8.GetString([Convert]::FromBase64String('__PAYLOAD__'))
 $previousEncoding = $OutputEncoding
 $previousConsoleEncoding = [Console]::OutputEncoding
+$previousPromptMode = $env:CLEF_USE_NO_MODEL_PROMPT
 try {
+    if ([Console]::IsInputRedirected) { $env:CLEF_USE_NO_MODEL_PROMPT = '1' }
     $OutputEncoding = New-Object Text.UTF8Encoding $false
     [Console]::OutputEncoding = $OutputEncoding
     $source | & $clefPython -X utf8 - @args
     if ($LASTEXITCODE -ne 0) {
-        throw 'Verified clef-use installation failed; previous runtime retained.'
+        throw 'clef-use setup did not complete; see the reported error above.'
     }
 } finally {
     $OutputEncoding = $previousEncoding
     [Console]::OutputEncoding = $previousConsoleEncoding
+    if ($null -eq $previousPromptMode) {
+        Remove-Item Env:CLEF_USE_NO_MODEL_PROMPT -ErrorAction SilentlyContinue
+    } else { $env:CLEF_USE_NO_MODEL_PROMPT = $previousPromptMode }
 }
 $userPath = [Environment]::GetEnvironmentVariable('Path', 'User')
 $entries = @($userPath -split ';' | Where-Object { $_ })

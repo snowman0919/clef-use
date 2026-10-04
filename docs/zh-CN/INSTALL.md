@@ -1,6 +1,6 @@
 # 安装
 
-**安装脚本仅安装 CLI/MCP 运行时，不会下载模型权重或安装推理依赖。** 首次执行 GUI 任务前，请设置模型缓存路径，依次运行 `clef-use models prepare` 和 `clef-use doctor`。`models download` 仅下载权重，不能代替完整的模型准备。
+运行时安装完成后，会询问 **`Prepare models now? [Y/n]`**。按 Enter 或 Y 执行模型准备，按 N 跳过。接受前请设置模型缓存路径。没有交互终端或使用 `--json` 时默认跳过。自动化可使用 `--prepare-models` 或 `--skip-models` 明确选择，也可稍后运行 `clef-use models prepare`。
 
 请安装带有 venv/pip 的 Python 3.11-3.13。模型准备需要 Python 3.11 和 Git。不需要 root 或管理员权限。使用下载 URL 之前，请确认公开部署验证结果。
 

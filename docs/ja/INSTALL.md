@@ -1,6 +1,6 @@
 # インストール
 
-**インストールスクリプトは CLI/MCP ランタイムのみをインストールします。モデルの重みや推論依存関係は含まれません。** 最初の GUI 操作前にモデルキャッシュを設定し、`clef-use models prepare`、`clef-use doctor` の順で実行してください。`models download` は重みのダウンロードのみです。
+ランタイムのインストール後、**`Prepare models now? [Y/n]`** と表示されます。Enter または Y でモデル準備を実行し、N で省略します。Y を選ぶ前にキャッシュを設定してください。対話端末がない場合や `--json` 使用時は既定で省略します。自動化では `--prepare-models` または `--skip-models` を指定できます。後から `clef-use models prepare` を実行することもできます。
 
 venv/pip を含む Python 3.11-3.13 をインストールしてください。モデル準備には Python 3.11 と Git が必要です。root や管理者権限は不要です。ダウンロード URL を使う前に公開配備の検証結果を確認してください。
 

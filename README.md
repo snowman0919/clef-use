@@ -38,8 +38,10 @@ Windows PowerShell:
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
-The installer installs the CLI/MCP runtime only. **It does not download models
-or install inference dependencies.** Before the first GUI task:
+After installing the runtime, the installer asks **`Prepare models now? [Y/n]`**.
+Enter or Y runs model preparation; N leaves the runtime installed and skips it.
+Preparation installs inference dependencies and downloads missing models. Set
+`model_dir` to your desired cache path before accepting Y. You can also prepare later:
 
 ```sh
 clef-use models prepare
