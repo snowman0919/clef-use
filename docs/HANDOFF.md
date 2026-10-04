@@ -530,3 +530,24 @@ Remote source/cache,tools,venv,artifact and raw logs retained for reproducibilit
 Local scripts match remote hashes; ruff lint/format and diff check passed.
 Future GUI GGUF integration depends on upstream image support and separate actual
 visual parity/task validation; do not silently discard screenshots.
+
+
+2026-10-04 human superseded GGUF deployment request: hold publication and
+investigate optimal serving. Interrupted deployment command was read-only; no
+model/site/downloader/installer mutation occurred. GGUF remains on monad only.
+Added serving investigation to existing architecture record. Recommendation is
+one resident typed-decision protocol, Mac MLX vision+head and Windows/Linux saved
+NF4 official worker as candidates; not a measured fastest result. Canonical0.1.8
+Windows full GUI passed load-time NF4, not a full-model saved checkpoint roundtrip.
+MLX prototype/image smoke remains uncommitted, distinct from canonical runtime.
+Upstream PR29622 confirmed open; current vLLM registry lacks Clef entry and pooling
+performance is not guaranteed. Generic chat model instructions are not evidence
+that joint head runs. Pinned MLX loader reviewed via monad small source download,
+SHA852223c944819a32fad5cf798d9d1dff30419820eaf5ad1f10cb9698afec97d5; mx.eval
+of head outputs already present. Official PyTorch forward use_cache=False.
+Existing JsonWorker resident loading confirmed; no duplicate service introduced.
+Benchmark contract specifies same text/questions/images, forced device completion,
+changed-input correctness, p50/p95 and split preprocessing/vision/backbone/head/IPC.
+No new GPU/Mac performance run: SSD currently absent from /Volumes. User asked for
+Mac20ms code/timing boundary through optional asynchronous question; unanswered.
+Preserved all24 actor hashes; deployment remains on hold. Full goal remains paused.

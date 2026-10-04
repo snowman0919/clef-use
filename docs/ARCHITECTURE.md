@@ -103,3 +103,56 @@ Therefore the GGUF is a text-only standalone artifact. It does not replace the
 canonical screenshot decision worker or change deployed installers. Parser
 dependency size is also unchanged. Raw files and logs live on monad under
 `~/clef-use-gguf`; accepted results are recorded in `docs/evidence/gguf-monad.json`.
+
+## Serving investigation, 2026-10-04
+
+Human put GGUF publication/download routing on hold. No GGUF was uploaded to
+the public installation site and no downloader or installer was changed.
+The current recommendation is a single resident typed-decision worker, selected
+for the installed hardware, behind the existing runtime protocol. This is a
+compatibility and implementation-cost recommendation, not a measured fastest
+backend. Existing `JsonWorker` already loads once and serializes requests; adding
+another HTTP service does not by itself remove inference work.
+
+| Candidate | Current evidence | Selection |
+| --- | --- | --- |
+| Apple Silicon MLX 4bit + `clef_mlx.py` | Pinned loader preserves vision and joint head, evaluates outputs with `mx.eval`; earlier synthetic-image and text perturbation smoke passed | Leading Mac candidate; not yet validated in canonical GUI path |
+| CUDA/ROCm saved NF4 + official `systemone` | Canonical Windows ROCm image/GUI path passed using load-time NF4; tiny fixture checkpoint roundtrip passed separately | Leading Windows/Linux candidate; full CLEF prequantized save/reload parity still required |
+| llama.cpp CLEF GGUF | Joint text answers passed; actual image request returns501; upstream PR29622 still open | Retain text artifact; unsuitable for current screenshot decision path |
+| vLLM | Pooling/hidden-state extension interfaces exist, but no Clef entry found in current registry; pooling speed advantage is explicitly not guaranteed | Consider only after demonstrating exact joint-head/vision semantics and a throughput need |
+| ONNX Runtime | Execution providers and quantization tools exist; no exported full CLEF graph/parity evidence here | Defer model-specific export until it has a measured device/dependency benefit |
+
+CLEF's official forward calls the backbone without KV caching and passes its
+hidden states to the joint head. Serving only the backbone through chat
+completion is not an equivalent decision API. Source inspection of the pinned
+MLX loader also shows a full backbone and joint-head evaluation per request.
+Prefix/vision-feature caching needs separate correctness and changed-image
+invalidation checks; it is not assumed to be available or safe already.
+
+Prequantized weights address initialization work, not necessarily steady-state
+latency. Compilation, attention kernels, per-request allocator-cache clearing
+and token/image limits are profiling hypotheses, not accepted improvements.
+The uncommitted MLX/checkpoint/residency prototypes remain separate from deployed
+0.1.8; this investigation does not integrate them or regress canonical HIP SDPA
+and both image pixel bounds.
+
+Compare the same pinned Flash model, typed questions, text length and image
+pixels at concurrency1. Separate preparation, process load, warmup, token/image
+preprocessing, vision, backbone, joint head, IPC and complete request. Force
+device completion when timing; measure changed inputs, not only repeated cached
+answers. Report p50/p95, peak device/host memory, exact versions and correctness
+against a floating-point reference before selecting a backend. The earlier
+4.2s CPU341-token GGUF smoke and a claimed Mac20ms result are not a controlled
+comparison. Published38.8ms Flash median also is not a local-device SLO.
+
+No new performance comparison was run in this investigation. The Mac SSD/model
+environment is currently disconnected. The user was asked for the20ms execution
+code and timing boundary; that evidence is still pending.
+
+Primary references:
+- https://huggingface.co/mlx-community/clef-flash-4bit
+- https://huggingface.co/Cloudflare/clef-flash
+- https://github.com/ggml-org/llama.cpp/pull/29622
+- https://github.com/vllm-project/vllm/blob/main/vllm/model_executor/models/registry.py
+- https://docs.vllm.ai/en/latest/models/pooling_models/
+- https://onnxruntime.ai/docs/performance/model-optimizations/quantization.html
