@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-04",
+  "status": "OBSERVED",
+  "source_commit": "0943347972d57862a2eb23e010d7ff7d2725dcc1",
+  "runner": {
+    "name": "dev-clef-use",
+    "label": "clef-use-deploy",
+    "host_alias": "dev",
+    "service": "clef-use-actions-runner.service",
+    "repository_scoped": true,
+    "printwatch_runner_preserved": true
+  },
+  "deployment": {
+    "directory": "~/share/clef-use",
+    "trigger": "new v* version tag or manual release.yml dispatch from main",
+    "variable": "CLEF_DEPLOY_ENABLED=true",
+    "release_run": 37194265112,
+    "release_url": "https://github.com/snowman0919/clef-use/actions/runs/37194265112",
+    "builds": 15,
+    "assembly": "success",
+    "deploy": "success",
+    "immutable_versions": true,
+    "manifest_switched_last": true
+  },
+  "ci": {
+    "run": 37194240711,
+    "jobs": 6,
+    "tests_per_job": 112,
+    "status": "success"
+  },
+  "public_readback": {
+    "version": "0.1.8",
+    "targets": 15,
+    "public_bootstraps_match_tested_source": true,
+    "bootstrap_sha256": {
+      "install.sh": "cfc61d138ab7c6841cd4d51a5fa63197dedcd319ba4f45b2522aadefd3969926",
+      "install.ps1": "92fe0553a2bcbb943d2d9b8351027fbdcbbd4ec42119f2b8c1e9e5ee0daabc17"
+    }
+  },
+  "server_readback": {
+    "server_latest": "0.1.8",
+    "releases": [
+      {
+        "version": "0.1.3",
+        "verified_archives": 15
+      },
+      {
+        "version": "0.1.8",
+        "verified_archives": 15
+      }
+    ],
+    "services": {
+      "clef-use-actions-runner.service": "active",
+      "printwatch-actions-runner.service": "active"
+    },
+    "pending_staging_dirs": 0
+  },
+  "raw_evidence": "/Volumes/SSD/AI/clef-use/validation/deployment-20261004",
+  "limits": [
+    "Atomic manifest pointer; bootstrap/checksum files replaced individually.",
+    "Runner remains enabled for future deployments; registration token was transient and SSH credentials are not needed.",
+    "Rebuilding an already published version with different hashes is refused; retry failed deploy jobs using their original artifact.",
+    "ML/GUI claims remain bounded by the separately recorded native runtime tests."
+  ]
+}

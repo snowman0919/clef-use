@@ -589,3 +589,14 @@ actual106tests per job plus all six build/install-update checks. Native0.1.8
 Win/Python3.12 ZIP hash verified on SSD; full15-target0.1.8 release assembly
 NOT_RUN. Final temporary source/site/lifecycle fixtures also removed. Public
 metadata read through canonical installer remains0.1.3/15targets.
+
+
+2026-10-04 GitHub Actions deployment: source0943347 adds a single release deploy
+job and stdlib publisher. Dedicated repository runner dev-clef-use is online on
+dev, user service enabled; printwatch runner preserved. CI37194240711 all6success,
+actual112tests each. Release37194265112 all15native build/installer checks,
+assembly and deployment passed. Public HTTPS latest now0.1.8/15targets; both
+bootstraps byte-identical to tested source. dev verified15new and15old archive
+hashes, old0.1.3 retained, staging removed. Evidence deployment.json; raw SSD
+validation/deployment-20261004. Future version tags/main manual release dispatch
+publish automatically. This does not add broader ML/GUI acceptance claims.

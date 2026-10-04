@@ -133,3 +133,8 @@ Disable future deployments with `gh variable set CLEF_DEPLOY_ENABLED --body fals
 Stop the runner with `systemctl --user disable --now clef-use-actions-runner.service`
 on dev; unregister it in this repository's Actions runner settings before removing
 `~/actions-runner-clef-use`. Existing served releases remain available.
+
+First deployment validated on 2026-10-04: [Actions run 37194265112](https://github.com/snowman0919/clef-use/actions/runs/37194265112)
+passed all 15 builds, assembly and deployment. Public latest is 0.1.8, both
+bootstraps match the tested source, and all previous 0.1.3 archives are preserved.
+See [deployment evidence](evidence/deployment.json).

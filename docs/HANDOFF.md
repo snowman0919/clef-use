@@ -477,3 +477,27 @@ handles remain. Existing actor24 file bytes preserved and excluded from source.
 Keep future work bounded to existing acceptance gates; no extra backend/cache,
 MLX/residency feature, or duplicate requirements. Mac input remains deferred;
 newest public deployment requires an available authorized upload route.
+
+
+2026-10-04 deployment route supplied and authorized: ssh dev:~/share/clef-use
+serves the install URL directly. Human chose a dedicated dev self-hosted runner.
+Source0943347972d57862a2eb23e010d7ff7d2725dcc1 adds only release deploy job,
+stdlib publish script, six integrity regressions and existing release docs.
+Local clean112tests/6.61s, lint/format and YAML checks passed. Actor24 paths
+remain byte-preserved. dev-clef-use runner registered online, labels
+self-hosted/Linux/X64/clef-use-deploy; user service clef-use-actions-runner.service
+active/enabled, existing Linger alreadyyes and printwatch runner still active.
+Registration token used only through stdin/environment, no SSH secret created.
+CLEF_DEPLOY_ENABLED=true. CI37194240711 all6success, actual112tests per job. First actual release/deploy
+37194265112 completed all15builds, assembly and dev deployment from exact0943347. Deployment serializes, refuses incomplete
+15-target sites/changed published versions/downgrade, verifies public archives,
+then switches manifest last. Public canonical HTTPS readback now0.1.8/15targets; both bootstrap bytes match
+tested source. All15new and15prior0.1.3archive hashes verified on dev; prior
+version preserved. Both runner services active, no pending staging directories.
+No goal status change; full goal was paused. Current authorized task is GitHub
+Actions deployment automation, independent of deferred Mac foreground input.
+Current Actions automation task complete. Future new-version tag or main manual
+release dispatch deploys automatically; rebuild of the same published version is
+refused. Evidence deployment.json; raw SSD validation/deployment-20261004. No
+active foreground/model/service test handles. Dedicated runner remains enabled
+as authorized; goal status not changed. No further feature work in this task.
