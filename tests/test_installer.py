@@ -341,7 +341,7 @@ def test_repeat_install_validates_existing_artifact_when_bootstrap_python_change
     (current / "installed.json").write_text(json.dumps({"version": "0.1.0", "sha256": digest}))
     monkeypatch.setenv("CLEF_USE_INSTALL_ROOT", str(root))
     monkeypatch.setenv("CLEF_USE_BIN_DIR", str(tmp_path / "bin"))
-    monkeypatch.setattr(installer.sys, "platform", "darwin")
+    monkeypatch.setattr(installer, "windows_user_access", lambda _: None)
     monkeypatch.setattr(installer, "select_artifact", lambda _: selected)
     sums = f"{selected['sha256']}  release.zip\n"
     if receipt != "missing_sum":
