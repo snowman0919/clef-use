@@ -137,5 +137,8 @@ Pre-existing MLX/residency/quantization drafts remain separate and unpublished.
 GGUF/model-serving deployment was deferred by the user; do not absorb these
 prototypes into current release acceptance. Future optimization remains measured
 VLM baseline comparison, temporal/incremental perception and native acceleration
-only after profiling. Overall goal completion remains unproven until the full
-acceptance audit is current; passing fixtures and release tests alone is insufficient.
+only after profiling. The final original-section/acceptance audit is current in
+evidence/completion-audit.json (latest_goal_audit): required V0 deliverables are
+verified, with the explicit profile, hardware, GUI and performance boundaries
+above. The fast-decision research hypothesis remains unproven; it is not a
+measured speed advantage. Optional/future scope is not counted as tested behavior.

@@ -985,3 +985,28 @@ mandatory. Original requirements permit documented limitations and future
 extensions; preserve the distinction from missing mandatory behavior. Speed
 claims and all-profile/hardware coverage remain unproven. Do not mark whole goal
 complete solely from narrow tests. Keep 24 original actor draft hashes unchanged.
+
+
+Final original-goal audit, 2026-10-05, base c096cff: inspected all36original
+sections and acceptance32, canonical source/interfaces/runtime gates, exact
+required artifacts/commands, current public release and recorded real-host/harness
+results. Clean export /tmp/clef-final-audit-c096 passed190tests in12.00s, Ruff
+lint and format104files. Runtime tree is exactly tagged0.1.20. Fifteen release
+job logs independently show first_install/CURRENT/update and three failure
+preservation cases; all ended on the private working synthetic0.1.21. Public
+latest/immutable metadata and bootstrap bytes match tagged0.1.20. GitHub public
+main, Issues/Discussions, published release and private vulnerability reporting
+confirmed; solo-main protection recommendations documented, branch unprotected.
+
+Authoritative audit: docs/evidence/completion-audit.json latest_goal_audit; old
+0.1.3audit preserved. Current validation summary and0.1.20release record refreshed
+so historical CUDA/deployment NOT_RUN text cannot masquerade as current status.
+Required V0 implementation/delivery is verified. Preserve explicit boundaries:
+no cache-empty cleanOS/broadapps/allhardware/agentLLM conversation claims;
+Mac native input deferred; monadGUI virtualX11 and one recovery; Windows finalSSH
+Y-wrapper completion and totalGUIwalltime unverified; originalHermes userlauncher
+still broken. Optional largerCLEF, VLM comparison, Wayland/XPU, DOM/AX/tracking,
+model-serving/MLX drafts and measured performance superiority remain future or
+conditional scope. Rejected compilation is not integrated. These are disclosed
+limitations, not missing mandatoryV0 behavior. Twenty-four original draft hashes
+and user settings remain preserved. No runtime version/release change needed.

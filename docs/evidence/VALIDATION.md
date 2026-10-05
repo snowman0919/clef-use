@@ -1,5 +1,37 @@
 # Validation evidence
 
+## Current acceptance, 2026-10-05
+
+Public release **0.1.20** is deployed and published. Current canonical runtime
+source is byte-identical to its tag. A fresh clean-source run passed **190 tests
+in 12.00s**; lint and format passed (104 Python files). Published CI passed six
+OS/Python jobs and release installation checks passed 15 targets, including first
+install, CURRENT, update, bad-checksum/missing-download/failed-smoke preservation.
+
+[Full requirement audit](completion-audit.json) records all 36 original sections,
+mandatory acceptance gates, required file hashes, current HTTPS readback and
+precise boundaries. [Public Windows/monad E2E](e2e-windows-monad-0.1.20.json)
+exercised installation through removal; Windows native GUI completed two actions,
+and monad's Xvfb recovery completed after one continue. All three
+[native harness clients](harnesses-0.1.20.json) consumed installed 0.1.20 MCP.
+Mac actual MPS models passed [generated pixels](model-smoke-0.1.20.json), with no
+native desktop input. [Stage profiles](../BENCHMARK.md) separate model costs;
+compiled fallback trials were rejected for numerical drift.
+
+These results fulfill the required V0 delivery and measured smoke-test scope.
+They do not establish cache-empty clean-OS installation, broad application or
+all-hardware compatibility, unassisted stability, an agent model conversation,
+Wayland behavior, larger CLEF inference, native Mac input or a speed advantage.
+The missing original Hermes user interpreter is separate from successful
+isolated official client consumption. Windows final SSH terminal Y-wrapper
+completion remains unverified; direct canonical prepare and public noninteractive
+reinstallation passed. Windows total GUI wall time was not measured.
+
+The following chronological records retain their original version-specific
+claims. Earlier deployment blockers and CUDA NOT_RUN statements are historical.
+
+## Historical initial validation
+
 Observed on 2026-10-04: macOS arm64, Python 3.11.15, 48 GiB unified memory,
 primary screenshot 1800 x 1169, external SSD model cache. PyTorch 2.11.0,
 CLEF Transformers 5.10.2; OmniParser Transformers 4.46.3. Pinned model/source
@@ -61,7 +93,7 @@ not native desktop latency measurements. There was no controlled VLM comparison
 and no speedup is claimed. Concurrent foreground use and memory pressure were
 not controlled; treat this as a smoke measurement, not a performance benchmark.
 
-## Remaining limitations
+## Historical 0.1.3 limitations
 
 Public 0.1.3 deployment is now observed working on isolated Mac and Windows
 installations (public-https-013.json). Newer source/release delivery remains a
@@ -76,7 +108,7 @@ non-Windows plain-text clipboard restoration cannot retain rich clipboard types;
 forward cancellation stops late input but does not immediately interrupt tensor
 computation. Model constraints are probabilistic, not a security sandbox.
 
-## Native Windows-local inference
+## Historical experimental Windows-local inference
 
 [Windows-local evidence](windows-local-inference.json) records Windows 11 Pro,
 Python 3.12.10, Ryzen AI 9 HX 370 / Radeon 890M (`gfx1150`), PyTorch

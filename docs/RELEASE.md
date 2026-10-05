@@ -206,3 +206,22 @@ execution skips by default; explicit prepare/skip flags are supported. Fresh pub
 Mac/Windows installations showed the actual terminal question and N exit 0.
 Enter/Y invocation used marker executables; full ML preparation was not repeated.
 Evidence [installer-model-prompt.json](evidence/installer-model-prompt.json).
+
+
+0.1.20 is published: immutable source `de87e470660365c75d1f20c5b38a372eea045deb`,
+[release/deployment](https://github.com/snowman0919/clef-use/actions/runs/37295470437)
+succeeded on all 15 installer targets. Each target verified first installation,
+CURRENT, update, bad checksum, missing download and failed smoke preservation;
+all ended on the previous working synthetic 0.1.21 update version. That test
+version is private to the loopback checks and is not a published release.
+[CI](https://github.com/snowman0919/clef-use/actions/runs/37295561731) passed190tests
+in six jobs at test-only fixture fix `1f4a538`; runtime bytes match the tag.
+[GitHub release](https://github.com/snowman0919/clef-use/releases/tag/v0.1.20)
+is published. 0.1.19 was cancelled before deployment; its tag remains immutable.
+
+Current HTTPS latest/immutable manifests and checksum metadata agree; both root
+bootstraps match tagged bytes. Public Windows and monad installation-to-removal
+and model/GUI results are in [E2E evidence](evidence/e2e-windows-monad-0.1.20.json),
+including reused-cache, delayed-render recovery and Windows SSH terminal-wrapper
+limits. Documentation-only/diagnostic commits after the tag do not replace its
+artifacts.

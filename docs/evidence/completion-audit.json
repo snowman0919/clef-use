@@ -23,5 +23,816 @@
     "0.1.3 verified natively on Windows 11; synthetic update version 0.1.4 stays isolated",
     "no native GUI task performed",
     "concurrent acceleration and residency changes excluded"
-  ]
+  ],
+  "latest_goal_audit": {
+    "date": "2026-10-05",
+    "version": "0.1.20",
+    "source_commit": "c096cff27dc02386419929d52108f3932524eb72",
+    "scope": "Original36sections and explicit acceptance32; functional V0 delivery, not proof of the unbounded research/performance hypothesis",
+    "result": "REQUIRED_V0_DELIVERABLES_VERIFIED_WITH_DISCLOSED_LIMITATIONS",
+    "fresh_validation": {
+      "clean_source_export": true,
+      "tests": "190 passed in12.00s",
+      "lint": "PASS",
+      "format": "104Python files PASS",
+      "fixture_benchmark": "2/2 COMPLETED, each2actions/4decisions, no paid API or native input",
+      "source_runtime_matches_release_tag": true
+    },
+    "artifacts": {
+      "source_commit": "c096cff27dc02386419929d52108f3932524eb72",
+      "release_tag": "v0.1.20",
+      "canonical_runtime_tree_matches_tag": true,
+      "runtime_tree": "a9d2fc4b85844ac96cf8499725dd5aca9439cea3",
+      "required_artifacts": {
+        "README.md": "e05df8642aafe68ce3d24fc1315077e9b200a133dbdeaa7d9b16591ff6432c0f",
+        "docs/ARCHITECTURE.md": "52d70b44719407565d8c941011725b0dc8b7df56fb4a26aa0e18598120922f70",
+        "docs/MCP.md": "49fc0a48dbe7d92653846e8a9334a86e2b4754e9b7955f53cda5547577b41e6b",
+        "docs/INSTALL.md": "3576792fcfbae080cd1d991cc44bb79a558d95d77fa6e7a0299282f9c5ecd7c7",
+        "docs/DEVELOPMENT.md": "a71363a221ca518ef20150c7ddda9089c1eb8fb77e088e596118ea2d05bfad34",
+        "docs/BENCHMARK.md": "b640051a6d1fdf37afaeff4b6d38786f425ea0cade02a14af5a894e41a522ed9",
+        "CONTRIBUTING.md": "139d5ce9faf3080a825d03bb3533abb7602063b6aaa321158623eaf9e19881b1",
+        "SECURITY.md": "595e46cb680e801f9a1518ba674a28948430a64739dfcb558dde0822428de43b",
+        "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+        "CHANGELOG.md": "fa615f6a0f2b7cfc5f1f44100316c5fe62e2bad75714d51e7e3a6d415f75e8b7",
+        "install.sh": "3d79e949eadf1809ada7a60276ff429e9aef1309a308093ff4b8e601069b778f",
+        "install.ps1": "165a277bb3c13129ea6d5d7e07dd5cee27b406bffbbb268b478a9c328a2a0b16",
+        ".github/ISSUE_TEMPLATE/bug_report.yml": "b05933fe41cf7788b7e4fba33ebc42d5ae561a5767743ec17591e64812f08385",
+        ".github/ISSUE_TEMPLATE/feature_request.yml": "90fee3a0eeb7819ac6464a78683bf4b28a1b5674ca90565fbe8560dd8b016677",
+        ".github/PULL_REQUEST_TEMPLATE.md": "cf482b1a0f6f60f19f5c93a962a07fa2206f7154dfb5d208158e78660ac52ad7",
+        ".github/workflows/ci.yml": "a5d085d9bb54b68a38c4322375ed400bb1c628e6960db5e4bf825f428aff8e7f",
+        ".github/workflows/release.yml": "35f07443779717be6e222f85c387c1ca2efbed0428eb06f04b104bef282c2d91",
+        "requirements/runtime.txt": "2407d4ff3484b2c971308f6a8f483ea5796a13b856f0adcf3c47ae8f81295c5d",
+        "uv.lock": "b4e2a3ee8eb3e9b5f2eb2179062a342711bc5100c4e83efb48378ca5bb5aac2d",
+        "docs/en/INSTALL.md": "c8fb2e26e4a8b8b87de8fe9408632a8f181965fddb20e9d06c6b128ea8773141",
+        "docs/en/QUICKSTART.md": "0405a1068a06b03fb4977944d6cac7a4074eacf0d044efa74604b24d9511bb47",
+        "docs/en/MCP.md": "7a5a648bdbe7c0f71e36b74736d94e5eaacb5cf5a8074ac12e29a7990334226e",
+        "docs/en/HARNESS_SETUP.md": "d8ed58acde86ae494ba5c8c47744829f66b7637f4e213f210f02d06d44eddd9e",
+        "docs/ko/INSTALL.md": "2ab0b20c76683fedde69e1096eb09e9ee38a6accd042a7b1f8910dcefa7e5c6f",
+        "docs/ko/QUICKSTART.md": "263c09631dded59a908f3ec29ab13fdcd143ad67fe5ebb824ae9b615c0206b07",
+        "docs/ko/MCP.md": "63284382c1903eee7f82fbd7387f5e7416f01caf6e9800504e88e17580f9ca01",
+        "docs/ko/HARNESS_SETUP.md": "1f42553cf5147e6e6576fd9c815541a9de78d81ec3305a6ccef8dbdcedfd1ff0",
+        "docs/zh-CN/INSTALL.md": "8e8f469c41046744fcbb1e9869b8939526d03fc39046033a352f3e6181998058",
+        "docs/zh-CN/QUICKSTART.md": "9fb8041aa6cd31dfffb1e851802b981e5430c5e639b3a0d084cfb297fa326503",
+        "docs/zh-CN/MCP.md": "4fc6c34ce114304ee290320ce27722338d26d1278a94dade1b90a0852aa1451d",
+        "docs/zh-CN/HARNESS_SETUP.md": "0d0a3348fdb34faed36e4e803fd4278a22c88c268c1a96ade53220cd1e1119ba",
+        "docs/ja/INSTALL.md": "4428d9ee295d484f52bdb822d35344666a389d09f250dd69fed9af3189827463",
+        "docs/ja/QUICKSTART.md": "37743ea4114485ed84f580f5a5234bafa79a41cf2ae8fbe28ca5025f6aa99c71",
+        "docs/ja/MCP.md": "1abba6be96556454cdff42ef0984372f08454c81670d35ae825c8a8d58c98a06",
+        "docs/ja/HARNESS_SETUP.md": "1b35d086b37b9d4c0859437b4931da7b010a1c5a845b46c74d73af47cb69cf74"
+      },
+      "four_locale_command_parity": {
+        "INSTALL.md": 4,
+        "QUICKSTART.md": 1,
+        "MCP.md": 1,
+        "HARNESS_SETUP.md": 4
+      },
+      "mandatory_cli_commands": [
+        "run",
+        "status",
+        "abort",
+        "doctor",
+        "models",
+        "mcp",
+        "install-mcp",
+        "update",
+        "version"
+      ],
+      "tracked_weights_environments_caches": []
+    },
+    "public_https": {
+      "date": "2026-10-05",
+      "version": "0.1.20",
+      "artifact_count": 15,
+      "latest_equals_immutable": true,
+      "manifest_checksums_consistent": true,
+      "manifest_sha256": "07bc4788f0632a8df3554c0ca8487a4ee047b0dee5c3dfd48e9115e8f3cb2622",
+      "bootstrap_tag_checks": {
+        "install.sh": {
+          "matches": true,
+          "sha256": "3d79e949eadf1809ada7a60276ff429e9aef1309a308093ff4b8e601069b778f"
+        },
+        "install.ps1": {
+          "matches": true,
+          "sha256": "165a277bb3c13129ea6d5d7e07dd5cee27b406bffbbb268b478a9c328a2a0b16"
+        }
+      },
+      "scope": "metadata and bootstrap delivery; individual payload integrity covered by release checks and recorded installed-host hashes"
+    },
+    "release_loopback_checks": {
+      "first_install": 15,
+      "idempotent": 15,
+      "update": 15,
+      "bad_checksum_preserves_old": 15,
+      "failed_smoke_preserves_old": 15,
+      "missing_download_preserves_old": 15,
+      "final_versions": {
+        "0.1.21": 15
+      }
+    },
+    "github": {
+      "public": true,
+      "main": true,
+      "issues": true,
+      "discussions": true,
+      "published_release": "v0.1.20",
+      "private_vulnerability_reporting": true,
+      "delete_merged_branches": true,
+      "main_protected": false,
+      "protection_recommendations": "docs/RELEASE.md, single-maintainer exception allowed by originalsection35",
+      "ci_run": 37295561731,
+      "ci_result": "SUCCESS sixjobs/190tests",
+      "release_run": 37295470437,
+      "release_result": "SUCCESS all15targets/assembly/devdeploy"
+    },
+    "sections": [
+      {
+        "section": 1,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "SessionRuntime.execute owns capture/parse/candidates/joint decision/native input/verification without per-action planner calls.",
+        "evidence": [
+          "src/clef_use/runtime.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 2,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "CLI and five MCP tools use RuntimeClient and one resident SessionManager; harness module installs configuration only.",
+        "evidence": [
+          "src/clef_use/cli.py",
+          "src/clef_use/mcp_server.py",
+          "src/clef_use/client.py",
+          "src/clef_use/service.py",
+          "tests/test_protocol.py",
+          "harnesses-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 3,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Iterative bounded inner loop returns typed terminal/escalation events after multiple actions.",
+        "evidence": [
+          "src/clef_use/runtime.py",
+          "tests/test_runtime.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 4,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Python runtime with isolated pinned Torch/Transformers environments and no custom native optimization sidecar.",
+        "evidence": [
+          "pyproject.toml",
+          "src/clef_use/model_worker.py",
+          "requirements/runtime.txt",
+          "src/clef_use/assets/ml-clef.txt",
+          "src/clef_use/assets/ml-omni.txt"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 5,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Pinned official OmniParser V2 detector/OCR/caption wrapper normalizes output only at its boundary.",
+        "evidence": [
+          "src/clef_use/model_worker.py",
+          "src/clef_use/models.py",
+          "src/clef_use/objects.py",
+          "tests/test_adapters.py",
+          "model-smoke-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 6,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Canonical per-state object identity, normalized geometry, labels, roles, interactions and safe box-center coordinates.",
+        "evidence": [
+          "src/clef_use/objects.py",
+          "src/clef_use/schema.py",
+          "tests/test_runtime.py"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 7,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "CandidateBuilder bounds semantic candidates and binds them to an observation; target and operation remain distinct.",
+        "evidence": [
+          "src/clef_use/candidates.py",
+          "src/clef_use/schema.py",
+          "tests/test_runtime.py"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 8,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Pinned CLEF-Flash default uses image and choice/score/noul questions jointly; models select candidate IDs rather than coordinates.",
+        "evidence": [
+          "src/clef_use/backends.py",
+          "src/clef_use/model_worker.py",
+          "src/clef_use/models.py",
+          "tests/test_decision_context.py",
+          "model-smoke-0.1.20.json",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Flash real inference verified; optional larger CLEF configured but inference NOT_RUN (approximately55GB weights and resource cost). No universal latency/quality claim."
+      },
+      {
+        "section": 9,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Strict bounded Contract supports goal, success_conditions, constraints, max_steps and confidence_threshold.",
+        "evidence": [
+          "src/clef_use/schema.py",
+          "tests/test_runtime.py"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 10,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Explicit terminal enum and iterative state transitions; rounds including verification are capped and continue cannot reset budget.",
+        "evidence": [
+          "src/clef_use/schema.py",
+          "src/clef_use/runtime.py",
+          "src/clef_use/service.py",
+          "tests/test_runtime.py",
+          "tests/test_visual_wait.py"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 11,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Action-result checks, visual change/fingerprint, no-effect/cycle detection, confidence gates and fresh double completion verification.",
+        "evidence": [
+          "src/clef_use/verification.py",
+          "src/clef_use/runtime.py",
+          "tests/test_runtime.py",
+          "tests/test_visual_wait.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 12,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Deterministic click/double-click/type/press/hotkey/scroll/wait adapters with tracked input release and safe coordinates.",
+        "evidence": [
+          "src/clef_use/backends.py",
+          "src/clef_use/windows_input.py",
+          "tests/test_adapters.py",
+          "tests/test_windows_input.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Actual Windows native input/cleanup verified; Mac native input deferred by user. Abort prevents late actions and releases owned input; an in-flight tensor forward may finish before desktop lease becomes reusable."
+      },
+      {
+        "section": 13,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Exactly five high-level MCP tools; observe includes current goal/status/recent actions/objects and optional image.",
+        "evidence": [
+          "src/clef_use/mcp_server.py",
+          "src/clef_use/runtime.py",
+          "tests/test_protocol.py",
+          "tests/test_observation.py",
+          "harnesses-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 14,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Thin CLI commands run/status/abort/doctor/models/mcp/install-mcp/update/version share core.",
+        "evidence": [
+          "src/clef_use/cli.py",
+          "tests/test_protocol.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 15,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Actual Codex TOML, Hermes YAML and OMP JSON adapters preserve unrelated entries/backups and are idempotent.",
+        "evidence": [
+          "src/clef_use/harness.py",
+          "tests/test_harness.py",
+          "harnesses-0.1.20.json"
+        ],
+        "boundary": "Native Codex catalog, OMP client and isolated official Hermes handler consumed0.1.20; agent model conversations NOT_RUN. Existing broken Hermes user launcher left unchanged."
+      },
+      {
+        "section": 16,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Canonical HTTPS one-line installation, repeat CURRENT/update and CLI update share installer.",
+        "evidence": [
+          "install.sh",
+          "install.ps1",
+          "src/clef_use/installer.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 17,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Generated latest/immutable release layout and15platform/architecture/Python bundles with version, URL, hashes and requirements.",
+        "evidence": [
+          "scripts/build_release.py",
+          "scripts/merge_releases.py",
+          "docs/RELEASE.md",
+          "PUBLIC_HTTPS_READBACK"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 18,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "POSIX bootstrap detects host/Python, verifies secondary payloads, stages offline, smoke-checks and activates atomically with per-user diagnostics.",
+        "evidence": [
+          "install.sh",
+          "scripts/build_installer.py",
+          "src/clef_use/installer.py",
+          "scripts/check_installation.py",
+          "RELEASE_15_TARGET_LOGS"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 19,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Install/update/CURRENT converge; checksum, missing download and failed smoke preserve the working version and remove failed staging.",
+        "evidence": [
+          "src/clef_use/installer.py",
+          "tests/test_installer.py",
+          "scripts/check_installation.py",
+          "RELEASE_15_TARGET_LOGS",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Rollback is pre-activation preservation, not a separate rollback command. All15loopback checks ended on prior working synthetic0.1.21."
+      },
+      {
+        "section": 20,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Configurable pinned cache; prepare downloads missing upstream files, isolates dependencies and initializes workers; doctor checks imports/devices/cache/source/capture/MCP.",
+        "evidence": [
+          "src/clef_use/models.py",
+          "src/clef_use/provision.py",
+          "src/clef_use/doctor.py",
+          "tests/test_doctor_readiness.py",
+          "tests/test_preparation_progress.py",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Doctor never injects input or treats cache presence as model semantics; separate GUI evidence proves input/inference. Current E2E reused model caches and is not a cache-empty clean-OS test."
+      },
+      {
+        "section": 21,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Explicit OS/backend contracts, acceleration detection and unsupported-configuration diagnostics; MPS/CUDA/ROCm and CPU parser paths observed.",
+        "evidence": [
+          "src/clef_use/deployment_profiles.py",
+          "src/clef_use/ml_probe.py",
+          "src/clef_use/provision.py",
+          "tests/test_deployment_profiles.py",
+          "model-smoke-0.1.20.json",
+          "e2e-windows-monad-0.1.20.json"
+        ],
+        "boundary": "Ten valid OS/backend target profiles; target declarations do not prove all hardware classes. XPU/Wayland and every CPU-only decision setup remain untested; impossible OS/backend combinations are rejected."
+      },
+      {
+        "section": 22,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "One project-owned Config and TOML path with bounded settings and explicit model/environment/cache overrides.",
+        "evidence": [
+          "src/clef_use/config.py",
+          "src/clef_use/schema.py",
+          "docs/INSTALL.md"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 23,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Private structured capture/parser/decision/execution/action/confidence/change/terminal records; debug adds counts/observationID without typed values.",
+        "evidence": [
+          "src/clef_use/runtime.py",
+          "src/clef_use/schema.py",
+          "tests/test_runtime.py",
+          "log-modes-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 24,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Fixture and ordinary-contract desktop benchmarks report success, wall time, actions, interventions, parser/CLEF means, confidence samples and stop counts without a paid API.",
+        "evidence": [
+          "src/clef_use/benchmark.py",
+          "docs/BENCHMARK.md",
+          "tests/test_runtime.py",
+          "latency-0.1.20.json"
+        ],
+        "boundary": "Benchmark metrics tested; real task timing and model-stage profiles measured separately. No controlled traditional-VLM speed advantage; Windows E2E helper did not measure total wall time."
+      },
+      {
+        "section": 25,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Contract/object/candidate/action/state/no-progress/manifest/checksum/version tests plus real loopback HTTP/stdio and actual package-install failure checks.",
+        "evidence": [
+          "tests/test_runtime.py",
+          "tests/test_adapters.py",
+          "tests/test_installer.py",
+          "tests/test_protocol.py",
+          "scripts/check_installation.py",
+          "FRESH190_TESTS",
+          "RELEASE_15_TARGET_LOGS"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 26,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Concrete Capture/Perception/Decision/Action/Verifier Protocols and injected SessionRuntime dependencies.",
+        "evidence": [
+          "src/clef_use/interfaces.py",
+          "src/clef_use/runtime.py",
+          "src/clef_use/verification.py",
+          "tests/test_runtime.py"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 27,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Replaceable interfaces documented for later DOM/AX/tracking/browser/remote execution; no speculative placeholders in production.",
+        "evidence": [
+          "src/clef_use/interfaces.py",
+          "docs/ARCHITECTURE.md"
+        ],
+        "boundary": "Explicit future features are outside V0, per originalsection27."
+      },
+      {
+        "section": 28,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Step budget, abort/release, confidence/no-progress gates, exception termination and redacted escalation logs; no hidden shell executor.",
+        "evidence": [
+          "src/clef_use/runtime.py",
+          "src/clef_use/backends.py",
+          "src/clef_use/windows_input.py",
+          "tests/test_runtime.py",
+          "tests/test_protocol.py",
+          "SECURITY.md"
+        ],
+        "boundary": "Model constraints are probabilistic; same-user local processes are trusted and there is no OS sandbox."
+      },
+      {
+        "section": 29,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Required English README/architecture/MCP/install/development/benchmark documents include one-line setup and shared-loop invariant.",
+        "evidence": [
+          "README.md",
+          "docs/ARCHITECTURE.md",
+          "docs/MCP.md",
+          "docs/INSTALL.md",
+          "docs/DEVELOPMENT.md",
+          "docs/BENCHMARK.md",
+          "REQUIRED_ARTIFACT_HASHES"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 30,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Independent main repository, no tracked weights/environments/caches; canonical formatting/tests pass, original24drafts/settings preserved.",
+        "evidence": [
+          ".gitignore",
+          "FRESH190_TESTS",
+          "REQUIRED_ARTIFACT_HASHES",
+          "PRESERVED24_DRAFT_HASHES"
+        ],
+        "boundary": "Working tree intentionally contains pre-existing actor drafts. Diagnostic scripts retain documented reproduction purposes; rejected experiments are not runtime backends."
+      },
+      {
+        "section": 31,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Core real GUI vertical slice, then shared interfaces/harnesses/distribution/robustness are integrated.",
+        "evidence": [
+          "docs/IMPLEMENTATION.md",
+          "e2e-windows-monad-0.1.20.json",
+          "harnesses-0.1.20.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 32,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "All explicit V0 runtime/MCP/CLI/fresh managed install/repeat update/failure preservation/release machinery gates inspected and verified.",
+        "evidence": [
+          "FRESH190_TESTS",
+          "e2e-windows-monad-0.1.20.json",
+          "harnesses-0.1.20.json",
+          "PUBLIC_HTTPS_READBACK",
+          "RELEASE_15_TARGET_LOGS"
+        ],
+        "boundary": "Fresh isolated runtime paths with existing model caches, native Windows owned GUI and virtual X11 monad; no broadened clean-OS or arbitrary-app claim."
+      },
+      {
+        "section": 33,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "One working local loop, bounded semantics, minimal duplication, measured limitations and no general shell agent/custom perception/model replacement.",
+        "evidence": [
+          "docs/ARCHITECTURE.md",
+          "docs/BENCHMARK.md",
+          "compile-probe-monad-0.1.20.json"
+        ],
+        "boundary": "Fast-decision research hypothesis remains unproven; measurements do not promise20ms or comparative superiority."
+      },
+      {
+        "section": 34,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Initial state, architecture/file map, tests/GUI/latencies, three harnesses, install/update commands and blocking/non-blocking/future limits reported in authoritative docs.",
+        "evidence": [
+          "docs/IMPLEMENTATION.md",
+          "VALIDATION.md",
+          "docs/BENCHMARK.md",
+          "docs/RELEASE.md",
+          "completion-audit.json"
+        ],
+        "boundary": "Required V0 behavior verified within the stated tests/observations."
+      },
+      {
+        "section": 35,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "Public main/Issues/Discussions/Actions/published release/private vulnerability reporting; community/templates andfourlocale setup examples checked.",
+        "evidence": [
+          "README.md",
+          "CONTRIBUTING.md",
+          "SECURITY.md",
+          "LICENSE",
+          "CHANGELOG.md",
+          ".github/ISSUE_TEMPLATE/bug_report.yml",
+          ".github/ISSUE_TEMPLATE/feature_request.yml",
+          ".github/PULL_REQUEST_TEMPLATE.md",
+          ".github/workflows/ci.yml",
+          ".github/workflows/release.yml",
+          "docs/RELEASE.md",
+          "GITHUB_LIVE_READBACK",
+          "REQUIRED_ARTIFACT_HASHES"
+        ],
+        "boundary": "Main protection/PR/CI/force-push restrictions documented for collaboration; solo branch currently unprotected, as allowed by originalsection35. Delete-merged-branches enabled."
+      },
+      {
+        "section": 36,
+        "classification": "REQUIRED_DELIVERY_VERIFIED",
+        "implementation": "PowerShell HTTPS bootstrap verifies artifacts, preserves prior install/PATH and machine security, and activates per-user CMD launcher; AMD64 native lifecycle observed.",
+        "evidence": [
+          "install.ps1",
+          "src/clef_use/installer.py",
+          "tests/test_installer.py",
+          "e2e-windows-monad-0.1.20.json",
+          "RELEASE_15_TARGET_LOGS"
+        ],
+        "boundary": "Windows ARM64 not advertised/built. Final0.1.20SSH terminal Y-wrapper completion unverified;0.1.18terminalY and0.1.20directprepare/noninteractivepublicreinstall passed. A cross-volume Unicode bin path has a documented limitation."
+      }
+    ],
+    "preservation": {
+      "24_pre_existing_draft_hashes_unchanged": true,
+      "user_harness_configuration_unchanged": "harnesses-0.1.20.json",
+      "remote_test_scopes_removed": "e2e-windows-monad-0.1.20.json",
+      "SSD_model_environment": "/Volumes/SSD/AI/clef-use; actualMPS generated-pixel run at0.1.20"
+    },
+    "limitations": {
+      "blocking": [],
+      "non_blocking": [
+        "Primary monitor and in-memory sessions; restarting service drops resumable context",
+        "Tensor forward not preempted, but cancellation prevents late input and releases owned state",
+        "Constraints probabilistic; no OS sandbox or independent authorization engine",
+        "Current E2E model caches reused; cache-empty cleanOS install NOT_RUN",
+        "Mac native input deferred by user; monadGUI virtualX11, not physical desktop",
+        "FinalWindows0.1.20SSH Y-wrapper completion unverified; directprepare/publicnoninteractiveinstall passed",
+        "OriginalHermes user interpreter missing; official isolated client worked",
+        "Windows totalE2Ewalltime unmeasured; singletrials do not prove generalstability",
+        "NonWindows Unicode clipboard restoration cannot retain rich clipboard types",
+        "Cross-volume WindowsUnicode launcher requiresASCII path or bininsideinstall"
+      ],
+      "future_or_conditional": [
+        "LargerCLEF inference optional iffeasible; NOT_RUN",
+        "Allhardwareclasses/XPU/Wayland compatibility untested, targets not acceptanceclaims",
+        "DOM/AX/tracking/game/remote extensions explicitly outsideV0",
+        "Controlled VLM performance/quality baseline and arbitraryapplications remain unproven",
+        "GGUF/model-serving deployment and protected MLX/quantization/residency prototypes remain deferred/unpublished",
+        "Compiled fallback rejected for numerical gates; no optimization speedup inproduction"
+      ]
+    },
+    "canonical_tracked_files": [
+      ".gitattributes",
+      ".github/ISSUE_TEMPLATE/bug_report.yml",
+      ".github/ISSUE_TEMPLATE/config.yml",
+      ".github/ISSUE_TEMPLATE/feature_request.yml",
+      ".github/PULL_REQUEST_TEMPLATE.md",
+      ".github/workflows/ci.yml",
+      ".github/workflows/release.yml",
+      ".gitignore",
+      "CHANGELOG.md",
+      "CONTRIBUTING.md",
+      "LICENSE",
+      "README.md",
+      "SECURITY.md",
+      "THIRD_PARTY_NOTICES.md",
+      "docs/ACTIVITY.md",
+      "docs/ARCHITECTURE.md",
+      "docs/BENCHMARK.md",
+      "docs/DEVELOPMENT.md",
+      "docs/HANDOFF.md",
+      "docs/IMPLEMENTATION.md",
+      "docs/INSTALL.md",
+      "docs/MCP.md",
+      "docs/RELEASE.md",
+      "docs/VISUAL_READINESS.md",
+      "docs/WINDOWS_INPUT.md",
+      "docs/en/HARNESS_SETUP.md",
+      "docs/en/INSTALL.md",
+      "docs/en/MCP.md",
+      "docs/en/QUICKSTART.md",
+      "docs/evidence/VALIDATION.md",
+      "docs/evidence/activity-cursor.png",
+      "docs/evidence/activity-overlay.json",
+      "docs/evidence/activity-preview.png",
+      "docs/evidence/bootstrap-0.1.11.json",
+      "docs/evidence/clef-boundary-diagnostic.json",
+      "docs/evidence/clef-cache-ablation.json",
+      "docs/evidence/clef-cache-request.json",
+      "docs/evidence/clef-forward-ablation.json",
+      "docs/evidence/clef-forward-context-ablation.json",
+      "docs/evidence/clef-forward-diagnostic.json",
+      "docs/evidence/clef-placeholder-diagnostic.json",
+      "docs/evidence/clef-vision-index-diagnostic.json",
+      "docs/evidence/compile-probe-monad-0.1.20.json",
+      "docs/evidence/completion-audit.json",
+      "docs/evidence/decision-profile-monad-0.1.20.json",
+      "docs/evidence/decision-profile-request-0.1.20.json",
+      "docs/evidence/decision-profile-windows-0.1.20.json",
+      "docs/evidence/deployment-profiles.json",
+      "docs/evidence/deployment.json",
+      "docs/evidence/doctor-readiness.json",
+      "docs/evidence/e2e-windows-monad-0.1.20.json",
+      "docs/evidence/gguf-monad.json",
+      "docs/evidence/harnesses-0.1.20.json",
+      "docs/evidence/hermes-mcp.json",
+      "docs/evidence/hermes-process-mcp.json",
+      "docs/evidence/input-cleanup-audit.json",
+      "docs/evidence/install-messages-0.1.13.json",
+      "docs/evidence/installed-doctor.json",
+      "docs/evidence/installed-update.json",
+      "docs/evidence/installer-014-local.json",
+      "docs/evidence/installer-015-local.json",
+      "docs/evidence/installer-model-prompt.json",
+      "docs/evidence/installer.json",
+      "docs/evidence/latency-0.1.20.json",
+      "docs/evidence/localized-commands-0.1.20.json",
+      "docs/evidence/localized-commands.json",
+      "docs/evidence/log-modes-0.1.20.json",
+      "docs/evidence/model-latency-summary.json",
+      "docs/evidence/model-smoke-0.1.20.json",
+      "docs/evidence/omp-mcp.json",
+      "docs/evidence/preparation-progress.json",
+      "docs/evidence/public-hosting.json",
+      "docs/evidence/public-https-013.json",
+      "docs/evidence/public-manifest-current.json",
+      "docs/evidence/real-model-repeat.json",
+      "docs/evidence/real-model-smoke-completed.json",
+      "docs/evidence/real-model-smoke-first.json",
+      "docs/evidence/real-model-smoke-second.json",
+      "docs/evidence/real-model-smoke-third.json",
+      "docs/evidence/release-0.1.10.json",
+      "docs/evidence/release-010-platforms.json",
+      "docs/evidence/release-011-platforms.json",
+      "docs/evidence/release-012-platforms.json",
+      "docs/evidence/release-013-platforms.json",
+      "docs/evidence/release-015-platforms.json",
+      "docs/evidence/release-tree.json",
+      "docs/evidence/visual-mode-diagnostic.json",
+      "docs/evidence/visual-mode-initial.json",
+      "docs/evidence/windows-014.json",
+      "docs/evidence/windows-015-assembled-install.json",
+      "docs/evidence/windows-015.json",
+      "docs/evidence/windows-canonical-cli.json",
+      "docs/evidence/windows-cleanup.json",
+      "docs/evidence/windows-install-lifecycle.json",
+      "docs/evidence/windows-local-inference.json",
+      "docs/evidence/windows-model-gui-initial.json",
+      "docs/evidence/windows-model-gui.json",
+      "docs/evidence/windows-model-gui.png",
+      "docs/evidence/windows-native-015.json",
+      "docs/evidence/windows-native-gui-initial.json",
+      "docs/evidence/windows-native-gui.json",
+      "docs/evidence/windows-session-zero.json",
+      "docs/evidence/windows-ssh-initial.json",
+      "docs/evidence/windows-ssh.json",
+      "docs/evidence/windows-visual-controlled.json",
+      "docs/evidence/windows-visual-initial.json",
+      "docs/evidence/windows-visual-measurement.json",
+      "docs/evidence/windows-visual-recovery.json",
+      "docs/evidence/windows-visual-wait.json",
+      "docs/ja/HARNESS_SETUP.md",
+      "docs/ja/INSTALL.md",
+      "docs/ja/MCP.md",
+      "docs/ja/QUICKSTART.md",
+      "docs/ko/HARNESS_SETUP.md",
+      "docs/ko/INSTALL.md",
+      "docs/ko/MCP.md",
+      "docs/ko/QUICKSTART.md",
+      "docs/zh-CN/HARNESS_SETUP.md",
+      "docs/zh-CN/INSTALL.md",
+      "docs/zh-CN/MCP.md",
+      "docs/zh-CN/QUICKSTART.md",
+      "install.ps1",
+      "install.sh",
+      "pyproject.toml",
+      "requirements/ml-clef.in",
+      "requirements/ml-omni.in",
+      "requirements/runtime.txt",
+      "scripts/activity_smoke.py",
+      "scripts/build_installer.py",
+      "scripts/build_release.py",
+      "scripts/check_hermes_client.py",
+      "scripts/check_installation.py",
+      "scripts/clef_compile_probe.py",
+      "scripts/clef_cuda_memory_probe.py",
+      "scripts/clef_decision_profile.py",
+      "scripts/clef_mps_diagnostic.py",
+      "scripts/deploy_release.py",
+      "scripts/merge_releases.py",
+      "scripts/model_smoke.py",
+      "scripts/prepare_clef_gguf.py",
+      "scripts/smoke_clef_gguf.py",
+      "scripts/windows_gui_smoke.py",
+      "scripts/windows_install_lifecycle.py",
+      "scripts/windows_model_gui_agent.py",
+      "scripts/windows_model_gui_smoke.py",
+      "scripts/windows_rocm_worker.py",
+      "scripts/windows_visual_benchmark.py",
+      "scripts/windows_visual_wait_smoke.py",
+      "src/clef_use/__init__.py",
+      "src/clef_use/activity.py",
+      "src/clef_use/activity_display.py",
+      "src/clef_use/activity_macos.py",
+      "src/clef_use/activity_windows.py",
+      "src/clef_use/activity_x11.py",
+      "src/clef_use/assets/ml-clef.txt",
+      "src/clef_use/assets/ml-omni.txt",
+      "src/clef_use/assets/ml-windows-nf4.txt",
+      "src/clef_use/assets/ml-windows-rocm.txt",
+      "src/clef_use/assets/ml-windows-torch-cpu.txt",
+      "src/clef_use/backends.py",
+      "src/clef_use/benchmark.py",
+      "src/clef_use/candidates.py",
+      "src/clef_use/cli.py",
+      "src/clef_use/client.py",
+      "src/clef_use/config.py",
+      "src/clef_use/deployment_profiles.py",
+      "src/clef_use/doctor.py",
+      "src/clef_use/harness.py",
+      "src/clef_use/installer.py",
+      "src/clef_use/interfaces.py",
+      "src/clef_use/mcp_server.py",
+      "src/clef_use/ml_probe.py",
+      "src/clef_use/model_worker.py",
+      "src/clef_use/models.py",
+      "src/clef_use/native_dependencies.py",
+      "src/clef_use/objects.py",
+      "src/clef_use/preparation_progress.py",
+      "src/clef_use/provision.py",
+      "src/clef_use/runtime.py",
+      "src/clef_use/schema.py",
+      "src/clef_use/service.py",
+      "src/clef_use/update_notice.py",
+      "src/clef_use/verification.py",
+      "src/clef_use/windows_input.py",
+      "tests/test_activity.py",
+      "tests/test_adapters.py",
+      "tests/test_decision_context.py",
+      "tests/test_deploy_release.py",
+      "tests/test_deployment_profiles.py",
+      "tests/test_doctor_readiness.py",
+      "tests/test_harness.py",
+      "tests/test_installer.py",
+      "tests/test_observation.py",
+      "tests/test_preparation_progress.py",
+      "tests/test_protocol.py",
+      "tests/test_runtime.py",
+      "tests/test_update_notice.py",
+      "tests/test_visual_wait.py",
+      "tests/test_windows_benchmark_evidence.py",
+      "tests/test_windows_input.py",
+      "tests/test_windows_ml_profile.py",
+      "tests/test_windows_rocm_worker.py",
+      "uv.lock"
+    ]
+  }
 }
