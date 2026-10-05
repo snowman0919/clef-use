@@ -314,3 +314,52 @@ def test_automation_does_not_open_console_input(name, value, monkeypatch):
         raising=False,
     )
     assert installer.ask_model_preparation() is None
+
+
+@pytest.mark.parametrize("receipt", ["other_python", "changed", "other_arch", "missing_sum"])
+def test_repeat_install_validates_existing_artifact_when_bootstrap_python_changes(
+    tmp_path, monkeypatch, receipt
+):
+    import clef_use.installer as installer
+
+    metadata = manifest()
+    selected = metadata["artifacts"][0]
+    previous = dict(
+        selected,
+        filename="previous.zip",
+        python="3.12",
+        sha256="b" * 64,
+        url=selected["url"].replace("release.zip", "previous.zip"),
+    )
+    if receipt == "other_arch":
+        previous["architecture"] = "x86_64"
+    metadata["artifacts"].append(previous)
+    root = tmp_path / "installation"
+    current = root / "current"
+    current.mkdir(parents=True)
+    digest = "c" * 64 if receipt == "changed" else previous["sha256"]
+    (current / "installed.json").write_text(json.dumps({"version": "0.1.0", "sha256": digest}))
+    monkeypatch.setenv("CLEF_USE_INSTALL_ROOT", str(root))
+    monkeypatch.setenv("CLEF_USE_BIN_DIR", str(tmp_path / "bin"))
+    monkeypatch.setattr(installer.sys, "platform", "darwin")
+    monkeypatch.setattr(installer, "select_artifact", lambda _: selected)
+    sums = f"{selected['sha256']}  release.zip\n"
+    if receipt != "missing_sum":
+        sums += f"{previous['sha256']}  previous.zip\n"
+    monkeypatch.setattr(
+        installer,
+        "fetch",
+        lambda url, *args: (
+            json.dumps(metadata).encode() if url.endswith("manifest.json") else sums.encode()
+        ),
+    )
+    smoked = []
+    monkeypatch.setattr(installer, "smoke", lambda exe, version: smoked.append(version))
+    if receipt == "other_python":
+        assert installer.install()["status"] == "CURRENT"
+        assert smoked == ["0.1.0"]
+    else:
+        with pytest.raises(ValueError, match="immutable release changed checksum"):
+            installer.install()
+        assert not smoked
+    assert json.loads((current / "installed.json").read_text())["sha256"] == digest

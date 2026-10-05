@@ -297,7 +297,16 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
             if release_version(installed["version"]) > release_version(manifest["version"]):
                 raise ValueError("refusing release downgrade")
             if installed["version"] == manifest["version"]:
-                if installed["sha256"] != artifact["sha256"]:
+                compatible = [
+                    item
+                    for item in manifest["artifacts"]
+                    if (item["platform"], item["architecture"], item["sha256"])
+                    == (artifact["platform"], artifact["architecture"], installed["sha256"])
+                ]
+                if not compatible or not any(
+                    f"{item['sha256']}  {item['filename']}" in sums.splitlines()
+                    for item in compatible
+                ):
                     raise ValueError("immutable release changed checksum")
                 report("Checking your existing installation...")
                 smoke(environment_binary(current, "clef-use"), installed["version"])
