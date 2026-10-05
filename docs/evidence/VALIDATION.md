@@ -751,3 +751,21 @@ Original settings, caches and model environments remain. The first monad probe
 failed because temporary profile.py shadowed Python's standard library; renamed
 before successful measurements. This was diagnostic scaffolding, not a runtime
 failure. Reproducer: scripts/clef_decision_profile.py and the generated request.
+
+
+## Compiled GatedDeltaNet fallback rejected, 2026-10-05
+
+[Comparison evidence](compile-probe-monad-0.1.20.json) retains two FAILED
+structured-answer gates. Default Inductor fullgraph/static compilation reduced
+later isolated inference from 0.5991s to 0.5444s but answer max delta was 0.0021
+against a predeclared 0.001 gate. Preserving precision casts reduced drift to
+0.0015 and later calls took 0.5467s; still FAILED. Kernel comparisons passed
+atol/rtol 0.001 and all choices remained unchanged. Restored eager means returned
+to 0.5982s/0.5986s. No tolerance was relaxed after seeing the result.
+
+Both nine-call trials used the same generated image/request and exported
+canonical 0.1.20 worker, existing CUDA/NF4 environment and RTX3080. No OS input,
+OmniParser, IPC or multi-action GUI was measured. No runtime changes or new
+packages were installed. Owned remote sources/Inductor/Triton caches were removed;
+free GPU memory returned to 8804MiB. Reproducer: scripts/clef_compile_probe.py.
+A failed optimization experiment is not a runtime regression or goal blocker.

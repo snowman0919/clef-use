@@ -1,0 +1,455 @@
+{
+  "date": "2026-10-05",
+  "runtime_version": "0.1.20",
+  "canonical_source": "fd76d42586dfd72de7591386beaa257c242863ef",
+  "scope": "two isolated nine-call CUDA/NF4 trials on one generated 1260-token image request; no GUI, parser or runtime optimization",
+  "tolerances": {
+    "kernel_atol": 0.001,
+    "kernel_rtol": 0.001,
+    "answer_max_abs_delta": 0.001
+  },
+  "decision": "REJECTED_FOR_RUNTIME_INTEGRATION",
+  "reason": "Both compiler variants exceeded the prespecified structured-answer tolerance despite unchanged choices and faster warm calls. First compiled request includes compile/validation overhead; dynamic-shape and other-machine behavior untested.",
+  "package_changes": false,
+  "settings_changes": false,
+  "variants": {
+    "default": {
+      "scope": "isolated generated-pixel request; no desktop input or runtime integration",
+      "torch": "2.11.0+cu130",
+      "transformers": "5.10.2",
+      "compiler": "inductor; fullgraph=True, dynamic=False, default mode",
+      "kernel_checks": [
+        {
+          "max_abs_delta": 0.00390625,
+          "shape": [
+            1,
+            1260,
+            32,
+            128
+          ]
+        }
+      ],
+      "gpu": "NVIDIA GeForce RTX 3080",
+      "later_mean_seconds": {
+        "eager": 0.5991000205103774,
+        "compiled": 0.5443929205066524,
+        "restored": 0.5982034195039887
+      },
+      "answer_max_abs_delta": 0.0020999999999999908,
+      "status": "FAILED",
+      "error": {
+        "type": "AssertionError",
+        "message": "compiled answer tolerance exceeded"
+      },
+      "rows": [
+        {
+          "mode": "eager",
+          "repetition": 0,
+          "seconds": 0.9278990750026423,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "eager",
+          "repetition": 1,
+          "seconds": 0.5994517290091608,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "eager",
+          "repetition": 2,
+          "seconds": 0.598748312011594,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 0,
+          "seconds": 13.954685945995152,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 1,
+          "seconds": 0.5446663970069494,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 2,
+          "seconds": 0.5441194440063555,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 0,
+          "seconds": 0.5979951600020286,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 1,
+          "seconds": 0.5985088640009053,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 2,
+          "seconds": 0.5978979750070721,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        }
+      ],
+      "changed_answers": {
+        "complete": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.0182
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.0183
+          }
+        },
+        "replan": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.329
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.3272
+          }
+        },
+        "progress": {
+          "eager": {
+            "type": "score",
+            "score": 1.1749,
+            "confidence": 0.4977,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.2286,
+              "1": 0.4977,
+              "2": 0.1714,
+              "3": 0.0746,
+              "4": 0.0277
+            }
+          },
+          "compiled": {
+            "type": "score",
+            "score": 1.177,
+            "confidence": 0.4975,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.2279,
+              "1": 0.4975,
+              "2": 0.172,
+              "3": 0.0748,
+              "4": 0.0278
+            }
+          }
+        },
+        "mode": {
+          "eager": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.9229,
+            "probabilities": {
+              "ACT": 0.9229,
+              "WAIT": 0.0151,
+              "BLOCKED": 0.0208,
+              "NEEDS_REPLAN": 0.0296,
+              "COMPLETED": 0.0116
+            }
+          },
+          "compiled": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.923,
+            "probabilities": {
+              "ACT": 0.923,
+              "WAIT": 0.0151,
+              "BLOCKED": 0.0207,
+              "NEEDS_REPLAN": 0.0296,
+              "COMPLETED": 0.0116
+            }
+          }
+        },
+        "effect": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.0486
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.0485
+          }
+        }
+      },
+      "all_choices_unchanged": true,
+      "warm_reduction_fraction": 0.09131547008981833,
+      "worker_sha256": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+      "request_sha256": "f3b4d9ca94aa326ab63ec5f664388593cc86c93ab3e14d9a15dca575568c3ffd"
+    },
+    "emulate_precision": {
+      "scope": "isolated generated-pixel request; no desktop input or runtime integration",
+      "torch": "2.11.0+cu130",
+      "transformers": "5.10.2",
+      "compiler": "inductor; fullgraph=True, dynamic=False, default mode",
+      "emulate_precision_casts": true,
+      "answer_tolerance": 0.001,
+      "worker_sha256": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+      "request_sha256": "f3b4d9ca94aa326ab63ec5f664388593cc86c93ab3e14d9a15dca575568c3ffd",
+      "kernel_checks": [
+        {
+          "max_abs_delta": 0.0009765625,
+          "shape": [
+            1,
+            1260,
+            32,
+            128
+          ]
+        }
+      ],
+      "gpu": "NVIDIA GeForce RTX 3080",
+      "later_mean_seconds": {
+        "eager": 0.5991418180055916,
+        "compiled": 0.5466713160130894,
+        "restored": 0.5986126364878146
+      },
+      "answer_max_abs_delta": 0.0015000000000000013,
+      "status": "FAILED",
+      "error": {
+        "type": "AssertionError",
+        "message": "compiled answer tolerance exceeded"
+      },
+      "rows": [
+        {
+          "mode": "eager",
+          "repetition": 0,
+          "seconds": 1.1370126480178442,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "eager",
+          "repetition": 1,
+          "seconds": 0.599609169003088,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "eager",
+          "repetition": 2,
+          "seconds": 0.5986744670080952,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 0,
+          "seconds": 13.101328947988804,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 1,
+          "seconds": 0.5472216140187811,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "compiled",
+          "repetition": 2,
+          "seconds": 0.5461210180073977,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 0,
+          "seconds": 0.598742909001885,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 1,
+          "seconds": 0.5984276289818808,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        },
+        {
+          "mode": "restored",
+          "repetition": 2,
+          "seconds": 0.5987976439937484,
+          "usage": {
+            "input_tokens": 1260,
+            "output_tokens": 0
+          }
+        }
+      ],
+      "changed_answers": {
+        "complete": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.0182
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.0183
+          }
+        },
+        "replan": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.329
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.3275
+          }
+        },
+        "progress": {
+          "eager": {
+            "type": "score",
+            "score": 1.1749,
+            "confidence": 0.4977,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.2286,
+              "1": 0.4977,
+              "2": 0.1714,
+              "3": 0.0746,
+              "4": 0.0277
+            }
+          },
+          "compiled": {
+            "type": "score",
+            "score": 1.1742,
+            "confidence": 0.4971,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.2293,
+              "1": 0.4971,
+              "2": 0.1715,
+              "3": 0.0744,
+              "4": 0.0277
+            }
+          }
+        },
+        "mode": {
+          "eager": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.9229,
+            "probabilities": {
+              "ACT": 0.9229,
+              "WAIT": 0.0151,
+              "BLOCKED": 0.0208,
+              "NEEDS_REPLAN": 0.0296,
+              "COMPLETED": 0.0116
+            }
+          },
+          "compiled": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.923,
+            "probabilities": {
+              "ACT": 0.923,
+              "WAIT": 0.0151,
+              "BLOCKED": 0.0207,
+              "NEEDS_REPLAN": 0.0296,
+              "COMPLETED": 0.0116
+            }
+          }
+        },
+        "effect": {
+          "eager": {
+            "type": "noul",
+            "noul": 0.0486
+          },
+          "compiled": {
+            "type": "noul",
+            "noul": 0.0485
+          }
+        }
+      },
+      "all_choices_unchanged": true,
+      "warm_reduction_fraction": 0.08757609703686642
+    }
+  },
+  "official_compile_contract": "https://docs.pytorch.org/docs/2.11/generated/torch.compile.html",
+  "precision_option_provenance": "installed torch/_inductor/config.py lines 2514-2523; preserve eager downcast-upcast boundaries",
+  "limitations": [
+    "One input/setup, not model quality or broad stability proof",
+    "Nested performance stages not measured in these trials",
+    "Windows/MPS compiler behavior NOT_RUN",
+    "No relaxed tolerance after observing failure"
+  ]
+}

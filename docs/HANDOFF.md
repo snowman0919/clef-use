@@ -964,3 +964,24 @@ Do not add heavyweight default dependencies or absorb protected drafts merely
 because they exist. Broader goal active; native Mac input stays deferred.
 Preserve original 24 draft hashes. Existing monad global CLI remains 0.1.14;
 profiling used canonical exported 0.1.20 worker, not that old installed CLI.
+
+
+Compilation experiment continuation, base fd76d42, 2026-10-05: two private
+CUDA/NF4 trials compiled only torch_chunk_gated_delta_rule with installed
+PyTorch2.11/Inductor/Triton. Each eager/compiled/restored arm had three real calls
+on canonical generated request, eighteen calls total. Default warm0.5991->0.5444s,
+precision-cast variant0.5991->0.5467s, restored0.5982/0.5986s. Both answer gates
+FAILED (max absolute deltas0.0021/0.0015, predeclared0.001); choices unchanged.
+Kernel atol/rtol0.001 passed. No runtime integration, dependency addition, setting
+change or tolerance relaxation. Rejected experiment preserved in compact evidence
+compile-probe-monad-0.1.20.json and scripts/clef_compile_probe.py. Compilation
+cache/source scopes removed on monad, free VRAM restored to8804MiB; local raw
+results /tmp/clef-compile-probe-020 retained for review. No live tool sessions.
+
+Next bounded action: re-audit original numbered requirements and acceptance32
+against canonical sources/current release and actual evidence, identifying any
+required missing integration rather than treating optional optimizations as
+mandatory. Original requirements permit documented limitations and future
+extensions; preserve the distinction from missing mandatory behavior. Speed
+claims and all-profile/hardware coverage remain unproven. Do not mark whole goal
+complete solely from narrow tests. Keep 24 original actor draft hashes unchanged.

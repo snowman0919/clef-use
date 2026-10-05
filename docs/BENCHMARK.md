@@ -88,3 +88,31 @@ The output must not already exist. On Windows use the environment's
 `Scripts/python.exe -X utf8` and extract the tagged source into a private path.
 `--detail-layers` adds synchronized per-layer-family totals. Do not sum nested
 stage totals or mistake the first request/load time for steady-state inference.
+
+## Compiled fallback experiment: rejected
+
+[Two isolated CUDA/NF4 trials](evidence/compile-probe-monad-0.1.20.json) replaced
+only GatedDeltaNet's torch fallback in a private process. Each trial ran three
+eager, three compiled, then three restored-eager calls on the same generated
+1,260-token request. Kernel tolerance was atol/rtol 0.001; structured-answer
+maximum absolute tolerance was 0.001, fixed before running.
+
+| Compiler option | Eager later mean | Compiled later mean | Restored later mean | Maximum answer delta | Gate |
+| --- | --- | --- | --- | --- | --- |
+| Default | 0.5991s | 0.5444s | 0.5982s | 0.0021 | FAILED |
+| Emulate precision casts | 0.5991s | 0.5467s | 0.5986s | 0.0015 | FAILED |
+
+Warm isolated calls were 8.8–9.1% faster and choices remained unchanged, but both
+exceeded the answer gate. The first compiled request included compilation and
+kernel validation and took much longer. These results support neither runtime
+integration nor an E2E speedup claim. No package, user setting or canonical worker
+was changed. Windows/MPS compilation and variable-length requests were not run.
+
+`scripts/clef_compile_probe.py` uses the same source/config/request arguments as
+the stage profiler. Its default experiment must fail for this recorded setup;
+`--emulate-precision` tests the second variant. Use a fresh output filename and
+private `TORCHINDUCTOR_CACHE_DIR` / `TRITON_CACHE_DIR`, and remove owned compiler
+caches afterward. The script writes evidence and restores module functions even
+when a comparison fails. This is a reproducible rejected experiment, not an
+optional production backend. The [PyTorch 2.11 compile contract](https://docs.pytorch.org/docs/2.11/generated/torch.compile.html)
+and installed Inductor configuration were inspected before choosing options.
