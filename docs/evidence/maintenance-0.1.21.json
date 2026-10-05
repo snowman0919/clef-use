@@ -78,8 +78,153 @@
     "doctor_fix": "Exit 2; explicit MANUAL device/backend failure and SSH session 0 limitation; no prepare invoked"
   },
   "limits": [
-    "missing model/dependency repair is validated with controlled unit boundaries; remote model environments are reused",
+    "Real missing-source repair passed on monad; missing dependency and device-failure branches additionally tested with controlled boundaries",
     "Windows physical GUI readiness is not established by SSH diagnostics",
     "uninstall retains model cache, inference environments, settings, MCP registrations and PATH"
-  ]
+  ],
+  "delivery": {
+    "source": "528466aaff4147383540ade277b8a7ccce0367c8",
+    "ci": {
+      "run": 37329396648,
+      "status": "SUCCESS",
+      "jobs": 6
+    },
+    "release": {
+      "run": 37329411298,
+      "status": "SUCCESS",
+      "targets": 15
+    },
+    "public": {
+      "version": "0.1.21",
+      "artifacts": 15,
+      "manifest_sha256": "af6d09aa9749271b6d858cd0f3c1c5b8f8b7563103dd29a90643a9a461a5a9a5",
+      "immutable_metadata_equal_latest": true,
+      "bootstraps": {
+        "install.sh": "d4f10322ed70e48cf656f8e0b5aac38e248b8e40aad5e7b802a4b38bbabebfe2",
+        "install.ps1": "e84fd188090229275dc16e8d408266fdd79adb657b41765cd3b2b2d77bfb52f6"
+      }
+    },
+    "github_release": "https://github.com/snowman0919/clef-use/releases/tag/v0.1.21"
+  },
+  "public_acceptance": {
+    "monad": {
+      "steps": [
+        {
+          "name": "public_install_0.1.21",
+          "exit": 0,
+          "seconds": 9.676489571982529,
+          "result": null
+        },
+        {
+          "name": "public_version",
+          "exit": 0,
+          "seconds": 0.1686813390115276,
+          "result": null
+        },
+        {
+          "name": "doctor_fix",
+          "exit": 2,
+          "seconds": 97.3968478810275,
+          "result": null
+        },
+        {
+          "name": "uninstall",
+          "exit": 0,
+          "seconds": 0.14642428001388907,
+          "result": null
+        },
+        {
+          "name": "preservation",
+          "exit": null,
+          "seconds": null,
+          "result": null
+        }
+      ],
+      "repairs": [
+        {
+          "status": "PREPARED",
+          "action": "models prepare"
+        }
+      ],
+      "manual_actions": [
+        "Run from a graphical X11 session; SSH has no DISPLAY"
+      ],
+      "ml_ready": {
+        "clef": true,
+        "omni": true
+      },
+      "configuration_preserved": true,
+      "cache_preserved": true,
+      "custom_launcher_found_without_install_overrides": true,
+      "scope": "Unmodified immutable public 0.1.21 bootstrap and wheel; no candidate overlay; no GUI input",
+      "repair_case": "Missing task-owned OmniParser source was cloned at the pinned revision; cached model snapshots reused; CLEF/Omni workers initialized; task-owned config saved and original config retained"
+    },
+    "windows": {
+      "steps": [
+        {
+          "name": "public_install_0.1.21",
+          "exit": 0,
+          "seconds": 39.40600000007544,
+          "result": null
+        },
+        {
+          "name": "public_version",
+          "exit": 0,
+          "seconds": 0.3119999999180436,
+          "result": null
+        },
+        {
+          "name": "doctor_fix",
+          "exit": 2,
+          "seconds": 15.844000000040978,
+          "result": null
+        },
+        {
+          "name": "uninstall",
+          "exit": 0,
+          "seconds": 0.3279999999795109,
+          "result": null
+        },
+        {
+          "name": "deferred_removal",
+          "exit": null,
+          "seconds": null,
+          "result": {
+            "status": "UNINSTALLED",
+            "root": "C:\\Users\\dbsgu\\AppData\\Local\\Temp\\clef-maintenance-021-k__slis5\\install",
+            "preserved": "model cache, configuration, MCP registrations and PATH"
+          }
+        },
+        {
+          "name": "preservation",
+          "exit": null,
+          "seconds": null,
+          "result": null
+        }
+      ],
+      "repairs": [
+        {
+          "status": "MANUAL",
+          "reason": "Check backend, GPU driver or probe timeout; dependencies preserved"
+        }
+      ],
+      "manual_actions": [
+        "Run from the signed-in Windows desktop, not a noninteractive SSH session",
+        "Check backend, GPU driver or probe timeout; dependencies preserved"
+      ],
+      "ml_ready": {
+        "clef": false,
+        "omni": true
+      },
+      "configuration_preserved": true,
+      "cache_preserved": true,
+      "custom_launcher_found_without_install_overrides": true,
+      "scope": "Unmodified immutable public 0.1.21 bootstrap and wheel; no candidate overlay; no GUI input"
+    }
+  },
+  "draft_preservation": {
+    "files": 24,
+    "all_original_content_retained": true,
+    "method": "21 untouched hashes equal; three intentionally extended draft files match original hashes after subtracting only the maintenance edits"
+  }
 }

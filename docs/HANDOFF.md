@@ -1033,3 +1033,20 @@ has AMD 890M but the preserved test config requests CUDA; tensor initialization
 fails and is reported as manual, not repaired through pip. No GUI input occurred.
 See docs/evidence/maintenance-0.1.21.json. Existing actor/MLX/residency drafts are
 retained in the working tree and excluded from the commit via canonical index blobs.
+
+### Public 0.1.21 readback
+
+Source/tag 528466aaff4147383540ade277b8a7ccce0367c8. CI 37329396648
+passed all six jobs; release/deploy 37329411298 passed all 15 targets and the
+dedicated dev deployment. Public latest and immutable manifest/SHA256SUMS agree;
+both bootstraps exactly match the tagged source. GitHub v0.1.21 is published.
+
+Unmodified public 0.1.21 installation-to-removal passed on monad and Windows,
+including custom launcher discovery with install-root/bin overrides removed.
+monad doctor --fix repaired an absent task-owned OmniParser source, reused cached
+model weights, initialized both real workers and saved only the scoped config.
+Windows CUDA/AMD mismatch was reported as MANUAL without running preparation.
+Both preserved original config/model cache and removed launcher/runtime versions;
+Windows final deferred result was UNINSTALLED. No physical GUI input occurred.
+monad global runtime was updated to 0.1.21; its doctor still requires DISPLAY for
+physical desktop readiness. All 24 original actor draft contents remain intact.
