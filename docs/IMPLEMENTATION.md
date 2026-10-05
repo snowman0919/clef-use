@@ -77,7 +77,7 @@ the stated boundary, never to native input quality from fixture tests.
 | 9-11 | strict small Contract, explicit states, hard budget, visual/repeat-state and independent completion verification; regression tests |
 | 12 | deterministic whitelist input, safe object centers, tracked keys/buttons and cleanup retries; real Windows Unicode/click/scroll/foreground/cleanup readback observed; macOS input deferred |
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
-| 15 | configuration-only Codex readback, OMP native client; isolated official Hermes CLI MCP connection and native handler completed 0.1.5 fixture; user launcher interpreter still missing |
+| 15 | installed 0.1.20: Codex native app-server discovered five tools; OMP native client and isolated official Hermes CLI/handler completed fixture tasks; agent model conversations NOT_RUN; user Hermes launcher interpreter still missing |
 | 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS install/update/failure-preservation/removal evidence; 0.1.20 all 15 installer targets and dev deployment passed; Windows/monad lifecycle and real GUI exercised; public 0.1.18 terminal Y preparation passed on both |
 | 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; canonical0.1.8 Windows Radeon890M profile installed fresh ROCm/NF4 CLEF and CPU Omni environments and initialized both workers; installed normal CLI GUI passed2inputs/4decisions; doctor checks real imports/device/NF4 arithmetic and pinned cache/source prerequisites |
 | 23-24 | private structured latency/action/terminal logs, benchmark with explicit fixture vs desktop modes; no comparative speed claim |
@@ -108,11 +108,21 @@ terminal wrapper completion was unverified; installed source, direct canonical
 prepare and noninteractive public reinstall were verified instead. Mac input
 remains deferred; Mac/SSD is not needed for Windows/monad E2E.
 
-External SSD /Volumes/SSD/AI/clef-use is absent at current readback. Mac model
-runs and isolated official Hermes source environment stored there cannot be
-rerun until the volume returns. Earlier official Hermes CLI/handler and OMP
-native MCP acceptance are retained as historical evidence; user Hermes launcher
-interpreter was missing at its last inspection. Existing settings remain intact.
+External SSD /Volumes/SSD/AI/clef-use returned. Installed 0.1.20 completed
+an actual MPS CLEF/CPU Omni task on generated pixels (two actions/four decisions,
+90.247s), without desktop capture or input. Three native harness clients were
+rechecked at 0.1.20 with existing user settings preserved. Codex acceptance is
+catalog discovery; OMP and isolated official Hermes acceptance includes fixture
+tool execution. No agent model conversation was run. The original user Hermes
+launcher still lacks its interpreter. See evidence/harnesses-0.1.20.json and
+evidence/model-smoke-0.1.20.json.
+
+Single-trial later decision means were 17.532s on Windows, 0.816s on monad and
+6.760s on MPS generated pixels. These tasks/hardware differ and do not establish
+a comparative improvement. Fast decision latency remains an unmet performance
+hypothesis; profile the canonical path before integrating optimization drafts.
+Concise/debug log behavior and command parity across four locales were checked
+against installed 0.1.20 and canonical source, respectively.
 
 Known non-blocking limitations: larger CLEF remains untested. NVIDIA CUDA Flash
 execution was observed on monad, with CPU output embedding rows under low free

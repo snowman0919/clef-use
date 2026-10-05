@@ -1,0 +1,28 @@
+{
+  "revision": "b9f4e6d",
+  "locales": [
+    "en",
+    "ko",
+    "zh-CN",
+    "ja"
+  ],
+  "documents": {
+    "INSTALL.md": {
+      "fenced_examples": 4,
+      "all_locales_identical": true
+    },
+    "QUICKSTART.md": {
+      "fenced_examples": 1,
+      "all_locales_identical": true
+    },
+    "MCP.md": {
+      "fenced_examples": 1,
+      "all_locales_identical": true
+    },
+    "HARNESS_SETUP.md": {
+      "fenced_examples": 4,
+      "all_locales_identical": true
+    }
+  },
+  "differences": []
+}

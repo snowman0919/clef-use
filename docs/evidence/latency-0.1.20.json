@@ -1,0 +1,43 @@
+{
+  "runtime": "0.1.20",
+  "scope": "single recorded task trial per setup; not a comparative benchmark or stability claim",
+  "mean_policy": "positive measured samples; first measured decision excluded only for later_decision_ms_mean",
+  "setups": {
+    "windows": {
+      "actions": 2,
+      "decisions": 4,
+      "first_decision_ms": 119609.40790001769,
+      "later_decision_ms_mean": 17531.636266658705,
+      "wall_seconds": null,
+      "outer_planner_interventions": 0,
+      "capture_ms_mean": 347.9308499954641,
+      "parser_ms_mean": 27609.173125005327,
+      "decision_ms_mean": 43051.07917499845,
+      "execution_ms_mean": 127.57724995026365
+    },
+    "monad": {
+      "actions": 2,
+      "decisions": 5,
+      "first_decision_ms": 16654.212872002972,
+      "later_decision_ms_mean": 816.4030254993122,
+      "wall_seconds": 38.7373675609997,
+      "outer_planner_interventions": 1,
+      "capture_ms_mean": 41.917905770242214,
+      "parser_ms_mean": 3135.245985200163,
+      "decision_ms_mean": 3983.964994800044,
+      "execution_ms_mean": 315.4394154989859
+    },
+    "macos_rendered": {
+      "actions": 2,
+      "decisions": 4,
+      "first_decision_ms": 48597.987875007675,
+      "later_decision_ms_mean": 6759.826180335949,
+      "wall_seconds": 90.24744612500945,
+      "outer_planner_interventions": 0,
+      "capture_ms_mean": 7.437114258209476,
+      "parser_ms_mean": 5185.139854256704,
+      "decision_ms_mean": 17219.36660400388,
+      "execution_ms_mean": 1.1191665034857579
+    }
+  }
+}

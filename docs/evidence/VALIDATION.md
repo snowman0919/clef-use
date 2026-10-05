@@ -701,3 +701,31 @@ a virtual X11 desktop. Final Windows SSH terminal wrapper was unverified, so
 canonical prepare and public noninteractive reinstall were checked directly.
 No Mac/SSD was required. CI passed 190 tests in each of six native jobs; all 15
 release installer targets and dedicated dev deployment passed.
+
+
+## Installed 0.1.20 harness and model readback, 2026-10-05
+
+[Harness evidence](harnesses-0.1.20.json): Codex 0.152.1 native app-server found
+all five MCP tools without creating a thread. OMP 18.4.8 native MCP client and
+pinned official Hermes CLI/registry handler each completed fixture tool execution
+(two actions/four decisions). Existing user configurations were preserved.
+These checks establish native MCP consumption, not an agent model conversation
+or native GUI input. The original user Hermes launcher remains unusable; Hermes
+was tested in its existing isolated official environment.
+
+The SSD returned and the managed Mac runtime was updated to 0.1.20. Actual pinned
+MPS CLEF/CPU Omni completed a [generated-pixel task](model-smoke-0.1.20.json) in
+90.247s, with two actions/four decisions and independent rendered-state readback.
+No desktop capture or input was performed. Workers closed after the test.
+
+[Latency baseline](latency-0.1.20.json) separates first and later decisions and
+retains the Windows/monad lifecycle boundaries above. Later decision means were
+17.532s (Windows), 0.816s (monad) and 6.760s (MPS). Single trials on different
+tasks/hardware cannot establish comparative performance or general stability.
+Profiling and performance acceptance remain open.
+
+[Log modes](log-modes-0.1.20.json) exercised installed-core fixture tasks with
+both debug settings; debug adds object/candidate counts and observation ID.
+[Locale parity](localized-commands-0.1.20.json) verified matching fenced commands
+and configuration examples across English, Korean, Chinese and Japanese setup
+documents at canonical b9f4e6d. No runtime code changed for these checks.

@@ -922,3 +922,24 @@ files were not overwritten. No dependency or backend layer was added.
 Final cleanup readback: all owned Windows/monad test scopes and Windows tasks
 are absent; owned remote helpers removed. Public v0.1.20 is published. The
 current E2E task is complete within the evidence boundaries above.
+
+
+Continuation audit, 2026-10-05, base main b9f4e6d: no runtime source changes.
+Owned evidence harnesses-0.1.20.json, model-smoke-0.1.20.json,
+latency-0.1.20.json, localized-commands-0.1.20.json and log-modes-0.1.20.json
+refresh acceptance. Installed Mac managed CLI updated from 0.1.10 to 0.1.20.
+SSD returned; actual MPS/CPU Omni generated-pixel task completed 2/4 in 90.247s,
+without native capture/input. Workers closed. Official isolated Hermes source
+hashes still match pinned revision; native CLI/handler and OMP native client
+completed 0.1.20 fixture tasks. Codex native app-server discovered five tools;
+no thread or agent model turn was created. All user harness settings retained.
+Initial Codex probe used invalid quoted dotted overrides, corrected before
+successful readback; this was a probe invocation error, not product MCP failure.
+
+Canonical later decision means: Windows 17.532s, monad 0.816s, MPS 6.760s.
+Tasks/hardware differ, one trial each; no comparative or 20ms claim. Next bounded
+work is canonical bottleneck profiling before any optimization integration.
+Original broader goal remains active; full performance acceptance, larger CLEF,
+broad hardware/application coverage and deferred native Mac input are unproven.
+Preserve all 24 draft hashes in /tmp/clef-deploy-preserved.json. Do not publish
+MLX/quantization/residency drafts or create a release for this docs-only update.

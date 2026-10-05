@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.1.20
+
+- Explain installation stages and offer model preparation with a Y/n prompt.
+- Report preparation stages and periodic progress while long operations run.
+- Validate repeat installations across Python minors using verified release receipts.
+- Continue Windows Python discovery past unusable launcher candidates and handle Unicode pip diagnostics.
+- Reduce CUDA NF4 resident memory by moving unused output embedding rows to CPU when free VRAM is low; initialization must still fit.
+- Publish verified artifacts for 15 installer targets through the dedicated dev runner.
+- Record public Windows and monad installation, preparation, MCP/GUI execution, update and removal, including recovery and cache-reuse limits.
+
 ## 0.1.3 - Release candidate
 
 - Refresh idle MCP observations with matching objects and pixels; reserve the desktop during parsing.
