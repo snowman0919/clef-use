@@ -1,0 +1,199 @@
+{
+  "scope": "same generated-pixel request; no desktop input, no parser, no runtime optimization",
+  "method": "three baseline requests then three synchronized instrumented requests; nested stages overlap",
+  "limitation": "instrumentation adds synchronization overhead; one request/setup, not stability or speedup proof",
+  "backend": "cuda",
+  "quantization": "4bit",
+  "torch": "2.11.0+cu130",
+  "transformers": "5.10.2",
+  "bitsandbytes": "0.50.2",
+  "detail_layers": true,
+  "gpu": "NVIDIA GeForce RTX 3080",
+  "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+  "worker_sha256": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+  "request_sha256": "f3b4d9ca94aa326ab63ec5f664388593cc86c93ab3e14d9a15dca575568c3ffd",
+  "load_seconds": 10.425996158999624,
+  "baseline_later_mean_seconds": 0.597937226499198,
+  "answers_identical": true,
+  "expected_action_observed": true,
+  "first_answers": {
+    "action": {
+      "type": "choice",
+      "choice": "a0",
+      "confidence": 1.0,
+      "probabilities": {
+        "a0": 1.0
+      }
+    },
+    "complete": {
+      "type": "noul",
+      "noul": 0.0182
+    },
+    "replan": {
+      "type": "noul",
+      "noul": 0.329
+    },
+    "unsafe": {
+      "type": "noul",
+      "noul": 0.0169
+    },
+    "progress": {
+      "type": "score",
+      "score": 1.1749,
+      "confidence": 0.4977,
+      "legend": {
+        "0": "No progress",
+        "1": "Early progress",
+        "2": "Partial progress",
+        "3": "Almost complete",
+        "4": "Complete"
+      },
+      "probabilities": {
+        "0": 0.2286,
+        "1": 0.4977,
+        "2": 0.1714,
+        "3": 0.0746,
+        "4": 0.0277
+      }
+    },
+    "condition_0": {
+      "type": "noul",
+      "noul": 0.0059
+    },
+    "mode": {
+      "type": "choice",
+      "choice": "ACT",
+      "confidence": 0.9229,
+      "probabilities": {
+        "ACT": 0.9229,
+        "WAIT": 0.0151,
+        "BLOCKED": 0.0208,
+        "NEEDS_REPLAN": 0.0296,
+        "COMPLETED": 0.0116
+      }
+    },
+    "effect": {
+      "type": "noul",
+      "noul": 0.0486
+    }
+  },
+  "rows": [
+    {
+      "mode": "baseline",
+      "repetition": 0,
+      "seconds": 0.9271911899850238,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "baseline",
+      "repetition": 1,
+      "seconds": 0.5981253040081356,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "baseline",
+      "repetition": 2,
+      "seconds": 0.5977491489902604,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 0,
+      "seconds": 0.6006303050089628,
+      "stages_seconds": {
+        "encode_record": 0.004991547000827268,
+        "collate_records": 0.0007986800046637654,
+        "visual": 0.02812330800225027,
+        "Qwen3_5GatedDeltaNet": 0.26490195697988383,
+        "Qwen3_5MLP": 0.23946310000610538,
+        "Qwen3_5Attention": 0.03006255903164856,
+        "language_model": 0.559344801993575,
+        "backbone": 0.5886243410059251,
+        "head": 0.004461253993213177
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 1,
+      "seconds": 0.6004694750008639,
+      "stages_seconds": {
+        "encode_record": 0.004943464009556919,
+        "collate_records": 0.0007751850062049925,
+        "visual": 0.02795800002058968,
+        "Qwen3_5GatedDeltaNet": 0.26494710508268327,
+        "Qwen3_5MLP": 0.239586265059188,
+        "Qwen3_5Attention": 0.03011035200324841,
+        "language_model": 0.559499560011318,
+        "backbone": 0.5885723499814048,
+        "head": 0.0044322079920675606
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 2,
+      "seconds": 0.6000920369988307,
+      "stages_seconds": {
+        "encode_record": 0.0048453250201419,
+        "collate_records": 0.0007767579809296876,
+        "visual": 0.0278852790070232,
+        "Qwen3_5GatedDeltaNet": 0.2648071569856256,
+        "Qwen3_5MLP": 0.23953905489179306,
+        "Qwen3_5Attention": 0.03007443403475918,
+        "language_model": 0.5592340690200217,
+        "backbone": 0.5882420130074024,
+        "head": 0.00447602299391292
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "instrumented_stage_mean_seconds": {
+    "encode_record": 0.004926778676842029,
+    "collate_records": 0.0007835409972661486,
+    "visual": 0.027988862343287717,
+    "Qwen3_5GatedDeltaNet": 0.26488540634939756,
+    "Qwen3_5MLP": 0.23952947331902882,
+    "Qwen3_5Attention": 0.03008244835655205,
+    "language_model": 0.5593594770083049,
+    "backbone": 0.5884795679982441,
+    "head": 0.0044564949930645525
+  },
+  "source_revision": "88d00581cf718fd4b798d2ace642d3f78e8111e8",
+  "runtime_version": "0.1.20",
+  "initial_probe_error": "Temporary filename profile.py shadowed Python standard library profile; renamed before successful measurement.",
+  "warnings_observed": [
+    "GatedDeltaNet fast path unavailable; torch fallback"
+  ],
+  "installed_source_inspection": {
+    "file": "transformers/models/qwen3_5/modeling_qwen3_5.py",
+    "fast_path_requires": [
+      "causal_conv1d_fn",
+      "causal_conv1d_update",
+      "chunk_gated_delta_rule",
+      "fused_recurrent_gated_delta_rule"
+    ],
+    "fallback": "torch_chunk_gated_delta_rule contains sequential chunk operations; no causal kernel ablation performed"
+  }
+}

@@ -45,3 +45,46 @@ Tasks, hardware and display environments differ: these rows cannot rank backends
 or demonstrate a speedup. Monad needed recovery after delayed rendering; macOS
 used no desktop input. Windows total wall time was not measured. Both cold loads
 and later decisions remain material costs. No 20ms decision claim is supported.
+
+## Decision-stage profile
+
+The [generated request](evidence/decision-profile-request-0.1.20.json) uses the
+canonical request builder, eight typed questions, a manually specified Continue
+object and a 600x400 generated image. Both setups saw 1,260 input tokens and chose
+ACT/a0. This isolates decision inference; it includes no OmniParser, transport,
+desktop capture or input. Each process loaded once, ran three baseline requests,
+then three instrumented requests. Nested module timings overlap.
+
+| Setup | Later baseline mean | Encode | Visual | Language model | Head |
+| --- | --- | --- | --- | --- | --- |
+| Monad RTX 3080 CUDA/NF4 | 0.598s | 0.005s | 0.028s | 0.559s | 0.0045s |
+| Windows Radeon 890M ROCm/NF4 | 9.546s | 0.015s | 0.688s | 8.890s | 0.044s |
+
+Stage means are synchronized instrumented calls, with additional measurement
+overhead. This is a same-input diagnostic, not an E2E speedup or model quality
+benchmark. Answers were identical within each setup before/after instrumentation;
+probabilities differ slightly between backends. See [monad evidence](evidence/decision-profile-monad-0.1.20.json)
+and [Windows evidence](evidence/decision-profile-windows-0.1.20.json).
+
+Monad layer hooks measured aggregate GatedDeltaNet 0.265s, MLP 0.240s and regular
+attention 0.030s. Both processes reported unavailable GatedDeltaNet fast-path
+libraries and PyTorch fallback. Windows also reported disabled experimental AMD
+efficient SDPA. These observations identify follow-up experiments, not proof that
+installing kernels will improve runtime latency or preserve outputs.
+
+Reproduce with canonical worker source and the existing pinned model environment:
+
+```sh
+mkdir -p /tmp/clef-profile-source
+git archive v0.1.20 src/clef_use | tar -x -C /tmp/clef-profile-source
+/path/to/clef-env/bin/python scripts/clef_decision_profile.py \
+  --config /path/to/config.toml \
+  --package-root /tmp/clef-profile-source/src/clef_use \
+  --request-file docs/evidence/decision-profile-request-0.1.20.json \
+  --output /tmp/clef-decision-profile.json
+```
+
+The output must not already exist. On Windows use the environment's
+`Scripts/python.exe -X utf8` and extract the tagged source into a private path.
+`--detail-layers` adds synchronized per-layer-family totals. Do not sum nested
+stage totals or mistake the first request/load time for steady-state inference.

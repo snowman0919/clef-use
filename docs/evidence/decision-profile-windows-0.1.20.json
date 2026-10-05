@@ -1,0 +1,178 @@
+{
+  "scope": "same generated-pixel request; no desktop input, no parser, no runtime optimization",
+  "method": "three baseline requests then three synchronized instrumented requests; nested stages overlap",
+  "limitation": "instrumentation adds synchronization overhead; one request/setup, not stability or speedup proof",
+  "backend": "rocm",
+  "quantization": "4bit",
+  "torch": "2.11.0+rocm7.14.1",
+  "gpu": "AMD Radeon(TM) 890M Graphics",
+  "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+  "worker_sha256": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+  "request_sha256": "f3b4d9ca94aa326ab63ec5f664388593cc86c93ab3e14d9a15dca575568c3ffd",
+  "load_seconds": 37.14676260005217,
+  "baseline_later_mean_seconds": 9.546456500014756,
+  "answers_identical": true,
+  "expected_action_observed": true,
+  "first_answers": {
+    "action": {
+      "type": "choice",
+      "choice": "a0",
+      "confidence": 1.0,
+      "probabilities": {
+        "a0": 1.0
+      }
+    },
+    "complete": {
+      "type": "noul",
+      "noul": 0.0182
+    },
+    "replan": {
+      "type": "noul",
+      "noul": 0.3279
+    },
+    "unsafe": {
+      "type": "noul",
+      "noul": 0.0169
+    },
+    "progress": {
+      "type": "score",
+      "score": 1.1753,
+      "confidence": 0.4971,
+      "legend": {
+        "0": "No progress",
+        "1": "Early progress",
+        "2": "Partial progress",
+        "3": "Almost complete",
+        "4": "Complete"
+      },
+      "probabilities": {
+        "0": 0.2289,
+        "1": 0.4971,
+        "2": 0.1715,
+        "3": 0.0748,
+        "4": 0.0277
+      }
+    },
+    "condition_0": {
+      "type": "noul",
+      "noul": 0.0059
+    },
+    "mode": {
+      "type": "choice",
+      "choice": "ACT",
+      "confidence": 0.9231,
+      "probabilities": {
+        "ACT": 0.9231,
+        "WAIT": 0.015,
+        "BLOCKED": 0.0207,
+        "NEEDS_REPLAN": 0.0295,
+        "COMPLETED": 0.0116
+      }
+    },
+    "effect": {
+      "type": "noul",
+      "noul": 0.0485
+    }
+  },
+  "rows": [
+    {
+      "mode": "baseline",
+      "repetition": 0,
+      "seconds": 31.159695499925874,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "baseline",
+      "repetition": 1,
+      "seconds": 9.534946799976751,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "baseline",
+      "repetition": 2,
+      "seconds": 9.55796620005276,
+      "stages_seconds": {},
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 0,
+      "seconds": 9.57847910001874,
+      "stages_seconds": {
+        "encode_record": 0.012646000017412007,
+        "collate_records": 0.00219740008469671,
+        "visual": 0.6899968000361696,
+        "language_model": 8.812931399908848,
+        "backbone": 9.513487700023688,
+        "head": 0.04416240006685257
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 1,
+      "seconds": 9.598918400006369,
+      "stages_seconds": {
+        "encode_record": 0.015624000108800828,
+        "collate_records": 0.0023731000255793333,
+        "visual": 0.6922866000095382,
+        "language_model": 8.830036300001666,
+        "backbone": 9.531028300058097,
+        "head": 0.044282699935138226
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    },
+    {
+      "mode": "instrumented",
+      "repetition": 2,
+      "seconds": 9.787843100028113,
+      "stages_seconds": {
+        "encode_record": 0.01655709999613464,
+        "collate_records": 0.0024652000283822417,
+        "visual": 0.6830455000745133,
+        "language_model": 9.026524599990807,
+        "backbone": 9.720440000062808,
+        "head": 0.042385200038552284
+      },
+      "usage": {
+        "input_tokens": 1260,
+        "output_tokens": 0
+      }
+    }
+  ],
+  "instrumented_stage_mean_seconds": {
+    "encode_record": 0.014942366707449159,
+    "collate_records": 0.0023452333795527616,
+    "visual": 0.6884429667067403,
+    "language_model": 8.889830766633773,
+    "backbone": 9.588318666714864,
+    "head": 0.04361010001351436
+  },
+  "source_revision": "88d00581cf718fd4b798d2ace642d3f78e8111e8",
+  "runtime_version": "0.1.20",
+  "transformers": "5.10.2",
+  "bitsandbytes": "0.50.2",
+  "versions_provenance": "existing verified environment doctor in e2e-windows-monad-0.1.20.json; no packages changed during profiling",
+  "warnings_observed": [
+    "ROCm architecture auto-detection failed",
+    "GatedDeltaNet fast path unavailable; torch fallback",
+    "AMD efficient SDPA experimental and disabled"
+  ]
+}

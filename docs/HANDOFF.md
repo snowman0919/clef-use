@@ -943,3 +943,24 @@ Original broader goal remains active; full performance acceptance, larger CLEF,
 broad hardware/application coverage and deferred native Mac input are unproven.
 Preserve all 24 draft hashes in /tmp/clef-deploy-preserved.json. Do not publish
 MLX/quantization/residency drafts or create a release for this docs-only update.
+
+
+Decision profiling continuation, base main 88d0058, 2026-10-05: added only
+scripts/clef_decision_profile.py, public generated request and compact per-host
+evidence plus existing benchmark/validation/handoff updates. Canonical worker
+exported from HEAD (runtime bytes match v0.1.20); dirty source never imported.
+Existing monad CUDA and Windows ROCm NF4 environments reused read-only. Six calls
+per setup, all ACT/a0, within-setup answers identical after synchronization hooks.
+Later means 0.598s RTX3080 and 9.546s Radeon890M; language model dominates.
+Monad detailed totals GatedDeltaNet 0.265s, MLP 0.240s, attention 0.030s; nested
+totals overlap. Both use torch fallback because fast-path libraries are absent.
+No runtime optimization/extra dependency or E2E speedup was delivered. Initial
+monad diagnostic filename shadowed stdlib profile; renamed, successful rerun.
+All owned remote diagnostic directories removed after named result transfer.
+
+Next: inspect canonical pinned GatedDeltaNet/MLP execution and supported kernel
+options, then conduct an isolated causal speed/output experiment if warranted.
+Do not add heavyweight default dependencies or absorb protected drafts merely
+because they exist. Broader goal active; native Mac input stays deferred.
+Preserve original 24 draft hashes. Existing monad global CLI remains 0.1.14;
+profiling used canonical exported 0.1.20 worker, not that old installed CLI.

@@ -729,3 +729,25 @@ both debug settings; debug adds object/candidate counts and observation ID.
 [Locale parity](localized-commands-0.1.20.json) verified matching fenced commands
 and configuration examples across English, Korean, Chinese and Japanese setup
 documents at canonical b9f4e6d. No runtime code changed for these checks.
+
+
+## Canonical decision bottleneck, 2026-10-05
+
+[Monad profile](decision-profile-monad-0.1.20.json) and
+[Windows profile](decision-profile-windows-0.1.20.json) ran tagged-runtime worker
+source against existing pinned environments without altering packages/settings.
+Same generated 1,260-token request, three baseline and three instrumented calls
+per process: expected ACT/a0 observed, answers unchanged by hooks. Later baseline
+means were 0.598s CUDA/NF4 and 9.546s ROCm/NF4. Language model forward dominated
+both; image/encode/head stage timings are in BENCHMARK.md. Detailed monad hooks
+separated GatedDeltaNet, MLP and regular attention.
+
+No parser, IPC, native desktop or multi-action loop was measured here. All stage
+hooks synchronize devices and add overhead; nested stages overlap. Both models
+reported missing fast-path libraries and torch fallback; no acceleration package
+was installed and no speedup is claimed. Windows GPU was Radeon 890M; monad RTX
+3080. Owned remote diagnostic directories were removed after evidence transfer.
+Original settings, caches and model environments remain. The first monad probe
+failed because temporary profile.py shadowed Python's standard library; renamed
+before successful measurements. This was diagnostic scaffolding, not a runtime
+failure. Reproducer: scripts/clef_decision_profile.py and the generated request.
