@@ -685,3 +685,19 @@ Mac curl|sh and Windows PowerShell/SSH ConPTY showed question, N skip, exit 0 an
 CLI version 0.1.17. Enter/Y routing invoked owned marker executables. NOT_RUN full
 ML preparation/inference. Existing runtime retained on preparation failure.
 Evidence [installer-model-prompt.json](installer-model-prompt.json).
+
+
+## Public Windows and monad lifecycle, 0.1.20
+
+See [e2e-windows-monad-0.1.20.json](e2e-windows-monad-0.1.20.json). Public source
+hashes matched the tag; preparation, doctor and real stdio MCP passed. Native
+Windows GUI completed 2 actions/4 decisions with held VKs empty, pointer restored
+and task exit 0. Monad Xvfb recovery completed 2 actions/5 decisions with one
+continue after safe NEEDS_REPLAN caused by delayed rendering. Failed attempts
+are retained. Updates from 0.1.18, repeat public installers under automatic Python
+discovery, CURRENT updates and removal passed on both. Existing installs/config/
+cache were preserved. Model caches/inference environments were reused; monad was
+a virtual X11 desktop. Final Windows SSH terminal wrapper was unverified, so
+canonical prepare and public noninteractive reinstall were checked directly.
+No Mac/SSD was required. CI passed 190 tests in each of six native jobs; all 15
+release installer targets and dedicated dev deployment passed.

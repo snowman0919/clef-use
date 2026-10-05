@@ -784,3 +784,141 @@ validation Python/model/settings retained. All 24 pre-existing actor drafts rema
 excluded/preserved. Future actor integration must merge canonical README/docs/
 INSTALL/cli prompt/help changes from 89e65a6; working draft bytes intentionally
 not overwritten. Broader model/GGUF serving objective remains deferred.
+
+2026-10-05 active user E2E task: Windows and ssh monad; Mac/SSD NOT required.
+Prior installer turn was progress. Latest user explicitly requests full E2E on
+these two machines after seeing repeated failures. No subagents. Source candidate
+0.1.18/6db1ff7 is staged/pushed on main; clean isolation /tmp/clef-use-e2e-017 is
+based on1ef7786 and contains the owned patch.24actor draft hashes remain intact.
+Main docs/IMPLEMENTATION.md has an owned, uncommitted current audit rewrite.
+Do not test or publish mixed dirty main; future actor integration must merge
+CUDA/provision changes from6db1ff7 alongside prior overlay/help/prompt additions.
+
+Observed0.1.17 E2E failures: old diagnostic Windows config device=cuda/profileauto
+refused HIP before input; canonical models prepare then hit CP1252 decoding of
+pip diagnostics/report JSON with non-ASCII metadata. Fixed unused pip stdout
+capture to bytes and explicitly UTF8 report JSON. Real invalid-byte subprocess/
+UTF8 foreign-metadata regression plus low/high CUDA memory selection are tested.
+Windows owned installed0.1.17 + exact owned preparation file patches completed
+all9stages/bothworkers and saved windows-rocm/rocm/gfx1150/4bit. Actual canonical
+CLI native GUI completed2clicks/4decisions and independent Task complete. Test
+helper cleanup initially tried restoring pointer after Tk window destruction,
+which was refused over the previous foreground; moved restoration before close.
+Full helper rerun completed2clicks/4decisions, inputs released/pointer restored,
+endpoint removed and scheduled-task exit0. New source also reads actual held key
+VKs at cleanup; this newest readback needs final public-package GUI acceptance.
+An owned same-position cursor probe before/after Tk destruction both returned
+SetCursorPos false/error0 on Default desktop; no security bypass/raise privilege.
+The stale PowerShell/Tee preparation wrapper remained after CLI processes exited;
+identified by exact encoded command and killed only its pwsh/powershell/conhost.
+A clean subprocess-returncode prepare repeat is still required, avoiding Tee.
+
+Monad public0.1.17 isolated install + canonical linux-cuda/NF4/CPU-Omni prepare
+completedall9stages/bothworkers (cached weights/envs); first real1280x800Xvfb GUI
+failed CUDA OOM before input. Controlled resident initialization allocated8.20GiB
+and had~117MiB free; lower pixel limits/SDPA alone still OOM. Canonical candidate
+keeps the floating output embedding table on CPU for CUDA NF4 when<1GiB is free,
+transferring only joint-head lexical rows. Existing SDPA used on CUDA/ROCm.
+No new backend, upstream edit, weight format or MPS allocator policy. Other
+backends/high-free-memory CUDA retain storage. Initialization must still fit.
+Actual loaded head/embedding seeded regression: max output delta0, lexical row
+perturbation delta0.1943359375, GPU allocation reduced~1.89GiB. Reproducer source
+scripts/clef_cuda_memory_probe.py. Actual candidate CUDA +CPU Omni canonical CLI
+Xvfb GUI COMPLETED2clicks/4decisions in32.4226103s, independent Task complete and
+endpoint removal. Initial Linux test helper thread/Tk readback was repaired via
+main-thread polling; all failed reports preserved. Xvfb is a virtual X11 desktop,
+not physical Linux foreground proof. No speed comparison to failed baseline.
+
+Latest frozen full checks186tests/10.03s, lint/format102files, uv locked offline.
+Review/publish actual0.1.18 CI/release handles next; verify public15targets/bytes,
+then fresh public-package prepare/doctor/stdio MCP/run GUI/current/update/removal
+on both machines. Preserve original installs, models, user settings and old hashes.
+Do not claim E2E full completion before deletion/readback and final artifacts.
+Windows ownedscope %LOCALAPPDATA%/clef-use-goal-gui-017-20261005; task same name.
+Task is terminal Ready after completed GUI. Home owned agent/probe/patch files
+clef-goal-gui-agent-017.py,clef-cursor-probe-017.py,clef-e2e-{native_dependencies,
+provision}.py. Existing MLcache/envs under clef-use-validation-20261004/local-inference
+retained; candidate prepare created clef-env-windows-rocm there, CPUenv reused.
+Local temp scripts /tmp/clef-goal-{gui-start,win-prepare,win-prepare-candidate}.sh,
+/tmp/clef-monad-{gui,forward}-017.py,/tmp/clef-e2e-018-source.patch.
+Monad ownscope /home/monad/clef-use-e2e-017-20261005 holds owned install/config,
+GUI/probe scripts, failure+success JSON/logs; shared ~/.cache/clef-use weights/MLenvs
+preserved. Both GUI services stopped/endpoint removed. Download only named report/
+step/probe files, never gui-token or endpoint.json. Canonical new source must be
+verified from public package, not left dependent on manually patched site-packages.
+
+
+E2E continuation, 2026-10-05: verified public 0.1.18 immutable bootstrap bytes
+and installed source hashes. The actual one-line install with terminal Y prepared
+both model workers on Windows and monad. Doctor, self-test and real stdio MCP
+initialization/listing passed on both machines. A blank Xvfb screen initially
+failed doctor; a real Tk window made capture nonuniform and doctor ready.
+Both public 0.1.18 GUI runs completed two clicks and four decisions with independent
+Task complete readback. Windows limited Interactive task exited 0, held VKs were
+empty, pointer was restored, and endpoint was removed. Monad used native Xvfb,
+completed in 30.112626 seconds, and removed its endpoint. Mac/SSD is irrelevant.
+
+Repeat installation exposed two additional defects: changing bootstrap Python
+minor incorrectly compared a different valid artifact hash; an unusable Windows
+Python App Alias stopped interpreter discovery. Existing receipts now require a
+same-platform/architecture hash in both manifest and SHA256SUMS, while changed
+hashes, wrong architectures and missing sums remain refused. Candidate and py
+launcher failures now continue discovery. Generated candidate bootstrap, with no
+CLEF_USE_PYTHON override, returned CURRENT on real Windows against public 0.1.18.
+
+The 0.1.19 release workflow was cancelled before deployment. Immutable tags were
+not moved. Final 0.1.20 tag points to de87e47; release run 37295470437 has passed
+Linux/Windows installer targets and is waiting on Mac jobs. The new checksum test
+initially pretended to be Darwin on Windows and tried importing fcntl. Test-only
+commit 1f4a538 keeps the native lock platform. CI 37295561731 passed Windows and
+Linux jobs; Mac remains pending. Runtime bytes match the tagged source exactly.
+
+Owned candidate 0.1.17 installs have been removed on both machines, with existing
+installs/configuration/model environments retained. Reports are in
+/tmp/clef-e2e-018-evidence. Evidence directories remain until final transfer.
+Public 0.1.18 scopes remain for CLI update to 0.1.20. Prepared helpers are
+/tmp/clef-final-{checks,lifecycle,remove}.py, /tmp/clef-win-final-020-install.sh and
+/tmp/clef-start-final-win-020.py. Lifecycle helper runs CLI update first and then
+unmodified public bootstrap with automatic Python discovery.
+
+Next: verify public 0.1.20 bytes, update/reinstall existing 0.1.18 scopes, install
+fresh 0.1.20 scopes with real Y preparation, run doctor/MCP/GUI on both, transfer
+named evidence without tokens/endpoints, and remove owned scopes/tasks/helpers.
+Publish GitHub v0.1.20 and commit/push compact canonical evidence and audit docs.
+Do not claim final E2E completion before public-package removal checks. Preserve
+all 24 actor draft hashes and existing user MCP settings; Mac input is deferred.
+
+
+Final Windows/monad E2E result, 2026-10-05: public 0.1.20/de87e47 immutable
+bootstrap bytes and installed source hashes verified. CI 37295561731 (test-only
+fix 1f4a538) passed 190 tests in six jobs; release 37295470437 passed 15 installer
+targets, assembly and dedicated dev deployment. GitHub v0.1.20 is published.
+Windows native GUI completed 2 inputs/4 decisions, independent Task complete,
+held VKs [], pointer restored, endpoint removed and limited Interactive task
+exit 0. Monad initial final GUI stopped NEEDS_REPLAN on delayed rendering.
+Recovery ran then continued the same session once and completed 2 inputs/5
+decisions in 38.737368s. Do not claim unassisted stability.
+
+Public 0.1.18 real terminal Y prepared both workers on both hosts. Final monad
+0.1.20 one-line terminal Y preparation exited 0. Final Windows SSH terminal
+wrapper did not provide completion; direct installed canonical prepare exited 0
+in 112.922s, doctor/MCP passed, public noninteractive reinstall exited 0. Local
+stale SSH transports were closed by exact owned command identity after remote
+completion, without generic process kills. Pinned model caches and inference
+environments were reused; no cache-empty or physical Linux GUI claim.
+
+Both hosts upgraded isolated 0.1.18 scopes to 0.1.20 and repeated the public
+installer under different automatic Python minors without checksum rejection.
+Fresh 0.1.20 CURRENT updates/reinstalls passed. All owned 0.1.17/18/20 runtime
+installs have been removed, retaining original installs/settings/PATH/shared
+models. Canonical evidence: docs/evidence/e2e-windows-monad-0.1.20.json. Remote
+evidence-only directories and helpers were removed after named transfer;
+no endpoint/token was downloaded. Original broader goal remains active; Mac
+input, larger CLEF and model-serving prototypes are not accepted by this task.
+Preserve 24 actor draft hashes. Future actor integration must merge de87e47/
+1f4a538 installer and 6db1ff7 preparation/CUDA fixes; protected draft working
+files were not overwritten. No dependency or backend layer was added.
+
+Final cleanup readback: all owned Windows/monad test scopes and Windows tasks
+are absent; owned remote helpers removed. Public v0.1.20 is published. The
+current E2E task is complete within the evidence boundaries above.

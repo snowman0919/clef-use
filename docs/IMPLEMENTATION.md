@@ -54,9 +54,14 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
-Their public end-to-end acceptance remains separate from loopback installation;
-a real Windows native-GUI/model vertical slice is now observed (see WINDOWS_INPUT.md). These open gates are not
-converted into completion by passing fixtures, model pixels or packaging tests.
+Public end-to-end installation is observed separately from loopback tests.
+The latest public version is 0.1.20. Public one-line installation, preparation,
+doctor, real stdio MCP, native Windows GUI and monad Xvfb GUI, upgrade from
+0.1.18, repeat installation and scoped removal were exercised. Exact installed
+source hashes match the release tag. See evidence/e2e-windows-monad-0.1.20.json.
+Monad's recovery trial required one continue call after delayed rendering safely
+caused NEEDS_REPLAN. Model caches were reused; this does not establish cache-empty
+installation or arbitrary-application stability.
 
 ## Requirement audit
 
@@ -73,37 +78,54 @@ the stated boundary, never to native input quality from fixture tests.
 | 12 | deterministic whitelist input, safe object centers, tracked keys/buttons and cleanup retries; real Windows Unicode/click/scroll/foreground/cleanup readback observed; macOS input deferred |
 | 13-14 | five canonical MCP tools and thin CLI; real stdio/HTTP tests, fresh idle observe without decision/action counts |
 | 15 | configuration-only Codex readback, OMP native client; isolated official Hermes CLI MCP connection and native handler completed 0.1.5 fixture; user launcher interpreter still missing |
-| 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS 0.1.3 install-to-removal passed; native assembled 0.1.6 installer/MCP/model-diagnostic/removal passed; new upload pending |
+| 16-19 | hashed offline bundles, native five-platform/Python matrix, shared atomic POSIX/update installer; public HTTPS install/update/failure-preservation/removal evidence; 0.1.20 all 15 installer targets and dev deployment passed; Windows/monad lifecycle and real GUI exercised; public 0.1.18 terminal Y preparation passed on both |
 | 20-22 | pinned SSD cache/provisioning, one config, doctor and acceleration probes; actual MPS CLEF/CPU Omni and experimental native Windows ROCm/NF4 plus CPU Omni observed; canonical0.1.8 Windows Radeon890M profile installed fresh ROCm/NF4 CLEF and CPU Omni environments and initialized both workers; installed normal CLI GUI passed2inputs/4decisions; doctor checks real imports/device/NF4 arithmetic and pinned cache/source prerequisites |
 | 23-24 | private structured latency/action/terminal logs, benchmark with explicit fixture vs desktop modes; no comparative speed claim |
 | 25-26 | unit regressions and actual packaged installs/stdio/IPC; concrete replacement interfaces for capture/perception/decision/action/verifier |
 | 27 | documented extension boundaries; DOM/AX/tracking/remote control intentionally future work |
 | 28 | abort, cleanup, bounded confidence/steps/no-progress, safe errors and escalation logs; no shell execution capability in executor |
 | 29-30 | required docs/community files, generated/cache exclusions, coherent commits; unowned concurrent edits preserved separately |
-| 31-32 | shared vertical slice and model semantics observed; real Windows native GUI passed with earlier Mac inference and later Windows-local ROCm/CPU inference (2 actions/4 decisions/118.6999s after initialization); public 0.1.3 one-line installation passed; 0.1.5 controlled visual GUI trials passed 10/10 and no-effect stopped after one input; new public upload remains open |
+| 31-32 | shared vertical slice and model semantics observed; real Windows native GUI passed with earlier Mac inference and later Windows-local ROCm/CPU inference (2 actions/4 decisions/118.6999s after initialization); public one-line installation passed through 0.1.20; 0.1.5 controlled visual GUI trials passed 10/10 and no-effect stopped after one input; full real-model GUI evidence is version-specific |
 | 33-34 | architectural choices and measured limits recorded here, ARCHITECTURE.md and evidence/VALIDATION.md; twelve delivery categories linked above |
 | 35 | public main, Issues/Discussions/Actions/security, CI/release machinery, four locale setup trees; command/config parity verified |
 | 36 | PowerShell 5.1/CMD installation-to-removal observed; 0.1.6 fixes OpenSSH OWNER RIGHTS limited-token access; user PATH/launcher/cache preserved; prior Unicode/update failure checks retained |
 
-Blocking deployment: newest public upload route is unavailable. Controlled
-owned-GUI visual trials now passed 10/10, without worker restarts; this does not
-resolve the cause of earlier MPS failures or establish arbitrary-input stability.
-Public HTTPS 0.1.3 metadata and
-Mac/Windows installs passed; the previous HTTP 404 blocker is resolved.
-Windows GUI was explicitly authorized and observed on 2026-10-04; macOS native
-input remains deferred. Non-blocking limitations: user Hermes launcher interpreter
-unavailable (isolated official CLI validated), larger CLEF and NVIDIA CUDA untested, cross-volume custom Unicode
-Windows bin paths require an ASCII target or the bin directory inside the install.
-Windows-local inference now passed through candidate0.1.8 installed normal CLI
-with two inputs/four decisions and independent owned-GUI completion readback. Doctor prerequisite false-readiness is corrected in 0.1.7; tests and actual ML
-environment/driver probes are in evidence/doctor-readiness.json. Full model load
-is still distinct from device initialization. Canonical Windows Radeon890M GPU/NF4 preparation and workers are integrated in
-candidate0.1.8; public newest delivery remains open. Broader prototypes remain
-separately uncommitted; no separate checkpoint cache is required.
-Future optimization: measured VLM baseline comparison, temporal/incremental
-perception, native input/capture acceleration only after profiling.
+Current audit (2026-10-05, public 0.1.20): deployment is no longer blocked.
+The dedicated dev runner published all 15 checked artifacts; latest/immutable
+metadata and bootstrap byte checks passed. CI 37295561731 passed 190 tests in
+six jobs. Its test-only commit 1f4a538 corrects the native lock fixture; runtime
+bytes match release tag de87e47. Release 37295470437 completed assembly/deployment.
+GitHub v0.1.20 is published. Hardware acceptance remains profile-specific.
 
-Latest native installer lifecycle proof is in evidence/windows-install-lifecycle.json.
-0.1.6 installed package completed a Windows-local model GUI diagnostic and was
-fully removed. Public0.1.3 tested separately; new0.1.6 all15release targets/sixCI jobs passed; public upload and
-canonical local GPU provisioning remain open. No full-goal completion claim.
+Final public Windows ROCm/NF4 CLEF plus CPU Omni GUI completed two actions/four
+decisions, independent Task complete readback, held-key/pointer cleanup, endpoint
+removal and task exit 0. Monad CUDA/NF4 plus CPU Omni recovery completed two
+actions/five decisions with one continue after delayed rendering. Its initial
+attempt safely stopped NEEDS_REPLAN and remains in the evidence. Doctor and real
+five-tool stdio MCP passed on both machines. Both runtime installs were removed
+while existing installs, settings and shared models remained. Final Windows SSH
+terminal wrapper completion was unverified; installed source, direct canonical
+prepare and noninteractive public reinstall were verified instead. Mac input
+remains deferred; Mac/SSD is not needed for Windows/monad E2E.
+
+External SSD /Volumes/SSD/AI/clef-use is absent at current readback. Mac model
+runs and isolated official Hermes source environment stored there cannot be
+rerun until the volume returns. Earlier official Hermes CLI/handler and OMP
+native MCP acceptance are retained as historical evidence; user Hermes launcher
+interpreter was missing at its last inspection. Existing settings remain intact.
+
+Known non-blocking limitations: larger CLEF remains untested. NVIDIA CUDA Flash
+execution was observed on monad, with CPU output embedding rows under low free
+VRAM; model initialization must still fit. Broad arbitrary-app coverage and
+unassisted stability are not established; intermittent earlier
+MPS failures retain their evidence without a general stability claim. A custom
+Windows bin directory on another volume with Unicode requires an ASCII target
+or a bin directory inside the installation. Fresh preparation across all ten
+OS/backend profiles and every hardware class is not established by CI.
+
+Pre-existing MLX/residency/quantization drafts remain separate and unpublished.
+GGUF/model-serving deployment was deferred by the user; do not absorb these
+prototypes into current release acceptance. Future optimization remains measured
+VLM baseline comparison, temporal/incremental perception and native acceleration
+only after profiling. Overall goal completion remains unproven until the full
+acceptance audit is current; passing fixtures and release tests alone is insufficient.

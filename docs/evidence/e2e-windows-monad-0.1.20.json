@@ -1,0 +1,647 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "release": "0.1.20",
+  "source_commit": "de87e470660365c75d1f20c5b38a372eea045deb",
+  "ci_commit": "1f4a5385ff7f53ddf8da8f74be0a628649b54a9e",
+  "scope": "Public HTTPS managed installer through model preparation, doctor, real stdio MCP, canonical CLI GUI, update/reinstall and scoped removal on Windows and monad.",
+  "public_metadata": {
+    "version": "0.1.20",
+    "artifact_count": 15,
+    "immutable_manifest_matches_latest": true,
+    "root_and_immutable_bootstrap_bytes_match_tag": true
+  },
+  "ci": {
+    "run_id": 37295561731,
+    "status": "SUCCESS",
+    "jobs": 6,
+    "tests_per_job": 190,
+    "scope": "macOS/Linux/Windows on Python 3.11 and 3.13; CI commit differs from release tag only in native-platform test fixture"
+  },
+  "release_workflow": {
+    "run_id": 37295470437,
+    "status": "SUCCESS",
+    "installer_targets": 15,
+    "dedicated_dev_deploy": "SUCCESS"
+  },
+  "fixed_failures": [
+    "Windows model preparation decoded pip diagnostics and report metadata using CP1252; diagnostics now remain bytes and reports use UTF-8.",
+    "CUDA NF4 model initialized but first GUI forward exhausted 10GiB GPU memory; low-free-memory CUDA now keeps the unused full output embedding table on CPU and transfers selected lexical rows.",
+    "Repeat install selected a different Python minor and rejected a valid immutable artifact; existing receipt must now match same-platform/architecture manifest and SHA256SUMS.",
+    "Windows bootstrap stopped at an unusable Python App Alias; failed interpreter/py launcher candidates now continue discovery."
+  ],
+  "boundaries": [
+    "No Mac model or SSD was required. No new Mac foreground input occurred.",
+    "Runtime installation paths were fresh and isolated; existing pinned model caches and inference environments were reused. This is not a cache-empty or clean-OS installation test.",
+    "Windows GUI ran on the real native interactive desktop under a limited Interactive scheduled task.",
+    "Monad GUI ran on native virtual X11/Xvfb, not a physical foreground desktop.",
+    "Public 0.1.18 real terminal Y completed preparation on both machines. Final 0.1.20 Windows SSH terminal wrapper completion was unverified despite installed runtime; direct canonical models prepare exited 0 and public noninteractive reinstall exited 0.",
+    "Final monad initial GUI run safely stopped NEEDS_REPLAN after one click when delayed rendering changed the screen during decision. A separate recovery trial exercised run then continue in the same session and completed with one planner intervention. No unassisted-stability claim.",
+    "Only the owned two-button GUI goal was exercised; no broad arbitrary-application coverage or performance improvement claim."
+  ],
+  "cuda_numerical": {
+    "scope": "Loaded real CLEF head/embeddings with seeded fixture hidden states; separate from GUI acceptance",
+    "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "head_max_abs_delta": 0.0,
+    "lexical_perturbation_delta": 0.1943359375,
+    "allocated_bytes_before": 8805809664,
+    "allocated_bytes_after": 6781140480,
+    "embedding_device": "cpu",
+    "embedding_dtype": "torch.float16",
+    "seed": 730,
+    "wall_seconds": 10.631963847990846
+  },
+  "preserved_user_state": {
+    "pre_existing_draft_files": 24,
+    "all_sha256_unchanged": true,
+    "existing_install_configuration_and_models_retained": true,
+    "user_harness_configuration_unchanged": true
+  },
+  "windows": {
+    "runtime_version": "0.1.20",
+    "fresh_runtime_install": "OBSERVED",
+    "prepare_exit_code": 0,
+    "doctor_ready": true,
+    "deployment_profile": {
+      "name": "windows-rocm",
+      "status": "TARGET"
+    },
+    "acceleration": {
+      "backend": "rocm",
+      "device": "cuda",
+      "hip": "7.14.60850",
+      "device_operation": "OBSERVED"
+    },
+    "mcp_initialize": "OBSERVED",
+    "mcp_tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort"
+    ],
+    "source_sha256": {
+      "installer": "9d2355d512afec2191c8c1f25d295379cb970e840882c20277c8641ee0c5a03e",
+      "model_worker": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+      "provision": "913126cf2e54361cf3994076073faec2983f05d9c1045665262963a1b1dfac05",
+      "native_dependencies": "4a02f30caa60cf3b1d6bbe77a07edd09fa39147bb913aa1b2aaa4c03a2846f1d",
+      "backends": "d30e4a6e91ebd37ee288aa3e91c2f05eb79d1b9c3c58f669bfb213398f5cd2c3",
+      "runtime": "d9da3e855bd8753d02041c5b3f6227bba08cfa81155ad7031f109edf1952b1c3",
+      "service": "5acacd283e3ff323474655e48a7d8d076f2e30235a965af9158a45b2ae37375e",
+      "cli": "8f52e59405d3c3589b2704c0326b2a2c72b3353a441a3111b8c6dbb89a4622e6",
+      "mcp_server": "6664d62cbb38933954b8bddc562d106770969e27e474ec028c83354fcdfc3fa9",
+      "windows_input": "d26e5efa8895b62bd0ba0357b4ca89bedfd440d5d8491b1db2aada9bf3b0b5d8"
+    },
+    "all_source_bytes_match_release_tag": true,
+    "gui": {
+      "mode": "REAL_WINDOWS_CANONICAL_CLI",
+      "uses_action_bridge": false,
+      "exit_code": 0,
+      "runtime": {
+        "session_id": "849eb2f0b6934186b35932c1ec5c19e5",
+        "status": "COMPLETED",
+        "steps": 2,
+        "rounds": 4,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_e2f9082af247"
+        },
+        "confidence": 0.793,
+        "reason": "goal and conditions verified on two fresh observations",
+        "blocker": null,
+        "activity": {
+          "phase": "Completed"
+        },
+        "summary": "COMPLETED after 2 actions, 4 decisions"
+      },
+      "independent_gui_readback": {
+        "stage": 2,
+        "clicks": [
+          "Continue",
+          "Confirm"
+        ],
+        "visible_result": "Task complete",
+        "render_pending": false
+      },
+      "endpoint_removed": true,
+      "cleanup": {
+        "inputs_released": true,
+        "held_input_vks": [],
+        "pointer_restored": true
+      }
+    },
+    "current_update_exit_code": 0,
+    "repeat_public_install_exit_code": 0,
+    "repeat_launcher_unchanged": true,
+    "upgrade_from": "0.1.18",
+    "upgrade_to": "0.1.20",
+    "upgrade_exit_code": 0,
+    "post_upgrade_python_discovery_reinstall_exit_code": 0,
+    "removal": {
+      "installation_removed": true,
+      "managed_launcher_removed": true,
+      "endpoint_absent": true,
+      "existing_install_and_config_unchanged": true,
+      "shared_models_and_environments_retained": true
+    },
+    "gui_steps": [
+      {
+        "capture_ms": 604.1165000060573,
+        "parser_ms": 43401.318199932575,
+        "decision_ms": 119609.40790001769,
+        "execution_ms": 248.7589999800548,
+        "verification_ms": 405.01340001355857,
+        "state_change_score": 0.001270878721859114,
+        "capture_calls": 11,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 0.9705,
+        "progress": 0.34805,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.9228,
+        "effect_probability": 0.0382,
+        "goal_probability": 0.0295,
+        "condition_probabilities": [
+          0.0044
+        ],
+        "replan_probability": 0.1564,
+        "safety_probability": 0.0134,
+        "wait_frames": 9,
+        "wait_ms": 1265.0000000139698,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_b76eb2ee85ff"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": true,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-05T11:12:38.597946+00:00",
+        "session_id": "849eb2f0b6934186b35932c1ec5c19e5",
+        "step": 1,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 578.3936999505386,
+        "parser_ms": 34595.135100069456,
+        "decision_ms": 18354.98910001479,
+        "execution_ms": 6.395499920472503,
+        "verification_ms": 430.07920042146,
+        "state_change_score": 0.005465504720406681,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 0.9403,
+        "progress": 0.5614,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.7462,
+        "effect_probability": 0.0627,
+        "goal_probability": 0.0587,
+        "condition_probabilities": [
+          0.0083
+        ],
+        "replan_probability": 0.2387,
+        "safety_probability": 0.0131,
+        "capture_calls": 10,
+        "wait_frames": 9,
+        "wait_ms": 1343.000000109896,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_e2f9082af247"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": true,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-05T11:13:33.101670+00:00",
+        "session_id": "849eb2f0b6934186b35932c1ec5c19e5",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 160.04430002067238,
+        "parser_ms": 32428.70839999523,
+        "decision_ms": 18117.51719994936,
+        "execution_ms": 0.0,
+        "verification_ms": 22.81390002463013,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 0.793,
+        "progress": 0.8326,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.8818,
+        "effect_probability": 0.6208,
+        "goal_probability": 0.9356,
+        "condition_probabilities": [
+          0.9746
+        ],
+        "replan_probability": 0.0541,
+        "safety_probability": 0.0169,
+        "capture_calls": 3,
+        "wait_frames": 2,
+        "wait_ms": 171.99999990407377,
+        "visual_wait_state": "STABLE",
+        "related_change": false,
+        "timestamp": "2026-10-05T11:14:23.954990+00:00",
+        "session_id": "849eb2f0b6934186b35932c1ec5c19e5",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 49.16890000458807,
+        "parser_ms": 11.530800024047494,
+        "decision_ms": 16122.402500011958,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "clef_calls": 1,
+        "confidence": 0.793,
+        "progress": 0.8326,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.8818,
+        "effect_probability": 0.6208,
+        "goal_probability": 0.9356,
+        "condition_probabilities": [
+          0.9746
+        ],
+        "replan_probability": 0.0541,
+        "safety_probability": 0.0169,
+        "capture_calls": 1,
+        "reason": "goal and conditions verified on two fresh observations",
+        "timestamp": "2026-10-05T11:14:40.217823+00:00",
+        "session_id": "849eb2f0b6934186b35932c1ec5c19e5",
+        "step": 2,
+        "terminal_event": "COMPLETED"
+      }
+    ],
+    "scheduled_task_exit_code": 0,
+    "prepare_direct": {
+      "exit_code": 0,
+      "wall_seconds": 112.92200000002049,
+      "route": "public installed canonical CLI models prepare; SSH terminal wrapper result unverified"
+    }
+  },
+  "monad": {
+    "runtime_version": "0.1.20",
+    "fresh_runtime_install": "OBSERVED",
+    "prepare_exit_code": 0,
+    "doctor_ready": true,
+    "deployment_profile": {
+      "name": "linux-cuda",
+      "status": "TARGET"
+    },
+    "acceleration": {
+      "backend": "cuda",
+      "device": "cuda",
+      "hip": null,
+      "device_operation": "OBSERVED"
+    },
+    "mcp_initialize": "OBSERVED",
+    "mcp_tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort"
+    ],
+    "source_sha256": {
+      "installer": "9d2355d512afec2191c8c1f25d295379cb970e840882c20277c8641ee0c5a03e",
+      "model_worker": "bb65de0210a835fd3e7a2875f0709cd0a885e8f73e56a895642c04d8bdc459a1",
+      "provision": "913126cf2e54361cf3994076073faec2983f05d9c1045665262963a1b1dfac05",
+      "native_dependencies": "4a02f30caa60cf3b1d6bbe77a07edd09fa39147bb913aa1b2aaa4c03a2846f1d",
+      "backends": "d30e4a6e91ebd37ee288aa3e91c2f05eb79d1b9c3c58f669bfb213398f5cd2c3",
+      "runtime": "d9da3e855bd8753d02041c5b3f6227bba08cfa81155ad7031f109edf1952b1c3",
+      "service": "5acacd283e3ff323474655e48a7d8d076f2e30235a965af9158a45b2ae37375e",
+      "cli": "8f52e59405d3c3589b2704c0326b2a2c72b3353a441a3111b8c6dbb89a4622e6",
+      "mcp_server": "6664d62cbb38933954b8bddc562d106770969e27e474ec028c83354fcdfc3fa9",
+      "windows_input": "d26e5efa8895b62bd0ba0357b4ca89bedfd440d5d8491b1db2aada9bf3b0b5d8"
+    },
+    "all_source_bytes_match_release_tag": true,
+    "gui": {
+      "mode": "REAL_LINUX_CANONICAL_CLI_XVFB",
+      "uses_action_bridge": false,
+      "exit_code": 0,
+      "runtime": {
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "status": "COMPLETED",
+        "steps": 2,
+        "rounds": 5,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_5754d8008dc6"
+        },
+        "confidence": 1.0,
+        "reason": "goal and conditions verified on two fresh observations",
+        "blocker": null,
+        "activity": {
+          "phase": "Completed"
+        },
+        "summary": "COMPLETED after 2 actions, 5 decisions"
+      },
+      "initial_runtime": {
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "status": "NEEDS_REPLAN",
+        "steps": 1,
+        "rounds": 2,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_3bb81b7099d6"
+        },
+        "confidence": 0.9579,
+        "reason": "screen changed during decision",
+        "blocker": null,
+        "activity": {
+          "phase": "Needs Replan"
+        },
+        "summary": "NEEDS_REPLAN after 1 actions, 2 decisions"
+      },
+      "planner_interventions": 1,
+      "wall_seconds": 38.7373675609997,
+      "endpoint_removed": true,
+      "independent_gui_readback": {
+        "stage": 2,
+        "clicks": [
+          "Continue",
+          "Confirm"
+        ],
+        "render_pending": false,
+        "visible_result": "Task complete"
+      }
+    },
+    "current_update_exit_code": 0,
+    "repeat_public_install_exit_code": 0,
+    "repeat_launcher_unchanged": true,
+    "upgrade_from": "0.1.18",
+    "upgrade_to": "0.1.20",
+    "upgrade_exit_code": 0,
+    "post_upgrade_python_discovery_reinstall_exit_code": 0,
+    "removal": {
+      "installation_removed": true,
+      "managed_launcher_removed": true,
+      "endpoint_absent": true,
+      "existing_install_and_config_unchanged": true,
+      "shared_models_and_environments_retained": true
+    },
+    "gui_steps": [
+      {
+        "capture_ms": 142.02904296689667,
+        "parser_ms": 6317.419617989799,
+        "decision_ms": 16654.212872002972,
+        "execution_ms": 330.0541260105092,
+        "verification_ms": 42.52878899569623,
+        "state_change_score": 0.002474400871459695,
+        "capture_calls": 6,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.3881,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.9424,
+        "effect_probability": 0.0442,
+        "goal_probability": 0.0389,
+        "condition_probabilities": [
+          0.0055
+        ],
+        "replan_probability": 0.1857,
+        "safety_probability": 0.0188,
+        "wait_frames": 4,
+        "wait_ms": 304.3903910147492,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_3bb81b7099d6"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": false,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-05T11:09:57.862150+00:00",
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "step": 1,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 4.008950985735282,
+        "parser_ms": 3474.558200017782,
+        "decision_ms": 813.9655769919045,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 0.9579,
+        "progress": 0.422875,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.877,
+        "effect_probability": 0.1251,
+        "goal_probability": 0.0668,
+        "condition_probabilities": [
+          0.0068
+        ],
+        "replan_probability": 0.136,
+        "safety_probability": 0.0103,
+        "capture_calls": 1,
+        "reason": "screen changed during decision",
+        "timestamp": "2026-10-05T11:10:02.216335+00:00",
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "step": 1,
+        "terminal_event": "NEEDS_REPLAN"
+      },
+      {
+        "capture_ms": 48.57660393463448,
+        "parser_ms": 3481.9815380033106,
+        "decision_ms": 900.8171269961167,
+        "execution_ms": 300.8247049874626,
+        "verification_ms": 53.10869409004226,
+        "state_change_score": 0.005344045025417575,
+        "capture_calls": 11,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 0.977,
+        "progress": 0.689575,
+        "decision_mode": "ACT",
+        "mode_confidence": 0.8995,
+        "effect_probability": 0.2035,
+        "goal_probability": 0.1556,
+        "condition_probabilities": [
+          0.0287
+        ],
+        "replan_probability": 0.0672,
+        "safety_probability": 0.0126,
+        "wait_frames": 9,
+        "wait_ms": 761.7170019948389,
+        "pre_input_readiness": "ALREADY_TRUE",
+        "actionability": {
+          "visible": "DETECTED",
+          "stable": "OBSERVED_PIXELS",
+          "enabled": "UNKNOWN",
+          "editable": "UNKNOWN",
+          "occluded": "UNKNOWN"
+        },
+        "action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_5754d8008dc6"
+        },
+        "execution_ok": true,
+        "visual_wait_state": "STABLE",
+        "related_change": true,
+        "expected_effect": "content_change",
+        "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+        "timestamp": "2026-10-05T11:10:08.183543+00:00",
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 10.887817974435166,
+        "parser_ms": 2400.721201993292,
+        "decision_ms": 808.4418640064541,
+        "execution_ms": 0.0,
+        "verification_ms": 1.8483749881852418,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.85945,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.8982,
+        "effect_probability": 0.4738,
+        "goal_probability": 0.9439,
+        "condition_probabilities": [
+          0.9713
+        ],
+        "replan_probability": 0.0423,
+        "safety_probability": 0.0421,
+        "capture_calls": 3,
+        "wait_frames": 2,
+        "wait_ms": 130.30815901583992,
+        "visual_wait_state": "STABLE",
+        "related_change": false,
+        "timestamp": "2026-10-05T11:10:11.578142+00:00",
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "step": 2,
+        "terminal_event": "RUNNING"
+      },
+      {
+        "capture_ms": 4.087112989509478,
+        "parser_ms": 1.5493679966311902,
+        "decision_ms": 742.3875340027735,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "state_change_score": null,
+        "readiness_frame_reused": true,
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "clef_calls": 1,
+        "confidence": 1.0,
+        "progress": 0.85945,
+        "decision_mode": "COMPLETED",
+        "mode_confidence": 0.8982,
+        "effect_probability": 0.4738,
+        "goal_probability": 0.9439,
+        "condition_probabilities": [
+          0.9713
+        ],
+        "replan_probability": 0.0423,
+        "safety_probability": 0.0421,
+        "capture_calls": 1,
+        "reason": "goal and conditions verified on two fresh observations",
+        "timestamp": "2026-10-05T11:10:12.376911+00:00",
+        "session_id": "84c06168778344fcb5bbfc05a1e39c6a",
+        "step": 2,
+        "terminal_event": "COMPLETED"
+      }
+    ],
+    "initial_gui_failure": {
+      "mode": "REAL_LINUX_CANONICAL_CLI_XVFB",
+      "uses_action_bridge": false,
+      "exit_code": 2,
+      "runtime": {
+        "session_id": "e56985e1061f44b890c8c62842a27019",
+        "status": "NEEDS_REPLAN",
+        "steps": 1,
+        "rounds": 2,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_3bb81b7099d6"
+        },
+        "confidence": 0.9584,
+        "reason": "screen changed during decision",
+        "blocker": null,
+        "activity": {
+          "phase": "Needs Replan"
+        },
+        "summary": "NEEDS_REPLAN after 1 actions, 2 decisions"
+      },
+      "wall_seconds": 24.275499484996544,
+      "endpoint_removed": true,
+      "independent_gui_readback": {
+        "stage": 1,
+        "clicks": [
+          "Continue"
+        ],
+        "render_pending": false,
+        "visible_result": "Continue accepted"
+      }
+    },
+    "one_line_Y_prepare_exit_code": 0
+  },
+  "remote_cleanup": {
+    "windows_owned_scopes_absent": true,
+    "windows_owned_scheduled_tasks_absent": true,
+    "monad_owned_scopes_absent": true,
+    "owned_remote_helpers_removed": true
+  },
+  "github_release": {
+    "published": true,
+    "url": "https://github.com/snowman0919/clef-use/releases/tag/v0.1.20"
+  }
+}
