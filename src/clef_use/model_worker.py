@@ -30,6 +30,28 @@ def model_path(config, repo, revision):
     )
 
 
+class CpuEmbeddingRows:
+    def __init__(self, weight, device):
+        self.weight = weight
+        self.device = device
+
+    def __getitem__(self, indices):
+        return self.weight[indices.cpu()].to(self.device)
+
+
+def offload_output_embeddings(model):
+    import torch
+
+    embedding = model.language_model.get_output_embeddings()
+    embedding.weight = torch.nn.Parameter(embedding.weight.detach().cpu(), requires_grad=False)
+
+    def select_rows(_module, arguments):
+        # The pinned joint head reads lexical rows directly; lm_head is never executed.
+        return (*arguments[:-1], CpuEmbeddingRows(arguments[-1], arguments[0].device))
+
+    model.head.register_forward_pre_hook(select_rows)
+
+
 class ClefWorker:
     def __init__(self, config):
         import torch
@@ -72,7 +94,7 @@ class ClefWorker:
             path,
             device=self.device,
             dtype=dtype,
-            attn_implementation="sdpa" if torch.version.hip else "eager",
+            attn_implementation="sdpa" if self.backend in {"cuda", "rocm"} else "eager",
             local_files_only=True,
             **kwargs,
         )
@@ -93,6 +115,8 @@ class ClefWorker:
             if not all(parameter.is_floating_point() for parameter in self.model.head.parameters()):
                 raise RuntimeError("CLEF typed head must remain floating point")
             self.quantized_modules = len(names)
+            if self.backend == "cuda" and torch.cuda.mem_get_info()[0] < 1024**3:
+                offload_output_embeddings(self.model)
 
     def request(self, record):
         image = record.pop("image", None)

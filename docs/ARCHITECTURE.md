@@ -225,3 +225,24 @@ a separate serving investigation.
 Primary runtime contracts: [PyTorch installation](https://pytorch.org/get-started/locally/),
 [PyTorch XPU](https://docs.pytorch.org/docs/stable/notes/get_start_xpu.html),
 [AMD Windows support matrix](https://rocm.docs.amd.com/projects/radeon-ryzen/en/latest/docs/compatibility/compatibilityrad/windows/windows_compatibility.html).
+
+CUDA NF4 memory boundary (0.1.18 candidate): the pinned CLEF joint head selects
+lexical rows directly from the floating point output embedding table; it does
+not invoke the autoregressive lm_head. If less than 1GiB of CUDA memory remains
+after initialization, keep this table on CPU and transfer only selected lexical
+rows during head execution. Vision and the joint head remain floating point;
+the existing NF4 exclusions are unchanged. GPU attention uses existing SDPA.
+This avoids another backend or altered model weights. Revisit the hook if the
+pinned upstream head/loader interface changes. Initialization must still fit:
+this is not a promise for every small GPU or every context length.
+
+On monad RTX3080/10GiB, resident initialization allocated 8.20GiB; an image
+forward failed even with reduced image pixels. Moving lexical output storage
+reduced allocation by 1.89GiB. Actual loaded head/embedding regression with seeded
+fixture hidden states returned identical outputs (max absolute delta 0); a
+lexical-row perturbation changed outputs by 0.1943359375. Actual CUDA plus CPU
+Omni CLI GUI then completed two clicks/four decisions on owned Linux X11/Xvfb.
+These are candidate checks; public release acceptance is recorded separately.
+The reproducible numerical check is scripts/clef_cuda_memory_probe.py, executed
+with the prepared CUDA interpreter and installed package root. Windows ROCm,
+MPS and CUDA devices with sufficient free memory keep their existing storage.

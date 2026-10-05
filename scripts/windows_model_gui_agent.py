@@ -319,12 +319,30 @@ def main():
         server.shutdown()
         server.server_close()
         action.release()
-        root.destroy()
         native.FAILSAFE = False
-        with native.physical_coordinates():
-            native.moveTo(previous_pointer.x, previous_pointer.y)
-        native.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
-        native.user.SetForegroundWindow(previous_target)
+        native.user.GetAsyncKeyState.argtypes = [ctypes.c_int]
+        native.user.GetAsyncKeyState.restype = ctypes.c_short
+        held = [vk for vk in (1, 16, 17, 18, 65, 76) if native.user.GetAsyncKeyState(vk) & 0x8000]
+        cleanup = {"inputs_released": not held, "held_input_vks": held}
+        try:
+            with native.physical_coordinates():
+                native.moveTo(previous_pointer.x, previous_pointer.y)
+            cleanup["pointer_restored"] = True
+        except Exception as exc:
+            cleanup.update(pointer_restored=False, error=type(exc).__name__)
+        finally:
+            root.destroy()
+            native.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
+            native.user.SetForegroundWindow(previous_target)
+        path = args.root / "canonical-cli-result.json"
+        if args.run_cli and path.exists():
+            report = json.loads(path.read_text())
+            report["cleanup"] = cleanup
+            path.write_text(json.dumps(report), encoding="utf-8")
+        if not cleanup.get("pointer_restored"):
+            raise RuntimeError(
+                "GUI probe pointer restoration was refused; cleanup evidence retained"
+            )
 
 
 if __name__ == "__main__":

@@ -163,3 +163,42 @@ def test_native_install_pins_backend_and_required_windows_isa(tmp_path, monkeypa
     else:
         backend = profiles.PROFILES[name].backend
         assert f"torch==2.11.0+{profiles.INDEX_SUFFIXES[backend]}" in resolution
+
+
+def test_native_install_accepts_non_utf8_pip_diagnostics(tmp_path, monkeypatch):
+    import json
+    import subprocess
+    import sys
+
+    python = tmp_path / "env" / "bin" / "python"
+    python.parent.mkdir(parents=True)
+    lock = tmp_path / "common.txt"
+    lock.write_text("pillow==12.3.0\n")
+    original_run = subprocess.run
+    from pathlib import Path
+
+    original_read_text = Path.read_text
+
+    def read_text(path, *args, **kwargs):
+        kwargs.setdefault("encoding", "cp1252")
+        return original_read_text(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "read_text", read_text)
+
+    def run(command, **kwargs):
+        if "--report" in command:
+            from pathlib import Path
+
+            data = report()
+            data["install"][0]["metadata"]["description"] = "前"
+            Path(command[command.index("--report") + 1]).write_text(
+                json.dumps(data, ensure_ascii=False), encoding="utf-8"
+            )
+        return original_run(
+            [sys.executable, "-c", "import sys; sys.stdout.buffer.write(bytes([141]))"],
+            **kwargs,
+        )
+
+    monkeypatch.setattr(native.subprocess, "run", run)
+    native.install_native(python, profiles.PROFILES["windows-rocm"], {}, lock, rocm_arch="gfx1150")
+    assert (python.parent.parent / "clef-use-native-lock.txt").is_file()

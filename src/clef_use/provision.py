@@ -77,7 +77,7 @@ def install_lock(path, lock, env, index=None, rocm=False, no_deps=False):
         command.append("--no-deps")
     if rocm:
         command.extend(["--no-binary=rocm", "--no-build-isolation"])
-    result = subprocess.run(command, env=env, capture_output=True, text=True)
+    result = subprocess.run(command, env=env, capture_output=True)
     if result.returncode:
         raise RuntimeError(
             f"Pinned ML installation failed ({lock.name}); "

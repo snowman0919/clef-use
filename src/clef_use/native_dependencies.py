@@ -101,13 +101,13 @@ def install_native(python, profile, env, common_lock, quantizer_only=False, rocm
             command.append("--no-deps")
         if profile.name == "windows-rocm" and not quantizer_only:
             command.extend(["--no-binary=rocm", "--no-build-isolation"])
-        resolved = subprocess.run(command, env=env, capture_output=True, text=True)
+        resolved = subprocess.run(command, env=env, capture_output=True)
         if resolved.returncode:
             raise RuntimeError(
                 f"{profile.name} wheel resolution failed; "
                 "Python/architecture/driver support is required"
             )
-        data = json.loads(report.read_text())
+        data = json.loads(report.read_text(encoding="utf-8"))
         lock = root / "native.txt"
         lock.write_text(report_lock(data))
         command = [
@@ -124,7 +124,7 @@ def install_native(python, profile, env, common_lock, quantizer_only=False, rocm
         ]
         if profile.name == "windows-rocm" and not quantizer_only:
             command.extend(["--no-binary=rocm", "--no-build-isolation"])
-        installed = subprocess.run(command, env=env, capture_output=True, text=True)
+        installed = subprocess.run(command, env=env, capture_output=True)
         if installed.returncode:
             raise RuntimeError(f"{profile.name} hashed native installation failed")
         stem = "quantizer" if quantizer_only else "native"
