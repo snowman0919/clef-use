@@ -41,14 +41,22 @@ if (-not $clefPython) {
         $command = Get-Command $candidate -ErrorAction SilentlyContinue
         if ($command) {
             $probe = 'import sys; raise SystemExit(not (3,11) <= sys.version_info[:2] < (3,14))'
-            & $command.Source -c $probe
-            if ($LASTEXITCODE -eq 0) { $clefPython = $command.Source; break }
+            try {
+                & $command.Source -c $probe 2>$null
+                if ($LASTEXITCODE -eq 0) { $clefPython = $command.Source; break }
+            } catch {
+                continue
+            }
         }
     }
     if (-not $clefPython -and (Get-Command py -ErrorAction SilentlyContinue)) {
         foreach ($minor in @('3.11', '3.12', '3.13')) {
-            $resolved = & py "-$minor" -c 'import sys; print(sys.executable)' 2>$null
-            if ($LASTEXITCODE -eq 0) { $clefPython = "$resolved".Trim(); break }
+            try {
+                $resolved = & py "-$minor" -c 'import sys; print(sys.executable)' 2>$null
+                if ($LASTEXITCODE -eq 0) { $clefPython = "$resolved".Trim(); break }
+            } catch {
+                continue
+            }
         }
     }
 }
