@@ -47,3 +47,17 @@ doctor が失敗したら、権限、snapshot 不足、ML 依存関係、MCP 起
 0.1.8の `models prepare` はWindows Radeon 890M (gfx1150)で固定ROCm/NF4構成を自動選択します。Python 3.12とCPU OmniParserを使用し、両方のモデルを初期化してから設定を保存します。明示的な変更は `--profile default` または `--quantization none` を指定してください。検証対象は一つの一時GUIタスクで、公開配布は別途確認します。
 
 `models prepare` は9段階の準備状況、バックエンドとキャッシュ、現在の依存関係やモデル、キャッシュの再利用、経過時間を表示します。長い処理中は10秒ごとに状態を表示します。段階数は全体の所要時間の割合ではありません。`models prepare --json` で段階表示を抑制できます。設定は両方のモデルの初期化が成功した後に保存されます。
+
+## Repair and removal
+
+```sh
+clef-use doctor --fix
+clef-use uninstall
+```
+
+`doctor --fix` は不足したモデルと依存関係を既存の準備処理で修復し、再診断します。
+`docker --fix` は同じコマンドの別名です。変更されたソース、OS 権限、画面接続は手動対応を
+案内します。実行中のタスクとモデル hold がある場合は修復・削除を拒否します。
+`uninstall` は管理されたランチャーとランタイムを削除し、モデルキャッシュ、推論環境、
+設定、MCP 登録、PATH を保持します。Windows はコマンド終了後に削除し、`result` の JSON
+ファイルに最終結果を記録します。

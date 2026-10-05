@@ -1,0 +1,85 @@
+{
+  "version": "0.1.21",
+  "test_scope": "Clean canonical source plus verified public 0.1.20 installation overlaid with candidate 0.1.21 wheel; no GUI input",
+  "local": {
+    "tests": 202,
+    "ruff": "PASS"
+  },
+  "monad": {
+    "steps": [
+      {
+        "name": "public_install_0.1.20",
+        "exit": 0,
+        "seconds": 5.610200081020594
+      },
+      {
+        "name": "candidate_wheel_0.1.21",
+        "exit": 0,
+        "seconds": 0.3020364079857245
+      },
+      {
+        "name": "candidate_version",
+        "exit": 0,
+        "seconds": 0.09014886798104271
+      },
+      {
+        "name": "doctor_fix",
+        "exit": 2,
+        "seconds": 7.188904543989338
+      },
+      {
+        "name": "uninstall",
+        "exit": 0,
+        "seconds": 0.1332428710302338
+      }
+    ],
+    "model_environment": {
+      "clef": "CUDA/NF4 ready",
+      "omni": "CPU ready"
+    },
+    "uninstall": "UNINSTALLED; launcher and versions removed",
+    "config_and_cache_preserved": true,
+    "desktop": "SSH DISPLAY absent; requires graphical X11 session"
+  },
+  "windows": {
+    "status": "NATIVE_REMOVAL_PASS",
+    "observed_gpu": "AMD Radeon 890M",
+    "existing_test_config": "windows-cuda; CUDA tensor initialization fails",
+    "repair_boundary": "device initialization failure is manual; no dependency reinstall after correction",
+    "steps": [
+      {
+        "name": "public_install_0.1.20",
+        "exit": 0,
+        "seconds": 40.54700000002049
+      },
+      {
+        "name": "candidate_wheel_0.1.21",
+        "exit": 0,
+        "seconds": 2.187999999965541
+      },
+      {
+        "name": "candidate_version",
+        "exit": 0,
+        "seconds": 0.375
+      },
+      {
+        "name": "doctor_fix",
+        "exit": 2,
+        "seconds": 16.234000000054948
+      },
+      {
+        "name": "uninstall",
+        "exit": 0,
+        "seconds": 0.3279999999795109
+      }
+    ],
+    "uninstall": "UNINSTALL_SCHEDULED then UNINSTALLED; launcher and versions removed",
+    "config_and_cache_preserved": true,
+    "doctor_fix": "Exit 2; explicit MANUAL device/backend failure and SSH session 0 limitation; no prepare invoked"
+  },
+  "limits": [
+    "missing model/dependency repair is validated with controlled unit boundaries; remote model environments are reused",
+    "Windows physical GUI readiness is not established by SSH diagnostics",
+    "uninstall retains model cache, inference environments, settings, MCP registrations and PATH"
+  ]
+}

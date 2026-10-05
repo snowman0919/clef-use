@@ -48,3 +48,24 @@ profile, not a different weight artifact. NVFP4 is not implemented in this loade
 The community [CLEF-Flash NVFP4 package](https://huggingface.co/kurcontko/clef-flash-NVFP4)
 requires Blackwell hardware and its pinned vLLM plugin; its server rejects image
 and video input. Repository existence alone does not establish integration here.
+
+## Repair and removal
+
+```sh
+clef-use doctor --fix
+clef-use uninstall
+```
+
+`doctor --fix` diagnoses first, runs model preparation only when dependencies,
+weights or the pinned source are missing, then checks again. `docker --fix` is an
+alias for the same diagnostic command. Cached weights are reused. Modified source,
+unsupported backends, OS permissions and a missing graphical session require manual
+action; the report lists these and does not claim GUI readiness. Active tasks and
+model holds prevent repair or removal.
+
+`uninstall` removes the installer-managed launcher and runtime versions. Model
+cache, inference environments, configuration, MCP registrations and PATH are
+retained. Pip/source installs must be removed with their original package manager.
+Custom installs made before removal support require the original
+`CLEF_USE_INSTALL_ROOT` and `CLEF_USE_BIN_DIR` overrides. On Windows removal finishes
+after the command exits; `result` names a JSON file containing the final result.

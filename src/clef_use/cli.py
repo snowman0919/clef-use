@@ -47,8 +47,16 @@ def parser():
     resume = commands.add_parser("continue", help="resume a session with new guidance")
     resume.add_argument("session_id")
     resume.add_argument("instruction")
-    doctor = commands.add_parser("doctor", help="check model readiness and desktop permissions")
+    doctor = commands.add_parser(
+        "doctor", aliases=["docker"], help="diagnose or repair model setup"
+    )
     doctor.add_argument("--no-capture", action="store_true")
+    doctor.add_argument(
+        "--fix",
+        action="store_true",
+        help="repair missing model dependencies and weights",
+    )
+    commands.add_parser("uninstall", help="remove the managed runtime; retain models and settings")
     models = commands.add_parser(
         "models",
         help="prepare inference dependencies and download or inspect models",
@@ -131,10 +139,14 @@ def main(argv=None):
             result = RuntimeClient(start=False).request(args.command, session_id=args.session_id)
         elif args.command == "continue":
             result = RuntimeClient(start=False).continue_session(args.session_id, args.instruction)
-        elif args.command == "doctor":
-            from .doctor import doctor
+        elif args.command in {"doctor", "docker"}:
+            from .maintenance import diagnose
 
-            result = doctor(not args.no_capture)
+            result = diagnose(not args.no_capture, args.fix)
+        elif args.command == "uninstall":
+            from .maintenance import uninstall
+
+            result = uninstall()
         elif args.command == "install-mcp":
             from .harness import install_mcp
 
@@ -192,7 +204,7 @@ def main(argv=None):
         print(json.dumps(result, indent=2))
         if args.command == "run" and result["status"] != "COMPLETED":
             return 2
-        if args.command == "doctor" and not result["ready"]:
+        if args.command in {"doctor", "docker"} and not result["ready"]:
             return 2
         return 0
     except (Exception, KeyboardInterrupt) as exc:

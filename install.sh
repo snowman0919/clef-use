@@ -390,6 +390,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                         "version": manifest["version"],
                         "sha256": artifact["sha256"],
                         "base_url": base_url,
+                        "launcher": str(launcher),
                     }
                 ),
             )

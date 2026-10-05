@@ -152,7 +152,7 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
             if environment.exists() and not (environment / "pyvenv.cfg").exists():
                 raise ValueError("refusing to modify a directory that is not a venv")
             report.message(f"Creating/checking {kind} Python environment")
-            if not environment.exists():
+            if not environment.exists() or not path.is_file():
                 subprocess.run([executable, "-m", "venv", str(environment)], check=True)
             pip_check = subprocess.run([str(path), "-m", "pip", "--version"], capture_output=True)
             if pip_check.returncode:

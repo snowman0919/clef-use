@@ -1010,3 +1010,26 @@ model-serving/MLX drafts and measured performance superiority remain future or
 conditional scope. Rejected compilation is not integrated. These are disclosed
 limitations, not missing mandatoryV0 behavior. Twenty-four original draft hashes
 and user settings remain preserved. No runtime version/release change needed.
+
+## Maintenance commands, 0.1.21
+
+User requested runtime uninstall and automatic issue repair. Canonical CLI adds
+`uninstall`, `doctor --fix` and its requested `docker --fix` alias. Repair reuses
+model preparation for missing dependencies/cache/source, then diagnoses again.
+Device initialization failures, timeouts, changed source and OS session/permission
+failures require explicit manual action; healthy environments are not reinstalled.
+Missing venv interpreters are recreated in the existing managed venv.
+
+Uninstall validates managed receipts, launcher ownership and version directories,
+refuses active tasks/model holds and stops the idle service. Model cache, inference
+environments, configuration, MCP registrations and PATH remain. Windows uses an
+external Python helper after the running command exits and writes a final JSON
+result. Unknown version directories or links are preserved by refusal.
+
+Clean canonical source passed 202 tests and Ruff checks. Real public 0.1.20 installs
+with a candidate 0.1.21 wheel passed monad/Windows removal and config preservation.
+monad CUDA/NF4 and CPU Omni dependencies were healthy; SSH lacks DISPLAY. Windows
+has AMD 890M but the preserved test config requests CUDA; tensor initialization
+fails and is reported as manual, not repaired through pip. No GUI input occurred.
+See docs/evidence/maintenance-0.1.21.json. Existing actor/MLX/residency drafts are
+retained in the working tree and excluded from the commit via canonical index blobs.

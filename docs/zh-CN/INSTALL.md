@@ -47,3 +47,16 @@ doctor 失败时，请区分权限、缺失 snapshot、ML 依赖和 MCP 启动�
 0.1.8 的 `models prepare` 在 Windows Radeon 890M (gfx1150) 上自动选择固定的 ROCm/NF4 配置，使用 Python 3.12 和 CPU OmniParser。两个模型成功初始化后才保存配置。可用 `--profile default` 或 `--quantization none` 显式覆盖。实际验证仅包括一个临时 GUI 任务；公开发布状态另行记录。
 
 `models prepare` 显示9个准备阶段、后端及缓存路径、当前依赖或模型、缓存复用和耗时。长时间运行的阶段每10秒输出状态。阶段数量不代表总耗时百分比。使用 `models prepare --json` 可隐藏阶段提示。两个模型均初始化成功后才会保存配置。
+
+## Repair and removal
+
+```sh
+clef-use doctor --fix
+clef-use uninstall
+```
+
+`doctor --fix` 使用现有准备流程修复缺失的模型和依赖，然后重新诊断。
+`docker --fix` 是同一命令的别名。修改过的源码、系统权限和显示连接问题会提示手动处理。
+运行中的任务和模型 hold 会阻止修复或卸载。`uninstall` 删除受管理的启动器及运行时版本，
+保留模型缓存、推理环境、配置、MCP 注册和 PATH。Windows 在命令退出后删除，
+最终结果写入 `result` 指定的 JSON 文件。

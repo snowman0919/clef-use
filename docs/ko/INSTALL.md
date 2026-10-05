@@ -49,3 +49,16 @@ doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오�
 `models prepare`는 9개 준비 단계, 선택한 백엔드와 캐시 경로, 설치 중인 의존성이나 모델, 캐시 재사용 여부와 경과 시간을 표시합니다. 오래 걸리는 단계는 10초마다 상태를 출력하며, 모델 로딩 중에도 표시됩니다. 단계 수는 전체 소요 시간의 백분율이 아닙니다. 다운로드 전송 진행률은 Hugging Face의 진행 표시가 활성화된 경우 함께 표시됩니다. 단계 안내는 stderr, 최종 JSON 결과는 stdout으로 출력합니다. `models prepare --json`으로 단계 안내를 끌 수 있습니다. 실패하거나 중단된 단계를 알리고, 두 모델의 초기화가 모두 성공한 후에만 설정을 저장합니다.
 
 현재 다운로더는 모든 백엔드에서 원본 Cloudflare snapshot을 받습니다. `--quantization 4bit`는 로딩 시 bitsandbytes NF4를 적용하며, 사전 양자화된 NVFP4 저장소를 선택하지 않습니다. GPU 감지는 추론 환경 프로파일 선택에만 사용됩니다. 현재 로더에는 NVFP4 지원이 없습니다. [커뮤니티 CLEF-Flash NVFP4](https://huggingface.co/kurcontko/clef-flash-NVFP4)는 제작자 안내상 Blackwell GPU와 전용 vLLM 플러그인을 요구하고, 제공 서버는 이미지와 영상 입력을 거부합니다.
+
+## Repair and removal
+
+```sh
+clef-use doctor --fix
+clef-use uninstall
+```
+
+`doctor --fix`는 진단 후 누락된 모델·의존성을 기존 준비 경로로 복구하고 다시 확인합니다.
+`docker --fix`는 같은 명령의 별칭입니다. 변경된 소스, OS 권한, 화면 연결 문제는
+자동으로 덮어쓰지 않고 필요한 조치를 안내합니다. 실행 중인 작업과 모델 hold는 복구·삭제를 막습니다.
+`uninstall`은 관리되는 실행 파일과 런타임 버전을 삭제하고 모델 캐시·추론 환경·설정·MCP 등록·PATH를
+보존합니다. Windows에서는 명령 종료 후 삭제하며 `result`의 JSON 파일로 완료 여부를 확인합니다.
