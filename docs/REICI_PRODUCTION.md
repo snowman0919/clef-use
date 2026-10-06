@@ -31,8 +31,10 @@ process. Local coherent commits are authorized. Remote publishing is not.
 ## Sources and output ownership
 
 Task-owned assets and large binary outputs: `/home/monad/develop/reici-production`.
-Original reference cache files are copied, never edited. Two reference images
-were recovered; the third reference mentioned in the prompt has not been found.
+Original reference cache files are copied, never edited. All three supplied
+images are preserved; the newly supplied `img_e46b52e05c98.jpg` design sheet and
+its unaltered Close Up crop are the primary authority. Generated support sheets
+remain provisional, with v1 rejected for its mature facial impression.
 Unseen views must be identified as derived, not falsely called canonical.
 
 The existing Blender process and user preferences are not modified. A dedicated
@@ -58,9 +60,52 @@ client/server path. All four failed before the correction.
 
 ## Modeling quality gate
 
-The active owned scene is `reici_model_v3_fringe.blend`, restored from the pre-rig
-modeling checkpoint and remodeled after the user's quality-first correction.
-Its current face, hair, proportions, outfit and accessories are not visually
+The active owned scene is `reici_model_v5_canonical_eye_fix.blend`, still
+modeling-only with no armature. The latest canonical Close Up now governs the
+rebuilt face and muted olive/sage round-pupil texture, which has a verified
+native Codex call/source-copy checksum and is packed into both eye meshes.
+The alternate skirt was replaced with loose charcoal cargo trousers and side
+pockets/webbing. The exposed neck was shortened without reopening its join.
+
+Actual render inspection caught two physical regressions: inward scalp winding,
+and iris occlusion after a Z-only iris shift lost its surface-depth relationship.
+Both have actual Blender RED/GREEN evidence. The corrected iris is reprojected
+through evaluated facial geometry, with maximum Y-offset error about 3.72e-9 m;
+eye opening aspect is 0.61456, crown mean radial normal dot is 0.13495, and
+finger/finite-coordinate/neck checks still pass. These are structural guards,
+not source-landmark equivalence or likeness acceptance. The doll-like eye/face
+expression, mechanical bangs, open-looking crown/rear-hair boundaries, clothing
+and sock/hem proportions remain visual defects.
+
+Current scripts: `remodel_face_v5.py`, `refine_face_v5.py`,
+`build_canonical_pants_v5.py`, `repair_iris_depth_v5.py`,
+`validate_face_structure.py`, `validate_canonical_outfit.py`, and
+`render_model_v5_view.py` in the task-owned production root. Current actual
+renders start with `model_v5_canonical_eye_fix_`; exact MCP evidence includes
+`blender-face-v5-refined.json`, `blender-canonical-pants-{red,green}.json`,
+`blender-iris-depth-{red,green}.json`, and the three `blender-v5-eye-fix-` renders.
+Earlier checkpoints and original artwork are preserved.
+
+Historical V3/V4 steps remodeled the
+pre-rig checkpoint after the user's quality-first correction. V3 whole-model
+renders exposed a cap-like rear-hair boundary and four fingers stacked in camera
+depth. V4 corrects finger orientation, lower-face proportions, eye/lid surfaces,
+scalp-rooted clumps, socks and the offset backpack. A newly exposed head/neck gap
+was detected by evaluated-geometry bounds and repaired before the next images.
+Structural RED/GREEN assertions and separate Blender readback are retained;
+these are not a visual quality acceptance. The cap-like rear-hair band, hair
+surface character, reference likeness, sleeves and strap clearances remain open.
+
+A seven-render Blender MCP call exceeded the installed transport's 180-second
+socket deadline while Blender continued producing the requested images and
+checkpoint. Do not replay that mutating script: independent readback confirmed
+V4 and its structural assertions. Subsequent render batches use fewer views.
+Exact evidence includes `blender-model-v4-structure.log`,
+`blender-model-v4-verified.json`, `blender-model-v4-neck-red.json`, and
+`blender-model-v4-join-repaired.json`; actual render filenames start with
+`model_v4_joined_` in the task-owned artifacts directory.
+
+The current face, hair, proportions, outfit and accessories are not visually
 accepted. Earlier rig, expression and physics checkpoints remain separate;
 their bone counts and tests do not validate the current remodeled scene.
 Do not expand avatar features before accepting the overall modeling quality.
@@ -119,6 +164,67 @@ not a cache speedup benchmark. Parser latency and autonomous completion remain
 open acceptance criteria. Exact artifacts: `clef-layout-review-fixed.json`,
 `blender-review-layout-start.json`, `blender-review-layout-verified.json`, and
 session-filtered rows in the task-owned `clef-state/steps.jsonl`.
+
+## Runtime follow-up from the production review
+
+The actual Render -> View Render inspection goal returned session
+`08bced846009412bbcdecce4c6ee2631`, NEEDS_REPLAN, zero delivered actions and one
+decision, with `screen changed during decision`. The parser took 135.705 s and
+the decision 4.721 s; the MCP call took 141.186 s. Refusing the stale input was
+a safety outcome, not a successful GUI inspection. A visible workspace tooltip
+and material-preview updates are possible transition sources, not a proven
+root cause without both original captures. A new retry uses the same goal and
+confidence policy after a task-owned static viewport, neutral-pointer move for
+diagnosis, equal-pixel captures and an idle-only private-runtime restart.
+
+Independent source/fixture audit exposed two separate defects, neither asserted
+to cause that stale-frame failure:
+
+- Empty OCR plus valid detector icons: the pinned overlap primitive returns bbox
+  lists instead of dictionaries. The real request raised `TypeError: list
+  indices must be integers or slices, not str` before captioning. Normalize that
+  documented branch at the wrapper boundary, retaining the actual filtered icons.
+  Four prepared CPU-environment request tests cover icon-only, empty, OCR-only
+  and OCR-inside-icon screens with real PNG decode, Torch scaling, pinned overlap,
+  crop caching and response assembly. OCR/detection/generation are fixtures; ML
+  quality is not claimed. Before correction one case errors; after, all four pass.
+- First positive completion on the final budget round: `_record` retained its
+  mutable row for the terminal finally block, logging three CLEF calls after two
+  actual decisions. Clear row ownership after recording. The real runtime fixture
+  now logs exactly two calls, one input, and STEP_BUDGET_EXHAUSTED, never inventing
+  the second positive completion proof. This regression failed before correction.
+
+The full core environment reports `241 passed, 4 skipped in 16.88s`; its four
+skips are the explicit prepared-parser integration tests, separately executed and
+passed above. The scoped runtime/cache suite reports 29 passes. Retained evidence:
+`completion-budget-v2-red.log`, `omni-empty-ocr-v2-{red,green}.log`,
+`runtime-followup-v2-{green,full}.log`, `runtime-followup-v2-restarted.json`,
+`blender-v5-ui-stability.json`, `clef-v5-render-view-{review,retry}.json`.
+The retry artifact is produced only when its real call returns; in-progress is
+not completion. The retry did return: session `f2bb3280235145599a40f289e6521c00`
+delivered two real clicks and three decisions in 534.816 s, then stopped with
+LOW_CONFIDENCE (`execution mode confidence below threshold`). The three logged
+CLEF calls match the actual rounds. Independent Blender readback and a real
+post-action screenshot show a Render Result image-editor window; saved/live
+geometry signatures match, with 405 objects, 96,137 mesh vertices, 93,899 polygons
+and zero armatures. This proves actual GUI inspection progress and geometry
+preservation, not autonomous completion. The floating window is at y=-83 on the
+owned display, so its header is outside the captured screen. Missing visible
+viewer controls are a concrete representation limitation, not yet a proven
+cause of the low semantic confidence. Evidence: `blender-v5-gui-review-readback.json`,
+`blender-v5-render-view-after.png`, `geometry-v5-{saved_baseline,live_after_gui}.json`.
+The signature does not prove unchanged material shader appearance.
+
+A bounded actual-weight CPU 64-vs-768 caption comparison was dispatched on a
+frozen owned screenshot; its result has not yet been integrated. No resize optimization, caption-quality
+parity or speedup has been accepted from tensor-shape evidence alone.
+
+Release-v2 parent readback exercised c62a83e-export Linux/Python-3.11 artifacts,
+20 activation boundary tests, actual installed 0.1.22 fixture version and immutable
+same-version checksum rejection with target preservation. These artifacts predate
+the two follow-up source corrections and must be rebuilt before final release.
+They do not establish native Windows/macOS or all distribution-target acceptance.
+See `docs/evidence/REICI_INSTALL.md` for historical source identity and limits.
 
 ## Completion status
 

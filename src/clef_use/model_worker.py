@@ -283,10 +283,14 @@ class OmniWorker:
             }
             for box, label in zip(boxes, text, strict=True)
         ]
-        objects = sorted(
-            self.overlap(icons, iou_threshold=0.7, ocr_bbox=ocr),
-            key=lambda box: box["content"] is None,
-        )
+        merged = self.overlap(icons, iou_threshold=0.7, ocr_bbox=ocr)
+        if not ocr:
+            # The pinned empty-OCR branch returns coordinates, unlike its dict branch.
+            merged = [
+                {"type": "icon", "bbox": box, "interactivity": True, "content": None}
+                for box in merged
+            ]
+        objects = sorted(merged, key=lambda box: box["content"] is None)
         start = next((i for i, box in enumerate(objects) if box["content"] is None), None)
         # Compose upstream primitives without its annotation helper's empty-OCR and
         # starting_idx=-1 bugs. Caption only regions that actually lack OCR content.

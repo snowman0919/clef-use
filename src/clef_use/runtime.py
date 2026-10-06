@@ -431,6 +431,7 @@ class SessionRuntime:
                         )
                     ready_frame = waiting.frame
                     self._record(session, row)
+                    row = {}
                     continue
                 completion_predictions = 0
                 if decision.mode_confidence < session.contract.confidence_threshold:

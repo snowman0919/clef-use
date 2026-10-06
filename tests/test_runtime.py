@@ -164,6 +164,34 @@ def test_action_then_stale_completion_uses_new_frame_without_repeating_click():
     assert sum(row.get("clef_calls", 0) for row in session.history) == session.rounds
 
 
+def test_last_round_positive_completion_records_each_inference_once():
+    desktop = FixtureDesktop()
+
+    class OneActionThenComplete:
+        def decide(self, observation, goal, candidates, history):
+            if desktop.stage == 0:
+                action = next(a for a in candidates if a.operation == "click")
+                return Decision(action=action.id, confidence=0.99)
+            return Decision(
+                mode="COMPLETED",
+                mode_confidence=0.99,
+                confidence=0.99,
+                goal_probability=0.99,
+                condition_probabilities=(0.99,),
+            )
+
+    runtime = SessionRuntime(
+        desktop, desktop, OneActionThenComplete(), desktop, Config(settle_seconds=0)
+    )
+    session = Session(Contract(goal="Open Settings", success_conditions=["active"], max_steps=2))
+    result = runtime.execute(session)
+    # One positive completion observation must not fabricate the second proof.
+    assert result["status"] == "STEP_BUDGET_EXHAUSTED"
+    assert session.steps == 1 and session.rounds == 2
+    assert sum(row.get("clef_calls", 0) for row in session.history) == session.rounds
+    assert len({id(row) for row in session.history}) == len(session.history)
+
+
 def test_multiaction_session_and_double_completion_verification():
     executor = fixture_runtime()
     session = Session(
