@@ -321,6 +321,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
         # Venv paths are never renamed; only the activation symlink changes.
         staged = Path(tempfile.mkdtemp(prefix=manifest["version"] + "-", dir=versions))
         activated = False
+        launcher_text = None
         try:
             if windows:
                 windows_user_access(staged)
@@ -393,11 +394,8 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                     raise ValueError(
                         "Unicode Windows paths require CLEF_USE_BIN_DIR inside the installation"
                     )
-                atomic_text(
-                    launcher,
-                    '@echo off\nrem clef-use managed launcher\n@"' + target + '" %*\n',
-                    0o755,
-                )
+                launcher_text = '@echo off\nrem clef-use managed launcher\n@"' + target + '" %*\n'
+                atomic_text(launcher, launcher_text, 0o755)
             else:
                 atomic_text(
                     launcher,
@@ -421,6 +419,16 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 ),
             }
         finally:
+            if not activated:
+                # Ctrl-C can arrive after the atomic switch but before activated is set.
+                # Read back the live pointer before deleting an allegedly unused environment.
+                activated = (
+                    launcher_text is not None
+                    and launcher.exists()
+                    and launcher.read_text() == launcher_text
+                    if windows
+                    else current.resolve() == staged.resolve()
+                )
             if not activated:
                 shutil.rmtree(staged)
 

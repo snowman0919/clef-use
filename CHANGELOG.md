@@ -4,6 +4,8 @@
 
 - Distinguish absent/expired GUI sessions from runtime failure and provide actionable first-call MCP diagnostics without starting model inference.
 - Track the reference-character Blender/VRM production acceptance criteria and real dogfood evidence.
+- Preserve the live installation when interruption arrives immediately after the atomic activation switch; keep previous runtime receipts and user data unchanged.
+- Align localized installation commands and document repair, removal, and forced-termination limits.
 
 ## 0.1.20
 

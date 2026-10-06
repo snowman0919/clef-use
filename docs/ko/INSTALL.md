@@ -12,6 +12,12 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
+업데이트는 이전 런타임 버전, 모델 캐시와 설정을 보존합니다. 활성화 전에 Ctrl-C로 설치를
+중단하면 정리 과정은 사용하지 않는 임시 환경만 삭제하며 기존 런타임은 활성 상태를 유지합니다.
+원자적 활성화 전환 후에는 성공 안내가 출력되지 않았더라도 새 활성 환경을 삭제하지 않습니다.
+설치 프로그램을 다시 실행해 활성 버전을 확인하세요. 강제 프로세스 종료나 정전은 정리를
+건너뛰고 임시 파일을 남길 수 있으며, 충돌 시 내구성과 잔여 파일 자동 삭제는 보장하지 않습니다.
+
 ~/.config/clef-use/config.toml을 만들거나 CLEF_USE_CONFIG를 지정하세요. model_dir을 쓰기 가능한 캐시 경로로 바꾸세요. 최소 30 GiB의 여유 공간과 CLEF-Flash 가중치 약 19.1 GB를 처리할 메모리가 필요합니다. 실제 검증 장비는 메모리 48 GiB입니다. 큰 CLEF 모델은 가중치 약 55 GB가 필요하며 여기서는 미검증입니다.
 
 ```toml
@@ -40,7 +46,11 @@ macOS에서는 실제 터미널 또는 harness에 화면 기록과 손쉬운 사
 
 doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오류를 구분하세요. self-test는 모델 없이 제어 흐름을 확인합니다. 설치 프로그램이 Python을 찾지 못하면 CLEF_USE_PYTHON을 지정하세요. LOW_CONFIDENCE와 NEEDS_REPLAN은 상위 계획자의 개입이 필요한 상태이며 ERROR는 완료가 아닙니다.
 
-제거하려면 유휴 런타임을 종료하고 관리되는 실행 파일과 설치 디렉터리만 삭제하세요. POSIX는 ~/.local/bin/clef-use와 ~/.local/share/clef-use, Windows는 %LOCALAPPDATA%\clef-use와 해당 사용자 PATH 항목입니다. harness 설정에서는 clef-use만 제거하세요. 명시적으로 삭제하려는 경우가 아니면 캐시와 설정을 보존하세요.
+설치 디렉터리 전체를 삭제하지 말고 `clef-use uninstall`로 관리되는 런타임을 제거하세요.
+기본 위치는 POSIX의 `~/.local/share/clef-use`와 `~/.local/bin/clef-use`, Windows의
+`%LOCALAPPDATA%\clef-use`입니다. 설치 디렉터리에는 보존해야 할 사용자 데이터도 있을 수
+있습니다. 등록까지 제거하려는 경우에만 harness 설정이나 PATH에서 clef-use 항목만 직접
+제거하세요. uninstall 명령은 이 등록을 변경하지 않습니다.
 
 [Quick start](QUICKSTART.md) | [Harness](HARNESS_SETUP.md) | [Evidence](../evidence/VALIDATION.md)
 
@@ -50,15 +60,17 @@ doctor 실패 시 권한 부족, snapshot 누락, ML 의존성, MCP 시작 오�
 
 현재 다운로더는 모든 백엔드에서 원본 Cloudflare snapshot을 받습니다. `--quantization 4bit`는 로딩 시 bitsandbytes NF4를 적용하며, 사전 양자화된 NVFP4 저장소를 선택하지 않습니다. GPU 감지는 추론 환경 프로파일 선택에만 사용됩니다. 현재 로더에는 NVFP4 지원이 없습니다. [커뮤니티 CLEF-Flash NVFP4](https://huggingface.co/kurcontko/clef-flash-NVFP4)는 제작자 안내상 Blackwell GPU와 전용 vLLM 플러그인을 요구하고, 제공 서버는 이미지와 영상 입력을 거부합니다.
 
-## Repair and removal
+## 복구 및 제거
 
 ```sh
 clef-use doctor --fix
 clef-use uninstall
 ```
 
-`doctor --fix`는 진단 후 누락된 모델·의존성을 기존 준비 경로로 복구하고 다시 확인합니다.
+`doctor --fix`는 진단 후 누락된 모델·추론 의존성을 기존 준비 경로로 복구하고 다시 확인합니다.
 `docker --fix`는 같은 명령의 별칭입니다. 변경된 소스, OS 권한, 화면 연결 문제는
-자동으로 덮어쓰지 않고 필요한 조치를 안내합니다. 실행 중인 작업과 모델 hold는 복구·삭제를 막습니다.
-`uninstall`은 관리되는 실행 파일과 런타임 버전을 삭제하고 모델 캐시·추론 환경·설정·MCP 등록·PATH를
-보존합니다. Windows에서는 명령 종료 후 삭제하며 `result`의 JSON 파일로 완료 여부를 확인합니다.
+자동으로 덮어쓰지 않고 필요한 조치를 안내합니다. 런타임 종료가 필요한 복구·삭제는 실행 중인
+작업이나 모델 hold가 있으면 거부합니다. `uninstall`은 유휴 런타임을 종료하고 관리되는 실행
+파일과 런타임 버전만 삭제하며 모델 캐시·추론 환경·설정·MCP 등록·PATH를 보존합니다.
+설치 루트 전체를 삭제하지 않습니다. Windows에서는 명령 종료 후 삭제를 예약합니다.
+완료로 간주하기 전에 `result`가 지정한 JSON 파일의 `UNINSTALLED` 또는 `ERROR`를 확인하세요.

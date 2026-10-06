@@ -141,6 +141,226 @@ def test_install_bootstraps_pip_without_copying_unix_python(tmp_path, monkeypatc
     assert not list((tmp_path / "bin").iterdir())
 
 
+@pytest.fixture(
+    params=[("linux", False), ("linux", True), ("win32", False), ("win32", True)],
+    ids=["posix-first", "posix-update", "windows-first", "windows-update"],
+)
+def activation_installation(tmp_path, monkeypatch, request):
+    import contextlib
+    import io
+    import os
+    import shlex
+    import subprocess
+    import sys
+    from types import SimpleNamespace
+
+    import clef_use.installer as installer
+
+    platform, update = request.param
+    windows = platform == "win32"
+    if os.name == "nt" and not windows:
+        pytest.skip("POSIX symlink activation requires a POSIX host")
+    root, bindir = tmp_path / "installation", tmp_path / "bin"
+    root.mkdir()
+    bindir.mkdir()
+    launcher = bindir / ("clef-use.cmd" if windows else "clef-use")
+    current = root / "current"
+    old = root / "versions" / "previous"
+    preserved = {}
+    for name in ("models/weights", "environments/inference/keep", "config.toml", "state/user-data"):
+        path = root / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"keep user data: " + name.encode())
+        preserved[path] = path.read_bytes()
+    if update:
+        old.mkdir(parents=True)
+        receipt = old / "installed.json"
+        receipt.write_text(json.dumps({"version": "0.0.9", "sha256": "b" * 64}))
+        preserved[receipt] = receipt.read_bytes()
+        if windows:
+            launcher.write_text(
+                '@echo off\nrem clef-use managed launcher\n@"'
+                + str(old / "Scripts/clef-use.exe")
+                + '" %*\n'
+            )
+        else:
+            current.symlink_to(old.relative_to(root), target_is_directory=True)
+            launcher.write_text(
+                "#!/bin/sh\n# clef-use managed launcher\nexec "
+                + shlex.quote(str(current / "bin/clef-use"))
+                + ' "$@"\n'
+            )
+    previous_launcher = launcher.read_bytes() if update else None
+    buffer = io.BytesIO()
+    with zipfile.ZipFile(buffer, "w") as archive:
+        archive.writestr("requirements.txt", "")
+        archive.writestr("wheels/clef_use-0.1.0-py3-none-any.whl", b"fixture")
+    payload = buffer.getvalue()
+    metadata = manifest()
+    artifact = metadata["artifacts"][0]
+    artifact.update(
+        platform=platform,
+        architecture="x86_64",
+        python="3.11",
+        sha256=hashlib.sha256(payload).hexdigest(),
+    )
+    responses = {
+        "/latest/manifest.json": json.dumps(metadata).encode(),
+        "/latest/SHA256SUMS": f"{artifact['sha256']}  release.zip\n".encode(),
+        "/releases/0.1.0/release.zip": payload,
+    }
+    base = installer.DEFAULT_BASE
+    monkeypatch.setenv("CLEF_USE_INSTALL_ROOT", str(root))
+    monkeypatch.setenv("CLEF_USE_BIN_DIR", str(bindir))
+    monkeypatch.setattr(installer.sys, "platform", platform)
+    monkeypatch.setattr(installer, "windows_user_access", lambda _: None)
+    monkeypatch.setattr(installer, "install_lock", lambda _: contextlib.nullcontext())
+    monkeypatch.setattr(installer, "fetch", lambda url, *args: responses[url[len(base) :]])
+    monkeypatch.setattr(installer, "select_artifact", lambda _: artifact)
+
+    class FixtureEnvironment:
+        # The regression exercises real filesystem activation, not pip or Windows ACLs.
+        def __init__(self, **kwargs):
+            pass
+
+        def create(self, staged):
+            binary = installer.environment_binary(staged, "clef-use")
+            binary.parent.mkdir(parents=True)
+            binary.write_text(
+                f"#!{sys.executable}\nimport sys\n"
+                "if sys.argv[1] == 'version': print('0.1.0')\n"
+                "elif sys.argv[1] != 'self-test': raise SystemExit(1)\n"
+            )
+            binary.chmod(0o755)
+
+    original_run = subprocess.run
+
+    def install_wheels(argv, **kwargs):
+        if "--require-hashes" in argv:
+            return subprocess.CompletedProcess(argv, 0)
+        # Run the fixture script portably, including a simulated Windows .exe on POSIX.
+        return original_run([sys.executable, *argv], **kwargs)
+
+    monkeypatch.setattr(installer.venv, "EnvBuilder", FixtureEnvironment)
+    monkeypatch.setattr(installer.subprocess, "run", install_wheels)
+    return SimpleNamespace(
+        installer=installer,
+        root=root,
+        launcher=launcher,
+        current=current,
+        old=old,
+        windows=windows,
+        update=update,
+        preserved=preserved,
+        previous_launcher=previous_launcher,
+    )
+
+
+def test_interrupt_after_activation_preserves_live_environment(
+    activation_installation, monkeypatch
+):
+    case = activation_installation
+    installer = case.installer
+    original_replace = installer.os.replace
+    switched = []
+
+    def replace_then_interrupt(source, destination):
+        original_replace(source, destination)
+        if destination == (case.launcher if case.windows else case.current):
+            if not case.windows:
+                # POSIX launcher creation is earlier than the current symlink switch.
+                assert case.current.resolve().is_dir()
+            switched.append(destination)
+            raise KeyboardInterrupt("immediately after activation")
+
+    monkeypatch.setattr(installer.os, "replace", replace_then_interrupt)
+    with pytest.raises(KeyboardInterrupt, match="immediately after activation"):
+        installer.install()
+    assert len(switched) == 1
+    if case.windows:
+        import re
+
+        match = re.search(r'^@"([^"\r\n]+)" %\*$', case.launcher.read_text(), re.MULTILINE)
+        assert match is not None
+        target = match[1]
+        if target.startswith("%~dp0"):
+            target = str(case.launcher.parent / target[5:])
+        active = installer.Path(target).parent.parent.resolve()
+    else:
+        active = case.current.resolve()
+    assert active.is_dir(), "interrupted cleanup deleted the live environment"
+    assert active != case.old
+    assert json.loads((active / "installed.json").read_text())["version"] == "0.1.0"
+    installer.smoke(installer.environment_binary(active, "clef-use"), "0.1.0")
+    assert all(path.read_bytes() == data for path, data in case.preserved.items())
+    assert not (case.root / ".next").exists()
+
+
+@pytest.mark.parametrize("failure", [KeyboardInterrupt, RuntimeError])
+@pytest.mark.parametrize("point", ["smoke", "activation"])
+def test_preactivation_failure_removes_only_staging(
+    activation_installation, monkeypatch, failure, point
+):
+    case = activation_installation
+    installer = case.installer
+    original_replace = installer.os.replace
+    reached = []
+
+    def stop(*args, **kwargs):
+        reached.append(point)
+        raise failure("before activation")
+
+    def replace_or_stop(source, destination):
+        if destination == (case.launcher if case.windows else case.current):
+            stop()
+        original_replace(source, destination)
+
+    if point == "smoke":
+        monkeypatch.setattr(installer, "smoke", stop)
+    else:
+        monkeypatch.setattr(installer.os, "replace", replace_or_stop)
+    with pytest.raises(failure, match="before activation"):
+        installer.install()
+    assert reached == [point]
+    assert set((case.root / "versions").iterdir()) == ({case.old} if case.update else set())
+    assert all(path.read_bytes() == data for path, data in case.preserved.items())
+    if case.update:
+        assert case.launcher.read_bytes() == case.previous_launcher
+        if not case.windows:
+            assert case.current.resolve() == case.old
+    else:
+        assert not case.current.exists()
+        if case.windows or point == "smoke":
+            assert not case.launcher.exists()
+
+
+def test_generated_bootstraps_embed_canonical_installer():
+    import base64
+    import re
+    import runpy
+    from pathlib import Path
+
+    root = Path(__file__).resolve().parents[1]
+    builder = runpy.run_path(str(root / "scripts/build_installer.py"))
+    assert (root / "install.sh").read_text() == builder["render"]()
+    powershell = (root / "install.ps1").read_text()
+    match = re.search(r"FromBase64String\('([^']+)'\)", powershell)
+    assert match is not None
+    assert base64.b64decode(match[1]) == (root / "src/clef_use/installer.py").read_bytes()
+
+
+@pytest.mark.parametrize("language", ["en", "ko", "ja", "zh-CN"])
+def test_localized_installation_commands_match(language):
+    import re
+    from pathlib import Path
+
+    docs = Path(__file__).resolve().parents[1] / "docs"
+    blocks = re.findall(r"```[^\n]*\n(.*?)```", (docs / language / "INSTALL.md").read_text(), re.S)
+    english = re.findall(r"```[^\n]*\n(.*?)```", (docs / "en/INSTALL.md").read_text(), re.S)
+    assert blocks[-1] == "clef-use doctor --fix\nclef-use uninstall\n"
+    assert blocks == english
+
+
 @pytest.mark.parametrize(
     ("status", "heading"),
     [
