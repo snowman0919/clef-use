@@ -22,12 +22,64 @@ def effect_region(box):
     )
 
 
+def pointer_allowed(pointer, observation):
+    if pointer.reference != observation.frame.reference():
+        return False
+    frame = observation.frame
+    width, height = frame.logical_size or frame.image.size
+    if width <= 0 or height <= 0:
+        return False
+    positions = [frame.pointer_point(p) for p in pointer.points]
+    area = pointer.surface
+    if any(
+        not (
+            area.x1 <= (x - frame.origin[0]) / width <= area.x2
+            and area.y1 <= (y - frame.origin[1]) / height <= area.y2
+        )
+        for x, y in positions
+    ):
+        return False
+    bounds = observation.frame.foreground_bounds
+    if bounds is not None:
+        left, top, right, bottom = bounds
+        if any(not (left <= x < right and top <= y < bottom) for x, y in positions):
+            return False
+    # Floor-to-device pixels and their coverage can cross normalized boundaries.
+    # Padding the whole convex surface also covers every delivered stroke segment.
+    pad_x, pad_y = 1 / width, 1 / height
+    return not any(
+        obj.sensitive
+        and area.x1 - pad_x <= obj.bbox.x2
+        and obj.bbox.x1 <= area.x2 + pad_x
+        and area.y1 - pad_y <= obj.bbox.y2
+        and obj.bbox.y1 <= area.y2 + pad_y
+        for obj in observation.objects
+    )
+
+
 class CandidateBuilder:
     def __init__(self, limit: int = 48):
         self.limit = limit
 
     def build(self, observation: Observation, contract: Contract) -> tuple[ActionCandidate, ...]:
         candidates = []
+        for pointer in contract.pointer_inputs:
+            if len(candidates) < self.limit and pointer_allowed(pointer, observation):
+                candidates.append(
+                    ActionCandidate(
+                        id=f"a{len(candidates)}",
+                        operation=pointer.operation,
+                        observation_id=observation.id,
+                        description=(
+                            f"{pointer.operation.title()} supplied pixel path: {pointer.label}"
+                        ),
+                        pointer=pointer,
+                        expected_effect="content_change",
+                        effect_roi=pointer.surface,
+                    )
+                )
+        if contract.pointer_inputs:
+            return tuple(candidates)
         objects = [
             obj
             for obj in observation.objects

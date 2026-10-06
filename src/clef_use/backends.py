@@ -13,6 +13,7 @@ from pathlib import Path
 
 from PIL import Image
 
+from .candidates import pointer_allowed
 from .config import Config
 from .models import MODEL_REVISIONS, OMNI_SOURCE_REVISION, snapshot_path
 from .objects import normalize_omni
@@ -223,6 +224,11 @@ def clef_request(observation, contract, candidates, history) -> dict:
                     "id": action.id,
                     "description": action.description,
                     "expected_effect": action.expected_effect,
+                    **(
+                        {"pointer": action.pointer.model_dump(mode="json")}
+                        if action.pointer
+                        else {}
+                    ),
                 }
                 for action in candidates
             ],
@@ -347,6 +353,14 @@ class DesktopAction:
             ):
                 return ActionResult(ok=False, reason="invalid or sensitive target")
             op = action.operation
+            if op == "stroke" and action.pointer is None:
+                return ActionResult(ok=False, reason="stroke requires a supplied pointer path")
+            if action.pointer is not None and (
+                op != action.pointer.operation
+                or action.target is not None
+                or action.value is not None
+            ):
+                return ActionResult(ok=False, reason="contradictory pointer action")
             if native and op != "wait":
                 gui.ensure_target(observation.frame.foreground_window)
                 if (
@@ -355,7 +369,11 @@ class DesktopAction:
                     != observation.frame.foreground_bounds
                 ):
                     raise RuntimeError("Windows foreground geometry changed since capture")
-            if op in {"click", "double_click", "focus"}:
+            if action.pointer is not None:
+                if not pointer_allowed(action.pointer, observation):
+                    return ActionResult(ok=False, reason="stale or sensitive pointer surface")
+                self._pointer(gui, action.pointer, observation.frame, cancelled)
+            elif op in {"click", "double_click", "focus"}:
                 if target is None:
                     return ActionResult(ok=False, reason="click requires object")
                 x, y = observation.frame.point(target.bbox)
@@ -425,6 +443,42 @@ class DesktopAction:
             elif op == "wait":
                 return ActionResult(ok=False, reason="visual wait is owned by the runtime")
             return ActionResult(ok=not cancelled.is_set())
+
+    def _pointer(self, gui, pointer, frame, cancelled):
+        native = isinstance(gui, WindowsInput)
+        points = [frame.pointer_point(point) for point in pointer.points]
+        move_kwargs = {} if native or pointer.operation == "click" else {"_pause": False}
+        gui.moveTo(*points[0], **move_kwargs)
+        if cancelled.is_set():
+            return
+        if native:
+            gui.ensure_target(frame.foreground_window)
+            bounds = gui.window_rect(frame.foreground_window)
+            if frame.foreground_bounds is not None and bounds != frame.foreground_bounds:
+                raise RuntimeError("Windows foreground geometry changed before pointer press")
+            x, y = points[0]
+            left, top, right, bottom = bounds
+            if not left <= x < right or not top <= y < bottom:
+                raise RuntimeError("Windows pointer start outside foreground before pointer press")
+        try:
+            self.buttons.add("left")
+            if native:
+                gui.mouseDown(button="left", target=frame.foreground_window)
+            else:
+                gui.mouseDown(button="left")
+            for point in points[1:]:
+                if cancelled.wait(pointer.duration / (len(points) - 1)):
+                    return
+                if native:
+                    gui.ensure_target(frame.foreground_window)
+                    if (
+                        frame.foreground_bounds is not None
+                        and gui.window_rect(frame.foreground_window) != frame.foreground_bounds
+                    ):
+                        raise RuntimeError("Windows foreground geometry changed during stroke")
+                gui.moveTo(*point, **move_kwargs)
+        finally:
+            self._release_with(gui)
 
     def _click(self, gui, x, y, count, cancelled, target=None):
         native = isinstance(gui, WindowsInput)

@@ -5,7 +5,7 @@ import pytest
 from PIL import Image
 
 from clef_use.backends import DesktopAction
-from clef_use.schema import ActionCandidate, Frame, Observation
+from clef_use.schema import ActionCandidate, Contract, Frame, Observation
 from clef_use.windows_input import Input, WindowsInput
 
 
@@ -197,3 +197,144 @@ def test_key_release_uses_original_scan_even_after_layout_mapping_changes():
     gui.keyUp("ctrl")
     assert api.events[-1] == (original[0], original[1], original[2] | 2)
     assert gui.key_events == {}
+
+
+@pytest.mark.parametrize("interrupt", [None, "cancel", "focus", "geometry"])
+def test_native_stroke_rechecks_foreground_and_releases_input(interrupt):
+    from clef_use.candidates import CandidateBuilder
+
+    api, gui = native()
+    bounds = [0, 0, 100, 100]
+    gui.window_rect = lambda target: tuple(bounds)
+    frame = Frame(
+        Image.new("RGB", (100, 100), "white"),
+        foreground_window=100,
+        foreground_bounds=tuple(bounds),
+    )
+    observation = Observation("epoch", frame, ())
+    contract = Contract(
+        goal="Draw within the captured foreground",
+        pointer_inputs=[
+            {
+                "operation": "stroke",
+                "label": "Inspected canvas path",
+                "reference": frame.reference().model_dump(mode="json"),
+                "surface": {"x1": 0.1, "y1": 0.1, "x2": 0.9, "y2": 0.9},
+                "points": [{"x": 0.2, "y": 0.4}, {"x": 0.5, "y": 0.4}, {"x": 0.8, "y": 0.4}],
+                "duration": 0.05,
+            }
+        ],
+    )
+    candidate = CandidateBuilder().build(observation, contract)[0]
+    cancelled = Event()
+
+    def after_input():
+        if interrupt == "cancel":
+            cancelled.set()
+        elif interrupt == "focus":
+            api.target = 200
+        elif interrupt == "geometry":
+            bounds[2] = 90
+
+    api.after_input = after_input
+    adapter = DesktopAction(gui)
+    if interrupt in {"focus", "geometry"}:
+        with pytest.raises(RuntimeError, match="foreground"):
+            adapter.execute(candidate, observation, cancelled)
+    else:
+        result = adapter.execute(candidate, observation, cancelled)
+        assert result.ok == (interrupt is None)
+    assert api.events == [(0, 0, 2), (0, 0, 4)]
+    assert api.position == ((80, 40) if interrupt is None else (20, 40))
+    assert not adapter.buttons and api.contexts[-1] == 42
+
+
+def _native_pointer_action(operation):
+    from clef_use.candidates import CandidateBuilder
+
+    api, gui = native()
+    bounds = [0, 0, 100, 100]
+    gui.window_rect = lambda target: tuple(bounds)
+    frame = Frame(
+        Image.new("RGB", (100, 100), "white"),
+        foreground_window=100,
+        foreground_bounds=tuple(bounds),
+    )
+    observation = Observation("epoch", frame, ())
+    points = [{"x": 0.2, "y": 0.4}]
+    if operation == "stroke":
+        points.append({"x": 0.8, "y": 0.4})
+    contract = Contract(
+        goal="Use the inspected foreground surface",
+        pointer_inputs=[
+            {
+                "operation": operation,
+                "label": "Inspected pointer input",
+                "reference": frame.reference().model_dump(mode="json"),
+                "surface": {"x1": 0.1, "y1": 0.1, "x2": 0.9, "y2": 0.9},
+                "points": points,
+                "duration": 0.05,
+            }
+        ],
+    )
+    candidate = CandidateBuilder().build(observation, contract)[0]
+    return api, gui, bounds, observation, candidate
+
+
+@pytest.mark.parametrize("operation", ["click", "stroke"])
+@pytest.mark.parametrize("interrupt", [None, "geometry", "focus", "cancel"])
+def test_native_pointer_rechecks_after_initial_move(operation, interrupt):
+    api, gui, bounds, observation, candidate = _native_pointer_action(operation)
+    adapter = DesktopAction(gui)
+    cancelled = Event()
+    moves = []
+    original_move = api.SetCursorPos
+
+    def move(x, y):
+        moves.append((x, y))
+        result = original_move(x, y)
+        if interrupt == "geometry":
+            bounds[2] = 90
+        elif interrupt == "focus":
+            api.target = 200
+        elif interrupt == "cancel":
+            cancelled.set()
+        return result
+
+    api.SetCursorPos = move
+    error = None
+    result = None
+    try:
+        result = adapter.execute(candidate, observation, cancelled)
+    except RuntimeError as exc:
+        error = exc
+
+    # A stable HWND is insufficient when moving the pointer changes its geometry.
+    assert api.events == ([(0, 0, 2), (0, 0, 4)] if interrupt is None else [])
+    if interrupt in {"geometry", "focus"}:
+        assert error is not None and "foreground" in str(error)
+    else:
+        assert error is None and result.ok == (interrupt is None)
+    if interrupt == "geometry":
+        assert api.target == observation.frame.foreground_window == 100
+    assert moves == (
+        [(20, 40), (80, 40)] if operation == "stroke" and interrupt is None else [(20, 40)]
+    )
+    assert not adapter.buttons and api.contexts[-1] == 42
+
+
+@pytest.mark.parametrize("operation", ["click", "stroke"])
+@pytest.mark.parametrize("failure", ["down", "up"])
+def test_native_pointer_sendinput_failure_preserves_cleanup(operation, failure):
+    api, gui, _, observation, candidate = _native_pointer_action(operation)
+    adapter = DesktopAction(gui)
+    api.refuse = (0, 2 if failure == "down" else 4)
+    with pytest.raises(RuntimeError, match="SendInput"):
+        adapter.execute(candidate, observation, Event())
+    assert api.events == ([(0, 0, 4)] if failure == "down" else [(0, 0, 2)])
+    assert adapter.buttons == (set() if failure == "down" else {"left"})
+    assert api.contexts[-1] == 42
+    api.refuse = None
+    adapter.release()
+    assert not adapter.buttons
+    assert api.events[-1] == (0, 0, 4)

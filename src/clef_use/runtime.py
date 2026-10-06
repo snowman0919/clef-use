@@ -515,9 +515,18 @@ class SessionRuntime:
                 stable = self._target_ready(session, frame, fresh, selected.effect_roi, row)
                 if session.status != Status.RUNNING:
                     return session.snapshot()
+                execution_observation = observation
+                if selected.pointer is not None:
+                    if selected.pointer.reference != stable.frame.reference():
+                        return self._finish(
+                            session,
+                            Status.NEEDS_REPLAN,
+                            "supplied pointer frame changed before input",
+                        )
+                    execution_observation = Observation(observation.id, stable.frame, objects)
                 target = next((obj for obj in objects if obj.id == selected.target), None)
                 row["actionability"] = {
-                    "visible": "DETECTED",
+                    "visible": "PLANNER_SUPPLIED_PIXELS" if selected.pointer else "DETECTED",
                     "stable": "OBSERVED_PIXELS",
                     "enabled": "UNKNOWN"
                     if target is None or target.enabled is None
@@ -547,6 +556,8 @@ class SessionRuntime:
                     "verification": "PENDING",
                     "failure_kind": None,
                 }
+                if selected.pointer is not None:
+                    effect_history["pointer"] = selected.pointer.model_dump(mode="json")
                 with session.lock:
                     session.action_history.append(effect_history)
                 last_effect = {
@@ -565,9 +576,12 @@ class SessionRuntime:
                     else (target.label[:200] if target else None)
                 )
                 point = observation.frame.point(target.bbox) if target else None
+                if selected.pointer is not None:
+                    label = selected.pointer.label
+                    point = execution_observation.frame.pointer_point(selected.pointer.points[0])
                 self._phase(session, selected.operation.replace("_", " ").title(), label, point)
                 with _timing(row, "execution_ms"):
-                    result = self.action.execute(selected, observation, session.cancelled)
+                    result = self.action.execute(selected, execution_observation, session.cancelled)
                 row["action"] = selected.audit()
                 row["execution_ok"] = result.ok
                 if session.cancelled.is_set():
@@ -673,6 +687,9 @@ class SessionRuntime:
                 if observation
                 else [],
                 "observation_id": observation.id if observation else None,
+                "frame_reference": observation.frame.reference().model_dump(mode="json")
+                if observation
+                else None,
                 "observation_fresh": fresh,
                 "image_sha256": hashlib.sha256(observation.frame.image.tobytes()).hexdigest()
                 if observation

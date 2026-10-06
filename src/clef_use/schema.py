@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from enum import StrEnum
 from typing import Literal
@@ -24,6 +25,7 @@ class Contract(StrictModel):
     max_steps: int = Field(default=30, ge=1, le=100)
     confidence_threshold: float = Field(default=0.55, ge=0.05, le=1)
     text_inputs: list[TextInput] = Field(default_factory=list, max_length=12)
+    pointer_inputs: list[PointerInput] = Field(default_factory=list, max_length=8)
 
     @model_validator(mode="after")
     def bounded_strings(self):
@@ -50,7 +52,49 @@ class BoundingBox(StrictModel):
         return ((self.x1 + self.x2) / 2, (self.y1 + self.y2) / 2)
 
 
-Operation = Literal["click", "double_click", "focus", "type", "press", "hotkey", "scroll", "wait"]
+class FrameReference(StrictModel):
+    image_sha256: str = Field(pattern=r"^[0-9a-f]{64}$")
+    image_size: tuple[int, int]
+    image_mode: str = "RGB"
+    origin: tuple[int, int] = (0, 0)
+    logical_size: tuple[int, int] | None = None
+    foreground_window: int | None = None
+    foreground_bounds: tuple[int, int, int, int] | None = None
+
+
+class PointerPoint(StrictModel):
+    x: float = Field(ge=0, le=1)
+    y: float = Field(ge=0, le=1)
+
+
+class PointerInput(StrictModel):
+    operation: Literal["click", "stroke"]
+    label: str = Field(min_length=1, max_length=200)
+    reference: FrameReference
+    surface: BoundingBox
+    points: tuple[PointerPoint, ...] = Field(min_length=1, max_length=128)
+    duration: float = Field(default=0.5, ge=0.05, le=5)
+
+    @model_validator(mode="after")
+    def scoped_points(self):
+        if (self.operation == "click" and len(self.points) != 1) or (
+            self.operation == "stroke" and len(self.points) < 2
+        ):
+            raise ValueError("click requires one point; stroke requires at least two")
+        if not self.label.strip() or any(
+            not (
+                self.surface.x1 <= p.x <= self.surface.x2
+                and self.surface.y1 <= p.y <= self.surface.y2
+            )
+            for p in self.points
+        ):
+            raise ValueError("all pointer points must stay inside the explicitly supplied surface")
+        return self
+
+
+Operation = Literal[
+    "click", "double_click", "focus", "type", "press", "hotkey", "scroll", "wait", "stroke"
+]
 
 
 class UIObject(StrictModel):
@@ -76,6 +120,7 @@ class ActionCandidate(StrictModel):
     target: str | None = None
     description: str
     value: str | None = None
+    pointer: PointerInput | None = None
 
     expected_effect: Literal[
         "target_change", "content_change", "view_change", "text_value", "focus_change"
@@ -83,7 +128,10 @@ class ActionCandidate(StrictModel):
     effect_roi: BoundingBox | None = None
 
     def audit(self) -> dict:
-        return {"id": self.id, "operation": self.operation, "target": self.target}
+        result = {"id": self.id, "operation": self.operation, "target": self.target}
+        if self.pointer is not None:
+            result["pointer"] = self.pointer.model_dump(mode="json")
+        return result
 
 
 class Decision(StrictModel):
@@ -145,6 +193,24 @@ class Frame:
     logical_size: tuple[int, int] | None = None
     foreground_window: int | None = None
     foreground_bounds: tuple[int, int, int, int] | None = None
+
+    def reference(self) -> FrameReference:
+        return FrameReference(
+            image_sha256=hashlib.sha256(self.image.tobytes()).hexdigest(),
+            image_size=self.image.size,
+            image_mode=self.image.mode,
+            origin=self.origin,
+            logical_size=self.logical_size,
+            foreground_window=self.foreground_window,
+            foreground_bounds=self.foreground_bounds,
+        )
+
+    def pointer_point(self, point: PointerPoint) -> tuple[int, int]:
+        width, height = self.logical_size or self.image.size
+        return (
+            self.origin[0] + min(width - 1, int(point.x * width)),
+            self.origin[1] + min(height - 1, int(point.y * height)),
+        )
 
     def point(self, bbox: BoundingBox) -> tuple[int, int]:
         width, height = self.logical_size or self.image.size

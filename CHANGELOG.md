@@ -1,6 +1,9 @@
 # Changelog
 
-## Unreleased
+## 0.1.22
+
+- Add planner-supplied, observation-bound canvas clicks and continuous left-button strokes through the existing high-level MCP/runtime/CLEF loop.
+- Restrict pointer runs to supplied paths; reject stale frames, sensitive surfaces, out-of-window points and contradictory input payloads while preserving cancellation cleanup and confidence/completion gates.
 
 - Distinguish absent/expired GUI sessions from runtime failure and provide actionable first-call MCP diagnostics without starting model inference.
 - Track the reference-character Blender/VRM production acceptance criteria and real dogfood evidence.

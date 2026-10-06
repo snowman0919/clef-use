@@ -5,10 +5,54 @@ Five tools are exported: `computer_run`, `computer_continue`, `computer_observe`
 MCP calls do not expose per-click primitives.
 
 `computer_run(goal, success_conditions=[], constraints=[], max_steps=30,
-confidence_threshold=0.55, text_inputs=[])` returns structured session status.
+confidence_threshold=0.55, text_inputs=[], pointer_inputs=[])` returns structured session status.
 `text_inputs` contains exact `value` and optional `target_label`; text inferred
 from a goal is limited to quoted strings and numeric expressions. No arbitrary
-model-generated strings or coordinates are accepted.
+model-generated strings or coordinates are accepted. A planner may explicitly
+submit inspected pixel paths using the bounded `pointer_inputs` contract below.
+
+## Inspected canvas paths
+
+`computer_observe(include_image=true)` supplies `frame_reference` alongside the
+image. Copy that reference unchanged into each pointer input. It binds the exact
+pixels, image dimensions/mode, monitor origin, logical coordinate size and
+available foreground-window identity/geometry. Normalized coordinates refer to
+the entire observed image, including when its PNG is downscaled for transport.
+
+Each pointer input contains:
+
+- `operation`: `click` for exactly one point, or `stroke` for 2-128 points.
+- `label`: the planner's nonempty description of the inspected target/path.
+- `reference`: the observation's `frame_reference`.
+- `surface`: a normalized `{x1,y1,x2,y2}` rectangle containing every point.
+- `points`: normalized `{x,y}` points, all within that surface.
+- `duration`: 0.05-5 seconds for a stroke (default 0.5).
+
+Up to eight paths may be offered in one run. With nonempty `pointer_inputs`,
+only these paths become candidates; unrelated detected controls are not offered.
+CLEF still selects the action and evaluates its effect/completion. There is no
+per-click MCP tool, forced execution or confidence-threshold bypass. Paths are
+recorded in action/model history as planner-supplied pixels, not parser-detected
+controls. Click/stroke delivery uses the left mouse button; tablet pressure,
+right-button gestures and arbitrary keyboard shortcuts are not supported.
+
+The candidate builder and input adapter refuse stale references, sensitive
+surface overlaps and points outside captured foreground bounds when available.
+Delivered quantized coordinates must also remain inside the supplied surface;
+sensitive-overlap checks conservatively pad it by one input-coordinate pixel to
+cover rounding, pixel coverage and every interpolated stroke segment.
+Immediately before input the runtime requires an exact matching fresh frame,
+not merely the usual screenshot-change tolerance. A stroke releases owned input
+on completion, cancellation or error, and rechecks native Windows foreground
+identity/geometry during movement. These checks are not an OS sandbox; use an
+isolated, nonsensitive desktop. Linux/macOS do not gain a native foreground-
+identity guarantee from this feature.
+
+After pixels change, an old path reference expires. Observe again and submit a
+new run with newly inspected paths; `computer_continue` does not replace paths.
+Visible change alone is readiness evidence, not successful modeling or drawing.
+
+## Session results
 
 Every run returns `session_id`, `status`, action `steps`, decision `rounds`,
 `last_action`, `confidence`, `reason`, and `summary`. The states are COMPLETED,

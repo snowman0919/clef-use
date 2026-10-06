@@ -6,7 +6,7 @@ from mcp.types import ImageContent, TextContent
 
 from .client import RuntimeClient
 from .config import load_config
-from .schema import Contract, SessionResult, TextInput
+from .schema import Contract, PointerInput, SessionResult, TextInput
 from .update_notice import startup_update_request
 
 
@@ -29,6 +29,7 @@ def create_server(client=None, update_request=""):
         max_steps: int | None = None,
         confidence_threshold: float | None = None,
         text_inputs: list[TextInput] | None = None,
+        pointer_inputs: list[PointerInput] | None = None,
     ) -> SessionResult:
         """Execute a high-level GUI goal autonomously until a terminal or escalation event."""
         config = load_config()
@@ -41,6 +42,7 @@ def create_server(client=None, update_request=""):
             if confidence_threshold is not None
             else config.confidence_threshold,
             text_inputs=text_inputs or [],
+            pointer_inputs=pointer_inputs or [],
         )
         result = await asyncio.to_thread(client.request, "run", **contract.model_dump(mode="json"))
         try:
