@@ -355,8 +355,12 @@ def test_localized_installation_commands_match(language):
     from pathlib import Path
 
     docs = Path(__file__).resolve().parents[1] / "docs"
-    blocks = re.findall(r"```[^\n]*\n(.*?)```", (docs / language / "INSTALL.md").read_text(), re.S)
-    english = re.findall(r"```[^\n]*\n(.*?)```", (docs / "en/INSTALL.md").read_text(), re.S)
+    blocks = re.findall(
+        r"```[^\n]*\n(.*?)```", (docs / language / "INSTALL.md").read_text(encoding="utf-8"), re.S
+    )
+    english = re.findall(
+        r"```[^\n]*\n(.*?)```", (docs / "en/INSTALL.md").read_text(encoding="utf-8"), re.S
+    )
     assert blocks[-1] == "clef-use doctor --fix\nclef-use uninstall\n"
     assert blocks == english
 
