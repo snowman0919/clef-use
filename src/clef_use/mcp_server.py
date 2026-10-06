@@ -16,7 +16,8 @@ def create_server(client=None, update_request=""):
         "clef-use",
         instructions=(
             "Submit bounded GUI goals to computer_run. The local runtime owns all "
-            "inner-loop actions. Use observe and continue only after escalation; "
+            "inner-loop actions. Observe after preparation to inspect fresh pixels "
+            "before supplying paths, or after escalation. Continue resumes escalation; "
             "abort stops input." + (" " + update_request if update_request else "")
         ),
     )

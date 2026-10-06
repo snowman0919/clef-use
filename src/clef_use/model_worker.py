@@ -10,6 +10,7 @@ import json
 import os
 import struct
 import sys
+import time
 import traceback
 from collections import OrderedDict
 from pathlib import Path
@@ -180,21 +181,29 @@ def caption_crop_coordinates(box, size):
     return xmin, ymin, xmax, ymax
 
 
-def caption_regions(image, boxes, captioner, cache, limit=256):
+def caption_regions(image, boxes, captioner, cache, limit=256, *, telemetry=None):
     """Reuse only byte-identical icon crops within this pinned worker instance."""
+    started = time.perf_counter()
     keys = []
     missing = {}
+    cache_hits = 0
+    duplicate_misses = 0
     for box in boxes:
         crop = image.crop(caption_crop_coordinates(box, image.size))
         key = (crop.mode, crop.size, hashlib.sha256(crop.tobytes()).digest())
         keys.append(key)
         if key not in cache:
+            duplicate_misses += key in missing
             missing.setdefault(key, box)
         else:
+            cache_hits += 1
             cache.move_to_end(key)
     fresh = {}
+    caption_ms = 0.0
     if missing:
+        caption_started = time.perf_counter()
         captions = captioner(list(missing.values()))
+        caption_ms = (time.perf_counter() - caption_started) * 1000
         for key, caption in zip(missing, captions, strict=True):
             fresh[key] = caption
             cache[key] = caption
@@ -202,11 +211,21 @@ def caption_regions(image, boxes, captioner, cache, limit=256):
     result = [fresh[key] if key in fresh else cache[key] for key in keys]
     while len(cache) > limit:
         cache.popitem(last=False)
+    if telemetry is not None:
+        telemetry.update(
+            caption_ms=caption_ms,
+            caption_cache_ms=(time.perf_counter() - started) * 1000 - caption_ms,
+            caption_regions=len(keys),
+            cache_hits=cache_hits,
+            unique_misses=len(missing),
+            duplicate_misses=duplicate_misses,
+        )
     return result
 
 
 class OmniWorker:
     def __init__(self, config):
+        started = time.perf_counter()
         import torch
 
         self.backend = select_backend(torch, config["parser_device"])
@@ -215,6 +234,7 @@ class OmniWorker:
         if not source or not (Path(source) / "util/utils.py").is_file():
             raise RuntimeError("pinned OmniParser source unavailable")
         sys.path.insert(0, source)
+        import_started = time.perf_counter()
         from transformers import AutoModelForCausalLM, AutoProcessor
         from util.utils import (
             check_ocr_box,
@@ -225,17 +245,26 @@ class OmniWorker:
             remove_overlap_new,
         )
 
+        self.load_metrics = {
+            "upstream_import_ms": (time.perf_counter() - import_started) * 1000,
+            "effective_torch_threads": torch.get_num_threads(),
+        }
         path = model_path(
             config, "microsoft/OmniParser-v2.0", MODEL_REVISIONS["microsoft/OmniParser-v2.0"]
         )
+        load_started = time.perf_counter()
         self.detector = get_yolo_model(path / "icon_detect_v3/model.pt", device=self.device)
+        self.load_metrics["detector_load_ms"] = (time.perf_counter() - load_started) * 1000
+        load_started = time.perf_counter()
         self.processor = AutoProcessor.from_pretrained(
             "microsoft/Florence-2-base",
             revision=MODEL_REVISIONS["microsoft/Florence-2-base"],
             trust_remote_code=True,
             local_files_only=True,
         )
+        self.load_metrics["processor_load_ms"] = (time.perf_counter() - load_started) * 1000
         dtype = torch.float32 if self.device == "cpu" else torch.float16
+        load_started = time.perf_counter()
         self.caption = AutoModelForCausalLM.from_pretrained(
             path / "icon_caption",
             trust_remote_code=True,
@@ -243,6 +272,7 @@ class OmniWorker:
             torch_dtype=dtype,
             code_revision=MODEL_REVISIONS["microsoft/Florence-2-base-ft"],
         ).to(self.device)
+        self.load_metrics["caption_load_ms"] = (time.perf_counter() - load_started) * 1000
         # Upstream selects the Florence prompt/generation contract using this metadata.
         # A local cache path otherwise selects its incompatible generic caption branch.
         self.caption.config.name_or_path = "microsoft/florence-2-base-ft"
@@ -252,9 +282,13 @@ class OmniWorker:
         self.caption_icons = get_parsed_content_icon
         self.area = int_box_area
         self.icon_caption_cache = OrderedDict()
+        self.load_metrics["total_load_ms"] = (time.perf_counter() - started) * 1000
 
     def request(self, record):
+        started = time.perf_counter()
         image = Image.open(io.BytesIO(base64.b64decode(record["image"]))).convert("RGB")
+        telemetry = {"decode_ms": (time.perf_counter() - started) * 1000}
+        stage_started = time.perf_counter()
         (text, boxes), _ = self.check_ocr_box(
             image,
             display_img=False,
@@ -262,11 +296,17 @@ class OmniWorker:
             easyocr_args={"text_threshold": 0.8},
             use_paddleocr=False,
         )
+        telemetry["ocr_ms"] = (time.perf_counter() - stage_started) * 1000
+        telemetry["ocr_count"] = len(boxes)
         import numpy as np
         import torch
 
         width, height = image.size
+        stage_started = time.perf_counter()
         detected, _, _ = self.predict(self.detector, image, 0.05, (height, width), False)
+        telemetry["detection_ms"] = (time.perf_counter() - stage_started) * 1000
+        telemetry["detected_count"] = len(detected)
+        stage_started = time.perf_counter()
         scale = torch.tensor([width, height, width, height], device=detected.device)
         icons = [
             {"type": "icon", "bbox": box, "interactivity": True, "content": None}
@@ -292,6 +332,16 @@ class OmniWorker:
             ]
         objects = sorted(merged, key=lambda box: box["content"] is None)
         start = next((i for i, box in enumerate(objects) if box["content"] is None), None)
+        telemetry.update(
+            fusion_ms=(time.perf_counter() - stage_started) * 1000,
+            object_count=len(objects),
+            caption_ms=0.0,
+            caption_cache_ms=0.0,
+            caption_regions=0,
+            cache_hits=0,
+            unique_misses=0,
+            duplicate_misses=0,
+        )
         # Compose upstream primitives without its annotation helper's empty-OCR and
         # starting_idx=-1 bugs. Caption only regions that actually lack OCR content.
         if start is not None:
@@ -306,11 +356,13 @@ class OmniWorker:
                     batch_size=16,
                 ),
                 self.icon_caption_cache,
+                telemetry=telemetry,
             )
             for box, caption in zip(objects[start:], captions, strict=True):
                 box["content"] = caption
                 box["source"] = "box_yolo_content_yolo"
-        return {"objects": objects}
+        telemetry["total_ms"] = (time.perf_counter() - started) * 1000
+        return {"objects": objects, "telemetry": telemetry}
 
 
 def main():
@@ -336,14 +388,15 @@ def main():
             os.environ["ROCM_SDK_TARGET_FAMILY"] = config["rocm_arch"]
         with contextlib.redirect_stdout(sys.stderr):
             worker = ClefWorker(config) if sys.argv[1] == "clef" else OmniWorker(config)
-        emit(
-            {
-                "ready": True,
-                "device": worker.device,
-                "backend": worker.backend,
-                "quantized_modules": getattr(worker, "quantized_modules", 0),
-            }
-        )
+        ready = {
+            "ready": True,
+            "device": worker.device,
+            "backend": worker.backend,
+            "quantized_modules": getattr(worker, "quantized_modules", 0),
+        }
+        if hasattr(worker, "load_metrics"):
+            ready["load_metrics"] = worker.load_metrics
+        emit(ready)
         for line in sys.stdin:
             try:
                 with contextlib.redirect_stdout(sys.stderr):

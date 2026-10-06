@@ -78,7 +78,7 @@ async def test_real_stdio_mcp_runs_same_service_and_lists_only_high_level_tools(
             assert status.structuredContent["status"] == "COMPLETED"
 
 
-@pytest.mark.parametrize("operation", ["status", "observe", "abort"])
+@pytest.mark.parametrize("operation", ["status", "abort"])
 def test_idle_session_requests_explain_how_to_start(service, operation):
     from clef_use.client import RuntimeClient
 

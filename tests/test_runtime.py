@@ -206,6 +206,38 @@ def test_multiaction_session_and_double_completion_verification():
     assert len(session.history) == 4
 
 
+@pytest.mark.parametrize("conditions", [(0.95, 0.7), (0.95,), (0.95, 0.95, 0.95)])
+def test_unverified_completion_reports_missing_visual_evidence_without_input(conditions):
+    desktop = FixtureDesktop()
+
+    class UnverifiedCompletion:
+        def decide(self, *args):
+            return Decision(
+                mode="COMPLETED",
+                confidence=0.99,
+                goal_probability=0.7,
+                condition_probabilities=conditions,
+            )
+
+    session = Session(
+        Contract(goal="Apply size 16", success_conditions=["Size is 16", "Applied is visible"])
+    )
+    executor = SessionRuntime(desktop, desktop, UnverifiedCompletion(), desktop)
+    result = executor.execute(session)
+    assert result["status"] == "NEEDS_REPLAN" and result["steps"] == desktop.stage == 0
+    evidence = result["blocker"]["observed"]
+    assert result["blocker"]["kind"] == "COMPLETION_UNVERIFIED"
+    assert evidence["goal"] == {"description": "Apply size 16", "probability": 0.7}
+    assert evidence["required_probability"] == 0.9
+    assert evidence["conditions"][1] == {
+        "description": "Applied is visible",
+        "probability": conditions[1] if len(conditions) > 1 else None,
+    }
+    assert evidence["condition_count_matches"] == (len(conditions) == 2)
+    assert evidence["observation_id"] == session.observation.id
+    assert session.history[-1]["completion_evidence"] == evidence
+
+
 @pytest.mark.parametrize(
     "decision,status",
     [

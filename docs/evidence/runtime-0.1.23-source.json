@@ -1,0 +1,941 @@
+{
+  "evidence_date_kst": "2026-10-06",
+  "root": "/home/monad/develop/clef-use",
+  "starting_head": "c7ac423af2829b9c2caa3dc5990f72d66238f752",
+  "preserved_dirty_file": "docs/REICI_PRODUCTION.md",
+  "hardware": {
+    "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+    "logical_cpus": 16,
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "gpu_memory_mib": 10240
+  },
+  "profile": {
+    "decision_model": "Cloudflare/clef-flash",
+    "decision_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "device": "cuda",
+    "quantization": "4bit",
+    "parser_device": "cpu",
+    "parser_torch": "2.11.0+cpu",
+    "parser_threads": 8,
+    "processor_resize": 768,
+    "model_dir": "/home/monad/.cache/clef-use/models",
+    "parser_python": "/home/monad/.cache/clef-use/omni-env-linux-cpu/bin/python",
+    "decision_python": "/home/monad/.cache/clef-use/clef-env-linux-cuda/bin/python",
+    "upstream_revision": "354021201345a96178360b28733573e27269f2de"
+  },
+  "source_sha256": {
+    "__init__.py": "b542abbf98f8751f05ed16bc5e5f1356426baccb06303f3194fc3ef5b7c59ff0",
+    "backends.py": "5d62fd3fe00686d2169fbd703aafa64090d3ae63fe9272bfcef850f127d7c5e5",
+    "model_worker.py": "177b3f86727444e6a4657a295bba99a96bb70774cc0ca6647babeade67d39208",
+    "runtime.py": "19b4adc6d6f74b3c6b1c532ff891c5ab98bfef98c9209f730319ef5739428c80",
+    "service.py": "bcbaa5e429dbe15449b7ca997e6c74574aa79aac6550f6e7a6abad354815efd2",
+    "mcp_server.py": "6a265b8d27397fa8d8ae0b3ce1613a88088430b6828f4d5e028cbc8d8797c3d5"
+  },
+  "latency": {
+    "class": "MEASURED",
+    "scope": "same frozen1280x900 image; metadata-only foreground change; one resident original CPU worker; five alternating baseline/candidate pairs",
+    "correctness": "same ordered161 objects, exact labels/bounding boxes and action sets; no numerical tolerance",
+    "input": "/home/monad/develop/reici-production/evidence/blender-owned-v5-frozen-screen.png",
+    "input_file_sha256": "360583ec42cda0dab3b5210553f26f475dae5d9f669781746c77ddbb6f746928",
+    "variants": {
+      "baseline_context_alternating": {
+        "n": 5,
+        "min_s": 2.2799334980081767,
+        "median_s": 2.344068168022204,
+        "max_s": 2.3886054040049203,
+        "sample_stdev_s": 0.041818676941225645,
+        "samples": [
+          {
+            "type": "run",
+            "variant": "baseline_context_alternating",
+            "index": 0,
+            "elapsed_s": 2.3886054040049203,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 1,
+            "cache_hit": false,
+            "stages_s": {
+              "ocr": 1.9383167859632522,
+              "detection": 0.4142372040078044,
+              "fusion": 0.019318278995342553
+            },
+            "loadavg": [
+              4.72705078125,
+              3.73291015625,
+              2.01708984375
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "baseline_context_alternating",
+            "index": 1,
+            "elapsed_s": 2.362247179960832,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 1,
+            "cache_hit": false,
+            "stages_s": {
+              "ocr": 1.9128930870210752,
+              "detection": 0.4139226550469175,
+              "fusion": 0.01911796594504267
+            },
+            "loadavg": [
+              4.9892578125,
+              3.80419921875,
+              2.04931640625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "baseline_context_alternating",
+            "index": 2,
+            "elapsed_s": 2.344068168022204,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 1,
+            "cache_hit": false,
+            "stages_s": {
+              "ocr": 1.8988935130182654,
+              "detection": 0.4090502859908156,
+              "fusion": 0.01969173800898716
+            },
+            "loadavg": [
+              4.9892578125,
+              3.80419921875,
+              2.04931640625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "baseline_context_alternating",
+            "index": 3,
+            "elapsed_s": 2.3170580709702335,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 1,
+            "cache_hit": false,
+            "stages_s": {
+              "ocr": 1.8664047439815477,
+              "detection": 0.41344018100062385,
+              "fusion": 0.020506097993347794
+            },
+            "loadavg": [
+              5.310546875,
+              3.890625,
+              2.0869140625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "baseline_context_alternating",
+            "index": 4,
+            "elapsed_s": 2.2799334980081767,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 1,
+            "cache_hit": false,
+            "stages_s": {
+              "ocr": 1.830690779024735,
+              "detection": 0.4116729870438576,
+              "fusion": 0.02055724896490574
+            },
+            "loadavg": [
+              5.310546875,
+              3.890625,
+              2.0869140625
+            ]
+          }
+        ]
+      },
+      "candidate_context_alternating": {
+        "n": 5,
+        "min_s": 0.0017523179994896054,
+        "median_s": 0.0017854609759524465,
+        "max_s": 0.001953753991983831,
+        "sample_stdev_s": 8.412213520010634e-05,
+        "samples": [
+          {
+            "type": "run",
+            "variant": "candidate_context_alternating",
+            "index": 0,
+            "elapsed_s": 0.0018503559986129403,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 0,
+            "cache_hit": true,
+            "stages_s": {},
+            "loadavg": [
+              4.72705078125,
+              3.73291015625,
+              2.01708984375
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "candidate_context_alternating",
+            "index": 1,
+            "elapsed_s": 0.0017854609759524465,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 0,
+            "cache_hit": true,
+            "stages_s": {},
+            "loadavg": [
+              4.9892578125,
+              3.80419921875,
+              2.04931640625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "candidate_context_alternating",
+            "index": 2,
+            "elapsed_s": 0.0017590009956620634,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 0,
+            "cache_hit": true,
+            "stages_s": {},
+            "loadavg": [
+              4.9892578125,
+              3.80419921875,
+              2.04931640625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "candidate_context_alternating",
+            "index": 3,
+            "elapsed_s": 0.001953753991983831,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 0,
+            "cache_hit": true,
+            "stages_s": {},
+            "loadavg": [
+              5.310546875,
+              3.890625,
+              2.0869140625
+            ]
+          },
+          {
+            "type": "run",
+            "variant": "candidate_context_alternating",
+            "index": 4,
+            "elapsed_s": 0.0017523179994896054,
+            "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+            "exact_objects_equal": true,
+            "object_count": 161,
+            "parser_calls": 0,
+            "cache_hit": true,
+            "stages_s": {},
+            "loadavg": [
+              5.310546875,
+              3.890625,
+              2.0869140625
+            ]
+          }
+        ]
+      }
+    },
+    "baseline_cold_load": {
+      "type": "load",
+      "elapsed_s": 5.835918832977768,
+      "torch_threads": 8,
+      "torch_version": "2.11.0+cpu",
+      "model_training": false,
+      "model_device": "cpu"
+    },
+    "baseline_cold_recognition": {
+      "type": "run",
+      "variant": "baseline_cold",
+      "index": 0,
+      "elapsed_s": 124.42527263698867,
+      "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+      "exact_objects_equal": true,
+      "object_count": 161,
+      "parser_calls": 1,
+      "cache_hit": false,
+      "stages_s": {
+        "ocr": 2.2681177660124376,
+        "detection": 0.5866136479889974,
+        "fusion": 0.019770781975239515,
+        "caption": 121.53306658403017
+      },
+      "loadavg": [
+        7.3544921875,
+        3.82080078125,
+        1.9443359375
+      ]
+    },
+    "candidate_pipeline_cold": {
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "parser_stages": {
+        "decode_ms": 12.943168985657394,
+        "ocr_ms": 1870.3436219948344,
+        "ocr_count": 78,
+        "detection_ms": 470.9822819568217,
+        "detected_count": 147,
+        "fusion_ms": 19.45482101291418,
+        "object_count": 161,
+        "caption_ms": 119110.47161294846,
+        "caption_cache_ms": 1.2224690872244537,
+        "caption_regions": 83,
+        "cache_hits": 0,
+        "unique_misses": 83,
+        "duplicate_misses": 0,
+        "total_ms": 121485.45871500392,
+        "worker_start_ms": 4053.6396880052052,
+        "upstream_import_ms": 2666.496752004605,
+        "effective_torch_threads": 8,
+        "detector_load_ms": 581.1665790388361,
+        "processor_load_ms": 122.52237496431917,
+        "caption_load_ms": 208.7954810122028,
+        "total_load_ms": 4026.861888996791,
+        "encode_ms": 103.14804199151695,
+        "normalize_ms": 1.4579039998352528
+      },
+      "type": "runtime",
+      "index": 0,
+      "elapsed_s": 125.6484936310444,
+      "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+      "exact_objects_equal": true,
+      "loadavg": [
+        7.97265625,
+        5.57470703125,
+        3.35107421875
+      ]
+    },
+    "candidate_runtime_warm": [
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 1,
+        "elapsed_s": 0.0018224050290882587,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      },
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 2,
+        "elapsed_s": 0.0016918429755605757,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      },
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 3,
+        "elapsed_s": 0.0016766850021667778,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      },
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 4,
+        "elapsed_s": 0.0016673359787091613,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      },
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 5,
+        "elapsed_s": 0.0016702820430509746,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      },
+      {
+        "perception_cache_hit": true,
+        "parser_calls": 0,
+        "type": "runtime",
+        "index": 6,
+        "elapsed_s": 0.0016698809922672808,
+        "object_digest": "dce0fc69603ae061228550b2b653307013606a4cb4e216b1faae3ec0dab0b0d2",
+        "exact_objects_equal": true,
+        "loadavg": [
+          7.97265625,
+          5.57470703125,
+          3.35107421875
+        ]
+      }
+    ],
+    "candidate_worker_warm": [
+      {
+        "type": "direct_warm",
+        "index": 0,
+        "elapsed_s": 2.4348108979756944,
+        "exact_objects_equal": true,
+        "parser_stages": {
+          "decode_ms": 11.82055298704654,
+          "ocr_ms": 1865.920630050823,
+          "ocr_count": 78,
+          "detection_ms": 428.0193590093404,
+          "detected_count": 147,
+          "fusion_ms": 20.23199904942885,
+          "object_count": 161,
+          "caption_ms": 0.0,
+          "caption_cache_ms": 1.206571003422141,
+          "caption_regions": 83,
+          "cache_hits": 83,
+          "unique_misses": 0,
+          "duplicate_misses": 0,
+          "total_ms": 2327.225962013472,
+          "worker_start_ms": 0.0,
+          "encode_ms": 103.21642603958026,
+          "normalize_ms": 1.2672670418396592
+        },
+        "loadavg": [
+          8.05517578125,
+          5.6318359375,
+          3.3818359375
+        ]
+      },
+      {
+        "type": "direct_warm",
+        "index": 1,
+        "elapsed_s": 2.4679600819945335,
+        "exact_objects_equal": true,
+        "parser_stages": {
+          "decode_ms": 11.900685960426927,
+          "ocr_ms": 1902.829666971229,
+          "ocr_count": 78,
+          "detection_ms": 422.7223439957015,
+          "detected_count": 147,
+          "fusion_ms": 21.40365296509117,
+          "object_count": 161,
+          "caption_ms": 0.0,
+          "caption_cache_ms": 1.1933550122193992,
+          "caption_regions": 83,
+          "cache_hits": 83,
+          "unique_misses": 0,
+          "duplicate_misses": 0,
+          "total_ms": 2360.074963013176,
+          "worker_start_ms": 0.0,
+          "encode_ms": 103.30283601069823,
+          "normalize_ms": 1.7998709809035063
+        },
+        "loadavg": [
+          8.05517578125,
+          5.6318359375,
+          3.3818359375
+        ]
+      },
+      {
+        "type": "direct_warm",
+        "index": 2,
+        "elapsed_s": 2.469888995983638,
+        "exact_objects_equal": true,
+        "parser_stages": {
+          "decode_ms": 11.799832980614156,
+          "ocr_ms": 1898.0984360096045,
+          "ocr_count": 78,
+          "detection_ms": 432.09959199884906,
+          "detected_count": 147,
+          "fusion_ms": 19.54951701918617,
+          "object_count": 161,
+          "caption_ms": 0.0,
+          "caption_cache_ms": 1.158258004579693,
+          "caption_regions": 83,
+          "cache_hits": 83,
+          "unique_misses": 0,
+          "duplicate_misses": 0,
+          "total_ms": 2362.7300320076756,
+          "worker_start_ms": 0.0,
+          "encode_ms": 103.1756239826791,
+          "normalize_ms": 1.191501971334219
+        },
+        "loadavg": [
+          8.130859375,
+          5.68798828125,
+          3.412109375
+        ]
+      },
+      {
+        "type": "direct_warm",
+        "index": 3,
+        "elapsed_s": 2.487225482997019,
+        "exact_objects_equal": true,
+        "parser_stages": {
+          "decode_ms": 11.9093949906528,
+          "ocr_ms": 1927.3312939913012,
+          "ocr_count": 78,
+          "detection_ms": 418.5763770365156,
+          "detected_count": 147,
+          "fusion_ms": 20.973175996914506,
+          "object_count": 161,
+          "caption_ms": 0.0,
+          "caption_cache_ms": 1.1277690064162016,
+          "caption_regions": 83,
+          "cache_hits": 83,
+          "unique_misses": 0,
+          "duplicate_misses": 0,
+          "total_ms": 2379.9410539795645,
+          "worker_start_ms": 0.0,
+          "encode_ms": 103.22725703008473,
+          "normalize_ms": 1.2142349733039737
+        },
+        "loadavg": [
+          8.130859375,
+          5.68798828125,
+          3.412109375
+        ]
+      },
+      {
+        "type": "direct_warm",
+        "index": 4,
+        "elapsed_s": 2.6150368729722686,
+        "exact_objects_equal": true,
+        "parser_stages": {
+          "decode_ms": 11.946715996600688,
+          "ocr_ms": 2013.7933709775098,
+          "ocr_count": 78,
+          "detection_ms": 459.1500340029597,
+          "detected_count": 147,
+          "fusion_ms": 21.57596603501588,
+          "object_count": 161,
+          "caption_ms": 0.0,
+          "caption_cache_ms": 1.218713994603604,
+          "caption_regions": 83,
+          "cache_hits": 83,
+          "unique_misses": 0,
+          "duplicate_misses": 0,
+          "total_ms": 2507.7085659722798,
+          "worker_start_ms": 0.0,
+          "encode_ms": 103.28871698584408,
+          "normalize_ms": 1.2494330294430256
+        },
+        "loadavg": [
+          8.20068359375,
+          5.7431640625,
+          3.4423828125
+        ]
+      }
+    ],
+    "limitations": "Cold samples have different enclosing boundaries and shared host load: no whole-task or cold-start speedup claim. Candidate warm image hits reuse all pixels; changed image CPU caption compute remains the bottleneck."
+  },
+  "source_native": {
+    "tool": "computer_run",
+    "arguments": {
+      "goal": "Make Task complete visible using the available Continue and Confirm buttons.",
+      "success_conditions": [
+        "The text Task complete is visible"
+      ],
+      "constraints": [
+        "Only the owned native test GUI on display :110; no unrelated controls or typed commands."
+      ],
+      "max_steps": 8,
+      "confidence_threshold": 0.55
+    },
+    "wall_seconds": 17.804083410999738,
+    "transport_error": false,
+    "result": {
+      "session_id": "dc17811b46e148b080cbd6dbdee74ab4",
+      "status": "COMPLETED",
+      "steps": 2,
+      "rounds": 4,
+      "last_action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_69477d00dcdb"
+      },
+      "confidence": 1.0,
+      "reason": "goal and conditions verified on two fresh observations",
+      "summary": "COMPLETED after 2 actions, 4 decisions",
+      "blocker": null,
+      "activity": {
+        "phase": "Completed",
+        "target": null,
+        "point": null,
+        "display": null
+      }
+    },
+    "server_version": "1.30.0",
+    "python": "/home/monad/develop/clef-use/.venv/bin/python",
+    "source": true
+  },
+  "source_native_readback": {
+    "pid": 2868050,
+    "display": ":110",
+    "stage": 2,
+    "clicks": [
+      {
+        "stage": 0,
+        "time": 1791281722.0081108
+      },
+      {
+        "stage": 1,
+        "time": 1791281725.8209171
+      }
+    ],
+    "applied": [
+      {
+        "stage": 1,
+        "time": 1791281722.5105815
+      },
+      {
+        "stage": 2,
+        "time": 1791281726.3231063
+      }
+    ],
+    "visible_text": "Task complete"
+  },
+  "source_blender_observe": {
+    "tool": "computer_observe",
+    "arguments": {
+      "include_image": true
+    },
+    "wall_seconds": 10.648220691015013,
+    "transport_error": false,
+    "result": {
+      "session_id": null,
+      "goal": null,
+      "recent_actions": [],
+      "objects": [],
+      "observation_id": "19608093945b43d59155a0d9bcb9943b",
+      "frame_reference": {
+        "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+        "image_size": [
+          1280,
+          900
+        ],
+        "image_mode": "RGB",
+        "origin": [
+          0,
+          0
+        ],
+        "logical_size": [
+          1280,
+          900
+        ],
+        "foreground_window": null,
+        "foreground_bounds": null
+      },
+      "observation_fresh": true,
+      "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3"
+    },
+    "server_version": "1.30.0",
+    "python": "/home/monad/develop/clef-use/.venv/bin/python",
+    "source": true
+  },
+  "source_blender_run": {
+    "tool": "computer_run",
+    "arguments": {
+      "goal": "On the prepared Blender blue sphere, perform exactly one supplied inward Grab stroke on its left side. X symmetry is enabled. Use only that supplied stroke and do not repeat it or change tools or the view.",
+      "success_conditions": [
+        "The blue sphere remains visible and its left and right sides are pulled slightly inward."
+      ],
+      "constraints": [
+        "Only this task-owned Blender on display :110.",
+        "Only the supplied pointer path; no other controls or commands."
+      ],
+      "max_steps": 4,
+      "confidence_threshold": 0.55,
+      "pointer_inputs": [
+        {
+          "operation": "stroke",
+          "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+          "reference": {
+            "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+            "image_size": [
+              1280,
+              900
+            ],
+            "image_mode": "RGB",
+            "origin": [
+              0,
+              0
+            ],
+            "logical_size": [
+              1280,
+              900
+            ],
+            "foreground_window": null,
+            "foreground_bounds": null
+          },
+          "surface": {
+            "x1": 0.29,
+            "y1": 0.4,
+            "x2": 0.38,
+            "y2": 0.6
+          },
+          "points": [
+            {
+              "x": 0.3125,
+              "y": 0.5
+            },
+            {
+              "x": 0.32265625,
+              "y": 0.5
+            },
+            {
+              "x": 0.33359375,
+              "y": 0.5
+            },
+            {
+              "x": 0.34375,
+              "y": 0.5
+            }
+          ],
+          "duration": 0.6
+        }
+      ]
+    },
+    "wall_seconds": 48.109711577999406,
+    "transport_error": false,
+    "result": {
+      "session_id": "8c6e52d6b3b14855a6e8a002dd9622b9",
+      "status": "NEEDS_REPLAN",
+      "steps": 1,
+      "rounds": 1,
+      "last_action": {
+        "id": "a0",
+        "operation": "stroke",
+        "target": null,
+        "pointer": {
+          "operation": "stroke",
+          "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+          "reference": {
+            "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+            "image_size": [
+              1280,
+              900
+            ],
+            "image_mode": "RGB",
+            "origin": [
+              0,
+              0
+            ],
+            "logical_size": [
+              1280,
+              900
+            ],
+            "foreground_window": null,
+            "foreground_bounds": null
+          },
+          "surface": {
+            "x1": 0.29,
+            "y1": 0.4,
+            "x2": 0.38,
+            "y2": 0.6
+          },
+          "points": [
+            {
+              "x": 0.3125,
+              "y": 0.5
+            },
+            {
+              "x": 0.32265625,
+              "y": 0.5
+            },
+            {
+              "x": 0.33359375,
+              "y": 0.5
+            },
+            {
+              "x": 0.34375,
+              "y": 0.5
+            }
+          ],
+          "duration": 0.6
+        }
+      },
+      "confidence": 1.0,
+      "reason": "expected visual readiness unconfirmed before deadline",
+      "summary": "NEEDS_REPLAN after 1 actions, 1 decisions",
+      "blocker": null,
+      "activity": {
+        "phase": "Needs Replan",
+        "target": null,
+        "point": null,
+        "display": null
+      }
+    },
+    "server_version": "1.30.0",
+    "python": "/home/monad/develop/clef-use/.venv/bin/python",
+    "source": true
+  },
+  "source_blender_continue": {
+    "tool": "computer_continue",
+    "arguments": {
+      "session_id": "8c6e52d6b3b14855a6e8a002dd9622b9",
+      "instruction": "The supplied single stroke has already been delivered. Do not repeat any input. Assess the current visible sphere against the original success condition and explain any missing visible evidence through the normal completion checks."
+    },
+    "wall_seconds": 2.973076958965976,
+    "transport_error": false,
+    "result": {
+      "session_id": "8c6e52d6b3b14855a6e8a002dd9622b9",
+      "status": "NEEDS_REPLAN",
+      "steps": 1,
+      "rounds": 2,
+      "last_action": {
+        "id": "a0",
+        "operation": "stroke",
+        "target": null,
+        "pointer": {
+          "operation": "stroke",
+          "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+          "reference": {
+            "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+            "image_size": [
+              1280,
+              900
+            ],
+            "image_mode": "RGB",
+            "origin": [
+              0,
+              0
+            ],
+            "logical_size": [
+              1280,
+              900
+            ],
+            "foreground_window": null,
+            "foreground_bounds": null
+          },
+          "surface": {
+            "x1": 0.29,
+            "y1": 0.4,
+            "x2": 0.38,
+            "y2": 0.6
+          },
+          "points": [
+            {
+              "x": 0.3125,
+              "y": 0.5
+            },
+            {
+              "x": 0.32265625,
+              "y": 0.5
+            },
+            {
+              "x": 0.33359375,
+              "y": 0.5
+            },
+            {
+              "x": 0.34375,
+              "y": 0.5
+            }
+          ],
+          "duration": 0.6
+        }
+      },
+      "confidence": 1.0,
+      "reason": "proposed completion lacks required visible condition evidence",
+      "summary": "NEEDS_REPLAN after 1 actions, 2 decisions",
+      "blocker": {
+        "kind": "COMPLETION_UNVERIFIED",
+        "observed": {
+          "required_probability": 0.9,
+          "goal": {
+            "description": "On the prepared Blender blue sphere, perform exactly one supplied inward Grab stroke on its left side. X symmetry is enabled. Use only that supplied stroke and do not repeat it or change tools or the view.",
+            "probability": 0.3471
+          },
+          "conditions": [
+            {
+              "description": "The blue sphere remains visible and its left and right sides are pulled slightly inward.",
+              "probability": 0.4876
+            }
+          ],
+          "condition_count_matches": true,
+          "observation_id": "8d6489ae38a34836973d3203fa43ff53"
+        },
+        "resume_when": "new visible evidence for the goal and unverified conditions, or planner clarification of observable success conditions; prior input and pixel readiness alone do not prove completion"
+      },
+      "activity": {
+        "phase": "Needs Replan",
+        "target": null,
+        "point": null,
+        "display": null
+      }
+    },
+    "server_version": "1.30.0",
+    "python": "/home/monad/develop/clef-use/.venv/bin/python",
+    "source": true
+  },
+  "source_blender_readback": {
+    "vertices": 24386,
+    "left_changed": 106,
+    "right_changed": 106,
+    "total_changed": 212,
+    "max_move": 0.050671517848968506,
+    "object_mirror_x": true,
+    "mesh_mirror_x": true,
+    "mode": "SCULPT",
+    "saved_file": "/tmp/clef-validation-20261006/blender-fixture-baseline.blend"
+  },
+  "source_blender_saved_independent": {
+    "file": "/tmp/clef-validation-20261006/blender-fixture-poststroke.blend",
+    "blender": "5.2.2 LTS",
+    "coords_equal_live": true,
+    "vertex_count": 24386,
+    "mirror_x": true,
+    "saved_file_sha256": "670070dbbee559b42f06a85ddd4a72c42c87d630ba00e436086045270c4a5fbd"
+  },
+  "checks": {
+    "full_suite": "292 passed,4 skipped in22.01s",
+    "prepared_parser": "4 tests,OK",
+    "ruff": "All checks passed;76 files already formatted",
+    "red_before_fix": "4 failed: missing completion diagnostic and pre-session observation",
+    "green_after_fix": "4 passed;final observation/pointer36 passed"
+  },
+  "installer": {
+    "first_install": "INSTALLED",
+    "initial_version": "0.1.23",
+    "idempotent": "CURRENT",
+    "update": "INSTALLED",
+    "bad_checksum_preserves_old": true,
+    "missing_download_preserves_old": true,
+    "failed_smoke_preserves_old": true,
+    "final_version": "0.1.24"
+  },
+  "limitations": [
+    "Blender autonomous completion remains NEEDS_REPLAN; source stroke first exited CONDITION_UNMET at edge-based readiness then planner-guided visual assessment rejected completion without additional input.",
+    "No threshold reduction, API completion substitution, CPU resize/thread modification or GGUF deployment.",
+    "Native Windows/macOS input NOT_RUN; existing protected desktop/unsaved scene untouched.",
+    "Installer update0.1.24 is synthetic test-only, never a published version."
+  ],
+  "raw_evidence_directory": "/tmp/clef-validation-20261006"
+}

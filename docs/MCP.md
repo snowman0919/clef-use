@@ -14,7 +14,10 @@ submit inspected pixel paths using the bounded `pointer_inputs` contract below.
 ## Inspected canvas paths
 
 `computer_observe(include_image=true)` supplies `frame_reference` alongside the
-image. Copy that reference unchanged into each pointer input. It binds the exact
+image. Finish desktop preparation, then observe and inspect the returned image
+before constructing a path. Observation is available before the first run;
+`session_id` is then null and no session, action or decision budget is created.
+Copy that reference unchanged into each pointer input. It binds the exact
 pixels, image dimensions/mode, monitor origin, logical coordinate size and
 available foreground-window identity/geometry. Normalized coordinates refer to
 the entire observed image, including when its PNG is downscaled for transport.
@@ -58,6 +61,15 @@ Every run returns `session_id`, `status`, action `steps`, decision `rounds`,
 `last_action`, `confidence`, `reason`, and `summary`. The states are COMPLETED,
 NEEDS_REPLAN, LOW_CONFIDENCE, SAFETY_BLOCK, NO_PROGRESS, STEP_BUDGET_EXHAUSTED,
 ERROR, ABORTED, plus RUNNING while status is polled.
+
+If the model proposes completion without sufficient visible evidence, the result
+includes `blocker.kind=COMPLETION_UNVERIFIED`. Its `observed` data names the goal,
+each success condition and its model probability (null when missing), the required
+0.9 probability, condition-count agreement and the observation ID. These are model
+scores, not calibrated task-success probabilities. Inspect the unverified conditions
+and provide new visible evidence or clarify observable success conditions before
+continuing. Input delivery, stable pixels and application API readback cannot replace
+visual completion evidence. Completion still requires two fresh positive observations.
 
 Continue accepts `session_id` and `instruction`, only for replanning, low
 confidence and no progress, within the remaining original budget. Use a new run

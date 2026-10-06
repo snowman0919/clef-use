@@ -67,8 +67,11 @@ Unknown editability/occlusion remains unknown; explicit negative states refuse
 input. Fresh capture/foreground/geometry and local target differences block stale
 coordinates, including small movement/modals. Text stays exact and scoped.
 No-effect input is not blindly repeated. Exact-image perception caching is one
-entry, pinned to parser identity and full capture geometry/foreground; normalized
-objects can be reused, decisions/completion claims cannot.
+entry, pinned to parser identity and exact image mode, size and pixels. Parser
+input is the image; normalized objects remain reusable when only capture geometry
+or foreground metadata changes. Each candidate still binds the new observation,
+and foreground/geometry and inspected-path checks use its full frame reference.
+Decisions and completion claims cannot be reused.
 
 References: Playwright actionability/assertions and SikuliX region/change waiting
 inform these principles; their DOM/event guarantees are not claimed by a pixel

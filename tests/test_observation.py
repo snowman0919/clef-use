@@ -35,6 +35,48 @@ def test_idle_observe_refreshes_without_actions_or_decisions():
     assert executor.action.released == 0 and session.status == Status.NEEDS_REPLAN
 
 
+def test_observe_before_first_run_binds_fresh_pixels_without_creating_a_session():
+    executor = fixture_runtime()
+    executor.capture.stage = 1
+    manager = SessionManager(lambda: executor)
+    result = manager.dispatch("observe", {"include_image": True})
+    assert result["session_id"] is None
+    assert result["observation_fresh"] and result["objects"][0]["label"] == "Apply"
+    image = Image.open(io.BytesIO(base64.b64decode(result["image_png"])))
+    assert image.getpixel((0, 0)) == (173, 216, 230)
+    assert result["frame_reference"] == executor.capture.capture().reference().model_dump(
+        mode="json"
+    )
+    assert manager.active is None and not manager.sessions and not manager.busy
+    assert executor.action.released == 0
+
+
+def test_first_observation_reserves_input_during_runtime_initialization():
+    executor = fixture_runtime()
+    entered, unblock = threading.Event(), threading.Event()
+
+    def factory():
+        entered.set()
+        assert unblock.wait(5)
+        return executor
+
+    manager = SessionManager(factory)
+    results = []
+    worker = threading.Thread(target=lambda: results.append(manager.dispatch("observe", {})))
+    worker.start()
+    try:
+        assert entered.wait(5)
+        cached = manager.dispatch("observe", {})
+        assert not cached["observation_fresh"] and cached["objects"] == []
+        assert cached["frame_reference"] is None and cached["observation_id"] is None
+        assert manager.run({"goal": "concurrent input"})["status"] == "SAFETY_BLOCK"
+    finally:
+        unblock.set()
+        worker.join(5)
+    assert not worker.is_alive() and not manager.busy
+    assert results[0]["observation_fresh"] and executor.action.released == 0
+
+
 def test_observation_reserves_desktop_and_cached_reads_do_not_parse():
     executor = fixture_runtime()
     session = Session(Contract(goal="test"), status=Status.NEEDS_REPLAN)

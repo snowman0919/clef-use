@@ -25,7 +25,6 @@ from clef_use.schema import (
     Decision,
     Frame,
     Observation,
-    Status,
     UIObject,
 )
 from clef_use.service import SessionManager, make_server
@@ -52,6 +51,37 @@ def stroke(frame, **changes):
         "duration": 0.05,
         **changes,
     }
+
+
+def test_cached_pixels_do_not_keep_a_pointer_valid_after_foreground_or_geometry_changes():
+    gui = RasterGui()
+    first = Frame(gui.image.copy(), foreground_window=1)
+    contract = Contract(goal="Draw inside canvas", pointer_inputs=[stroke(first)])
+
+    class Parser:
+        cache_identity = ("fixed-image-parser",)
+
+        def parse(self, image):
+            return ()
+
+    runtime = SessionRuntime(None, Parser(), None, None)
+    objects = runtime._parse(first)
+    assert CandidateBuilder().build(Observation("first", first, objects), contract)
+    for changed in [
+        replace(first, foreground_window=2),
+        replace(first, origin=(1, 0)),
+        replace(first, logical_size=(50, 50)),
+        replace(first, foreground_bounds=(1, 1, 99, 99)),
+    ]:
+        row = {}
+        cached = runtime._parse(changed, row)
+        assert row["perception_cache_hit"]
+        observation = Observation("fresh", changed, cached)
+        assert CandidateBuilder().build(observation, contract) == ()
+        candidate = CandidateBuilder().build(Observation("first", first, objects), contract)[0]
+        candidate = candidate.model_copy(update={"observation_id": observation.id})
+        assert not DesktopAction(gui=gui).execute(candidate, observation, Event()).ok
+    assert gui.presses == 0
 
 
 class RasterGui:
@@ -148,9 +178,6 @@ async def test_real_stdio_mcp_routes_supplied_stroke_through_shared_runtime(tmp_
         desktop, desktop, desktop, DesktopAction(gui=desktop), Config(settle_seconds=0)
     )
     manager = SessionManager(lambda: executor)
-    inspected = Session(Contract(goal="Inspect canvas"), status=Status.NEEDS_REPLAN)
-    manager.runtime, manager.active = executor, inspected.id
-    manager.sessions[inspected.id] = inspected
     server = make_server(manager, "pointer-fixture-token")
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
@@ -177,13 +204,12 @@ async def test_real_stdio_mcp_routes_supplied_stroke_through_shared_runtime(tmp_
                 tools = await client.list_tools()
                 run = next(t for t in tools.tools if t.name == "computer_run")
                 assert "pointer_inputs" in run.inputSchema["properties"]
-                observed = await client.call_tool(
-                    "computer_observe", {"session_id": inspected.id, "include_image": True}
-                )
+                observed = await client.call_tool("computer_observe", {"include_image": True})
                 assert not observed.isError
                 observed_data = json.loads(observed.content[0].text)
                 image = Image.open(io.BytesIO(base64.b64decode(observed.content[1].data)))
-                assert observed_data["observation_fresh"] and observed_data["steps"] == 0
+                assert observed_data["observation_fresh"] and observed_data["session_id"] is None
+                assert not manager.sessions
                 assert (
                     observed_data["frame_reference"]["image_sha256"]
                     == hashlib.sha256(image.tobytes()).hexdigest()

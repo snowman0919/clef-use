@@ -168,7 +168,7 @@ def test_stale_small_target_shift_stops_input_before_action():
     assert session.status == Status.NEEDS_REPLAN and session.steps == desktop.stage == 0
 
 
-def test_exact_perception_cache_keys_include_geometry_foreground_and_model_identity():
+def test_exact_image_cache_invalidates_changed_pixels_and_model_identity():
     class Parser:
         cache_identity = ("pinned-parser", 1)
 
@@ -190,9 +190,9 @@ def test_exact_perception_cache_keys_include_geometry_foreground_and_model_ident
     runtime._parse(Frame(first.image, origin=(1, 0), foreground_window=2))
     parser.cache_identity = ("pinned-parser", 2)
     runtime._parse(Frame(first.image, origin=(1, 0), foreground_window=2))
-    assert parser.calls == 4
+    assert parser.calls == 2
     runtime._parse(frame("black"))
-    assert parser.calls == 5
+    assert parser.calls == 3
 
 
 def test_candidates_refuse_unscoped_text_and_unknown_generic_keyboard_focus():

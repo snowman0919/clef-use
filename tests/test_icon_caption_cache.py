@@ -26,13 +26,34 @@ def test_unchanged_icons_reuse_captions_but_changed_pixels_are_recognized(monkey
         ]
 
     boxes = [[0, 0, 0.5, 1], [0.5, 0, 1, 1]]
-    assert worker.caption_regions(image, boxes, recognize, cache) == ["red icon", "red icon"]
+    telemetry = {}
+    assert worker.caption_regions(image, boxes, recognize, cache, telemetry=telemetry) == [
+        "red icon",
+        "red icon",
+    ]
+    assert telemetry["caption_regions"] == 2
+    assert telemetry["cache_hits"] == 0
+    assert telemetry["unique_misses"] == 1
+    assert telemetry["duplicate_misses"] == 1
     first_count = len(calls)
-    assert worker.caption_regions(image, boxes, recognize, cache) == ["red icon", "red icon"]
+    assert worker.caption_regions(image, boxes, recognize, cache, telemetry=telemetry) == [
+        "red icon",
+        "red icon",
+    ]
     assert len(calls) == first_count
+    assert telemetry["cache_hits"] == 2
+    assert telemetry["unique_misses"] == 0
+    assert telemetry["duplicate_misses"] == 0
+    assert telemetry["caption_ms"] == 0
     image.paste("blue", (10, 0, 20, 10))
-    assert worker.caption_regions(image, boxes, recognize, cache) == ["red icon", "blue icon"]
+    assert worker.caption_regions(image, boxes, recognize, cache, telemetry=telemetry) == [
+        "red icon",
+        "blue icon",
+    ]
     assert calls[-1] == [boxes[1]]
+    assert telemetry["cache_hits"] == 1
+    assert telemetry["unique_misses"] == 1
+    assert telemetry["duplicate_misses"] == 0
 
 
 def test_float32_crop_boundary_changes_are_not_hidden_by_cache(monkeypatch):

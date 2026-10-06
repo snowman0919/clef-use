@@ -117,6 +117,37 @@ class SessionManager:
                     raise RuntimeError("cannot restart a service that owns the desktop")
                 self.stopping = True
             return {"ok": True}
+        if operation == "observe":
+            with self.lock:
+                session = (
+                    self.get(data.get("session_id"))
+                    if data.get("session_id") is not None or self.active is not None
+                    else None
+                )
+                refresh = not self.busy and not self.stopping
+                if refresh:
+                    self.busy = True
+            try:
+                if self.runtime is None:
+                    if not refresh:
+                        return {
+                            **(session.snapshot() if session is not None else {"session_id": None}),
+                            "goal": session.contract.goal if session is not None else None,
+                            "recent_actions": [],
+                            "objects": [],
+                            "observation_id": None,
+                            "frame_reference": None,
+                            "observation_fresh": False,
+                            "image_sha256": None,
+                        }
+                    self.runtime = self.factory()
+                return self.runtime.observe(
+                    session, refresh=refresh, include_image=bool(data.get("include_image"))
+                )
+            finally:
+                if refresh:
+                    with self.lock:
+                        self.busy = False
         session = self.get(data.get("session_id"))
         if operation == "status":
             return session.snapshot()
@@ -126,21 +157,6 @@ class SessionManager:
                 return self.runtime.abort(session)
             session.status, session.reason = Status.ABORTED, "abort requested"
             return session.snapshot()
-        if operation == "observe":
-            with self.lock:
-                if not self.runtime:
-                    return session.snapshot()
-                refresh = not self.busy and not self.stopping
-                if refresh:
-                    self.busy = True
-            try:
-                return self.runtime.observe(
-                    session, refresh=refresh, include_image=bool(data.get("include_image"))
-                )
-            finally:
-                if refresh:
-                    with self.lock:
-                        self.busy = False
         raise ValueError("unknown operation")
 
 

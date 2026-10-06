@@ -6,7 +6,7 @@ import re
 import threading
 import time
 import uuid
-from contextlib import contextmanager
+from contextlib import contextmanager, nullcontext
 from dataclasses import dataclass, field
 from datetime import UTC, datetime
 from pathlib import Path
@@ -29,6 +29,8 @@ from .verification import (
     text_effect,
 )
 from .windows_input import WindowsDesktopUnavailable, WindowsForegroundChanged
+
+COMPLETION_PROBABILITY = 0.9
 
 
 @contextmanager
@@ -111,14 +113,11 @@ class SessionRuntime:
         identity = getattr(self.perception, "cache_identity", None)
         key = None
         if self.config.perception_cache and identity is not None:
+            # Parser objects depend on pixels; input binding still checks the full fresh frame.
             key = (
                 identity,
                 frame.image.size,
                 frame.image.mode,
-                frame.origin,
-                frame.logical_size,
-                frame.foreground_window,
-                frame.foreground_bounds,
                 hashlib.sha256(frame.image.tobytes()).digest(),
             )
             if self._perception_cache is not None and self._perception_cache[0] == key:
@@ -131,6 +130,9 @@ class SessionRuntime:
         objects = self.perception.parse(frame.image)
         if row is not None:
             row["perception_cache_hit"] = False
+            metrics = getattr(self.perception, "metrics", None)
+            if metrics is not None:
+                row["parser_stages"] = dict(metrics)
         self._perception_cache = (key, objects) if key is not None else None
         return objects
 
@@ -400,9 +402,9 @@ class SessionRuntime:
                     )
                 conditions = decision.condition_probabilities
                 completed = (
-                    decision.goal_probability >= 0.9
+                    decision.goal_probability >= COMPLETION_PROBABILITY
                     and len(conditions) == len(session.contract.success_conditions)
-                    and all(p >= 0.9 for p in conditions)
+                    and all(p >= COMPLETION_PROBABILITY for p in conditions)
                 )
                 if completed:
                     fresh = self._capture(row)
@@ -434,6 +436,34 @@ class SessionRuntime:
                     row = {}
                     continue
                 completion_predictions = 0
+                if decision.mode == "COMPLETED":
+                    evidence = {
+                        "required_probability": COMPLETION_PROBABILITY,
+                        "goal": {
+                            "description": session.contract.goal,
+                            "probability": decision.goal_probability,
+                        },
+                        "conditions": [
+                            {
+                                "description": condition,
+                                "probability": conditions[i] if i < len(conditions) else None,
+                            }
+                            for i, condition in enumerate(session.contract.success_conditions)
+                        ],
+                        "condition_count_matches": len(conditions)
+                        == len(session.contract.success_conditions),
+                        "observation_id": observation.id,
+                    }
+                    row["completion_evidence"] = evidence
+                    session.blocker = {
+                        "kind": "COMPLETION_UNVERIFIED",
+                        "observed": evidence,
+                        "resume_when": (
+                            "new visible evidence for the goal and unverified conditions, "
+                            "or planner clarification of observable success conditions; "
+                            "prior input and pixel readiness alone do not prove completion"
+                        ),
+                    }
                 if decision.mode_confidence < session.contract.confidence_threshold:
                     return self._finish(
                         session, Status.LOW_CONFIDENCE, "execution mode confidence below threshold"
@@ -664,25 +694,29 @@ class SessionRuntime:
                 elif session.status != Status.RUNNING:
                     self._record(session, {"event": "terminal", "reason": session.reason})
 
-    def observe(self, session: Session, *, refresh=True, include_image=False) -> dict:
+    def observe(self, session: Session | None = None, *, refresh=True, include_image=False) -> dict:
         fresh = False
+        observation = None
         if refresh and self.desktop_lock.acquire(blocking=False):
             try:
                 frame = self._capture()
                 objects = self._parse(frame)
-                with session.lock:
-                    session.observation = Observation(uuid.uuid4().hex, frame, objects)
+                observation = Observation(uuid.uuid4().hex, frame, objects)
+                if session is not None:
+                    with session.lock:
+                        session.observation = observation
                 fresh = True
             finally:
                 self.desktop_lock.release()
-        with session.lock:
-            observation = session.observation
+        with session.lock if session is not None else nullcontext():
+            if session is not None:
+                observation = session.observation
             result = {
-                **session.snapshot(),
-                "goal": session.contract.goal,
-                "recent_actions": [
-                    r.get("action") for r in session.history[-6:] if r.get("action")
-                ],
+                **(session.snapshot() if session is not None else {"session_id": None}),
+                "goal": session.contract.goal if session is not None else None,
+                "recent_actions": [r.get("action") for r in session.history[-6:] if r.get("action")]
+                if session is not None
+                else [],
                 "objects": [o.model_dump(mode="json") for o in observation.objects[:100]]
                 if observation
                 else [],

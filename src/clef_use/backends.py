@@ -8,6 +8,7 @@ import queue
 import subprocess
 import sys
 import threading
+import time
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
 
@@ -83,11 +84,19 @@ class JsonWorker:
 
     def request(self, payload):
         with self.lock:
+            startup = {}
+            startup_ms = 0.0
             if self.process is None or self.process.poll() is not None:
-                self._start()
+                started = time.perf_counter()
+                ready = self._start()
+                startup_ms = (time.perf_counter() - started) * 1000
+                startup = ready.get("load_metrics", {})
             self.process.stdin.write(json.dumps(payload) + "\n")
             self.process.stdin.flush()
-            return self._receive()
+            reply = self._receive()
+            if self.kind == "omni":
+                reply["worker_metrics"] = {"worker_start_ms": startup_ms, **startup}
+            return reply
 
     def close(self):
         if self.process and self.process.poll() is None:
@@ -113,6 +122,7 @@ def encode_image(image: Image.Image) -> str:
 class OmniParserBackend:
     def __init__(self, config: Config):
         self.worker = JsonWorker(config.omni_python, "omni", config)
+        self.metrics = {}
 
     @property
     def cache_identity(self):
@@ -126,7 +136,20 @@ class OmniParserBackend:
         )
 
     def parse(self, image):
-        return normalize_omni(self.worker.request({"image": encode_image(image)})["objects"])
+        self.metrics = {}
+        started = time.perf_counter()
+        encoded = encode_image(image)
+        encode_ms = (time.perf_counter() - started) * 1000
+        reply = self.worker.request({"image": encoded})
+        started = time.perf_counter()
+        objects = normalize_omni(reply["objects"])
+        self.metrics = {
+            **reply["telemetry"],
+            **reply["worker_metrics"],
+            "encode_ms": encode_ms,
+            "normalize_ms": (time.perf_counter() - started) * 1000,
+        }
+        return objects
 
 
 def clef_request(observation, contract, candidates, history) -> dict:

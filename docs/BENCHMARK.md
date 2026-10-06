@@ -46,6 +46,29 @@ or demonstrate a speedup. Monad needed recovery after delayed rendering; macOS
 used no desktop input. Windows total wall time was not measured. Both cold loads
 and later decisions remain material costs. No 20ms decision claim is supported.
 
+## Parser stage telemetry
+
+Each uncached parser round records `parser_stages`: PNG encode/decode,
+worker startup, OCR, detection, fusion, caption inference, caption-cache work and
+normalization wall times in milliseconds. Cold startup includes upstream/OCR
+imports, detector, processor and caption model loads, plus effective Torch thread
+count. Request counts distinguish raw OCR/detections, fused objects, caption
+regions, existing cache hits, unique misses and duplicate misses within the frame.
+`parser_ms` remains the inclusive runtime boundary; do not add it to stage times
+or add the startup total to its load components. Times are wall measurements,
+not a GPU kernel profile.
+
+Whole-image cache hits execute no parser stages (`parser_calls=0`) and omit
+`parser_stages`, rather than recycling cold-load timings. Exact pixels can reuse
+normalized parser objects across foreground/geometry changes; action binding
+still uses the complete fresh frame. Compare identical pixels and pinned model
+settings, retain ordered-object equality checks and separate cold from resident
+samples. Changed pixels always require recognition.
+
+The [0.1.23 runtime verification](evidence/RUNTIME_0_1_23.md) records the
+controlled metadata-only cache comparison, actual native GUI completion and
+separate Blender input/readback with unresolved visual completion.
+
 ## Decision-stage profile
 
 The [generated request](evidence/decision-profile-request-0.1.20.json) uses the
