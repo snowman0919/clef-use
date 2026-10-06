@@ -69,3 +69,42 @@ stages, hardware/profile, source hashes, contracts and status/readback distincti
 Raw task-owned evidence is in `/tmp/clef-validation-20261006`; screenshots and
 private production assets are not committed. Installer tests use a synthetic
 0.1.24 update fixture that is never a published product version.
+
+## Deployed installation observations
+
+OBSERVED: implementation commit `664338e25a11e8515588c9f863c9b5432799c33b`
+passed all six [CI jobs](https://github.com/snowman0919/clef-use/actions/runs/37449160887).
+All 15 native package/installer jobs, assembly and the dev deployment passed in
+the [release workflow](https://github.com/snowman0919/clef-use/actions/runs/37449625691).
+The deployment returned `DEPLOYED`, version `0.1.23`, targets `15`.
+Public latest and immutable release manifests agree; the previous 0.1.22
+immutable manifest remains unchanged. Root and immutable bootstraps match the
+source bytes; the downloaded Linux x86_64 Python 3.11 archive matches its SHA-256.
+
+OBSERVED: the public bootstrap installed 0.1.23 in an isolated task prefix and
+returned `CURRENT` on a second invocation. All six changed installed modules
+match the implementation source hashes. Stdio MCP uses that installed Python
+without `PYTHONPATH`. The existing protected desktop and global installations
+were not updated by this isolated installation.
+
+OBSERVED: fresh pre-session observation returns `session_id: null`, a full frame
+reference and `observation_fresh: true`. One supplied stroke bound to that frame
+was delivered on the disposable Blender scene. Both X mirror flags read true;
+106 left and 106 right vertices changed. Independent background reopening matches
+all 24,386 saved coordinates. Runtime visual readiness was `STABLE`, then the
+model proposed completion with goal 0.7372 and condition 0.8211. The unchanged
+0.9 gate returned `NEEDS_REPLAN` with `COMPLETION_UNVERIFIED`, the original
+condition, its probability and observation ID. Exactly one input was delivered.
+This validates the missing-evidence diagnostic; autonomous Blender completion
+remains unresolved.
+
+OBSERVED: the installed package completed the native Continue/Confirm task with
+two native callbacks and four model decisions in 13.683852 seconds. Two fresh
+positive observations had goal 0.9588 and condition 0.9782. Independent UI readback
+and a fresh screenshot show `Task complete`. This single run is an execution
+check, not a whole-task performance comparison.
+
+The idle installed test service was shut down normally; the owned native GUI,
+Blender and Xvfb were stopped. Protected Blender and Xvfb processes remain.
+[Deployed measurements and results](runtime-0.1.23-deployed.json) preserve
+package provenance, installer outputs, actual model/input results and cleanup.

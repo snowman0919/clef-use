@@ -1,0 +1,1000 @@
+{
+  "schema_version": 1,
+  "claim_class": "OBSERVED",
+  "implementation_commit": "664338e25a11e8515588c9f863c9b5432799c33b",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "664338e25a11e8515588c9f863c9b5432799c33b",
+    "jobs": [
+      {
+        "name": "checks (macos-15, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (windows-2022, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (ubuntu-24.04, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (macos-15, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (ubuntu-24.04, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "checks (windows-2022, 3.11)",
+        "conclusion": "success"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/37449160887"
+  },
+  "publication": {
+    "version": "0.1.23",
+    "artifact_count": 15,
+    "native_artifact": {
+      "filename": "clef-use-0.1.23-linux-x86_64-py311.zip",
+      "platform": "linux",
+      "architecture": "x86_64",
+      "python": "3.11",
+      "url": "https://ftp.kotori9.dev/clef-use/releases/0.1.23/clef-use-0.1.23-linux-x86_64-py311.zip",
+      "sha256": "a69f01878426e371f4ef6a925aa925ca8fd111d818bc51d8c9f5f3f9805353ea"
+    },
+    "bootstrap": {
+      "install.sh": {
+        "sha256": "b9969e12dc12138b1e591b30254ffedd7348bd36ba9455ccfd7b68fd41f55d4e",
+        "immutable_and_source_equal": true
+      },
+      "install.ps1": {
+        "sha256": "966d0857ae5072780990d8a049ebee43fbd9d77a00b8a0ff0aaa1b0b00fedbff",
+        "immutable_and_source_equal": true
+      }
+    },
+    "previous_release_unchanged": true,
+    "release": {
+      "status": "completed",
+      "conclusion": "success",
+      "headSha": "664338e25a11e8515588c9f863c9b5432799c33b",
+      "url": "https://github.com/snowman0919/clef-use/actions/runs/37449625691"
+    },
+    "jobs": [
+      {
+        "name": "build (ubuntu-24.04-arm, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.11)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.13)",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.12)",
+        "conclusion": "success"
+      },
+      {
+        "name": "assemble",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "conclusion": "success"
+      }
+    ]
+  },
+  "installer": {
+    "first": {
+      "status": "INSTALLED",
+      "version": "0.1.23",
+      "executable": "/tmp/clef-validation-20261006/public-bin/clef-use",
+      "path_hint": "Add /tmp/clef-validation-20261006/public-bin to PATH if needed. Previous versions and model cache are retained."
+    },
+    "repeat": {
+      "status": "CURRENT",
+      "version": "0.1.23",
+      "executable": "/tmp/clef-validation-20261006/public-bin/clef-use"
+    },
+    "module_hashes": {
+      "version": "0.1.23",
+      "installed": "/tmp/clef-validation-20261006/public-install/current/lib/python3.11/site-packages/clef_use",
+      "modules": {
+        "__init__.py": "b542abbf98f8751f05ed16bc5e5f1356426baccb06303f3194fc3ef5b7c59ff0",
+        "backends.py": "5d62fd3fe00686d2169fbd703aafa64090d3ae63fe9272bfcef850f127d7c5e5",
+        "model_worker.py": "177b3f86727444e6a4657a295bba99a96bb70774cc0ca6647babeade67d39208",
+        "runtime.py": "19b4adc6d6f74b3c6b1c532ff891c5ab98bfef98c9209f730319ef5739428c80",
+        "service.py": "bcbaa5e429dbe15449b7ca997e6c74574aa79aac6550f6e7a6abad354815efd2",
+        "mcp_server.py": "6a265b8d27397fa8d8ae0b3ce1613a88088430b6828f4d5e028cbc8d8797c3d5"
+      }
+    }
+  },
+  "fresh_pre_session_observation": {
+    "tool": "computer_observe",
+    "arguments": {
+      "include_image": true
+    },
+    "wall_seconds": 7.11172909400193,
+    "transport_error": false,
+    "result": {
+      "session_id": null,
+      "goal": null,
+      "recent_actions": [],
+      "objects": [],
+      "observation_id": "3b416671e81e45e4925f10042c22f69b",
+      "frame_reference": {
+        "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+        "image_size": [
+          1280,
+          900
+        ],
+        "image_mode": "RGB",
+        "origin": [
+          0,
+          0
+        ],
+        "logical_size": [
+          1280,
+          900
+        ],
+        "foreground_window": null,
+        "foreground_bounds": null
+      },
+      "observation_fresh": true,
+      "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3"
+    },
+    "server_version": "1.30.0",
+    "python": "/tmp/clef-validation-20261006/public-install/current/bin/python",
+    "source": false
+  },
+  "blender": {
+    "run": {
+      "tool": "computer_run",
+      "arguments": {
+        "goal": "On the prepared Blender blue sphere, perform exactly one supplied inward Grab stroke on its left side. X symmetry is enabled. Use only that supplied stroke and do not repeat it or change tools or the view.",
+        "success_conditions": [
+          "The blue sphere remains visible and its left and right sides are pulled slightly inward."
+        ],
+        "constraints": [
+          "Only this task-owned Blender on display :110.",
+          "Only the supplied pointer path; no other controls or commands."
+        ],
+        "max_steps": 4,
+        "confidence_threshold": 0.55,
+        "pointer_inputs": [
+          {
+            "operation": "stroke",
+            "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+            "reference": {
+              "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+              "image_size": [
+                1280,
+                900
+              ],
+              "image_mode": "RGB",
+              "origin": [
+                0,
+                0
+              ],
+              "logical_size": [
+                1280,
+                900
+              ],
+              "foreground_window": null,
+              "foreground_bounds": null
+            },
+            "surface": {
+              "x1": 0.29,
+              "y1": 0.4,
+              "x2": 0.38,
+              "y2": 0.6
+            },
+            "points": [
+              {
+                "x": 0.3125,
+                "y": 0.5
+              },
+              {
+                "x": 0.32265625,
+                "y": 0.5
+              },
+              {
+                "x": 0.33359375,
+                "y": 0.5
+              },
+              {
+                "x": 0.34375,
+                "y": 0.5
+              }
+            ],
+            "duration": 0.6
+          }
+        ]
+      },
+      "wall_seconds": 64.57949514302891,
+      "transport_error": false,
+      "result": {
+        "session_id": "c56a382c5a2340948648864ba0c0ff98",
+        "status": "NEEDS_REPLAN",
+        "steps": 1,
+        "rounds": 2,
+        "last_action": {
+          "id": "a0",
+          "operation": "stroke",
+          "target": null,
+          "pointer": {
+            "operation": "stroke",
+            "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+            "reference": {
+              "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+              "image_size": [
+                1280,
+                900
+              ],
+              "image_mode": "RGB",
+              "origin": [
+                0,
+                0
+              ],
+              "logical_size": [
+                1280,
+                900
+              ],
+              "foreground_window": null,
+              "foreground_bounds": null
+            },
+            "surface": {
+              "x1": 0.29,
+              "y1": 0.4,
+              "x2": 0.38,
+              "y2": 0.6
+            },
+            "points": [
+              {
+                "x": 0.3125,
+                "y": 0.5
+              },
+              {
+                "x": 0.32265625,
+                "y": 0.5
+              },
+              {
+                "x": 0.33359375,
+                "y": 0.5
+              },
+              {
+                "x": 0.34375,
+                "y": 0.5
+              }
+            ],
+            "duration": 0.6
+          }
+        },
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence",
+        "summary": "NEEDS_REPLAN after 1 actions, 2 decisions",
+        "blocker": {
+          "kind": "COMPLETION_UNVERIFIED",
+          "observed": {
+            "required_probability": 0.9,
+            "goal": {
+              "description": "On the prepared Blender blue sphere, perform exactly one supplied inward Grab stroke on its left side. X symmetry is enabled. Use only that supplied stroke and do not repeat it or change tools or the view.",
+              "probability": 0.7372
+            },
+            "conditions": [
+              {
+                "description": "The blue sphere remains visible and its left and right sides are pulled slightly inward.",
+                "probability": 0.8211
+              }
+            ],
+            "condition_count_matches": true,
+            "observation_id": "ddc9702b701949efbb882552b4bda4a0"
+          },
+          "resume_when": "new visible evidence for the goal and unverified conditions, or planner clarification of observable success conditions; prior input and pixel readiness alone do not prove completion"
+        },
+        "activity": {
+          "phase": "Needs Replan",
+          "target": null,
+          "point": null,
+          "display": null
+        }
+      },
+      "server_version": "1.30.0",
+      "python": "/tmp/clef-validation-20261006/public-install/current/bin/python",
+      "source": false
+    },
+    "independent_readback": {
+      "vertices": 24386,
+      "left_changed": 106,
+      "right_changed": 106,
+      "total_changed": 212,
+      "max_move": 0.050671517848968506,
+      "object_mirror_x": true,
+      "mesh_mirror_x": true,
+      "mode": "SCULPT",
+      "saved_file": "/tmp/clef-validation-20261006/blender-fixture-baseline.blend"
+    },
+    "saved_reopen": {
+      "coordinates_equal": true,
+      "vertices": 24386,
+      "object_mirror_x": true,
+      "mesh_mirror_x": true,
+      "saved_sha256": "a10de805c55f811d30f40520207275a21280e970392b71257cb58305a10e449e"
+    },
+    "completion_acceptance": "NOT MET; requires additional visible condition evidence, API readback is not completion"
+  },
+  "native_gui": {
+    "run": {
+      "tool": "computer_run",
+      "arguments": {
+        "goal": "Make Task complete visible using the available Continue and Confirm buttons.",
+        "success_conditions": [
+          "The text Task complete is visible"
+        ],
+        "constraints": [
+          "Only the owned native test GUI on display :110; no unrelated controls or typed commands."
+        ],
+        "max_steps": 8,
+        "confidence_threshold": 0.55
+      },
+      "wall_seconds": 13.683851523033809,
+      "transport_error": false,
+      "result": {
+        "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+        "status": "COMPLETED",
+        "steps": 2,
+        "rounds": 4,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_24335114f88b"
+        },
+        "confidence": 1.0,
+        "reason": "goal and conditions verified on two fresh observations",
+        "summary": "COMPLETED after 2 actions, 4 decisions",
+        "blocker": null,
+        "activity": {
+          "phase": "Completed",
+          "target": null,
+          "point": null,
+          "display": null
+        }
+      },
+      "server_version": "1.30.0",
+      "python": "/tmp/clef-validation-20261006/public-install/current/bin/python",
+      "source": false
+    },
+    "independent_readback": {
+      "pid": 2878174,
+      "display": ":110",
+      "stage": 2,
+      "clicks": [
+        {
+          "stage": 0,
+          "time": 1791283161.1224558
+        },
+        {
+          "stage": 1,
+          "time": 1791283164.7179315
+        }
+      ],
+      "applied": [
+        {
+          "stage": 1,
+          "time": 1791283161.6227446
+        },
+        {
+          "stage": 2,
+          "time": 1791283165.2183309
+        }
+      ],
+      "visible_text": "Task complete"
+    },
+    "final_observation": {
+      "tool": "computer_observe",
+      "arguments": {
+        "include_image": true
+      },
+      "wall_seconds": 0.024558191013056785,
+      "transport_error": false,
+      "result": {
+        "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+        "status": "COMPLETED",
+        "steps": 2,
+        "rounds": 4,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_24335114f88b"
+        },
+        "confidence": 1.0,
+        "reason": "goal and conditions verified on two fresh observations",
+        "blocker": null,
+        "activity": {
+          "phase": "Completed"
+        },
+        "summary": "COMPLETED after 2 actions, 4 decisions",
+        "goal": "Make Task complete visible using the available Continue and Confirm buttons.",
+        "recent_actions": [
+          {
+            "id": "a0",
+            "operation": "click",
+            "target": "obj_05cf8edad648"
+          },
+          {
+            "id": "a0",
+            "operation": "click",
+            "target": "obj_24335114f88b"
+          }
+        ],
+        "objects": [
+          {
+            "id": "obj_6e1cfe9531e5",
+            "bbox": {
+              "x1": 0.27109375,
+              "y1": 0.24333333333333335,
+              "x2": 0.64140625,
+              "y2": 0.31555555555555553
+            },
+            "label": "Local test workspace",
+            "role": "text",
+            "confidence": null,
+            "actions": [],
+            "source": [
+              "box_ocr_content_ocr"
+            ],
+            "sensitive": false,
+            "visible": null,
+            "enabled": null,
+            "editable": null,
+            "focused": null,
+            "occluded": null
+          },
+          {
+            "id": "obj_fea1deaafe2d",
+            "bbox": {
+              "x1": 0.315625,
+              "y1": 0.44666666666666666,
+              "x2": 0.61484375,
+              "y2": 0.5211111111111111
+            },
+            "label": "Task complete",
+            "role": "text",
+            "confidence": null,
+            "actions": [],
+            "source": [
+              "box_ocr_content_ocr"
+            ],
+            "sensitive": false,
+            "visible": null,
+            "enabled": null,
+            "editable": null,
+            "focused": null,
+            "occluded": null
+          },
+          {
+            "id": "obj_41178428f69b",
+            "bbox": {
+              "x1": 0.0,
+              "y1": 0.6701984405517578,
+              "x2": 0.47151798009872437,
+              "y2": 0.990772008895874
+            },
+            "label": "unanswerable",
+            "role": "icon",
+            "confidence": null,
+            "actions": [
+              "double_click",
+              "click"
+            ],
+            "source": [
+              "box_yolo_content_yolo"
+            ],
+            "sensitive": false,
+            "visible": null,
+            "enabled": null,
+            "editable": null,
+            "focused": null,
+            "occluded": null
+          }
+        ],
+        "observation_id": "d731cce387ad4905a05661dc4a91153f",
+        "frame_reference": {
+          "image_sha256": "e9e4d1c113aa753b0054c25d369d990a93904cb5c93f61d4e5fee7abe0145daf",
+          "image_size": [
+            1280,
+            900
+          ],
+          "image_mode": "RGB",
+          "origin": [
+            0,
+            0
+          ],
+          "logical_size": [
+            1280,
+            900
+          ],
+          "foreground_window": null,
+          "foreground_bounds": null
+        },
+        "observation_fresh": true,
+        "image_sha256": "e9e4d1c113aa753b0054c25d369d990a93904cb5c93f61d4e5fee7abe0145daf"
+      },
+      "server_version": "1.30.0",
+      "python": "/tmp/clef-validation-20261006/public-install/current/bin/python",
+      "source": false
+    },
+    "completion_acceptance": "MET; two fresh positive observations and independently visible Task complete"
+  },
+  "runtime_log": [
+    {
+      "capture_ms": 135.8052859432064,
+      "parser_ms": 1.836440002080053,
+      "candidate_ms": 1.786111039109528,
+      "decision_ms": 53258.8634690037,
+      "execution_ms": 832.8894900041632,
+      "verification_ms": 40.80856801010668,
+      "state_change_score": 0.0003066448801742919,
+      "capture_calls": 7,
+      "perception_cache_hit": true,
+      "parser_calls": 0,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.479975,
+      "decision_mode": "ACT",
+      "mode_confidence": 0.8665,
+      "effect_probability": 0.3451,
+      "goal_probability": 0.3607,
+      "condition_probabilities": [
+        0.1171
+      ],
+      "replan_probability": 0.0619,
+      "safety_probability": 0.032,
+      "object_count": 0,
+      "candidate_count": 1,
+      "observation_id": "1dd700e6bf3541a49ad199c2535e0253",
+      "wait_frames": 5,
+      "wait_ms": 218.58948899898678,
+      "pre_input_readiness": "ALREADY_TRUE",
+      "actionability": {
+        "visible": "PLANNER_SUPPLIED_PIXELS",
+        "stable": "OBSERVED_PIXELS",
+        "enabled": "UNKNOWN",
+        "editable": "UNKNOWN",
+        "occluded": "UNKNOWN"
+      },
+      "action": {
+        "id": "a0",
+        "operation": "stroke",
+        "target": null,
+        "pointer": {
+          "operation": "stroke",
+          "label": "One short inward Grab stroke on the left blue sphere surface with X mirror enabled",
+          "reference": {
+            "image_sha256": "b124184bc7a6acd481d32f1fd13dff0cf21bc80c16d8f31035315985f9a543f3",
+            "image_size": [
+              1280,
+              900
+            ],
+            "image_mode": "RGB",
+            "origin": [
+              0,
+              0
+            ],
+            "logical_size": [
+              1280,
+              900
+            ],
+            "foreground_window": null,
+            "foreground_bounds": null
+          },
+          "surface": {
+            "x1": 0.29,
+            "y1": 0.4,
+            "x2": 0.38,
+            "y2": 0.6
+          },
+          "points": [
+            {
+              "x": 0.3125,
+              "y": 0.5
+            },
+            {
+              "x": 0.32265625,
+              "y": 0.5
+            },
+            {
+              "x": 0.33359375,
+              "y": 0.5
+            },
+            {
+              "x": 0.34375,
+              "y": 0.5
+            }
+          ],
+          "duration": 0.6
+        }
+      },
+      "execution_ok": true,
+      "visual_wait_state": "STABLE",
+      "related_change": true,
+      "expected_effect": "content_change",
+      "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+      "timestamp": "2026-10-06T10:38:38.408133+00:00",
+      "session_id": "c56a382c5a2340948648864ba0c0ff98",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 0.0,
+      "parser_ms": 8848.762449983042,
+      "candidate_ms": 3.7016220157966018,
+      "decision_ms": 836.3222509506159,
+      "execution_ms": 0.0,
+      "verification_ms": 0.0,
+      "state_change_score": null,
+      "readiness_frame_reused": true,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "parser_stages": {
+        "decode_ms": 93.37257698643953,
+        "ocr_ms": 6712.869637995027,
+        "ocr_count": 0,
+        "detection_ms": 1968.7762830290012,
+        "detected_count": 0,
+        "fusion_ms": 3.5067510325461626,
+        "object_count": 0,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.0,
+        "caption_regions": 0,
+        "cache_hits": 0,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 8779.186530970037,
+        "worker_start_ms": 0.0,
+        "encode_ms": 42.72700700676069,
+        "normalize_ms": 0.16797799617052078
+      },
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.7688,
+      "decision_mode": "COMPLETED",
+      "mode_confidence": 0.9266,
+      "effect_probability": 0.7397,
+      "goal_probability": 0.7372,
+      "condition_probabilities": [
+        0.8211
+      ],
+      "replan_probability": 0.1028,
+      "safety_probability": 0.0235,
+      "object_count": 0,
+      "candidate_count": 0,
+      "observation_id": "ddc9702b701949efbb882552b4bda4a0",
+      "completion_evidence": {
+        "required_probability": 0.9,
+        "goal": {
+          "description": "On the prepared Blender blue sphere, perform exactly one supplied inward Grab stroke on its left side. X symmetry is enabled. Use only that supplied stroke and do not repeat it or change tools or the view.",
+          "probability": 0.7372
+        },
+        "conditions": [
+          {
+            "description": "The blue sphere remains visible and its left and right sides are pulled slightly inward.",
+            "probability": 0.8211
+          }
+        ],
+        "condition_count_matches": true,
+        "observation_id": "ddc9702b701949efbb882552b4bda4a0"
+      },
+      "reason": "proposed completion lacks required visible condition evidence",
+      "timestamp": "2026-10-06T10:38:48.102732+00:00",
+      "session_id": "c56a382c5a2340948648864ba0c0ff98",
+      "step": 1,
+      "terminal_event": "NEEDS_REPLAN"
+    },
+    {
+      "capture_ms": 57.38493788521737,
+      "parser_ms": 2148.2949210330844,
+      "candidate_ms": 1.962382986675948,
+      "decision_ms": 773.9029990043491,
+      "execution_ms": 300.78643001616,
+      "verification_ms": 81.28678589127958,
+      "state_change_score": 0.0007228576615831519,
+      "capture_calls": 14,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "parser_stages": {
+        "decode_ms": 7.237937999889255,
+        "ocr_ms": 1597.0589970238507,
+        "ocr_count": 2,
+        "detection_ms": 524.6533789904788,
+        "detected_count": 1,
+        "fusion_ms": 0.2601679880172014,
+        "object_count": 2,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.0,
+        "caption_regions": 0,
+        "cache_hits": 0,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2129.2198310256936,
+        "worker_start_ms": 0.0,
+        "encode_ms": 9.923444013111293,
+        "normalize_ms": 6.752708985004574
+      },
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.404,
+      "decision_mode": "ACT",
+      "mode_confidence": 0.9275,
+      "effect_probability": 0.0594,
+      "goal_probability": 0.028,
+      "condition_probabilities": [
+        0.0053
+      ],
+      "replan_probability": 0.1512,
+      "safety_probability": 0.0194,
+      "object_count": 2,
+      "candidate_count": 1,
+      "observation_id": "87b2c1adfd184699802562e64f202c51",
+      "wait_frames": 12,
+      "wait_ms": 629.3999540503137,
+      "pre_input_readiness": "ALREADY_TRUE",
+      "actionability": {
+        "visible": "DETECTED",
+        "stable": "OBSERVED_PIXELS",
+        "enabled": "UNKNOWN",
+        "editable": "UNKNOWN",
+        "occluded": "UNKNOWN"
+      },
+      "action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_05cf8edad648"
+      },
+      "execution_ok": true,
+      "visual_wait_state": "STABLE",
+      "related_change": true,
+      "expected_effect": "content_change",
+      "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+      "timestamp": "2026-10-06T10:39:21.766870+00:00",
+      "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+      "step": 1,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 49.60454080719501,
+      "parser_ms": 1847.0123619772494,
+      "candidate_ms": 0.06493704859167337,
+      "decision_ms": 790.1895379764028,
+      "execution_ms": 301.05939897475764,
+      "verification_ms": 83.69592507369816,
+      "state_change_score": 0.00506644880174292,
+      "readiness_frame_reused": true,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "parser_stages": {
+        "decode_ms": 6.888274976518005,
+        "ocr_ms": 1409.6316900104284,
+        "ocr_count": 2,
+        "detection_ms": 418.03904401604086,
+        "detected_count": 1,
+        "fusion_ms": 0.056630990002304316,
+        "object_count": 2,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.0,
+        "caption_regions": 0,
+        "cache_hits": 0,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 1834.6265099826269,
+        "worker_start_ms": 0.0,
+        "encode_ms": 9.96269000461325,
+        "normalize_ms": 0.14475302305072546
+      },
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.512175,
+      "decision_mode": "ACT",
+      "mode_confidence": 0.9025,
+      "effect_probability": 0.0455,
+      "goal_probability": 0.0234,
+      "condition_probabilities": [
+        0.0058
+      ],
+      "replan_probability": 0.23,
+      "safety_probability": 0.0161,
+      "object_count": 2,
+      "candidate_count": 1,
+      "observation_id": "3a3b96278a1146579f5406e57aa33352",
+      "capture_calls": 14,
+      "wait_frames": 13,
+      "wait_ms": 680.7822379632853,
+      "pre_input_readiness": "ALREADY_TRUE",
+      "actionability": {
+        "visible": "DETECTED",
+        "stable": "OBSERVED_PIXELS",
+        "enabled": "UNKNOWN",
+        "editable": "UNKNOWN",
+        "occluded": "UNKNOWN"
+      },
+      "action": {
+        "id": "a0",
+        "operation": "click",
+        "target": "obj_24335114f88b"
+      },
+      "execution_ok": true,
+      "visual_wait_state": "STABLE",
+      "related_change": true,
+      "expected_effect": "content_change",
+      "effect_semantics": "UNVERIFIED; pixel readiness is not task completion",
+      "timestamp": "2026-10-06T10:39:25.415704+00:00",
+      "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 10.412687028292567,
+      "parser_ms": 4380.138775974046,
+      "candidate_ms": 0.05030800821259618,
+      "decision_ms": 855.8810589602217,
+      "execution_ms": 0.0,
+      "verification_ms": 2.7482369914650917,
+      "state_change_score": null,
+      "readiness_frame_reused": true,
+      "parser_calls": 1,
+      "perception_cache_hit": false,
+      "parser_stages": {
+        "decode_ms": 6.807006022427231,
+        "ocr_ms": 1407.9471009899862,
+        "ocr_count": 2,
+        "detection_ms": 449.9202300212346,
+        "detected_count": 1,
+        "fusion_ms": 0.06129901157692075,
+        "object_count": 3,
+        "caption_ms": 2500.647098000627,
+        "caption_cache_ms": 2.247088006697595,
+        "caption_regions": 1,
+        "cache_hits": 0,
+        "unique_misses": 1,
+        "duplicate_misses": 0,
+        "total_ms": 4367.94866702985,
+        "worker_start_ms": 0.0,
+        "encode_ms": 9.999540983699262,
+        "normalize_ms": 0.12547499500215054
+      },
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.8912,
+      "decision_mode": "COMPLETED",
+      "mode_confidence": 0.9226,
+      "effect_probability": 0.7345,
+      "goal_probability": 0.9588,
+      "condition_probabilities": [
+        0.9782
+      ],
+      "replan_probability": 0.0308,
+      "safety_probability": 0.1084,
+      "object_count": 3,
+      "candidate_count": 1,
+      "observation_id": "2877655cce4b42b88dd3560d48d4b48a",
+      "capture_calls": 3,
+      "wait_frames": 2,
+      "wait_ms": 59.289149998221546,
+      "visual_wait_state": "STABLE",
+      "related_change": false,
+      "timestamp": "2026-10-06T10:39:30.728471+00:00",
+      "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+      "step": 2,
+      "terminal_event": "RUNNING"
+    },
+    {
+      "capture_ms": 3.870269050821662,
+      "parser_ms": 1.7335560405626893,
+      "candidate_ms": 0.07835304131731391,
+      "decision_ms": 779.6779529890046,
+      "execution_ms": 0.0,
+      "verification_ms": 0.0,
+      "state_change_score": null,
+      "readiness_frame_reused": true,
+      "perception_cache_hit": true,
+      "parser_calls": 0,
+      "clef_calls": 1,
+      "confidence": 1.0,
+      "progress": 0.8912,
+      "decision_mode": "COMPLETED",
+      "mode_confidence": 0.9226,
+      "effect_probability": 0.7345,
+      "goal_probability": 0.9588,
+      "condition_probabilities": [
+        0.9782
+      ],
+      "replan_probability": 0.0308,
+      "safety_probability": 0.1084,
+      "object_count": 3,
+      "candidate_count": 1,
+      "observation_id": "6e4ff48c8dc44c6a9b1427adc599eb66",
+      "capture_calls": 1,
+      "reason": "goal and conditions verified on two fresh observations",
+      "timestamp": "2026-10-06T10:39:31.526885+00:00",
+      "session_id": "95f1b683d6874ea4ba5dd55f4b5f2de3",
+      "step": 2,
+      "terminal_event": "COMPLETED"
+    }
+  ],
+  "cleanup": {
+    "service": {
+      "health": {
+        "ok": true,
+        "pid": 2875873,
+        "version": "0.1.23",
+        "busy": false
+      },
+      "shutdown": {
+        "ok": true
+      }
+    },
+    "owned_gui_stopped": true,
+    "owned_blender_stopped": true,
+    "owned_xvfb_stopped": true,
+    "protected_blender_and_xvfb_pids_observed": [
+      1141425,
+      1964048
+    ],
+    "throwaway_helpers_removed": true
+  },
+  "limits": [
+    "Native Windows/macOS GUI input NOT_RUN: only the isolated Linux desktop was available for authorized input tests.",
+    "No artistic improvement or production model likeness claim.",
+    "Single native run is not a whole-task performance comparison.",
+    "Public package installed only in a task prefix; global installations unchanged."
+  ]
+}
