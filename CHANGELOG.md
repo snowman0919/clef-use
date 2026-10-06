@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Distinguish absent/expired GUI sessions from runtime failure and provide actionable first-call MCP diagnostics without starting model inference.
+- Track the reference-character Blender/VRM production acceptance criteria and real dogfood evidence.
+
 ## 0.1.20
 
 - Explain installation stages and offer model preparation with a Y/n prompt.

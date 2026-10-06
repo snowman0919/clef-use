@@ -88,7 +88,18 @@ class RuntimeClient:
         self._ensure()
         try:
             return self._send(operation, data)
-        except urllib.error.HTTPError:
+        except urllib.error.HTTPError as exc:
+            try:
+                reply = json.loads(exc.read(4096))
+                code = reply.get("error") if isinstance(reply, dict) else None
+            except (OSError, ValueError):
+                code = None
+            messages = {
+                "NO_ACTIVE_SESSION": "no active session; start computer_run first",
+                "SESSION_NOT_FOUND": "session not found; it may have expired or restarted",
+            }
+            if exc.code == 404 and code in messages:
+                raise RuntimeError(messages[code]) from None
             raise RuntimeError(f"runtime refused {operation}; inspect session status") from None
 
     def wait(self, result):

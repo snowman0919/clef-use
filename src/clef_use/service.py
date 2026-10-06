@@ -17,6 +17,12 @@ from .runtime import Session
 from .schema import Contract, Status
 
 
+class SessionLookupError(LookupError):
+    def __init__(self, code):
+        self.code = code
+        super().__init__(code)
+
+
 class SessionManager:
     def __init__(self, factory=None):
         self.factory = factory or (lambda: runtime(load_config(), state_dir() / "steps.jsonl"))
@@ -71,7 +77,12 @@ class SessionManager:
 
     def get(self, session_id=None):
         with self.lock:
-            return self.sessions[session_id or self.active]
+            target = session_id if session_id is not None else self.active
+            if target is None:
+                raise SessionLookupError("NO_ACTIVE_SESSION")
+            if target not in self.sessions:
+                raise SessionLookupError("SESSION_NOT_FOUND")
+            return self.sessions[target]
 
     def continue_session(self, session_id, instruction):
         if not isinstance(instruction, str) or not instruction.strip() or len(instruction) > 1000:
@@ -162,6 +173,8 @@ def make_server(manager, token):
                 if self.path == "/shutdown_idle":
                     threading.Thread(target=self.server.shutdown, daemon=True).start()
                 status = 200
+            except SessionLookupError as exc:
+                result, status = {"error": exc.code}, 404
             except (ValueError, KeyError, RuntimeError) as exc:
                 result, status = {"error": type(exc).__name__}, 400
             raw = json.dumps(result).encode()

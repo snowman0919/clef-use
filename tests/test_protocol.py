@@ -78,6 +78,24 @@ async def test_real_stdio_mcp_runs_same_service_and_lists_only_high_level_tools(
             assert status.structuredContent["status"] == "COMPLETED"
 
 
+@pytest.mark.parametrize("operation", ["status", "observe", "abort"])
+def test_idle_session_requests_explain_how_to_start(service, operation):
+    from clef_use.client import RuntimeClient
+
+    with pytest.raises(RuntimeError, match="no active session; start computer_run first"):
+        RuntimeClient(start=False).request(operation, session_id=None)
+    assert service[1].runtime is None
+    assert not service[1].busy
+    assert not service[1].sessions
+
+
+def test_unknown_session_is_distinguished_from_idle(service):
+    from clef_use.client import RuntimeClient
+
+    with pytest.raises(RuntimeError, match="session not found; it may have expired or restarted"):
+        RuntimeClient(start=False).request("status", session_id="unknown")
+
+
 def test_loopback_api_rejects_unauthenticated_and_browser_origin_requests(service):
     server = service[0]
     url = f"http://127.0.0.1:{server.server_port}/health"
