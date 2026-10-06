@@ -70,6 +70,100 @@ def test_bounded_candidates_preserve_exact_text_and_observation_binding():
     assert all(a.target is None or a.target == obs.objects[0].id for a in candidates)
 
 
+@pytest.mark.parametrize(
+    "continuous_transition, expected_status",
+    [(False, "COMPLETED"), (True, "STEP_BUDGET_EXHAUSTED")],
+)
+def test_completion_reobserves_transition_without_repeating_input(
+    continuous_transition, expected_status
+):
+    before = Image.new("RGB", (80, 60), "gray")
+    after = before.copy()
+    after.paste("black", (0, 0, 40, 20))
+
+    class TransitionDesktop(FixtureDesktop):
+        captures = 0
+
+        def capture(self):
+            self.captures += 1
+            return Frame(
+                before
+                if (self.captures % 2 if continuous_transition else self.captures == 1)
+                else after
+            )
+
+    class CompletedDecision:
+        def decide(self, *args):
+            return Decision(
+                mode="COMPLETED",
+                mode_confidence=0.99,
+                confidence=0.99,
+                goal_probability=0.99,
+                condition_probabilities=(0.99,),
+            )
+
+    desktop = TransitionDesktop()
+    executor = SessionRuntime(
+        desktop, desktop, CompletedDecision(), desktop, Config(settle_seconds=0)
+    )
+    session = Session(
+        Contract(goal="Verify active workspace", success_conditions=["active"], max_steps=3)
+    )
+    result = executor.execute(session)
+    assert result["status"] == expected_status
+    assert session.steps == 0 and session.rounds == 3
+    assert desktop.stage == 0
+    assert session.history[0]["completion_observation_refreshed"] is True
+    assert sum(row.get("clef_calls", 0) for row in session.history) == session.rounds
+    assert len({id(row) for row in session.history}) == len(session.history)
+
+
+def test_action_then_stale_completion_uses_new_frame_without_repeating_click():
+    class TransitionDesktop(FixtureDesktop):
+        settled = False
+        input_count = 0
+
+        def capture(self):
+            if self.settled:
+                return Frame(Image.new("RGB", (400, 240), "lightgreen"))
+            return super().capture()
+
+        def execute(self, action, observation, cancelled):
+            self.input_count += 1
+            return super().execute(action, observation, cancelled)
+
+    desktop = TransitionDesktop()
+    observed_pixels = []
+
+    class TransitionDecision:
+        def decide(self, observation, goal, candidates, history):
+            observed_pixels.append(observation.frame.image.getpixel((399, 239)))
+            if desktop.stage == 0:
+                chosen = next(a for a in candidates if a.operation == "click")
+                return Decision(action=chosen.id, confidence=0.99)
+            desktop.settled = True
+            return Decision(
+                mode="COMPLETED",
+                mode_confidence=0.99,
+                confidence=0.99,
+                goal_probability=0.99,
+                condition_probabilities=(0.99,),
+            )
+
+    executor = SessionRuntime(
+        desktop, desktop, TransitionDecision(), desktop, Config(settle_seconds=0)
+    )
+    session = Session(Contract(goal="Open Settings", success_conditions=["active"], max_steps=4))
+    result = executor.execute(session)
+    assert result["status"] == "COMPLETED"
+    assert desktop.input_count == session.steps == 1
+    assert session.rounds == 4
+    assert observed_pixels[-1] == observed_pixels[-2] == (144, 238, 144)
+    assert observed_pixels[1] != observed_pixels[2]
+    assert any(row.get("completion_observation_refreshed") for row in session.history)
+    assert sum(row.get("clef_calls", 0) for row in session.history) == session.rounds
+
+
 def test_multiaction_session_and_double_completion_verification():
     executor = fixture_runtime()
     session = Session(

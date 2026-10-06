@@ -337,6 +337,7 @@ class SessionRuntime:
                 row = {
                     "capture_ms": 0.0,
                     "parser_ms": 0.0,
+                    "candidate_ms": 0.0,
                     "decision_ms": 0.0,
                     "execution_ms": 0.0,
                     "verification_ms": 0.0,
@@ -356,7 +357,8 @@ class SessionRuntime:
                     session.observation = observation
                 if not self._visible_effect(session, objects, last_effect, row):
                     return session.snapshot()
-                candidates = self.builder.build(observation, session.contract)
+                with _timing(row, "candidate_ms"):
+                    candidates = self.builder.build(observation, session.contract)
                 history = [{"guidance": g} for g in session.guidance] + session.action_history[-6:]
                 row["clef_calls"] = 1
                 self._phase(session, "Choosing next action")
@@ -405,11 +407,14 @@ class SessionRuntime:
                 if completed:
                     fresh = self._capture(row)
                     if self._stale(frame, fresh, last_region):
-                        return self._finish(
-                            session,
-                            Status.NEEDS_REPLAN,
-                            "screen changed during completion verification",
-                        )
+                        # Delayed UI transitions invalidate evidence, not the planner's goal.
+                        # Spend a bounded decision round re-observing; never repeat input here.
+                        completion_predictions = 0
+                        ready_frame = fresh
+                        row["completion_observation_refreshed"] = True
+                        self._record(session, row)
+                        row = {}
+                        continue
                     completion_predictions += 1
                     if completion_predictions >= 2:
                         return self._finish(

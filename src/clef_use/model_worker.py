@@ -4,11 +4,14 @@ from __future__ import annotations
 
 import base64
 import contextlib
+import hashlib
 import io
 import json
 import os
+import struct
 import sys
 import traceback
+from collections import OrderedDict
 from pathlib import Path
 
 from deployment_profiles import resolve_profile, select_backend, torch_device
@@ -43,6 +46,8 @@ def offload_output_embeddings(model):
     import torch
 
     embedding = model.language_model.get_output_embeddings()
+    if str(embedding.weight.device) == "cpu":
+        return
     embedding.weight = torch.nn.Parameter(embedding.weight.detach().cpu(), requires_grad=False)
 
     def select_rows(_module, arguments):
@@ -50,6 +55,28 @@ def offload_output_embeddings(model):
         return (*arguments[:-1], CpuEmbeddingRows(arguments[-1], arguments[0].device))
 
     model.head.register_forward_pre_hook(select_rows)
+
+
+def load_cuda_nf4_model(path, *, device="cuda", dtype, **kwargs):
+    """Compose the pinned release before moving its joint head onto a tight GPU."""
+    import torch
+    from joint_schema_model import ClefModel, JointSchemaHead
+    from safetensors.torch import load_file
+    from transformers import AutoProcessor, Qwen3_5ForConditionalGeneration
+
+    backbone = Qwen3_5ForConditionalGeneration.from_pretrained(
+        path, dtype=dtype, device_map={"": str(device)}, **kwargs
+    )
+    backbone.config.use_cache = False
+    head = JointSchemaHead(**json.loads((path / "joint_head_config.json").read_text()))
+    head.load_state_dict(load_file(path / "joint_head.safetensors"), strict=True)
+    model = ClefModel(backbone, head)
+    if torch.cuda.mem_get_info()[0] < 1024**3:
+        # The upstream loader moves the head first, before the old offload guard can run.
+        offload_output_embeddings(model)
+        torch.cuda.empty_cache()
+    head.to(device=device, dtype=dtype)
+    return model.eval(), AutoProcessor.from_pretrained(path, local_files_only=True)
 
 
 class ClefWorker:
@@ -90,7 +117,12 @@ class ClefWorker:
                 bnb_4bit_compute_dtype=dtype,
                 llm_int8_skip_modules=["lm_head", "model.visual"],
             )
-        self.model, self.processor = load_release_model(
+        loader = (
+            load_cuda_nf4_model
+            if quantization == "4bit" and self.backend == "cuda"
+            else load_release_model
+        )
+        self.model, self.processor = loader(
             path,
             device=self.device,
             dtype=dtype,
@@ -130,6 +162,47 @@ class ClefWorker:
                 import torch
 
                 torch.mps.empty_cache()
+
+
+def caption_crop_coordinates(box, size):
+    """Match pinned OmniParser's float32 products and NumPy slicing exactly."""
+
+    def float32(value):
+        return struct.unpack("f", struct.pack("f", value))[0]
+
+    width, height = size
+    pixels = [
+        int(float32(float32(value) * (width if i % 2 == 0 else height)))
+        for i, value in enumerate(box)
+    ]
+    xmin, xmax, _ = slice(pixels[0], pixels[2]).indices(width)
+    ymin, ymax, _ = slice(pixels[1], pixels[3]).indices(height)
+    return xmin, ymin, xmax, ymax
+
+
+def caption_regions(image, boxes, captioner, cache, limit=256):
+    """Reuse only byte-identical icon crops within this pinned worker instance."""
+    keys = []
+    missing = {}
+    for box in boxes:
+        crop = image.crop(caption_crop_coordinates(box, image.size))
+        key = (crop.mode, crop.size, hashlib.sha256(crop.tobytes()).digest())
+        keys.append(key)
+        if key not in cache:
+            missing.setdefault(key, box)
+        else:
+            cache.move_to_end(key)
+    fresh = {}
+    if missing:
+        captions = captioner(list(missing.values()))
+        for key, caption in zip(missing, captions, strict=True):
+            fresh[key] = caption
+            cache[key] = caption
+    # A frame may itself have more distinct controls than the cache capacity.
+    result = [fresh[key] if key in fresh else cache[key] for key in keys]
+    while len(cache) > limit:
+        cache.popitem(last=False)
+    return result
 
 
 class OmniWorker:
@@ -178,6 +251,7 @@ class OmniWorker:
         self.overlap = remove_overlap_new
         self.caption_icons = get_parsed_content_icon
         self.area = int_box_area
+        self.icon_caption_cache = OrderedDict()
 
     def request(self, record):
         image = Image.open(io.BytesIO(base64.b64decode(record["image"]))).convert("RGB")
@@ -217,12 +291,17 @@ class OmniWorker:
         # Compose upstream primitives without its annotation helper's empty-OCR and
         # starting_idx=-1 bugs. Caption only regions that actually lack OCR content.
         if start is not None:
-            captions = self.caption_icons(
-                torch.tensor([box["bbox"] for box in objects]),
-                start,
-                np.asarray(image),
-                {"model": self.caption, "processor": self.processor},
-                batch_size=16,
+            captions = caption_regions(
+                image,
+                [box["bbox"] for box in objects[start:]],
+                lambda boxes: self.caption_icons(
+                    torch.tensor(boxes, dtype=torch.float32),
+                    0,
+                    np.asarray(image),
+                    {"model": self.caption, "processor": self.processor},
+                    batch_size=16,
+                ),
+                self.icon_caption_cache,
             )
             for box, caption in zip(objects[start:], captions, strict=True):
                 box["content"] = caption

@@ -6,6 +6,9 @@
 - Track the reference-character Blender/VRM production acceptance criteria and real dogfood evidence.
 - Preserve the live installation when interruption arrives immediately after the atomic activation switch; keep previous runtime receipts and user data unchanged.
 - Align localized installation commands and document repair, removal, and forced-termination limits.
+- Move CUDA NF4 output-embedding offload ahead of joint-head allocation when GPU memory is low; avoid installing hooks on an already-CPU embedding.
+- Cache only byte-identical icon crops with pinned float32/NumPy crop semantics and allow idle observations to outlast the short control-call timeout.
+- Reobserve delayed completion transitions without repeating input, preserve inference-log counts at budget exhaustion, and record candidate-building latency.
 
 ## 0.1.20
 

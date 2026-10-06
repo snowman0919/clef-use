@@ -11,7 +11,7 @@ import urllib.request
 from filelock import FileLock
 
 from . import __version__
-from .config import state_dir
+from .config import load_config, state_dir
 
 
 class RuntimeClient:
@@ -35,7 +35,12 @@ class RuntimeClient:
             },
             method="POST",
         )
-        with urllib.request.urlopen(request, timeout=5) as response:
+        timeout = 5
+        if operation == "observe":
+            config = load_config()
+            # Idle observation may cold-start its parser and then parse a fresh frame.
+            timeout += 2 * config.backend_timeout + config.screen_timeout
+        with urllib.request.urlopen(request, timeout=timeout) as response:
             return json.load(response)
 
     def _ensure(self):

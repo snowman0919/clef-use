@@ -96,6 +96,29 @@ def test_unknown_session_is_distinguished_from_idle(service):
         RuntimeClient(start=False).request("status", session_id="unknown")
 
 
+def test_idle_observation_waits_for_parser_beyond_control_timeout(service):
+    import time
+
+    from clef_use.client import RuntimeClient
+    from clef_use.runtime import Session
+    from clef_use.schema import Contract, Status
+
+    manager = service[1]
+    task = Session(Contract(goal="observe without input"), status=Status.COMPLETED)
+    manager.sessions[task.id] = task
+    manager.active = task.id
+
+    class SlowObservation:
+        def observe(self, session, **kwargs):
+            time.sleep(5.1)
+            return {**session.snapshot(), "observation_fresh": True, "objects": []}
+
+    manager.runtime = SlowObservation()
+    result = RuntimeClient(start=False).request("observe", session_id=task.id)
+    assert result["observation_fresh"] is True
+    assert result["steps"] == 0 and not manager.busy
+
+
 def test_loopback_api_rejects_unauthenticated_and_browser_origin_requests(service):
     server = service[0]
     url = f"http://127.0.0.1:{server.server_port}/health"

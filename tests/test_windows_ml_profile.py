@@ -155,6 +155,8 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free
         recorded.update(kwargs)
         return model, object()
 
+    monkeypatch.setattr(worker_module, "load_cuda_nf4_model", load)
+
     torch = SimpleNamespace(
         cuda=SimpleNamespace(is_available=lambda: True, mem_get_info=lambda: (free, 10 * 1024**3)),
         version=SimpleNamespace(hip=hip),
