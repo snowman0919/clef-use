@@ -34,3 +34,15 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 Any Blender friction found in production goes into
 `~/develop/clef-use-reici-goal/reici-production/clef_use_observations.md`, then
 reproduce -> fix in V2 src -> regression test -> retry the SAME operation.
+
+## Dogfood fix queue (from production observations, pending real repro)
+
+- F1 completion-evidence gap: after a geometry-changing stroke, the fresh frame's
+  target-region change is captured (`last_effect["result_frame"]`, region_changed)
+  but never enters the next decision record, so CLEF scores conditions low ->
+  `COMPLETED -> NEEDS_REPLAN "lacks required visible condition evidence"`
+  (runtime.py:599). Candidate general fix: pass the changed effect ROI crop as a
+  second image (joint_schema_model supports `images * N`) or fold the verified
+  `region_changed` fact into `record.state`. Requires real-model repro first.
+- F2 LOW_CONFIDENCE after a single canvas stroke where the visual effect lags the
+  observation round (trial-v43) — same root cause family as F1.
