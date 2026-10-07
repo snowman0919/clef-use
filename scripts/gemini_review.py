@@ -63,7 +63,7 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
     file_list = "\n".join(f"- {p}" for p in paths)
     full = f"{prompt}\n\nIMAGE FILES (open and inspect each):\n{file_list}\n"
     cmd += ["--print", full]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=420)  # noqa: S603
+    result = subprocess.run(cmd, capture_output=True, text=True, timeout=1500)  # noqa: S603
     out = result.stdout.strip()
     if not out:
         raise SystemExit(f"agy produced no output: {result.stderr[:400]}")
