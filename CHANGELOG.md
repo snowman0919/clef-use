@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Deliver the previous action's verified visible effect (bounded ROI crop plus facts)
+  into the next CLEF decision, so a genuinely changed viewport region no longer
+  collapses into NEEDS_REPLAN "lacks required visible condition evidence"
+  (Blender dogfood finding F1; regression: tests/test_effect_evidence.py).
 - Add configurable structured/visual/canvas routing before candidate truncation,
   bounded CLEF decision context, and confidence/entropy-triggered visual fallback.
 - Add isolated frozen SigLIP2 coarse-to-fine grounding and optional supervised
