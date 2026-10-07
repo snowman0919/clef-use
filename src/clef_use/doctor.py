@@ -1,0 +1,194 @@
+from __future__ import annotations
+
+import asyncio
+import ctypes
+import importlib.util
+import json
+import os
+import subprocess
+import sys
+from pathlib import Path
+
+from .config import load_config
+from .deployment_profiles import resolve_profile
+from .models import OMNI_SOURCE_REVISION, inventory
+
+
+def ml_environment_probe(python, kind, device, quantization="none", rocm_arch=None):
+    try:
+        result = subprocess.run(
+            [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device, quantization],
+            capture_output=True,
+            text=True,
+            timeout=60,
+            env=dict(os.environ, ROCM_SDK_TARGET_FAMILY=rocm_arch) if rocm_arch else None,
+        )
+        if result.returncode:
+            return {"status": "ERROR", "ready": False, "reason": "ML probe failed"}
+        report = json.loads(result.stdout)
+        if not isinstance(report, dict) or type(report.get("ready")) is not bool:
+            raise ValueError("invalid ML probe response")
+        return report
+    except (OSError, ValueError, subprocess.TimeoutExpired) as exc:
+        return {"status": "ERROR", "ready": False, "reason": type(exc).__name__}
+
+
+def omni_source_probe(source):
+    if not source or not (source / "util/utils.py").is_file():
+        return {"status": "MISSING", "ready": False}
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(source), "rev-parse", "HEAD"],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        )
+        revision = result.stdout.strip()
+        if result.returncode or revision != OMNI_SOURCE_REVISION:
+            return {"status": "REVISION_MISMATCH", "revision": revision, "ready": False}
+        diff = subprocess.run(
+            ["git", "-C", str(source), "diff", "--quiet", "HEAD", "--", "util"],
+            capture_output=True,
+            timeout=15,
+        )
+        return {
+            "status": "OBSERVED" if diff.returncode == 0 else "MODIFIED",
+            "revision": revision,
+            "ready": diff.returncode == 0,
+        }
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        return {"status": "ERROR", "ready": False, "reason": type(exc).__name__}
+
+
+async def mcp_probe():
+    from mcp import ClientSession, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+
+    parameters = StdioServerParameters(command=sys.executable, args=["-m", "clef_use.cli", "mcp"])
+    async with stdio_client(parameters) as (read, write):
+        async with ClientSession(read, write) as session:
+            await session.initialize()
+            tools = await session.list_tools()
+            return [tool.name for tool in tools.tools]
+
+
+def mac_permissions():
+    if sys.platform != "darwin":
+        return {"screen_capture": "NOT_PROBED", "input_injection": "NOT_PROBED"}
+    core = ctypes.CDLL("/System/Library/Frameworks/CoreGraphics.framework/CoreGraphics")
+    accessibility = ctypes.CDLL(
+        "/System/Library/Frameworks/ApplicationServices.framework/ApplicationServices"
+    )
+    core.CGPreflightScreenCaptureAccess.restype = ctypes.c_bool
+    accessibility.AXIsProcessTrusted.restype = ctypes.c_bool
+    return {
+        "screen_capture": bool(core.CGPreflightScreenCaptureAccess()),
+        "input_injection": bool(accessibility.AXIsProcessTrusted()),
+    }
+
+
+def windows_desktop_probe():
+    from .windows_input import WindowsInput
+
+    try:
+        return {"status": "OBSERVED", **WindowsInput().desktop_status()}
+    except RuntimeError as exc:
+        return {"status": "UNAVAILABLE", "reason": str(exc)}
+
+
+def doctor(capture: bool = True):
+    config = load_config()
+    permissions = mac_permissions()
+    report = {
+        "python": sys.version.split()[0],
+        "platform": sys.platform,
+        "dependencies": {
+            module: importlib.util.find_spec(module) is not None
+            for module in ("mcp", "PIL", "mss", "pyautogui", "pyperclip")
+        },
+        "models": inventory(config.model_dir, config.decision_model),
+        "permissions": permissions,
+    }
+    if config.visual_grounding:
+        report["models"] = inventory(config.model_dir, config.decision_model, visual=True)
+        report["visual_grounding"] = {
+            "model": config.visual_model,
+            "revision": config.visual_revision,
+            "device": config.visual_device,
+            "head_available": config.visual_head is None or config.visual_head.is_file(),
+            "python_available": (
+                config.visual_python or config.clef_python or Path(sys.executable)
+            ).is_file(),
+        }
+    if sys.platform == "win32":
+        report["windows_desktop"] = windows_desktop_probe()
+    try:
+        selected = resolve_profile(config.ml_profile, config.device)
+        report["deployment_profile"] = {"name": selected.name, "status": "TARGET"}
+        requested = selected.backend
+    except (ValueError, RuntimeError, OSError, subprocess.TimeoutExpired) as exc:
+        report["deployment_profile"] = {"status": "ERROR", "reason": str(exc)}
+        requested = config.device
+    report["ml_environments"] = {
+        "clef": ml_environment_probe(
+            config.clef_python or sys.executable,
+            "clef",
+            requested,
+            config.quantization,
+            config.rocm_arch,
+        ),
+        "omni": ml_environment_probe(
+            config.omni_python or sys.executable,
+            "omni",
+            config.parser_device,
+            "none",
+            config.rocm_arch,
+        ),
+    }
+    clef_environment = report["ml_environments"]["clef"]
+    report["acceleration"] = {
+        key: clef_environment.get(key) for key in ("backend", "device", "hip", "device_operation")
+    }
+    report["omni_source"] = omni_source_probe(config.omni_source)
+    if capture and permissions["screen_capture"] is not False:
+        try:
+            from .backends import DesktopCapture
+
+            frame = DesktopCapture().capture()
+            from PIL import ImageStat
+
+            report["capture"] = {
+                "status": "OBSERVED",
+                "pixels": frame.image.size,
+                "logical_size": frame.logical_size,
+                "nonuniform": max(ImageStat.Stat(frame.image).stddev) > 1,
+            }
+        except Exception as exc:
+            report["capture"] = {"status": "ERROR", "type": type(exc).__name__}
+    else:
+        report["capture"] = {"status": "NOT_RUN", "reason": "disabled or permission unavailable"}
+    report["input"] = {
+        "status": "DESKTOP_CHECK_ONLY" if sys.platform == "win32" else "PERMISSION_CHECK_ONLY",
+        "reason": "doctor does not inject input",
+    }
+    try:
+        report["mcp"] = {
+            "status": "OBSERVED",
+            "tools": asyncio.run(asyncio.wait_for(mcp_probe(), 45)),
+        }
+    except Exception as exc:
+        report["mcp"] = {"status": "ERROR", "type": type(exc).__name__}
+    report["models_semantics"] = "NOT_RUN; cache presence is not model inference proof"
+    report["ready"] = (
+        report["deployment_profile"]["status"] != "ERROR"
+        and all(report["dependencies"].values())
+        and all(env["ready"] for env in report["ml_environments"].values())
+        and report["omni_source"]["ready"]
+        and report["mcp"].get("status") == "OBSERVED"
+        and all(m["available"] for m in report["models"])
+        and report["capture"].get("status") == "OBSERVED"
+        and report["capture"].get("nonuniform", False)
+        and permissions["input_injection"] is not False
+        and (sys.platform != "win32" or report["windows_desktop"]["status"] == "OBSERVED")
+    )
+    return report
