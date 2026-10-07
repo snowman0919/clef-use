@@ -213,4 +213,6 @@ class ExecutionRouter:
         hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive][
             : self.config.structured_candidate_threshold
         ]
-        return Observation(observation.id, observation.frame, tuple(targets + hints))
+        return Observation(
+            observation.id, observation.frame, tuple(targets + hints), evidence=observation.evidence
+        )

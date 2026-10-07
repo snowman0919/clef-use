@@ -26,6 +26,7 @@ from .verification import (
     foreground_region,
     region_change_count,
     region_changed,
+    region_pixels,
     same_context,
     text_effect,
 )
@@ -446,8 +447,12 @@ class SessionRuntime:
         visual_stale_retries = 0
         row = {}
         ready_frame = None
+        delivered = None
         last_region = None
         last_effect = session.last_effect
+        if last_effect is not None and last_effect.get("evidence") is not None:
+            # Resume path: carry the previously verified effect into this turn's first decision.
+            delivered = last_effect.pop("evidence")
         session.blocker = None
         if last_effect is not None and last_effect.get("guidance_count", 0) != len(
             session.guidance
@@ -477,7 +482,8 @@ class SessionRuntime:
                 self._phase(session, "Finding controls")
                 with _timing(row, "parser_ms"):
                     objects = self._parse(frame, row)
-                observation = Observation(uuid.uuid4().hex, frame, objects)
+                observation = Observation(uuid.uuid4().hex, frame, objects, evidence=delivered)
+                delivered = None
                 with session.lock:
                     session.observation = observation
                 if not self._visible_effect(session, objects, last_effect, row):
@@ -828,6 +834,26 @@ class SessionRuntime:
                     )
                 after = waiting.frame
                 ready_frame = after
+                roi = selected.effect_roi
+                crop = region_pixels(after, roi)
+                if crop is after.image or crop.width > 128 or crop.height > 128:
+                    crop = crop.copy()
+                    crop.thumbnail((128, 128))
+                roi_changed = roi is None or region_changed(
+                    last_effect.get("frame", frame), after, roi
+                )
+                delivered = (
+                    {
+                        "kind": "previous_action_effect",
+                        "action": selected.audit(),
+                        "expected_effect": selected.expected_effect,
+                        "roi_visibly_changed": roi_changed,
+                        "verification": "VERIFIED" if roi_changed else "UNCHANGED",
+                        "note": "visible pixels after a stable wait; not a completion claim",
+                    },
+                    crop,
+                )
+                last_effect["evidence"] = delivered
                 score = self.verifier.change(frame, after)
                 row["state_change_score"] = score
                 if tracker.update(score, self.verifier.fingerprint(after)):

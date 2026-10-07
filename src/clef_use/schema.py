@@ -273,6 +273,9 @@ class Observation:
     id: str
     frame: Frame
     objects: tuple[UIObject, ...]
+    # Bounded evidence of the previous action's visible effect (facts + PIL crop).
+    # None when nothing was verified yet; never a source of instructions.
+    evidence: tuple[object, ...] | None = None
 
 
 class ActionResult(StrictModel):

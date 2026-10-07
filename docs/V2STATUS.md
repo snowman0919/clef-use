@@ -37,7 +37,9 @@ reproduce -> fix in V2 src -> regression test -> retry the SAME operation.
 
 ## Dogfood fix queue (from production observations, pending real repro)
 
-- F1 completion-evidence gap: after a geometry-changing stroke, the fresh frame's
+- F1 FIXED 2026-10-08: verified effect crops + facts now reach the next CLEF decision
+  via Observation.evidence (runtime -> router -> clef_request -> ClefWorker multi-image). Regression
+  test_effect_evidence.py reproduced the stale-completion failure red, green after fix.
   target-region change is captured (`last_effect["result_frame"]`, region_changed)
   but never enters the next decision record, so CLEF scores conditions low ->
   `COMPLETED -> NEEDS_REPLAN "lacks required visible condition evidence"`

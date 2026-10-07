@@ -202,8 +202,13 @@ class ClefWorker:
 
     def request(self, record):
         image = record.pop("image", None)
+        evidence = record.pop("evidence_images", [])
         if image:
-            record["images"] = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
+            images = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
+            images.extend(
+                Image.open(io.BytesIO(base64.b64decode(item))).convert("RGB") for item in evidence
+            )
+            record["images"] = images
             record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
             return self.systemone(self.model, self.processor, record, max_length=8192)
