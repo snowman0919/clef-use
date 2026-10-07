@@ -1,0 +1,4 @@
+# Optional frozen Foundation ViT grounding environment; keep the runtime ML-free.
+torch>=2.6,<3
+transformers>=4.51,<6
+safetensors>=0.4,<1

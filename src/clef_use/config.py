@@ -22,6 +22,7 @@ def state_dir() -> Path:
 class Config(StrictModel):
     decision_model: Literal["Cloudflare/clef-flash", "Cloudflare/clef"] = "Cloudflare/clef-flash"
     device: Literal["auto", "cpu", "cuda", "rocm", "xpu", "mps"] = "auto"
+    cpu_compute_dtype: Literal["float32", "bfloat16"] = "float32"
     parser_device: Literal["auto", "cpu", "cuda", "rocm", "xpu", "mps"] = "auto"
     quantization: Literal["none", "4bit"] = "none"
     ml_profile: ProfileName = "auto"
@@ -40,6 +41,21 @@ class Config(StrictModel):
     perception_cache: bool = True
     backend_timeout: float = Field(default=180, ge=1, le=600)
     max_candidates: int = Field(default=48, ge=12, le=100)
+    visual_grounding: bool = False
+    visual_python: Path | None = None
+    visual_model: str = Field(default="google/siglip2-base-patch16-512",
+                              pattern=r"^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$")
+    visual_revision: str = Field(default="a89f5c5093f902bf39d3cd4d81d2c09867f0724b",
+                                 pattern=r"^[0-9a-f]{40}$")
+    visual_head: Path | None = None
+    visual_device: Literal["cpu", "cuda", "mps"] = "cpu"
+    structured_candidate_threshold: int = Field(default=24, ge=1, le=100)
+    native_confidence_threshold: float = Field(default=0.95, ge=0, le=1)
+    visual_confidence_threshold: float = Field(default=0.55, ge=0.05, le=1)
+    visual_presence_threshold: float = Field(default=0.9, ge=0.5, le=1)
+    clef_entropy_threshold: float = Field(default=0.8, ge=0, le=1)
+    visual_refinement_retries: int = Field(default=2, ge=0, le=4)
+    visual_stale_retries: int = Field(default=2, ge=0, le=4)
     activity_overlay: bool = True
     debug: bool = False
 

@@ -8,6 +8,7 @@ MODEL_REVISIONS = {
     "microsoft/OmniParser-v2.0": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
     "microsoft/Florence-2-base": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac",
     "microsoft/Florence-2-base-ft": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+    "google/siglip2-base-patch16-512": "a89f5c5093f902bf39d3cd4d81d2c09867f0724b",
 }
 OMNI_SOURCE_REVISION = "354021201345a96178360b28733573e27269f2de"
 
@@ -40,7 +41,7 @@ def download(root: Path, repo: str) -> Path:
     )
 
 
-def inventory(root: Path, decision_model: str) -> list[dict]:
+def inventory(root: Path, decision_model: str, *, visual=False) -> list[dict]:
     required = {
         decision_model: [
             "config.json",
@@ -72,6 +73,11 @@ def inventory(root: Path, decision_model: str) -> list[dict]:
             "modeling_florence2.py",
         ],
     }
+    if visual:
+        required["google/siglip2-base-patch16-512"] = [
+            "config.json", "model.safetensors", "preprocessor_config.json",
+            "tokenizer.json", "tokenizer_config.json",
+        ]
     result = []
     for repo, filenames in required.items():
         path = snapshot_path(root, repo)

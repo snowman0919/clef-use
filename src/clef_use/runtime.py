@@ -16,7 +16,8 @@ from .activity import SilentActivity
 from .candidates import CandidateBuilder, effect_region
 from .config import Config
 from .interfaces import ActionBackend, CaptureBackend, DecisionBackend, PerceptionBackend, Verifier
-from .schema import Contract, Observation, Status
+from .router import ExecutionRouter, GroundingUncertain
+from .schema import Contract, Decision, Observation, Status
 from .verification import (
     ProgressTracker,
     VisualVerifier,
@@ -31,6 +32,11 @@ from .verification import (
 from .windows_input import WindowsDesktopUnavailable, WindowsForegroundChanged
 
 COMPLETION_PROBABILITY = 0.9
+
+
+def _action_identity(action):
+    points = tuple((p.x, p.y) for p in action.pointer.points) if action.pointer else ()
+    return action.operation, action.target, action.value, points
 
 
 @contextmanager
@@ -91,6 +97,7 @@ class SessionRuntime:
         verifier: Verifier | None = None,
         log_path: Path | None = None,
         activity=None,
+        grounder=None,
     ):
         self.activity = activity or SilentActivity()
         self.capture = capture
@@ -100,6 +107,7 @@ class SessionRuntime:
         self.config = config or Config()
         self.verifier = verifier or VisualVerifier()
         self.builder = CandidateBuilder(self.config.max_candidates)
+        self.router = ExecutionRouter(self.config, grounder)
         self.log_path = log_path
         self.desktop_lock = threading.Lock()
         self.waiter = VisualWaiter(
@@ -170,10 +178,14 @@ class SessionRuntime:
             roi is not None and region_changed(before, fresh, roi)
         )
 
-    def _target_ready(self, session, before, fresh, roi, row):
+    def _target_ready(self, session, before, fresh, roi, row, *, allow_fresh_reference=False):
         self._phase(session, "Checking target")
-
         def reference_matches(candidate):
+            # The waiter independently establishes consecutive stable ROI pixels.
+            # Eligible model pointers can then be regrounded, while retaining the
+            # window identity and the strict pointer hash gate below.
+            if allow_fresh_reference:
+                return same_context(before, candidate)
             return not self._stale(before, candidate, roi)
 
         capture = SimpleNamespace(capture=lambda: self._capture(row))
@@ -299,6 +311,9 @@ class SessionRuntime:
         return session.snapshot()
 
     def _record(self, session: Session, row: dict) -> None:
+        started = row.pop("_step_started", None)
+        row["step_latency_ms"] = ((time.perf_counter() - started) * 1000
+                                  if started is not None else None)
         row.update(
             timestamp=datetime.now(UTC).isoformat(),
             session_id=session.id,
@@ -313,6 +328,84 @@ class SessionRuntime:
                 self.log_path.chmod(0o600)
                 stream.write(json.dumps(row) + "\n")
 
+    def _choose(self, observation, session, history, row):
+        route = self.router.route(observation, session.contract)
+        row.update(mode=route.mode, routing_reason=route.reason,
+                   candidate_count=route.candidate_count, object_count=len(observation.objects),
+                   clef_calls=0, visual_confidence=None, coarse_roi=None, fine_target=None,
+                   clef_entropy=None, grounding_ms=0.0)
+        with _timing(row, "candidate_ms"):
+            structured_observation = self.router.scoped_observation(observation, session.contract)
+            if route.native_target is not None:
+                structured_observation = Observation(
+                    observation.id, observation.frame,
+                    tuple(o for o in observation.objects if o.id == route.native_target),
+                )
+            candidates = self.builder.build(structured_observation, session.contract) if (
+                route.mode == "STRUCTURED"
+            ) else ()
+        if route.native_target is not None:
+            candidates = tuple(a for a in candidates if a.target == route.native_target
+                               and a.operation == "click")
+        if session.contract.visual_intent is not None and route.mode == "STRUCTURED":
+            candidates = tuple(a for a in candidates
+                               if a.operation == session.contract.visual_intent.operation)
+        row["clef_candidate_count"] = len(candidates)
+
+        def decide():
+            row["clef_calls"] += 1
+            bounded = self.router.decision_observation(observation, candidates)
+            # Legacy structured sessions retain their existing observation contract.
+            if self.router.grounder is None or session.contract.pointer_inputs:
+                bounded = observation
+            with _timing(row, "decision_ms"):
+                answer = self.decision.decide(bounded, session.contract, candidates, history)
+            row.setdefault("clef_decisions", []).append(
+                {"confidence": answer.confidence, "entropy": answer.entropy,
+                 "mode": answer.mode, "candidate_count": len(candidates)}
+            )
+            row.update(clef_confidence=answer.confidence, clef_entropy=answer.entropy)
+            return answer
+
+        if route.mode != "STRUCTURED" and session.last_effect is not None:
+            # Observe the prior effect before asking for another target. A completed
+            # action can legitimately make its target disappear from the screen.
+            assessment = decide()
+            conditions = assessment.condition_probabilities
+            complete = (assessment.goal_probability >= COMPLETION_PROBABILITY
+                        and len(conditions) == len(session.contract.success_conditions)
+                        and all(p >= COMPLETION_PROBABILITY for p in conditions))
+            # BLOCKED can simply mean that this completion-only assessment has
+            # no available action. Reassess actionability with a grounded target.
+            if (complete or assessment.mode in {"COMPLETED", "WAIT", "NEEDS_REPLAN"}
+                or assessment.safety_probability >= .5
+                or assessment.replan_probability >= .8):
+                return candidates, assessment
+        if route.mode != "STRUCTURED":
+            with _timing(row, "grounding_ms"):
+                candidates = self.router.visual_candidates(
+                    observation, session.contract, row, session.cancelled
+                )
+            row["clef_candidate_count"] = len(candidates)
+        if route.native_target and candidates and not history and not session.contract.constraints:
+            decision = Decision(action=candidates[0].id, confidence=1)
+            row["native_direct"] = True
+        else:
+            decision = decide()
+        if (route.mode == "STRUCTURED" and self.router.grounder is not None
+            and not session.contract.pointer_inputs
+            and session.contract.execution_mode == "AUTO"
+            and decision.safety_probability < .5 and decision.replan_probability < .8
+            and self.router.uncertain(decision, session.contract.confidence_threshold)):
+            row.update(mode="VISUAL", routing_reason="CLEF uncertainty in bounded selection")
+            with _timing(row, "grounding_ms"):
+                candidates = self.router.visual_candidates(
+                    observation, session.contract, row, session.cancelled
+                )
+            row["clef_candidate_count"] = len(candidates)
+            decision = decide()
+        return candidates, decision
+
     def execute(self, session: Session) -> dict:
         if not self.desktop_lock.acquire(blocking=False):
             result = self._finish(
@@ -322,6 +415,7 @@ class SessionRuntime:
             return result
         tracker = ProgressTracker(self.config.no_progress_limit)
         completion_predictions = 0
+        visual_stale_retries = 0
         row = {}
         ready_frame = None
         last_region = None
@@ -337,6 +431,7 @@ class SessionRuntime:
                 if session.cancelled.is_set():
                     return self._finish(session, Status.ABORTED, "abort requested")
                 row = {
+                    "_step_started": time.perf_counter(),
                     "capture_ms": 0.0,
                     "parser_ms": 0.0,
                     "candidate_ms": 0.0,
@@ -359,15 +454,13 @@ class SessionRuntime:
                     session.observation = observation
                 if not self._visible_effect(session, objects, last_effect, row):
                     return session.snapshot()
-                with _timing(row, "candidate_ms"):
-                    candidates = self.builder.build(observation, session.contract)
                 history = [{"guidance": g} for g in session.guidance] + session.action_history[-6:]
-                row["clef_calls"] = 1
                 self._phase(session, "Choosing next action")
-                with _timing(row, "decision_ms"):
-                    decision = self.decision.decide(
-                        observation, session.contract, candidates, history
-                    )
+                try:
+                    candidates, decision = self._choose(observation, session, history, row)
+                except GroundingUncertain as exc:
+                    return self._finish(session, Status.ABORTED if session.cancelled.is_set()
+                                        else Status.NEEDS_REPLAN, str(exc))
                 row.update(
                     confidence=decision.confidence,
                     progress=decision.progress,
@@ -384,7 +477,7 @@ class SessionRuntime:
                 if self.config.debug:
                     row.update(
                         object_count=len(objects),
-                        candidate_count=len(candidates),
+                        clef_candidate_count=len(candidates),
                         observation_id=observation.id,
                     )
                 with session.lock:
@@ -485,7 +578,13 @@ class SessionRuntime:
                         observed={"actionable_candidates": len(candidates)},
                     )
                 if decision.mode == "WAIT":
-                    wait_region = self._wait_region(observation, last_region)
+                    explicit_wait = next((a.effect_roi for a in candidates
+                                          if a.operation == "wait" and a.effect_roi is not None),
+                                         None)
+                    if (explicit_wait is None and session.contract.visual_intent is not None
+                        and session.contract.visual_intent.operation == "wait"):
+                        explicit_wait = session.contract.visual_intent.region
+                    wait_region = explicit_wait or self._wait_region(observation, last_region)
                     if wait_region is None:
                         return self._blocked(
                             session,
@@ -505,6 +604,9 @@ class SessionRuntime:
                     self._record(session, row)
                     row = {}
                     continue
+                if candidates and candidates[0].operation == "wait" and decision.mode == "ACT":
+                    return self._finish(session, Status.NEEDS_REPLAN,
+                                        "visual wait requires CLEF WAIT mode")
                 if not candidates:
                     return self._blocked(
                         session,
@@ -521,7 +623,7 @@ class SessionRuntime:
                         session, Status.ERROR, "decision selected an unknown candidate"
                     )
                 if last_effect is not None:
-                    same_action = (selected.operation, selected.target) == last_effect["action"]
+                    same_action = _action_identity(selected) == last_effect["action"]
                     unchanged = not region_changed(last_effect["frame"], frame, selected.effect_roi)
                     if (
                         same_action
@@ -538,16 +640,52 @@ class SessionRuntime:
                         )
                 # Fresh pixels and target-region identity bind every input.
                 fresh = self._capture(row)
-                if self._context_stale(frame, fresh):
+                can_refresh_model_pointer = (
+                    selected.pointer is not None
+                    and row.get("mode") in {"VISUAL", "CANVAS"}
+                    and not session.contract.pointer_inputs
+                    and visual_stale_retries < self.config.visual_stale_retries
+                    # Missing metadata cannot establish that redraw stayed in one window.
+                    and frame.foreground_window is not None
+                    and frame.foreground_bounds is not None
+                )
+                if (not same_context(frame, fresh)
+                    or (not can_refresh_model_pointer and self._context_stale(frame, fresh))):
                     return self._finish(
                         session, Status.NEEDS_REPLAN, "screen changed during decision"
                     )
-                stable = self._target_ready(session, frame, fresh, selected.effect_roi, row)
+                stable = self._target_ready(
+                    session,
+                    frame,
+                    fresh,
+                    selected.effect_roi,
+                    row,
+                    allow_fresh_reference=can_refresh_model_pointer,
+                )
                 if session.status != Status.RUNNING:
                     return session.snapshot()
                 execution_observation = observation
                 if selected.pointer is not None:
                     if selected.pointer.reference != stable.frame.reference():
+                        if (
+                            can_refresh_model_pointer
+                            and same_context(frame, stable.frame)
+                        ):
+                            visual_stale_retries += 1
+                            row["visual_stale_retry"] = {
+                                "attempt": visual_stale_retries,
+                                "limit": self.config.visual_stale_retries,
+                                "input_sent": False,
+                                "reason": "model pointer frame changed before input",
+                                "from_reference": selected.pointer.reference.model_dump(
+                                    mode="json"
+                                ),
+                                "to_reference": stable.frame.reference().model_dump(mode="json"),
+                            }
+                            ready_frame = stable.frame
+                            self._record(session, row)
+                            row = {}
+                            continue
                         return self._finish(
                             session,
                             Status.NEEDS_REPLAN,
@@ -592,7 +730,7 @@ class SessionRuntime:
                     session.action_history.append(effect_history)
                 last_effect = {
                     "history": effect_history,
-                    "action": (selected.operation, selected.target),
+                    "action": _action_identity(selected),
                     "frame": stable.frame,
                     "candidate": selected,
                     "target": target,
@@ -622,6 +760,7 @@ class SessionRuntime:
                     return self._finish(
                         session, Status.ERROR, "action adapter refused or failed execution"
                     )
+                visual_stale_retries = 0
                 with session.lock:
                     session.steps += 1
                     session.last_action = selected.audit()

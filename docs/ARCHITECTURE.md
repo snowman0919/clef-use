@@ -1,5 +1,14 @@
 # Architecture
 
+The opt-in [V2 hybrid execution path](HYBRID_EXECUTION.md) routes sparse semantic
+candidates through CLEF and dense/canvas contracts through frozen Foundation ViT
+grounding before bounded CLEF assessment. Both paths use the same ActionBackend
+and fresh-observation verification loop. Existing installations retain their
+structured default until the visual model/environment is configured.
+The visual contract chooses native overlapping tiles by default or a whole-region
+coarse overview explicitly; both refine an original-pixel ROI. Supervised V3
+checkpoints declare their trained strategies and reject unsupported requests.
+
 `cli.py` and `mcp_server.py` both use `RuntimeClient` to reach one authenticated
 loopback service. `SessionManager` owns sessions, the exclusive desktop lease,
 and a lazily initialized `SessionRuntime`. ML subprocesses remain resident in
@@ -9,8 +18,9 @@ incompatible Transformers versions. They are components of one runtime.
 `SessionRuntime.execute` captures a fresh frame, parses it into project-owned
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint
 CLEF answers, evaluates escalation gates, executes a deterministic adapter, and
-checks progress. Candidate IDs are bound to one observation. The model never
-produces mouse coordinates. `Frame.point` maps normalized box centers to the
+checks progress. Candidate IDs are bound to one observation. CLEF selects
+bounded candidates; the optional Foundation ViT produces screenshot coordinates
+that become observation-bound pointer candidates. `Frame.point` maps box centers to the
 primary monitor's logical coordinate space, including Retina scaling.
 
 The OmniParser wrapper composes official detection, overlap/OCR fusion and

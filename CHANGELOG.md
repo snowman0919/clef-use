@@ -1,5 +1,30 @@
 # Changelog
 
+## Unreleased
+
+- Add configurable structured/visual/canvas routing before candidate truncation,
+  bounded CLEF decision context, and confidence/entropy-triggered visual fallback.
+- Add isolated frozen SigLIP2 coarse-to-fine grounding and optional supervised
+  dense target-score/offset heads with positive/negative independent-split provenance.
+- Support explicit whole-region coarse overviews with native fine crops and V3
+  checkpoint validation of trained strategies; retain distinct letterbox-edge patches.
+- Compare supervised target components through conditional spatial confidence
+  with a configurable binary-score floor, retaining ambiguity and absent-target checks.
+- Extend observation-bound native gestures with drag, move, double-click and
+  scoped scrolling while retaining fresh-frame, progress and abort checks.
+- Preserve unverified completion assessments for planner escalation instead of
+  issuing another visual input that can undo the visible result.
+- Reground model-generated pointers after same-window tooltip/redraw changes
+  within the existing retry budget, preserving strict input references and window guards.
+- Capture native X11 foreground identity and geometry; require established window
+  metadata for redraw retries and preserve the original Windows double-click target.
+- Add real isolated Blender stress benchmarks with independent state readback,
+  retained failures, execution-mode success rates, separate raw/choice counts,
+  round wall latency and persisted runtime outcomes before native readback.
+- Use CPU SDPA for CLEF, retain replayable trial-attributed model requests, and
+  balance coarse/fine supervision with seeded epoch shuffling and separate
+  stage validation metrics.
+
 ## 0.1.22
 
 - Add planner-supplied, observation-bound canvas clicks and continuous left-button strokes through the existing high-level MCP/runtime/CLEF loop.

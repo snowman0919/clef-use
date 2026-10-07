@@ -26,6 +26,8 @@ class Contract(StrictModel):
     confidence_threshold: float = Field(default=0.55, ge=0.05, le=1)
     text_inputs: list[TextInput] = Field(default_factory=list, max_length=12)
     pointer_inputs: list[PointerInput] = Field(default_factory=list, max_length=8)
+    execution_mode: Literal["AUTO", "STRUCTURED", "VISUAL", "CANVAS"] = "AUTO"
+    visual_intent: VisualIntent | None = None
 
     @model_validator(mode="after")
     def bounded_strings(self):
@@ -68,19 +70,22 @@ class PointerPoint(StrictModel):
 
 
 class PointerInput(StrictModel):
-    operation: Literal["click", "stroke"]
+    operation: Literal["click", "double_click", "drag", "move", "scroll", "stroke"]
     label: str = Field(min_length=1, max_length=200)
     reference: FrameReference
     surface: BoundingBox
     points: tuple[PointerPoint, ...] = Field(min_length=1, max_length=128)
     duration: float = Field(default=0.5, ge=0.05, le=5)
+    scroll_direction: Literal["up", "down", "left", "right"] = "down"
+    scroll_magnitude: int = Field(default=3, ge=1, le=100)
 
     @model_validator(mode="after")
     def scoped_points(self):
-        if (self.operation == "click" and len(self.points) != 1) or (
-            self.operation == "stroke" and len(self.points) < 2
-        ):
-            raise ValueError("click requires one point; stroke requires at least two")
+        if (self.operation in {"click", "double_click", "move", "scroll"}
+            and len(self.points) != 1) or (
+            self.operation in {"stroke", "drag"} and len(self.points) < 2
+        ) or (self.operation == "drag" and len(self.points) != 2):
+            raise ValueError("point actions require one point; drag two; stroke at least two")
         if not self.label.strip() or any(
             not (
                 self.surface.x1 <= p.x <= self.surface.x2
@@ -92,8 +97,36 @@ class PointerInput(StrictModel):
         return self
 
 
+class VisualIntent(StrictModel):
+    query: str = Field(min_length=1, max_length=1000)
+    coarse_strategy: Literal["tiled", "overview"] = "tiled"
+    target_geometry: Literal["point", "horizontal_line"] = "point"
+    operation: Literal[
+        "click", "double_click", "drag", "move", "scroll", "stroke", "wait"
+    ] = "click"
+    end_query: str | None = Field(default=None, min_length=1, max_length=1000)
+    path_queries: tuple[str, ...] = Field(default=(), max_length=126)
+    region: BoundingBox | None = None
+    duration: float = Field(default=0.5, ge=0.05, le=5)
+    scroll_direction: Literal["up", "down", "left", "right"] = "down"
+    scroll_magnitude: int = Field(default=3, ge=1, le=100)
+
+    @model_validator(mode="after")
+    def valid_gesture(self):
+        if not self.query.strip() or (self.end_query is not None and not self.end_query.strip()):
+            raise ValueError("visual queries must be nonempty")
+        if self.operation in {"drag", "stroke"} and self.end_query is None:
+            raise ValueError("drag/stroke require an end query")
+        if self.path_queries and self.operation != "stroke":
+            raise ValueError("path queries require stroke")
+        if any(not q.strip() or len(q) > 1000 for q in self.path_queries):
+            raise ValueError("path queries must contain bounded nonempty text")
+        return self
+
+
 Operation = Literal[
-    "click", "double_click", "focus", "type", "press", "hotkey", "scroll", "wait", "stroke"
+    "click", "double_click", "focus", "type", "press", "hotkey", "scroll", "wait", "stroke",
+    "drag", "move"
 ]
 
 
@@ -145,6 +178,7 @@ class Decision(StrictModel):
     safety_probability: float = Field(default=0, ge=0, le=1)
     progress: float = Field(default=0, ge=0, le=1)
     condition_probabilities: tuple[float, ...] = ()
+    entropy: float | None = Field(default=None, ge=0)
 
     @model_validator(mode="after")
     def valid_conditions(self):

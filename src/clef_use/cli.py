@@ -9,7 +9,7 @@ from . import __version__
 from .client import RuntimeClient
 from .config import load_config
 from .deployment_profiles import PROFILES, profile_catalog
-from .schema import Contract, TextInput
+from .schema import Contract, TextInput, VisualIntent
 
 
 def parser():
@@ -31,6 +31,9 @@ def parser():
     run.add_argument("goal")
     run.add_argument("--success", action="append", default=[])
     run.add_argument("--constraint", action="append", default=[])
+    run.add_argument("--mode", choices=["AUTO", "STRUCTURED", "VISUAL", "CANVAS"], default="AUTO")
+    run.add_argument("--visual-query")
+    run.add_argument("--coarse-strategy", choices=("tiled", "overview"), default="tiled")
     run.add_argument("--max-steps", type=int)
     run.add_argument("--confidence-threshold", type=float)
     run.add_argument("--text", action="append", default=[])
@@ -81,6 +84,9 @@ def parser():
         "--json", action="store_true", help="suppress setup progress; emit JSON result"
     )
     models.add_argument("--python")
+    models.add_argument(
+        "--visual", action="store_true", help="download the configured visual backbone"
+    )
     models.add_argument(
         "--rocm-arch", help="Windows ROCm ISA, e.g. gfx1150; autodetected when available"
     )
@@ -133,6 +139,10 @@ def main(argv=None):
                 if args.confidence_threshold is not None
                 else config.confidence_threshold,
                 text_inputs=[TextInput(value=v) for v in args.text],
+                execution_mode=args.mode,
+                visual_intent=(VisualIntent(query=args.visual_query or args.goal,
+                                           coarse_strategy=args.coarse_strategy)
+                               if args.visual_query or args.coarse_strategy != "tiled" else None),
             )
             result = RuntimeClient().run(contract)
         elif args.command in {"status", "abort", "observe"}:
@@ -155,6 +165,8 @@ def main(argv=None):
             from .models import MODEL_REVISIONS, download, inventory
 
             config = load_config()
+            if args.visual and args.action not in {"download", "list"}:
+                raise ValueError("--visual applies to models download or list")
             if args.action == "profiles":
                 print(json.dumps(profile_catalog(), indent=2))
                 return 0
@@ -173,16 +185,22 @@ def main(argv=None):
                 )
             else:
                 if args.action == "download":
-                    for model in [
+                    models = [
                         config.decision_model,
                         "microsoft/OmniParser-v2.0",
                         "microsoft/Florence-2-base",
                         "microsoft/Florence-2-base-ft",
-                    ]:
+                    ]
+                    if args.visual:
+                        if config.visual_model not in MODEL_REVISIONS:
+                            raise ValueError("visual download requires a supported pinned model")
+                        models = [config.visual_model]
+                    for model in models:
                         download(config.model_dir, model)
                 result = {
                     "revisions": MODEL_REVISIONS,
-                    "models": inventory(config.model_dir, config.decision_model),
+                    "models": inventory(config.model_dir, config.decision_model,
+                                        visual=args.visual or config.visual_grounding),
                 }
         elif args.command in {"benchmark", "self-test"}:
             from .benchmark import desktop_benchmark, fixture_benchmark

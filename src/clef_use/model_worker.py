@@ -34,6 +34,38 @@ def model_path(config, repo, revision):
     )
 
 
+class VisualWorker:
+    def __init__(self, config):
+        from grounding import SiglipGrounder
+
+        self.device = config["visual_device"]
+        self.backend = self.device
+        path = (Path(config["model_dir"]) / "huggingface/hub"
+                / ("models--" + config["visual_model"].replace("/", "--"))
+                / "snapshots" / config["visual_revision"])
+        self.grounder = SiglipGrounder(str(path), revision=config["visual_revision"],
+                                     device=self.device, head_path=config.get("visual_head"),
+                                     presence_threshold=config.get("visual_presence_threshold", .9))
+        dense_head = self.grounder.head.dense_head
+        self.coarse_strategies = sorted(dense_head.coarse_strategies if dense_head is not None
+                                       else {"tiled", "overview"})
+
+    def request(self, payload):
+        from dataclasses import asdict
+        from types import SimpleNamespace
+
+        image = Image.open(io.BytesIO(base64.b64decode(payload["image"]))).convert("RGB")
+        region = SimpleNamespace(**payload["region"]) if payload.get("region") else None
+        result = asdict(self.grounder.ground(
+            image, payload["query"], region=region,
+            refinement=payload.get("refinement", 0),
+            geometry=payload.get("geometry", "point"),
+            coarse_strategy=payload.get("coarse_strategy", "tiled"),
+        ))
+        result.pop("heatmap", None)
+        return {"grounding": result}
+
+
 class CpuEmbeddingRows:
     def __init__(self, weight, device):
         self.weight = weight
@@ -99,7 +131,7 @@ class ClefWorker:
         if quantization == "4bit" and self.backend == "mps":
             raise RuntimeError("NF4 is not enabled for the MPS profile")
         dtype = (
-            torch.float32
+            getattr(torch, config.get("cpu_compute_dtype", "float32"))
             if self.device == "cpu"
             else torch.float16
             if self.device == "mps" or torch.version.hip or quantization == "4bit"
@@ -127,10 +159,14 @@ class ClefWorker:
             path,
             device=self.device,
             dtype=dtype,
-            attn_implementation="sdpa" if self.backend in {"cuda", "rocm"} else "eager",
+            attn_implementation="sdpa" if self.backend in {"cpu", "cuda", "rocm"} else "eager",
             local_files_only=True,
             **kwargs,
         )
+        self.compute_dtype = str(dtype).removeprefix("torch.")
+        backbone_config = getattr(getattr(self.model, "language_model", self.model), "config", None)
+        text_config = getattr(backbone_config, "text_config", backbone_config)
+        self.attention_implementation = getattr(text_config, "_attn_implementation", None)
         self.quantized_modules = 0
         if quantization == "4bit":
             import bitsandbytes as bnb
@@ -387,7 +423,8 @@ def main():
         if config.get("rocm_arch"):
             os.environ["ROCM_SDK_TARGET_FAMILY"] = config["rocm_arch"]
         with contextlib.redirect_stdout(sys.stderr):
-            worker = ClefWorker(config) if sys.argv[1] == "clef" else OmniWorker(config)
+            worker_type = {"clef": ClefWorker, "omni": OmniWorker, "visual": VisualWorker}
+            worker = worker_type[sys.argv[1]](config)
         ready = {
             "ready": True,
             "device": worker.device,
@@ -396,6 +433,12 @@ def main():
         }
         if hasattr(worker, "load_metrics"):
             ready["load_metrics"] = worker.load_metrics
+        if hasattr(worker, "compute_dtype"):
+            ready["compute_dtype"] = worker.compute_dtype
+        if getattr(worker, "attention_implementation", None) is not None:
+            ready["attention_implementation"] = worker.attention_implementation
+        if hasattr(worker, "coarse_strategies"):
+            ready["coarse_strategies"] = worker.coarse_strategies
         emit(ready)
         for line in sys.stdin:
             try:

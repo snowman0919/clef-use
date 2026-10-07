@@ -381,11 +381,39 @@ likeness marker; evidence `clef-v10-saved-independent-verification.json`.
 Four actual checkpoint-labelled renders are verified; the relaxed inspection
 matrices restore with residual 0.0 and do not prove rig deformation. Current
 parent visual inspection still rejects likeness. Independent V10 image review
-is dispatched read-only; its verdict is not yet available.
+`evidence/reici-v10-likeness-review.md` returns REJECT: the small cheek edit
+does not visibly resolve the lower-face mismatch. The user explicitly confirms
+V10 still does not resemble the original. Retain V10 only as deployed-input
+proof and a rejected modeling checkpoint, not an artistic improvement. Next
+modeling work must address pose-matched lower-face/chin/neck, coupled eye
+aperture/lid/iris, and nonrepetitive hair flow before garment refinements or rig.
 
 The prior V9 Wireframe inspection returned `LOW_CONFIDENCE`, probability
 `0.4813`, zero actions and one decision. Its wrapper exit zero was not success;
 readback confirms the viewport remained SOLID.
+
+## Likeness rejection follow-up (2026-10-06)
+
+The user explicitly rejects V10. Independent V10 visual review also returns
+REJECT and cannot distinguish a meaningful cheek improvement from V9.
+Actual deployed GUI lower-jaw trial `7fc4b6dc0acc47a6a4d3c3c84364308e`
+produces V11 with bilateral surface dents. Keeping its path/radius/strength
+and changing only brush falloff from SPHERE to PROJECTED after exact V10
+restoration yields trial `1fd577527500420793ecd7c1056ce954`, V12 with
+bilateral contour notches. Both actual front and 3/4 renders are inspected
+and rejected. Finite coordinates, bilateral participation and zero triangle
+orientation reversals did NOT predict acceptable anatomy or likeness.
+Both trials end NEEDS_REPLAN; neither is an improvement or successful
+completion. They remain diagnostic checkpoints only.
+
+After the failed V12, the owned live scene is restored from preserved V10;
+independent readback proves all 21,506 Face coordinates equal its stored
+post-gesture baseline. Original V9/V10 files remain intact. Stop local jaw
+Grab iterations; establish canonical landmarks and a broad edit selection /
+controlled GUI transform before claiming further face remodeling progress.
+The existing runtime key allowlist does not support general Blender modeling
+shortcuts; investigate the actual visible gizmo route or implement a reviewed,
+deployed capability if genuinely needed, never bypass with scripted mesh edits.
 
 ## Completion status
 

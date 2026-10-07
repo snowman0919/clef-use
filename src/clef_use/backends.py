@@ -34,6 +34,7 @@ class JsonWorker:
         self.kind = kind
         self.config = config
         self.process = None
+        self.ready = None
         self.replies = queue.Queue()
         self.lock = threading.Lock()
 
@@ -57,6 +58,7 @@ class JsonWorker:
         return reply
 
     def _start(self):
+        self.ready = None
         self.replies = queue.Queue()
         child_env = os.environ.copy()
         child_env["HF_HOME"] = str(self.config.model_dir / "huggingface")
@@ -80,7 +82,8 @@ class JsonWorker:
         threading.Thread(
             target=self._reader, args=(self.process, self.replies), daemon=True
         ).start()
-        return self._receive()
+        self.ready = self._receive()
+        return self.ready
 
     def request(self, payload):
         with self.lock:
@@ -150,6 +153,34 @@ class OmniParserBackend:
             "normalize_ms": (time.perf_counter() - started) * 1000,
         }
         return objects
+
+
+class VisualGroundingBackend:
+    """Resident Foundation ViT inference in the separately provisioned ML environment."""
+
+    def __init__(self, config: Config):
+        self.worker = JsonWorker(config.visual_python or config.clef_python, "visual", config)
+
+    def ground(self, image, query, region=None, refinement=0, geometry="point",
+               coarse_strategy="tiled"):
+        from .grounding import GroundingQueryTooLong, GroundingResult, GroundingStrategyUnsupported
+
+        try:
+            reply = self.worker.request({"image": encode_image(image), "query": query,
+                                         "region": region.model_dump() if region else None,
+                                         "refinement": refinement, "geometry": geometry,
+                                         "coarse_strategy": coarse_strategy})
+        except ModelWorkerError as exc:
+            if exc.diagnostic["code"] == "GroundingQueryTooLong":
+                raise GroundingQueryTooLong(
+                    "visual query exceeds the backbone text context"
+                ) from exc
+            if exc.diagnostic["code"] == "GroundingStrategyUnsupported":
+                raise GroundingStrategyUnsupported(
+                    "coarse strategy was not supervised by this head"
+                ) from exc
+            raise
+        return GroundingResult(**reply["grounding"])
 
 
 def clef_request(observation, contract, candidates, history) -> dict:
@@ -274,12 +305,22 @@ class ClefBackend:
         request = clef_request(observation, goal, candidates, history)
         answers = self.worker.request(request)["answers"]
         choice = answers["action"]
+        import math
+
+        probabilities = choice.get("probabilities", {})
+        total = sum(probabilities.values())
+        entropy = None
+        if total > 0:
+            entropy = (-sum((p / total) * math.log(p / total)
+                            for p in probabilities.values() if p > 0)
+                       / math.log(len(probabilities))) if len(probabilities) > 1 else 0.0
         return Decision(
             mode=answers["mode"]["choice"],
             mode_confidence=answers["mode"]["confidence"],
             effect_probability=answers["effect"]["noul"],
             action=None if choice["choice"] == "none" else choice["choice"],
             confidence=choice["confidence"],
+            entropy=entropy,
             goal_probability=answers["complete"]["noul"],
             replan_probability=answers["replan"]["noul"],
             safety_probability=answers["unsafe"]["noul"],
@@ -292,6 +333,33 @@ class ClefBackend:
 
 class DesktopCapture:
     native_overlay_exclusion = sys.platform in {"darwin", "win32"}
+
+    @staticmethod
+    def _x11_context():
+        from Xlib import display, error
+
+        connection = display.Display()
+        try:
+            window = connection.get_input_focus().focus
+            root = connection.screen().root
+            # None/PointerRoot identify no particular application window.
+            if not hasattr(window, "id") or window.id == root.id:
+                return None, None
+            while True:
+                parent = window.query_tree().parent
+                if parent.id == root.id:
+                    break
+                window = parent
+            geometry = window.get_geometry()
+            position = root.translate_coords(window, 0, 0)
+            bounds = (position.x, position.y,
+                      position.x + geometry.width, position.y + geometry.height)
+            return window.id, bounds
+        except error.XError:
+            # A disappearing native window cannot establish a reusable context.
+            return None, None
+        finally:
+            connection.close()
 
     @contextmanager
     def excluding_windows(self, windows):
@@ -306,6 +374,7 @@ class DesktopCapture:
 
         native = WindowsInput() if sys.platform == "win32" else None
         target = native.ensure_target(None) if native else None
+        x11_context = self._x11_context() if sys.platform == "linux" else (None, None)
         with native.physical_coordinates() if native else nullcontext():
             with mss.MSS() as screen:
                 monitor = screen.monitors[1]
@@ -344,7 +413,9 @@ class DesktopCapture:
                 import pyautogui
 
                 logical = tuple(pyautogui.size())
-                bounds = None
+                target, bounds = x11_context
+                if sys.platform == "linux" and self._x11_context() != x11_context:
+                    raise RuntimeError("X11 foreground changed during capture")
         return Frame(image, (monitor["left"], monitor["top"]), logical, target, bounds)
 
 
@@ -376,8 +447,8 @@ class DesktopAction:
             ):
                 return ActionResult(ok=False, reason="invalid or sensitive target")
             op = action.operation
-            if op == "stroke" and action.pointer is None:
-                return ActionResult(ok=False, reason="stroke requires a supplied pointer path")
+            if op in {"stroke", "drag", "move"} and action.pointer is None:
+                return ActionResult(ok=False, reason=f"{op} requires a supplied pointer path")
             if action.pointer is not None and (
                 op != action.pointer.operation
                 or action.target is not None
@@ -483,6 +554,23 @@ class DesktopAction:
             left, top, right, bottom = bounds
             if not left <= x < right or not top <= y < bottom:
                 raise RuntimeError("Windows pointer start outside foreground before pointer press")
+        if pointer.operation == "move":
+            return
+        if pointer.operation == "double_click":
+            self._click(gui, *points[0], 2, cancelled, frame.foreground_window)
+            return
+        if pointer.operation == "scroll":
+            clicks = pointer.scroll_magnitude * (1 if pointer.scroll_direction in {"up", "right"}
+                                                 else -1)
+            if pointer.scroll_direction in {"left", "right"}:
+                if not hasattr(gui, "hscroll"):
+                    raise RuntimeError("horizontal scrolling unavailable in input backend")
+                gui.hscroll(clicks)
+            elif native:
+                gui.scroll(clicks, frame.foreground_window)
+            else:
+                gui.scroll(clicks)
+            return
         try:
             self.buttons.add("left")
             if native:
@@ -521,7 +609,7 @@ class DesktopAction:
             if count > 1:
                 cancelled.wait(0.1)
                 if native:
-                    target = gui.ensure_target(None)
+                    gui.ensure_target(target)
 
     def _hotkey(self, gui, keys, cancelled, target=None):
         native = isinstance(gui, WindowsInput)
@@ -595,6 +683,14 @@ def runtime(config: Config, log_path=None):
             raise RuntimeError(
                 f"Model missing: run clef-use models download ({MODEL_REVISIONS[repo]})"
             )
+    if config.visual_grounding:
+        visual_path = (config.model_dir / "huggingface/hub"
+                       / ("models--" + config.visual_model.replace("/", "--"))
+                       / "snapshots" / config.visual_revision)
+        if not (visual_path / "model.safetensors").is_file():
+            raise RuntimeError("Visual model missing: run clef-use models download --visual")
+        if config.visual_head is not None and not config.visual_head.is_file():
+            raise RuntimeError("Configured trained grounding head is missing")
     return SessionRuntime(
         DesktopCapture(),
         OmniParserBackend(config),
@@ -603,4 +699,5 @@ def runtime(config: Config, log_path=None):
         config,
         log_path=log_path,
         activity=ActivityOverlay(config.activity_overlay),
+        grounder=VisualGroundingBackend(config) if config.visual_grounding else None,
     )

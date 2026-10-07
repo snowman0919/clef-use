@@ -109,6 +109,15 @@ def doctor(capture: bool = True):
         "models": inventory(config.model_dir, config.decision_model),
         "permissions": permissions,
     }
+    if config.visual_grounding:
+        report["models"] = inventory(config.model_dir, config.decision_model, visual=True)
+        report["visual_grounding"] = {
+            "model": config.visual_model, "revision": config.visual_revision,
+            "device": config.visual_device,
+            "head_available": config.visual_head is None or config.visual_head.is_file(),
+            "python_available": (config.visual_python or config.clef_python or Path(sys.executable))
+            .is_file(),
+        }
     if sys.platform == "win32":
         report["windows_desktop"] = windows_desktop_probe()
     try:

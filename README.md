@@ -1,12 +1,18 @@
 # clef-use
 
+V2 adds opt-in hybrid STRUCTURED / VISUAL / CANVAS execution, with frozen SigLIP2
+spatial grounding, native tiles or explicit coarse overviews with high-resolution
+fine crops, and observation-bound gestures.
+See [hybrid configuration, verification and real Blender benchmark](docs/HYBRID_EXECUTION.md).
+
 [English](README.md) | [한국어](docs/ko/QUICKSTART.md) | [简体中文](docs/zh-CN/QUICKSTART.md) | [日本語](docs/ja/QUICKSTART.md)
 
 **One local computer-use runtime. One MCP interface. A fast decision loop.**
 
-clef-use turns a high-level GUI goal into a bounded sequence of visual actions.
-OmniParser detects screen objects; CLEF selects semantic action candidates;
-deterministic input adapters execute them. Your planner gets control back at a
+clef-use turns a high-level GUI goal into a bounded sequence of verified actions.
+OmniParser supplies objects and semantic hints; CLEF assesses bounded candidates.
+The optional Foundation ViT path grounds dense GUI and canvas targets directly.
+Deterministic input adapters execute actions. Your planner gets control back at a
 terminal event instead of making an inference for every click.
 
 ```mermaid

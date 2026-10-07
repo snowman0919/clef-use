@@ -6,7 +6,7 @@ from PIL import Image
 
 from clef_use.backends import DesktopAction
 from clef_use.schema import ActionCandidate, Contract, Frame, Observation
-from clef_use.windows_input import Input, WindowsInput
+from clef_use.windows_input import Input, WindowsForegroundChanged, WindowsInput
 
 
 class FakeAPI:
@@ -279,6 +279,30 @@ def _native_pointer_action(operation):
     )
     candidate = CandidateBuilder().build(observation, contract)[0]
     return api, gui, bounds, observation, candidate
+
+
+def test_native_double_click_refuses_second_press_after_foreground_switch():
+    api, gui, _, observation, candidate = _native_pointer_action("double_click")
+    adapter = DesktopAction(gui)
+    pressed_windows = []
+
+    def switch_after_first_press():
+        if api.events[-1] == (0, 0, 2):
+            pressed_windows.append(api.target)
+            api.target = 101
+
+    api.after_input = switch_after_first_press
+    error = None
+    try:
+        adapter.execute(candidate, observation, Event())
+    except WindowsForegroundChanged as exc:
+        error = exc
+
+    assert pressed_windows == [100]
+    assert api.events == [(0, 0, 2), (0, 0, 4)]
+    assert error is not None
+    assert not adapter.buttons
+    assert api.contexts[-1] == 42
 
 
 @pytest.mark.parametrize("operation", ["click", "stroke"])
