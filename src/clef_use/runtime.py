@@ -835,23 +835,32 @@ class SessionRuntime:
                 after = waiting.frame
                 ready_frame = after
                 roi = selected.effect_roi
-                crop = region_pixels(after, roi)
-                if crop is after.image or crop.width > 128 or crop.height > 128:
-                    crop = crop.copy()
-                    crop.thumbnail((128, 128))
                 roi_changed = roi is None or region_changed(
                     last_effect.get("frame", frame), after, roi
                 )
+                before_frame = last_effect.get("frame", frame)
+                vector = None
+                if roi_changed:
+                    from PIL import ImageChops
+
+                    a, b = region_pixels(before_frame, roi), region_pixels(after, roi)
+                    if a.size == b.size:
+                        diff = ImageChops.difference(a, b)
+                        width, height = diff.size
+                        scale = max(1, min(width, height) // 8)
+                        diff = diff.reduce(scale)
+                        changed = [value > 8 for value in diff.convert("L").getdata()]
+                        vector = "".join("1" if cell else "0" for cell in changed)[:256]
                 delivered = (
                     {
                         "kind": "previous_action_effect",
                         "action": selected.audit(),
                         "expected_effect": selected.expected_effect,
                         "roi_visibly_changed": roi_changed,
+                        "roi_change_cells_8x8": vector,
                         "verification": "VERIFIED" if roi_changed else "UNCHANGED",
-                        "note": "visible pixels after a stable wait; not a completion claim",
+                        "note": "measured pixels after a stable wait; not a completion claim",
                     },
-                    crop,
                 )
                 last_effect["evidence"] = delivered
                 score = self.verifier.change(frame, after)

@@ -63,8 +63,6 @@ def test_verified_effect_is_delivered_as_evidence_to_next_decision():
     second = seen[1]
     assert second.evidence, "verified visible effect never reached the next observation"
     facts = [item for item in second.evidence if isinstance(item, dict)]
-    images = [item for item in second.evidence if isinstance(item, Image.Image)]
     assert any(fact.get("verification") == "VERIFIED" for fact in facts), facts
-    assert images and any(
-        pixel[0] > 200 and pixel[1] < 90 and pixel[2] < 90 for pixel in images[0].getdata()
-    ), "effect crop did not contain the visible viewport change"
+    vector = facts[0].get("roi_change_cells_8x8")
+    assert vector and "1" in vector, "measured change vector missing from effect evidence"

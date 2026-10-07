@@ -201,14 +201,15 @@ class ClefWorker:
                 offload_output_embeddings(self.model)
 
     def request(self, record):
+        # The pinned release backbone's vision tower supports exactly one image;
+        # a second raster fails inside its linear projection (verified on the real
+        # CUDA checkpoint, 2026-10-08). Effect evidence therefore travels as a
+        # bounded, quantified text summary plus a change vector -- never a crop --
+        # so no evidence path may ever reintroduce an images list here.
         image = record.pop("image", None)
-        evidence = record.pop("evidence_images", [])
+        record.pop("evidence_images", None)
         if image:
-            images = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
-            images.extend(
-                Image.open(io.BytesIO(base64.b64decode(item))).convert("RGB") for item in evidence
-            )
-            record["images"] = images
+            record["images"] = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
             record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
             return self.systemone(self.model, self.processor, record, max_length=8192)

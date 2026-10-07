@@ -294,10 +294,7 @@ def clef_request(observation, contract, candidates, history) -> dict:
                 for action in candidates
             ],
             "previous_action_evidence": (
-                [
-                    item if isinstance(item, dict) else "[effect crop delivered as extra image]"
-                    for item in observation.evidence
-                ]
+                [item for item in observation.evidence if isinstance(item, dict)]
                 if getattr(observation, "evidence", None)
                 else []
             ),
@@ -309,11 +306,6 @@ def clef_request(observation, contract, candidates, history) -> dict:
         },
         "questions": questions,
         "image": encode_image(observation.frame.image),
-        "evidence_images": [
-            encode_image(item)
-            for item in (getattr(observation, "evidence", None) or ())
-            if isinstance(item, Image.Image)
-        ],
     }
 
 
