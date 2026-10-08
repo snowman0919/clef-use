@@ -104,7 +104,6 @@ def test_dense_structured_session_still_receives_bounded_context():
     from clef_use.backends import clef_request
     from clef_use.benchmark import FixtureDesktop
     from clef_use.config import Config
-    from clef_use.router import ExecutionRouter
     from clef_use.runtime import Session, SessionRuntime
     from clef_use.schema import BoundingBox, Contract, Decision, UIObject
 
