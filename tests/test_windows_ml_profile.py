@@ -150,7 +150,7 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free
     recorded = {}
     offloaded = []
     monkeypatch.setattr(
-        worker_module, "offload_output_embeddings", lambda *a, **k: offloaded.append(a)
+        worker_module, "offload_output_embeddings", lambda *a, **k: offloaded.append(a[0])
     )
 
     def load(_path, **kwargs):
