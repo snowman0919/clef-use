@@ -219,7 +219,9 @@ def test_unverified_completion_preserves_the_visible_result_without_repeating_in
     assert result["status"] == "COMPLETED", result
     assert desktop.stage == 1
     assert result["steps"] == 1
-    assert any(row.get("completion_basis") == "effect_evidence_plus_model" for row in session.history)
+    assert any(
+        row.get("completion_basis") == "effect_evidence_plus_model" for row in session.history
+    )
 
 
 def test_empty_completion_assessment_does_not_block_next_visual_action():
