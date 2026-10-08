@@ -92,9 +92,8 @@ def offload_output_embeddings(model):
     import torch
 
     embedding = model.language_model.get_output_embeddings()
-    if str(embedding.weight.device) == "cpu":
-        return
-    embedding.weight = torch.nn.Parameter(embedding.weight.detach().cpu(), requires_grad=False)
+    if str(embedding.weight.device) != "cpu":
+        embedding.weight = torch.nn.Parameter(embedding.weight.detach().cpu(), requires_grad=False)
 
     def select_rows(_module, arguments):
         # The pinned joint head reads lexical rows directly; lm_head is never executed.
@@ -110,17 +109,18 @@ def load_cuda_nf4_model(path, *, device="cuda", dtype, **kwargs):
     from safetensors.torch import load_file
     from transformers import AutoProcessor, Qwen3_5ForConditionalGeneration
 
+    # lm_head (fp16, never executed) is the largest non-quantized block; pinning it
+    # to host RAM keeps the whole stack inside a 10GB card. The row hook below
+    # serves the joint head's lexical gather, so placement is transparent.
     backbone = Qwen3_5ForConditionalGeneration.from_pretrained(
-        path, dtype=dtype, device_map={"": str(device)}, **kwargs
+        path, dtype=dtype, device_map={"": str(device), "lm_head": "cpu"}, **kwargs
     )
     backbone.config.use_cache = False
     head = JointSchemaHead(**json.loads((path / "joint_head_config.json").read_text()))
     head.load_state_dict(load_file(path / "joint_head.safetensors"), strict=True)
     model = ClefModel(backbone, head)
-    if torch.cuda.mem_get_info()[0] < 1024**3:
-        # The upstream loader moves the head first, before the old offload guard can run.
-        offload_output_embeddings(model)
-        torch.cuda.empty_cache()
+    offload_output_embeddings(model)
+    torch.cuda.empty_cache()
     head.to(device=device, dtype=dtype)
     return model.eval(), AutoProcessor.from_pretrained(path, local_files_only=True)
 

@@ -137,6 +137,7 @@ def test_cpu_worker_preserves_causal_attention_without_quadratic_score_storage(
 
 
 @pytest.mark.parametrize("free_bytes", [256 * 1024**2, 4 * 1024**3])
+# lm_head placement is now unconditional (CPU) so both free-memory branches must offload.
 def test_low_memory_loader_frees_unused_rows_before_joint_head(tmp_path, monkeypatch, free_bytes):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "src/clef_use"))
     worker = importlib.import_module("model_worker")
@@ -147,6 +148,7 @@ def test_low_memory_loader_frees_unused_rows_before_joint_head(tmp_path, monkeyp
         config=SimpleNamespace(use_cache=True), get_output_embeddings=lambda: embedding
     )
     hooks = []
+    calls = {}
 
     class Head:
         def __init__(self, **kwargs):
@@ -156,7 +158,7 @@ def test_low_memory_loader_frees_unused_rows_before_joint_head(tmp_path, monkeyp
             assert strict and state == {"actual_fixture_weight": 7}
 
         def to(self, device, dtype):
-            if free_bytes < 1024**3 and embedding.weight is weight:
+            if embedding.weight is weight:
                 raise MemoryError("joint head does not fit until lexical rows leave CUDA")
             return self
 
@@ -185,7 +187,7 @@ def test_low_memory_loader_frees_unused_rows_before_joint_head(tmp_path, monkeyp
         "transformers",
         SimpleNamespace(
             Qwen3_5ForConditionalGeneration=SimpleNamespace(
-                from_pretrained=lambda *a, **k: backbone
+                from_pretrained=lambda *a, **k: calls.update(map=k["device_map"]) or backbone
             ),
             AutoProcessor=SimpleNamespace(from_pretrained=lambda *a, **k: "processor"),
         ),
@@ -202,5 +204,6 @@ def test_low_memory_loader_frees_unused_rows_before_joint_head(tmp_path, monkeyp
     assert model.language_model is backbone and processor == "processor"
     assert not backbone.config.use_cache
     assert model.head.hidden_size == 4
-    assert embedding.weight == "cpu-rows" if free_bytes < 1024**3 else embedding.weight is weight
-    assert len(hooks) == (1 if free_bytes < 1024**3 else 0)
+    assert embedding.weight == "cpu-rows"
+    assert len(hooks) == 1
+    assert calls.get("map") == {"": "cuda", "lm_head": "cpu"}
