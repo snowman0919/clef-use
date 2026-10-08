@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.1.24
+
+- Freeze the pre-V2 implementation under `old/` and port reviewed components into a clean
+  V2 tree (structured routing always bounded; effect-evidence completion gate calibrated
+  against the real checkpoint; dense-screen decision overflow crash fixed; observation-bound
+  canvas actions, SigLIP2 grounding path).
+- Gemini-AGY strict CV reviewer adapter for asset ranking and production gates.
+
 - Deliver the previous action's verified visible effect (bounded ROI crop plus facts)
   into the next CLEF decision, so a genuinely changed viewport region no longer
   collapses into NEEDS_REPLAN "lacks required visible condition evidence"
