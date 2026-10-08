@@ -138,8 +138,18 @@ def test_real_fixture_socket_denies_untrusted_requests_before_state_readback(tmp
         def exchange(payload):
             with socket.create_connection(server.getsockname(), timeout=2) as client:
                 client.sendall(json.dumps(payload).encode() + b"\n")
-                namespace["tick"]()
-                return json.loads(client.recv(65536))
+                client.settimeout(5)
+                buffer = b""
+                while b"\n" not in buffer:
+                    # The fixture drains one accept/recv pass per call; loop the
+                    # handler so a connect that races accept on slow CI runners
+                    # still converges instead of blocking the socket forever.
+                    namespace["tick"]()
+                    try:
+                        buffer += client.recv(65536)
+                    except TimeoutError as exc:
+                        raise AssertionError("fixture handler never replied") from exc
+                return json.loads(buffer)
 
         for payload in (
             {"operation": "readback"},
