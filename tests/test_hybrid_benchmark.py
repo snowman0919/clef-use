@@ -3,6 +3,7 @@ import hmac
 import importlib.util
 import json
 import socket
+import time
 from pathlib import Path
 from threading import Event
 
@@ -143,12 +144,18 @@ def test_real_fixture_socket_denies_untrusted_requests_before_state_readback(tmp
                 client.sendall(json.dumps(payload).encode() + b"\n")
                 client.settimeout(5)
                 buffer = b""
-                while b"\n" not in buffer:
+                deadline = time.monotonic() + 10
+                while b"\n" not in buffer and time.monotonic() < deadline:
+                    # The handler is cooperative: only tick() reads requests and
+                    # sends replies, so poll (short recv slice) between ticks.
                     namespace["tick"]()
+                    client.settimeout(0.05)
                     try:
-                        buffer += client.recv(65536)
-                    except TimeoutError as exc:
-                        raise AssertionError("fixture handler never replied") from exc
+                        buffer += client.recv(4096)
+                    except TimeoutError:
+                        pass
+                if b"\n" not in buffer:
+                    raise AssertionError("fixture handler never replied")
                 return json.loads(buffer)
 
         for payload in (
