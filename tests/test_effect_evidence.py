@@ -66,3 +66,56 @@ def test_verified_effect_is_delivered_as_evidence_to_next_decision():
     assert any(fact.get("verification") == "VERIFIED" for fact in facts), facts
     vector = facts[0].get("roi_change_cells_8x8")
     assert vector and "1" in vector, "measured change vector missing from effect evidence"
+
+
+def test_calibrated_completion_accepts_model_plus_measured_effect():
+    desktop = StrokeChangesViewport()
+    seen = []
+
+    class Recorder:
+        def decide(self, observation, goal, candidates, history):
+            seen.append(observation)
+            if len(seen) == 1:
+                chosen = next(a for a in candidates if a.operation == "click")
+                return Decision(action=chosen.id, confidence=0.99)
+            return Decision(
+                mode="COMPLETED",
+                confidence=0.99,
+                goal_probability=0.84,
+                condition_probabilities=(0.76,),
+            )
+
+    session = Session(
+        Contract(goal="Move the chin band", success_conditions=["band moved"], max_steps=8)
+    )
+    result = SessionRuntime(
+        desktop, desktop, Recorder(), desktop, Config(settle_seconds=0)
+    ).execute(session)
+    assert result["status"] == "COMPLETED", result
+    assert any(
+        row.get("completion_basis") == "effect_evidence_plus_model" for row in session.history
+    )
+
+
+def test_calibrated_completion_needs_a_witness_not_a_bare_claim():
+    # Same sub-0.9 probabilities WITHOUT any executed-and-measured effect in the
+    # session must still escalate to NEEDS_REPLAN, never COMPLETED.
+    desktop = StrokeChangesViewport()
+
+    class ClaimOnly:
+        def decide(self, observation, goal, candidates, history):
+            return Decision(
+                mode="COMPLETED",
+                confidence=0.99,
+                goal_probability=0.84,
+                condition_probabilities=(0.76,),
+            )
+
+    session = Session(
+        Contract(goal="Move the chin band", success_conditions=["band moved"], max_steps=4)
+    )
+    result = SessionRuntime(
+        desktop, desktop, ClaimOnly(), desktop, Config(settle_seconds=0)
+    ).execute(session)
+    assert result["status"] == "NEEDS_REPLAN", result
+    assert "lacks required visible condition evidence" in result["reason"]
