@@ -118,10 +118,13 @@ def test_real_fixture_socket_denies_untrusted_requests_before_state_readback(tmp
     )
     state_path = tmp_path / "state.json"
     state_path.write_text(json.dumps({"workspace": "Layout", "thin_wall": False}))
-    with socket.socket() as server:
-        server.bind(("127.0.0.1", 0))
-        server.listen(4)
-        server.setblocking(False)
+    # A listener with a real accept backlog makes connect() succeed even before
+    # tick() drains; socket.socketpair raced deterministically on macOS runners.
+    server = socket.socket()
+    server.bind(("127.0.0.1", 0))
+    server.listen(4)
+    server.setblocking(False)
+    try:
         namespace = {
             "server": server,
             "clients": {},
@@ -141,9 +144,6 @@ def test_real_fixture_socket_denies_untrusted_requests_before_state_readback(tmp
                 client.settimeout(5)
                 buffer = b""
                 while b"\n" not in buffer:
-                    # The fixture drains one accept/recv pass per call; loop the
-                    # handler so a connect that races accept on slow CI runners
-                    # still converges instead of blocking the socket forever.
                     namespace["tick"]()
                     try:
                         buffer += client.recv(65536)
@@ -163,6 +163,8 @@ def test_real_fixture_socket_denies_untrusted_requests_before_state_readback(tmp
             "workspace": "Layout",
             "thin_wall": False,
         }
+    finally:
+        server.close()
 
 
 def test_failures_remain_in_denominator_and_latency():
