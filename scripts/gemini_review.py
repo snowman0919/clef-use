@@ -76,9 +76,14 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
         start = body.find("{")
         end = body.rfind("}")
         if start == -1 or end <= start:
-            verdict = {"verdict": "FAIL", "top_mismatches": ["reviewer output unparsable"],
-                       "severity": "critical", "correction_targets": ["rerun review"],
-                       "evidence_only": False, "_raw": body[:800]}
+            verdict = {
+                "verdict": "FAIL",
+                "top_mismatches": ["reviewer output unparsable"],
+                "severity": "critical",
+                "correction_targets": ["rerun review"],
+                "evidence_only": False,
+                "_raw": body[:800],
+            }
         else:
             verdict = json.loads(body[start : end + 1])
     return verdict
