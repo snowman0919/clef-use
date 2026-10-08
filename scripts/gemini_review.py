@@ -73,9 +73,25 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
     try:
         verdict = json.loads(body)
     except json.JSONDecodeError:
+        # agy may emit the verdict object followed by extra JSON or prose; take
+        # the first complete top-level object instead of bracket-sniffing, which
+        # dies with "Extra data" when two objects are concatenated.
         start = body.find("{")
         end = body.rfind("}")
-        if start == -1 or end <= start:
+        verdict = None
+        if start != -1 and end > start:
+            for parse in (
+                lambda: json.JSONDecoder().raw_decode(body[start:])[0],
+                lambda: json.loads(body[start : end + 1]),
+            ):
+                try:
+                    candidate = parse()
+                except json.JSONDecodeError:
+                    continue
+                if isinstance(candidate, dict) and "verdict" in candidate:
+                    verdict = candidate
+                    break
+        if not isinstance(verdict, dict):
             verdict = {
                 "verdict": "FAIL",
                 "top_mismatches": ["reviewer output unparsable"],
@@ -84,8 +100,6 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
                 "evidence_only": False,
                 "_raw": body[:800],
             }
-        else:
-            verdict = json.loads(body[start : end + 1])
     return verdict
 
 
