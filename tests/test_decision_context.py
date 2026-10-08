@@ -95,3 +95,42 @@ def test_unknown_actionability_is_omitted_from_model_state_without_claiming_true
     assert list(payload["questions"]).index("complete") < list(payload["questions"]).index(
         "condition_0"
     )
+
+
+def test_dense_structured_session_still_receives_bounded_context():
+    # Regression (dogfood F3): a 123-object Blender screen with 48 candidates
+    # overflowed the real decision model's context via the legacy whole-roster
+    # passthrough and crashed the CUDA worker with OUT_OF_MEMORY.
+    from clef_use.backends import clef_request
+    from clef_use.benchmark import FixtureDesktop
+    from clef_use.config import Config
+    from clef_use.router import ExecutionRouter
+    from clef_use.runtime import Session, SessionRuntime
+    from clef_use.schema import BoundingBox, Contract, Decision, UIObject
+
+    class DenseBlender(FixtureDesktop):
+        def parse(self, image):
+            return tuple(
+                UIObject(
+                    id=str(i),
+                    label=f"Scene Collection prop {i}",
+                    actions=frozenset({"click"}),
+                    bbox=BoundingBox(x1=0.1, y1=0.2, x2=0.6, y2=0.5),
+                )
+                for i in range(123)
+            )
+
+    sizes = []
+
+    class SizeRecorder:
+        def decide(self, observation, goal, candidates, history):
+            payload = clef_request(observation, goal, candidates, history)
+            sizes.append(len(payload["state"]["objects"]))
+            return Decision(mode="WAIT", confidence=0.95)
+
+    desktop = DenseBlender()
+    session = Session(Contract(goal="Open the Object menu", max_steps=2))
+    SessionRuntime(desktop, desktop, SizeRecorder(), desktop, Config(settle_seconds=0)).execute(
+        session
+    )
+    assert sizes and max(sizes) <= 40  # 32 targets + 8 hints cap

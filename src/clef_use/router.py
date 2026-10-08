@@ -210,8 +210,12 @@ class ExecutionRouter:
 
         ids = {a.target for a in candidates if a.target is not None}
         targets = [o for o in observation.objects if o.id in ids]
+        # Cap at the decision model's context budget (~8k tokens total): one
+        # serialized object is roughly 90 tokens. Overflow previously crashed
+        # the CUDA worker (dogfood F3: 123 objects + 48 candidates on Blender).
+        targets = targets[:32]
         hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive][
-            : self.config.structured_candidate_threshold
+            :8
         ]
         return Observation(
             observation.id, observation.frame, tuple(targets + hints), evidence=observation.evidence

@@ -370,10 +370,11 @@ class SessionRuntime:
 
         def decide():
             row["clef_calls"] += 1
+            # V2: CLEF always sees the bounded decision context. The legacy
+            # whole-roster passthrough let dense Blender screens (100+ parser
+            # objects, 48 candidates) overflow the decision model's context and
+            # crash the worker with OUT_OF_MEMORY on the real CUDA checkpoint.
             bounded = self.router.decision_observation(observation, candidates)
-            # Legacy structured sessions retain their existing observation contract.
-            if self.router.grounder is None or session.contract.pointer_inputs:
-                bounded = observation
             with _timing(row, "decision_ms"):
                 answer = self.decision.decide(bounded, session.contract, candidates, history)
             row.setdefault("clef_decisions", []).append(

@@ -48,3 +48,24 @@ reproduce -> fix in V2 src -> regression test -> retry the SAME operation.
   `region_changed` fact into `record.state`. Requires real-model repro first.
 - F2 LOW_CONFIDENCE after a single canvas stroke where the visual effect lags the
   observation round (trial-v43) — same root cause family as F1.
+
+## F3 (fixed 2026-10-08): dense-screen decision overflow crash
+
+Real Blender @1920x1080: 123 parser objects + 48 candidates -> the legacy
+`pointer_inputs/grounder None` whole-roster passthrough serialized ~24.5KB of
+state (~6.1k tokens) on top of questions/media and the real CUDA worker died
+with OUT_OF_MEMORY inside forward. Fix: structured sessions ALWAYS use the
+bounded `decision_observation` (targets capped to the 32-candidate choice set,
+hints capped to 8); regression in test_decision_context.py + suite green.
+Trial sequence: trial2/7/8 crashed or DisplayConnection (stale service env);
+trial9 running against a systemd-run service bound to :122.
+
+## Ops lessons (dogfood environment)
+
+- CLI-launched service inherits the launching shell's DISPLAY; a service started
+  while Xvfb was dead keeps the poisoned env forever (status shows stale sessions,
+  not its own env failure). Restart the service, don't re-run the CLI.
+- Hermes background wrappers die on gateway restart; use `systemd-run --user`
+  for Xvfb/Blender/service on this box.
+- Never `pkill -f <pattern>` in a tracked terminal: pattern matches the
+  wrapper's own command line and self-kills (SIGTERM). Target pids explicitly.
