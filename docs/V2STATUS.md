@@ -80,3 +80,47 @@ trial9 running against a systemd-run service bound to :122.
   for Xvfb/Blender/service on this box.
 - Never `pkill -f <pattern>` in a tracked terminal: pattern matches the
   wrapper's own command line and self-kills (SIGTERM). Target pids explicitly.
+
+### 2026-10-09: work continuity under host memory pressure
+
+Primary evidence: `docs/evidence/HOST_MEMORY_2026-10-09.json`.
+
+- OBSERVED: recent whole-gateway kills were systemd-oomd pressure kills, not
+  exclusively kernel OOM. Its log identifies the gateway cgroup and the 50% /
+  20-second monitored-ancestor pressure condition. `OOMPolicy=kill` had set
+  `memory.oom.group=1`; it does not mean "kill only the offending worker".
+- Corrected the task host's gateway drop-in to `OOMPolicy=continue` and bounded
+  control-plane `ManagedOOMPreference=omit`. Verified equal cgroup owner uids,
+  actual omit xattr, `memory.oom.group=0`, unchanged gateway PID/restart counter
+  after live daemon-reload. The inference service is separate, capped at 8GiB
+  memory / 1GiB swap, not exempted from oomd, with bounded service restarts.
+- A real model retry still hit global OOM while another VM trial grew tmpfs.
+  The model child died, but the repaired gateway and service survived. Thus
+  isolation alone was not evidence that the task had enough RAM.
+- With user permission, switched the current VM boot/backup helper scratch
+  paths to disk; preserved the original disk-capacity checks and truthful
+  non-tmpfs metadata. Existing live VM images were not moved/deleted. A disk
+  qcow2 overlay smoke passed; a full VM reboot was NOT_RUN and new VM admission
+  is currently blocked by disk space. No fallback to shared host RAM.
+- Preserved the unused 091 root partition with single-thread LZMA2 level 9,
+  16MiB dictionary. Full extraction matched the pre-archive SHA256 and exact
+  byte count before releasing its 2,511,585,280 tmpfs bytes. The other
+  `snapshot.raw` disappeared during concurrent work and was NOT archived;
+  the preservation manifest explicitly records the incomplete full-disk copy.
+- The pinned meta lm_head path now keeps a lazy safetensors slice and casts
+  only selected lexical rows. The eager BF16 -> FP16 full-table copy fails the
+  new allocation regression; selected row means are bitwise equivalent on
+  real CPU/CUDA for FP16/BF16/FP32 (six cases). No confidence gate was changed.
+  Independent code review found no blocking security/logic defects. Following
+  its coverage finding, profiling includes initialization plus first gather;
+  a deferred full-table dtype-copy mutation fails both FP16/FP32 CPU budgets.
+  The corrected six precision/device cases and 441-test base suite pass.
+- MEASURED: original Hair001 contract returned five real CUDA decisions over
+  240.07 seconds, with 480 memory samples and 40 subsequent health checks.
+  New OOM count = 0, main PIDs and restart counters unchanged, minimum host
+  MemAvailable = 10.746GiB. One CPU parser and one CUDA CLEF worker remained
+  resident. Service memory includes reclaimable checkpoint file cache and
+  reached its 8GiB cap; this is not a claim of aggregate memory reduction.
+- OPEN: all five decisions remained LOW_CONFIDENCE (zero inputs). This proves
+  work continuity, not Hair001 selection or Reici visual quality. SSD space
+  and the separate bounded-candidate/model-confidence defect remain explicit.

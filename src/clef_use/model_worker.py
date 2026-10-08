@@ -80,12 +80,13 @@ class VisualWorker:
 
 
 class CpuEmbeddingRows:
-    def __init__(self, weight, device):
+    def __init__(self, weight, device, dtype=None):
         self.weight = weight
         self.device = device
+        self.dtype = dtype
 
     def __getitem__(self, indices):
-        return self.weight[indices.cpu()].to(self.device)
+        return self.weight[indices.cpu()].to(self.device, dtype=self.dtype)
 
 
 def offload_output_embeddings(model, *, path=None, dtype=None):
@@ -94,8 +95,8 @@ def offload_output_embeddings(model, *, path=None, dtype=None):
     embedding = model.language_model.get_output_embeddings()
     weight = embedding.weight
     if bool(getattr(weight, "is_meta", False)):
-        # Quantizers skip this module, so a CPU-mapped device map leaves it
-        # uninitialized; pull the pinned rows straight from the checkpoint.
+        # Quantizers skip this never-executed module. Keep its lexical rows as
+        # a lazy checkpoint slice rather than materializing the whole table.
         from safetensors import safe_open
 
         if path is None:
@@ -103,17 +104,17 @@ def offload_output_embeddings(model, *, path=None, dtype=None):
         index = json.loads((Path(path) / "model.safetensors.index.json").read_text())
         shard = Path(path) / index["weight_map"]["lm_head.weight"]
         with safe_open(str(shard), framework="pt") as handle:
-            weight = handle.get_tensor("lm_head.weight")
-        embedding.weight = torch.nn.Parameter(
-            weight.to("cpu", dtype=dtype if dtype is not None else weight.dtype),
-            requires_grad=False,
-        )
+            weight = handle.get_slice("lm_head.weight")
     elif str(weight.device) != "cpu":
         embedding.weight = torch.nn.Parameter(weight.detach().cpu(), requires_grad=False)
+        weight = embedding.weight
 
     def select_rows(_module, arguments):
         # The pinned joint head reads lexical rows directly; lm_head is never executed.
-        return (*arguments[:-1], CpuEmbeddingRows(arguments[-1], arguments[0].device))
+        return (
+            *arguments[:-1],
+            CpuEmbeddingRows(weight, arguments[0].device, dtype),
+        )
 
     model.head.register_forward_pre_hook(select_rows)
 
@@ -181,8 +182,8 @@ class ClefWorker:
                 bnb_4bit_compute_dtype=dtype,
                 # lm_head is never executed (joint head gathers rows), so it
                 # must stay out of quantizers; a split device_map leaves the
-                # skipped CPU module as a meta tensor, which
-                # offload_output_embeddings materializes from the checkpoint.
+                # skipped CPU module as a meta tensor. The row hook reads only
+                # selected checkpoint rows and casts them to compute dtype.
                 llm_int8_skip_modules=["lm_head", "model.visual"],
                 # lm_head stays fp16 and lives on the CPU in the device map; the
                 # quantizer only accepts a split map when the offloaded module

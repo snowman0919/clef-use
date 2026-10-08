@@ -1,0 +1,63 @@
+{
+  "date_kst": "2026-10-09",
+  "scope": "Restore work continuity under real host-memory pressure; not avatar or GUI completion",
+  "baseline_commit": "9f09d866aa14fa0ab8541f5faa497f9fd07a8972",
+  "host": {"gpu": "NVIDIA GeForce RTX 3080", "vram_mib": 10240, "ram_bytes": 32702382080, "torch": "2.11.0+cu130", "clef_revision": "17f0b0ad64efb65d273590632833508766b2aae6"},
+  "confirmed_causes": [
+    "systemd-oomd killed the gateway cgroup at 2026-10-08 23:18:02 and 2026-10-09 00:23:21, 00:25:31, 02:32:05 KST: monitored user@1000.service memory pressure exceeded 50% for over 20s",
+    "The gateway had OOMPolicy=kill and memory.oom.group=1; earlier claims that this kills only an offending child were incorrect",
+    "Foreground heavyweight probes shared the gateway cgroup; generic background workers have a separate 4GiB cap which was insufficient for earlier model/compression loads",
+    "Concurrent VM disks and raw snapshots consumed tmpfs while swap was nearly full; a real global OOM killed CLEF worker 1170608 at 2026-10-09 04:01:58 KST even after gateway isolation"
+  ],
+  "applied_host_settings": {
+    "gateway": {"MemoryHigh": "5G", "MemoryMax": "6G", "OOMPolicy": "continue", "ManagedOOMPreference": "omit", "actual_memory_oom_group": 0, "actual_user_oomd_omit": "1", "pid_preserved": 1127752},
+    "model_service": {"MemoryMax": "8G", "MemorySwapMax": "1G", "OOMPolicy": "continue", "StartLimitIntervalSec": "1h", "StartLimitBurst": 2},
+    "invalid_shm_reaper_timer": "disabled; find exit status was not a matching-file predicate and directory fuser was not an active-file ownership proof",
+    "vm_scratch": "/home/monad/apps/RWB_runtime/disk-tmp",
+    "vm_scripts_changed_with_user_permission": ["/home/monad/apps/RWB_runtime/orca-dev/probe_electron093.py", "/home/monad/apps/RWB_runtime/orca-dev/preserve_live093.py"],
+    "vm_disk_boot_test": "NOT_RUN: existing VM was not rebooted or mutated; disk-backed qcow2 overlay creation verified independently; disk free-space admission currently rejects new boots"
+  },
+  "model_change": "Keep skipped meta lm_head lexical rows in a lazy safetensors slice; convert only gathered rows to requested device/dtype, not the full vocabulary table",
+  "regression": {"original_fp16_fixture_loader_conversion_bytes": 524288, "corrected_fp16_fixture_loader_conversion_bytes": 0, "allocation_regression_scope": "Initialization plus first lexical gather; expected-value computation stays outside the profiler", "deferred_full_copy_mutation": {"result": "REJECTED", "cpu_float16_allocated_copy_bytes": 525572, "cpu_float32_allocated_copy_bytes": 1048580, "expected_failures": 2, "bfloat16_no_conversion_passed": 1}, "cpu_cuda_precision_cases_passed": 6, "row_values_and_mean_tolerance": {"rtol": 0, "atol": 0}, "base_suite": {"passed": 441, "skipped": 16}, "targeted_loader_profile_suite": {"passed": 18, "skipped": 5}, "ruff": "PASS"},
+  "independent_review": {"result": "PASS", "blocking_security_concerns": [], "blocking_logic_errors": [], "suggestion_applied": "Extend host-allocation profiling through the first query and confirm a deferred full-table conversion is rejected", "limits": "Reviewer did not re-run operational memory measurements or real-model/GPU inference"},
+  "successful_live_validation": {
+    "duration_seconds": 240.07,
+    "memory_samples": 480,
+    "health_checks_after_decisions": 40,
+    "minimum_mem_available_gib": 10.746,
+    "gateway_pid_before_after": [1127752, 1127752],
+    "gateway_restart_counter_before_after": [8, 8],
+    "model_service_pid_before_after": [1169762, 1169762],
+    "model_service_restart_counter_before_after": [0, 0],
+    "gateway_new_oom_kills": 0,
+    "model_service_new_oom_kills": 0,
+    "historical_model_service_oom_kills": 1,
+    "gateway_sampled_peak_gib": 1.061,
+    "model_service_sampled_peak_gib": 8.0,
+    "model_service_anon_gib_after": 4.994,
+    "model_service_file_cache_gib_after": 2.962,
+    "single_clef_worker_pid": 1179531,
+    "single_parser_worker_pid": 1170098,
+    "requests": [
+      {"session_id": "77d5d1cfff8943c7ac1092c9ad5605f4", "status": "LOW_CONFIDENCE", "actions": 0, "decisions": 1},
+      {"session_id": "af5ffbab2a67463fbc19e7afc1021e3e", "status": "LOW_CONFIDENCE", "actions": 0, "decisions": 1},
+      {"session_id": "3413a52fb35b45eabeb6e9484e3aed8d", "status": "LOW_CONFIDENCE", "actions": 0, "decisions": 1},
+      {"session_id": "0d955d7ad6d44f27aa9ae873b533083c", "status": "LOW_CONFIDENCE", "actions": 0, "decisions": 1},
+      {"session_id": "1459eac23bde4b50b7ede317ea2b6749", "status": "LOW_CONFIDENCE", "actions": 0, "decisions": 1}
+    ],
+    "acceptance": "Resident CPU parser plus real CUDA CLEF replies remain available without control-plane/service restart or new OOM; Hair001 GUI selection remains uncompleted"
+  },
+  "preservation": {
+    "archive": "/home/monad/apps/RWB_runtime/disk-tmp/rwb-native091-snapshot-read.7z",
+    "manifest": "/home/monad/apps/RWB_runtime/disk-tmp/rwb-native091-snapshot-read.manifest.json",
+    "archive_bytes": 567016258,
+    "verified_member": "root-partition.raw",
+    "verified_sha256": "116d0362b49236c3219a53299d3ece102b2d8683689d0bb31df7018f4c8a1eac",
+    "verified_logical_bytes": 6308216320,
+    "tmpfs_bytes_released_by_this_operation": 2511585280,
+    "complete_disk_snapshot_preserved": false,
+    "limitation": "snapshot.raw disappeared during concurrent work before the archiver opened it; do not claim both source files were preserved",
+    "active_vm_images_deleted_by_this_operation": false
+  },
+  "remaining": ["Hair001 Outliner task still returns LOW_CONFIDENCE; confidence gates unchanged", "SSD free space is below VM boot/backup admission; no tmpfs fallback", "No claim of lower aggregate host memory from the row optimization alone: live aggregate totals include file cache and concurrent external cleanup", "A four-minute controlled run is evidence of current stability, not immunity to all future memory pressure"]
+}
