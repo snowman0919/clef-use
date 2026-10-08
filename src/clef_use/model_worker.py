@@ -88,12 +88,28 @@ class CpuEmbeddingRows:
         return self.weight[indices.cpu()].to(self.device)
 
 
-def offload_output_embeddings(model):
+def offload_output_embeddings(model, *, path=None, dtype=None):
     import torch
 
     embedding = model.language_model.get_output_embeddings()
-    if str(embedding.weight.device) != "cpu":
-        embedding.weight = torch.nn.Parameter(embedding.weight.detach().cpu(), requires_grad=False)
+    weight = embedding.weight
+    if bool(getattr(weight, "is_meta", False)):
+        # Quantizers skip this module, so a CPU-mapped device map leaves it
+        # uninitialized; pull the pinned rows straight from the checkpoint.
+        from safetensors import safe_open
+
+        if path is None:
+            raise RuntimeError("meta lm_head requires the checkpoint path to materialize")
+        index = json.loads((Path(path) / "model.safetensors.index.json").read_text())
+        shard = Path(path) / index["weight_map"]["lm_head.weight"]
+        with safe_open(str(shard), framework="pt") as handle:
+            weight = handle.get_tensor("lm_head.weight")
+        embedding.weight = torch.nn.Parameter(
+            weight.to("cpu", dtype=dtype if dtype is not None else weight.dtype),
+            requires_grad=False,
+        )
+    elif str(weight.device) != "cpu":
+        embedding.weight = torch.nn.Parameter(weight.detach().cpu(), requires_grad=False)
 
     def select_rows(_module, arguments):
         # The pinned joint head reads lexical rows directly; lm_head is never executed.
@@ -121,7 +137,7 @@ def load_cuda_nf4_model(path, *, device="cuda", dtype, **kwargs):
     head = JointSchemaHead(**json.loads((path / "joint_head_config.json").read_text()))
     head.load_state_dict(load_file(path / "joint_head.safetensors"), strict=True)
     model = ClefModel(backbone, head)
-    offload_output_embeddings(model)
+    offload_output_embeddings(model, path=path, dtype=dtype)
     torch.cuda.empty_cache()
     head.to(device=device, dtype=dtype)
     return model.eval(), AutoProcessor.from_pretrained(path, local_files_only=True)
@@ -163,7 +179,12 @@ class ClefWorker:
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_compute_dtype=dtype,
-                llm_int8_skip_modules=["lm_head", "model.visual"],
+                # Do NOT skip lm_head here: with a split device_map, a skipped
+                # module is never materialized (stays a meta tensor, and the
+                # row-gather hook dies with "Cannot copy out of meta tensor").
+                # bnb only quantizes CUDA modules, and lm_head is mapped to CPU,
+                # so it loads as fp16 without quantization either way.
+                llm_int8_skip_modules=["model.visual"],
                 # lm_head stays fp16 and lives on the CPU in the device map; the
                 # quantizer only accepts a split map when the offloaded module
                 # keeps its native dtype.
@@ -204,7 +225,7 @@ class ClefWorker:
                 raise RuntimeError("CLEF typed head must remain floating point")
             self.quantized_modules = len(names)
             if self.backend == "cuda" and torch.cuda.mem_get_info()[0] < 1024**3:
-                offload_output_embeddings(self.model)
+                offload_output_embeddings(self.model, path=path, dtype=dtype)
 
     def request(self, record):
         # The pinned release backbone's vision tower supports exactly one image;
