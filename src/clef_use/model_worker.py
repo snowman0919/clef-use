@@ -179,12 +179,11 @@ class ClefWorker:
                 bnb_4bit_quant_type="nf4",
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_compute_dtype=dtype,
-                # Do NOT skip lm_head here: with a split device_map, a skipped
-                # module is never materialized (stays a meta tensor, and the
-                # row-gather hook dies with "Cannot copy out of meta tensor").
-                # bnb only quantizes CUDA modules, and lm_head is mapped to CPU,
-                # so it loads as fp16 without quantization either way.
-                llm_int8_skip_modules=["model.visual"],
+                # lm_head is never executed (joint head gathers rows), so it
+                # must stay out of quantizers; a split device_map leaves the
+                # skipped CPU module as a meta tensor, which
+                # offload_output_embeddings materializes from the checkpoint.
+                llm_int8_skip_modules=["lm_head", "model.visual"],
                 # lm_head stays fp16 and lives on the CPU in the device map; the
                 # quantizer only accepts a split map when the offloaded module
                 # keeps its native dtype.
