@@ -24,8 +24,13 @@ from .windows_input import WindowsInput
 
 class ModelWorkerError(RuntimeError):
     def __init__(self, reply):
-        self.diagnostic = {"code": reply["error"], "frames": reply.get("frames", [])}
-        super().__init__(reply["error"])
+        message = reply.get("message") or ""
+        self.diagnostic = {
+            "code": reply["error"],
+            "message": message,
+            "frames": reply.get("frames", []),
+        }
+        super().__init__(f"{reply['error']}: {message[:300]}" if message else reply["error"])
 
 
 class JsonWorker:

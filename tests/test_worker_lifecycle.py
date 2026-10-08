@@ -125,3 +125,19 @@ def test_model_startup_is_durable_before_request_and_archived_image_replays(tmp_
         assert persisted["clef_requests"][0]["candidates"] == 1
     finally:
         client.close()
+
+
+def test_worker_error_carries_diagnostic_message():
+    from clef_use.backends import ModelWorkerError
+
+    reply = {
+        "error": "OUT_OF_MEMORY",
+        "message": "CUDA out of memory. Tried to allocate 1.89 GiB.",
+        "frames": [],
+    }
+    exc = ModelWorkerError(reply)
+    assert "CUDA out of memory" in str(exc)
+    assert exc.diagnostic["code"] == "OUT_OF_MEMORY"
+    legacy = ModelWorkerError({"error": "INVALID_INPUT"})
+    assert str(legacy) == "INVALID_INPUT"
+    assert legacy.diagnostic["message"] == ""

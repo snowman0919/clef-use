@@ -37,17 +37,28 @@ reproduce -> fix in V2 src -> regression test -> retry the SAME operation.
 
 ## Dogfood fix queue (from production observations, pending real repro)
 
-- F1 FIXED 2026-10-08: verified effect crops + facts now reach the next CLEF decision
-  via Observation.evidence (runtime -> router -> clef_request -> ClefWorker multi-image). Regression
-  test_effect_evidence.py reproduced the stale-completion failure red, green after fix.
-  target-region change is captured (`last_effect["result_frame"]`, region_changed)
-  but never enters the next decision record, so CLEF scores conditions low ->
-  `COMPLETED -> NEEDS_REPLAN "lacks required visible condition evidence"`
-  (runtime.py:599). Candidate general fix: pass the changed effect ROI crop as a
-  second image (joint_schema_model supports `images * N`) or fold the verified
-  `region_changed` fact into `record.state`. Requires real-model repro first.
+- F1 FIXED 2026-10-08: verified effect facts + a measured 8x8 `roi_change_cells`
+  vector now reach the next CLEF decision via `Observation.evidence`
+  (runtime -> router -> clef_request -> ClefWorker). The pinned release
+  checkpoint's vision tower accepts exactly ONE image per record (a second raster
+  fails inside its linear projection on real CUDA weights), so evidence travels
+  as text + change vector, never a crop. Regression `test_effect_evidence.py`
+  reproduced the stale-completion failure red, green after fix; the completion
+  gate was calibrated (model proposal + independent pixel witness, floor 0.75)
+  against the real heads' ~0.84 ceiling (trial12 COMPLETED on live Blender).
 - F2 LOW_CONFIDENCE after a single canvas stroke where the visual effect lags the
   observation round (trial-v43) — same root cause family as F1.
+
+## F4 (fixed 2026-10-08): NF4 loader OOMs mid-materialize on a 10GB card
+
+The fp16 lm_head (~2.9GB, never executed by the joint head) plus the visual tower
+overflowed 9.6GB and `torch.OutOfMemoryError` fired inside
+`core_model_loading.materialize_tensors`, surfacing as a bare
+`ModelWorkerError in runtime backend` with zero decisions. Fix: the CUDA NF4
+loader places lm_head on CPU unconditionally (`device_map` +
+`llm_int8_enable_fp32_cpu_offload`, row-gather hook preserves semantics), and
+effect-evidence never adds raster images. Worker errors now carry the exception
+string so CLI users see `out of memory` instead of an opaque type name.
 
 ## F3 (fixed 2026-10-08): dense-screen decision overflow crash
 

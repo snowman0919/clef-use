@@ -109,9 +109,11 @@ def load_cuda_nf4_model(path, *, device="cuda", dtype, **kwargs):
     from safetensors.torch import load_file
     from transformers import AutoProcessor, Qwen3_5ForConditionalGeneration
 
-    # lm_head (fp16, never executed) is the largest non-quantized block; pinning it
-    # to host RAM keeps the whole stack inside a 10GB card. The row hook below
-    # serves the joint head's lexical gather, so placement is transparent.
+    # lm_head (fp16, never executed) is the largest non-quantized block; pinning
+    # it to host RAM keeps the whole stack inside a 10GB card. The row hook in
+    # offload_output_embeddings serves the joint head's lexical gather, so the
+    # placement is transparent. llm_int8_enable_fp32_cpu_offload (set by the
+    # config builder) is required for a split device_map to be accepted.
     backbone = Qwen3_5ForConditionalGeneration.from_pretrained(
         path, dtype=dtype, device_map={"": str(device), "lm_head": "cpu"}, **kwargs
     )
@@ -162,6 +164,10 @@ class ClefWorker:
                 bnb_4bit_use_double_quant=True,
                 bnb_4bit_compute_dtype=dtype,
                 llm_int8_skip_modules=["lm_head", "model.visual"],
+                # lm_head stays fp16 and lives on the CPU in the device map; the
+                # quantizer only accepts a split map when the offloaded module
+                # keeps its native dtype.
+                llm_int8_enable_fp32_cpu_offload=True,
             )
         loader = (
             load_cuda_nf4_model
@@ -428,9 +434,13 @@ def main():
         protocol.flush()
 
     def diagnostic(exc):
-        code = "OUT_OF_MEMORY" if "out of memory" in str(exc).lower() else type(exc).__name__
+        message = str(exc)
+        code = "OUT_OF_MEMORY" if "out of memory" in message.lower() else type(exc).__name__
         return {
             "error": code,
+            # Operators saw only "ModelWorkerError in runtime backend" while the
+            # real CUDA message named the cause; carry a bounded exception text.
+            "message": message[-600:],
             "frames": [
                 {"file": Path(frame.filename).name, "function": frame.name, "line": frame.lineno}
                 for frame in traceback.extract_tb(exc.__traceback__)[-4:]

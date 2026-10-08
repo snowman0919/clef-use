@@ -922,7 +922,12 @@ class SessionRuntime:
             diagnostic = getattr(exc, "diagnostic", None)
             if diagnostic:
                 row["backend_error"] = diagnostic
-            return self._finish(session, Status.ERROR, f"{type(exc).__name__} in runtime backend")
+            code = diagnostic.get("code") if isinstance(diagnostic, dict) else None
+            return self._finish(
+                session,
+                Status.ERROR,
+                f"{type(exc).__name__} in runtime backend" + (f": {code}" if code else ""),
+            )
         finally:
             try:
                 self.action.release()
