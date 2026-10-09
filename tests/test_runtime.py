@@ -346,6 +346,28 @@ def test_abort_during_decision_blocks_late_action_and_releases():
     assert not thread.is_alive() and desktop.stage == 0 and desktop.released >= 1
 
 
+def test_head_setup_failure_has_safe_user_remediation_without_worker_payload():
+    from clef_use.backends import ModelWorkerError
+
+    desktop = FixtureDesktop()
+    private_payload = "private worker payload must not enter public status"
+
+    class InvalidHeadParser:
+        def parse(self, image):
+            raise ModelWorkerError(
+                {"error": "GroundingHeadProvenanceError", "message": private_payload}
+            )
+
+    executor = SessionRuntime(desktop, InvalidHeadParser(), fixture_runtime().decision, desktop)
+    session = Session(Contract(goal="Open File menu"))
+    result = executor.execute(session)
+    assert result["status"] == "ERROR"
+    assert "visual_head" in result["reason"] and "v3" in result["reason"]
+    assert private_payload not in result["reason"]
+    assert session.steps == desktop.stage == 0
+    assert desktop.released >= 1
+
+
 def test_backend_failure_redacts_exception_and_releases_input():
     desktop = FixtureDesktop()
 

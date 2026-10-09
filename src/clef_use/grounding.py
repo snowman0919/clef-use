@@ -31,6 +31,10 @@ class GroundingStrategyUnsupported(ValueError):
     """The loaded head has no training provenance for the requested coarse input."""
 
 
+class GroundingHeadProvenanceError(ValueError):
+    """Configured dense weights do not belong to the required audited head format."""
+
+
 SIGLIP_MODEL = "google/siglip2-base-patch16-512"
 SIGLIP_REVISION = "a89f5c5093f902bf39d3cd4d81d2c09867f0724b"
 
@@ -349,7 +353,9 @@ def load_grounding_head(path, *, dimension, device="cpu"):
             or metadata.get("backbone_revision") != SIGLIP_REVISION
             or metadata.get("temperature") != "1"
         ):
-            raise ValueError("grounding head provenance does not match the pinned dense model")
+            raise GroundingHeadProvenanceError(
+                "grounding head provenance does not match the pinned dense model"
+            )
         try:
             stored_dimension = int(metadata["dimension"])
             hidden_size = int(metadata["hidden_size"])

@@ -3,6 +3,38 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: qualified source and real dense-head setup failure
+
+- OBSERVED: official VRoid sample A/B primary usage flags and complete creator
+  terms were parent-verified. Existing private original binaries were located;
+  historical authorized mirror receipts and pinned remote byte hashes match.
+  This is not a new Hub download, a login bypass or a CC0 claim. Asset-specific
+  restrictions remain separate from the software license and release.
+- EXERCISED: canonical reviewer -> AGY Gemini, three immutable references and
+  two official multi-view source images. All five actual view_file calls, model
+  identity and image hashes verified. Source suitability PASS, rank V01 then
+  V02. V01 is qualified for technical inspection, not final avatar/rig approval.
+- EXERCISED: a fresh task-owned empty Blender 5.2 window on isolated display
+  :122 -> the actual CLI AUTO 'Open the File menu' contract. It failed before
+  input: 122 candidates routed VISUAL; the configured legacy v2 cheek head was
+  correctly refused by the audited v3 provenance gate. No compatible v3 head
+  was found under the existing hybrid-grounding cache. No avatar was imported.
+- FIXED: the public setup diagnostic, not grounding accuracy or GUI completion.
+  A typed GroundingHeadProvenanceError crosses the real worker boundary; runtime
+  presents a static visual_head/v3 remediation without exposing arbitrary worker
+  text. A red->green consumer regression preserves zero input and secret redaction.
+- RETRIED: same goal/constraints through the real stdio MCP server on the owned
+  runtime. Status ERROR, zero actions/decisions, now with the precise safe setup
+  explanation. Legacy weights were not relabeled, thresholds/defaults were not
+  weakened, and Blender/Python did not bypass the failed GUI operation.
+- MEASURED: local 503 passed / 16 skipped / 40 existing Pillow warnings; Ruff
+  and diff checks pass. MCP retry 68.578 s includes cold reload; it is not a
+  controlled speedup comparison with the earlier warm CLI failure.
+- OPEN: prepare genuinely auditable compatible UI grounding weights, then retry
+  the original File/import workflow and inspect actual source topology/rig and
+  matched renders. A scoped read-only audit is pending. No hosted validation,
+  new release or avatar distribution has occurred in this phase.
+
 ## 2026-10-10: source suitability separated from production acceptance
 
 - OBSERVED: `rank` mixed a source-compatibility question with the final-character

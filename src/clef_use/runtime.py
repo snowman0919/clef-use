@@ -923,11 +923,15 @@ class SessionRuntime:
             if diagnostic:
                 row["backend_error"] = diagnostic
             code = diagnostic.get("code") if isinstance(diagnostic, dict) else None
-            return self._finish(
-                session,
-                Status.ERROR,
-                f"{type(exc).__name__} in runtime backend" + (f": {code}" if code else ""),
-            )
+            reason = f"{type(exc).__name__} in runtime backend" + (f": {code}" if code else "")
+            if code == "GroundingHeadProvenanceError":
+                # Only this static domain diagnosis is public, never raw worker text.
+                reason = (
+                    "configured visual_head is incompatible; prepare an audited v3 "
+                    "checkpoint for the pinned backbone. Do not relabel legacy weights "
+                    "or bypass the provenance check."
+                )
+            return self._finish(session, Status.ERROR, reason)
         finally:
             try:
                 self.action.release()
