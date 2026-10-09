@@ -3,6 +3,17 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: honest isolated-environment readiness
+
+- OBSERVED: running the full suite with existing ML/app packages exposed an
+  ambient-path leak: an intentionally empty ML environment imported the
+  caller's Torch and appeared ready. Explicit PYTHONPATH poison was imported;
+  a foreign PYTHONHOME could prevent the interpreter from starting at all.
+- FIXED: readiness uses Python isolated mode and explicitly admits only the
+  probe's trusted sibling helper directory. No ML-environment install or lock
+  change. Real empty-environment/poison regressions fail before and pass after;
+  inherited app paths remain test harness context, never readiness evidence.
+
 ## 2026-10-10: scoped NF4 placement and unused host-table ownership
 
 - OBSERVED: installed Accelerate hook initialization recursively places the

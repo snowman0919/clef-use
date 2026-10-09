@@ -94,9 +94,19 @@ def test_explicit_cuda_does_not_become_cpu_ready(monkeypatch):
     assert "device" not in result
 
 
-def test_isolated_probe_rejects_missing_runtime_dependency(tmp_path):
+@pytest.mark.parametrize("ambient", [None, "PYTHONPATH", "PYTHONHOME"])
+def test_isolated_probe_rejects_missing_runtime_dependency(tmp_path, monkeypatch, ambient):
     from clef_use.installer import environment_binary
 
+    monkeypatch.delenv("PYTHONPATH", raising=False)
+    monkeypatch.delenv("PYTHONHOME", raising=False)
+    if ambient == "PYTHONPATH":
+        poison = tmp_path / "ambient"
+        poison.mkdir()
+        (poison / "torch.py").write_text('raise RuntimeError("ambient dependency was imported")\n')
+        monkeypatch.setenv("PYTHONPATH", str(poison))
+    elif ambient == "PYTHONHOME":
+        monkeypatch.setenv("PYTHONHOME", str(tmp_path / "nonexistent-prefix"))
     environment = tmp_path / "empty-ml-env"
     venv.EnvBuilder(with_pip=False).create(environment)
     report = diagnostics.ml_environment_probe(

@@ -130,4 +130,9 @@ def main():
 
 
 if __name__ == "__main__":
+    from pathlib import Path
+
+    # Isolated interpreter mode excludes ambient paths; only our own trusted
+    # sibling helpers are needed in addition to this environment's packages.
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
     main()

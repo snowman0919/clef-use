@@ -17,7 +17,14 @@ from .models import DECISION_MODELS, OMNI_SOURCE_REVISION, inventory
 def ml_environment_probe(python, kind, device, quantization="none", rocm_arch=None):
     try:
         result = subprocess.run(
-            [str(python), str(Path(__file__).with_name("ml_probe.py")), kind, device, quantization],
+            [
+                str(python),
+                "-I",
+                str(Path(__file__).with_name("ml_probe.py")),
+                kind,
+                device,
+                quantization,
+            ],
             capture_output=True,
             text=True,
             timeout=60,
