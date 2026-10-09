@@ -215,5 +215,20 @@ Do not promote the candidate using a model-card benchmark or replay-only result.
   No Blender accuracy labels or live E2E safety claim. See DECISION_MODELS.md.
 - Feature commit `a3c1b0e` is pushed; CI `37972241262` passed all six jobs,
   including native packaging/install/update failure-preservation checks.
-- OPEN: final release/update/public readback verification.
+- OBSERVED: release `v0.1.25` / source `1af8808` published. Exact-source CI
+  `37974286598` passed all six jobs; existing release `37974290815` passed all
+  15 native build/installer jobs, assembly and dev deployment. Public latest
+  is 0.1.25; every archive SHA256/runtime wheel, both bootstraps, checksum list
+  and immutable manifest were read back. Prior 0.1.24 manifest is unchanged.
+- OBSERVED: actual public Linux and Windows isolated 0.1.24 -> 0.1.25 updates
+  returned INSTALLED then CURRENT. Config and cache-sentinel bytes were preserved;
+  installed candidate catalog still reports active CLEF-Flash. No model setup,
+  desktop input or user PATH changes. Windows bootstrap bytes were HTTPS-fetched
+  on monad and SCP-staged after its Invoke-WebRequest stalled; installer bundle
+  fetching and update still used the public canonical distribution.
+- Scoped idle display :122 service was restored and its 0.1.25 / not-busy RPC
+  read back. See RELEASE.md and private goal-workspace verification JSON files.
+- Remaining promotion evidence only: live paired Blender/Windows/macOS success
+  and safety, labelled Blender quality, and a successful paired GPU baseline.
+  None is asserted by fixture replay or successful software deployment.
   Default remains `Cloudflare/clef-flash`; d1 status remains `candidate`.

@@ -225,3 +225,31 @@ and model/GUI results are in [E2E evidence](evidence/e2e-windows-monad-0.1.20.js
 including reused-cache, delayed-render recovery and Windows SSH terminal-wrapper
 limits. Documentation-only/diagnostic commits after the tag do not replace its
 artifacts.
+
+## Version 0.1.25
+
+Release `v0.1.25` uses immutable source
+`1af880856e00cecec13cd0b93a13705f5a31e56e`. Exact-source CI `37974286598`
+passed six native jobs; release `37974290815` passed all 15 platform/Python
+installer/update checks, assembly and the existing dev deployment. The GitHub
+release is published, non-prerelease, and marked latest. HTTPS latest is 0.1.25.
+
+All 15 public archive SHA256s and contained runtime wheels were read back,
+including the d1 hash lock, shared answer contract, model catalog and worker
+bytes. Root/version bootstraps, latest/version checksums and immutable manifests
+agree. Prior public 0.1.24 manifest bytes remain unchanged. Latest manifest SHA256:
+`d202f96d7f9c96a5c8bfeb1f27ef567a89e38c0091e6d6c5a9e66f83cc52c090`.
+
+Actual isolated Linux and Windows public 0.1.24 -> 0.1.25 updates returned
+INSTALLED, then CURRENT. Config and cache-sentinel bytes remained identical;
+installed catalog queries selected d1 without changing active CLEF-Flash.
+These checks skipped model setup and desktop input and did not alter user PATH.
+The Windows bootstrap was HTTPS-fetched on monad and SCP-staged after a stalled
+Invoke-WebRequest; the canonical installer itself downloaded the public bundle.
+Task-owned staging/verification prefixes were removed after evidence retention.
+
+See DECISION_MODELS.md for the authentic CPU/BF16 replay and limitations.
+d1 remains opt-in candidate: its progress-score regression and missing live
+paired task-success/safety evidence prohibit promotion. Packaging/deployment does
+not validate ML on every release target. Model weights, downloaded remote SDK
+code, private rasters, avatars and VRM assets are not runtime wheel contents.
