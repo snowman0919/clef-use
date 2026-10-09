@@ -124,3 +124,22 @@ Primary evidence: `docs/evidence/HOST_MEMORY_2026-10-09.json`.
 - OPEN: all five decisions remained LOW_CONFIDENCE (zero inputs). This proves
   work continuity, not Hair001 selection or Reici visual quality. SSD space
   and the separate bounded-candidate/model-confidence defect remain explicit.
+
+### 2026-10-10: desktop-owned runtime endpoints
+
+- Linux X11/Wayland desktop identity scopes the default endpoint directory;
+  local X11 screen-zero aliases share identity. Explicit state-dir overrides
+  remain supported but do not waive ownership checks.
+- Service health reports its captured desktop scope. Clients reject foreign or
+  legacy-unknown ownership before version-based shutdown, startup or dispatch.
+  Non-health service requests additionally require a matching desktop header.
+- Protocol regressions cannot initialize GUI/model backends or spawn runtimes.
+  Real :0 MCP observe against the :122 endpoint was refused, with the bounded
+  service PID/cgroup unchanged. The correct :122 observe returned a fresh frame.
+- The frame was blank and no Blender process was present; successful observation
+  is NOT evidence of Hair001 selection, completed GUI work or model quality.
+- MEASURED: full suite 452 passed / 16 skipped; changed-file Ruff and diff checks
+  pass. The prior default decision model and confidence/safety gates are unchanged.
+- Current user direction is the model-independent Decision Backend with d1-3B
+  as a candidate. Default promotion requires paired task-success/safety evidence,
+  including authentic Blender trajectories and Windows/macOS GUI coverage.

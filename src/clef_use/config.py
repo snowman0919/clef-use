@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import hashlib
+import json
 import os
+import re
+import sys
 import tomllib
 from pathlib import Path
 from typing import Literal
@@ -15,8 +19,28 @@ def config_path() -> Path:
     return Path(os.environ.get("CLEF_USE_CONFIG", Path.home() / ".config/clef-use/config.toml"))
 
 
+def desktop_scope() -> str | None:
+    if sys.platform != "linux":
+        return None
+    display = os.environ.get("DISPLAY")
+    wayland = os.environ.get("WAYLAND_DISPLAY")
+    if display:
+        alias = re.fullmatch(r"(:[0-9]+)\.0", display)
+        identity = ["x11", alias[1] if alias else display]
+    elif wayland:
+        identity = ["wayland", os.environ.get("XDG_RUNTIME_DIR", ""), wayland]
+    else:
+        return None
+    return hashlib.sha256(json.dumps(identity).encode()).hexdigest()
+
+
 def state_dir() -> Path:
-    return Path(os.environ.get("CLEF_USE_STATE_DIR", Path.home() / ".local/state/clef-use"))
+    override = os.environ.get("CLEF_USE_STATE_DIR")
+    if override is not None:
+        return Path(override)
+    root = Path.home() / ".local/state/clef-use"
+    scope = desktop_scope()
+    return root / "desktops" / scope if scope is not None else root
 
 
 class Config(StrictModel):

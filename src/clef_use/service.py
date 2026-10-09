@@ -12,7 +12,7 @@ from filelock import FileLock
 
 from . import __version__
 from .backends import runtime
-from .config import load_config, state_dir
+from .config import desktop_scope, load_config, state_dir
 from .runtime import Session
 from .schema import Contract, Status
 
@@ -25,6 +25,7 @@ class SessionLookupError(LookupError):
 
 class SessionManager:
     def __init__(self, factory=None):
+        self.desktop_scope = desktop_scope()
         self.factory = factory or (lambda: runtime(load_config(), state_dir() / "steps.jsonl"))
         self.runtime = None
         self.sessions = {}
@@ -110,7 +111,13 @@ class SessionManager:
         if operation == "continue":
             return self.continue_session(data["session_id"], data["instruction"])
         if operation == "health":
-            return {"ok": True, "pid": os.getpid(), "version": __version__, "busy": self.busy}
+            return {
+                "ok": True,
+                "pid": os.getpid(),
+                "version": __version__,
+                "busy": self.busy,
+                "desktop_scope": self.desktop_scope,
+            }
         if operation == "shutdown_idle":
             with self.lock:
                 if self.busy:
@@ -177,6 +184,18 @@ def make_server(manager, token):
                 return
             if self.headers.get("Content-Type") != "application/json":
                 self.send_error(415)
+                return
+            if (
+                self.path != "/health"
+                and manager.desktop_scope is not None
+                and self.headers.get("X-Clef-Desktop-Scope") != manager.desktop_scope
+            ):
+                raw = json.dumps({"error": "DESKTOP_MISMATCH"}).encode()
+                self.send_response(403)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(raw)))
+                self.end_headers()
+                self.wfile.write(raw)
                 return
             try:
                 length = int(self.headers.get("Content-Length", "0"))

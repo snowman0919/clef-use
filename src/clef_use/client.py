@@ -11,7 +11,7 @@ import urllib.request
 from filelock import FileLock
 
 from . import __version__
-from .config import load_config, state_dir
+from .config import desktop_scope, load_config, state_dir
 
 
 class RuntimeClient:
@@ -32,6 +32,7 @@ class RuntimeClient:
             headers={
                 "Authorization": "Bearer " + endpoint["token"],
                 "Content-Type": "application/json",
+                "X-Clef-Desktop-Scope": desktop_scope() or "",
             },
             method="POST",
         )
@@ -43,9 +44,19 @@ class RuntimeClient:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             return json.load(response)
 
+    def _check_desktop(self, health):
+        expected = desktop_scope()
+        if "desktop_scope" not in health and expected is not None:
+            raise RuntimeError(
+                "runtime desktop ownership is unknown; stop the legacy service explicitly"
+            )
+        if health.get("desktop_scope") != expected:
+            raise RuntimeError("runtime belongs to another desktop; match the desktop environment")
+
     def _ensure(self):
         try:
             health = self._send("health", {})
+            self._check_desktop(health)
             if not self.start or health.get("version") == __version__:
                 return
             if health.get("busy"):
@@ -58,6 +69,7 @@ class RuntimeClient:
         with FileLock(root / "start.lock", timeout=15):
             try:
                 health = self._send("health", {})
+                self._check_desktop(health)
                 if health.get("version") == __version__:
                     return
                 if health.get("busy"):
@@ -83,7 +95,8 @@ class RuntimeClient:
             deadline = time.monotonic() + 10
             while time.monotonic() < deadline:
                 try:
-                    self._send("health", {})
+                    health = self._send("health", {})
+                    self._check_desktop(health)
                     return
                 except (OSError, ValueError):
                     time.sleep(0.1)
