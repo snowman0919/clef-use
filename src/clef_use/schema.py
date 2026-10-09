@@ -26,7 +26,7 @@ class Contract(StrictModel):
     confidence_threshold: float = Field(default=0.55, ge=0.05, le=1)
     text_inputs: list[TextInput] = Field(default_factory=list, max_length=12)
     pointer_inputs: list[PointerInput] = Field(default_factory=list, max_length=8)
-    execution_mode: Literal["AUTO", "STRUCTURED", "VISUAL", "CANVAS"] = "AUTO"
+    execution_mode: Literal["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"] = "AUTO"
     visual_intent: VisualIntent | None = None
 
     @model_validator(mode="after")

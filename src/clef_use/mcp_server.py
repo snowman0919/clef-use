@@ -34,7 +34,7 @@ def create_server(client=None, update_request=""):
         execution_mode: str = "AUTO",
         visual_intent: VisualIntent | None = None,
     ) -> SessionResult:
-        """Execute a high-level GUI goal autonomously until a terminal or escalation event."""
+        """Execute a bounded GUI goal; ASSESS verifies it without permitting input."""
         config = load_config()
         contract = Contract(
             goal=goal,

@@ -381,15 +381,16 @@ class SessionRuntime:
             # whole-roster passthrough let dense Blender screens (100+ parser
             # objects, 48 candidates) overflow the decision model's context and
             # crash the worker with OUT_OF_MEMORY on the real CUDA checkpoint.
-            bounded = self.router.decision_observation(observation, candidates)
+            bounded = self.router.decision_observation(observation, candidates, session.contract)
             with _timing(row, "decision_ms"):
                 answer = self.decision.decide(bounded, session.contract, candidates, history)
             row.setdefault("clef_decisions", []).append(
                 {
-                    "confidence": answer.confidence,
-                    "entropy": answer.entropy,
-                    "mode": answer.mode,
+                    **answer.model_dump(mode="json"),
                     "candidate_count": len(candidates),
+                    "observation_id": bounded.id,
+                    "frame_reference": bounded.frame.reference().model_dump(mode="json"),
+                    "context_ids": [o.id for o in bounded.objects],
                 }
             )
             row.update(clef_confidence=answer.confidence, clef_entropy=answer.entropy)
@@ -410,7 +411,8 @@ class SessionRuntime:
             # BLOCKED can simply mean that this completion-only assessment has
             # no available action. Reassess actionability with a grounded target.
             if (
-                complete
+                route.mode == "ASSESS"
+                or complete
                 or assessment.mode in {"COMPLETED", "WAIT", "NEEDS_REPLAN"}
                 or assessment.safety_probability >= 0.5
                 or assessment.replan_probability >= 0.8
@@ -647,6 +649,13 @@ class SessionRuntime:
                         session,
                         Status.NEEDS_REPLAN,
                         "proposed completion lacks required visible condition evidence",
+                    )
+                if session.contract.execution_mode == "ASSESS":
+                    return self._finish(
+                        session,
+                        Status.NEEDS_REPLAN,
+                        "read-only assessment does not establish goal completion; "
+                        "no input permitted",
                     )
                 if decision.mode == "BLOCKED":
                     return self._blocked(
@@ -996,4 +1005,10 @@ class SessionRuntime:
 
             image.thumbnail((1280, 1280))
             result["image_png"] = encode_image(image)
+            result["preview_reference"] = {
+                "image_sha256": hashlib.sha256(image.tobytes()).hexdigest(),
+                "image_size": list(image.size),
+                "image_mode": image.mode,
+                "derived_from_frame_sha256": result["image_sha256"],
+            }
         return result

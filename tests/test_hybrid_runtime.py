@@ -105,6 +105,69 @@ def test_visible_dense_goal_is_assessed_before_grounding_or_input(probability, s
         assert result["reason"] == "goal and conditions verified on two fresh observations"
 
 
+@pytest.mark.parametrize("dense", [False, True])
+@pytest.mark.parametrize(
+    ("mode", "goal_probability", "safety", "expected"),
+    [
+        ("ACT", 0.2, 0.0, "NEEDS_REPLAN"),
+        ("COMPLETED", 0.99, 0.0, "COMPLETED"),
+        ("COMPLETED", 0.8, 0.0, "NEEDS_REPLAN"),
+        ("COMPLETED", 0.99, 0.75, "SAFETY_BLOCK"),
+    ],
+)
+def test_assessment_contract_never_creates_or_executes_input(
+    dense,
+    mode,
+    goal_probability,
+    safety,
+    expected,
+):
+    class AssessmentDesktop(DenseDesktop):
+        def parse(self, image):
+            return tuple(self._object(i) for i in range(160 if dense else 1))
+
+        def decide(self, observation, goal, candidates, history):
+            assert candidates == ()
+            return Decision(
+                mode=mode,
+                confidence=1.0,
+                goal_probability=goal_probability,
+                condition_probabilities=(goal_probability,),
+                safety_probability=safety,
+            )
+
+        def execute(self, *args):
+            pytest.fail("assessment is not permission to repeat input")
+
+    class ForbiddenInputPath:
+        def build(self, *args):
+            pytest.fail("read-only assessment must not create candidates")
+
+        def ground(self, *args, **kwargs):
+            pytest.fail("read-only assessment must not seek an input point")
+
+    desktop = AssessmentDesktop()
+    session = Session(
+        Contract(
+            goal="Settings",
+            success_conditions=["Settings open"],
+            execution_mode="ASSESS",
+            max_steps=3,
+        )
+    )
+    executor = runtime(desktop, ForbiddenInputPath())
+    executor.builder = ForbiddenInputPath()
+    result = executor.execute(session)
+    assert result["status"] == expected
+    assert result["steps"] == 0 and session.last_effect is None
+    assert result["rounds"] == (2 if expected == "COMPLETED" else 1)
+    trace = session.history[0]["clef_decisions"][0]
+    assert trace["goal_probability"] == goal_probability
+    assert trace["condition_probabilities"] == [goal_probability]
+    assert trace["safety_probability"] == safety
+    assert trace["candidate_count"] == 0
+
+
 def test_dense_runtime_executes_visual_and_verifies_completion():
     desktop = DenseDesktop()
     session = Session(Contract(goal="Settings", success_conditions=["Settings open"], max_steps=5))

@@ -3,6 +3,44 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: retain bounded evidence and assess without input
+
+- Parent verified the completed independent audit against primary code and saved
+  artifacts. The old first-eight hint policy preserved some text, not none, but
+  omitted dropdown entries. Singleton action none confidence1.0 is not completion
+  probability. The historical grounding failure lacked completion scores.
+- FIXED: unique genuine anchor plus observed rectangle distance prioritizes at
+  most eight raw context hints. No File dictionary, synthetic menu, action trust
+  upgrade or label/ID/bbox/null-confidence rewrite. Packet retains source and
+  observation/frame provenance. Existing32targets+8hints remain; object/32KiB
+  text overflow fails closed. The pinned encoder preflights with a larger bound
+  and refuses >8192tokens before unchanged8192-token inference, never silently
+  clipping completion evidence. This repeats CPU encoding, not a speedup claim.
+- ADDED: opt-in ASSESS in the existing MCP/CLI goal contract; no sixth tool or
+  low-level click API. It constructs no candidates, performs no spatial input
+  grounding and cannot deliver input. Existing safety/mode/completion gates,
+  including two fresh stable positive observations, remain unchanged. Raw model
+  completion/condition scores are now retained even before grounding failure.
+- FIXED: observe thumbnails carry their own pixel identity and native parent hash;
+  a1280x720preview is not the1920x1080model input. Old saved mismatches remain
+  disclosed, not relabeled. No native foreground metadata is invented.
+- ACTUAL: real stdio sessioncca0c740d2dd4a73bbd52580855a1544, original File goal/
+  conditions/constraints/max_steps3, delivery policy only changed AUTO->ASSESS.
+  Already-open starting state; actual CLEF-FlashNF4/default and task8GiB limit.
+  One decision/zero new inputs; modeACT0.4498, goal0.0943, condition0.0772,
+  safety0.0185, replan0.6109. ResultLOW_CONFIDENCE, notCOMPLETED. OOM/kill deltas
+ 0/0. Menu context really reached the model; this correction did not establish
+  actual completion recognition. No unchanged retry or previous-click repeat.
+- VERIFIED: full local533passed/18skipped; isolated ML565passed/4skipped. Existing
+  Pillow/profiler warnings remain. Actual setup reload owned PID2013293, idle;
+  no model installs, training, asset import, default switch or new release.
+- RISK M1: meta projection replacement is only valid for the pinned immutable
+  untied CLEF joint-head consumer. Full HF forward/generate or later output
+  embedding mutation is unsupported; static audit found no current pinned-path
+  defect. Owner reclamation is not ample-memory or numeric whole-model proof.
+- OPEN: File dropdown stays visibly open and empty scene unchanged, but runtime
+  success still unverified. Overall avatar/rig/physics/Gemini gates incomplete.
+
 ## 2026-10-10: assess visible dense goals without redundant targeting
 
 - FIXED: the completion-only CLEF assessment precedes non-structured target
@@ -207,7 +245,7 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
 ## Ported and green (432 passed, 10 skipped)
 
-- Contracts: `schema.py` (Contract.execution_mode AUTO/STRUCTURED/VISUAL/CANVAS,
+- Contracts: `schema.py` (Contract.execution_mode AUTO/STRUCTURED/VISUAL/CANVAS/ASSESS,
   visual_intent), `interfaces.py` (Capture/Perception/Decision/ActionBackend/Verifier
   Protocols), `config.py`.
 - Structured path: `candidates.py`, `objects.py`, `mcp_server.py`, `cli.py`.

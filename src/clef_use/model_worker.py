@@ -91,6 +91,7 @@ class CpuEmbeddingRows:
 
 
 def offload_output_embeddings(model, *, path=None, dtype=None):
+    """Pinned immutable CLEF joint-head rows; not HF generation or embedding mutation."""
     import torch
 
     embedding = model.language_model.get_output_embeddings()
@@ -173,9 +174,10 @@ class ClefWorker:
         self.model_revision = revision
         path = model_path(config, config["decision_model"], revision)
         sys.path.insert(0, str(path))
-        from joint_schema_model import load_release_model, systemone
+        from joint_schema_model import encode_record, load_release_model, systemone
 
         self.systemone = systemone
+        self.encode_record = encode_record
         quantization = config.get("quantization", "none")
         if quantization == "4bit" and self.backend == "mps":
             raise RuntimeError("NF4 is not enabled for the MPS profile")
@@ -255,6 +257,15 @@ class ClefWorker:
             record["images"] = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
             record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
+            # The pinned encoder clips state to its token budget. Encode with
+            # a larger bound first: <=8192 proves no clipping at the real bound;
+            # >=16384 is already a refusal, not a larger inference allowance.
+            encoded = self.encode_record(
+                self.processor.tokenizer, record, max_length=16384, processor=self.processor
+            )
+            if len(encoded.input_ids) > 8192:
+                raise ValueError("decision would truncate observed evidence at the token budget")
+            del encoded
             return self.systemone(self.model, self.processor, record, max_length=8192)
         finally:
             if self.device == "mps":

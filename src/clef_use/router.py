@@ -57,6 +57,8 @@ class ExecutionRouter:
         )
         # Count potential actions before CandidateBuilder truncates its output.
         count = sum(len(o.actions) for o in objects)
+        if contract.execution_mode == "ASSESS":
+            return Route("ASSESS", count, "read-only goal assessment; no action proposals")
         if contract.pointer_inputs or contract.execution_mode == "STRUCTURED":
             return Route("STRUCTURED", count, "explicit structured/pixel contract")
         if contract.execution_mode in {"VISUAL", "CANVAS"}:
@@ -227,19 +229,37 @@ class ExecutionRouter:
             ),
         )
 
-    def decision_observation(self, observation, candidates):
-        """Bound CLEF context as well as its choice set; keep relevant OCR hints."""
+    def decision_observation(self, observation, candidates, contract):
+        """Keep bounded evidence near a unique observed anchor, not new actions."""
         from .schema import Observation
 
         ids = {a.target for a in candidates if a.target is not None}
-        targets = [o for o in observation.objects if o.id in ids]
-        # Cap at the decision model's context budget (~8k tokens total): one
-        # serialized object is roughly 90 tokens. Overflow previously crashed
-        # the CUDA worker (dogfood F3: 123 objects + 48 candidates on Blender).
-        targets = targets[:32]
-        hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive][
-            :8
+        targets = [o for o in observation.objects if o.id in ids][:32]
+        hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive]
+        query = contract.visual_intent.query if contract.visual_intent else contract.goal
+        anchors = [
+            o
+            for o in self.scoped_observation(observation, contract).objects
+            if o.label.strip().casefold() == query.strip().casefold()
+            and not o.sensitive
+            and o.visible is not False
+            and o.occluded is not True
         ]
+        if len(anchors) == 1:
+            anchor = anchors[0]
+
+            def rank(obj):
+                box, reference = obj.bbox, anchor.bbox
+                dx = max(reference.x1 - box.x2, box.x1 - reference.x2, 0)
+                dy = max(reference.y1 - box.y2, box.y1 - reference.y2, 0)
+                return (obj.id != anchor.id, dx * dx + dy * dy, box.y1, box.x1, obj.id)
+
+            hints.sort(key=rank)
+        # A missing or ambiguous anchor grants no spatial inference. Neither
+        # hint selection nor raw OCR geometry changes the executable choice set.
         return Observation(
-            observation.id, observation.frame, tuple(targets + hints), evidence=observation.evidence
+            observation.id,
+            observation.frame,
+            tuple(targets + hints[:8]),
+            evidence=observation.evidence,
         )

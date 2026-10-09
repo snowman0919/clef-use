@@ -32,7 +32,9 @@ def parser():
     run.add_argument("goal")
     run.add_argument("--success", action="append", default=[])
     run.add_argument("--constraint", action="append", default=[])
-    run.add_argument("--mode", choices=["AUTO", "STRUCTURED", "VISUAL", "CANVAS"], default="AUTO")
+    run.add_argument(
+        "--mode", choices=["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"], default="AUTO"
+    )
     run.add_argument("--visual-query")
     run.add_argument("--coarse-strategy", choices=("tiled", "overview"), default="tiled")
     run.add_argument("--max-steps", type=int)

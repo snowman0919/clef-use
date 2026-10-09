@@ -82,7 +82,7 @@ def test_clef_modes_and_effect_use_one_joint_structured_worker_request():
     assert calls[0]["state"]["allowed_candidates"] == []
 
 
-def test_unknown_actionability_is_omitted_from_model_state_without_claiming_true():
+def test_unknown_actionability_is_preserved_as_null_without_claiming_true():
     from clef_use.backends import decision_request
     from clef_use.schema import Observation
 
@@ -91,7 +91,7 @@ def test_unknown_actionability_is_omitted_from_model_state_without_claiming_true
     payload = decision_request(
         observation, Contract(goal="test", success_conditions=["done"]), (), []
     )
-    assert "enabled" not in payload["state"]["objects"][0]
+    assert payload["state"]["objects"][0]["enabled"] is None
     assert observation.objects[0].enabled is None
     assert list(payload["questions"])[-2:] == ["mode", "effect"]
     assert list(payload["questions"]).index("complete") < list(payload["questions"]).index(

@@ -22,6 +22,25 @@ def previous_observation(executor, session):
     executor.capture.stage = 1
 
 
+def test_observe_preview_has_its_own_pixel_identity_and_native_parent():
+    import hashlib
+
+    from clef_use.schema import Frame
+
+    executor = fixture_runtime()
+    executor.capture.capture = lambda: Frame(Image.new("RGB", (1920, 1080), "white"))
+    result = executor.observe(include_image=True)
+    image = Image.open(io.BytesIO(base64.b64decode(result["image_png"])))
+    assert image.size == (1280, 720)
+    assert result["preview_reference"] == {
+        "image_sha256": hashlib.sha256(image.tobytes()).hexdigest(),
+        "image_size": [1280, 720],
+        "image_mode": "RGB",
+        "derived_from_frame_sha256": result["frame_reference"]["image_sha256"],
+    }
+    assert result["preview_reference"]["image_sha256"] != result["image_sha256"]
+
+
 def test_idle_observe_refreshes_without_actions_or_decisions():
     executor = fixture_runtime()
     session = Session(Contract(goal="test"), status=Status.NEEDS_REPLAN)

@@ -25,6 +25,39 @@ def observation(count, **fields):
     )
 
 
+def test_actionless_context_uses_unique_observed_anchor_not_roster_prefix():
+    router = ExecutionRouter(Config())
+    items = tuple(
+        UIObject(
+            id=f"context_{i}",
+            label=label,
+            role="text",
+            source=("ocr",),
+            bbox=BoundingBox(x1=x, y1=y, x2=x + 0.03, y2=y + 0.01),
+        )
+        for i, (label, x, y) in enumerate(
+            [(f"Unrelated {i}", 0.7, 0.6 + i * 0.01) for i in range(9)]
+            + [
+                ("Tools ", 0.02, 0.01),
+                ("Add Item", 0.025, 0.03),
+                ("Recent Items", 0.025, 0.05),
+                ("Raw_OCR_", 0.025, 0.07),
+            ]
+        )
+    )
+    contract = Contract(goal="Show Tools", visual_intent=VisualIntent(query="Tools"))
+    obs = Observation("context_epoch", Frame(Image.new("RGB", (1000, 500))), items)
+    bounded = router.decision_observation(obs, (), contract)
+    ids = {o.id for o in bounded.objects}
+    assert {o.id for o in items[-4:]} <= ids
+    assert len(bounded.objects) <= 8
+    assert all(o == next(x for x in items if x.id == o.id) for o in bounded.objects)
+    assert all(not o.actions and o.confidence is None for o in bounded.objects)
+    assert bounded.id == obs.id and bounded.frame is obs.frame
+    reordered = Observation(obs.id, obs.frame, tuple(reversed(items)))
+    assert router.decision_observation(reordered, (), contract).objects == bounded.objects
+
+
 def test_raw_candidate_explosion_routes_before_truncation():
     router = ExecutionRouter(Config(structured_candidate_threshold=24), grounder=object())
     route = router.route(observation(160), Contract(goal="Settings"))

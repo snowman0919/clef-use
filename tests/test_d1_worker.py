@@ -116,7 +116,8 @@ def test_clef_adapter_supplies_its_required_model_tag_without_leaking_it_to_comm
     worker.device = "cpu"
     worker.decision_model = "Cloudflare/clef-flash"
     worker.model = object()
-    worker.processor = object()
+    worker.processor = SimpleNamespace(tokenizer=object())
+    worker.encode_record = lambda *_args, **_kwargs: SimpleNamespace(input_ids=range(10))
     seen = []
 
     def systemone(model, processor, record, max_length):

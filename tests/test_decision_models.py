@@ -49,6 +49,84 @@ def test_d1_is_an_unpromoted_candidate_and_inventory_matches_its_single_file_rel
     assert report["available"] is False
 
 
+def test_decision_packet_retains_context_provenance_without_action_authority():
+    from PIL import Image
+
+    from clef_use.backends import decision_request
+    from clef_use.schema import BoundingBox, Frame, UIObject
+
+    obj = UIObject(
+        id="raw_id",
+        label="Raw_OCR_ ",
+        role="text",
+        source=("ocr",),
+        bbox=BoundingBox(x1=0.01, y1=0.02, x2=0.03, y2=0.04),
+    )
+    obs = Observation("same_epoch", Frame(Image.new("RGB", (100, 50))), (obj,))
+    packet = decision_request(obs, Contract(goal="Inspect"), (), [])
+    assert packet["state"]["objects"] == [obj.model_dump(mode="json")]
+    assert packet["state"]["observation_id"] == obs.id
+    assert packet["state"]["frame_reference"] == obs.frame.reference().model_dump(mode="json")
+    assert packet["state"]["allowed_candidates"] == []
+    assert list(packet["questions"]["action"]["criteria"]) == ["none"]
+    assert "evidence" in packet["state"]["context_policy"]
+    # Oversized genuine evidence is refused, not silently rewritten/truncated.
+    huge = obj.model_copy(update={"label": "x" * 40000})
+    with pytest.raises(ValueError, match="bounded text budget"):
+        decision_request(Observation(obs.id, obs.frame, (huge,)), Contract(goal="Inspect"), (), [])
+
+
+def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():
+    from clef_use.backends import decision_request
+
+    desktop = FixtureDesktop()
+    base = desktop.parse(None)[0]
+    obs = Observation(
+        "overflow",
+        desktop.capture(),
+        tuple(base.model_copy(update={"id": f"record_{i}"}) for i in range(41)),
+    )
+    with pytest.raises(ValueError, match="bounded object budget"):
+        decision_request(obs, Contract(goal="Inspect"), (), [])
+
+
+@pytest.mark.parametrize("tokens", [8192, 8193, 16384])
+def test_clef_worker_refuses_sdk_state_truncation_before_inference(tokens, monkeypatch):
+    from types import SimpleNamespace
+
+    monkeypatch.syspath_prepend(str(Path(__file__).parents[1] / "src" / "clef_use"))
+    from clef_use.model_worker import ClefWorker
+
+    worker = ClefWorker.__new__(ClefWorker)
+    worker.device = "cpu"
+    worker.decision_model = "Cloudflare/clef-flash"
+    worker.model = object()
+    worker.processor = SimpleNamespace(tokenizer=object())
+    calls = []
+
+    def encode(tokenizer, record, *, max_length, processor):
+        assert max_length > 8192
+        assert processor is worker.processor and tokenizer is processor.tokenizer
+        return SimpleNamespace(input_ids=range(tokens))
+
+    def systemone(model, processor, record, *, max_length):
+        calls.append(record)
+        assert max_length == 8192
+        return {"answers": {}}
+
+    # Tokenizer/ML inference are external boundaries here, not numerical proof.
+    worker.encode_record = encode
+    worker.systemone = systemone
+    record = {"state": {"objects": []}, "questions": {"complete": {"type": "noul"}}}
+    if tokens > 8192:
+        with pytest.raises(ValueError, match="truncate observed evidence"):
+            worker.request(record)
+        assert not calls
+    else:
+        worker.request(record)
+        assert len(calls) == 1
+
+
 def test_canonical_packet_has_required_instructions_without_changing_clef_score_prompt():
     from clef_use.backends import decision_request
 

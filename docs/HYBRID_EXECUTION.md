@@ -25,7 +25,14 @@ flowchart TD
 
 ## Routing and contracts
 
-`Contract.execution_mode` is `AUTO`, `STRUCTURED`, `VISUAL`, or `CANVAS`. This
+`Contract.execution_mode` is `AUTO`, `STRUCTURED`, `VISUAL`, `CANVAS`, or `ASSESS`.
+`ASSESS` is read-only goal verification: no candidate construction, spatial
+input grounding, or input delivery. It retains the existing two-fresh-observation
+completion and safety gates; insufficient evidence returns `NEEDS_REPLAN` or
+`LOW_CONFIDENCE`, never input permission.
+Use it after a delivered input with uncertain runtime outcome, rather than
+blindly repeating the action. AUTO and its input policy remain unchanged.
+The execution contract
 is distinct from CLEF's `ACT`, `WAIT`, `BLOCKED`, `COMPLETED`, and `NEEDS_REPLAN`.
 AUTO counts valid interactive actions **before** CandidateBuilder truncation.
 The threshold applies within a supplied target region; logs retain the full

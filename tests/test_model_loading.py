@@ -41,7 +41,7 @@ def test_worker_precision_runs_real_torch_forward(
         model = torch.nn.Linear(3, 2, bias=False, dtype=dtype)
         with torch.no_grad():
             model.weight.copy_(weight)
-        return model.eval(), None
+        return model.eval(), SimpleNamespace(tokenizer=object())
 
     def systemone(model, processor, record, **kwargs):
         return model(record["inputs"].to(model.weight.dtype)).tanh()
@@ -49,7 +49,11 @@ def test_worker_precision_runs_real_torch_forward(
     monkeypatch.setitem(
         sys.modules,
         "joint_schema_model",
-        SimpleNamespace(load_release_model=load_release_model, systemone=systemone),
+        SimpleNamespace(
+            load_release_model=load_release_model,
+            systemone=systemone,
+            encode_record=lambda *_args, **_kwargs: SimpleNamespace(input_ids=range(10)),
+        ),
     )
     values = {"device": device, "model_dir": tmp_path}
     if precision is not None:
@@ -100,7 +104,7 @@ def test_cpu_worker_preserves_causal_attention_without_quadratic_score_storage(
             return Qwen3_5TextModel(config).to(dtype=dtype).eval()
 
     def load_release_model(path, *, dtype, attn_implementation, **kwargs):
-        return make_model(dtype, attn_implementation), None
+        return make_model(dtype, attn_implementation), SimpleNamespace(tokenizer=object())
 
     def systemone(model, processor, record, **kwargs):
         return model(**record, use_cache=False).last_hidden_state
@@ -111,6 +115,7 @@ def test_cpu_worker_preserves_causal_attention_without_quadratic_score_storage(
         SimpleNamespace(
             load_release_model=load_release_model,
             systemone=systemone,
+            encode_record=lambda *_args, **_kwargs: SimpleNamespace(input_ids=range(10)),
         ),
     )
     config = Config(device="cpu", model_dir=tmp_path, cpu_compute_dtype=precision)

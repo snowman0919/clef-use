@@ -5,7 +5,12 @@ Five tools are exported: `computer_run`, `computer_continue`, `computer_observe`
 MCP calls do not expose per-click primitives.
 
 `computer_run(goal, success_conditions=[], constraints=[], max_steps=30,
-confidence_threshold=0.55, text_inputs=[], pointer_inputs=[])` returns structured session status.
+confidence_threshold=0.55, text_inputs=[], pointer_inputs=[], execution_mode="AUTO")`
+returns structured session status. Use `execution_mode="ASSESS"` to verify the
+same visible goal without constructing candidates, grounding an input target,
+or delivering another input. Completion still requires the normal two fresh
+positive observations and safety gates; weaker evidence escalates. CLI uses
+`clef-use run <goal> --mode ASSESS`. The default remains input-capable AUTO.
 `text_inputs` contains exact `value` and optional `target_label`; text inferred
 from a goal is limited to quoted strings and numeric expressions. No arbitrary
 model-generated strings or coordinates are accepted. A planner may explicitly
@@ -77,7 +82,10 @@ for an exhausted or aborted session. Observe refreshes the screen and object map
 execution owns the desktop, it returns the latest cached observation with
 `observation_fresh=false`. Objects, image hash and optional PNG share one
 `observation_id`. Observation never consumes the action/decision budget. `include_image=true` returns MCP PNG
-content at up to 1280 pixels; there is no permanent screenshot file or cloud
+content at up to 1280 pixels. `preview_reference` identifies these transport
+pixels and names their original parent hash; `frame_reference` remains the
+native-resolution input reference. Their pixel hashes are not interchangeable.
+There is no permanent screenshot file or cloud
 upload. Status/abort accept an optional session ID (latest session by default).
 Cancellation of a running MCP request also aborts its session.
 

@@ -182,6 +182,7 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip):
         "joint_schema_model",
         SimpleNamespace(
             load_release_model=load,
+            encode_record=lambda *_args, **_kwargs: None,
             systemone=lambda *_: None,
         ),
     )
@@ -217,7 +218,9 @@ def test_clef_passes_both_pixel_bounds_to_processor(monkeypatch):
     worker = object.__new__(worker_module.ClefWorker)
     worker.device = "cuda"
     worker.decision_model = "Cloudflare/clef-flash"
-    worker.model, worker.processor = object(), object()
+    worker.model = object()
+    worker.processor = SimpleNamespace(tokenizer=object())
+    worker.encode_record = lambda *_args, **_kwargs: SimpleNamespace(input_ids=range(10))
 
     def systemone(_model, _processor, request, **kwargs):
         recorded.update(request)
