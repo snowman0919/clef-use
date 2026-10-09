@@ -3,6 +3,36 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: source suitability separated from production acceptance
+
+- OBSERVED: `rank` mixed a source-compatibility question with the final-character
+  recognition rule. Source previews are now ranked as reusable infrastructure,
+  with repeated labels treated as additional views of one asset. Production
+  gates retain the strict identity rule; this does not lower final quality.
+- Host-owned `review_scope` separates `source_suitability` from
+  `production_stage`. A base PASS cannot carry a final-stage label, and a stage
+  review cannot be relabeled by reviewer output. Two red->green regressions
+  exercise these consumer-visible output boundaries.
+- EXERCISED: actual CLI parser/rank handler -> sandboxed AGY Gemini, three
+  immutable canonical references plus seven original BOOTH images. All ten
+  view_file calls are DONE, model identity and before/after SHA256s verified;
+  raw process/events are retained in private evidence. Runtime 86.229 s.
+- RESULT: independent source review returned FAIL, ranking B01 before B07.
+  Neither is selected. Framing evidence is better, but marketing still images
+  do not establish reusable topology, deformation or physics. Do not retry to
+  manufacture a PASS, recommend purchase from this result or call it final
+  avatar acceptance.
+- Primary asset-specific Japanese licenses were read in full (9 and 10 pages).
+  Modification/format conversion are permitted for legitimate users; original
+  model redistribution is not planned. The software embedding clause addresses
+  embedding AND distribution, not private screenshot-based testing alone.
+  Commission/corporate/commercial conditions remain separate. No asset binary
+  was acquired or imported; private evidence is excluded from software releases.
+- MEASURED: local 498 passed / 16 skipped / 40 existing Pillow warnings; active
+  Ruff and diff checks pass. No Actions dispatch or release rebuild is needed
+  for this source-review helper-only change. Live Blender editing remains NOT_RUN
+  in this phase because an acceptable, legitimately acquired base is not ready.
+
 ## 2026-10-10: independent CV review path repaired
 
 - OBSERVED: the shared AGY reviewer previously ignored native structured_output

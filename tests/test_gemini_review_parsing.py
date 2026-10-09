@@ -134,6 +134,52 @@ def test_prose_wrapped_verdict_parses(reviewer):
     assert reviewer(_agy_json(body))["verdict"] == "FAIL"
 
 
+def test_base_selection_pass_cannot_be_labeled_final_review(monkeypatch, tmp_path, capsys):
+    module = _load()
+    reference = tmp_path / "reference.png"
+    candidate = tmp_path / "candidate.png"
+    reference.write_bytes(b"reference CLI argument fixture")
+    candidate.write_bytes(b"candidate CLI argument fixture")
+    monkeypatch.setattr(
+        module,
+        "run_agy",
+        lambda *args: {
+            "verdict": "PASS",
+            "review_scope": "production_stage",
+            "stage": "final",
+        },
+    )
+    args = module.argparse.Namespace(reference=[str(reference)], candidate=[f"B01={candidate}"])
+    assert module.cmd_rank(args) == 0
+    verdict = json.loads(capsys.readouterr().out)
+    assert verdict["review_scope"] == "source_suitability"
+    assert "stage" not in verdict
+
+
+def test_production_gate_pass_is_bound_to_requested_stage(monkeypatch, tmp_path, capsys):
+    module = _load()
+    reference = tmp_path / "reference.png"
+    render = tmp_path / "render.png"
+    reference.write_bytes(b"reference CLI argument fixture")
+    render.write_bytes(b"render CLI argument fixture")
+    monkeypatch.setattr(
+        module,
+        "run_agy",
+        lambda *args: {
+            "verdict": "PASS",
+            "review_scope": "source_suitability",
+            "stage": "final",
+        },
+    )
+    args = module.argparse.Namespace(
+        reference=[str(reference)], render=str(render), stage="face", log=None
+    )
+    assert module.cmd_gate(args) == 0
+    verdict = json.loads(capsys.readouterr().out)
+    assert verdict["review_scope"] == "production_stage"
+    assert verdict["stage"] == "face"
+
+
 def test_unparsable_response_fails_closed(reviewer):
     parsed = reviewer(_agy_json("I cannot see the images."))
     assert parsed["verdict"] == "FAIL"

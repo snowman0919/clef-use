@@ -36,13 +36,17 @@ VERDICT_SCHEMA = {
     "required": ["verdict", "top_mismatches", "severity", "correction_targets"],
 }
 
-STRICT_RULES = """STRICT CV REVIEWER RULES:
+EVIDENCE_RULES = """STRICT CV REVIEWER RULES:
 - You MUST open and look at every image file path given. Judge ONLY visible pixels.
 - Do not praise. Do not infer intended quality. If you cannot see it, say UNKNOWN.
 - Same colors / same ribbon / same flowers are NOT sufficient for identity.
 - Identity = face geometry + eye design + hair silhouette + outfit + proportions.
-- Verdict PASS only if a fan of the reference character would recognize this avatar
-  from the reviewed views alone."""
+"""
+STRICT_RULES = (
+    EVIDENCE_RULES
+    + """- Verdict PASS only if a fan of the reference character
+  would recognize this avatar from the reviewed views alone."""
+)
 
 
 def failed_review(reason: str) -> dict:
@@ -183,18 +187,27 @@ def cmd_rank(args: argparse.Namespace) -> int:
     lines = [
         "Independent blind ranking task for candidate source assets toward a 3D",
         "avatar of the reference character (first image(s) are canonical reference).",
-        STRICT_RULES,
+        EVIDENCE_RULES,
+        "This is SOURCE SUITABILITY, not a production or final-identity gate.",
+        "Each candidate label is one source asset; repeated labels are additional",
+        "views of that asset. Rank each unique label once, using all its views.",
         "Rank ALL candidates on: face structure compatibility, head proportions,",
         "eye layout/style, body proportions, hair potential, anime-style fit,",
         "modification effort, and RISK the final result still reads as the source",
         "avatar rather than the reference character. Best first.",
-        "Return PASS only for a suitable technical base, REVISE for gaps, FAIL if none fit.",
+        "PASS means a visibly compatible source worth inspecting after legitimate",
+        "acquisition, not that its current hair/outfit already depicts the character.",
+        "REVISE for critical missing views; FAIL for visible structural unsuitability.",
+        "State actual framing/crops per file; do not invent unseen legs or numerical",
+        "proportions from unmatched perspective. Rig/deformation stays UNKNOWN.",
         "Do NOT infer license, acquisition rights, rig integrity or final-avatar approval.",
         "rank=[labels best..worst], top_mismatches=main risks, severity of overall gap,",
         "correction_targets=what the chosen base must change. Set evidence_only=true.",
         "Candidates: " + ", ".join(f"{label}={p.name}" for label, p in cands),
     ]
     verdict = run_agy(paths, "\n".join(lines), VERDICT_SCHEMA)
+    verdict["review_scope"] = "source_suitability"
+    verdict.pop("stage", None)
     print(json.dumps(verdict, ensure_ascii=False))
     return {"PASS": 0, "REVISE": 1}.get(verdict.get("verdict", "FAIL"), 2)
 
@@ -217,6 +230,8 @@ def cmd_gate(args: argparse.Namespace) -> int:
     if args.log:
         lines.append(f"Evidence log for context only (do not grade from it): {args.log}")
     verdict = run_agy(paths, "\n".join(lines), VERDICT_SCHEMA)
+    verdict["review_scope"] = "production_stage"
+    verdict["stage"] = args.stage
     print(json.dumps(verdict, ensure_ascii=False))
     return {"PASS": 0, "REVISE": 1}.get(verdict.get("verdict", "FAIL"), 2)
 
