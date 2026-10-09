@@ -31,6 +31,8 @@ class DenseDesktop(FixtureDesktop):
                 goal_probability=0.99,
                 condition_probabilities=(0.99,),
             )
+        if not candidates:
+            return Decision(mode="BLOCKED", confidence=0.0)
         return Decision(action=candidates[0].id, confidence=0.99)
 
 
@@ -60,6 +62,47 @@ def runtime(desktop, grounder):
         Config(settle_seconds=0, screen_interval=0.005),
         grounder=grounder,
     )
+
+
+@pytest.mark.parametrize(
+    ("probability", "safety", "status"),
+    [(0.99, 0.0, "COMPLETED"), (0.8, 0.0, "NEEDS_REPLAN"), (0.99, 0.75, "SAFETY_BLOCK")],
+)
+def test_visible_dense_goal_is_assessed_before_grounding_or_input(probability, safety, status):
+    class SatisfiedDesktop(DenseDesktop):
+        def __init__(self):
+            super().__init__()
+            self.stage = 1
+
+        def parse(self, image):
+            return tuple(self._object(i) for i in range(160))
+
+        def decide(self, observation, goal, candidates, history):
+            assert not candidates
+            return Decision(
+                mode="COMPLETED",
+                confidence=0.0,
+                goal_probability=probability,
+                condition_probabilities=(probability,),
+                safety_probability=safety,
+            )
+
+        def execute(self, action, observation, cancelled):
+            pytest.fail("already-visible goal must not trigger redundant input")
+
+    class NoActionGrounder:
+        def ground(self, *args, **kwargs):
+            pytest.fail("completion does not require a new grounded input target")
+
+    desktop = SatisfiedDesktop()
+    session = Session(Contract(goal="Settings", success_conditions=["Settings open"], max_steps=3))
+    result = runtime(desktop, NoActionGrounder()).execute(session)
+    assert result["status"] == status, result
+    assert result["steps"] == 0
+    assert session.last_effect is None
+    if status == "COMPLETED":
+        assert result["rounds"] == 2
+        assert result["reason"] == "goal and conditions verified on two fresh observations"
 
 
 def test_dense_runtime_executes_visual_and_verifies_completion():

@@ -395,9 +395,11 @@ class SessionRuntime:
             row.update(clef_confidence=answer.confidence, clef_entropy=answer.entropy)
             return answer
 
-        if route.mode != "STRUCTURED" and session.last_effect is not None:
-            # Observe the prior effect before asking for another target. A completed
-            # action can legitimately make its target disappear from the screen.
+        if route.mode != "STRUCTURED":
+            # Assess the visible goal before demanding an input target, including
+            # an already-satisfied first frame. A menu transition can remove its
+            # original target. An empty proposal group never authorizes input;
+            # completion and safety still pass the normal evidence gates below.
             assessment = decide()
             conditions = assessment.condition_probabilities
             complete = (

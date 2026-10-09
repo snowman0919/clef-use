@@ -3,6 +3,32 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: assess visible dense goals without redundant targeting
+
+- FIXED: the completion-only CLEF assessment precedes non-structured target
+  grounding even on a first frame with no previous effect. An already-visible
+  goal does not require a new input point. This is a zero-proposal assessment,
+  not permission to act on OCR text or bypass grounding for new input.
+- VERIFIED: red->green dense first-frame tests require zero input, two fresh
+  observations for strong completion, refusal of weaker completion with no
+  independent effect witness, and safety veto even when the goal is visible.
+  Existing completion probabilities, calibrated prior-effect requirement,
+  safety/replan thresholds and action confidence remain unchanged.
+- EXERCISED: same actual File request, now starting with its physically open
+  dropdown, reached actual CLEF assessment with zero proposals; CLEF chose ACT,
+  then the unchanged dense confidence gate (0.0) returned NEEDS_REPLAN/no input.
+  The new assessment path is exercised; it did NOT fix this model's goal
+  recognition or establish runtime completion. Captured genuine OCR File/New/
+  Open Recent/Save/Import facts have no action proposals. The bounded empty
+  context may discard useful read-only text: INFERRED, independent audit pending.
+- VERIFIED integrated final source: local 518 passed / 18 skipped; isolated ML
+  full suite 550 passed / 4 skipped, with dependency-dependent parametrization.
+  Ruff, scoped formatting and diff checks pass. No ordinary Actions, new model
+  training, default-model promotion, checkpoint relabel or Blender import.
+- OPEN: runtime completion/grounding remains blocked; physical File menu stays
+  open, empty V01 scene untouched. Private evidence and weights remain outside
+  distribution. Goal is not complete; public release remains 0.1.25.
+
 ## 2026-10-10: honest isolated-environment readiness
 
 - OBSERVED: running the full suite with existing ML/app packages exposed an
