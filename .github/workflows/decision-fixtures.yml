@@ -1,0 +1,30 @@
+name: Native owned-view decision fixtures
+
+'on':
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  macos-owned-view:
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - name: Checkout fixture source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Collect native owned-view stages (not OS screenshot or input)
+        env:
+          FIXTURE_OUTPUT: ${{ runner.temp }}/native-decision-fixtures-macos-${{ github.run_id }}-${{ github.run_attempt }}
+        run: swift -swift-version 5 scripts/macos_decision_fixture.swift "$FIXTURE_OUTPUT"
+      - name: Upload native owned-view fixtures (not desktop or task E2E)
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-decision-fixtures-macos
+          path: |
+            ${{ runner.temp }}/native-decision-fixtures-macos-${{ github.run_id }}-${{ github.run_attempt }}/manifest.json
+            ${{ runner.temp }}/native-decision-fixtures-macos-${{ github.run_id }}-${{ github.run_attempt }}/*.png
+          if-no-files-found: error
+          retention-days: 7
