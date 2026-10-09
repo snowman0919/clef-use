@@ -347,11 +347,16 @@ class SessionRuntime:
         )
         with _timing(row, "candidate_ms"):
             structured_observation = self.router.scoped_observation(observation, session.contract)
-            if route.native_target is not None:
+            if route.native_target is not None or route.semantic_targets:
+                targets = (
+                    {route.native_target}
+                    if route.native_target is not None
+                    else set(route.semantic_targets)
+                )
                 structured_observation = Observation(
                     observation.id,
                     observation.frame,
-                    tuple(o for o in observation.objects if o.id == route.native_target),
+                    tuple(o for o in structured_observation.objects if o.id in targets),
                 )
             candidates = (
                 self.builder.build(structured_observation, session.contract)
@@ -367,6 +372,8 @@ class SessionRuntime:
                 a for a in candidates if a.operation == session.contract.visual_intent.operation
             )
         row["clef_candidate_count"] = len(candidates)
+        if route.semantic_targets and {a.target for a in candidates} != set(route.semantic_targets):
+            raise GroundingUncertain("semantic targets exceed the bounded action budget")
 
         def decide():
             row["clef_calls"] += 1

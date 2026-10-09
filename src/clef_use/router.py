@@ -16,6 +16,7 @@ class Route:
     candidate_count: int
     reason: str
     native_target: str | None = None
+    semantic_targets: tuple[str, ...] = ()
 
 
 class GroundingUncertain(RuntimeError):
@@ -83,6 +84,28 @@ class ExecutionRouter:
         ]
         if len(native) == 1:
             return Route("STRUCTURED", count, "unique native semantic target", native[0].id)
+        if intent is not None and intent.target_geometry == "point":
+            # OCR-backed labels are useful proposals, not trusted native clicks.
+            # Match display text without mutating its original label or identity;
+            # CLEF still selects/vetoes within this observation-bound subset.
+            semantic = tuple(
+                o.id
+                for o in objects
+                if o.label.strip().casefold() == query.strip()
+                and "click" in o.actions
+                and any(
+                    s in {"ocr", "ax", "dom", "native", "uia", "atspi"} or s.endswith("_ocr")
+                    for s in o.source
+                )
+            )
+            limit = min(self.config.structured_candidate_threshold, self.config.max_candidates)
+            if query.strip() and 0 < len(semantic) <= limit:
+                return Route(
+                    "STRUCTURED",
+                    count,
+                    "bounded semantic target candidates",
+                    semantic_targets=semantic,
+                )
         if not objects:
             return Route("CANVAS", count, "no useful interactive UI candidates")
         scoped_count = sum(len(o.actions) for o in objects)

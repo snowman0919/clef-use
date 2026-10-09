@@ -95,6 +95,113 @@ def test_step_latency_includes_wait_intervals_without_logging_internal_clock(mon
     assert all("_step_started" not in row for row in session.history)
 
 
+def test_dense_ocr_target_uses_bounded_clef_selection_before_visual_grounding():
+    from clef_use.schema import BoundingBox, UIObject
+
+    class MenuDesktop(DenseDesktop):
+        def parse(self, image):
+            objects = super().parse(image)
+            # Opening a menu leaves its menubar entry present.
+            return (
+                *objects,
+                UIObject(
+                    id="execute-menu",
+                    label="Execute ",
+                    bbox=BoundingBox(x1=0.1, y1=0.2, x2=0.6, y2=0.5),
+                    actions=frozenset({"click", "double_click"}),
+                    source=("box_yolo_content_ocr",),
+                ),
+            )
+
+        def execute(self, action, observation, cancelled):
+            assert action.target == "execute-menu"
+            assert action.operation == "click"
+            return super().execute(action, observation, cancelled)
+
+    desktop = MenuDesktop()
+    session = Session(
+        Contract(
+            goal="Open the Execute menu and stop when it is visible",
+            success_conditions=["Execute menu visible"],
+            visual_intent=VisualIntent(query="Execute"),
+            max_steps=3,
+        )
+    )
+    result = runtime(desktop, FixedGrounder(0.1)).execute(session)
+    assert result["status"] == "COMPLETED", result
+    assert result["steps"] == 1
+    assert desktop.stage == 1
+    first = session.history[0]
+    assert first["mode"] == "STRUCTURED"
+    assert first["clef_candidate_count"] == 1
+    assert first["clef_calls"] == 1
+    assert not first.get("native_direct")
+    assert first["clef_confidence"] == 0.99
+    assert "visual_grounding" not in first
+
+
+def test_semantic_subset_cannot_drop_ambiguous_targets_at_the_action_budget():
+    class AmbiguousMenus(DenseDesktop):
+        def _object(self, i):
+            obj = super()._object(i)
+            return (
+                obj.model_copy(
+                    update={
+                        "label": "Execute",
+                        "source": ("ocr",),
+                        "actions": frozenset({"click", "double_click"}),
+                    }
+                )
+                if i < 12
+                else obj
+            )
+
+    desktop = AmbiguousMenus()
+    executor = SessionRuntime(
+        desktop,
+        desktop,
+        desktop,
+        desktop,
+        Config(max_candidates=12, settle_seconds=0, screen_interval=0.005),
+        grounder=FixedGrounder(0.1),
+    )
+    session = Session(
+        Contract(
+            goal="Open Execute menu",
+            visual_intent=VisualIntent(query="Execute"),
+            max_steps=1,
+        )
+    )
+    result = executor.execute(session)
+    assert result["status"] == "NEEDS_REPLAN"
+    assert result["steps"] == 0
+    assert desktop.stage == 0
+
+
+@pytest.mark.parametrize("unsafe", [False, True])
+def test_ocr_semantic_subset_does_not_bypass_clef_confidence_or_safety(unsafe):
+    class UnapprovedMenu(DenseDesktop):
+        def _object(self, i):
+            obj = super()._object(i)
+            return obj.model_copy(update={"source": ("ocr",)}) if i == 0 else obj
+
+        def decide(self, observation, goal, candidates, history):
+            return Decision(
+                action=candidates[0].id,
+                confidence=0.2,
+                safety_probability=0.9 if unsafe else 0,
+            )
+
+    desktop = UnapprovedMenu()
+    session = Session(Contract(goal="Settings", visual_intent=VisualIntent(query="Settings")))
+    result = runtime(desktop, FixedGrounder(0.1)).execute(session)
+    assert result["status"] == ("SAFETY_BLOCK" if unsafe else "NEEDS_REPLAN")
+    assert result["steps"] == 0
+    assert desktop.stage == 0
+    assert not session.history[0].get("native_direct")
+    assert session.history[0]["clef_calls"] == 1
+
+
 def test_low_visual_confidence_escalates_without_input():
     desktop = DenseDesktop()
     session = Session(Contract(goal="Settings"))

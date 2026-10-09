@@ -3,6 +3,47 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: existing V3 recovery and bounded semantic routing
+
+- OBSERVED: the independent read-only audit found an existing overview+tiled V3
+  checkpoint outside the previously inspected hybrid cache. Parent verified its
+  full SHA256, original manifest bytes, all 20 image hashes and 80 annotated rows;
+  copied 26 exact files into a private durable bundle without changing metadata.
+  Canonical `load_grounding_head` ran in the real isolated ML environment:
+  finite payload, non-initial weights and both trained strategies accepted.
+  No new training, legacy relabeling, threshold weakening or weight publication.
+- The task-only config differs from the global config solely in `visual_head`.
+  The owned display service reads that config via a runtime-only override; MCP
+  callers must pass the same config. Global settings and CLEF-Flash/NF4 remain.
+  Format/readiness compatibility is not evidence of UI grounding accuracy.
+- EXERCISED: actual stdio MCP retried the original File-menu goal/conditions/
+  constraints. V3 loading no longer fails, but visual confidence remained zero;
+  a concise referential-query replan also safely returned NEEDS_REPLAN with zero
+  input. Earlier zero *exact* File labels did not prove absence: the actual
+  observation contains the OCR-backed interactive label `File ` with whitespace.
+- FIXED: AUTO now bounds explicitly named OCR/native display-text proposals
+  before applying whole-screen candidate density. Raw labels and IDs remain
+  unchanged; this is not an OCR-to-native trust upgrade or automatic click.
+  CLEF still chooses/vetoes with unchanged confidence/safety policy, and explicit
+  geometry/operations/regions remain binding. If canonical action-budget limits
+  omit any ambiguous matched target, replan without input rather than silently
+  selecting from an incomplete subset. No Blender-specific label or coordinate.
+- EXERCISED: real stdio MCP on the same owned empty Blender, same goal and
+  constraints plus explicit query `File`: 120 raw candidates -> STRUCTURED ->
+  one CLEF proposal. The downstream CLEF NF4 load failed OUT_OF_MEMORY before
+  input, not a dense-context overflow. RTX 3080 10GB; actual exception attempted
+  1.89GiB with 1.83GiB free. Pinned input/output embedding headers each contain
+  BF16 [248320,4096], 2034237440 bytes. Input-table placement is a hypothesis,
+  not a proven tensor attribution or a completed memory fix.
+- VERIFIED: local 518 passed / 16 skipped / 41 existing Pillow warnings; Ruff
+  and diff checks pass. Red->green regressions cover both bounded OCR selection
+  and incomplete action-budget refusal; safety, region, geometry, ambiguity and
+  untrusted-caption exclusions remain covered. Ordinary Actions stay disabled.
+- OPEN: independent read-only memory-placement/API audit is pending. File menu
+  remains closed, original workflow NOT COMPLETED, V01 not imported; rig/physics/
+  matched renders remain NOT_RUN. Private weights/evidence stay outside releases.
+  Cold and warm attempts have different load states: no controlled speedup claim.
+
 ## 2026-10-10: qualified source and real dense-head setup failure
 
 - OBSERVED: official VRoid sample A/B primary usage flags and complete creator

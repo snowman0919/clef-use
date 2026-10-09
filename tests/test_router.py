@@ -45,6 +45,100 @@ def test_sparse_and_native_semantic_precedence():
     assert route.native_target == "0"
 
 
+def test_ocr_display_target_bounds_dense_candidates_without_native_trust():
+    router = ExecutionRouter(Config(), grounder=object())
+    obs = observation(160)
+    targets = tuple(
+        o.model_copy(update={"label": label, "source": ("box_yolo_content_ocr",)})
+        for o, label in zip(obs.objects[:2], ("Apply", "Apply "), strict=True)
+    )
+    obs = Observation(obs.id, obs.frame, (*targets, *obs.objects[2:]))
+    route = router.route(
+        obs, Contract(goal="Apply the operation", visual_intent=VisualIntent(query="Apply"))
+    )
+    assert route.mode == "STRUCTURED"
+    assert route.semantic_targets == ("0", "1")
+    assert route.native_target is None
+    assert targets[1].label == "Apply "
+
+
+@pytest.mark.parametrize(
+    "fields",
+    [
+        {"sensitive": True},
+        {"visible": False},
+        {"enabled": False},
+        {"occluded": True},
+        {"actions": frozenset({"type"})},
+        {"source": ("box_yolo_content_yolo",)},
+    ],
+)
+def test_ineligible_semantic_target_cannot_replace_dense_grounding(fields):
+    router = ExecutionRouter(Config(), grounder=object())
+    obs = observation(160)
+    target = obs.objects[0].model_copy(
+        update={"label": "Apply", "source": ("box_yolo_content_ocr",), **fields}
+    )
+    obs = Observation(obs.id, obs.frame, (target, *obs.objects[1:]))
+    route = router.route(
+        obs, Contract(goal="Apply the operation", visual_intent=VisualIntent(query="Apply"))
+    )
+    assert route.mode == "VISUAL"
+    assert not route.semantic_targets
+    assert route.native_target is None
+
+
+def test_semantic_matching_is_exact_and_excludes_out_of_region_targets():
+    router = ExecutionRouter(Config(), grounder=object())
+    obs = observation(160)
+    target = obs.objects[0].model_copy(update={"label": "Apply all", "source": ("ocr",)})
+    obs = Observation(obs.id, obs.frame, (target, *obs.objects[1:]))
+    contract = Contract(goal="Apply", visual_intent=VisualIntent(query="Apply"))
+    assert router.route(obs, contract).mode == "VISUAL"
+    contract = contract.model_copy(
+        update={
+            "visual_intent": VisualIntent(
+                query="Apply", region=BoundingBox(x1=0.6, y1=0.6, x2=0.9, y2=0.9)
+            )
+        }
+    )
+    target = target.model_copy(update={"label": "Apply"})
+    obs = Observation(obs.id, obs.frame, (target, *obs.objects[1:]))
+    assert router.route(obs, contract).mode == "CANVAS"
+    assert not router.route(obs, contract).semantic_targets
+
+
+@pytest.mark.parametrize("count,expected", [(12, "STRUCTURED"), (13, "VISUAL")])
+def test_semantic_candidates_do_not_silently_truncate_ambiguous_targets(count, expected):
+    router = ExecutionRouter(
+        Config(structured_candidate_threshold=24, max_candidates=12), grounder=object()
+    )
+    obs = observation(160)
+    matches = tuple(
+        o.model_copy(update={"label": "Apply", "source": ("ocr",)}) for o in obs.objects[:count]
+    )
+    obs = Observation(obs.id, obs.frame, (*matches, *obs.objects[count:]))
+    route = router.route(obs, Contract(goal="Apply", visual_intent=VisualIntent(query="Apply")))
+    assert route.mode == expected
+    assert len(route.semantic_targets) == (count if expected == "STRUCTURED" else 0)
+
+
+def test_horizontal_line_request_is_not_replaced_by_semantic_point_click():
+    router = ExecutionRouter(Config(), grounder=object())
+    obs = observation(160)
+    target = obs.objects[0].model_copy(update={"label": "Apply", "source": ("ocr",)})
+    obs = Observation(obs.id, obs.frame, (target, *obs.objects[1:]))
+    route = router.route(
+        obs,
+        Contract(
+            goal="Apply",
+            visual_intent=VisualIntent(query="Apply", target_geometry="horizontal_line"),
+        ),
+    )
+    assert route.mode == "VISUAL"
+    assert not route.semantic_targets
+
+
 def test_canvas_contract_does_not_depend_on_omniparser_objects():
     router = ExecutionRouter(Config(), grounder=object())
     contract = Contract(
