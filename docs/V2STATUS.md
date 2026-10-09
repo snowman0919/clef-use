@@ -3,6 +3,28 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: independent CV review path repaired
+
+- OBSERVED: the shared AGY reviewer previously ignored native structured_output
+  and could accept a PASS from a failed process/envelope. Red regressions reproduce
+  both failures; it now parses actual event/result streams, retains typed output,
+  and fails closed on unsuccessful transport.
+- Reviews use the explicitly observed Gemini model in plan+sandbox mode, not
+  auto-approved write permissions. Every requested image needs a DONE view_file
+  record; before/after SHA256s bind the verdict to the actual immutable files.
+  Model identity and hashes are retained; temporary schema files are removed.
+- Real shared-adapter execution inspected 11 original shortlist inputs and six
+  follow-up inputs. A raw PASS falsely claimed full-leg visibility in a cropped
+  source preview. A separate Gemini original-pixel audit returned FAIL. Selection
+  remains on HOLD; image-open traces prove inspection, not semantic correctness.
+- No asset purchase/import, Blender scene mutation, model-default promotion or
+  final visual-quality approval occurred. Private references/previews/reviews stay
+  outside software source/release artifacts. See the private production ledger
+  and TASK_STATE.md for remaining matched-view, acquisition, rights and rig gates.
+- MEASURED: local full suite 496 passed / 16 skipped, with 40 existing Pillow
+  deprecation warnings. Active-tree Ruff and diff checks pass. GitHub Actions
+  was not dispatched; standalone CI/fixture workflows stay disabled.
+
 ## Ported and green (432 passed, 10 skipped)
 
 - Contracts: `schema.py` (Contract.execution_mode AUTO/STRUCTURED/VISUAL/CANVAS,

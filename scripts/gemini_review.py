@@ -15,6 +15,7 @@ Exit: 0 PASS, 1 REVISE, 2 FAIL/ERROR. Machine-readable verdict on stdout last li
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import shutil
 import subprocess
@@ -44,12 +45,33 @@ STRICT_RULES = """STRICT CV REVIEWER RULES:
   from the reviewed views alone."""
 
 
-def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
+def failed_review(reason: str) -> dict:
+    return {
+        "verdict": "FAIL",
+        "top_mismatches": [reason],
+        "severity": "critical",
+        "correction_targets": ["restore reviewer evidence or transport"],
+        "evidence_only": False,
+    }
+
+
+def run_agy(paths: list[Path], prompt: str, schema: dict | None) -> dict:
     agy = shutil.which("agy")
     if agy is None:
         raise SystemExit("agy CLI not found")
+    paths = [p.resolve() for p in paths]
+    input_hashes = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}
     dirs = sorted({str(p.parent) for p in paths})
-    cmd = [agy, "--output-format", "json", "--dangerously-skip-permissions"]
+    cmd = [
+        agy,
+        "--output-format",
+        "stream-json",
+        "--mode",
+        "plan",
+        "--sandbox",
+        "--model",
+        "gemini-3.1-pro-high",
+    ]
     schema_file = None
     if schema is not None:
         schema_file = tempfile.NamedTemporaryFile(  # noqa: SIM115
@@ -62,12 +84,56 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
         cmd += ["--add-dir", d]
     file_list = "\n".join(f"- {p}" for p in paths)
     full = f"{prompt}\n\nIMAGE FILES (open and inspect each):\n{file_list}\n"
-    cmd += ["--print", full]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=1500)  # noqa: S603
+    cmd += ["--print=" + full]
+    try:
+        result = subprocess.run(cmd, capture_output=True, text=True, timeout=1500)  # noqa: S603
+    finally:
+        if schema_file is not None:
+            Path(schema_file.name).unlink(missing_ok=True)
     out = result.stdout.strip()
+    if result.returncode != 0:
+        return failed_review(f"reviewer process exited {result.returncode}")
     if not out:
-        raise SystemExit(f"agy produced no output: {result.stderr[:400]}")
-    payload = json.loads(out)
+        raise SystemExit("agy produced no output")
+    events = []
+    try:
+        try:
+            payload = json.loads(out)
+        except json.JSONDecodeError:
+            events = [json.loads(line) for line in out.splitlines() if line.strip()]
+            results = [event["result"] for event in events if event.get("event") == "result"]
+            if len(results) != 1:
+                return failed_review("reviewer stream needs exactly one final result")
+            payload = results[0]
+    except (json.JSONDecodeError, KeyError, TypeError):
+        return failed_review("reviewer transport output unparsable")
+    if payload.get("event") == "result":
+        payload = payload["result"]
+    if payload.get("status", "SUCCESS") != "SUCCESS":
+        return failed_review("reviewer transport did not succeed")
+    proof = {}
+    if paths:
+        models = [
+            event.get("init", {}).get("model") for event in events if event.get("event") == "init"
+        ]
+        if models != ["gemini-3.1-pro-high"]:
+            return failed_review("requested independent Gemini model not observed")
+        opened = set()
+        for event in events:
+            step = event.get("step_update", {})
+            if step.get("tool_name") == "view_file" and step.get("state") == "DONE":
+                value = step.get("tool_info", {}).get("parameters", {}).get("AbsolutePath")
+                if isinstance(value, str):
+                    opened.add(str(Path(value).resolve()))
+        if not set(input_hashes) <= opened:
+            return failed_review("reviewer did not inspect every requested image")
+        for p in paths:
+            if hashlib.sha256(p.read_bytes()).hexdigest() != input_hashes[str(p)]:
+                return failed_review("reviewed image changed during review")
+        proof = {"_review_evidence": {"model": models[0], "input_sha256": input_hashes}}
+    structured = payload.get("structured_output")
+    if isinstance(structured, dict) and "verdict" in structured:
+        return {**structured, **proof}
     body = payload.get("response", "")
     # response may itself be the schema JSON
     try:
@@ -100,7 +166,7 @@ def run_agy(paths: list[Path], prompt: str, schema: dict) -> dict:
                 "evidence_only": False,
                 "_raw": body[:800],
             }
-    return verdict
+    return {**verdict, **proof}
 
 
 def cmd_rank(args: argparse.Namespace) -> int:
@@ -122,7 +188,8 @@ def cmd_rank(args: argparse.Namespace) -> int:
         "eye layout/style, body proportions, hair potential, anime-style fit,",
         "modification effort, and RISK the final result still reads as the source",
         "avatar rather than the reference character. Best first.",
-        "Return verdict=PASS if a clear legal base exists in the set (else REVISE),",
+        "Return PASS only for a suitable technical base, REVISE for gaps, FAIL if none fit.",
+        "Do NOT infer license, acquisition rights, rig integrity or final-avatar approval.",
         "rank=[labels best..worst], top_mismatches=main risks, severity of overall gap,",
         "correction_targets=what the chosen base must change. Set evidence_only=true.",
         "Candidates: " + ", ".join(f"{label}={p.name}" for label, p in cands),

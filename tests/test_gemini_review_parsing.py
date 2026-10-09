@@ -24,17 +24,95 @@ def _load():
 def reviewer(monkeypatch):
     module = _load()
 
-    def run_with(response: str):
-        completed = subprocess.CompletedProcess(args=[], returncode=0, stdout=response, stderr="")
+    def run_with(response: str, returncode: int = 0, paths: list[Path] | None = None):
+        completed = subprocess.CompletedProcess(
+            args=[], returncode=returncode, stdout=response, stderr=""
+        )
         monkeypatch.setattr(module.shutil, "which", lambda _name: "/bin/true")
         monkeypatch.setattr(subprocess, "run", lambda *a, **k: completed)
-        return module.run_agy([], "prompt", None)
+        return module.run_agy(paths or [], "prompt", None)
 
     return run_with
 
 
 def _agy_json(body):
     return json.dumps({"response": body})
+
+
+def test_actual_agy_structured_output_is_not_lost(reviewer):
+    verdict = {
+        "verdict": "REVISE",
+        "top_mismatches": ["eye aperture"],
+        "severity": "major",
+        "correction_targets": ["capture matched front and profile"],
+        "evidence_only": True,
+    }
+    envelope = {"status": "SUCCESS", "response": "", "structured_output": verdict}
+    parsed = reviewer(json.dumps(envelope))
+    assert parsed == verdict
+
+
+def test_actual_agy_native_event_stream_is_parsed(reviewer):
+    verdict = {
+        "verdict": "REVISE",
+        "top_mismatches": ["body evidence incomplete"],
+        "severity": "major",
+        "correction_targets": ["capture body proportions"],
+        "evidence_only": True,
+    }
+    stream = "\n".join(
+        json.dumps(event)
+        for event in [
+            {"event": "init", "init": {"model": "gemini-3.1-pro-high"}},
+            {
+                "event": "result",
+                "result": {"status": "SUCCESS", "structured_output": verdict},
+            },
+        ]
+    )
+    assert reviewer(stream) == verdict
+
+
+def test_a_pass_without_inspecting_every_requested_image_is_refused(reviewer, tmp_path):
+    reference = tmp_path / "reference.png"
+    candidate = tmp_path / "candidate.png"
+    reference.write_bytes(b"reference transport fixture")
+    candidate.write_bytes(b"candidate transport fixture")
+    verdict = {
+        "verdict": "PASS",
+        "top_mismatches": [],
+        "severity": "none",
+        "correction_targets": [],
+        "evidence_only": True,
+    }
+    events = [
+        {"event": "init", "init": {"model": "gemini-3.1-pro-high"}},
+        {
+            "event": "step_update",
+            "step_update": {
+                "state": "DONE",
+                "tool_name": "view_file",
+                "tool_info": {"parameters": {"AbsolutePath": str(reference)}},
+            },
+        },
+        {"event": "result", "result": {"status": "SUCCESS", "structured_output": verdict}},
+    ]
+    stream = "\n".join(json.dumps(event) for event in events)
+    parsed = reviewer(stream, paths=[reference, candidate])
+    assert parsed["verdict"] == "FAIL"
+    assert parsed["evidence_only"] is False
+
+
+@pytest.mark.parametrize("returncode,status", [(1, "SUCCESS"), (0, "ERROR")])
+def test_transport_failure_cannot_supply_a_pass(reviewer, returncode, status):
+    envelope = {
+        "status": status,
+        "response": "",
+        "structured_output": {"verdict": "PASS", "evidence_only": True},
+    }
+    parsed = reviewer(json.dumps(envelope), returncode=returncode)
+    assert parsed["verdict"] == "FAIL"
+    assert parsed["evidence_only"] is False
 
 
 def test_plain_verdict_parses(reviewer):
