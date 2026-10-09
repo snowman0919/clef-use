@@ -207,6 +207,13 @@ Do not promote the candidate using a model-card benchmark or replay-only result.
 - MEASURED: complete active suite 491 passed / 16 skipped; CI-scoped Ruff lint,
   formatting and diff checks pass. Frozen `old/` is untouched. The whole-tree
   formatting check exposed only frozen legacy style differences, not a V2 error.
-- OPEN: expanded cross-platform paired measurements, coherent feature commit
-  and release/update verification. See DECISION_MODELS.md for the shared API and license notices.
+- MEASURED: expanded authentic nine-case CPU/BF16 comparison completed: 54 real
+  responses with paired hashes, different worker PIDs and the same SDK/device.
+  CLEF 63/63 versus d1 54/63 known-field judgments (21 unique fields x 3 repeats),
+  zero false-completion choices in both. Warm medians 19.858s versus 1.614s;
+  peak RSS 10.627GiB versus 6.656GiB. d1 progress regresses on three GUI frames.
+  No Blender accuracy labels or live E2E safety claim. See DECISION_MODELS.md.
+- Feature commit `a3c1b0e` is pushed; CI `37972241262` passed all six jobs,
+  including native packaging/install/update failure-preservation checks.
+- OPEN: final release/update/public readback verification.
   Default remains `Cloudflare/clef-flash`; d1 status remains `candidate`.

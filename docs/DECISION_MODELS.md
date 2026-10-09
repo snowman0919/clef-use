@@ -105,3 +105,40 @@ maintained/improved same-task success and safety. Smaller latency or a successfu
 model initialization alone cannot satisfy that condition. A native AppKit
 owned-view fixture is genuine macOS rendering, but is explicitly not OS-input
 E2E evidence.
+
+### Observed comparison: 2026-10-10
+
+Authentic corpus: two archived Blender failure frames, one earlier Windows final
+frame, three new Windows owned-client screenshots, and three new macOS AppKit
+owned-view renders. Nine cases x three repeated requests x two isolated models
+produced 54 real responses with identical per-case input hashes. Seven labelled
+GUI cases supply 21 unique field judgments, repeated three times (63 per model);
+these repeats are not 63 independent examples. Blender quality remains unlabelled.
+
+Controlled profile: CPU BF16 on AMD Ryzen 7 9700X / 32GB-class host, eight Torch
+threads, Torch 2.11.0+cu130 / Transformers 5.14.1 / tokenizers 0.22.2, seed 0.
+Both workers use the same prepared SDK environment but retain their checkpoint's
+native image processing. No fitting/calibration; ordinal truth tolerance is half
+one declared level, fixed before this run. Resource bounds were MemoryHigh 10GiB,
+MemoryMax 12GiB and MemorySwapMax 1GiB. GPU deployment baseline loading OOMed;
+that separate failure is not combined with CPU timings.
+
+- CLEF-Flash: 63/63 known fields, zero false-completion choices; warm median
+  19.858s, mean 22.009s +/- 4.624s, range 17.513-30.610s; peak worker RSS 10.627GiB.
+- d1: 54/63 known fields (85.71%), zero false-completion choices; warm median
+  1.614s, mean 2.418s +/- 1.633s, range 1.432-7.702s; peak worker RSS 6.656GiB.
+
+The warm distributions mix different case sizes, not just same-frame jitter.
+Raw samples allow case-paired analysis. d1 underestimates progress on the earlier
+Windows final frame and both new Confirm frames; completion/button choices remain
+correct in this small split. Faster/lower-memory replay does not cancel this
+accuracy regression or establish maintained live-task safety. **No promotion.**
+
+Private canonical evidence: `reici-production/decision-backend-benchmark/` in the
+separate goal workspace. `native-cpu-paired-v2.json` SHA256:
+`9335be81e355628773e96df02a38adc8aa841f7a451967b5c02c3bc28c42380f`.
+The corpus and raw GUI/Blender images are not software-release assets. Windows
+build 26200.9457 / Session 1 readbacks and macOS 15.7.9 ARM64 runner
+`37968411148` verify native fixture provenance, not live input or task E2E.
+The canonical d1 `DecisionBackend` also ran on the real macOS Confirm raster;
+its valid ACT/a0 result verifies adapter integration only, not action delivery.
