@@ -115,8 +115,9 @@ produced 54 real responses with identical per-case input hashes. Seven labelled
 GUI cases supply 21 unique field judgments, repeated three times (63 per model);
 these repeats are not 63 independent examples. Blender quality remains unlabelled.
 
-Controlled profile: CPU BF16 on AMD Ryzen 7 9700X / 32GB-class host, eight Torch
-threads, Torch 2.11.0+cu130 / Transformers 5.14.1 / tokenizers 0.22.2, seed 0.
+Controlled profile: CPU BF16 on AMD Ryzen 7 9700X / 32GB-class host,
+Torch 2.11.0+cu130 / Transformers 5.14.1 / tokenizers 0.22.2, seed 0.
+NOT_RECORDED: replay-worker thread count; timings are not a portable guarantee.
 Both workers use the same prepared SDK environment but retain their checkpoint's
 native image processing. No fitting/calibration; ordinal truth tolerance is half
 one declared level, fixed before this run. Resource bounds were MemoryHigh 10GiB,
