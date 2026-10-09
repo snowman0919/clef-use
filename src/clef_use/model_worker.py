@@ -154,6 +154,8 @@ class ClefWorker:
         self.backend = select_backend(torch, requested)
         self.device = torch_device(self.backend)
         revision = MODEL_REVISIONS[config["decision_model"]]
+        self.decision_model = config["decision_model"]
+        self.model_revision = revision
         path = model_path(config, config["decision_model"], revision)
         sys.path.insert(0, str(path))
         from joint_schema_model import load_release_model, systemone
@@ -228,6 +230,7 @@ class ClefWorker:
                 offload_output_embeddings(self.model, path=path, dtype=dtype)
 
     def request(self, record):
+        record = {**record, "model": self.decision_model}
         # The pinned release backbone's vision tower supports exactly one image;
         # a second raster fails inside its linear projection (verified on the real
         # CUDA checkpoint, 2026-10-08). Effect evidence therefore travels as a
@@ -240,6 +243,80 @@ class ClefWorker:
             record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
             return self.systemone(self.model, self.processor, record, max_length=8192)
+        finally:
+            if self.device == "mps":
+                import torch
+
+                torch.mps.empty_cache()
+
+
+def load_d1_model(path, *, device, dtype):
+    import transformers
+
+    if transformers.__version__ != "5.14.1":
+        raise RuntimeError(
+            "d1 worker requires pinned transformers 5.14.1; prepare its own environment"
+        )
+    return transformers.AutoModel.from_pretrained(
+        str(path),
+        trust_remote_code=True,
+        local_files_only=True,
+        code_revision=MODEL_REVISIONS["LiquidAI/d1-3B"],
+        dtype=dtype,
+        device_map={"": str(device)},
+        attn_implementation="sdpa",
+    )
+
+
+class D1Worker:
+    def __init__(self, config):
+        if config["decision_model"] != "LiquidAI/d1-3B":
+            raise ValueError("d1 worker only accepts LiquidAI/d1-3B")
+        if config.get("quantization", "none") != "none":
+            raise ValueError(
+                "d1 candidate currently requires quantization none; CLEF NF4 is separate"
+            )
+        import torch
+
+        requested = config["device"]
+        if config.get("ml_profile", "auto") not in {"auto", "default"}:
+            requested = resolve_profile(config["ml_profile"], requested).backend
+        self.backend = select_backend(torch, requested)
+        self.device = torch_device(self.backend)
+        dtype = (
+            getattr(torch, config.get("cpu_compute_dtype", "float32"))
+            if self.device == "cpu"
+            else torch.float16
+            if self.device == "mps"
+            else torch.bfloat16
+            if (torch.xpu if self.backend == "xpu" else torch.cuda).is_bf16_supported()
+            else torch.float16
+        )
+        self.decision_model = config["decision_model"]
+        self.model_revision = MODEL_REVISIONS[self.decision_model]
+        path = model_path(config, self.decision_model, self.model_revision)
+        self.model = load_d1_model(path, device=self.device, dtype=dtype).eval()
+        self.model.engine.token_budget = 8192
+        self.compute_dtype = str(dtype).removeprefix("torch.")
+        # d1 executes its tied lm_head. CLEF's never-executed-head offload and
+        # quantizer exclusions must not be transplanted into this worker.
+
+    def request(self, record):
+        images = None
+        if record.get("image"):
+            image = Image.open(io.BytesIO(base64.b64decode(record["image"]))).convert("RGB")
+            max_pixels = 512 * 512
+            if image.width * image.height > max_pixels:
+                scale = (max_pixels / (image.width * image.height)) ** 0.5
+                image = image.resize(
+                    (max(1, int(image.width * scale)), max(1, int(image.height * scale))),
+                    Image.Resampling.BICUBIC,
+                )
+            images = [image]
+        # Keep the common single-frame contract even though d1 can accept more.
+        # Effect evidence remains the same quantified state, not a second raster.
+        try:
+            return self.model.system_one(record["state"], record["questions"], images=images)
         finally:
             if self.device == "mps":
                 import torch
@@ -447,6 +524,37 @@ class OmniWorker:
         return {"objects": objects, "telemetry": telemetry}
 
 
+def profiled_request(worker, payload):
+    if not payload.pop("benchmark_metrics", False):
+        return worker.request(payload)
+    import torch
+
+    seed = payload.pop("benchmark_seed", 0)
+    if type(seed) is not int or not 0 <= seed < 2**32:
+        raise ValueError("benchmark seed must be a uint32")
+    torch.manual_seed(seed)
+    gpu = worker.backend in {"cuda", "rocm"}
+    if gpu:
+        torch.cuda.synchronize()
+        torch.cuda.reset_peak_memory_stats()
+    result = worker.request(payload)
+    if gpu:
+        torch.cuda.synchronize()
+    metrics = {"seed": seed}
+    try:
+        import resource
+
+        peak = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss
+        metrics["peak_rss_bytes"] = peak if sys.platform == "darwin" else peak * 1024
+    except ImportError:
+        pass
+    if gpu:
+        metrics["gpu_peak_allocated_bytes"] = torch.cuda.max_memory_allocated()
+        metrics["gpu_peak_reserved_bytes"] = torch.cuda.max_memory_reserved()
+    result["benchmark_metrics"] = metrics
+    return result
+
+
 def main():
     protocol = sys.stdout
 
@@ -473,7 +581,12 @@ def main():
         if config.get("rocm_arch"):
             os.environ["ROCM_SDK_TARGET_FAMILY"] = config["rocm_arch"]
         with contextlib.redirect_stdout(sys.stderr):
-            worker_type = {"clef": ClefWorker, "omni": OmniWorker, "visual": VisualWorker}
+            worker_type = {
+                "clef": ClefWorker,
+                "d1": D1Worker,
+                "omni": OmniWorker,
+                "visual": VisualWorker,
+            }
             worker = worker_type[sys.argv[1]](config)
         ready = {
             "ready": True,
@@ -481,6 +594,16 @@ def main():
             "backend": worker.backend,
             "quantized_modules": getattr(worker, "quantized_modules", 0),
         }
+        if hasattr(worker, "decision_model"):
+            import importlib.metadata
+
+            ready["worker_pid"] = os.getpid()
+            ready["libraries"] = {
+                name: importlib.metadata.version(name)
+                for name in ("torch", "transformers", "tokenizers")
+            }
+            ready["decision_model"] = worker.decision_model
+            ready["model_revision"] = worker.model_revision
         if hasattr(worker, "load_metrics"):
             ready["load_metrics"] = worker.load_metrics
         if hasattr(worker, "compute_dtype"):
@@ -493,7 +616,7 @@ def main():
         for line in sys.stdin:
             try:
                 with contextlib.redirect_stdout(sys.stderr):
-                    result = worker.request(json.loads(line))
+                    result = profiled_request(worker, json.loads(line))
                 emit(result)
             except Exception as exc:
                 emit(diagnostic(exc))

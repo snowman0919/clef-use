@@ -29,7 +29,8 @@ def test_heartbeat_is_visible_during_blocking_work_and_stops_on_failure():
 
 @pytest.mark.parametrize("json_mode", [False, True])
 def test_cli_prepare_reports_stages_without_corrupting_json(json_mode, monkeypatch, capsys):
-    def prepare(*args, progress=None):
+    def prepare(*args, progress=None, decision_model=None):
+        assert decision_model is None
         if json_mode:
             assert progress is None
         else:
@@ -45,16 +46,21 @@ def test_cli_prepare_reports_stages_without_corrupting_json(json_mode, monkeypat
     assert bool(captured.err) != json_mode
 
 
-def test_canonical_prepare_reports_all_stages_and_saves_after_both_workers(tmp_path, monkeypatch):
+@pytest.mark.parametrize("decision_model", ["Cloudflare/clef-flash", "LiquidAI/d1-3B"])
+def test_canonical_prepare_reports_all_stages_and_saves_after_both_workers(
+    tmp_path, monkeypatch, decision_model
+):
     from types import SimpleNamespace
 
     from clef_use.config import Config
 
     config_file = tmp_path / "config.toml"
-    config_file.write_text("# keep existing settings\nmax_steps = 12\n")
+    config_file.write_text('# keep existing settings\nmax_steps = 12\nquantization = "4bit"\n')
     monkeypatch.setenv("CLEF_USE_CONFIG", str(config_file))
     monkeypatch.setattr("clef_use.deployment_profiles.host_system", lambda: "linux")
-    config = Config(model_dir=tmp_path / "models", ml_profile="linux-cpu", device="cpu")
+    config = Config(
+        model_dir=tmp_path / "models", ml_profile="linux-cpu", device="cpu", quantization="4bit"
+    )
     monkeypatch.setattr(provision, "select_python", lambda *_: "python")
     monkeypatch.setattr("clef_use.installer.windows_user_access", lambda _path: None)
     monkeypatch.setattr(provision, "install_lock", lambda *_a, **_kw: None)
@@ -88,7 +94,10 @@ def test_canonical_prepare_reports_all_stages_and_saves_after_both_workers(tmp_p
 
         def _start(self):
             assert f"Loading {self.kind} model" in messages[-1]
-            assert config_file.read_text() == "# keep existing settings\nmax_steps = 12\n"
+            assert (
+                config_file.read_text()
+                == '# keep existing settings\nmax_steps = 12\nquantization = "4bit"\n'
+            )
             initialized.append(self.kind)
             return {"ready": True}
 
@@ -96,9 +105,17 @@ def test_canonical_prepare_reports_all_stages_and_saves_after_both_workers(tmp_p
             pass
 
     monkeypatch.setattr(provision, "JsonWorker", Worker)
-    result = provision.prepare(config, progress=messages.append)
+    result = provision.prepare(config, progress=messages.append, decision_model=decision_model)
     assert result["status"] == "PREPARED"
-    assert initialized == ["clef", "omni"]
+    kind = "d1" if decision_model == "LiquidAI/d1-3B" else "clef"
+    assert initialized == [kind, "omni"]
+    import tomllib
+
+    saved = tomllib.loads(config_file.read_text())
+    assert saved.get("decision_model", "Cloudflare/clef-flash") == "Cloudflare/clef-flash"
+    assert ("d1_python" in saved) == (kind == "d1")
+    assert saved["quantization"] == "4bit"
+    assert result["active_model_unchanged"] is True
     assert cache == {"missing-model"}
     assert messages[-1].startswith("[9/9] Done")
     assert "max_steps = 12" in config_file.read_text()

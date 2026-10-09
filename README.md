@@ -10,7 +10,8 @@ See [hybrid configuration, verification and real Blender benchmark](docs/HYBRID_
 **One local computer-use runtime. One MCP interface. A fast decision loop.**
 
 clef-use turns a high-level GUI goal into a bounded sequence of verified actions.
-OmniParser supplies objects and semantic hints; CLEF assesses bounded candidates.
+OmniParser supplies objects and semantic hints; a model-independent Decision
+Backend assesses bounded candidates (CLEF-Flash default, LiquidAI/d1-3B candidate).
 The optional Foundation ViT path grounds dense GUI and canvas targets directly.
 Deterministic input adapters execute actions. Your planner gets control back at a
 terminal event instead of making an inference for every click.
@@ -23,7 +24,7 @@ flowchart TD
     R --> S[Screenshot]
     S --> P[OmniParser V2]
     P --> O[Object map + bounded candidates]
-    O --> D[CLEF / CLEF-Flash]
+    O --> D[Decision Backend: CLEF-Flash / d1]
     D --> E[Deterministic OS input]
     E --> V[Verification + progress checks]
     V --> S
@@ -58,6 +59,13 @@ clef-use doctor
 weights, initializes the workers and saves their configuration. Model preparation
 requires Python 3.11/3.12, Git and sufficient disk space. Set `model_dir` to your
 chosen cache or external SSD path before preparation; see [installation](docs/INSTALL.md).
+Preparing the d1 candidate is opt-in and does not activate it:
+
+```sh
+clef-use models prepare --decision-model LiquidAI/d1-3B --quantization none
+```
+
+See [pinned workers, licensing and the promotion gate](docs/DECISION_MODELS.md).
 Runtime installation supports Python 3.11-3.13 with `venv` and `pip`; no root is
 needed. Updates retain the model cache.
 

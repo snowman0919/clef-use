@@ -14,7 +14,7 @@ from uuid import uuid4
 
 from PIL import Image
 
-from clef_use.backends import ClefBackend, OmniParserBackend, encode_image
+from clef_use.backends import DecisionBackend, OmniParserBackend, encode_image
 from clef_use.config import load_config, state_dir
 from clef_use.runtime import Session, SessionRuntime
 from clef_use.schema import ActionResult, Contract, Frame
@@ -94,7 +94,7 @@ def main():
             request("release")
 
     config = load_config()
-    perception, decision, desktop = OmniParserBackend(config), ClefBackend(config), Desktop()
+    perception, decision, desktop = OmniParserBackend(config), DecisionBackend(config), Desktop()
     if args.rocm_worker:
         if sys.platform != "win32":
             raise RuntimeError("the ROCm diagnostic worker requires native Windows")

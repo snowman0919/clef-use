@@ -143,3 +143,70 @@ Primary evidence: `docs/evidence/HOST_MEMORY_2026-10-09.json`.
 - Current user direction is the model-independent Decision Backend with d1-3B
   as a candidate. Default promotion requires paired task-success/safety evidence,
   including authentic Blender trajectories and Windows/macOS GUI coverage.
+
+### 2026-10-10: model-independent Decision Backend (IN_PROGRESS)
+
+Current user scope: add `LiquidAI/d1-3B` as the new default-model candidate, keep
+CLEF-Flash as the compatibility/performance baseline and available fallback,
+and preserve OmniParser, SigLIP2 grounding, CANVAS, MCP/CLI and ActionBackend.
+Do not promote the candidate using a model-card benchmark or replay-only result.
+
+- Primary HF metadata and complete SDK/license files were retrieved at immutable
+  d1 revision `051bcc464b01b9f92942b364d9586b0ef5912432`. The SDK uses the public
+  `AutoModel` / `system_one(state, questions, images)` API and requires its own
+  pinned Transformers 5.14.1 environment. License: LFM Open License v1.0, not
+  Apache-2.0; preparation/catalog notices link the pinned license and identify
+  commercial conditions separately from the application license.
+- `DecisionBackend` and `decision_request` replace the model-specific active
+  backend names. Registry-selected worker kinds/interpreters isolate d1 from
+  the unchanged CLEF loader. Invalid/missing/foreign/nonfinite typed answers
+  fail closed; native choice confidence and noul probabilities are not rescaled.
+- SDK audit caught two real compatibility constraints before model execution:
+  CLEF requires an adapter-supplied model tag and rounds answers to four decimal
+  places. Regression tests preserve that tag and bounded serialization error
+  without normalizing/clipping scores. d1 keeps its native full-precision fields.
+- d1 currently allows original weights only (`quantization=none`). It executes
+  its tied lm_head; do not apply CLEF's unused-head NF4/CPU-row offload to d1.
+- MEASURED: 476 passed / 16 skipped; changed-file Ruff and diff checks pass.
+  These include adapter/loader spies, not a real d1 weight/inference benchmark.
+- MEASURED: the hashed d1 environment lock contains 38 pinned packages. Real
+  candidate preparation loaded the immutable 6,247,065,504-byte weight artifact
+  on CUDA/BF16 and initialized the unchanged CPU OmniParser. Readback confirms
+  the active model remains CLEF-Flash/NF4 and the pinned LICENSE SHA256 matches.
+- Added a real-model replay runner with input/image hashes, raw typed answers,
+  cold/warm timing, actual worker RSS/GPU allocator peaks and independent-only
+  labels. Archived Blender v15/v27 failure frames have no invented quality
+  labels; NEEDS_REPLAN is not ground truth. Replay never executes OS input.
+- First real inference found a malformed corpus missing public-SDK question
+  instructions; the reader now rejects it before model load. An early paired
+  GPU attempt also failed while another PID held 6.86GiB; that failure is
+  retained as ERROR, not accuracy/performance data. The next bounded replay
+  returned six valid real d1 choice/score/noul responses from Windows + actual
+  Blender failure frames. CLEF-Flash still OOMed during GPU loading, so that
+  run is not a paired speed/quality comparison.
+- MEASURED: matched CPU/BF16 + Torch 2.11.0 / Transformers 5.14.1 paired replay
+  completed (3 authentic cases x 3 repetitions per model, exact input hashes,
+  separate worker PIDs). CLEF-Flash warm median 29.391s / peak RSS 10.045GiB;
+  d1 4.336s / 6.874GiB. One labelled Windows final fixture supplied 9 repeated
+  known-field judgments: CLEF 9/9, d1 6/9 (ordinal progress underestimated).
+  Blender image timing is real but quality labels remain unknown. This small
+  replay is not task-success proof; explicit accuracy-regression blocker added.
+- Native macOS collector/workflow was reviewed and committed as `15874a8`,
+  pushed with exact remote SHA readback. Actual macos-15 fixture run
+  `37968411148` passed real Swift/AppKit execution. Downloaded three macOS
+  15.7.9 ARM64 owned-view PNGs; all hashes, native widget readbacks, dimensions
+  and nonuniform pixels verified. Toolkit callbacks are not live OS input.
+  Fresh Windows collection also passed on build 26200.9457 / AMD64 / Session 1:
+  three 640x360 owned-client screenshots, Win32/Tcl readbacks and hashes verified.
+  Foreground, pointer and owned-window cleanup read back unchanged/restored.
+  `Button.invoke()` transitions are fixture construction, not model-led OS input.
+- OBSERVED: real pinned CUDA/BF16 d1 now traverses canonical `DecisionBackend`
+  on the authentic macOS Confirm frame and returns a validated ACT/a0 decision.
+  This found/fixed missing progress `instructions`; using the exact CLEF fallback
+  text preserves its prompt meaning. No OS input or task completion is asserted.
+- MEASURED: complete active suite 491 passed / 16 skipped; CI-scoped Ruff lint,
+  formatting and diff checks pass. Frozen `old/` is untouched. The whole-tree
+  formatting check exposed only frozen legacy style differences, not a V2 error.
+- OPEN: expanded cross-platform paired measurements, coherent feature commit
+  and release/update verification. See DECISION_MODELS.md for the shared API and license notices.
+  Default remains `Cloudflare/clef-flash`; d1 status remains `candidate`.

@@ -14,7 +14,13 @@ from .backends import JsonWorker
 from .config import config_path
 from .deployment_profiles import resolve_profile, resolve_rocm_arch
 from .harness import atomic_write
-from .models import OMNI_SOURCE_REVISION, download, inventory
+from .models import (
+    DECISION_MODELS,
+    OMNI_SOURCE_REVISION,
+    decision_model_notice,
+    download,
+    inventory,
+)
 from .preparation_progress import PreparationProgress
 
 
@@ -97,7 +103,25 @@ def common_ml_requirements(text):
     return "".join(lines)
 
 
-def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=None, progress=None):
+def prepare(
+    config,
+    python=None,
+    profile="auto",
+    quantization=None,
+    rocm_arch=None,
+    progress=None,
+    *,
+    decision_model=None,
+):
+    active_model = config.decision_model
+    selected_model = decision_model or active_model
+    if selected_model not in DECISION_MODELS:
+        raise ValueError("unsupported pinned decision model")
+    spec = DECISION_MODELS[selected_model]
+    decision_kind = spec.worker_kind
+    if decision_kind == "d1" and quantization not in {None, "none"}:
+        raise ValueError("d1 candidate requires quantization none; CLEF NF4 is separate")
+    config = config.model_copy(update={"decision_model": selected_model})
     report = PreparationProgress(progress)
     with report.stage("Selecting profiles, Python and existing source"):
         profile = select_profile(config, profile)
@@ -114,7 +138,11 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
             else None
         )
         quantization = quantization or (
-            "4bit" if profile == "windows-rocm" else config.quantization
+            "none"
+            if decision_kind == "d1"
+            else "4bit"
+            if profile == "windows-rocm"
+            else config.quantization
         )
         if quantization == "4bit" and selected.backend == "mps":
             raise ValueError(
@@ -131,8 +159,10 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
     parent = config.model_dir.parent
     parent.mkdir(parents=True, exist_ok=True)
     report.message(
-        f"CLEF: {profile}; OmniParser: {parser_selected.name}; model cache: {config.model_dir}"
+        f"Decision {selected_model}: {profile}; OmniParser: {parser_selected.name}; "
+        f"model cache: {config.model_dir}; license: {spec.license_name}"
     )
+    report.message(decision_model_notice(selected_model)["notice"])
     from .installer import environment_binary
 
     try:
@@ -140,8 +170,8 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
     except (ValueError, RuntimeError):
         previous_profile = None
     paths = {
-        "clef": (config.clef_python if previous_profile == profile else None)
-        or environment_binary(parent / f"clef-env-{profile}", "python"),
+        decision_kind: (getattr(config, spec.python_field) if previous_profile == profile else None)
+        or environment_binary(parent / f"{decision_kind}-env-{profile}", "python"),
         "omni": config.omni_python
         or environment_binary(parent / f"omni-env-{parser_selected.name}", "python"),
     }
@@ -168,24 +198,24 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
                 install_lock(path, common, child_env, no_deps=True)
                 report.message(
                     f"Installing {kind} native backend: "
-                    f"{(selected if kind == 'clef' else parser_selected).name}"
+                    f"{(selected if kind == decision_kind else parser_selected).name}"
                 )
                 install_native(
                     path,
-                    selected if kind == "clef" else parser_selected,
+                    selected if kind == decision_kind else parser_selected,
                     child_env,
                     lock,
                     rocm_arch=rocm_arch,
                 )
-            if kind == "clef" and quantization == "4bit":
+            if kind == decision_kind and quantization == "4bit":
                 report.message("Installing 4-bit quantization dependencies")
                 install_native(path, selected, child_env, lock, quantizer_only=True)
     from .doctor import ml_environment_probe
 
     with report.stage("Checking installed inference dependencies"):
         for kind, path in paths.items():
-            backend = selected.backend if kind == "clef" else parser_selected.backend
-            precision = quantization if kind == "clef" else "none"
+            backend = selected.backend if kind == decision_kind else parser_selected.backend
+            precision = quantization if kind == decision_kind else "none"
             if not ml_environment_probe(path, kind, backend, precision, rocm_arch)["ready"]:
                 raise RuntimeError(f"{kind} backend/dependency probe failed before model download")
     with report.stage("Preparing pinned OmniParser source"):
@@ -233,7 +263,7 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
                 download(config.model_dir, model["model"])
     updated = config.model_copy(
         update={
-            "clef_python": paths["clef"],
+            spec.python_field: paths[decision_kind],
             "omni_python": paths["omni"],
             "omni_source": source,
             "ml_profile": profile,
@@ -244,7 +274,7 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
         }
     )
     initialized = {}
-    for kind in ("clef", "omni"):
+    for kind in (decision_kind, "omni"):
         with report.stage(f"Loading {kind} model and verifying worker initialization"):
             worker = JsonWorker(
                 paths[kind], kind, updated.model_copy(update={"backend_timeout": 600})
@@ -256,21 +286,16 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
     with report.stage("Saving verified model configuration"):
         path = config_path()
         data = tomlkit.parse(path.read_text() if path.exists() else "")
-        for field in (
-            "model_dir",
-            "clef_python",
-            "omni_python",
-            "omni_source",
-            "ml_profile",
-            "quantization",
-            "device",
-            "parser_device",
-        ):
+        fields = ("model_dir", spec.python_field, "omni_python", "omni_source", "parser_device")
+        if selected_model == active_model:
+            fields += ("ml_profile", "quantization", "device")
+        for field in fields:
             data[field] = str(getattr(updated, field))
-        if rocm_arch:
-            data["rocm_arch"] = rocm_arch
-        else:
-            data.pop("rocm_arch", None)
+        if selected_model == active_model:
+            if rocm_arch:
+                data["rocm_arch"] = rocm_arch
+            else:
+                data.pop("rocm_arch", None)
         atomic_write(path, tomlkit.dumps(data))
         if sys.platform == "win32":
             from .installer import windows_user_access
@@ -278,6 +303,10 @@ def prepare(config, python=None, profile="auto", quantization=None, rocm_arch=No
             windows_user_access(path)
     return {
         "status": "PREPARED",
+        "active_model_unchanged": True,
+        "active_decision_model": active_model,
+        "selected_decision_model": selected_model,
+        "license_notice": decision_model_notice(selected_model),
         "models": inventory(config.model_dir, config.decision_model),
         "omni_source_revision": observed,
         "config": str(path),

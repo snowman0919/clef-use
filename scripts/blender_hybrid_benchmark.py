@@ -838,7 +838,7 @@ def main(argv=None):
         import tomllib
 
         from clef_use.backends import (
-            ClefBackend,
+            DecisionBackend,
             DesktopAction,
             DesktopCapture,
             OmniParserBackend,
@@ -923,7 +923,7 @@ def main(argv=None):
                 report["environment_versions"][name] = {"error": type(exc).__name__}
         perception, decision, grounder = (
             OmniParserBackend(config),
-            ClefBackend(config),
+            DecisionBackend(config),
             VisualGroundingBackend(config),
         )
         instrument_worker_trace(

@@ -42,12 +42,12 @@ def test_decision_context_carries_actual_actions_without_past_model_predictions(
 def test_clef_modes_and_effect_use_one_joint_structured_worker_request():
     from types import SimpleNamespace
 
-    from clef_use.backends import ClefBackend
+    from clef_use.backends import DecisionBackend
     from clef_use.schema import Observation
 
     desktop = FixtureDesktop()
     observation = Observation("epoch", desktop.capture(), desktop.parse(None))
-    backend = ClefBackend(Config())
+    backend = DecisionBackend(Config())
     calls = []
 
     def request(payload):
@@ -83,12 +83,14 @@ def test_clef_modes_and_effect_use_one_joint_structured_worker_request():
 
 
 def test_unknown_actionability_is_omitted_from_model_state_without_claiming_true():
-    from clef_use.backends import clef_request
+    from clef_use.backends import decision_request
     from clef_use.schema import Observation
 
     desktop = FixtureDesktop()
     observation = Observation("epoch", desktop.capture(), desktop.parse(None))
-    payload = clef_request(observation, Contract(goal="test", success_conditions=["done"]), (), [])
+    payload = decision_request(
+        observation, Contract(goal="test", success_conditions=["done"]), (), []
+    )
     assert "enabled" not in payload["state"]["objects"][0]
     assert observation.objects[0].enabled is None
     assert list(payload["questions"])[-2:] == ["mode", "effect"]
@@ -101,7 +103,7 @@ def test_dense_structured_session_still_receives_bounded_context():
     # Regression (dogfood F3): a 123-object Blender screen with 48 candidates
     # overflowed the real decision model's context via the legacy whole-roster
     # passthrough and crashed the CUDA worker with OUT_OF_MEMORY.
-    from clef_use.backends import clef_request
+    from clef_use.backends import decision_request
     from clef_use.benchmark import FixtureDesktop
     from clef_use.config import Config
     from clef_use.runtime import Session, SessionRuntime
@@ -123,7 +125,7 @@ def test_dense_structured_session_still_receives_bounded_context():
 
     class SizeRecorder:
         def decide(self, observation, goal, candidates, history):
-            payload = clef_request(observation, goal, candidates, history)
+            payload = decision_request(observation, goal, candidates, history)
             sizes.append(len(payload["state"]["objects"]))
             return Decision(mode="WAIT", confidence=0.95)
 

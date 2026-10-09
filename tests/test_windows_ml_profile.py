@@ -223,6 +223,7 @@ def test_clef_passes_both_pixel_bounds_to_processor(monkeypatch):
     recorded = {}
     worker = object.__new__(worker_module.ClefWorker)
     worker.device = "cuda"
+    worker.decision_model = "Cloudflare/clef-flash"
     worker.model, worker.processor = object(), object()
 
     def systemone(_model, _processor, request, **kwargs):

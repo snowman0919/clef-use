@@ -16,7 +16,8 @@ from PIL import Image
 
 from .candidates import pointer_allowed
 from .config import Config
-from .models import MODEL_REVISIONS, OMNI_SOURCE_REVISION, snapshot_path
+from .decision_contract import validate_answers
+from .models import DECISION_MODELS, MODEL_REVISIONS, OMNI_SOURCE_REVISION, snapshot_path
 from .objects import normalize_omni
 from .schema import ActionResult, Decision, Frame
 from .windows_input import WindowsInput
@@ -195,7 +196,7 @@ class VisualGroundingBackend:
         return GroundingResult(**reply["grounding"])
 
 
-def clef_request(observation, contract, candidates, history) -> dict:
+def decision_request(observation, contract, candidates, history) -> dict:
     questions = {
         "mode": {
             "type": "choice",
@@ -239,6 +240,8 @@ def clef_request(observation, contract, candidates, history) -> dict:
         },
         "progress": {
             "type": "score",
+            # CLEF's omitted-instruction fallback was the question name.
+            "instructions": "progress",
             "criteria": [
                 "No progress",
                 "Early progress",
@@ -260,7 +263,6 @@ def clef_request(observation, contract, candidates, history) -> dict:
         "effect": questions["effect"],
     }
     return {
-        "model": "clef-flash",
         "state": {
             "goal": contract.goal,
             "success_conditions": contract.success_conditions,
@@ -314,13 +316,20 @@ def clef_request(observation, contract, candidates, history) -> dict:
     }
 
 
-class ClefBackend:
+class DecisionBackend:
     def __init__(self, config: Config):
-        self.worker = JsonWorker(config.clef_python, "clef", config)
+        self.spec = DECISION_MODELS[config.decision_model]
+        self.worker = JsonWorker(
+            getattr(config, self.spec.python_field), self.spec.worker_kind, config
+        )
 
     def decide(self, observation, goal, candidates, history):
-        request = clef_request(observation, goal, candidates, history)
-        answers = self.worker.request(request)["answers"]
+        request = decision_request(observation, goal, candidates, history)
+        answers = validate_answers(
+            request["questions"],
+            self.worker.request(request),
+            answer_decimals=self.spec.answer_decimals,
+        )
         choice = answers["action"]
         import math
 
@@ -346,7 +355,8 @@ class ClefBackend:
             goal_probability=answers["complete"]["noul"],
             replan_probability=answers["replan"]["noul"],
             safety_probability=answers["unsafe"]["noul"],
-            progress=answers["progress"]["score"] / 4,
+            progress=answers["progress"]["score"]
+            / (len(request["questions"]["progress"]["criteria"]) - 1),
             condition_probabilities=tuple(
                 answers[f"condition_{i}"]["noul"] for i in range(len(goal.success_conditions))
             ),
@@ -725,7 +735,7 @@ def runtime(config: Config, log_path=None):
     return SessionRuntime(
         DesktopCapture(),
         OmniParserBackend(config),
-        ClefBackend(config),
+        DecisionBackend(config),
         DesktopAction(),
         config,
         log_path=log_path,

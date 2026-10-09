@@ -14,7 +14,7 @@ from mcp.client.stdio import stdio_client
 from PIL import Image, ImageDraw
 from pydantic import ValidationError
 
-from clef_use.backends import DesktopAction, clef_request
+from clef_use.backends import DesktopAction, decision_request
 from clef_use.candidates import CandidateBuilder
 from clef_use.config import Config
 from clef_use.runtime import Session, SessionRuntime
@@ -320,7 +320,7 @@ def test_pointer_contract_offers_only_supplied_paths_with_coordinates_in_model_s
     contract = Contract(goal="Draw", pointer_inputs=[stroke(frame)])
     actions = CandidateBuilder().build(observation, contract)
     assert len(actions) == 1 and actions[0].pointer is not None
-    payload = clef_request(observation, contract, actions, [])
+    payload = decision_request(observation, contract, actions, [])
     assert payload["state"]["allowed_candidates"][0]["pointer"]["points"][1] == {"x": 0.5, "y": 0.4}
 
 

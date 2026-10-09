@@ -11,7 +11,7 @@ from pathlib import Path
 
 from .config import load_config
 from .deployment_profiles import resolve_profile
-from .models import OMNI_SOURCE_REVISION, inventory
+from .models import DECISION_MODELS, OMNI_SOURCE_REVISION, inventory
 
 
 def ml_environment_probe(python, kind, device, quantization="none", rocm_arch=None):
@@ -129,10 +129,12 @@ def doctor(capture: bool = True):
     except (ValueError, RuntimeError, OSError, subprocess.TimeoutExpired) as exc:
         report["deployment_profile"] = {"status": "ERROR", "reason": str(exc)}
         requested = config.device
+    decision_spec = DECISION_MODELS[config.decision_model]
+    report["decision_model"] = config.decision_model
     report["ml_environments"] = {
-        "clef": ml_environment_probe(
-            config.clef_python or sys.executable,
-            "clef",
+        decision_spec.worker_kind: ml_environment_probe(
+            getattr(config, decision_spec.python_field) or sys.executable,
+            decision_spec.worker_kind,
             requested,
             config.quantization,
             config.rocm_arch,
@@ -145,9 +147,10 @@ def doctor(capture: bool = True):
             config.rocm_arch,
         ),
     }
-    clef_environment = report["ml_environments"]["clef"]
+    decision_environment = report["ml_environments"][decision_spec.worker_kind]
     report["acceleration"] = {
-        key: clef_environment.get(key) for key in ("backend", "device", "hip", "device_operation")
+        key: decision_environment.get(key)
+        for key in ("backend", "device", "hip", "device_operation")
     }
     report["omni_source"] = omni_source_probe(config.omni_source)
     if capture and permissions["screen_capture"] is not False:

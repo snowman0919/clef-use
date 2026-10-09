@@ -9,6 +9,7 @@ from . import __version__
 from .client import RuntimeClient
 from .config import load_config
 from .deployment_profiles import PROFILES, profile_catalog
+from .models import DECISION_MODELS
 from .schema import Contract, TextInput, VisualIntent
 
 
@@ -84,6 +85,11 @@ def parser():
         "--json", action="store_true", help="suppress setup progress; emit JSON result"
     )
     models.add_argument("--python")
+    models.add_argument(
+        "--decision-model",
+        choices=list(DECISION_MODELS),
+        help="prepare or inspect a pinned candidate without activating it",
+    )
     models.add_argument(
         "--visual", action="store_true", help="download the configured visual backbone"
     )
@@ -183,14 +189,16 @@ def main(argv=None):
                     args.profile,
                     args.quantization,
                     args.rocm_arch,
+                    decision_model=args.decision_model,
                     progress=None
                     if args.json
                     else lambda message: print(message, file=sys.stderr, flush=True),
                 )
             else:
+                selected_model = args.decision_model or config.decision_model
                 if args.action == "download":
                     models = [
-                        config.decision_model,
+                        selected_model,
                         "microsoft/OmniParser-v2.0",
                         "microsoft/Florence-2-base",
                         "microsoft/Florence-2-base-ft",
@@ -203,9 +211,11 @@ def main(argv=None):
                         download(config.model_dir, model)
                 result = {
                     "revisions": MODEL_REVISIONS,
+                    "active_decision_model": config.decision_model,
+                    "selected_decision_model": selected_model,
                     "models": inventory(
                         config.model_dir,
-                        config.decision_model,
+                        selected_model,
                         visual=args.visual or config.visual_grounding,
                     ),
                 }

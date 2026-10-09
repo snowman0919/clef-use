@@ -18,6 +18,16 @@ MODULES = {
         "safetensors",
         "huggingface_hub",
     ),
+    "d1": (
+        "torch",
+        "torchvision",
+        "transformers",
+        "accelerate",
+        "PIL",
+        "numpy",
+        "safetensors",
+        "huggingface_hub",
+    ),
     "omni": (
         "torch",
         "torchvision",
@@ -41,6 +51,8 @@ MODULES = {
 
 
 def probe(kind, requested, quantization="none"):
+    if kind == "d1" and quantization != "none":
+        return {"status": "ERROR", "ready": False, "reason": "d1 requires quantization none"}
     modules = {}
     errors = {}
     versions = {}
@@ -54,10 +66,16 @@ def probe(kind, requested, quantization="none"):
                 _ = module.AutoProcessor
                 _ = getattr(
                     module,
-                    "Qwen3_5ForConditionalGeneration" if kind == "clef" else "AutoModelForCausalLM",
+                    {
+                        "clef": "Qwen3_5ForConditionalGeneration",
+                        "d1": "Lfm2VlForConditionalGeneration",
+                        "omni": "AutoModelForCausalLM",
+                    }[kind],
                 )
             modules[name] = module
             versions[name] = str(getattr(module, "__version__", "UNKNOWN"))
+            if name == "transformers" and kind == "d1" and versions[name] != "5.14.1":
+                errors["transformers_version"] = "d1 requires pinned transformers 5.14.1"
         except Exception as exc:
             errors[name] = type(exc).__name__
     report = {

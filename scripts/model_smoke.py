@@ -9,7 +9,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw, ImageFont
 
-from clef_use.backends import ClefBackend, OmniParserBackend
+from clef_use.backends import DecisionBackend, OmniParserBackend
 from clef_use.config import load_config
 from clef_use.runtime import Session, SessionRuntime
 from clef_use.schema import ActionResult, Contract, Frame
@@ -51,7 +51,7 @@ def main():
     args = parser.parse_args()
     config = load_config()
     desktop = RenderedDesktop()
-    perception, decision = OmniParserBackend(config), ClefBackend(config)
+    perception, decision = OmniParserBackend(config), DecisionBackend(config)
     session = Session(
         Contract(
             goal="Make Task complete visible using the available Continue and Confirm buttons.",
