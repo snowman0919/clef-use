@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import base64
 import contextlib
+import gc
 import hashlib
 import io
 import json
@@ -105,6 +106,18 @@ def offload_output_embeddings(model, *, path=None, dtype=None):
         shard = Path(path) / index["weight_map"]["lm_head.weight"]
         with safe_open(str(shard), framework="pt") as handle:
             weight = handle.get_slice("lm_head.weight")
+        # Meta placement alone retains the full CPU table in Accelerate's
+        # offload hook. Replace this never-executed output projection through
+        # the public setter, preserving its metadata and the real lazy rows.
+        model.language_model.set_output_embeddings(
+            torch.nn.Linear(
+                embedding.weight.shape[1],
+                embedding.weight.shape[0],
+                bias=getattr(embedding, "bias", None) is not None,
+                device="meta",
+                dtype=embedding.weight.dtype,
+            )
+        )
     elif str(weight.device) != "cpu":
         embedding.weight = torch.nn.Parameter(weight.detach().cpu(), requires_grad=False)
         weight = embedding.weight
@@ -126,19 +139,21 @@ def load_cuda_nf4_model(path, *, device="cuda", dtype, **kwargs):
     from safetensors.torch import load_file
     from transformers import AutoProcessor, Qwen3_5ForConditionalGeneration
 
-    # lm_head (fp16, never executed) is the largest non-quantized block; pinning
-    # it to host RAM keeps the whole stack inside a 10GB card. The row hook in
-    # offload_output_embeddings serves the joint head's lexical gather, so the
-    # placement is transparent. llm_int8_enable_fp32_cpu_offload (set by the
-    # config builder) is required for a split device_map to be accepted.
+    # Scope CUDA to the model subtree: Accelerate's recursive root placement
+    # would temporarily migrate the CPU lm_head before its offload hook exists.
+    # lm_head is never executed; the lexical-row helper below serves the joint
+    # head from its checkpoint without a full-vocabulary CUDA allocation.
     backbone = Qwen3_5ForConditionalGeneration.from_pretrained(
-        path, dtype=dtype, device_map={"": str(device), "lm_head": "cpu"}, **kwargs
+        path, dtype=dtype, device_map={"model": str(device), "lm_head": "cpu"}, **kwargs
     )
     backbone.config.use_cache = False
     head = JointSchemaHead(**json.loads((path / "joint_head_config.json").read_text()))
     head.load_state_dict(load_file(path / "joint_head.safetensors"), strict=True)
     model = ClefModel(backbone, head)
     offload_output_embeddings(model, path=path, dtype=dtype)
+    # Forward wrappers form cycles; release their unused CPU table before
+    # inference and before another resident worker needs transient host memory.
+    gc.collect()
     torch.cuda.empty_cache()
     head.to(device=device, dtype=dtype)
     return model.eval(), AutoProcessor.from_pretrained(path, local_files_only=True)
@@ -226,8 +241,6 @@ class ClefWorker:
             if not all(parameter.is_floating_point() for parameter in self.model.head.parameters()):
                 raise RuntimeError("CLEF typed head must remain floating point")
             self.quantized_modules = len(names)
-            if self.backend == "cuda" and torch.cuda.mem_get_info()[0] < 1024**3:
-                offload_output_embeddings(self.model, path=path, dtype=dtype)
 
     def request(self, record):
         record = {**record, "model": self.decision_model}

@@ -3,6 +3,46 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: scoped NF4 placement and unused host-table ownership
+
+- OBSERVED: installed Accelerate hook initialization recursively places the
+  root CUDA map before the CPU exception's offload hook is installed. A tiny
+  real-hook regression reproduced the forbidden lm_head CUDA transfer on both
+  a guarded CPU boundary and real CUDA. Pinned input/output tables are equally
+  sized; the old full-model traceback did not name its tensor, so attributing
+  that specific historical allocation remains an inference.
+- FIXED: CUDA placement names the model subtree, not the root. The canonical
+  lexical-row helper retains genuine checkpoint slices/casts, while the public
+  output-embedding setter replaces the never-executed hooked projection with
+  matching meta shape/dtype/bias metadata. This releases the hook's full CPU
+  owner; garbage collection handles its forward-wrapper cycles. No checkpoint
+  weight rewrite, zero-valued inference signal, CPU model fallback, quantizer
+  exclusion change, threshold change or service-limit increase. Removed the
+  redundant low-free-VRAM second row-hook installation and obsolete mock tests
+  that pinned the broken root map/repeated offload rather than behavior.
+- VERIFIED: the host-owner regression failed before correction even when the
+  parameter was meta; fixed dispatch and row tests pass with weak-reference
+  reclamation and exact numerical lexical-gather/reduction equivalence. Test
+  fixtures use real hooks and tiny tensors, not real model/task success labels.
+- EXERCISED: original real stdio File request constructed CLEF NF4 and delivered
+  one model-selected click. Independent native capture shows the dropdown open
+  and scene still empty, but subsequent parser work hit the unchanged 8GiB
+  cgroup limit: ERROR/worker disconnected, oom_kill increased by one. A second
+  structured observation also failed; raw native capture avoided another model
+  retry. Physical input is not runtime COMPLETED; never blindly repeat/toggle.
+- EXERCISED after the complete correction: real owned service loaded CLEF,
+  parser and dense workers together and ran the same request without another
+  OOM/kill (event deltas zero). Cgroup current still reached 8GiB with reclaim
+  events and about 520MB swap, so this is not a memory-headroom claim. The task
+  remains NEEDS_REPLAN because dense confidence is zero and completion was not
+  recognized. Closed-menu click and already-open retries are different initial
+  states; no controlled latency/memory improvement percentage is claimed.
+- VERIFIED: scoped dispatch and row suite 8 passed, including real CPU/CUDA
+  numerical and hook regressions. Ruff/diff checks pass. Integrated full-suite
+  counts are recorded with the subsequent readiness/goal-assessment corrections;
+  do not assign combined-working-tree counts to this isolated loader change.
+  No environment install/lock changes, training, avatar import or new release.
+
 ## 2026-10-10: existing V3 recovery and bounded semantic routing
 
 - OBSERVED: the independent read-only audit found an existing overview+tiled V3

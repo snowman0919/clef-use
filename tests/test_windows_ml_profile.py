@@ -121,10 +121,8 @@ def test_failed_clef_initialization_preserves_configuration(tmp_path, monkeypatc
 
 
 @pytest.mark.parametrize("bad", [None, "vision", "joint"])
-@pytest.mark.parametrize(
-    ("hip", "free"), [(None, 512 * 1024**2), (None, 4 * 1024**3), ("7.14", 512 * 1024**2)]
-)
-def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free):
+@pytest.mark.parametrize("hip", [None, "7.14"])
+def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip):
     import importlib
 
     monkeypatch.syspath_prepend(str(Path(provision.__file__).parent))
@@ -148,10 +146,6 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free
         ),
     )
     recorded = {}
-    offloaded = []
-    monkeypatch.setattr(
-        worker_module, "offload_output_embeddings", lambda *a, **k: offloaded.append(a[0])
-    )
 
     def load(_path, **kwargs):
         recorded.update(kwargs)
@@ -160,7 +154,7 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free
     monkeypatch.setattr(worker_module, "load_cuda_nf4_model", load)
 
     torch = SimpleNamespace(
-        cuda=SimpleNamespace(is_available=lambda: True, mem_get_info=lambda: (free, 10 * 1024**3)),
+        cuda=SimpleNamespace(is_available=lambda: True),
         version=SimpleNamespace(hip=hip),
         float32="fp32",
         float16="fp16",
@@ -205,7 +199,6 @@ def test_nf4_retains_vision_and_joint_head(tmp_path, monkeypatch, bad, hip, free
             "model.visual",
         ]
         assert recorded["attn_implementation"] == "sdpa"
-        assert offloaded == ([] if hip or free >= 1024**3 else [model])
         assert recorded["dtype"] == "fp16"
         assert recorded["local_files_only"] is True
 

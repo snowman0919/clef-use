@@ -23,15 +23,26 @@ def test_meta_embedding_gather_avoids_full_table_cast(tmp_path, monkeypatch, pre
     (tmp_path / "model.safetensors.index.json").write_text(
         json.dumps({"weight_map": {"lm_head.weight": "model.safetensors"}}), encoding="utf-8"
     )
-    embedding = torch.nn.Embedding(4096, 64, device="meta")
+
+    class Backbone(torch.nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.lm_head = torch.nn.Linear(64, 4096, bias=False, device="meta")
+
+        def get_output_embeddings(self):
+            return self.lm_head
+
+        def set_output_embeddings(self, value):
+            self.lm_head = value
+
+    backbone = Backbone()
+    embedding = backbone.get_output_embeddings()
 
     class Head(torch.nn.Module):
         def forward(self, hidden, indices, weight):
             return weight[indices].mean(dim=0)
 
-    model = SimpleNamespace(
-        language_model=SimpleNamespace(get_output_embeddings=lambda: embedding), head=Head()
-    )
+    model = SimpleNamespace(language_model=backbone, head=Head())
     indices = torch.tensor([0, 11, 4095, 11], device=device)
     hidden = torch.zeros(1, dtype=dtype, device=device)
     # Include the first query: delaying a full-table cast until first use
