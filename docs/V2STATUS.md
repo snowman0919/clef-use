@@ -3,6 +3,35 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: bounded full-frame image preprocessing diagnostic
+
+- Pinned worker hardcodes min_pixels56*56/max_pixels512*512 area, producing
+  image-grid1x24x42 for the preserved native1920x1080 Blender frame. Investigated
+  potential small-UI information loss without changing default/runtime policy.
+- Fixed immutable H2 B/native image/state/questions, same CLEF-Flash/NF4/FP16,
+  seed0, private raw capturesoff; serial default/highres/highres/default per area:
+  262144 area: condition0.1175, complete0.1069,2593tokens;
+  1048576 area: condition0.3471, complete0.3761,3349tokens;
+  native1920*1080 area: condition0.5263, complete0.4713,4321tokens.
+  Each A/B API4decimal repeat dispersion0;8completed=8started=8validated rows.
+- CPU preflight plus actual SDK-forward checks bind token hashes/grid/tensor
+  shapes, single image and<8192 unchanged no-truncation budget. Original helper
+  reused with only preflight/output filename substitutions for native area;
+  scope records exact substitution recipe/helper/executed-code hashes.
+- Resolution changes media token count/schema positions/global attention too:
+  this is one-case preprocessing total effect, not isolated legibility/root cause,
+  calibrated accuracy or fresh live completion. Native-area COMPLETED argmax
+  confidence0.3487<0.85 and both final probabilities<0.9: recognition NOT solved.
+  No sweep beyond native-area, model/head edits or policy/default promotion.
+- Hardware caps8GiB+1GiB and model/token/confidence gates preserved; both unit
+  memory peaks reach8GiB, so no spare combined-parser capacity or speedup claim.
+  Final owned service0.1.28 restored idle/cold/config same/no GPU worker;
+  status404/cached200empty/freshfalse without model initialization verified.
+- Fresh passive owned :122 capture equals preserved native raster; actual progress
+  photo reused equal PNG to avoid duplication. Scene remains emptyV01, no source
+  avatar selected/imported or visual quality approved. No GUI input in diagnostics.
+- Independent H4 comparison/interpretation review pending. Overall INCOMPLETE.
+
 ## 2026-10-11: authorized original live retry and minimized H3 diagnostic
 
 - Human native clarification granted full access for this canonical task and
