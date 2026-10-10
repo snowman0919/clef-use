@@ -310,6 +310,146 @@ def test_unchanged_failed_effect_cannot_be_retried_using_model_confidence():
     assert session.status == Status.BLOCKED and action.calls == 1
 
 
+@pytest.mark.parametrize("cold", [False, True])
+def test_cached_observe_preserves_concurrent_fresh_owner_and_work(cold):
+    from threading import Thread
+
+    from clef_use.service import SessionManager
+
+    entered, release = Event(), Event()
+    factory_calls = []
+
+    def pause():
+        entered.set()
+        if not release.wait(timeout=5):
+            raise TimeoutError("test barrier was not released")
+
+    class PausedDesktop(FixtureDesktop):
+        captures = 0
+        parses = 0
+
+        def capture(self):
+            self.captures += 1
+            if not cold:
+                pause()
+            return frame("green")
+
+        def parse(self, image):
+            self.parses += 1
+            return super().parse(image)
+
+    desktop = PausedDesktop()
+    executor = SessionRuntime(desktop, desktop, desktop, desktop)
+
+    def factory():
+        factory_calls.append(1)
+        if cold:
+            pause()
+        return executor
+
+    manager = SessionManager(factory)
+    task = None
+    if not cold:
+        manager.runtime = executor
+        task = Session(Contract(goal="Read the recorded menu"), status=Status.LOW_CONFIDENCE)
+        task.observation = Observation("before-concurrent-refresh", frame("blue"), ())
+        manager.sessions[task.id] = task
+        manager.active = task.id
+    results, errors = [], []
+
+    def fresh():
+        try:
+            results.append(manager.dispatch("observe", {}))
+        except BaseException as exc:
+            errors.append(exc)
+
+    thread = Thread(target=fresh)
+    thread.start()
+    try:
+        assert entered.wait(timeout=5) and manager.busy
+        before = (len(factory_calls), desktop.captures, desktop.parses)
+        result = manager.dispatch("observe", {"refresh": False, "include_image": True})
+        assert result["observation_fresh"] is False and manager.busy
+        assert (len(factory_calls), desktop.captures, desktop.parses) == before
+        if cold:
+            assert manager.runtime is None and result["observation_id"] is None
+            assert "image_png" not in result
+        else:
+            assert result["observation_id"] == task.observation.id == "before-concurrent-refresh"
+            assert result["frame_reference"] == task.observation.frame.reference().model_dump(
+                mode="json"
+            )
+            assert task.status == Status.LOW_CONFIDENCE and task.rounds == task.steps == 0
+    finally:
+        release.set()
+        thread.join(timeout=5)
+    assert not thread.is_alive() and not errors and len(results) == 1
+    assert results[0]["observation_fresh"] and not manager.busy
+    assert desktop.captures == desktop.parses == 1
+    assert len(factory_calls) == int(cold)
+
+
+@pytest.mark.parametrize(("busy", "stopping"), [(False, False), (True, False), (False, True)])
+def test_cached_observe_without_recorded_frame_never_initializes_runtime(busy, stopping):
+    from clef_use.service import SessionManager
+
+    manager = SessionManager(lambda: pytest.fail("cache-only request initialized runtime"))
+    manager.busy, manager.stopping = busy, stopping
+    result = manager.dispatch("observe", {"refresh": False, "include_image": True})
+    assert result["observation_fresh"] is False and result["frame_reference"] is None
+    assert result["objects"] == [] and result["observation_id"] is None
+    assert "image_png" not in result
+    assert manager.runtime is None and manager.busy == busy and manager.stopping == stopping
+
+
+@pytest.mark.parametrize("value", [None, 0, 1, "false", [], {}])
+def test_service_rejects_non_boolean_observe_policy_before_runtime(value):
+    from clef_use.service import SessionManager
+
+    calls = []
+
+    def factory():
+        calls.append("initialized")
+        return SessionRuntime(
+            FixtureDesktop(), FixtureDesktop(), FixtureDesktop(), FixtureDesktop()
+        )
+
+    manager = SessionManager(factory)
+    with pytest.raises(ValueError, match="refresh must be a boolean"):
+        manager.dispatch("observe", {"refresh": value})
+    assert not calls and manager.runtime is None and not manager.busy
+
+
+def test_idle_service_cache_only_preserves_terminal_observation_without_capture():
+    from clef_use.service import SessionManager
+
+    capture = Sequence([frame("red")])
+    desktop = FixtureDesktop()
+    runtime = SessionRuntime(capture, desktop, desktop, desktop)
+    manager = SessionManager(lambda: pytest.fail("cached read must not initialize runtime"))
+    manager.runtime = runtime
+    session = Session(
+        Contract(goal="Inspect the recorded File dropdown"), status=Status.LOW_CONFIDENCE
+    )
+    session.rounds = 1
+    session.blocker = {"kind": "CONFIDENCE_BELOW_THRESHOLD", "observed": {"probability": 0.4444}}
+    recorded = Observation("recorded-menu-epoch", frame("blue"), desktop.parse(None))
+    session.observation = recorded
+    manager.sessions[session.id] = session
+    manager.active = session.id
+    before = session.snapshot()
+
+    result = manager.dispatch("observe", {"session_id": session.id, "refresh": False})
+
+    assert result["observation_fresh"] is False
+    assert result["observation_id"] == recorded.id
+    assert result["frame_reference"] == recorded.frame.reference().model_dump(mode="json")
+    assert result["objects"] == [o.model_dump(mode="json") for o in recorded.objects]
+    assert result["blocker"] == before["blocker"]
+    assert session.snapshot() == before and session.observation is recorded
+    assert capture.calls == 0 and desktop.stage == 0 and not manager.busy
+
+
 def test_idle_observe_uses_exact_cache_and_busy_observe_does_not_capture():
     class Parser(FixtureDesktop):
         cache_identity = ("fixed", 1)

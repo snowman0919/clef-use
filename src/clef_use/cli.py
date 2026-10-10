@@ -50,6 +50,12 @@ def parser():
             }[command],
         )
         sub.add_argument("--session-id")
+        if command == "observe":
+            sub.add_argument(
+                "--cached",
+                action="store_true",
+                help="read recorded evidence without capture or service startup",
+            )
     resume = commands.add_parser("continue", help="resume a session with new guidance")
     resume.add_argument("session_id")
     resume.add_argument("instruction")
@@ -157,7 +163,11 @@ def main(argv=None):
                 ),
             )
             result = RuntimeClient().run(contract)
-        elif args.command in {"status", "abort", "observe"}:
+        elif args.command == "observe":
+            result = RuntimeClient(start=False).request(
+                "observe", session_id=args.session_id, refresh=not args.cached
+            )
+        elif args.command in {"status", "abort"}:
             result = RuntimeClient(start=False).request(args.command, session_id=args.session_id)
         elif args.command == "continue":
             result = RuntimeClient(start=False).continue_session(args.session_id, args.instruction)

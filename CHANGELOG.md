@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 0.1.27
+
+- Add explicit cache-only observation with MCP `refresh=false` and CLI
+  `observe --cached`, preserving recorded frame/object/image and refusal evidence
+  without capture, parsing, runtime initialization or service startup/restart.
+- Fail closed on legacy services without a cached-observe capability, and bind
+  capability/read requests to one authenticated endpoint against endpoint swaps.
+- Reject non-boolean refresh policies at the client before startup and at the
+  service before initialization. Preserve concurrent fresh-operation ownership.
+- Retain default fresh observation, all confidence/completion/input safety gates,
+  CLEF-Flash/NF4 defaults and opt-in d1. This release adds diagnostic UX, not proof
+  of improved recognition, fresh completion or Reici visual acceptance.
+
 ## 0.1.26
 
 - Explain confidence refusals with bounded mode/selection/goal/condition scores;

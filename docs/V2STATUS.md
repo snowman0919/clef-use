@@ -3,6 +3,33 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: explicit cached observation, no hidden GUI work
+
+- Source `computer_observe(refresh=false)` and CLI `observe --cached` now read only
+  a recorded session observation, preserving frame/object/preview identity,
+  counters and refusal/completion evidence. Default idle-refresh and busy cached
+  behavior remain unchanged. A cold cache returns null refs without factory work.
+- Client cached reads never call service auto-start/version restart. They require
+  explicit health `capabilities.cached_observe=true` and bind both authenticated
+  health/read requests to the same endpoint; legacy support and endpoint swaps
+  cannot silently turn a read into a fresh capture. Raw HTTP refresh is a strict
+  boolean; invalid values are refused before runtime initialization.
+- Observed RED→GREEN: idle recorded read formerly returned fresh=true; real stdio
+  MCP discarded refresh=false; legacy equal-version observe proceeded and older
+  version attempted startup; replacing endpoint between health/read reached a
+  different fresh-capture service; CLI rejected --cached. Core capture/parser,
+  decision/completion/input gates in runtime.py remain byte-identical.
+- Independent read-only adversarial review deleg_4bf238cd PASS on the frozen
+  diff. Parent then reproduced its invalid-client-policy suggestion (six guarded
+  startup attempts), added a two-line preflight type guard, and verified both
+  real-thread cold-factory/fresh-capture overlap cases with Events. Full582passed/
+  34skipped/41existing Pillow warnings + Ruff/format/diff PASS. Live task-owned
+  service0.1.25 rejects the capability request before observe/restart, unchanged
+  PID/busy. Real loopback/stdio use synthetic pixels/recorded refusal, not Blender
+  recognition. Release0.1.27 PREPARED; delivery pending. Linux/Windows actual
+  public0.1.26/config/cache/PATH baselines verified before tag push by reusing the
+  existing isolated prefixes. No new inference/input or task-service reload.
+
 ## 2026-10-10: 0.1.26 software delivery verified
 
 - Published GitHub latest releasev0.1.26 at tag/source

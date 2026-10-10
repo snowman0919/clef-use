@@ -17,7 +17,9 @@ def create_server(client=None, update_request=""):
         instructions=(
             "Submit bounded GUI goals to computer_run. The local runtime owns all "
             "inner-loop actions. Observe after preparation to inspect fresh pixels "
-            "before supplying paths, or after escalation. Continue resumes escalation; "
+            "before supplying paths, or after escalation. Use observe refresh=False for "
+            "recorded diagnostic evidence, not fresh input/completion proof. "
+            "Continue resumes escalation; "
             "abort stops input." + (" " + update_request if update_request else "")
         ),
     )
@@ -69,10 +71,16 @@ def create_server(client=None, update_request=""):
             raise
 
     @server.tool()
-    async def computer_observe(session_id: str | None = None, include_image: bool = False) -> list:
-        """Refresh the idle desktop; while running, read an explicitly cached observation."""
+    async def computer_observe(
+        session_id: str | None = None, include_image: bool = False, refresh: bool = True
+    ) -> list:
+        """Refresh idle pixels by default; refresh=False reads only recorded session evidence."""
         result = await asyncio.to_thread(
-            client.request, "observe", session_id=session_id, include_image=include_image
+            client.request,
+            "observe",
+            session_id=session_id,
+            include_image=include_image,
+            refresh=refresh,
         )
         image = result.pop("image_png", None)
         contents = [TextContent(type="text", text=json.dumps(result))]

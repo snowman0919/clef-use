@@ -24,8 +24,8 @@ class RuntimeClient:
             raise ValueError("invalid local service port")
         return data
 
-    def _send(self, operation, data):
-        endpoint = self._endpoint()
+    def _send(self, operation, data, *, endpoint=None):
+        endpoint = endpoint if endpoint is not None else self._endpoint()
         request = urllib.request.Request(
             f"http://127.0.0.1:{endpoint['port']}/{operation}",
             data=json.dumps(data).encode(),
@@ -37,7 +37,7 @@ class RuntimeClient:
             method="POST",
         )
         timeout = 5
-        if operation == "observe":
+        if operation == "observe" and data.get("refresh", True) is not False:
             config = load_config()
             # Idle observation may cold-start its parser and then parse a fresh frame.
             timeout += 2 * config.backend_timeout + config.screen_timeout
@@ -103,9 +103,31 @@ class RuntimeClient:
             raise RuntimeError("runtime service did not start")
 
     def request(self, operation, **data):
-        self._ensure()
+        if operation == "observe" and not isinstance(data.get("refresh", True), bool):
+            raise ValueError("refresh must be a boolean")
+        endpoint = None
+        if operation == "observe" and data.get("refresh", True) is False:
+            try:
+                endpoint = self._endpoint()
+                health = self._send("health", {}, endpoint=endpoint)
+            except (OSError, ValueError):
+                raise RuntimeError(
+                    "runtime service is not running; cached reads cannot start it"
+                ) from None
+            self._check_desktop(health)
+            capabilities = health.get("capabilities")
+            if not isinstance(capabilities, dict) or capabilities.get("cached_observe") is not True:
+                raise RuntimeError(
+                    "runtime does not support cached observations; update it explicitly while idle"
+                )
+        else:
+            self._ensure()
         try:
-            return self._send(operation, data)
+            return (
+                self._send(operation, data, endpoint=endpoint)
+                if endpoint is not None
+                else self._send(operation, data)
+            )
         except urllib.error.HTTPError as exc:
             try:
                 reply = json.loads(exc.read(4096))

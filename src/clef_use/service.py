@@ -119,6 +119,7 @@ class SessionManager:
                 "version": __version__,
                 "busy": self.busy,
                 "desktop_scope": self.desktop_scope,
+                "capabilities": {"cached_observe": True},
             }
         if operation == "shutdown_idle":
             with self.lock:
@@ -127,13 +128,16 @@ class SessionManager:
                 self.stopping = True
             return {"ok": True}
         if operation == "observe":
+            requested_refresh = data.get("refresh", True)
+            if not isinstance(requested_refresh, bool):
+                raise ValueError("refresh must be a boolean")
             with self.lock:
                 session = (
                     self.get(data.get("session_id"))
                     if data.get("session_id") is not None or self.active is not None
                     else None
                 )
-                refresh = not self.busy and not self.stopping
+                refresh = requested_refresh and not self.busy and not self.stopping
                 if refresh:
                     self.busy = True
             try:

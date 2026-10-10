@@ -80,7 +80,22 @@ Continue accepts `session_id` and `instruction`, only for replanning, low
 confidence and no progress, within the remaining original budget. Use a new run
 for an exhausted or aborted session. Observe refreshes the screen and object map while the runtime is idle. While
 execution owns the desktop, it returns the latest cached observation with
-`observation_fresh=false`. Objects, image hash and optional PNG share one
+`observation_fresh=false`. For diagnostics use
+`computer_observe(session_id="...", refresh=false, include_image=true)` or
+`clef-use observe --cached --session-id ...`. This explicitly reads only the
+selected session's recorded observation, even while idle: no capture/parser,
+action/decision budget, runtime initialization or service start/restart. It does
+not clear refusal/completion evidence. An absent recorded frame returns null
+observation/frame references and no image, not an invented fresh observation.
+
+Cached reads require the service's explicit `cached_observe` capability. An older
+service is refused before observe or automatic version restart; update explicitly
+while idle if needed. The capability check and recorded read use the same endpoint
+identity so an endpoint-file replacement cannot redirect the read into a legacy
+fresh-capture path. Default `refresh=true` retains existing idle-refresh semantics.
+Cached evidence is diagnostic history, never a fresh completion witness or a
+substitute for newly inspected pixels before a pointer-input run. Objects, image
+hash and optional PNG share one
 `observation_id`. Observation never consumes the action/decision budget. `include_image=true` returns MCP PNG
 content at up to 1280 pixels. `preview_reference` identifies these transport
 pixels and names their original parent hash; `frame_reference` remains the
