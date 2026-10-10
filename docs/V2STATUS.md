@@ -24,8 +24,14 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   and no model/factory initialization; no GPU workers. Ordinary CI/fixture Actions
   remain disabled; no additional hosted validation matrix was dispatched.
 - H2 same-case context0.0363->0.1175 is not enough: goal0.1069/modeBLOCKED0.3976
-  still below0.9/0.85. Independent H2 source/interpretation review is pending,
-  not an authorization for private numeric probes or a new live File ASSESS.
+  still below0.9/0.85. Independent H2 review PASS for comparison validity and
+  same-case context membership/order total effect only. Tokens2627->2593; B was
+  not repeated/order-crossed. The immutable identifier says membership_only,
+  but intervention also changes order/serialization; original bytes preserved
+  with this erratum. No generalization/calibration, model-root-cause proof or
+  fresh/full126-roster/live completion follows. Image/hash truth and service
+  restoration were parent checks, not independent review. No new probe/ASSESS
+  authority was granted by the internal review result.
   Original live retry, base selection/acquisition/import/deformation/physics/
   Gemini production-stage/final acceptance remain incomplete. Overall Goal OPEN.
 
