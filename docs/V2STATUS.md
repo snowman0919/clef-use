@@ -37,8 +37,16 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   Authentic recorded100-object capped-roster CPU replay now includes New and
   Open Recent; questions/image/other state match and ASSESS has0 candidates.
   The original parser had126 objects: this is not a complete126-object reparse.
-  Corrected-context model inference and original live MCP retry are NOT_RUN;
+  The next saved-frame GPU comparison ran A/repeatA/B with only context subset
+  and order changed: Acondition0.0363 both, B0.1175 (+0.0812), Bgoal0.1069 and
+  BLOCKED mode0.3976 remain below0.9/0.85 gates. Four-decimal repeats match, same
+  schema/image/other state and resource/model defaults; no GUI/raw numeric capture.
+  This is a same-case context effect, not calibrated accuracy or live completion.
+  Original live MCP retry is NOT_RUN. Service restored idle with exact config/caps;
   source regression PASS is not Blender recognition, avatar CV or Goal completion.
+- Software0.1.28 delivery is being prepared via the existing release-only pipeline.
+  Genuine Linux/Windows0.1.27 prefixes and config/cache/PATH baseline receipts were
+  verified before any tag push; avatar artifacts and private captures are excluded.
 
 ## 2026-10-10: authorized live File ASSESS and recorded-cache readback
 

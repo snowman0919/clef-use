@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+## 0.1.28
+
+- Focus bounded decision evidence around a unique literal observed label in
+  success conditions when a natural-language goal has no exact UI anchor and
+  no explicit visual intent. Preserve raw objects and unchanged executable
+  choices, context bounds, native-raster proximity and confidence/safety gates.
+- Refuse ambiguous, substring-only, hidden, occluded, sensitive and blank
+  fallback anchors; preserve existing explicit/exact-goal anchor priority.
+- Retain CLEF-Flash/NF4 and opt-in d1. Saved-frame GPU diagnostics establish a
+  context effect, not calibrated accuracy, fresh Blender completion or avatar
+  acceptance; no captured data, model weights or third-party assets ship.
+
 ## 0.1.27
 
 - Add explicit cache-only observation with MCP `refresh=false` and CLI
