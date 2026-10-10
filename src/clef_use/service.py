@@ -101,8 +101,10 @@ class SessionManager:
                 raise ValueError("session status cannot be resumed")
             if session.rounds >= session.contract.max_steps:
                 raise ValueError("create a new contract after budget exhaustion")
-            session.guidance.append(instruction)
-            session.status, session.reason = Status.RUNNING, "resumed with planner guidance"
+            with session.lock:
+                session.guidance.append(instruction)
+                session.status, session.reason = Status.RUNNING, "resumed with planner guidance"
+                session.blocker = None
             return self._launch(session)
 
     def dispatch(self, operation, data):

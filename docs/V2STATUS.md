@@ -3,6 +3,32 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: expose the refusing confidence gate without changing policy
+
+- Saved File assessment returned LOW_CONFIDENCE with selector confidence1.0 and
+  ACT mode probability0.4444. The selector score is not mode/completion certainty.
+  Both mode/selection diagnostic regressions first failed with blocker=None.
+- Shared runtime now returns bounded gate probabilities in the existing blocker
+  dictionary, not new schema fields or raw model/GUI data. A prior unverified
+  completion blocker survives, and resuming clears stale refusal evidence.
+- OBSERVED real stdio MCP and loopback service with synthetic capture and recorded
+  decision scores: LOW_CONFIDENCE, confidence1.0, refusing mode0.4444, zero inputs;
+  computer_status readback matches. The continuation response and MCP status also
+  show RUNNING with blockerNone while worker execution is deliberately deferred;
+  the previous terminal payload remains unchanged. This exercises actual service/
+  transport state transitions, NOT a live model/backbone/Blender task or improved
+  recognition.
+- Initial independent review found the resume reset occurred too late inside the
+  worker. Parent reproduced all three blocker variants RED, then atomically reset
+  the blocker with RUNNING under the session lock before worker launch: GREEN.
+  Local558passed/34skipped, existing41 Pillow warnings; Ruff/format/diff pass.
+  Final independent re-review PASS with no security/logic findings; parent verified
+  exact reviewed file hashes and AST-equivalent existing runtime gates.
+- Thresholds, selector scores, statuses/reasons, two-fresh-positive completion,
+  no-input ASSESS, defaults/caps and public release0.1.25 unchanged. No runtime
+  reload, new live capture/inference, denied model/prompt replay or release.
+  Original File task and overall Reici/V2 Goal remain incomplete.
+
 ## 2026-10-10: correct evidence scope and context-distance units
 
 - Independent numerics review PASS for one-input head arithmetic only. Correct

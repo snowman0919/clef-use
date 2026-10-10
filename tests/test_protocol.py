@@ -5,12 +5,15 @@ import sys
 import threading
 import urllib.error
 import urllib.request
+from types import SimpleNamespace
 
 import pytest
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
 from clef_use.benchmark import fixture_runtime
+from clef_use.client import RuntimeClient
+from clef_use.schema import Decision
 from clef_use.service import SessionManager, make_server
 
 
@@ -76,6 +79,78 @@ async def test_real_stdio_mcp_runs_same_service_and_lists_only_high_level_tools(
             assert service[1].get(data["session_id"]).rounds == 4
             status = await session.call_tool("computer_status", {"session_id": data["session_id"]})
             assert status.structuredContent["status"] == "COMPLETED"
+
+
+async def test_real_stdio_mcp_reports_confidence_gate_and_matching_status(service, monkeypatch):
+    class RecordedAssessment:
+        def decide(self, observation, goal, candidates, history):
+            assert candidates == ()
+            # Recorded decision scores with synthetic fixture capture, not new inference.
+            return Decision(
+                mode="ACT",
+                mode_confidence=0.4444,
+                confidence=1.0,
+                goal_probability=0.1578,
+                condition_probabilities=(0.1647,),
+            )
+
+    service[1].runtime = fixture_runtime()
+    service[1].runtime.decision = RecordedAssessment()
+    parameters = StdioServerParameters(
+        command=sys.executable, args=["-m", "clef_use.cli", "mcp"], env=dict(os.environ)
+    )
+    async with stdio_client(parameters) as (read, write):
+        async with ClientSession(read, write) as client:
+            await client.initialize()
+            result = await client.call_tool(
+                "computer_run",
+                {
+                    "goal": "Assess Settings",
+                    "success_conditions": ["Settings open"],
+                    "execution_mode": "ASSESS",
+                    "max_steps": 3,
+                },
+            )
+            assert not result.isError
+            data = result.structuredContent
+            assert data["status"] == "LOW_CONFIDENCE" and data["confidence"] == 1.0
+            assert data["steps"] == 0 and data["rounds"] == 1 and data["last_action"] is None
+            assert data["blocker"]["kind"] == "CONFIDENCE_BELOW_THRESHOLD"
+            observed = data["blocker"]["observed"]
+            assert observed["source"] == "execution_mode"
+            assert observed["probability"] == observed["mode_confidence"] == 0.4444
+            assert observed["probability"] < observed["required_probability"]
+            assert observed["action_selection_confidence"] == 1.0
+            assert observed["goal_probability"] == 0.1578
+            assert observed["condition_probabilities"] == [0.1647]
+            status = await client.call_tool("computer_status", {"session_id": data["session_id"]})
+            assert not status.isError
+            assert status.structuredContent["blocker"] == data["blocker"]
+            assert status.structuredContent["status"] == "LOW_CONFIDENCE"
+
+            class DeferredWorkerThread:
+                def __init__(self, *, target, args, daemon):
+                    pass
+
+                def start(self):
+                    pass
+
+            # Pause only the worker scheduler, not HTTP, MCP, or session state transitions.
+            monkeypatch.setattr(
+                "clef_use.service.threading", SimpleNamespace(Thread=DeferredWorkerThread)
+            )
+            resumed = RuntimeClient(start=False).request(
+                "continue",
+                session_id=data["session_id"],
+                instruction="Use the new visible evidence",
+            )
+            assert resumed["status"] == "RUNNING" and resumed["blocker"] is None
+            status = await client.call_tool("computer_status", {"session_id": data["session_id"]})
+            assert not status.isError
+            assert status.structuredContent["status"] == "RUNNING"
+            assert status.structuredContent["blocker"] is None
+            assert status.structuredContent["rounds"] == 1
+            assert data["blocker"]["observed"]["probability"] == 0.4444
 
 
 @pytest.mark.parametrize("operation", ["status", "abort"])

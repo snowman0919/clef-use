@@ -297,6 +297,32 @@ class SessionRuntime:
         session.blocker = {"kind": kind, "observed": observed, "resume_when": resume}
         return self._finish(session, Status.BLOCKED, reason)
 
+    def _low_confidence(self, session, decision, *, source):
+        mode_gate = source == "execution_mode"
+        observed = {
+            "source": source,
+            "probability": decision.mode_confidence if mode_gate else decision.confidence,
+            "required_probability": session.contract.confidence_threshold,
+            "action_selection_confidence": decision.confidence,
+            "mode": decision.mode,
+            "mode_confidence": decision.mode_confidence,
+            "goal_probability": decision.goal_probability,
+            "condition_probabilities": list(decision.condition_probabilities),
+        }
+        with session.lock:
+            if session.blocker is None:
+                session.blocker = {
+                    "kind": "CONFIDENCE_BELOW_THRESHOLD",
+                    "observed": observed,
+                    "resume_when": "new relevant evidence or planner clarification; "
+                    "do not repeat already-delivered input",
+                }
+            else:
+                # Weak completion evidence remains available alongside the refusing gate.
+                session.blocker = {**session.blocker, "confidence_gate": observed}
+        reason = "execution mode confidence" if mode_gate else "action confidence"
+        return self._finish(session, Status.LOW_CONFIDENCE, f"{reason} below threshold")
+
     def abort(self, session: Session) -> dict:
         session.cancelled.set()
         with session.lock:
@@ -607,9 +633,7 @@ class SessionRuntime:
                         ),
                     }
                 if decision.mode_confidence < session.contract.confidence_threshold:
-                    return self._finish(
-                        session, Status.LOW_CONFIDENCE, "execution mode confidence below threshold"
-                    )
+                    return self._low_confidence(session, decision, source="execution_mode")
                 if decision.mode == "NEEDS_REPLAN":
                     return self._finish(
                         session, Status.NEEDS_REPLAN, "executor mode requests planner guidance"
@@ -681,9 +705,7 @@ class SessionRuntime:
                         observed={"actionable_candidates": 0},
                     )
                 if decision.confidence < session.contract.confidence_threshold:
-                    return self._finish(
-                        session, Status.LOW_CONFIDENCE, "action confidence below threshold"
-                    )
+                    return self._low_confidence(session, decision, source="action_selection")
                 selected = next((a for a in candidates if a.id == decision.action), None)
                 if selected is None:
                     return self._finish(

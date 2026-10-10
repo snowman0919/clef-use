@@ -50,6 +50,20 @@ Only bounded candidate targets and bounded semantic hints enter CLEF's decision
 context. OmniParser continues to supply proposals, OCR, metadata and candidates;
 its full object roster is no longer automatically a CLEF choice roster.
 
+MCP/session `confidence` retains its action-selection meaning; it is not mode
+confidence or completion certainty. In a read-only assessment the selector can
+report `1.0` while the mode gate still refuses execution. A `LOW_CONFIDENCE`
+result now includes `blocker.kind="CONFIDENCE_BELOW_THRESHOLD"` and bounded
+`blocker.observed` scores: the refusing `source` (`execution_mode` or
+`action_selection`), its `probability`, `required_probability`, and the separate
+selection, mode, goal and condition probabilities. If a `COMPLETION_UNVERIFIED`
+blocker already exists, its evidence is preserved and the refusing scores are
+attached as `blocker.confidence_gate`. These diagnostics do not authorize input,
+change thresholds, or replace the two-fresh-observation completion requirement.
+The service clears a resumed session's previous blocker atomically with its
+`RUNNING` transition, before launching the worker; immediate continue/status
+responses therefore cannot expose the terminal blocker as current evidence.
+
 `visual_intent` describes the target, optional normalized screenshot region and
 gesture.
 

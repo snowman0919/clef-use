@@ -1,4 +1,5 @@
 from types import SimpleNamespace
+from typing import NoReturn
 
 import pytest
 
@@ -6,7 +7,7 @@ from clef_use.benchmark import FixtureDesktop
 from clef_use.config import Config
 from clef_use.grounding import GroundingQueryTooLong, GroundingStrategyUnsupported
 from clef_use.runtime import Session, SessionRuntime
-from clef_use.schema import Contract, Decision, VisualIntent
+from clef_use.schema import Contract, Decision, SessionResult, Status, VisualIntent
 
 
 class DenseDesktop(FixtureDesktop):
@@ -103,6 +104,150 @@ def test_visible_dense_goal_is_assessed_before_grounding_or_input(probability, s
     if status == "COMPLETED":
         assert result["rounds"] == 2
         assert result["reason"] == "goal and conditions verified on two fresh observations"
+
+
+def test_low_mode_confidence_reports_actual_gate_not_singleton_action_score():
+    class RecordedAssessment(DenseDesktop):
+        def decide(self, observation, goal, candidates, history):
+            assert candidates == ()
+            # Recorded File-assessment scores; fixture pixels are not a native GUI replay.
+            return Decision(
+                mode="ACT",
+                mode_confidence=0.4444,
+                confidence=1.0,
+                goal_probability=0.1578,
+                condition_probabilities=(0.1647,),
+            )
+
+        def execute(self, action, observation, cancelled) -> NoReturn:
+            pytest.fail("a confidence refusal must not deliver input")
+
+    desktop = RecordedAssessment()
+    session = Session(
+        Contract(
+            goal="Assess the visible menu",
+            success_conditions=["The menu is visibly open"],
+            execution_mode="ASSESS",
+            confidence_threshold=0.85,
+            max_steps=3,
+        )
+    )
+    result = runtime(desktop, None).execute(session)
+    assert result["status"] == "LOW_CONFIDENCE"
+    assert result["confidence"] == 1.0  # Preserve the existing action-selection score.
+    assert result["steps"] == 0 and result["rounds"] == 1 and result["last_action"] is None
+    assert result["blocker"] is not None
+    assert result["blocker"]["kind"] == "CONFIDENCE_BELOW_THRESHOLD"
+    observed = result["blocker"]["observed"]
+    assert observed == {
+        "source": "execution_mode",
+        "probability": 0.4444,
+        "required_probability": 0.85,
+        "action_selection_confidence": 1.0,
+        "mode": "ACT",
+        "mode_confidence": 0.4444,
+        "goal_probability": 0.1578,
+        "condition_probabilities": [0.1647],
+    }
+    typed = SessionResult.model_validate(result)
+    assert typed.blocker is not None
+    assert typed.blocker["observed"] == observed
+
+
+def test_low_action_confidence_reports_selection_gate_without_mode_conflation():
+    class UncertainChoice(FixtureDesktop):
+        def decide(self, observation, goal, candidates, history):
+            assert candidates
+            return Decision(action=candidates[0].id, confidence=0.4, mode_confidence=0.95)
+
+        def execute(self, action, observation, cancelled) -> NoReturn:
+            pytest.fail("a low-confidence choice must not deliver input")
+
+    desktop = UncertainChoice()
+    session = Session(Contract(goal="Settings", confidence_threshold=0.85, max_steps=2))
+    result = runtime(desktop, None).execute(session)
+    assert result["status"] == "LOW_CONFIDENCE"
+    assert result["confidence"] == 0.4
+    assert result["steps"] == 0 and result["rounds"] == 1 and result["last_action"] is None
+    assert result["blocker"] is not None
+    observed = result["blocker"]["observed"]
+    assert observed["source"] == "action_selection"
+    assert observed["probability"] == observed["action_selection_confidence"] == 0.4
+    assert observed["mode_confidence"] == 0.95
+    assert observed["required_probability"] == 0.85
+    assert desktop.stage == 0
+
+
+def test_low_mode_confidence_preserves_unverified_completion_evidence():
+    class UnverifiedCompletion(DenseDesktop):
+        def decide(self, observation, goal, candidates, history):
+            return Decision(
+                mode="COMPLETED",
+                mode_confidence=0.4,
+                confidence=1.0,
+                goal_probability=0.5,
+                condition_probabilities=(0.6,),
+            )
+
+    desktop = UnverifiedCompletion()
+    session = Session(
+        Contract(
+            goal="Assess Settings",
+            success_conditions=["Settings open"],
+            execution_mode="ASSESS",
+            confidence_threshold=0.85,
+        )
+    )
+    result = runtime(desktop, None).execute(session)
+    assert result["status"] == "LOW_CONFIDENCE" and result["steps"] == 0
+    blocker = result["blocker"]
+    assert blocker["kind"] == "COMPLETION_UNVERIFIED"
+    assert blocker["observed"]["goal"]["probability"] == 0.5
+    assert blocker["observed"]["conditions"][0]["probability"] == 0.6
+    assert blocker["observed"]["condition_count_matches"] is True
+    assert blocker["confidence_gate"]["source"] == "execution_mode"
+    assert blocker["confidence_gate"]["probability"] == 0.4
+    assert blocker["confidence_gate"]["required_probability"] == 0.85
+
+
+def test_resumed_assessment_does_not_retain_previous_confidence_blocker():
+    class ChangedEvidence(DenseDesktop):
+        clarified = False
+
+        def decide(self, observation, goal, candidates, history):
+            return Decision(
+                mode="COMPLETED" if self.clarified else "ACT",
+                mode_confidence=0.99 if self.clarified else 0.4,
+                confidence=1.0,
+                goal_probability=0.99 if self.clarified else 0.1,
+                condition_probabilities=(0.99 if self.clarified else 0.1,),
+            )
+
+        def execute(self, action, observation, cancelled) -> NoReturn:
+            pytest.fail("resumed read-only assessment must not deliver input")
+
+    desktop = ChangedEvidence()
+    executor = runtime(desktop, None)
+    session = Session(
+        Contract(
+            goal="Assess Settings",
+            success_conditions=["Settings open"],
+            execution_mode="ASSESS",
+            confidence_threshold=0.85,
+            max_steps=3,
+        )
+    )
+    first = executor.execute(session)
+    assert first["status"] == "LOW_CONFIDENCE"
+    assert first["blocker"]["kind"] == "CONFIDENCE_BELOW_THRESHOLD"
+    desktop.clarified = True
+    session.guidance.append("Use the new visible evidence")
+    session.status = Status.RUNNING
+    resumed = executor.execute(session)
+    assert resumed["status"] == "COMPLETED"
+    assert resumed["steps"] == 0 and resumed["rounds"] == 3
+    assert resumed["blocker"] is None
+    assert first["blocker"]["observed"]["probability"] == 0.4
 
 
 @pytest.mark.parametrize("dense", [False, True])

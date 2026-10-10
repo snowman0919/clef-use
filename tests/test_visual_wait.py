@@ -1,4 +1,6 @@
+from copy import deepcopy
 from threading import Event
+from types import SimpleNamespace
 
 import pytest
 from PIL import Image, ImageDraw
@@ -331,16 +333,53 @@ def test_idle_observe_uses_exact_cache_and_busy_observe_does_not_capture():
         runtime.desktop_lock.release()
 
 
-def test_blocked_service_session_resumes_with_explicit_guidance_and_keeps_budget():
+@pytest.mark.parametrize(
+    ("status", "blocker"),
+    [
+        (Status.BLOCKED, {"kind": "VISIBLE_LOADING", "observed": {"overlay": "Loading"}}),
+        (
+            Status.LOW_CONFIDENCE,
+            {"kind": "CONFIDENCE_BELOW_THRESHOLD", "observed": {"probability": 0.4444}},
+        ),
+        (
+            Status.LOW_CONFIDENCE,
+            {
+                "kind": "COMPLETION_UNVERIFIED",
+                "observed": {"goal_probability": 0.5},
+                "confidence_gate": {"probability": 0.4},
+            },
+        ),
+    ],
+)
+def test_resumed_service_clears_blocker_before_worker_runs(monkeypatch, status, blocker):
     from clef_use.service import SessionManager
 
-    manager = SessionManager()
-    session = Session(Contract(goal="test", max_steps=3), status=Status.BLOCKED, rounds=1)
+    class DeferredWorkerThread:
+        def __init__(self, *, target, args, daemon):
+            pass
+
+        def start(self):
+            # Hold the scheduler boundary; all session transitions remain real service code.
+            pass
+
+    manager = SessionManager(lambda: pytest.fail("a deferred worker must not load a runtime"))
+    session = Session(Contract(goal="test", max_steps=3), status=status, rounds=1)
+    session.blocker = deepcopy(blocker)
     manager.sessions[session.id] = session
-    manager._launch = lambda active: active.snapshot()
-    result = manager.continue_session(session.id, "The loading indicator disappeared")
-    assert result["status"] == "RUNNING" and result["rounds"] == 1
-    assert session.guidance == ["The loading indicator disappeared"]
+    terminal = session.snapshot()
+    monkeypatch.setattr("clef_use.service.threading", SimpleNamespace(Thread=DeferredWorkerThread))
+    result = manager.dispatch(
+        "continue",
+        {"session_id": session.id, "instruction": "Use the new visible evidence"},
+    )
+    concurrent_status = manager.dispatch("status", {"session_id": session.id})
+    assert result["status"] == concurrent_status["status"] == "RUNNING"
+    assert result["blocker"] is None and concurrent_status["blocker"] is None
+    assert result["rounds"] == concurrent_status["rounds"] == 1
+    assert session.contract.max_steps == 3
+    assert session.guidance == ["Use the new visible evidence"]
+    assert terminal["status"] == status.value and terminal["blocker"] == blocker
+    assert manager.busy and manager.runtime is None
 
 
 def test_uniform_hover_color_is_not_content_readiness_before_delayed_glyph():
