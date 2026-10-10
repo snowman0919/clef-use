@@ -3,6 +3,34 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: d1 encoded-input budget enforcement
+
+- Real pinned SDK plus tokenizer, without loading backbone weights, allowed an
+  8390-token record (8355 state +35 branches;16847 text bytes) to reach the model
+  boundary despite token_budget8192. The boundary was a sentinel, not inference.
+  Branch packing alone did not enforce the whole-input limit. A decisive unit
+  RED also reproduced8193 accepted tokens before the fix.
+- Serial d1 requests now check actual encoded plain-forward IDs, tree trunk+all
+  packed branches, and whole-branch overflow before a first partial chunk. The
+  scoped hooks/method wrappers restore previous class/instance state on success,
+  refusal, model exception and setup failure. No second prompt renderer, clipping,
+  model/precision/default/token-limit increase or CLEF-only head offload.
+- Real SDK CPU controls reject text/image and single/multi-question overflow before
+  the sentinel; native H2 B still reaches its allowed2233-token tree boundary.
+  These are execution-boundary controls, not model numerical/quality evidence.
+- Actual pinned d1 CUDA/BF16 additionally refused the oversized record before any
+  backbone boundary call and replayed native H2 B twice: all API scalar differences
+  from the preserved baseline0 within predeclared1e-4; condition0.06754669 remains
+  below the unchanged0.9 gate. Two actual native model calls, not live completion
+  or improved recognition. Per-request temporary guards restored every time.
+- Local616passed/34skipped/41existing Pillow warnings; Ruff/format/diff PASS.
+  Original worker profiles/resource caps preserved; owned service0.1.28 restored
+  idle with before/after3config hashes, actual caps and empty compute-GPU list
+  recorded. Cgroup1.8GB charge on this warm-cache unit is not physical resident
+  footprint, combined-parser capacity or a RAM/speedup claim.
+- Independent source/guard review pending before the next coherent software
+  release, including the earlier singleton replay fix. Avatar/overall Goal OPEN.
+
 ## 2026-10-11: singleton native replay repair and candidate diagnostic
 
 - Canonical benchmark rejected the real File ASSESS packet before any inference:

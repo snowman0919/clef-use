@@ -27,8 +27,16 @@ def test_d1_calls_public_system_one_once_without_changing_state_or_question_mean
     worker.device = "cpu"
     calls = []
     questions = {
-        "next": {"type": "choice", "criteria": {"wait": "Wait", "stop": "Stop"}},
-        "progress": {"type": "score", "criteria": ["None", "Done"]},
+        "next": {
+            "type": "choice",
+            "instructions": "Choose the next allowed action",
+            "criteria": {"wait": "Wait", "stop": "Stop"},
+        },
+        "progress": {
+            "type": "score",
+            "instructions": "Evaluate visible progress",
+            "criteria": ["None", "Done"],
+        },
         "unsafe": {"type": "noul", "instructions": "Would this violate a constraint?"},
     }
     expected = {
@@ -48,7 +56,8 @@ def test_d1_calls_public_system_one_once_without_changing_state_or_question_mean
         calls.append((state, submitted, images))
         return expected
 
-    worker.model = SimpleNamespace(system_one=system_one)
+    worker.model = DecisionBoundary(20, [9])
+    worker.model.system_one = system_one
     record = {
         "state": {"goal": "Wait", "constraints": ["No input"]},
         "questions": questions,
@@ -62,6 +71,177 @@ def test_d1_calls_public_system_one_once_without_changing_state_or_question_mean
     width, height = calls[0][2][0].size
     assert width * height <= 512 * 512
     assert record["image"] and record["evidence_images"]  # no mutation of replay payloads
+
+
+class EncodedSize:
+    def __init__(self, tokens):
+        self.tokens = tokens
+
+    def numel(self):
+        return self.tokens
+
+
+class BranchPlanner:
+    token_budget = 8192
+
+    def _plan(self, lengths, token_budget=None):
+        chunks, used = [[]], 0
+        for index, count in enumerate(lengths):
+            if chunks[-1] and used + count > self.token_budget:
+                chunks.append([])
+                used = 0
+            chunks[-1].append(index)
+            used += count
+        return chunks
+
+
+class DecisionBoundary:
+    """Lightweight external SDK boundary; no tensor library or model inference."""
+
+    def __init__(self, trunk, branches):
+        self.engine = BranchPlanner()
+        self.trunk, self.branches = trunk, branches
+        self.executed = []
+        self.hooks = []
+
+    def register_forward_pre_hook(self, hook, *, with_kwargs):
+        assert with_kwargs
+        self.hooks.append(hook)
+        return SimpleNamespace(remove=lambda: self.hooks.remove(hook))
+
+    def answer(self, trunk, packed, lengths, **vision):
+        self.executed.append(trunk.numel() + packed.numel())
+        return {"answers": {}, "usage": {"input_tokens": self.executed[-1], "output_tokens": 0}}
+
+    def system_one(self, state, submitted, images=None):
+        reply = None
+        for chunk in self.engine._plan(self.branches):
+            reply = self.answer(
+                EncodedSize(self.trunk),
+                EncodedSize(sum(self.branches[index] for index in chunk)),
+                None,
+            )
+        return reply
+
+
+def test_d1_rejects_total_trunk_plus_branches_before_execution(worker_module):
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = DecisionBoundary(8190, [2, 1])
+    record = {
+        "state": {"constraints": ["No input"]},
+        "questions": {"visible": {"type": "noul", "instructions": "Is the result visible?"}},
+    }
+    with pytest.raises(ValueError, match="token budget"):
+        worker.request(record)
+    assert worker.model.executed == []
+    assert worker.model.hooks == []
+    assert "answer" not in vars(worker.model) and "_plan" not in vars(worker.model.engine)
+
+
+@pytest.mark.parametrize("trunk, branches", [(8190, [2]), (0, [8192])])
+def test_d1_exact_total_budget_is_allowed_and_temporary_guards_are_removed(
+    worker_module, trunk, branches
+):
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = DecisionBoundary(trunk, branches)
+    result = worker.request({"state": {}, "questions": {}})
+    assert result["usage"]["input_tokens"] == 8192
+    assert worker.model.executed == [8192]
+    assert worker.model.hooks == []
+    assert "answer" not in vars(worker.model) and "_plan" not in vars(worker.model.engine)
+
+
+def test_d1_entire_branch_overflow_cannot_execute_a_first_under_budget_chunk(worker_module):
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = DecisionBoundary(16, [5000, 5000])
+    with pytest.raises(ValueError, match="token budget"):
+        worker.request({"state": {}, "questions": {}})
+    assert worker.model.executed == []
+    assert worker.model.hooks == []
+    assert "answer" not in vars(worker.model) and "_plan" not in vars(worker.model.engine)
+
+
+def test_d1_restores_preexisting_instance_methods_after_model_exception(worker_module):
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = DecisionBoundary(10, [2, 1])
+    original_plan = worker.model.engine._plan
+
+    def answer(*args, **kwargs):
+        raise RuntimeError("test model exception")
+
+    worker.model.answer = answer
+    worker.model.engine._plan = original_plan
+    with pytest.raises(RuntimeError, match="test model exception"):
+        worker.request({"state": {}, "questions": {}})
+    assert worker.model.answer is answer and worker.model.engine._plan is original_plan
+    assert worker.model.hooks == []
+
+
+@pytest.mark.parametrize("positional", [False, True])
+@pytest.mark.parametrize("count", [8192, 8193])
+def test_d1_plain_forward_is_guarded_before_execution(worker_module, count, positional):
+    class PlainBoundary(DecisionBoundary):
+        def system_one(self, state, submitted, images=None):
+            args, kwargs = (
+                ((EncodedSize(count),), {})
+                if positional
+                else ((), {"input_ids": EncodedSize(count)})
+            )
+            for hook in self.hooks:
+                hook(self, args, kwargs)
+            self.executed.append(count)
+            return {"usage": {"input_tokens": count}}
+
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = PlainBoundary(0, [])
+    if count == 8193:
+        with pytest.raises(ValueError, match="token budget"):
+            worker.request({"state": {}, "questions": {}})
+        assert worker.model.executed == []
+    else:
+        assert worker.request({"state": {}, "questions": {}})["usage"]["input_tokens"] == count
+        assert worker.model.executed == [count]
+    assert worker.model.hooks == []
+    assert "answer" not in vars(worker.model) and "_plan" not in vars(worker.model.engine)
+
+
+def test_d1_failed_guard_installation_restores_prior_state(worker_module):
+    class ReadOnlyAnswer(DecisionBoundary):
+        def __setattr__(self, name, value):
+            if name == "answer":
+                raise RuntimeError("cannot replace answer")
+            super().__setattr__(name, value)
+
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = ReadOnlyAnswer(10, [2])
+    prior_hook = object()
+    worker.model.hooks.append(prior_hook)
+    with pytest.raises(RuntimeError, match="cannot replace answer"):
+        worker.request({"state": {}, "questions": {}})
+    assert worker.model.executed == [] and worker.model.hooks == [prior_hook]
+    assert "_plan" not in vars(worker.model.engine)
+
+
+def test_d1_plain_forward_without_encoded_ids_is_refused(worker_module):
+    class MissingIds(DecisionBoundary):
+        def system_one(self, state, submitted, images=None):
+            for hook in self.hooks:
+                hook(self, (), {"input_ids": None})
+            self.executed.append(1)
+
+    worker = worker_module.D1Worker.__new__(worker_module.D1Worker)
+    worker.device = "cpu"
+    worker.model = MissingIds(0, [])
+    with pytest.raises(ValueError, match="no encoded input ids"):
+        worker.request({"state": {}, "questions": {}})
+    assert worker.model.executed == [] and worker.model.hooks == []
+    assert "answer" not in vars(worker.model) and "_plan" not in vars(worker.model.engine)
 
 
 def test_d1_does_not_inherit_clef_only_nf4_loader_or_silently_fall_back(worker_module):

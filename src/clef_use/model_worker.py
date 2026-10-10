@@ -326,6 +326,49 @@ def load_d1_model(path, *, device, dtype):
     )
 
 
+@contextlib.contextmanager
+def bounded_d1_decision(model):
+    """Guard actual encoded inputs without re-rendering the pinned SDK's prompt."""
+    engine = model.engine
+    plan, answer = engine._plan, model.answer
+
+    def check(count):
+        if count > 8192:
+            raise ValueError("d1 decision record exceeds the 8192 token budget")
+
+    def checked_plan(lengths, token_budget=None):
+        # Branch-only packing otherwise permits partial execution of an oversized record.
+        check(sum(lengths))
+        return plan(lengths, token_budget)
+
+    def checked_answer(trunk, packed, lengths, **vision):
+        check(trunk.numel() + packed.numel())
+        return answer(trunk, packed, lengths, **vision)
+
+    def checked_forward(_module, args, kwargs):
+        input_ids = kwargs.get("input_ids")
+        if input_ids is None and args:
+            input_ids = args[0]
+        if input_ids is None:
+            raise ValueError("d1 decision record has no encoded input ids")
+        check(input_ids.numel())
+
+    with contextlib.ExitStack() as cleanup:
+        hook = model.register_forward_pre_hook(checked_forward, with_kwargs=True)
+        cleanup.callback(hook.remove)
+        for owner, name, replacement in (
+            (engine, "_plan", checked_plan),
+            (model, "answer", checked_answer),
+        ):
+            owned, original = name in vars(owner), vars(owner).get(name)
+            setattr(owner, name, replacement)
+            if owned:
+                cleanup.callback(setattr, owner, name, original)
+            else:
+                cleanup.callback(delattr, owner, name)
+        yield
+
+
 class D1Worker:
     def __init__(self, config):
         if config["decision_model"] != "LiquidAI/d1-3B":
@@ -374,7 +417,8 @@ class D1Worker:
         # Keep the common single-frame contract even though d1 can accept more.
         # Effect evidence remains the same quantified state, not a second raster.
         try:
-            return self.model.system_one(record["state"], record["questions"], images=images)
+            with bounded_d1_decision(self.model):
+                return self.model.system_one(record["state"], record["questions"], images=images)
         finally:
             if self.device == "mps":
                 import torch
