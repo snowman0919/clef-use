@@ -29,8 +29,18 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   capacity claim. Idle owned service0.1.28 restored with exact config/dropin/caps,
   no GPU worker. Passive fresh capture matches original empty V01 inspection;
   no avatar selection/import/modeling or visual approval. Overall INCOMPLETE.
-- Independent diagnostic review pending; source fix is not yet in a new public
-  release. Software0.1.28 delivery remains distinct from this source checkpoint.
+- Independent diagnostic review PASS for one configured-profile saved case only.
+  AABB is recorded loop-order metadata, not independent chronological tracing;
+  repeat equality is numerical, not bit identity. ACT plus singleton `none` and
+  empty allowed_candidates is not executable authority. Review did not rehash PNG,
+  inspect execution-time media, prove generic d1 input-cap enforcement or reread
+  the complete long helper strings (read_file line truncation). Scope lacked a
+  persisted post-restore hash map/GPU list; exact restoration was a parent execution
+  assertion. New read-only parent witness confirms current3config hashes/caps,
+  service0.1.28/PID2350164/idle and no compute GPU worker, not retroactive capture
+  or independent replay of restoration. All4 reviewed artifacts remain unchanged.
+  No fresh recognition/default promotion or new public release. Software0.1.28
+  delivery remains distinct from this source checkpoint; overall INCOMPLETE.
 
 ## 2026-10-11: bounded full-frame image preprocessing diagnostic
 
