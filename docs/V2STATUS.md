@@ -26,9 +26,23 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   34skipped/41existing Pillow warnings + Ruff/format/diff PASS. Live task-owned
   service0.1.25 rejects the capability request before observe/restart, unchanged
   PID/busy. Real loopback/stdio use synthetic pixels/recorded refusal, not Blender
-  recognition. Release0.1.27 PREPARED; delivery pending. Linux/Windows actual
-  public0.1.26/config/cache/PATH baselines verified before tag push by reusing the
-  existing isolated prefixes. No new inference/input or task-service reload.
+  recognition. Release0.1.27 delivered at sourcec1450e0b68d96140763bbc639f399da49e176e17;
+  release-only run38049933715 all17jobs PASS, GitHub published/latest408923509.
+  All15public artifacts matched manifest hashes and runtime source. Windows ZIP
+  create_system0 vs Unix3 changes the wheel ZIP hash; all48 nested member bytes
+  match exactly. This packaging-metadata difference is not altered source.
+- Linux and Windows genuine public0.1.26→unmodified public0.1.27 updates plus
+  CURRENT passed. Config/cache and Windows user PATH unchanged; previous26
+  baselines verified before tag by reusing existing isolated prefixes. Actual
+  installed packages on both hosts exercised real stdio/loopback cached-null and
+  synthetic recorded-image/refusal/budget preservation, including refresh schema.
+  CPU fixture pixels are not real Blender or model-recognition evidence.
+- Explicitly updated only the idle task-owned service122 after metadata proved
+  NO_ACTIVE_SESSION and the original session already SESSION_NOT_FOUND. New
+  PID2241024/version0.1.27; actual stdio cached observe returned null refs without
+  new capture/parser/model/input. The unavailable old frame was not retrieved or
+  fabricated. Maintenance was explicit and separate from cache-only requests;
+  those still never start/restart. Overall Reici/recognition Goal remains incomplete.
 
 ## 2026-10-10: 0.1.26 software delivery verified
 
