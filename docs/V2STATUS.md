@@ -30,7 +30,16 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 - Fresh passive owned :122 capture equals preserved native raster; actual progress
   photo reused equal PNG to avoid duplication. Scene remains emptyV01, no source
   avatar selected/imported or visual quality approved. No GUI input in diagnostics.
-- Independent H4 comparison/interpretation review pending. Overall INCOMPLETE.
+- Independent H4 review PASS for single-saved-case preprocessing sensitivity
+  only. Source lacks an explicit image-field equality/preflight-to-actual packet
+  hash guard; report copies the preflight hash. Parent read-only reconstruction
+  now independently binds actual packet/PNG/preflight/report hashes and rehashes
+  the native-code recipe; this is not retroactive per-run media-value capture.
+  Reviewed helper/results remain unchanged. Native-area is an area setting, not
+  pixel-unmodified model input; media numeric identity was not independently
+  proven. Both units report memory max events despite oom0: no RAM headroom or
+  concurrent-parser capacity claim. No fresh recognition or default promotion.
+  Overall Goal remains INCOMPLETE.
 
 ## 2026-10-11: authorized original live retry and minimized H3 diagnostic
 
