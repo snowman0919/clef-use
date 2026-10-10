@@ -3,6 +3,16 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: prepare 0.1.26 software delivery
+
+- Release preparation covers verified source changes since public0.1.25, including
+  completion/ASSESS safety, native-raster context ranking, confidence-refusal
+  diagnostics and atomic service resume. Defaults, thresholds/caps and avatar gates
+  remain unchanged; no third-party assets or private captures are release inputs.
+- Actual tag-triggered release/deploy/install-update verification is PENDING.
+  Standalone CI/decision-fixture Actions remain disabled; only the authorized
+  release pipeline may run. No new model inference or Blender success is asserted.
+
 ## 2026-10-10: expose the refusing confidence gate without changing policy
 
 - Saved File assessment returned LOW_CONFIDENCE with selector confidence1.0 and

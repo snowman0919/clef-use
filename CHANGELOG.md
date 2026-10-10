@@ -2,6 +2,28 @@
 
 ## Unreleased
 
+## 0.1.26
+
+- Explain confidence refusals with bounded mode/selection/goal/condition scores;
+  keep the legacy selector score and all existing confidence thresholds unchanged.
+  Clear transient blockers atomically before resumed workers start, preserving
+  previous terminal payloads and unverified-completion evidence.
+- Assess visible goals before requiring dense input targets, support no-input
+  ASSESS runs, and require full completion evidence after measured visual effects.
+  Preserve the two-fresh-positive completion rule; a changed ROI is not completion.
+- Bound explicit semantic target choices and rank nearby context hints in native
+  raster units instead of unit-square distance. Keep original labels/provenance
+  and unchanged action/context limits; do not manufacture missing popup evidence.
+- Scope NF4 placement to the backbone subtree, release obsolete owners of the
+  never-executed output table, and isolate ML readiness from ambient Python paths.
+- Keep private one-shot numeric head-boundary capture opt-in and disabled by
+  default, with descriptor-relative path, bounded-write and cleanup guards.
+  No captured data, model weights or third-party avatar assets ship in releases.
+- Separate independent source-suitability reviews from production acceptance and
+  require actual image-open/model/hash evidence for Gemini review transport.
+- Retain CLEF-Flash/NF4 defaults and the opt-in d1 candidate. This release does not
+  claim improved Blender recognition, calibrated model accuracy or Reici completion.
+
 ## 0.1.24
 
 - Freeze the pre-V2 implementation under `old/` and port reviewed components into a clean
