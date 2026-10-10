@@ -3,6 +3,33 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: authorized live File ASSESS and recorded-cache readback
+
+- Native clarification explicitly approved one task-owned :122 File ASSESS,
+  max3 decisions and zero GUI input with existing thresholds/resources. This
+  does not authorize GPU/prompt A/B, changed model defaults or private head capture.
+- Actual current-source0.1.27 stdio MCP returned session85208ed17755412fa4c4fe0c0d4f9731
+  LOW_CONFIDENCE after1decision/0actions, elapsed84.7657s including cold startup.
+  Refusing ACT mode probability0.4359 <0.85; goal0.038, condition0.0363.
+  Selector confidence1.0 is not goal/completion confidence. No unchanged retry.
+- Real computer_observe(refresh=false,include_image=true) twice retained exactly
+  the status/blocker/budget, observation34047540042b48e8aba971829a07c2b8 and recorded
+  RGB1920x1080 framee64a4a77c90d919130abada048163384042e289c43d9c1846442e5b475e65ceb.
+  Both PNG bytes and complete observed metadata match.100 recorded objects, no
+  recent input. These are actual model/Blender refusal diagnostics, not synthetic
+  fixture pixels or fresh completion witnesses. Recognition remains unresolved.
+- Owned servicePID2241024 and 8GiB cap unchanged; post-run snapshot showed
+  memory peak at cap, swap511909888bytes and oom/oom_kill0. This is one resource
+  snapshot, not a paired speed/quality comparison or an OOM diagnosis. No cap
+  increase, service reload, default/fallback promotion, new software release or CI.
+- Retained authorized A/B/C additionally pass15 pinned official VRM0 schemas
+  under explicit Draft4/Draft7 (official files omit dialect); type/enum controls
+  reject while empty/version/index controls reveal permissiveness. Static schema
+  PASS does not prove full VRM conformance, permissions, import, rig or physics;
+  the prior glTF skin common-root error remains. Original bytes preserved.
+- Overall Goal incomplete. Independent avatar CV and production acceptance remain
+  separate; no Hermes visual self-evaluation is used as completion evidence.
+
 ## 2026-10-10: explicit cached observation, no hidden GUI work
 
 - Source `computer_observe(refresh=false)` and CLI `observe --cached` now read only
