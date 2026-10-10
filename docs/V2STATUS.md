@@ -35,9 +35,15 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   stdin loop separately; CPU sentinel controls are not real plain-model inference.
   Child requested140doc lines instead of only the new section; scope deviation
   retained, verdict claims used6-32 only. No new authority inferred from review.
-- Coherent0.1.29 release includes this guard plus singleton replay repair. Local
-  source/test/real native evidence are verified; publication/install-update pending.
-  Avatar/overall Goal OPEN.
+- Coherent0.1.29 software release COMPLETE: source/tagd5b10036b746f2358083f086c09adbee90323329,
+  one release-only run38083640383 with all17jobs green; release409190111 by-tag and
+  latest publication readback match. All15public archives' hashes, exact37source
+  modules/app requirements and root/versioned bootstraps verified; immutable prior
+  metadata unchanged. Real Linux/Windows0.1.28->0.1.29 updates and CURRENT preserve
+  config/cache/user PATH; installed native stdio discovery/context/singleton fixture
+  PASS. Fixtures are synthetic CPU/transport, not real Blender/model acceptance.
+  Idle owned servicePID2375489/0.1.29, exact config/caps and zero computeGPU verified.
+  Default CLEF-Flash/NF4 and d1 promotion HOLD unchanged; avatar/overall Goal OPEN.
 
 ## 2026-10-11: singleton native replay repair and candidate diagnostic
 
