@@ -28,8 +28,15 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 - Config/dropin hashes and8GiB+1GiB caps restored; service0.1.28 idle/cold,
   no GPU worker. No in-memory session after restart; status404, cached observe200
   empty metadata/sessionnull/freshfalse without initialization, not a regression.
-- Independent H3 interpretation review pending. Overall Goal remains INCOMPLETE;
-  software delivery, fixed-case diagnostics and actual recognition are separate.
+- Independent H3 review PASS for this saved B scalar probe only. All5 completed
+  requests vs3 final validated rows are distinguished; repeated instrumentation
+  is not independent observation. API4decimal agreement is not internal bit or
+  arithmetic identity; raster/CPU fixture/restoration bytes were not independently
+  verified. Batch/question-index trace dedupe may hide reentrant/multiple forwards
+  and is not a general-purpose profiler. Reviewed input/helper/report unchanged.
+- A-versus-B gated-joint context attribution is PROPOSED/NOT_RUN (A margin absent),
+  not an outcome or authority from this internal notification. Overall Goal remains
+  INCOMPLETE; software, fixed-case diagnostics and live recognition remain separate.
 
 ## 2026-10-11: software0.1.28 delivered; recognition still incomplete
 
