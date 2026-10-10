@@ -17,6 +17,7 @@ from collections import OrderedDict
 from pathlib import Path
 
 from deployment_profiles import resolve_profile, select_backend, torch_device
+from head_trace import capture_head_inputs
 from models import MODEL_REVISIONS
 from PIL import Image
 
@@ -227,6 +228,9 @@ class ClefWorker:
         text_config = getattr(backbone_config, "text_config", backbone_config)
         self.attention_implementation = getattr(text_config, "_attn_implementation", None)
         self.quantized_modules = 0
+        # Only the local operator environment can opt in; model/request fields cannot.
+        self.head_trace_root = os.environ.get("CLEF_USE_HEAD_TRACE_DIR")
+        self._head_trace_attempted = False
         if quantization == "4bit":
             import bitsandbytes as bnb
 
@@ -253,8 +257,15 @@ class ClefWorker:
         # so no evidence path may ever reintroduce an images list here.
         image = record.pop("image", None)
         record.pop("evidence_images", None)
+        trace_root = getattr(self, "head_trace_root", None)
+        capture_requested = bool(trace_root and not getattr(self, "_head_trace_attempted", False))
+        png_sha256 = None
         if image:
-            record["images"] = [Image.open(io.BytesIO(base64.b64decode(image))).convert("RGB")]
+            decoded = base64.b64decode(image)
+            if capture_requested:
+                png_sha256 = hashlib.sha256(decoded).hexdigest()
+            record["images"] = [Image.open(io.BytesIO(decoded)).convert("RGB")]
+            del decoded
             record["media_kwargs"] = {"min_pixels": 56 * 56, "max_pixels": 512 * 512}
         try:
             # The pinned encoder clips state to its token budget. Encode with
@@ -266,6 +277,29 @@ class ClefWorker:
             if len(encoded.input_ids) > 8192:
                 raise ValueError("decision would truncate observed evidence at the token budget")
             del encoded
+            if capture_requested:
+                # Consume the attempt before any real inference, including failing attempts.
+                self._head_trace_attempted = True
+                state = record.get("state")
+                reference = state.get("frame_reference") if isinstance(state, dict) else None
+                metadata = {
+                    "worker_pid": os.getpid(),
+                    "model_revision": self.model_revision,
+                    "decision_model": self.decision_model,
+                    "backend": self.backend,
+                    "compute_dtype": self.compute_dtype,
+                    "quantized_modules": self.quantized_modules,
+                    "image_png_sha256": png_sha256,
+                    "frame_image_sha256": reference.get("image_sha256")
+                    if isinstance(reference, dict)
+                    else None,
+                }
+                return capture_head_inputs(
+                    self.model,
+                    lambda: self.systemone(self.model, self.processor, record, max_length=8192),
+                    trace_root,
+                    metadata,
+                )
             return self.systemone(self.model, self.processor, record, max_length=8192)
         finally:
             if self.device == "mps":
@@ -588,6 +622,8 @@ def main():
 
     def diagnostic(exc):
         message = str(exc)
+        if getattr(exc, "head_capture_cleanup_incomplete", False) is True:
+            message += "; private head capture cleanup incomplete"
         code = "OUT_OF_MEMORY" if "out of memory" in message.lower() else type(exc).__name__
         return {
             "error": code,

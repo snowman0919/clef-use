@@ -3,6 +3,39 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: diagnose real head arithmetic without changing defaults
+
+- Independent static re-review PASS after initial privacy/bounding/fidelity
+  rejection and red->green regressions. The six code/test hashes and pinned SDK
+  were independently rechecked before first use. ADR0003 defines host-only,
+  default-off, one-attempt private numeric capture, not SDK replay or authority.
+- ACTUAL: same original File contract in ASSESS; one genuine CUDA/NF4 decision,
+  zero inputs. ModeACT0.4503, goal0.0944, condition0.0775; LOW_CONFIDENCE.
+  Raw hidden/logit hashes,0600 files/0700 root, actual worker and native frame
+  identity match the original logged decision. No OOM/kill; the8GiB service hit
+  its memory limit and used swap, so this is not ample-headroom evidence.
+- MEASURED: one saved real input on cached trained head/selected genuine rows,
+  CPU2GiB/swap0/two threads. Production-rounded FP16 parameters/rows were widened
+  unchanged to FP32. Two deterministic repeats give bitwise-equal FP16 baselines;
+  real captured question/option token spans match independently preserved
+  canonical definitions. No vocabulary table or backbone materialization.
+- GPU/CPU probability bridge max delta0.00024178624153137207, below predeclared
+ 0.02 tolerance. FP32 arithmetic max probability change0.00019890069961547852,
+  identical across repeats; lexical sign-flip changes logits1.994140625, finite.
+  Goal0.09442688524723053->0.09441555291414261, condition
+ 0.07748274505138397->0.07756032049655914. Widening head arithmetic does not
+  explain the low completion scores in this one input. It cannot restore source
+  values already rounded or backbone/activation information already lost.
+- VERIFIED: local547passed/34skipped; bounded real-Torch16passed; active Ruff,
+  format/diff pass. Actual CPU peak charge1162428416bytes, RSS1375031296bytes;
+  no CPU swap or OOM. Shared charge/RSS and post-exit unit footer differ; use
+  in-process sampled resource fields, not the footer to claim containment.
+- Task-only capture environment/drop-in removed and owned idle service reloaded;
+  source weights/default model/NF4/gates/config/caps unchanged. Private inputs
+  stay outside the repo and release artifacts. Capture is not UI success:
+  File recognition, Reici production, full-GPU/prompt probes, accuracy/default
+  promotion and new release remain NOT_DONE/NOT_RUN as applicable.
+
 ## 2026-10-10: remove weak completion through pixel-change evidence
 
 - Parent verified the completed inference-integrity audit against the pinned
