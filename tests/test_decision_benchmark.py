@@ -53,6 +53,89 @@ def test_unknown_blender_failure_does_not_become_invented_truth(tmp_path):
     assert load_corpus(path)[0]["expected"] == {}
 
 
+def test_read_only_packet_replays_its_singleton_no_action_without_inventing_truth(tmp_path):
+    from clef_use.backends import decision_request
+    from clef_use.schema import Contract, Frame, Observation
+
+    packet = decision_request(
+        Observation("assessment", Frame(Image.new("RGB", (40, 30), "white")), ()),
+        Contract(goal="Inspect the visible result", execution_mode="ASSESS"),
+        (),
+        [],
+    )
+    path = write_corpus(
+        tmp_path,
+        request={"state": packet["state"], "questions": packet["questions"]},
+        provenance={"kind": "archived_unlabelled"},
+        expected={},
+    )
+    row = load_corpus(path)[0]
+    assert row["request"] == packet
+    assert row["request"]["questions"]["action"]["criteria"] == {
+        "none": "No executable action available"
+    }
+    assert score_answers(row["expected"], {"action": {"choice": "none", "confidence": 1}}) == {
+        "known_fields": 0,
+        "correct_fields": 0,
+        "false_completions": 0,
+    }
+
+
+@pytest.mark.parametrize("identifier", ["only-action", " File selection "])
+def test_singleton_choice_preserves_an_arbitrary_opaque_identifier(tmp_path, identifier):
+    questions = {
+        "action": {
+            "type": "choice",
+            "instructions": "Select the only allowed action",
+            "criteria": {identifier: "Allowed operation"},
+        }
+    }
+    path = write_corpus(
+        tmp_path,
+        request={"state": {}, "questions": questions},
+        provenance={"kind": "archived_unlabelled"},
+        expected={},
+    )
+    assert load_corpus(path)[0]["request"]["questions"] == questions
+
+
+@pytest.mark.parametrize("criteria", [{}, [], None, {str(i): "option" for i in range(101)}])
+def test_choice_cardinality_fix_still_refuses_invalid_or_unbounded_options(tmp_path, criteria):
+    path = write_corpus(
+        tmp_path,
+        request={
+            "state": {},
+            "questions": {
+                "action": {
+                    "type": "choice",
+                    "instructions": "Select an allowed action",
+                    "criteria": criteria,
+                }
+            },
+        },
+        expected={},
+    )
+    with pytest.raises(ValueError, match="choice requires"):
+        load_corpus(path)
+
+
+def test_choice_upper_bound_still_preserves_all_named_alternatives(tmp_path):
+    questions = {
+        "action": {
+            "type": "choice",
+            "instructions": "Select a named option",
+            "criteria": {f" option-{i} ": "Allowed operation" for i in range(100)},
+        }
+    }
+    path = write_corpus(
+        tmp_path,
+        request={"state": {}, "questions": questions},
+        provenance={"kind": "archived_unlabelled"},
+        expected={},
+    )
+    assert load_corpus(path)[0]["request"]["questions"] == questions
+
+
 def test_duplicate_cases_cannot_inflate_coverage(tmp_path):
     path = write_corpus(tmp_path)
     doc = json.loads(path.read_text())

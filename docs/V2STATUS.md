@@ -3,6 +3,35 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: singleton native replay repair and candidate diagnostic
+
+- Canonical benchmark rejected the real File ASSESS packet before any inference:
+  its singleton action `none` violated the loader's 2..100 choice rule, despite
+  being a valid production decision. A decisive RED regression reproduces it;
+  the minimal fix accepts 1..100 named choices while retaining empty/nonmapping/
+  oversize refusal, exact opaque IDs, image integrity and unlabelled-truth rules.
+  This fixes replay friction, not File recognition or GUI execution.
+- Retried the exact frozen H2 B state/questions/native PNG through the repaired
+  canonical benchmark. Two serial CUDA workers, A/A/B/B, seed0 and two arithmetic
+  repeats each: CLEF-Flash/NF4/FP16 condition0.1175/goal0.1069/BLOCKED0.3976;
+  d1/unquantized/BF16 condition0.06754669/goal0.13296424/ACT0.62936357. Full scalar
+  repeat deltas0; baseline agrees with immutable H2 B within1e-4. Neither clears
+  unchanged mode0.85/final0.9 gates; no candidate live retry or default promotion.
+- Model-free preflight and runtime usage agree: CLEF2593/d12233 tokens<8192.
+  Same native input, but SDK, precision, quantization and preprocessing differ:
+  this is configured-profile diagnostics, not isolated model causality, accuracy,
+  calibration, safety rates or a speedup. One unlabelled saved case, known fields0;
+  false_completions0 is bookkeeping, not evidence of zero false-completion risk.
+  Execution-time media numerical identity is not independently captured.
+- Private corpus references the existing native PNG, with no duplicate raster,
+  published captures or raw tokens/latents/head traces. Memory peak8GiB/max10314/
+  oom0 under unchanged8GiB+swap1GiB/CPU400%/Tasks256/core0; no combined-parser
+  capacity claim. Idle owned service0.1.28 restored with exact config/dropin/caps,
+  no GPU worker. Passive fresh capture matches original empty V01 inspection;
+  no avatar selection/import/modeling or visual approval. Overall INCOMPLETE.
+- Independent diagnostic review pending; source fix is not yet in a new public
+  release. Software0.1.28 delivery remains distinct from this source checkpoint.
+
 ## 2026-10-11: bounded full-frame image preprocessing diagnostic
 
 - Pinned worker hardcodes min_pixels56*56/max_pixels512*512 area, producing

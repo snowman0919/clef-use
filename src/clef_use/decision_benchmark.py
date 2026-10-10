@@ -66,9 +66,9 @@ def load_corpus(path: Path) -> list[dict]:
                 raise ValueError("each typed decision question requires instructions")
             kind, criteria = question.get("type"), question.get("criteria")
             if kind == "choice" and (
-                not isinstance(criteria, dict) or not 2 <= len(criteria) <= 100
+                not isinstance(criteria, dict) or not 1 <= len(criteria) <= 100
             ):
-                raise ValueError("choice requires 2 to 100 named alternatives")
+                raise ValueError("choice requires 1 to 100 named alternatives")
             if kind == "score" and (not isinstance(criteria, list) or not 2 <= len(criteria) <= 10):
                 raise ValueError("score requires 2 to 10 ordered levels")
             if kind not in {"choice", "score", "noul"}:
