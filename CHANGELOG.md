@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+## 0.1.29
+
+- Accept genuine singleton action choices in archived/native decision benchmarks,
+  including no-input ASSESS `none`, while preserving opaque identifiers and the
+  empty/nonmapping/100-option boundary. Unlabelled evidence remains unlabelled.
+- Enforce the whole encoded 8192-token limit before d1 backbone execution, not
+  merely branch packing. Guard plain IDs, tree state plus packed branches and
+  oversized branch sets before partial execution; restore scoped hooks/methods
+  on success, refusal and setup/model failures under the pinned serial SDK contract.
+- Preserve prompts, pixels, weights, precision, confidence gates and default
+  CLEF-Flash/NF4. Normal saved-native d1 replay is compatible; no recognition,
+  calibration, live completion, default promotion or avatar acceptance claim.
+- Ship software only: no private screenshots/corpora, weights or third-party assets.
+
 ## 0.1.28
 
 - Focus bounded decision evidence around a unique literal observed label in

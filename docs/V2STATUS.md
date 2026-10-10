@@ -28,8 +28,16 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   idle with before/after3config hashes, actual caps and empty compute-GPU list
   recorded. Cgroup1.8GB charge on this warm-cache unit is not physical resident
   footprint, combined-parser capacity or a RAM/speedup claim.
-- Independent source/guard review pending before the next coherent software
-  release, including the earlier singleton replay fix. Avatar/overall Goal OPEN.
+- Independent source/guard review PASS for the pinned SDK/8192 packing/compile=False
+  serialized worker contract. Smaller packing budgets, direct/compiled forward
+  bypasses and concurrent method replacement are outside that validated contract.
+  Parent inspected the actual pinned engine factory/default target and synchronous
+  stdin loop separately; CPU sentinel controls are not real plain-model inference.
+  Child requested140doc lines instead of only the new section; scope deviation
+  retained, verdict claims used6-32 only. No new authority inferred from review.
+- Coherent0.1.29 release includes this guard plus singleton replay repair. Local
+  source/test/real native evidence are verified; publication/install-update pending.
+  Avatar/overall Goal OPEN.
 
 ## 2026-10-11: singleton native replay repair and candidate diagnostic
 
