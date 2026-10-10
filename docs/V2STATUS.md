@@ -3,15 +3,33 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
-## 2026-10-10: prepare 0.1.26 software delivery
+## 2026-10-10: 0.1.26 software delivery verified
 
-- Release preparation covers verified source changes since public0.1.25, including
-  completion/ASSESS safety, native-raster context ranking, confidence-refusal
-  diagnostics and atomic service resume. Defaults, thresholds/caps and avatar gates
-  remain unchanged; no third-party assets or private captures are release inputs.
-- Actual tag-triggered release/deploy/install-update verification is PENDING.
-  Standalone CI/decision-fixture Actions remain disabled; only the authorized
-  release pipeline may run. No new model inference or Blender success is asserted.
+- Published GitHub latest releasev0.1.26 at tag/source
+  48527427d62908cbd29560ebfc1c67c2c19fa25a. Tag-triggered authorized Release artifacts
+  run38044249827 completed all15 native build/install jobs plus assemble/deploy;
+  ordinary CI/decision-fixture workflows remain disabled. No unrelated Actions ran.
+- ftp.kotori9.dev/clef-use latest/versioned0.1.26 metadata are byte-identical.
+  Parent fetched all15 public archives, matched manifest SHA256s, compared packaged
+  runtime/service/router/head_trace/model_worker/config source to the tag, and
+  excluded avatar/model/private-capture payloads. Public/versioned bootstraps match
+  the source; the immutable previous0.1.25 manifest remains unchanged.
+- Real Linux public0.1.25→0.1.26 update and native Windows update passed, with repeat
+  CURRENT and preserved isolated config/cache sentinels + Windows user PATH.
+  Windows bootstrap raced with deployment and initially installed fresh0.1.26;
+  that was NOT counted as update evidence. A fixture-only URL selector then used
+  matching real immutable0.1.25 manifest/checksums for the previous baseline;
+  actual archive downloads and subsequent public CLI update were unmodified.
+  No response bodies or checksums were synthesized or bypassed.
+- Actual installed Linux/Windows packages completed real stdio MCP initialize and
+  discovered all five high-level tools. No tools/call, model inference or desktop
+  input ran. Local source558passed/34skipped/41existing Pillow warnings and
+  Ruff/format/diff remain green; skipped platforms/ML are not implicit successes.
+- Delivery includes completion/ASSESS safety, native-raster context ranking,
+  confidence-refusal diagnostics and atomic resume. CLEF-Flash/NF4 defaults,
+  d1 HOLD, private capture default-off and avatar gates remain unchanged. This
+  software milestone does not prove Blender recognition, calibrated confidence,
+  Reici likeness, deformation/physics or overall Goal completion.
 
 ## 2026-10-10: expose the refusing confidence gate without changing policy
 
