@@ -3,6 +3,34 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: authorized original live retry and minimized H3 diagnostic
+
+- Human native clarification granted full access for this canonical task and
+  requested intermittent actual Blender photos. Resource/confidence/model gates
+  remain unchanged; no paid purchase or third-party publication was inferred.
+- Actual owned :122 service0.1.28 retried original File ASSESS/max3/GUI0 through
+  real stdio MCP. Result LOW_CONFIDENCE,1decision,0input: ACT0.4382<0.85,
+  goal0.1795/condition0.1824<0.9. No recognition/completion success is claimed.
+- Actual parser126 objects,8context hints; only7 selected hints are present in
+  transport100 roster. New state/context differ from immutable H2 B, although
+  native raster hash matches; this is not a pure same-packet causal comparison.
+  Two cached reads agree. Actual menu-open, empty-inspection Blender photo sent
+  to user; avatar creation/source selection did not advance or get CV approval.
+- H3 scalar-only canonical/instrumented/repeat replays immutable H2 B API
+  condition0.1175. Both lexical prior and gated joint favor false; proposed
+  prior-suppresses-true-preferring-joint mechanism rejected for this case only.
+  No parameter/gain/default/cap/threshold edits and no calibration/accuracy or
+  model-root-cause proof. Private derived margins/raw inputs are not published.
+- H3 completed requests5: failed-hook2 (only canonical validated), then3 valid;
+  two earlier harness pre-model attempts0forwards. Real-SDK tiny CPU fixture
+  exposes duplicate Python append-line trace callbacks; batch/question dedupe
+  preserves output numerically. Baseline failures/history are not hidden.
+- Config/dropin hashes and8GiB+1GiB caps restored; service0.1.28 idle/cold,
+  no GPU worker. No in-memory session after restart; status404, cached observe200
+  empty metadata/sessionnull/freshfalse without initialization, not a regression.
+- Independent H3 interpretation review pending. Overall Goal remains INCOMPLETE;
+  software delivery, fixed-case diagnostics and actual recognition are separate.
+
 ## 2026-10-11: software0.1.28 delivered; recognition still incomplete
 
 - Source/tag880f8de1b975277c1424700f20a1554b6e63f9c0/v0.1.28 includes the
