@@ -33,7 +33,16 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   Targeted32passed; full local551passed/34skipped, existing41 Pillow warnings;
   active Ruff/format/diff pass. Production router bytes unchanged after review;
   post-review edits only focused tests and precise question/option wording.
-  Real original-task retry still pending; offline geometry is not recognition PASS.
+  Actual original-task ASSESS sessionbc8da2b676034c71ae8d7c7e20aba75b on accepted
+  router: one genuine CUDA/NF4 decision, zero candidates/GUI inputs. Same logged
+  native frame hash e64a4a77... and126 objects; eight context IDs now select raw
+  label Reyert instead of Window and reorder nearer dropdown hints. LOW_CONFIDENCE
+  persists:
+  modeACT0.4444/goal0.1578/condition0.1647. These one-case scores do not establish
+  accuracy improvement, calibration, causality or completion. No capture re-arm,
+  model/default/gate/cap change or denied full-GPU/prompt A/B.
+  No OOM/kill, but unchanged8GiB cap reached with15992 max events and308215808
+  swap bytes. Context-distance correction and actual task success remain separate.
 
 ## 2026-10-10: diagnose real head arithmetic without changing defaults
 
