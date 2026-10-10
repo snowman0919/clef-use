@@ -3,6 +3,32 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: software0.1.28 delivered; recognition still incomplete
+
+- Source/tag880f8de1b975277c1424700f20a1554b6e63f9c0/v0.1.28 includes the
+  reviewed condition-context fix c479253 and only root-version/release-note edits.
+  Local597passed/34skipped/41existing warnings, Ruff/format/diff/old checks PASS;
+  wheel48members/37source modules match canonical bytes, no private assets/weights.
+- Authorized release-only run38072480051 completed17/17 native-build/install,
+  assemble/deploy jobs. Published release409105300 is non-draft/non-prerelease
+  latest. Every one of15 canonical archives passed manifest+SHA256SUMS hashes and
+  all48 app-wheel member-byte comparisons with local/tag source. Root/versioned
+  bootstraps match canonical installer; immutable0.1.27 metadata stayed intact.
+- Reused real Linux/Windows0.1.27 prefixes had pre-tag executable/config/cache/PATH
+  baseline receipts; actual public CLI updates produced0.1.28, repeatedCURRENT,
+  and preserved bytes/PATH. Installed native CPU synthetic context/ambiguity/raw
+  identity and actual stdio initialize/tools-list/refresh-schema checks PASS.
+  These tests are not capture, GUI input, GPU recognition, or avatar acceptance.
+- Idle task-owned service explicitly updated0.1.27->0.1.28/PID2325882 with same
+  private config/dropin and8GiB+1GiB caps. Cold cached read leaves null observation
+  and no model/factory initialization; no GPU workers. Ordinary CI/fixture Actions
+  remain disabled; no additional hosted validation matrix was dispatched.
+- H2 same-case context0.0363->0.1175 is not enough: goal0.1069/modeBLOCKED0.3976
+  still below0.9/0.85. Independent H2 source/interpretation review is pending,
+  not an authorization for private numeric probes or a new live File ASSESS.
+  Original live retry, base selection/acquisition/import/deformation/physics/
+  Gemini production-stage/final acceptance remain incomplete. Overall Goal OPEN.
+
 ## 2026-10-11: bounded GPU question ablation and literal-condition context
 
 - Explicit human approval covered bounded GPU/prompt cause comparison, not GUI
@@ -44,7 +70,7 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   This is a same-case context effect, not calibrated accuracy or live completion.
   Original live MCP retry is NOT_RUN. Service restored idle with exact config/caps;
   source regression PASS is not Blender recognition, avatar CV or Goal completion.
-- Software0.1.28 delivery is being prepared via the existing release-only pipeline.
+- Software0.1.28 delivery completed via the existing release-only pipeline.
   Genuine Linux/Windows0.1.27 prefixes and config/cache/PATH baseline receipts were
   verified before any tag push; avatar artifacts and private captures are excluded.
 
