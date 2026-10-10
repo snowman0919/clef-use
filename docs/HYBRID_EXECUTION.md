@@ -29,7 +29,11 @@ flowchart TD
 `ASSESS` is read-only goal verification: no candidate construction, spatial
 input grounding, or input delivery. It retains the existing two-fresh-observation
 completion and safety gates; insufficient evidence returns `NEEDS_REPLAN` or
-`LOW_CONFIDENCE`, never input permission.
+`LOW_CONFIDENCE`, never input permission. In every execution mode, the goal and
+all success conditions must each score at least 0.9 on two fresh stable positive
+observations. A measured pixel change or carried previous effect does not lower
+that requirement, and a single positive assessment exhausted by its budget is
+not completion.
 Use it after a delivered input with uncertain runtime outcome, rather than
 blindly repeating the action. AUTO and its input policy remain unchanged.
 The execution contract

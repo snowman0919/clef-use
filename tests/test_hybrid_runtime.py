@@ -425,16 +425,12 @@ def test_unverified_completion_preserves_the_visible_result_without_repeating_in
         )
     )
     result = runtime(desktop, FixedGrounder()).execute(session)
-    # Policy change (calibrated completion): sub-0.9 model heads plus a MEASURED
-    # pixel change in the action's own effect region now complete instead of
-    # escalating; input is still never repeated. The witness-free escalation
-    # path is covered in tests/test_effect_evidence.py.
-    assert result["status"] == "COMPLETED", result
+    # A measured effect cannot establish all of a weak final completion claim.
+    assert result["status"] == "NEEDS_REPLAN", result
     assert desktop.stage == 1
     assert result["steps"] == 1
-    assert any(
-        row.get("completion_basis") == "effect_evidence_plus_model" for row in session.history
-    )
+    assert result["blocker"]["kind"] == "COMPLETION_UNVERIFIED"
+    assert result["blocker"]["observed"]["required_probability"] == 0.9
 
 
 def test_empty_completion_assessment_does_not_block_next_visual_action():

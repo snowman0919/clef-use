@@ -8,6 +8,9 @@ runtime turned that into NEEDS_REPLAN "lacks required visible condition
 evidence" (trials V27/V29/V39/V42/V43).
 """
 
+from typing import NoReturn
+
+import pytest
 from PIL import Image, ImageDraw
 
 from clef_use.benchmark import FixtureDesktop
@@ -68,7 +71,7 @@ def test_verified_effect_is_delivered_as_evidence_to_next_decision():
     assert vector and "1" in vector, "measured change vector missing from effect evidence"
 
 
-def test_calibrated_completion_accepts_model_plus_measured_effect():
+def test_measured_pixel_change_does_not_relax_goal_completion():
     desktop = StrokeChangesViewport()
     seen = []
 
@@ -91,13 +94,77 @@ def test_calibrated_completion_accepts_model_plus_measured_effect():
     result = SessionRuntime(
         desktop, desktop, Recorder(), desktop, Config(settle_seconds=0)
     ).execute(session)
-    assert result["status"] == "COMPLETED", result
+    assert result["status"] == "NEEDS_REPLAN", result
+    assert result["steps"] == desktop.action_count == 1
+    assert len(seen) == 2
+    facts = [item for item in seen[1].evidence if isinstance(item, dict)]
     assert any(
-        row.get("completion_basis") == "effect_evidence_plus_model" for row in session.history
+        fact.get("verification") == "VERIFIED" and fact.get("roi_visibly_changed") is True
+        for fact in facts
     )
+    assert result["blocker"]["kind"] == "COMPLETION_UNVERIFIED"
+    observed = result["blocker"]["observed"]
+    assert observed["required_probability"] == 0.9
+    assert observed["goal"]["probability"] == 0.84
+    assert observed["conditions"][0]["probability"] == 0.76
 
 
-def test_calibrated_completion_needs_a_witness_not_a_bare_claim():
+@pytest.mark.parametrize("execution_mode", ["AUTO", "ASSESS"])
+@pytest.mark.parametrize(
+    ("goal_probability", "condition_probability", "budget", "expected", "rounds"),
+    [
+        (0.84, 0.76, 3, "NEEDS_REPLAN", 1),
+        (0.99, 0.8999, 3, "NEEDS_REPLAN", 1),
+        (0.8999, 0.99, 3, "NEEDS_REPLAN", 1),
+        (0.9, 0.9, 3, "COMPLETED", 2),
+        (0.99, 0.99, 1, "STEP_BUDGET_EXHAUSTED", 1),
+    ],
+)
+def test_prior_effect_does_not_replace_strong_fresh_completion(
+    execution_mode, goal_probability, condition_probability, budget, expected, rounds
+):
+    seen = []
+
+    class NoInputDesktop(StrokeChangesViewport):
+        def decide(self, observation, goal, candidates, history):
+            seen.append(observation)
+            return Decision(
+                mode="COMPLETED",
+                confidence=0.99,
+                goal_probability=goal_probability,
+                condition_probabilities=(condition_probability,),
+            )
+
+        def execute(self, action, observation, cancelled) -> NoReturn:
+            raise AssertionError("completion assessment must not repeat prior input")
+
+    desktop = NoInputDesktop()
+    desktop.action_count = 1
+    session = Session(
+        Contract(
+            goal="Move the chin band",
+            success_conditions=["band moved"],
+            execution_mode=execution_mode,
+            max_steps=budget,
+        )
+    )
+    # An effect fixture carried from a prior turn is not a final-goal witness.
+    session.last_effect = {
+        "guidance_count": 0,
+        "evidence": [{"verification": "VERIFIED", "roi_visibly_changed": True}],
+    }
+    result = SessionRuntime(desktop, desktop, desktop, desktop, Config(settle_seconds=0)).execute(
+        session
+    )
+    assert result["status"] == expected, result
+    assert result["steps"] == 0 and result["rounds"] == rounds
+    assert desktop.action_count == 1
+    assert seen[0].evidence == [{"verification": "VERIFIED", "roi_visibly_changed": True}]
+    if expected == "COMPLETED":
+        assert result["reason"] == "goal and conditions verified on two fresh observations"
+
+
+def test_weak_completion_without_a_delivered_effect_requests_replan():
     # Same sub-0.9 probabilities WITHOUT any executed-and-measured effect in the
     # session must still escalate to NEEDS_REPLAN, never COMPLETED.
     desktop = StrokeChangesViewport()

@@ -3,6 +3,41 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: remove weak completion through pixel-change evidence
+
+- Parent verified the completed inference-integrity audit against the pinned
+  encoder, option IDs/noul polarity, head forward path and local runtime. No
+  deterministic inference-adapter scoring defect was demonstrated. BF16 source
+  head/rows become FP16 in the NF4 deployment; causal accuracy loss is unproven.
+- MEASURED separately: actual cached trained head and genuine selected checkpoint
+  rows, seeded synthetic CPU hidden states23/730. Lazy transport and independent
+  eager rows give bitwise-equal finite logits; sign-flipped rows change logits.
+  This excludes neither CUDA/NF4 backbone error nor model-domain recognition.
+  Initial zero-row FP16 participation control produced nonfinite normalization;
+  rejected as degenerate, not evidence about actual task activations.
+- REPRODUCED: the 0.75 single-pass branch accepted goal0.84/condition0.76 after
+  one delivered fixture input and genuinely measured ROI change. The regression
+  fails before with COMPLETED, passes after with NEEDS_REPLAN/COMPLETION_UNVERIFIED;
+  its prior input is retained and never repeated. Pixel change is effect evidence,
+  not independent proof that the final goal and all conditions are satisfied.
+- FIXED: remove that fallback. Every completion now requires goal and all
+  conditions>=0.9 on two fresh stable positive observations. AUTO/ASSESS prior-
+  effect cases verify weaker goal/condition refusal, exact0.9 acceptance only
+  after two rounds, and single-positive budget exhaustion without input.
+- CORRECTION to earlier status/ADR wording: the 0.9 constant and normal two-fresh
+  path remained, but an older calibrated-effect exception also remained. Earlier
+  statements implying every completion path already enforced those gates were
+  too broad. This change removes that contradiction rather than calling pixel
+  evidence a calibration corpus.
+- VERIFIED: full local543passed/18skipped, active Ruff/format/diff checks pass.
+  Existing41 Pillow deprecation warnings remain. ML full suite and actual File
+  inference not repeated: adapter/weights/precision are unchanged, and the prior
+  ACT/LOW_CONFIDENCE result did not enter this completion branch. No success,
+  speedup, FP32 benefit, default promotion, avatar import or new release claim.
+- OPEN: real Blender completion recognition still unproved. Independent audit
+  complete; actual backbone activations are absent. Precision candidates need
+  causal evidence before adoption, not a threshold change or convenient PASS.
+
 ## 2026-10-10: retain bounded evidence and assess without input
 
 - Parent verified the completed independent audit against primary code and saved
