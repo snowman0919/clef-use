@@ -58,6 +58,50 @@ def test_actionless_context_uses_unique_observed_anchor_not_roster_prefix():
     assert router.decision_observation(reordered, (), contract).objects == bounded.objects
 
 
+@pytest.mark.parametrize("size", [(1000, 500), (500, 1000)])
+@pytest.mark.parametrize("mapped", [False, True])
+def test_bounded_context_keeps_native_pixel_nearest_hint_on_rectangular_frames(size, mapped):
+    width, height = size
+
+    def item(id, label, x, y):
+        return UIObject(
+            id=id,
+            label=label,
+            role="text",
+            source=("ocr",),
+            bbox=BoundingBox(
+                x1=x / width, y1=y / height, x2=(x + 10) / width, y2=(y + 10) / height
+            ),
+        )
+
+    anchor = item("anchor", "Anchor ", 100, 100)
+    overlap = tuple(item(f"overlap_{i}", f"Observed {i}", 100, 100) for i in range(6))
+    near_xy, far_xy = ((100, 120), (128, 100)) if width > height else ((120, 100), (100, 128))
+    near = item("near_raw", "Near_Raw_", *near_xy)
+    far = item("far", "Farther", *far_xy)
+    objects = (far, *overlap, near, anchor)
+    frame = Frame(
+        Image.new("RGB", size),
+        origin=(73, -41) if mapped else (0, 0),
+        logical_size=(height, width) if mapped else None,
+    )
+    evidence = (object(),)
+    obs = Observation("rectangular_epoch", frame, objects, evidence)
+    contract = Contract(goal="Assess visible state", visual_intent=VisualIntent(query="Anchor"))
+    router = ExecutionRouter(Config())
+    bounded = router.decision_observation(obs, (), contract)
+    assert near in bounded.objects  # Native rectangle gaps: near10 pixels, far18 pixels.
+    assert far not in bounded.objects
+    assert len(bounded.objects) == 8 and bounded.objects[0] is anchor
+    assert all(not obj.actions and obj.confidence is None for obj in bounded.objects)
+    assert bounded.frame is frame and bounded.id == obs.id
+    assert bounded.evidence is evidence
+    by_id = {obj.id: obj for obj in objects}
+    assert all(obj is by_id[obj.id] for obj in bounded.objects)
+    reordered = Observation(obs.id, frame, tuple(reversed(objects)), evidence)
+    assert router.decision_observation(reordered, (), contract).objects == bounded.objects
+
+
 def test_raw_candidate_explosion_routes_before_truncation():
     router = ExecutionRouter(Config(structured_candidate_threshold=24), grounder=object())
     route = router.route(observation(160), Contract(goal="Settings"))

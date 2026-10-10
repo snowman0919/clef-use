@@ -99,11 +99,19 @@ non-POSIX requirement. Review a separate raw-data contract before expanding it.
   memory-limit pressure and swap occurred under the unchanged8GiB cap.
 - MEASURED: one real captured input, CPU2GiB/swap0/two threads, no backbone or
   full vocabulary table. FP16 parameters/selected rows reproduced before widening
-  the same values to FP32. Two deterministic FP16 repeats bitwise equal; finite
-  lexical perturbation changes logits. GPU/CPU max probability delta0.0002417862
+  the same values to FP32. Two deterministic FP16 repeats numerically identical
+  under rtol=0/atol=0, not bytewise proof; finite lexical perturbation changes
+  logits. GPU/CPU max probability delta0.0002417862
   passes the predeclared0.02 bridge tolerance. Arithmetic widening max probability
   delta0.0001989007; low completion scores persist, not evidence for a dtype fix.
   This does not recover already-rounded source or backbone/activation information.
+- Independent static numerics review PASS for this one input. Historical artifact
+  field baseline_bitwise_repeat_verified is misnamed: its rtol=0/atol=0 assertion
+  establishes exact numerical equality, not signed-zero byte equality. Preserve
+  the original artifact/helper and interpret it through this correction.
+  Lexical checkpoint shard/index and tokenizer hashes were not recorded. Declared
+  raw/head hashes and tolerance declaration timing were not independently rehashed
+  or established within that static review; do not claim complete provenance.
 - Removed the task-only opt-in and read back owned idle runtime/defaults/config/
   caps. Raw latents/token IDs remain private outside Git/releases. No actual task
   completion, accuracy improvement, default promotion or new release claim.

@@ -3,6 +3,38 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-10: correct evidence scope and context-distance units
+
+- Independent numerics review PASS for one-input head arithmetic only. Correct
+  earlier "bitwise repeat" wording: rtol=0/atol=0 asserts exact numerical equality,
+  not signed-zero byte identity. Original evidence/helper bytes stay preserved;
+  their baseline_bitwise_repeat_verified field is a historical misnamed flag.
+  Lexical shard/index/tokenizer digests were not recorded. Declared private/head
+  hashes and pre-capture tolerance timing were outside that static verification.
+- OFFLINE menu-coverage audit joins seven of eight logged context IDs to an older
+ 100-object structured snapshot with the same recorded native frame reference.
+  Observation IDs differ; one context item is UNKNOWN, not inferred from pixels
+  or raw tensors. Known hints include File/Edit/Render/Window and vertically
+  aligned New/Qpen_/Open Recent. Raw OCR spelling/null confidence are unchanged.
+  These support a dropdown-consistent layout hypothesis, not native popup state,
+  actual goal success, complete context coverage or a causal recognition diagnosis.
+- REPRODUCED separately: unit-square bbox distances ignore raster aspect ratio.
+  In retained metadata New is nearer File in native pixels than Edit, yet the old
+  policy ranks Edit first. Landscape/portrait bounded-context regressions both
+  drop a10px-near hint for an18px-far hint before the correction.
+- FIXED locally: measure rectangle gaps with native image width/height before
+  squaring. Only unique-anchor hint ranking changes;32targets/8hints, actual raw
+  objects/IDs, candidate set, question/option wording, weights and all safety/
+  completion gates remain. Serialized hint text intentionally changes with
+  selection. No menu dictionary or missing-object invention.
+- VERIFIED: independent source review PASS, no blocking concerns. Recommended
+  nonzero-origin/swapped-logical-aspect cases preserve frame/evidence/raw-object
+  identity and reject an in-memory logical-dimensions substitution mutant.
+  Targeted32passed; full local551passed/34skipped, existing41 Pillow warnings;
+  active Ruff/format/diff pass. Production router bytes unchanged after review;
+  post-review edits only focused tests and precise question/option wording.
+  Real original-task retry still pending; offline geometry is not recognition PASS.
+
 ## 2026-10-10: diagnose real head arithmetic without changing defaults
 
 - Independent static re-review PASS after initial privacy/bounding/fidelity
@@ -16,8 +48,9 @@ under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
   its memory limit and used swap, so this is not ample-headroom evidence.
 - MEASURED: one saved real input on cached trained head/selected genuine rows,
   CPU2GiB/swap0/two threads. Production-rounded FP16 parameters/rows were widened
-  unchanged to FP32. Two deterministic repeats give bitwise-equal FP16 baselines;
-  real captured question/option token spans match independently preserved
+  unchanged to FP32. Two deterministic repeats give numerically identical FP16
+  baselines under rtol=0/atol=0; this does not distinguish signed-zero bits.
+  Real captured question/option token spans match independently preserved
   canonical definitions. No vocabulary table or backbone materialization.
 - GPU/CPU probability bridge max delta0.00024178624153137207, below predeclared
  0.02 tolerance. FP32 arithmetic max probability change0.00019890069961547852,

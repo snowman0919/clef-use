@@ -247,11 +247,13 @@ class ExecutionRouter:
         ]
         if len(anchors) == 1:
             anchor = anchors[0]
+            # OCR boxes are image-normalized; measure proximity in the native raster.
+            width, height = observation.frame.image.size
 
             def rank(obj):
                 box, reference = obj.bbox, anchor.bbox
-                dx = max(reference.x1 - box.x2, box.x1 - reference.x2, 0)
-                dy = max(reference.y1 - box.y2, box.y1 - reference.y2, 0)
+                dx = max(reference.x1 - box.x2, box.x1 - reference.x2, 0) * width
+                dy = max(reference.y1 - box.y2, box.y1 - reference.y2, 0) * height
                 return (obj.id != anchor.id, dx * dx + dy * dy, box.y1, box.x1, obj.id)
 
             hints.sort(key=rank)
