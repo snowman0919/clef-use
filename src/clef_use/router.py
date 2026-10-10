@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+import re
 from dataclasses import dataclass
 
 from .candidates import pointer_allowed
@@ -237,14 +238,24 @@ class ExecutionRouter:
         targets = [o for o in observation.objects if o.id in ids][:32]
         hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive]
         query = contract.visual_intent.query if contract.visual_intent else contract.goal
-        anchors = [
+        eligible = [
             o
             for o in self.scoped_observation(observation, contract).objects
-            if o.label.strip().casefold() == query.strip().casefold()
-            and not o.sensitive
-            and o.visible is not False
-            and o.occluded is not True
+            if not o.sensitive and o.visible is not False and o.occluded is not True
         ]
+        anchors = [o for o in eligible if o.label.strip().casefold() == query.strip().casefold()]
+        if not anchors and contract.visual_intent is None:
+            # A literal success-condition label can focus evidence, never grant input.
+            conditions = [condition.casefold() for condition in contract.success_conditions]
+            anchors = [
+                o
+                for o in eligible
+                if (label := o.label.strip().casefold())
+                and any(
+                    re.search(r"(?<!\w)" + re.escape(label) + r"(?!\w)", condition)
+                    for condition in conditions
+                )
+            ]
         if len(anchors) == 1:
             anchor = anchors[0]
             # OCR boxes are image-normalized; measure proximity in the native raster.

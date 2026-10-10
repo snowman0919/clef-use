@@ -3,6 +3,43 @@
 Canonical spec: `~/develop/celf-use` (V2 + Reici dogfood goal). OLD tree frozen
 under `old/` at tag `freeze-2026-10-08` (commit a2e677f).
 
+## 2026-10-11: bounded GPU question ablation and literal-condition context
+
+- Explicit human approval covered bounded GPU/prompt cause comparison, not GUI
+  input, default-model changes, raised resource/confidence caps or raw head capture.
+  Same native1920x1080 RGB/context hash and frozen raw state: full8-question A,
+  repeatA, single-condition B. Pinned CPU encoder verified2627/1914tokens,
+  identical image tensors, exact condition wording/true-false IDs and no clipping.
+- Actual CUDA/NF4 pinned CLEF-Flash/FP16-head scores: A/repeat condition0.0363,
+  complete0.038 and ACT0.4359 reproduce the original refusal; all returned
+  four-decimal scores repeat exactly. B condition0.0418 (+0.0055) does not resolve
+  recognition. Membership also changes field positions/context; this is neither
+  calibrated accuracy nor a pure head-competition or full-GPU-residency proof.
+- A deliberate idle task-service pause preserved refusal/cache/native image on
+  disk first and restored the exact config and8GiB+1GiB caps. In-memory session
+  expires on this explicit restart; a cold cached read does not initialize models.
+  Diagnostic cgroup reached8GiB with8567 max events, OOM/kill0 and122880bytes swap;
+  successful exit is not excess memory headroom. No ordinary Actions or release.
+- Independent pinned-source audit found no noul polarity or single-record mask
+  alignment bug. Parent verified actual decision objects were eight menu-bar
+  entries, omitting already observed New and Open Recent. Whole natural-language
+  goal equality could not anchor the genuine File label.
+- RED -> GREEN: decision_observation now falls back only to a unique eligible
+  observed label literally present in success_conditions, only without an
+  explicit visual_intent or an existing exact-goal anchor. Missing/ambiguous,
+  hidden/occluded/sensitive/blank and substring-only matches cannot anchor. Raw
+  IDs/labels/boxes/actions/source/nullable fields and raster-distance policy stay
+  intact; at most8 hints, same executable choices and all runtime gates remain.
+- Independent precommit review PASS, no security/logic findings; its suggested
+  exact-goal priority/ambiguity and32 target identity/order+8 hint-cap regressions
+  were added without further source changes. Full local597passed/34skipped/41
+  existing warnings; scoped Ruff/format/diff/old PASS.
+  Authentic recorded100-object capped-roster CPU replay now includes New and
+  Open Recent; questions/image/other state match and ASSESS has0 candidates.
+  The original parser had126 objects: this is not a complete126-object reparse.
+  Corrected-context model inference and original live MCP retry are NOT_RUN;
+  source regression PASS is not Blender recognition, avatar CV or Goal completion.
+
 ## 2026-10-10: authorized live File ASSESS and recorded-cache readback
 
 - Native clarification explicitly approved one task-owned :122 File ASSESS,

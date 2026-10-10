@@ -5,7 +5,15 @@ from PIL import Image
 
 from clef_use.config import Config
 from clef_use.router import ExecutionRouter, GroundingUncertain
-from clef_use.schema import BoundingBox, Contract, Frame, Observation, UIObject, VisualIntent
+from clef_use.schema import (
+    ActionCandidate,
+    BoundingBox,
+    Contract,
+    Frame,
+    Observation,
+    UIObject,
+    VisualIntent,
+)
 
 
 def observation(count, **fields):
@@ -100,6 +108,202 @@ def test_bounded_context_keeps_native_pixel_nearest_hint_on_rectangular_frames(s
     assert all(obj is by_id[obj.id] for obj in bounded.objects)
     reordered = Observation(obs.id, frame, tuple(reversed(objects)), evidence)
     assert router.decision_observation(reordered, (), contract).objects == bounded.objects
+
+
+def test_context_uses_unique_success_condition_label_without_visual_intent():
+    items = tuple(
+        UIObject(
+            id=f"context_{i}",
+            label=label,
+            role="text",
+            source=("ocr",),
+            bbox=BoundingBox(x1=x, y1=y, x2=x + 0.03, y2=y + 0.01),
+        )
+        for i, (label, x, y) in enumerate(
+            [(f"Unrelated {i}", 0.7, 0.6 + i * 0.01) for i in range(9)]
+            + [
+                ("Tools ", 0.02, 0.01),
+                ("Add Item", 0.025, 0.03),
+                ("Recent Items", 0.025, 0.05),
+                ("Raw_OCR_", 0.025, 0.07),
+            ]
+        )
+    )
+    contract = Contract(
+        goal="Open the Tools menu in the task-owned application window.",
+        success_conditions=["The TOOLS dropdown is visibly open."],
+        execution_mode="ASSESS",
+    )
+    frame = Frame(Image.new("RGB", (1000, 500)))
+    evidence = (object(),)
+    obs = Observation("condition_context_epoch", frame, items, evidence)
+    router = ExecutionRouter(Config())
+    bounded = router.decision_observation(obs, (), contract)
+    assert {o.id for o in items[-4:]} <= {o.id for o in bounded.objects}
+    assert len(bounded.objects) == 8
+    assert bounded.objects[0] is items[-4]
+    by_id = {o.id: o for o in items}
+    assert all(o is by_id[o.id] for o in bounded.objects)
+    assert all(not o.actions and o.confidence is None for o in bounded.objects)
+    assert bounded.id == obs.id and bounded.frame is frame and bounded.evidence is evidence
+    reordered = Observation(obs.id, frame, tuple(reversed(items)), evidence)
+    assert router.decision_observation(reordered, (), contract).objects == bounded.objects
+    assert router.route(obs, contract).mode == "ASSESS"
+
+
+@pytest.mark.parametrize(
+    "variant",
+    [
+        "duplicate",
+        "second_condition_label",
+        "substring",
+        "goal_only",
+        "explicit_missing",
+        "hidden",
+        "occluded",
+        "sensitive",
+        "blank",
+    ],
+)
+def test_success_condition_context_fallback_does_not_invent_or_override_anchor(variant):
+    prefix = tuple(
+        UIObject(
+            id=f"unrelated_{i}",
+            label=f"Other {i}",
+            bbox=BoundingBox(x1=0.7, y1=0.6, x2=0.8, y2=0.7),
+        )
+        for i in range(8)
+    )
+    anchor = UIObject(
+        id="raw_anchor", label="Tools", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.05, y2=0.02)
+    )
+    near = UIObject(
+        id="raw_neighbor",
+        label="Nearby Item",
+        bbox=BoundingBox(x1=0.02, y1=0.03, x2=0.05, y2=0.04),
+    )
+    extras = []
+    contract = Contract(
+        goal="Open the Tools menu", success_conditions=["The Tools dropdown is visible."]
+    )
+    if variant == "duplicate":
+        extras.append(anchor.model_copy(update={"id": "duplicate"}))
+    elif variant == "second_condition_label":
+        contract = contract.model_copy(
+            update={"success_conditions": [*contract.success_conditions, "Nearby Item is shown."]}
+        )
+    elif variant == "substring":
+        contract = contract.model_copy(
+            update={"success_conditions": ["The Toolset dropdown is visible."]}
+        )
+    elif variant == "goal_only":
+        contract = contract.model_copy(update={"success_conditions": ["The dropdown is visible."]})
+    elif variant == "explicit_missing":
+        contract = contract.model_copy(
+            update={"visual_intent": VisualIntent(query="Explicit Missing")}
+        )
+    elif variant == "blank":
+        anchor = anchor.model_copy(update={"label": " "})
+    else:
+        fields = {
+            "hidden": {"visible": False},
+            "occluded": {"occluded": True},
+            "sensitive": {"sensitive": True},
+        }
+        anchor = anchor.model_copy(update=fields[variant])
+    obs = Observation(
+        "ambiguous_epoch", Frame(Image.new("RGB", (1000, 500))), (*prefix, anchor, near, *extras)
+    )
+    assert ExecutionRouter(Config()).decision_observation(obs, (), contract).objects == prefix
+
+
+@pytest.mark.parametrize(
+    "label,condition",
+    [("Tools (v2)", "The Tools (v2) menu is visible."), ("設定", "The 「設定」 panel is visible.")],
+)
+def test_success_condition_label_is_literal_and_unicode_safe(label, condition):
+    anchor = UIObject(id="literal", label=label, bbox=BoundingBox(x1=0, y1=0, x2=0.1, y2=0.1))
+    far = tuple(
+        UIObject(id=str(i), label=f"Other {i}", bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8))
+        for i in range(8)
+    )
+    obs = Observation("literal_epoch", Frame(Image.new("RGB", (1000, 500))), (*far, anchor))
+    contract = Contract(goal="Show the requested menu", success_conditions=[condition])
+    assert ExecutionRouter(Config()).decision_observation(obs, (), contract).objects[0] is anchor
+
+
+@pytest.mark.parametrize("duplicate", [False, True])
+def test_exact_goal_anchor_precedes_literal_success_condition_fallback(duplicate):
+    prefix = tuple(
+        UIObject(id=str(i), label=f"Other {i}", bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8))
+        for i in range(8)
+    )
+    goal_anchor = UIObject(
+        id="goal", label="Exact Goal", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.05, y2=0.02)
+    )
+    condition_anchor = UIObject(
+        id="condition", label="Tools", bbox=BoundingBox(x1=0.6, y1=0.3, x2=0.65, y2=0.35)
+    )
+    extras = (goal_anchor.model_copy(update={"id": "duplicate"}),) if duplicate else ()
+    obs = Observation(
+        "exact_epoch",
+        Frame(Image.new("RGB", (1000, 500))),
+        (*prefix, goal_anchor, condition_anchor, *extras),
+    )
+    contract = Contract(goal="Exact Goal", success_conditions=["The Tools dropdown is visible."])
+    bounded = ExecutionRouter(Config()).decision_observation(obs, (), contract)
+    if duplicate:
+        assert bounded.objects == prefix
+    else:
+        assert bounded.objects[0] is goal_anchor
+
+
+def test_condition_context_fallback_preserves_executable_targets_and_bound():
+    from clef_use.backends import decision_request
+
+    targets = tuple(
+        UIObject(
+            id=f"target_{i}",
+            label=f"Allowed {i}",
+            actions=frozenset({"click"}),
+            bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8),
+        )
+        for i in range(32)
+    )
+    far = tuple(
+        UIObject(id=f"hint_{i}", label=f"Other {i}", bbox=targets[0].bbox) for i in range(9)
+    )
+    anchor = UIObject(
+        id="anchor", label="Tools", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.05, y2=0.02)
+    )
+    near = UIObject(
+        id="near", label="Observed Item", bbox=BoundingBox(x1=0.02, y1=0.03, x2=0.05, y2=0.04)
+    )
+    obs = Observation(
+        "choices_epoch", Frame(Image.new("RGB", (1000, 500))), (*targets, *far, anchor, near)
+    )
+    candidates = tuple(
+        ActionCandidate(
+            id=f"action_{i}",
+            operation="click",
+            observation_id=obs.id,
+            target=obj.id,
+            description=obj.label,
+        )
+        for i, obj in enumerate(reversed(targets))
+    )
+    contract = Contract(
+        goal="Show the Tools menu", success_conditions=["The Tools dropdown is visible."]
+    )
+    bounded = ExecutionRouter(Config()).decision_observation(obs, candidates, contract)
+    assert len(bounded.objects) == 40
+    assert all(
+        actual is expected for actual, expected in zip(bounded.objects[:32], targets, strict=True)
+    )
+    assert bounded.objects[32] is anchor and near in bounded.objects[32:]
+    packet = decision_request(bounded, contract, candidates, [])
+    assert [a["id"] for a in packet["state"]["allowed_candidates"]] == [a.id for a in candidates]
+    assert list(packet["questions"]["action"]["criteria"]) == [a.id for a in candidates]
 
 
 def test_raw_candidate_explosion_routes_before_truncation():
