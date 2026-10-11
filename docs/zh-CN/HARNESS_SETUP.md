@@ -1,5 +1,8 @@
 # Harness 设置
 
+请使用[代理设置指南](AGENT_GUIDE.md)一起管理 MCP 与 Agent Skills。
+下方旧版 `install-mcp` 命令仅配置通信连接。
+
 安装程序保留其他服务器与注释，创建私有备份，并可重复执行。不同的现有 clef-use 配置会报告冲突，不会覆盖。用 --dry-run 预览；非标准位置用 --path。使用绝对可执行路径，重启 harness 并验证五个工具。Windows 如果不能启动 CMD 包装器，请使用活动版本的 Scripts/clef-use.exe，并在更新后重新注册。
 
 ```sh

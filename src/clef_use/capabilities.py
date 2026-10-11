@@ -1,0 +1,162 @@
+"""Read-only product discovery, derived from installed tools and guide sources."""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import sys
+from functools import lru_cache
+from pathlib import Path
+
+from . import __version__
+
+API_SCHEMA_VERSION = 1
+GUIDE_CONTRACT_VERSION = 1
+SKILL_NAMES = ("clef-use", "clef-use-blender", "clef-use-diagnostics")
+
+
+def digest(value) -> str:
+    return hashlib.sha256(
+        json.dumps(value, sort_keys=True, separators=(",", ":")).encode()
+    ).hexdigest()
+
+
+def skill_root() -> Path:
+    bundled = Path(__file__).parent / "agent-skills"
+    if bundled.is_dir():
+        return bundled
+    source = Path(__file__).resolve().parents[2] / "agent-skills"
+    if not source.is_dir():
+        raise FileNotFoundError("Guide bundle missing; reinstall this runtime release")
+    return source
+
+
+def guide_manifest() -> dict:
+    skills = {}
+    for name in SKILL_NAMES:
+        root = skill_root() / name
+        if root.is_symlink():
+            raise ValueError("Guide bundle must not contain symlinks")
+        hashes = {}
+        for path in sorted(root.rglob("*")):
+            if path.is_symlink():
+                raise ValueError("Guide bundle must not contain symlinks")
+            if path.is_file():
+                hashes[path.relative_to(root).as_posix()] = hashlib.sha256(
+                    path.read_bytes()
+                ).hexdigest()
+        if "SKILL.md" not in hashes:
+            raise ValueError(f"Missing guide: {name}")
+        skills[name] = {"sha256": hashes, "digest": digest(hashes)}
+    return {
+        "runtime_version": __version__,
+        "api_schema_version": API_SCHEMA_VERSION,
+        "guide_contract_version": GUIDE_CONTRACT_VERSION,
+        "api_range": ">=0.1.29,<0.2",
+        "required_tools": [
+            "computer_run",
+            "computer_continue",
+            "computer_observe",
+            "computer_status",
+            "computer_abort",
+        ],
+        "skills": skills,
+    }
+
+
+@lru_cache(maxsize=1)
+def _schemas_json() -> str:
+    from .mcp_server import create_server
+
+    # FastMCP generates these parameters from the registered callable signatures.
+    # Creating the facade does not start the runtime, capture or load models.
+    server = create_server()
+    return json.dumps({tool.name: tool.parameters for tool in server._tool_manager.list_tools()})
+
+
+def tool_schemas() -> dict:
+    return json.loads(_schemas_json())
+
+
+def capabilities(*, detail: bool = False, operation_id: str | None = None) -> dict:
+    from .models import DEFAULT_DECISION_MODEL, MODEL_REVISIONS
+    from .operations import operation_registry
+
+    operations = list(operation_registry())
+    for operation in operations:
+        operation["default_runtime_availability"] = {
+            "status": "BLOCKED",
+            "scope": "shipped_default_runtime",
+            "reason": "No trusted application state provider is configured or shipped.",
+            "missing_verified_facts": [
+                name
+                for name in operation["requires"]
+                if name not in {"window", "foreground", "target_geometry"}
+            ],
+            "live_probe": "NOT_PROBED",
+        }
+    if operation_id is not None:
+        operation = next((op for op in operations if op["family"] == operation_id), None)
+        if operation is None:
+            raise ValueError("UNKNOWN_OPERATION: discover supported operation IDs first")
+        return operation
+    schemas = tool_schemas()
+    result = {
+        "runtime_version": __version__,
+        "api_schema_version": API_SCHEMA_VERSION,
+        "schema_sha256": digest(schemas),
+        "guide_contract_version": GUIDE_CONTRACT_VERSION,
+        "operation_registry_version": 2,
+        "default_runtime_state": {
+            "provider": "NONE",
+            "observation_access_level": "PIXELS_ONLY",
+            "trusted_application_evidence": "UNAVAILABLE",
+            "provider_configuration_path": "UNAVAILABLE",
+            "operation_availability": "BLOCKED",
+            "live_probe": "NOT_PROBED",
+            "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+            "native_state": "Window identity may be available; desktop permissions are not probed.",
+        },
+        "tools": list(schemas),
+        "modes": ["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"],
+        "inputs": {
+            "legacy": ["text", "pointer", "press", "hotkey"],
+            "typed": ["key", "chord", "text", "pointer", "gesture", "wheel"],
+            "physical_code": "UNSUPPORTED",
+            "ime": "composition context guard; no IME engine control",
+            "unicode": "Windows native; X11 full Unicode via explicit clipboard provider",
+            "macos_watchdog": "limited: native foreground and human-input query unavailable",
+        },
+        "operations": operations
+        if detail
+        else [
+            {key: op[key] for key in ("family", "description", "default_runtime_availability")}
+            for op in operations
+        ],
+        "platform": sys.platform,
+        "model_policy": {
+            "default_decision_model": DEFAULT_DECISION_MODEL,
+            "pinned_revisions": MODEL_REVISIONS,
+            "readiness": "NOT_PROBED",
+        },
+        "limitations": [
+            "Discovery does not probe desktop permissions or initialize models.",
+            "ASSESS sends no input; cached observations authorize no new input.",
+            "State-dependent operations require verified fresh local provider facts.",
+            "All six operations block on unknown facts in the default installation; "
+            "no application state provider configuration path is shipped.",
+            "Typed continuation requires an explicit operation; "
+            "verify the complete goal with a new ASSESS contract.",
+            "Operation SUCCEEDED verifies its typed effect; "
+            "session NEEDS_REPLAN requires fresh goal ASSESS.",
+            "No measured 100ms profile is advertised until native release gates pass.",
+        ],
+        "guides": guide_manifest(),
+        "resources": [
+            "clef-use://api/schema",
+            *[f"clef-use://guides/{name}/SKILL.md" for name in SKILL_NAMES],
+        ],
+    }
+    if detail:
+        result["schemas"] = schemas
+    return result

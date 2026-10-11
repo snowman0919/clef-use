@@ -179,7 +179,25 @@ def atomic_text(path, text, mode=0o600):
         Path(temporary).unlink(missing_ok=True)
 
 
-def smoke(executable, expected_version):
+def verify_contract(expected, actual):
+    for key in (
+        "api_schema_version",
+        "schema_sha256",
+        "guide_contract_version",
+        "operation_registry_version",
+    ):
+        if key in expected and actual.get(key) != expected[key]:
+            raise ValueError(f"installed release contract mismatch: {key}")
+    if "guide_bundle_sha256" in expected:
+        skills = actual.get("guides", {}).get("skills", {})
+        digest = hashlib.sha256(
+            json.dumps(skills, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if digest != expected["guide_bundle_sha256"]:
+            raise ValueError("installed release contract mismatch: guide bundle")
+
+
+def smoke(executable, expected_version, contract=None):
     environment = clean_environment()
     version = subprocess.run(
         [str(executable), "version"], capture_output=True, text=True, timeout=30, env=environment
@@ -191,6 +209,20 @@ def smoke(executable, expected_version):
     )
     if result.returncode:
         raise RuntimeError("installed runtime state-machine smoke check failed")
+    if contract and "api_schema_version" in contract:
+        discovery = subprocess.run(
+            [str(executable), "capabilities", "--json"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+            env=environment,
+        )
+        if discovery.returncode:
+            raise RuntimeError("installed runtime capability check failed")
+        advertised = json.loads(discovery.stdout)
+        if advertised.get("runtime_version") != expected_version:
+            raise ValueError("installed release runtime version mismatch")
+        verify_contract(contract, advertised)
 
 
 def clean_environment():
@@ -327,7 +359,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 ):
                     raise ValueError("immutable release changed checksum")
                 report("Checking your existing installation...")
-                smoke(environment_binary(current, "clef-use"), installed["version"])
+                smoke(environment_binary(current, "clef-use"), installed["version"], artifact)
                 return {
                     "status": "CURRENT",
                     "version": installed["version"],
@@ -382,7 +414,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                         "verified offline wheel installation failed; previous version preserved"
                     )
             report("Checking that clef-use runs correctly...")
-            smoke(environment_binary(staged, "clef-use"), manifest["version"])
+            smoke(environment_binary(staged, "clef-use"), manifest["version"], artifact)
             report("Activating the installation...")
             atomic_text(
                 staged / "installed.json",
@@ -525,6 +557,92 @@ def prepare_installed_models(executable, json_mode=False):
     return 0
 
 
+def configure_integrations(executable, targets, skills=None, preview_only=False):
+    """Only explicit selected harnesses receive new MCP entries and guide copies."""
+    reports = {}
+    if not targets:
+        return reports
+    executable = integration_executable(executable)
+    for target in targets:
+        if target not in {"codex", "hermes", "omp", "all"}:
+            raise ValueError("unknown integration target")
+        arguments = [
+            str(executable),
+            "integrate",
+            target,
+            "--scope",
+            "user",
+            "--non-interactive",
+            "--command-path",
+            str(executable),
+        ]
+        for skill in skills or []:
+            if skill not in {"core", "blender", "diagnostics"}:
+                raise ValueError("unknown guide selection")
+            arguments += ["--skills", skill]
+        preview = subprocess.run(
+            arguments + ["--dry-run"], capture_output=True, text=True, timeout=60
+        )
+        if preview.returncode not in (0, 2):
+            raise RuntimeError(f"{target} integration preview failed; configuration preserved")
+        reports[target] = json.loads(preview.stdout)
+        if not preview_only and integrations_ready(reports[target]):
+            applied = subprocess.run(arguments, capture_output=True, text=True, timeout=60)
+            if applied.returncode not in (0, 2):
+                raise RuntimeError(f"{target} integration failed; inspect integrations status")
+            reports[target] = json.loads(applied.stdout)
+    return reports
+
+
+def integration_executable(executable):
+    path = Path(executable)
+    if sys.platform != "win32" or path.suffix.lower() != ".cmd":
+        return str(path)
+    text = path.read_text()
+    match = re.search(r'^@"([^"\r\n]+)" %\*$', text, re.MULTILINE)
+    if "clef-use managed launcher" not in text or not match:
+        raise ValueError("managed Windows launcher is malformed")
+    target = match[1]
+    if target.startswith("%~dp0"):
+        target = str(path.parent / target[5:])
+    if "%" in target or not Path(target).is_absolute():
+        raise ValueError("managed Windows executable path is unsafe")
+    return target
+
+
+def integrations_ready(report):
+    values = report.get("integrations", [report])
+    return all(item.get("status") in {"PREVIEW", "INSTALLED", "UNCHANGED"} for item in values)
+
+
+def refresh_integrations(result):
+    """Refresh only enrollment previously recorded by this user's active profiles."""
+    try:
+        refreshed = subprocess.run(
+            [
+                integration_executable(result["executable"]),
+                "integrations",
+                "refresh",
+                "--managed-only",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=90,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        result["managed_refresh"] = {"status": "NOT_RUN", "reason": "managed refresh unavailable"}
+        result["integration_status"] = "DEGRADED"
+        return result
+    try:
+        report = json.loads(refreshed.stdout)
+    except (ValueError, TypeError):
+        report = {"status": "NOT_RUN", "reason": "managed refresh unavailable"}
+    result["managed_refresh"] = report
+    if refreshed.returncode or not integrations_ready(report):
+        result["integration_status"] = "DEGRADED"
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description="Install or update clef-use without root")
     parser.add_argument(
@@ -532,6 +650,18 @@ def main():
     )
     parser.add_argument("--allow-insecure-localhost", action="store_true")
     parser.add_argument("--json", action="store_true", help="Emit JSON without progress messages")
+    parser.add_argument(
+        "--integrate",
+        choices=["codex", "hermes", "omp", "all"],
+        action="append",
+        help="explicitly select MCP and Agent Skill installation targets",
+    )
+    parser.add_argument("--skills", choices=["core", "blender", "diagnostics"], action="append")
+    parser.add_argument(
+        "--integration-preview",
+        action="store_true",
+        help="preview selected integration paths without modifying them",
+    )
     models = parser.add_mutually_exclusive_group()
     models.add_argument(
         "--prepare-models",
@@ -558,6 +688,19 @@ def main():
             args.base_url,
             args.allow_insecure_localhost,
             progress=None if args.json else progress,
+        )
+        result["integrations"] = configure_integrations(
+            result["executable"], args.integrate or [], args.skills, args.integration_preview
+        )
+        if not args.integration_preview:
+            refresh_integrations(result)
+        result["integration_status"] = (
+            "DEGRADED"
+            if result.get("integration_status") == "DEGRADED"
+            or any(not integrations_ready(item) for item in result["integrations"].values())
+            else "SELECTED_TARGETS_APPLIED"
+            if result["integrations"]
+            else "NO_NEW_TARGETS_SELECTED"
         )
         if args.json:
             print(json.dumps(result))
@@ -596,6 +739,14 @@ def main():
                 f"\nFirst-use setup:\n  {command} models prepare\n  {command} doctor\n"
                 f"\nModel setup options:\n  {command} models prepare --help"
             )
+            print(
+                f"\nAgent setup (MCP plus portable guides):\n"
+                f"  {command} integrate codex --dry-run\n"
+                f"  {command} integrate codex --scope user\n"
+                f"  {command} integrations verify codex --live --read-only"
+            )
+            if result["integrations"]:
+                print(json.dumps(result["integrations"], ensure_ascii=False, indent=2))
         choice = args.prepare_models
         if choice is None and not args.json:
             choice = ask_model_preparation()

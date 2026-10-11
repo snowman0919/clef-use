@@ -578,7 +578,9 @@ def test_repeat_install_validates_existing_artifact_when_bootstrap_python_change
         ),
     )
     smoked = []
-    monkeypatch.setattr(installer, "smoke", lambda exe, version: smoked.append(version))
+    monkeypatch.setattr(
+        installer, "smoke", lambda exe, version, contract=None: smoked.append(version)
+    )
     if receipt == "other_python":
         assert installer.install()["status"] == "CURRENT"
         assert smoked == ["0.1.0"]

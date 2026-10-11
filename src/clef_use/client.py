@@ -102,11 +102,11 @@ class RuntimeClient:
                     time.sleep(0.1)
             raise RuntimeError("runtime service did not start")
 
-    def request(self, operation, **data):
-        if operation == "observe" and not isinstance(data.get("refresh", True), bool):
+    def request(self, route, **data):
+        if route == "observe" and not isinstance(data.get("refresh", True), bool):
             raise ValueError("refresh must be a boolean")
         endpoint = None
-        if operation == "observe" and data.get("refresh", True) is False:
+        if route == "observe" and data.get("refresh", True) is False:
             try:
                 endpoint = self._endpoint()
                 health = self._send("health", {}, endpoint=endpoint)
@@ -124,9 +124,9 @@ class RuntimeClient:
             self._ensure()
         try:
             return (
-                self._send(operation, data, endpoint=endpoint)
+                self._send(route, data, endpoint=endpoint)
                 if endpoint is not None
-                else self._send(operation, data)
+                else self._send(route, data)
             )
         except urllib.error.HTTPError as exc:
             try:
@@ -140,7 +140,7 @@ class RuntimeClient:
             }
             if exc.code == 404 and code in messages:
                 raise RuntimeError(messages[code]) from None
-            raise RuntimeError(f"runtime refused {operation}; inspect session status") from None
+            raise RuntimeError(f"runtime refused {route}; inspect session status") from None
 
     def wait(self, result):
         session_id = result["session_id"]
@@ -157,5 +157,12 @@ class RuntimeClient:
         result = self._send("run", contract.model_dump(mode="json"))
         return self.wait(result)
 
-    def continue_session(self, session_id, instruction):
-        return self.wait(self.request("continue", session_id=session_id, instruction=instruction))
+    def continue_session(self, session_id, instruction, operation=None):
+        return self.wait(
+            self.request(
+                "continue",
+                session_id=session_id,
+                instruction=instruction,
+                **({"operation": operation} if operation is not None else {}),
+            )
+        )

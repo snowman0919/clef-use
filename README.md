@@ -137,6 +137,9 @@ explicitly requests an MCP image. No shell execution tool is exposed.
 - [Architecture and invariants](docs/ARCHITECTURE.md)
 - [Development and testing](docs/DEVELOPMENT.md)
 - [Benchmarks](docs/BENCHMARK.md)
+- Agent Skills and runtime operations: [English](docs/en/AGENT_GUIDE.md),
+  [한국어](docs/ko/AGENT_GUIDE.md), [简体中文](docs/zh-CN/AGENT_GUIDE.md),
+  [日本語](docs/ja/AGENT_GUIDE.md)
 - [English setup](docs/en/INSTALL.md), [한국어](docs/ko/INSTALL.md),
   [简体中文](docs/zh-CN/INSTALL.md), [日本語](docs/ja/INSTALL.md)
 - [Contributing](CONTRIBUTING.md), [security reporting](SECURITY.md),

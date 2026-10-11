@@ -95,4 +95,11 @@ async def test_real_stdio_initialize_delivers_update_request_to_agent():
             result = await session.initialize()
             assert "Update requested: clef-use 99.0.0" in result.instructions
             assert "clef-use update" in result.instructions
-            assert len((await session.list_tools()).tools) == 5
+            assert {tool.name for tool in (await session.list_tools()).tools} == {
+                "computer_run",
+                "computer_continue",
+                "computer_observe",
+                "computer_status",
+                "computer_abort",
+                "computer_capabilities",
+            }

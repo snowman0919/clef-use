@@ -40,6 +40,7 @@ def parser():
     run.add_argument("--max-steps", type=int)
     run.add_argument("--confidence-threshold", type=float)
     run.add_argument("--text", action="append", default=[])
+    run.add_argument("--operation", type=json.loads, help="registered typed operation JSON")
     for command in ("status", "abort", "observe"):
         sub = commands.add_parser(
             command,
@@ -59,6 +60,7 @@ def parser():
     resume = commands.add_parser("continue", help="resume a session with new guidance")
     resume.add_argument("session_id")
     resume.add_argument("instruction")
+    resume.add_argument("--operation", type=json.loads, help="typed registered operation JSON")
     doctor = commands.add_parser(
         "doctor", aliases=["docker"], help="diagnose or repair model setup"
     )
@@ -110,7 +112,46 @@ def parser():
         choices=["none", "4bit"],
         help="none: original weights; 4bit: bitsandbytes NF4 during loading",
     )
-    commands.add_parser("mcp", help="start the MCP server for an AI agent")
+    mcp = commands.add_parser("mcp", help="start the MCP server for an AI agent")
+    mcp.add_argument(
+        "--read-only",
+        action="store_true",
+        help="expose only discovery and existing-session status for live verification",
+    )
+    capability = commands.add_parser(
+        "capabilities", help="discover installed schemas without input"
+    )
+    capability.add_argument("--json", action="store_true")
+    capability.add_argument("--detail", action="store_true")
+    capability.add_argument("--operation-id")
+    integrate = commands.add_parser("integrate", help="preview or install MCP and portable guides")
+    integrate.add_argument("harness", choices=["codex", "hermes", "omp", "all"])
+    integrate.add_argument("--scope", choices=["user", "project"], default="user")
+    integrate.add_argument("--skills", choices=["core", "blender", "diagnostics"], action="append")
+    integrate.add_argument("--project", type=Path)
+    integrate.add_argument("--command-path")
+    integrate.add_argument("--dry-run", action="store_true")
+    integrate.add_argument("--non-interactive", action="store_true")
+    integrations = commands.add_parser("integrations", help="inspect managed integration evidence")
+    integration_commands = integrations.add_subparsers(dest="action", required=True)
+    integration_status = integration_commands.add_parser("status")
+    integration_status.add_argument("--json", action="store_true")
+    integration_verify = integration_commands.add_parser("verify")
+    integration_verify.add_argument("harness", choices=["codex", "hermes", "omp"])
+    integration_verify.add_argument("--live", action="store_true")
+    integration_verify.add_argument("--read-only", action="store_true")
+    integration_verify.add_argument(
+        "--trigger", choices=["natural", "explicit", "negative", "native"], default="natural"
+    )
+    integration_verify.add_argument("--scope", choices=["user", "project"], default="user")
+    integration_verify.add_argument("--project", type=Path)
+    integration_remove = integration_commands.add_parser("remove")
+    integration_remove.add_argument("harness", choices=["codex", "hermes", "omp"])
+    integration_remove.add_argument("--dry-run", action="store_true")
+    integration_remove.add_argument("--scope", choices=["user", "project"], default="user")
+    integration_remove.add_argument("--project", type=Path)
+    integration_refresh = integration_commands.add_parser("refresh")
+    integration_refresh.add_argument("--managed-only", action="store_true", required=True)
     install = commands.add_parser("install-mcp", help="register clef-use with Codex, Hermes or OMP")
     install.add_argument("harness", choices=["codex", "hermes", "omp"])
     install.add_argument("--path", type=Path)
@@ -137,12 +178,53 @@ def main(argv=None):
         if args.command == "mcp":
             from .mcp_server import main as serve
 
-            serve()
+            serve(read_only=args.read_only)
             return 0
         if args.command == "version":
             print(__version__)
             return 0
-        if args.command == "run":
+        if args.command == "capabilities":
+            from .capabilities import capabilities
+
+            result = capabilities(detail=args.detail, operation_id=args.operation_id)
+        elif args.command == "integrate":
+            from .integrations import integrate
+
+            targets = ["codex", "hermes", "omp"] if args.harness == "all" else [args.harness]
+            result = {
+                "integrations": [
+                    integrate(
+                        target,
+                        scope=args.scope,
+                        skills=args.skills,
+                        dry_run=args.dry_run,
+                        command=args.command_path,
+                        project=args.project,
+                    )
+                    for target in targets
+                ]
+            }
+        elif args.command == "integrations":
+            from . import integrations
+
+            if args.action == "status":
+                result = integrations.status()
+            elif args.action == "verify":
+                result = integrations.verify(
+                    args.harness,
+                    live=args.live,
+                    read_only=True,
+                    trigger=args.trigger,
+                    scope=args.scope,
+                    project=args.project,
+                )
+            elif args.action == "refresh":
+                result = integrations.refresh_managed()
+            else:
+                result = integrations.remove(
+                    args.harness, dry_run=args.dry_run, scope=args.scope, project=args.project
+                )
+        elif args.command == "run":
             config = load_config()
             contract = Contract(
                 goal=args.goal,
@@ -161,6 +243,7 @@ def main(argv=None):
                     if args.visual_query or args.coarse_strategy != "tiled"
                     else None
                 ),
+                operation=args.operation,
             )
             result = RuntimeClient().run(contract)
         elif args.command == "observe":
@@ -170,7 +253,9 @@ def main(argv=None):
         elif args.command in {"status", "abort"}:
             result = RuntimeClient(start=False).request(args.command, session_id=args.session_id)
         elif args.command == "continue":
-            result = RuntimeClient(start=False).continue_session(args.session_id, args.instruction)
+            result = RuntimeClient(start=False).continue_session(
+                args.session_id, args.instruction, args.operation
+            )
         elif args.command in {"doctor", "docker"}:
             from .maintenance import diagnose
 
@@ -245,10 +330,15 @@ def main(argv=None):
                 print(json.dumps(result))
                 return 1
         elif args.command == "update":
-            from .installer import install
+            from .installer import install, refresh_integrations
 
-            result = install(args.base_url, args.allow_insecure_localhost)
+            result = refresh_integrations(install(args.base_url, args.allow_insecure_localhost))
         print(json.dumps(result, indent=2))
+        if args.command == "integrate" and any(
+            item.get("status") not in {"PREVIEW", "INSTALLED", "UNCHANGED"}
+            for item in result["integrations"]
+        ):
+            return 2
         if args.command == "run" and result["status"] != "COMPLETED":
             return 2
         if args.command in {"doctor", "docker"} and not result["ready"]:

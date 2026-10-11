@@ -1,5 +1,8 @@
 # Harness setup
 
+For managed MCP **and Agent Skills**, use the [agent setup guide](AGENT_GUIDE.md).
+The legacy `install-mcp` command below configures the transport only.
+
 The installer preserves unrelated servers/comments, writes a private backup, and is idempotent. A different existing clef-use entry is a conflict, not an overwrite. Preview with --dry-run and use --path for nonstandard configuration. Use absolute executable paths, restart the harness and verify all five tools. Windows harnesses that cannot launch CMD wrappers should use the active version Scripts/clef-use.exe and re-register after updates.
 
 ```sh

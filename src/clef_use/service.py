@@ -34,6 +34,14 @@ class SessionManager:
         self.busy = False
         self.stopping = False
 
+    def _owns_desktop(self):
+        # Call under self.lock. A finished execution can still own recovery of
+        # an open modal; replacing its process would discard that authority.
+        return self.busy or any(
+            runner.owns_modal()
+            for runner in getattr(self.runtime, "operation_runners", {}).values()
+        )
+
     def _execute(self, session):
         try:
             if self.runtime is None:
@@ -62,17 +70,29 @@ class SessionManager:
         with self.lock:
             if self.stopping:
                 raise RuntimeError("service is stopping")
-            if self.busy:
+            if self._owns_desktop():
                 session.status = Status.SAFETY_BLOCK
-                session.reason = "another session owns the desktop or is finishing cancellation"
+                session.reason = "another session owns the desktop or requires modal recovery"
                 self.sessions[session.id] = session
                 return session.snapshot()
             if len(self.sessions) >= 64:
+                runners = getattr(self.runtime, "operation_runners", {})
                 removable = next(
-                    (s for s in self.sessions if self.sessions[s].status != Status.RUNNING), None
+                    (
+                        s
+                        for s in self.sessions
+                        if self.sessions[s].status != Status.RUNNING
+                        and (s not in runners or not runners[s].owns_modal())
+                    ),
+                    None,
                 )
                 if removable:
                     del self.sessions[removable]
+                    runners.pop(removable, None)
+                else:
+                    session.status = Status.SAFETY_BLOCK
+                    session.reason = "owned modal recovery records are at capacity"
+                    return session.snapshot()
             self.sessions[session.id] = session
             return self._launch(session)
 
@@ -85,45 +105,74 @@ class SessionManager:
                 raise SessionLookupError("SESSION_NOT_FOUND")
             return self.sessions[target]
 
-    def continue_session(self, session_id, instruction):
+    def continue_session(self, session_id, instruction, operation=None):
         if not isinstance(instruction, str) or not instruction.strip() or len(instruction) > 1000:
             raise ValueError("instruction must be 1 to 1000 characters")
         with self.lock:
             if self.busy or self.stopping:
                 raise RuntimeError("previous execution is still finishing")
             session = self.get(session_id)
+            if session.contract.operation is not None and operation is None:
+                raise ValueError(
+                    "typed continuation requires an explicit operation; "
+                    "use a new ASSESS contract to verify the complete goal"
+                )
+            runner = getattr(self.runtime, "operation_runners", {}).get(session_id)
+            cleanup = (
+                isinstance(operation, dict)
+                and operation.get("family") == "modal_cancel"
+                and runner is not None
+                and runner.owns_modal(operation.get("modal_id"))
+            )
+            if self._owns_desktop() and not cleanup:
+                raise RuntimeError("owned modal recovery must finish before another operation")
             if session.status not in {
                 Status.NEEDS_REPLAN,
                 Status.LOW_CONFIDENCE,
                 Status.NO_PROGRESS,
                 Status.BLOCKED,
-            }:
+            } and not (session.status == Status.ABORTED and cleanup):
                 raise ValueError("session status cannot be resumed")
-            if session.rounds >= session.contract.max_steps:
+            if session.rounds >= session.contract.max_steps and not cleanup:
                 raise ValueError("create a new contract after budget exhaustion")
             with session.lock:
+                if operation is not None:
+                    session.contract = Contract.model_validate(
+                        {**session.contract.model_dump(), "operation": operation}
+                    )
+                if cleanup:
+                    session.cancelled.clear()
                 session.guidance.append(instruction)
                 session.status, session.reason = Status.RUNNING, "resumed with planner guidance"
                 session.blocker = None
             return self._launch(session)
 
     def dispatch(self, operation, data):
+        if operation == "capabilities":
+            from .capabilities import capabilities
+
+            return capabilities(
+                detail=data.get("detail", False), operation_id=data.get("operation_id")
+            )
         if operation == "run":
             return self.run(data)
         if operation == "continue":
-            return self.continue_session(data["session_id"], data["instruction"])
+            return self.continue_session(
+                data["session_id"], data["instruction"], data.get("operation")
+            )
         if operation == "health":
-            return {
-                "ok": True,
-                "pid": os.getpid(),
-                "version": __version__,
-                "busy": self.busy,
-                "desktop_scope": self.desktop_scope,
-                "capabilities": {"cached_observe": True},
-            }
+            with self.lock:
+                return {
+                    "ok": True,
+                    "pid": os.getpid(),
+                    "version": __version__,
+                    "busy": self._owns_desktop(),
+                    "desktop_scope": self.desktop_scope,
+                    "capabilities": {"cached_observe": True},
+                }
         if operation == "shutdown_idle":
             with self.lock:
-                if self.busy:
+                if self._owns_desktop():
                     raise RuntimeError("cannot restart a service that owns the desktop")
                 self.stopping = True
             return {"ok": True}

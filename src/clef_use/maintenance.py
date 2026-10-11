@@ -40,6 +40,9 @@ def diagnose(capture=True, fix=False):
     from .doctor import doctor
 
     report = doctor(capture)
+    from .integrations import status as integration_status
+
+    report["integrations"] = integration_status()
     repairs = []
     needs_prepare = (
         not all(env["ready"] for env in report["ml_environments"].values())

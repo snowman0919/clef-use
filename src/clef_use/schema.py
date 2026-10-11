@@ -28,9 +28,16 @@ class Contract(StrictModel):
     pointer_inputs: list[PointerInput] = Field(default_factory=list, max_length=8)
     execution_mode: Literal["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"] = "AUTO"
     visual_intent: VisualIntent | None = None
+    operation: dict[str, JsonValue] | None = None
 
     @model_validator(mode="after")
     def bounded_strings(self):
+        if self.operation is not None:
+            from .operations import parse_operation_request
+
+            request = parse_operation_request(self.operation)
+            if self.execution_mode == "ASSESS" and request.family != "menu_assess":
+                raise ValueError("ASSESS permits only read-only registered operations")
         if not self.goal.strip() or any(
             not s.strip() or len(s) > 1000 for s in self.success_conditions + self.constraints
         ):

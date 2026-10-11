@@ -1,0 +1,37 @@
+{
+  "runtime_version": "0.1.30",
+  "api_schema_version": 1,
+  "guide_contract_version": 1,
+  "api_range": ">=0.1.29,<0.2",
+  "required_tools": [
+    "computer_run",
+    "computer_continue",
+    "computer_observe",
+    "computer_status",
+    "computer_abort"
+  ],
+  "skills": {
+    "clef-use": {
+      "sha256": {
+        "SKILL.md": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f",
+        "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      "digest": "d76f10ebfe06e7ef706a7f0f3986188f3fd52aeee2807564df5afa9bed176339"
+    },
+    "clef-use-blender": {
+      "sha256": {
+        "SKILL.md": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6",
+        "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      "digest": "dc6ec1039b7b3906909efead361a19482dd57bbc1ffe250ded690ba7b177c1f7"
+    },
+    "clef-use-diagnostics": {
+      "sha256": {
+        "SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      },
+      "digest": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+    }
+  }
+}

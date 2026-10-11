@@ -99,6 +99,7 @@ class SessionRuntime:
         log_path: Path | None = None,
         activity=None,
         grounder=None,
+        state_provider=None,
     ):
         self.activity = activity or SilentActivity()
         self.capture = capture
@@ -117,6 +118,260 @@ class SessionRuntime:
             self.config.screen_stable_samples,
         )
         self._perception_cache = None
+        from .state import StateCompiler
+
+        self.state_compiler = StateCompiler()
+        self.state_provider = state_provider
+        self.operation_runners = {}
+        self._operation_frames = {}
+        self._operation_state_lock = threading.RLock()
+
+    def _operation_state(self):
+        # Watchdog and foreground checks can observe concurrently. Attribute the
+        # provider evidence to one atomic capture/compile version, never a guess
+        # about a version another observer may consume first.
+        with self._operation_state_lock:
+            frame = self._capture()
+            observation = Observation(uuid.uuid4().hex, frame, ())
+            evidence = (
+                self.state_provider(observation, self.state_compiler.version + 1)
+                if self.state_provider
+                else None
+            )
+            state = self.state_compiler.compile(observation, evidence)
+            self._operation_frames[state.observation_id] = frame
+            if len(self._operation_frames) > 64:
+                self._operation_frames.pop(next(iter(self._operation_frames)))
+            return state
+
+    def _operation_input(self, command, state, cancelled, operation=None):
+        from .input_ir import ChordInput, InputContext, InputDispatchError, KeyInput
+        from .schema import ActionResult
+
+        frame = self._operation_frames.get(state.observation_id)
+        if frame is None or not hasattr(self.action, "execute_input"):
+            return ActionResult(ok=False, reason="fresh typed input backend unavailable")
+        expected_window = frame.foreground_window
+        family = operation.get("family") if operation else None
+        bindings = state.require("keymap") if operation else {}
+
+        def matches_binding(name):
+            keys = bindings.get(name) if isinstance(bindings, dict) else None
+            if isinstance(command, KeyInput):
+                return (
+                    command.phase == "tap"
+                    and command.repeat == 1
+                    and not command.hold_seconds
+                    and keys == [command.key]
+                )
+            return isinstance(command, ChordInput) and keys == [
+                *command.modifiers,
+                command.key,
+            ]
+
+        transition = None
+        if family == "command_search" and matches_binding("search"):
+            transition = "search_open"
+        elif (
+            family == "numeric_transform"
+            and state.require("modal") is None
+            and matches_binding(operation["operation"])
+        ):
+            transition = "transform_enter"
+        elif (
+            family in {"numeric_transform", "modal_cancel"}
+            and state.require("modal") is not None
+            and (
+                matches_binding("cancel")
+                or (family == "numeric_transform" and matches_binding("commit"))
+            )
+        ):
+            transition = "modal_close"
+
+        def guard(after_input=False):
+            current = self._operation_state()
+            fresh = self._operation_frames[current.observation_id]
+            anchors = (
+                "application",
+                "window",
+                "foreground",
+                "editor",
+                "mode",
+                "keymap_version",
+                "selection",
+                "ime_composing",
+            )
+            if family in {"numeric_transform", "modal_cancel"}:
+                anchors += ("space", "unit")
+            valid = (
+                same_context(frame, fresh)
+                and fresh.foreground_window == expected_window
+                and all(current.require(name) == state.require(name) for name in anchors)
+                and current.require("loading") is False
+                and state.require("loading") is False
+            )
+            text_focus, popup = current.require("text_focus"), current.require("popup")
+            modal = current.require("modal")
+            modal_valid = modal == state.require("modal")
+            text_valid = text_focus == state.require("text_focus")
+            popup_valid = popup == state.require("popup")
+            if after_input and transition == "search_open":
+                # Only an acknowledged observed search binding may enter this
+                # finite UI transition. Pre-event checks remain exact.
+                popup_valid = (popup is False and text_focus is False) or (
+                    popup == "COMMAND_SEARCH" and text_focus is True
+                )
+                text_valid = popup_valid
+            elif after_input and transition == "transform_enter":
+                modal_valid = modal is None or (
+                    isinstance(modal, dict)
+                    and isinstance(modal.get("id"), str)
+                    and bool(modal["id"])
+                    and modal.get("name") == operation["operation"]
+                )
+            elif after_input and transition == "modal_close":
+                modal_valid = modal_valid or modal is None
+            if after_input and text_control == "submit":
+                text_valid = text_valid or text_focus is False
+                popup_valid = popup_valid or popup is False
+            valid = valid and modal_valid and text_valid and popup_valid
+            if operation and operation.get("family") == "property_edit":
+                if not after_input or text_focus is True:
+                    valid = valid and current.require("focused_property") == state.require(
+                        "focused_property"
+                    )
+            if not valid:
+                raise RuntimeError("registered operation context changed before OS input")
+            return True
+
+        text_control = None
+        if state.require("text_focus") is True and operation:
+            family = operation.get("family")
+            owned_field = family == "property_edit" and state.require("focused_property") == {
+                "target_id": operation["target_id"],
+                "field": operation["field"],
+            }
+            owned_search = family == "command_search" and state.require("popup") == "COMMAND_SEARCH"
+            if owned_field or owned_search:
+                if (
+                    isinstance(command, ChordInput)
+                    and command.key == "a"
+                    and command.modifiers in (("ctrl",), ("command",))
+                    and bindings.get("select_all") == [*command.modifiers, command.key]
+                ):
+                    text_control = "select_all"
+                elif (
+                    isinstance(command, KeyInput)
+                    and command.key == "enter"
+                    and command.phase == "tap"
+                    and command.repeat == 1
+                    and not command.hold_seconds
+                    and bindings.get("commit") == ["enter"]
+                ):
+                    text_control = "submit"
+
+        context = InputContext(
+            lease_id="local-operation",
+            state_version=str(state.version),
+            foreground=state.require("window"),
+            editor=state.require("editor"),
+            mode=state.require("mode"),
+            keymap=state.require("keymap_version"),
+            text_focus=state.require("text_focus"),
+            ime_composing=state.require("ime_composing"),
+            text_control=text_control,
+        )
+        try:
+            return self.action.execute_input(
+                command,
+                frame,
+                cancelled,
+                context_guard=guard,
+                deadline=time.monotonic() + 3,
+                context=context,
+                after_input_guard=(lambda: guard(after_input=True))
+                if text_control == "submit" or transition is not None
+                else None,
+            )
+        except InputDispatchError as exc:
+            return ActionResult(ok=False, reason=str(exc), delivery=exc.delivery)
+
+    def _execute_operation(self, session):
+        from .operations import OperationRunner, parse_operation_request
+
+        request = parse_operation_request(session.contract.operation)
+        runner = self.operation_runners.get(session.id)
+        cleanup = (
+            request.family == "modal_cancel"
+            and runner is not None
+            and runner.owns_modal(request.modal_id)
+        )
+        inputs_required = {
+            "menu_assess": 0,
+            "command_search": 3,
+            "numeric_transform": 4,
+            "property_edit": 3,
+            "viewport_gesture": 1,
+            "modal_cancel": 1,
+        }[request.family]
+        if not cleanup and (
+            session.rounds >= session.contract.max_steps
+            or session.steps + inputs_required > session.contract.max_steps
+        ):
+            return self._finish(
+                session, Status.BLOCKED, "remaining operation input budget is insufficient"
+            )
+        if session.id not in self.operation_runners:
+            if len(self.operation_runners) >= 64:
+                removable = next(
+                    (
+                        identity
+                        for identity, existing in self.operation_runners.items()
+                        if not existing.owns_modal()
+                    ),
+                    None,
+                )
+                if removable is None:
+                    return self._finish(
+                        session, Status.SAFETY_BLOCK, "owned modal recovery records are at capacity"
+                    )
+                self.operation_runners.pop(removable)
+            self.operation_runners[session.id] = OperationRunner(
+                self._operation_state,
+                lambda command, state, cancelled: self._operation_input(
+                    command, state, cancelled, session.contract.operation
+                ),
+                text_method="unicode",
+            )
+        self._phase(session, "Checking registered operation")
+        report = self.operation_runners[session.id].run(request, session.cancelled)
+        row = {"event": "operation", "operation": report.model_dump(mode="json")}
+        session.steps += report.input_count
+        session.rounds += 1
+        status = {
+            "SUCCEEDED": Status.NEEDS_REPLAN,
+            "ABORTED": Status.ABORTED,
+            "BLOCKED": Status.BLOCKED,
+            "FAILED": Status.NEEDS_REPLAN,
+        }[report.status]
+        reason = report.reason
+        if (
+            request.family == "menu_assess"
+            and report.assessment != "OPEN"
+            and report.status == "SUCCEEDED"
+        ):
+            status = Status.BLOCKED
+            reason = f"requested menu is not uniquely open: {report.assessment}"
+        elif report.status == "SUCCEEDED":
+            reason = "registered effect verified; task goal requires separate fresh ASSESS"
+        session.blocker = {
+            "kind": "OPERATION_RESULT",
+            "observed": report.model_dump(mode="json"),
+            "resume_when": "new verified local state or separate ASSESS",
+        }
+        result = self._finish(session, status, reason)
+        self._record(session, row)
+        return result
 
     def _parse(self, frame, row=None):
         identity = getattr(self.perception, "cache_identity", None)
@@ -398,6 +653,11 @@ class SessionRuntime:
                 a for a in candidates if a.operation == session.contract.visual_intent.operation
             )
         row["clef_candidate_count"] = len(candidates)
+        row["candidate_diagnostics"] = (
+            dict(self.builder.metrics)
+            if route.mode == "STRUCTURED"
+            else {"applicability": "NOT_APPLICABLE", "reason": "no structured candidates built"}
+        )
         if route.semantic_targets and {a.target for a in candidates} != set(route.semantic_targets):
             raise GroundingUncertain("semantic targets exceed the bounded action budget")
 
@@ -498,6 +758,8 @@ class SessionRuntime:
             last_effect["pending"] = False
         try:
             self._phase(session, "Starting")
+            if session.contract.operation is not None:
+                return self._execute_operation(session)
             while session.rounds < session.contract.max_steps:
                 if session.cancelled.is_set():
                     return self._finish(session, Status.ABORTED, "abort requested")
@@ -538,6 +800,7 @@ class SessionRuntime:
                     )
                 row.update(
                     confidence=decision.confidence,
+                    decision_diagnostics=decision.diagnostics,
                     progress=decision.progress,
                     decision_mode=decision.mode,
                     mode_confidence=decision.mode_confidence,

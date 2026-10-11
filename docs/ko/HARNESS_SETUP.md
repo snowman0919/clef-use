@@ -1,5 +1,8 @@
 # Harness 설정
 
+MCP와 Agent Skills를 함께 관리하려면 [에이전트 설정 안내](AGENT_GUIDE.md)를 사용하세요.
+아래의 기존 `install-mcp` 명령은 통신 연결만 설정합니다.
+
 설치기는 다른 서버와 주석을 보존하고 비공개 백업을 만들며 반복 실행 시 중복되지 않습니다. 다른 기존 clef-use 항목은 충돌로 보고하고 덮어쓰지 않습니다. --dry-run으로 미리 확인하고 비표준 경로에는 --path를 사용하세요. 절대 실행 파일 경로를 지정하고 harness를 다시 시작해 다섯 도구를 확인하세요. Windows에서 CMD 래퍼를 실행하지 못하는 harness는 활성 버전의 Scripts/clef-use.exe를 지정하고 업데이트 후 다시 등록하세요.
 
 ```sh

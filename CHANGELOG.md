@@ -2,11 +2,21 @@
 
 ## Unreleased
 
-- Record pre-pruning candidate coverage diagnostics without relaxing confidence
-  gates; distinguish singleton/uniform distributions and numeric false completions.
-
+- Bundle three portable Agent Skills with actual schema/capability discovery,
+  managed harness enrollment, release contract hashes, conflict preservation,
+  and distinct discovery/load/invoke verification stages.
 - Add typed keyboard, literal text, three-button pointer and modifier gestures
   with bounded ownership and independent native abort recovery.
+- Validate finite UI transitions only after an acknowledged trigger; retain
+  exact modal, loading, unit and coordinate-frame guards before input. Preserve
+  owned-modal cleanup after abort and prevent replacement during pending recovery.
+- Add provenance-aware State Compiler and six guarded Blender operation families.
+  Missing hidden application state blocks execution. Native API-assisted fixtures
+  verify effects; they do not establish pixels-only production support.
+- Record pre-pruning candidate coverage diagnostics without relaxing confidence
+  gates; distinguish singleton/uniform distributions and numeric false completions.
+- Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
+  full harness task success or public release is claimed for this candidate.
 
 ## 0.1.29
 
