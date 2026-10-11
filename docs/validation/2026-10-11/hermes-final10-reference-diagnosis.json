@@ -1,0 +1,92 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL10",
+  "model_reruns": 0,
+  "scope": "Native linked-reference contract diagnosis after retained natural trigger FAIL",
+  "observed_wrong_call": {
+    "name": "clef-use/references/API_BASELINE.md"
+  },
+  "observed_error": "Skill 'clef-use/references/API_BASELINE.md' not found.",
+  "native_contract": {
+    "name": "owning skill identifier",
+    "file_path": "relative linked file within that skill",
+    "model_visible_tool_schema_described_file_path": true,
+    "model_visible_result": {
+      "chars": 5502,
+      "complete_core_body": true,
+      "linked_files": {
+        "references": [
+          "references/API_BASELINE.md",
+          "references/LIVE_API.md"
+        ]
+      },
+      "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+      "truncated": false
+    }
+  },
+  "native_correct_call_probe": {
+    "model_requests": 0,
+    "reads": [
+      {
+        "skill": "clef-use",
+        "file_path": "references/API_BASELINE.md",
+        "success": true,
+        "full_file_content_matches": true,
+        "file_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "result_field_names": [
+          "success",
+          "name",
+          "file",
+          "content",
+          "file_type",
+          "_source_path"
+        ]
+      },
+      {
+        "skill": "clef-use",
+        "file_path": "references/LIVE_API.md",
+        "success": true,
+        "full_file_content_matches": true,
+        "file_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "result_field_names": [
+          "success",
+          "name",
+          "file",
+          "content",
+          "file_type",
+          "_source_path"
+        ]
+      }
+    ]
+  },
+  "packaging": "Both reference files exist in FINAL10 and managed profile with identical hashes; not a missing-file/package-registration defect",
+  "source_analysis": {
+    "native_skill_lookup": "Hermes tools/skills_tool.py:550-592 locates name as owning skill before serving file_path",
+    "guide_link": "agent-skills/clef-use/SKILL.md:24-28 uses valid relative Markdown links, without native-reader call mapping",
+    "blender_routing": "agent-skills/clef-use/SKILL.md:51-53 places Blender routing beside text/input guidance; Blender guide description focuses editing/selection/transforms/gestures/materials/rig inspection"
+  },
+  "conclusion": "Actual model used the wrong native linked-file call despite correct schema and full result usage hint. No runtime or package defect established. Natural missing Blender guide is separate actual failure.",
+  "proposals": [
+    {
+      "classification": "PROPOSED",
+      "file": "agent-skills/clef-use/SKILL.md",
+      "line": 24,
+      "change": "Clarify native skill-reader reference semantics: keep owning skill name and pass relative path via its linked-file parameter; for Hermes skill_view(name=\"clef-use\", file_path=\"references/API_BASELINE.md\").",
+      "limit": "May improve instruction clarity; not proved to correct model behavior. Preserve prior FAIL; new predeclared actual check required."
+    },
+    {
+      "classification": "PROPOSED",
+      "file": "agent-skills/clef-use-blender/SKILL.md",
+      "line": 3,
+      "change": "Include read-only Blender GUI state/menu assessment in discovery description; move matching core Blender-routing instruction into Discover before acting.",
+      "limit": "Description/routing mismatch is an inference from observed selection behavior; not an isolated causal proof."
+    }
+  ],
+  "no_additional_model_requests": true,
+  "no_repository_writes": true,
+  "cleanup_auth_metadata_absent": true,
+  "native_probe_file": {
+    "basename": "native-reference-probe.json",
+    "sha256": "195153722a17ece06f66489d7a7f5061e2756b33b9e52fe53cb2a0a2ed870b79"
+  }
+}

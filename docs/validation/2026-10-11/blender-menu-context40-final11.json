@@ -1,0 +1,300 @@
+{
+  "kind": "ACTUAL_INSTALLED_FINAL11_CONTEXT40_CANONICAL_MENU_ATTEMPTS",
+  "status": "OBSERVED_RUNTIME_FAILURE",
+  "scheduled": 15,
+  "executed": 3,
+  "native_runtime_errors": 3,
+  "not_run": 12,
+  "omitted_attempts": 0,
+  "stop_authority": "ROOT requested stop scheduling after current in-flight request completed because systemic CUDA/NVML allocator error",
+  "original_declared_matrix_retained": true,
+  "no_retries_no_threshold_changes": true,
+  "software": {
+    "runtime": "0.1.30",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "installed_packaged_files_verified": 61,
+    "router_sha256": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+    "same_h2_worker_sha256": "ce6b90a0686ee5d9896f9206063efa2977fce253304c7f456dfc7738af2699ef",
+    "same_h2_config_sha256": "62fffb9c5258f2f86ddac6f68abf7f954edcbaf605e667392e2d151df1af0659",
+    "contract_sha256": "0f3b40cc1b6cf8d9486193da4fc7f8f6c820b9b6e261a2f168b62b796172985c",
+    "decision_model": "Cloudflare/clef-flash",
+    "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "quantization": "4bit"
+  },
+  "actual_groundtruth": "Root visually approved three representative native factory Blender screens; all three executed runtime rasters match previous FINAL10 pixels exactly; before/after signatures retained privately",
+  "execution_coverage": {
+    "scheduled": 15,
+    "executed": 3,
+    "valid_model_replies": 0,
+    "remaining_not_run": 12
+  },
+  "whole_goal_file_menu_success": "NOT_ESTABLISHED; executed positive trial errors, four planned positives NOT_RUN",
+  "native_assess_inputs": 0,
+  "setup_event_calibration": 35,
+  "timing_claim": "Descriptive failed request timings only; no p95, speedup or100ms gate claim",
+  "resource_observations": {
+    "nvml_query_exit_code": 18,
+    "nvml_error": "",
+    "kernel_driver_version": "NVRM version: NVIDIA UNIX x86_64 Kernel Module  595.84  Wed Jun 10 21:13:57 UTC 2026",
+    "gpu_process_memory": "UNAVAILABLE: NVML query failed; no attribution of memory exhaustion inferred from masked allocator assertion"
+  },
+  "resource_cause": "Memory exhaustion is not proven: NVML masks allocator failure and per-process GPU memory unavailable; drivers/config/model/production scene unchanged",
+  "cleanup": {
+    "all_fixture_children_exited": true,
+    "all_controllers_exited": true,
+    "private_xsocket_removed": true
+  },
+  "production_scene_touched": false,
+  "normalization": {
+    "basis": "Original reports preserved report-before-stop.json/report-after-original-finally.json; in-flight actual worker report incorporated, untouched12matrix rows explicitly NOT_RUN",
+    "controller_exit_code": 130,
+    "stop_method": "SIGSTOP scheduling controller only; after in-flight actual report, SIGINT+SIGCONT invoked original finallycleanup",
+    "no_additional_model_requests": true
+  },
+  "matrix": [
+    {
+      "index": 0,
+      "case": "MENU_OPEN",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_status": "ERROR",
+      "runtime_ms": 96848.7048529787,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "ea6cefce3874cb454d4ac739dd26f7ff7d6d2d95a18670347091537c5b3f9d6e",
+      "offline_actual_packet_tokens": 7851,
+      "backend_error": {
+        "code": "RuntimeError",
+        "message": "NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at \"/pytorch/c10/cuda/CUDACachingAllocator.cpp\":1135, please report a bug to PyTorch. ",
+        "frames": [
+          {
+            "file": "module.py",
+            "function": "_call_impl",
+            "line": 1790
+          },
+          {
+            "file": "hooks.py",
+            "function": "new_forward",
+            "line": 192
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "forward",
+            "line": 535
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "torch_chunk_gated_delta_rule",
+            "line": 297
+          }
+        ]
+      },
+      "parser_ms": 72840.16376396175,
+      "decision_ms": 23999.171372968704,
+      "worker_warm_before": false,
+      "decision_reply": "NOT_PRODUCED: actual model forward failed"
+    },
+    {
+      "index": 1,
+      "case": "EDIT_WRONG",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_status": "ERROR",
+      "runtime_ms": 60588.84618896991,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "e5f4bf915ac67495b67e78980157091cbdeb1a5c9515f2fd8a96374d347ad50f",
+      "offline_actual_packet_tokens": 8012,
+      "backend_error": {
+        "code": "RuntimeError",
+        "message": "NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at \"/pytorch/c10/cuda/CUDACachingAllocator.cpp\":1135, please report a bug to PyTorch. ",
+        "frames": [
+          {
+            "file": "module.py",
+            "function": "_call_impl",
+            "line": 1790
+          },
+          {
+            "file": "hooks.py",
+            "function": "new_forward",
+            "line": 192
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "forward",
+            "line": 535
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "torch_chunk_gated_delta_rule",
+            "line": 297
+          }
+        ]
+      },
+      "parser_ms": 36606.92744189873,
+      "decision_ms": 23971.42614191398,
+      "worker_warm_before": false,
+      "decision_reply": "NOT_PRODUCED: actual model forward failed"
+    },
+    {
+      "index": 2,
+      "case": "ABSENT",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_status": "ERROR",
+      "runtime_ms": 74790.82364600617,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "dc34a947de7f5822a38b225572e2dfffdf08d8eb81966c2f341eea4ddc972fbd",
+      "offline_actual_packet_tokens": 7878,
+      "backend_error": {
+        "code": "RuntimeError",
+        "message": "NVML_SUCCESS == DriverAPI::get()->nvmlInit_v2_() INTERNAL ASSERT FAILED at \"/pytorch/c10/cuda/CUDACachingAllocator.cpp\":1135, please report a bug to PyTorch. ",
+        "frames": [
+          {
+            "file": "module.py",
+            "function": "_call_impl",
+            "line": 1790
+          },
+          {
+            "file": "hooks.py",
+            "function": "new_forward",
+            "line": 192
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "forward",
+            "line": 535
+          },
+          {
+            "file": "modeling_qwen3_5.py",
+            "function": "torch_chunk_gated_delta_rule",
+            "line": 297
+          }
+        ]
+      },
+      "parser_ms": 51049.93690003175,
+      "decision_ms": 23733.5328750778,
+      "worker_warm_before": false,
+      "decision_reply": "NOT_PRODUCED: actual model forward failed"
+    },
+    {
+      "index": 3,
+      "case": "MENU_OPEN",
+      "repeat": 1,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 4,
+      "case": "EDIT_WRONG",
+      "repeat": 1,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 5,
+      "case": "ABSENT",
+      "repeat": 1,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 6,
+      "case": "MENU_OPEN",
+      "repeat": 2,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 7,
+      "case": "EDIT_WRONG",
+      "repeat": 2,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 8,
+      "case": "ABSENT",
+      "repeat": 2,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 9,
+      "case": "MENU_OPEN",
+      "repeat": 3,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 10,
+      "case": "EDIT_WRONG",
+      "repeat": 3,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 11,
+      "case": "ABSENT",
+      "repeat": 3,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 12,
+      "case": "MENU_OPEN",
+      "repeat": 4,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 13,
+      "case": "EDIT_WRONG",
+      "repeat": 4,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    },
+    {
+      "index": 14,
+      "case": "ABSENT",
+      "repeat": 4,
+      "status": "NOT_RUN",
+      "variant": "clef",
+      "reason": "ROOT stopped further scheduling after actual reproducible canonical CUDA/NVML allocator failure; no retries or threshold/model changes"
+    }
+  ],
+  "private_policy": "No screenshots, raw parser labels/scene data, base64 packets, model cache paths, credentials or personal data",
+  "proof_sha256": {
+    "private_report": "b31566afc40a4f11509c5f5541313d9fbe4c31fb26f241640816258b9ee409ce",
+    "original_finally_report": "0e5950455e7a62372b57a51db2b47a1f2189be101202304f01c4b03b96875cfa",
+    "predeclaration": "ec543c5063cbb3d90e15c7a18911bf064a6c03669d5a3c1dac05647df333215c"
+  }
+}

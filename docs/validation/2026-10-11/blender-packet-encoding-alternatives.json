@@ -1,0 +1,262 @@
+{
+  "kind": "PURE_OFFLINE_CANONICAL_ENCODING_ANALYSIS",
+  "source": "Existing three H2 observed captures, unchanged ranked40objects; zero additional model calls/weights loaded/source changes",
+  "model_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+  "token_guard": 8192,
+  "text_bytes_guard": 32768,
+  "lossless_scope": "Shared null/false defaults and columns reconstruct exact original40object values/order including labels/bboxes/actions/nullunknowns",
+  "derived_pixel_scope": {
+    "geometry_policy": "Decision-only outward raster-pixel envelopes, floorleft/top and ceilright/bottom, x scaled by width and y byheight; original rawnormalized UIObjects/executiongeometry never mutated",
+    "raw_geometry_lossless": false,
+    "maximum_declared_outward_error_each_side_pixels": 1,
+    "all_non_bbox_factvalues_preserved": true,
+    "actual_captured_aspects": [
+      [
+        1280,
+        900
+      ]
+    ],
+    "additional_mathematical_boundary_checks": [
+      {
+        "image_size": [
+          1280,
+          900
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          1280,
+          900
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          1280,
+          900
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          900,
+          1280
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          900,
+          1280
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          900,
+          1280
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          2048,
+          512
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          2048,
+          512
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          2048,
+          512
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          512,
+          2048
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          512,
+          2048
+        ],
+        "axis_mapping_enclosure_pass": true
+      },
+      {
+        "image_size": [
+          512,
+          2048
+        ],
+        "axis_mapping_enclosure_pass": true
+      }
+    ]
+  },
+  "cases": [
+    {
+      "case": "MENU_OPEN",
+      "object_count": 40,
+      "lossless_roundtrip_exact": true,
+      "lossless_variants": {
+        "full40": {
+          "encoded_tokens": 7850,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 17805,
+          "exact_wire_bytes": 507654,
+          "packet_sha256": "5bff6f39eccb224e05dd3f38beb7581577da4c2db0dcacb30faa6931755ef386"
+        },
+        "common_null_false_defaults": {
+          "encoded_tokens": 6747,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 13027,
+          "exact_wire_bytes": 502876,
+          "packet_sha256": "ac3829834da2d6c54f4a2fd37ddf96ed197c7912bfed9eaaa97c9c5988992019"
+        },
+        "columns_and_bbox_header": {
+          "encoded_tokens": 6202,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 11786,
+          "exact_wire_bytes": 501635,
+          "packet_sha256": "402a9d729f48c96b96699b906d429cf3b276da236de5b3b26c514c17091bf3f5"
+        }
+      },
+      "derived_pixel_variants": {
+        "full40": {
+          "encoded_tokens": 7850,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 17805,
+          "packet_sha256": "5bff6f39eccb224e05dd3f38beb7581577da4c2db0dcacb30faa6931755ef386"
+        },
+        "pixel_envelope": {
+          "encoded_tokens": 5387,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 15572,
+          "packet_sha256": "0e288add3505c4fe3379f7e511e374683ed66570ad620e1b2f465a6871150585"
+        },
+        "shared_defaults_pixel_envelope": {
+          "encoded_tokens": 4277,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 10755,
+          "packet_sha256": "856002719fce4294561ca118405d40f7e373fa8b6cf2e43d6be155f0aa9653e2"
+        }
+      },
+      "maximum_actual_outward_side_error_pixels": 0.9999999999999716,
+      "all160side_enclosures_pass": true,
+      "all_nonbbox_values_order_preserved": true
+    },
+    {
+      "case": "EDIT_WRONG",
+      "object_count": 40,
+      "lossless_roundtrip_exact": true,
+      "lossless_variants": {
+        "full40": {
+          "encoded_tokens": 8011,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 18301,
+          "exact_wire_bytes": 514950,
+          "packet_sha256": "fddca76075dd7dbc943a5cdf143e6cc91733a8ae24137f7a980433008ae65d01"
+        },
+        "common_null_false_defaults": {
+          "encoded_tokens": 6908,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 13523,
+          "exact_wire_bytes": 510172,
+          "packet_sha256": "3e5bf7ef9b1805b272a108729899d6804bf124086bcf9893f6b4fff718104985"
+        },
+        "columns_and_bbox_header": {
+          "encoded_tokens": 6369,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 12282,
+          "exact_wire_bytes": 508931,
+          "packet_sha256": "12c8450e86daae6a1f37b78752b96983c0141565c2927a6f7cfae679b13b3be2"
+        }
+      },
+      "derived_pixel_variants": {
+        "full40": {
+          "encoded_tokens": 8011,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 18301,
+          "packet_sha256": "fddca76075dd7dbc943a5cdf143e6cc91733a8ae24137f7a980433008ae65d01"
+        },
+        "pixel_envelope": {
+          "encoded_tokens": 5410,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 15930,
+          "packet_sha256": "ada221c1c8202a0ef9f0414a771b88ea52e3d7764aee47c2c0200373fde84e04"
+        },
+        "shared_defaults_pixel_envelope": {
+          "encoded_tokens": 4300,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 11113,
+          "packet_sha256": "6522d940f7ff3abe750e5fe1cdf65e1685c9c717933964294bcc0e94cb9ff434"
+        }
+      },
+      "maximum_actual_outward_side_error_pixels": 0.985076904296875,
+      "all160side_enclosures_pass": true,
+      "all_nonbbox_values_order_preserved": true
+    },
+    {
+      "case": "ABSENT",
+      "object_count": 40,
+      "lossless_roundtrip_exact": true,
+      "lossless_variants": {
+        "full40": {
+          "encoded_tokens": 7883,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 17967,
+          "exact_wire_bytes": 522308,
+          "packet_sha256": "f2ef909e99be76509ef6697f3d417b98b69351492c8715937d70a41e7ad68f5f"
+        },
+        "common_null_false_defaults": {
+          "encoded_tokens": 6780,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 13189,
+          "exact_wire_bytes": 517530,
+          "packet_sha256": "7b20f7fd058505940ddcaa0f83509cd8155d2f6b13b86e603143deeb88e7dea7"
+        },
+        "columns_and_bbox_header": {
+          "encoded_tokens": 6239,
+          "within8192_no_clipping_guard": true,
+          "state_questions_utf8_bytes": 11948,
+          "exact_wire_bytes": 516289,
+          "packet_sha256": "5c9e3384ac314ec77e20a2da57fd5133db71867da568b65a56ac10c8ece3873d"
+        }
+      },
+      "derived_pixel_variants": {
+        "full40": {
+          "encoded_tokens": 7883,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 17967,
+          "packet_sha256": "f2ef909e99be76509ef6697f3d417b98b69351492c8715937d70a41e7ad68f5f"
+        },
+        "pixel_envelope": {
+          "encoded_tokens": 5358,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 15672,
+          "packet_sha256": "02f480038a49cee7ae766b4635a89c7d25a1ae8796635b59a4c04bd31ba1dd37"
+        },
+        "shared_defaults_pixel_envelope": {
+          "encoded_tokens": 4248,
+          "no_clipping8192_guard": true,
+          "state_questions_utf8_bytes": 10855,
+          "packet_sha256": "80b4080617b4d8e874bd58e0e834ae9b9f7ab53c3fee3609a0ebd01fb02bc0b7"
+        }
+      },
+      "maximum_actual_outward_side_error_pixels": 0.9921722412109375,
+      "all160side_enclosures_pass": true,
+      "all_nonbbox_values_order_preserved": true
+    }
+  ],
+  "limits": "Encoding size alone proves neither GPU viability nor model quality; pixel geometry is explicitly derived at <=1rasterpixel outward per side, and must remain separate from raw normalized execution geometry"
+}

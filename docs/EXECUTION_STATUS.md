@@ -2,8 +2,11 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest frozen implementation: `65d5a87` on `codex/reactive-agent-contracts`.
-Published evidence HEAD before the following measurements: `26d9252`.
+Latest frozen implementation: `1e71144` on `codex/reactive-agent-contracts`.
+Published evidence HEAD before the following measurements: `8e1eedf`.
+Latest local candidate: FINAL12, built from the current changes; installed module
+hashes and its **783 passed / 34 skipped** source regression are recorded in
+[final12-install.json](validation/2026-10-11/final12-install.json).
 This is partial execution evidence, not specification completion or release approval.
 Machine-readable, sanitized evidence and artifact hashes: [summary.json](validation/2026-10-11/summary.json).
 Latest installed input/profile candidate: [final10.json](validation/2026-10-11/final10.json).
@@ -339,6 +342,20 @@ completion, status and underlying cause were not captured. No retry, seeded cach
 provider substitution or rescoring of the earlier negative failure is used. See
 [omp-final10-native-generated.json](validation/2026-10-11/omp-final10-native-generated.json).
 
+**OBSERVED / OMP profile and readiness correction:** the earlier isolated runner
+omitted the actual configured `smol` role and selected a priority fallback. The
+corrected official read-only settings reader preserves both configured roles.
+Native bootstrap returned with all three original description previews. Its
+three background description completions returned stop and three phase fetch
+deliveries returned HTTP 200; two descriptions were accepted, one exceeded the
+native compressed-description limits. Phase fetches are not guaranteed model-only
+request counts. The declared driver required all three cache entries and stopped
+before primary turns. Actual OMP does not impose that gate: it keeps the original
+preview and catches the background warning. These primary cases remain
+**NOT_RUN due to driver readiness policy**, not a native fatal bootstrap error.
+No cache was seeded and all prior results remain. See
+[configured-profile evidence](validation/2026-10-11/omp-native-profile-readonly.json).
+
 **OBSERVED / FINAL10 Codex:** three fresh authenticated native-daemon model sessions
 passed explicit full-body load/capability invocation, natural three-guide loading
 and capability invocation, and the non-GUI negative with no guide/tool calls.
@@ -348,6 +365,89 @@ session was started. Ephemeral sessions were unsubscribed. This is distinct from
 the current desktop chat's transport and requires no authentication repair. See
 [codex-final10-readonly.json](validation/2026-10-11/codex-final10-readonly.json).
 
+**OBSERVED / FINAL10 Hermes native generated prompt:** explicit core-body loading
+and capabilities passed. The natural Blender case completed but loaded only core;
+it also named a reference path as a separate skill, which the native reader refused.
+The batch stopped without retry and the negative case remains **NOT_RUN**. Correct
+native linked-file reads return exact packaged bytes; no missing-file or runtime
+bug was established. FINAL11 clarifies owning-skill/reference arguments and includes
+read-only Blender assessment in discovery. One fresh native batch passed all three
+read-only cases: explicit core/reference/capabilities, natural Blender/core/capabilities,
+and negative with zero tool requests. Eight actual primary API calls were made;
+there was no retry, GUI/session creation or provider substitution. Earlier failures
+remain recorded. This is not GUI task verification or a reliability estimate.
+
+**OBSERVED / FINAL11 Codex:** fresh explicit, natural Blender and non-GUI negative
+turns all passed through the existing authenticated native daemon. Actual full
+guide and linked-file outputs matched the frozen installed bytes; capabilities
+matched the selected installed schema. The negative turn requested no tools.
+All ephemeral threads were unsubscribed. This is read-only verification, with
+GUI `TASK_VERIFIED` still **NOT_RUN**. Both Codex and Hermes FINAL11 guide bytes
+are unchanged in FINAL12; their earlier results remain attributed to FINAL11.
+
+**OBSERVED / actual menu context boundary:** three fixed FINAL10 canonical ASSESS
+captures retained the full parser result, exact serialized packet and raw answer.
+The File popup's Open Recent, Save Copy and External Data evidence was present in
+the parser but absent from all eight selected objects. Edit's distinguishing rows
+were likewise omitted. Keeping the same ranking while using the existing 40-object
+total budget retains all observed popup objects; cached native encoding measured
+7850/8011/7883 tokens, below the unchanged 8192 limit. Edit has only 181 tokens of
+headroom. The supplied full image remains unchanged, so information loss does not
+alone establish the cause of low completion confidence. FINAL11 uses unreserved
+target slots for evidence, adds a failing-then-passing long-dropdown regression,
+and retains input sets and all guards. Its fixed 15-trial installed model run was
+stopped after three actual forward errors in the CUDA allocator/NVML path; all
+remaining 12 cases are **NOT_RUN**. The host reports kernel driver 595.84 versus
+NVML library 595.99, and memory queries are unavailable. OOM is not established.
+No menu quality improvement is claimed from this failing candidate.
+
+**OBSERVED / FINAL12 model packet:** the corrected packet retains the same forty
+ranked objects and every non-geometry fact. Explicit shared defaults preserve
+known false/true versus unknown values. Only model-facing boxes use outward
+integer image-pixel envelopes, with less than one pixel expansion per edge;
+original native objects and input geometry are unchanged. Actual pinned encoding
+of the three preflight packets is **4269 / 4292 / 4240 tokens**. The independent
+visual gate confirmed the same File/Edit/absent states. These encoding and
+installation checks alone do not establish live menu accuracy. The subsequent
+fixed fifteen-trial installed run returned fifteen real model answers, with
+**zero forward errors**, unchanged source and fifteen matching prior screenshots.
+File completion remained **0/5** (`NEEDS_REPLAN`); all ten Edit/absent trials
+returned `LOW_CONFIDENCE`, with zero false completions and zero native ASSESS
+inputs. This does not prove correct wrong-menu/absent classification. Original
+menu acceptance remains **FAIL**; no threshold, provider, model or retry changed.
+See [actual FINAL12 menu evidence](validation/2026-10-11/blender-menu-context-pixel-final12.json).
+
+**OBSERVED / installed compatibility recovery:** the actual FINAL12 CLI refused
+a genuine pinned 0.1.29 executable and all three stale CI guide bindings before
+harness execution. Refresh retained the approved immutable older launcher and
+refused its incompatible guide contract. Explicit rebinding also preserved the
+registration as a conflict. Native managed removal followed by explicit current
+launcher enrollment restored matching contracts across all three harnesses,
+preserving original user bytes. Four probe-assumption failures are retained;
+no product guard was relaxed. This is isolated CLI evidence, not a complete
+unsupported-operation or active-session update matrix. See
+[compatibility evidence](validation/2026-10-11/installed-compatibility-final12.json).
+
+**OBSERVED / FINAL11 local installation:** first installation and repeat returned
+`INSTALLED`/`CURRENT`; all three guides in all three selected harnesses returned
+`INSTALLED`/`UNCHANGED`. All 26 HOME file bytes and original CRLF comments were
+preserved; 61 installed Python files exactly match the frozen source. Full source
+regression: **781 passed, 34 skipped, 41 warnings, 45.03 s**; Ruff and generated
+contract checks passed. Archive SHA-256 is
+`2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899`.
+
+**OBSERVED / Linux fresh-install crashes:** the actual immutable CI installer was
+terminated with `os._exit(87)` at eleven declared staging/activation boundaries.
+Every fresh installation resumed, retained original user bytes and launched the
+complete native 0.1.30 runtime. The final post-switch crash resumed as `CURRENT`;
+earlier boundaries resumed as `INSTALLED`. No installer function was substituted.
+The genuine pinned 0.1.29 to immutable CI 0.1.30 update also passed all eleven
+declared crash/resume boundaries. Before pointer activation the old native 0.1.29
+runtime remained usable; after activation the complete 0.1.30 runtime launched.
+Every case retained the previous environment and original user bytes. Windows
+crash recovery remains **NOT_RUN**, so INSTALL-07 stays partial. See
+[update crash evidence](validation/2026-10-11/linux-installer-update-crash-phases-ci26d9252.json).
+
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
 native, harness, installed or public-release status from another evidence level.
@@ -355,7 +455,7 @@ native, harness, installed or public-release status from another evidence level.
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
-| M1 discovery/integration | IN_PROGRESS | Codex FINAL10 read-only stages pass; OMP normal native bootstrap stopped before primary model; GUI task coverage remains. |
+| M1 discovery/integration | IN_PROGRESS | Codex and Hermes FINAL11 read-only stages pass; OMP normal native bootstrap stopped before primary model; GUI task coverage remains. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |

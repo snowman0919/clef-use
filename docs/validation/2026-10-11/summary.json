@@ -1892,12 +1892,96 @@
       "artifact": "docs/validation/2026-10-11/linux-installer-boundary-ci26d9252.json",
       "sha256": "532384f17cbca41f7b3ae735768bd71158754baedb4905fb3d8be23ebd102c09",
       "scope": "Actualimmutable install.sh checksum/traversal/absolute/backslash/symlink/duplicate/offline7/7refused beforeactivation;oldwrapper/current/HOMEbytes/versionpreserved"
+    },
+    "hermes_actual_model_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final10-readonly.json",
+      "sha256": "a18a441f7e6f2ca45c1a2068d88a11f186fb253bacffd3af7bfc81b2073ce549",
+      "scope": "Native explicitPASS, naturalBlender-guideFAIL, negativeNOT_RUN afterstop; no GUI/retry"
+    },
+    "hermes_reference_diagnosis_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final10-reference-diagnosis.json",
+      "sha256": "0188667711bdbd800d0751001c3ea9c961e9386eb418205e794a71d92a9de862",
+      "scope": "Actual correct native linked-file reader succeeds; missing file/package bug not established"
+    },
+    "linux_installer_crash_phases": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/linux-installer-crash-phases-ci26d9252.json",
+      "sha256": "6fedc79696c4b52e365a9f1d49986df077e92df2dccd6242a54a9fbe23e6e33d",
+      "scope": "Actual frozen installer freshLinux11crash/resumeboundariesPASS; version-update/WindowscrashmatrixNOT_RUN"
+    },
+    "final11_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final11-install.json",
+      "sha256": "d4c4fd663512da4c8fd34665a4bec75fecb220d5a09a581236975df1ed91108d",
+      "scope": "Fresh actual localrelease install/repeat/all3guides3harness/61sourcefilesPASS; fullregression781passed34skipped45.03s"
+    },
+    "blender_menu_context_h2_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-menu-context-h2-final10.json",
+      "sha256": "cf0899afa28e85f09d42ba640a7340cda776a2121ceda5445a750c65b775f359",
+      "scope": "Actual3canonicalinput-free captures show popupcorroboratingtextlost8hints; same-ranking40 recovers allobservedpopupobjects, exactencodedbudgets7850/8011/7883; causalqualityeffectnotestablished"
+    },
+    "hermes_actual_model_final11": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final11-readonly.json",
+      "sha256": "b9b09daf8a6b09efab561daf3149c46d17b8aff0e7a8a2a0acafcb44225750f2",
+      "scope": "Actualnativegeneratedprompt3/3readonlyPASS; newcore/Blenderbodies+correctreferences/caps;negative0tools; allFINAL10failuresretained;GUI TASK_VERIFIED NOT_RUN"
+    },
+    "codex_actual_model_final11": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/codex-final11-readonly.json",
+      "sha256": "e6b2e73360e25ddc3e40636239fc178b3ac8734a3d27208dbc823b16f148af85",
+      "scope": "Nativeauthenticateddaemon3/3readonlyPASS; exactfullguide/referencebytes/caps;negative0tools;GUI TASK_VERIFIED NOT_RUN"
+    },
+    "blender_menu_context40_final11": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-menu-context40-final11.json",
+      "sha256": "3ba3f8354837362818c32b45d0582bfcdde2bdb18827cbbe992d667776be449e",
+      "scope": "Fixed15stoppedafter3actualCUDA/NVMLforwardERROR;remaining12NOT_RUN/0OSinputs;all3pixelsmatchFINAL10; OOMnotestablished"
+    },
+    "blender_packet_encoding_alternatives": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-packet-encoding-alternatives.json",
+      "sha256": "62908377795e053ec547f2826199dd3005151d44a3b92381432876d2ac856999",
+      "scope": "PURE_OFFLINE nativeencoder comparisons, no modelquality/VRAMproof; retainedall40nongeometryfacts; derivedoutwardpixelsnotlosslessrawgeometry"
+    },
+    "final12_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final12-install.json",
+      "sha256": "82bd3dec69e706515701462a947cd8d69061c6efa1c20fa04cf807aa49487209",
+      "scope": "Fresh local FINAL12 archive install/repeat; all three guides in three harnesses; 61 source files exact; 26 HOME bytes preserved; source regression 783 passed, 34 skipped. Model quality is a separate gate."
+    },
+    "linux_installer_update_crash_phases": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/linux-installer-update-crash-phases-ci26d9252.json",
+      "sha256": "9e373f441527f053449b74ff01b31dbb0f69612535d94b7926f87086d7042430",
+      "scope": "Actual genuine pinned 0.1.29 to immutable CI 0.1.30 Linux update: eleven declared crash/resume boundaries pass; previous runtime and user bytes preserved. Windows crash matrix NOT_RUN."
+    },
+    "blender_menu_context_pixel_final12": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-menu-context-pixel-final12.json",
+      "sha256": "2736d73ef587ed8f852dc06a14c425d803b20d1e99286707b2e023d850a21e95",
+      "scope": "All 15 actual canonical installed model trials executed with unchanged guards, 15 model replies, zero forward errors/native ASSESS inputs. File completion 0/5 remains FAIL; negative false completion 0/10 is not correct menu classification proof. All pixels match previous FINAL10 captures."
+    },
+    "installed_compatibility_final12": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/installed-compatibility-final12.json",
+      "sha256": "5dd6e6e0b3ed7f158975d6f4bbf4c9d3b9d65e1dc2a0701ef28e153b8df20114",
+      "scope": "Actual installed old-runtime refusal, three real stale-guide mismatch refusals before harness execution, managed launcher preservation, explicit safe removal/re-enrollment to matching current runtime. Isolated native CLI only; no model, GUI or unsupported-operation matrix."
+    },
+    "omp_actual_model_configured_profile": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-profile-readonly.json",
+      "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316",
+      "scope": "Native bootstrap returned with all three original skill previews under actual configured default/smol. Three background completions/fetch deliveries returned 200; two accepted cache entries and one INVALID_COMPRESSION. Primary NOT_RUN due artificial driver readiness gate, not native fatal behavior. Prior wrong-role and controlled failures retained."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
     "windows": "Corrected immutableCI26d9252 managedinstallation/lifecyclePASS; nativeCodexisolatedUSERdiscoveryFAIL,PROJECT3guideDISCOVEREDPASS; nativeHermes/OMPexecutablesunavailable andmodelGUIstagesNOT_RUN. Earliernativeforeground-restorationFAIL andoldnewlineFAILpreserved; formalIME andall-platformGUIgateNOT_RUN.",
-    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS. OMP FINAL6 current native default positive stages PASS; completed non-GUI negative over-trigger FAIL is recorded separately and does not certify GUI tasks.",
+    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. FINAL11 Codex and Hermes read-only explicit/natural/negative batches PASS. Hermes FINAL10 natural failure/negative NOT_RUN retained. OMP corrected configured native bootstrap returned with all three previews; primary NOT_RUN due driver all-cache gate, while native background compression warning is nonfatal. Earlier wrong-route and controlled negative over-trigger failure retained.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
     "public_release": "Corrected existingCI38132441002 all15platform/Pythonbuilds+assemblySUCCESS; immutableassembledLinuxinstall andnativeWindowsmanagedlifecycleverified. BranchdeploySKIPPEDbyexistingpolicy; publicupload/download/freshpublicinstallNOT_RUN."
@@ -1982,6 +2066,21 @@
     "blender-menu-clef-d1-final10.json",
     "blender-menu-setup-diagnosis-final10.json",
     "windows-installer-boundary-ci26d9252.json",
-    "linux-installer-boundary-ci26d9252.json"
+    "linux-installer-boundary-ci26d9252.json",
+    "hermes-final10-readonly.json",
+    "hermes-final10-reference-diagnosis.json",
+    "linux-installer-crash-phases-ci26d9252.json",
+    "final11-install.json",
+    "blender-menu-context-h2-final10.json",
+    "hermes-final11-readonly.json",
+    "codex-final11-readonly.json",
+    "blender-menu-context40-final11.json",
+    "blender-packet-encoding-alternatives.json",
+    "final12-install.json",
+    "linux-installer-update-crash-phases-ci26d9252.json",
+    "blender-menu-context-pixel-final12.json",
+    "installed-compatibility-final12.json",
+    "omp-native-profile-readonly.json",
+    "omp-native-profile-predeclaration.json"
   ]
 }

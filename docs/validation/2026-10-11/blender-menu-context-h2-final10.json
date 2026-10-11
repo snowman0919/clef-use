@@ -1,0 +1,461 @@
+{
+  "kind": "ACTUAL_CANONICAL_H2_MENU_CONTEXT_DIAGNOSTIC",
+  "scope": "Separate predeclared three native canonical CLEF ASSESS calls on immutable FINAL10; completed thirty-trial comparison is unmodified",
+  "scheduled": 3,
+  "executed": 3,
+  "errors": 0,
+  "omitted_attempts": 0,
+  "runtime_status_counts": {
+    "LOW_CONFIDENCE": 3
+  },
+  "production_scene_touched": false,
+  "native_assess_inputs": 0,
+  "setup_event_calibration": 38,
+  "cleanup": {
+    "all_fixture_children_exited": true,
+    "all_controllers_exited": true,
+    "private_xsocket_removed": true
+  },
+  "software": {
+    "runtime": "0.1.30",
+    "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+    "wheel_sha256": "31f9ae0497f422ed8a849b5b0f9a85c798d9aadc984eb51be16b5246f040f0d1",
+    "verified_packaged_files": 61,
+    "contract_sha256": "0f3b40cc1b6cf8d9486193da4fc7f8f6c820b9b6e261a2f168b62b796172985c",
+    "config_sha256": "62fffb9c5258f2f86ddac6f68abf7f954edcbaf605e667392e2d151df1af0659",
+    "model": "Cloudflare/clef-flash",
+    "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "quantization": "4bit",
+    "encoder_sha256": "0e304cf7c6500e8bb59bef7e2afd2c6373f82596dfb3b57d1aa93c175e2dc3a3",
+    "current_router_method_sha256": "50681165a85bce809260390e04dee91df45641c543000015c55a554bedbc233f"
+  },
+  "hypothesis_result": {
+    "information_loss": "OBSERVED",
+    "detail": "Raw File popup corroborating labels and wrong Edit popup labels were absent from exact bounded eight-object packets; unchanged unique-anchor ranking with existing forty-total budget includes them",
+    "accuracy_improvement": "NOT_RUN; pure offline packet/encoding analysis does not prove decision accuracy",
+    "diagnostic_roi": "Manual screen-reviewed popup rectangles, solely for counting captured evidence; never provided to model/ranking/runtime",
+    "proposed_change": "Use forty minus actual targets for existing ranked hints; preserve raw objects, allowed actions, questions, source image, ranking and thresholds",
+    "token_headroom_minimum": 181,
+    "limits": "Canonical text32768-byte and8192-token whole-record refusal must remain; longer captures can refuse",
+    "performance": "No p95, speedup or100ms release claim; instrumentation and encoding-only times are descriptive"
+  },
+  "cases": [
+    {
+      "case": "MENU_OPEN",
+      "status": "EXECUTED",
+      "runtime_status": "LOW_CONFIDENCE",
+      "actual_os_inputs": 0,
+      "actual_runtime_steps": 0,
+      "runtime_ms": 97768.2899220381,
+      "decision_worker_warm_before": false,
+      "actual_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.3116
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.3779
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0103
+          },
+          "progress": {
+            "type": "score",
+            "score": 1.2208,
+            "confidence": 0.5016,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.5016,
+              "1": 0.1236,
+              "2": 0.1533,
+              "3": 0.0953,
+              "4": 0.1262
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.4482
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.3069,
+            "probabilities": {
+              "ACT": 0.2996,
+              "WAIT": 0.0457,
+              "BLOCKED": 0.1985,
+              "NEEDS_REPLAN": 0.1493,
+              "COMPLETED": 0.3069
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.031
+          }
+        },
+        "usage": {
+          "input_tokens": 2688,
+          "output_tokens": 0
+        }
+      },
+      "actual_before_after_groundtruth_verified": true,
+      "parser_object_count": 134,
+      "exact_current8_reproduced": true,
+      "manual_diagnostic_popup_counts": {
+        "raw": 20,
+        "current8": 3,
+        "proposed40": 20
+      },
+      "corroborating_public_menu_labels_in_proposed_rank40": [
+        {
+          "rank": 9,
+          "label": "Open Recent"
+        },
+        {
+          "rank": 12,
+          "label": "Save Ctrl $ Save As_ Shift Ctrl $ Save Copy_ Save Incremental Ctrl Alt $ "
+        },
+        {
+          "rank": 30,
+          "label": "External Data Clean Up "
+        }
+      ],
+      "text_bytes": {
+        "current8": 5545,
+        "proposed40": 17805,
+        "limit": 32768
+      },
+      "canonical_sdk_encoded_tokens": {
+        "case": "MENU_OPEN",
+        "old8": {
+          "input_tokens": 2688,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 13.674497953616083,
+          "matches_actual_runtime_usage": true
+        },
+        "proposed40": {
+          "input_tokens": 7850,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 11.419014073908329
+        }
+      },
+      "trace_artifacts": [
+        {
+          "sha256": "f3a85e5c08ae8c4e1e7d9626b918cc8b6bf9cf5ca81c4b23c8d97230932fbc2e",
+          "bytes": 49970,
+          "kind": "parser-objects",
+          "serialization_write_ms": 0.4611479816958308
+        },
+        {
+          "sha256": "602c08d93f50cc5d280fc9c2f29e853a8e0d637a537d61de50ad67683fbeec27",
+          "bytes": 3460,
+          "kind": "bounded-decision-context",
+          "serialization_write_ms": 0.09839003905653954
+        },
+        {
+          "sha256": "5803b745e7ef7e6564c6292c06e05618ac164bb0a9ff859191d4ce50e1089529",
+          "bytes": 495394,
+          "kind": "exact-wire-packet",
+          "serialization_write_ms": 0.8426030399277806
+        },
+        {
+          "sha256": "fddf3adaab00519e465b62096062202515e77648e2f89c51f8959ab842f70951",
+          "bytes": 887,
+          "kind": "exact-worker-reply",
+          "serialization_write_ms": 2.7633190620690584
+        }
+      ]
+    },
+    {
+      "case": "EDIT_WRONG",
+      "status": "EXECUTED",
+      "runtime_status": "LOW_CONFIDENCE",
+      "actual_os_inputs": 0,
+      "actual_runtime_steps": 0,
+      "runtime_ms": 35236.76159000024,
+      "decision_worker_warm_before": true,
+      "actual_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0356
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.1673
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0097
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4148,
+            "confidence": 0.8157,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.8157,
+              "1": 0.0583,
+              "2": 0.0564,
+              "3": 0.0347,
+              "4": 0.0349
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0405
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "BLOCKED",
+            "confidence": 0.372,
+            "probabilities": {
+              "ACT": 0.2699,
+              "WAIT": 0.0396,
+              "BLOCKED": 0.372,
+              "NEEDS_REPLAN": 0.238,
+              "COMPLETED": 0.0805
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0102
+          }
+        },
+        "usage": {
+          "input_tokens": 2685,
+          "output_tokens": 0
+        }
+      },
+      "actual_before_after_groundtruth_verified": true,
+      "parser_object_count": 135,
+      "exact_current8_reproduced": true,
+      "manual_diagnostic_popup_counts": {
+        "raw": 9,
+        "current8": 1,
+        "proposed40": 9
+      },
+      "corroborating_public_menu_labels_in_proposed_rank40": [
+        {
+          "rank": 11,
+          "label": "Undo History "
+        },
+        {
+          "rank": 26,
+          "label": "Preferences_. Ctrl "
+        }
+      ],
+      "text_bytes": {
+        "current8": 5582,
+        "proposed40": 18301,
+        "limit": 32768
+      },
+      "canonical_sdk_encoded_tokens": {
+        "case": "EDIT_WRONG",
+        "old8": {
+          "input_tokens": 2685,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 8.626049035228789,
+          "matches_actual_runtime_usage": true
+        },
+        "proposed40": {
+          "input_tokens": 8011,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 11.559133068658412
+        }
+      },
+      "trace_artifacts": [
+        {
+          "sha256": "e36dd5704e5e8f97a5c57e6eaced4b721aed1ed224b1d73e911f2fb6ab51a319",
+          "bytes": 50964,
+          "kind": "parser-objects",
+          "serialization_write_ms": 0.503509072586894
+        },
+        {
+          "sha256": "fcffcf132416254d8ff5c70ad91828568fd898a3c843139d54b5bfd9659885a8",
+          "bytes": 3497,
+          "kind": "bounded-decision-context",
+          "serialization_write_ms": 0.09442097507417202
+        },
+        {
+          "sha256": "834c411668729ba70e9dc310ff86e37df24cc03677e292492ae40ca48d0e84ea",
+          "bytes": 502231,
+          "kind": "exact-wire-packet",
+          "serialization_write_ms": 0.8860239759087563
+        },
+        {
+          "sha256": "a2154384c1197c54f5437bafb65c081c63bed5cf78378b3c7bc49b4b1698611e",
+          "bytes": 883,
+          "kind": "exact-worker-reply",
+          "serialization_write_ms": 0.12078299187123775
+        }
+      ]
+    },
+    {
+      "case": "ABSENT",
+      "status": "EXECUTED",
+      "runtime_status": "LOW_CONFIDENCE",
+      "actual_os_inputs": 0,
+      "actual_runtime_steps": 0,
+      "runtime_ms": 54189.18692297302,
+      "decision_worker_warm_before": true,
+      "actual_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0171
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.1286
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0088
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.2494,
+            "confidence": 0.8894,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.8894,
+              "1": 0.0364,
+              "2": 0.0317,
+              "3": 0.0206,
+              "4": 0.0219
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0119
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "BLOCKED",
+            "confidence": 0.3884,
+            "probabilities": {
+              "ACT": 0.2172,
+              "WAIT": 0.0506,
+              "BLOCKED": 0.3884,
+              "NEEDS_REPLAN": 0.2839,
+              "COMPLETED": 0.0599
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0077
+          }
+        },
+        "usage": {
+          "input_tokens": 2637,
+          "output_tokens": 0
+        }
+      },
+      "actual_before_after_groundtruth_verified": true,
+      "parser_object_count": 143,
+      "exact_current8_reproduced": true,
+      "manual_diagnostic_popup_counts": {
+        "raw": 0,
+        "current8": 0,
+        "proposed40": 0
+      },
+      "corroborating_public_menu_labels_in_proposed_rank40": [],
+      "text_bytes": {
+        "current8": 5491,
+        "proposed40": 17967,
+        "limit": 32768
+      },
+      "canonical_sdk_encoded_tokens": {
+        "case": "ABSENT",
+        "old8": {
+          "input_tokens": 2637,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 8.322175941430032,
+          "matches_actual_runtime_usage": true
+        },
+        "proposed40": {
+          "input_tokens": 7883,
+          "canonical_no_truncation_guard_pass": true,
+          "encoding_only_ms": 11.250270996242762
+        }
+      },
+      "trace_artifacts": [
+        {
+          "sha256": "635fa59f49d617cd0e650b53c96b94badc4a778dd91df2e691aceb4e219257ca",
+          "bytes": 53707,
+          "kind": "parser-objects",
+          "serialization_write_ms": 0.4839099710807204
+        },
+        {
+          "sha256": "578f92bde9af9b754a501c6b7aa03545203bcefd23326cfcd08b003c0437c6bc",
+          "bytes": 3406,
+          "kind": "bounded-decision-context",
+          "serialization_write_ms": 0.10897999163717031
+        },
+        {
+          "sha256": "5bbe6c76d6ecae4e47ab7eed7ca18ed90e2a56a626c5a19c101c3256b5e953cd",
+          "bytes": 509832,
+          "kind": "exact-wire-packet",
+          "serialization_write_ms": 1.0328160133212805
+        },
+        {
+          "sha256": "fbbcb49374ca5ff7389ee66717eed0c54964bb76726803027a15a6fc718a173e",
+          "bytes": 886,
+          "kind": "exact-worker-reply",
+          "serialization_write_ms": 0.11486106086522341
+        }
+      ]
+    }
+  ],
+  "private_evidence_policy": "Raw screenshots, scene readback, base64 image packets, full parser labels, model cache paths and personal data excluded",
+  "prior_thirty_trial_report_sha256": "50d05d0bb178141ad1f9dc32a25d1b3a00736c1d945fba11466eabd610aeed16"
+}

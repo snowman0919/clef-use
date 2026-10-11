@@ -1,0 +1,120 @@
+{
+  "claim": "OBSERVED",
+  "candidate": "FINAL11",
+  "scope": "Actual locally built release archive installer in isolated HOME; no global/model changes",
+  "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+  "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+  "first_status": "INSTALLED",
+  "repeat_status": "CURRENT",
+  "home_files": 26,
+  "repeat_all_home_bytes_preserved": true,
+  "packaged_python_exact_source": true,
+  "comment_prefixes_preserved": {
+    ".codex/config.toml": true,
+    ".hermes/config.yaml": true,
+    ".omp/config.yml": true
+  },
+  "owned_loopback_stopped": true,
+  "router_sha256": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+  "regression": {
+    "passed": 781,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 45.03,
+    "log_sha256": "6cf555db75c1be0ffe3bd8957ee31ef47f5648878b62d316d95cf0625256ce40"
+  },
+  "guides": {
+    "clef-use": {
+      "sha256": {
+        "SKILL.md": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      "digest": "83b67a2f2dc5865578accf6a54a833409a5acfb72cdbf04bac83327c4109ab6b"
+    },
+    "clef-use-blender": {
+      "sha256": {
+        "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      "digest": "c1af3408ec928b31dcf87a5033f45d477665fa65c64bdf7ac1134c98297509b8"
+    },
+    "clef-use-diagnostics": {
+      "sha256": {
+        "SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      },
+      "digest": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+    }
+  },
+  "explicit_three": [
+    {
+      "status": "INSTALLED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    }
+  ],
+  "explicit_three_repeat": [
+    {
+      "status": "UNCHANGED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    }
+  ]
+}

@@ -79,6 +79,14 @@ scenarios:
     section: evidence.omp_actual_model
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.hermes_actual_model_final11
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.codex_actual_model_final11
+    claim: OBSERVED
+    partial: true
   execution_note: Codex FINAL6 explicit/natural/negative triggers pass. OMP current native default
     completes positive load/invoke, but its completed non-GUI Python negative case unnecessarily
     loads GUI guides and invokes capabilities. This observed over-trigger fails the requirement;
@@ -87,6 +95,14 @@ scenarios:
     bootstrap executed three auxiliary invocation starts but produced zero successful
     description entries; zero primary invocations, all three primary cases NOT_RUN.
     Codex FINAL10 explicit/natural/negative passed. Controlled-probe failure retained.
+    Fresh Hermes FINAL10 explicit passed, but its completed natural Blender assessment
+    omitted the Blender guide; negative remains NOT_RUN after the declared stop.
+    FINAL11 Codex and corrected Hermes each pass fresh explicit/natural/negative
+    read-only batches with actual full guide bodies, reference bytes and capabilities.
+    Earlier failures remain recorded; normal native OMP primary stages remain NOT_RUN.
+    Corrected configured OMP bootstrap returned with all three original previews;
+    primary stages were stopped by a stricter driver all-cache readiness gate.
+    Native compression warnings are nonfatal; this is a probe limitation.
 - id: GUIDE-04
   category: guides
   requirement: Cached observation is not used as new input or final-completion proof.
@@ -132,8 +148,15 @@ scenarios:
     section: evidence.installed_candidate
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_compatibility_final12
+    claim: OBSERVED
+    partial: true
   execution_note: Unsupported operation/default missing-provider and stale-guide compatibility
-    fixtures exist; full installed mismatch matrix incomplete.
+    fixtures exist. Actual installed CLI refuses a genuine old executable and all
+    three real stale guide bindings before native harness execution. Managed removal
+    and explicit current executable enrollment restore matching contracts without
+    overwriting approved registrations. Full installed feature-mismatch matrix incomplete.
 - id: CAP-03
   category: api
   requirement: Existing five tools and goal-only contracts retain backward compatibility.
@@ -246,8 +269,18 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: true
-  execution_note: Integration journal crash/recovery fixtures passed; every runtime installation
-    staging/activation crash point not established.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.linux_installer_crash_phases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.linux_installer_update_crash_phases
+    claim: OBSERVED
+    partial: true
+  execution_note: Integration journal crash/recovery fixtures passed. Actual Linux fresh
+    installation and genuine pinned 0.1.29 to immutable CI 0.1.30 update each crashed
+    at eleven staging/activation boundaries and resumed with original user bytes and
+    previous runtime preserved. Windows crash matrix remains NOT_RUN.
 - id: INSTALL-08
   category: installation
   requirement: Uninstall removes only unchanged managed entries and preserves later user edits.
@@ -322,8 +355,11 @@ scenarios:
     section: evidence.harnesses
     claim: OBSERVED
     partial: false
-  execution_note: Actual fresh Hermes explicit/natural runs read guides and invoked read-only
-    capabilities; pre-FINAL4 guide bundle only, GUI TASK_VERIFIED NOT_RUN.
+  execution_note: Earlier actual fresh Hermes explicit/natural runs read guides and invoked
+    read-only capabilities. FINAL10 native explicit core load and capabilities passed;
+    natural Blender guide selection failed and negative was NOT_RUN. Corrected FINAL11
+    explicit/natural/negative native batches pass with exact guide/reference bytes
+    and capability calls. GUI TASK_VERIFIED NOT_RUN; earlier failures remain recorded.
 - id: HARNESS-03
   category: harness
   requirement: OMP actual selected profile discovers and reads guide, then invokes read-only runtime
@@ -626,11 +662,18 @@ scenarios:
     section: evidence.actual_original_menu
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.blender_menu_context_pixel_final12
+    claim: OBSERVED
+    partial: true
   execution_note: FINAL5 API-assisted operation fixture passes 22 cases. In a fixed actual
     parser/model ASSESS comparison, full pinned .29 and FINAL6 installed .30 both refuse all
     five File-open trials, with all 30 scheduled trials executed and no native input. The
     original menu workflow is observed FAIL; remaining production/harness/public-release
     workflows are NOT_RUN. No confidence threshold was relaxed.
+    FINAL12 executes all fifteen canonical installed model trials without forward
+    errors, but File completion remains 0/5; ten negative cases have no false
+    completion, without proving correct wrong-menu/absent classification.
 - id: E2E-02
   category: e2e
   requirement: Browser form and independent editor validate non-Blender generality.

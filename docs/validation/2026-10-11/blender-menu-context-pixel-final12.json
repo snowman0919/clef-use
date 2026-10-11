@@ -1,0 +1,2358 @@
+{
+  "kind": "ACTUAL_INSTALLED_FINAL12_CANONICAL_CLEF_MENU_ASSESS_FIXED15",
+  "status": "EXECUTED",
+  "scope": "Fresh predeclared15 same actual File/Edit/absent task using shared explicit unknown/false defaults plus derived outwardpixel decision bboxes, retaining all40rankedobjects; previousFINAL10/11trials unchanged",
+  "scheduled": 15,
+  "executed": 15,
+  "not_run": 0,
+  "runtime_errors": 0,
+  "valid_model_replies": 15,
+  "omitted_attempts": 0,
+  "model_status_counts": {
+    "NEEDS_REPLAN": 5,
+    "LOW_CONFIDENCE": 10
+  },
+  "file_menu_whole_goal_completed": {
+    "completed": 0,
+    "planned": 5,
+    "executed": 5
+  },
+  "negative_false_completions": {
+    "false_completed": 0,
+    "planned": 10,
+    "executed": 10
+  },
+  "no_threshold_model_provider_changes_or_retries": true,
+  "matched_previous_final10_actual_runtime_pixels": {
+    "matched": 15,
+    "executed": 15
+  },
+  "native_assess_inputs": 0,
+  "setup_events_calibration": 190,
+  "software": {
+    "version": "0.1.30",
+    "archive_sha256": "b2feb3b69340de567244015276c01072528d48e75546a80d552ef5288359a3e6",
+    "wheel_sha256": "5ca97a6407c8dcb18763d2caf6a8f12d1acd0981c79b2eecafe23d454f409594",
+    "verified_installed_files": 61,
+    "verified_postrun_unchanged": true,
+    "router_sha256": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+    "backends_sha256": "d1d614111278172a6ac444b959b17b5b8e90fe45592e187a5e5ca5a9c8909163",
+    "same_worker_sha256": "ce6b90a0686ee5d9896f9206063efa2977fce253304c7f456dfc7738af2699ef",
+    "same_config_sha256": "62fffb9c5258f2f86ddac6f68abf7f954edcbaf605e667392e2d151df1af0659",
+    "contract_sha256": "0f3b40cc1b6cf8d9486193da4fc7f8f6c820b9b6e261a2f168b62b796172985c",
+    "model": "Cloudflare/clef-flash",
+    "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "quantization": "4bit"
+  },
+  "evidence_geometry": "All40originalnonbboxfacts andorder retained; explicit shared defaults preserve unknown versus false; decision geometry only uses <=1rasterpixel outward envelope, coordinate_space+image_size declared; raw UIObject/executable/native geometry unchanged",
+  "accuracy_interpretation": "Only actual COMPLETED File trials establish whole-goal success. Negative non-completions establish no false completion, not correct recognition of wrong-menu versus absent. Higher raw confidence alone is not success. All refusals/errors included.",
+  "performance_interpretation": "Timing rows separate actual worker cold/warm and parsercaption stages, with transparentloggeroverhead retained; descriptive only, no speedup/p95/100ms releaseclaim",
+  "initial_preflight_comparator_history": {
+    "status": "Fixture dictionary equality AssertionError beforemodelcalls; retained privately",
+    "corrected_check": "Action fields compared as declared frozensets; exact objectorder/IDs/otherfacts and runtime geometry checks preserved",
+    "attribution": "Cross-process set serialization order is incidental; no production source change was needed"
+  },
+  "cleanup": {
+    "all_fixture_children_exited": true,
+    "all_controllers_exited": true,
+    "private_xsocket_removed": true
+  },
+  "production_scene_touched": false,
+  "matrix": [
+    {
+      "index": 0,
+      "case": "MENU_OPEN",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence"
+      },
+      "runtime_ms": 98846.4483609423,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "8be25edb08179bbe99ed44f9571a19cedf9d38b19ee96773c644b2c285367e53",
+      "packet_text_bytes": 10700,
+      "worker_warm_before": false,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.7681
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.4593
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0152
+          },
+          "progress": {
+            "type": "score",
+            "score": 2.6191,
+            "confidence": 0.4499,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.1252,
+              "1": 0.1571,
+              "2": 0.1411,
+              "3": 0.1267,
+              "4": 0.4499
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.8132
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.6638,
+            "probabilities": {
+              "ACT": 0.2035,
+              "WAIT": 0.0214,
+              "BLOCKED": 0.0438,
+              "NEEDS_REPLAN": 0.0675,
+              "COMPLETED": 0.6638
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1748
+          }
+        },
+        "usage": {
+          "input_tokens": 4269,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 7.085376069881022,
+        "parser_ms": 74009.80821298435,
+        "candidate_ms": 0.010400079190731049,
+        "decision_ms": 24823.8485440379,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 98846.26438992564,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 12.481120065785944,
+        "ocr_ms": 2217.4295800505206,
+        "ocr_count": 98,
+        "detection_ms": 505.6411810219288,
+        "detected_count": 96,
+        "fusion_ms": 11.541343992576003,
+        "object_count": 134,
+        "caption_ms": 64964.93593999185,
+        "caption_cache_ms": 0.4512190353125334,
+        "caption_regions": 44,
+        "cache_hits": 0,
+        "unique_misses": 43,
+        "duplicate_misses": 1,
+        "total_ms": 67712.51432108693,
+        "worker_start_ms": 6249.574268935248,
+        "upstream_import_ms": 4184.23325906042,
+        "effective_torch_threads": 8,
+        "detector_load_ms": 696.7278500087559,
+        "processor_load_ms": 138.55483196675777,
+        "caption_load_ms": 303.9681169902906,
+        "total_load_ms": 6211.397966020741,
+        "encode_ms": 42.03969310037792,
+        "normalize_ms": 1.5341859543696046
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 49970,
+          "sha256": "cf5fc16d3fe29b294b869590d133f310cfab345e816ff3b2d2f188fe8f99a8c0",
+          "serialization_write_ms": 0.5871339235454798
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15720,
+          "sha256": "997c682843eabb4bc5327c03deee91eda6a84c941b5e475f4799f574137f6a40",
+          "serialization_write_ms": 0.20017405040562153
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 500549,
+          "sha256": "8be25edb08179bbe99ed44f9571a19cedf9d38b19ee96773c644b2c285367e53",
+          "serialization_write_ms": 0.8618229767307639
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 888,
+          "sha256": "5a9dfd2cde84d555a65676de27709e2094df73b9da1de64421e3f5a46918d153",
+          "serialization_write_ms": 1.0728059569373727
+        }
+      ]
+    },
+    {
+      "index": 1,
+      "case": "EDIT_WRONG",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 34814.30373794865,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "8d380e07523b0def59d138b7974fe00c1e09fad4ad63d5a3ce3b8714dfe6ed87",
+      "packet_text_bytes": 11058,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.1025
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2822
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0106
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.8726,
+            "confidence": 0.61,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.61,
+              "1": 0.1275,
+              "2": 0.1182,
+              "3": 0.0684,
+              "4": 0.0758
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.1214
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3893,
+            "probabilities": {
+              "ACT": 0.3893,
+              "WAIT": 0.0326,
+              "BLOCKED": 0.1903,
+              "NEEDS_REPLAN": 0.1653,
+              "COMPLETED": 0.2225
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0162
+          }
+        },
+        "usage": {
+          "input_tokens": 4292,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 6.995851988904178,
+        "parser_ms": 32706.35456603486,
+        "candidate_ms": 0.010801013559103012,
+        "decision_ms": 2097.326449933462,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 34814.133774954826,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 11.45009498577565,
+        "ocr_ms": 2108.415193972178,
+        "ocr_count": 88,
+        "detection_ms": 461.7259739898145,
+        "detected_count": 104,
+        "fusion_ms": 13.034723000600934,
+        "object_count": 135,
+        "caption_ms": 30064.21811308246,
+        "caption_cache_ms": 0.5075569497421384,
+        "caption_regions": 54,
+        "cache_hits": 34,
+        "unique_misses": 20,
+        "duplicate_misses": 0,
+        "total_ms": 32659.38689489849,
+        "worker_start_ms": 0.0,
+        "encode_ms": 41.13518295343965,
+        "normalize_ms": 1.45903998054564
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 50964,
+          "sha256": "28d0a7e75087a04f5aedb3e3ca7f7f9014131f9e5b5cdbe160288c3fcb46188b",
+          "serialization_write_ms": 0.4998499061912298
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 16216,
+          "sha256": "a890dc992826fff9a9f27c24cb6f78979120d64434cb8546cd9602423d099ee6",
+          "serialization_write_ms": 0.24146295618265867
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 507707,
+          "sha256": "8d380e07523b0def59d138b7974fe00c1e09fad4ad63d5a3ce3b8714dfe6ed87",
+          "serialization_write_ms": 0.9667149279266596
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 878,
+          "sha256": "8543a67ca0b7297e1f8b34db81547e3d93af482a3fa85792d56a846020d789dc",
+          "serialization_write_ms": 0.12862205039709806
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "case": "ABSENT",
+      "repeat": 0,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 51983.442045981064,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "b1c3841a3664e8f00b5eb13f4578f5b9fd6fdea462d624e6300d36cbb756b0ec",
+      "packet_text_bytes": 10800,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0382
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2447
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0113
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4629,
+            "confidence": 0.7838,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.7838,
+              "1": 0.0732,
+              "2": 0.0739,
+              "3": 0.0343,
+              "4": 0.0347
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0456
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3823,
+            "probabilities": {
+              "ACT": 0.3823,
+              "WAIT": 0.0354,
+              "BLOCKED": 0.2595,
+              "NEEDS_REPLAN": 0.2131,
+              "COMPLETED": 0.1097
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.011
+          }
+        },
+        "usage": {
+          "input_tokens": 4239,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.136266001500189,
+        "parser_ms": 49865.01123895869,
+        "candidate_ms": 0.009158044122159481,
+        "decision_ms": 2110.2410070598125,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 51983.22883900255,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.263703996315598,
+        "ocr_ms": 1902.7121509425342,
+        "ocr_count": 81,
+        "detection_ms": 425.7746220100671,
+        "detected_count": 113,
+        "fusion_ms": 13.687633094377816,
+        "object_count": 143,
+        "caption_ms": 47461.575596942566,
+        "caption_cache_ms": 0.5617609713226557,
+        "caption_regions": 62,
+        "cache_hits": 29,
+        "unique_misses": 33,
+        "duplicate_misses": 0,
+        "total_ms": 49814.60609799251,
+        "worker_start_ms": 0.0,
+        "encode_ms": 44.256524997763336,
+        "normalize_ms": 1.3566229026764631
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 53707,
+          "sha256": "fe59792cc68a57772234a05e183365d7e276ed9958e9504a4ae03cc019d0fab2",
+          "serialization_write_ms": 0.6829460617154837
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15882,
+          "sha256": "34c488d9545a54ff09a24d57fe9993c349677f0c3e0473d038dd34108148456a",
+          "serialization_write_ms": 0.1629890175536275
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 515141,
+          "sha256": "b1c3841a3664e8f00b5eb13f4578f5b9fd6fdea462d624e6300d36cbb756b0ec",
+          "serialization_write_ms": 1.0576590429991484
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 881,
+          "sha256": "921f8c2bbb69287e487606be7b7acfed26a6ce863e149aa9a53014062495e283",
+          "serialization_write_ms": 0.14469295274466276
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "case": "MENU_OPEN",
+      "repeat": 1,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence"
+      },
+      "runtime_ms": 4460.857707075775,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "6204cc248dd815fdf61dc6663e983e157046c3cfbc08245e5130399fa489082b",
+      "packet_text_bytes": 10700,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.7694
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.4529
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.015
+          },
+          "progress": {
+            "type": "score",
+            "score": 2.6178,
+            "confidence": 0.4492,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.1255,
+              "1": 0.1569,
+              "2": 0.141,
+              "3": 0.1274,
+              "4": 0.4492
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.8152
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.6657,
+            "probabilities": {
+              "ACT": 0.2022,
+              "WAIT": 0.0211,
+              "BLOCKED": 0.0433,
+              "NEEDS_REPLAN": 0.0676,
+              "COMPLETED": 0.6657
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1832
+          }
+        },
+        "usage": {
+          "input_tokens": 4269,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 4.794616950675845,
+        "parser_ms": 2514.0089839696884,
+        "candidate_ms": 0.008737086318433285,
+        "decision_ms": 1939.3080270383507,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4460.644160048105,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.22858393844217,
+        "ocr_ms": 2014.5869880216196,
+        "ocr_count": 98,
+        "detection_ms": 432.31138004921377,
+        "detected_count": 96,
+        "fusion_ms": 11.868449044413865,
+        "object_count": 134,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.3570879343897104,
+        "caption_regions": 44,
+        "cache_hits": 44,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2469.3738319911063,
+        "worker_start_ms": 0.0,
+        "encode_ms": 39.6309751085937,
+        "normalize_ms": 1.0359060252085328
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 49970,
+          "sha256": "cf5fc16d3fe29b294b869590d133f310cfab345e816ff3b2d2f188fe8f99a8c0",
+          "serialization_write_ms": 0.45841699466109276
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15720,
+          "sha256": "997c682843eabb4bc5327c03deee91eda6a84c941b5e475f4799f574137f6a40",
+          "serialization_write_ms": 0.17424998804926872
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 500549,
+          "sha256": "6204cc248dd815fdf61dc6663e983e157046c3cfbc08245e5130399fa489082b",
+          "serialization_write_ms": 0.8777970215305686
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 886,
+          "sha256": "ca87c29fe930a67f247deecc01010a38b0e50a906e7aa8db86f3d81f89ba95e9",
+          "serialization_write_ms": 0.1522779930382967
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "case": "EDIT_WRONG",
+      "repeat": 1,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4606.344167026691,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "18a18675792d2bc336c5ca94050abaadcbf322887a9bc09286f8f993bd5d2374",
+      "packet_text_bytes": 11058,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.103
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2836
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0107
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.8626,
+            "confidence": 0.6145,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.6145,
+              "1": 0.1264,
+              "2": 0.1167,
+              "3": 0.067,
+              "4": 0.0754
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.1278
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.384,
+            "probabilities": {
+              "ACT": 0.384,
+              "WAIT": 0.0326,
+              "BLOCKED": 0.1901,
+              "NEEDS_REPLAN": 0.1671,
+              "COMPLETED": 0.2262
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0162
+          }
+        },
+        "usage": {
+          "input_tokens": 4294,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.2703439723700285,
+        "parser_ms": 2583.5521110566333,
+        "candidate_ms": 0.009347917512059212,
+        "decision_ms": 2014.9822470266372,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4606.127673061565,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.003668954595923,
+        "ocr_ms": 2096.249185036868,
+        "ocr_count": 88,
+        "detection_ms": 418.7197149731219,
+        "detected_count": 104,
+        "fusion_ms": 12.525988975539804,
+        "object_count": 135,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.46923698391765356,
+        "caption_regions": 54,
+        "cache_hits": 54,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2537.989267031662,
+        "worker_start_ms": 0.0,
+        "encode_ms": 40.38390808273107,
+        "normalize_ms": 1.0426390217617154
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 50964,
+          "sha256": "28d0a7e75087a04f5aedb3e3ca7f7f9014131f9e5b5cdbe160288c3fcb46188b",
+          "serialization_write_ms": 0.5382630042731762
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 16216,
+          "sha256": "a890dc992826fff9a9f27c24cb6f78979120d64434cb8546cd9602423d099ee6",
+          "serialization_write_ms": 0.1569769810885191
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 507707,
+          "sha256": "18a18675792d2bc336c5ca94050abaadcbf322887a9bc09286f8f993bd5d2374",
+          "serialization_write_ms": 0.9613099973648787
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 878,
+          "sha256": "eecb7e44d853cfd148d56dad1aee70c276a4df37c8ec666e5a2eb654b06f7072",
+          "serialization_write_ms": 0.15319895464926958
+        }
+      ]
+    },
+    {
+      "index": 5,
+      "case": "ABSENT",
+      "repeat": 1,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4458.863366977312,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "2fcd100a64f05679284b980dcd77879ebba151145f6fba5bddc1f5494483a4b7",
+      "packet_text_bytes": 10800,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0381
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2398
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0113
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4619,
+            "confidence": 0.7842,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.7842,
+              "1": 0.0732,
+              "2": 0.0738,
+              "3": 0.0342,
+              "4": 0.0347
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0451
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3756,
+            "probabilities": {
+              "ACT": 0.3756,
+              "WAIT": 0.0359,
+              "BLOCKED": 0.2621,
+              "NEEDS_REPLAN": 0.2168,
+              "COMPLETED": 0.1096
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0109
+          }
+        },
+        "usage": {
+          "input_tokens": 4240,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.73113199789077,
+        "parser_ms": 2429.3266179738566,
+        "candidate_ms": 0.00907795038074255,
+        "decision_ms": 2021.1053490638733,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4458.634810056537,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.335182072594762,
+        "ocr_ms": 1937.6694490201771,
+        "ocr_count": 81,
+        "detection_ms": 419.25982700195163,
+        "detected_count": 113,
+        "fusion_ms": 13.405872043222189,
+        "object_count": 143,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.5176820559427142,
+        "caption_regions": 62,
+        "cache_hits": 62,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2381.209023995325,
+        "worker_start_ms": 0.0,
+        "encode_ms": 42.56135504692793,
+        "normalize_ms": 1.303277094848454
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 53707,
+          "sha256": "fe59792cc68a57772234a05e183365d7e276ed9958e9504a4ae03cc019d0fab2",
+          "serialization_write_ms": 0.5124120507389307
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15882,
+          "sha256": "34c488d9545a54ff09a24d57fe9993c349677f0c3e0473d038dd34108148456a",
+          "serialization_write_ms": 0.1525779953226447
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 515141,
+          "sha256": "2fcd100a64f05679284b980dcd77879ebba151145f6fba5bddc1f5494483a4b7",
+          "serialization_write_ms": 1.0078500490635633
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 882,
+          "sha256": "ff3fe1adf0497b184eaec2872d9cf66beda610223de0dcd46bfdef76e1e61b1a",
+          "serialization_write_ms": 0.16301905270665884
+        }
+      ]
+    },
+    {
+      "index": 6,
+      "case": "MENU_OPEN",
+      "repeat": 2,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence"
+      },
+      "runtime_ms": 4607.650739955716,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "71769364c11a274c570ec81a3611c655243b27c43bd3210cb59302a5f9b66478",
+      "packet_text_bytes": 10700,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.7644
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.4568
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0151
+          },
+          "progress": {
+            "type": "score",
+            "score": 2.5975,
+            "confidence": 0.444,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.1295,
+              "1": 0.1585,
+              "2": 0.1408,
+              "3": 0.1271,
+              "4": 0.444
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.8121
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.6624,
+            "probabilities": {
+              "ACT": 0.2043,
+              "WAIT": 0.0216,
+              "BLOCKED": 0.0438,
+              "NEEDS_REPLAN": 0.0679,
+              "COMPLETED": 0.6624
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1632
+          }
+        },
+        "usage": {
+          "input_tokens": 4270,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 4.939713049679995,
+        "parser_ms": 2585.2505080401897,
+        "candidate_ms": 0.008646980859339237,
+        "decision_ms": 2014.6681430051103,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4607.391644036397,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 9.987568017095327,
+        "ocr_ms": 2078.981823986396,
+        "ocr_count": 98,
+        "detection_ms": 437.07773298956454,
+        "detected_count": 96,
+        "fusion_ms": 12.645620037801564,
+        "object_count": 134,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.3832279471680522,
+        "caption_regions": 44,
+        "cache_hits": 44,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2539.097625995055,
+        "worker_start_ms": 0.0,
+        "encode_ms": 41.01390007417649,
+        "normalize_ms": 1.045412034727633
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 49970,
+          "sha256": "cf5fc16d3fe29b294b869590d133f310cfab345e816ff3b2d2f188fe8f99a8c0",
+          "serialization_write_ms": 0.5064989672973752
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15720,
+          "sha256": "997c682843eabb4bc5327c03deee91eda6a84c941b5e475f4799f574137f6a40",
+          "serialization_write_ms": 0.1508150016888976
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 500549,
+          "sha256": "71769364c11a274c570ec81a3611c655243b27c43bd3210cb59302a5f9b66478",
+          "serialization_write_ms": 0.9072429966181517
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 886,
+          "sha256": "948a0ba9c466fff5d34ffde2feb1b7228b13e00f3f25efea53131c1031c6d69e",
+          "serialization_write_ms": 0.145204016007483
+        }
+      ]
+    },
+    {
+      "index": 7,
+      "case": "EDIT_WRONG",
+      "repeat": 2,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4605.146361049265,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "90627ba8dfe9565335391d6b2dc2f3c2f60e7d2b8f7aaef01850d05bbdcfa18c",
+      "packet_text_bytes": 11058,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.1013
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2812
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0107
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.8597,
+            "confidence": 0.6154,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.6154,
+              "1": 0.1258,
+              "2": 0.1174,
+              "3": 0.0669,
+              "4": 0.0747
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.1221
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3849,
+            "probabilities": {
+              "ACT": 0.3849,
+              "WAIT": 0.0327,
+              "BLOCKED": 0.1919,
+              "NEEDS_REPLAN": 0.1674,
+              "COMPLETED": 0.2231
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.016
+          }
+        },
+        "usage": {
+          "input_tokens": 4293,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.746818031184375,
+        "parser_ms": 2576.0253170737997,
+        "candidate_ms": 0.009738956578075886,
+        "decision_ms": 2020.815607975237,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4604.925408959389,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 9.951442945748568,
+        "ocr_ms": 2049.003186984919,
+        "ocr_count": 88,
+        "detection_ms": 457.1533550042659,
+        "detected_count": 104,
+        "fusion_ms": 13.340902980417013,
+        "object_count": 135,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.4948470741510391,
+        "caption_regions": 54,
+        "cache_hits": 54,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2529.9667009385303,
+        "worker_start_ms": 0.0,
+        "encode_ms": 40.62042199075222,
+        "normalize_ms": 1.101040979847312
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 50964,
+          "sha256": "28d0a7e75087a04f5aedb3e3ca7f7f9014131f9e5b5cdbe160288c3fcb46188b",
+          "serialization_write_ms": 0.5820770747959614
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 16216,
+          "sha256": "a890dc992826fff9a9f27c24cb6f78979120d64434cb8546cd9602423d099ee6",
+          "serialization_write_ms": 0.16885995864868164
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 507707,
+          "sha256": "90627ba8dfe9565335391d6b2dc2f3c2f60e7d2b8f7aaef01850d05bbdcfa18c",
+          "serialization_write_ms": 1.0037410538643599
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 881,
+          "sha256": "a064bccafd831da0ccb23632d4b19a87d849f3552aaa20e3a61f5575732dca9d",
+          "serialization_write_ms": 0.1414360012859106
+        }
+      ]
+    },
+    {
+      "index": 8,
+      "case": "ABSENT",
+      "repeat": 2,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4422.7586520137265,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "8f4f24c3b846e48ce8e743d55922f0977407c18bdb04cf042c1ff4dc54fe3aef",
+      "packet_text_bytes": 10800,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0378
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2431
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0113
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4594,
+            "confidence": 0.7863,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.7863,
+              "1": 0.0714,
+              "2": 0.0736,
+              "3": 0.034,
+              "4": 0.0347
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0451
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3831,
+            "probabilities": {
+              "ACT": 0.3831,
+              "WAIT": 0.0351,
+              "BLOCKED": 0.2615,
+              "NEEDS_REPLAN": 0.2131,
+              "COMPLETED": 0.1072
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0111
+          }
+        },
+        "usage": {
+          "input_tokens": 4237,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 4.667686996981502,
+        "parser_ms": 2399.668228928931,
+        "candidate_ms": 0.009548966772854328,
+        "decision_ms": 2015.8374649472535,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4422.583829960786,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.44730597641319,
+        "ocr_ms": 1908.3026890875772,
+        "ocr_count": 81,
+        "detection_ms": 418.9571200404316,
+        "detected_count": 113,
+        "fusion_ms": 13.473104918375611,
+        "object_count": 143,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.5362279480323195,
+        "caption_regions": 62,
+        "cache_hits": 62,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2351.738058961928,
+        "worker_start_ms": 0.0,
+        "encode_ms": 42.540151975117624,
+        "normalize_ms": 1.2862719595432281
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 53707,
+          "sha256": "fe59792cc68a57772234a05e183365d7e276ed9958e9504a4ae03cc019d0fab2",
+          "serialization_write_ms": 0.5683599738404155
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15882,
+          "sha256": "34c488d9545a54ff09a24d57fe9993c349677f0c3e0473d038dd34108148456a",
+          "serialization_write_ms": 0.23754395078867674
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 515141,
+          "sha256": "8f4f24c3b846e48ce8e743d55922f0977407c18bdb04cf042c1ff4dc54fe3aef",
+          "serialization_write_ms": 0.8981740102171898
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 881,
+          "sha256": "e7edf3e36d038af0a9453a2ae88f4a2d1d8093d9d1d8e8f60dc62a127d254e6c",
+          "serialization_write_ms": 0.13922201469540596
+        }
+      ]
+    },
+    {
+      "index": 9,
+      "case": "MENU_OPEN",
+      "repeat": 3,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence"
+      },
+      "runtime_ms": 4506.274212966673,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "0ad80194ad029299fe7f12bfb884e8f8342b888a1013996ff6fee8e46c08fac3",
+      "packet_text_bytes": 10700,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.7644
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.4558
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0154
+          },
+          "progress": {
+            "type": "score",
+            "score": 2.6047,
+            "confidence": 0.4458,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.1281,
+              "1": 0.1578,
+              "2": 0.1412,
+              "3": 0.1271,
+              "4": 0.4458
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.8112
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.6633,
+            "probabilities": {
+              "ACT": 0.2036,
+              "WAIT": 0.0214,
+              "BLOCKED": 0.0441,
+              "NEEDS_REPLAN": 0.0677,
+              "COMPLETED": 0.6633
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1659
+          }
+        },
+        "usage": {
+          "input_tokens": 4269,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.132672959007323,
+        "parser_ms": 2531.2293639872223,
+        "candidate_ms": 0.01064990647137165,
+        "decision_ms": 1967.3795819981024,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4506.080765975639,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.028543998487294,
+        "ocr_ms": 2041.2533639464527,
+        "ocr_count": 98,
+        "detection_ms": 422.3703619791195,
+        "detected_count": 96,
+        "fusion_ms": 11.98212697636336,
+        "object_count": 134,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.384451006539166,
+        "caption_regions": 44,
+        "cache_hits": 44,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2486.038996023126,
+        "worker_start_ms": 0.0,
+        "encode_ms": 39.93709897622466,
+        "normalize_ms": 1.25883799046278
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 49970,
+          "sha256": "cf5fc16d3fe29b294b869590d133f310cfab345e816ff3b2d2f188fe8f99a8c0",
+          "serialization_write_ms": 0.49003702588379383
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15720,
+          "sha256": "997c682843eabb4bc5327c03deee91eda6a84c941b5e475f4799f574137f6a40",
+          "serialization_write_ms": 0.3108680248260498
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 500549,
+          "sha256": "0ad80194ad029299fe7f12bfb884e8f8342b888a1013996ff6fee8e46c08fac3",
+          "serialization_write_ms": 0.887093017809093
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 888,
+          "sha256": "ff058562d32fbd76558cbd94e6804d73ceef98b795a66607d71eeebbf57a9990",
+          "serialization_write_ms": 0.14716805890202522
+        }
+      ]
+    },
+    {
+      "index": 10,
+      "case": "EDIT_WRONG",
+      "repeat": 3,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4466.451388900168,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "53a5322ba1ab68ec066490023de4d8f91f6b08fd38ca8b7cc5883fde3154ccc9",
+      "packet_text_bytes": 11058,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.1028
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2817
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0107
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.864,
+            "confidence": 0.6138,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.6138,
+              "1": 0.1269,
+              "2": 0.1167,
+              "3": 0.0668,
+              "4": 0.0758
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.1274
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3842,
+            "probabilities": {
+              "ACT": 0.3842,
+              "WAIT": 0.0328,
+              "BLOCKED": 0.1907,
+              "NEEDS_REPLAN": 0.1667,
+              "COMPLETED": 0.2256
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0159
+          }
+        },
+        "usage": {
+          "input_tokens": 4294,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.541619029827416,
+        "parser_ms": 2493.5000149998814,
+        "candidate_ms": 0.009368057362735271,
+        "decision_ms": 1964.8562190122902,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4466.264393995516,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.190966073423624,
+        "ocr_ms": 2001.7941410187632,
+        "ocr_count": 88,
+        "detection_ms": 421.83402297087014,
+        "detected_count": 104,
+        "fusion_ms": 12.901025940664113,
+        "object_count": 135,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.48669998068362474,
+        "caption_regions": 54,
+        "cache_hits": 54,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2447.2308719996363,
+        "worker_start_ms": 0.0,
+        "encode_ms": 40.93248501885682,
+        "normalize_ms": 1.1215589474886656
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 50964,
+          "sha256": "28d0a7e75087a04f5aedb3e3ca7f7f9014131f9e5b5cdbe160288c3fcb46188b",
+          "serialization_write_ms": 0.5759840132668614
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 16216,
+          "sha256": "a890dc992826fff9a9f27c24cb6f78979120d64434cb8546cd9602423d099ee6",
+          "serialization_write_ms": 0.15883997548371553
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 507707,
+          "sha256": "53a5322ba1ab68ec066490023de4d8f91f6b08fd38ca8b7cc5883fde3154ccc9",
+          "serialization_write_ms": 0.934033072553575
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 881,
+          "sha256": "b4e6ecb541e09ccb2e83e5b1125bfa58c79fcb3b2057b7a4a93bd417a488f5d1",
+          "serialization_write_ms": 0.1423479989171028
+        }
+      ]
+    },
+    {
+      "index": 11,
+      "case": "ABSENT",
+      "repeat": 3,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4557.808230048977,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "d09f81bed48d7d1e129f85af5a1227c58631443257df4e0dfc9006170d46042a",
+      "packet_text_bytes": 10800,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0372
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.24
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0111
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4635,
+            "confidence": 0.7833,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.7833,
+              "1": 0.073,
+              "2": 0.0749,
+              "3": 0.0344,
+              "4": 0.0344
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0455
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3732,
+            "probabilities": {
+              "ACT": 0.3732,
+              "WAIT": 0.0364,
+              "BLOCKED": 0.2654,
+              "NEEDS_REPLAN": 0.2167,
+              "COMPLETED": 0.1083
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0109
+          }
+        },
+        "usage": {
+          "input_tokens": 4232,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.49366301856935,
+        "parser_ms": 2537.510380963795,
+        "candidate_ms": 0.009268056601285934,
+        "decision_ms": 2012.3185550328344,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4557.627647998743,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 10.383928078226745,
+        "ocr_ms": 2037.7899640006945,
+        "ocr_count": 81,
+        "detection_ms": 426.79751093965024,
+        "detected_count": 113,
+        "fusion_ms": 13.742593000642955,
+        "object_count": 143,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.5469069583341479,
+        "caption_regions": 62,
+        "cache_hits": 62,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2489.283447037451,
+        "worker_start_ms": 0.0,
+        "encode_ms": 42.770784930326045,
+        "normalize_ms": 1.1402660747990012
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 53707,
+          "sha256": "fe59792cc68a57772234a05e183365d7e276ed9958e9504a4ae03cc019d0fab2",
+          "serialization_write_ms": 0.4835739964619279
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15882,
+          "sha256": "34c488d9545a54ff09a24d57fe9993c349677f0c3e0473d038dd34108148456a",
+          "serialization_write_ms": 0.1530490117147565
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 515141,
+          "sha256": "d09f81bed48d7d1e129f85af5a1227c58631443257df4e0dfc9006170d46042a",
+          "serialization_write_ms": 0.9235719917342067
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 879,
+          "sha256": "2513e7f00c13aa9c93922ec97f0c1247e3126da051198de39cd1d604dea466bc",
+          "serialization_write_ms": 0.147748040035367
+        }
+      ]
+    },
+    {
+      "index": 12,
+      "case": "MENU_OPEN",
+      "repeat": 4,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "proposed completion lacks required visible condition evidence"
+      },
+      "runtime_ms": 4528.9226489840075,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "parser_objects": 134,
+      "packet_objects": 40,
+      "actual_packet_sha256": "907e7a8c941113219dcc9e7ed3f89375f6cbdda6c3c9857ac797ef209f0abc1b",
+      "packet_text_bytes": 10700,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.7639
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.4581
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.015
+          },
+          "progress": {
+            "type": "score",
+            "score": 2.6071,
+            "confidence": 0.4457,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.1275,
+              "1": 0.1575,
+              "2": 0.1414,
+              "3": 0.128,
+              "4": 0.4457
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.8157
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "COMPLETED",
+            "confidence": 0.6626,
+            "probabilities": {
+              "ACT": 0.2034,
+              "WAIT": 0.0216,
+              "BLOCKED": 0.0444,
+              "NEEDS_REPLAN": 0.0681,
+              "COMPLETED": 0.6626
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.1634
+          }
+        },
+        "usage": {
+          "input_tokens": 4271,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.804416025057435,
+        "parser_ms": 2512.4744020868093,
+        "candidate_ms": 0.010770978406071663,
+        "decision_ms": 2007.9980470472947,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4528.733038925566,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 9.92273399606347,
+        "ocr_ms": 2019.6810140041634,
+        "ocr_count": 98,
+        "detection_ms": 423.04836702533066,
+        "detected_count": 96,
+        "fusion_ms": 12.300662929192185,
+        "object_count": 134,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.4110320005565882,
+        "caption_regions": 44,
+        "cache_hits": 44,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2465.3871550690383,
+        "worker_start_ms": 0.0,
+        "encode_ms": 40.97814601846039,
+        "normalize_ms": 1.6399399610236287
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 49970,
+          "sha256": "cf5fc16d3fe29b294b869590d133f310cfab345e816ff3b2d2f188fe8f99a8c0",
+          "serialization_write_ms": 0.7081920048221946
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15720,
+          "sha256": "997c682843eabb4bc5327c03deee91eda6a84c941b5e475f4799f574137f6a40",
+          "serialization_write_ms": 0.25330495554953814
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 500549,
+          "sha256": "907e7a8c941113219dcc9e7ed3f89375f6cbdda6c3c9857ac797ef209f0abc1b",
+          "serialization_write_ms": 0.8626930648460984
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 886,
+          "sha256": "6e3038807cbf97449cc36599248c1f5763e91d5cf0413db990d592f27a89934b",
+          "serialization_write_ms": 0.1459750346839428
+        }
+      ]
+    },
+    {
+      "index": 13,
+      "case": "EDIT_WRONG",
+      "repeat": 4,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4761.516020982526,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "parser_objects": 135,
+      "packet_objects": 40,
+      "actual_packet_sha256": "929763c7c33d350f6a1fe57d17007e19a0b84c0b2f4fec4f571364d43716638c",
+      "packet_text_bytes": 11058,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.1041
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2902
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0105
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.8577,
+            "confidence": 0.616,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.616,
+              "1": 0.1266,
+              "2": 0.1162,
+              "3": 0.0662,
+              "4": 0.0751
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.1293
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.3838,
+            "probabilities": {
+              "ACT": 0.3838,
+              "WAIT": 0.032,
+              "BLOCKED": 0.1948,
+              "NEEDS_REPLAN": 0.1647,
+              "COMPLETED": 0.2246
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0166
+          }
+        },
+        "usage": {
+          "input_tokens": 4288,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.491924937814474,
+        "parser_ms": 2750.530711025931,
+        "candidate_ms": 0.00962906051427126,
+        "decision_ms": 2002.9875569744036,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4761.328574968502,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 9.870967944152653,
+        "ocr_ms": 2222.804288030602,
+        "ocr_count": 88,
+        "detection_ms": 451.8171770032495,
+        "detected_count": 104,
+        "fusion_ms": 12.621592031791806,
+        "object_count": 135,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.45291404239833355,
+        "caption_regions": 54,
+        "cache_hits": 54,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2697.5893420167267,
+        "worker_start_ms": 0.0,
+        "encode_ms": 47.67357197124511,
+        "normalize_ms": 1.072312006726861
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 50964,
+          "sha256": "28d0a7e75087a04f5aedb3e3ca7f7f9014131f9e5b5cdbe160288c3fcb46188b",
+          "serialization_write_ms": 0.6133170099928975
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 16216,
+          "sha256": "a890dc992826fff9a9f27c24cb6f78979120d64434cb8546cd9602423d099ee6",
+          "serialization_write_ms": 0.1644809963181615
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 507707,
+          "sha256": "929763c7c33d350f6a1fe57d17007e19a0b84c0b2f4fec4f571364d43716638c",
+          "serialization_write_ms": 0.9172490099444985
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 879,
+          "sha256": "39676118505b7ac36b3db4dfeb58567826e0683ac9ab54ce2322b995de8d454d",
+          "serialization_write_ms": 0.17134391237050295
+        }
+      ]
+    },
+    {
+      "index": 14,
+      "case": "ABSENT",
+      "repeat": 4,
+      "status": "EXECUTED",
+      "variant": "clef",
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 0,
+        "rounds": 1,
+        "confidence": 1.0,
+        "reason": "execution mode confidence below threshold"
+      },
+      "runtime_ms": 4425.072610960342,
+      "native_inputs": 0,
+      "runtime_steps": 0,
+      "before_after_groundtruth_verified": true,
+      "matches_prior_final10_pixels": true,
+      "pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "parser_objects": 143,
+      "packet_objects": 40,
+      "actual_packet_sha256": "f8dec18818830bebb543a7af83af4f5026411117686e93c0798e38cf3f8abb9f",
+      "packet_text_bytes": 10800,
+      "worker_warm_before": true,
+      "actual_model_reply": {
+        "model": "Cloudflare/clef-flash",
+        "answers": {
+          "action": {
+            "type": "choice",
+            "choice": "none",
+            "confidence": 1.0,
+            "probabilities": {
+              "none": 1.0
+            }
+          },
+          "complete": {
+            "type": "noul",
+            "noul": 0.0382
+          },
+          "replan": {
+            "type": "noul",
+            "noul": 0.2486
+          },
+          "unsafe": {
+            "type": "noul",
+            "noul": 0.0113
+          },
+          "progress": {
+            "type": "score",
+            "score": 0.4593,
+            "confidence": 0.7857,
+            "legend": {
+              "0": "No progress",
+              "1": "Early progress",
+              "2": "Partial progress",
+              "3": "Almost complete",
+              "4": "Complete"
+            },
+            "probabilities": {
+              "0": 0.7857,
+              "1": 0.0721,
+              "2": 0.0738,
+              "3": 0.0339,
+              "4": 0.0345
+            }
+          },
+          "condition_0": {
+            "type": "noul",
+            "noul": 0.0454
+          },
+          "mode": {
+            "type": "choice",
+            "choice": "ACT",
+            "confidence": 0.383,
+            "probabilities": {
+              "ACT": 0.383,
+              "WAIT": 0.0349,
+              "BLOCKED": 0.2607,
+              "NEEDS_REPLAN": 0.2133,
+              "COMPLETED": 0.1082
+            }
+          },
+          "effect": {
+            "type": "noul",
+            "noul": 0.0109
+          }
+        },
+        "usage": {
+          "input_tokens": 4238,
+          "output_tokens": 0
+        }
+      },
+      "metrics": {
+        "capture_ms": 5.0130190793424845,
+        "parser_ms": 2394.784949021414,
+        "candidate_ms": 0.01243501901626587,
+        "decision_ms": 2022.6853330386803,
+        "execution_ms": 0.0,
+        "verification_ms": 0.0,
+        "step_latency_ms": 4424.876298056915,
+        "capture_calls": 1,
+        "parser_calls": 1,
+        "perception_cache_hit": false,
+        "clef_calls": 1
+      },
+      "parser_stages": {
+        "decode_ms": 9.929658961482346,
+        "ocr_ms": 1899.225709028542,
+        "ocr_count": 81,
+        "detection_ms": 422.0656080869958,
+        "detected_count": 113,
+        "fusion_ms": 13.708487036637962,
+        "object_count": 143,
+        "caption_ms": 0.0,
+        "caption_cache_ms": 0.5079710390418768,
+        "caption_regions": 62,
+        "cache_hits": 62,
+        "unique_misses": 0,
+        "duplicate_misses": 0,
+        "total_ms": 2345.462111989036,
+        "worker_start_ms": 0.0,
+        "encode_ms": 43.44515397679061,
+        "normalize_ms": 1.6718609258532524
+      },
+      "backend_error": null,
+      "observer_overhead": [
+        {
+          "kind": "parser-objects",
+          "bytes": 53707,
+          "sha256": "fe59792cc68a57772234a05e183365d7e276ed9958e9504a4ae03cc019d0fab2",
+          "serialization_write_ms": 0.4992940230295062
+        },
+        {
+          "kind": "bounded-decision-context",
+          "bytes": 15882,
+          "sha256": "34c488d9545a54ff09a24d57fe9993c349677f0c3e0473d038dd34108148456a",
+          "serialization_write_ms": 0.29039697255939245
+        },
+        {
+          "kind": "exact-wire-packet",
+          "bytes": 515141,
+          "sha256": "f8dec18818830bebb543a7af83af4f5026411117686e93c0798e38cf3f8abb9f",
+          "serialization_write_ms": 0.9816950187087059
+        },
+        {
+          "kind": "exact-worker-reply",
+          "bytes": 880,
+          "sha256": "03ae38f576ff6b3645023fe1b29af231a084b45e11dd298a01a06a63bd454539",
+          "serialization_write_ms": 0.15822902787476778
+        }
+      ]
+    }
+  ],
+  "privacy": "No screenshots/rawparserlabels/scene data/base64packets/cachepaths/credentials/personal data included",
+  "proof_sha256": {
+    "private_report": "3ebb65028a595727aa176bb335f53a0864dae78c76365e94132fa2f7bf2e1a14",
+    "predeclaration": "5182740df1b3b21ee8bfc3a1e93480010b2d66fd88a3bc478d7ea56d548955fd",
+    "source_preflight": "9987139e408da17b51204c3141f41185324a30372d98779b341602148138f061",
+    "canonical_encoding_preflight": "2d386e06ac68ba6757758d7c0856578de4b414821aa4031b59695f856ad339b0"
+  },
+  "prior_final10_report_unchanged_sha256": "50d05d0bb178141ad1f9dc32a25d1b3a00736c1d945fba11466eabd610aeed16",
+  "prior_final11_failure_report_unchanged_sha256": "b31566afc40a4f11509c5f5541313d9fbe4c31fb26f241640816258b9ee409ce"
+}
