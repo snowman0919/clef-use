@@ -1,0 +1,186 @@
+{
+  "classification": "OBSERVED_TRACES_PLUS_EXPLICIT_INFERENCE",
+  "scope": "Read-only original2traces,no model/GUI/input rerun",
+  "status": "QUALITY_FAIL_RETAINED",
+  "cases": {
+    "browser": {
+      "terminal": "LOW_CONFIDENCE",
+      "actual_guard_reason": "execution mode confidence below threshold",
+      "raw_objects_count": 5,
+      "raw_route_action_count": 6,
+      "CLEF_candidate_count": 4,
+      "candidate_limit": 16,
+      "candidate_metrics": {
+        "proposals_before_limit": 4,
+        "proposals_after_limit": 4,
+        "targets_before_limit": 2,
+        "targets_after_limit": 2,
+        "proposal_target_retention": 1.0,
+        "semantic_duplicate_groups": [],
+        "coverage_at_k": null,
+        "target_absent": null,
+        "ground_truth": "UNAVAILABLE; retention is not correct-target coverage"
+      },
+      "candidate_truncation_observed": false,
+      "context_ids": [
+        "obj_0e3fd99460f8",
+        "obj_90db9d50fc55",
+        "obj_3899b303ebf0",
+        "obj_426b114557d1",
+        "obj_08319bc309e1"
+      ],
+      "probabilities_SERIALIZED_4DECIMALS": {
+        "a0": 0.0174,
+        "a1": 0.0543,
+        "a2": 0.0052,
+        "a3": 0.9232
+      },
+      "probability_sum": 1.0001,
+      "classification": "NONUNIFORM",
+      "normalized_entropy": 0.23794908144352578,
+      "top_two_margin": 0.8689,
+      "ranked_candidate_ids": [
+        "a3",
+        "a1",
+        "a0",
+        "a2"
+      ],
+      "selected_candidate": "a3",
+      "selected_candidate_rank": 1,
+      "desired_correct_candidate_rank": "NOT_RECORDED:criteria descriptions/oraclemapping unavailable",
+      "coverage_at_K": null,
+      "coverage_reason": "No retainedcorrecttargetmapping;proposalretentionisnotcoverage",
+      "target_absent": null,
+      "model_question_outputs": {
+        "decision_mode": "ACT",
+        "mode_confidence": 0.7271,
+        "confidence": 0.9232,
+        "effect_probability": 0.0512,
+        "replan_probability": 0.6234,
+        "safety_probability": 0.0304,
+        "goal_probability": 0.0294,
+        "condition_probabilities": [
+          0.0113,
+          0.0103
+        ]
+      },
+      "unrounded_serialization_consistency": "NOT_RUN_UNREACHABLE:no retainedrawhead values;4decimalprob/conf match asobserved,roundingerror\u00b10.00005 pervalue",
+      "raw_input_text_bytes": "NOT_RECORDED",
+      "raw_input_tokens": "NOT_RECORDED",
+      "raw_vs_serialized_limits": "Non-ERROR response supports gatesacceptedoneactualpacket;noexactlengthclaim",
+      "INFERRED_candidate_shape": "Rawaction6/proposals4/targets2 withcanonicalOmni-normalizer+builder is consistent withoneinput(click/focus/type123)+oneclicktarget. Type appendedlast suggestsselecteda3=type123, butactualroster/descriptionsnotretained;do not reportasobservedcorrecttarget.",
+      "diagnosis": "OBSERVED sharpactionrank1(.9232,margin.8689) butindependentACTmodeconfidence.7271<.9; legitimatepolicyabstention,notuniformcandidateflattening. Exacttargetcoverageunknown."
+    },
+    "editor": {
+      "terminal": "NEEDS_REPLAN",
+      "actual_guard_reason": "executor needs planner guidance",
+      "raw_objects_count": 10,
+      "raw_route_action_count": 8,
+      "CLEF_candidate_count": 4,
+      "candidate_limit": 16,
+      "candidate_metrics": {
+        "proposals_before_limit": 4,
+        "proposals_after_limit": 4,
+        "targets_before_limit": 4,
+        "targets_after_limit": 4,
+        "proposal_target_retention": 1.0,
+        "semantic_duplicate_groups": [
+          [
+            "obj_ffc34c73c154",
+            "obj_f8183750c173"
+          ]
+        ],
+        "coverage_at_k": null,
+        "target_absent": null,
+        "ground_truth": "UNAVAILABLE; retention is not correct-target coverage"
+      },
+      "candidate_truncation_observed": false,
+      "context_ids": [
+        "obj_0120e25aeb24",
+        "obj_8c6a807e7340",
+        "obj_f8183750c173",
+        "obj_ffc34c73c154",
+        "obj_25b9d9031298",
+        "obj_eac479020b31",
+        "obj_e2485b0fb9cf",
+        "obj_b5ef7cc6cdd3",
+        "obj_60a32825de97",
+        "obj_9be38a5886d1"
+      ],
+      "probabilities_SERIALIZED_4DECIMALS": {
+        "a0": 0.0344,
+        "a1": 0.9442,
+        "a2": 0.0116,
+        "a3": 0.0098
+      },
+      "probability_sum": 1.0,
+      "classification": "NONUNIFORM",
+      "normalized_entropy": 0.19271374600009897,
+      "top_two_margin": 0.9098,
+      "ranked_candidate_ids": [
+        "a1",
+        "a0",
+        "a2",
+        "a3"
+      ],
+      "selected_candidate": "a1",
+      "selected_candidate_rank": 1,
+      "desired_correct_candidate_rank": "NOT_RECORDED:criteria descriptions/oraclemapping unavailable",
+      "coverage_at_K": null,
+      "coverage_reason": "No retainedcorrecttargetmapping;proposalretentionisnotcoverage",
+      "target_absent": null,
+      "model_question_outputs": {
+        "decision_mode": "ACT",
+        "mode_confidence": 0.4355,
+        "confidence": 0.9442,
+        "effect_probability": 0.0183,
+        "replan_probability": 0.9041,
+        "safety_probability": 0.0288,
+        "goal_probability": 0.0123,
+        "condition_probabilities": [
+          0.0065,
+          0.0078
+        ]
+      },
+      "unrounded_serialization_consistency": "NOT_RUN_UNREACHABLE:no retainedrawhead values;4decimalprob/conf match asobserved,roundingerror\u00b10.00005 pervalue",
+      "raw_input_text_bytes": "NOT_RECORDED",
+      "raw_input_tokens": "NOT_RECORDED",
+      "raw_vs_serialized_limits": "Non-ERROR response supports gatesacceptedoneactualpacket;noexactlengthclaim",
+      "INFERRED_candidate_shape": "Fourproposals/fourdistincttargets means no additionalfocus/typeproposal foranyclicktarget undercanonicalnormalizer+builder;rawaction8 fitsfourclick/double_click objects. Visibleeditablewidgetexists(nativeoracle), but noexecutablenexttypeproposal isINFERRED;exactlabel/bbox/targetabsentcannotbeobservedwithoutroster.",
+      "diagnosis": "OBSERVED sharpactionrank1(.9442,margin.9098) withreplan.9041>=.8 causingNEEDS_REPLAN before input;ACTmode.4355 alsobelow.9. One2-ID semanticduplicategroup exists,notflatprobabilities. No exactselectedaction meaning retained."
+    }
+  },
+  "retention_gap": {
+    "normalized_objects": "NOT_RECORDED:onlycontext_ids/frame reference/count persisted",
+    "actual_candidate_roster_descriptions_geometry": "NOT_RECORDED:onlycounts/duplicateIDs/probabilityIDs persisted",
+    "decision_request_state_questions_bytes": "NOT_RECORDED",
+    "tokenized_length": "NOT_RECORDED",
+    "unrounded_head_probabilities_logits": "NOT_RECORDED:upstreamserializes4decimal probabilities",
+    "raw_worker_JSON": "NOT_RECORDED:validatedselectedfields retained,otherquestion distributionslost",
+    "image_frame_reference": "OBSERVED:1280x900 imagepixels/framehash/foregroundbounds inoriginaltrace",
+    "correct_target_oracle": "NOT_RECORDED:actualfixture nativeeffect oracle exists,but no declared mapping tooriginalperceptionobject/candidate IDs"
+  },
+  "static_source_findings": {
+    "decision_request_text_budget_bytes": 32768,
+    "worker_preencode_max_length": 16384,
+    "actual_forward_max_length": 8192,
+    "oversize_policy": "Raise beforeforward if encoded input_ids>8192;no relaxedbudget/clippingallowed",
+    "validator": "Returns supplied answers without clipping or renormalizing;validates4decimalroundingtolerance",
+    "serializer": "Pinnedjoint_schema_model.systemone_answer rounds probabilities/confidence4decimals;pre-serializationtensorsnotretained",
+    "code_not_execution": "Sourceenforcesbound,and realresponsesmeanno refusal occurred;exactactualbytes/tokens not inferable"
+  },
+  "forbidden_conclusions": [
+    "Proposalretention1.0 is notcoverage@K=1.0",
+    "Highactionconfidence/margin does not prove correcttargetor safeexecutable mode",
+    "Guardthresholdfailure is not itselfa guardbug",
+    "No whole-UI flattening claim fromtwoNONUNIFORM answer vectors",
+    "No selectedaction semantics assertedwithoutroster"
+  ],
+  "source_lines": {
+    "objects.py:normalize_omni": "Interactivity givesclick/double_click;inputrole/inputlikecaption addsfocus/type; noeditable/focusedtruth fabricated",
+    "candidates.py:CandidateBuilder.build": "click/focus/type proposals arebuiltfromsameobject;type appendedafterclick/focus andrequires exactsuppliedpayloadtarget_labelmatch;no genericpress unlessfocusedTrue",
+    "decision_contract.py:validate_answers": "Preserves serializedprobabilities withdeclaredrounding tolerance",
+    "model_worker.py:ClefWorker.request": "Preencode16384/refuse>8192 before actualsystemone max8192"
+  },
+  "received_native_artifact_sha256": "1ca8aa957199b1f3968407c5c454ee7a0031cba3ee8d158c2cb59bb6d35aec0c"
+}

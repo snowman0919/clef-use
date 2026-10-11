@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T13:45:06.724638+00:00",
+  "generated_at": "2026-10-11T13:56:00.879479+00:00",
   "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
   "completion_claim": false,
   "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
@@ -2220,15 +2220,46 @@
       "artifact": "docs/validation/2026-10-11/active-gui-update-final15-native.json",
       "sha256": "23244ec601e546b15822cb8d0b9e4beea350540a1fa325b1de553dd87f820cae",
       "scope": "Actual genuine installed .29 default-factory ASSESS GUI session remained RUNNING/busy with identity/session preserved across actual FINAL15 installation. New .30 client actionable refusal; matching old abort then separately observed busy False; .30 protocol/schema reload, provider NONE menu BLOCKED, own cleanup PASS. Sampled lifecycle only; no OS effect, all-platform, production-provider or latency claim."
+    },
+    "general_gui_final15_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/general-gui-final15-native.json",
+      "sha256": "7d5ac33570c915f851c080688231f49f5933c946c7c1783b6d248aa100ecc502",
+      "scope": "Actual installed default-factory Omni/CLEF browser/editor tasks0/2 complete, native inputs0/effects0/false-completion0, retained FAIL. Browser ACT-mode .7271<.9; editor replan .9041. Own cleanup6/6 PASS; no threshold/model/provider/task retry."
+    },
+    "general_gui_final15_diagnostic": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/general-gui-final15-diagnostic.json",
+      "sha256": "a390547125605989bb8f350dc6020eecc2f1bb349289199c5a8247865a08db47",
+      "scope": "Read-only retained actual traces show NONUNIFORM vectors, entropy .237949/.192714, no truncation, one duplicate group. Exact roster/request/token/raw-head values NOT_RECORDED, correct-target coverage unknown; inference explicitly separated."
+    },
+    "windows_ci6cdf182_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-ci6cdf182-install.json",
+      "sha256": "574b9e1e4695ab1f1c87e8a58fda9061ff59e86563104eef459f2d046c0b0dd0",
+      "scope": "Actual native exact-source CI6cdf182 Windows fresh INSTALLED/repeatCURRENT,61installed-to-wheel file hashes exact,3guides3profiles INSTALLED/UNCHANGED, Codex project DISCOVERED only, globalV2/customized bytes/cleanup preserved. Git60/61 bytes; generated manifest values equal with key-order exception. No model/GUI/native input/service task."
+    },
+    "ui_tars2b_pinned_acquisition": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ui-tars2b-pinned-acquisition.json",
+      "sha256": "632630606c611e1034b229f090fbd1187a5fe2a39254471c34192617a05467c1",
+      "scope": "Public pinned GUI-trained model downloaded without implicit authentication; two actual F32 safetensors SHA256/metadata independently verified. Acquisition only; no adoption or heldout quality result."
+    },
+    "ui_tars2b_development_smoke": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ui-tars2b-development-smoke.json",
+      "sha256": "8e4598291399ecd3d6db1bca281663b2574c5d71fb538c711e4261f1a8f76c56",
+      "scope": "Actual offline standard-transformers/trust_remote_codeFalse Qwen2VL BF16 CUDA development-only load/forward output native normalized coordinate tokens. Input explicitly excluded from heldout; no OS input, comparison/adoption/latency acceptance."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Immutable f440de1 native installation/CodexPROJECTdiscovery PASS. Six-case installed native IME input-layer composition/refusal/commit/chord/exactUTF16/independentabort PASS with true caller-observed context; original alphanumeric-mode NOT_RUN and historical foregroundFAIL retained. Automatic IMM/TSF discovery, native Hermes/OMP, service/model/harness GUI and FINAL15 Windows transport NOT_RUN.",
+    "windows": "Exact-source immutable CI6cdf182 native Windows fresh/repeat/61installed-wheel files/3guides3profiles/CodexPROJECTdiscovery PASS; Git60/61byte match with generatedmanifest key-order exception. Model/load/invoke/tasks and actualservice transport NOT_RUN. Historical foregroundFAIL/userdiscoveryFAIL retained. Native IME input-layer f440de1 proof remains caller-observed, no automaticIMM/TSF/service/model claim.",
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Exact-source CI38143663561 HEAD6cdf182 all15platform/Pythonbuilds+assembly SUCCESS, deployment SKIPPED by existing branch policy. Immutable FINAL15 CI Linux/Windows fresh installation pending actual checks; public upload/download/freshpublicinstall NOT_RUN. Prior f440de1 install evidence retains its own artifact identity."
+    "public_release": "Exact-source CI38143663561 HEAD6cdf182 all15platform/Pythonbuilds+assembly SUCCESS, deployment SKIPPED by existing branch policy. Immutable FINAL15 CI Linux/Windows fresh installation pending actual checks; public upload/download/freshpublicinstall NOT_RUN. Prior f440de1 install evidence retains its own artifact identity.",
+    "general_gui_tasks": "Actual FINAL15 canonical default-runtime browser/editor tasks executed once each:0/2 completed/effects, browserLOW_CONFIDENCE mode.7271<.9/editorNEEDS_REPLAN replan.9041; nativeinput0/falsecompletion0/cleanup6PASS. Full task acceptance FAIL, no model/input/provider retries or threshold changes. Exactcandidate rosters/request lengths not retained; coverage unknown."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -2239,7 +2270,7 @@
   },
   "acceptance": {
     "pass": 33,
-    "not_run": 9,
+    "not_run": 8,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -2281,13 +2312,13 @@
       "PERF-02": "NOT_RUN",
       "PERF-03": "NOT_RUN",
       "E2E-01": "FAIL",
-      "E2E-02": "NOT_RUN",
+      "E2E-02": "FAIL",
       "E2E-03": "NOT_RUN",
       "RELEASE-01": "NOT_RUN",
       "RELEASE-02": "PASS"
     },
     "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion.",
-    "fail": 2
+    "fail": 3
   },
   "additional_evidence": [
     "final6.json",
@@ -2365,6 +2396,11 @@
     "active-update-thread-transport-preflight.json",
     "active-gui-update-final15-leader-observer-stopped.json",
     "active-gui-update-final15-v3-predeclaration.json",
-    "active-gui-update-final15-native.json"
+    "active-gui-update-final15-native.json",
+    "general-gui-final15-native.json",
+    "general-gui-final15-diagnostic.json",
+    "windows-ci6cdf182-install.json",
+    "ui-tars2b-pinned-acquisition.json",
+    "ui-tars2b-development-smoke.json"
   ]
 }

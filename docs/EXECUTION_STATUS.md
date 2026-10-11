@@ -10,6 +10,8 @@ installed module hashes and its **792 passed / 34 skipped** source regression ar
 recorded in [final15-install.json](validation/2026-10-11/final15-install.json).
 Earlier FINAL12 native tasks retain their original candidate and guide hashes.
 This is partial execution evidence, not specification completion or release approval.
+Current acceptance evidence is **33 PASS / 3 FAIL / 8 NOT_RUN**; the newly executed
+general GUI tasks failed rather than remaining unexecuted.
 Machine-readable, sanitized evidence and artifact hashes: [summary.json](validation/2026-10-11/summary.json).
 Latest installed input/profile candidate: [final10.json](validation/2026-10-11/final10.json).
 Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-11/reaction-final10.json).
@@ -58,6 +60,32 @@ The sanitized private probe summary SHA-256 is
 only the owned Blender/Xvfb processes were terminated.
 
 ## Executed evidence
+
+**OBSERVED / actual general GUI tasks:** FINAL15's installed default factory ran
+one native Firefox form and one independent Tk editor task through actual cached
+OmniParser and CLEF workers. Neither completed: browser stopped on ACT-mode
+confidence 0.7271 below the unchanged 0.9 guard; editor requested replanning at
+probability 0.9041. Independent HTTP submission and saved-file/widget oracles
+confirmed zero effects, with zero native inputs and no false completion. All six
+owned cleanup checks passed. The action distributions were NONUNIFORM and no
+candidate truncation occurred. Logs did not retain exact candidate descriptions,
+geometry, decision requests or raw head values, so correct-target coverage is
+unknown. No threshold, prompt, provider or model retry was used. See
+[native task failures](validation/2026-10-11/general-gui-final15-native.json) and
+[retained-trace diagnosis](validation/2026-10-11/general-gui-final15-diagnostic.json).
+
+**OBSERVED / GUI-trained model preparation:** public UI-TARS-2B-SFT was downloaded
+at revision `f366a1db3e7f29635f5b236d6a71dea367a0a700`; both actual F32
+safetensors hashes match the pinned producer metadata. An offline standard
+Qwen2VL BF16 CUDA development smoke loaded it and produced coordinate tokens,
+without remote code or OS input. That image is excluded from future heldout
+evaluation. One forward is neither a quality comparison nor a speed improvement.
+The original producer's coordinate prompt and /1000 mapping are pinned; its
+OpenAI-compatible frequency penalty has no identical Transformers parameter,
+which remains an explicit decoding difference. No default model, confidence gate
+or production operation was changed. See
+[pinned acquisition](validation/2026-10-11/ui-tars2b-pinned-acquisition.json) and
+[development smoke](validation/2026-10-11/ui-tars2b-development-smoke.json).
 
 - **OBSERVED / source fixture:** FINAL6 source regression reports **772 passed, 34 skipped** and 41 warnings.
   Earlier FINAL5: 767 passed, 34 skipped; phase: 766 passed, 34 skipped. Unit/protocol/fixture coverage is distinct
@@ -579,7 +607,17 @@ preflight then verified the all-thread union against an independent PPID oracle.
 Both original observer failures remain retained. See
 [stopped observer attempt](validation/2026-10-11/active-gui-update-final15-observer-stopped.json).
 
-**OBSERVED / latest native Windows installation:** immutable f440de1 installed and
+**OBSERVED / exact-source CI Windows installation:** CI `38143663561` at `6cdf182`
+passed 15 platform/Python builds and assembly; the existing branch policy skipped
+deployment. Its actual Windows ZIP installed and repeated, matched all 61 installed
+files to the immutable wheel, enrolled three guides across three selected profiles
+and passed native Codex project discovery. All six preservation/cleanup checks
+passed, including global V2 and prior customized bytes. Sixty wheel files match
+Git exactly; the generated manifest has equal parsed values but platform-dependent
+key ordering. That exception is explicit. No model, GUI, input or service task ran.
+See [CI Windows installation](validation/2026-10-11/windows-ci6cdf182-install.json).
+
+**OBSERVED / earlier native Windows installation:** immutable f440de1 installed and
 repeated successfully, matched 61 package files (46 Python modules, 15 resources),
 enrolled three guides for three profiles and passed native Codex project discovery.
 Global V2, configuration, PATH and prior customized bytes survived. Earlier

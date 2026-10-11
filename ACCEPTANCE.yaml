@@ -724,7 +724,7 @@ scenarios:
 - id: E2E-02
   category: e2e
   requirement: Browser form and independent editor validate non-Blender generality.
-  status: NOT_RUN
+  status: FAIL
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_browser
@@ -738,8 +738,20 @@ scenarios:
     section: evidence.reaction
     claim: MEASURED
     partial: true
-  execution_note: Real Firefox form and independent Code/Tk native exact-text effects observed;
-    SessionRuntime/harness general task E2E NOT_RUN.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.general_gui_final15_native
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.general_gui_final15_diagnostic
+    claim: OBSERVED
+    partial: true
+  execution_note: Actual FINAL15 default-runtime Omni/CLEF Firefox form and independent Tk
+    editor tasks completed0/2, with native input0/effects0/false completion0. Browser ACT-mode
+    confidence .7271 below unchanged .9 guard; editor replan probability .9041 caused
+    NEEDS_REPLAN. All6 owned cleanup checks passed. Actual distributions NONUNIFORM;
+    candidate rosters/request lengths not retained, so correct-target coverage remains unknown.
+    Earlier input-only Firefox/Code/Tk effects remain separate and do not establish task success.
 - id: E2E-03
   category: e2e
   requirement: Reici GUI edits have actual matched-view evidence and independent review status.

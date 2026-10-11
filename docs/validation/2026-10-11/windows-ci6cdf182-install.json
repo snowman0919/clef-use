@@ -1,0 +1,943 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "scope": "Native Windows immutable CI artifact installation and catalog discovery only; no model, GUI, input or production service actions.",
+  "ci": {
+    "run": 38143663561,
+    "attempt": 1,
+    "commit": "6cdf18281b404663591057b4f1cef9529ebb0294",
+    "artifact_name": "site-windows-2022-3.11",
+    "artifact_id": 11703598173,
+    "deployment": "SKIPPED",
+    "outer_zip": {
+      "artifact_id": 11703598173,
+      "sha256": "e7c434988d55c32e95e0000c21deb6ea1f75edd5da6498d518ccfb5adab2a194",
+      "metadata_sha256": "e7c434988d55c32e95e0000c21deb6ea1f75edd5da6498d518ccfb5adab2a194",
+      "checksum_matches": true,
+      "bytes": 28744874,
+      "extracted_site_exact_match": true,
+      "extracted_files": 9
+    }
+  },
+  "archive_sha256": "1bc84ce63b79e88ecaed702250908d612004c2263b2108955afc4e01c7eefa9d",
+  "wheel_sha256": "19b09b333f64ff41612ab1fd20e46586f76e0f73b11645f8b48b96b3785cfd42",
+  "installer_ps1_sha256": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+  "decoded_packaged_installer_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+  "native_platform": "win32",
+  "native_python": "3.11.9",
+  "runtime_version": "0.1.30",
+  "fresh": "INSTALLED",
+  "repeat": "CURRENT",
+  "live_contract": {
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "guide_bundle_sha256": "12ced50ecf3bbbd27b04b6ba66ead6826a3148782f7d1f68e21c44b9639d7fcb",
+  "core_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+  "default_runtime_state": {
+    "provider": "NONE",
+    "observation_access_level": "PIXELS_ONLY",
+    "trusted_application_evidence": "UNAVAILABLE",
+    "provider_configuration_path": "UNAVAILABLE",
+    "operation_availability": "BLOCKED",
+    "live_probe": "NOT_PROBED",
+    "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+    "native_state": "Window identity may be available; desktop permissions are not probed."
+  },
+  "source_provenance": {
+    "file_count": 61,
+    "python_modules": 46,
+    "resource_files": 15,
+    "git_exact_byte_matches": 60,
+    "generated_manifest_json_values_equal": true,
+    "exception": "Generated agent-skills/manifest.json contains equal parsed data with platform-dependent key order; it is not byte-identical to the Git object. No archive or installed source patch.",
+    "files": [
+      {
+        "path": "clef_use/__init__.py",
+        "git_sha256": "1ae22733b78bd09254de860a6963c83323e18e3aaf4861fde024efea68f66687",
+        "wheel_sha256": "1ae22733b78bd09254de860a6963c83323e18e3aaf4861fde024efea68f66687",
+        "exact": true,
+        "git_bytes": 161,
+        "wheel_bytes": 161,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/activity.py",
+        "git_sha256": "c5af31d0faec6d49049deda27f0bc5c13a027eb943295df6c7615e7ce857878b",
+        "wheel_sha256": "c5af31d0faec6d49049deda27f0bc5c13a027eb943295df6c7615e7ce857878b",
+        "exact": true,
+        "git_bytes": 4388,
+        "wheel_bytes": 4388,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/activity_display.py",
+        "git_sha256": "2d917e7b5e521d5fadfddc7d7caa5eab90521385a505991da630b6bf6534bfbc",
+        "wheel_sha256": "2d917e7b5e521d5fadfddc7d7caa5eab90521385a505991da630b6bf6534bfbc",
+        "exact": true,
+        "git_bytes": 3514,
+        "wheel_bytes": 3514,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/activity_macos.py",
+        "git_sha256": "d6d5892140129ad881c3e9e2931943c286830c9f82a18e72c530f79e2adf5d84",
+        "wheel_sha256": "d6d5892140129ad881c3e9e2931943c286830c9f82a18e72c530f79e2adf5d84",
+        "exact": true,
+        "git_bytes": 3266,
+        "wheel_bytes": 3266,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/activity_windows.py",
+        "git_sha256": "adf724071b9d914785dc72963fad5c9e20d6115f46dfb5f0fcae5f893ef39290",
+        "wheel_sha256": "adf724071b9d914785dc72963fad5c9e20d6115f46dfb5f0fcae5f893ef39290",
+        "exact": true,
+        "git_bytes": 5881,
+        "wheel_bytes": 5881,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/activity_x11.py",
+        "git_sha256": "c94060c1541532f02dd0f4c4733361a9ba8d819f88072280b5586848a1343f12",
+        "wheel_sha256": "c94060c1541532f02dd0f4c4733361a9ba8d819f88072280b5586848a1343f12",
+        "exact": true,
+        "git_bytes": 6511,
+        "wheel_bytes": 6511,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/backends.py",
+        "git_sha256": "d1d614111278172a6ac444b959b17b5b8e90fe45592e187a5e5ca5a9c8909163",
+        "wheel_sha256": "d1d614111278172a6ac444b959b17b5b8e90fe45592e187a5e5ca5a9c8909163",
+        "exact": true,
+        "git_bytes": 32874,
+        "wheel_bytes": 32874,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/benchmark.py",
+        "git_sha256": "b3bd4f91b32c8b7cd7564d3f6501c7f0eb4e5020cac6e5e28509816879e2f66d",
+        "wheel_sha256": "b3bd4f91b32c8b7cd7564d3f6501c7f0eb4e5020cac6e5e28509816879e2f66d",
+        "exact": true,
+        "git_bytes": 5047,
+        "wheel_bytes": 5047,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/candidates.py",
+        "git_sha256": "d304844949d97322424ff0c481ba849b0f27ba08edc13496aa6c9f7e96e66372",
+        "wheel_sha256": "d304844949d97322424ff0c481ba849b0f27ba08edc13496aa6c9f7e96e66372",
+        "exact": true,
+        "git_bytes": 8024,
+        "wheel_bytes": 8024,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/capabilities.py",
+        "git_sha256": "5e3e4b4eed6b4701892f968c3813b05dde537345841ce05a7b4922d0378c3733",
+        "wheel_sha256": "5e3e4b4eed6b4701892f968c3813b05dde537345841ce05a7b4922d0378c3733",
+        "exact": true,
+        "git_bytes": 6482,
+        "wheel_bytes": 6482,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/cli.py",
+        "git_sha256": "5899761fbdb4ae3a75584eeef3adee745ee49ffb3ed91fa32b3da83ff994b5ad",
+        "wheel_sha256": "5899761fbdb4ae3a75584eeef3adee745ee49ffb3ed91fa32b3da83ff994b5ad",
+        "exact": true,
+        "git_bytes": 16259,
+        "wheel_bytes": 16259,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/client.py",
+        "git_sha256": "3b15c16d5a2888d1987d19926082bd8e825fb151e0210b90a9f5f26a16d4687f",
+        "wheel_sha256": "3b15c16d5a2888d1987d19926082bd8e825fb151e0210b90a9f5f26a16d4687f",
+        "exact": true,
+        "git_bytes": 9788,
+        "wheel_bytes": 9788,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/config.py",
+        "git_sha256": "ae1497a5ccbf7d57c054b19fb3f9363765ccb4184e554e3f5c31ae91d3100aa1",
+        "wheel_sha256": "ae1497a5ccbf7d57c054b19fb3f9363765ccb4184e554e3f5c31ae91d3100aa1",
+        "exact": true,
+        "git_bytes": 3617,
+        "wheel_bytes": 3617,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/decision_benchmark.py",
+        "git_sha256": "ce858a1253c77b5c49354bbb46d164ca142c1f99e34bd088599e81ab1b01e0b2",
+        "wheel_sha256": "ce858a1253c77b5c49354bbb46d164ca142c1f99e34bd088599e81ab1b01e0b2",
+        "exact": true,
+        "git_bytes": 14620,
+        "wheel_bytes": 14620,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/decision_contract.py",
+        "git_sha256": "62681e6033c9a0841612a11fb4a4e3d86363481d9230a528f7b54ef5282ddb76",
+        "wheel_sha256": "62681e6033c9a0841612a11fb4a4e3d86363481d9230a528f7b54ef5282ddb76",
+        "exact": true,
+        "git_bytes": 3797,
+        "wheel_bytes": 3797,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/decision_diagnostics.py",
+        "git_sha256": "e5b2826b53ee81adae9ed4429099bc2dcd12be0a9d7e7f5ba6f22f8833f91f10",
+        "wheel_sha256": "e5b2826b53ee81adae9ed4429099bc2dcd12be0a9d7e7f5ba6f22f8833f91f10",
+        "exact": true,
+        "git_bytes": 1305,
+        "wheel_bytes": 1305,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/deployment_profiles.py",
+        "git_sha256": "fc3fb57bb94c07cd25b36551632b07af973412998385fdccdc0b15c5d689e37f",
+        "wheel_sha256": "fc3fb57bb94c07cd25b36551632b07af973412998385fdccdc0b15c5d689e37f",
+        "exact": true,
+        "git_bytes": 6561,
+        "wheel_bytes": 6561,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/doctor.py",
+        "git_sha256": "e85556ecb54d89596b0ca19f423a31b573527b02a655268c963d387b656ac7f7",
+        "wheel_sha256": "e85556ecb54d89596b0ca19f423a31b573527b02a655268c963d387b656ac7f7",
+        "exact": true,
+        "git_bytes": 7983,
+        "wheel_bytes": 7983,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/grounding.py",
+        "git_sha256": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+        "wheel_sha256": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+        "exact": true,
+        "git_bytes": 38584,
+        "wheel_bytes": 38584,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/harness.py",
+        "git_sha256": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+        "wheel_sha256": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+        "exact": true,
+        "git_bytes": 12439,
+        "wheel_bytes": 12439,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/head_trace.py",
+        "git_sha256": "a7a0e737a2a3e9b42cd854473930cef40b60888aa9884b34a170e243cf964e1d",
+        "wheel_sha256": "a7a0e737a2a3e9b42cd854473930cef40b60888aa9884b34a170e243cf964e1d",
+        "exact": true,
+        "git_bytes": 11430,
+        "wheel_bytes": 11430,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/input_ir.py",
+        "git_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+        "wheel_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+        "exact": true,
+        "git_bytes": 37213,
+        "wheel_bytes": 37213,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/installer.py",
+        "git_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+        "wheel_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+        "exact": true,
+        "git_bytes": 30206,
+        "wheel_bytes": 30206,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/integrations.py",
+        "git_sha256": "fd9df346ff262e103c9a6c0ee54f2958266123264f5d579937a1c8a65ae84be4",
+        "wheel_sha256": "fd9df346ff262e103c9a6c0ee54f2958266123264f5d579937a1c8a65ae84be4",
+        "exact": true,
+        "git_bytes": 63625,
+        "wheel_bytes": 63625,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/interfaces.py",
+        "git_sha256": "ee414e43b5815bd2dc30dd9a099440fef6cda31b80df536bce2de0fd0be1e107",
+        "wheel_sha256": "ee414e43b5815bd2dc30dd9a099440fef6cda31b80df536bce2de0fd0be1e107",
+        "exact": true,
+        "git_bytes": 920,
+        "wheel_bytes": 920,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/maintenance.py",
+        "git_sha256": "fb706c7363117f980f525b0607ffd21fe2031cfe512c7e0c8a3138cd8b811392",
+        "wheel_sha256": "fb706c7363117f980f525b0607ffd21fe2031cfe512c7e0c8a3138cd8b811392",
+        "exact": true,
+        "git_bytes": 10748,
+        "wheel_bytes": 10748,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/mcp_server.py",
+        "git_sha256": "1409a64ef97d13f3202a465152f426908203622ab1e453ba5404cc6d45bb0f37",
+        "wheel_sha256": "1409a64ef97d13f3202a465152f426908203622ab1e453ba5404cc6d45bb0f37",
+        "exact": true,
+        "git_bytes": 7143,
+        "wheel_bytes": 7143,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/ml_probe.py",
+        "git_sha256": "7f6b10ee79a9e66a66b6d7820ad05ab7c094ef8bdf903b1ddddd47b14b491c51",
+        "wheel_sha256": "7f6b10ee79a9e66a66b6d7820ad05ab7c094ef8bdf903b1ddddd47b14b491c51",
+        "exact": true,
+        "git_bytes": 4688,
+        "wheel_bytes": 4688,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/model_worker.py",
+        "git_sha256": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+        "wheel_sha256": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+        "exact": true,
+        "git_bytes": 30352,
+        "wheel_bytes": 30352,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/models.py",
+        "git_sha256": "4e6b2eb224a509ddab5eea3734eefb29627ced1fcf01cb2a7ab003f4bafb5853",
+        "wheel_sha256": "4e6b2eb224a509ddab5eea3734eefb29627ced1fcf01cb2a7ab003f4bafb5853",
+        "exact": true,
+        "git_bytes": 5689,
+        "wheel_bytes": 5689,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/native_dependencies.py",
+        "git_sha256": "4a02f30caa60cf3b1d6bbe77a07edd09fa39147bb913aa1b2aaa4c03a2846f1d",
+        "wheel_sha256": "4a02f30caa60cf3b1d6bbe77a07edd09fa39147bb913aa1b2aaa4c03a2846f1d",
+        "exact": true,
+        "git_bytes": 5262,
+        "wheel_bytes": 5262,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/objects.py",
+        "git_sha256": "898d3b9213d4075b98d7f35eae53c375d980e2ec8fe4f74a873bf365e170766e",
+        "wheel_sha256": "898d3b9213d4075b98d7f35eae53c375d980e2ec8fe4f74a873bf365e170766e",
+        "exact": true,
+        "git_bytes": 1622,
+        "wheel_bytes": 1622,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/operations.py",
+        "git_sha256": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+        "wheel_sha256": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+        "exact": true,
+        "git_bytes": 29160,
+        "wheel_bytes": 29160,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/preparation_progress.py",
+        "git_sha256": "43bfd8043f28e0322bfab15991a025eb710461fb2f7e034c907208d8c7e8277a",
+        "wheel_sha256": "43bfd8043f28e0322bfab15991a025eb710461fb2f7e034c907208d8c7e8277a",
+        "exact": true,
+        "git_bytes": 1675,
+        "wheel_bytes": 1675,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/provision.py",
+        "git_sha256": "45d9d171009bab467224d4e071d3f51309592de9bb6f533fa8b1574547ddacd6",
+        "wheel_sha256": "45d9d171009bab467224d4e071d3f51309592de9bb6f533fa8b1574547ddacd6",
+        "exact": true,
+        "git_bytes": 12789,
+        "wheel_bytes": 12789,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/reaction_metrics.py",
+        "git_sha256": "86c626b6d7c7f24b935965b463d68dd74327960c44e59fe1ed1ea19f5cf38d66",
+        "wheel_sha256": "86c626b6d7c7f24b935965b463d68dd74327960c44e59fe1ed1ea19f5cf38d66",
+        "exact": true,
+        "git_bytes": 3148,
+        "wheel_bytes": 3148,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/router.py",
+        "git_sha256": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+        "wheel_sha256": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+        "exact": true,
+        "git_bytes": 12847,
+        "wheel_bytes": 12847,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/runtime.py",
+        "git_sha256": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+        "wheel_sha256": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+        "exact": true,
+        "git_bytes": 59174,
+        "wheel_bytes": 59174,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/schema.py",
+        "git_sha256": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+        "wheel_sha256": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+        "exact": true,
+        "git_bytes": 10610,
+        "wheel_bytes": 10610,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/service.py",
+        "git_sha256": "812871cc3075f99c266fefdc6451775183000ce4b935b6535dfe00b3f69e9841",
+        "wheel_sha256": "812871cc3075f99c266fefdc6451775183000ce4b935b6535dfe00b3f69e9841",
+        "exact": true,
+        "git_bytes": 15828,
+        "wheel_bytes": 15828,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/state.py",
+        "git_sha256": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8",
+        "wheel_sha256": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8",
+        "exact": true,
+        "git_bytes": 5607,
+        "wheel_bytes": 5607,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/update_notice.py",
+        "git_sha256": "8a6b76eaafa906c208e4125a55762bbd1c87b9bed1692294e28fdc33502749fe",
+        "wheel_sha256": "8a6b76eaafa906c208e4125a55762bbd1c87b9bed1692294e28fdc33502749fe",
+        "exact": true,
+        "git_bytes": 1510,
+        "wheel_bytes": 1510,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/verification.py",
+        "git_sha256": "00d307a77785227457d40ce27ab691aeb0028d412aaa632043e5722f5aa7b94d",
+        "wheel_sha256": "00d307a77785227457d40ce27ab691aeb0028d412aaa632043e5722f5aa7b94d",
+        "exact": true,
+        "git_bytes": 7196,
+        "wheel_bytes": 7196,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/windows_input.py",
+        "git_sha256": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648",
+        "wheel_sha256": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648",
+        "exact": true,
+        "git_bytes": 13335,
+        "wheel_bytes": 13335,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/x11_clipboard.py",
+        "git_sha256": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3",
+        "wheel_sha256": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3",
+        "exact": true,
+        "git_bytes": 21852,
+        "wheel_bytes": 21852,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/x11_input_state.py",
+        "git_sha256": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+        "wheel_sha256": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+        "exact": true,
+        "git_bytes": 3145,
+        "wheel_bytes": 3145,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-clef.txt",
+        "git_sha256": "6bb2ad97596b97cbd80aaf351d3e8c514a5c4c85a34e0c188ae8d7d38e0384cb",
+        "wheel_sha256": "6bb2ad97596b97cbd80aaf351d3e8c514a5c4c85a34e0c188ae8d7d38e0384cb",
+        "exact": true,
+        "git_bytes": 71782,
+        "wheel_bytes": 71782,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-d1.txt",
+        "git_sha256": "7aeb4d4afd612ff6be878745d89f596a62da8f2a8a811e4c4043018fba0b0f5e",
+        "wheel_sha256": "7aeb4d4afd612ff6be878745d89f596a62da8f2a8a811e4c4043018fba0b0f5e",
+        "exact": true,
+        "git_bytes": 61835,
+        "wheel_bytes": 61835,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-omni.txt",
+        "git_sha256": "20e31b2828f4923ec8c1bb2656381d31a8b99c1a9c31bdc0ba9cbcfab47b70e4",
+        "wheel_sha256": "20e31b2828f4923ec8c1bb2656381d31a8b99c1a9c31bdc0ba9cbcfab47b70e4",
+        "exact": true,
+        "git_bytes": 216506,
+        "wheel_bytes": 216506,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-windows-nf4.txt",
+        "git_sha256": "479225a0abce94b7387205a62d0d991548cf5ddeb915066b7501bc129c780ba2",
+        "wheel_sha256": "479225a0abce94b7387205a62d0d991548cf5ddeb915066b7501bc129c780ba2",
+        "exact": true,
+        "git_bytes": 100,
+        "wheel_bytes": 100,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-windows-rocm.txt",
+        "git_sha256": "049dd697db89beae75047c0ec83e91b937c046f6fb0d4286bfc88a40224fe138",
+        "wheel_sha256": "049dd697db89beae75047c0ec83e91b937c046f6fb0d4286bfc88a40224fe138",
+        "exact": true,
+        "git_bytes": 1184,
+        "wheel_bytes": 1184,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/assets/ml-windows-torch-cpu.txt",
+        "git_sha256": "ede3f01100c69b59c29ee0c707ea41287c8f99b43666d8ab84f36d8f3436f2e3",
+        "wheel_sha256": "ede3f01100c69b59c29ee0c707ea41287c8f99b43666d8ab84f36d8f3436f2e3",
+        "exact": true,
+        "git_bytes": 259,
+        "wheel_bytes": 259,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/examples.json",
+        "git_sha256": "b208836816c129f46b779164cbbf0393f0a7ca691461e1b75a080520e1460f2c",
+        "wheel_sha256": "b208836816c129f46b779164cbbf0393f0a7ca691461e1b75a080520e1460f2c",
+        "exact": true,
+        "git_bytes": 1122,
+        "wheel_bytes": 1122,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/manifest.json",
+        "git_sha256": "1a84039cfecffbee554391b091465b7bc9c78ef2f80ceed139e01937c8703e5f",
+        "wheel_sha256": "f751982b04f5e6e25c9c939e92a824ba22816d57faa98644c7e18f0c4a9fe256",
+        "exact": false,
+        "git_bytes": 1382,
+        "wheel_bytes": 1382,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": false
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use/SKILL.md",
+        "git_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "wheel_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "exact": true,
+        "git_bytes": 4887,
+        "wheel_bytes": 4887,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use/references/API_BASELINE.md",
+        "git_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "wheel_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "exact": true,
+        "git_bytes": 2200,
+        "wheel_bytes": 2200,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use/references/LIVE_API.md",
+        "git_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "wheel_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "exact": true,
+        "git_bytes": 1137,
+        "wheel_bytes": 1137,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use-blender/SKILL.md",
+        "git_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "wheel_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "exact": true,
+        "git_bytes": 3590,
+        "wheel_bytes": 3590,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use-blender/references/OPERATIONS.md",
+        "git_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "wheel_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "exact": true,
+        "git_bytes": 3046,
+        "wheel_bytes": 3046,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use-diagnostics/SKILL.md",
+        "git_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "wheel_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "exact": true,
+        "git_bytes": 3097,
+        "wheel_bytes": 3097,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      },
+      {
+        "path": "clef_use/agent-skills/clef-use-diagnostics/references/FAILURES.md",
+        "git_sha256": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b",
+        "wheel_sha256": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b",
+        "exact": true,
+        "git_bytes": 1603,
+        "wheel_bytes": 1603,
+        "git_crlf": 0,
+        "wheel_crlf": 0,
+        "lf_normalized_equal": true
+      }
+    ]
+  },
+  "installed_to_wheel": {
+    "exact_matches": 61,
+    "total": 61,
+    "all_match": true
+  },
+  "guide_profiles": {
+    "fresh_explicit_three": [
+      {
+        "harness": "codex",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "hermes",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "omp",
+        "status": "INSTALLED"
+      }
+    ],
+    "repeat_explicit_three": [
+      {
+        "harness": "codex",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "hermes",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "omp",
+        "status": "UNCHANGED"
+      }
+    ],
+    "deployed_file_hash_matches": {
+      "codex": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      },
+      "hermes": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      },
+      "omp": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      }
+    },
+    "project_codex_file_hash_matches": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      }
+    }
+  },
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_config_comments_preserved": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "OMP_disabled_agents_setting_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true
+  },
+  "catalog": {
+    "status": "NOT_RUN",
+    "stages": {
+      "INSTALLED": {
+        "status": "PASS"
+      },
+      "DISCOVERED": {
+        "status": "PASS"
+      },
+      "LOADED": {
+        "status": "NOT_RUN"
+      },
+      "INVOKED": {
+        "status": "NOT_RUN"
+      },
+      "TASK_VERIFIED": {
+        "status": "NOT_RUN"
+      }
+    },
+    "compatibility": {
+      "status": "MATCH",
+      "reload_required": false,
+      "installed_release": "0.1.30",
+      "runtime_release": "0.1.30",
+      "action": null
+    }
+  },
+  "harness_availability": {
+    "codex": true,
+    "hermes": false,
+    "omp": false,
+    "pi": true
+  },
+  "availability_note": "omp and hermes commands absent; pi command present but not identified or exercised. Do not infer full OMP consumer absence.",
+  "preservation_and_cleanup": {
+    "owned_loopback_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_V2_runtime_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "global_wrapper_target_same_hashed_bootstrap_runtime": true,
+  "steps": [
+    {
+      "name": "fresh-install",
+      "exit_code": 0,
+      "seconds": 46.65599999995902
+    },
+    {
+      "name": "wrapper-version",
+      "exit_code": 0,
+      "seconds": 0.3589999999385327
+    },
+    {
+      "name": "native-version",
+      "exit_code": 0,
+      "seconds": 0.3600000001024455
+    },
+    {
+      "name": "capabilities-detail",
+      "exit_code": 0,
+      "seconds": 0.7180000001098961
+    },
+    {
+      "name": "explicit-three-guides",
+      "exit_code": 0,
+      "seconds": 2.7340000001713634
+    },
+    {
+      "name": "repeat-bootstrap",
+      "exit_code": 0,
+      "seconds": 10.516000000061467
+    },
+    {
+      "name": "repeat-explicit-three",
+      "exit_code": 0,
+      "seconds": 2.75
+    },
+    {
+      "name": "project-codex-integrate",
+      "exit_code": 0,
+      "seconds": 1.452999999979511
+    },
+    {
+      "name": "project-codex-native",
+      "exit_code": 0,
+      "seconds": 1.297000000020489
+    }
+  ],
+  "timing_scope": "Descriptive native installation durations only; no latency, speedup or100ms acceptance claim.",
+  "not_run": [
+    "Native Codex model LOADED/INVOKED/TASK_VERIFIED (read-only catalog scope).",
+    "Hermes native discovery/load/invoke (hermes command absent).",
+    "OMP/pi native consumer discovery/load/invoke (omp command absent; pi command present, not identified/exercised).",
+    "GUI/input/service and production state-provider readiness.",
+    "New crash/adversarial/update rollback matrix and user-edited deployed guide update case; prior evidence remains separately attributed."
+  ],
+  "private_report_sha256": "489b8adcf330d8cd69477c041b4f3ea9097898bf340b53af63f7867a93cd3cd7",
+  "native_helper_sha256": "46fc8587f4a442f83bfff499b800a5fac54d6f17266aacf55a7852e6e20b16cd",
+  "predeclaration_sha256": "72542c3b6c9b8bb3e520e1762d34bba17c5fcedcccdf56d76825a20e08b4bb24",
+  "privacy": "No user paths, credentials, socket/token/session identifiers, screenshots, raw model or user content included.",
+  "received_native_artifact_sha256": "f41c1e6800ea0e2a1655e6213aeffea2674ff6ad6b9f8d499d086d47f1313fde"
+}
