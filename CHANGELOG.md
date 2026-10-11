@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Record pre-pruning candidate coverage diagnostics without relaxing confidence
+  gates; distinguish singleton/uniform distributions and numeric false completions.
+
 - Add typed keyboard, literal text, three-button pointer and modifier gestures
   with bounded ownership and independent native abort recovery.
 

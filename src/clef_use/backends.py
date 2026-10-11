@@ -328,6 +328,9 @@ class DecisionBackend:
         import math
 
         probabilities = choice.get("probabilities", {})
+        from .decision_diagnostics import distribution_metrics
+
+        diagnostics = distribution_metrics(probabilities)
         total = sum(probabilities.values())
         entropy = None
         if total > 0:
@@ -346,6 +349,7 @@ class DecisionBackend:
             action=None if choice["choice"] == "none" else choice["choice"],
             confidence=choice["confidence"],
             entropy=entropy,
+            diagnostics=diagnostics,
             goal_probability=answers["complete"]["noul"],
             replan_probability=answers["replan"]["noul"],
             safety_probability=answers["unsafe"]["noul"],

@@ -6,7 +6,7 @@ from enum import StrEnum
 from typing import Literal
 
 from PIL import Image
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, model_validator
 
 
 class StrictModel(BaseModel):
@@ -192,6 +192,7 @@ class Decision(StrictModel):
     progress: float = Field(default=0, ge=0, le=1)
     condition_probabilities: tuple[float, ...] = ()
     entropy: float | None = Field(default=None, ge=0)
+    diagnostics: dict[str, JsonValue] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def valid_conditions(self):

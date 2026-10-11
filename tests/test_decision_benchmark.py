@@ -7,6 +7,20 @@ from PIL import Image
 from clef_use.decision_benchmark import load_corpus, promotion_gate, score_answers
 
 
+def test_confident_numeric_completion_of_known_incomplete_state_blocks_promotion():
+    assert score_answers({"complete": {"range": [0, 0.1]}}, {"complete": {"noul": 0.99}}) == {
+        "known_fields": 1,
+        "correct_fields": 0,
+        "false_completions": 1,
+    }
+    assert (
+        score_answers({"complete": {"range": [0.9, 1]}}, {"complete": {"noul": 0.99}})[
+            "false_completions"
+        ]
+        == 0
+    )
+
+
 def write_corpus(tmp_path, **changes):
     image = tmp_path / "capture.png"
     Image.new("RGB", (40, 30), "white").save(image)
