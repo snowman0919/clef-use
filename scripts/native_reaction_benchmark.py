@@ -34,12 +34,17 @@ def summarize(rows, elapsed_seconds, target_ms):
     correct = [row for row in rows if row["verified"] and not row["critical_errors"]]
     latencies = [row["event_latency_ms"] for row in correct if row["event_latency_ms"] is not None]
     fast = sum(value <= target_ms for value in latencies)
+    eligibility_known = bool(rows) and all(type(row.get("fast_eligible")) is bool for row in rows)
     return {
         "opportunities": len(rows),
         "correct": len(correct),
         "accuracy": len(correct) / len(rows) if rows else None,
         "fast_correct": fast,
-        "fast_coverage": fast / len(rows) if rows else None,
+        "goodput_100": sum(value <= 100 for value in latencies) / len(rows) if rows else None,
+        "fast_coverage": sum(row["fast_eligible"] for row in rows) / len(rows)
+        if eligibility_known
+        else None,
+        "fast_coverage_status": "MEASURED" if eligibility_known else "NOT_MEASURED",
         "misses": len(rows) - fast,
         "critical_errors": sum(len(row["critical_errors"]) for row in rows),
         "failed_opportunities": len(rows) - len(correct),

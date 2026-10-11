@@ -18,6 +18,8 @@
   verify effects; they do not establish pixels-only production support.
 - Record pre-pruning candidate coverage diagnostics without relaxing confidence
   gates; distinguish singleton/uniform distributions and numeric false completions.
+- Keep deadline goodput separate from fast-path eligibility coverage; unrecorded
+  eligibility remains unmeasured in native benchmark reports.
 - Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
   full harness task success or public release is claimed for this candidate.
 
