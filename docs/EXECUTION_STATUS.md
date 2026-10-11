@@ -103,9 +103,23 @@ immediate foreground readback was `None`. A later restoration-only probe found t
 original window valid while foreground had independently changed, so it preserved
 that foreground and did not replay native input. The raw report's old source-scope
 label is explicitly stale; module hashes identify the actual FINAL5 components.
-This failure is not hidden by passing input cases. Managed final-version Windows
-installation/lifecycle, harness task E2E and active IME composition remain **NOT_RUN**;
-Windows overall and release are not PASS.
+This failure is not hidden by passing input cases. Windows overall and release
+are not PASS.
+
+**OBSERVED / FINAL7 Windows installation:** the exact Windows CI artifact from
+run `38127830854` installed the runtime, matched all five contract fields and
+preserved the working wrapper after a checksum-refused update. Actual managed
+integration failed: native text-mode writes converted guide LF bytes to CRLF and
+existing CRLF configuration to CRCRLF, breaking hashes and transaction recovery.
+An intermediate private install with only the canonical atomic-writer fix then
+preserved exact mixed newlines/Unicode, installed all three profiles idempotently,
+and preserved customized guides and disabled entries. Codex discovered all three
+project guides; isolated user-root discovery failed because native Windows Codex
+used the real known-folder home rather than overridden environment variables.
+Both outcomes remain recorded in
+[`windows-final7-integration.json`](validation/2026-10-11/windows-final7-integration.json).
+This source-patched install is not an immutable rebuilt artifact. Fresh fixed
+artifact validation, harness GUI tasks and active IME composition remain **NOT_RUN**.
 
 ## Actual harness stages
 
@@ -119,12 +133,15 @@ These fresh native-library checks do not establish model triggering or GUI tasks
 All eight Blender/input core module hashes match FINAL5; native results remain
 attributed to their actual installed candidates.
 
-These are pre-FINAL4 `0.1.30` guide-bundle observations. The FINAL4 Blender reference
-changed afterward; prior stages do not certify a fresh FINAL4 guide reload.
+Hermes and OMP model-trigger observations below used the pre-FINAL4 `0.1.30`
+guide bundle. The Blender reference changed afterward; these earlier model stages
+do not certify a fresh FINAL4 guide reload. Codex's later model-trigger check used
+the exact FINAL6 bundle and is recorded separately in
+[`codex-final6-triggers.json`](validation/2026-10-11/codex-final6-triggers.json).
 
 | Harness | INSTALLED | DISCOVERED | LOADED | INVOKED (read-only) | GUI TASK_VERIFIED |
 | --- | --- | --- | --- | --- | --- |
-| Codex | PASS | PASS (native catalog) | NOT_RUN | NOT_RUN | NOT_RUN |
+| Codex | PASS | PASS (native catalog) | PASS (FINAL6 explicit/natural) | PASS (capabilities) | NOT_RUN |
 | Hermes | PASS | PASS | PASS (explicit/natural) | PASS | NOT_RUN |
 | OMP | PASS | PASS | PASS (SDK and achieved model stage) | PASS (achieved stage) | NOT_RUN |
 
@@ -134,6 +151,15 @@ neither. A separate `codex-cli 0.160.1` process in the isolated installation fix
 stopped at provider HTTP 401 `invalid_api_key` using local API-key authentication;
 no credential values are retained. This does not establish an authentication
 failure in the active Codex desktop chat or that the chat uses the same transport.
+An existing authenticated Codex daemon (`0.159.2`, ChatGPT authentication) then
+completed fresh ephemeral `gpt-6.1-sol` turns without changing authentication or
+global configuration. Native discovery resolved all three exact FINAL6 installed
+guide paths. The explicit turn read the core body; the natural Blender turn read
+all three bodies; both successfully called read-only capabilities. The negative
+non-GUI turn read no guide and called no runtime tool. A status call correctly
+refused because there was no active session. Earlier denied-approval rounds are
+retained separately. These results establish the named read-only stages, not a
+GUI task or identity between the daemon and this chat's transport.
 OMP's model natural run achieved
 load/invoke, then exited with `DeadlineExceeded`; overall model session is `NOT_RUN`.
 The independent native SDK survivor check passes after removing Codex's shared owner.
@@ -190,7 +216,7 @@ native, harness, installed or public-release status from another evidence level.
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment provenance pinned; complete original live task/model baseline remains. |
-| M1 discovery/integration | IN_PROGRESS | Portable bundle/install and read-only harness stages observed; Codex auth, final-bundle reload and cross-harness trigger coverage remain. |
+| M1 discovery/integration | IN_PROGRESS | Codex FINAL6 model discovery/load/invoke observed; final-bundle cross-harness triggers and GUI task coverage remain. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
 | M3 state/operations | IN_PROGRESS | Installed API-assisted Blender fixture passes; shipped production provider and canonical original task replay remain. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |

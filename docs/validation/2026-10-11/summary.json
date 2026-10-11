@@ -644,12 +644,12 @@
       "owned_keys_after": [],
       "owned_buttons_after": [],
       "production_desktop_touched": false,
-      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture→DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
+      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture\u2192DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
       "limitation": "Save chord used context=None under a private native window/no-XIM guard; this does not prove general application/text-focus facts or a SessionRuntime/harness workflow."
     },
     "harnesses": {
       "codex": {
-        "bundle_scope": "Pre-FINAL4 0.1.30 candidate guide bundle; FINAL4 Blender reference changed, so these are not FINAL4 reload certificates.",
+        "bundle_scope": "Historical pre-FINAL4 native discovery retained; separate FINAL6 actual-model read-only stages recorded in codex_actual_model.",
         "records": [
           {
             "artifact": "codex_discovery",
@@ -672,7 +672,8 @@
           }
         ],
         "gui_task_verified": "NOT_RUN",
-        "blocker": "Native discovery passed. A separate isolated codex-cli 0.160.1 model request returned HTTP 401 invalid_api_key using local API-key authentication; load/invocation was not completed. This does not establish an authentication failure for the active desktop chat. No credential values retained."
+        "historical_blocker": "Native discovery passed. A separate isolated codex-cli 0.160.1 model request returned HTTP 401 invalid_api_key using local API-key authentication; load/invocation was not completed. This does not establish an authentication failure for the active desktop chat. No credential values retained.",
+        "current_read_only_stages": "PASS: see codex_actual_model; GUI TASK_VERIFIED remains NOT_RUN."
       },
       "hermes": {
         "bundle_scope": "Pre-FINAL4 0.1.30 candidate guide bundle; FINAL4 Blender reference changed, so these are not FINAL4 reload certificates.",
@@ -1434,15 +1435,54 @@
         "removed": true
       },
       "privacy_note": "Windows account/interpreter paths, HWNDs, key-event contents and raw event/motion traces are deliberately omitted."
+    },
+    "codex_actual_model": {
+      "claim": "OBSERVED",
+      "status": "PASS",
+      "candidate": "FINAL6 installed guide bundle",
+      "summary": "docs/validation/2026-10-11/codex-final6-triggers.json",
+      "stages": {
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "scope": "Existing authenticated daemon, same gpt-6.1-sol, explicit/natural/negative cases. Earlier approval failures retained. No authentication repair or global configuration change."
+    },
+    "published_examples": {
+      "claim": "OBSERVED",
+      "status": "PASS",
+      "level": "installed_parser_and_schema",
+      "candidate": "FINAL6 local unpublished runtime with current public documents/generator",
+      "generator_sha256": "8503838c07d9a7f1baf5724ffdff215e38b66b75b10ec92f50b1989a6aea9255",
+      "result": {
+        "status": "PASS",
+        "tool_examples": 3,
+        "cli_examples": 11,
+        "published_cli_examples": 194,
+        "published_tool_examples": 12,
+        "guides": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ]
+      },
+      "scope": "Current published CLI examples and inline tool calls/signatures, generated tool arguments and all guide JSON argument examples validated against the installed parser/schema. Historical execution records and unimplemented design specifications are excluded."
+    },
+    "windows_managed_integration_final7": {
+      "claim": "OBSERVED",
+      "status": "PARTIAL",
+      "summary": "docs/validation/2026-10-11/windows-final7-integration.json",
+      "scope": "Immutable CI artifact actual integration FAIL retained; source-patched private install exact-newline/profile/idempotency/conflict/disable checks PASS; fresh fixed immutable install remains NOT_RUN."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Overall native Windows fixture FAIL: admitted foreground restoration had immediate null readback; later independent foreground change preserved without replay. FINAL5 wheel component input cases pass with matching hashes; managed installation/lifecycle, model/runtime/harness E2E and actual IME composition remain NOT_RUN.",
-    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Historical read-only discovery/load/invocation stages do not certify FINAL4 guides or task completion.",
-    "full_task_performance": "Declared production/Blender/model/harness workload, full b3 baseline comparison, and release quality gates NOT_RUN. The bounded Tk input profile is a separate measurement. FINAL5 benchmark pending; FINAL4 measurements are not relabelled as FINAL5.",
+    "windows": "Original native foreground-restoration fixture FAIL retained; immutable FINAL7 managed integration also FAIL. Source-patched private profile checks PASS in separate evidence. Fixed immutable rebuild, model/runtime/harness GUI E2E and shipped native IME support remain NOT_RUN.",
+    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS; earlier Hermes/OMP model results do not certify fresh FINAL6 triggers or GUI task completion.",
+    "full_task_performance": "Declared production/Blender/model/harness workload, full pinned baseline comparison, and release quality gates NOT_RUN. FINAL5 bounded Tk input measurement is recorded separately; current input changes require fresh installed measurements.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Public upload/download/hash/CI/fresh public install gates NOT_RUN at this snapshot. Local FINAL5 candidate and synthetic lifecycle 0.1.31 are not public releases."
+    "public_release": "Public upload/download/hash/fresh public install NOT_RUN. Existing release CI run38127830854 passed15platform/Python builds and assembly, branch deployment skipped; immutable Windows nativeintegration then failed. Fixedlatest immutable build pending."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -1452,12 +1492,12 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 21,
-    "not_run": 23,
+    "pass": 24,
+    "not_run": 20,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
-      "GUIDE-02": "NOT_RUN",
+      "GUIDE-02": "PASS",
       "GUIDE-03": "NOT_RUN",
       "GUIDE-04": "NOT_RUN",
       "CAP-01": "PASS",
@@ -1473,7 +1513,7 @@
       "INSTALL-08": "PASS",
       "INSTALL-09": "NOT_RUN",
       "INSTALL-10": "NOT_RUN",
-      "HARNESS-01": "NOT_RUN",
+      "HARNESS-01": "PASS",
       "HARNESS-02": "PASS",
       "HARNESS-03": "NOT_RUN",
       "HARNESS-04": "NOT_RUN",
@@ -1498,7 +1538,7 @@
       "E2E-02": "NOT_RUN",
       "E2E-03": "NOT_RUN",
       "RELEASE-01": "NOT_RUN",
-      "RELEASE-02": "NOT_RUN"
+      "RELEASE-02": "PASS"
     },
     "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion."
   },

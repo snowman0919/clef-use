@@ -61,14 +61,15 @@ scenarios:
   category: guides
   requirement: Every published tool and CLI example validates against actual installed
     schemas/parsers.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.generated_contract_check
+    section: evidence.published_examples
     claim: OBSERVED
-    partial: true
-  execution_note: Generated 3 tool/11 CLI examples and four AGENT_GUIDE blocks pass; exhaustive
-    published-example validation is not established.
+    partial: false
+  execution_note: Current published 194 CLI and 12 inline tool examples/signatures, generated tool
+    arguments and guide JSON examples validate against FINAL6 installed parser/schema. Historical
+    evidence and unimplemented design specifications are excluded.
 - id: GUIDE-03
   category: guides
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
@@ -289,14 +290,16 @@ scenarios:
   category: harness
   requirement: Codex actual fresh session discovers and reads guide, then invokes read-only runtime
     tool.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.harnesses
+    section: evidence.codex_actual_model
     claim: OBSERVED
-    partial: true
-  execution_note: Codex native discovery observed; a separate isolated CLI request returned HTTP 401 and prevented model guide
-    load/invocation.
+    partial: false
+  execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
+    FINAL6 native discovery, actual full guide body reads and successful read-only capabilities.
+    Negative non-GUI trigger passed. Earlier isolated CLI 401 and denied-approval rounds are
+    retained separately; GUI TASK_VERIFIED remains NOT_RUN.
 - id: HARNESS-02
   category: harness
   requirement: Hermes actual selected profile discovers and reads guide, then invokes read-only
@@ -646,14 +649,16 @@ scenarios:
 - id: RELEASE-02
   category: release
   requirement: EN/KO/zh-CN/ja setup/usage/troubleshooting examples remain contract-consistent.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.generated_contract_check
+    section: evidence.published_examples
     claim: OBSERVED
-    partial: true
-  execution_note: Four localized AGENT_GUIDE command blocks match; complete published localized
-    setup/usage/troubleshooting validation NOT_RUN.
+    partial: false
+  execution_note: EN/KO/zh-CN/ja generated guide blocks match, managed integration replaces legacy
+    setup examples, and current published setup/usage/troubleshooting CLI and inline tool examples
+    validate against FINAL6 installed parser/schema. This is documentation contract validation,
+    not a localized GUI task or public release certificate.
 evidence_summary: docs/validation/2026-10-11/summary.json
 latest_native_harness_evidence: docs/validation/2026-10-11/final6.json
 latest_native_reaction_evidence: docs/validation/2026-10-11/reaction-final5.json

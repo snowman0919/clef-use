@@ -1,0 +1,284 @@
+{
+  "kind": "NATIVE_WINDOWS_MANAGED_INSTALL_EVIDENCE",
+  "status": "PARTIAL",
+  "claim_class": "OBSERVED",
+  "ci_run": 38127830854,
+  "ci_commit": "02b47a68fb19ae0bf13e317ed2e2aaf076be7974",
+  "artifact_sha256": "b7c18ef78816cc840ff42399f9f8641299669f74d2a9fccef711808509682f35",
+  "native_python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "runtime_version": "0.1.30",
+  "immutable_ci_artifact": {
+    "status": "FAIL",
+    "reason": "Integration transaction newline bytes changed by native Windows text-mode atomic_write",
+    "native_newline_root_cause": {
+      "packaged_sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f",
+      "deployed_sha256": "41dfc55cf60aadcdcc6942e3ee09232c3469aaed88def32700c5dbd3448cda84",
+      "packaged_lf": 83,
+      "packaged_crlf": 0,
+      "packaged_crcrlf": 0,
+      "deployed_lf": 83,
+      "deployed_crlf": 83,
+      "deployed_crcrlf": 0,
+      "equal": false
+    },
+    "contracts": {
+      "api_schema_version": true,
+      "schema_sha256": true,
+      "guide_contract_version": true,
+      "operation_registry_version": true,
+      "guide_bundle_sha256": true
+    },
+    "packaged_guides": [
+      "clef-use",
+      "clef-use-blender",
+      "clef-use-diagnostics"
+    ],
+    "checksum_rollback": {
+      "exit_code": 1,
+      "mismatch_observed": true,
+      "wrapper_preserved": true,
+      "working_version_after": "0.1.30"
+    },
+    "runtime_idempotent": "CURRENT; integration DEGRADED",
+    "owned_server_stopped": true
+  },
+  "source_patched_private_install": {
+    "kind": "SOURCE_PATCHED_PRIVATE_INSTALL",
+    "immutable_ci_artifact": false,
+    "ci_run": 38127830854,
+    "ci_commit": "02b47a68fb19ae0bf13e317ed2e2aaf076be7974",
+    "native_python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+    "package": "<PRIVATE_INSTALL>/site-packages/clef_use",
+    "original_harness_sha256": "88bd8d2346b16de97222db6b4763d7714675c2bdaf0200ab9a15d3cc7599d65d",
+    "patched_harness_sha256": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+    "patch_scope": "Only harness.py atomic_write newline preservation; original preserved separately; old failed profile/journals untouched",
+    "errors": [],
+    "profiles": {
+      "codex": "default at explicit CODEX_HOME",
+      "hermes": "native-selected at explicit HERMES_HOME",
+      "omp": "native-selected under relative PI_CONFIG_DIR=.omp"
+    },
+    "native_atomic_write_exact_bytes": true,
+    "CRLF_comment_prefixes_preserved": {
+      "codex": true,
+      "hermes": true,
+      "omp_settings": true
+    },
+    "omp_existing_value_preserved": true,
+    "idempotent_config_and_manifest_bytes_preserved": true,
+    "modified_guide_bytes_preserved": true,
+    "modified_guide_config_preserved": true,
+    "disabled_config_bytes_preserved": true,
+    "modified_guide_still_preserved": true,
+    "status": "PARTIAL",
+    "model_requests": "NOT_RUN: native catalog only; no authentication copied or repaired",
+    "release_gate": "NOT_RUN: source-patched private install is intermediate proof; immutable rebuilt artifact required",
+    "profile_deployment_status": "PASS",
+    "status_reason": "Native Codex user-scope discovery FAIL retained; project discovery proved separately; load/invoke/model/release gates NOT_RUN."
+  },
+  "source_patched_profile_results": {
+    "first": [
+      "INSTALLED",
+      "INSTALLED",
+      "INSTALLED"
+    ],
+    "repeat": [
+      "UNCHANGED",
+      "UNCHANGED",
+      "UNCHANGED"
+    ],
+    "modified": [
+      "CONFLICT",
+      "UNCHANGED",
+      "UNCHANGED"
+    ],
+    "disabled": [
+      "DISABLED",
+      "DISABLED",
+      "DISABLED"
+    ],
+    "all_packaged_deployed_files_match": true
+  },
+  "native_harnesses": {
+    "codex_user": {
+      "harness": "codex",
+      "profile": "default",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS",
+          "modified": []
+        },
+        "DISCOVERED": {
+          "status": "FAIL",
+          "skills": []
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN",
+          "reason": "read-only verification does not execute a GUI fixture"
+        }
+      },
+      "status": "FAIL",
+      "read_only": true,
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      }
+    },
+    "codex_project": {
+      "harness": "codex",
+      "profile": "default",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS",
+          "modified": []
+        },
+        "DISCOVERED": {
+          "status": "PASS",
+          "skills": [
+            {
+              "name": "clef-use",
+              "description": "Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI. Plan bounded actions, inspect fresh state, and verify results. Not for ordinary code-only work or unrelated shell tasks.",
+              "path": "<USERPROFILE>\\AppData\\Local\\Temp\\clef-use-install-final7-20261011-74b6d6\\source-patched-evidence3\\owned-project\\.agents\\skills\\clef-use\\SKILL.md",
+              "scope": "repo",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "clef-use-blender",
+              "description": "Use clef-use for Blender GUI editing, selection, transforms, viewport gestures, materials, or rig inspection. Check editor, mode, keymap, and effects. Not a primitive avatar generator or a substitute for asset-quality review.",
+              "path": "<USERPROFILE>\\AppData\\Local\\Temp\\clef-use-install-final7-20261011-74b6d6\\source-patched-evidence3\\owned-project\\.agents\\skills\\clef-use-blender\\SKILL.md",
+              "scope": "repo",
+              "enabled": true,
+              "pluginId": null
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "description": "Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or mode, input failures, and latency. Use on actual errors or requested audits; prefer read-only evidence and preserve user settings.",
+              "path": "<USERPROFILE>\\AppData\\Local\\Temp\\clef-use-install-final7-20261011-74b6d6\\source-patched-evidence3\\owned-project\\.agents\\skills\\clef-use-diagnostics\\SKILL.md",
+              "scope": "repo",
+              "enabled": true,
+              "pluginId": null
+            }
+          ]
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN",
+          "reason": "read-only verification does not execute a GUI fixture"
+        }
+      },
+      "status": "NOT_RUN",
+      "read_only": true,
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "reason": "native Codex skill discovery passed; model body load/invocation not executed"
+    },
+    "hermes": {
+      "harness": "hermes",
+      "profile": "native-selected",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS",
+          "modified": []
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "status": "NOT_RUN",
+      "read_only": true,
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "reason": "harness executable is unavailable"
+    },
+    "omp": {
+      "harness": "omp",
+      "profile": "native-selected",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS",
+          "modified": []
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "status": "NOT_RUN",
+      "read_only": true,
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "reason": "harness executable is unavailable"
+    }
+  },
+  "original_path_guard_failure": {
+    "status": "OBSERVED_REFUSAL",
+    "reason": "Unicode Windows paths require CLEF_USE_BIN_DIR inside the installation",
+    "fixture_corrected": "bin nested inside owned installation",
+    "global_install_and_configs_preserved": true,
+    "user_path_preserved": true
+  },
+  "original_supported_path_attempt_preservation": {
+    "global_install_and_configs_preserved": true,
+    "user_path_preserved": true,
+    "owned_server_stopped": true
+  },
+  "remaining": {
+    "immutable_fixed_release": "NOT_RUN: rebuilt artifact pending",
+    "model_body_load_invoke": "NOT_RUN: native catalog only; no authentication copied or model requested",
+    "hermes_omp_native": "NOT_RUN: native binaries unavailable",
+    "general_windows_provider": "NOT_RUN: this installation slice never exercises GUI/input"
+  },
+  "raw_private_evidence_files": [
+    "/tmp/clef-native-win-final7-corrected-report.json",
+    "/tmp/clef-native-win-final7-reachable.json",
+    "/tmp/clef-native-win-final7-source-patched-report.json",
+    "/tmp/clef-native-win-final7-project-discovery.json"
+  ]
+}
