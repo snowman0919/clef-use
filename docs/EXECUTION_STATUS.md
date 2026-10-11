@@ -2,7 +2,7 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest frozen implementation: `1e71144` on `codex/reactive-agent-contracts`.
+Latest frozen implementation and fixture: `a7a46b5` on `codex/reactive-agent-contracts`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
 Latest local candidate: FINAL12, built from the current changes; installed module
 hashes and its **783 passed / 34 skipped** source regression are recorded in
@@ -444,8 +444,15 @@ earlier boundaries resumed as `INSTALLED`. No installer function was substituted
 The genuine pinned 0.1.29 to immutable CI 0.1.30 update also passed all eleven
 declared crash/resume boundaries. Before pointer activation the old native 0.1.29
 runtime remained usable; after activation the complete 0.1.30 runtime launched.
-Every case retained the previous environment and original user bytes. Windows
-crash recovery remains **NOT_RUN**, so INSTALL-07 stays partial. See
+Every case retained the previous environment and original user bytes. Native
+Windows subsequently passed eleven fresh and eleven genuine update process-exit
+boundaries. Each crash returned 87; resume verified the real executable, current
+contracts, old runtime and user bytes. Global V2, settings, PATH and existing
+fixture bytes remained unchanged; owned server and children stopped. INSTALL-07
+passes at this process-termination scope; machine power-loss durability was not
+tested. The Windows installer is from immutable CI `26d9252`, not a claim about
+FINAL12 model or GUI behavior. See
+[Windows crash evidence](validation/2026-10-11/windows-installer-crash-phases-ci26d9252.json) and
 [update crash evidence](validation/2026-10-11/linux-installer-update-crash-phases-ci26d9252.json).
 
 **OBSERVED / actual Codex GUI task:** an authenticated native ephemeral Codex
@@ -460,6 +467,35 @@ endpoint, server, Blender and Xvfb cleanup all passed. This establishes
 `TASK_VERIFIED` only at the controlled `API_ASSISTED_FIXTURE_ONLY` scope;
 production availability, whole-goal ASSESS and workload latency remain open.
 See [native Codex task evidence](validation/2026-10-11/codex-final12-native-gui.json).
+
+**OBSERVED / actual Hermes GUI task:** the configured native model read complete
+core and Blender guides and current capability/schema results, then submitted one
+bounded transform through installed MCP. Fresh independent RNA and pixels verified
+the same Cube X +2 m task, unchanged remaining state and complete cleanup. MCP
+resources and prompts were disabled; the actual instruction results were present
+in the native model conversation before invocation, establishing HARNESS-04 at
+this controlled task scope. One request for an unavailable terminal tool was
+refused without execution and counts as a model tool-selection error. Task success
+does not imply an error-free trajectory or whole-goal ASSESS. See
+[native Hermes task](validation/2026-10-11/hermes-final12-native-gui.json) and
+[instruction delivery proof](validation/2026-10-11/hermes-final12-resources-disabled.json).
+
+**OBSERVED / independent abort and cleanup:** an actual independent MCP abort
+interrupted the first native transform input, leaving a positively identified
+owned modal. Idle shutdown correctly refused. The fixture's normal deadline then
+issued one same-session typed cancel; fresh RNA confirmed the original transforms,
+selection, mode, space and units, with no modal or owned inputs. All 28 resource
+and state checks passed. The earlier short setup expired with zero operation,
+abort or model calls and remains recorded as NOT_RUN. See
+[pending modal cleanup](validation/2026-10-11/blender-final12-pending-modal-cleanup.json).
+
+**OBSERVED / original fixture regression:** the unchanged canonical 22-case
+installed Blender run after adding serve mode remains **21/22 FAIL** overall.
+`menu_edit` expected `WRONG_MENU`, but actual evidence was `ABSENT`; the runtime
+honestly returned that read-only assessment with zero inputs. The cause of the
+missing popup is not established. The other 21 cases passed. Neither the passing
+harness transforms nor the instrumented private diagnostic replaces this failure.
+See [original regression](validation/2026-10-11/blender-operations-final12-after-serve.json).
 
 **OBSERVED / immutable f440de1 CI install:** all fifteen platform/Python builds
 and assembly succeeded. Every downloaded archive hash matched the immutable
@@ -495,11 +531,11 @@ native, harness, installed or public-release status from another evidence level.
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
-| M1 discovery/integration | IN_PROGRESS | Codex and Hermes FINAL11 read-only stages pass; corrected OMP native consumer turns remain partial; Codex private fixture GUI task passes, other GUI coverage remains. |
+| M1 discovery/integration | IN_PROGRESS | Codex and Hermes actual native private fixture GUI tasks pass; corrected OMP native consumer turns remain partial; OMP and production GUI coverage remain. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
-| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux install and Codex private fixture task pass; remaining harness tasks, full Windows matrix and public release verification remain open. |
+| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux install, native Windows22process-exit cases and Codex/Hermes private fixture tasks pass; OMP, latest Windows artifact and public release verification remain open. |
 
 Reici matched-view production edits, independent visual review, Warudo/VRChat
 verification and public artifact publication/download/hash/fresh public install

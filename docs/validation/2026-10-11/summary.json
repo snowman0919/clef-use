@@ -2048,12 +2048,54 @@
       "artifact": "docs/validation/2026-10-11/omp-native-schemafaithful-stopped.json",
       "sha256": "accc5841a80363ab5c14ecd6e4e3e68571e02436474977654ca89102af2264d0",
       "scope": "First actual native primary invocation stopped with workspace_violation before any parsed tools/reads/capabilities. No retries; later cases NOT_RUN. Exact error origin and rejected args NOT_OBSERVED. Owned state/service untouched."
+    },
+    "hermes_final12_native_gui": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final12-native-gui.json",
+      "sha256": "b8fd9882b4312613718ae74fc40617b5982d1392d2ff7d8b0981dff3a42c1296",
+      "scope": "Actual native Hermes configured model: full core/Blender loads then actual schema/capabilities, enforced prerequisite gate and one exact native numeric operation; independent fresh RNA/visual checks and allcleanup pass. API_ASSISTED fixture-only TASK_VERIFIED. Whole-goal/production/full-latency remain NOT_RUN. One unavailable terminal request was refused without execution and is counted as a model tool-selection error; no error-free trajectory claim."
+    },
+    "blender_final12_canonical22_after_serve": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-operations-final12-after-serve.json",
+      "sha256": "be4027929a9f39c4d1a3ee2dc084c0aebe4cbf382a2afaeb8e7a3119d4365b14",
+      "scope": "Actual original canonical installed22case regression after new serve mode:21/22pass,menuEdit expectedWRONG_MENU but actualABSENT retainedFAIL; no threshold/source/model changes. Allother nativeeffects/guards/abort cases passed. Does not prove full model/task/latency gates."
+    },
+    "windows_installer_crash_phases": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-installer-crash-phases-ci26d9252.json",
+      "sha256": "f0fdb0865a6776b4c600130e387b62a1c68af6d93318d4e8319664686bf10a8b",
+      "scope": "Native Windows immutable CI26d9252 installer: fresh11 and genuine pinned source-built0.1.29 to CI0.1.30 update11 process-exit87/resume PASS; real launch/contracts, old runtime/user bytes/globalV2/config/PATH preserved, loopback/children cleaned. Not power-loss or FINAL12 model/GUI proof."
+    },
+    "windows_installer_crash_phase_cases": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-installer-crash-phases-report-ci26d9252.json",
+      "sha256": "b1ebc8c5a9159540bbe54bdee53fe9a49d4c53ede56159881c345d88d075df38",
+      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim."
+    },
+    "windows_installer_crash_phase_declaration": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-installer-crash-phases-predeclaration-ci26d9252.json",
+      "sha256": "bbbd6a29cce2ebf31e3019e6b8e988b1dc1afd4e6955d0f9873a391b858997a0",
+      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim."
+    },
+    "hermes_resources_disabled_task": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final12-resources-disabled.json",
+      "sha256": "766f6f37df269b61c4ad57363342e5d5953574b30d971521d4c1290e8ef22a93",
+      "scope": "Read-only audit of already executed native Hermes GUI task with actual resources=false/prompts=false; complete core/Blender and3reference results present in model conversation before one accepted native operation. Task and cleanup pass; unavailable terminal request1 refused without execution is retained as model tool-selection error."
+    },
+    "blender_pending_modal_cleanup": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-final12-pending-modal-cleanup.json",
+      "sha256": "d84d7a53bf9f3bd7b56d9bcc1c7ffd251900bc54547abed4c8ca655259aefedd",
+      "scope": "Actual installed MCP independent abort after oneG input leaves identified owned native modal; shutdown_idle correctly refuses. Normal180s fixture deadline invokes same-session typedcancel once, restores actual native scene and removes all owned resources;28checksPASS. Initial45s setup expired with0calls remainsNOT_RUN; no model or operation retry."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Corrected immutableCI26d9252 managedinstallation/lifecyclePASS; nativeCodexisolatedUSERdiscoveryFAIL,PROJECT3guideDISCOVEREDPASS; nativeHermes/OMPexecutablesunavailable andmodelGUIstagesNOT_RUN. Earliernativeforeground-restorationFAIL andoldnewlineFAILpreserved; formalIME andall-platformGUIgateNOT_RUN.",
-    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. FINAL11 Codex and Hermes read-only explicit/natural/negative batches PASS. Hermes FINAL10 natural failure/negative NOT_RUN retained. OMP corrected configured native bootstrap returned with all three previews; primary NOT_RUN due driver all-cache gate, while native background compression warning is nonfatal. Earlier wrong-route and controlled negative over-trigger failure retained.",
+    "windows": "Immutable CI26d9252 native managed installation and fresh11/genuine-update11 process-exit crash-resumePASS; globalV2/config/PATH/user bytes preserved. Earlier foreground-restorationFAIL and nativeCodex USER-discoveryFAIL retained; PROJECT3guidesPASS. NativeHermes/OMP unavailable, formalactiveIME/all-platformGUI and latestf440de1 Windows install NOT_RUN.",
+    "harness_gui_tasks": "Codex and Hermes actual native FINAL12 controlled API-assisted numeric GUI tasks TASK_VERIFIED; original default capabilities remain NONE/BLOCKED. OMP actual GUI task NOT_RUN pending managed-project native consumer. Hermes resources-disabled taskPASS includes one refused unavailable-tool request. Historical failures remain retained. Whole-goal ASSESS, full model/menu accuracy and latency workload remain NOT_RUN/FAIL separately.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
     "public_release": "Corrected existingCI38132441002 all15platform/Pythonbuilds+assemblySUCCESS; immutableassembledLinuxinstall andnativeWindowsmanagedlifecycleverified. BranchdeploySKIPPEDbyexistingpolicy; publicupload/download/freshpublicinstallNOT_RUN."
@@ -2066,8 +2108,8 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 28,
-    "not_run": 14,
+    "pass": 30,
+    "not_run": 12,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -2083,14 +2125,14 @@
       "INSTALL-04": "PASS",
       "INSTALL-05": "NOT_RUN",
       "INSTALL-06": "PASS",
-      "INSTALL-07": "NOT_RUN",
+      "INSTALL-07": "PASS",
       "INSTALL-08": "PASS",
       "INSTALL-09": "PASS",
       "INSTALL-10": "NOT_RUN",
       "HARNESS-01": "PASS",
       "HARNESS-02": "PASS",
       "HARNESS-03": "PASS",
-      "HARNESS-04": "NOT_RUN",
+      "HARNESS-04": "PASS",
       "INPUT-01": "PASS",
       "INPUT-02": "NOT_RUN",
       "INPUT-03": "PASS",
@@ -2165,6 +2207,13 @@
     "omp-native-mcp-schema-fidelity.json",
     "omp-native-state-isolation-addendum.json",
     "omp-native-schemafaithful-predeclaration.json",
-    "omp-native-schemafaithful-stopped.json"
+    "omp-native-schemafaithful-stopped.json",
+    "hermes-final12-native-gui.json",
+    "blender-operations-final12-after-serve.json",
+    "windows-installer-crash-phases-ci26d9252.json",
+    "windows-installer-crash-phases-report-ci26d9252.json",
+    "windows-installer-crash-phases-predeclaration-ci26d9252.json",
+    "hermes-final12-resources-disabled.json",
+    "blender-final12-pending-modal-cleanup.json"
   ]
 }

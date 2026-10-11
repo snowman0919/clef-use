@@ -1,0 +1,155 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "TASK_VERIFIED": true,
+  "scope": "One actual native Hermes discovery/load/invoke GUI task on an API_ASSISTED private factory Blender fixture; this is controlled-fixture evidence only.",
+  "candidate": "FINAL12",
+  "runtime_version": "0.1.30",
+  "install_archive_sha256": "b2feb3b69340de567244015276c01072528d48e75546a80d552ef5288359a3e6",
+  "wheel_sha256": "5ca97a6407c8dcb18763d2caf6a8f12d1acd0981c79b2eecafe23d454f409594",
+  "provider_scope": "API_ASSISTED_FIXTURE_ONLY",
+  "production_provider_verified": false,
+  "installed_default_provider": "NONE",
+  "installed_default_operation_availability": "BLOCKED_MISSING_VERIFIED_FACTS",
+  "native_model": "qwen3.8-flash-next",
+  "native_provider": "custom",
+  "model_cases_scheduled": 1,
+  "model_cases_executed": 1,
+  "native_api_calls": 7,
+  "primary_max_iterations": 8,
+  "run_budget_seconds": 90,
+  "native_api_max_retries": 1,
+  "driver_retry": false,
+  "observed_model_completed": true,
+  "model_elapsed_seconds": 60.381435416056775,
+  "timing_scope": "Descriptive one-case harness duration, not OS input latency or a p95 claim.",
+  "ordered_prerequisites": {
+    "native_full_body_loaded": [
+      "clef-use",
+      "clef-use-blender"
+    ],
+    "guide_sha256": {
+      "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+      "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    },
+    "subsequent_detail_capabilities_verified": true,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "installed_state_dir_and_desktop_scope_match": true,
+    "zero_inference_preflight_model_requests": 0,
+    "receipt_guard_enforced_in_actual_MCP": true
+  },
+  "task": {
+    "family": "numeric_transform",
+    "target_id": "Cube",
+    "operation": "translate",
+    "axis": "X",
+    "space": "GLOBAL",
+    "unit": "METERS",
+    "amount": 2,
+    "commit": true,
+    "max_steps": 4,
+    "confidence_threshold": 0.9,
+    "max_accepted_operation_requests": 1
+  },
+  "observed_accepted_operation_requests": 1,
+  "typed_operation": {
+    "family": "numeric_transform",
+    "status": "SUCCEEDED",
+    "reason": "application readback verified",
+    "assessment": null,
+    "transitions": [
+      "requires_verified",
+      "owned_modal_entered",
+      "preview_verified",
+      "committed",
+      "readback_verified"
+    ],
+    "state_version": 36,
+    "access_level": "API_ASSISTED",
+    "owned_modal_id": null,
+    "geometry_invalidated": false,
+    "input_count": 4
+  },
+  "runtime_session_status": "NEEDS_REPLAN",
+  "whole_goal_assess": "NOT_RUN: operation-only fixture has no perception/decision backend for a separate canonical whole-goal ASSESS.",
+  "final_answer_interpretation": "The native model reported the local committed effect as SUCCEEDED and kept the session NEEDS_REPLAN; it explicitly did not claim canonical whole-goal COMPLETED or production provider readiness.",
+  "independent_scene_readback": {
+    "passed": true,
+    "checks": {
+      "translate": true,
+      "other_transforms_unchanged": true,
+      "selection_unchanged": true,
+      "no_modal": true,
+      "mode_unchanged": true,
+      "space_unchanged": true,
+      "unit_unchanged": true
+    },
+    "health_busy": false,
+    "shutdown_idle": {
+      "ok": true
+    }
+  },
+  "negative_prerequisite_gate": {
+    "classification": "OBSERVED",
+    "scope": "Separate schema-valid negative tool call, not an accepted operation or harness model task",
+    "negative_tool_calls": 1,
+    "accepted_operations": 0,
+    "model_requests": 0,
+    "checks": {
+      "actual_error_reply": true,
+      "prerequisite_absent": true,
+      "accepted_operation_receipt_absent": true,
+      "transform_values_unchanged": true,
+      "selection_unchanged": true,
+      "modal_unchanged_empty": true,
+      "operator_history_unchanged": true,
+      "mode_space_units_unchanged": true
+    },
+    "passed": true
+  },
+  "cleanup": {
+    "worker_finished": true,
+    "owned_inputs_after_release": [],
+    "endpoint_removed": true,
+    "server_thread_stopped": true,
+    "server_socket_closed": true,
+    "signals_restored": true,
+    "all_exited": true,
+    "xvfb_socket_removed": true,
+    "health_busy": false,
+    "endpoint_absent": true,
+    "owned_xvfb_socket_absent": true,
+    "production_blender_preserved": true,
+    "report_fixture_passed": true,
+    "service_report_fixture_passed": true,
+    "stop_reason": "shutdown_idle"
+  },
+  "source_sha256": {
+    "blender_operations_fixture.py": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+    "clef_hermes_fixture_gui_verify_20261011.py": "538fd7927cc004f15c484a6a6234d27b0d39032fb88086c797d6c2409fc9f53b",
+    "clef_hermes_fixture_gui_driver_20261011.py": "4042a438251160c8dd996c6a8d742d9046a9fcab82394ae36b34fcd03075ff40",
+    "clef_fixture_mcp_entry_20261011.py": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f"
+  },
+  "private_proof_sha256": {
+    "native_summary": "92bf3790ed4d1d73eb152fc42b50c6d74517565299e29e6529e3d8228c050232",
+    "zero_inference_preflight_summary": "f4467103b6431d8a5303f8caf56f5084cb967745805c4710cbcb868157b41de4",
+    "state_dir_proof": "3a90e863a7c6d1055969f21d6815bae87635134dec26ab88b338ba2fd0074459",
+    "negative_prerequisite_gate": "8d56c20aad20008da64087ca6a954ea8b45858799e6878c5b3ef1bb113208773",
+    "independent_scene_readback": "e30df1e8c23b41e7747584207a292edcf692c9f116f65fd9dc99ebf9470469ad",
+    "fixture_final_report": "5b45857ff4f15fe73cdbafb219299a6cae5f14c1413cee1c52dc24e1b76fd6f5",
+    "fixture_final_service_report": "ce34d59b9e60adb82d3d3e03972785a5e7dd432815f9bca52957013a0fa7833d"
+  },
+  "privacy": "Raw screenshots, scene payloads, native model conversation, endpoint tokens, auth values, route addresses and user metadata are excluded.",
+  "received_public_artifact_sha256": "339d73ceef042c2fd3ef94e2bfa73c4caa5dc80c85168c1da270267f197ca73a",
+  "unavailable_tool_attempts": {
+    "count": 1,
+    "tool_name": "mcp__computer__terminal",
+    "observed_result": "Tool does not exist; the native result enumerated only the six available tools.",
+    "actual_tool_execution": false,
+    "effect": "No shell/desktop input dispatched by this unavailable tool request; counted as a model tool-selection error.",
+    "native_model_tool_message_index": 10
+  },
+  "tool_selection_error_count": 1,
+  "tool_selection_interpretation": "Task effect passed, but not an error-free model/tool trajectory. Native harness refused unavailable terminal request; no shell or additional OS input executed."
+}

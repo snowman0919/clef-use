@@ -1,0 +1,116 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "acceptance_id": "HARNESS-04",
+  "scope": "Read-only audit of the already executed single native Hermes GUI task; no new model or input calls.",
+  "candidate": "FINAL12",
+  "runtime_version": "0.1.30",
+  "native_mcp_configuration": {
+    "resources": false,
+    "prompts": false,
+    "included_runtime_tools": [
+      "computer_capabilities",
+      "computer_run",
+      "computer_status",
+      "computer_abort"
+    ]
+  },
+  "model_available_tools": [
+    "mcp__clef_use__computer_abort",
+    "mcp__clef_use__computer_capabilities",
+    "mcp__clef_use__computer_run",
+    "mcp__clef_use__computer_status",
+    "skill_view",
+    "skills_list"
+  ],
+  "essential_instruction_delivery": "Native skill_view tool results included complete installed instruction bodies, and identical result objects are retained in the native model conversation before the accepted computer_run. MCP resource/prompt support was not required.",
+  "body_proofs": [
+    {
+      "skill": "clef-use",
+      "file": "SKILL.md",
+      "native_tool_event_index": 0,
+      "packaged_file_sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+      "instruction_body_sha256": "ef6a3760fc43f64a2be3463b2325b15d74fc34d478ba5df6147cbeb775174ec8",
+      "body_characters": 4353,
+      "complete_body_in_native_tool_result": true,
+      "exact_result_in_native_model_tool_messages": true,
+      "native_model_tool_message_indices": [
+        2
+      ],
+      "installed_manifest_hash_match": true
+    },
+    {
+      "skill": "clef-use-blender",
+      "file": "SKILL.md",
+      "native_tool_event_index": 1,
+      "packaged_file_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "instruction_body_sha256": "b19c7edcdabad0b15771576209faa0140fae877a19ae2a88d4839c3165ae4ade",
+      "body_characters": 3259,
+      "complete_body_in_native_tool_result": true,
+      "exact_result_in_native_model_tool_messages": true,
+      "native_model_tool_message_indices": [
+        3
+      ],
+      "installed_manifest_hash_match": true
+    },
+    {
+      "skill": "clef-use",
+      "file": "references/API_BASELINE.md",
+      "native_tool_event_index": 2,
+      "packaged_file_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+      "instruction_body_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+      "body_characters": 2200,
+      "complete_body_in_native_tool_result": true,
+      "exact_result_in_native_model_tool_messages": true,
+      "native_model_tool_message_indices": [
+        5
+      ],
+      "installed_manifest_hash_match": true
+    },
+    {
+      "skill": "clef-use",
+      "file": "references/LIVE_API.md",
+      "native_tool_event_index": 3,
+      "packaged_file_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+      "instruction_body_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+      "body_characters": 1137,
+      "complete_body_in_native_tool_result": true,
+      "exact_result_in_native_model_tool_messages": true,
+      "native_model_tool_message_indices": [
+        6
+      ],
+      "installed_manifest_hash_match": true
+    },
+    {
+      "skill": "clef-use-blender",
+      "file": "references/OPERATIONS.md",
+      "native_tool_event_index": 4,
+      "packaged_file_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+      "instruction_body_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+      "body_characters": 3046,
+      "complete_body_in_native_tool_result": true,
+      "exact_result_in_native_model_tool_messages": true,
+      "native_model_tool_message_indices": [
+        7
+      ],
+      "installed_manifest_hash_match": true
+    }
+  ],
+  "run_native_tool_event_index": 7,
+  "unavailable_tool_attempts": {
+    "count": 1,
+    "tool_name": "mcp__computer__terminal",
+    "observed_result": "Tool does not exist; the native result enumerated only the six available tools.",
+    "actual_tool_execution": false,
+    "effect": "No shell/desktop input dispatched by this unavailable tool request; counted as a model tool-selection error.",
+    "native_model_tool_message_index": 10
+  },
+  "model_requests_added_by_audit": 0,
+  "native_input_added_by_audit": 0,
+  "private_proof_sha256": {
+    "native_tool_results": "00d237c66b33c7176a8a321fa69ec2d1f9ef1c35082b6050a661571f6476aa08",
+    "native_model_result": "8273eb0ef96c61724a85599de7c5bec6efa6be4a230b1087371a03bc80dd4489",
+    "executed_private_config": "fad44c36b169e3113c95d223ff1e4c9760bc734a0f6f3895540ea045231a3cf8"
+  },
+  "privacy": "No auth, private paths, full model transcript, scene data or screenshots included."
+}

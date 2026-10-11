@@ -1,0 +1,110 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "scope": "Real pending-modal cleanup of one API_ASSISTED owned factory Blender fixture through installed MCP, RuntimeClient, SessionManager, SessionRuntime and native OS input. No production-provider claim.",
+  "candidate": "FINAL12",
+  "runtime_version": "0.1.30",
+  "models": 0,
+  "external_numeric_requests": 1,
+  "external_abort_requests": 1,
+  "internal_same_session_modal_cancel_requests": 1,
+  "total_native_acknowledged_inputs": 2,
+  "precleanup": {
+    "typed_operation": {
+      "family": "numeric_transform",
+      "status": "ABORTED",
+      "reason": "operation aborted during input",
+      "assessment": null,
+      "transitions": [
+        "requires_verified",
+        "owned_modal_entered"
+      ],
+      "state_version": 8,
+      "access_level": "API_ASSISTED",
+      "geometry_invalidated": false,
+      "input_count": 1,
+      "owned_modal_id_matches_native": true
+    },
+    "health_busy": true,
+    "shutdown_idle_refused": true,
+    "checks": {
+      "same_owned_session": true,
+      "terminal_aborted": true,
+      "typed_aborted": true,
+      "owned_id_matches_native": true,
+      "acknowledged_inputs_bounded": true,
+      "health_busy_pending": true,
+      "shutdown_idle_refused": true,
+      "native_translate_open": true
+    }
+  },
+  "final_cleanup_operation": {
+    "family": "modal_cancel",
+    "status": "SUCCEEDED",
+    "reason": "owned modal cancelled without commit",
+    "assessment": null,
+    "transitions": [
+      "owned_modal_cancelled",
+      "unchanged_readback_verified"
+    ],
+    "state_version": 17,
+    "access_level": "API_ASSISTED",
+    "owned_modal_id": null,
+    "geometry_invalidated": false,
+    "input_count": 1
+  },
+  "final_session_status": "NEEDS_REPLAN",
+  "guard_facts": "Fresh independent native TRANSFORM_OT_translate ID matched the typed owned modal ID before normal-deadline cleanup; ownership was not inferred from active/default session.",
+  "checks": {
+    "pending_modal_established": true,
+    "all_precleanup_guard_checks": true,
+    "one_external_numeric_request": true,
+    "one_external_abort_request": true,
+    "same_session_cleanup": true,
+    "internal_typed_cancel_succeeded": true,
+    "internal_cancel_input_count_one": true,
+    "all_transforms_restored": true,
+    "selection_unchanged": true,
+    "mode_unchanged": true,
+    "space_unchanged": true,
+    "units_unchanged": true,
+    "native_modal_empty": true,
+    "owned_inputs_empty": true,
+    "health_idle": true,
+    "normal_deadline_reached": true,
+    "worker_finished": true,
+    "endpoint_removed": true,
+    "server_thread_stopped": true,
+    "server_socket_closed": true,
+    "signals_restored": true,
+    "owned_processes_exited": true,
+    "owned_xvfb_socket_removed": true,
+    "actual_endpoint_absent": true,
+    "actual_display_socket_absent": true,
+    "production_blender_preserved": true,
+    "fixture_final_passed": true,
+    "fixture_service_report_passed": true
+  },
+  "deadline_seconds": 180,
+  "race_policy": "One actual operation only; no retry. Race was successfully interrupted after first acknowledged G input.",
+  "preliminary_setup_not_run": {
+    "reason": "45-second setup expired before controller START; zero numeric/abort/model calls. It remains NOT_RUN separately.",
+    "report_sha256": "b970693e0a00a8e781a45eed5b8f2432be7a387e67813c5a849b765e9eb27a21"
+  },
+  "source_sha256": {
+    "clef_pending_modal_serve_controller_20261011.py": "e860979ad112f72065bcc3a9c23219171b053a5f900ead0f9201e5b820880d26",
+    "clef_fixture_mcp_entry_20261011.py": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f",
+    "blender_operations_fixture.py": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce"
+  },
+  "private_proof_sha256": {
+    "pending-controller-report.json": "9155f295c06aa357f8e3e6c915e9380fa739fc54a62bc5b175b96e6f8ccee0f8",
+    "pending-operation-receipt.json": "89455ccfd29b7e525aa3f106fd2f94a02d956006d3f9104ef20653c7001b7dc1",
+    "pending-before-private.json": "18af76cccf93c8df39276a0c4c312e48da08d13e41f16544c52c1e49f0baed64",
+    "pending-native-at-abort-private.json": "c97b51586fdf037c56c560437cc42df9c262f45a06bd5a4799f203b092a8e7a3",
+    "pending-precleanup-oracle-private.json": "c97b51586fdf037c56c560437cc42df9c262f45a06bd5a4799f203b092a8e7a3",
+    "report.json": "9c517ad19fa82db5b1737b4a52c77f9c2722b538d83e61cb678f335c8db26116",
+    "service-report.json": "ffcdddbe360410343e8e619cefc530be7b448778f81f9bcf603bf26f9a163e61"
+  },
+  "privacy": "No endpoint tokens, native IDs, raw screenshots, scene payloads, auth or user assets included.",
+  "whole_goal_assess": "NOT_RUN: controlled abort/cleanup task; local cleanup SUCCEEDED keeps session NEEDS_REPLAN."
+}

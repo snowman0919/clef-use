@@ -263,7 +263,7 @@ scenarios:
 - id: INSTALL-07
   category: installation
   requirement: Crash at each staging/activation phase can resume or rollback without data loss.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
@@ -277,10 +277,18 @@ scenarios:
     section: evidence.linux_installer_update_crash_phases
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_installer_crash_phases
+    claim: OBSERVED
+    partial: false
   execution_note: Integration journal crash/recovery fixtures passed. Actual Linux fresh
     installation and genuine pinned 0.1.29 to immutable CI 0.1.30 update each crashed
     at eleven staging/activation boundaries and resumed with original user bytes and
-    previous runtime preserved. Windows crash matrix remains NOT_RUN.
+    previous runtime preserved. Native Windows fresh and genuine update each passed
+    eleven corresponding process-exit boundaries with real executable and contract
+    checks after resume. Global V2, user bytes, settings and PATH were preserved.
+    This covers process termination of the immutable installer; power-loss durability
+    is not established, and no FINAL12 model or GUI claim is implied.
 - id: INSTALL-08
   category: installation
   requirement: Uninstall removes only unchanged managed entries and preserves later user edits.
@@ -389,7 +397,7 @@ scenarios:
   category: harness
   requirement: Resources-disabled client still receives essential instructions and can act
     correctly.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
@@ -399,8 +407,16 @@ scenarios:
     section: evidence.harnesses
     claim: OBSERVED
     partial: true
-  execution_note: Essential tool/server instructions exist; resources-disabled actual client task
-    behavior not established.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.hermes_resources_disabled_task
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual native Hermes with resources and prompts disabled delivered complete
+    installed core and Blender guide bodies through skill_view before one exact numeric
+    operation. Independent fresh RNA and pixels verified the controlled API-assisted
+    task and cleanup. One unavailable terminal tool request was refused without execution
+    and is retained as a model tool-selection error. Production and whole-goal verification
+    remain separate NOT_RUN conditions.
 - id: INPUT-01
   category: input
   requirement: Key tap/down/up/chord ownership and ordered release work with native OS fixture.
