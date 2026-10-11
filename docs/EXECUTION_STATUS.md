@@ -1,25 +1,36 @@
 # Reactive runtime execution status
 
-Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
+Date: 2026-10-12. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest committed implementation: `b3219c5` on
+Latest committed implementation: `bb971ef` on
 `codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
-Latest local candidate: FINAL17, adding prospective eligibility provenance and
-correct source-runner selection with older installed runtimes. Its actual installation,
-61 exact packaged files and **835 passed / 34 skipped** source regression are
-recorded in [final17-install.json](validation/2026-10-11/final17-install.json).
+Latest installed local candidate: FINAL24, correcting complete-directory aliases and duplicate
+declared names in active skill sources while preserving separate resources and
+unreadable metadata. Actual fresh and repeat shell installation, three guides across
+three harness profiles, 26 preserved HOME files and 61 exact source/wheel/installed
+files are recorded in [final24-install.json](validation/2026-10-11/final24-install.json).
+FINAL24 includes the FINAL23 native catalog/explicit lookup and Codex individual
+file-disable corrections, and preserves valid Hermes YAML documents during actual
+enrollment. Source regression passed **874 tests / 34 skipped**. Native discovery
+and native loading are recorded separately below.
+FINAL21's planned native matrix was stopped before execution and retains
+[14 NOT_RUN cases](validation/2026-10-11/install05-final21-native-not-started.json).
+Native discovery is recorded
+separately; installation does not prove guide loading or invocation. FINAL19 retains
+its original [837-test installation record](validation/2026-10-11/final19-install.json). FINAL17 retains its original
+[installation and 835-test record](validation/2026-10-11/final17-install.json).
 FINAL16's installed numeric model request retains its original candidate identity
 in [final16-install.json](validation/2026-10-11/final16-install.json).
 FINAL15's runtime identity correction and **792 passed / 34 skipped** regression
 retain their original [candidate record](validation/2026-10-11/final15-install.json).
 Earlier FINAL12 native tasks retain their original candidate and guide hashes.
 This is partial execution evidence, not specification completion or release approval.
-Current acceptance evidence is **33 PASS / 3 FAIL / 8 NOT_RUN**; the newly executed
+Current acceptance evidence is **34 PASS / 3 FAIL / 7 NOT_RUN**; the newly executed
 general GUI tasks failed rather than remaining unexecuted.
 Machine-readable, sanitized evidence and artifact hashes: [summary.json](validation/2026-10-11/summary.json).
-Latest installed input/profile candidate: [final10.json](validation/2026-10-11/final10.json).
+Most recent native input/profile measurement candidate: [final10.json](validation/2026-10-11/final10.json).
 Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-11/reaction-final10.json).
 Per-scenario status and remaining scope: [ACCEPTANCE.yaml](../ACCEPTANCE.yaml).
 
@@ -67,7 +78,234 @@ only the owned Blender/Xvfb processes were terminated.
 
 ## Executed evidence
 
-**OBSERVED / latest immutable Linux artifact:** CI run `38148208835` built
+**OBSERVED / committed YAML-fix Windows installation:** the actual `bb971ef`
+Windows 3.11 CI archive completed ten native commands with fresh `INSTALLED`,
+repeat `CURRENT` and all 61 Git/wheel/installed files identical. At three stages,
+the actual installed `read_config` parsed the enrolled flow document and verified
+unchanged settings, user-note hash, original CRLF prefix and tail bytes. Three
+guides across three profiles enrolled then remained `UNCHANGED`; repeat HOME,
+configuration and guide bytes were identical. Independent readback found zero
+owned processes. Global wrapper/configuration/PATH and bootstrap/prior-fixture
+trees were preserved; full active production V2 runtime identity is not established
+by that bootstrap snapshot. Native harness/model/service/GUI/input were not run.
+See [immutable Windows proof](validation/2026-10-11/windows-cibb971ef-install.json).
+
+**OBSERVED / isolated accessibility setup failure:** installed GI/AT-SPI imported,
+but the owned Xvfb terminated with SIG11 before any bus, registry or factory
+Blender started. Blender accessibility publication remains `NOT_RUN`; this is not
+evidence of its absence. NVIDIA EGL library names in the stack are observations,
+not a proven cause. The owned child and namespace exited, and independent
+mount/socket checks found no survivors. See [setup failure](validation/2026-10-11/production-atspi-factory-setup-failure.json)
+and [separate metadata review](validation/2026-10-11/production-atspi-installed-metadata.json).
+
+**OBSERVED / committed YAML-fix release workflow:** run 38157978139 at `bb971ef`
+completed all 15 build/installation-check/upload pairs and release-site assembly.
+Production deployment and tag publication remained skipped by the existing guards;
+no bypass, main/tag change or agent retry occurred. Native Windows flow-config
+installation is a separate check. See
+[exact-source workflow receipt](validation/2026-10-11/release-cibb971ef.json).
+
+**OBSERVED / installed FINAL24 native Hermes boundaries:** identical block-YAML
+seeds exposed five preservation-report mismatches in the actual FINAL22 installation
+and none in FINAL24 across eight conditions. A separate original flow-YAML seed
+actually enrolled, parsed with the native parser, retained trusted-project settings
+and loaded the complete selected project guide. All 17 conditions verified native
+config parsing, trust, full body and preexisting HOME bytes. Root independently
+checked all 51 actual exit/output receipts; 24 capability children ran, no retries
+or model/service/GUI/input calls occurred, and owned-process readback was zero.
+The original fixture stop and serialization failure remain unchanged. See
+[paired native proof](validation/2026-10-11/install05-hermes-boundary-v5-paired.json).
+
+**OBSERVED / INSTALL-05 assessment:** the 14 native conditions cover the four named
+behavior classes across three harnesses, plus configured Hermes sources. Together
+with the separately executed Hermes boundary corrections, the exact named condition
+is `PASS`. Complete-directory realpath aliases and Codex individual file inactivity
+retain their tested scope; condition results are dry-run preservation reports,
+not overwrites or a whole-profile/task claim. Native14 file preservation hashes
+cover selected `SKILL.md` files; broader preservation is proven only where separate
+installation or paired receipts measure it. See
+[root policy and limits](validation/2026-10-11/install05-final24-root-policy.json).
+
+**OBSERVED / source354 release workflow:** run 38156320672 completed all 15 OS and
+Python build/installation-check/upload pairs and assembled the release site.
+Production deployment and tag publication were skipped by the existing main/tag
+guards. No bypass, new tag, main change or agent retry occurred. This is an
+immutable candidate artifact result, not public download/fresh installation.
+See [workflow receipt](validation/2026-10-11/release-ci3542636.json).
+
+**OBSERVED / immutable Windows source354 installation:** seven native commands
+completed with fresh `INSTALLED` and repeat `CURRENT`; all 61 Git/wheel/installed
+files matched. Three guides across three selected harness profiles enrolled then
+remained `UNCHANGED`. HOME, CRLF comments, disabled OMP settings, global wrapper,
+configuration and PATH checks passed; independent owned-process readback was zero.
+The runtime-tree snapshot covers the existing bootstrap tree and prior fixture,
+not a verified identity of the full active production V2 runtime. This seeded
+block-config proof does not clear the separately observed flow-YAML defect or
+execute native harness/model/service/GUI/input. See
+[actual Windows installation](validation/2026-10-11/windows-ci3542636-install.json).
+
+**OBSERVED / separate Hermes boundary fixture stop:** the original paired attempt
+stopped on its first BEFORE case after a manually copied unmanaged guide correctly
+returned `CONFLICT`. Native missing-child cwd fallback and full-body loading worked.
+The other 15 candidate-case checks remained `NOT_RUN`; the exact CLI exit was not
+persisted and is explicitly distinguished from source-inferred exit 2. This was
+a fixture ownership error, not a product cwd regression. A separately reviewed
+fresh attempt uses actual canonical enrollment before constructing each condition.
+See [original setup stop](validation/2026-10-11/install05-hermes-boundary-v3-setup-failure.json).
+
+**OBSERVED / Hermes YAML serialization failure:** actual enrollment in the next
+attempt returned `INSTALLED` but appended a block after a closed valid flow
+mapping. Hermes rejected that document and fell back to defaults; successful
+local guide loading therefore did not establish trusted-project configuration.
+The evaluation CLI returned `ParserError`, exit 1, and the remaining 15 conditions
+were not run. Three outer children were waited; independent owned-process count
+was zero. The source correction keeps new entries inside flow mappings and before
+document endings. Six deterministic regression cases failed before correction;
+99 harness/integration cases passed after, including two empty explicit YAML
+documents that initially raised `AttributeError`. Installed native correction evidence
+remains separate. See
+[actual serialization failure](validation/2026-10-11/install05-hermes-boundary-v4-serialization-failure.json).
+
+**OBSERVED / FINAL23 native discovery:** all 14 conditions executed with 28 native
+reports and 20 actual capability queries. Complete-directory aliases, duplicate
+names, project overrides and the tested inactive sources agreed with the installed
+preservation reports across Codex, Hermes and OMP. Codex's exact individual
+`SKILL.md` disable now reports `PREVIEW`, matching the actual disabled project copy
+and enabled managed copy. This does not claim whole-profile or directory-entry
+disable semantics. Hermes create/external source conflicts preserve the selected
+local body; `CONFLICT` does not certify which duplicate the native harness selects.
+All 70 command receipts were waited and final owned-process/socket counts were
+zero. No model, service, GUI or input ran. Three non-atomic live-observer
+disagreements remain recorded. See
+[FINAL23 native matrix](validation/2026-10-11/install05-final23-native-matrix.json).
+
+**OBSERVED / FINAL23 source regression:** the integration suite passed 85 cases and
+the frozen full suite passed 866 with 34 skipped. Corrections cover Hermes cwd
+validation, directory and declared-name aliases, malformed frontmatter, catalog
+pruning versus legacy flat lookup, and Codex individual file disables. Independent
+review was static and is not execution evidence. No confidence threshold changed.
+See [frozen regression](validation/2026-10-11/final23-regression.json).
+
+**OBSERVED / FINAL22 native discovery:** all 14 cases executed with 28 native
+reports and 19 runtime capability queries. Whole-directory aliases, duplicate
+names, trusted project sources and configured Hermes roots agreed with preservation
+reports. Codex's individual disabled project `SKILL.md` was actually disabled,
+but enrollment still returned `CONFLICT`; this concrete mismatch remains retained.
+The earlier directory-only disable attempt did not establish inactivity.
+The separately executed FINAL23 results above address this mismatch. See
+[actual 14-case batch](validation/2026-10-11/install05-final22-native-matrix.json)
+and [root policy interpretation](validation/2026-10-11/install05-final22-policy-readback.json).
+
+**MEASURED / locked component comparison:** both models completed the same 72
+queries over 36 original native screenshots. The supported V3 alternative hit
+0/54 PRESENT targets and correctly abstained on 18/18 absent or ambiguous queries.
+UI-TARS hit 50/54 PRESENT targets (browser 18/18, editor 18/18, Blender 14/18),
+but proposed a point on all 18 queries requiring abstention. Neither result
+supports production adoption. Thresholds remain unchanged. These correlated
+component opportunities do not certify actual task accuracy, a genuine historical
+baseline, reaction p95, goodput or coverage. Only seed 17 was executed. The original
+environment failures remain retained separately. See
+[completed comparison](validation/2026-10-11/heldout-component-comparison-final2.json).
+
+**OBSERVED / FINAL22 source regression:** the missing-child, padded absolute and
+home-relative `TERMINAL_CWD` cases each failed before correction and passed after
+matching native Hermes directory validation. Explicit project selection remains
+authoritative. The integration suite passed 67 cases; the full suite passed
+848 with 34 skipped. This does not prove an installed native harness result.
+See [source regression](validation/2026-10-11/final22-regression.json).
+
+**OBSERVED / FINAL20 complete discovery batch:** all 12 planned cases executed,
+with 24 actual catalog reports and 18 capability queries. Distinct duplicate names
+now produce installed `CONFLICT` across Codex, Hermes and OMP. Hermes trusted-project
+precedence exposed a remaining source-report gap: its native catalog selects the
+project guide and shadows the local guide while enrollment reports `PREVIEW`.
+The source now considers configured create/external directories and only the
+current nearest trusted Git project, preserving `project_discovery: false`.
+Codex's directory-targeted disable entry did not disable either catalog copy;
+its installed conflict is correct and the inactive condition is `NOT_ESTABLISHED`.
+No native accuracy/task/input or whole-source/profile gating pass follows from
+these reports. See [all12 native observations](validation/2026-10-11/install05-final20-native-matrix.json)
+and [precise policy readback](validation/2026-10-11/install05-final20-policy-readback.json).
+
+**OBSERVED / model namespace boundary and first initialization failure:** exact
+FINAL19 code and a narrow existing dependency overlay imported in separate CPU/UI
+namespaces with original private paths inaccessible. The original missing-pydantic
+failure is retained. The first authorized model batch subsequently stopped during
+Transformers lazy import because the empty filesystem had no UID record or
+`USER`/`LOGNAME`. No model weight load or query was reached; all 144 model-specific
+query opportunities remained `NOT_RUN`. This is an environment initialization
+failure, not model accuracy evidence. A separately authorized correction supplies
+synthetic account environment values without mounting the host account database.
+See [import admission](validation/2026-10-11/heldout-model-dependency-admission.json)
+and [original initialization stop](validation/2026-10-11/heldout-model-first-initialization-stop.json).
+
+
+**OBSERVED / FINAL19 native discovery:** actual Codex discovery and installed
+preview now agree for a project alias of the complete managed directory. The next
+case exposed a second defect: `duplicate-clef/SKILL.md` declared `name: clef-use`,
+and the real Codex catalog returned two enabled copies, but enrollment returned
+`PREVIEW` with no conflict. The matrix stopped at this concrete mismatch after
+four native responses and four capability queries. The remaining ten cases,
+including Hermes and OMP, remain `NOT_RUN`; no model, service, GUI or input ran.
+The source correction scans declared names within the selected and other active
+sources, preserving different directories and unreadable metadata as conflicts.
+Its new installation and native matrix require separate evidence. See
+[original FINAL19 native result](validation/2026-10-11/install05-final19-native-matrix.json).
+
+
+**OBSERVED / historical FINAL19 source correction:** native Codex discovery deduplicated a
+project alias of the complete managed guide directory, while FINAL17 enrollment
+incorrectly rejected the same alias. The source now recognizes that shared resource
+root. A file-only `SKILL.md` alias and separate identical files still conflict,
+preserving divergent relative references. Regression passed **837 tests / 34 skipped**.
+FINAL19 actually installed and repeated as `INSTALLED`/`CURRENT`, with all three
+guides across three profiles, 26 HOME files preserved and 61 exact packaged files.
+Native matrix results are recorded separately when observed. See the
+[original native false conflict](validation/2026-10-11/install05-native-alias-false-conflict.json).
+
+**OBSERVED / completed held-out acquisition and annotation:** the next capture
+carried 17 original images byte-for-byte and acquired the remaining 19, completing
+all 36 native browser, Tk and Blender screens. All 72 queries retain their original
+text and kinds. Root viewed all 36 originals and approved the native DOM/Tk geometry
+and independent Blender boxes before any model predictions. Local exact encoded
+and decoded overlaps with the 20 known training/validation images and excluded
+development image are zero; all 36 held-out images are distinct. Fifteen dHash
+flags were reviewed against nearest references. The private data lock retains
+54 present, nine visible-absence and nine ambiguous queries. Blender-10 includes
+an explicit component-label inference limitation. Disabled-control localization
+never grants input permission, and visible absence includes full occlusion.
+No public-pretraining exclusion, statistical independence, model quality, native
+control effect, task success or latency pass is claimed. All 72 model queries remain
+`NOT_RUN` at this acquisition stage. See
+[complete capture](validation/2026-10-11/heldout-acquisition-v6-complete.json),
+[local leakage review](validation/2026-10-11/heldout-all36-local-leakage-review.json),
+[root annotation review](validation/2026-10-11/heldout-all36-root-annotation-review.json),
+and [all12 Tk pixel review](validation/2026-10-11/heldout-tk12-root-pixel-review.json).
+Earlier partial-capture and pending-review records below retain their historical states.
+
+**INFERRED / production provider boundary:** primary Blender 5.2 source confirms
+that public modal-operator enumeration omits internal UI handlers and that event
+context is temporary. The actual local runtime accepts partial verified provider
+facts, but a production collector and authenticated OS-to-RNA per-window binding
+have not been implemented or verified. Unknown text focus, menu, IME and busy
+state cannot be replaced with `false`. Accessibility collectors remain unverified.
+See [source feasibility review](validation/2026-10-11/production-state-provider-source-feasibility.json).
+
+
+**OBSERVED / native discovery setup failure:** the 12-case discovery matrix stopped
+in its first installation setup, before any native harness or capability discovery
+call. The driver used the lexical `runtime/current` Python path; the actual console
+shebang uses its immutable versioned VENV path. The former exposed a symlink ancestor
+to the bundled-source guard. This did not reproduce a failure of the canonical
+launcher. Eleven remaining cases and first-case discovery remain `NOT_RUN`.
+See [original setup failure](validation/2026-10-11/install05-native-first-setup-failure.json).
+The unchanged installed console body subsequently ran once through its exact
+shebang VENV: exit 0, `INSTALLED`, three exact guide hashes and one actual capability
+subprocess. This confirms the corrected console route, without native harness
+discovery or a separate shell-launcher execution. See
+[console proof](validation/2026-10-11/install05-canonical-console-proof.json).
+
+**OBSERVED / historical b3219c5 immutable Linux artifact:** CI run `38148208835` built
 `b3219c5`. Its Linux 3.11 archive installed and repeated as `INSTALLED`/`CURRENT`;
 all 46 Python modules and 15 resources matched source, wheel and installation,
 including manifest ordering. Three guides for three profiles, 26 HOME files and
@@ -79,7 +317,7 @@ that expected idle status success are retained. No model, GUI or task ran.
 See
 [immutable Linux installation](validation/2026-10-11/cib3219c5-linux-install.json).
 
-**OBSERVED / latest immutable Windows artifact:** the same commit's successful
+**OBSERVED / historical b3219c5 immutable Windows artifact:** the same commit's successful
 Windows 3.11 job artifact installed and repeated as `INSTALLED`/`CURRENT`. All
 61 files matched Git, wheel and installation, with no manifest exception. Three
 guides across three managed harness configurations enrolled and repeated as
@@ -89,7 +327,7 @@ Read-only post-run inspection found no process command line referencing the owne
 root. This did not execute a harness, model, GUI, input or runtime service. See
 [native Windows installation](validation/2026-10-11/windows-cib3219c5-install.json).
 
-**OBSERVED / latest CI failure:** all 15 platform/Python build and installer-check
+**OBSERVED / historical b3219c5 CI failure:** all 15 platform/Python build and installer-check
 step pairs succeeded, but the macOS Intel/Python 3.12 job failed when
 `actions/upload-artifact` timed out creating its artifact after five built-in
 attempts. Fourteen jobs passed; assembly and deployment were skipped. No agent
@@ -125,12 +363,27 @@ subsequent exact namespace admission loaded the actual Xlib/Pillow/native XCB
 dependencies through narrow read-only mounts. The next authorized run captured
 all 12 Firefox images and DOM oracles, then stopped when the first Tk oracle
 reported unmapped 1x1 controls. The remaining 24 scenes and all 72 model queries
-remain `NOT_RUN`. Root inspected all 12 original browser images; final annotations
-and leakage review remain pending, with no model or quality pass. See the
+remain `NOT_RUN`. Root inspected all 12 original browser images. All 12 encoded
+and decoded image identities differ from the 20 local train/validation images and
+the excluded development image. Five dHash flags were inspected against both
+nearest source images, which are uniform gray; no copied local screen was observed.
+This does not establish absence from public pretraining. Final annotations and
+the full data lock remain pending, with no model or quality pass. See the
 [dependency failure](validation/2026-10-11/heldout-acquisition-v3-stopped.json),
 [actual dependency admission](validation/2026-10-11/heldout-v4-dependency-native.json),
 [partial capture](validation/2026-10-11/heldout-acquisition-v4-partial.json), and
-[pixel review](validation/2026-10-11/heldout-browser12-pixel-review.json).
+[pixel review](validation/2026-10-11/heldout-browser12-pixel-review.json), and
+[local leakage review](validation/2026-10-11/heldout-browser12-leakage-review.json).
+The subsequent run carried those 12 browser images and oracles byte-for-byte and
+captured five native Tk scenes. It stopped on the next scene because an empty
+toolbar legitimately measured one pixel high while the actual Notebook targets
+were mapped at 1172x30. No scene was retried or relabeled. Seventeen screens are
+available; 19 screens and all 72 model queries remain `NOT_RUN`. Root inspected
+the five new Tk originals; their local leakage review and the full data lock remain
+pending. Owned processes and all declared X sockets/locks were gone after cleanup;
+production Blender remained alive. See
+[v5 partial capture](validation/2026-10-11/heldout-acquisition-v5-partial.json) and
+[Tk pixel review](validation/2026-10-11/heldout-tk5-pixel-review.json).
 
 **OBSERVED / grounding-head provenance:** the configured historical head uses v2;
 both pinned and current canonical loaders require v3. Refusal is inferred from
@@ -779,7 +1032,7 @@ native, harness, installed or public-release status from another evidence level.
 | M2 typed input | IN_PROGRESS | Linux and Windows native input/actual IME separation observed; historical Windows restoration failure and canonical automatic IME discovery remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
-| M5 harness/install/release | IN_PROGRESS | Immutable6cdf182 CI/Linux/Windows install, Windows22process-exit cases, FINAL15 Codex/Hermes private fixture tasks and active GUI update pass at their recorded scope; OMP, production tasks and public release verification remain open. |
+| M5 harness/install/release | IN_PROGRESS | FINAL24 local installation and native Hermes boundaries, native14 discovery and bb971ef CI/Windows flow-config installation pass at their recorded scope; OMP, production tasks and public release remain open. |
 
 Reici matched-view production edits, independent visual review, Warudo/VRChat
 verification and public artifact publication/download/hash/fresh public install

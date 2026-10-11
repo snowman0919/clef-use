@@ -1,0 +1,36 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Frozen FINAL23 source consumer regressions: resource-root identity, declared-name/dirname aliases, native Hermes configured/trusted/terminal sources, distinct catalog and legacy-flat lookup, and Codex individual file disables. Installed native discovery and task/release gates remain separate.",
+  "command": ".venv/bin/python -m pytest -q",
+  "passed": 866,
+  "skipped": 34,
+  "warnings": 41,
+  "elapsed_seconds": 51.12,
+  "raw_log_sha256": "6e102e86a30e8afef4a870ca488c55220292e4fb30a72a27fbe2d3484e333a56",
+  "source_sha256": {
+    "src/clef_use/integrations.py": "b61ec02103dfda098b47d58b55a788a1bae6175089eefdacd678aca6ff1c55b7",
+    "tests/test_integrations.py": "a43f66da8358d944d1ec685767f62e70ef60965d2840901084a2b17d8ff34dea"
+  },
+  "checks": {
+    "integration_consumer_regressions": 85,
+    "ruff": "PASS",
+    "generated_contract_build_check": "PASS",
+    "static_review": "No remaining concrete finding in scoped final scanner readback; not execution evidence."
+  },
+  "before_correction": {
+    "terminal_cwd": "3 FAILED",
+    "Hermes_alias_catalog_legacy_first_batch": "9 FAILED /1 PASSED",
+    "Codex_individual_disable": "2 FAILED /2 PASSED",
+    "Hermes_legacy_flat_inside_excluded_dirs": "3 FAILED /11 PASSED"
+  },
+  "retained_prior_draft_full_suite": {
+    "passed": 863,
+    "skipped": 34,
+    "elapsed_seconds": 50.83,
+    "scope": "Completed before the final legacy-flat exclusion correction; superseded source, not relabeled frozen FINAL23.",
+    "raw_log_sha256": "ef9e095fa48e376d4a9c4921d2fe49121971778b226575b2a98c24fb26062abd"
+  },
+  "limits": [
+    "No task accuracy, genuine historical model baseline, reaction p95/goodput/coverage, Windows or public release inferred from this suite."
+  ]
+}

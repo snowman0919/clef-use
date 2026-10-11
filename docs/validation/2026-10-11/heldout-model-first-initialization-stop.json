@@ -1,0 +1,99 @@
+{
+  "classification": "OBSERVED_ENVIRONMENT_INITIALIZATION_FAILURE_COMPONENT_MEASUREMENTS_NOT_RUN",
+  "status": "STOPPED_FIRST_UNEXPECTED_ERROR_NO_RETRY",
+  "date": "2026-10-12",
+  "bindings": {
+    "driver": {
+      "basename": "clef_grounder_heldout_compare_final_20261012.py",
+      "sha256": "4bb92133594b9d663e62880f2a4c63bbb934ea072085f3c6e5b4e107ab9ad607"
+    },
+    "declaration": {
+      "basename": "clef-grounder-heldout-comparison-final-predeclaration-20261012.json",
+      "sha256": "4e39b48dda29f605a8edb7bb7a4f3d468adebb050cc873bf209decbccfb00198"
+    },
+    "root_START_once": {
+      "basename": "clef-grounder-heldout-comparison-root-start-once-20261012.json",
+      "sha256": "a064af9224a7e8b68a60c58b491de883a27de748b9908b28c4d5c0c580832d4c"
+    },
+    "data_lock": {
+      "basename": "clef-grounder-heldout-data-lock-20261012.json",
+      "sha256": "9545c1cced419fcf74d16870fcf434221f9916f5a7ab75c8e6afc56af1359e5d"
+    }
+  },
+  "received_native_artifact_sha256": "444699438e52c42202ffee5d1071b4b3a3f4749efbf33cbcfc5d4a9734ebe9cb",
+  "private_predictions_sha256": "051833f1d5dba843da592dcf16cc600c74703cd44b49e9eb5eb048f7d531b06b",
+  "private_error_sha256": "b25a4461e3e564cc50d202fd796d5817682f741ef0abe05f492223732838d32a",
+  "private_process_log_sha256": "f7b7596007ccfa241f0a4b7a9cbf965ee67590bf20205657d44586ba5822b4d6",
+  "private_parent_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "data_validation": {
+    "declared_screens": 36,
+    "declared_query_opportunities_per_phase": 72,
+    "valid_locked_queries_staged": 72,
+    "staged_png_encoded_decoded_dimensions_checked": true,
+    "annotation_changes": false,
+    "locked_before_predictions": true,
+    "sample_structure": {
+      "queries_per_screen": 2,
+      "UI_families": 3,
+      "correlation": "WITHIN_SCREEN_AND_UI_FAMILY",
+      "independence_claim": false
+    }
+  },
+  "actual_phase_outcomes": [
+    {
+      "phase": "SUPPORTED_V3_HEAD_ALTERNATIVE",
+      "seed": 17,
+      "process_exit": 1,
+      "status": "INITIALIZATION_FAILED_BEFORE_QUERY",
+      "attempted_queries": 0,
+      "completed_predictions": 0,
+      "remaining_NOT_RUN": 72,
+      "owned_unit_inactive": true,
+      "quality_scores": "NOT_MEASURED"
+    },
+    {
+      "phase": "UI_TARS_2B_CANDIDATE",
+      "seed": 17,
+      "status": "NOT_RUN_FIRST_FAILURE_STOP",
+      "attempted_queries": 0,
+      "completed_predictions": 0,
+      "remaining_NOT_RUN": 72,
+      "process_started": false,
+      "quality_scores": "NOT_MEASURED"
+    }
+  ],
+  "observed_failure": {
+    "error_type": "KeyError",
+    "public_message": "getpwuid(): uid not found for current namespace UID",
+    "call_path": [
+      "canonical SiglipGrounder initialization",
+      "Transformers AutoModel lazy import",
+      "torch._dynamo package import",
+      "torch._inductor default_cache_dir",
+      "getpass.getuser",
+      "pwd.getpwuid"
+    ],
+    "source_boundary": "Fresh filesystem omits host account database and clearenv omits username; default cache lookup fails.",
+    "not_a_quality_outcome": true,
+    "model_parameter_load": "NOT_REACHED: lazy AutoModel import raised before from_pretrained",
+    "host_checkpoint_hash_reads": "Authorized prelaunch hash validation occurred; distinct from model weight loading."
+  },
+  "cleanup": {
+    "parent_process_exit": 1,
+    "owned_CPU_unit_inactive": true,
+    "UI_unit_never_started": true,
+    "added_retries": 0,
+    "fallbacks": 0,
+    "native_input_or_GUI_calls": 0,
+    "canonical_writes": 0
+  },
+  "limits": {
+    "initial_admission": "Top-level transformers import succeeded; lazy AutoModel/Qwen class import closure was not tested.",
+    "raw_not_run_queries_field": "Original raw top-level not_run_queries=0 counts locked acquisition availability, not completed model queries; actual remaining evaluation opportunities are144.",
+    "dynamic_network_syscall_accounting": "Not instrumented; isolated network/offline configuration applied.",
+    "genuine_baseline_task_or_p95": "NOT_RUN",
+    "production_adoption": "NOT_RUN_ROOT_DECISION"
+  },
+  "proposed_only": "Root may review an explicit owned-cache/opaque-username environment correction and zero-inference imports of actual lazy classes; no change or new execution authorized by this artifact.",
+  "private_evidence_policy": "Raw predictions, boxes, trace and paths remain private; public artifact includes stable basenames, digests and scoped numeric outcomes only."
+}

@@ -1,0 +1,60 @@
+{
+  "classification": "OBSERVED",
+  "scope": "FINAL17 unchanged installed console entry executed by its exact shebang VENV under private hidden-HOME namespace; fresh Codex integration only. Not native harness discovery or matrix completion.",
+  "status": "PASS_CANONICAL_CONSOLE_PROOF_ONLY",
+  "driver_sha256": "9a7daceb39f6fabda6216a4eca730ae059ea30bd91e345d2b2dc33541e3199fa",
+  "declaration_sha256": "b1af6d49029c8e192015507449610184fa0932fbaad41b22eed41aa72e3f7088",
+  "root_authorization_sha256": "c9962440215538e7e86243af2b1eb829a9ccf24f8d2af00e5ef9bbab585c3017",
+  "native_exit": 0,
+  "native_status": "INSTALLED",
+  "guide_hashes": {
+    "clef-use": {
+      "actual_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "immutable_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+    },
+    "clef-use-blender": {
+      "actual_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "immutable_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+    },
+    "clef-use-diagnostics": {
+      "actual_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+      "immutable_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  },
+  "actual_runtime_capability_subprocesses": 1,
+  "native_harness_discovery": 0,
+  "SDK_discovery": 0,
+  "models": 0,
+  "services": 0,
+  "GUI": 0,
+  "inputs": 0,
+  "matrix_calls": 0,
+  "actual_prefix_is_immutable_versioned_VENV": true,
+  "actual_cli_origin_is_immutable_versioned_VENV": true,
+  "capabilities": {
+    "CapInh": 0,
+    "CapPrm": 0,
+    "CapEff": 0,
+    "CapBnd": 0,
+    "CapAmb": 0,
+    "NoNewPrivs": 1
+  },
+  "raw_stdout_sha256": "b28319a6057aa325c59ef82a1926af9b253967003d16d5b493be3178ad3e218d",
+  "raw_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "raw_audit_sha256": "b37873cc914ebcd2746957ea100490777c5746b7b8487ebaf021ca263f027fe0",
+  "raw_receipt_sha256": "92780ba134e8fcc3ab558e6dc07eed1e7aff02793a3e7d0413fabec2158ad375",
+  "cleanup": {
+    "outer_waited": true,
+    "all_thread_children_after_wait": 0,
+    "direct_PPID_children_after_wait": 0,
+    "observer_sets_agree_after_wait": true,
+    "own_root_process_argv_matches": 0,
+    "process_scan_permission_denials": 0,
+    "live_snapshot_sets_disagreed_due_sequential_observation": true
+  },
+  "limitations": [
+    "No separate managed shell-launcher execution; exact console artifact body run unchanged using exact shebang VENV.",
+    "Native DISCOVERED/LOADED/INVOKED/TASK_VERIFIED remain NOT_RUN.",
+    "First failed matrix and all prior admission failures preserved; no retry of failed root."
+  ]
+}

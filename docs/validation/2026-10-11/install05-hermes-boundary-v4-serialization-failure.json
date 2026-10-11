@@ -1,0 +1,126 @@
+{
+  "evidence_kind": "ACTUAL_INSTALLED_NATIVE_BOUNDARY_FAILURE",
+  "status": "OBSERVED_FAIL",
+  "candidate": "FINAL22_BEFORE",
+  "paired_scope": {
+    "conditions_per_candidate": 8,
+    "candidates": 2,
+    "scheduled_conditions": 16,
+    "completed_conditions": 0,
+    "first_condition": "missing_child",
+    "first_condition_status": "ERROR",
+    "remaining_conditions_status": "NOT_RUN",
+    "remaining_conditions": 15
+  },
+  "bindings": {
+    "driver_sha256": "4f8ae9b7e120cbc53c73850573dd972c54edff25e86ddbb81381f4fd66041e2c",
+    "paired_declaration_sha256": "01ae2f500b1853f54053050d92059ee64524da3c3e793cdae84cf28b1f9818ea",
+    "before_declaration_sha256": "98d7336ca173c12f0f7f162240351b1c6faae387e1cf70d0728c1dfb4ea1a677",
+    "after_declaration_sha256": "2abaf9dbc965c7d157be3086c88b3584a18d28046fa637fa4579f078bd8bd782",
+    "start_receipt_sha256": "bbe372250f941b3093b3d865c4a2fee4edbc679a93686985d94b9eb52e37dc32",
+    "installed_console_sha256": "f81f67e14409ff0fba23e99da869bd0d5e0b10bf1d2685b0bbdd4dd87986bc5c",
+    "installed_integrations_sha256": "df8f69e2fe2d0da69deb7f1433d46b19e768db31e4792b041044f12b4d6b7a59",
+    "installed_harness_sha256": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+    "packaged_core_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+  },
+  "actual_calls": {
+    "outer": 3,
+    "setup_cli": 1,
+    "native": 1,
+    "evaluation_cli": 1,
+    "capability_children": 1,
+    "model": 0,
+    "GUI_input": 0,
+    "service": 0,
+    "retries": 0
+  },
+  "actual_exit_receipts": [
+    {
+      "case": "missing_child",
+      "mode": "setup",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "outer_waited": true,
+      "seconds": 0.6146716000512242,
+      "stdout_sha256": "c825c2acf47c69784a25120435c5c5b22e6f4e682b01ce98e916f5fdf674cf2c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "case": "missing_child",
+      "mode": "native",
+      "actual_exit": 0,
+      "expected_exit": 0,
+      "outer_waited": true,
+      "seconds": 0.21407858293969184,
+      "stdout_sha256": "6795964d3563c2e1d47c97b5227543cbced62715635db1600aed92636cf8df17",
+      "stderr_sha256": "1b2f7948e5132b61fad6d770b463bfb50ff64a3766215414af737ff9be26c4f6"
+    },
+    {
+      "case": "missing_child",
+      "mode": "installed",
+      "actual_exit": 1,
+      "expected_exit": 0,
+      "outer_waited": true,
+      "seconds": 0.16399699600879103,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "048fc3d9b4b5f37e5dff723dc3c939a627a08ac95195b768c8e5f9dfeae95d40"
+    }
+  ],
+  "setup": {
+    "status": "INSTALLED",
+    "manifest_and_three_packaged_files_verified": true,
+    "verification_sha256": "8e41635e4e21a9718e4a8ec58de0c973337b7e6c0124236c68e7c743a4423cff"
+  },
+  "native": {
+    "process_exit": 0,
+    "guide_view_returned_success": true,
+    "trusted_configuration_accepted": false,
+    "core_body_success_does_not_certify_trusted_project_discovery": true,
+    "reported_config_error_line_1_based": 8,
+    "reported_config_error_column": "NOT_CAPTURED",
+    "error": "expected '<document start>', but found ('<block mapping start>',)",
+    "fallback": "DEFAULT_SETTINGS",
+    "corrupt_backup_observed": true
+  },
+  "evaluation": {
+    "exit": 1,
+    "error_type": "ParserError",
+    "error_reason": "operation failed; run doctor",
+    "capability_children": 0
+  },
+  "cause": {
+    "classification": "OBSERVED_PRODUCT_SERIALIZATION_BOUNDARY",
+    "initial_format": "JSON_FLOW_MAPPING_VALID_YAML",
+    "initial_json_decode_equals_expected_mapping": true,
+    "initial_input_sha256": "550eff6abb24e5aa7319c25333c8f0b49c8f7e69cc13ae7d3c21476c89b5a27f",
+    "setup_output_config_sha256": "880c3223493bee724761b4a84cbee2e67d9217b87daa66dfff41564bde7d49ed",
+    "setup_kept_initial_prefix": true,
+    "appended_block_after_closed_flow_mapping": true,
+    "source": "src/clef_use/harness.py",
+    "function": "_yaml_entry",
+    "line_1_based": 143,
+    "native_imports_did_not_mutate_config": true
+  },
+  "preservation": {
+    "pre_native_snapshot_file_count": 9,
+    "post_native_file_count": 11,
+    "all_preexisting_bytes_preserved": true,
+    "changed_preexisting_files": 0,
+    "native_added_default_SOUL_document": true,
+    "native_added_corrupt_backup": true,
+    "backup_matches_corrupt_config": true,
+    "prior_v3_failure_retained": true
+  },
+  "cleanup": {
+    "all_children_waited": true,
+    "driver_owned_worker_process_count": 0,
+    "independent_owned_worker_process_count": 0,
+    "process_readback_permission_unknowns": 0
+  },
+  "limits": [
+    "Native success used fallback defaults and does not establish trusted-project configuration or any paired condition.",
+    "No AFTER candidate calls executed.",
+    "No product patch or automatic rerun performed.",
+    "Raw configuration, native guide bodies, temporary roots and logs remain private."
+  ]
+}

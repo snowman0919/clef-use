@@ -1,0 +1,226 @@
+{
+  "classification": "OBSERVED_LOCKED_HELDOUT_COMPONENT_COMPARISON_NOT_GENUINE_TASK_BASELINE",
+  "status": "COMPLETE_COMPONENT_MEASUREMENTS_NO_ADOPTION_DECISION",
+  "date": "2026-10-12",
+  "bindings": {
+    "driver": {
+      "basename": "clef_grounder_heldout_compare_final2_20261012.py",
+      "sha256": "d2b57eb0a5fe8054db53a023878f6216c751e80b1495c01c634128fcf24a30fc"
+    },
+    "predeclaration": {
+      "basename": "clef-grounder-heldout-comparison-final2-predeclaration-20261012.json",
+      "sha256": "6c8f040afe1bd65dc0ec3fa1586436ba63bbedb5cbb70d4b0b96361f4ad2133a"
+    },
+    "ROOT_START_ONCE": {
+      "basename": "clef-grounder-heldout-comparison-root-start-once2-20261012.json",
+      "sha256": "e764846aacb185e4044fdc3dd7c6216ac4a2dbcecaf690d9e611c068f77aa328"
+    },
+    "data_lock": {
+      "basename": "clef-grounder-heldout-data-lock-20261012.json",
+      "sha256": "9545c1cced419fcf74d16870fcf434221f9916f5a7ab75c8e6afc56af1359e5d"
+    },
+    "FINAL19_installed_receipt": {
+      "basename": "clef-final19-owned-install-public-20261012.json",
+      "sha256": "d051a63cb0bd48abad3992c14e1cb130f404daa6f46060375b46a4719de91d4c"
+    },
+    "namespace_plan": {
+      "basename": "clef-heldout-model-private-namespace-plan-20261012.json",
+      "sha256": "67527da152ca9ba5eebb73d2b743c4cebaa48d686bef000b6a3024b4376b1af2"
+    },
+    "dependency_overlay": {
+      "basename": "clef-final19-product-dependency-overlay-20261012.json",
+      "sha256": "829fa05cf56ad95528540737c0da74e71cb3652278451f5140a099b38f6d6668"
+    }
+  },
+  "received_native_artifact_sha256": "4adbb82eec22793e5f5670a4ad06a5fc1962b1cb25cc993633040ae12ee2f6bd",
+  "retained_histories": {
+    "original_draft_import_admission_pydantic_missing": {
+      "artifact_basename": "public-report.json",
+      "sha256": "f81e46ae8276258c58f344fe626fcb71b62ebc184cd3db613f3c2b20df7b9a51",
+      "preserved": true
+    },
+    "corrected_dependency_import_admission": {
+      "artifact_basename": "clef-heldout-namespace-dependency-admission-public-20261012.json",
+      "sha256": "12ed9b5fd2069ab3ac6289ab1025b213827e21bb8c69f45333d597cc39f661ca",
+      "preserved": true
+    },
+    "first_model_initialization_getpwuid_stop": {
+      "artifact_basename": "clef-heldout-component-first-initialization-stop-public-20261012.json",
+      "sha256": "68391008ba46ad143ecd0275713cda0b198459ac65bcf32637354b36db95664c",
+      "preserved": true
+    }
+  },
+  "scope": {
+    "original_screens": 36,
+    "declared_queries_per_model": 72,
+    "model_phases": 2,
+    "seed": 17,
+    "planned_kind_counts": {
+      "PRESENT": 54,
+      "ABSENT_VISIBLE": 9,
+      "AMBIGUOUS": 9
+    },
+    "same_locked_queries_and_pixels": true,
+    "source_image_acquisition": "Original native v4/v5/v6 images; exact carry provenance bound by root lock and all36 leakage receipt.",
+    "same_family_correlation": "Two queries per screen and three UI families;72 is distinct query count, not72independent samples.",
+    "enabled_status": "Disabled visible PRESENT controls remain component localization opportunities; a hit is not permission to act.",
+    "Blender10_label_limit": "Generic X field component label inferred from row context; retained in root lock, not erased by scoring."
+  },
+  "execution": {
+    "order": [
+      "SUPPORTED_V3_HEAD_ALTERNATIVE",
+      "UI_TARS_2B_CANDIDATE"
+    ],
+    "V3_dtype_device": "float32 CPU",
+    "UI_dtype_device": "bfloat16 cuda:0 SDPA",
+    "parent_exit": 0,
+    "added_retries": 0,
+    "provider_fallbacks": 0,
+    "threshold_tuning": 0,
+    "native_input_or_GUI_calls": 0,
+    "correction_from_original": "Only synthetic USER/LOGNAME after distinct root-approved environment initialization correction; original failure preserved.",
+    "network": "Unshared namespace and offline configuration; dynamic network syscall count not instrumented."
+  },
+  "phases": [
+    {
+      "model": "SUPPORTED_V3_HEAD_ALTERNATIVE",
+      "seed": 17,
+      "status": "COMPLETE_MEASUREMENTS",
+      "process_exit": 0,
+      "owned_unit_inactive_recorded": true,
+      "owned_unit_inactive_final_readback": true,
+      "attempted_queries": 72,
+      "completed_predictions": 72,
+      "remaining_NOT_RUN": 0,
+      "present_denominator": 54,
+      "negative_denominator": 18,
+      "strict_correct": 18,
+      "strict_correct_denominator": 72,
+      "outcome_counts": {
+        "PRESENT_REJECTED": 53,
+        "CORRECT_NEGATIVE_ABSTENTION": 18,
+        "WRONG_POINT": 1
+      },
+      "per_application": {
+        "blender": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_REJECTED": 17,
+            "WRONG_POINT": 1,
+            "CORRECT_NEGATIVE_ABSTENTION": 6
+          }
+        },
+        "browser": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_REJECTED": 18,
+            "CORRECT_NEGATIVE_ABSTENTION": 6
+          }
+        },
+        "tk_editor": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_REJECTED": 18,
+            "CORRECT_NEGATIVE_ABSTENTION": 6
+          }
+        }
+      },
+      "disabled_visible_present_count": 2,
+      "native_predictions_sha256": "ffd5d71467c407b39c42ab195be979845bdedff811aeb7810e988b902575f1ce",
+      "private_scored_sha256": "140fad38587c8bf5ae34bdaf705ffcf0ba52be59a9caff3a03d5360de3d05315",
+      "private_process_log_sha256": "898d9aa3be28ec4d1050226f2c9e7e173a3f3b9a4ccccf5074c4629c5ee86f2d",
+      "runtime_environment": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.10.2",
+        "CPU_threads": 12
+      }
+    },
+    {
+      "model": "UI_TARS_2B_CANDIDATE",
+      "seed": 17,
+      "status": "COMPLETE_MEASUREMENTS",
+      "process_exit": 0,
+      "owned_unit_inactive_recorded": true,
+      "owned_unit_inactive_final_readback": true,
+      "attempted_queries": 72,
+      "completed_predictions": 72,
+      "remaining_NOT_RUN": 0,
+      "present_denominator": 54,
+      "negative_denominator": 18,
+      "strict_correct": 50,
+      "strict_correct_denominator": 72,
+      "outcome_counts": {
+        "PRESENT_HIT": 50,
+        "NEGATIVE_POINT_PROPOSAL": 18,
+        "WRONG_POINT": 4
+      },
+      "per_application": {
+        "blender": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_HIT": 14,
+            "WRONG_POINT": 4,
+            "NEGATIVE_POINT_PROPOSAL": 6
+          }
+        },
+        "browser": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_HIT": 18,
+            "NEGATIVE_POINT_PROPOSAL": 6
+          }
+        },
+        "tk_editor": {
+          "declared_queries": 24,
+          "counts": {
+            "PRESENT_HIT": 18,
+            "NEGATIVE_POINT_PROPOSAL": 6
+          }
+        }
+      },
+      "disabled_visible_present_count": 2,
+      "native_predictions_sha256": "99e9e4c657526884bcda396001dd04e743500cf79683dcc9aa4da61d7e5b92f1",
+      "private_scored_sha256": "f1402bb255edea172281e7a75c7b9cc545a3991ef9cefac8abbaba9143bd4684",
+      "private_process_log_sha256": "2dcb1dd1579fab30a214249bec11bd53e39881fd35d5fbb0e6b896b23df5aafd",
+      "runtime_environment": {
+        "torch": "2.11.0+cu130",
+        "transformers": "5.10.2",
+        "CPU_threads": 12,
+        "GPU_hardware": "NVIDIA GeForce RTX 3080",
+        "GPU_total_bytes": 10347741184
+      }
+    }
+  ],
+  "paired_descriptive_counts": {
+    "same72query_opportunities": {
+      "UI_TARS_ONLY_CORRECT": 50,
+      "V3_ONLY_CORRECT": 18,
+      "NEITHER_CORRECT": 4,
+      "BOTH_CORRECT": 0
+    },
+    "independent_sample_or_significance_claim": false
+  },
+  "scoring": {
+    "PRESENT": "floor native point inside one prelocked half-open target box",
+    "negative": "ABSENT_VISIBLE and AMBIGUOUS require canonical abstention; any proposed point is incorrect",
+    "INVALID": "No correctness credit; all raw outputs retained privately",
+    "independent_curator_recomputation_matches_native_private_scores": true,
+    "gates": "Existing .9presence/.55spatial/refinement2 unchanged; UI greedy128tokens strict coordinate parser unchanged"
+  },
+  "cleanup": {
+    "parent_exit": 0,
+    "both_owned_units_inactive": true,
+    "no_fixture_or_production_process_started": true,
+    "canonical_edits": 0
+  },
+  "NOT_RUN": {
+    "genuine_b3f0b233_task_baseline": "This is supported V3 alternative vs UI-TARS component comparison, not retained actual full-task baseline",
+    "runtime_model_or_harness_GUI_task": "No OS input or service session",
+    "statechange_to_correct_OSinput_p95_goodput_coverage": "No such measurements in this component run",
+    "production_state_provider": "No provider implementation or readiness claim",
+    "multi_seed_repeats": "Only declared seed17authorized",
+    "public_pretraining_absence": "Local trainval/dev exclusion does not establish internet/pretraining independence",
+    "statistical_independence_or_adoption": "Root owns interpretation/acceptance; no adoption decision"
+  },
+  "private_evidence_policy": "No raw prediction text/coordinates/token IDs, query IDs, boxes, private paths/auth or per-scene screenshots in public artifact."
+}

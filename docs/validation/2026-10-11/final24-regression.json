@@ -1,0 +1,34 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL24",
+  "source_commit_base": "35426367aac52f2c1ae994e4c4cc822c61e7350e",
+  "source_harness_sha256": "fc3bee99ea42e6988ac029f91b53ef8a79f85468d9817ef8cd7580eb742178f9",
+  "tests_harness_sha256": "53e6f781587937561d940a4a88ae9075067c8e18cd2830812a571aab17f6bfd5",
+  "source_integrations_sha256": "b61ec02103dfda098b47d58b55a788a1bae6175089eefdacd678aca6ff1c55b7",
+  "regression": {
+    "passed": 874,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 51.12,
+    "raw_log_sha256": "c84fda166e621f12307a0c61e61902ee40b3e799b9385406ad095bc59701987f"
+  },
+  "focused": {
+    "harness_and_integrations_passed": 99,
+    "initial_serialization_cases_failed_before": 6,
+    "empty_explicit_document_cases_failed_before": 2
+  },
+  "static_checks": {
+    "ruff": true,
+    "format": true,
+    "generated_contract": true
+  },
+  "independent_review": "STATIC_ONLY; identified empty explicit document ScalarNode issue, reproduced then fixed; final scoped review found no further concrete defect.",
+  "superseded_draft": {
+    "passed": 872,
+    "skipped": 34,
+    "seconds": 50.99,
+    "raw_log_sha256": "d0c9bf811dcff0006a9c93e480e065cc028b10319073795940a13540e5b6bdb5",
+    "scope": "Before empty-document correction; retained original, not final frozen result."
+  },
+  "scope": "Source regression of actual YAML registration serialization, idempotency and semantic user settings; installed native artifact execution and whole-spec/performance gates separate."
+}

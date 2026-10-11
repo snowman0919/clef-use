@@ -1,0 +1,23 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Current source regression for skill enrollment collisions and Hermes configured-source discovery; source tests include disposable native widget/protocol cases but do not certify installed harness/task/release acceptance.",
+  "command": ".venv/bin/python -m pytest -q",
+  "passed": 845,
+  "skipped": 34,
+  "warnings": 41,
+  "elapsed_seconds": 67.3,
+  "raw_log_sha256": "ce48528d9c521e9ad324003ada400ece8b363b7d8079ea51eb0fc34939802865",
+  "source_sha256": {
+    "src/clef_use/integrations.py": "176943c3e4329674e04f636d2626be28d050ef6026d12c9e120be03302d3917b",
+    "tests/test_integrations.py": "db73d891e394b24c444c8a89051499c9fcdf2bb680323eb473a9224c7bc25173"
+  },
+  "checks": {
+    "integration_consumer_regressions": 64,
+    "ruff": "PASS",
+    "generated_contract_build_check": "PASS",
+    "tracked_old_diff_empty": true
+  },
+  "limits": [
+    "No model, installed native harness, full task goodput/coverage, 100ms release or Windows source execution inferred from this suite."
+  ]
+}

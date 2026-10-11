@@ -235,18 +235,23 @@ scenarios:
   category: installation
   requirement: Duplicate realpath/name, project overrides and inactive sources are reported
     correctly.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.shared_owner_lifecycle
+    section: evidence.install05_final24_root_policy
     claim: OBSERVED
-    partial: true
+    partial: false
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.source_regression
+    section: evidence.install05_hermes_boundary_v5_paired
     claim: OBSERVED
-    partial: true
-  execution_note: Shared guide owner/native SDK survival and override/source fixtures observed;
-    exhaustive discovery precedence matrix incomplete.
+    partial: false
+  execution_note: Actual native14 covers complete-directory aliases, duplicate names, project
+    overrides and tested inactive sources across Codex/Hermes/OMP; installed preservation
+    reports agree. Codex inactivity is an exact SKILL.md entry, not whole profile/source.
+    Separate paired Hermes8 preserves five FINAL22 mismatches and verifies all eight
+    FINAL24 corrections; original flow-YAML registration additionally parses, trusts and
+    loads the project guide. Conflict outcomes are dry-run reports; no conflicting guide
+    overwrite, whole-session precedence or GUI/model/task proof is claimed.
 - id: INSTALL-06
   category: installation
   requirement: Checksum failure, offline download and traversal/symlink-escape archives do not

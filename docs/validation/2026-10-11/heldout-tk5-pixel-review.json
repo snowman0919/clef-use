@@ -1,0 +1,64 @@
+{
+  "classification": "OBSERVED root original-pixel review; no model execution",
+  "status": "FIVE_NATIVE_TK_PIXEL_REVIEWS_COMPLETED_PENDING_LOCAL_LEAKAGE_REVIEW",
+  "source_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+  "acquisition_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+  "scenes": [
+    {
+      "screen_id": "tk_editor-01",
+      "encoded_sha256": "b353a239075874362a721c0962eeceefb80470a7307652d1c3ad599b39257db1",
+      "decoded_rgb_sha256": "030685777a17383f0cdeaad5ba94ef1ddc4316a6e82f660cf4a4c5893394b60a",
+      "native_oracle_sha256": "174174fae71bdc864ba02fc99e23d0c39983632d8c3991cda26fd1519cd5c969",
+      "actual_original_pixels_viewed": true,
+      "pixel_assessment": "CONSISTENT_WITH_NATIVE_ORACLE",
+      "observation": "Save and Find controls visible in separate toolbar boxes.",
+      "native_boxes_unchanged": true
+    },
+    {
+      "screen_id": "tk_editor-02",
+      "encoded_sha256": "55130104a4a3976e16d476c9773dd0e502c1e1757ce13ec3298763797a4c6c43",
+      "decoded_rgb_sha256": "43872e37894ba8a6b10553eb02e908f1cc9f71da59606b64ad971deef0a2b9c4",
+      "native_oracle_sha256": "42487d995d916ea2940e6fedc5d572f31b81f3bc66b7a6336b863a25abc13947",
+      "actual_original_pixels_viewed": true,
+      "pixel_assessment": "CONSISTENT_WITH_NATIVE_ORACLE",
+      "observation": "Replace button and Line numbers checkbox visible.",
+      "native_boxes_unchanged": true
+    },
+    {
+      "screen_id": "tk_editor-04",
+      "encoded_sha256": "adf2a0f47ff5328f8654e7b45bbb3a82639e32880b6fe30a361214ad5deb6dfd",
+      "decoded_rgb_sha256": "8de4352fe6e87e59d4d0dc84660d2aac577a0e1a4b50b857e3d16aba9f6a66c0",
+      "native_oracle_sha256": "bd7768123456aff6fd7d9e89c30f1de720c33719135a4b92810dad24fa5dbcea",
+      "actual_original_pixels_viewed": true,
+      "pixel_assessment": "CONSISTENT_WITH_NATIVE_ORACLE",
+      "observation": "Next and Close toolbar buttons visible.",
+      "native_boxes_unchanged": true
+    },
+    {
+      "screen_id": "tk_editor-07",
+      "encoded_sha256": "030489c1a4dfe6dc1344f73886cf97cc145c3c66445e424b04210005eec483fa",
+      "decoded_rgb_sha256": "9b8697f7d440fe69e2e0cd7cfe0fbcb2ca2f7ee1d7bb7a4c28aa12b73131067a",
+      "native_oracle_sha256": "90a60297b4103553b1ba31e12ffaf88df14b122e7e6bfae2470b5889affd556f",
+      "actual_original_pixels_viewed": true,
+      "pixel_assessment": "CONSISTENT_WITH_NATIVE_ORACLE",
+      "observation": "Undo is a button; Delete document is visible ordinary editor text, with no matching button.",
+      "native_boxes_unchanged": true
+    },
+    {
+      "screen_id": "tk_editor-10",
+      "encoded_sha256": "c026b8fa56fb3698c035168a0b7b9eaeb97317bce66d19871b36c7cc26a963d4",
+      "decoded_rgb_sha256": "1fd5b4f33628e6e1e083767329aaf981ce85d55613699645c64476b6f69b199e",
+      "native_oracle_sha256": "ac983e6632a2e6b37464ab133251c9f56928ddf0db92512906152237352cab1d",
+      "actual_original_pixels_viewed": true,
+      "pixel_assessment": "CONSISTENT_WITH_NATIVE_ORACLE",
+      "observation": "Run button and two distinct visible Save buttons, one toolbar and one sidebar; ambiguous query retained.",
+      "native_boxes_unchanged": true
+    }
+  ],
+  "limits": [
+    "All five native original screenshots viewed; no transformations or oracle edits.",
+    "Does not certify native interaction effects or full functional controls.",
+    "All5 dHash flags still require nearest-source local review; no full data lock or public-pretraining absence claim.",
+    "All72 model queries NOT_RUN; remaining19 screenshots NOT_RUN."
+  ]
+}

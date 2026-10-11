@@ -2336,7 +2336,7 @@
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/cib3219c5-linux-install.json",
       "sha256": "d0aa900a976a357318c42fcf5cbedc47835c2c27aa4decfbf7873f1e8c511146",
-      "scope": "Actual immutable latest-source Linux archive, installation/integration/repeat/idle service identity and cleanup only. Native model/harness/GUI/task/latency not executed; total CI status is separately recorded when complete."
+      "scope": "Actual historical b3219c5 immutable Linux archive, installation/integration/repeat/idle service identity and cleanup only. Native model/harness/GUI/task/latency not executed; total CI status is separately recorded when complete."
     },
     "heldout_acquisition_v2_stopped": {
       "claim": "OBSERVED",
@@ -2354,7 +2354,7 @@
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/ci-b3219c5.json",
       "sha256": "8544e2ef3b340467b77d1b70094c849b5add47f39fdbfd964a586010063346f5",
-      "scope": "Latest implementation CI, not complete release approval. Successful Linux/Windows archive installation evidence is separately scoped; no overallCI pass, tag, main merge, deployment guard bypass or public release."
+      "scope": "Historical b3219c5 implementation CI, not complete release approval. Successful Linux/Windows archive installation evidence is separately scoped; no overallCI pass, tag, main merge, deployment guard bypass or public release."
     },
     "windows_cib3219c5_install": {
       "claim": "OBSERVED",
@@ -2385,15 +2385,261 @@
       "artifact": "docs/validation/2026-10-11/heldout-browser12-pixel-review.json",
       "sha256": "d95e1d2c535d42eb586bfee43d0d721ccf8ec66f74f699ffb220aa5ea8e3a431",
       "scope": "Actual isolated acquisition preparation/native pixels or cleanup only; original errors retained. All72modelqueries NOT_RUN, no data lock, model quality, task, performance or release pass."
+    },
+    "heldout_browser12_leakage_review": {
+      "claim": "OBSERVED / MEASURED / INFERRED explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-browser12-leakage-review.json",
+      "sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+      "scope": "All12 browser exact encoded/decoded local train/validation and excluded-development overlaps0; five dHash flags manually reviewed against both nearest uniform-gray references. No observed local duplicate; no public-pretraining absence, final data lock, model quality, adoption, task, performance or release claim."
+    },
+    "install05_native_first_setup_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-native-first-setup-failure.json",
+      "sha256": "d17b7cd85f2980d02aa11f571f25645c20b2fb1ee3c1de357aa5dc228202752b",
+      "scope": "Native discovery NOT_RUN: first actual installedCLI setup exit1 under driver lexical-current interpreter; no native or capability calls; 11remaining cases NOT_RUN. Failure retained independently of canonical-console followup."
+    },
+    "heldout_acquisition_v5_partial": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-v5-partial.json",
+      "sha256": "3e0b7c5ac4e49acb912093513cd5a0d798c80838f3191b5901adf483a6b4fe63",
+      "scope": "12byteexactv4browser carry+5new nativeTk captures; emptytoolbar1px barrier failure stops remaining19screens, all72modelqueries NOT_RUN; cleanup observed, no data lock or quality/task/performance/release claim."
+    },
+    "heldout_tk5_pixel_review": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-tk5-pixel-review.json",
+      "sha256": "d3741127c5e1e02c718e11fef59b3fb18523a586e63e0efb41a7e819b7347f5d",
+      "scope": "Root viewed all5original nativeTk screens and compared native target boxes/visible absence/ambiguity. Local leakage review remains pending; no annotation change, model, functional task or data lock claim."
+    },
+    "install05_canonical_console_proof": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-canonical-console-proof.json",
+      "sha256": "2185368980663aa4d3e0903b4cc41dd2ce1673d83fb91011ffc9f7337ffa3ffb",
+      "scope": "Actual unchanged installed console body via exact shebang VENV installed3guidebytes correctly with1realcapability subprocess; no native harness discovery/matrix/model/service/GUI/task. Separate shell launcher execution not claimed; first setup driver failure retained."
+    },
+    "heldout_acquisition_v6_complete": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-v6-complete.json",
+      "sha256": "3f49d01ef393653bbf6b8ff436453c6989792f127319dc5b3d72fdd56712d09f",
+      "scope": "All36native screenshots captured:17byteexact carried+19new; zero model queries; independent cleanup, production untouched. Capture only, not quality/task/performance."
+    },
+    "heldout_all36_local_leakage_review": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-all36-local-leakage-review.json",
+      "sha256": "abb946fbf7d8b15b53088bdab6275caf1aa50bc09d24c0fa46969cd6a373d3e3",
+      "scope": "All36 local exact encoded/decoded trainval/development overlap0, withinheldout36unique,15dHash flags reviewed against nearest sources. Bounded local exclusion, not public-pretraining absence or statistical independence."
+    },
+    "heldout_all36_root_annotation_review": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-all36-root-annotation-review.json",
+      "sha256": "e00efb489b849b976c32dc97b475abcca3b265962cc9d25a514ca307dff0bbc5",
+      "scope": "Root viewed36original native screens before predictions and approved72annotations:54present9visibleabsence9ambiguous. Explicit Blender-10 label inference limitation retained; no functional input or model quality claim."
+    },
+    "heldout_tk12_root_pixel_review": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-tk12-root-pixel-review.json",
+      "sha256": "594aa2e814bec86684414f862e369a0e503f58b06f4b1589c0ef2687045f4acb",
+      "scope": "All12original nativeTk screenshots viewed against native widget geometry; disabled/occluded/ordinarytext/ambiguity boundaries preserved; no native control effect claim."
+    },
+    "install05_native_alias_false_conflict": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/install05-native-alias-false-conflict.json",
+      "sha256": "02689c9b7a7c5d5aec8081b3bd84043f65472dfd5c8e0003e18a3513d1a37931",
+      "scope": "Actual FINAL17 Codex native catalog before/after same-directory alias identical; installed repeat dryrun exit2 false CONFLICT. Root interpretation supersedes earlier incorrect success interpretation; other11cases NOT_RUN."
+    },
+    "production_state_provider_source_feasibility": {
+      "claim": "OBSERVED / INFERRED scope explicitly separated",
+      "artifact": "docs/validation/2026-10-11/production-state-provider-source-feasibility.json",
+      "sha256": "193934a4b41f6126e17470a9a8f66609196f8d36f141c97e0e441cefda2a7b39",
+      "scope": "Primary Blender5.2 source and actual local provider interfaces reviewed; public modal/RNA context cannot certify text/menu/IME/idle absence. General production collector remains NOT_RUN; existing fixture not promoted."
+    },
+    "final19_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final19-install.json",
+      "sha256": "d051a63cb0bd48abad3992c14e1cb130f404daa6f46060375b46a4719de91d4c",
+      "scope": "Actual FINAL19 isolated shell install INSTALLED/CURRENT;3guides×3harness INSTALLED/UNCHANGED;26HOMEfiles/commentprefixes preserved;61source/wheel/installed bytes exact. No models/services/GUI/input/native harness discovery. Full source837pass34skip49.64s; matrix separately recorded."
+    },
+    "install05_final19_native_matrix": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-final19-native-matrix.json",
+      "sha256": "038efcd60f62c8868c93b74aff0d3d2ffd9ca8e8da2c3f95bfaf79a7b99dce98",
+      "scope": "Actual Codex samephysicalwhole-directoryalias corrected; next duplicatefrontmatter-name native2enabledcopies vs installedPREVIEW/no conflicts FAIL. Fouractualnativecatalogresponses and4capqueries; remaining10cases NOT_RUN; Hermes/OMP0. Originalfailures retained, no retry/repair; no models/service/GUI/input."
+    },
+    "final20_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final20-install.json",
+      "sha256": "212d027b131feb86ba2940b20cc850fc935a0e53a4b7d024b93183fb8b66283c",
+      "scope": "Actual FINAL20 isolated shell install INSTALLED/CURRENT;3guides×3harness INSTALLED/UNCHANGED;26HOMEfiles/commentprefixes preserved;61source/wheel/installed bytes exact. No models/services/GUI/input/native harness discovery. Full source841pass34skip50.33s; native matrix separately recorded."
+    },
+    "install05_final20_native_matrix": {
+      "claim": "OBSERVED / INFERRED limitations explicitly separated",
+      "artifact": "docs/validation/2026-10-11/install05-final20-native-matrix.json",
+      "sha256": "82424f556a595d10b2702d2acb1720153e79535cfb5effa44c1b0261033f66e3",
+      "scope": "Actual12cases/24nativecatalogreports/18capabilityqueries, allpendingrootpolicyreview; threeharnessduplicateCONFLICT corrected; Hermes trustedproject source gap observed; Codex directorydisableeffect NOT_ESTABLISHED. No task/model/input, cleanupobserved."
+    },
+    "install05_final20_policy_readback": {
+      "claim": "OBSERVED / INFERRED limitations explicitly separated",
+      "artifact": "docs/validation/2026-10-11/install05-final20-policy-readback.json",
+      "sha256": "3b63f3240b1d3d5f94a7453d1394ffa707e3ffc1625c62e42aefae3cc7e3fb9b",
+      "scope": "Readonly originalcatalog/config readback: Codex bothcopies enabledtrue, installedCONFLICT matchesactivecatalog; inactivecondition notproved. Hermes nativeprojectselected/usercoreSHADOWED vs installedPREVIEW concretegap; no extra executions."
+    },
+    "heldout_model_dependency_admission": {
+      "claim": "OBSERVED / INFERRED limitations explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-model-dependency-admission.json",
+      "sha256": "12ed9b5fd2069ab3ac6289ab1025b213827e21bb8c69f45333d597cc39f661ca",
+      "scope": "Originalmissingpydantic admissionfailure retained; corrected exact132fileexistingdependencyoverlay CPU/UI each14imports PASS, privatepathsdenied/unitsinactive. No models/weights/CUDAinquiry/inference/GUI/input, no qualityclaim."
+    },
+    "heldout_model_first_initialization_stop": {
+      "claim": "OBSERVED / INFERRED limitations explicitly separated",
+      "artifact": "docs/validation/2026-10-11/heldout-model-first-initialization-stop.json",
+      "sha256": "68391008ba46ad143ecd0275713cda0b198459ac65bcf32637354b36db95664c",
+      "scope": "Firstactual modelbatch CPU initialization stoppedbeforeweights/queries becausefreshnamespace lackedUSER/LOGNAME/passwd UID record;0predictions, CPU72/UI72remainingNOTRUN, no qualityscore. Originaldriver/declaration/START/data identities andcleanup retained."
+    },
+    "latest_source_regression_final21": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final21-regression.json",
+      "sha256": "1c6439b73c1430e3d2c8935df3fca7c8301b7d17c96fcbe3af80f3f065b92372",
+      "scope": "Historical FINAL21 source regression for skill enrollment collisions and Hermes configured-source discovery; source tests include disposable native widget/protocol cases but do not certify installed harness/task/release acceptance."
+    },
+    "final21_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final21-install.json",
+      "sha256": "7de92e5c8bdebe62da77a2f80734030e943a8cec0537044e5f3597e93ecee6e4",
+      "scope": "Actual FINAL21 fresh/repeat installation, preserved HOME and exact61 source/wheel/installed files; no native discovery."
+    },
+    "install05_final21_not_started": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-final21-native-not-started.json",
+      "sha256": "7a2a9dbed2173c72160d315b93b716b59b03173ac0bd18d3c2a96397e641249f",
+      "scope": "FINAL21 native14 was not started; parent stopped before execution after a newly reproduced TERMINAL_CWD defect."
+    },
+    "heldout_component_comparison_final2": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-component-comparison-final2.json",
+      "sha256": "0af4efcf9aeda81c36c44ffbae5648c0fdc25ffc8119658a50d4438ebc1b6e38",
+      "scope": "Actual locked36screen/72query component comparison per model. V3 PRESENT0/54, negatives18/18; UI-TARS PRESENT50/54, negatives0/18. No model adoption, genuine task baseline, p95/goodput/coverage claim."
+    },
+    "latest_source_regression_final22": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final22-regression.json",
+      "sha256": "a3ef6b060499813ff7827d96fa552f3351fab4611388a6b38324605b4204d0fa",
+      "scope": "FINAL22 source regression including actual-directory validation for Hermes TERMINAL_CWD. This suite does not certify installed native harness/task/release acceptance."
+    },
+    "final22_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final22-install.json",
+      "sha256": "0247883107365a480d6355b5dbaed8eafbb212d0d61eedc54e2b3c05262ac245",
+      "scope": "Actual FINAL22 fresh/repeat shell installation INSTALLED/CURRENT,3guides3harnesses,26HOME/CRLF preserved,61source-wheel-installed exact,51wheels. Native discovery/load/invoke independent."
+    },
+    "install05_final22_native_matrix": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-final22-native-matrix.json",
+      "sha256": "4324bb719949b2492e94e4c9fa0c7f7fe8260016b4e8233e030b30d6867de83b",
+      "scope": "All14 planned native discovery cases executed,28catalog reports/19capability queries; root policy identifies Codex individual disabled project file still reported CONFLICT despite native projectenabledFalse/userTrue. Hermes current-source fixes pass14scope, additional alias/fallback/pruning/legacy boundaries not covered. Not a whole-source/profile/task PASS."
+    },
+    "install05_final22_policy_readback": {
+      "claim": "OBSERVED / root interpretation",
+      "artifact": "docs/validation/2026-10-11/install05-final22-policy-readback.json",
+      "sha256": "3494a2af992b77eaad43201e211dde8d06fa09f4e3995e3326eec834d359d92c",
+      "scope": "Preservation conflict reports, including duplicates in configured active sources even when native precedence retains the managed source. Whole-directory aliases and actually disabled individual entries do not conflict. No whole-source/profile disable or GUI/task proof."
+    },
+    "latest_source_regression_final23": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final23-regression.json",
+      "sha256": "29133e4226dd4c9a9c4da5bd8483faa526bd9568badd7742c96ddc19431446f0",
+      "scope": "Frozen FINAL23 source consumer regressions: resource-root identity, declared-name/dirname aliases, native Hermes configured/trusted/terminal sources, distinct catalog and legacy-flat lookup, and Codex individual file disables. Installed native discovery and task/release gates remain separate."
+    },
+    "final23_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final23-install.json",
+      "sha256": "bf379ec21a6eed7244d03ed7b5a09665f025a8eec7353073225dae41f0f65369",
+      "scope": "Actual frozen FINAL23 shell fresh/repeat INSTALLED/CURRENT, explicit3guides3harnesses INSTALLED/UNCHANGED,26HOME/CRLF preservation,61source-wheel-installed exact/51wheels; zero model/nativeharness/service/GUI/input in this install proof."
+    },
+    "install05_final23_native_matrix": {
+      "claim": "OBSERVED / root policy reviewed",
+      "artifact": "docs/validation/2026-10-11/install05-final23-native-matrix.json",
+      "sha256": "64525bb65c3841cb4cc329bf3a81b5344ba16b796ac831e238d14165e46ea760",
+      "scope": "Actual14native cases/28reports/20caps;all14preservationreports agree,including exactindividualCodexdisabledprojectfile. Separate17conditionHermespairedproof/rootpolicy nowrecorded. Original14identity unchanged;no model/task/wholeprofile assertion."
+    },
+    "release_ci3542636": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/release-ci3542636.json",
+      "sha256": "60113d53c3a1e68cb44b78ecc1f04f1200fd350cf0b339a6107cf9bef2de1e22",
+      "scope": "Actual source354 CI:15build/install/upload pairs and assembly success; production deployment and tag publication skipped by existing guards."
+    },
+    "install05_hermes_boundary_v3_setup_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-hermes-boundary-v3-setup-failure.json",
+      "sha256": "485096550d526bab22ab16e19fe5c12a2f2f552a079902f9940fa6c0be0ab355",
+      "scope": "Original separate paired attempt stopped after unmanaged local guide fixture correctly conflicted;1native/1CLI,remaining15casechecks NOT_RUN. Not a product cwd failure; exact childexit unrecorded/inferred2 retained."
+    },
+    "install05_hermes_boundary_v4_serialization_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/install05-hermes-boundary-v4-serialization-failure.json",
+      "sha256": "da7f7a1cf23b5a944be7af3105867ec6d0f5d90c69b862c59e22fa3641e75897",
+      "scope": "Actual setup INSTALLED corrupts accepted valid flow-map YAML;native warns and falls back/default guidebody is not projectdiscovery proof;evalParserErrorexit1,3outer/1cap/allwaited/cleanup0,remaining15conditions NOT_RUN. Root sourcefix requires separateinstallednativeproof."
+    },
+    "windows_ci3542636_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-ci3542636-install.json",
+      "sha256": "d151b8715c08d7341938f07c268866006911d536ece7de47038ef35f0ae09d99",
+      "scope": "Actual immutableWindowsCI354 source61exact fresh/repeat plus3guides3harnesses,HOME/CRLF/disabledsettings/globalwrapperconfigPATH+bootstrap/priorfixtures preserved,independentownprocess0. Seededblockconfig only;no nativeharness/model/service/GUI/input/flowYAMLfix/fullV2runtimeidentity proof."
+    },
+    "latest_source_regression_final24": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final24-regression.json",
+      "sha256": "b9dc5dab33873ef1d7ee2e878f73e07dfe5c300775caac7a23ccb923eb96a475",
+      "scope": "Source regression of actual YAML registration serialization, idempotency and semantic user settings; installed native artifact execution and whole-spec/performance gates separate."
+    },
+    "final24_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final24-install.json",
+      "sha256": "1deaa6403a1e1e42a388fea3244123dcbaf303270a4b7b9fc5e415f3f6177f77",
+      "scope": "Actual FINAL24 shell fresh/repeat INSTALLED/CURRENT,61source-wheel-installed exact/51wheels,3guides3harnesses INSTALLED→UNCHANGED,26HOME/CRLF preserved,loopbackclosed/joined andpostwaitchildren0. Native paired boundary separate."
+    },
+    "install05_hermes_boundary_v5_paired": {
+      "claim": "OBSERVED / root interpretation",
+      "artifact": "docs/validation/2026-10-11/install05-hermes-boundary-v5-paired.json",
+      "sha256": "3b5f2fee59a95347039fae5e8437b163351785ec116bee8ceefbcfbadd8d78a3",
+      "scope": "Actual17native conditions/51outer/24caps; BEFORE22 preserves5mismatches,AF24block8+originalflow1agree; nativeparse/trust/fullbody/HOMEchecks/cleanup0 independently rootread. No model/task/performance proof."
+    },
+    "install05_final24_root_policy": {
+      "claim": "OBSERVED / root interpretation",
+      "artifact": "docs/validation/2026-10-11/install05-final24-root-policy.json",
+      "sha256": "2931ecf7c23b969f676695439864ebcbdd91e154c67559e23b0f930fa80d8a5b",
+      "scope": "Root exactINSTALL05 fournamedclasses across3harnesses plus actualHermes boundaries. Bounded scopes/originalfailures retained; no infinite precedence gate/wholeprofile/task assertion."
+    },
+    "release_cibb971ef": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/release-cibb971ef.json",
+      "sha256": "cec68b5fc0f41b6e518d3b95709a4cc880f8d1b58708f3c815e31750d1697035",
+      "scope": "Actual committedYAMLfixbb971ef CI38157978139 all15build/install/uploadpairs+assemblySUCCESS,deploy/tagpubSKIPPEDexistingguards;no bypass/tag/main/agentretry/publicfreshinstall."
+    },
+    "production_atspi_installed_metadata": {
+      "claim": "OBSERVED metadata / INFERRED feasibility",
+      "artifact": "docs/validation/2026-10-11/production-atspi-installed-metadata.json",
+      "sha256": "983082dd43621a9af34eb5b8bc0bc311306c4608ba9fb02b092bde5fc10d534a",
+      "scope": "Installed observer and officialBlender metadata only. No livebus/app/tree/import/productionprovider proof; generic capabilities do not prove popup/edit absence."
+    },
+    "production_atspi_factory_setup_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-setup-failure.json",
+      "sha256": "57ee1c2a20b81a97debcba1fb8fd79d4e384e1ee077b6344b24f39d6df0ae67d",
+      "scope": "Exactownednamespace attempt:GIimportPASS/XvfbSIG11 beforebus/registry/Blender; apppublishingNOT_RUN, notabsence. Directchild/outerwaited, independentownedmount0/socket0. Initialcleanupobservererror retained;noinput/models/productionUI."
+    },
+    "windows_cibb971ef_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-cibb971ef-install.json",
+      "sha256": "8775c618f7e04292e7afe0eeef0b169227f24a73b12c353ccef9ae8c3f2fae8d",
+      "scope": "Actual sourcebb971ef WindowsCI artifact11709226557:10nativecommands/61Git-wheel-installed exact/3guides3profiles,actualinstalledread_config at3phases verifies validflowYAML/settings/usernotehash/CRLFprefix-tail bytes;repeatHOME/config/guides exact. Independentownedprocess0/globalwrapperconfigPATH+bootstrap/priorfixtures preserved. No nativeharness/model/service/GUI/input/fullV2runtimeidentity proof."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Exact-source immutable CI6cdf182 native Windows fresh/repeat/61installed-wheel files/3guides3profiles/CodexPROJECTdiscovery PASS; Git60/61byte match with generatedmanifest key-order exception. Model/load/invoke/tasks and actualservice transport NOT_RUN. Historical foregroundFAIL/userdiscoveryFAIL retained. Native IME input-layer f440de1 proof remains caller-observed, no automaticIMM/TSF/service/model claim.",
+    "windows": "Latest actualWindows committedbb971ef immutableCI11709226557 fresh/repeat10commands/61Git-wheel-installed/3guides3harness/3actualinstalledread_config flowYAML phases PASS. OriginalCRLFprefix/tail/usernote/settings and repeatHOME/config/guides preserved. Source354blockonly and historical6cdf182orderingexception/b321proof retained independently. Nativeharness/model/load/invoke/tasks/fullservicetransport/automaticIMM-TSFreader remainNOT_RUN;fullproductionV2runtimeidentity notestablished by bootstrap snapshot.",
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Exact-source CI38143663561 HEAD6cdf182 all15platform/Pythonbuilds+assembly SUCCESS, deployment SKIPPED by existing branch policy. Immutable FINAL15 CI Linux/Windows fresh installation pending actual checks; public upload/download/freshpublicinstall NOT_RUN. Prior f440de1 install evidence retains its own artifact identity.",
+    "public_release": "Latest bb971ef CI38157978139 all15build/install/upload pairs and assembly SUCCESS; productiondeploy/tagpublication SKIPPED by existing featurebranch guards. No bypass/main/tag/agent rerun. Publicdownload/freshpublicinstall NOT_RUN; source354andb321historicalresults retained independently.",
     "general_gui_tasks": "Actual FINAL15 canonical default-runtime browser/editor tasks executed once each:0/2 completed/effects, browserLOW_CONFIDENCE mode.7271<.9/editorNEEDS_REPLAN replan.9041; nativeinput0/falsecompletion0/cleanup6PASS. Full task acceptance FAIL, no model/input/provider retries or threshold changes. Exactcandidate rosters/request lengths not retained; coverage unknown."
   },
   "privacy": {
@@ -2404,8 +2650,8 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 33,
-    "not_run": 8,
+    "pass": 34,
+    "not_run": 7,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -2419,7 +2665,7 @@
       "INSTALL-02": "PASS",
       "INSTALL-03": "PASS",
       "INSTALL-04": "PASS",
-      "INSTALL-05": "NOT_RUN",
+      "INSTALL-05": "PASS",
       "INSTALL-06": "PASS",
       "INSTALL-07": "PASS",
       "INSTALL-08": "PASS",
@@ -2557,6 +2803,47 @@
     "heldout-acquisition-v3-stopped.json",
     "heldout-v4-dependency-native.json",
     "heldout-acquisition-v4-partial.json",
-    "heldout-browser12-pixel-review.json"
+    "heldout-browser12-pixel-review.json",
+    "heldout-browser12-leakage-review.json",
+    "install05-native-first-setup-failure.json",
+    "heldout-acquisition-v5-partial.json",
+    "heldout-tk5-pixel-review.json",
+    "install05-canonical-console-proof.json",
+    "heldout-acquisition-v6-complete.json",
+    "heldout-all36-local-leakage-review.json",
+    "heldout-all36-root-annotation-review.json",
+    "heldout-tk12-root-pixel-review.json",
+    "install05-native-alias-false-conflict.json",
+    "production-state-provider-source-feasibility.json",
+    "final19-install.json",
+    "install05-final19-native-matrix.json",
+    "final20-install.json",
+    "install05-final20-native-matrix.json",
+    "install05-final20-policy-readback.json",
+    "heldout-model-dependency-admission.json",
+    "heldout-model-first-initialization-stop.json",
+    "final21-regression.json",
+    "final21-install.json",
+    "install05-final21-native-not-started.json",
+    "heldout-component-comparison-final2.json",
+    "final22-regression.json",
+    "final22-install.json",
+    "install05-final22-native-matrix.json",
+    "install05-final22-policy-readback.json",
+    "final23-regression.json",
+    "final23-install.json",
+    "install05-final23-native-matrix.json",
+    "release-ci3542636.json",
+    "install05-hermes-boundary-v3-setup-failure.json",
+    "install05-hermes-boundary-v4-serialization-failure.json",
+    "windows-ci3542636-install.json",
+    "final24-regression.json",
+    "final24-install.json",
+    "install05-hermes-boundary-v5-paired.json",
+    "install05-final24-root-policy.json",
+    "release-cibb971ef.json",
+    "production-atspi-installed-metadata.json",
+    "production-atspi-factory-setup-failure.json",
+    "windows-cibb971ef-install.json"
   ]
 }

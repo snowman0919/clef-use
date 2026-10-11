@@ -1,0 +1,50 @@
+{
+  "classification": "OBSERVED_WITH_SEPARATE_INFERENCE",
+  "candidate": "FINAL20",
+  "status": "POLICY_REVIEW_REQUIRED_NO_ACCEPTANCE_PASS",
+  "full_native_report_sha256": "82424f556a595d10b2702d2acb1720153e79535cfb5effa44c1b0261033f66e3",
+  "Codex_INACTIVE_SOURCE": {
+    "actual_config_sha256": "b0c3c8c2ce96bdf480bcd1026980eae97886a75a2bbaafeed05e18ed321f7da3",
+    "configured_enabled": false,
+    "configured_path_kind": "EXISTING_PROJECT_SKILL_DIRECTORY",
+    "configured_path": "$CASE/project/.agents/skills/clef-use",
+    "actual_native_core_rows": 2,
+    "actual_native_enabled_flags": [
+      true,
+      true
+    ],
+    "disabled_effect": "NOT_OBSERVED",
+    "disabled_skill_verification": "NOT_RUN_SUCCESSFULLY",
+    "whole_inactive_source_inventory": "NOT_RUN",
+    "inference": "Directory versus SKILL.md path binding may explain ignored native configuration; not verified, no repair/retry."
+  },
+  "Hermes_PROJECT_OVERRIDE": {
+    "native_selected_core": "PROJECT_TIER0",
+    "native_user_core_status": "shadowed",
+    "actual_native_skill_view_selected_project_body": true,
+    "installed_dry_run": "PREVIEW",
+    "installed_dry_run_exit": 0,
+    "installed_status": "INSTALLED",
+    "installed_shadow_report": "ABSENT",
+    "assessment": "Observed source precedence is not represented by installed reports; root owns defect decision."
+  },
+  "installed_status_conflicts": {
+    "observed_all12_installed_statuses": "INSTALLED",
+    "dry_run_CONFLICT_cases": [
+      "codex/DUPLICATE_NAME",
+      "codex/PROJECT_OVERRIDE",
+      "codex/INACTIVE_SOURCE",
+      "hermes/DUPLICATE_NAME",
+      "omp/DUPLICATE_NAME",
+      "omp/PROJECT_OVERRIDE"
+    ],
+    "assessment": "Status and dry-run scopes may differ; actual statuses retained for root interpretation, no automatic correctness verdict."
+  },
+  "remaining_matrix_cases_NOT_RUN": 0,
+  "follow_on_execution": 0,
+  "models": 0,
+  "services": 0,
+  "GUI": 0,
+  "OS_inputs": 0,
+  "automatic_retries": 0
+}

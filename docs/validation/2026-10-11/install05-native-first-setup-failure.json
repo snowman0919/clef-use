@@ -1,0 +1,62 @@
+{
+  "classification": "OBSERVED_STOPPED_DRIVER_SETUP_NOT_NATIVE_DISCOVERY_RESULT",
+  "acceptance_id": "INSTALL-05",
+  "candidate": "FINAL17",
+  "status": "NOT_RUN_DISCOVERY_MATRIX_DRIVER_SETUP_FAILED",
+  "matrix_invocations": 1,
+  "planned_cases": 12,
+  "attempted_setup_cases": 1,
+  "condition_queries_executed": 0,
+  "first_case": "codex/SAME_REALPATH",
+  "remaining_cases_NOT_RUN": 11,
+  "first_case_discovery_NOT_RUN": true,
+  "exact_sanitized_native_error": {
+    "status": "ERROR",
+    "type": "ValueError",
+    "reason": "symlink is not a managed installation target: $INSTALLED_ROOT/runtime/current"
+  },
+  "actual_process_exit": 1,
+  "failure_stage": "Installed CLI guide-source scan before runtime capability or harness discovery",
+  "actual_counts": {
+    "installed_cli_entries": 1,
+    "runtime_capability_discovery_subprocesses": 0,
+    "native_harness_command_attempts": 0,
+    "native_harness_responses": 0,
+    "SDK_discovery": 0,
+    "models": 0,
+    "services": 0,
+    "GUI": 0,
+    "OS_inputs": 0,
+    "guide_files_created": 0
+  },
+  "cleanup": {
+    "outer_waited": true,
+    "afterwait_all_thread_children": [],
+    "afterwait_independent_PPID_children": [],
+    "afterwait_sets_agree": true,
+    "owned_root_argv_processes_remaining": [],
+    "read_only_process_scan_denied": 0
+  },
+  "provenance": {
+    "driver_sha256": "850428ac750fe5b25a02b16f01d4ce02b24097c944caa4344600c0c5f9e8b1e7",
+    "declaration_sha256": "631897add117c871067fb92f98c8a62d56dde02a2350968cdfa3e220c3ad573d",
+    "receipt_sha256": "9fa37001132701df81e6d45fef7c0b24dfe72defd3908aa2e6bf5ea69c4e430e",
+    "stderr_sha256": "6fdee6be0a05102880df62702286ba8d4d21ddee51c25262eeff17e54ac2f60a",
+    "audit_sha256": "731aa92eaf07b805ca577844e291c683ce7465f2eb548d8c00bdd6b602ebe93f",
+    "matrix_sha256": "eb98b0d2116bc079b787fbcb96831eeb65c7442cd1dd312f6f0c4112aa2c0620",
+    "bound_files_verified": 19,
+    "all_bound_files_unchanged": true
+  },
+  "diagnosis": {
+    "classification": "INFERRED_FROM_ACTUAL_ERROR_AND_READONLY_SOURCE",
+    "cause": "Driver invoked CLI through runtime/current/bin/python, retaining current in imported module __file__/bundled guide path. Safe source scan rejects that ancestor. Actual installed console shebang names immutable runtime/versions VENV, so this run does not demonstrate canonical launcher failure.",
+    "canonical_launcher_result": "NOT_RUN",
+    "retry": "NONE",
+    "product_source_changed": false
+  },
+  "limits": [
+    "No native discovery precedence result was obtained.",
+    "No INSTALL-05 PASS or canonical launcher regression claim.",
+    "Guard was preserved; no retry, repair, global configuration or source change."
+  ]
+}

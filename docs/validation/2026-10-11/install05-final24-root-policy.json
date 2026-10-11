@@ -1,0 +1,144 @@
+{
+  "classification": "OBSERVED / ROOT_POLICY_READBACK",
+  "acceptance_id": "INSTALL-05",
+  "status": "PASS_NAMED_CONDITION_AT_RECORDED_SCOPE",
+  "requirement": "Duplicate realpath/name, project overrides and inactive sources are reported correctly.",
+  "source_commit": "bb971ef01c3d9083cb823a1e5673cc847360d5b0",
+  "native14_source_integrations_sha256": "b61ec02103dfda098b47d58b55a788a1bae6175089eefdacd678aca6ff1c55b7",
+  "current_installed_integrations_same_bytes": true,
+  "original14_receipt_sha256": "64525bb65c3841cb4cc329bf3a81b5344ba16b796ac831e238d14165e46ea760",
+  "named_condition_cases": [
+    {
+      "id": "codex/SAME_REALPATH",
+      "condition": "SAME_REALPATH",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "codex/DUPLICATE_NAME",
+      "condition": "DUPLICATE_NAME",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "codex/PROJECT_OVERRIDE",
+      "condition": "PROJECT_OVERRIDE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "codex/INACTIVE_SOURCE",
+      "condition": "INDIVIDUAL_SKILL_ENTRY_ONLY",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/SAME_REALPATH",
+      "condition": "SAME_REALPATH",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/DUPLICATE_NAME",
+      "condition": "DUPLICATE_NAME",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/PROJECT_OVERRIDE",
+      "condition": "PROJECT_OVERRIDE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/INACTIVE_SOURCE",
+      "condition": "INACTIVE_SOURCE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "omp/SAME_REALPATH",
+      "condition": "SAME_REALPATH",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "omp/DUPLICATE_NAME",
+      "condition": "DUPLICATE_NAME",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "omp/PROJECT_OVERRIDE",
+      "condition": "PROJECT_OVERRIDE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "omp/INACTIVE_SOURCE",
+      "condition": "INACTIVE_SOURCE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/CREATE_SOURCE",
+      "condition": "CREATE_SOURCE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    },
+    {
+      "id": "hermes/EXTERNAL_SOURCE",
+      "condition": "EXTERNAL_SOURCE",
+      "native_observation_reviewed": true,
+      "installed_dryrun": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "selected_SKILL_bytes_preserved": true
+    }
+  ],
+  "paired_native_boundaries": {
+    "receipt_sha256": "3b5f2fee59a95347039fae5e8437b163351785ec116bee8ceefbcfbadd8d78a3",
+    "before22_agreement": 3,
+    "before22_mismatch": 5,
+    "after24_agreement": 8,
+    "after24_original_flow_seed_agreement": 1,
+    "actual_outer_receipts_independently_verified": 51,
+    "actual_native_config_parse_and_trust": true,
+    "preexisting_HOME_checks_independently_read": true
+  },
+  "interpretation": "Complete-directory aliases do not conflict; separate duplicate names or active project/configured sources preserve user data and report possible conflict; actually inactive sources are skipped. Conflict does not certify native source selection or quarantine.",
+  "limits": [
+    "Native14 realpath scope is complete managed guide-directory aliases. Codex inactivity is exact individual SKILL.md enable=false, not whole source/profile.",
+    "Condition outcomes are actual installed dry-run PREVIEW/CONFLICT, not reenrollment under conflicts; initial enrollment actually executed.",
+    "Native14 preservation list covers selected SKILL.md bytes only, not references/config/manifest/HOME. Separate install/paired records retain their measured scope.",
+    "Native Codex/OMP14 retains FINAL23 identity with identical current integration bytes. FINAL24 changes only Hermes YAML enrollment; its native parse/trust/body/conflicts independently executed.",
+    "Original native23 Windows candidate22 wording is a historical attribution typo, not Windows discovery evidence.",
+    "Standalone Hermes session override unset; no exhaustive session/profile/platform/task/model/performance assertion.",
+    "Original FINAL19/20/22 mismatches and v3/v4 stopped attempts retained."
+  ]
+}

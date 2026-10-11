@@ -1,0 +1,180 @@
+{
+  "classification": "OBSERVED_SETUP_FAILURE",
+  "status": "STOPPED_NO_RETRY",
+  "scope": "Bounded native Hermes and installed CLI witness, immutable FINAL22 BEFORE. Existing unmanaged local guide fixture conflicts before intended cwd comparison. No FINAL23 execution.",
+  "driver_sha256": "a3666e632107e874ec7624dda160a068435c17f8649dba5126c2bf6d9cfed476",
+  "paired_declaration_sha256": "1684b7ee616e99a03590e3a3ec4ba4a78d71d8c4df9ae6a6a2a5a2dce925a6b9",
+  "before_declaration_sha256": "4fbbe1cfc078eb77412bccd4707b28322dcc1f6294e2f839d4cd5b2fec105e43",
+  "installed_integrations_sha256": "df8f69e2fe2d0da69deb7f1433d46b19e768db31e4792b041044f12b4d6b7a59",
+  "installed_console_sha256": "f81f67e14409ff0fba23e99da869bd0d5e0b10bf1d2685b0bbdd4dd87986bc5c",
+  "packaged_core_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+  "scheduled": {
+    "case_checks": 16,
+    "native_calls": 16,
+    "installed_cli_calls": 16
+  },
+  "executed": {
+    "native_calls": 1,
+    "installed_cli_calls": 1,
+    "outer_exit_code": 1,
+    "added_retries": 0
+  },
+  "first_case": {
+    "id": "missing_child",
+    "status": "ERROR_SETUP",
+    "native_resolved_scope": "owned_unrelated_workspace",
+    "native_project_root": null,
+    "native_core_view_success": true,
+    "native_source": "owned_local_core",
+    "native_full_selected_body_contained": true,
+    "native_selected_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+    "native_caps": {
+      "CapInh": 0,
+      "CapPrm": 0,
+      "CapEff": 0,
+      "CapBnd": 0,
+      "CapAmb": 0
+    },
+    "installed_status": "CONFLICT",
+    "expected_installed_status": "PREVIEW",
+    "installed_reason": "existing unmanaged local guide has no managed manifest; proposed comparison conflict",
+    "exact_installed_exit_code": "NOT_RECORDED; nonzero observed by controller, canonical CONFLICT exit2 inferred from CLI source",
+    "not_a_product_cwd_regression": true
+  },
+  "matrix": [
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "missing_child",
+      "status": "ERROR_SETUP"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "padded_absolute",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "tilde",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "directory_alias",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "malformed_frontmatter",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "pruned_support_and_excluded",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "legacy_flat_alias",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL22_BEFORE",
+      "case": "excluded_legacy_flat",
+      "status": "NOT_RUN"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "missing_child",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "padded_absolute",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "tilde",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "directory_alias",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "malformed_frontmatter",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "pruned_support_and_excluded",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "legacy_flat_alias",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    },
+    {
+      "candidate": "FINAL23_AFTER",
+      "case": "excluded_legacy_flat",
+      "status": "NOT_RUN",
+      "reason": "first invariant failure stopped paired scheduling"
+    }
+  ],
+  "remaining_calls": {
+    "native_calls_NOT_RUN": 15,
+    "installed_cli_calls_NOT_RUN": 15
+  },
+  "guarded_native_import_notes": {
+    "denied_provider_plugin_probe_attempts_logged": 7,
+    "native_subprocess_starts_allowed": 0,
+    "no_provider_auth_or_model_request_claim": true
+  },
+  "preservation": {
+    "postrun_local_packaged_guide_files_match": {
+      "SKILL.md": true,
+      "references/API_BASELINE.md": true,
+      "references/LIVE_API.md": true
+    },
+    "preexec_HOME_hash_snapshot_persisted": false,
+    "scope_limit": "No persistent preexec HOME snapshot; do not claim independently measured entire HOME before/after equality."
+  },
+  "cleanup": {
+    "controller_all_children_waited": true,
+    "controller_owned_worker_commandlines_remaining": 0,
+    "independent_owned_worker_commandlines_remaining": 0,
+    "independent_process_permission_unknowns": 0,
+    "after_phase_root_exists": false,
+    "private_evidence_retained": true
+  },
+  "prohibited_activity": {
+    "models": 0,
+    "service": 0,
+    "GUI": 0,
+    "input": 0,
+    "remote_windows": 0,
+    "canonical_source_edits": 0
+  },
+  "private_raw_hashes": {
+    "native.stdout": "244701c50503599c410cfe50c4bad9a61e7843f60569ac6f734deb2aaf6d180c",
+    "native.stderr": "cd49edcbef5ec94ca230496e904d1d3055450bec8db865e4d143b9d6d7398d16",
+    "installed.stdout": "1d5421a33b4366bf8956a12795d69d782f676370500b7ba28f0b095ae4b4fe68",
+    "installed.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "installed-audit.json": "a4a69655b159ccf9a7c5cbcb53b9304e875d12281da1bbae9c011772a7c330ee"
+  },
+  "private_report_hashes": {
+    "before": "b242aaacd8258af76b978eac3bd2f87b592b77aa670f46366ed80fa97149d9ae",
+    "paired": "dc84fa99bf6376f18ff8e402b862048c7b0875973b22a3cec45a99c090bfdfda"
+  },
+  "next_step": "Only after root review: correct fresh fixture through actual managed enrollment; do not reuse or rerun this failed root."
+}
