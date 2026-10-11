@@ -59,8 +59,8 @@
   },
   "artifacts": {
     "source_regression": {
-      "local_artifact": "/tmp/clef-use-full-regression-final5-20261011.log",
-      "sha256": "d4b7592eac2a420c489c0b0001d4b2bfcc9a2493f20cf6bdf9cd2cd6cb357778",
+      "local_artifact": "/tmp/clef-use-full-regression-final10-20261011.log",
+      "sha256": "c774576ede12941e20c0425e1f40579e45f89cd8cce00d340406445b62f64365",
       "raw_artifact_committed": false
     },
     "previous_regression": {
@@ -172,19 +172,24 @@
       "local_artifact": "/tmp/clef-windows-native-evidence-20261011/final5-wheel.json",
       "sha256": "f8cd17a01e8fac5b6208fd8ae5e227e9a74e65d5626ef497796c92f66fd5e860",
       "raw_artifact_committed": false
+    },
+    "source_regression_final5": {
+      "local_artifact": "/tmp/clef-use-full-regression-final5-20261011.log",
+      "sha256": "d4b7592eac2a420c489c0b0001d4b2bfcc9a2493f20cf6bdf9cd2cd6cb357778",
+      "raw_artifact_committed": false
     }
   },
   "evidence": {
     "source_regression": {
       "claim": "OBSERVED",
-      "level": "fixture",
+      "level": "source_regression",
       "artifact": "source_regression",
-      "passed": 767,
+      "passed": 779,
       "skipped": 34,
       "warnings": 41,
-      "elapsed_seconds": 41.1,
-      "scope": "Completed source regression log after the source gesture timing correction; unit/protocol/fixture coverage is not harness or production GUI evidence.",
-      "execution_command": "uv run pytest (reported suite; exact invocation flags are not stored in the log)"
+      "elapsed_seconds": 58.79,
+      "execution_command": ".venv/bin/python -m pytest -q",
+      "scope": "Frozen X11 query/keymap/clipboard source and integrated literal-method changes, before final ICCCM TIMESTAMP/interoperability corrections. Unit/protocol/native disposable fixtures do not establish installed, harness GUI or production acceptance."
     },
     "previous_source_regression": {
       "claim": "OBSERVED",
@@ -644,7 +649,7 @@
       "owned_keys_after": [],
       "owned_buttons_after": [],
       "production_desktop_touched": false,
-      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture\u2192DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
+      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture→DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
       "limitation": "Save chord used context=None under a private native window/no-XIM guard; this does not prove general application/text-focus facts or a SessionRuntime/harness workflow."
     },
     "harnesses": {
@@ -1474,12 +1479,253 @@
       "status": "PARTIAL",
       "summary": "docs/validation/2026-10-11/windows-final7-integration.json",
       "scope": "Immutable CI artifact actual integration FAIL retained; source-patched private install exact-newline/profile/idempotency/conflict/disable checks PASS; fresh fixed immutable install remains NOT_RUN."
+    },
+    "omp_actual_model": {
+      "schema_version": 1,
+      "date": "2026-10-11",
+      "classification": "OBSERVED",
+      "scope": "Actual OMP native model triggers against FINAL6 installed public guides and read-only capabilities/status only",
+      "historical_route": {
+        "provider": "existing-local",
+        "model": "qwen3.8-flash-next",
+        "natural": {
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "turn_completion": "NOT_RUN",
+          "reason": "Final reasoning exceeded original 90 second deadline"
+        },
+        "route_reexecution": "NOT_RUN",
+        "reason": "Original temporary provider config not present in named artifact root, canonical config or model cache. No credential reconstruction or substitution.",
+        "evidence": {
+          "basename": "natural-derived-result.json",
+          "sha256": "9be7c80e030c9081de9dd2e66b8d85173e4f2c9142f8cc5c810c387e206efbde"
+        }
+      },
+      "current_default_route": {
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "comparison": "DIFFERENT from historical route; native existing canonical default, never a same-route rerun",
+        "model_requests_use_native_provider_resolver": true,
+        "guides": [
+          {
+            "basename": "agent-skills/clef-use/SKILL.md",
+            "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+          },
+          {
+            "basename": "agent-skills/clef-use-blender/SKILL.md",
+            "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+          },
+          {
+            "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+            "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "native_skill_uri_preflight": [
+          {
+            "guide": "clef-use",
+            "native_uri": "skill://clef-use",
+            "full_body_observed": true,
+            "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+          },
+          {
+            "guide": "clef-use-blender",
+            "native_uri": "skill://clef-use-blender",
+            "full_body_observed": true,
+            "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "native_uri": "skill://clef-use-diagnostics",
+            "full_body_observed": true,
+            "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "cases": {
+          "explicit": {
+            "result": "PASS",
+            "turn_status": "stop",
+            "DISCOVERED": "PASS",
+            "LOADED": "PASS",
+            "loaded_guides": [
+              "clef-use"
+            ],
+            "INVOKED": "PASS",
+            "successful_tools": [
+              "mcp__clef_use_computer_capabilities"
+            ],
+            "tool_calls": 2,
+            "TASK_VERIFIED": "NOT_RUN",
+            "evidence": {
+              "basename": "explicit-private-trace.jsonl",
+              "sha256": "fc22f87a6aada90deb62c2d1e91f7edf5bad1d2978622b930fc8381201496b82"
+            }
+          },
+          "natural": {
+            "result": "PASS",
+            "turn_status": "stop",
+            "DISCOVERED": "PASS",
+            "LOADED": "PASS",
+            "loaded_guides": [
+              "clef-use",
+              "clef-use-blender"
+            ],
+            "INVOKED": "PASS",
+            "successful_tools": [
+              "mcp__clef_use_computer_capabilities"
+            ],
+            "tool_calls": 4,
+            "TASK_VERIFIED": "NOT_RUN",
+            "evidence": {
+              "basename": "natural-private-trace.jsonl",
+              "sha256": "4ac9f55bf945c4783c3072230b64aaf0b1615153f94ec17ad9d555504b5b7d89"
+            }
+          },
+          "negative": {
+            "result": "FAIL",
+            "turn_status": "stop",
+            "DISCOVERED": "PASS",
+            "LOADED": "PASS (unexpected for negative case)",
+            "loaded_guides": [
+              "clef-use",
+              "clef-use-blender"
+            ],
+            "INVOKED": "PASS (unexpected for negative case)",
+            "successful_tools": [
+              "mcp__clef_use_computer_capabilities"
+            ],
+            "tool_calls": 6,
+            "TASK_VERIFIED": "NOT_RUN",
+            "reason": "Completed Python-only/no-files/no-runtime prompt still loaded GUI guides and invoked capabilities. No GUI operation executed.",
+            "evidence": {
+              "basename": "negative-private-trace.jsonl",
+              "sha256": "7d586901006f2e8ee014c77a0213d737074cfae089c192b2e17b79dbb42e9359"
+            }
+          }
+        },
+        "preserved_failures": [
+          {
+            "attempt": "first explicit",
+            "turn_status": "error",
+            "LOADED": "NOT_RUN",
+            "INVOKED": "NOT_RUN",
+            "reason": "invalid tool call: workspace_violation: path escapes workspace",
+            "evidence": {
+              "basename": "first-workspace-refusal-summary.json",
+              "sha256": "df8bd8050559760911c40657bfbc340db00f9e02043217bbcbb05f4201a07c17"
+            }
+          },
+          {
+            "attempt": "second explicit with public additionalDirectories",
+            "turn_status": "error",
+            "LOADED": "NOT_RUN",
+            "INVOKED": "PASS",
+            "successful_tool": "computer_capabilities",
+            "reason": "invalid tool call: workspace_violation: path escapes workspace",
+            "evidence": {
+              "basename": "second-workspace-refusal-summary.json",
+              "sha256": "289f8a20421da50c87d826f3db75d733a20e312daa463261fb74b97308dae637"
+            }
+          },
+          {
+            "attempt": "first negative",
+            "turn_status": "error",
+            "guide_body_loads": 0,
+            "tool_calls": 0,
+            "reason": "The socket connection was closed unexpectedly.",
+            "evidence": {
+              "basename": "negative-summary.json",
+              "sha256": "2a03ec595ad7dd67c43f51422346d0ad1bac6fc430bf79f098247ae9cd9b0dc4"
+            },
+            "raw_trace_availability": "UNAVAILABLE: same filename overwritten by final negative; original derived summary and process log preserved. Error text was observed before overwrite.",
+            "process_log_evidence": {
+              "basename": "negative-model-private.log",
+              "sha256": "789d69674069e7b1ebcb9f63d6cfff394a19e9ae02f8c92040c54989078fe0e1"
+            }
+          }
+        ],
+        "positive_path_correction": "Native advertised skill:// URI; read-only SDK preflight returned all three complete guide bodies with exact FINAL6 hashes. Physical/symlink paths no longer requested. No guard weakened.",
+        "evidence": {
+          "basename": "uri-positive-summary.json",
+          "sha256": "361c3c4ea0f9094634e203964502f2541cc1e007fe9b1fcd21de16fb0cd081d4"
+        },
+        "status_refusal": {
+          "case": "natural",
+          "tool": "computer_status",
+          "reason": "no active session; start computer_run first",
+          "session_started": false
+        },
+        "harness_version": "18.6.1",
+        "case_matrix_result": "FAIL: negative overtrigger; positive explicit and natural completed read-only stages PASS",
+        "negative_reexecution_reason": "Initial negative transport closed; two subsequent independent official-URI positive model turns completed on the same route. Parent authorized one fresh negative; no further retry after overtrigger.",
+        "negative_instruction_audit": {
+          "basename": "clef-omp-negative-instruction-audit-20261011.json",
+          "sha256": "fb8c43124b836fa3dd52647f449a939d480516314a1edf9b734af3178a8fe635"
+        },
+        "permission_scope": "Session-local automatic tool approval only after exact three-tool preflight: native Read restricted to public installed skill files (speculative read disabled), capabilities/status arguments validated, runtime MCP read-only facade. OS filesystem writes denied outside own probe root. No global policy changed."
+      },
+      "cleanup": {
+        "all_native_sessions": "disposed",
+        "session_storage": "in-memory; not saved",
+        "MCP": "disconnected after each process",
+        "filesystem_boundary": "bwrap mounted filesystem read-only except own private probe root",
+        "new_services_or_dependencies": false,
+        "live_processes_with_probe_cwd": 0,
+        "persisted_session_files_under_probe_agent_or_project": 0
+      },
+      "limits": {
+        "GUI_TASK_VERIFIED": "NOT_RUN",
+        "general_trusted_state_provider": "NOT_RUN",
+        "historical_route_completed_model_turn": "NOT_RUN",
+        "release_gate": "NOT_RUN"
+      },
+      "privacy": {
+        "credentials_extracted_copied_or_printed": false,
+        "raw_payloads_included": false,
+        "private_code_assets_or_screenshots_included": false,
+        "global_configuration_or_repository_edits": false
+      },
+      "reusable_driver": {
+        "wrapper": {
+          "basename": "clef_omp_native_readonly_verify_20261011.py",
+          "sha256": "4a2f8c08b76cfc7f123164562b7fa26cea11a4d5515625d787a859b124d1b193"
+        },
+        "driver": {
+          "basename": "clef_omp_native_readonly_driver_20261011.ts",
+          "sha256": "288f2299bc0e0065a3270d750aa466122234d486d3d28cf3868603fd1323d56b"
+        },
+        "command": "python3 clef_omp_native_readonly_verify_20261011.py --install-root INSTALLED_ROOT",
+        "smoke": "OBSERVED preflight-only PASS; native URI body/hash check for exact three installed guides and exactly read+capabilities+status enabled tools; zero model requests",
+        "model_route_guard": "Refuses if canonical default selector differs from aipi/dgx-moa-fast; no substitution"
+      }
+    },
+    "source_regression_final5": {
+      "claim": "OBSERVED",
+      "level": "fixture",
+      "artifact": "source_regression",
+      "passed": 767,
+      "skipped": 34,
+      "warnings": 41,
+      "elapsed_seconds": 41.1,
+      "scope": "Completed source regression log after the source gesture timing correction; unit/protocol/fixture coverage is not harness or production GUI evidence.",
+      "execution_command": "uv run pytest (reported suite; exact invocation flags are not stored in the log)"
+    },
+    "source_regression_final9_failure": {
+      "claim": "OBSERVED",
+      "status": "FAIL",
+      "passed": 775,
+      "failed": 1,
+      "skipped": 34,
+      "warnings": 41,
+      "elapsed_seconds": 42.22,
+      "reason": "Actual native Unicode paste returned success before widget inserted requested literal; timed clipboard restoration exposed the prior selection. Failure retained; delayed-consumer native reproduction drove acknowledgement-based correction.",
+      "local_artifact": "/tmp/clef-use-full-regression-final9-20261011.log"
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
     "windows": "Original native foreground-restoration fixture FAIL retained; immutable FINAL7 managed integration also FAIL. Source-patched private profile checks PASS in separate evidence. Fixed immutable rebuild, model/runtime/harness GUI E2E and shipped native IME support remain NOT_RUN.",
-    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS; earlier Hermes/OMP model results do not certify fresh FINAL6 triggers or GUI task completion.",
+    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS. OMP FINAL6 current native default positive stages PASS; completed non-GUI negative over-trigger FAIL is recorded separately and does not certify GUI tasks.",
     "full_task_performance": "Declared production/Blender/model/harness workload, full pinned baseline comparison, and release quality gates NOT_RUN. FINAL5 bounded Tk input measurement is recorded separately; current input changes require fresh installed measurements.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
     "public_release": "Public upload/download/hash/fresh public install NOT_RUN. Existing release CI run38127830854 passed15platform/Python builds and assembly, branch deployment skipped; immutable Windows nativeintegration then failed. Fixedlatest immutable build pending."
@@ -1492,13 +1738,13 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 24,
-    "not_run": 20,
+    "pass": 25,
+    "not_run": 18,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
       "GUIDE-02": "PASS",
-      "GUIDE-03": "NOT_RUN",
+      "GUIDE-03": "FAIL",
       "GUIDE-04": "NOT_RUN",
       "CAP-01": "PASS",
       "CAP-02": "NOT_RUN",
@@ -1515,7 +1761,7 @@
       "INSTALL-10": "NOT_RUN",
       "HARNESS-01": "PASS",
       "HARNESS-02": "PASS",
-      "HARNESS-03": "NOT_RUN",
+      "HARNESS-03": "PASS",
       "HARNESS-04": "NOT_RUN",
       "INPUT-01": "PASS",
       "INPUT-02": "NOT_RUN",
@@ -1540,7 +1786,8 @@
       "RELEASE-01": "NOT_RUN",
       "RELEASE-02": "PASS"
     },
-    "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion."
+    "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion.",
+    "fail": 1
   },
   "additional_evidence": [
     "final6.json",

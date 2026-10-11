@@ -209,6 +209,18 @@ the stated thresholds; all original numerical gates remain unchanged.
 
 ## Remaining acceptance and milestones
 
+**OBSERVED / FINAL6 OMP native default:** OMP18.6.1 using its current
+`aipi/dgx-moa-fast` route completed explicit and natural turns, read complete
+installed guides through native `skill://` URIs and invoked read-only capabilities.
+This establishes HARNESS-03 at its named read-only scope. The independent negative
+Python question also completed, but unnecessarily read GUI guides and invoked
+capabilities: GUIDE-03 is **FAIL**. Earlier deadline, workspace and socket failures
+remain in the evidence. This route differs from the historical
+`existing-local/qwen3.8-flash-next`; no same-route recovery or GUI completion is
+claimed. The first negative raw trace was overwritten by a throwaway rerun;
+its previously inspected derived result, hash and process log remain, and the
+missing raw trace is explicitly recorded.
+
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
 native, harness, installed or public-release status from another evidence level.

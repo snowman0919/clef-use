@@ -73,14 +73,16 @@ scenarios:
 - id: GUIDE-03
   category: guides
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
-  status: NOT_RUN
+  status: FAIL
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.harnesses
+    section: evidence.omp_actual_model
     claim: OBSERVED
     partial: true
-  execution_note: Hermes explicit/natural/negative model triggers observed; all-harness trigger
-    evaluation incomplete.
+  execution_note: Codex FINAL6 explicit/natural/negative triggers pass. OMP current native default
+    completes positive load/invoke, but its completed non-GUI Python negative case unnecessarily
+    loads GUI guides and invokes capabilities. This observed over-trigger fails the requirement;
+    GUI task completion remains NOT_RUN.
 - id: GUIDE-04
   category: guides
   requirement: Cached observation is not used as new input or final-completion proof.
@@ -316,18 +318,20 @@ scenarios:
   category: harness
   requirement: OMP actual selected profile discovers and reads guide, then invokes read-only runtime
     tool.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.harnesses
+    section: evidence.omp_actual_model
     claim: OBSERVED
-    partial: true
+    partial: false
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.shared_owner_lifecycle
     claim: OBSERVED
     partial: true
-  execution_note: OMP native SDK read-only check passed; model natural run achieved load/invoke then
-    DeadlineExceeded; completed model session not established.
+  execution_note: FINAL6 actual OMP18.6.1 current native default aipi/dgx-moa-fast completed explicit
+    and natural turns, read full installed guide bodies through native skill URIs and invoked
+    read-only capabilities. Historical existing-local deadline/workspace failures are retained;
+    this is a different route. Negative over-trigger fails GUIDE-03; GUI TASK_VERIFIED NOT_RUN.
 - id: HARNESS-04
   category: harness
   requirement: Resources-disabled client still receives essential instructions and can act
