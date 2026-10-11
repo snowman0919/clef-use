@@ -57,7 +57,7 @@ def validate_examples():
         cli.parse_args(shlex.split(command)[1:])
     for name in SKILL_NAMES:
         root = skill_root() / name
-        body = (root / "SKILL.md").read_text()
+        body = (root / "SKILL.md").read_text(encoding="utf-8")
         frontmatter = body.split("---", 2)[1]
         if not re.search(rf"^name: {re.escape(name)}$", frontmatter, re.M):
             raise ValueError(f"guide name mismatch: {name}")
@@ -69,7 +69,7 @@ def validate_examples():
             ):
                 raise ValueError(f"missing or escaped reference: {ref}")
         for relative in ("SKILL.md", *[str(p.relative_to(root)) for p in root.rglob("*.md")]):
-            text = (root / relative).read_text()
+            text = (root / relative).read_text(encoding="utf-8")
             for block in re.findall(r"```json\s*\n(.*?)\n```", text, re.S):
                 value = json.loads(block)
                 # Baseline standalone arguments are unambiguous by their fields.
@@ -115,27 +115,27 @@ def main():
     generated = outputs()
     for path, text in generated.items():
         if args.check:
-            if not path.is_file() or path.read_text() != text:
+            if not path.is_file() or path.read_text(encoding="utf-8") != text:
                 raise ValueError(f"generated examples drifted: {path.relative_to(ROOT)}")
         else:
-            path.write_text(text)
+            path.write_text(text, encoding="utf-8", newline="\n")
     validate_examples()
     manifest_path = ROOT / "agent-skills/manifest.json"
     bundle = guide_manifest()
-    bundle["runtime_version"] = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"][
-        "version"
-    ]
+    bundle["runtime_version"] = tomllib.loads(
+        (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    )["project"]["version"]
     manifest = json.dumps(bundle, indent=2) + "\n"
     if args.check:
-        if manifest_path.read_text() != manifest:
+        if manifest_path.read_text(encoding="utf-8") != manifest:
             raise ValueError("guide manifest drifted; regenerate agent contract")
     else:
-        manifest_path.write_text(manifest)
+        manifest_path.write_text(manifest, encoding="utf-8", newline="\n")
     for language in ("en", "ko", "zh-CN", "ja"):
         path = ROOT / f"docs/{language}/AGENT_GUIDE.md"
         if not path.exists():
             continue
-        blocks = re.findall(r"```sh\s*\n(.*?)\n```", path.read_text(), re.S)
+        blocks = re.findall(r"```sh\s*\n(.*?)\n```", path.read_text(encoding="utf-8"), re.S)
         if not blocks or blocks[0].splitlines() != COMMANDS:
             raise ValueError(f"localized command drift: {language}")
     print(

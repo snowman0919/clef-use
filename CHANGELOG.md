@@ -20,6 +20,8 @@
   gates; distinguish singleton/uniform distributions and numeric false completions.
 - Keep deadline goodput separate from fast-path eligibility coverage; unrecorded
   eligibility remains unmeasured in native benchmark reports.
+- Read localized guide contracts as UTF-8 and generate LF bytes independently of
+  the build host locale, including Windows packaging.
 - Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
   full harness task success or public release is claimed for this candidate.
 
