@@ -2256,6 +2256,30 @@
       "artifact": "docs/validation/2026-10-11/guide-manifest-native-ordering.json",
       "sha256": "e12bd27f82a64cafb9fbe46d1af011a0a3457cd17ad44e1b28526aff362921cb",
       "scope": "Real native Windows guide_manifest before differs only key-order; one identical-source private fix produces Linux/Git bytes with parsed values unchanged, sourceSHA matched root correction. Actual immutable corrected Windows archive not yet built/installed; existingCI remains original source."
+    },
+    "ci6cdf182_linux_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci6cdf182-linux-install.json",
+      "sha256": "cfb2ed3812b4e46ec37231fe01adb0fce18d055b0ece0ddf5ae32f885c6804d7",
+      "scope": "Historical immutable CI6cdf182 Linux: actual fresh INSTALLED/repeat CURRENT;46Python+15resources exact to CI wheel/source;3guides across3harnesses INSTALLED/UNCHANGED with original bytes/comments/disabled preserved;non-live compatibility MATCH;native readonly2tool scope and full6tool schema distinguished;no-start status;actual lazy CI runtime;genuine29 generic refusal preserves CI service;matching idle shutdown and cleanup. Three driver errors retained. No model/harness LOAD/GUI/input/active-update/performance claim; predates later guide-manifest ordering correction."
+    },
+    "ci6cdf182_linux_driver_stopped1": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci6cdf182-linux-driver-stopped1.json",
+      "sha256": "c2b3267f686089b00727decd6222d112f12bcf1be3f305ccb257d9a87e29d253",
+      "scope": "Original stopped partial installation batch. Incorrect readonly2tool versus full-product schema equality assertion;product failure not established;remaining lifecycle NOT_RUN at that point. Original full-product count12 wording is an erroneous driver assertion; immutable catalog has6 tools as verified in the aggregate and second record."
+    },
+    "ci6cdf182_linux_driver_stopped2": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci6cdf182-linux-driver-stopped2.json",
+      "sha256": "f09b5a0c1674a0e08a9b583446379748bc32f865ac11b3add033820251ae6811",
+      "scope": "Second stopped driver: inherited fixed full-catalog count12 contradicted actual immutable count6. Actual readonly2tool schemas/digest/caps verified;status and lifecycle NOT_RUN at that point."
+    },
+    "ci6cdf182_linux_driver_stopped3": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci6cdf182-linux-driver-stopped3.json",
+      "sha256": "3ae3b3a6a2ca62eaf07499a9cd540ef587d8fe93a950dcafdcae6bafa6a0a914",
+      "scope": "Third stopped driver: readonly status/current lazy runtime passed;shared helper imported .30-only capabilities module before genuine29 RuntimeClient import/request. No old consumer invocation reached. Original immediate cleanup flags and later process/endpoint absence both retained."
     }
   },
   "not_run": {
@@ -2408,6 +2432,10 @@
     "windows-ci6cdf182-install.json",
     "ui-tars2b-pinned-acquisition.json",
     "ui-tars2b-development-smoke.json",
-    "guide-manifest-native-ordering.json"
+    "guide-manifest-native-ordering.json",
+    "ci6cdf182-linux-install.json",
+    "ci6cdf182-linux-driver-stopped1.json",
+    "ci6cdf182-linux-driver-stopped2.json",
+    "ci6cdf182-linux-driver-stopped3.json"
   ]
 }

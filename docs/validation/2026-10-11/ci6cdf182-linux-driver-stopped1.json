@@ -1,0 +1,89 @@
+{
+  "classification": "OBSERVED",
+  "overall_result": "NOT_RUN",
+  "reason": "Declared batch stopped at driver-contaminated read-only facade versus full-product schema equality assertion; remaining lifecycle checks not executed. Product failure not established.",
+  "ci_run": 38143663561,
+  "source_commit": "6cdf18281b404663591057b4f1cef9529ebb0294",
+  "artifact_id": 11704256223,
+  "artifact_zip_sha256": "ed54ba2102db1dbbb241c8335132e1927d986cc79a59a9f500135f4c31e8cbd2",
+  "archive_sha256": "3e0119c7ea6f7283c81a30b0851d2c1c44ec3c9fbf3cc7be7d80bf668ed3ff87",
+  "wheel_sha256": "525bb3bd714f51d75e08fe9d64345bda5ab0e9c93ff5c3ac23f8dc5340bf0933",
+  "declaration_sha256": "6549554db7c041e5f3bbdd49d418eeb5410c7f1f04336b268e5c51764d02980e",
+  "executor_sha256": "6503779bcf8a6ec81c2424a82634dd1e549823cf4f2815b0941299552468d7aa",
+  "private_report_sha256": "68b993a16b47b54360c4d7de0571159be8c5772582031a1037426beab8cec834",
+  "elapsed_seconds": 9.934366,
+  "completed_stages": {
+    "first_install": {
+      "status": "INSTALLED",
+      "version": "0.1.30"
+    },
+    "repeat_install": {
+      "status": "CURRENT",
+      "home_bytes_preserved": true
+    },
+    "source_and_resources": {
+      "python_exact": 46,
+      "resources_exact": 15
+    },
+    "managed_enrollment": {
+      "harnesses": {
+        "codex": "INSTALLED",
+        "hermes": "INSTALLED",
+        "omp": "INSTALLED"
+      },
+      "selected_guides": 3
+    },
+    "managed_preservation": {
+      "repeat_harness_statuses": {
+        "codex": "UNCHANGED",
+        "hermes": "UNCHANGED",
+        "omp": "UNCHANGED"
+      },
+      "all_home_file_bytes_identical_on_repeat": true,
+      "original_seed_count": 6,
+      "comments_and_unrelated_disabled_preserved": true
+    },
+    "managed_compatibility": {
+      "codex": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      },
+      "hermes": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      },
+      "omp": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      }
+    }
+  },
+  "partial_native_mcp": {
+    "initialize": "PASS",
+    "tools_list": "PASS",
+    "exact_allowlist": [
+      "computer_capabilities",
+      "computer_status"
+    ],
+    "each_advertised_schema_equals_corresponding_full_product_schema": "PASS",
+    "capabilities_tool_result_received_without_tool_error": true,
+    "readonly_schema_vs_full_schema_assertion": "DRIVER_ERROR",
+    "actual_semantics": "Read-only facade advertises 2 tools and its own digest. Full product advertises 12 tools and its own digest.",
+    "response_body_persisted_before_assertion": false,
+    "canonical_source": "src/clef_use/mcp_server.py:124",
+    "native_status": "NOT_RUN",
+    "harness_discovery_body_load_model_trigger": "NOT_RUN"
+  },
+  "not_run": [
+    "read-only MCP status semantics",
+    "lazy installed service status/health/current contract compatibility",
+    "genuine 0.1.29 status refusal against this CI service",
+    "matching idle shutdown"
+  ],
+  "cleanup": {
+    "endpoint_removed": true,
+    "http_server_closed": true
+  },
+  "no_models_gpu_gui_input_production_changes": true,
+  "privacy": "No auth, account, endpoints, private IDs/paths, raw payloads or screenshots included."
+}

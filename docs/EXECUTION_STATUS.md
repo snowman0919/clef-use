@@ -607,6 +607,21 @@ preflight then verified the all-thread union against an independent PPID oracle.
 Both original observer failures remain retained. See
 [stopped observer attempt](validation/2026-10-11/active-gui-update-final15-observer-stopped.json).
 
+**OBSERVED / historical immutable CI6cdf182 Linux:** the actual CI archive installed
+as `INSTALLED`, then `CURRENT`. All 46 Python files and 15 packaged resources
+matched that commit; three guides across three harnesses enrolled idempotently,
+preserving user bytes, comments and disabled settings. Native read-only MCP
+schemas and status were checked separately from the full product schema. A
+genuine .29 client could not replace the idle .30 service; matching shutdown
+removed the endpoint and reaped the service. See the [aggregate evidence and three
+preserved driver errors](validation/2026-10-11/ci6cdf182-linux-install.json).
+The first stopped record's original "12 tools" wording is an erroneous driver
+assertion: the verified full catalog has six tools and the read-only facade two.
+This covers CI source `6cdf182`, before the later guide-manifest ordering
+correction. Native harness loading, model/GUI/input tasks, active-session update
+on this archive and performance gates were not run. Deployment remained skipped
+by branch policy.
+
 **OBSERVED / exact-source CI Windows installation:** CI `38143663561` at `6cdf182`
 passed 15 platform/Python builds and assembly; the existing branch policy skipped
 deployment. Its actual Windows ZIP installed and repeated, matched all 61 installed
@@ -675,7 +690,7 @@ native, harness, installed or public-release status from another evidence level.
 | M2 typed input | IN_PROGRESS | Linux and Windows native input/actual IME separation observed; historical Windows restoration failure and canonical automatic IME discovery remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
-| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux/Windows install, Windows22process-exit cases and FINAL12 Codex/Hermes private fixture tasks pass; FINAL15 active update/fresh harness tasks, OMP and public release verification remain open. |
+| M5 harness/install/release | IN_PROGRESS | Immutable6cdf182 CI/Linux/Windows install, Windows22process-exit cases, FINAL15 Codex/Hermes private fixture tasks and active GUI update pass at their recorded scope; OMP, production tasks and public release verification remain open. |
 
 Reici matched-view production edits, independent visual review, Warudo/VRChat
 verification and public artifact publication/download/hash/fresh public install

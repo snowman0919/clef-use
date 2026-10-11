@@ -1,0 +1,48 @@
+{
+  "classification": "OBSERVED",
+  "overall_result": "NOT_RUN",
+  "ci_run": 38143663561,
+  "source_commit": "6cdf18281b404663591057b4f1cef9529ebb0294",
+  "archive_sha256": "3e0119c7ea6f7283c81a30b0851d2c1c44ec3c9fbf3cc7be7d80bf668ed3ff87",
+  "declaration_sha256": "5db1fdd76b8d75de5c0de6a90d1de70c023edfae2895926958aa9f84fb69c0e6",
+  "executor_sha256": "313cf98e46c9428fda5a44a30d7dc1855fb0c7a8e46937a34ca77f51fdbd1b3e",
+  "private_report_sha256": "ceeeab37989cb990cbb286a08cfbbcb54c00666c4122c8d71c6d80aa4fb7f7e6",
+  "elapsed_seconds": 0.567179,
+  "completed_readonly_checks": {
+    "native_initialize": "PASS",
+    "native_tools_list_exact_2": "PASS",
+    "actual_capabilities_call": "PASS",
+    "actual_readonly_response_exact_selected_schemas": "PASS",
+    "actual_readonly_response_digest_matches_selected_schemas": "PASS",
+    "read_only_facade_flag": true,
+    "readonly_schema_count": 2,
+    "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "full_product_schema_count_from_immutable_CI_archive": 6,
+    "full_product_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "full_product_tool_names": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort",
+      "computer_capabilities"
+    ]
+  },
+  "driver_failure": "Fixed full schema count==12 assertion contradicted actual immutable catalog count6; product failure not established.",
+  "not_run": [
+    "read-only MCP status",
+    "current lazy service lifecycle",
+    "genuine29 refusal against CI service",
+    "matching current idle shutdown"
+  ],
+  "cleanup": {
+    "endpoint_never_created": true,
+    "stdio_context_exit": "Exception propagated through official stdio_client context; success-only false report flag is not residual-process evidence. No independent process census captured."
+  },
+  "first_attempt_public_artifact": {
+    "basename": "clef-ci38143663561-linux-attempt1-public-20261011.json",
+    "sha256": "c2b3267f686089b00727decd6222d112f12bcf1be3f305ccb257d9a87e29d253"
+  },
+  "no_models_gui_gpu_input_production_changes": true,
+  "privacy": "No auth/account/endpoint/private IDs or paths/screenshots/raw private payloads included."
+}
