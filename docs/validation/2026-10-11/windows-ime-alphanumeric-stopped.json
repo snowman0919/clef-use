@@ -1,0 +1,94 @@
+{
+  "classification": "OBSERVED",
+  "status": "NOT_RUN",
+  "scope": "One limited InteractiveToken owned IMM fixture; immutable f440 installed input layer",
+  "artifact_attribution": {
+    "archive_sha256": "36dca7156d60171a63b39a0b8345768fc0d2ed13ec8322ed1bf1293ae86bd5fc",
+    "wheel_sha256": "8755168230b5c8eda20e68520caaeeead8951a5a791e796c19a958be52412a2d",
+    "input_ir_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+    "windows_input_sha256": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648"
+  },
+  "native_admission": {
+    "session_id": 1,
+    "desktop": "Default",
+    "owned_foreground_focus_IMC": true,
+    "initial_owned_ime": {
+      "open": false,
+      "conversion": 0,
+      "sentence": 8
+    },
+    "own_IMC_open_true_confirmed_before_input": true
+  },
+  "native_observation": {
+    "sendinput_ACK_events": 2,
+    "owned_EDIT_WM_KEYDOWN_vk": 71,
+    "owned_EDIT_WM_KEYUP_vk": 71,
+    "WM_IME_events_recorded": 0,
+    "stage": "First composition-begin native effect bound expired",
+    "bound_seconds": 2,
+    "fixture_elapsed_seconds": 2.297000000020489,
+    "WM_CHAR": "NOT_RECORDED: observer covered key and IME events only",
+    "failure_widget_UTF16": "NOT_RECORDED: text snapshot was scheduled after composition admission, which was never reached"
+  },
+  "acceptance": {
+    "composition_begin": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    },
+    "literal_refused_active": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    },
+    "composition_commit": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    },
+    "chord_distinct": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    },
+    "literal_after_commit": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    },
+    "independent_abort": {
+      "status": "NOT_RUN",
+      "why": "Composition precondition not observed; stopped first unexpected effect, no retry"
+    }
+  },
+  "cleanup": {
+    "own_ime_state_restored": true,
+    "own_thread_HKL_restored": true,
+    "owned_window_destroyed": true,
+    "original_foreground_restored": true,
+    "restore_attempted_once": true,
+    "owned_class_unregistered": true,
+    "preparation_owned_keys_empty": true,
+    "native_shift_state_released": true
+  },
+  "preservation": {
+    "owned_task_removed": true,
+    "global_config_bytes_preserved": true,
+    "user_PATH_preserved": true,
+    "global_runtime_bytes_preserved": true,
+    "existing_fixture_home_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "task_native_exit": 2,
+  "controller_transport_exit": 1,
+  "no_guardian_spawned": "InputExecutor creation was after composition admission and not reached",
+  "limits": [
+    "No actual active composition or TSF/IMM interoperability claim",
+    "No canonical automatic IME detector claim: typed layer accepts trusted caller-provided InputContext; WindowsInput has no IMM/TSF composition reader",
+    "Historical earlier foreground-restore failure retained separately; this owned run actual restoration PASS",
+    "No product source changes or global settings/layout installation; no model/MCP/service inputs"
+  ],
+  "digests": {
+    "clef-win-ime-owned-controller-report-20261011.json": "4faabec02cc07b2019d4bf5bcc3b93e3f4a839109c9016bbdd69c70ae02f9140",
+    "clef-win-ime-owned-report-20261011.json": "03fcab7f11c0e49a46160ca2226cd72a51167572b84222aafcec5b251b9a4aa3",
+    "clef-win-ime-owned-predeclaration-20261011.json": "f00b3d44265df6e8159385013d85b5c110b8e590800dc994300ac1d6f81ea466",
+    "clef-win-ime-owned-fixture-20261011.py": "89669d28ddfe1908c3f0bc57bd672940019ad3d38bbe8ef99662b83704725399",
+    "clef-win-ime-controller-20261011.py": "1613583cc473947fcbfb861a01776f31e4a85a798472c04b3eb01e3dc770661a"
+  },
+  "received_native_artifact_sha256": "c3b6eeda70b65ae7179d69351662b1419371b6926c23e073ac07ae868d3e3c68"
+}

@@ -1,0 +1,340 @@
+{
+  "scope": "Immutable f440de1 native win32 fresh/repeat + installed discovery and isolated Codex project native catalog; no model/GUI/service invocation",
+  "ci_commit": "f440de1",
+  "ci_run": 38137115873,
+  "fresh_expected": "INSTALLED",
+  "repeat_expected": "CURRENT",
+  "package_files": 61,
+  "python_modules": 46,
+  "resource_files": 15,
+  "source_modified": false,
+  "repeat_crash_matrix": false,
+  "reason": "PS1 and decoded native installer byte-identical to observed22-case CI26 matrix",
+  "server_bind": "127.0.0.1",
+  "classification": "OBSERVED",
+  "native_platform": "win32",
+  "native_python": "3.11.9",
+  "free_bytes_before": 518526238720,
+  "steps": [
+    {
+      "name": "fresh-install",
+      "exit_code": 0,
+      "seconds": 75.11000000010245
+    },
+    {
+      "name": "wrapper-version",
+      "exit_code": 0,
+      "seconds": 0.5470000000204891
+    },
+    {
+      "name": "native-version",
+      "exit_code": 0,
+      "seconds": 0.5160000000614673
+    },
+    {
+      "name": "self-test",
+      "exit_code": 0,
+      "seconds": 1.047000000020489
+    },
+    {
+      "name": "capabilities-detail",
+      "exit_code": 0,
+      "seconds": 1.296000000089407
+    },
+    {
+      "name": "explicit-three-guides",
+      "exit_code": 0,
+      "seconds": 5.077999999979511
+    },
+    {
+      "name": "repeat-bootstrap",
+      "exit_code": 0,
+      "seconds": 19.843999999808148
+    },
+    {
+      "name": "repeat-explicit-three",
+      "exit_code": 0,
+      "seconds": 4.984000000171363
+    },
+    {
+      "name": "project-codex-integrate",
+      "exit_code": 0,
+      "seconds": 2.8439999998081475
+    },
+    {
+      "name": "project-codex-native",
+      "exit_code": 0,
+      "seconds": 1.6400000001303852
+    }
+  ],
+  "status": "PASS",
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "preexisting_config_comments_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true
+  },
+  "digests": {
+    "actual_archive_sha": "36dca7156d60171a63b39a0b8345768fc0d2ed13ec8322ed1bf1293ae86bd5fc",
+    "wheel_sha": "8755168230b5c8eda20e68520caaeeead8951a5a791e796c19a958be52412a2d",
+    "installer_ps1_sha": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "packaged_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e"
+  },
+  "fresh_install_status": "INSTALLED",
+  "self_test": {
+    "mode": "DETERMINISTIC_FIXTURE",
+    "proves": "control flow only; not ML quality or desktop speed",
+    "samples": [
+      {
+        "status": "COMPLETED",
+        "task_success": true,
+        "wall_seconds": 0.46719160000793636,
+        "low_level_actions": 2,
+        "outer_llm_interventions": 0,
+        "parser_ms_mean": 0.13697490794584155,
+        "clef_ms_mean": 0.01142494147643447,
+        "confidence": [
+          0.99,
+          0.99,
+          0.99,
+          0.99
+        ],
+        "no_progress_replan_count": 0
+      }
+    ]
+  },
+  "schema_tool_names": [
+    "computer_abort",
+    "computer_capabilities",
+    "computer_continue",
+    "computer_observe",
+    "computer_run",
+    "computer_status"
+  ],
+  "installed_package_files": {
+    "clef_use/__init__.py": true,
+    "clef_use/activity.py": true,
+    "clef_use/activity_display.py": true,
+    "clef_use/activity_macos.py": true,
+    "clef_use/activity_windows.py": true,
+    "clef_use/activity_x11.py": true,
+    "clef_use/backends.py": true,
+    "clef_use/benchmark.py": true,
+    "clef_use/candidates.py": true,
+    "clef_use/capabilities.py": true,
+    "clef_use/cli.py": true,
+    "clef_use/client.py": true,
+    "clef_use/config.py": true,
+    "clef_use/decision_benchmark.py": true,
+    "clef_use/decision_contract.py": true,
+    "clef_use/decision_diagnostics.py": true,
+    "clef_use/deployment_profiles.py": true,
+    "clef_use/doctor.py": true,
+    "clef_use/grounding.py": true,
+    "clef_use/harness.py": true,
+    "clef_use/head_trace.py": true,
+    "clef_use/input_ir.py": true,
+    "clef_use/installer.py": true,
+    "clef_use/integrations.py": true,
+    "clef_use/interfaces.py": true,
+    "clef_use/maintenance.py": true,
+    "clef_use/mcp_server.py": true,
+    "clef_use/ml_probe.py": true,
+    "clef_use/model_worker.py": true,
+    "clef_use/models.py": true,
+    "clef_use/native_dependencies.py": true,
+    "clef_use/objects.py": true,
+    "clef_use/operations.py": true,
+    "clef_use/preparation_progress.py": true,
+    "clef_use/provision.py": true,
+    "clef_use/reaction_metrics.py": true,
+    "clef_use/router.py": true,
+    "clef_use/runtime.py": true,
+    "clef_use/schema.py": true,
+    "clef_use/service.py": true,
+    "clef_use/state.py": true,
+    "clef_use/update_notice.py": true,
+    "clef_use/verification.py": true,
+    "clef_use/windows_input.py": true,
+    "clef_use/x11_clipboard.py": true,
+    "clef_use/x11_input_state.py": true,
+    "clef_use/assets/ml-clef.txt": true,
+    "clef_use/assets/ml-d1.txt": true,
+    "clef_use/assets/ml-omni.txt": true,
+    "clef_use/assets/ml-windows-nf4.txt": true,
+    "clef_use/assets/ml-windows-rocm.txt": true,
+    "clef_use/assets/ml-windows-torch-cpu.txt": true,
+    "clef_use/agent-skills/examples.json": true,
+    "clef_use/agent-skills/manifest.json": true,
+    "clef_use/agent-skills/clef-use/SKILL.md": true,
+    "clef_use/agent-skills/clef-use/references/API_BASELINE.md": true,
+    "clef_use/agent-skills/clef-use/references/LIVE_API.md": true,
+    "clef_use/agent-skills/clef-use-blender/SKILL.md": true,
+    "clef_use/agent-skills/clef-use-blender/references/OPERATIONS.md": true,
+    "clef_use/agent-skills/clef-use-diagnostics/SKILL.md": true,
+    "clef_use/agent-skills/clef-use-diagnostics/references/FAILURES.md": true
+  },
+  "preservation_and_cleanup": {
+    "owned_loopback_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_V2_runtime_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "cleanup_scope": "Ownedloopback stopped, all subprocesses waited, no scheduled tasks created; private artifacts retained.",
+  "not_run": "Model LOADED/INVOKED/TASK_VERIFIED, GUI/input/service actions outside this installation scope; Hermes/OMP native CLI absent on PATH. No auth copying, new harness install, production changes or source edits.",
+  "prior_fixture_failure": {
+    "report_sha256": "c342ab2fc7dd3f897008d8a12fd15748326489615d9039e6cbe3bbd262a0754c",
+    "source_sha256": "96e463881f9c512605aee999920189f85751c1de891008d2ae8e0265964c6888",
+    "failure": "Fixture incorrectly demanded lexical Path equality; read-only native samefile confirmed registered path and normalized target are one owned physical file. Initial report and original runner retained."
+  },
+  "continuation_source_sha256": "6c2860b3fdd3e1a86e327ca17f8c7a0f56ea7db92c32161b0a361bc2c73e88dd",
+  "three_user_enrollment": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED"
+    }
+  ],
+  "deployed_three_guides": {
+    "codex": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    },
+    "hermes": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    },
+    "omp": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    }
+  },
+  "repeat_install_status": "CURRENT",
+  "repeat_three_enrollment": [
+    {
+      "harness": "codex",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "hermes",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "omp",
+      "status": "UNCHANGED"
+    }
+  ],
+  "project_codex_install": {
+    "status": "INSTALLED",
+    "stages": {
+      "INSTALLED": {
+        "status": "PASS"
+      },
+      "DISCOVERED": {
+        "status": "NOT_RUN"
+      },
+      "LOADED": {
+        "status": "NOT_RUN"
+      },
+      "INVOKED": {
+        "status": "NOT_RUN"
+      },
+      "TASK_VERIFIED": {
+        "status": "NOT_RUN"
+      }
+    },
+    "compatibility": null
+  },
+  "project_guide_files": {
+    "clef-use": {
+      "SKILL.md": true,
+      "references/API_BASELINE.md": true,
+      "references/LIVE_API.md": true
+    },
+    "clef-use-blender": {
+      "SKILL.md": true,
+      "references/OPERATIONS.md": true
+    },
+    "clef-use-diagnostics": {
+      "SKILL.md": true,
+      "references/FAILURES.md": true
+    }
+  },
+  "project_codex_native": {
+    "status": "NOT_RUN",
+    "stages": {
+      "INSTALLED": {
+        "status": "PASS"
+      },
+      "DISCOVERED": {
+        "status": "PASS"
+      },
+      "LOADED": {
+        "status": "NOT_RUN"
+      },
+      "INVOKED": {
+        "status": "NOT_RUN"
+      },
+      "TASK_VERIFIED": {
+        "status": "NOT_RUN"
+      }
+    },
+    "compatibility": {
+      "status": "MATCH",
+      "reload_required": false,
+      "installed_release": "0.1.30",
+      "runtime_release": "0.1.30",
+      "action": null
+    }
+  },
+  "received_native_artifact_sha256": "420406efcd6a7cabb47e1017da44ebdadbd3cf879d4541ce7f0e7c034c748624"
+}

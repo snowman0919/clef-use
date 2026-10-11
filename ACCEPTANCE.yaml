@@ -138,7 +138,7 @@ scenarios:
   category: api
   requirement: Version/feature mismatch refuses unsupported actions with actionable current
     guidance.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
@@ -152,11 +152,17 @@ scenarios:
     section: evidence.installed_compatibility_final12
     claim: OBSERVED
     partial: true
-  execution_note: Unsupported operation/default missing-provider and stale-guide compatibility
-    fixtures exist. Actual installed CLI refuses a genuine old executable and all
-    three real stale guide bindings before native harness execution. Managed removal
-    and explicit current executable enrollment restore matching contracts without
-    overwriting approved registrations. Full installed feature-mismatch matrix incomplete.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.runtime_binding_final15_native
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual installed CLI stale executable/three-guide compatibility
+    refusal is retained. Genuine immutable .29 cannot replace FINAL15 .30;
+    real HTTP version/protocol/schema control matrix36/36 refuses with409 and reload
+    guidance while preserving PID/starttime/endpoint. Unsupported operation and three
+    invalid bodies return400 and current capability guidance; discovery remains available.
+    Immutable .29 displays its original generic refusal rather than server guidance.
+    Active GUI update is a separate INSTALL-10 condition, not implied by this pass.
 - id: CAP-03
   category: api
   requirement: Existing five tools and goal-only contracts retain backward compatibility.
@@ -436,7 +442,7 @@ scenarios:
 - id: INPUT-02
   category: input
   requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_native_input
@@ -454,9 +460,19 @@ scenarios:
     section: evidence.windows
     claim: OBSERVED
     partial: true
-  execution_note: Exact Unicode and shortcuts exercised; active IME composition behavior not
-    exercised natively. Native Windows component checks pass, but overall Windows fixture remains
-    FAIL on foreground restoration; no all-platform PASS implied.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_native_ime
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual immutable f440de1 installed Windows input layer observes native
+    composition start/preedit/result/end; literal input during active composition is
+    refused with preedit/widget/input count unchanged. After commit, Ctrl+A selects
+    exact UTF16 and Unicode insertion matches12bytes without clipboard mutation.
+    Independent cancellation releases held Shift without worker release. All6cases
+    and own IMC/HKL/foreground/V2/config/PATH cleanup pass. Original alphanumeric-mode
+    stopped attempt remains NOT_RUN. Caller supplies native-observed trusted context;
+    automatic IMM/TSF discovery and service/model/harness E2E are not implied.
+    Historical Windows foreground failure remains separately retained.
 - id: INPUT-03
   category: input
   requirement: Left/right/middle button and modifier-held drag/orbit/pan execute in bounded

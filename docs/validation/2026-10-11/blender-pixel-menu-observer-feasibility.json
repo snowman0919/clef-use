@@ -1,0 +1,126 @@
+{
+  "classification": "INFERRED_FROM_OBSERVED_INPUTS",
+  "scope": "Read-only production PIXELS menu-observer feasibility from existing H2 captures and frozen shipped interfaces; no new model, GUI, input or source changes.",
+  "observed_captures": [
+    {
+      "case": "MENU_OPEN",
+      "object_count": 134,
+      "confidence_null_count": 134,
+      "roles": {
+        "text": 51,
+        "icon": 83
+      },
+      "popup_parent_or_coverage_fields_present": false,
+      "positive_visible_text_examples": [
+        "Open Recent",
+        "External Data Clean Up",
+        "Save Ctrl $ Save As_ Shift Ctrl $ Save Copy_ Save Incremental Ctrl Alt $"
+      ],
+      "File_menubar_label_present": true,
+      "raw_objects_sha256": "f3a85e5c08ae8c4e1e7d9626b918cc8b6bf9cf5ca81c4b23c8d97230932fbc2e"
+    },
+    {
+      "case": "EDIT_WRONG",
+      "object_count": 135,
+      "confidence_null_count": 135,
+      "roles": {
+        "text": 43,
+        "icon": 92
+      },
+      "popup_parent_or_coverage_fields_present": false,
+      "positive_visible_text_examples": [
+        "Preferences_. Ctrl",
+        "Undo History"
+      ],
+      "File_menubar_label_present": true,
+      "raw_objects_sha256": "e36dd5704e5e8f97a5c57e6eaced4b721aed1ed224b1d73e911f2fb6ab51a319"
+    },
+    {
+      "case": "ABSENT",
+      "object_count": 143,
+      "confidence_null_count": 143,
+      "roles": {
+        "text": 47,
+        "icon": 96
+      },
+      "popup_parent_or_coverage_fields_present": false,
+      "positive_visible_text_examples": [],
+      "File_menubar_label_present": true,
+      "raw_objects_sha256": "635fa59f49d617cd0e650b53c96b94badc4a778dd91df2e691aceb4e219257ca"
+    }
+  ],
+  "evidence_limit": "Three known states from one factory desktop are examples, not calibrated error/coverage bounds. All 412 parsed objects have confidence=null; no supplied popup/member/coverage relation exists.",
+  "current_interfaces": {
+    "PerceptionBackend.parse": "image -> tuple[UIObject,...]",
+    "UIObject": "bbox,label,role,confidence,actions,source,sensitive plus nullable visible/enabled/editable/focused/occluded; no popup identity, parent or coverage",
+    "SessionRuntime._operation_state": "captures frame but builds Observation(objects=()); only an injected local state_provider can supply menus",
+    "StateCompiler.compile": "binds StateFact source/timestamp/version/validity/uncertainty; absent evidence remains UNKNOWN",
+    "CompiledState.require": "rejects non-VALID or uncertainty>0.1; do not invent a lower uncertainty to authorize a visual inference",
+    "OperationRunner._menu": "consumes the menus fact only; [] means ABSENT, so a failed detector must never return [] as a successful fact"
+  },
+  "conclusion": "Existing objects and pixels provide useful positive witnesses, but cannot presently justify trustworthy production OPEN/WRONG_MENU at the unchanged state gate. A new verified pixel observer would need explicit popup geometry/member association and uncertainty/coverage handling; it is not implemented or advertised.",
+  "positive_rule_requirements": {
+    "OPEN": [
+      "Fresh window-bound pixels",
+      "Observed requested header identity from OCR, not caption guesses",
+      "Independently supported popup outline and header linkage derived from current image, not fixed coordinates",
+      "Coherent spatially associated visible menu-member evidence and unambiguous root-popup identity",
+      "No unaccounted multiple, clipped, overlapping or occluded popup candidate",
+      "Validated evidence uncertainty compatible with existing require gate; otherwise UNKNOWN"
+    ],
+    "WRONG_MENU": [
+      "Positively identified different menu",
+      "Complete relevant visible-popup coverage sufficient to exclude the requested menu; identifying one different popup alone is insufficient"
+    ],
+    "ABSENT": "No evidence of items is not proof of no menu. Without explicit trustworthy visible coverage, return UNKNOWN rather than VALID []."
+  },
+  "counterexamples": [
+    {
+      "case": "menubar label alone",
+      "observed_evidence": "File label exists in all three H2 states, including EDIT_WRONG and ABSENT."
+    },
+    {
+      "case": "matching words in ordinary content",
+      "risk": "A text editor, help document or panel can contain Open Recent/Save/Preferences without an open menu; require actual popup geometry and header linkage."
+    },
+    {
+      "case": "merged OCR boxes",
+      "observed_evidence": "One File object joins Save, Save As, Save Copy and Save Incremental; one box must not be treated as four independently verified menu members."
+    },
+    {
+      "case": "multiple popups/submenus",
+      "risk": "One positive popup cannot certify uniqueness or WRONG_MENU if another root/submenu is unresolved; current flat menus contract has no hierarchy, so refuse ambiguous cases."
+    },
+    {
+      "case": "clipped/occluded/off-frame popup",
+      "risk": "Missing OCR members cannot certify absence or coverage."
+    },
+    {
+      "case": "locale/theme/scale/window aspect",
+      "risk": "English item vocabulary and dark-theme outlines from one capture do not validate other locales, themes or geometry; unsupported identity stays UNKNOWN."
+    },
+    {
+      "case": "caption hallucination",
+      "observed_evidence": "box_yolo_content_yolo objects include generic profile/blurry captions; they are not direct observed menu text."
+    },
+    {
+      "case": "stale parse",
+      "risk": "OmniParser may exceed the 1-second state-fact lifetime. Use actual capture time and refuse stale pixels; never timestamp old pixels as fresh at parse completion."
+    }
+  ],
+  "minimum_trustworthy_data_needed": [
+    "Direct OCR recognition evidence retained with source and measured reliability; detection text_threshold is not semantic confidence",
+    "A real popup-boundary and header/member spatial relation extracted from pixels, with clipping/overlap/coverage flags",
+    "Frame/window binding and true capture timestamp; a later equal-image/window recapture may establish freshness only when actually observed",
+    "Version/locale identity only if independently observed, or UNKNOWN for unsupported translation",
+    "Representative positive/negative real captures and held-out counterexamples to establish the acceptance boundary without reducing thresholds"
+  ],
+  "at_most_one_implementation_slice": {
+    "classification": "PROPOSED",
+    "name": "Read-only pixel menu witness extraction and validation",
+    "description": "One bounded observer consuming the unflattened current UIObjects and original frame pixels. Derive popup candidates and text membership without mutating objects/actions; retain raw supporting object IDs and dynamic geometry. Emit UNKNOWN on missing identity/coverage/confidence. Only connect a production menus StateFact after its real negative/ambiguity validation establishes the unchanged gate; do not add a provider stub, guess numeric facts, or promote default readiness."
+  },
+  "production_provider_status": "OPEN REQUIREMENT; default NONE/BLOCKED unchanged",
+  "privacy": "No raw screenshots, model transcript, scene payloads, credentials or cache paths included.",
+  "received_native_artifact_sha256": "ef08b191dbbaabaa85b5416c9d039490330448af1ea353fe40a5e8d7ab18578b"
+}

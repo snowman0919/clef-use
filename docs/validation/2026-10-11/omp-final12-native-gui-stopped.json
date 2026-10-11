@@ -1,0 +1,520 @@
+{
+  "classification": "OBSERVED",
+  "scope": "One bounded native OMP GUI task attempt against a root-owned private API_ASSISTED fixture; no GUI tool execution occurred",
+  "overall": "NOT_RUN_MODEL_PROVIDER_HTTP_401_BEFORE_ANY_TOOL",
+  "attempt_process_exit_code": 1,
+  "declaration": {
+    "basename": "clef-omp-native-fixture-caller-predeclaration-public-20261011.json",
+    "sha256": "cb36d206f2cc64bc959054b7aef145012a8f8c14c4bcbe5ebdfaa71bccbc767a"
+  },
+  "candidate": {
+    "release": "0.1.30",
+    "label": "FINAL12",
+    "reported_ci_artifact_sha256": "b2feb3b69340de567244015276c01072528d48e75546a80d552ef5288359a3e6",
+    "guide_contract_version": 1,
+    "api_schema_version": 1
+  },
+  "code": [
+    {
+      "basename": "clef_omp_native_fixture_caller_20261011.py",
+      "sha256": "04a9e9deba6bda9c7f21f8e27fbe4ee96064547cfe2666b7de5ec3b96738a76d"
+    },
+    {
+      "basename": "clef_omp_native_fixture_caller_20261011.ts",
+      "sha256": "fa1697ff2754e4dcf6778f69011429f2f1ef9112cc7248160872678f698f4559"
+    },
+    {
+      "basename": "clef_omp_native_public_read_guard_20261011.ts",
+      "sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b"
+    },
+    {
+      "basename": "clef_fixture_mcp_entry_20261011.py",
+      "sha256": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f"
+    }
+  ],
+  "evidence_bindings": [
+    {
+      "basename": "summary.json",
+      "sha256": "cbc88aa9ee18287f0c7704a5b6888fecfafbd8da87f5bcfd663fabef754b2dd8"
+    },
+    {
+      "basename": "preparation-public-metadata.json",
+      "sha256": "09bca09a65f24af8733a374a48376c15d944329c04ed93af1ff31beb226879df"
+    },
+    {
+      "basename": "gui-private-trace.jsonl",
+      "sha256": "6d09174bf15cf1ab5a26e0b6705c370650ad5d6e7751c54e56dc6d059a8df3b7"
+    }
+  ],
+  "preflight": {
+    "managed_project_install_statuses": [
+      "INSTALLED",
+      "UNCHANGED"
+    ],
+    "exact_public_files": [
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "clef-use/references/API_BASELINE.md",
+        "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4"
+      },
+      {
+        "basename": "clef-use/references/LIVE_API.md",
+        "sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      {
+        "basename": "clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "clef-use-blender/references/OPERATIONS.md",
+        "sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      {
+        "basename": "clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      },
+      {
+        "basename": "clef-use-diagnostics/references/FAILURES.md",
+        "sha256": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      }
+    ],
+    "manifest_public_metadata": {
+      "harness": "omp",
+      "profile": "default",
+      "scope": "project",
+      "selection": [
+        "blender",
+        "core",
+        "diagnostics"
+      ],
+      "release": "0.1.30",
+      "guide_contract_version": 1,
+      "api_schema_version": 1,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+    },
+    "descriptor_and_health": {
+      "classification": "OBSERVED_ROOT_PROVIDED_DESCRIPTOR_AND_LIVE_HEALTH",
+      "root_supplied_descriptor_fields_validated": true,
+      "live_runtime_health_bound": true,
+      "live_fixture_ready": "ROOT_DESCRIPTOR_AND_RUNTIME_HEALTH_ONLY",
+      "descriptor_sha256": "12d93c093ca8d0a940927514e2501fa7c1bb0bf7f04a93fda1266f7334e8d81f",
+      "policy_source_sha256": "917a6f60bc8c4b1ce95cbdf3da7f7e1742b7e7e592309f349af304d562d8b094",
+      "live_health_version_matches": true,
+      "live_health_idle": true,
+      "live_desktop_scope_matches": true,
+      "keymap_digest_matches": true,
+      "keymap_digest_method": "sha256(json.dumps(keymap, sort_keys=True).encode()), matching fixture source; not product schema digest",
+      "descriptor_imported_candidate_matches": true,
+      "actual_before_public_facts": {
+        "application": "Blender",
+        "mode": "OBJECT",
+        "selection": [
+          "Cube"
+        ],
+        "modal_operators": [],
+        "space": "GLOBAL",
+        "unit": {
+          "translate": "METERS",
+          "rotate": "DEGREES",
+          "scale": "NONE"
+        }
+      },
+      "before_global_X": 0.0,
+      "independent_scene_readback_owner": "root fixture controller; no production provider claim"
+    },
+    "allowed_operation": {
+      "family": "numeric_transform",
+      "target_id": "Cube",
+      "operation": "translate",
+      "axis": "X",
+      "space": "GLOBAL",
+      "unit": "METERS",
+      "amount": 2.0,
+      "keymap_version": "7dde70e665443a1a4babb6568d525760dd35b17396b732ca8e672dca5aeda9a3",
+      "commit": true,
+      "tolerance": 1e-05
+    },
+    "native_discovery": "PASS",
+    "generated_prompt": {
+      "mode": "native-generated-plus-permissions-only-append",
+      "sha256": "7a706ef602509d8568a4d004418e011e36547d0ee50c66853083293e5728f06f",
+      "native_catalog_present": true,
+      "matching_skill_instruction_present": true,
+      "public_catalog_lines": [
+        "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+        "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,\u2026",
+        "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+      ],
+      "no_fixed_system_prompt": true,
+      "preflight_test_child": false
+    },
+    "native_managed_project": {
+      "skill_root_relative": ".omp/skills",
+      "config_relative": ".omp/mcp.json",
+      "source_provider": "native",
+      "source_level": "project",
+      "original_managed_entry_matches_installed_launcher": true,
+      "all_skill_realpaths_inside_project": true,
+      "additional_directories": [],
+      "native_source_paths": [
+        {
+          "name": "clef-use",
+          "project_relative": ".omp/skills/clef-use/SKILL.md"
+        },
+        {
+          "name": "clef-use-blender",
+          "project_relative": ".omp/skills/clef-use-blender/SKILL.md"
+        },
+        {
+          "name": "clef-use-diagnostics",
+          "project_relative": ".omp/skills/clef-use-diagnostics/SKILL.md"
+        }
+      ]
+    },
+    "test_transport_override": {
+      "declared": true,
+      "command": "installed runtime/current/bin/python",
+      "entry_basename": "clef_fixture_mcp_entry_20261011.py",
+      "entry_sha256": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f",
+      "managed_MCP_entry_matches_overridden_transport": false,
+      "managed_project_files_modified_after_enrollment": false,
+      "provider_scope": "API_ASSISTED_FIXTURE_ONLY",
+      "production_provider_available": false
+    },
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "capabilities_preflight_was_model_invoke": false
+  },
+  "route": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "provider": "aipi",
+  "model": "dgx-moa-fast",
+  "budget": {
+    "auxiliary_native_completion_invocations_per_session": 3,
+    "auxiliary_native_completion_invocations_total": 3,
+    "auxiliary_native_completion_invocations_per_skill_per_session": 1,
+    "primary_cases": 1,
+    "primary_invocations_per_case": 8,
+    "primary_invocations_total": 8,
+    "case_deadline_ms": 180000,
+    "driver_or_session_retry_enabled": false,
+    "native_transport_retry_policy_preserved": true,
+    "actual_http_attempt_count": "NOT_OBSERVED",
+    "hard_http_attempt_ceiling": "NOT_OBSERVED",
+    "stop_first_failed_case": true,
+    "normal_runtime_required_for_models": true
+  },
+  "native_behavior": {
+    "fixed_system_prompt": false,
+    "append_permissions_only": true,
+    "native_description_policy": "Native synchronous preview/cache snapshot; no cache-readiness gate; compression warnings nonfatal; only cleanup awaits already scheduled native background work",
+    "test_child": false
+  },
+  "active_tools": [
+    "read",
+    "mcp__clef_use_computer_abort",
+    "mcp__clef_use_computer_capabilities",
+    "mcp__clef_use_computer_run",
+    "mcp__clef_use_computer_status"
+  ],
+  "actual_case": {
+    "native_primary_invocations_started": 1,
+    "native_auxiliary_invocations_started": 3,
+    "native_primary_ended_error": true,
+    "http_status_from_primary_native_span": 401,
+    "http_status_from_each_auxiliary_native_span": [
+      401,
+      401,
+      401
+    ],
+    "phase_fetch_calls": [
+      {
+        "phase": "create_native_session",
+        "case": "gui",
+        "delivered_status": 401,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "gui",
+        "delivered_status": 401,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "gui",
+        "delivered_status": 401,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "gui",
+        "delivered_status": 401,
+        "resolved": true,
+        "rejected": false
+      }
+    ],
+    "phase_fetch_calls_are_guaranteed_model_only_http_requests": false,
+    "underlying_http_attempts": "NOT_OBSERVED",
+    "tool_execution_count": 0,
+    "full_guide_body_load": "NOT_RUN",
+    "capabilities_tool_invoke_by_model": "NOT_RUN",
+    "prerequisite_receipt_created": false,
+    "fixture_mcp_event_receipt_created": false,
+    "computer_run_count": 0,
+    "computer_status_count": 0,
+    "computer_abort_count": 0,
+    "native_final_answer": "NOT_RUN",
+    "gui_task_execution": "NOT_RUN",
+    "whole_goal_assess": "NOT_RUN",
+    "retry_or_reissue": false
+  },
+  "auxiliary": {
+    "warnings": [
+      {
+        "event": "skill_description_compression_failed",
+        "skill": "clef-use-diagnostics",
+        "category": "MODEL_ERROR",
+        "http_status_from_error": null,
+        "error_message_recorded": false
+      },
+      {
+        "event": "skill_description_compression_failed",
+        "skill": "clef-use",
+        "category": "MODEL_ERROR",
+        "http_status_from_error": null,
+        "error_message_recorded": false
+      },
+      {
+        "event": "skill_description_compression_failed",
+        "skill": "clef-use-blender",
+        "category": "MODEL_ERROR",
+        "http_status_from_error": null,
+        "error_message_recorded": false
+      }
+    ],
+    "native_cache_snapshots": [
+      {
+        "stage": "before_create_session",
+        "case": "gui",
+        "elapsed_ms": 504.1987949999999,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_create_session_return",
+        "case": "gui",
+        "elapsed_ms": 561.2548789999998,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "before_primary_no_wait",
+        "case": "gui",
+        "elapsed_ms": 561.76925,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_background_cleanup_wait",
+        "case": "gui",
+        "elapsed_ms": 1054.4227389999999,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      }
+    ],
+    "warnings_were_nonfatal_no_readiness_gate": true
+  },
+  "cleanup": {
+    "native_session_disposal_and_mcp_disconnect_reported": true,
+    "own_artifact_root_argument_process_count_observed_after_exit": 0,
+    "root_owned_fixture_started_by_driver": false,
+    "root_owned_fixture_cleanup_by_driver": false,
+    "root_independent_rna_pixels_and_shutdown": "ROOT_COMPLETED_UNCHANGED_CHECKS_AND_OWNED_FIXTURE_CLEANUP",
+    "credentials_or_global_config_changed": false,
+    "production_gui_touched": false
+  },
+  "interpretation": {
+    "observed_failure_scope": "This configured OMP native model route returned HTTP 401 metadata; exact credential cause unobserved",
+    "current_desktop_chat_auth_failure_established": false,
+    "product_runtime_failure_established": false,
+    "production_trusted_provider_claim": false,
+    "managed_mcp_manifest_match_after_test_transport_override": false
+  },
+  "prior_histories_preserved": [
+    {
+      "basename": "clef-omp-native-schemafaithful-consumer-readonly-public-20261011.json",
+      "sha256": "accc5841a80363ab5c14ecd6e4e3e68571e02436474977654ca89102af2264d0",
+      "scope": "First primary workspace_violation; origin unobserved; no tools",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-native-guarded-consumer-readonly-public-20261011.json",
+      "sha256": "4eb7aaa78a1bb8d558a9a8b9f61fc50f0e2121f0eaed3c4e4725f71b7661862f",
+      "scope": "Eight-call partial, advertised MCP argument falsely refused by driver",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059",
+      "scope": "Eight-call partial, native URI selectors falsely refused by driver",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-native-profile-readonly-public-20261011.json",
+      "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316",
+      "scope": "Primary driver-gated NOT_RUN; native bootstrap nonfatal",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-final10-native-generated-public-20261011.json",
+      "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784",
+      "scope": "Wrong auxiliary role; primary driver-gated NOT_RUN",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-native-state-isolation-addendum-public-20261011.json",
+      "sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e",
+      "scope": "Historical unsupported state override disclosure",
+      "existing_artifact_unmodified": true
+    },
+    {
+      "basename": "clef-omp-public-evidence-20261011.json",
+      "sha256": "d7b9341359e0bbc6fcef8abf9e8712473fd6fbbb733855e621742935195fb353",
+      "scope": "Prior fixed-system-prompt results, including negative overtrigger, preserved",
+      "existing_artifact_unmodified": true
+    }
+  ],
+  "privacy": "Stable public basenames and SHA256 only; raw traces, provider payloads, endpoints, account identifiers, auth values, private paths, screenshots and assets omitted",
+  "root_independent_verification": {
+    "classification": "OBSERVED_ARTIFACTS_AND_PARENT_REPORTED_VISUAL_OBSERVATION",
+    "bindings": [
+      {
+        "basename": "omp-external-readback.json",
+        "sha256": "289dd5851854f8257f3f753b470c172d507524370b01c5ed47f42cec5d419fc8"
+      },
+      {
+        "basename": "report.json",
+        "sha256": "6353e54aff9d676c49884820b99b566b57fc11db64546843512446ab25ee4b71"
+      },
+      {
+        "basename": "service-report.json",
+        "sha256": "a88dc47971b9647e5bd7d393d167fde7e8be7703698af25b2137753d8ca5645a"
+      }
+    ],
+    "rna_and_service_checks": {
+      "transform_values_unchanged": true,
+      "selection_unchanged": true,
+      "mode_unchanged": true,
+      "space_unchanged": true,
+      "unit_unchanged": true,
+      "no_modal": true,
+      "service_idle": true
+    },
+    "unchanged_checks_passed": true,
+    "TASK_VERIFIED": "NOT_RUN",
+    "shutdown_idle_accepted": true,
+    "root_reported_pixels": "Cube global X remained 0; no modal; screenshot omitted",
+    "production_blender_alive": "PARENT_REPORTED_OBSERVED",
+    "production_scene_touched": false,
+    "fixture_report_passed": true,
+    "service_report_passed": true,
+    "cleanup": {
+      "owned_inputs_after_release": [],
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "server_socket_closed": true,
+      "signals_restored": true
+    },
+    "owned_process_cleanup": {
+      "all_exited": true,
+      "xvfb_socket_removed": true
+    },
+    "interpretation": "Successful unchanged-state verification and cleanup are not successful GUI task execution; task remains NOT_RUN due to native OMP provider HTTP 401 before tools"
+  },
+  "received_native_artifact_sha256": "933165945952d4a9806a9fd86dd78b7ca527c8d82c4c39a2bdb9a86777e54793"
+}

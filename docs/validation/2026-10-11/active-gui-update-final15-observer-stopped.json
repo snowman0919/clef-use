@@ -1,0 +1,127 @@
+{
+  "classification": "OBSERVED",
+  "overall": "INSTALL10_NOT_RUN_DRIVER_OBSERVER_DESKTOP_MISMATCH",
+  "scope": "One actual genuine .29 canonical read-only GUI ASSESS attempt; .30 update was never started",
+  "declaration": {
+    "basename": "clef-active-gui-update-final15-predeclaration-public-20261011.json",
+    "sha256": "e2cf64eaae1b97f94c541e1a8476dbeb94cc48f92978fcf8a39e76c59f331a92"
+  },
+  "driver": {
+    "basename": "clef_active_gui_update_final15_20261011.py",
+    "sha256": "e070ad4c7a8fa02d2abda01fa288d0a2294deab5db479f1af03bfbf06849b582"
+  },
+  "evidence": [
+    {
+      "basename": "report.json",
+      "sha256": "37dca327e26224882950f9336b93eee82d942839ee1aac67a7e6c21e276a7923"
+    },
+    {
+      "basename": "old-run-result-private.json",
+      "sha256": "3dbffc26c7d04271ef9006d092965d6c29f8ae47dff0a30a26edbd510626ea86"
+    },
+    {
+      "basename": "old-install-private.log",
+      "sha256": "56ed98fa85e29b14bca2f29fdbc0b8b4fa780d154ff78bd402653f49560ffc8e"
+    }
+  ],
+  "genuine_old_install": {
+    "status": "PASS",
+    "record_version": "0.1.29",
+    "archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e",
+    "absolute_version_retained": true
+  },
+  "initial_observer_status": {
+    "status": 403,
+    "body": {
+      "error": "DESKTOP_MISMATCH"
+    }
+  },
+  "last_observer_status": {
+    "status": 403,
+    "body": {
+      "error": "DESKTOP_MISMATCH"
+    }
+  },
+  "driver_failure": {
+    "type": "AssertionError",
+    "message": "real old active GUI worker gate timed out; no retry"
+  },
+  "driver_contamination": {
+    "raw_status_omitted_actual_desktop_scope": true,
+    "server_refusal_was_correct": true,
+    "initial_403_was_before_model_run": true,
+    "driver_failed_to_stop_on_initial_refusal": true,
+    "observer_gate_timed_out_seconds": 60,
+    "model_or_runtime_lifecycle_failure_attribution": false
+  },
+  "actual_native_old_gui_result": {
+    "status": "LOW_CONFIDENCE",
+    "steps": 0,
+    "rounds": 1,
+    "confidence": 1.0,
+    "reason": "execution mode confidence below threshold",
+    "blocker": {
+      "kind": "CONFIDENCE_BELOW_THRESHOLD",
+      "observed": {
+        "source": "execution_mode",
+        "probability": 0.4694,
+        "required_probability": 0.9,
+        "action_selection_confidence": 1.0,
+        "mode": "BLOCKED",
+        "mode_confidence": 0.4694,
+        "goal_probability": 0.0925,
+        "condition_probabilities": [
+          0.0652
+        ]
+      },
+      "resume_when": "new relevant evidence or planner clarification; do not repeat already-delivered input"
+    },
+    "activity": {
+      "phase": "Low Confidence"
+    },
+    "summary": "LOW_CONFIDENCE after 0 actions, 1 decisions"
+  },
+  "actual_model_scope": {
+    "native_local_completed_decision_rounds": 1,
+    "native_retries_added": 0,
+    "model_threshold_unchanged": 0.9,
+    "remote_harness_model_calls": 0,
+    "result_is_lifecycle_pass": false
+  },
+  "stages": {
+    "genuine_fresh_old_install": "PASS",
+    "genuine_old_runtime_gui_assessment": "OBSERVED_LOW_CONFIDENCE",
+    "correctly_bound_observer_gate": "FAIL_DRIVER_403",
+    "actual_30_installer_update": "NOT_RUN",
+    "active_session_survival_across_update": "NOT_RUN",
+    "new_client_busy_version_refusal": "NOT_RUN",
+    "matching_old_session_abort": "NOT_RUN",
+    "current_30_contract_reload": "NOT_RUN"
+  },
+  "independent_native_observations": {
+    "recorded_keyboard_pointer_event_count": 0,
+    "record_start_ack": "NOT_OBSERVED_SEPARATELY",
+    "pixels_byte_hash_unchanged": true,
+    "key_button_maps_unchanged": true,
+    "gui_os_input_task_claim": false
+  },
+  "elapsed_seconds": 66.176875,
+  "cleanup": {
+    "matching_shutdown": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "all_observed_owned_service_workers_exited": true,
+    "all_direct_children_exited": true,
+    "endpoint_removed": true,
+    "xvfb_socket_removed": true,
+    "http_server_closed": true
+  },
+  "production_changes": false,
+  "original_attempt_preserved": true,
+  "automatic_retry": false,
+  "privacy": "No private paths, endpoints/auth/accounts/payloads, session/process IDs, screenshots or assets",
+  "received_native_artifact_sha256": "4cc5e9493e975d1912804f9ff43ab886c3570b9d764025c9cd1975324a06a390"
+}

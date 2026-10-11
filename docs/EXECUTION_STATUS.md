@@ -2,11 +2,13 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest frozen implementation and fixture: `a7a46b5` on `codex/reactive-agent-contracts`.
+Latest committed implementation: `f4ec498` on `codex/reactive-agent-contracts`;
+the bounded Blender fixture remains unchanged from `a7a46b5`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
-Latest local candidate: FINAL12, built from the current changes; installed module
-hashes and its **783 passed / 34 skipped** source regression are recorded in
-[final12-install.json](validation/2026-10-11/final12-install.json).
+Latest local candidate: FINAL15, including the runtime identity correction;
+installed module hashes and its **792 passed / 34 skipped** source regression are
+recorded in [final15-install.json](validation/2026-10-11/final15-install.json).
+Earlier FINAL12 native tasks retain their original candidate and guide hashes.
 This is partial execution evidence, not specification completion or release approval.
 Machine-readable, sanitized evidence and artifact hashes: [summary.json](validation/2026-10-11/summary.json).
 Latest installed input/profile candidate: [final10.json](validation/2026-10-11/final10.json).
@@ -524,6 +526,80 @@ regression (**783 passed, 34 skipped, 41 warnings, 45.35 s**), scoped Ruff and
 generated contract/example checks. This does not replace the actual GUI evidence
 or turn skipped acceptance work into a pass.
 
+## Runtime identity correction and remaining checks
+
+**OBSERVED / fresh FINAL15 native harness tasks:** Codex and Hermes each loaded
+the changed installed instructions, checked actual capabilities/schemas and
+invoked one Cube X +2 m operation. Each produced four acknowledged native inputs,
+typed `SUCCEEDED` and session `NEEDS_REPLAN`. Fresh independent RNA verified nine
+effect/preservation conditions; root viewed both result screens and shut down the
+owned fixtures. Complete installed guide bytes were present in actual tool output,
+including the final LF. Hermes also delivered the three complete reference files
+with MCP resources/prompts disabled. Its attempted unavailable `execute_code`
+tool was refused without execution and is retained as one tool-selection error,
+separate from the earlier FINAL12 terminal error. These are API-assisted operation
+tasks, not whole-goal ASSESS, a shipped production provider or a latency result.
+See [Codex FINAL15](validation/2026-10-11/codex-final15-native-gui.json),
+[exact guide-byte audit](validation/2026-10-11/codex-final15-guide-bytes-audit.json)
+and [Hermes FINAL15](validation/2026-10-11/hermes-final15-native-gui.json).
+
+**OBSERVED / actual installed regression:** a genuine immutable baseline .29 client
+request replaced an idle FINAL12 .30 service with .29. FINAL15 binds control
+requests to the runtime version, protocol and actual schema digest. Replaying the
+same old client preserved the .30 PID, start time and endpoint bytes. All 36 real
+HTTP identity-mismatch control requests returned 409 and reload guidance; all four
+invalid/unsupported run bodies returned 400 and current capability guidance. The
+immutable old client still displays its original generic refusal; this is distinct
+from the actionable server response and current client diagnostics. Matching
+capability discovery and idle shutdown passed. No session or model ran in this
+transport check. See [original defect](validation/2026-10-11/stale-client-downgrade-final12.json)
+and [installed correction](validation/2026-10-11/runtime-binding-final15-native.json).
+An update across an actual active GUI session remains a separate pending check.
+Its first actual attempt had a status observer missing the desktop-scope header:
+the service correctly returned 403, but the driver failed to stop at preflight.
+One real local ASSESS ended LOW_CONFIDENCE at the unchanged 0.9 threshold; no
+installer update, abort or reload ran. Native input was zero, pixels/input maps
+were unchanged and owned cleanup passed. This observer defect is retained as
+NOT_RUN for INSTALL-10, not a product lifecycle or model-task failure. See
+[stopped observer attempt](validation/2026-10-11/active-gui-update-final15-observer-stopped.json).
+
+**OBSERVED / latest native Windows installation:** immutable f440de1 installed and
+repeated successfully, matched 61 package files (46 Python modules, 15 resources),
+enrolled three guides for three profiles and passed native Codex project discovery.
+Global V2, configuration, PATH and prior customized bytes survived. Earlier
+foreground-restoration and isolated user-discovery failures remain retained;
+load/invoke/model tasks and FINAL15 Windows transport are not established by this
+archive. See [Windows f440de1](validation/2026-10-11/windows-cif440de1-install.json).
+
+**OBSERVED / actual native IME:** the installed f440de1 input layer observed real
+composition start, positive preedit bytes, committed result and composition end.
+Literal insertion during active composition refused without changing the native
+preedit/widget or input count. After commit, Ctrl+A selected the actual UTF16 text;
+exact Unicode insertion matched 12 bytes without clipboard mutation. Independent
+cancellation released a held Shift without the main worker calling release.
+All six cases and IMC/layout/foreground/resource/global V2 preservation passed.
+The original alphanumeric-mode attempt remains NOT_RUN. The corrected fixture
+supplied truthfully native-observed context; automatic IMM/TSF discovery, canonical
+service/model/harness tasks and latency are not proved. INPUT-02 now passes its
+exact input-separation condition. See [native IME proof](validation/2026-10-11/windows-ime-native-mode-f440de1.json)
+and [original stopped attempt](validation/2026-10-11/windows-ime-alphanumeric-stopped.json).
+
+**OBSERVED / OMP task attempt:** actual managed-project enrollment and native
+discovery passed. The subsequent configured OMP provider returned HTTP 401 before
+any guide load or tool call, so its GUI task remains NOT_RUN. Independent native
+scene/pixel readback and fixture cleanup passed. This failure is separate from the
+working Codex desktop session and its authentication; no authentication changes
+were requested or made for this attempt. See [stopped OMP task](validation/2026-10-11/omp-final12-native-gui-stopped.json).
+
+**OBSERVED / menu diagnosis:** passive XRecord confirmed that the original Edit
+click was delivered while no prior popup remained, but the popup did not open.
+Application activation timing remains an inference. A separate offline structural
+menu witness found a false positive on an ordinary document panel; semantic
+promotion was rejected and all state facts remain UNKNOWN. No confidence threshold,
+model, production provider or original failing workload was changed. See
+[passive diagnosis](validation/2026-10-11/blender-final12-menu-setup-diagnostic.json)
+and [counterexample](validation/2026-10-11/blender-pixel-menu-witness-counterexample.json).
+
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
 native, harness, installed or public-release status from another evidence level.
@@ -532,10 +608,10 @@ native, harness, installed or public-release status from another evidence level.
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
 | M1 discovery/integration | IN_PROGRESS | Codex and Hermes actual native private fixture GUI tasks pass; corrected OMP native consumer turns remain partial; OMP and production GUI coverage remain. |
-| M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
+| M2 typed input | IN_PROGRESS | Linux and Windows native input/actual IME separation observed; historical Windows restoration failure and canonical automatic IME discovery remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
-| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux install, native Windows22process-exit cases and Codex/Hermes private fixture tasks pass; OMP, latest Windows artifact and public release verification remain open. |
+| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux/Windows install, Windows22process-exit cases and FINAL12 Codex/Hermes private fixture tasks pass; FINAL15 active update/fresh harness tasks, OMP and public release verification remain open. |
 
 Reici matched-view production edits, independent visual review, Warudo/VRChat
 verification and public artifact publication/download/hash/fresh public install

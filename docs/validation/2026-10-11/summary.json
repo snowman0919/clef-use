@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T11:03:15.671235+00:00",
+  "generated_at": "2026-10-11T13:32:40.206667+00:00",
   "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
   "completion_claim": false,
   "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
@@ -2094,15 +2094,117 @@
       "artifact": "docs/validation/2026-10-11/blender-final12-pending-modal-cleanup.json",
       "sha256": "d84d7a53bf9f3bd7b56d9bcc1c7ffd251900bc54547abed4c8ca655259aefedd",
       "scope": "Actual installed MCP independent abort after oneG input leaves identified owned native modal; shutdown_idle correctly refuses. Normal180s fixture deadline invokes same-session typedcancel once, restores actual native scene and removes all owned resources;28checksPASS. Initial45s setup expired with0calls remainsNOT_RUN; no model or operation retry."
+    },
+    "stale_client_downgrade_before_fix": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/stale-client-downgrade-final12.json",
+      "sha256": "5c42f3b0a079d5c3ffa4d80fcc60f6a26958fc42bd1fd24967bed4af69822ad2",
+      "scope": "Actual genuine immutable .29 client replaced real idle FINAL12 .30 service; prepatch regression retained FAIL, no GUI/models."
+    },
+    "runtime_binding_final15_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/runtime-binding-final15-native.json",
+      "sha256": "50c8ce521a423366ba95aaf03fe4151e0faf01d089550420c92c0c95d757bd94",
+      "scope": "Actual genuine .29 client cannot replace FINAL15 .30 service; PID/starttime/endpoint preserved. Real HTTP identity matrix36/36 returns409+reload guidance; unsupported/invalid requests4/4 return400+current capabilities guidance. Old immutable client displays its original generic refusal; no GUI/models."
+    },
+    "omp_final12_gui_declaration": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-final12-native-gui-predeclaration.json",
+      "sha256": "462c435a2cfc0f3bf1f75d82636a9c4c239ec575931921112e24966be8ad47b5",
+      "scope": "Fixed native OMP managed-project GUI caller declaration, preceding one attempt; declaration alone is not execution evidence."
+    },
+    "omp_final12_native_gui_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-final12-native-gui-stopped.json",
+      "sha256": "3478bb55c8f2e2fe1319aefb7e1964b8d1b81d50da7233740183077629da58fa",
+      "scope": "Actual configured OMP primary and3auxiliary provider calls returned401 before any tool; task/load/invoke NOT_RUN. Root independent native scene/pixels unchanged and owned fixture cleanup PASS. Current Codex desktop authentication is separate."
+    },
+    "omp_managed_project_preflight": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-final11-managed-project-preflight.json",
+      "sha256": "867e03fc427642ad0f3c784f3da54d064407e893a40803ff4e4fc6f5ef4bcb46",
+      "scope": "Actual installed FINAL11 CLI managed PROJECT enrollment/discovery and native read/capabilities schema preflight, zero inference; no GUI/model task claim."
+    },
+    "blender_menu_setup_diagnostic": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-final12-menu-setup-diagnostic.json",
+      "sha256": "f82bb15d0b4ea46df10c563771bd8c9558a22e67c8913490a9ccfff2d0109bc8",
+      "scope": "Exact canonical22 workload with passive XRecord/profile:21/22, actual Edit popup absent despite delivered click. Previous-popup and guard-refusal hypotheses rejected in this capture; activation timing cause remains inferred, no threshold/source changes."
+    },
+    "blender_pixel_menu_observer_feasibility": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-pixel-menu-observer-feasibility.json",
+      "sha256": "7f0d9c94347b1ece323e5b97a3f90cd7864200f000450cafaf2811ffb6799c91",
+      "scope": "Offline inspection of actual412 raw parser objects: confidence/hierarchy/coverage absent. No VALID menu, ABSENT or production-provider claim."
+    },
+    "blender_pixel_menu_witness_counterexample": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-pixel-menu-witness-counterexample.json",
+      "sha256": "0b95c3199031d0f1f0cfc14a113cd45846a116d3d8e3360d20c12866127d2404",
+      "scope": "Fixed offline structural witness diagnostic over actual captures and synthetic counterexamples: ordinary panel false-positive rejects semantic promotion. All facts UNKNOWN; no model/GUI/input/source changes."
+    },
+    "windows_cif440de1_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-cif440de1-install.json",
+      "sha256": "43b52f603ac2537392c0c1f07fc0f972371809a79c9cd4bfa0b8b39ce8df56c4",
+      "scope": "Immutable f440de1 actual Windows fresh/repeat,61files=46Python+15resources exact,3guides/3profiles and Codex native project discovery PASS; native model/load/invoke/task NOT_RUN. GlobalV2/config/PATH/customized bytes preserved; prior path-comparison fixture failure retained. Not FINAL15 transport proof."
+    },
+    "windows_cif440de1_install_report": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-cif440de1-install-report.json",
+      "sha256": "bc05ceabd1d49c8963c6e378bf370b8cc37548bb963be7e703668396e8842d33",
+      "scope": "Detailed exact immutable f440de1 native Windows installation/discovery checks and preservation; received CRLF digest retained while repository JSON uses LF."
+    },
+    "final15_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final15-install.json",
+      "sha256": "9dc01eabe917099607661717b8cae51cc946d43defff987f61608c15c05ae949",
+      "scope": "Actual isolated complete FINAL15 archive first/repeat installation, exact source/guide hashes and26HOMEbyte preservation; full792/34 source regression. Actual transport proof separately recorded; no CI/public-release or whole-task latency claim."
+    },
+    "windows_ime_initial_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-ime-alphanumeric-stopped.json",
+      "sha256": "b4405aeb37bca366af0a58d0e345636d9623cb40aca9a4607b360a0dd9f9d5de",
+      "scope": "Original native owned Windows IMC conversion0 attempt: key2observed, no actual composition; subsequent casesNOT_RUN, allcleanup/preservationPASS. Retained before separate documented setup correction."
+    },
+    "windows_native_ime": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-ime-native-mode-f440de1.json",
+      "sha256": "74df98ba4cef158d816ba8e3f19cb2a0b92981da402415a48d7eaabaae617967",
+      "scope": "Actual immutable f440de1 Windows input-layer six-case native composition/preedit-refusal/commit/chord/exactUTF16/independentabort PASS. Own IMC/native mode readback and true native composition oracle; allcleanup/globalV2 preserved. Caller-observed context, no automaticIME/service/model/harness or latency claim."
+    },
+    "active_gui_update_final15_observer_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/active-gui-update-final15-observer-stopped.json",
+      "sha256": "5e928f422e78f13d86513c89e0af8bb6f7df55f57d48869eb0ac5bd46c97329f",
+      "scope": "Original actual .29 owned GUI model executed1localLOW_CONFIDENCE decision; raw status observer omitted desktop scope and got403 before model, failed to stop. No update/abort/reload; INSTALL10 NOT_RUN. Native input0/state/pixels/owned cleanupPASS; observer defect retained."
+    },
+    "codex_final15_native_gui": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/codex-final15-native-gui.json",
+      "sha256": "36f151f2bcc1f271394882c0ec2c7e8dc651cc27cb56397fa99f7d1e1a88c3d7",
+      "scope": "Actual native Codex/gpt6.1sol FINAL15 discovers/loads all3 exactinstalledguides, actualcapabilities/current4toolschemas and1guardedCubeX+2operation;4nativeinputs/SUCCEEDED/sessionNEEDS_REPLAN, independentRNA9+visual and15cleanupPASS. Exactfullguidebytes audit resolves stripped trailingLF hash distinction. Wholegoal/production/performance NOT_RUN."
+    },
+    "codex_final15_guide_bytes": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/codex-final15-guide-bytes-audit.json",
+      "sha256": "b45f1940b1bd16010694418d3b8f6478403ee63cbd548a683b532f32bb1714fb",
+      "scope": "Read-only audit of actually executed native tool message bytes: complete unmodified installed SKILL bytes including finalLF contained for all3guides, extractedSHAequalspackaged. Previous trimmed body hash retained and explained. No new model or tool calls."
+    },
+    "hermes_final15_native_gui": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/hermes-final15-native-gui.json",
+      "sha256": "28c45444c888358b16b1956eb324421e12439092d394bf2c20aafe7731708968",
+      "scope": "Actual native configured Hermes FINAL15 resourcesfalse/promptsfalse: completeexactcore/Blender/3references in native modelmessages before1guardedCubeX+2run,4nativeinputs/SUCCEEDED/sessionNEEDS_REPLAN; rootRNA9/visual/cleanup16PASS. Unavailableexecute_code toolerror1 retained(actualcode0), historicalFINAL12terminal1separate. Wholegoal/production/100ms NOT_RUN."
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Immutable CI26d9252 native managed installation and fresh11/genuine-update11 process-exit crash-resumePASS; globalV2/config/PATH/user bytes preserved. Earlier foreground-restorationFAIL and nativeCodex USER-discoveryFAIL retained; PROJECT3guidesPASS. NativeHermes/OMP unavailable, formalactiveIME/all-platformGUI and latestf440de1 Windows install NOT_RUN.",
-    "harness_gui_tasks": "Codex and Hermes actual native FINAL12 controlled API-assisted numeric GUI tasks TASK_VERIFIED; original default capabilities remain NONE/BLOCKED. OMP actual GUI task NOT_RUN pending managed-project native consumer. Hermes resources-disabled taskPASS includes one refused unavailable-tool request. Historical failures remain retained. Whole-goal ASSESS, full model/menu accuracy and latency workload remain NOT_RUN/FAIL separately.",
+    "windows": "Immutable f440de1 native installation/CodexPROJECTdiscovery PASS. Six-case installed native IME input-layer composition/refusal/commit/chord/exactUTF16/independentabort PASS with true caller-observed context; original alphanumeric-mode NOT_RUN and historical foregroundFAIL retained. Automatic IMM/TSF discovery, native Hermes/OMP, service/model/harness GUI and FINAL15 Windows transport NOT_RUN.",
+    "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Corrected existingCI38132441002 all15platform/Pythonbuilds+assemblySUCCESS; immutableassembledLinuxinstall andnativeWindowsmanagedlifecycleverified. BranchdeploySKIPPEDbyexistingpolicy; publicupload/download/freshpublicinstallNOT_RUN."
+    "public_release": "Immutable f440de1 CI38137115873 all15platform/Pythonbuilds+assembly SUCCESS and Linux/Windows installation verified. Existing branch policy skipped deployment. FINAL15 compatibility source/local archive not yet verified by immutableCI; public upload/download/freshpublicinstall NOT_RUN."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -2112,8 +2214,8 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 30,
-    "not_run": 12,
+    "pass": 32,
+    "not_run": 10,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -2121,7 +2223,7 @@
       "GUIDE-03": "FAIL",
       "GUIDE-04": "NOT_RUN",
       "CAP-01": "PASS",
-      "CAP-02": "NOT_RUN",
+      "CAP-02": "PASS",
       "CAP-03": "PASS",
       "INSTALL-01": "PASS",
       "INSTALL-02": "PASS",
@@ -2138,7 +2240,7 @@
       "HARNESS-03": "PASS",
       "HARNESS-04": "PASS",
       "INPUT-01": "PASS",
-      "INPUT-02": "NOT_RUN",
+      "INPUT-02": "PASS",
       "INPUT-03": "PASS",
       "INPUT-04": "PASS",
       "INPUT-05": "NOT_RUN",
@@ -2218,6 +2320,23 @@
     "windows-installer-crash-phases-report-ci26d9252.json",
     "windows-installer-crash-phases-predeclaration-ci26d9252.json",
     "hermes-final12-resources-disabled.json",
-    "blender-final12-pending-modal-cleanup.json"
+    "blender-final12-pending-modal-cleanup.json",
+    "stale-client-downgrade-final12.json",
+    "runtime-binding-final15-native.json",
+    "omp-final12-native-gui-predeclaration.json",
+    "omp-final12-native-gui-stopped.json",
+    "omp-final11-managed-project-preflight.json",
+    "blender-final12-menu-setup-diagnostic.json",
+    "blender-pixel-menu-observer-feasibility.json",
+    "blender-pixel-menu-witness-counterexample.json",
+    "windows-cif440de1-install.json",
+    "windows-cif440de1-install-report.json",
+    "final15-install.json",
+    "windows-ime-alphanumeric-stopped.json",
+    "windows-ime-native-mode-f440de1.json",
+    "active-gui-update-final15-observer-stopped.json",
+    "codex-final15-native-gui.json",
+    "codex-final15-guide-bytes-audit.json",
+    "hermes-final15-native-gui.json"
   ]
 }

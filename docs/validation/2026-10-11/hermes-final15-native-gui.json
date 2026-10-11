@@ -1,0 +1,272 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL15",
+  "scope": "Actual native Hermes discovery/load/schema/invoke with controlled API_ASSISTED factory Blender; no production-provider claim",
+  "artifact": {
+    "filename": "clef-use-0.1.30-linux-x86_64-py311.zip",
+    "sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c"
+  },
+  "runtime": {
+    "runtime_version": "0.1.30",
+    "api_schema_version": 1,
+    "runtime_protocol_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+  },
+  "source_sha256": {
+    "codex_wrapper": "7aeab59b78c72776e094bc57e389e4c350552edab436a047a20f76d079fe211a",
+    "codex_driver": "ceda21e50f5a26903b57c3b09970432bc9b9bcf8f22572d24454b1aeace0d018",
+    "hermes_wrapper": "13eafaf49320b4e3cd632ca7770abdc68663b71a94701a4451fa4efba1d5f346",
+    "hermes_driver": "4042a438251160c8dd996c6a8d742d9046a9fcab82394ae36b34fcd03075ff40",
+    "mcp_guard": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f",
+    "fixture_source": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce"
+  },
+  "installed_guide_sha256": {
+    "clef-use": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+    "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+    "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+  },
+  "native_harness": {
+    "model": "qwen3.8-flash-next",
+    "provider": "custom",
+    "model_case_invocations": 1,
+    "api_calls": 7,
+    "completed": true,
+    "failed": false,
+    "turn_exit_reason": "text_response(finish_reason=stop)",
+    "preflight_status": "PASS",
+    "exact_installed_schemas": true,
+    "native_generated_prompt": true,
+    "executed_MCP_config": {
+      "resources": false,
+      "prompts": false,
+      "include": [
+        "computer_capabilities",
+        "computer_run",
+        "computer_status",
+        "computer_abort"
+      ]
+    },
+    "native_available_tools": [
+      "mcp__clef_use__computer_abort",
+      "mcp__clef_use__computer_capabilities",
+      "mcp__clef_use__computer_run",
+      "mcp__clef_use__computer_status",
+      "skill_view",
+      "skills_list"
+    ],
+    "full_exact_packaged_guide_and_reference_delivery": [
+      {
+        "skill": "clef-use",
+        "relative_file": "SKILL.md",
+        "tool_result_index": 0,
+        "model_message_index": 2,
+        "packaged_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_content_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_content_equals_exact_packaged_file_bytes": true,
+        "model_received_exact_native_result": true,
+        "before_run": true
+      },
+      {
+        "skill": "clef-use-blender",
+        "relative_file": "SKILL.md",
+        "tool_result_index": 1,
+        "model_message_index": 3,
+        "packaged_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "native_content_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "native_content_equals_exact_packaged_file_bytes": true,
+        "model_received_exact_native_result": true,
+        "before_run": true
+      },
+      {
+        "skill": "clef-use",
+        "relative_file": "references/API_BASELINE.md",
+        "tool_result_index": 2,
+        "model_message_index": 5,
+        "packaged_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "native_content_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "native_content_equals_exact_packaged_file_bytes": true,
+        "model_received_exact_native_result": true,
+        "before_run": true
+      },
+      {
+        "skill": "clef-use",
+        "relative_file": "references/LIVE_API.md",
+        "tool_result_index": 3,
+        "model_message_index": 6,
+        "packaged_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "native_content_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "native_content_equals_exact_packaged_file_bytes": true,
+        "model_received_exact_native_result": true,
+        "before_run": true
+      },
+      {
+        "skill": "clef-use-blender",
+        "relative_file": "references/OPERATIONS.md",
+        "tool_result_index": 4,
+        "model_message_index": 7,
+        "packaged_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "native_content_sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "native_content_equals_exact_packaged_file_bytes": true,
+        "model_received_exact_native_result": true,
+        "before_run": true
+      }
+    ],
+    "tool_result_order": [
+      {
+        "tool": "skill_view",
+        "relative_file": null
+      },
+      {
+        "tool": "skill_view",
+        "relative_file": null
+      },
+      {
+        "tool": "skill_view",
+        "relative_file": "references/API_BASELINE.md"
+      },
+      {
+        "tool": "skill_view",
+        "relative_file": "references/LIVE_API.md"
+      },
+      {
+        "tool": "skill_view",
+        "relative_file": "references/OPERATIONS.md"
+      },
+      {
+        "tool": "mcp__clef_use__computer_capabilities",
+        "relative_file": null
+      },
+      {
+        "tool": "mcp__clef_use__computer_run",
+        "relative_file": null
+      },
+      {
+        "tool": "mcp__clef_use__computer_status",
+        "relative_file": null
+      }
+    ],
+    "successful_native_tool_results": 8,
+    "tool_selection_errors": [
+      {
+        "tool": "execute_code",
+        "count": 1,
+        "native_refusal": "Tool does not exist; exact six available tools listed",
+        "actual_code_executions": 0
+      }
+    ],
+    "retries": 0,
+    "caller_exit_code": 0
+  },
+  "prerequisite_gate": {
+    "receipt_created_only_after_observed_full_core_Blender_then_real_capabilities": true,
+    "mode0600": true,
+    "actual_MCP_gate_enforced_before_acceptance": true,
+    "capabilities_before_run": true,
+    "accepted_operation_permits": 1,
+    "callback_is_observation_not_enforcement": true
+  },
+  "operation": {
+    "family": "numeric_transform",
+    "target": "Cube",
+    "operation": "translate",
+    "axis": "X",
+    "space": "GLOBAL",
+    "unit": "METERS",
+    "amount": 2,
+    "commit": true,
+    "max_steps": 4,
+    "confidence_threshold": 0.9,
+    "accepted_operation_calls": 1,
+    "typed_status": "SUCCEEDED",
+    "native_acknowledged_input_count": 4,
+    "session_status": "NEEDS_REPLAN",
+    "modal_authority_remaining": false,
+    "access_level": "API_ASSISTED",
+    "transitions": [
+      "requires_verified",
+      "owned_modal_entered",
+      "preview_verified",
+      "committed",
+      "readback_verified"
+    ],
+    "after_run": "one own-session status only"
+  },
+  "root_independent_fresh_RNA_readback": {
+    "passed": true,
+    "checks": {
+      "exact_cube_translation_and_other_transforms": true,
+      "selection_unchanged": true,
+      "mode_unchanged": true,
+      "space_unchanged": true,
+      "unit_unchanged": true,
+      "view_revision_unchanged": true,
+      "no_modal": true,
+      "service_idle": true,
+      "runtime_contract_matches": true
+    },
+    "before_X": 0.0,
+    "after_X": 2.0,
+    "visual_review": "PASS: root viewed fresh after pixels; image private"
+  },
+  "final_native_answer": {
+    "sha256": "326d94c2e12bec74e14222e2c619f962dbac135cf0739cc8faf2dc54f0e61398",
+    "reports_local_SUCCEEDED_and_four_inputs": true,
+    "reports_NEEDS_REPLAN_and_separate_whole_goal_uncertainty": true,
+    "default_provider_NONE_BLOCKED_fixture_only": true,
+    "no_false_COMPLETED_or_production_READY": true
+  },
+  "cleanup": {
+    "worker_finished": true,
+    "owned_inputs_empty": true,
+    "service_idle": true,
+    "endpoint_removed_reported": true,
+    "endpoint_absent_fresh": true,
+    "server_thread_stopped": true,
+    "server_socket_closed": true,
+    "signals_restored": true,
+    "children_all_exited": true,
+    "xvfb_socket_removed_reported": true,
+    "xvfb_socket_absent_fresh": true,
+    "release_error_absent": true,
+    "outer_report_passed": true,
+    "service_report_passed": true,
+    "owned_auth_metadata_absent": true,
+    "production_blender_alive": true
+  },
+  "overall_GUI_task_verified": true,
+  "tool_sequence_all_successful": false,
+  "whole_goal_ASSESS": "NOT_RUN: fixture has no perception/decision backend; task verification uses independent RNA",
+  "default_production_provider": {
+    "provider": "NONE",
+    "observation_access_level": "PIXELS_ONLY",
+    "trusted_application_evidence": "UNAVAILABLE",
+    "provider_configuration_path": "UNAVAILABLE",
+    "operation_availability": "BLOCKED",
+    "live_probe": "NOT_PROBED",
+    "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+    "native_state": "Window identity may be available; desktop permissions are not probed."
+  },
+  "elapsed_seconds_descriptive": 61.94351770495996,
+  "performance": "No speedup/latency/p95 claim; single native model-case elapsed only",
+  "evidence_sha256": {
+    "native_summary": "3d1ef0527631296cc959238ae0e3bea8a84a292d98026c6e11dd2a66b3fcc543",
+    "native_model_result": "d9bd8c05383a47aff00ca9093f87f77433b0f1904131d4d53de31a1d54610f51",
+    "native_tool_results": "1e7d04977abc83e06a99a021e2a684e45e306cadafa92dae0d09ed622f6534c8",
+    "executed_MCP_config": "6cfff0c05133167358da8789e6c4be45f6808090da27921ac8586872cabede40",
+    "prerequisites": "20875aad8630396f054911c1a5e6695c560ba30fa575571b26c6392539714516",
+    "operation_receipt": "c9295b007597d7aa1f43e6feee1e2235193e5b7a2603694315b028efbda2d6bd",
+    "installed_state_proof": "b6ab20c80498ed78d0ea932e65ff31830bfc64d5f0c740b507b05001201eedb3",
+    "root_external_readback": "00265220a9da53a7639a02f54e6985eb0f67a1f8b37fef917ff536a5c2dcc9e4",
+    "fixture_report": "3b25213c8fce618b447400cecbf87437a83f6b8353d09da72a6e4b367130aa23",
+    "fixture_service_report": "0e2c32ba3e8ee7bf9df99933641cfc01bd63fca813ee5726589600daa11b6fea",
+    "root_fresh_after_pixels": "e838d234b425f865f5442fade511092a7372cd7a8ce6b63fb98a5aa952a01d9c"
+  },
+  "prior_history": {
+    "FINAL12_Hermes_unavailable_terminal_attempts": 1,
+    "FINAL12_actual_terminal_executions": 0,
+    "distinct_from_FINAL15_execute_code_error": true,
+    "prior_proofs_not_relabelled": true
+  },
+  "privacy": "No private paths, sockets, tokens, process/session identifiers, raw transcripts, screenshots or assets included",
+  "received_native_artifact_sha256": "58778a39a4ff231cc66c4bc7a37c92298bc3871e54ed6f0a0e3532363e219f7b"
+}
