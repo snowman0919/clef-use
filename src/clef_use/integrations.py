@@ -17,6 +17,7 @@ from pathlib import Path
 
 from filelock import FileLock
 from packaging.specifiers import SpecifierSet
+from ruamel.yaml.error import YAMLError
 
 from .harness import (
     atomic_write,
@@ -232,17 +233,22 @@ def _load_manifest(layout: dict) -> dict:
     return data
 
 
+def _codex_disabled_paths(data: dict) -> set[Path]:
+    return {
+        Path(item["path"]).expanduser().resolve()
+        for item in data.get("skills", {}).get("config", [])
+        if item.get("enabled") is False and item.get("path")
+    }
+
+
 def _disabled(layout: dict, original: str, names: list[str]) -> list[str]:
     data = read_config(layout["harness"], original)
     disabled = []
     if layout["harness"] == "codex":
-        for item in data.get("skills", {}).get("config", []):
-            if item.get("enabled") is False:
-                path = Path(item.get("path", "")).expanduser()
-                for name in names:
-                    target = layout["root"] / name
-                    if path.resolve() in (target.resolve(), (target / "SKILL.md").resolve()):
-                        disabled.append(name)
+        paths = _codex_disabled_paths(data)
+        disabled = [
+            name for name in names if (layout["root"] / name / "SKILL.md").resolve() in paths
+        ]
     elif layout["harness"] == "hermes":
         skills = data.get("skills", {}) or {}
         blocked = set(skills.get("disabled", []))
@@ -266,11 +272,57 @@ def _disabled(layout: dict, original: str, names: list[str]) -> list[str]:
     return sorted(set(disabled))
 
 
-def _shadowed(layout: dict, names: list[str]) -> list[dict]:
-    cwd = Path(layout.get("project") or Path.cwd())
+def _hermes_sources(layout: dict, original: str, cwd: Path) -> list[Path]:
+    settings = read_config("hermes", original).get("skills") or {}
+
+    def entries(raw):
+        if isinstance(raw, str):
+            raw = [raw]
+        if not isinstance(raw, list):
+            return []
+        return [str(item).strip() for item in raw if str(item).strip()]
+
     candidates = []
+    create = settings.get("create_dir")
+    external = entries(settings.get("external_dirs"))
+    if isinstance(create, str) and create.strip():
+        external.insert(0, create.strip())
+    for entry in external:
+        path = Path(os.path.expandvars(entry)).expanduser()
+        path = (path if path.is_absolute() else layout["config"].parent / path).resolve()
+        if path.is_dir():
+            candidates.append(path)
+    if settings.get("project_discovery") is not False:
+        trusted = {
+            Path(os.path.expandvars(entry)).expanduser().resolve()
+            for entry in entries(settings.get("trusted_project_dirs"))
+        }
+        project = layout.get("project")
+        if project is None:
+            terminal = os.environ.get("TERMINAL_CWD", "").strip()
+            configured = Path(terminal).expanduser() if terminal else None
+            project = configured if configured is not None and configured.is_dir() else cwd
+        project = Path(project).resolve()
+        for _ in range(64):
+            if (project / ".git").exists():
+                if project != Path.home().resolve() and project in trusted:
+                    candidates.extend(
+                        project / source / "skills" for source in (".hermes", ".agents")
+                    )
+                break
+            if project.parent == project:
+                break
+            project = project.parent
+    return candidates
+
+
+def _shadowed(layout: dict, names: list[str], original: str) -> list[dict]:
+    cwd = Path(layout.get("project") or Path.cwd())
+    candidates = [layout["root"]]
     if layout["harness"] == "codex" and layout["scope"] == "user":
         candidates.append(cwd / ".agents/skills")
+    elif layout["harness"] == "hermes":
+        candidates.extend(_hermes_sources(layout, original, cwd))
     elif layout["harness"] == "omp":
         settings = _omp_settings(layout["config"].parent).get("skills") or {}
         if settings.get("enableAgentsUser", True):
@@ -282,13 +334,112 @@ def _shadowed(layout: dict, names: list[str]) -> list[dict]:
         if settings.get("enablePiProject", True):
             candidates.append(cwd / ".omp/skills")
     result = []
+    hermes = layout["harness"] == "hermes"
+    disabled_paths = (
+        _codex_disabled_paths(read_config("codex", original))
+        if layout["harness"] == "codex"
+        else set()
+    )
+    excluded = {
+        ".git",
+        ".github",
+        ".hub",
+        ".archive",
+        ".curator_backups",
+        ".locks",
+        ".venv",
+        "venv",
+        "node_modules",
+        "site-packages",
+        "__pycache__",
+        ".tox",
+        ".nox",
+        ".pytest_cache",
+        ".mypy_cache",
+        ".ruff_cache",
+    }
+    support = {"references", "templates", "assets", "scripts"}
+    flat_names = {name + ".md" for name in names}
+    scanned = set()
     for root in candidates:
-        if root.resolve() == layout["root"].resolve():
+        if root.resolve() in scanned:
             continue
-        for name in names:
-            path = root / name / "SKILL.md"
-            if path.exists():
-                result.append({"name": name, "path": str(path), "realpath": str(path.resolve())})
+        scanned.add(root.resolve())
+        if hermes:
+            # Native explicit lookup of legacy Markdown has separate exclusions
+            # from the SKILL.md catalog, including files in archived directories.
+            for path in root.rglob("*.md"):
+                if path.name not in flat_names or not path.is_file():
+                    continue
+                relative = path.relative_to(root)
+                packaged = any(
+                    (root.joinpath(*relative.parts[:depth]) / "SKILL.md").is_file()
+                    for depth in range(1, len(relative.parts))
+                )
+                supporting = any(
+                    parent.name in support and (parent.parent / "SKILL.md").exists()
+                    for parent in path.parents
+                )
+                if not packaged and not supporting:
+                    result.append(
+                        {"name": path.stem, "path": str(path), "realpath": str(path.resolve())}
+                    )
+        visited = set()
+        for directory, children, files in os.walk(root, followlinks=True):
+            parent = Path(directory)
+            resolved = parent.resolve()
+            if resolved in visited:
+                children[:] = []
+                continue
+            visited.add(resolved)
+            if hermes:
+                children[:] = [
+                    child
+                    for child in children
+                    if child not in excluded and not ("SKILL.md" in files and child in support)
+                ]
+            children.sort()
+            if "SKILL.md" not in files:
+                continue
+            path = parent / "SKILL.md"
+            if path.resolve() in disabled_paths:
+                continue
+            name = parent.name
+            try:
+                with path.open(encoding="utf-8-sig") as stream:
+                    if stream.readline().strip() == "---":
+                        header = []
+                        for line in stream:
+                            if line.strip() in ("---", "..."):
+                                try:
+                                    metadata = read_config("hermes", "".join(header))
+                                    if isinstance(metadata, dict):
+                                        name = metadata.get("name", name)
+                                except YAMLError:
+                                    if hermes:
+                                        for entry in header:
+                                            key, separator, value = entry.partition(":")
+                                            if separator and key.strip() == "name":
+                                                name = value.strip()
+                                break
+                            header.append(line)
+            except (OSError, UnicodeError) as error:
+                result.append(
+                    {
+                        "name": None,
+                        "path": str(path),
+                        "realpath": str(path.resolve()),
+                        "error": "skill metadata unreadable",
+                        "error_type": type(error).__name__,
+                    }
+                )
+                continue
+            aliases = [parent.name, name] if hermes else [name]
+            for alias in names:
+                if alias in aliases and resolved != (layout["root"] / alias).resolve():
+                    result.append(
+                        {"name": alias, "path": str(path), "realpath": str(path.resolve())}
+                    )
     return result
 
 
@@ -426,11 +577,11 @@ def _integrate(
     disabled = _disabled(layout, original, names)
     if disabled:
         return {"status": "DISABLED", "harness": layout["harness"], "skills": disabled}
-    shadows = _shadowed(layout, names)
+    shadows = _shadowed(layout, names, original)
     if shadows:
         return {
             "status": "CONFLICT",
-            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "reason": "configured skill source may shadow or duplicate this target; preserved",
             "shadowed": shadows,
         }
     previous = server_entry(layout["harness"], original)

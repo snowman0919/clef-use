@@ -45,6 +45,26 @@ clef-use abort
 clef-use update
 ```
 
+Repeat enrollment ignores active-source aliases of the same complete managed
+skill directory. A separate resource directory with the same skill name still
+reports a conflict, including a symlink of only `SKILL.md`, because relative
+references can differ. User files and configuration remain preserved.
+Duplicate names declared in `SKILL.md` are also reported within the selected
+source and other active sources, even when nested directory names differ.
+Hermes checks configured create/external directories and the current trusted Git
+project's `.hermes/skills` and `.agents/skills`. Disabled project discovery stays
+disabled. Without an explicit project, `TERMINAL_CWD` is trimmed and home-expanded
+and used only when it names an existing directory; otherwise the launch directory
+is used. These preservation checks report possible conflicts; native discovery
+and loading remain separate verification stages.
+Hermes collision checks also recognize directory-name aliases and legacy named
+Markdown guides. Package support files are not independent guides. Excluded
+cache/dependency folders are skipped by the `SKILL.md` catalog, while explicit
+legacy Markdown remains checked wherever native lookup can load it. Malformed
+frontmatter follows Hermes's name fallback.
+Codex disables individual `SKILL.md` entries. A disabled project file does not
+conflict with the active managed guide; a directory entry alone does not disable it.
+
 Grant Screen Recording and Accessibility to the actual macOS terminal/harness and restart it. Linux requires an accessible graphical display; Wayland may restrict capture/input. Windows packaging is a CI target, while actual ML/GUI compatibility remains experimental. Acceleration detection does not establish model support.
 
 If doctor fails, distinguish permissions, missing snapshots, ML dependencies and MCP startup errors. self-test checks offline control flow. Set CLEF_USE_PYTHON if the installer cannot find a compatible interpreter. LOW_CONFIDENCE and NEEDS_REPLAN require planner intervention; ERROR is not completion.

@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+- Ignore active-source aliases of the same complete managed skill directory
+  during repeat enrollment; separate resource roots still report conflicts,
+  including aliases of only SKILL.md with different relative references.
+- Detect duplicate declared skill names in selected and other active skill
+  sources, including nested directories with different folder names; preserve
+  conflicting guides and configuration.
+- Include Hermes trusted current-project sources and configured create/external
+  directories in enrollment collision checks, preserving inactive project discovery.
+- Match Hermes terminal working-directory validation: trim whitespace, expand
+  the home directory, and ignore missing directories when no project is explicit.
+- Recognize Hermes directory aliases, malformed-frontmatter name recovery and
+  legacy Markdown guides without treating package support files as active guides.
+- Ignore disabled Codex SKILL.md copies in collision reports and retain active
+  guides when a configuration entry targets only their directory.
 - Require prospective policy/eligibility evidence in reaction scorers; unknown
   coverage remains unmeasured and cannot pass release gates. Eligibility counts
   include verified opportunities independently of attempts and deadlines.

@@ -320,6 +320,291 @@ def test_project_override_is_preserved_and_reported(installation, tmp_path):
     assert override.read_text() == "project customized guide"
 
 
+@pytest.mark.parametrize("harness", ("codex", "omp"))
+def test_project_alias_of_managed_guide_does_not_block_reenrollment(
+    installation, tmp_path, harness
+):
+    home, command = installation
+    project = tmp_path / "project"
+    project.mkdir()
+    initial = integrations.integrate(harness, command=command, project=project)
+    assert initial["status"] == "INSTALLED"
+    target = home / ".agents/skills/clef-use"
+    alias = project / ".agents/skills/clef-use"
+    alias.parent.mkdir(parents=True)
+    alias.symlink_to(target, target_is_directory=True)
+    before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    preview = integrations.integrate(harness, command=command, project=project, dry_run=True)
+    assert preview["status"] == "PREVIEW"
+    assert not preview["changed"]
+    repeated = integrations.integrate(harness, command=command, project=project)
+    assert repeated["status"] == "UNCHANGED"
+    assert alias.is_symlink() and alias.resolve() == target
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+    alias.unlink()
+    alias.mkdir()
+    separate = alias / "SKILL.md"
+    separate.symlink_to(target / "SKILL.md")
+    reference = alias / "references/API_BASELINE.md"
+    reference.parent.mkdir()
+    reference.write_text("Project reference customization")
+    result = integrations.integrate(harness, command=command, project=project, dry_run=True)
+    assert result["status"] == "CONFLICT"
+    assert result["shadowed"] == [
+        {"name": "clef-use", "path": str(separate), "realpath": str(target / "SKILL.md")}
+    ]
+    assert separate.is_symlink()
+    assert reference.read_text() == "Project reference customization"
+    separate.unlink()
+    separate.write_bytes((target / "SKILL.md").read_bytes())
+    result = integrations.integrate(harness, command=command, project=project, dry_run=True)
+    assert result["status"] == "CONFLICT"
+    assert result["shadowed"] == [
+        {"name": "clef-use", "path": str(separate), "realpath": str(separate)}
+    ]
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+
+
+@pytest.mark.parametrize("harness", integrations.HARNESSES)
+def test_declared_duplicate_in_managed_source_is_preserved(installation, tmp_path, harness):
+    home, command = installation
+    project = tmp_path / "project"
+    project.mkdir()
+    initial = integrations.integrate(harness, command=command, project=project)
+    assert initial["status"] == "INSTALLED"
+    root = integrations._layout(harness, project=project)["root"]
+    duplicate = root / "category/duplicate-clef/SKILL.md"
+    duplicate.parent.mkdir(parents=True)
+    duplicate.write_text(
+        '---\nname: "clef-use"\ndescription: Independently customized guide\n---\nUser content\n'
+    )
+    before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    for dry_run in (True, False):
+        result = integrations.integrate(harness, command=command, project=project, dry_run=dry_run)
+        assert result["status"] == "CONFLICT"
+        assert result["shadowed"] == [
+            {"name": "clef-use", "path": str(duplicate), "realpath": str(duplicate)}
+        ]
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+
+
+@pytest.mark.parametrize("source", (".agents", ".hermes"))
+def test_hermes_reports_only_trusted_active_project_overrides(installation, tmp_path, source):
+    home, command = installation
+    project = tmp_path / "project"
+    (project / ".git").mkdir(parents=True)
+    nested = project / "nested"
+    nested.mkdir()
+    initial = integrations.integrate("hermes", command=command, project=nested)
+    assert initial["status"] == "INSTALLED"
+    config = home / ".hermes/config.yaml"
+    original = config.read_text()
+    override = project / source / "skills/clef-use/SKILL.md"
+    override.parent.mkdir(parents=True)
+    override.write_text("---\nname: clef-use\ndescription: Project guide\n---\nUser content\n")
+    for enabled, trusted in ((False, True), (True, False), (True, True)):
+        trust = (str(project) if source == ".hermes" else [str(project)]) if trusted else []
+        config.write_text(
+            original
+            + f"\nskills:\n  project_discovery: {str(enabled).lower()}\n"
+            + "  trusted_project_dirs: "
+            + json.dumps(trust)
+            + "\n"
+        )
+        before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+        result = integrations.integrate("hermes", command=command, project=nested, dry_run=True)
+        assert result["status"] == ("CONFLICT" if enabled and trusted else "PREVIEW")
+        if enabled and trusted:
+            assert result["shadowed"] == [
+                {"name": "clef-use", "path": str(override), "realpath": str(override)}
+            ]
+        after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+        assert after == before
+        assert override.read_text().endswith("User content\n")
+
+
+@pytest.mark.parametrize("terminal", ("missing", "padded", "home-relative"))
+def test_hermes_terminal_cwd_uses_only_existing_expanded_directories(
+    installation, tmp_path, monkeypatch, terminal
+):
+    home, command = installation
+    unrelated = tmp_path / "launch-directory"
+    unrelated.mkdir()
+    monkeypatch.chdir(unrelated)
+    monkeypatch.delenv("TERMINAL_CWD", raising=False)
+    assert integrations.integrate("hermes", command=command)["status"] == "INSTALLED"
+    project = home / "trusted-project"
+    (project / ".git").mkdir(parents=True)
+    override = project / ".agents/skills/clef-use/SKILL.md"
+    override.parent.mkdir(parents=True)
+    override.write_text("---\nname: clef-use\ndescription: Project guide\n---\nUser content\n")
+    config = home / ".hermes/config.yaml"
+    config.write_text(
+        config.read_text()
+        + "\nskills:\n  trusted_project_dirs: "
+        + json.dumps([str(project)])
+        + "\n"
+    )
+    monkeypatch.setenv(
+        "TERMINAL_CWD",
+        {
+            "missing": str(project / "missing-subdir"),
+            "padded": "  " + str(project) + "  ",
+            "home-relative": "~/trusted-project",
+        }[terminal],
+    )
+    before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    result = integrations.integrate("hermes", command=command, dry_run=True)
+    assert result["status"] == ("PREVIEW" if terminal == "missing" else "CONFLICT")
+    if terminal != "missing":
+        assert result["shadowed"] == [
+            {"name": "clef-use", "path": str(override), "realpath": str(override)}
+        ]
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+
+
+@pytest.mark.parametrize(
+    "relative,header,package,expected",
+    [
+        ("clef-use/SKILL.md", "name: other-guide", False, "CONFLICT"),
+        ("duplicate-clef/SKILL.md", "name: clef-use\ndescription: [", False, "CONFLICT"),
+        ("other/references/clef-use/SKILL.md", "name: clef-use", True, "PREVIEW"),
+        ("other/templates/clef-use/SKILL.md", "name: clef-use", True, "PREVIEW"),
+        ("other/assets/clef-use/SKILL.md", "name: clef-use", True, "PREVIEW"),
+        ("other/scripts/clef-use/SKILL.md", "name: clef-use", True, "PREVIEW"),
+        (".git/clef-use/SKILL.md", "name: clef-use", False, "PREVIEW"),
+        ("node_modules/clef-use/SKILL.md", "name: clef-use", False, "PREVIEW"),
+        ("references/clef-use/SKILL.md", "name: clef-use", False, "CONFLICT"),
+        ("clef-use.md", "name: other-guide", False, "CONFLICT"),
+        ("other/clef-use.md", "name: clef-use", True, "PREVIEW"),
+        (".archive/clef-use.md", "name: other-guide", False, "CONFLICT"),
+        (".git/clef-use.md", "name: other-guide", False, "CONFLICT"),
+        ("node_modules/clef-use.md", "name: other-guide", False, "CONFLICT"),
+    ],
+)
+def test_hermes_loadable_aliases_exclude_package_support_files(
+    installation, tmp_path, relative, header, package, expected
+):
+    home, command = installation
+    project = tmp_path / "trusted-project"
+    (project / ".git").mkdir(parents=True)
+    assert (
+        integrations.integrate("hermes", command=command, project=project)["status"] == "INSTALLED"
+    )
+    config = home / ".hermes/config.yaml"
+    config.write_text(
+        config.read_text()
+        + "\nskills:\n  trusted_project_dirs: "
+        + json.dumps([str(project)])
+        + "\n"
+    )
+    root = project / ".agents/skills"
+    candidate = root / relative
+    candidate.parent.mkdir(parents=True)
+    candidate.write_text("---\n" + header + "\n---\nUser content\n")
+    if package:
+        (root / "other/SKILL.md").write_text("---\nname: other\n---\nOther guide\n")
+    before = {
+        str(p): p.read_bytes() for tree in (home, project) for p in tree.rglob("*") if p.is_file()
+    }
+    result = integrations.integrate("hermes", command=command, project=project, dry_run=True)
+    assert result["status"] == expected
+    if expected == "CONFLICT":
+        assert result["shadowed"] == [
+            {"name": "clef-use", "path": str(candidate), "realpath": str(candidate)}
+        ]
+    after = {
+        str(p): p.read_bytes() for tree in (home, project) for p in tree.rglob("*") if p.is_file()
+    }
+    assert after == before
+
+
+@pytest.mark.parametrize("managed", (False, True))
+@pytest.mark.parametrize("file_entry", (False, True))
+def test_codex_disables_individual_skill_files_without_disabling_directories(
+    installation, tmp_path, managed, file_entry
+):
+    home, command = installation
+    project = tmp_path / "project"
+    project.mkdir()
+    assert (
+        integrations.integrate("codex", command=command, project=project)["status"] == "INSTALLED"
+    )
+    target = home / ".agents/skills/clef-use" if managed else project / ".agents/skills/clef-use"
+    if not managed:
+        target.mkdir(parents=True)
+        (target / "SKILL.md").write_text("---\nname: clef-use\n---\nProject guide\n")
+    disabled = target / "SKILL.md" if file_entry else target
+    config = home / ".codex/config.toml"
+    config.write_text(
+        config.read_text()
+        + "\n[[skills.config]]\npath = "
+        + json.dumps(str(disabled))
+        + "\nenabled = false\n"
+    )
+    before = {
+        str(p): p.read_bytes() for tree in (home, project) for p in tree.rglob("*") if p.is_file()
+    }
+    expected = (
+        "DISABLED" if managed and file_entry else "PREVIEW" if managed or file_entry else "CONFLICT"
+    )
+    result = integrations.integrate("codex", command=command, project=project, dry_run=True)
+    assert result["status"] == expected
+    after = {
+        str(p): p.read_bytes() for tree in (home, project) for p in tree.rglob("*") if p.is_file()
+    }
+    assert after == before
+
+
+@pytest.mark.parametrize("setting", ("create_dir", "external_dirs"))
+def test_hermes_preserves_configured_relative_source_duplicates(installation, monkeypatch, setting):
+    home, command = installation
+    assert integrations.integrate("hermes", command=command)["status"] == "INSTALLED"
+    config = home / ".hermes/config.yaml"
+    monkeypatch.setenv("CLEF_TEST_SKILL_SOURCE", "more-skills")
+    config.write_text(
+        config.read_text() + f'\nskills:\n  {setting}: "${{CLEF_TEST_SKILL_SOURCE}}"\n'
+    )
+    duplicate = config.parent / "more-skills/duplicate-clef/SKILL.md"
+    duplicate.parent.mkdir(parents=True)
+    duplicate.write_text("---\nname: clef-use\ndescription: External guide\n---\nUser content\n")
+    before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    result = integrations.integrate("hermes", command=command, dry_run=True)
+    assert result["status"] == "CONFLICT"
+    assert result["shadowed"] == [
+        {"name": "clef-use", "path": str(duplicate), "realpath": str(duplicate)}
+    ]
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+
+
+def test_unreadable_active_skill_metadata_refuses_enrollment_without_changes(installation):
+    home, command = installation
+    assert integrations.integrate("codex", command=command)["status"] == "INSTALLED"
+    unreadable = home / ".agents/skills/unknown/SKILL.md"
+    unreadable.parent.mkdir()
+    unreadable.write_bytes(b"---\nname: \xff\n---\n")
+    before = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    for dry_run in (True, False):
+        result = integrations.integrate("codex", command=command, dry_run=dry_run)
+        assert result["status"] == "CONFLICT"
+        assert result["shadowed"] == [
+            {
+                "name": None,
+                "path": str(unreadable),
+                "realpath": str(unreadable),
+                "error": "skill metadata unreadable",
+                "error_type": "UnicodeDecodeError",
+            }
+        ]
+    after = {str(p.relative_to(home)): p.read_bytes() for p in home.rglob("*") if p.is_file()}
+    assert after == before
+
+
 def test_recovery_never_overwrites_later_user_edit(installation):
     _, command = installation
     integrations.integrate("codex", command=command)

@@ -43,6 +43,23 @@ clef-use abort
 clef-use update
 ```
 
+重复注册时，指向同一完整受管理技能目录的活动来源别名不会被视为冲突。
+同名技能的资源目录若不同，仍会报告冲突；即使只有 `SKILL.md` 指向同一文件，
+相对引用的资料也可能不同。用户文件和配置会被保留。
+选定来源和其他活动来源中的 `SKILL.md` 若声明重复名称，即使嵌套目录名称不同，
+也会报告冲突。
+Hermes 会检查配置的 create/external 目录及当前受信任 Git 项目的
+`.hermes/skills`、`.agents/skills`，保留关闭的项目发现设置。
+未显式指定项目时，会去除 `TERMINAL_CWD` 两端空白并展开主目录，仅在目录存在时使用；
+否则使用启动目录。
+这些保留检查报告潜在冲突；实际 harness 的发现和加载验证是独立阶段。
+Hermes 冲突检查也识别目录名别名和旧式命名 Markdown 指南。
+指南内的资料不会被视为独立指南。`SKILL.md` 目录扫描会跳过排除的缓存和依赖目录，
+但旧式 Markdown 在 native 查询能够加载的位置仍会检查。
+错误 frontmatter 中的名称按 Hermes 的备用解析方式处理。
+Codex 禁用单个 `SKILL.md` 条目。已禁用的项目文件不会与活动的受管理指南冲突；
+仅指定目录条目不代表该指南已禁用。
+
 macOS 请为实际终端或 harness 授予屏幕录制与辅助功能权限，然后重启。Linux 需要可访问的图形桌面；Wayland 可能限制截图与输入。Windows 打包是 CI 目标，但实际 ML/GUI 兼容性仍属实验性。检测到加速设备不等于模型已经验证。
 
 doctor 失败时，请区分权限、缺失 snapshot、ML 依赖和 MCP 启动错误。self-test 不加载模型，检查控制流程。找不到兼容 Python 时请设置 CLEF_USE_PYTHON。LOW_CONFIDENCE 和 NEEDS_REPLAN 需要规划器介入；ERROR 不表示完成。
