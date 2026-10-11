@@ -5,6 +5,10 @@ runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-us
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有
 `--integrate codex|hermes|omp|all` 时注册新工具环境。模型准备是独立选项。
 
+OMP 将 `PI_CONFIG_DIR` 解析为相对于 HOME 的路径名称，默认是 `.omp`。
+绝对路径的默认 agent 目录请使用 `PI_CODING_AGENT_DIR`。
+明确为空或 `default` 的 `OMP_PROFILE` 优先于 `PI_PROFILE`，选择默认配置。
+
 <!-- clef-use:commands -->
 operation 的 `SUCCEEDED` 只验证类型化效果。自然语言目标需要另一次 fresh
 `ASSESS`，因此会话返回 `NEEDS_REPLAN`。验证时使用

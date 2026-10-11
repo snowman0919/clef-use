@@ -5,6 +5,9 @@
 - Bundle three portable Agent Skills with actual schema/capability discovery,
   managed harness enrollment, release contract hashes, conflict preservation,
   and distinct discovery/load/invoke verification stages.
+- Resolve OMP configuration names relative to HOME and preserve explicit default
+  profile precedence. Reject absolute config names before writing to a location
+  the native harness would not discover.
 - Add typed keyboard, literal text, three-button pointer and modifier gestures
   with bounded ownership and independent native abort recovery.
 - Validate finite UI transitions only after an acknowledged trigger; retain

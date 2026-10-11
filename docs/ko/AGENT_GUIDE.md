@@ -6,6 +6,10 @@ Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미�
 선택한 대상만 변경합니다. 최초 무인 설치는 `--integrate codex|hermes|omp|all`
 없이 새 하네스를 등록하지 않습니다. 모델 준비는 별도 선택입니다.
 
+OMP의 `PI_CONFIG_DIR`는 HOME 기준 상대 경로 이름이며 기본값은 `.omp`입니다.
+절대 경로의 기본 agent 디렉터리는 `PI_CODING_AGENT_DIR`로 지정하세요.
+`OMP_PROFILE`을 빈 값이나 `default`로 지정하면 `PI_PROFILE`보다 우선하여 기본 프로필을 선택합니다.
+
 <!-- clef-use:commands -->
 operation의 `SUCCEEDED`는 typed effect 검증입니다. 자연어 목표는 별도의 fresh
 `ASSESS`가 필요하므로 세션은 `NEEDS_REPLAN`을 반환합니다. 하네스 검증의

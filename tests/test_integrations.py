@@ -213,6 +213,35 @@ def test_profile_install_does_not_change_default_omp(installation, monkeypatch):
     assert not (home / ".omp/agent/mcp.json").exists()
 
 
+def test_omp_relative_config_root_follows_native_home_resolution(installation, monkeypatch):
+    home, command = installation
+    workspace = home / "workspace"
+    workspace.mkdir()
+    monkeypatch.chdir(workspace)
+    monkeypatch.setenv("PI_CONFIG_DIR", ".custom-omp")
+    assert integrations.integrate("omp", command=command)["status"] == "INSTALLED"
+    assert (home / ".custom-omp/agent/mcp.json").is_file()
+    assert not (workspace / ".custom-omp").exists()
+
+
+@pytest.mark.parametrize("profile", ["", "default", "  "])
+def test_omp_explicit_default_does_not_inherit_legacy_profile(installation, monkeypatch, profile):
+    home, command = installation
+    monkeypatch.setenv("OMP_PROFILE", profile)
+    monkeypatch.setenv("PI_PROFILE", "legacy-profile")
+    assert integrations.integrate("omp", command=command)["status"] == "INSTALLED"
+    assert (home / ".omp/agent/mcp.json").is_file()
+    assert not (home / ".omp/profiles").exists()
+
+
+def test_omp_absolute_config_name_refuses_before_registration(installation, monkeypatch):
+    home, command = installation
+    monkeypatch.setenv("PI_CONFIG_DIR", str(home / "custom-omp"))
+    with pytest.raises(ValueError, match="PI_CODING_AGENT_DIR"):
+        integrations.integrate("omp", command=command)
+    assert not (home / "custom-omp").exists()
+
+
 def test_selection_change_removes_only_unchanged_deselected_skills(installation):
     _, command = installation
     integrations.integrate("codex", command=command, skills=["core", "diagnostics", "blender"])

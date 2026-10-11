@@ -6,6 +6,10 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+OMP の `PI_CONFIG_DIR` は HOME からの相対パス名で、既定は `.omp` です。
+絶対パスの既定 agent ディレクトリには `PI_CODING_AGENT_DIR` を使います。
+空または `default` の `OMP_PROFILE` は `PI_PROFILE` より優先して既定 profile を選択します。
+
 <!-- clef-use:commands -->
 operation の `SUCCEEDED` は型付き効果の検証です。自然言語の目標には別の fresh
 `ASSESS` が必要なため、セッションは `NEEDS_REPLAN` を返します。ハーネス検証の

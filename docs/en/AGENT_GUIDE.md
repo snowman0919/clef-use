@@ -6,6 +6,10 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+OMP resolves `PI_CONFIG_DIR` as a name relative to HOME (default `.omp`). Use
+`PI_CODING_AGENT_DIR` for an absolute default agent directory. An explicit empty
+or `default` `OMP_PROFILE` selects the default even when `PI_PROFILE` is set.
+
 <!-- clef-use:commands -->
 ```sh
 clef-use capabilities --json

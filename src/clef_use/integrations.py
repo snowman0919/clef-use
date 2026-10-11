@@ -18,7 +18,15 @@ from pathlib import Path
 from filelock import FileLock
 from packaging.specifiers import SpecifierSet
 
-from .harness import atomic_write, install_mcp, read_config, render_entry, server_entry, target_path
+from .harness import (
+    atomic_write,
+    install_mcp,
+    omp_profile,
+    read_config,
+    render_entry,
+    server_entry,
+    target_path,
+)
 
 HARNESSES = ("codex", "hermes", "omp")
 SKILLS = {"core": "clef-use", "blender": "clef-use-blender", "diagnostics": "clef-use-diagnostics"}
@@ -42,7 +50,7 @@ def _layout(harness: str, scope: str = "user", project: Path | str | None = None
         raise ValueError("scope must be user or project")
     home = Path.home()
     config = target_path(harness)
-    profile = os.environ.get("OMP_PROFILE") or os.environ.get("PI_PROFILE") or "default"
+    profile = omp_profile() or "default" if harness == "omp" else "default"
     if harness == "hermes":
         profile = os.environ.get("HERMES_PROFILE", "default")
         if profile != "default" and not os.environ.get("HERMES_HOME"):

@@ -3,6 +3,7 @@ from __future__ import annotations
 import io
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -193,6 +194,20 @@ def _yaml_entry(original: str, entry: dict | None) -> str:
     return original[:start] + original[end:]
 
 
+def omp_profile() -> str | None:
+    # Native OMP treats an explicitly empty canonical variable as default.
+    selected = os.environ.get("OMP_PROFILE", os.environ.get("PI_PROFILE", "")).strip()
+    if selected in ("", "default"):
+        return None
+    if (
+        not re.fullmatch(r"[a-z0-9][a-z0-9._-]{0,63}", selected)
+        or selected.endswith(".")
+        or re.match(r"^(CON|PRN|AUX|NUL|COM[0-9]|LPT[0-9])(?:\.|$)", selected, re.I)
+    ):
+        raise ValueError("unsafe OMP profile")
+    return selected
+
+
 def target_path(harness: str, home: Path | None = None) -> Path:
     home = home or Path.home()
     if harness == "codex":
@@ -200,13 +215,17 @@ def target_path(harness: str, home: Path | None = None) -> Path:
     if harness == "hermes":
         return Path(os.environ.get("HERMES_HOME", home / ".hermes")) / "config.yaml"
     if harness == "omp":
-        profile = os.environ.get("OMP_PROFILE") or os.environ.get("PI_PROFILE")
-        root = Path(os.environ.get("PI_CONFIG_DIR", home / ".omp"))
+        profile = omp_profile()
+        name = Path(os.environ.get("PI_CONFIG_DIR") or ".omp")
+        if name.is_absolute():
+            raise ValueError(
+                "PI_CONFIG_DIR must be a name relative to HOME; "
+                "use PI_CODING_AGENT_DIR for an absolute default agent directory"
+            )
+        root = home / name
         if profile:
-            if not profile.replace("-", "").replace("_", "").isalnum():
-                raise ValueError("unsafe OMP profile")
             return root / "profiles" / profile / "agent/mcp.json"
-        return Path(os.environ.get("PI_CODING_AGENT_DIR", root / "agent")) / "mcp.json"
+        return Path(os.environ.get("PI_CODING_AGENT_DIR") or root / "agent").absolute() / "mcp.json"
     raise ValueError("harness must be codex, hermes or omp")
 
 
