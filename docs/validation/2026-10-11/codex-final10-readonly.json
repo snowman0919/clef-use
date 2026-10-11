@@ -1,0 +1,136 @@
+{
+  "classification": "OBSERVED",
+  "scope": "FINAL10 actual Codex read-only guide/body/capability trigger verification; no GUI task",
+  "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+  "model": "gpt-6.1-sol",
+  "transport": "existing owned local Unix-socket daemon",
+  "auth_type_only": "chatgpt",
+  "auth_or_global_config_mutation": false,
+  "auth_repair_needed": false,
+  "native_discovery": "PASS",
+  "guides": [
+    {
+      "basename": "agent-skills/clef-use/SKILL.md",
+      "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+    },
+    {
+      "basename": "agent-skills/clef-use-blender/SKILL.md",
+      "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+    },
+    {
+      "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "schemas_exact_selected_installed_match": true,
+  "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+  "cases": {
+    "explicit": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [
+        "clef-use"
+      ],
+      "INVOKED": [
+        "computer_capabilities"
+      ],
+      "completed_shell_command_count": 2,
+      "tool_results": [
+        {
+          "tool": "computer_capabilities",
+          "status": "completed",
+          "runtime_version": "0.1.30",
+          "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true
+        }
+      ],
+      "approved_exact_readonly_calls": 1,
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "explicit-private-trace.jsonl",
+        "sha256": "717321acf2912a35a2ae11cd6b24363576e6b7211753f2a4792615ed49c5b671"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "natural": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "INVOKED": [
+        "computer_capabilities"
+      ],
+      "completed_shell_command_count": 2,
+      "tool_results": [
+        {
+          "tool": "computer_capabilities",
+          "status": "completed",
+          "runtime_version": "0.1.30",
+          "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true
+        },
+        {
+          "tool": "computer_status",
+          "status": "REFUSED",
+          "reason": "no active session; start computer_run first",
+          "session_or_GUI_started": false
+        }
+      ],
+      "approved_exact_readonly_calls": 2,
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "natural-private-trace.jsonl",
+        "sha256": "3b164154d14ecbb99e7377e021a8503bf8893d119663d71d40afae4e88752dab"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "negative": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [],
+      "INVOKED": [],
+      "completed_shell_command_count": 0,
+      "tool_results": [],
+      "approved_exact_readonly_calls": 0,
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "negative-private-trace.jsonl",
+        "sha256": "082d6b30ade802e97d62c2ec0f8ff8815579b15979bcdca7ea860bcc3364716a"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    }
+  },
+  "prior_history_preserved": {
+    "basename": "clef-codex-public-evidence-20261011.json",
+    "sha256": "52d431be34c0f44673db3a8ce049cea4ff306cb287ff74a1547f799d7ad0ed50"
+  },
+  "prior_history_interpretation": "Preserve isolated CLI401 and first existing-daemon stage failure separately; current desktop auth failure was never established",
+  "driver": {
+    "basename": "driver.js",
+    "sha256": "6d0d3128d76f5c2ad340253625d7dd461cac8a4d5259aed47e5189d47891d1b7"
+  },
+  "raw_evidence_private": true,
+  "repository_changes": false,
+  "GUI_TASK_VERIFIED": "NOT_RUN"
+}

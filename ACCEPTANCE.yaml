@@ -83,8 +83,10 @@ scenarios:
     completes positive load/invoke, but its completed non-GUI Python negative case unnecessarily
     loads GUI guides and invokes capabilities. This observed over-trigger fails the requirement;
     GUI task completion remains NOT_RUN. Probe fidelity audit subsequently found its fixed
-    systemPrompt replaces native generated skill/catalog blocks; corrected native-prompt
-    verification is pending and the controlled-probe failure is retained without rescoring.
+    systemPrompt replaces native generated skill/catalog blocks. FINAL10 normal native
+    bootstrap executed three auxiliary invocation starts but produced zero successful
+    description entries; zero primary invocations, all three primary cases NOT_RUN.
+    Codex FINAL10 explicit/natural/negative passed. Controlled-probe failure retained.
 - id: GUIDE-04
   category: guides
   requirement: Cached observation is not used as new input or final-completion proof.
@@ -220,18 +222,21 @@ scenarios:
   category: installation
   requirement: Checksum failure, offline download and traversal/symlink-escape archives do not
     activate.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.installation_lifecycle
+    section: evidence.linux_installer_boundary
     claim: OBSERVED
-    partial: true
+    partial: false
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.source_regression
+    section: evidence.windows_installer_boundary
     claim: OBSERVED
-    partial: true
-  execution_note: Checksum, missing download, failed smoke and path safety fixtures observed;
-    complete offline/archive escape matrix not established.
+    partial: false
+  execution_note: Actual immutable Linux install.sh and native Windows install.ps1 refused
+    checksum mismatch, offline connection, traversal, absolute path, backslash path,
+    symlink member and duplicate archive member before activation. Old executable/version,
+    runtime selector and owned HOME bytes remained unchanged. Synthetic 0.1.31 metadata
+    was malformed test input only, never installed or published.
 - id: INSTALL-07
   category: installation
   requirement: Crash at each staging/activation phase can resume or rollback without data loss.
@@ -261,19 +266,22 @@ scenarios:
 - id: INSTALL-09
   category: installation
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.installed_candidate
+    section: evidence.windows_ci26d9252_immutable
     claim: OBSERVED
-    partial: true
+    partial: false
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
     claim: OBSERVED
     partial: true
-  execution_note: Linux spaces/Unicode HOME plus native FINAL5 Windows component cases observed;
-    Windows overall FAIL on foreground restoration; managed Windows install/profile matrix remains
-    NOT_RUN.
+  execution_note: Corrected immutable CI26d9252 actual native Windows spaced/Unicode HOME,
+    executable and three-profile/three-guide managed lifecycle passed. Native Codex isolated
+    user discovery remains FAIL, supported project discovery PASS; native Hermes/OMP unavailable.
+    Actual read-only native walk examined 6625 owned entries and seven ancestor components,
+    with zero reparse points; registered native PE executable launched version 0.1.30.
+    Earlier foreground FAIL is separate; no all-platform GUI PASS implied.
 - id: INSTALL-10
   category: installation
   requirement: Active GUI session is not killed during update; stale client gets
@@ -301,7 +309,7 @@ scenarios:
     claim: OBSERVED
     partial: false
   execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
-    FINAL6 native discovery, actual full guide body reads and successful read-only capabilities.
+    FINAL6 and FINAL10 native discovery, actual full guide body reads and successful read-only capabilities.
     Negative non-GUI trigger passed. Earlier isolated CLI 401 and denied-approval rounds are
     retained separately; GUI TASK_VERIFIED remains NOT_RUN.
 - id: HARNESS-02
@@ -557,13 +565,16 @@ scenarios:
 - id: DEC-02
   category: decision
   requirement: d1/CLEF compare under same live task conditions without weakening confidence gates.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
-    section: evidence.source_regression
+    section: evidence.blender_menu_clef_d1_final10
     claim: OBSERVED
-    partial: true
-  execution_note: Diagnostics do not constitute d1/CLEF comparison on identical live tasks; NOT_RUN.
+    partial: false
+  execution_note: Fixed 30 actual canonical ASSESS trials use identical FINAL10 installed code,
+    contract and paired pixels for CLEF and d1 across File-open/Edit-open/absent states,
+    five repeats each. No threshold changes or input. File completion is 0/5 each;
+    comparison condition executed, original menu quality requirement remains FAIL.
 - id: PERF-01
   category: performance
   requirement: Predeclare workload/hardware/split; record at least 1000 reaction opportunities.
@@ -585,9 +596,11 @@ scenarios:
     section: evidence.reaction
     claim: MEASURED
     partial: true
-  execution_note: FINAL4 and FINAL5 Tk input profiles measured; independent editor p95 exceeds
-    100 ms. Historical fast_coverage was deadline success ratio (goodput_100), corrected in
-    curated evidence; eligibility coverage is NOT_MEASURED. Overall task-profile gate NOT_RUN.
+  execution_note: FINAL4/FINAL5 editor p95 failures retained. FINAL10 installed warm Tk
+    1000/1000 correct, p95 20.234534 ms, goodput_100 1.0; separate Text single-key 50/50,
+    p95 20.319422 ms. Historical fast_coverage was deadline success ratio (goodput_100),
+    corrected in curated evidence; eligibility coverage remains NOT_MEASURED.
+    Overall model/Blender/harness task-profile gate NOT_RUN.
 - id: PERF-03
   category: performance
   requirement: Accuracy >= pinned baseline on identical suite; critical errors individually block

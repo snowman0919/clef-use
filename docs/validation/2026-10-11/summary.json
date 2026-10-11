@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T08:57:36.597580+00:00",
+  "generated_at": "2026-10-11T11:03:15.671235+00:00",
   "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
   "completion_claim": false,
   "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
@@ -649,7 +649,7 @@
       "owned_keys_after": [],
       "owned_buttons_after": [],
       "production_desktop_touched": false,
-      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture→DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
+      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture\u2192DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
       "limitation": "Save chord used context=None under a private native window/no-XIM guard; this does not prove general application/text-focus facts or a SessionRuntime/harness workflow."
     },
     "harnesses": {
@@ -1704,7 +1704,7 @@
         "sdk_source": "@oh-my-pi/pi-coding-agent/src/sdk.ts:3734",
         "earlier_outcomes": "Retained actual controlled-probe outcomes; do not infer normal generated-prompt triggering.",
         "corrected_generated_prompt_preflight": "PASS with PI_TEST_RUNTIME=1 only, no model requests; test-mode scope explicit",
-        "fresh_installed_normal_flag_model_batch": "NOT_RUN pending final source/install; auxiliary native description compression must be bounded and recorded separately."
+        "fresh_installed_normal_flag_model_batch": "Executed normal native bootstrap:3 genuine auxiliary invocationstarts,0/3 nativecacheentries,0 primaryinvocations; boundedstop all3primarycasesNOT_RUN. UnderlyingHTTP/status/causeNOT_OBSERVED; no retry/provider substitution."
       }
     },
     "source_regression_final5": {
@@ -1779,15 +1779,128 @@
       "test_mode": "PI_TEST_RUNTIME=1 only for no-compression preflight",
       "normal_generated_prompt_model_batch": "NOT_RUN pending declaredbenchmark completion",
       "scope": "actual generatednativecatalog+three installedbodies+two readonlynativeMCPschemas matchingfullinstalledcontract; no model or GUI inference"
+    },
+    "reaction_final10": {
+      "claim": "MEASURED",
+      "artifact": "docs/validation/2026-10-11/reaction-final10.json",
+      "sha256": "976cadc5dbbb07535c477ced35435c8c8054faa5ddc48a40b2794cc0c740532c",
+      "warm_opportunities_per_variant": 1000,
+      "sessions": 5,
+      "typed_warm": {
+        "opportunities": 1000,
+        "correct": 1000,
+        "accuracy": 1.0,
+        "fast_correct": 1000,
+        "goodput_100": 1.0,
+        "fast_coverage": null,
+        "fast_coverage_status": "NOT_MEASURED",
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 24.785390611903264,
+        "elapsed_seconds": 40.34634820399993,
+        "correct_event_latency_ms": {
+          "p50": 20.173809,
+          "p95": 20.234534,
+          "p99": 20.270474
+        }
+      },
+      "native_text_editor": {
+        "opportunities": 50,
+        "correct": 50,
+        "accuracy": 1.0,
+        "fast_correct": 50,
+        "goodput_100": 1.0,
+        "fast_coverage": null,
+        "fast_coverage_status": "NOT_MEASURED",
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 24.72467037282091,
+        "elapsed_seconds": 2.022271652,
+        "correct_event_latency_ms": {
+          "p50": 20.231348,
+          "p95": 20.319422,
+          "p99": 20.395019
+        }
+      },
+      "scope": "Owned installed native Tk/Xvfb state-to-correct-key and independent widget readback; excludes parser/model/Blender and full runtime baseline.",
+      "eligibility_coverage": "NOT_MEASURED",
+      "release_gate": "NOT_RUN"
+    },
+    "codex_actual_model_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/codex-final10-readonly.json",
+      "sha256": "1e0b9cdf2112f700f03b6a7d9c2178f1cab6efa07b7fd806eda064bb8cbd6dab",
+      "scope": "Actual authenticated native daemon read-only3casePASS; not currentchat transport or GUI",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "omp_native_generated_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-final10-native-generated.json",
+      "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784",
+      "scope": "Native discoveryPASS; auxiliarygeneration0/3; primary3casesNOT_RUN/no retry",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "ci26d9252_linux_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci26d9252-linux-install.json",
+      "sha256": "fcc07d8abf616c61e1cb4fdafd0627264c2bc148319318713d794eb2dcc20c2a",
+      "scope": "15matrix+assemblySUCCESS; actualimmutableLinuxinstall/profile/idempotencePASS; branchdeploySKIPPED",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "blender_operations_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-operations-final10.json",
+      "sha256": "baff92982e2b3c5c844865e6016274838d9cd16a9869f6db38938975adb830a5",
+      "canonical_fixture": "FAIL21/22expectedcases; actualEditpopupabsent",
+      "instrumented_private_setup": "PASS22/22; not canonicalfix or productionprovider",
+      "scope": "API_ASSISTED ownedBlender native SessionManager/SessionRuntime operations; no model/harnessGUI"
+    },
+    "windows_ci26d9252_immutable": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-ci26d9252-immutable.json",
+      "sha256": "a58e930aa226504d235de60eae1b13fa00a88c34fc37a4af9bbca0ac256fa91d",
+      "managed_install_lifecycle": "PASS",
+      "native_codex_user_discovery": "FAIL",
+      "native_codex_project_discovery": "PASS",
+      "native_Hermes_OMP": "NOT_RUN: unavailable executables",
+      "GUI_model_TASK_VERIFIED": "NOT_RUN",
+      "scope": "Immutable CIWindows ZIP on actual native PowerShell/managedPython; all61modulesexactwheel,3guides3profilesrepeat/edit/disabled/checksum andpreservation; olderforegroundFAIL remains",
+      "no_symlink": "OBSERVED native6625entries+7ancestorcomponents,zeroReparsePoints; nativePEexeversion0.1.30"
+    },
+    "blender_menu_clef_d1_final10": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-menu-clef-d1-final10.json",
+      "sha256": "bc0f217feb50d46e57fa6246ac8ec555ed31b78ae28386f6826977ec2f075f5b",
+      "scope": "Executed30/30sameFINAL10canonicalASSESS; bothmodelsFilecompletion0/5;15identicalpixelpairs;native0/no falsecompletion; no thresholdchange"
+    },
+    "blender_menu_setup_diagnosis_final10": {
+      "claim": "INFERRED",
+      "artifact": "docs/validation/2026-10-11/blender-menu-setup-diagnosis-final10.json",
+      "sha256": "51eed62ab00513352b3c9f8c144abeaf1af323e621eb98619f0aab8941eb2785",
+      "scope": "Canonical21/22 vsinstrumented22/22; setupACK\u2192widget boundaryunobserved; nojustifiedruntimefix"
+    },
+    "windows_installer_boundary": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-installer-boundary-ci26d9252.json",
+      "sha256": "0223294848081d6cdde3a849ab0bd6e10a890caf8f0ecc76b819167350051295",
+      "scope": "NativeimmutablePowerShelltraversal/absolute/backslash/symlink/duplicate/offline6/6refused beforeactivation,customized/disabled111HOMEfiles+wrapper/versionpreserved; priorchecksumPASS"
+    },
+    "linux_installer_boundary": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/linux-installer-boundary-ci26d9252.json",
+      "sha256": "532384f17cbca41f7b3ae735768bd71158754baedb4905fb3d8be23ebd102c09",
+      "scope": "Actualimmutable install.sh checksum/traversal/absolute/backslash/symlink/duplicate/offline7/7refused beforeactivation;oldwrapper/current/HOMEbytes/versionpreserved"
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
-    "windows": "Original native foreground-restoration fixture FAIL retained; immutable FINAL7 managed integration also FAIL. Source-patched private profile checks PASS in separate evidence. Fixed immutable rebuild, model/runtime/harness GUI E2E and shipped native IME support remain NOT_RUN.",
+    "windows": "Corrected immutableCI26d9252 managedinstallation/lifecyclePASS; nativeCodexisolatedUSERdiscoveryFAIL,PROJECT3guideDISCOVEREDPASS; nativeHermes/OMPexecutablesunavailable andmodelGUIstagesNOT_RUN. Earliernativeforeground-restorationFAIL andoldnewlineFAILpreserved; formalIME andall-platformGUIgateNOT_RUN.",
     "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS. OMP FINAL6 current native default positive stages PASS; completed non-GUI negative over-trigger FAIL is recorded separately and does not certify GUI tasks.",
-    "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS comparison executed30trials and failed positive completion0/5each. Production action tasks, fullA0-A5 matrix, release quality gates and state-change-to-input reaction remain NOT_RUN. Current input changes require fresh installed measurements.",
+    "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Public upload/download/hash/fresh public install NOT_RUN. Existing release CI run38127830854 passed15platform/Python builds and assembly, branch deployment skipped; immutable Windows nativeintegration then failed. Fixedlatest immutable build pending."
+    "public_release": "Corrected existingCI38132441002 all15platform/Pythonbuilds+assemblySUCCESS; immutableassembledLinuxinstall andnativeWindowsmanagedlifecycleverified. BranchdeploySKIPPEDbyexistingpolicy; publicupload/download/freshpublicinstallNOT_RUN."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -1797,8 +1910,8 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 25,
-    "not_run": 17,
+    "pass": 28,
+    "not_run": 14,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -1813,10 +1926,10 @@
       "INSTALL-03": "PASS",
       "INSTALL-04": "PASS",
       "INSTALL-05": "NOT_RUN",
-      "INSTALL-06": "NOT_RUN",
+      "INSTALL-06": "PASS",
       "INSTALL-07": "NOT_RUN",
       "INSTALL-08": "PASS",
-      "INSTALL-09": "NOT_RUN",
+      "INSTALL-09": "PASS",
       "INSTALL-10": "NOT_RUN",
       "HARNESS-01": "PASS",
       "HARNESS-02": "PASS",
@@ -1835,7 +1948,7 @@
       "OP-04": "PASS",
       "OP-05": "PASS",
       "DEC-01": "PASS",
-      "DEC-02": "NOT_RUN",
+      "DEC-02": "PASS",
       "PERF-01": "NOT_RUN",
       "PERF-02": "NOT_RUN",
       "PERF-03": "NOT_RUN",
@@ -1859,6 +1972,16 @@
     "omp-final6-triggers.json",
     "omp-final10-generated-preflight.json",
     "codex-final6-triggers.json",
-    "windows-final7-integration.json"
+    "windows-final7-integration.json",
+    "reaction-final10.json",
+    "codex-final10-readonly.json",
+    "omp-final10-native-generated.json",
+    "ci26d9252-linux-install.json",
+    "windows-ci26d9252-immutable.json",
+    "blender-operations-final10.json",
+    "blender-menu-clef-d1-final10.json",
+    "blender-menu-setup-diagnosis-final10.json",
+    "windows-installer-boundary-ci26d9252.json",
+    "linux-installer-boundary-ci26d9252.json"
   ]
 }

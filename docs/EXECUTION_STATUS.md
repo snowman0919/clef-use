@@ -2,12 +2,12 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest implementation HEAD: `2371eb1` on `codex/reactive-agent-contracts`
-(six local implementation commits).
+Latest frozen implementation: `65d5a87` on `codex/reactive-agent-contracts`.
+Published evidence HEAD before the following measurements: `26d9252`.
 This is partial execution evidence, not specification completion or release approval.
 Machine-readable, sanitized evidence and artifact hashes: [summary.json](validation/2026-10-11/summary.json).
-Latest installed harness/profile correction: [final6.json](validation/2026-10-11/final6.json).
-Final input-candidate measurement: [reaction-final5.json](validation/2026-10-11/reaction-final5.json).
+Latest installed input/profile candidate: [final10.json](validation/2026-10-11/final10.json).
+Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-11/reaction-final10.json).
 Per-scenario status and remaining scope: [ACCEPTANCE.yaml](../ACCEPTANCE.yaml).
 
 ## Objective and invariants
@@ -118,8 +118,38 @@ project guides; isolated user-root discovery failed because native Windows Codex
 used the real known-folder home rather than overridden environment variables.
 Both outcomes remain recorded in
 [`windows-final7-integration.json`](validation/2026-10-11/windows-final7-integration.json).
-This source-patched install is not an immutable rebuilt artifact. Fresh fixed
-artifact validation, harness GUI tasks and active IME composition remain **NOT_RUN**.
+This source-patched install is not an immutable rebuilt artifact. Its historical
+scope remains separate from the corrected immutable verification below.
+
+**OBSERVED / corrected immutable CI:** run `38132441002` at `26d9252` passed all
+15 platform/Python builds and assembly. Existing branch policy skipped deployment.
+The assembled site installed on a fresh isolated Linux HOME, preserved all 26
+managed file bytes on repeated explicit three-guide integration, matched every
+packaged Python module to frozen source and verified all 15 archive hashes.
+See [ci26d9252-linux-install.json](validation/2026-10-11/ci26d9252-linux-install.json).
+The exact corrected Windows ZIP also passed native PowerShell install, executable
+launch, all five contract fields, three-guide enrollment across three profiles,
+idempotence, exact mixed-newline/Unicode preservation, edited-guide conflict,
+disabled-entry preservation and checksum-refused update with the old wrapper intact.
+All 61 installed Python files matched its wheel. Global V2/config/PATH were preserved.
+An actual native walk found zero reparse points across 6,625 owned entries and
+seven ancestor components; the registered PE executable directly launched 0.1.30.
+Native Windows Codex isolated user-source discovery still failed, while supported
+project discovery found all three guides. Hermes/OMP executables were unavailable;
+their native stages and all model/GUI stages remain **NOT_RUN**. Two earlier fixture
+configuration errors and their actual safety refusals are preserved. See
+[windows-ci26d9252-immutable.json](validation/2026-10-11/windows-ci26d9252-immutable.json).
+The earlier Windows foreground failure remains open.
+
+**OBSERVED / immutable installer refusal boundaries:** actual Linux `install.sh`
+and native Windows `install.ps1` refused checksum mismatch, an offline origin,
+parent traversal, absolute paths, backslash paths, symlink members and duplicate
+ZIP entries before activation. Existing runtime selector, executable/version and
+owned HOME bytes survived: 26 Linux files and 111 customized/disabled Windows files.
+Both owned loopback servers stopped. Synthetic `0.1.31` metadata represented only
+malformed test inputs, never a published or installed release. See
+[Linux boundary evidence](validation/2026-10-11/linux-installer-boundary-ci26d9252.json)
+and [Windows boundary evidence](validation/2026-10-11/windows-installer-boundary-ci26d9252.json).
 
 ## Actual harness stages
 
@@ -203,11 +233,25 @@ the labels without changing timestamps or attempts. The runner now keeps these
 metrics separate and preserves unknown eligibility. No eligibility coverage gate
 is certified by these narrow input measurements.
 
+**MEASURED / FINAL10:** the frozen installed runtime completed five sessions and
+1,005 opportunities per variant. Warm typed input was **1,000/1,000 correct**,
+p50/p95/p99 **20.174/20.235/20.270 ms**, goodput100 **1.000**, with zero misses
+or critical errors and useful throughput **24.785/s**. The pinned primitive's warm
+p95 was **20.261 ms**, throughput **4.526/s**. The separate 50-opportunity native
+Text single-key profile was **50/50 correct**, p95 **20.319 ms**, goodput100 **1.000**.
+All five Unicode clipboard correctness preflights passed; they do not measure
+Unicode latency. Runtime hashes remained unchanged. Native state notification,
+correct KeyPress timestamp and independent widget readback bound this result;
+parser/model inference and full operation-return latency are excluded.
+Eligibility coverage remains **NOT_MEASURED**. See
+[reaction-final10.json](validation/2026-10-11/reaction-final10.json).
+
 **NOT_RUN:** the production/model/Blender/harness task performance gate. The pinned
 baseline is only the `b3f0b233` DesktopAction implementation with current supporting
 libraries, not the entire old runtime/model stack. No overall 100 ms result or
-controlled comparative speedup is claimed. The independent editor profile misses
-the stated thresholds; all original numerical gates remain unchanged.
+controlled comparative speedup is claimed. Earlier independent editor profiles
+missed the stated threshold and remain recorded; all original numerical gates
+remain unchanged.
 
 ## Remaining acceptance and milestones
 
@@ -220,8 +264,18 @@ restoration, interrupted queued paste and requestor destruction. A private actua
 Hangul engine confirms explicit clipboard literals commit exactly while native
 Unicode-keyboard substitution and active-composition insertion are refused.
 This is API-assisted owned-widget evidence, not shipped composition control or
-general production state support. Fresh reaction measurements and harness GUI
-tasks remain separate gates.
+general production state support. Fresh reaction measurements are recorded above;
+harness GUI tasks remain a separate gate.
+
+**OBSERVED / FINAL10 Blender operations:** the canonical installed fixture returned
+**FAIL, 21/22 expected outcomes**. Its Edit setup screenshot contained no popup;
+the runtime correctly reported `ABSENT`, while the fixture expected `WRONG_MENU`.
+One private instrumented run, separating pointer movement from click with native
+screenshot/OCR checkpoints, passed 22/22. The proposed Escape/popup race was
+rejected by those checkpoints. The canonical failure's cause is not established;
+the instrumented result does not correct or erase it. Both results and the initial
+diagnostic import failure are retained in
+[blender-operations-final10.json](validation/2026-10-11/blender-operations-final10.json).
 
 **OBSERVED / original live menu task FAIL:** a predeclared 30-trial comparison
 executed the full pinned `b3f0b233` 0.1.29 runtime and immutable FINAL6 installed
@@ -234,6 +288,20 @@ inputs were **0**. Original File-menu recognition remains unsolved; E2E-01 is
 warm/caption-cache timings are separate; no speedup or state-change-to-input p95
 is inferred from input-free ASSESS. Exact sources, unchanged thresholds, setup
 failures and cleanup are retained in `blender-menu-paired-final6.json`.
+
+**OBSERVED / same FINAL10 CLEF versus d1:** a second predeclared comparison executed
+all 30 canonical ASSESS trials with identical installed code and contract, five
+repeats per File-open/Edit-open/absent state and model. All 15 paired screenshots
+matched; independent ground truth verified every before/after state. CLEF returned
+15 `LOW_CONFIDENCE`; d1 returned ten `NEEDS_REPLAN` and five `LOW_CONFIDENCE`.
+File completion was **0/5 each**, with zero false completions and zero native inputs.
+This completes DEC-02's comparison, while original menu quality remains **FAIL**.
+The actual d1 backend loaded its pinned local BF16 checkpoint without a budget
+refusal; its exact encoded token count was not exported. Cold/model-warm/parser-cache
+timings remain distinct, with no 100 ms or comparative speedup claim. Exact selected
+OCR text/bboxes were not retained by canonical history, so no cause is inferred
+from matching context IDs or the intentional ASSESS `none` singleton. See
+[blender-menu-clef-d1-final10.json](validation/2026-10-11/blender-menu-clef-d1-final10.json).
 
 **OBSERVED / native IME counterexample:** a private GTK/IBus Hangul fixture
 observed real preedit and committed text through official owner-widget events.
@@ -264,8 +332,21 @@ capability invocations and over-trigger failure remain recorded, but it does not
 establish normal generated-prompt behavior. A separate zero-inference preflight
 using the native generator plus permission-only appended scope found all three
 catalog entries and native skill instructions. Fresh installed model verification
-with that corrected native context remains **NOT_RUN**; no guide-wording workaround
-or rescoring of the earlier negative failure is used.
+with that corrected native context stopped before primary inference. Three genuine
+native description-compression invocations produced **0/3 cache entries**; the
+three primary cases remain **NOT_RUN**, with zero primary invocations. HTTP
+completion, status and underlying cause were not captured. No retry, seeded cache,
+provider substitution or rescoring of the earlier negative failure is used. See
+[omp-final10-native-generated.json](validation/2026-10-11/omp-final10-native-generated.json).
+
+**OBSERVED / FINAL10 Codex:** three fresh authenticated native-daemon model sessions
+passed explicit full-body load/capability invocation, natural three-guide loading
+and capability invocation, and the non-GUI negative with no guide/tool calls.
+The native read-only facade's schema exactly matched the installed selection.
+An attempted status query correctly refused because no session existed; no GUI
+session was started. Ephemeral sessions were unsubscribed. This is distinct from
+the current desktop chat's transport and requires no authentication repair. See
+[codex-final10-readonly.json](validation/2026-10-11/codex-final10-readonly.json).
 
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
@@ -274,9 +355,9 @@ native, harness, installed or public-release status from another evidence level.
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
-| M1 discovery/integration | IN_PROGRESS | Codex FINAL6 model discovery/load/invoke observed; final-bundle cross-harness triggers and GUI task coverage remain. |
+| M1 discovery/integration | IN_PROGRESS | Codex FINAL10 read-only stages pass; OMP normal native bootstrap stopped before primary model; GUI task coverage remains. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
-| M3 state/operations | IN_PROGRESS | API-assisted operation fixture passes; original canonical menu replay FAIL and shipped production provider remain open. |
+| M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
 | M5 harness/install/release | IN_PROGRESS | Local candidate/lifecycle checks observed; harness GUI tasks, full Windows matrix and public release verification remain NOT_RUN. |
 

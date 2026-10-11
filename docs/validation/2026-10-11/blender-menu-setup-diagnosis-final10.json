@@ -1,0 +1,124 @@
+{
+  "classification": "INFERRED",
+  "method": "Read-only comparison of existing parent-executed native fixture reports, saved OCR checkpoints, frozen source and installed modules; no GUI/model reruns",
+  "scope": "FINAL10 Blender menu fixture setup failure diagnosis only",
+  "observed_report_comparison": {
+    "canonical": {
+      "fixture_passed": false,
+      "menu_edit_assessment": "ABSENT",
+      "service_entry_refusal_cases": 1,
+      "service_entry_refusal_cases_passed": 1,
+      "operation_report_cases": 21,
+      "operation_report_cases_passed": 20,
+      "total_cases": 22,
+      "passed_cases": 21
+    },
+    "instrumented_copy": {
+      "fixture_passed": true,
+      "menu_edit_assessment": "WRONG_MENU",
+      "service_entry_refusal_cases": 1,
+      "service_entry_refusal_cases_passed": 1,
+      "operation_report_cases": 21,
+      "operation_report_cases_passed": 21,
+      "total_cases": 22,
+      "passed_cases": 22
+    }
+  },
+  "canonical_modules_equal_installed": {
+    "input_ir.py": {
+      "source_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+      "installed_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+      "equal": true
+    },
+    "backends.py": {
+      "source_sha256": "1a5fab24b11e62a6b309b3e731e13e6d0f3d1b43a1d889d363477f23446072dc",
+      "installed_sha256": "1a5fab24b11e62a6b309b3e731e13e6d0f3d1b43a1d889d363477f23446072dc",
+      "equal": true
+    },
+    "x11_input_state.py": {
+      "source_sha256": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+      "installed_sha256": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+      "equal": true
+    },
+    "operations.py": {
+      "source_sha256": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+      "installed_sha256": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+      "equal": true
+    },
+    "runtime.py": {
+      "source_sha256": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+      "installed_sha256": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+      "equal": true
+    },
+    "schema.py": {
+      "source_sha256": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+      "installed_sha256": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+      "equal": true
+    }
+  },
+  "instrumented_changes": [
+    "Import path for existing public fixture helper",
+    "Extra native PointerInput(move) before unchanged click",
+    "Screenshot and OCR before/after move, after click and after Escape"
+  ],
+  "probe_checkpoints": {
+    "File-after-escape": {
+      "edit_OCR_signature": false,
+      "file_OCR_signature": false,
+      "ocr_sha256": "99df138f27d71e8bc7b80abe351f5cd893a07d46d6c23ca055b3841e08146611"
+    },
+    "Edit-before-move": {
+      "edit_OCR_signature": false,
+      "file_OCR_signature": false,
+      "ocr_sha256": "99df138f27d71e8bc7b80abe351f5cd893a07d46d6c23ca055b3841e08146611"
+    },
+    "Edit-after-move": {
+      "edit_OCR_signature": false,
+      "file_OCR_signature": false,
+      "ocr_sha256": "99df138f27d71e8bc7b80abe351f5cd893a07d46d6c23ca055b3841e08146611"
+    },
+    "Edit-after-click": {
+      "edit_OCR_signature": true,
+      "file_OCR_signature": false,
+      "ocr_sha256": "180c9c8424e8d159dc70af9e9973c2f7aeb761d841253759621db1d283d597b4"
+    },
+    "Edit-after-escape": {
+      "edit_OCR_signature": false,
+      "file_OCR_signature": false,
+      "ocr_sha256": "99df138f27d71e8bc7b80abe351f5cd893a07d46d6c23ca055b3841e08146611"
+    }
+  },
+  "rejected_hypothesis": "Parent-confirmed popup was closed after Escape and before/after the separate move; Edit popup opened only after click. Hover-then-click-close is rejected for the instrumented observed sequence.",
+  "native_semantics": {
+    "source": "input_ir.py",
+    "pointer_click_sequence": "Move; fresh guard; native button down; post guard; finally release newly owned input",
+    "x11_backend": "PyAutoGUI XTest motion, press and release each synchronize with X server; server request acknowledgement does not establish Blender event processing or widget effect",
+    "pointer_delivery_receipt": "InputDelivery receipts are generated for key/chord triggers; pointer path has no receipt",
+    "fixture_setup_results": "Canonical click and Escape ActionResult values are ignored; setup dispatches are absent from operation/terminal runtime log",
+    "application_effect": "Menu provider uses actual screenshot OCR; returning ABSENT with absent popup is correct"
+  },
+  "unobserved_boundary": "Canonical Edit setup input admission/result and actual Motion/ButtonPress/ButtonRelease delivery/order/timing versus Blender menu activation, before read-only assessment",
+  "causal_limit": "Instrumented success changes motion count, elapsed pre-click processing opportunity, and extra captures simultaneously; it does not isolate which change affected the outcome",
+  "supported_runtime_fix": null,
+  "actionable_fixture_followup": "Record and check each setup ActionResult, record native event/ACK metadata, and verify the intended menu preparation postcondition before assigning expected assessment; preserve canonical failure. No blind retry, arbitrary sleep, runtime guard weakening or threshold change is justified by present evidence.",
+  "artifacts": [
+    {
+      "basename": "canonical-report.json",
+      "sha256": "a770b3421629dc398d1a59938b6f7e447653c5a8457741e3e17e6173607ea94a"
+    },
+    {
+      "basename": "instrumented-report.json",
+      "sha256": "8665781d1c1b3c805868074e6bf7ed38a707976d14cebfb86163e4d12612bebf"
+    },
+    {
+      "basename": "blender_operations_fixture.py",
+      "sha256": "bd7d8cd9a3c8ac4bbf81b3cc322215b70e73b8565b18d170876a1a8c4469658c"
+    },
+    {
+      "basename": "clef_blender_menu_setup_probe_20261011.py",
+      "sha256": "a01c664ff491dd29a434608c420f16b1e4fa35bfb1ef3f47a918c154aeee32a5"
+    }
+  ],
+  "source_changes": false,
+  "new_GUI_or_model_runs": false
+}
