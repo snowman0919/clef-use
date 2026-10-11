@@ -82,7 +82,9 @@ scenarios:
   execution_note: Codex FINAL6 explicit/natural/negative triggers pass. OMP current native default
     completes positive load/invoke, but its completed non-GUI Python negative case unnecessarily
     loads GUI guides and invokes capabilities. This observed over-trigger fails the requirement;
-    GUI task completion remains NOT_RUN.
+    GUI task completion remains NOT_RUN. Probe fidelity audit subsequently found its fixed
+    systemPrompt replaces native generated skill/catalog blocks; corrected native-prompt
+    verification is pending and the controlled-probe failure is retained without rescoring.
 - id: GUIDE-04
   category: guides
   requirement: Cached observation is not used as new input or final-completion proof.
@@ -601,15 +603,21 @@ scenarios:
 - id: E2E-01
   category: e2e
   requirement: Installed release repeats real Blender menu/transform/property/viewport workflows.
-  status: NOT_RUN
+  status: FAIL
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_blender
     claim: OBSERVED
     partial: true
-  execution_note: FINAL5 installed local candidate passes 22 API-assisted native Blender cases with
-    eight source module hashes matched; production provider and actual harness/public release
-    rehearsal remain NOT_RUN.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.actual_original_menu
+    claim: OBSERVED
+    partial: true
+  execution_note: FINAL5 API-assisted operation fixture passes 22 cases. In a fixed actual
+    parser/model ASSESS comparison, full pinned .29 and FINAL6 installed .30 both refuse all
+    five File-open trials, with all 30 scheduled trials executed and no native input. The
+    original menu workflow is observed FAIL; remaining production/harness/public-release
+    workflows are NOT_RUN. No confidence threshold was relaxed.
 - id: E2E-02
   category: e2e
   requirement: Browser form and independent editor validate non-Blender generality.

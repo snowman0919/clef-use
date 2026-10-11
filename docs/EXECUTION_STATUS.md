@@ -183,7 +183,7 @@ Power/thermal state is uncontrolled and other workspace agents may compete for l
 | typed | 1000/1000 | 40.273 | 80.457 | 80.526 | 10 | 0.990 | 14.474 |
 
 Each variant reports zero critical errors in this bounded input workload. The separate
-50-opportunity Unicode Tk editor profile reports 50 correct, p95 **100.577 ms**,
+50-opportunity Tk Text single-key profile reports 50 correct, p95 **100.577 ms**,
 goodput100 **0.78**, 11 misses and zero critical errors. Cold/all/session statistics,
 source hashes, scope/exclusions and artifact hashes are retained in the JSON summary.
 **MEASURED / FINAL5:** the same predeclared workload completes with 1,005 correct
@@ -191,8 +191,10 @@ opportunities per variant. Warm typed p50/p95/p99 are **40.268/80.447/80.509 ms*
 goodput100 **0.991**, 9 misses and useful throughput **14.665/s**. Warm pinned-b3
 p95 is **20.268 ms**, goodput100 **1.000** and throughput **4.523/s**. Typed event
 latency is slower than this native baseline despite higher throughput. The separate
-50-opportunity editor profile has p95 **100.558 ms**, goodput100 **0.82**, and 9 misses.
+50-opportunity Text single-key profile has p95 **100.558 ms**, goodput100 **0.82**, and 9 misses.
 It does not pass the 100 ms p95 target. All reported critical counts are zero.
+Exact Unicode clipboard insertion was a separate correctness preflight, not the
+50 timed opportunities. Unicode insertion p95 was not measured by these profiles.
 
 **Metric correction:** historical raw native reports called deadline success ratio
 `fast_coverage`. Under KODEX that ratio is `goodput_100`; fast-path eligibility
@@ -209,6 +211,40 @@ the stated thresholds; all original numerical gates remain unchanged.
 
 ## Remaining acceptance and milestones
 
+**OBSERVED / FINAL10 installed input correction:** the frozen source suite passed
+**780 tests**, with 34 skips and 41 warnings (44.60s). A fresh local archive install
+matched eight changed source modules, enrolled all three guides in three isolated
+profiles and preserved all 26 owned-home file bytes on repeat integration. Real
+installed native widget/protocol checks pass, including prior Unicode/large-data
+restoration, interrupted queued paste and requestor destruction. A private actual
+Hangul engine confirms explicit clipboard literals commit exactly while native
+Unicode-keyboard substitution and active-composition insertion are refused.
+This is API-assisted owned-widget evidence, not shipped composition control or
+general production state support. Fresh reaction measurements and harness GUI
+tasks remain separate gates.
+
+**OBSERVED / original live menu task FAIL:** a predeclared 30-trial comparison
+executed the full pinned `b3f0b233` 0.1.29 runtime and immutable FINAL6 installed
+0.1.30 against actual Blender File-open, Edit-open and absent states, five repeats
+per state/version. All 15 pairs had identical before-image pixels and independently
+verified menu state. Both versions returned `LOW_CONFIDENCE` in all 15 trials;
+File-open completion was **0/5 each**. Negative false completions and native OS
+inputs were **0**. Original File-menu recognition remains unsolved; E2E-01 is
+**FAIL**, distinct from the 22 passing API-assisted operation cases. Cold and
+warm/caption-cache timings are separate; no speedup or state-change-to-input p95
+is inferred from input-free ASSESS. Exact sources, unchanged thresholds, setup
+failures and cleanup are retained in `blender-menu-paired-final6.json`.
+
+**OBSERVED / native IME counterexample:** a private GTK/IBus Hangul fixture
+observed real preedit and committed text through official owner-widget events.
+Known active composition correctly blocked shortcut/literal requests. With an
+idle enabled Hangul engine, the previous X11 ASCII keyboard substitute returned
+success while creating preedit instead of the requested literal. Linux now
+requires explicit clipboard delivery even for ASCII; Windows native Unicode is
+separate. External read-only IBus peer observation did not establish generic
+composition state. A shipped trusted observer and typed composition transaction
+remain **NOT_RUN**; this fixture does not satisfy INPUT-02 by itself.
+
 **OBSERVED / FINAL6 OMP native default:** OMP18.6.1 using its current
 `aipi/dgx-moa-fast` route completed explicit and natural turns, read complete
 installed guides through native `skill://` URIs and invoked read-only capabilities.
@@ -221,16 +257,26 @@ claimed. The first negative raw trace was overwritten by a throwaway rerun;
 its previously inspected derived result, hash and process log remain, and the
 missing raw trace is explicitly recorded.
 
+**OBSERVED / OMP probe fidelity correction:** the installed native SDK's fixed
+`systemPrompt` option replaces generated blocks, including the normal skill
+catalog. The controlled model probe used that option. Its actual body loads,
+capability invocations and over-trigger failure remain recorded, but it does not
+establish normal generated-prompt behavior. A separate zero-inference preflight
+using the native generator plus permission-only appended scope found all three
+catalog entries and native skill instructions. Fresh installed model verification
+with that corrected native context remains **NOT_RUN**; no guide-wording workaround
+or rescoring of the earlier negative failure is used.
+
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
 native, harness, installed or public-release status from another evidence level.
 
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
-| M0 baseline | IN_PROGRESS | Software/attachment provenance pinned; complete original live task/model baseline remains. |
+| M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
 | M1 discovery/integration | IN_PROGRESS | Codex FINAL6 model discovery/load/invoke observed; final-bundle cross-harness triggers and GUI task coverage remain. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
-| M3 state/operations | IN_PROGRESS | Installed API-assisted Blender fixture passes; shipped production provider and canonical original task replay remain. |
+| M3 state/operations | IN_PROGRESS | API-assisted operation fixture passes; original canonical menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
 | M5 harness/install/release | IN_PROGRESS | Local candidate/lifecycle checks observed; harness GUI tasks, full Windows matrix and public release verification remain NOT_RUN. |
 

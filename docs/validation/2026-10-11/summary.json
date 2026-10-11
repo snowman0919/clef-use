@@ -59,8 +59,8 @@
   },
   "artifacts": {
     "source_regression": {
-      "local_artifact": "/tmp/clef-use-full-regression-final10-20261011.log",
-      "sha256": "c774576ede12941e20c0425e1f40579e45f89cd8cce00d340406445b62f64365",
+      "local_artifact": "/tmp/clef-use-full-regression-final11-20261011.log",
+      "sha256": "a2306fc18394086894f09790080a8ad9f02a32d5cf3c83e205954adaf72cdfed",
       "raw_artifact_committed": false
     },
     "previous_regression": {
@@ -184,12 +184,12 @@
       "claim": "OBSERVED",
       "level": "source_regression",
       "artifact": "source_regression",
-      "passed": 779,
+      "passed": 780,
       "skipped": 34,
       "warnings": 41,
-      "elapsed_seconds": 58.79,
+      "elapsed_seconds": 44.6,
       "execution_command": ".venv/bin/python -m pytest -q",
-      "scope": "Frozen X11 query/keymap/clipboard source and integrated literal-method changes, before final ICCCM TIMESTAMP/interoperability corrections. Unit/protocol/native disposable fixtures do not establish installed, harness GUI or production acceptance."
+      "scope": "Final frozen X11 protocol/query/keymap source plus integrated runtime literal-method and benchmark oracle corrections. Includes real disposable native widgets/protocol/cancellation/crash regressions; does not establish installed/harness GUI/production acceptance."
     },
     "previous_source_regression": {
       "claim": "OBSERVED",
@@ -1380,7 +1380,7 @@
           "text_editor_exact_unicode": true
         }
       ],
-      "interpretation": "Reported latency is correct-event latency. All failures/misses remain in accuracy and fast-coverage denominators. The independent Unicode editor profile has p95 above 100 ms and coverage below 0.80. No overall 100 ms claim, controlled speedup claim, full model/runtime baseline claim, or release-gate PASS is made.",
+      "interpretation": "Correct-event latency; all failures/misses remain in accuracy and goodput denominators. The 50 timed Text-widget single-key opportunities have p95 above100ms. Unicode clipboard insertion was a separate correctness preflight with no latency percentile. Eligibility coverage NOT_MEASURED; no overall100ms, controlledspeedup, fullmodel/runtimebaseline or releasegatePASS claim.",
       "metric_correction": "Historical raw report fast_coverage measured correct events within 100 ms, which is goodput_100. Eligibility was not recorded; fast_coverage is NOT_MEASURED. Raw artifacts and timestamps remain unchanged."
     },
     "windows": {
@@ -1697,6 +1697,14 @@
         "command": "python3 clef_omp_native_readonly_verify_20261011.py --install-root INSTALLED_ROOT",
         "smoke": "OBSERVED preflight-only PASS; native URI body/hash check for exact three installed guides and exactly read+capabilities+status enabled tools; zero model requests",
         "model_route_guard": "Refuses if canonical default selector differs from aipi/dgx-moa-fast; no substitution"
+      },
+      "probe_fidelity_limitation": {
+        "claim": "OBSERVED",
+        "fixed_system_prompt_replaced_generated_native_catalog": true,
+        "sdk_source": "@oh-my-pi/pi-coding-agent/src/sdk.ts:3734",
+        "earlier_outcomes": "Retained actual controlled-probe outcomes; do not infer normal generated-prompt triggering.",
+        "corrected_generated_prompt_preflight": "PASS with PI_TEST_RUNTIME=1 only, no model requests; test-mode scope explicit",
+        "fresh_installed_normal_flag_model_batch": "NOT_RUN pending final source/install; auxiliary native description compression must be bounded and recorded separately."
       }
     },
     "source_regression_final5": {
@@ -1720,13 +1728,64 @@
       "elapsed_seconds": 42.22,
       "reason": "Actual native Unicode paste returned success before widget inserted requested literal; timed clipboard restoration exposed the prior selection. Failure retained; delayed-consumer native reproduction drove acknowledgement-based correction.",
       "local_artifact": "/tmp/clef-use-full-regression-final9-20261011.log"
+    },
+    "actual_original_menu": {
+      "claim": "OBSERVED",
+      "status": "FAIL",
+      "candidate": "full pinned b3f0b233 .29 vs immutable FINAL6 installed .30; latest input fixes excluded and unused by ASSESS",
+      "public_evidence": "blender-menu-paired-final6.json",
+      "public_evidence_sha256": "166420042619a042ebfff8eb7e93b38e2c978a66071f7a79ccecaab19e291de7",
+      "scheduled": 30,
+      "executed": 30,
+      "identical_before_pixel_pairs": 15,
+      "file_open_completed_per_variant": "0/5",
+      "all_terminal_statuses": "LOW_CONFIDENCE",
+      "negative_false_completions": 0,
+      "native_OS_inputs": 0,
+      "thresholds": "UNCHANGED",
+      "scope": "Real canonical parser/model ASSESS; no injected state provider/oracle facts. API-assisted operation fixture is separate. Input-free task cannot measure reaction-to-OS-input p95; full A0-A5/task matrix NOT_RUN."
+    },
+    "x11_native_corrections": {
+      "claim": "OBSERVED",
+      "status": "PASS",
+      "public_evidence": "native-input-final10.json",
+      "independent_before_failures": "x11-review-regressions.json",
+      "full_suite_passed": 780,
+      "scoped_passed": 64,
+      "installed_candidate": "PASS FINAL10 exactsourcehashes and actual native protocol/widget checks; see final10.json",
+      "reaction_p95": "NOT_RUN: single cancellation timing/native microchecks are not reaction release evidence"
+    },
+    "ime_feasibility": {
+      "claim": "OBSERVED",
+      "status": "PARTIAL",
+      "public_evidence": "ime-feasibility.json",
+      "formal_composition_support": "NOT_RUN",
+      "idle_engine_literal_counterexample": "FAIL retained; X11 unicode keyboard substitution removed",
+      "new_installed_literal": "PASS FINAL10 idle actualHangulengine unicodekeyboardrefused; explicitclipboardASCII+Unicodeexactcommitted/no unintendedpreedit; activecompositionrefused unchanged. Formalcomposition remainsNOT_RUN."
+    },
+    "installed_final10": {
+      "claim": "OBSERVED",
+      "status": "PASS",
+      "public_evidence": "final10.json",
+      "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+      "source_matches_installed": true,
+      "scope": "isolated installed runtime/nativeX11protocol+ownedactiveHangulliteralguard+3guides/comment/idempotentbytes+actualschemas; not formalIME, fullGUIharness, productionprovider or releasegate"
+    },
+    "omp_generated_prompt_preflight_final10": {
+      "claim": "OBSERVED",
+      "status": "PASS",
+      "public_evidence": "omp-final10-generated-preflight.json",
+      "model_calls": 0,
+      "test_mode": "PI_TEST_RUNTIME=1 only for no-compression preflight",
+      "normal_generated_prompt_model_batch": "NOT_RUN pending declaredbenchmark completion",
+      "scope": "actual generatednativecatalog+three installedbodies+two readonlynativeMCPschemas matchingfullinstalledcontract; no model or GUI inference"
     }
   },
   "not_run": {
     "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
     "windows": "Original native foreground-restoration fixture FAIL retained; immutable FINAL7 managed integration also FAIL. Source-patched private profile checks PASS in separate evidence. Fixed immutable rebuild, model/runtime/harness GUI E2E and shipped native IME support remain NOT_RUN.",
     "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Codex FINAL6 actual read-only trigger stages PASS. OMP FINAL6 current native default positive stages PASS; completed non-GUI negative over-trigger FAIL is recorded separately and does not certify GUI tasks.",
-    "full_task_performance": "Declared production/Blender/model/harness workload, full pinned baseline comparison, and release quality gates NOT_RUN. FINAL5 bounded Tk input measurement is recorded separately; current input changes require fresh installed measurements.",
+    "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS comparison executed30trials and failed positive completion0/5each. Production action tasks, fullA0-A5 matrix, release quality gates and state-change-to-input reaction remain NOT_RUN. Current input changes require fresh installed measurements.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
     "public_release": "Public upload/download/hash/fresh public install NOT_RUN. Existing release CI run38127830854 passed15platform/Python builds and assembly, branch deployment skipped; immutable Windows nativeintegration then failed. Fixedlatest immutable build pending."
   },
@@ -1739,7 +1798,7 @@
   },
   "acceptance": {
     "pass": 25,
-    "not_run": 18,
+    "not_run": 17,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -1780,17 +1839,26 @@
       "PERF-01": "NOT_RUN",
       "PERF-02": "NOT_RUN",
       "PERF-03": "NOT_RUN",
-      "E2E-01": "NOT_RUN",
+      "E2E-01": "FAIL",
       "E2E-02": "NOT_RUN",
       "E2E-03": "NOT_RUN",
       "RELEASE-01": "NOT_RUN",
       "RELEASE-02": "PASS"
     },
     "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion.",
-    "fail": 1
+    "fail": 2
   },
   "additional_evidence": [
     "final6.json",
-    "reaction-final5.json"
+    "reaction-final5.json",
+    "final10.json",
+    "native-input-final10.json",
+    "x11-review-regressions.json",
+    "ime-feasibility.json",
+    "blender-menu-paired-final6.json",
+    "omp-final6-triggers.json",
+    "omp-final10-generated-preflight.json",
+    "codex-final6-triggers.json",
+    "windows-final7-integration.json"
   ]
 }

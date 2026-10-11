@@ -1,0 +1,75 @@
+{
+  "classification": "OBSERVED",
+  "scope": "FINAL10 exact native OMP generated-prompt preflight, no model requests",
+  "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+  "model_requests": 0,
+  "test_child": true,
+  "route": {
+    "provider": "aipi",
+    "model": "dgx-moa-fast"
+  },
+  "guide_body_hashes": [
+    {
+      "basename": "agent-skills/clef-use/SKILL.md",
+      "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+    },
+    {
+      "basename": "agent-skills/clef-use-blender/SKILL.md",
+      "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+    },
+    {
+      "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "native_full_body_read_preflight": [
+    {
+      "guide": "clef-use",
+      "native_uri": "skill://clef-use",
+      "full_body_observed": true,
+      "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+    },
+    {
+      "guide": "clef-use-blender",
+      "native_uri": "skill://clef-use-blender",
+      "full_body_observed": true,
+      "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+    },
+    {
+      "guide": "clef-use-diagnostics",
+      "native_uri": "skill://clef-use-diagnostics",
+      "full_body_observed": true,
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "full_installed_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+  "readonly_native_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+  "readonly_schemas_exact_selected_installed_match": true,
+  "guide_hashes_exact_installed_match": true,
+  "generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "f0e7712cbbf7da2f2ee24f590a7eca366afcc9a7fc86bb6914211f57b454d062",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI editing, selection, transforms, viewport gestures, materials, or rig\u2026",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": true,
+    "inference_invocations": 0
+  },
+  "prompt_source_audit": {
+    "custom_system_override_present": false,
+    "additional_root_context_count": 0
+  },
+  "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+  "corrected_model_batch": "NOT_RUN: parent benchmark and explicit batch signal pending",
+  "GUI_TASK_VERIFIED": "NOT_RUN",
+  "driver_sha256": {
+    "py": "7463dc3da8cd1808811714a071ee5f9912a4422464cd96a10956dcea3bd4d2d2",
+    "ts": "c3c646130895437cba7b9fd1afd7bbf6156df83ccbe358d206dd45277bb3685a"
+  }
+}
