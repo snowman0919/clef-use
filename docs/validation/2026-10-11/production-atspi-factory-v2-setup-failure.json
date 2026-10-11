@@ -1,0 +1,107 @@
+{
+  "classification": "OBSERVED_SETUP_FAILURE_NO_BLENDER_PUBLISHING_RESULT",
+  "date": "2026-10-12",
+  "attempt": "v2",
+  "driver_sha256": "bb16e7aae886fce42038d22c73cefd2842f998cf695e0dc7aa39b09ac82c36f7",
+  "declaration_sha256": "6ac5741a4b12d5f47066a618bc99b355d4b1ef0be2fcfedb47e90812d89adbc4",
+  "root_start_receipt_sha256": "ce4012b2411c093a37841ef153aa023e78bb720bb3ed2bc993d695b9a7e27a73",
+  "diff_sha256": "ce8bb6f29ce2825f94d2453f342b2bbb27d61fb2f90953437775eee0443124f1",
+  "executions": 1,
+  "retries": 0,
+  "controller_exit_code": 1,
+  "elapsed_worker_seconds": 5.020798731944524,
+  "prior_attempt_preserved": {
+    "basename": "clef-atspi-factory-once-setup-failure-public-20261012.json",
+    "sha256": "57ee1c2a20b81a97debcba1fb8fd79d4e384e1ee077b6344b24f39d6df0ae67d"
+  },
+  "stages": {
+    "host_GI_Atspi_import": "PASS",
+    "nested_Xvfb_user_namespace": "FAIL",
+    "Xvfb_exec": "NOT_RUN",
+    "private_X11_socket_directory_initialization": "NOT_RUN",
+    "isolated_session_bus": "NOT_RUN",
+    "isolated_accessibility_bus": "NOT_RUN",
+    "native_registry_initialization": "NOT_RUN",
+    "Blender_launch": "NOT_RUN",
+    "Blender_OS_window_binding": "NOT_RUN",
+    "Blender_AT_SPI_registration": "NOT_RUN",
+    "app_tree_samples": 0
+  },
+  "failure": {
+    "worker_error_type": "TimeoutError",
+    "worker_error": "phase deadline",
+    "nested_bwrap_error": "No permissions to create new namespace, likely because the kernel does not allow non-privileged user namespaces.",
+    "interpretation": "The nested bubblewrap process reported namespace creation refusal before the embedded socket setup or Xvfb exec. The exact kernel/policy cause of this refusal was not established. No Mesa-versus-NVIDIA comparison or Blender accessibility publishing observation occurred."
+  },
+  "raw_artifacts": [
+    {
+      "basename": "accessibility.conf",
+      "sha256": "73dc6ce5e1e6dc027110c97b5c6f6bbe7047620d39d796dd9ce2580be69281a4"
+    },
+    {
+      "basename": "cleanup-independent.private.json",
+      "sha256": "9ff8d2079f889393f2e83b9684567e188bacbd6aac9d6fd633d61abba2bf4fb1"
+    },
+    {
+      "basename": "controller.json",
+      "sha256": "69ded396a1aff6234465716ff7105c486927ffac81902d3cdc2ecce043cf89d1"
+    },
+    {
+      "basename": "outer.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "report.private.json",
+      "sha256": "d3e2568a2cd909534f9017664bcf62aa6de26bd8d3c3632d843b8999db4bc258"
+    },
+    {
+      "basename": "session.conf",
+      "sha256": "c11ce7368f4e3fcfd502aaf9b38645547eb05a842971ecfce0706373a3ac5d31"
+    },
+    {
+      "basename": "xvfb.private.log",
+      "sha256": "f584d723d6016799815da1fe797c1cb4d40b556ab350e3d7b78d3d12d7febf46"
+    }
+  ],
+  "cleanup": {
+    "outer_waited": true,
+    "outer_namespace_exited": true,
+    "direct_children_waited": 1,
+    "all_direct_children_exited": true,
+    "same_uid_process_mount_namespaces_checked": 380,
+    "owned_mountpoint_process_matches": 0,
+    "permission_denials": 0,
+    "concurrently_vanished": 0,
+    "mountinfo_errors_by_errno": {
+      "22": 5
+    },
+    "unreadable_nonlive_zombies": 5,
+    "unreadable_potentially_live": 0,
+    "owned_root_socket_count": 0,
+    "independent_oracle_method": "Same-UID /proc mountinfo exact owned-root mountpoint; failed mountinfo classified using process state only; no cmdline/environment/UI read."
+  },
+  "scope": {
+    "nested_bwrap_children_started": 1,
+    "new_Xvfb_processes": 0,
+    "new_factory_Blender_processes": 0,
+    "app_inputs": 0,
+    "screenshots": 0,
+    "accessible_names_descriptions_text_reads": 0,
+    "model_calls": 0,
+    "MCP_runtime_sessions": 0,
+    "canonical_edits": 0,
+    "production_UI_or_PID_targeting": 0
+  },
+  "claims_NOT_RUN": [
+    "Blender AT-SPI publishing or absence",
+    "Popup or edit ownership transitions",
+    "Software Mesa correction effectiveness or v1 crash root cause",
+    "Default production StateCompiler provider",
+    "Six guarded operations"
+  ],
+  "redactions": [
+    "No PIDs, account identifiers, hostnames, cookies, absolute private paths, accessible names or assets included.",
+    "Xauthority and machine-id contents and hashes omitted."
+  ],
+  "no_fallback_or_changed_driver": true
+}

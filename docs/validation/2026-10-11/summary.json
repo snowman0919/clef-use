@@ -2631,10 +2631,40 @@
       "artifact": "docs/validation/2026-10-11/windows-cibb971ef-install.json",
       "sha256": "8775c618f7e04292e7afe0eeef0b169227f24a73b12c353ccef9ae8c3f2fae8d",
       "scope": "Actual sourcebb971ef WindowsCI artifact11709226557:10nativecommands/61Git-wheel-installed exact/3guides3profiles,actualinstalledread_config at3phases verifies validflowYAML/settings/usernotehash/CRLFprefix-tail bytes;repeatHOME/config/guides exact. Independentownedprocess0/globalwrapperconfigPATH+bootstrap/priorfixtures preserved. No nativeharness/model/service/GUI/input/fullV2runtimeidentity proof."
+    },
+    "production_atspi_factory_v2_setup_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-v2-setup-failure.json",
+      "sha256": "4bcac60183765909718f6e65163dff15ba3ab4a2e05c2c2eedecd3db645e164f",
+      "scope": "Separateboundedstartupcorrection: GIimportPASS; nestednamespace refusedbeforeXvfbexec/bus/Blender. No Mesa-cause or apppublication/absence result; originalv1unchanged. Ownedouter/directchildexited/independentmount0/socket0, noinput/models/productionUI."
+    },
+    "production_atspi_factory_v3_setup_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-v3-setup-failure.json",
+      "sha256": "55d54d578f683548d1525d7f21101906f6fed0d7c451edbf1963d6313a24d15a",
+      "scope": "MappednamespaceUID0/onlyownedSYS_ADMIN route: Xvfbexec/socket observed; privateDBus connectionfailed withUIDpassworddatabase diagnostic beforeaccessiblebus/registry/Blender. No apppublication/absence or soleEGLcause claim. Child3/outerwaited, independentownedmount0/socket0;earlierv1/v2unchanged. Capabilityset fields describe declared namespace policy; live CapEff was not measured."
+    },
+    "production_atspi_factory_v4_observer_pass_app_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-v4-observer-pass-app-failure.json",
+      "sha256": "29c3a7c216116e32a3c21ee07646657dba8a55a94729d4a2b215ad004a7eb268",
+      "scope": "ActualprivateATSPImethods/bus/registryPID/emptydesktopobserverPASS afterownednamespaceidentityfiles; appbwrapmountnamespacecreationEPERMbeforeBlenderELF. ApppublicationINCONCLUSIVE, notabsence/defaultprovider;prior3failures unchanged. Child5/outerwaited andindependentownedmount0/socket0. Capabilityset fields describe declared namespace policy; live CapEff was not measured."
+    },
+    "production_atspi_factory_v5_startup_error_observation": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-v5-startup-error-observation.json",
+      "sha256": "6a2a689c8001a1113ce54f09a0cfb232edb71ec3d533802259489d5793d25b11",
+      "scope": "DirectofficialELF+ownedOSwindowPID/proc-exeinode and actualobserverPASS;5samples registry0/window1. Original --noaudio unknownfileargument ERROR invalidatescleanfactorybaselineclaim;boundedrawclassification retained, notuniversalabsence/defaultprovider. Child5/outerwaited, independentownedmount0/socket0;earlier4stops preserved."
+    },
+    "production_atspi_factory_v6_bounded_observation": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/production-atspi-factory-v6-bounded-observation.json",
+      "sha256": "9010eee49ac41490ece67233b2eab66c7c3bbd602d43d37c69921b08abe8ebec",
+      "scope": "ExactofficialELF/proc-exeinode/OSwindowPID and actualprivateATSPIobserverPASS;5samples0.318-2.321s eachwindow1/registry0. Corrected-noaudio argument has0unknown/errorlines,2warnings remain. Notsettledscene/longerabsence/popupedit/defaultprovider/6ops proof;all5originalattempts preserved. Child5/outerwaited/independentownedmount0/socket0;capsDECLARED_POLICYonly."
     }
   },
   "not_run": {
-    "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
+    "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider. Separate directofficialELF/OSwindow/privateATSPI observer passed, but5shortsamples exposed no registered app; no universalabsence or verifiedpopup/text/IME/keymap feed was established. State remainsUNKNOWN ratherthanfalse.",
     "windows": "Latest actualWindows committedbb971ef immutableCI11709226557 fresh/repeat10commands/61Git-wheel-installed/3guides3harness/3actualinstalledread_config flowYAML phases PASS. OriginalCRLFprefix/tail/usernote/settings and repeatHOME/config/guides preserved. Source354blockonly and historical6cdf182orderingexception/b321proof retained independently. Nativeharness/model/load/invoke/tasks/fullservicetransport/automaticIMM-TSFreader remainNOT_RUN;fullproductionV2runtimeidentity notestablished by bootstrap snapshot.",
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
@@ -2844,6 +2874,11 @@
     "release-cibb971ef.json",
     "production-atspi-installed-metadata.json",
     "production-atspi-factory-setup-failure.json",
-    "windows-cibb971ef-install.json"
+    "windows-cibb971ef-install.json",
+    "production-atspi-factory-v2-setup-failure.json",
+    "production-atspi-factory-v3-setup-failure.json",
+    "production-atspi-factory-v4-observer-pass-app-failure.json",
+    "production-atspi-factory-v5-startup-error-observation.json",
+    "production-atspi-factory-v6-bounded-observation.json"
   ]
 }

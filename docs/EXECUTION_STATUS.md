@@ -97,6 +97,40 @@ evidence of its absence. NVIDIA EGL library names in the stack are observations,
 not a proven cause. The owned child and namespace exited, and independent
 mount/socket checks found no survivors. See [setup failure](validation/2026-10-11/production-atspi-factory-setup-failure.json)
 and [separate metadata review](validation/2026-10-11/production-atspi-installed-metadata.json).
+The separate v2 startup correction stopped when its nested user namespace was
+refused, before Xvfb executed. It supplies no comparison of EGL vendors or Blender
+publication; the original crash and both cleanup results remain recorded. See
+[v2 setup stop](validation/2026-10-11/production-atspi-factory-v2-setup-failure.json).
+The v3 route observed the Xvfb socket, then failed to establish the private DBus
+connection with a UID password-database lookup diagnostic. Its mapped namespace
+identity differs from the first attempts. Registry and Blender remained unstarted;
+this still supplies no app-publication result. See
+[v3 setup stop](validation/2026-10-11/production-atspi-factory-v3-setup-failure.json).
+The v4 route initialized the actual private AT-SPI bus, registry and desktop
+observer, verified the owned registry PID and observed an empty baseline. Its
+separate app launcher failed to create a mount namespace before the Blender ELF
+executed. App publication remains inconclusive; observer initialization alone
+does not provide application state. See
+[v4 observer and app setup results](validation/2026-10-11/production-atspi-factory-v4-observer-pass-app-failure.json).
+The v5 direct-ELF route verified the official executable and its OS window PID.
+Five samples each observed one owned window and zero registered applications.
+However, Blender treated the original `--noaudio` argument as a filename and
+reported a read error. This is a bounded observation with a startup limitation,
+not a clean factory baseline or proof of interface absence. See
+[v5 limited observation](validation/2026-10-11/production-atspi-factory-v5-startup-error-observation.json).
+The v6 direct-ELF run corrected that argument to `-noaudio`. The actual observer,
+registry identity, executable inode and OS window PID checks passed. Five samples
+from 0.318 to 2.321 seconds each observed one owned window and zero registered
+applications. The complete app log had no unknown-argument or error lines; locale
+and mounted-filesystem warnings remained. This is a short bounded observation,
+not a settled-scene check or universal interface-absence proof. It establishes no
+verified popup, edit, IME or keymap facts for the production State Compiler.
+Owned children and namespace exited; independent mount/socket readback found zero
+survivors. All five earlier attempts remain recorded. In the original v3/v4
+receipts, `environment_route.outer_retained_capability` describes declared policy;
+live capability sets were not measured. The original receipt bytes and hashes
+remain preserved. See
+[v6 bounded observation](validation/2026-10-11/production-atspi-factory-v6-bounded-observation.json).
 
 **OBSERVED / committed YAML-fix release workflow:** run 38157978139 at `bb971ef`
 completed all 15 build/installation-check/upload pairs and release-site assembly.
