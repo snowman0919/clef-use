@@ -268,11 +268,14 @@ class ExecutionRouter:
                 return (obj.id != anchor.id, dx * dx + dy * dy, box.y1, box.x1, obj.id)
 
             hints.sort(key=rank)
+        # Spend the existing total packet budget on observed evidence. ASSESS
+        # has no executable targets, so reserving their unused slots discarded
+        # distinguishing rows from long dropdowns after the nearest eight.
         # A missing or ambiguous anchor grants no spatial inference. Neither
         # hint selection nor raw OCR geometry changes the executable choice set.
         return Observation(
             observation.id,
             observation.frame,
-            tuple(targets + hints[:8]),
+            tuple(targets + hints[: 40 - len(targets)]),
             evidence=observation.evidence,
         )

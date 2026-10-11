@@ -64,7 +64,12 @@ def test_decision_packet_retains_context_provenance_without_action_authority():
     )
     obs = Observation("same_epoch", Frame(Image.new("RGB", (100, 50))), (obj,))
     packet = decision_request(obs, Contract(goal="Inspect"), (), [])
-    assert packet["state"]["objects"] == [obj.model_dump(mode="json")]
+    seen = packet["state"]["object_defaults"] | packet["state"]["objects"][0]
+    raw = obj.model_dump(mode="json")
+    assert {k: v for k, v in seen.items() if k != "bbox"} == {
+        k: v for k, v in raw.items() if k != "bbox"
+    }
+    assert seen["bbox"] == {"x1": 1, "y1": 1, "x2": 3, "y2": 2}
     assert packet["state"]["observation_id"] == obs.id
     assert packet["state"]["frame_reference"] == obs.frame.reference().model_dump(mode="json")
     assert packet["state"]["allowed_candidates"] == []
@@ -74,6 +79,47 @@ def test_decision_packet_retains_context_provenance_without_action_authority():
     huge = obj.model_copy(update={"label": "x" * 40000})
     with pytest.raises(ValueError, match="bounded text budget"):
         decision_request(Observation(obs.id, obs.frame, (huge,)), Contract(goal="Inspect"), (), [])
+
+
+@pytest.mark.parametrize("size", [(1280, 900), (900, 1280)])
+def test_decision_evidence_preserves_known_and_unknown_facts_and_native_geometry(size):
+    from PIL import Image
+
+    from clef_use.backends import decision_request
+    from clef_use.schema import BoundingBox, Frame, UIObject
+
+    obj = UIObject(
+        id="observed",
+        label="Actual label",
+        bbox=BoundingBox(x1=0.01125, y1=0.22125, x2=0.31425, y2=0.41925),
+        confidence=0.84,
+        visible=False,
+        enabled=None,
+        editable=True,
+        focused=False,
+        sensitive=True,
+        source=("ocr",),
+    )
+    raw = obj.model_dump(mode="json")
+    frame = Frame(Image.new("RGB", size), origin=(91, -23), logical_size=(640, 450))
+    packet = decision_request(
+        Observation("pixels", frame, (obj,)), Contract(goal="Inspect"), (), []
+    )
+    state = packet["state"]
+    seen = state["object_defaults"] | state["objects"][0]
+    assert seen["visible"] is False and seen["enabled"] is None
+    assert seen["editable"] is True and seen["focused"] is False
+    assert seen["sensitive"] is True and seen["confidence"] == 0.84
+    assert seen["label"] == "Actual label" and seen["source"] == ["ocr"]
+    assert state["bbox_coordinate_space"] == "image_pixels_outward_envelope"
+    box = seen["bbox"]
+    for edge, extent in (("x1", size[0]), ("y1", size[1])):
+        assert 0 <= raw["bbox"][edge] * extent - box[edge] < 1
+    for edge, extent in (("x2", size[0]), ("y2", size[1])):
+        assert 0 <= box[edge] - raw["bbox"][edge] * extent < 1
+    assert obj.model_dump(mode="json") == raw
+    assert frame.origin == (91, -23) and frame.logical_size == (640, 450)
+    assert state["allowed_candidates"] == []
 
 
 def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():

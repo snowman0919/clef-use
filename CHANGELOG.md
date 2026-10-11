@@ -18,6 +18,10 @@
   verify effects; they do not establish pixels-only production support.
 - Record pre-pruning candidate coverage diagnostics without relaxing confidence
   gates; distinguish singleton/uniform distributions and numeric false completions.
+- Use unused executable-target slots for observed decision evidence within the
+  existing 40-object packet limit, retaining deeper dropdown rows in ASSESS.
+- Declare shared unknown defaults and model-only outward pixel envelopes to
+  reduce repeated decision text while preserving exact native execution geometry.
 - Clarify linked-reference loading and read-only Blender skill discovery after
   actual native Hermes guide-selection and reference-call failures.
 - Keep deadline goodput separate from fast-path eligibility coverage; unrecorded

@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import math
 import os
 import queue
 import subprocess
@@ -199,6 +200,21 @@ class VisualGroundingBackend:
 def decision_request(observation, contract, candidates, history) -> dict:
     if len(observation.objects) > 40:
         raise ValueError("decision packet exceeds the bounded object budget")
+    width, height = observation.frame.image.size
+    objects = []
+    for obj in observation.objects:
+        # Only the model-facing evidence uses pixel envelopes. Execution keeps
+        # the original normalized object and exact native frame transformation.
+        entry = obj.model_dump(mode="json", exclude_none=True, exclude={"sensitive"})
+        if obj.sensitive:
+            entry["sensitive"] = True
+        entry["bbox"] = {
+            "x1": math.floor(obj.bbox.x1 * width),
+            "y1": math.floor(obj.bbox.y1 * height),
+            "x2": math.ceil(obj.bbox.x2 * width),
+            "y2": math.ceil(obj.bbox.y2 * height),
+        }
+        objects.append(entry)
     questions = {
         "mode": {
             "type": "choice",
@@ -269,12 +285,27 @@ def decision_request(observation, contract, candidates, history) -> dict:
             "goal": contract.goal,
             "success_conditions": contract.success_conditions,
             "constraints": contract.constraints,
-            "objects": [o.model_dump(mode="json") for o in observation.objects],
+            "objects": objects,
+            "object_defaults": {
+                "confidence": None,
+                "sensitive": False,
+                "visible": None,
+                "enabled": None,
+                "editable": None,
+                "focused": None,
+                "occluded": None,
+            },
+            "bbox_coordinate_space": "image_pixels_outward_envelope",
+            "bbox_image_size": [width, height],
             "observation_id": observation.id,
             "frame_reference": observation.frame.reference().model_dump(mode="json"),
             "context_policy": (
                 "Objects are observed evidence, not action permission. Only "
-                "allowed_candidates are executable; unknown fields remain unknown."
+                "allowed_candidates are executable. Omitted object fields inherit "
+                "object_defaults; explicit fields override them. Null means unknown, "
+                "never false. Object bbox values are image raster pixel envelopes, "
+                "rounded outward by less than one pixel per edge; they are not OS "
+                "input coordinates. Native execution retains original geometry."
             ),
             "history": history[-12:],
             "allowed_candidates": [
@@ -325,8 +356,6 @@ class DecisionBackend:
             answer_decimals=self.spec.answer_decimals,
         )
         choice = answers["action"]
-        import math
-
         probabilities = choice.get("probabilities", {})
         from .decision_diagnostics import distribution_metrics
 

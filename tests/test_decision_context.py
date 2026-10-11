@@ -91,7 +91,8 @@ def test_unknown_actionability_is_preserved_as_null_without_claiming_true():
     payload = decision_request(
         observation, Contract(goal="test", success_conditions=["done"]), (), []
     )
-    assert payload["state"]["objects"][0]["enabled"] is None
+    state = payload["state"]
+    assert (state["object_defaults"] | state["objects"][0])["enabled"] is None
     assert observation.objects[0].enabled is None
     assert list(payload["questions"])[-2:] == ["mode", "effect"]
     assert list(payload["questions"]).index("complete") < list(payload["questions"]).index(
@@ -134,4 +135,4 @@ def test_dense_structured_session_still_receives_bounded_context():
     SessionRuntime(desktop, desktop, SizeRecorder(), desktop, Config(settle_seconds=0)).execute(
         session
     )
-    assert sizes and max(sizes) <= 40  # 32 targets + 8 hints cap
+    assert sizes and max(sizes) <= 40  # Shared target/evidence packet budget.
