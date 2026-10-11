@@ -1,0 +1,1509 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-11T08:57:36.597580+00:00",
+  "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
+  "completion_claim": false,
+  "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
+  "baseline": {
+    "branch_at_evidence_collection": "codex/reactive-agent-contracts",
+    "changed_tracked_old_paths": [],
+    "current_source_sha256": {
+      "src/clef_use/runtime.py": "4ed6e0f08cd77a7eae5c30476c9f38ac163db4cc01c550ae765932a4e74fc84c",
+      "src/clef_use/service.py": "7591321786d4532abe811046df37316a537ede800960db5f788657cd1193e4f4",
+      "src/clef_use/input_ir.py": "4dac061bb63aa2424ba022aa20392453ff4ce59d90c02ea436f7f6410f703d87",
+      "src/clef_use/operations.py": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+      "src/clef_use/schema.py": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+      "src/clef_use/state.py": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8",
+      "src/clef_use/capabilities.py": "500dbdd82a0cd2d12c5a73f95268a1cdf97be21ce351804709f9b8092eccf0af",
+      "src/clef_use/windows_input.py": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648"
+    },
+    "note": "Source hashes are an evidence-collection snapshot, not installed FINAL4 hashes or a release certificate.",
+    "head_at_initial_evidence_collection": "b0ff951e28adcee2ff5c0994fdff2a74feecbecb",
+    "head_at_document_finalization": "1c52c80877d94116071107c67454457bbd2da46c",
+    "branch_at_document_finalization": "codex/reactive-agent-contracts"
+  },
+  "attachment_import": {
+    "claim": "OBSERVED",
+    "archive_name": "clef-use-codex-handoff-20261011.zip",
+    "archive_sha256": "bd3b71075324544b03e3ca3a45f9cd94d3ed55d754f78e8b2c35285008b82b33",
+    "files": {
+      "KODEX.md": {
+        "attachment_sha256": "8a8b2ccd8913830694ff2ba462e2d9c5c7e746d9e674045867fae3226db332c5",
+        "repository_sha256_before_status_update": "8a8b2ccd8913830694ff2ba462e2d9c5c7e746d9e674045867fae3226db332c5",
+        "unchanged_before_status_update": true
+      },
+      "docs/BASELINE_AND_SOURCES.md": {
+        "attachment_sha256": "0b559a3afd30eaed158961af6d7806e6b20a2d81bb540c16969c916740be054a",
+        "repository_sha256_before_status_update": "0b559a3afd30eaed158961af6d7806e6b20a2d81bb540c16969c916740be054a",
+        "unchanged_before_status_update": true
+      },
+      "ACCEPTANCE.yaml": {
+        "attachment_sha256": "5363ba700497580cdefc8d039ff1a44404b1a668f5aa5c70051fa126b64b157c",
+        "repository_sha256_before_status_update": "5363ba700497580cdefc8d039ff1a44404b1a668f5aa5c70051fa126b64b157c",
+        "unchanged_before_status_update": true
+      }
+    },
+    "acceptance_policy": "Only execution status/evidence metadata is updated; imported requirements and numeric release gates are preserved."
+  },
+  "versions": {
+    "runtime_version": "0.1.30",
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "installed_guide_digests": {
+    "clef-use": "d76f10ebfe06e7ef706a7f0f3986188f3fd52aeee2807564df5afa9bed176339",
+    "clef-use-blender": "dc6ec1039b7b3906909efead361a19482dd57bbc1ffe250ded690ba7b177c1f7",
+    "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+  },
+  "artifacts": {
+    "source_regression": {
+      "local_artifact": "/tmp/clef-use-full-regression-final5-20261011.log",
+      "sha256": "d4b7592eac2a420c489c0b0001d4b2bfcc9a2493f20cf6bdf9cd2cd6cb357778",
+      "raw_artifact_committed": false
+    },
+    "previous_regression": {
+      "local_artifact": "/tmp/clef-use-full-regression-phase-final-20261011.log",
+      "sha256": "2b4cb62de9b424df6c6a5857148de6a29b525fbf700fee93327353147576ca39",
+      "raw_artifact_committed": false
+    },
+    "installed_candidate": {
+      "local_artifact": "/tmp/clef-use-installed-final5-20261011/report.json",
+      "sha256": "b954e1e05ae28546efd71b6f8ee064715da677c5722782cc81e510507f917cd7",
+      "raw_artifact_committed": false
+    },
+    "installation_lifecycle": {
+      "local_artifact": "/tmp/clef-use-installation-final5-report-20261011.json",
+      "sha256": "f45f28b63048f7e7fa3daaa66193a008ffab267b53910dcb5077637fef9f1f7d",
+      "raw_artifact_committed": false
+    },
+    "installed_blender": {
+      "local_artifact": "/tmp/clef-use-operations-installed-final5-20261011/report.json",
+      "sha256": "71029bbae339e93ae883535d2c1b0951e23f949ef0a0823e8e09e95fb8bb6739",
+      "raw_artifact_committed": false
+    },
+    "installed_browser": {
+      "local_artifact": "/tmp/clef-browser-form-installed-final4-20261011/report.json",
+      "sha256": "46434e1e070f7167c37bbeb38aab94e3c0feb4aa57f9e56286de63144b6ea49b",
+      "raw_artifact_committed": false
+    },
+    "installed_editor": {
+      "local_artifact": "/tmp/clef-installed-code-editor-final4-20261011/report.json",
+      "sha256": "8c455c8dbdcf38c0b24700678489e23aa78f9826da3160296f8d8fc611534e68",
+      "raw_artifact_committed": false
+    },
+    "source_native_input": {
+      "local_artifact": "/tmp/pytest-of-monad/pytest-171/test_native_widget_effects_and0/native-input-evidence.json",
+      "sha256": "bc86e4bbe62df7b60a05c1e87b587ff60433e27a02b7ccb71cf9a8f66349b4e5",
+      "raw_artifact_committed": false
+    },
+    "reaction_scope": {
+      "local_artifact": "/tmp/clef-native-reaction-installed-final4-20261011/BENCHMARK_SCOPE.json",
+      "sha256": "7002a3712e4b58d6020586e7ea4b984f14aa381b9b9ecb6922d2bd6761668915",
+      "raw_artifact_committed": false
+    },
+    "reaction_report": {
+      "local_artifact": "/tmp/clef-native-reaction-installed-final4-20261011/REPORT.json",
+      "sha256": "547f2099a042f53fc72ce2cfb09de8559b6eff2621555e4523d66471b18012a0",
+      "raw_artifact_committed": false
+    },
+    "codex_discovery": {
+      "local_artifact": "/tmp/clef-codex-candidate-discovery-isf0vrsl/native-verify-result.json",
+      "sha256": "4cce5d5cf757f91158957883f9325147e71303d7fb69357d559ef4f80b51ded4",
+      "raw_artifact_committed": false
+    },
+    "hermes_explicit": {
+      "local_artifact": "/tmp/clef-hermes-final-triggers-o0ojze5j/explicit-derived-result.json",
+      "sha256": "142c3d9e10a081f4c693ab9d2b6b19fa81b75615f0a0500fcf3b3fba8df074d4",
+      "raw_artifact_committed": false
+    },
+    "hermes_natural": {
+      "local_artifact": "/tmp/clef-hermes-final-triggers-o0ojze5j/natural-derived-result.json",
+      "sha256": "218c1de3b9abaf5576ae6cc10f505f5d7b73ca08bf73107b925f58292ed28f8d",
+      "raw_artifact_committed": false
+    },
+    "hermes_negative": {
+      "local_artifact": "/tmp/clef-hermes-final-triggers-o0ojze5j/negative-derived-result.json",
+      "sha256": "aa0d69e6b6690708f14dfe02d3afe7d37d7a45bd2913f55774b043a149710ea5",
+      "raw_artifact_committed": false
+    },
+    "omp_natural": {
+      "local_artifact": "/tmp/clef-omp-configured-provider-792oifur/natural-derived-result.json",
+      "sha256": "9be7c80e030c9081de9dd2e66b8d85173e4f2c9142f8cc5c810c387e206efbde",
+      "raw_artifact_committed": false
+    },
+    "shared_owner_lifecycle": {
+      "local_artifact": "/tmp/clef-shared-live-cbdpwhao/summary.json",
+      "sha256": "e5e768d40ff9497f27e935c92e7c0d87e30b54c88fd2f44983c4d6e9de3973e1",
+      "raw_artifact_committed": false
+    },
+    "omp_survivor": {
+      "local_artifact": "/tmp/clef-shared-live-cbdpwhao/survivor-result.json",
+      "sha256": "8f301f168edabdbe6c60b8b0f463e9582c2b659779350e282623b9c9b998ee12",
+      "raw_artifact_committed": false
+    },
+    "default_launcher": {
+      "local_artifact": "/tmp/clef-default-launcher-live-zek8lcko/result.json",
+      "sha256": "27a4340f8e88252f01dd6ac149f3067c672856d6367e5008428f2d388381eb5a",
+      "raw_artifact_committed": false
+    },
+    "installed_candidate_final4": {
+      "local_artifact": "/tmp/clef-use-installed-final4-20261011/report.json",
+      "sha256": "6dd021287025d57a11dc566fed48cb953a0bd90c5944f6a8d8d4fedda6d055b3",
+      "raw_artifact_committed": false
+    },
+    "installation_lifecycle_final4": {
+      "local_artifact": "/tmp/clef-use-installation-final4-report-20261011.json",
+      "sha256": "a93556b236b73b956951c21baa65b9e82b95cff5b44a916b9ba392a4835772c1",
+      "raw_artifact_committed": false
+    },
+    "installed_blender_final4": {
+      "local_artifact": "/tmp/clef-use-operations-installed-final4-20261011/report.json",
+      "sha256": "e494f6008483e044b2f57b51b92b66defc523037855423c7da7c5316e229d435",
+      "raw_artifact_committed": false
+    },
+    "windows_summary": {
+      "local_artifact": "/tmp/clef-windows-native-evidence-20261011/SUMMARY.json",
+      "sha256": "bbfebbbcf6b222b8720cfa75c12774254ae027d993c80fa86232aee375036b92",
+      "raw_artifact_committed": false
+    },
+    "windows_final5_components": {
+      "local_artifact": "/tmp/clef-windows-native-evidence-20261011/final5-wheel.json",
+      "sha256": "f8cd17a01e8fac5b6208fd8ae5e227e9a74e65d5626ef497796c92f66fd5e860",
+      "raw_artifact_committed": false
+    }
+  },
+  "evidence": {
+    "source_regression": {
+      "claim": "OBSERVED",
+      "level": "fixture",
+      "artifact": "source_regression",
+      "passed": 767,
+      "skipped": 34,
+      "warnings": 41,
+      "elapsed_seconds": 41.1,
+      "scope": "Completed source regression log after the source gesture timing correction; unit/protocol/fixture coverage is not harness or production GUI evidence.",
+      "execution_command": "uv run pytest (reported suite; exact invocation flags are not stored in the log)"
+    },
+    "previous_source_regression": {
+      "claim": "OBSERVED",
+      "artifact": "previous_regression",
+      "passed": 766,
+      "skipped": 34,
+      "warnings": 41,
+      "scope": "Earlier phase snapshot; superseded by the final source regression above."
+    },
+    "generated_contract_check": {
+      "claim": "OBSERVED",
+      "level": "installed_release",
+      "status": "PASS",
+      "candidate": "FINAL4 local unpublished candidate",
+      "command": "/tmp/clef-use-installed-final4-20261011/runtime/current/bin/python scripts/generate_agent_contract.py --check",
+      "script_sha256": "9f6879f2cf44c269683244b82f473560d7c96179aac0319b21f9e9b057b19063",
+      "result": {
+        "status": "PASS",
+        "tool_examples": 3,
+        "cli_examples": 11,
+        "guides": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ]
+      },
+      "scope": "Generated common examples, guide names/body bounds/relative references, and the four AGENT_GUIDE command blocks; not an exhaustive model-use evaluation of all published prose/examples."
+    },
+    "installed_candidate": {
+      "claim": "OBSERVED",
+      "level": "installed_release",
+      "artifact": "installed_candidate",
+      "candidate": "FINAL5 local unpublished 0.1.30",
+      "install_status": "INSTALLED",
+      "harnesses": [
+        {
+          "harness": "codex",
+          "installed": "INSTALLED",
+          "compatibility": "MATCH"
+        },
+        {
+          "harness": "hermes",
+          "installed": "INSTALLED",
+          "compatibility": "MATCH"
+        },
+        {
+          "harness": "omp",
+          "installed": "INSTALLED",
+          "compatibility": "MATCH"
+        }
+      ],
+      "idempotent": [
+        {
+          "harness": "codex",
+          "status": "UNCHANGED"
+        },
+        {
+          "harness": "hermes",
+          "status": "UNCHANGED"
+        },
+        {
+          "harness": "omp",
+          "status": "UNCHANGED"
+        }
+      ],
+      "preserved_unrelated_config": true,
+      "home_scope": "Disposable Linux HOME containing spaces and Korean characters; no production settings changed.",
+      "previous_final4_artifact": "installed_candidate_final4"
+    },
+    "installation_lifecycle": {
+      "claim": "OBSERVED",
+      "level": "fixture",
+      "artifact": "installation_lifecycle",
+      "first_install": "INSTALLED",
+      "initial_version": "0.1.30",
+      "idempotent": "CURRENT",
+      "update": "INSTALLED",
+      "bad_checksum_preserves_old": true,
+      "missing_download_preserves_old": true,
+      "failed_smoke_preserves_old": true,
+      "final_version": "0.1.31",
+      "scope": "Local staged release fixture, including synthetic 0.1.31 update; not a public 0.1.31 release. Native Windows installation and every crash phase remain unverified.",
+      "previous_final4_artifact": "installation_lifecycle_final4"
+    },
+    "installed_blender": {
+      "claim": "OBSERVED",
+      "level": "installed_release",
+      "artifact": "installed_blender",
+      "candidate": "FINAL5 local unpublished 0.1.30",
+      "access_level": "API_ASSISTED",
+      "execution_path": "SessionManager.run/continue_session -> SessionRuntime.execute",
+      "abort_path": "SessionManager.dispatch(abort) -> SessionRuntime.abort",
+      "production_scene_touched": false,
+      "cases": [
+        {
+          "name": "wrong_keymap_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "wrong_unit_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified"
+          ],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "numeric_transform",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 4,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered",
+            "preview_verified",
+            "committed",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "numeric_transform_cancel",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 4,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered",
+            "preview_verified",
+            "cancelled",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "numeric_transform_enter_abort",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "ABORTED",
+          "assessment": null,
+          "input_count": 1,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered"
+          ],
+          "session_status": "ABORTED"
+        },
+        {
+          "name": "known_modal_enter_cancel",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 1,
+          "geometry_invalidated": false,
+          "transitions": [
+            "owned_modal_cancelled",
+            "unchanged_readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "numeric_transform_abort",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "ABORTED",
+          "assessment": null,
+          "input_count": 3,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered"
+          ],
+          "session_status": "ABORTED"
+        },
+        {
+          "name": "existing_modal_guard",
+          "passed": true,
+          "service_entry_refusal": true,
+          "operation_status": null,
+          "assessment": null,
+          "input_count": null,
+          "geometry_invalidated": null,
+          "transitions": [],
+          "session_status": "SAFETY_BLOCK"
+        },
+        {
+          "name": "known_modal_cancel",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 1,
+          "geometry_invalidated": false,
+          "transitions": [
+            "owned_modal_cancelled",
+            "unchanged_readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "scale_y",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 4,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered",
+            "preview_verified",
+            "committed",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "rotation_z",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 4,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "owned_modal_entered",
+            "preview_verified",
+            "committed",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "incompatible_global_scale_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified"
+          ],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "viewport_orbit",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 1,
+          "geometry_invalidated": true,
+          "transitions": [
+            "requires_verified",
+            "view_change_verified",
+            "geometry_invalidated"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "viewport_pan",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 1,
+          "geometry_invalidated": true,
+          "transitions": [
+            "requires_verified",
+            "view_change_verified",
+            "geometry_invalidated"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "command_search",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 3,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "registered_command_selected",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "menu_absent",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": "ABSENT",
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "menu_file",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": "OPEN",
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "menu_edit",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": "WRONG_MENU",
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "text_focus_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "property_edit",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "SUCCEEDED",
+          "assessment": null,
+          "input_count": 3,
+          "geometry_invalidated": false,
+          "transitions": [
+            "requires_verified",
+            "exact_field_verified",
+            "readback_verified"
+          ],
+          "session_status": "NEEDS_REPLAN"
+        },
+        {
+          "name": "selection_changed_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        },
+        {
+          "name": "wrong_editor_guard",
+          "passed": true,
+          "service_entry_refusal": false,
+          "operation_status": "BLOCKED",
+          "assessment": null,
+          "input_count": 0,
+          "geometry_invalidated": false,
+          "transitions": [],
+          "session_status": "BLOCKED"
+        }
+      ],
+      "cases_passed": 22,
+      "service_entry_refusals": 1,
+      "scope": "Real Blender GUI/native input in disposable factory-startup Xvfb. Private fixture API/telemetry and observation establish editor/keymap/modal/preview/readback. The fixture evidence provider is not shipped or configured in production. Local operation success is not task-goal completion. FINAL5 includes corrected two-point gesture timing; all eight runtime module hashes match source.",
+      "not_run": [
+        "Canonical model-driven original menu ASSESS",
+        "General production trusted state provider",
+        "Actual harness GUI task"
+      ],
+      "previous_final4_artifact": "installed_blender_final4",
+      "module_sha256": {
+        "runtime.py": "4ed6e0f08cd77a7eae5c30476c9f38ac163db4cc01c550ae765932a4e74fc84c",
+        "service.py": "7591321786d4532abe811046df37316a537ede800960db5f788657cd1193e4f4",
+        "input_ir.py": "4dac061bb63aa2424ba022aa20392453ff4ce59d90c02ea436f7f6410f703d87",
+        "operations.py": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+        "schema.py": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+        "state.py": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8",
+        "capabilities.py": "500dbdd82a0cd2d12c5a73f95268a1cdf97be21ce351804709f9b8092eccf0af",
+        "windows_input.py": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648"
+      },
+      "all_eight_modules_match_source": true,
+      "fixture_script_sha256_current": "a92243f4990f0a2f519ce0ac5913edee70a88d292ef311e1f265e0384c69b3c4"
+    },
+    "source_native_input": {
+      "claim": "OBSERVED",
+      "level": "native_gui",
+      "artifact": "source_native_input",
+      "checks": {
+        "chord_literal": "A",
+        "exact_unicode": true,
+        "down_up": true,
+        "buttons_and_modifier_gesture": true,
+        "deadline_release": true,
+        "cancel_release": true,
+        "preexisting_input_preserved": true,
+        "foreground_watchdog_release": true,
+        "intervention_release_preserves_unowned": true,
+        "guardian_failure_release": true,
+        "process_crash_release": true,
+        "frozen_injector_deadline_release": true
+      },
+      "scope": "Source Linux/X11 disposable native widget after gesture timing correction. Native key/chord/text/button/gesture, cancellation/deadline/intervention/guardian/process crash checks; no native Windows result."
+    },
+    "installed_browser": {
+      "claim": "OBSERVED",
+      "level": "installed_release",
+      "artifact": "installed_browser",
+      "candidate": "FINAL4 local unpublished 0.1.30",
+      "status": "PASS",
+      "literal_verified": true,
+      "native_input": true,
+      "independent_readback": "HTTP form submission",
+      "scope": "Typed native input in owned Firefox form; not model/harness E2E"
+    },
+    "installed_editor": {
+      "claim": "OBSERVED",
+      "level": "installed_release",
+      "artifact": "installed_editor",
+      "candidate": "FINAL4 local unpublished 0.1.30",
+      "status": "PASS",
+      "application_version": "1.141.0",
+      "exact_utf8_equal": true,
+      "input_retries": 0,
+      "total_input_dispatches_including_setup": 3,
+      "owned_keys_after": [],
+      "owned_buttons_after": [],
+      "production_desktop_touched": false,
+      "scope": "API_ASSISTED private Xvfb/plain owned file; DesktopCapture→DesktopAction.execute_input; not SessionRuntime OperationRunner or production application provider; FINAL4 predates unrelated gesture timing fix (no gesture used)",
+      "limitation": "Save chord used context=None under a private native window/no-XIM guard; this does not prove general application/text-focus facts or a SessionRuntime/harness workflow."
+    },
+    "harnesses": {
+      "codex": {
+        "bundle_scope": "Pre-FINAL4 0.1.30 candidate guide bundle; FINAL4 Blender reference changed, so these are not FINAL4 reload certificates.",
+        "records": [
+          {
+            "artifact": "codex_discovery",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "NOT_RUN",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "NOT_RUN",
+              "INVOKED": "NOT_RUN",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": false,
+            "trigger_case": null,
+            "trigger_status": null,
+            "trigger_loaded": [],
+            "trigger_invoked": [],
+            "exit_code": null
+          }
+        ],
+        "gui_task_verified": "NOT_RUN",
+        "blocker": "Native discovery passed. A separate isolated codex-cli 0.160.1 model request returned HTTP 401 invalid_api_key using local API-key authentication; load/invocation was not completed. This does not establish an authentication failure for the active desktop chat. No credential values retained."
+      },
+      "hermes": {
+        "bundle_scope": "Pre-FINAL4 0.1.30 candidate guide bundle; FINAL4 Blender reference changed, so these are not FINAL4 reload certificates.",
+        "records": [
+          {
+            "artifact": "hermes_explicit",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "PASS",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "PASS",
+              "INVOKED": "PASS",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": true,
+            "trigger_case": "explicit",
+            "trigger_status": "PASS",
+            "trigger_loaded": [
+              "clef-use",
+              "clef-use-diagnostics"
+            ],
+            "trigger_invoked": [
+              "mcp__clef_use__computer_capabilities"
+            ],
+            "exit_code": 0
+          },
+          {
+            "artifact": "hermes_natural",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "PASS",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "PASS",
+              "INVOKED": "PASS",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": true,
+            "trigger_case": "natural",
+            "trigger_status": "PASS",
+            "trigger_loaded": [
+              "clef-use-blender"
+            ],
+            "trigger_invoked": [
+              "mcp__clef_use__computer_capabilities",
+              "mcp__clef_use__computer_capabilities"
+            ],
+            "exit_code": 0
+          },
+          {
+            "artifact": "hermes_negative",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "PASS",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "PASS",
+              "INVOKED": "PASS",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": true,
+            "trigger_case": "negative",
+            "trigger_status": "PASS",
+            "trigger_loaded": [],
+            "trigger_invoked": [],
+            "exit_code": 0
+          }
+        ],
+        "gui_task_verified": "NOT_RUN"
+      },
+      "omp": {
+        "bundle_scope": "Pre-FINAL4 0.1.30 candidate guide bundle; FINAL4 Blender reference changed, so these are not FINAL4 reload certificates.",
+        "records": [
+          {
+            "artifact": "omp_natural",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "NOT_RUN",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "PASS",
+              "INVOKED": "PASS",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": true,
+            "trigger_case": "natural",
+            "trigger_status": "NOT_RUN",
+            "trigger_loaded": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "trigger_invoked": [
+              "mcp__clef_use_computer_capabilities"
+            ],
+            "exit_code": 1
+          },
+          {
+            "artifact": "omp_survivor",
+            "claim": "OBSERVED",
+            "read_only": true,
+            "overall_status": "PASS",
+            "stages": {
+              "INSTALLED": "PASS",
+              "DISCOVERED": "PASS",
+              "LOADED": "PASS",
+              "INVOKED": "PASS",
+              "TASK_VERIFIED": "NOT_RUN"
+            },
+            "model_driven": false,
+            "trigger_case": null,
+            "trigger_status": "NOT_RUN",
+            "trigger_loaded": [],
+            "trigger_invoked": [],
+            "exit_code": 0
+          }
+        ],
+        "gui_task_verified": "NOT_RUN",
+        "blocker": "Model-driven natural run loaded guides and invoked capabilities, then exited with DeadlineExceeded. Native SDK survivor check passed; this does not establish a completed model task."
+      }
+    },
+    "shared_owner_lifecycle": {
+      "claim": "OBSERVED",
+      "level": "actual_harness",
+      "artifacts": [
+        "shared_owner_lifecycle",
+        "omp_survivor",
+        "default_launcher"
+      ],
+      "scope": "Disposable HOME: removing Codex retained shared guides for OMP; actual OMP SDK then discovered/read/invoked read-only capabilities. Last-owner removal and default executable launcher were checked. This is not a model-driven GUI task."
+    },
+    "reaction": {
+      "claim": "MEASURED",
+      "measurement_origin": "Native runner artifact; inspected and hashed, not independently rerun by evidence writer.",
+      "level": "native_gui",
+      "artifacts": [
+        "reaction_scope",
+        "reaction_report"
+      ],
+      "candidate": "FINAL4 local unpublished 0.1.30; predates source gesture timing correction",
+      "scope": "Owned disposable Tk/Xvfb native task state -> selected OS key -> verified widget",
+      "exclusions": [
+        "Blender",
+        "model inference",
+        "screenshot state inference",
+        "release gate",
+        "full b3f0b23 runtime/model baseline",
+        "real user desktop",
+        "physical human input"
+      ],
+      "release_gate": "NOT_RUN",
+      "opportunities_per_variant": 1005,
+      "sessions": 5,
+      "warm_cold_policy": {
+        "cold": "first opportunity of each variant per fresh driver/app session; interpreter/app startup excluded",
+        "warm": "remaining opportunities; no dropped failures or deadline misses"
+      },
+      "order": "rotating variant order by session and batch; identical per-variant indexed alternating a/b task sequence",
+      "timing": "monotonic perf_counter_ns; separate Tk process timestamps state change and OS KeyPress receipt",
+      "verification": "Tk after_idle readback after native class binding; expected key and literal must both match",
+      "environment": {
+        "platform": "Linux-7.0.0-34-generic-x86_64-with-glibc2.39",
+        "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+        "logical_cpus": 16,
+        "loadavg_at_declaration": [
+          1.37255859375,
+          1.087890625,
+          0.99658203125
+        ],
+        "power_thermal": "NOT_CONTROLLED",
+        "competing_load": "other workspace agents may be active"
+      },
+      "runtime_source_sha256": {
+        "backends.py": "1a5fab24b11e62a6b309b3e731e13e6d0f3d1b43a1d889d363477f23446072dc",
+        "input_ir.py": "683bab14bc5a79ee082c37406301b3408ad4eb975fce1f3937a6f5826b0ddebf",
+        "windows_input.py": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648",
+        "schema.py": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1"
+      },
+      "baseline_variant": {
+        "revision": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+        "file": "src/clef_use/backends.py",
+        "sha256": "5bfee291bc629d8ae3a36213309f67014ba36c88a936b61ff63dd1ecb321c9b5",
+        "supporting_libraries": "current runtime schema/WindowsInput/candidates; plain ASCII Tk path only"
+      },
+      "source_unchanged_during_run": true,
+      "variants": {
+        "pinned_b3": {
+          "all": {
+            "opportunities": 1005,
+            "correct": 1005,
+            "accuracy": 1,
+            "fast_correct": 1005,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.522904970153303,
+            "elapsed_seconds": 222.20232497299975,
+            "correct_event_latency_ms": {
+              "p50": 20.226451,
+              "p95": 20.271975,
+              "p99": 20.311365
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "cold": {
+            "opportunities": 5,
+            "correct": 5,
+            "accuracy": 1,
+            "fast_correct": 5,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.51397463622569,
+            "elapsed_seconds": 1.107671266,
+            "correct_event_latency_ms": {
+              "p50": 20.19447,
+              "p95": 20.360565,
+              "p99": 20.360565
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "warm": {
+            "opportunities": 1000,
+            "correct": 1000,
+            "accuracy": 1,
+            "fast_correct": 1000,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.522949710603248,
+            "elapsed_seconds": 221.0946537069998,
+            "correct_event_latency_ms": {
+              "p50": 20.226451,
+              "p95": 20.270682,
+              "p99": 20.303846
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "sessions": [
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.528845501195192,
+              "elapsed_seconds": 44.38217200099999,
+              "correct_event_latency_ms": {
+                "p50": 20.227441,
+                "p95": 20.290981,
+                "p99": 20.531752
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.517069219554517,
+              "elapsed_seconds": 44.497879096000005,
+              "correct_event_latency_ms": {
+                "p50": 20.220372,
+                "p95": 20.256654,
+                "p99": 20.276086
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.519416175367168,
+              "elapsed_seconds": 44.474771120999996,
+              "correct_event_latency_ms": {
+                "p50": 20.22769,
+                "p95": 20.265391,
+                "p99": 20.287234
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.525258176275043,
+              "elapsed_seconds": 44.41735524700002,
+              "correct_event_latency_ms": {
+                "p50": 20.235409,
+                "p95": 20.276119,
+                "p99": 20.332978
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.5239552707721336,
+              "elapsed_seconds": 44.430147508000005,
+              "correct_event_latency_ms": {
+                "p50": 20.224419,
+                "p95": 20.269499,
+                "p99": 20.288822
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            }
+          ]
+        },
+        "current_legacy": {
+          "all": {
+            "opportunities": 1005,
+            "correct": 1005,
+            "accuracy": 1,
+            "fast_correct": 1005,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.522738220799202,
+            "elapsed_seconds": 222.2105173759999,
+            "correct_event_latency_ms": {
+              "p50": 20.227944,
+              "p95": 20.273596,
+              "p99": 20.404489
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "cold": {
+            "opportunities": 5,
+            "correct": 5,
+            "accuracy": 1,
+            "fast_correct": 5,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.517691221902059,
+            "elapsed_seconds": 1.106760014,
+            "correct_event_latency_ms": {
+              "p50": 20.238399,
+              "p95": 20.322858,
+              "p99": 20.322858
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "warm": {
+            "opportunities": 1000,
+            "correct": 1000,
+            "accuracy": 1,
+            "fast_correct": 1000,
+            "fast_coverage": null,
+            "misses": 0,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 4.522763484126414,
+            "elapsed_seconds": 221.10375736199993,
+            "correct_event_latency_ms": {
+              "p50": 20.227874,
+              "p95": 20.271827,
+              "p99": 20.404489
+            },
+            "goodput_100": 1,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "sessions": [
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.54016252462345,
+              "elapsed_seconds": 44.27154290399999,
+              "correct_event_latency_ms": {
+                "p50": 20.23203,
+                "p95": 20.404489,
+                "p99": 20.789676
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.519784728488177,
+              "elapsed_seconds": 44.471144551,
+              "correct_event_latency_ms": {
+                "p50": 20.228855,
+                "p95": 20.26495,
+                "p99": 20.293198
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.516777557428294,
+              "elapsed_seconds": 44.50075246000001,
+              "correct_event_latency_ms": {
+                "p50": 20.223459,
+                "p95": 20.259689,
+                "p99": 20.278398
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.520459230837244,
+              "elapsed_seconds": 44.464508965999975,
+              "correct_event_latency_ms": {
+                "p50": 20.228884,
+                "p95": 20.2584,
+                "p99": 20.285631
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 201,
+              "fast_coverage": null,
+              "misses": 0,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 4.51659323938983,
+              "elapsed_seconds": 44.502568495000034,
+              "correct_event_latency_ms": {
+                "p50": 20.2284,
+                "p95": 20.264413,
+                "p99": 20.271541
+              },
+              "goodput_100": 1,
+              "fast_coverage_status": "NOT_MEASURED"
+            }
+          ]
+        },
+        "typed": {
+          "all": {
+            "opportunities": 1005,
+            "correct": 1005,
+            "accuracy": 1,
+            "fast_correct": 994,
+            "fast_coverage": null,
+            "misses": 11,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 14.432536984829941,
+            "elapsed_seconds": 69.634327011,
+            "correct_event_latency_ms": {
+              "p50": 40.275311,
+              "p95": 80.457545,
+              "p99": 100.486115
+            },
+            "goodput_100": 0.9890547263681592,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "cold": {
+            "opportunities": 5,
+            "correct": 5,
+            "accuracy": 1,
+            "fast_correct": 4,
+            "fast_coverage": null,
+            "misses": 1,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 9.188163040241133,
+            "elapsed_seconds": 0.544178415,
+            "correct_event_latency_ms": {
+              "p50": 80.444764,
+              "p95": 120.865307,
+              "p99": 120.865307
+            },
+            "goodput_100": 0.8,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "warm": {
+            "opportunities": 1000,
+            "correct": 1000,
+            "accuracy": 1,
+            "fast_correct": 990,
+            "fast_coverage": null,
+            "misses": 10,
+            "critical_errors": 0,
+            "failed_opportunities": 0,
+            "goodput_per_second": 14.473843526483538,
+            "elapsed_seconds": 69.09014859599998,
+            "correct_event_latency_ms": {
+              "p50": 40.273385,
+              "p95": 80.457155,
+              "p99": 80.525592
+            },
+            "goodput_100": 0.99,
+            "fast_coverage_status": "NOT_MEASURED"
+          },
+          "sessions": [
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 199,
+              "fast_coverage": null,
+              "misses": 2,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 14.46415991884696,
+              "elapsed_seconds": 13.896417153000002,
+              "correct_event_latency_ms": {
+                "p50": 40.278072,
+                "p95": 80.457155,
+                "p99": 80.508638
+              },
+              "goodput_100": 0.9900497512437811,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 198,
+              "fast_coverage": null,
+              "misses": 3,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 14.231812928831252,
+              "elapsed_seconds": 14.123288508999996,
+              "correct_event_latency_ms": {
+                "p50": 40.272197,
+                "p95": 80.447948,
+                "p99": 100.486115
+              },
+              "goodput_100": 0.9850746268656716,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 199,
+              "fast_coverage": null,
+              "misses": 2,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 14.603290487082878,
+              "elapsed_seconds": 13.764021210000003,
+              "correct_event_latency_ms": {
+                "p50": 40.279768,
+                "p95": 80.463186,
+                "p99": 80.502498
+              },
+              "goodput_100": 0.9900497512437811,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 199,
+              "fast_coverage": null,
+              "misses": 2,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 14.168034529487345,
+              "elapsed_seconds": 14.186865480999993,
+              "correct_event_latency_ms": {
+                "p50": 40.282699,
+                "p95": 80.455046,
+                "p99": 80.523564
+              },
+              "goodput_100": 0.9900497512437811,
+              "fast_coverage_status": "NOT_MEASURED"
+            },
+            {
+              "opportunities": 201,
+              "correct": 201,
+              "accuracy": 1,
+              "fast_correct": 199,
+              "fast_coverage": null,
+              "misses": 2,
+              "critical_errors": 0,
+              "failed_opportunities": 0,
+              "goodput_per_second": 14.710473017149544,
+              "elapsed_seconds": 13.663734657999996,
+              "correct_event_latency_ms": {
+                "p50": 40.254295,
+                "p95": 80.460959,
+                "p99": 80.525592
+              },
+              "goodput_100": 0.9900497512437811,
+              "fast_coverage_status": "NOT_MEASURED"
+            }
+          ]
+        }
+      },
+      "native_text_editor": {
+        "opportunities": 50,
+        "correct": 50,
+        "accuracy": 1,
+        "fast_correct": 39,
+        "fast_coverage": null,
+        "misses": 11,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 6.594585806514092,
+        "elapsed_seconds": 7.581977317,
+        "correct_event_latency_ms": {
+          "p50": 80.491225,
+          "p95": 100.576797,
+          "p99": 100.579382
+        },
+        "goodput_100": 0.78,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "preflight": [
+        {
+          "false_guard_blocks_native_event": true,
+          "text_editor_exact_unicode": true
+        },
+        {
+          "false_guard_blocks_native_event": true,
+          "text_editor_exact_unicode": true
+        },
+        {
+          "false_guard_blocks_native_event": true,
+          "text_editor_exact_unicode": true
+        },
+        {
+          "false_guard_blocks_native_event": true,
+          "text_editor_exact_unicode": true
+        },
+        {
+          "false_guard_blocks_native_event": true,
+          "text_editor_exact_unicode": true
+        }
+      ],
+      "interpretation": "Reported latency is correct-event latency. All failures/misses remain in accuracy and fast-coverage denominators. The independent Unicode editor profile has p95 above 100 ms and coverage below 0.80. No overall 100 ms claim, controlled speedup claim, full model/runtime baseline claim, or release-gate PASS is made.",
+      "metric_correction": "Historical raw report fast_coverage measured correct events within 100 ms, which is goodput_100. Eligibility was not recorded; fast_coverage is NOT_MEASURED. Raw artifacts and timestamps remain unchanged."
+    },
+    "windows": {
+      "scope": "Final immutable wheel components unpacked in owned Windows temp payload, using existing managed 0.1.21 Python/dependencies; no global installation change",
+      "overall_status": "FAIL",
+      "native_input_cases": "PASS",
+      "wheel_sha256": "6c41e000b528a4aa3aa850c64253cd8a94b57aa5a366057f14554d338c70c1cc",
+      "loaded_module_hashes_match_final5_wheel": {
+        "backends.py": true,
+        "input_ir.py": true,
+        "windows_input.py": true,
+        "schema.py": true
+      },
+      "restoration_status": "FAIL_UNCONFIRMED",
+      "restoration_reason": "SetForegroundWindow admitted=True; immediate actual foreground readback=None. A later restoration-only probe found original HWND still valid but foreground independently changed outside owned console and preserved it. No native input replay.",
+      "raw_report_scope_label_stale": true,
+      "stale_label_reason": "Final wheel was extracted into actual fixture payload, but updated throwaway scope/readback file was uploaded under a different filename than the task target; code hashes prove actual wheel payload. Raw report is preserved unchanged.",
+      "not_run": [
+        "Windows managed final-version installation/lifecycle E2E",
+        "Windows model/runtime/harness E2E",
+        "Actual IME composition (Unicode SendInput is distinct)",
+        "macOS native input",
+        "Native physical_code identity unsupported fail closed"
+      ],
+      "claim": "OBSERVED",
+      "level": "native_gui",
+      "artifacts": [
+        "windows_summary",
+        "windows_final5_components"
+      ],
+      "module_sha256": {
+        "backends.py": "1a5fab24b11e62a6b309b3e731e13e6d0f3d1b43a1d889d363477f23446072dc",
+        "input_ir.py": "4dac061bb63aa2424ba022aa20392453ff4ce59d90c02ea436f7f6410f703d87",
+        "windows_input.py": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648",
+        "schema.py": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1"
+      },
+      "checks": {
+        "exact_unicode_no_clipboard_change": true,
+        "ctrl_a_selection": true,
+        "modifier_chords": true,
+        "left_right_middle": true,
+        "compound_modifier_gesture": true,
+        "explicit_bounded_gesture_control": true,
+        "independent_deadline_release": true,
+        "independent_abort_release": true,
+        "preexisting_unowned_key_preserved": true,
+        "foreground_watchdog_release": true,
+        "injector_crash_guardian_release": true,
+        "frozen_injector_guardian_release": true,
+        "pointer_restore_confirmed": true
+      },
+      "held_keys_after_release": [],
+      "foreground_restore_admitted": true,
+      "foreground_after_restore": null,
+      "task_cleanup": {
+        "last_result": 0,
+        "removed": true
+      },
+      "privacy_note": "Windows account/interpreter paths, HWNDs, key-event contents and raw event/motion traces are deliberately omitted."
+    }
+  },
+  "not_run": {
+    "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider.",
+    "windows": "Overall native Windows fixture FAIL: admitted foreground restoration had immediate null readback; later independent foreground change preserved without replay. FINAL5 wheel component input cases pass with matching hashes; managed installation/lifecycle, model/runtime/harness E2E and actual IME composition remain NOT_RUN.",
+    "harness_gui_tasks": "Codex/Hermes/OMP GUI TASK_VERIFIED NOT_RUN. Historical read-only discovery/load/invocation stages do not certify FINAL4 guides or task completion.",
+    "full_task_performance": "Declared production/Blender/model/harness workload, full b3 baseline comparison, and release quality gates NOT_RUN. The bounded Tk input profile is a separate measurement. FINAL5 benchmark pending; FINAL4 measurements are not relabelled as FINAL5.",
+    "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
+    "public_release": "Public upload/download/hash/CI/fresh public install gates NOT_RUN at this snapshot. Local FINAL5 candidate and synthetic lifecycle 0.1.31 are not public releases."
+  },
+  "privacy": {
+    "raw_traces_copied": false,
+    "screenshots_copied": false,
+    "authentication_copied": false,
+    "restricted_assets_copied": false,
+    "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
+  },
+  "acceptance": {
+    "pass": 21,
+    "not_run": 23,
+    "status_by_id": {
+      "BASE-01": "PASS",
+      "GUIDE-01": "PASS",
+      "GUIDE-02": "NOT_RUN",
+      "GUIDE-03": "NOT_RUN",
+      "GUIDE-04": "NOT_RUN",
+      "CAP-01": "PASS",
+      "CAP-02": "NOT_RUN",
+      "CAP-03": "PASS",
+      "INSTALL-01": "PASS",
+      "INSTALL-02": "PASS",
+      "INSTALL-03": "PASS",
+      "INSTALL-04": "PASS",
+      "INSTALL-05": "NOT_RUN",
+      "INSTALL-06": "NOT_RUN",
+      "INSTALL-07": "NOT_RUN",
+      "INSTALL-08": "PASS",
+      "INSTALL-09": "NOT_RUN",
+      "INSTALL-10": "NOT_RUN",
+      "HARNESS-01": "NOT_RUN",
+      "HARNESS-02": "PASS",
+      "HARNESS-03": "NOT_RUN",
+      "HARNESS-04": "NOT_RUN",
+      "INPUT-01": "PASS",
+      "INPUT-02": "NOT_RUN",
+      "INPUT-03": "PASS",
+      "INPUT-04": "PASS",
+      "INPUT-05": "NOT_RUN",
+      "STATE-01": "PASS",
+      "STATE-02": "PASS",
+      "OP-01": "PASS",
+      "OP-02": "PASS",
+      "OP-03": "PASS",
+      "OP-04": "PASS",
+      "OP-05": "PASS",
+      "DEC-01": "PASS",
+      "DEC-02": "NOT_RUN",
+      "PERF-01": "NOT_RUN",
+      "PERF-02": "NOT_RUN",
+      "PERF-03": "NOT_RUN",
+      "E2E-01": "NOT_RUN",
+      "E2E-02": "NOT_RUN",
+      "E2E-03": "NOT_RUN",
+      "RELEASE-01": "NOT_RUN",
+      "RELEASE-02": "NOT_RUN"
+    },
+    "policy": "PASS applies only to the exact named condition at the recorded evidence scope; it does not imply production-provider, all-platform, public-release or whole-spec completion."
+  },
+  "additional_evidence": [
+    "final6.json",
+    "reaction-final5.json"
+  ]
+}

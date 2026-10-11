@@ -1,0 +1,506 @@
+{
+  "schema_version": 1,
+  "claim": "MEASURED",
+  "candidate": "FINAL5 local unpublished 0.1.30",
+  "scope": "Owned disposable Tk/Xvfb native task state -> selected OS key -> verified widget",
+  "release_gate": "NOT_RUN",
+  "report_sha256": "1b49046856b14e040d08db381fbb5b2efa1d04e0282f4762e9184e01240d083d",
+  "scope_sha256": "6d4317a9655d058f3aade791aefada03905e4a02caa0fa7873867cf9cba3ae8b",
+  "source_unchanged_during_run": true,
+  "variants": {
+    "pinned_b3": {
+      "all": {
+        "opportunities": 1005,
+        "correct": 1005,
+        "accuracy": 1,
+        "fast_correct": 1005,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.522911033721773,
+        "elapsed_seconds": 222.2020270810002,
+        "correct_event_latency_ms": {
+          "p50": 20.22757,
+          "p95": 20.267859,
+          "p99": 20.293207
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "warm": {
+        "opportunities": 1000,
+        "correct": 1000,
+        "accuracy": 1,
+        "fast_correct": 1000,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.522949057531699,
+        "elapsed_seconds": 221.09468563100026,
+        "correct_event_latency_ms": {
+          "p50": 20.22757,
+          "p95": 20.267539,
+          "p99": 20.292065
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "cold": {
+        "opportunities": 5,
+        "correct": 5,
+        "accuracy": 1,
+        "fast_correct": 5,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.515319100535792,
+        "elapsed_seconds": 1.10734145,
+        "correct_event_latency_ms": {
+          "p50": 20.178994,
+          "p95": 20.334689,
+          "p99": 20.334689
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "sessions": [
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.515965835935685,
+          "elapsed_seconds": 44.50875123999999,
+          "correct_event_latency_ms": {
+            "p50": 20.227456,
+            "p95": 20.271937,
+            "p99": 20.290531
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.52177782235352,
+          "elapsed_seconds": 44.45154271099999,
+          "correct_event_latency_ms": {
+            "p50": 20.227063,
+            "p95": 20.268092,
+            "p99": 20.294948
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.52565291740372,
+          "elapsed_seconds": 44.41348103100002,
+          "correct_event_latency_ms": {
+            "p50": 20.22384,
+            "p95": 20.258918,
+            "p99": 20.272243
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.525334323073515,
+          "elapsed_seconds": 44.41660784599996,
+          "correct_event_latency_ms": {
+            "p50": 20.233428,
+            "p95": 20.276607,
+            "p99": 20.294995
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.525840089481092,
+          "elapsed_seconds": 44.411644253000006,
+          "correct_event_latency_ms": {
+            "p50": 20.227336,
+            "p95": 20.263162,
+            "p99": 20.277188
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        }
+      ]
+    },
+    "current_legacy": {
+      "all": {
+        "opportunities": 1005,
+        "correct": 1005,
+        "accuracy": 1,
+        "fast_correct": 1005,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.521169141786033,
+        "elapsed_seconds": 222.2876358929998,
+        "correct_event_latency_ms": {
+          "p50": 20.228378,
+          "p95": 20.269354,
+          "p99": 20.320544
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "warm": {
+        "opportunities": 1000,
+        "correct": 1000,
+        "accuracy": 1,
+        "fast_correct": 1000,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.521182431475329,
+        "elapsed_seconds": 221.1810771089998,
+        "correct_event_latency_ms": {
+          "p50": 20.228378,
+          "p95": 20.268914,
+          "p99": 20.309351
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "cold": {
+        "opportunities": 5,
+        "correct": 5,
+        "accuracy": 1,
+        "fast_correct": 5,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 4.518512773380144,
+        "elapsed_seconds": 1.106558784,
+        "correct_event_latency_ms": {
+          "p50": 20.21244,
+          "p95": 20.324481,
+          "p99": 20.324481
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "sessions": [
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.509593375472645,
+          "elapsed_seconds": 44.57164610300001,
+          "correct_event_latency_ms": {
+            "p50": 20.228304,
+            "p95": 20.263817,
+            "p99": 20.387206
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.526814532643371,
+          "elapsed_seconds": 44.402084191999975,
+          "correct_event_latency_ms": {
+            "p50": 20.227803,
+            "p95": 20.270886,
+            "p99": 20.29162
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.523852403923159,
+          "elapsed_seconds": 44.43115779500001,
+          "correct_event_latency_ms": {
+            "p50": 20.2222,
+            "p95": 20.254808,
+            "p99": 20.272969
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.5209542772897136,
+          "elapsed_seconds": 44.45964008299999,
+          "correct_event_latency_ms": {
+            "p50": 20.227751,
+            "p95": 20.272259,
+            "p99": 20.306768
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 201,
+          "fast_coverage": null,
+          "misses": 0,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 4.524672187882667,
+          "elapsed_seconds": 44.42310772000005,
+          "correct_event_latency_ms": {
+            "p50": 20.233794,
+            "p95": 20.270245,
+            "p99": 20.444251
+          },
+          "goodput_100": 1,
+          "fast_coverage_status": "NOT_MEASURED"
+        }
+      ]
+    },
+    "typed": {
+      "all": {
+        "opportunities": 1005,
+        "correct": 1005,
+        "accuracy": 1,
+        "fast_correct": 996,
+        "fast_coverage": null,
+        "misses": 9,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 14.630663272984817,
+        "elapsed_seconds": 68.69134920600007,
+        "correct_event_latency_ms": {
+          "p50": 40.270279,
+          "p95": 80.447892,
+          "p99": 80.515209
+        },
+        "goodput_100": 0.991044776119403,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "warm": {
+        "opportunities": 1000,
+        "correct": 1000,
+        "accuracy": 1,
+        "fast_correct": 991,
+        "fast_coverage": null,
+        "misses": 9,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 14.665308540834722,
+        "elapsed_seconds": 68.18813236800007,
+        "correct_event_latency_ms": {
+          "p50": 40.2677,
+          "p95": 80.447165,
+          "p99": 80.509036
+        },
+        "goodput_100": 0.991,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "cold": {
+        "opportunities": 5,
+        "correct": 5,
+        "accuracy": 1,
+        "fast_correct": 5,
+        "fast_coverage": null,
+        "misses": 0,
+        "critical_errors": 0,
+        "failed_opportunities": 0,
+        "goodput_per_second": 9.936074515853145,
+        "elapsed_seconds": 0.5032168379999999,
+        "correct_event_latency_ms": {
+          "p50": 80.432237,
+          "p95": 80.519528,
+          "p99": 80.519528
+        },
+        "goodput_100": 1,
+        "fast_coverage_status": "NOT_MEASURED"
+      },
+      "sessions": [
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 199,
+          "fast_coverage": null,
+          "misses": 2,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 14.641129082337724,
+          "elapsed_seconds": 13.728449416000004,
+          "correct_event_latency_ms": {
+            "p50": 40.275291,
+            "p95": 80.442689,
+            "p99": 80.502816
+          },
+          "goodput_100": 0.9900497512437811,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 200,
+          "fast_coverage": null,
+          "misses": 1,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 14.780090491456994,
+          "elapsed_seconds": 13.599375464999998,
+          "correct_event_latency_ms": {
+            "p50": 40.270419,
+            "p95": 80.438585,
+            "p99": 80.474098
+          },
+          "goodput_100": 0.9950248756218906,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 200,
+          "fast_coverage": null,
+          "misses": 1,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 14.757762156920174,
+          "elapsed_seconds": 13.619951173000004,
+          "correct_event_latency_ms": {
+            "p50": 40.264803,
+            "p95": 80.436135,
+            "p99": 80.515209
+          },
+          "goodput_100": 0.9950248756218906,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 198,
+          "fast_coverage": null,
+          "misses": 3,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 14.58712471150161,
+          "elapsed_seconds": 13.779274804000005,
+          "correct_event_latency_ms": {
+            "p50": 40.260528,
+            "p95": 80.461764,
+            "p99": 100.514066
+          },
+          "goodput_100": 0.9850746268656716,
+          "fast_coverage_status": "NOT_MEASURED"
+        },
+        {
+          "opportunities": 201,
+          "correct": 201,
+          "accuracy": 1,
+          "fast_correct": 199,
+          "fast_coverage": null,
+          "misses": 2,
+          "critical_errors": 0,
+          "failed_opportunities": 0,
+          "goodput_per_second": 14.39384887023612,
+          "elapsed_seconds": 13.964298348000005,
+          "correct_event_latency_ms": {
+            "p50": 40.275396,
+            "p95": 80.453452,
+            "p99": 80.487448
+          },
+          "goodput_100": 0.9900497512437811,
+          "fast_coverage_status": "NOT_MEASURED"
+        }
+      ]
+    }
+  },
+  "native_text_editor": {
+    "opportunities": 50,
+    "correct": 50,
+    "accuracy": 1,
+    "fast_correct": 41,
+    "fast_coverage": null,
+    "misses": 9,
+    "critical_errors": 0,
+    "failed_opportunities": 0,
+    "goodput_per_second": 6.7270432965197795,
+    "elapsed_seconds": 7.432685921000001,
+    "correct_event_latency_ms": {
+      "p50": 80.490946,
+      "p95": 100.558361,
+      "p99": 100.656991
+    },
+    "goodput_100": 0.82,
+    "fast_coverage_status": "NOT_MEASURED"
+  },
+  "limitations": [
+    "Only pinned DesktopAction backend with current supporting libraries, not full baseline runtime/model.",
+    "Private native Tk/Xvfb input workload; no Blender, perception/model or actual harness task performance claim.",
+    "Thermal state uncontrolled; events within sessions correlated.",
+    "FINAL6 changes harness/profile resolution only; this measurement remains attributed to FINAL5."
+  ],
+  "metric_correction": "Original raw report named the fraction of correct events within 100 ms fast_coverage. That value is goodput_100. Fast-path eligibility was not recorded, so its coverage is NOT_MEASURED. No timestamps or attempts changed."
+}

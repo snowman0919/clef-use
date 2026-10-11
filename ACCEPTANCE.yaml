@@ -1,0 +1,659 @@
+spec_version: 1
+status: PARTIAL_EXECUTION_EVIDENCE
+baseline_commit: b3f0b23309a7c7ea6a943e0c14e0ae51034552cd
+status_enum:
+- NOT_RUN
+- PASS
+- FAIL
+- BLOCKED
+evidence_levels:
+- static
+- fixture
+- replay
+- native_gui
+- actual_harness
+- installed_release
+- public_release
+integration_stages:
+- INSTALLED
+- DISCOVERED
+- LOADED
+- INVOKED
+- TASK_VERIFIED
+release_gates:
+  warm_local_p95_reaction_ms_max: 100
+  fast_path_coverage_min: 0.8
+  predeclared_opportunities_min: 1000
+  critical_input_leaks_observed_max: 0
+  critical_wrong_scope_actions_observed_max: 0
+  critical_false_completions_observed_max: 0
+  accuracy: no regression against pinned baseline on the same declared suite
+  note: Targets, not measurements. Report limits, all attempts, uncertainty and independent
+    verification.
+scenarios:
+- id: BASE-01
+  category: baseline
+  requirement: Pin actual HEAD, preserve unrelated changes and frozen old, diff against b3f0b233.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: baseline
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: attachment_import
+    claim: OBSERVED
+    partial: false
+  execution_note: OBSERVED repository/attachment snapshot; tracked old/ diff is empty.
+- id: GUIDE-01
+  category: guides
+  requirement: Validate three portable skill names/frontmatter, relative references, bounded body
+    sizes.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: false
+  execution_note: Three matching guide names, bounded bodies and relative references verified
+    against FINAL4 installed bundle.
+- id: GUIDE-02
+  category: guides
+  requirement: Every published tool and CLI example validates against actual installed
+    schemas/parsers.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: true
+  execution_note: Generated 3 tool/11 CLI examples and four AGENT_GUIDE blocks pass; exhaustive
+    published-example validation is not established.
+- id: GUIDE-03
+  category: guides
+  requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  execution_note: Hermes explicit/natural/negative model triggers observed; all-harness trigger
+    evaluation incomplete.
+- id: GUIDE-04
+  category: guides
+  requirement: Cached observation is not used as new input or final-completion proof.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  execution_note: Cache-only/freshness protocol guards covered by fixtures; actual model/harness GUI
+    misuse evaluation incomplete.
+- id: CAP-01
+  category: api
+  requirement: Read-only capabilities have no model load/download, inference, capture, focus change
+    or input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Installed read-only discovery executed; fixture guards cover no runtime/model
+    initialization.
+- id: CAP-02
+  category: api
+  requirement: Version/feature mismatch refuses unsupported actions with actionable current
+    guidance.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: true
+  execution_note: Unsupported operation/default missing-provider and stale-guide compatibility
+    fixtures exist; full installed mismatch matrix incomplete.
+- id: CAP-03
+  category: api
+  requirement: Existing five tools and goal-only contracts retain backward compatibility.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Existing five-tool and goal-only protocol fixtures passed; additive capability
+    tool preserves prior contract.
+- id: INSTALL-01
+  category: installation
+  requirement: Fresh install into isolated HOME deploys selected MCP entry and guides only.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: false
+  execution_note: Disposable selected all-harness install plus default core/diagnostics launcher
+    installation observed.
+- id: INSTALL-02
+  category: installation
+  requirement: Same-version reinstall is idempotent; unrelated bytes/comments/disabled settings
+    survive.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Same-version reinstall UNCHANGED; exact-byte/comments/disabled preservation
+    exercised by integration fixtures.
+- id: INSTALL-03
+  category: installation
+  requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installation_lifecycle
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  execution_note: Local staged compatible runtime/guide update fixture observed; synthetic 0.1.31 is
+    not public release.
+- id: INSTALL-04
+  category: installation
+  requirement: User-modified guide or config entry is preserved and reported as conflict.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Modified managed guide/MCP preservation and conflict reporting exercised by
+    integration fixtures.
+- id: INSTALL-05
+  category: installation
+  requirement: Duplicate realpath/name, project overrides and inactive sources are reported
+    correctly.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Shared guide owner/native SDK survival and override/source fixtures observed;
+    exhaustive discovery precedence matrix incomplete.
+- id: INSTALL-06
+  category: installation
+  requirement: Checksum failure, offline download and traversal/symlink-escape archives do not
+    activate.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installation_lifecycle
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Checksum, missing download, failed smoke and path safety fixtures observed;
+    complete offline/archive escape matrix not established.
+- id: INSTALL-07
+  category: installation
+  requirement: Crash at each staging/activation phase can resume or rollback without data loss.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Integration journal crash/recovery fixtures passed; every runtime installation
+    staging/activation crash point not established.
+- id: INSTALL-08
+  category: installation
+  requirement: Uninstall removes only unchanged managed entries and preserves later user edits.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: false
+  execution_note: Modified entries preserved by fixture removal; actual shared-owner removal and
+    survivor SDK invocation observed.
+- id: INSTALL-09
+  category: installation
+  requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Linux spaces/Unicode HOME plus native FINAL5 Windows component cases observed;
+    Windows overall FAIL on foreground restoration; managed Windows install/profile matrix remains
+    NOT_RUN.
+- id: INSTALL-10
+  category: installation
+  requirement: Active GUI session is not killed during update; stale client gets
+    reload/compatibility result.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  execution_note: Pending-modal lease blocks shutdown/replacement/new goals and allows exact
+    cleanup; full installed update with active GUI session/stale client incomplete.
+- id: HARNESS-01
+  category: harness
+  requirement: Codex actual fresh session discovers and reads guide, then invokes read-only runtime
+    tool.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  execution_note: Codex native discovery observed; a separate isolated CLI request returned HTTP 401 and prevented model guide
+    load/invocation.
+- id: HARNESS-02
+  category: harness
+  requirement: Hermes actual selected profile discovers and reads guide, then invokes read-only
+    runtime tool.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual fresh Hermes explicit/natural runs read guides and invoked read-only
+    capabilities; pre-FINAL4 guide bundle only, GUI TASK_VERIFIED NOT_RUN.
+- id: HARNESS-03
+  category: harness
+  requirement: OMP actual selected profile discovers and reads guide, then invokes read-only runtime
+    tool.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: true
+  execution_note: OMP native SDK read-only check passed; model natural run achieved load/invoke then
+    DeadlineExceeded; completed model session not established.
+- id: HARNESS-04
+  category: harness
+  requirement: Resources-disabled client still receives essential instructions and can act
+    correctly.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  execution_note: Essential tool/server instructions exist; resources-disabled actual client task
+    behavior not established.
+- id: INPUT-01
+  category: input
+  requirement: Key tap/down/up/chord ownership and ordered release work with native OS fixture.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux/X11 native fixture verified key/chord/down/up ownership and release.
+    Native Windows component checks pass, but overall
+    Windows fixture remains FAIL on foreground restoration; no all-platform PASS implied.
+- id: INPUT-02
+  category: input
+  requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_browser
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_editor
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  execution_note: Exact Unicode and shortcuts exercised; active IME composition behavior not
+    exercised natively. Native Windows component checks pass, but overall Windows fixture remains
+    FAIL on foreground restoration; no all-platform PASS implied.
+- id: INPUT-03
+  category: input
+  requirement: Left/right/middle button and modifier-held drag/orbit/pan execute in bounded
+    surfaces.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux native button/modifier gesture checks and installed Blender bounded
+    orbit/pan observed. Native Windows component checks pass, but overall Windows fixture remains
+    FAIL on foreground restoration; no all-platform PASS implied.
+- id: INPUT-04
+  category: input
+  requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux native deadline/cancel/intervention/guardian failure/process
+    crash/frozen injector release checks passed. Native Windows component checks pass, but overall
+    Windows fixture remains FAIL on foreground restoration; no all-platform PASS implied.
+- id: INPUT-05
+  category: input
+  requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Native foreground/intervention and installed editor/keymap/text-focus guards plus
+    fixture mode checks observed; full native application-state matrix incomplete.
+- id: STATE-01
+  category: state
+  requirement: Unknown/false, source, version, timestamp and validity remain distinguishable.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: State compiler fixtures distinguish unknown/false, provenance, version, timestamp,
+    uncertainty and invalidation.
+- id: STATE-02
+  category: state
+  requirement: Menu open/absent/wrong menu/duplicate label assessed without sending input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  execution_note: Menu absent/open/wrong-menu native read-only observations and duplicate-label
+    fixture assessment passed without operation input.
+- id: OP-01
+  category: operations
+  requirement: Command search uses observed keymap and only authorized registered command.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: API-assisted installed search uses verified binding and registered command;
+    nonregistered command refused by fixture.
+- id: OP-02
+  category: operations
+  requirement: Numeric transform verifies selection, axis/space/unit, preview, commit and readback.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: API-assisted installed translation/scale/rotation preview, commit/cancel/readback
+    and guard cases passed.
+- id: OP-03
+  category: operations
+  requirement: Property edit validates exact intended field and final literal value.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  execution_note: API-assisted installed exact focused property and final numeric readback passed.
+- id: OP-04
+  category: operations
+  requirement: Viewport gesture invalidates old projected target and reacquires before edit.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Installed orbit/pan invalidation and subsequent fresh observations plus
+    reused-geometry/partial-gesture fixture refusal passed.
+- id: OP-05
+  category: operations
+  requirement: Cancel applies only to known owned modal and verifies no unintended commit.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Known same-session modal cancellation verified unchanged readback; foreign modal
+    and interrupted entry/closure authority fixtures passed.
+- id: DEC-01
+  category: decision
+  requirement: Singleton, uniform probability and repeat invariance classified separately; coverage
+    before pruning.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Distribution diagnostics and pre-pruning candidate retention fixture tests passed;
+    target accuracy remains explicitly unknown.
+- id: DEC-02
+  category: decision
+  requirement: d1/CLEF compare under same live task conditions without weakening confidence gates.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  execution_note: Diagnostics do not constitute d1/CLEF comparison on identical live tasks; NOT_RUN.
+- id: PERF-01
+  category: performance
+  requirement: Predeclare workload/hardware/split; record at least 1000 reaction opportunities.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: 1005 opportunities/variant in five predeclared Tk sessions observed; full
+    production task workload/hardware/split gate NOT_RUN.
+- id: PERF-02
+  category: performance
+  requirement: Warm profile p95 reaction<=100ms and fast coverage>=0.80; report p99/misses/all
+    attempts.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: FINAL4 and FINAL5 Tk input profiles measured; independent editor p95 exceeds
+    100 ms. Historical fast_coverage was deadline success ratio (goodput_100), corrected in
+    curated evidence; eligibility coverage is NOT_MEASURED. Overall task-profile gate NOT_RUN.
+- id: PERF-03
+  category: performance
+  requirement: Accuracy >= pinned baseline on identical suite; critical errors individually block
+    release.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: Zero reported critical errors and 1005/1005 correct per bounded variant; full
+    pinned runtime/model/task accuracy comparison NOT_RUN.
+- id: E2E-01
+  category: e2e
+  requirement: Installed release repeats real Blender menu/transform/property/viewport workflows.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  execution_note: FINAL5 installed local candidate passes 22 API-assisted native Blender cases with
+    eight source module hashes matched; production provider and actual harness/public release
+    rehearsal remain NOT_RUN.
+- id: E2E-02
+  category: e2e
+  requirement: Browser form and independent editor validate non-Blender generality.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_browser
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_editor
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: Real Firefox form and independent Code/Tk native exact-text effects observed;
+    SessionRuntime/harness general task E2E NOT_RUN.
+- id: E2E-03
+  category: e2e
+  requirement: Reici GUI edits have actual matched-view evidence and independent review status.
+  status: NOT_RUN
+  evidence: []
+  execution_note: No Reici matched-view evidence or independent review performed.
+- id: RELEASE-01
+  category: release
+  requirement: Public version downloads and hashes match; fresh install/update use that release.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installation_lifecycle
+    claim: OBSERVED
+    partial: true
+  execution_note: Local candidate install/update only; public release download/hash/fresh install
+    NOT_RUN.
+- id: RELEASE-02
+  category: release
+  requirement: EN/KO/zh-CN/ja setup/usage/troubleshooting examples remain contract-consistent.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: true
+  execution_note: Four localized AGENT_GUIDE command blocks match; complete published localized
+    setup/usage/troubleshooting validation NOT_RUN.
+evidence_summary: docs/validation/2026-10-11/summary.json
+latest_native_harness_evidence: docs/validation/2026-10-11/final6.json
+latest_native_reaction_evidence: docs/validation/2026-10-11/reaction-final5.json
