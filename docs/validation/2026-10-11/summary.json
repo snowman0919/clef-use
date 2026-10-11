@@ -2070,14 +2070,18 @@
     "windows_installer_crash_phase_cases": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/windows-installer-crash-phases-report-ci26d9252.json",
-      "sha256": "b1ebc8c5a9159540bbe54bdee53fe9a49d4c53ede56159881c345d88d075df38",
-      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim."
+      "sha256": "80977508d79fb0cdf5fc75406f1e051cd626360ca5c45095e9cb572d0733e6c8",
+      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim.",
+      "received_native_artifact_sha256": "b1ebc8c5a9159540bbe54bdee53fe9a49d4c53ede56159881c345d88d075df38",
+      "serialization": "Public copy normalized to LF by repository policy; original native CRLF SHA256 retained separately."
     },
     "windows_installer_crash_phase_declaration": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/windows-installer-crash-phases-predeclaration-ci26d9252.json",
-      "sha256": "bbbd6a29cce2ebf31e3019e6b8e988b1dc1afd4e6955d0f9873a391b858997a0",
-      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim."
+      "sha256": "6e4b4fefee50ea2c77fbe67facec1d33543820f9e8a1b2a97d6d8d0937445b7e",
+      "scope": "Supporting exact immutable Windows process-exit matrix declaration/cases; no production GUI or power-loss claim.",
+      "received_native_artifact_sha256": "bbbd6a29cce2ebf31e3019e6b8e988b1dc1afd4e6955d0f9873a391b858997a0",
+      "serialization": "Public copy normalized to LF by repository policy; original native CRLF SHA256 retained separately."
     },
     "hermes_resources_disabled_task": {
       "claim": "OBSERVED",
