@@ -22,9 +22,9 @@
     "clef-use-blender": {
       "sha256": {
         "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
-        "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+        "references/OPERATIONS.md": "4c6b02d1611f1ddf1b1a68b6f011084650eb5dbf5f9b8cdc456ba7f530574571"
       },
-      "digest": "c1af3408ec928b31dcf87a5033f45d477665fa65c64bdf7ac1134c98297509b8"
+      "digest": "b78e3dddf1621be12d46d86b3ed25e586720f22d54edc4d8813cfca171084d54"
     },
     "clef-use-diagnostics": {
       "sha256": {
