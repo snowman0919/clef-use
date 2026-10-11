@@ -63,6 +63,12 @@ use its selected user profile. Inspect source/shadow status before moving guides
 
 Cancel only your own session; verify owned input release. Exact Unicode clipboard
 insertion and IME composition are distinct; active or unknown IME blocks shortcuts.
+X11 literals require the explicit clipboard method, including ASCII; keyboard
+events can enter an idle IME instead of inserting the requested characters.
+Clipboard transfer is not widget readback. Unsupported prior clipboard formats
+refuse before input. If cancelled before consumption, the owned literal remains
+available for a queued paste until transfer or another copy; previous data is not
+restored early. Windows operations use native Unicode insertion.
 Watchdog recovery is limited by native permissions and acknowledgement windows.
 No measured 100ms profile or release-gate success is currently advertised.
 See [execution evidence](../EXECUTION_STATUS.md) and [acceptance](../../ACCEPTANCE.yaml).

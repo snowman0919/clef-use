@@ -27,6 +27,14 @@
   parser and schemas during packaging.
 - Preserve exact UTF-8 and newline bytes in atomic managed writes on Windows,
   keeping guide hashes and existing CRLF configuration compatible with recovery.
+- Reuse a process-bound X11 query connection while reading fresh native guards;
+  refuse changed logical key bindings and recover acknowledged physical keycodes.
+- Replace X11 clipboard time-based restoration with verified application transfer
+  acknowledgement. Preserve queued text after interrupted paste and concurrent
+  clipboard ownership; require explicit clipboard delivery for Linux literals,
+  including ASCII, because an idle IME can compose native key events.
+- Observe actual editor change events in the native benchmark preflight instead
+  of waiting a fixed interval before reading the widget.
 - Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
   full harness task success or public release is claimed for this candidate.
 

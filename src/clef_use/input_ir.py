@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import json
 import math
+import os
 import queue
 import subprocess
 import sys
@@ -233,6 +234,13 @@ class InputExecutor:
         self.active = False
         self.disabled = False
         self.delivery = None
+        self.x11_state = None
+        self.x11_keys = {}
+        self.x11_keymap = None
+        if getattr(gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+            # This is the map used to construct PyAutoGUI's fixed logical
+            # keycodes, not a new snapshot taken after an OS layout change.
+            self.x11_keymap = tuple(tuple(row) for row in gui.platformModule._display._keymap_codes)
         if self._native():
             self.gui.ownership_changed = self._native_ownership_changed
 
@@ -261,6 +269,16 @@ class InputExecutor:
         from .windows_input import WindowsInput
 
         return isinstance(self.gui, WindowsInput)
+
+    def _x11_state(self):
+        if self.x11_state is not None:
+            return self.x11_state
+        with self.lock:
+            if self.x11_state is None:
+                from .x11_input_state import X11InputState
+
+                self.x11_state = X11InputState(self.gui.platformModule._display.get_display_name())
+            return self.x11_state
 
     def _guardian_start(self):
         if self.disabled:
@@ -316,6 +334,7 @@ class InputExecutor:
                             "deadline": self.watch[1] if self.watch else None,
                             "native_keys": native_keys,
                             "unicode_units": units,
+                            "x11_keys": self.x11_keys,
                         }
                     )
                     + "\n"
@@ -383,13 +402,14 @@ class InputExecutor:
             ):
                 raise InputInterrupted("foreground geometry changed")
         elif getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
-            from .backends import DesktopCapture
-
-            window, bounds = DesktopCapture._x11_context()
+            window, bounds = self._x11_state().foreground()
             if frame.foreground_window is None or window != frame.foreground_window:
                 raise InputInterrupted("foreground changed or unknown")
             if frame.foreground_bounds is not None and bounds != frame.foreground_bounds:
                 raise InputInterrupted("foreground geometry changed")
+            with self.lock:
+                for key, code in self.x11_keys.items():
+                    self._x11_keycode(key, code)
         elif getattr(self.gui, "__name__", "") == "pyautogui":
             raise InputInterrupted(
                 "typed input foreground verification unavailable on this platform"
@@ -403,16 +423,12 @@ class InputExecutor:
                 return self.gui.unowned_input(self.keys, self.buttons)
             if getattr(self.gui, "__name__", "") != "pyautogui" or sys.platform != "linux":
                 return False
-            from Xlib import X, display
+            from Xlib import X
 
-            connection = display.Display()
-            try:
+            with self._x11_state().query() as connection:
                 bitmap = connection.query_keymap()
                 held = {code for code in range(256) if bitmap[code // 8] & (1 << (code % 8))}
-                owned = {
-                    self.gui.platformModule.keyboardMapping.get(KEY_ALIASES.get(key, key))
-                    for key in self.keys
-                }
+                owned = set(self.x11_keys.values())
                 if held - owned:
                     return True
                 mask = connection.screen().root.query_pointer().mask
@@ -424,8 +440,6 @@ class InputExecutor:
                     if mask & bit and button not in self.buttons:
                         return True
                 return False
-            finally:
-                connection.close()
 
     def _held(self, key=None, button=None):
         if key is not None and hasattr(self.gui, "is_pressed"):
@@ -433,10 +447,9 @@ class InputExecutor:
         if button is not None and hasattr(self.gui, "button_pressed"):
             return self.gui.button_pressed(button)
         if getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
-            from Xlib import X, display
+            from Xlib import X
 
-            connection = display.Display()
-            try:
+            with self._x11_state().query() as connection:
                 if key is not None:
                     code = self.gui.platformModule.keyboardMapping.get(KEY_ALIASES.get(key, key))
                     if not code:
@@ -447,9 +460,14 @@ class InputExecutor:
                     button
                 ]
                 return bool(connection.screen().root.query_pointer().mask & mask)
-            finally:
-                connection.close()
         return False
+
+    def _x11_keycode(self, key, code=None):
+        if code is None:
+            code = self.gui.platformModule.keyboardMapping.get(KEY_ALIASES.get(key, key))
+        if not code or not self._x11_state().binding_matches(code, self.x11_keymap[code]):
+            raise InputInterrupted("logical key binding changed in current OS keymap")
+        return code
 
     def _key_down(self, key, frame, acknowledged=None):
         with self.lock:
@@ -464,15 +482,16 @@ class InputExecutor:
                 from Xlib import X
                 from Xlib.ext.xtest import fake_input
 
-                code = self.gui.platformModule.keyboardMapping[KEY_ALIASES.get(key, key)]
+                code = self._x11_keycode(key)
                 fake_input(self.gui.platformModule._display, X.KeyPress, code)
                 self.gui.platformModule._display.sync()
+                self.x11_keys[key] = code
             else:
                 self.gui.keyDown(KEY_ALIASES.get(key, key), _pause=False)
-            if acknowledged is not None:
-                acknowledged()
             self.keys.add(key)
             self.owned.append(("key", key))
+            if acknowledged is not None:
+                acknowledged()
             self._sync()
 
     def _button_down(self, button, frame):
@@ -497,6 +516,15 @@ class InputExecutor:
             if kind == "key":
                 if self._native():
                     self.gui.keyUp(value)
+                elif getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+                    from Xlib import X
+                    from Xlib.ext.xtest import fake_input
+
+                    # Recovery owns the acknowledged physical code, regardless
+                    # of the current logical layout or mapping caches.
+                    fake_input(self.gui.platformModule._display, X.KeyRelease, self.x11_keys[value])
+                    self.gui.platformModule._display.sync()
+                    del self.x11_keys[value]
                 else:
                     self.gui.keyUp(KEY_ALIASES.get(value, value), _pause=False)
             else:
@@ -553,6 +581,8 @@ class InputExecutor:
         context=None,
         after_input_guard=None,
     ):
+        if self.x11_state is not None and os.getpid() != self.x11_state.process:
+            self.x11_state._binding()
         with self.execution_lock:
             self.delivery = None
             try:
@@ -766,17 +796,42 @@ class InputExecutor:
     def _text(self, command, frame, cancelled, deadline, guard):
         if command.method == "unicode":
             if not hasattr(self.gui, "type_text"):
-                if (
-                    getattr(self.gui, "__name__", "") == "pyautogui"
-                    and sys.platform == "linux"
-                    and command.text.isascii()
-                ):
-                    self._ascii_text(command.text, frame, cancelled, deadline, guard)
-                    return
                 raise InputInterrupted(
                     "exact native Unicode unavailable; select clipboard explicitly"
                 )
             self.gui.type_text(command.text, cancelled, frame.foreground_window)
+            return
+        if getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+            from .x11_clipboard import ClipboardTransferError, X11ClipboardTransfer
+
+            transfer = None
+            try:
+                transfer = X11ClipboardTransfer(
+                    command.text,
+                    self.gui.platformModule._display.get_display_name(),
+                    deadline,
+                    cancelled,
+                    lambda: self._check(cancelled, deadline, guard, frame),
+                )
+                for key in ("ctrl", "v"):
+                    self._check(cancelled, deadline, guard, frame)
+                    if key == "v":
+                        transfer.arm()
+                    self._key_down(key, frame)
+                self.release()
+                transfer.wait_consumed()
+            except (ClipboardTransferError, InputInterrupted) as exc:
+                if transfer is not None:
+                    transfer.close()
+                unresolved = transfer is not None and transfer.unresolved
+                reason = str(exc)
+                if unresolved:
+                    reason += "; clipboard transfer unacknowledged"
+                    reason += "; pending clipboard ownership unresolved"
+                raise InputInterrupted(reason) from exc
+            finally:
+                if transfer is not None:
+                    transfer.close()
             return
         import pyperclip
 
@@ -792,38 +847,6 @@ class InputExecutor:
             # Do not overwrite a clipboard edit made concurrently by the user.
             if pyperclip.paste() == command.text:
                 pyperclip.copy(previous)
-
-    def _ascii_text(self, text, frame, cancelled, deadline, guard):
-        """Verify the live X11 keymap before inserting an exact ASCII literal."""
-        from Xlib import X, display
-
-        connection = display.Display()
-        try:
-            if connection.screen().root.query_pointer().mask & X.LockMask:
-                raise InputInterrupted("literal insertion refused while Caps Lock is active")
-            mapping = self.gui.platformModule.keyboardMapping
-            prepared = []
-            for char in text:
-                code = mapping.get(char)
-                shift = self.gui.isShiftCharacter(char)
-                if not code or connection.keycode_to_keysym(code, int(shift)) != ord(char):
-                    raise InputInterrupted("literal unavailable in current OS keymap")
-                logical = char.lower() if char.isalpha() else char
-                logical = next(
-                    (key for key, value in KEY_ALIASES.items() if value == logical), logical
-                )
-                if logical == " ":
-                    logical = "space"
-                prepared.append((logical, shift))
-            for key, shift in prepared:
-                self._check(cancelled, deadline, guard, frame)
-                before = set(self.owned)
-                if shift:
-                    self._key_down("shift", frame)
-                self._key_down(key, frame)
-                self.release(only=set(self.owned) - before)
-        finally:
-            connection.close()
 
 
 def _guardian_main():
@@ -844,7 +867,7 @@ def _guardian_main():
         updates.put(None)
 
     threading.Thread(target=read, daemon=True).start()
-    owned, deadline, native_keys, unicode_units = [], None, {}, []
+    owned, deadline, native_keys, unicode_units, x11_keys = [], None, {}, [], {}
     while True:
         try:
             message = updates.get(timeout=0.01)
@@ -854,12 +877,18 @@ def _guardian_main():
             owned, deadline = message["owned"], message["deadline"]
             native_keys = message.get("native_keys", {})
             unicode_units = message.get("unicode_units", [])
+            x11_keys = message.get("x11_keys", {})
         expired = deadline is not None and time.monotonic() >= deadline
         if message is None or expired:
             if sys.platform == "win32":
                 owned = [
                     *owned,
                     *[("key", key) for key in native_keys if ("key", key) not in owned],
+                ]
+            elif sys.platform == "linux":
+                owned = [
+                    *owned,
+                    *[("key", key) for key in x11_keys if ("key", key) not in owned],
                 ]
             for kind, value in reversed(owned):
                 try:
@@ -870,6 +899,12 @@ def _guardian_main():
                             gui._send(
                                 Input(type=1, keyboard=KeyboardInput(vk, scan, flags | 2, 0, 0))
                             )
+                        elif sys.platform == "linux":
+                            from Xlib import X
+                            from Xlib.ext.xtest import fake_input
+
+                            fake_input(gui.platformModule._display, X.KeyRelease, x11_keys[value])
+                            gui.platformModule._display.sync()
                         else:
                             gui.keyUp(KEY_ALIASES.get(value, value), _pause=False)
                     else:
@@ -882,7 +917,7 @@ def _guardian_main():
                         gui._send(Input(type=1, keyboard=KeyboardInput(0, unit, 6, 0, 0)))
                     except Exception:
                         pass
-            owned, deadline = [], None
+            owned, deadline, x11_keys = [], None, {}
             if message is None:
                 return
 

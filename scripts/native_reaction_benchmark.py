@@ -73,12 +73,14 @@ current=None
 started=None
 active=entry
 received=[]
+observe_text=False
+capture_keys=True
 def emit(value):
     print(json.dumps(value,ensure_ascii=True),flush=True)
 def content():
     return entry.get() if active is entry else editor.get("1.0","end-1c")
 def key(event):
-    if not event.char: return
+    if not event.char or not capture_keys: return
     event_ns=time.perf_counter_ns()
     identity=current
     received.append(dict(id=identity,keysym=event.keysym,char=event.char,received_ns=event_ns))
@@ -89,8 +91,15 @@ def key(event):
     root.after_idle(verify)
 entry.bind("<KeyPress>",key)
 editor.bind("<KeyPress>",key)
+def modified(event):
+    if not editor.edit_modified(): return
+    editor.edit_modified(False)
+    if observe_text and active is editor and content()==expected:
+        emit(dict(kind="text_effect",id=current,widget=content(),
+                  verified_ns=time.perf_counter_ns()))
+editor.bind("<<Modified>>",modified)
 def command(stream,mask):
-    global expected,current,started,active
+    global expected,current,started,active,observe_text,capture_keys
     line=sys.stdin.readline()
     if not line:
         root.destroy();return
@@ -98,6 +107,8 @@ def command(stream,mask):
     if request["op"]=="prepare":
         current=request["id"]
         expected=request["expected"]
+        observe_text=request.get("observe_text",False)
+        capture_keys=request.get("capture_keys",True)
         active=editor if request.get("editor") else entry
         if active is entry: entry.delete(0,"end")
         else: editor.delete("1.0","end")
@@ -126,7 +137,7 @@ from pathlib import Path
 if sys.argv[1]:sys.path.insert(0,str(Path(sys.argv[1])/"src"))
 import clef_use
 root=Path(clef_use.__file__).parent
-names=["backends.py","input_ir.py","windows_input.py","schema.py"]
+names=["backends.py","input_ir.py","x11_input_state.py","x11_clipboard.py","windows_input.py","schema.py"]
 print(json.dumps(dict(python=sys.version,executable=sys.executable,
     package_version=importlib.metadata.version("clef-use"),module_origin=str(root),
     source_sha256={name:hashlib.sha256((root/name).read_bytes()).hexdigest()
@@ -337,27 +348,39 @@ def driver(config):
                     ),
                     flush=True,
                 )
-        # Independent Text editor widget, including native exact Unicode insertion.
+        # Timed single-key Text widget profile; Unicode is a separate preflight.
         for index in range(10):
             editor_rows.append(
                 opportunity(
                     "typed", 9_000_000 + config["session"] * 100 + index, cold=False, editor=True
                 )
             )
-        request({"op": "prepare", "id": -2, "expected": "a", "editor": True}, "prepared")
         from clef_use.input_ir import TextInput
 
         unicode_text = "한😀 e\u0301"
+        request(
+            {
+                "op": "prepare",
+                "id": -2,
+                "expected": unicode_text,
+                "editor": True,
+                "observe_text": True,
+                "capture_keys": False,
+            },
+            "prepared",
+        )
         result = adapters["typed"].execute_input(
             TextInput(text=unicode_text, method="clipboard"), frame, cancelled["typed"]
         )
-        # Paste may generate several real character events; allow delivery then
-        # inspect authoritative widget state, draining those protocol notifications.
-        time.sleep(0.05)
-        while not replies.empty():
-            replies.get_nowait()
+        # Native clipboard transfer is not widget readback. Wait for the
+        # independent app's actual edit event rather than an elapsed delay.
+        effect = replies.get(timeout=3)
+        if effect["kind"] != "text_effect" or effect.get("id") != -2:
+            raise RuntimeError(f"unexpected Unicode effect event: {effect['kind']}")
         inspected = request({"op": "inspect", "id": -2}, "inspected")
-        preflight["text_editor_exact_unicode"] = result.ok and inspected["widget"] == unicode_text
+        preflight["text_editor_exact_unicode"] = (
+            result.ok and effect["widget"] == unicode_text and inspected["widget"] == unicode_text
+        )
     except Exception as exc:
         preflight["driver_error"] = f"{type(exc).__name__}: {str(exc)[:200]}"
     finally:
@@ -506,10 +529,14 @@ def main():
             "session_incomplete",
         ],
         "reporting": (
-            "all failures count in accuracy/fast coverage denominators; "
+            "all failures count in accuracy/goodput denominators; "
+            "eligibility coverage stays unmeasured; "
             "correct-only latency explicitly labelled"
         ),
-        "generality": "native independent Tk Text editor + Unicode paste; browser not covered",
+        "generality": (
+            "Timed native Tk Text single-key profile; separate Unicode clipboard correctness "
+            "preflight has no latency percentile. Browser not covered."
+        ),
         "diagnostic_only": args.diagnostic_smoke,
         "runtime": metadata,
         "environment": {

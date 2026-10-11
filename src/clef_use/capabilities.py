@@ -124,7 +124,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "typed": ["key", "chord", "text", "pointer", "gesture", "wheel"],
             "physical_code": "UNSUPPORTED",
             "ime": "composition context guard; no IME engine control",
-            "unicode": "Windows native; X11 full Unicode via explicit clipboard provider",
+            "unicode": "Windows native; X11 requires explicit clipboard, including ASCII literals",
             "macos_watchdog": "limited: native foreground and human-input query unavailable",
         },
         "operations": operations

@@ -535,7 +535,7 @@ def exercise(args, token, capture, gui, output):
         return action.execute_input(command, frames[state.observation_id], cancelled)
 
     state = observe()
-    runner = OperationRunner(observe, execute, text_method="unicode")
+    runner = OperationRunner(observe, execute, text_method="clipboard")
     runtime = session = manager = None
     if args.runtime:
         from clef_use.config import Config

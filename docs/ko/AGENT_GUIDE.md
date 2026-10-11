@@ -64,6 +64,11 @@ user profile을 사용합니다. 스킬을 옮기기 전에 source·shadow 상�
 
 자신의 세션만 중단하고 입력 해제를 확인하세요. 정확한 Unicode clipboard 삽입과
 IME 조합은 별개입니다. IME가 활성 상태이거나 불명이면 단축키를 차단합니다.
+X11에서는 ASCII를 포함한 문자 삽입에 명시적 clipboard 방식을 사용합니다. 키 이벤트는
+조합이 시작되기 전에도 IME로 전달될 수 있습니다. clipboard 전송 확인과 입력 필드의
+결과 확인은 별개입니다. 기존 clipboard 형식을 보존할 수 없으면 입력 전에 거부합니다.
+수신 전에 중단되면 이미 전달된 붙여넣기를 위해 문자를 전송 완료 또는 다른 복사까지
+유지하며, 이전 데이터를 일찍 복원하지 않습니다. Windows 조작은 native Unicode를 사용합니다.
 watchdog 복구에는 OS 권한과 입력 확인 시점에 따른 한계가 있습니다.
 현재 측정으로 통과한 100ms profile이나 출하 gate 성공을 주장하지 않습니다.
 [실행 증거](../EXECUTION_STATUS.md)와 [acceptance](../../ACCEPTANCE.yaml)를 확인하세요.

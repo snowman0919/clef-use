@@ -341,7 +341,14 @@ class SessionRuntime:
                 lambda command, state, cancelled: self._operation_input(
                     command, state, cancelled, session.contract.operation
                 ),
-                text_method="unicode",
+                # Only an actual native literal implementation can use Unicode.
+                # X11 key events remain IME-mediated even with an idle preedit,
+                # so its operations deliberately request clipboard literals.
+                text_method=(
+                    "unicode"
+                    if hasattr(getattr(self.action, "gui", None), "type_text")
+                    else "clipboard"
+                ),
             )
         self._phase(session, "Checking registered operation")
         report = self.operation_runners[session.id].run(request, session.cancelled)

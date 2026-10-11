@@ -59,5 +59,9 @@ profile。移动技能前检查 source 和 shadow 状态。
 
 仅中止自己的会话并验证输入释放。精确 Unicode clipboard 插入与 IME 组合不同；
 IME 活动或未知时会阻止快捷键。watchdog 恢复受 OS 权限和确认时间窗口限制。
+X11 的字符输入（包括 ASCII）要求显式 clipboard 方式；键事件即使在组合开始前
+也可能进入 IME。传输确认不等于输入框结果验证。无法保留原有 clipboard 格式时，
+会在输入前拒绝。接收前中止时，为已发送的粘贴保留文字，直到传输完成或发生其他
+复制，不提前恢复旧数据。Windows 操作使用 native Unicode 输入。
 目前不宣称已测得通过的 100ms profile 或发布 gate 成功。
 参阅[执行证据](../EXECUTION_STATUS.md)及[验收要求](../../ACCEPTANCE.yaml)。

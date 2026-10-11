@@ -1,0 +1,187 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Disposable own Xvfb, native Tk/Xlib selection protocol and real clipboard-provider subprocess only",
+  "production_GUI": "NOT_RUN",
+  "repository_edits": false,
+  "cases": [
+    {
+      "case": "utf8_incremental_snapshot",
+      "source_boundary": "initial",
+      "clipboard_source_sha256": "41e81203d826dcaac628b836c940f3c0ecc870c3b5c9717423303d38b8374511",
+      "observations": {
+        "error_type": "ClipboardTransferError",
+        "error": "string argument without an encoding",
+        "previous_owner_preservation": "NOT_RUN: not separately queried in this historical case"
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "large_restored_snapshot",
+      "source_boundary": "initial",
+      "clipboard_source_sha256": "41e81203d826dcaac628b836c940f3c0ecc870c3b5c9717423303d38b8374511",
+      "observations": {
+        "previous_bytes": 409600,
+        "temporary_bytes_exact": true,
+        "native_consumed_ack": true,
+        "restored_exact": false,
+        "read_error_type": "TclError",
+        "read_error": "selection owner didn't respond",
+        "provider_exit": 0,
+        "provider_events": [
+          {
+            "event": "error",
+            "reason": "ushort format requires 0 <= number <= 65535",
+            "ownership_acquired": true
+          },
+          {
+            "event": "closed"
+          }
+        ]
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "destroyed_foreign_incremental_reader",
+      "source_boundary": "initial",
+      "clipboard_source_sha256": "41e81203d826dcaac628b836c940f3c0ecc870c3b5c9717423303d38b8374511",
+      "observations": {
+        "native_incr_observed": true,
+        "new_clipboard_exact": true,
+        "provider_alive_after_new_owner_and_one_second": true,
+        "provider_events": [
+          {
+            "event": "owner_changed"
+          }
+        ]
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "small_direct_unicode_snapshot",
+      "source_boundary": "unicode_cancel",
+      "clipboard_source_sha256": "dfc0b446b7e51b2045a7ec2f784d4e2b12804a8dc0c5392d57d0432076add91a",
+      "observations": {
+        "temporary_exact": true,
+        "native_consumed_ack": true,
+        "restored_unicode_exact": true,
+        "expected_utf8_sha256": "2e5fec925231393929180fc3e4f8538bac751f402aa43d1dd4028e6ed891a711",
+        "restored_utf8_sha256": "2e5fec925231393929180fc3e4f8538bac751f402aa43d1dd4028e6ed891a711",
+        "restored_utf8_bytes": 21
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "constructor_cancel_during_unresponsive_snapshot",
+      "source_boundary": "unicode_cancel",
+      "clipboard_source_sha256": "dfc0b446b7e51b2045a7ec2f784d4e2b12804a8dc0c5392d57d0432076add91a",
+      "observations": {
+        "error_type": "ClipboardTransferError",
+        "error": "clipboard transfer cancelled or deadline expired; clipboard restoration unacknowledged",
+        "elapsed_seconds": 3.0,
+        "cancellation_scheduled_seconds": 0.05,
+        "previous_owner_preserved": true
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "destroy_before_provider_subscription",
+      "source_boundary": "stale_subscription",
+      "clipboard_source_sha256": "23f28103c2b1ba0d512cd40440e2e24b4a4e2ac4fe8a2e52c818b9e00ece103f",
+      "observations": {
+        "event_order": "own provider paused; native ConvertSelection then DestroyWindow and server sync; provider resumed; new native clipboard copy",
+        "new_clipboard_exact": true,
+        "provider_alive_after_new_owner_and_one_second": true,
+        "provider_exit": null,
+        "provider_events": [
+          {
+            "event": "owner_changed"
+          }
+        ]
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    },
+    {
+      "case": "destroy_before_multiple_property_read",
+      "source_boundary": "stale_multiple",
+      "clipboard_source_sha256": "23f28103c2b1ba0d512cd40440e2e24b4a4e2ac4fe8a2e52c818b9e00ece103f",
+      "observations": {
+        "event_order": "own provider paused; native MULTIPLE ConvertSelection then DestroyWindow and server sync; provider resumed",
+        "clipboard_selection_missing": true,
+        "provider_exit": 0,
+        "provider_events": [
+          {
+            "event": "error",
+            "error_type": "BadWindow",
+            "ownership_acquired": true
+          },
+          {
+            "event": "closed"
+          }
+        ]
+      },
+      "cleanup": {
+        "owned_provider_children_reaped": true,
+        "owned_Xvfb_reaped": true
+      }
+    }
+  ],
+  "limits": [
+    "Source hashes captured at probe startup; historical frozen source was not copied by reviewer.",
+    "Small Unicode restoration ran later source, not the historical failing snapshot.",
+    "Cancellation was scheduled at 50ms; actual callback firing time was not separately timestamped.",
+    "Historical issues remain preserved; later implementation fixes require separately identified smoke evidence.",
+    "Live abandoned requestors are distinct from destroyed requestors; no timeout termination was tested or recommended."
+  ],
+  "artifacts": [
+    {
+      "basename": "resource-frozen-probe.py",
+      "sha256": "746f21d89908277f5396caea739574099d6d71b90ee31035b3560b88d4eba9c7"
+    },
+    {
+      "basename": "resource-frozen-report.json",
+      "sha256": "711323498e95d035b631b966201c8ff4a1f3081b23603e33a2338a9ed0ce0a88"
+    },
+    {
+      "basename": "unicode_cancel_probe.py",
+      "sha256": "5667942bb104a4087a780397bea33cfa432916d71b29880dbbf575d44af80d78"
+    },
+    {
+      "basename": "destroy_before_subscribe_probe.py",
+      "sha256": "495ff1e8fb309af9e97977cff4bccd77303ded2c77e3f3d4745893650383cd25"
+    },
+    {
+      "basename": "destroy_before_multiple_probe.py",
+      "sha256": "2c712899b8c50a563e31239a04494c1244700fff73e27597ea6e07e4628c9407"
+    }
+  ],
+  "latest_correction_review": {
+    "classification": "INFERRED",
+    "method": "Read-only inspection of requestor subscription acknowledgement, per-requestor BadWindow/BadAtom cleanup, MULTIPLE property-read containment and asynchronous send error paths; no rerun by reviewer",
+    "clipboard_source_sha256": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3",
+    "remaining_concrete_blockers_found_in_requested_boundary": [],
+    "separate_native_fix_evidence": {
+      "execution_owner": "input agent",
+      "basename": "native-input-evidence.json",
+      "sha256": "02c23b1b2aeb3ec2ad25005ad3ef9945ce1339928a26d57bba184f42ce8f7455",
+      "reported_results": "Native stale UTF8 subscription and stale MULTIPLE provider/clipboard preservation passed; 64 scoped tests passed. Reviewer inspected artifact provenance, did not execute these tests."
+    }
+  }
+}
