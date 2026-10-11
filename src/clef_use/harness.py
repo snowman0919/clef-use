@@ -136,11 +136,27 @@ def _yaml_entry(original: str, entry: dict | None) -> str:
     servers = next((value for key, value in pairs if key.value == "mcp_servers"), None)
     newline = "\r\n" if "\r\n" in original else "\n"
     encoded = json.dumps(entry) if entry is not None else None
+
+    def insert_flow(mapping, name, value):
+        position = mapping.end_mark.index - 1
+        fragment = original[mapping.start_mark.index : mapping.end_mark.index]
+        previous = None
+        for token in YAML().scan(fragment):
+            if token.id == "}" and token.end_mark.index == len(fragment):
+                break
+            previous = token
+        prefix = ", " if mapping.value and previous.id != "," else ""
+        return original[:position] + prefix + json.dumps(name) + ": " + value + original[position:]
+
     if servers is None:
         if entry is None:
             return original
-        separator = "" if not original or original.endswith(("\n", "\r")) else newline
-        return original + separator + "mcp_servers:" + newline + "  clef-use: " + encoded + newline
+        if node is not None and getattr(node, "flow_style", False):
+            return insert_flow(node, "mcp_servers", json.dumps({"clef-use": entry}))
+        position = node.end_mark.index if node is not None else len(original)
+        separator = "" if not position or original[position - 1] in ("\n", "\r") else newline
+        addition = separator + "mcp_servers:" + newline + "  clef-use: " + encoded + newline
+        return original[:position] + addition + original[position:]
     if not isinstance(servers.value, list):
         if servers.value == "":
             return (
@@ -161,9 +177,7 @@ def _yaml_entry(original: str, entry: dict | None) -> str:
         if entry is None:
             return original
         if servers.flow_style:
-            position = servers.end_mark.index - 1
-            prefix = ", " if servers.value else ""
-            return original[:position] + prefix + '"clef-use": ' + encoded + original[position:]
+            return insert_flow(servers, "clef-use", encoded)
         indent = servers.value[0][0].start_mark.column if servers.value else 2
         position = servers.end_mark.index - servers.end_mark.column
         addition = " " * indent + "clef-use: " + encoded + newline

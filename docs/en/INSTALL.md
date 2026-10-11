@@ -62,6 +62,8 @@ Markdown guides. Package support files are not independent guides. Excluded
 cache/dependency folders are skipped by the `SKILL.md` catalog, while explicit
 legacy Markdown remains checked wherever native lookup can load it. Malformed
 frontmatter follows Hermes's name fallback.
+Hermes MCP registration preserves YAML flow mappings, trailing commas, comments
+and document endings; existing settings remain in the same YAML document.
 Codex disables individual `SKILL.md` entries. A disabled project file does not
 conflict with the active managed guide; a directory entry alone does not disable it.
 

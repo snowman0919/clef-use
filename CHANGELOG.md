@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Keep Hermes MCP registration inside existing YAML flow mappings, respecting
+  trailing commas and document endings while preserving user settings and comments.
 - Ignore active-source aliases of the same complete managed skill directory
   during repeat enrollment; separate resource roots still report conflicts,
   including aliases of only SKILL.md with different relative references.
