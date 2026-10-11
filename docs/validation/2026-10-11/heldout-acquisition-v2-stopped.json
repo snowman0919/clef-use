@@ -1,0 +1,65 @@
+{
+  "classification": "OBSERVED",
+  "status": "FAIL",
+  "scope": "Single declared v2 native acquisition; first invariant failure before capture. No retries, relabels, models or GPU calls.",
+  "driver_sha256": "fff508014c29c3496096c662c1cbe60193f8341c2b76c1d1b06b65bf0a23b99d",
+  "declaration_sha256": "f3af9f5e3b2f3bd6a203e111f8869930d2710bf61ad8677161d6d835d12ff813",
+  "report_sha256": "1daa140a0b2c64d780b4b2907ca48334cef2217213a512319b7ceb6bb4fab516",
+  "scene_count": 36,
+  "query_count": 72,
+  "captured_screens": 0,
+  "NOT_RUN_screens": 36,
+  "NOT_RUN_queries": 72,
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "OS_accuracy_task_inputs": 0,
+  "first_failure": {
+    "application": "browser",
+    "scene_id": "browser-01",
+    "error_type": "RuntimeError",
+    "error": "Native oracle viewport/frame binding mismatch",
+    "oracle": "NATIVE_DOM",
+    "declared_frame_resolution": [
+      1200,
+      800
+    ],
+    "observed_DOM_inner_viewport": [
+      1080,
+      720
+    ],
+    "observed_DOM_screen_offset": [
+      4,
+      4
+    ],
+    "device_pixel_ratio": 1,
+    "oracle_sha256": "111f982abeb7ad9618452d1b35084e2a16f6585e716611b6cc3cb453505509a1",
+    "screenshot_exists": false,
+    "native_window_rect_observed": false,
+    "note": "Only DOM oracle was obtained before binding check; no screenshot/native X11 window rect recorded. No inference about browser chrome thickness or final kiosk state."
+  },
+  "report_group_status_note": "Group RUNNING field retained at exception; top-level FAIL terminal. No running-process claim.",
+  "cleanup": {
+    "recorded": [
+      {
+        "application": "browser",
+        "seed": 17,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      }
+    ],
+    "independently_remaining_owned_pids": [],
+    "all_declared_X_sockets_absent": true,
+    "all_declared_X_locks_absent": true,
+    "production_Blender_PID_alive": true,
+    "supervisor_exit_code": 1
+  },
+  "prior_failure_preserved": {
+    "original_driver_sha256": "50365be5a110ba960cf741aade080a73a6911f280321b1537e19aa99b90f347d",
+    "original_report_sha256": "0ef71c9049236901499ba3cbd677b39e19780660bfe983fe71ca8351ed6ab9b9"
+  },
+  "ground_truth_lock": "NOT_READY",
+  "received_artifact_sha256": "e02b15cbee2ac9b0172eeb6d8d0608923ad4a13af3a270252214fd75e6bf2643"
+}

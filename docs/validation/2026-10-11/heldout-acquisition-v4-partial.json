@@ -1,0 +1,902 @@
+{
+  "classification": "OBSERVED",
+  "status": "PARTIAL_CAPTURE_THEN_FAIL",
+  "driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+  "declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+  "original_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+  "scheduled_screens": 36,
+  "scheduled_model_queries": 72,
+  "captured_native_screens": 12,
+  "NOT_RUN_screens": 24,
+  "executed_model_queries": 0,
+  "NOT_RUN_model_queries": 72,
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "OS_accuracy_task_inputs": 0,
+  "first_failure": {
+    "screen_id": "tk_editor-01",
+    "query_id": "tk_editor-01-1",
+    "planned_kind": "PRESENT",
+    "error": "Independent native oracle contradicts locked query: tk_editor-01-1",
+    "observed_targets": [
+      {
+        "query_index": 0,
+        "native_class": "TButton",
+        "rect": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "visible": false
+      },
+      {
+        "query_index": 1,
+        "native_class": "TButton",
+        "rect": [
+          0,
+          0,
+          1,
+          1
+        ],
+        "visible": false
+      }
+    ],
+    "oracle_sha256": "13410c00d78749efcf5f69ec6143d83ead480ba70aa5cfb1d9e4351a3f0f6db6",
+    "Tk_screenshot_exists": false,
+    "note": "Recorded Tk viewport field is configured width/height, not actual winfo width/height readback. Root native viewport therefore not independently established by this record."
+  },
+  "screens": [
+    {
+      "screen_id": "browser-01",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "689332423d35903c91a6119cbfb762ca4afc6930df94eabbcbf71eb303210cae",
+      "decoded_rgb_sha256": "686e450b0146e090fb6eb74e1802d0ab56227ec6970d5fe4e2a9b9e519d49f6f",
+      "oracle_sha256": "3e13c866c21d132005000ff0f25d9ab862856e4ad7a8d92201c9ea591ed15bda",
+      "native_window_geometry": [
+        0,
+        0,
+        1200,
+        800
+      ],
+      "DOM_viewport": [
+        1200,
+        800
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 12,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-02",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "0addeecaf703758432434a28b5f7e3980a98fee9f763eff64ae4ad52893c1adc",
+      "decoded_rgb_sha256": "96f860bc8bc467e2cfed3786f4fbfbcff3800c74c1f8a5dc0bbc9d144a4d28e8",
+      "oracle_sha256": "2d660c8779aa86af990efeb03a4b74e0346cf1447dfa1224ec0a5c01a9c7d1cc",
+      "native_window_geometry": [
+        0,
+        0,
+        1360,
+        900
+      ],
+      "DOM_viewport": [
+        1360,
+        900
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 11,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-03",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "2e3d06d44d8b8968e05f7b7f20d7f82dcc8fb348db2645ff9d453c566b7d3f32",
+      "decoded_rgb_sha256": "5e9b4214ed287885e7fdfa465c7f008efeeb9d4b9641da3326519acc760d79e1",
+      "oracle_sha256": "452696b64783363a3919587be716fa03fb24a04d4917628022fd5dd0a8dcffd5",
+      "native_window_geometry": [
+        0,
+        0,
+        1600,
+        1000
+      ],
+      "DOM_viewport": [
+        1600,
+        1000
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 13,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-04",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "4f682ac79184b6d126e02469d4039909bdbd65d75983ac141a3e84b8cd403f12",
+      "decoded_rgb_sha256": "2ab57f2618ccb9f9203f149ad271ecab36cce4ffc68b20ef797b428ee6a3de38",
+      "oracle_sha256": "95174134ce40d985ce3cb9a9aaf332ec6e901c643884d45443c9a2d4d5c304c8",
+      "native_window_geometry": [
+        0,
+        0,
+        1200,
+        800
+      ],
+      "DOM_viewport": [
+        1200,
+        800
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 8,
+      "near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-05",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "1695402d1d64645258445bce4f175d7ef09d734cce0e8770010af9a0e17d534b",
+      "decoded_rgb_sha256": "15ac7e77dc88c08d516accffaa1c95b712bcb961c9fc5c57d5b5cc8235b9a56a",
+      "oracle_sha256": "4ce4153f096d6d99dfd35578f107ecbb2ed0abd40c5e60ea231f5221df50eed9",
+      "native_window_geometry": [
+        0,
+        0,
+        1360,
+        900
+      ],
+      "DOM_viewport": [
+        1360,
+        900
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 14,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-06",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ],
+      "encoded_sha256": "e34734f0647cee21c49de6327df7d092ec53cd69ad20bdd3ee298e8ff6c3ef8d",
+      "decoded_rgb_sha256": "a70698b110194e436944ad0644f50c5cf09bfaa76efeea40a5c460cd3e5f25d7",
+      "oracle_sha256": "6e54585295534cf561649b8813bad4e76b324d8133004d9c3df0b1e7d3fd709a",
+      "native_window_geometry": [
+        0,
+        0,
+        1600,
+        1000
+      ],
+      "DOM_viewport": [
+        1600,
+        1000
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 8,
+      "near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-07",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ],
+      "encoded_sha256": "3f6c1879bdb2051f70e11b4fc4fcd063e1e1878debee5799cad4b3ecacdca289",
+      "decoded_rgb_sha256": "5e5bb54f4bfac46ea91e174ad8dc13bae13690bc7efb496689c437d2ad787521",
+      "oracle_sha256": "61b04695327ff0acfc7e57eb8aefb22425ab3b0d72a73521f62200d280d2ee93",
+      "native_window_geometry": [
+        0,
+        0,
+        1200,
+        800
+      ],
+      "DOM_viewport": [
+        1200,
+        800
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 10,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-08",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ],
+      "encoded_sha256": "5b8117b5a05b68e99aea36f6dd7a8050cae46231a4f72855225b222f1cd9cdc1",
+      "decoded_rgb_sha256": "a44ba7c5c352ba5a0d10ef41e609a0d2eaa5113434c1aa86558267285f118509",
+      "oracle_sha256": "f6696c06361883d5b339c5ecaa465b5b8184b44fcaf8d3b499af9610909c6bbf",
+      "native_window_geometry": [
+        0,
+        0,
+        1360,
+        900
+      ],
+      "DOM_viewport": [
+        1360,
+        900
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 6,
+      "near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-09",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ],
+      "encoded_sha256": "52e449e1e39b4dc0c79ce89d19883126c6e4ef040adec4d645f721936621ec96",
+      "decoded_rgb_sha256": "158cc58664153ba61cb37c0c3274a69453c4a54a29a2019ff0a9b8a5bc38804e",
+      "oracle_sha256": "64ff3c7d0676320f825a4e3a5ce53db1182b3549c0ce8192edb3ea1eee6f4024",
+      "native_window_geometry": [
+        0,
+        0,
+        1600,
+        1000
+      ],
+      "DOM_viewport": [
+        1600,
+        1000
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 8,
+      "near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-10",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ],
+      "encoded_sha256": "5ae4f4cca0c4c7a8ef512ddcd5d51cace94e4b68cba2501f2cce3a6c9e9ec156",
+      "decoded_rgb_sha256": "10a32440de819f78361c9ca0415e25844d89f87f763551ac48013ebc210f3d1d",
+      "oracle_sha256": "12f1a97e76a96171d20e5b932f0e29c655fc7051812186fdeacf5000b89c44ca",
+      "native_window_geometry": [
+        0,
+        0,
+        1200,
+        800
+      ],
+      "DOM_viewport": [
+        1200,
+        800
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 12,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-11",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ],
+      "encoded_sha256": "d75a5de74e58b6f91aa1592b7f442ad34c52c9e10a32a9d57552d22b1c6f79ed",
+      "decoded_rgb_sha256": "d5804ebd87ba4c629e907ac403bd2fe71fbcf80e1c19c37a35c8a7508e4bbdda",
+      "oracle_sha256": "e784d4b55b22844fe5d4b1070a7382ad91b0d3fd50786249cad5cb4056d97535",
+      "native_window_geometry": [
+        0,
+        0,
+        1360,
+        900
+      ],
+      "DOM_viewport": [
+        1360,
+        900
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 12,
+      "near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-12",
+      "application": "browser",
+      "acquisition_status": "CAPTURED_PENDING_INDEPENDENT_VISUAL_REVIEW",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ],
+      "encoded_sha256": "b280704f8272e5030cac1f4deae476fddd9337a0dbf9adfd20c9d7a7bce9c4f2",
+      "decoded_rgb_sha256": "40956e1e0b316c9e0b0e2215a05da0e6b31a0894cbf04dd18e3bda7918ce9978",
+      "oracle_sha256": "5ed854065b7ca56d4459ef29fc82bf4bf7edab7a1dd6973cdd984f791f65dbe9",
+      "native_window_geometry": [
+        0,
+        0,
+        1600,
+        1000
+      ],
+      "DOM_viewport": [
+        1600,
+        1000
+      ],
+      "measured_DOM_screen_offset": [
+        0,
+        0
+      ],
+      "DPR": 1,
+      "trainval_exact_overlap": false,
+      "trainval_min_dhash_distance": 7,
+      "near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "tk_editor-01",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-02",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-03",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-04",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-05",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-06",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-07",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-08",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-09",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-10",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-11",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    },
+    {
+      "screen_id": "tk_editor-12",
+      "application": "tk_editor",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    },
+    {
+      "screen_id": "blender-01",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-02",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-03",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-04",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-05",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-06",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "PRESENT"
+      ]
+    },
+    {
+      "screen_id": "blender-07",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "blender-08",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "blender-09",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "ABSENT_VISIBLE"
+      ]
+    },
+    {
+      "screen_id": "blender-10",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1200,
+        800
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    },
+    {
+      "screen_id": "blender-11",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1360,
+        900
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    },
+    {
+      "screen_id": "blender-12",
+      "application": "blender",
+      "acquisition_status": "NOT_RUN",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "model_queries_status": "NOT_RUN",
+      "query_count": 2,
+      "planned_kinds": [
+        "PRESENT",
+        "AMBIGUOUS"
+      ]
+    }
+  ],
+  "cleanup": {
+    "recorded": [
+      {
+        "application": "browser",
+        "seed": 17,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      },
+      {
+        "application": "browser",
+        "seed": 29,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      },
+      {
+        "application": "browser",
+        "seed": 43,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      },
+      {
+        "application": "tk_editor",
+        "seed": 17,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      }
+    ],
+    "independent_remaining_owned_pids": [],
+    "all_declared_X_sockets_absent": true,
+    "all_declared_X_locks_absent": true,
+    "production_Blender_PID_alive": true,
+    "supervisor_exit_code": 1
+  },
+  "scope_limits": [
+    "All pixels/oracles private; no model evaluation or final groundtruth annotation.",
+    "Browser screenshots still require independent pixel/manual/leakage review.",
+    "No retries/relabels/substituted rows, no canonical edits.",
+    "Historical Tk groupRUNNING field retained at exception; overallFAIL terminal and workerwaited."
+  ],
+  "prior_failures_preserved": {
+    "original_driver_sha256": "50365be5a110ba960cf741aade080a73a6911f280321b1537e19aa99b90f347d",
+    "v2driver_sha256": "fff508014c29c3496096c662c1cbe60193f8341c2b76c1d1b06b65bf0a23b99d",
+    "v3driver_sha256": "c7c67fbb61f524b30d736b818aa13686bcdcd8fe3f20e63049f5f6bbf43ef370",
+    "v3report_sha256": "70d693335f1efd920c85621a92671c08f3ce3580b5869c0a8cbb21e91664f673"
+  },
+  "ground_truth_lock": "NOT_READY",
+  "received_artifact_sha256": "74cf1a5a5b40dfa62273ba0dbc38afda751618c0f3c7746115b653b5ec54aeea"
+}

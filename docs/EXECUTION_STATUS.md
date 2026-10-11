@@ -2,7 +2,7 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest committed implementation before eligibility provenance correction: `7a30721` on
+Latest committed implementation: `b3219c5` on
 `codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
@@ -67,6 +67,35 @@ only the owned Blender/Xvfb processes were terminated.
 
 ## Executed evidence
 
+**OBSERVED / latest immutable Linux artifact:** CI run `38148208835` built
+`b3219c5`. Its Linux 3.11 archive installed and repeated as `INSTALLED`/`CURRENT`;
+all 46 Python modules and 15 resources matched source, wheel and installation,
+including manifest ordering. Three guides for three profiles, 26 HOME files and
+configuration comments survived repeat integration. The actual installed client
+started an owned idle service, verified version/protocol/schema, observed the
+expected no-session status refusal, and shut down its matching endpoint. Independent
+process readback found no owned runtime remaining. Two earlier driver mistakes
+that expected idle status success are retained. No model, GUI or task ran.
+See
+[immutable Linux installation](validation/2026-10-11/cib3219c5-linux-install.json).
+
+**OBSERVED / latest immutable Windows artifact:** the same commit's successful
+Windows 3.11 job artifact installed and repeated as `INSTALLED`/`CURRENT`. All
+61 files matched Git, wheel and installation, with no manifest exception. Three
+guides across three managed harness configurations enrolled and repeated as
+`INSTALLED`/`UNCHANGED`. All 12 checks and six preservation checks passed; V2,
+PATH, existing fixture bytes, comments and disabled settings were preserved.
+Read-only post-run inspection found no process command line referencing the owned
+root. This did not execute a harness, model, GUI, input or runtime service. See
+[native Windows installation](validation/2026-10-11/windows-cib3219c5-install.json).
+
+**OBSERVED / latest CI failure:** all 15 platform/Python build and installer-check
+step pairs succeeded, but the macOS Intel/Python 3.12 job failed when
+`actions/upload-artifact` timed out creating its artifact after five built-in
+attempts. Fourteen jobs passed; assembly and deployment were skipped. No agent
+rerun or deployment bypass occurred. This is not an overall CI or release pass.
+See [original CI result](validation/2026-10-11/ci-b3219c5.json).
+
 **OBSERVED / eligibility provenance correction:** the changed native scorer ran
 against the retained 3,015 actual reaction rows and 50 editor rows. All 25 summaries
 preserved the original accuracy, latency, goodput and error values. Those historical
@@ -84,6 +113,24 @@ before Firefox launched. Zero of 36 screens were captured; all 72 queries remain
 `NOT_RUN`. Owned processes and X sockets were removed; existing Blender survived.
 No model, accuracy-task input or quality claim resulted. See
 [original failure](validation/2026-10-11/heldout-acquisition-stopped.json).
+The corrected zero-capability private-loopback preflight passed, but the next
+capture stopped before any screenshot: actual Firefox DOM was 1080x720 at (4,4),
+while Xvfb was 1200x800. This is a native coordinate-binding failure, with all
+72 queries still `NOT_RUN`, not model-quality evidence. See
+[second failure](validation/2026-10-11/heldout-acquisition-v2-stopped.json) and
+[native namespace preflight](validation/2026-10-11/heldout-namespace-v2-native.json).
+The next driver failed because its private namespace could not import the Xlib
+dependency visible to the host interpreter; no screenshot was attempted. A
+subsequent exact namespace admission loaded the actual Xlib/Pillow/native XCB
+dependencies through narrow read-only mounts. The next authorized run captured
+all 12 Firefox images and DOM oracles, then stopped when the first Tk oracle
+reported unmapped 1x1 controls. The remaining 24 scenes and all 72 model queries
+remain `NOT_RUN`. Root inspected all 12 original browser images; final annotations
+and leakage review remain pending, with no model or quality pass. See the
+[dependency failure](validation/2026-10-11/heldout-acquisition-v3-stopped.json),
+[actual dependency admission](validation/2026-10-11/heldout-v4-dependency-native.json),
+[partial capture](validation/2026-10-11/heldout-acquisition-v4-partial.json), and
+[pixel review](validation/2026-10-11/heldout-browser12-pixel-review.json).
 
 **OBSERVED / grounding-head provenance:** the configured historical head uses v2;
 both pinned and current canonical loaders require v3. Refusal is inferred from

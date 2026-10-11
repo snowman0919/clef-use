@@ -1,0 +1,98 @@
+{
+  "status": "PASS",
+  "scope": "NO_GUI_NO_XDISPLAY_NO_CAPTURE_NO_MODEL",
+  "versions": {
+    "Xlib": "0.15",
+    "Pillow": "12.3.0",
+    "Python": "3.14.7"
+  },
+  "Pillow_native_core_loaded": true,
+  "Pillow_xcb_available": true,
+  "caps_before": {
+    "CapInh": 0,
+    "CapPrm": 0,
+    "CapEff": 0,
+    "CapBnd": 0,
+    "CapAmb": 0
+  },
+  "caps_after": {
+    "CapInh": 0,
+    "CapPrm": 0,
+    "CapEff": 0,
+    "CapBnd": 0,
+    "CapAmb": 0
+  },
+  "private_interfaces_count": 1,
+  "only_private_loopback": true,
+  "no_DISPLAY_or_XAUTHORITY": true,
+  "HOME_is_owned": true,
+  "classification": "OBSERVED",
+  "probe_executions": 1,
+  "driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+  "raw_probe_sha256": "4fe411d8c7a3e0dd44d0e39a0f93fd5f06ba2538ae946e33dfadaaf39751d9e0",
+  "module_origins": {
+    "Xlib": {
+      "path_relative_to_owned_dependencies": "Xlib/__init__.py",
+      "sha256": "2799b37f544bfadf7173eb64649ac2c7d2fbe1cf6fd8a8bba35b3da0836a9893"
+    },
+    "Xlib.display": {
+      "path_relative_to_owned_dependencies": "Xlib/display.py",
+      "sha256": "30b6672bd549392978674c318c363bd4a9a2d91974658b514632aaa8c4f1490f"
+    },
+    "PIL": {
+      "path_relative_to_owned_dependencies": "PIL/__init__.py",
+      "sha256": "7361b6ad3878589affe5956e4a4da24d71398b0891fd3a8c15e9362217b4ca01"
+    },
+    "PIL.Image": {
+      "path_relative_to_owned_dependencies": "PIL/Image.py",
+      "sha256": "04af3f2db7ffdd61e829fa7aa8f5481d394a0a4129a8fd8aa5b13908928fcd6d"
+    },
+    "PIL.ImageGrab": {
+      "path_relative_to_owned_dependencies": "PIL/ImageGrab.py",
+      "sha256": "124cd6534e7fe23f8344277ded5cd71c9a870844e4ac6f701f34dc41013992da"
+    }
+  },
+  "readonly_dependency_bindings": [
+    {
+      "name": "Xlib",
+      "file_count": 112,
+      "tree_sha256": "f3dffa1a2c3f4ccd7c7b5798b87a4498441a0763e3953a207c2721224a530baa",
+      "source_bytes_unchanged": true
+    },
+    {
+      "name": "PIL",
+      "file_count": 211,
+      "tree_sha256": "2eb984bccccbefd58ebb6357729a003fbe14c12fb8f08a87b5b173e86274ef8b",
+      "source_bytes_unchanged": true
+    },
+    {
+      "name": "pillow.libs",
+      "file_count": 18,
+      "tree_sha256": "e734d8a0de92c037fe5c33833e1985a4dc568dcba8f78e53b6eaa9c7f19ae573",
+      "source_bytes_unchanged": true
+    }
+  ],
+  "helper_native_imports": [
+    "Xlib.X",
+    "Xlib.display",
+    "PIL.Image",
+    "PIL.ImageGrab",
+    "PIL.features",
+    "Pillow native core/xcb",
+    "ctypes",
+    "fcntl",
+    "socket"
+  ],
+  "cleanup": {
+    "subprocess_waited": true,
+    "owned_processes_remaining": [],
+    "X_servers_started": 0,
+    "production_Blender_PID_alive": true
+  },
+  "GUI_launches": 0,
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "native_capture_calls": 0,
+  "external_network_calls": 0,
+  "received_artifact_sha256": "e80e4831766f9419fb4bc20eaf61975e9893d1fb232149277339e9f0c8327070"
+}

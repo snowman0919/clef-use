@@ -2331,6 +2331,60 @@
       "artifact": "docs/validation/2026-10-11/final17-install.json",
       "sha256": "b3e1036be5f3183cf8c10ecb2d1d5b2776fb68f8b24e8d25c6904a87f0b565fd",
       "scope": "Actual FINAL17 installation/repeat61exactfiles/3guides3profiles/26HOMEfiles/comments preserved,835source tests; installed model/harness/task NOT_RUN."
+    },
+    "cib3219c5_linux_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/cib3219c5-linux-install.json",
+      "sha256": "d0aa900a976a357318c42fcf5cbedc47835c2c27aa4decfbf7873f1e8c511146",
+      "scope": "Actual immutable latest-source Linux archive, installation/integration/repeat/idle service identity and cleanup only. Native model/harness/GUI/task/latency not executed; total CI status is separately recorded when complete."
+    },
+    "heldout_acquisition_v2_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-v2-stopped.json",
+      "sha256": "aea53532e9f931e620fbf933062ceba7a8567749f484ab01c8e6c36fea3f58f7",
+      "scope": "Native isolated setup/capture preparation only; original failure retained, no model/quality/performance claim."
+    },
+    "heldout_namespace_v2_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-namespace-v2-native.json",
+      "sha256": "2c40ae5066446cc2d45c9f55d5095092365f7a4635547f24598feebd7b5bc46c",
+      "scope": "Native isolated setup/capture preparation only; original failure retained, no model/quality/performance claim."
+    },
+    "ci_b3219c5": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci-b3219c5.json",
+      "sha256": "8544e2ef3b340467b77d1b70094c849b5add47f39fdbfd964a586010063346f5",
+      "scope": "Latest implementation CI, not complete release approval. Successful Linux/Windows archive installation evidence is separately scoped; no overallCI pass, tag, main merge, deployment guard bypass or public release."
+    },
+    "windows_cib3219c5_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/windows-cib3219c5-install.json",
+      "sha256": "950c277eb5e6f216af19188806e783e8ac9b9b7c54a3abc2b230da0dca41a6a8",
+      "scope": "Actual native Win32 immutable successful Windows CI job artifact installed into a new owned TEMP root. Installer/contract/configuration evidence only; no harness execution, models, GPU, GUI input, runtime service, or task completion."
+    },
+    "heldout_acquisition_v3_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-v3-stopped.json",
+      "sha256": "22f59985ebbb40deb5ce67230f8489c42aac01eef7667dcc511b4d3623a0f43e",
+      "scope": "Actual isolated acquisition preparation/native pixels or cleanup only; original errors retained. All72modelqueries NOT_RUN, no data lock, model quality, task, performance or release pass."
+    },
+    "heldout_v4_dependency_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-v4-dependency-native.json",
+      "sha256": "d7177ab7354f0f77975ef8540bdd47a5366dd9e7b18e4e985248e4869010c818",
+      "scope": "Actual isolated acquisition preparation/native pixels or cleanup only; original errors retained. All72modelqueries NOT_RUN, no data lock, model quality, task, performance or release pass."
+    },
+    "heldout_acquisition_v4_partial": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-v4-partial.json",
+      "sha256": "7c6ccdc1127572617861d0053879579ad99704c7c61fa53c41b0d30449942fa9",
+      "scope": "Actual isolated acquisition preparation/native pixels or cleanup only; original errors retained. All72modelqueries NOT_RUN, no data lock, model quality, task, performance or release pass."
+    },
+    "heldout_browser12_pixel_review": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-browser12-pixel-review.json",
+      "sha256": "d95e1d2c535d42eb586bfee43d0d721ccf8ec66f74f699ffb220aa5ea8e3a431",
+      "scope": "Actual isolated acquisition preparation/native pixels or cleanup only; original errors retained. All72modelqueries NOT_RUN, no data lock, model quality, task, performance or release pass."
     }
   },
   "not_run": {
@@ -2494,6 +2548,15 @@
     "reaction-final17-reanalysis.json",
     "grounder-head-provenance.json",
     "heldout-acquisition-stopped.json",
-    "final17-install.json"
+    "final17-install.json",
+    "cib3219c5-linux-install.json",
+    "heldout-acquisition-v2-stopped.json",
+    "heldout-namespace-v2-native.json",
+    "ci-b3219c5.json",
+    "windows-cib3219c5-install.json",
+    "heldout-acquisition-v3-stopped.json",
+    "heldout-v4-dependency-native.json",
+    "heldout-acquisition-v4-partial.json",
+    "heldout-browser12-pixel-review.json"
   ]
 }
