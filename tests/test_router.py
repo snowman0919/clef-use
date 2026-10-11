@@ -258,7 +258,8 @@ def test_exact_goal_anchor_precedes_literal_success_condition_fallback(duplicate
         assert bounded.objects[0] is goal_anchor
 
 
-def test_condition_context_fallback_preserves_executable_targets_and_bound():
+@pytest.mark.parametrize("target_count", [32, 33, 40])
+def test_condition_context_fallback_preserves_executable_targets_and_bound(target_count):
     from clef_use.backends import decision_request
 
     targets = tuple(
@@ -268,7 +269,7 @@ def test_condition_context_fallback_preserves_executable_targets_and_bound():
             actions=frozenset({"click"}),
             bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8),
         )
-        for i in range(32)
+        for i in range(target_count)
     )
     far = tuple(
         UIObject(id=f"hint_{i}", label=f"Other {i}", bbox=targets[0].bbox) for i in range(9)
@@ -298,12 +299,33 @@ def test_condition_context_fallback_preserves_executable_targets_and_bound():
     bounded = ExecutionRouter(Config()).decision_observation(obs, candidates, contract)
     assert len(bounded.objects) == 40
     assert all(
-        actual is expected for actual, expected in zip(bounded.objects[:32], targets, strict=True)
+        actual is expected
+        for actual, expected in zip(bounded.objects[:target_count], targets, strict=True)
     )
-    assert bounded.objects[32] is anchor and near in bounded.objects[32:]
+    if target_count < 40:
+        assert bounded.objects[target_count] is anchor and near in bounded.objects[target_count:]
     packet = decision_request(bounded, contract, candidates, [])
     assert [a["id"] for a in packet["state"]["allowed_candidates"]] == [a.id for a in candidates]
     assert list(packet["questions"]["action"]["criteria"]) == [a.id for a in candidates]
+    assert {a["target"] for a in packet["state"]["allowed_candidates"]} <= {
+        obj["id"] for obj in packet["state"]["objects"]
+    }
+
+
+def test_target_budget_overflow_is_refused_without_silently_pruning_actions():
+    obs = observation(41)
+    candidates = tuple(
+        ActionCandidate(
+            id=f"action_{i}",
+            operation="click",
+            observation_id=obs.id,
+            target=obj.id,
+            description=obj.label,
+        )
+        for i, obj in enumerate(obs.objects)
+    )
+    with pytest.raises(GroundingUncertain, match="executable targets exceed"):
+        ExecutionRouter(Config()).decision_observation(obs, candidates, Contract(goal="Inspect"))
 
 
 def test_raw_candidate_explosion_routes_before_truncation():

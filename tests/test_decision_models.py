@@ -136,6 +136,62 @@ def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():
         decision_request(obs, Contract(goal="Inspect"), (), [])
 
 
+def test_same_label_actions_remain_bound_to_distinct_observed_controls():
+    import json
+
+    from PIL import Image
+
+    from clef_use.backends import decision_request
+    from clef_use.candidates import CandidateBuilder
+    from clef_use.schema import BoundingBox, Frame, UIObject
+
+    controls = tuple(
+        UIObject(
+            id=identity,
+            label="Apply",
+            role="button",
+            actions=("click",),
+            bbox=BoundingBox(x1=left, y1=0.2, x2=left + 0.1, y2=0.4),
+        )
+        for identity, left in (("left-control", 0.1), ("right-control", 0.7))
+    )
+    observation = Observation("same-label", Frame(Image.new("RGB", (100, 100))), controls)
+    contract = Contract(goal="Click the right Apply button")
+    candidates = CandidateBuilder().build(observation, contract)
+    packet = json.loads(json.dumps(decision_request(observation, contract, candidates, [])))
+    state = packet["state"]
+    objects = {obj["id"]: obj for obj in state["objects"]}
+    right_actions = [
+        action
+        for action in state["allowed_candidates"]
+        if action["operation"] == "click" and objects[action["target"]]["bbox"]["x1"] >= 70
+    ]
+    assert [action["id"] for action in right_actions] == ["a1"]
+    assert right_actions[0]["target"] == "right-control"
+    assert (
+        packet["questions"]["action"]["criteria"]["a0"]
+        == packet["questions"]["action"]["criteria"]["a1"]
+    )
+
+
+def test_decision_packet_refuses_an_action_without_its_observed_target():
+    from clef_use.backends import decision_request
+    from clef_use.candidates import CandidateBuilder
+
+    desktop = FixtureDesktop()
+    observation = Observation("epoch", desktop.capture(), desktop.parse(None))
+    contract = Contract(goal="Open Settings")
+    candidates = CandidateBuilder().build(observation, contract)
+    target = candidates[0].target
+    missing = Observation(
+        observation.id,
+        observation.frame,
+        tuple(obj for obj in observation.objects if obj.id != target),
+    )
+    with pytest.raises(ValueError, match="target missing from observed decision context"):
+        decision_request(missing, contract, candidates, [])
+
+
 def test_unicode_request_budget_counts_utf8_bytes_and_refuses_the_next_character():
     import json
 

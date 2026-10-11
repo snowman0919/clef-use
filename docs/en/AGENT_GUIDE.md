@@ -96,6 +96,11 @@ object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integ
 from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are
 `INVALID`, both with a null count. These counters do not measure correct-target
 coverage, calibrated confidence or model latency.
+Decision candidates retain their operation and observed target ID so equally
+labelled controls can be distinguished by position. This preserves the mapping;
+it does not certify correct selection or relax confidence guards.
+Missing targets or more than 40 distinct executable targets are refused instead
+of silently removing their observed geometry from the decision context.
 Reaction coverage stays null/`NOT_MEASURED` without prospective eligibility and
 policy evidence for every opportunity; fast successful inputs alone cannot pass
 the release gate. Native event timestamps are distinct from backend ACKs.

@@ -19,7 +19,12 @@ incompatible Transformers versions. They are components of one runtime.
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint
 CLEF answers, evaluates escalation gates, executes a deterministic adapter, and
 checks progress. Candidate IDs are bound to one observation. CLEF selects
-bounded candidates; the optional Foundation ViT produces screenshot coordinates
+bounded candidates. Model-facing candidates retain their operation and target
+object ID, linking equally labelled controls to their distinct observed geometry.
+This connection supplies evidence; it does not change input or confidence guards.
+All executable target objects must fit the existing 40-object context budget;
+overflow or missing target evidence is refused rather than silently truncated.
+The optional Foundation ViT produces screenshot coordinates
 that become observation-bound pointer candidates. `Frame.point` maps box centers to the
 primary monitor's logical coordinate space, including Retina scaling.
 

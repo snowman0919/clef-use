@@ -202,6 +202,9 @@ def decision_request(
 ) -> dict:
     if len(observation.objects) > 40:
         raise ValueError("decision packet exceeds the bounded object budget")
+    object_ids = {obj.id for obj in observation.objects}
+    if any(action.target is not None and action.target not in object_ids for action in candidates):
+        raise ValueError("candidate target missing from observed decision context")
     width, height = observation.frame.image.size
     objects = []
     for obj in observation.objects:
@@ -312,14 +315,9 @@ def decision_request(
             "history": history[-12:],
             "allowed_candidates": [
                 {
-                    "id": action.id,
+                    **action.audit(),
                     "description": action.description,
                     "expected_effect": action.expected_effect,
-                    **(
-                        {"pointer": action.pointer.model_dump(mode="json")}
-                        if action.pointer
-                        else {}
-                    ),
                 }
                 for action in candidates
             ],

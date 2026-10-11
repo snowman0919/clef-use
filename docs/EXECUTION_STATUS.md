@@ -2,9 +2,11 @@
 
 Date: 2026-10-12. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest committed implementation: `bb971ef` on
+Latest built, installed and CI-verified implementation: `bb971ef` on
 `codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
+The source-only candidate identity correction below is newer; its installed and
+native model task checks remain NOT_RUN.
 Published evidence HEAD before the following measurements: `8e1eedf`.
 Latest installed local candidate: FINAL24, correcting complete-directory aliases and duplicate
 declared names in active skill sources while preserving separate resources and
@@ -13,7 +15,7 @@ three harness profiles, 26 preserved HOME files and 61 exact source/wheel/instal
 files are recorded in [final24-install.json](validation/2026-10-11/final24-install.json).
 FINAL24 includes the FINAL23 native catalog/explicit lookup and Codex individual
 file-disable corrections, and preserves valid Hermes YAML documents during actual
-enrollment. Source regression passed **874 tests / 34 skipped**. Native discovery
+enrollment. Its source regression passed **874 tests / 34 skipped**. Native discovery
 and native loading are recorded separately below.
 FINAL21's planned native matrix was stopped before execution and retains
 [14 NOT_RUN cases](validation/2026-10-11/install05-final21-native-not-started.json).
@@ -33,6 +35,41 @@ Machine-readable, sanitized evidence and artifact hashes: [summary.json](validat
 Most recent native input/profile measurement candidate: [final10.json](validation/2026-10-11/final10.json).
 Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-11/reaction-final10.json).
 Per-scenario status and remaining scope: [ACCEPTANCE.yaml](../ACCEPTANCE.yaml).
+
+## Remaining work and specific verification boundaries
+
+The overall stop was not justified by the recorded failures. Unimplemented
+production observation and failed model decisions are engineering work, not proof
+of an unavailable environment. The following boundaries apply to individual checks.
+
+| Check | Observed result or missing prerequisite | Next action and ownership |
+| --- | --- | --- |
+| Production operations | The production factory does not bind a `state_provider`. Only native window/foreground and pixel geometry can be compiled; the six operations lack verified application facts. | Implementation remains ours: ship a real read-only producer, authenticate and bind its app/window observations, preserve UNKNOWN for unresolved popup, editing, IME, busy and effective keymap facts. A callback or fixture transport alone does not close this requirement. |
+| OMP native model loading/invocation | The recorded `aipi/dgx-moa-fast` primary and three auxiliary requests returned HTTP 401 before any tool call. Current provider health and the credential cause were not checked. Actual Codex native loading/invocation succeeded separately. | This blocks that OMP route only. Do not request Codex desktop authentication repair or stop independent implementation. Keep OMP loading/invocation NOT_RUN until its selected provider can execute. |
+| Blender and general GUI accuracy | Actual Blender File assessment failed all five positives; the browser mode confidence was 0.7271 and the editor replan probability was 0.9041. Models executed; no input was sent in the browser/editor cases. | Diagnose context, candidates and state while retaining the original guards. Repeat the identical real tasks after a reviewed implementation change; these are product failures, not external blockers. |
+| Reici matched-view verification | A real private production checkpoint was located through an existing active task ledger. The earlier missing-scene assumption is withdrawn. That task records a default-computer-use approval timeout before an alignment input, and part-local/final quality gates remain open. | Preserve the other actor's scene and input boundary. Establish the permitted isolated verification target without rerouting or bypassing its unapproved input. Existing scene discovery proves neither edits nor independent review. No asset purchase is required to continue software work. |
+| Full reaction profile | Whole-workflow accuracy, prospective fast-path eligibility coverage and state-change-to-correct-input p95 are unmeasured. The bounded Tk profile is separate. | Complete the real task/state path, lock the workload and eligibility evidence, then measure at least 1000 opportunities. Do not count fast refusal, ACK or fixture success as this gate. |
+| Public release | CI built and checked all 15 combinations; deploy was skipped because the feature branch is outside the existing main/version-tag guard. Current deployment variable, runner and public server health were not verified. | Finish the candidate and use the existing authorized promotion/release workflow. A branch guard is not a deployment outage; do not bypass it or request release approval for an incomplete candidate. |
+
+**OBSERVED / candidate identity correction:** a direct canonical packet check with
+two equally labelled controls could not resolve an action to its observed object:
+the model-facing serializer omitted `operation` and `target`. The regression failed
+with `KeyError: 'operation'`. Reusing `ActionCandidate.audit()` preserves both fields
+and the existing pointer representation. The same real builder/serializer/JSON path
+now resolves `a1` to the right control's pixel box `(70, 20, 80, 40)` while `a0`
+remains bound to `(10, 20, 20, 40)`. A separate boundary reproduction found that
+the router kept only 32 executable target objects despite allowing more actions.
+All 33 or 40 targets are now retained within the unchanged 40-object budget;
+41 distinct targets explicitly request replanning before any model or input call.
+The canonical serializer also refuses a target absent from its observation.
+The focused suite passed 124 tests and the full source suite passed
+**880 tests / 34 skipped**; scoped Ruff and formatting passed.
+This check executed no model or OS input. Existing installed/CI measurements retain
+their earlier source identity. Identical native model tasks, installation and CI
+for this correction remain **NOT_RUN**, pending a new candidate; no acceptance
+status or confidence guard changed, and no cause of the historical task failures
+is claimed from this packet check alone. See
+[source correction evidence](validation/2026-10-11/candidate-target-context-fix.json).
 
 ## Objective and invariants
 

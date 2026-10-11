@@ -1,3 +1,5 @@
+import pytest
+
 from clef_use.benchmark import FixtureDesktop
 from clef_use.config import Config
 from clef_use.runtime import Session, SessionRuntime
@@ -100,7 +102,8 @@ def test_unknown_actionability_is_preserved_as_null_without_claiming_true():
     )
 
 
-def test_dense_structured_session_still_receives_bounded_context():
+@pytest.mark.parametrize("candidate_limit", [40, 48])
+def test_dense_structured_session_keeps_targets_in_context_or_refuses(candidate_limit):
     # Regression (dogfood F3): a 123-object Blender screen with 48 candidates
     # overflowed the real decision model's context via the legacy whole-roster
     # passthrough and crashed the CUDA worker with OUT_OF_MEMORY.
@@ -132,7 +135,16 @@ def test_dense_structured_session_still_receives_bounded_context():
 
     desktop = DenseBlender()
     session = Session(Contract(goal="Open the Object menu", max_steps=2))
-    SessionRuntime(desktop, desktop, SizeRecorder(), desktop, Config(settle_seconds=0)).execute(
-        session
-    )
-    assert sizes and max(sizes) <= 40  # Shared target/evidence packet budget.
+    result = SessionRuntime(
+        desktop,
+        desktop,
+        SizeRecorder(),
+        desktop,
+        Config(settle_seconds=0, max_candidates=candidate_limit),
+    ).execute(session)
+    if candidate_limit == 40:
+        assert max(sizes) == 40
+    else:
+        assert result["status"] == "NEEDS_REPLAN"
+        assert "executable targets exceed" in result["reason"]
+        assert sizes == [] and session.steps == 0

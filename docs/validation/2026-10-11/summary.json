@@ -2661,6 +2661,12 @@
       "artifact": "docs/validation/2026-10-11/production-atspi-factory-v6-bounded-observation.json",
       "sha256": "9010eee49ac41490ece67233b2eab66c7c3bbd602d43d37c69921b08abe8ebec",
       "scope": "ExactofficialELF/proc-exeinode/OSwindowPID and actualprivateATSPIobserverPASS;5samples0.318-2.321s eachwindow1/registry0. Corrected-noaudio argument has0unknown/errorlines,2warnings remain. Notsettledscene/longerabsence/popupedit/defaultprovider/6ops proof;all5originalattempts preserved. Child5/outerwaited/independentownedmount0/socket0;capsDECLARED_POLICYonly."
+    },
+    "candidate_target_context_fix": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/candidate-target-context-fix.json",
+      "sha256": "a1c763890340e517212b8fed1dad5b47de4835a760eec7aa3c9510882c45df88",
+      "scope": "Source-only actualbuilder/router/serializer/JSON preserves equal-label target/operation and all33/40targets, explicitlyrefuses41/missingtarget;124scoped and880fullPASS34SKIP. NativeGUI/model efficacy/newinstallation/CI/fullperformanceNOT_RUN;historicalfailures/guardsunchanged."
     }
   },
   "not_run": {
@@ -2879,6 +2885,7 @@
     "production-atspi-factory-v3-setup-failure.json",
     "production-atspi-factory-v4-observer-pass-app-failure.json",
     "production-atspi-factory-v5-startup-error-observation.json",
-    "production-atspi-factory-v6-bounded-observation.json"
+    "production-atspi-factory-v6-bounded-observation.json",
+    "candidate-target-context-fix.json"
   ]
 }

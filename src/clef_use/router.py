@@ -235,7 +235,9 @@ class ExecutionRouter:
         from .schema import Observation
 
         ids = {a.target for a in candidates if a.target is not None}
-        targets = [o for o in observation.objects if o.id in ids][:32]
+        if len(ids) > 40:
+            raise GroundingUncertain("executable targets exceed the bounded decision object budget")
+        targets = [o for o in observation.objects if o.id in ids]
         hints = [o for o in observation.objects if o.id not in ids and o.label and not o.sensitive]
         query = contract.visual_intent.query if contract.visual_intent else contract.goal
         eligible = [

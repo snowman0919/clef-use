@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Preserve each decision candidate's operation and observed target identity so
+  equally labelled controls remain distinguishable by their actual geometry.
+  Keep every executable target within the existing 40-object context budget;
+  refuse overflow or missing targets instead of silently dropping their evidence.
 - Keep Hermes MCP registration inside existing YAML flow mappings, respecting
   trailing commas and document endings while preserving user settings and comments.
 - Ignore active-source aliases of the same complete managed skill directory

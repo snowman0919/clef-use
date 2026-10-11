@@ -98,6 +98,10 @@ decision 診断には画像を除く実際の UTF-8 テキスト予算のバイ�
 数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、
 欠落は `UNAVAILABLE`、不正な報告値は `INVALID` とし、後二者の数は null です。
 これらは正しい対象の coverage、校正された信頼度、モデル遅延の測定ではありません。
+decision 候補は operation と観測 target ID を保持し、同じ名前の control を位置で
+区別できるようにします。対象との対応を保つ変更であり、正しい選択の保証や信頼度
+guard の緩和ではありません。
+対象の根拠がない場合や実行対象が 40 個を超える場合、座標の根拠を黙って削除せず拒否します。
 全機会の事前適格性・policy 証拠がなければ、反応 coverage は null・`NOT_MEASURED`
 のままです。高速な成功入力だけでは出荷 gate を通過しません。実際の OS event
 時刻と backend ACK は区別します。
