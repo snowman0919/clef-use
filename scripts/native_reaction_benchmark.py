@@ -24,6 +24,17 @@ import time
 from datetime import UTC, datetime
 from pathlib import Path
 
+# Score with this runner's revision without preloading the selected runtime's
+# package before driver() applies --checkout. Older installed runtimes may not
+# expose the scorer used by this source runner.
+_metrics_spec = importlib.util.spec_from_file_location(
+    "native_reaction_metrics",
+    Path(__file__).resolve().parents[1] / "src/clef_use/reaction_metrics.py",
+)
+_metrics = importlib.util.module_from_spec(_metrics_spec)
+_metrics_spec.loader.exec_module(_metrics)
+fast_path_eligibility = _metrics.fast_path_eligibility
+
 
 def percentile(values, probability):
     ordered = sorted(values)
@@ -34,17 +45,25 @@ def summarize(rows, elapsed_seconds, target_ms):
     correct = [row for row in rows if row["verified"] and not row["critical_errors"]]
     latencies = [row["event_latency_ms"] for row in correct if row["event_latency_ms"] is not None]
     fast = sum(value <= target_ms for value in latencies)
-    eligibility_known = bool(rows) and all(type(row.get("fast_eligible")) is bool for row in rows)
+    eligibility_known, eligible_count = 0, 0
+    for row in rows:
+        eligible = fast_path_eligibility(
+            row,
+            state_change_ns=row.get("state_changed_ns"),
+            os_event_ns=row.get("received_ns"),
+        )
+        if eligible is not None:
+            eligibility_known += 1
+            eligible_count += eligible
+    coverage_measured = bool(rows) and eligibility_known == len(rows)
     return {
         "opportunities": len(rows),
         "correct": len(correct),
         "accuracy": len(correct) / len(rows) if rows else None,
         "fast_correct": fast,
         "goodput_100": sum(value <= 100 for value in latencies) / len(rows) if rows else None,
-        "fast_coverage": sum(row["fast_eligible"] for row in rows) / len(rows)
-        if eligibility_known
-        else None,
-        "fast_coverage_status": "MEASURED" if eligibility_known else "NOT_MEASURED",
+        "fast_coverage": eligible_count / len(rows) if coverage_measured else None,
+        "fast_coverage_status": "MEASURED" if coverage_measured else "NOT_MEASURED",
         "misses": len(rows) - fast,
         "critical_errors": sum(len(row["critical_errors"]) for row in rows),
         "failed_opportunities": len(rows) - len(correct),

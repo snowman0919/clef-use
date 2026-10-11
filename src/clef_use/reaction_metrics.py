@@ -6,6 +6,46 @@ import math
 from collections import Counter
 
 
+def fast_path_eligibility(
+    row: dict, *, state_change_ns: object, os_event_ns: object
+) -> bool | None:
+    """Return prospective eligibility, or None when its evidence is unavailable.
+
+    The caller supplies actual observation provenance and timestamps from the
+    same monotonic clock; this validator cannot establish their truth itself.
+    Every opportunity needs an actual local policy decision boundary. Unattempted
+    opportunities have no dispatch or native event; attempted ones need an actual
+    dispatch timestamp, with an optional event when no native input was delivered.
+    """
+    eligibility_time = row.get("eligibility_observed_ns")
+    decision = row.get("policy_decision_ns")
+    dispatch = row.get("input_dispatch_ns")
+    source = row.get("eligibility_source")
+    if not (
+        type(row.get("fast_eligible")) is bool
+        and isinstance(source, str)
+        and source.strip()
+        and type(state_change_ns) is int
+        and type(eligibility_time) is int
+        and type(decision) is int
+        and state_change_ns <= eligibility_time <= decision
+    ):
+        return None
+    if row.get("attempted") is False:
+        if dispatch is not None or os_event_ns is not None:
+            return None
+    elif row.get("attempted") is True:
+        if not (
+            type(dispatch) is int
+            and decision <= dispatch
+            and (os_event_ns is None or (type(os_event_ns) is int and dispatch <= os_event_ns))
+        ):
+            return None
+    else:
+        return None
+    return row["fast_eligible"]
+
+
 def summarize_reactions(scope: dict, rows: list[dict]) -> dict:
     ids = scope["opportunity_ids"]
     if not ids or len(ids) != len(set(ids)):
@@ -23,10 +63,18 @@ def summarize_reactions(scope: dict, rows: list[dict]) -> dict:
             raise ValueError("invalid native event timestamp")
         observed[identity] = row
     times, useful, fast, within, critical = [], 0, 0, 0, Counter()
+    eligibility_known = 0
     sessions = set()
     for row in rows:
         sessions.add(row["session_id"])
-        fast += bool(row.get("attempted") and row.get("fast_eligible"))
+        eligible = fast_path_eligibility(
+            row,
+            state_change_ns=row.get("state_change_ns"),
+            os_event_ns=row.get("os_event_ns"),
+        )
+        if eligible is not None:
+            eligibility_known += 1
+            fast += eligible
         if row.get("critical_error"):
             critical[row["critical_error"]] += 1
         correct = (
@@ -47,7 +95,8 @@ def summarize_reactions(scope: dict, rows: list[dict]) -> dict:
 
     count = len(ids)
     baseline = scope.get("baseline_accuracy")
-    accuracy, coverage = useful / count, fast / count
+    accuracy = useful / count
+    coverage = fast / count if eligibility_known == count else None
     p95 = percentile(0.95)
     return {
         "opportunities": count,
@@ -66,6 +115,7 @@ def summarize_reactions(scope: dict, rows: list[dict]) -> dict:
         "deadline_misses": count - within,
         "goodput_100": within / count,
         "fast_coverage": coverage,
+        "fast_coverage_status": "MEASURED" if coverage is not None else "NOT_MEASURED",
         "critical_errors": dict(critical),
         "release_gate_pass": bool(
             count >= 1000
@@ -74,6 +124,7 @@ def summarize_reactions(scope: dict, rows: list[dict]) -> dict:
             and accuracy >= baseline
             and p95 is not None
             and p95 <= 100
+            and coverage is not None
             and coverage >= 0.8
             and not critical
         ),

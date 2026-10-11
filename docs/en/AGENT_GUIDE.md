@@ -96,5 +96,8 @@ object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integ
 from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are
 `INVALID`, both with a null count. These counters do not measure correct-target
 coverage, calibrated confidence or model latency.
+Reaction coverage stays null/`NOT_MEASURED` without prospective eligibility and
+policy evidence for every opportunity; fast successful inputs alone cannot pass
+the release gate. Native event timestamps are distinct from backend ACKs.
 No measured 100ms profile or release-gate success is currently advertised.
 See [execution evidence](../EXECUTION_STATUS.md) and [acceptance](../../ACCEPTANCE.yaml).

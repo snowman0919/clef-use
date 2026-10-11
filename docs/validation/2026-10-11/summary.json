@@ -2298,6 +2298,39 @@
       "artifact": "docs/validation/2026-10-11/final16-install.json",
       "sha256": "01853280eb4311acd970d8941c1f1bbdc869b511e79687a192976eabe93ad2fd",
       "scope": "Actual complete FINAL16 local archive INSTALLED/CURRENT,46Python+15resources exact source/wheel/installed bytes,3guides3profiles idempotent/26HOME bytes/comments preserved,804passed34skipped source regression. Actual one installed CLEF numeric smoke separately recorded; no immutableCI/nativeharness/release/fulltask claim."
+    },
+    "reaction_final17_reanalysis": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/reaction-final17-reanalysis.json",
+      "sha256": "f0c11075293a9cb8d2daa477e455621fdbe5d37b215aa487ffce080b5bf95891",
+      "scope": "Changed scorer, retained actual3015reaction+50editor rows,25summaries unchanged except eligibility remains NOT_MEASURED; no new input or performance gate."
+    },
+    "grounder_head_provenance": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/grounder-head-provenance.json",
+      "sha256": "0b5437c38558731b0a9ad003e507776a71e77b6466ed759c508ae3ddaedcdf4e",
+      "scope": "Actual metadata/config/source readback only. Configured v2 head is unsupported by pinned/current v3 loader (INFERRED refusal); supported v3 alternative is not served-baseline proof. No inference or source/config mutation."
+    },
+    "heldout_acquisition_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/heldout-acquisition-stopped.json",
+      "sha256": "655de528b16bb685e06b2b061a3025325dceff60c306dbb5ecd456a60023617c",
+      "scope": "Initial isolated capture setup EPERM before browser launch:0/36screens,72queries NOT_RUN; no model/input, own cleanup observed and production Blender preserved."
+    },
+    "final17_source_regression": {
+      "claim": "OBSERVED",
+      "passed": 835,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 54.84,
+      "private_log_sha256": "5378f47aa70393adda59897ddf43ddf9ef928c8291aa0957483274afdcb360ab",
+      "scope": "Source regression including old-runtime benchmark selection correction; no whole-task claim."
+    },
+    "final17_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final17-install.json",
+      "sha256": "b3e1036be5f3183cf8c10ecb2d1d5b2776fb68f8b24e8d25c6904a87f0b565fd",
+      "scope": "Actual FINAL17 installation/repeat61exactfiles/3guides3profiles/26HOMEfiles/comments preserved,835source tests; installed model/harness/task NOT_RUN."
     }
   },
   "not_run": {
@@ -2457,6 +2490,10 @@
     "ci6cdf182-linux-driver-stopped3.json",
     "decision-numeric-final16-native.json",
     "decision-numeric-final16-cleanup.json",
-    "final16-install.json"
+    "final16-install.json",
+    "reaction-final17-reanalysis.json",
+    "grounder-head-provenance.json",
+    "heldout-acquisition-stopped.json",
+    "final17-install.json"
   ]
 }

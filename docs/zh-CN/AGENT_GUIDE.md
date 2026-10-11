@@ -85,5 +85,7 @@ decision 诊断保留不含图像的实际 UTF-8 文本预算字节数、object/
 SDK 报告的输入 token 数。`SDK_USAGE` 表示 1～8192 的整数；缺失时为
 `UNAVAILABLE`，报告值无效时为 `INVALID`，后二者的数量均为 null。
 这些计数不衡量正确目标的 coverage、校准置信度或模型延迟。
+缺少所有机会的事前资格及 policy 证据时，反应 coverage 保持 null/`NOT_MEASURED`。
+仅有快速成功的输入不能通过发布 gate；实际 OS event 时刻与 backend ACK 分开记录。
 目前不宣称已测得通过的 100ms profile 或发布 gate 成功。
 参阅[执行证据](../EXECUTION_STATUS.md)及[验收要求](../../ACCEPTANCE.yaml)。

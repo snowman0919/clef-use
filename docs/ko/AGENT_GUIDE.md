@@ -96,5 +96,8 @@ decision 진단은 이미지가 제외된 실제 UTF-8 텍스트 예산 바이�
 개수와 SDK가 보고한 입력 토큰 수를 보존합니다. `SDK_USAGE`는 1~8192의 정수이며,
 누락은 `UNAVAILABLE`, 잘못된 보고 값은 `INVALID`로 표시하고 토큰 수는 null입니다.
 이 수치는 올바른 대상의 coverage, 보정된 신뢰도나 모델 지연 시간을 측정하지 않습니다.
+모든 기회에 대한 사전 적격성·정책 증거가 없으면 반응 coverage는 null·`NOT_MEASURED`로
+남습니다. 빠르게 성공한 입력만으로 출하 gate를 통과하지 않습니다. 실제 OS 이벤트
+시각과 backend ACK는 구분합니다.
 현재 측정으로 통과한 100ms profile이나 출하 gate 성공을 주장하지 않습니다.
 [실행 증거](../EXECUTION_STATUS.md)와 [acceptance](../../ACCEPTANCE.yaml)를 확인하세요.

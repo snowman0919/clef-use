@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Require prospective policy/eligibility evidence in reaction scorers; unknown
+  coverage remains unmeasured and cannot pass release gates. Eligibility counts
+  include verified opportunities independently of attempts and deadlines.
 - Retain decision request UTF-8 budget bytes, object/question counts and bounded
   SDK-reported input tokens in numeric diagnostics without changing model packets
   or confidence gates. Missing and invalid token usage remain explicit.

@@ -2,14 +2,16 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest committed implementation before numeric diagnostics: `06340b0` on
+Latest committed implementation before eligibility provenance correction: `7a30721` on
 `codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
-Latest local candidate: FINAL16, adding numeric request/SDK diagnostics and the
-platform-independent guide-manifest ordering correction. Its actual installation,
-61 exact packaged files and **804 passed / 34 skipped** source regression are
-recorded in [final16-install.json](validation/2026-10-11/final16-install.json).
+Latest local candidate: FINAL17, adding prospective eligibility provenance and
+correct source-runner selection with older installed runtimes. Its actual installation,
+61 exact packaged files and **835 passed / 34 skipped** source regression are
+recorded in [final17-install.json](validation/2026-10-11/final17-install.json).
+FINAL16's installed numeric model request retains its original candidate identity
+in [final16-install.json](validation/2026-10-11/final16-install.json).
 FINAL15's runtime identity correction and **792 passed / 34 skipped** regression
 retain their original [candidate record](validation/2026-10-11/final15-install.json).
 Earlier FINAL12 native tasks retain their original candidate and guide hashes.
@@ -64,6 +66,31 @@ The sanitized private probe summary SHA-256 is
 only the owned Blender/Xvfb processes were terminated.
 
 ## Executed evidence
+
+**OBSERVED / eligibility provenance correction:** the changed native scorer ran
+against the retained 3,015 actual reaction rows and 50 editor rows. All 25 summaries
+preserved the original accuracy, latency, goodput and error values. Those historical
+rows contain no prospective eligibility/policy-decision provenance, so coverage
+remains `NOT_MEASURED`, with no success-based backfill or release-gate pass.
+Source regression passed **835 tests / 34 skipped**. An actual older FINAL15 Python
+also ran the current benchmark's help/checkout selector without preloading its
+incompatible scorer. This is scorer reanalysis,
+not a new installed task or latency measurement. See
+[retained-row evidence](validation/2026-10-11/reaction-final17-reanalysis.json).
+
+**OBSERVED / held-out preparation failure:** initial isolated native capture stopped
+on private loopback initialization `PermissionError: [Errno 1] Operation not permitted`,
+before Firefox launched. Zero of 36 screens were captured; all 72 queries remain
+`NOT_RUN`. Owned processes and X sockets were removed; existing Blender survived.
+No model, accuracy-task input or quality claim resulted. See
+[original failure](validation/2026-10-11/heldout-acquisition-stopped.json).
+
+**OBSERVED / grounding-head provenance:** the configured historical head uses v2;
+both pinned and current canonical loaders require v3. Refusal is inferred from
+source/metadata, not an executed load. The existing supported v3 head is a separately
+named alternative, without evidence that it is currently served. Earlier general
+GUI tasks disabled visual grounding. Global configuration and active V2 remain
+unchanged. See [metadata readback](validation/2026-10-11/grounder-head-provenance.json).
 
 **OBSERVED / installed numeric diagnostics:** FINAL16's actual default CLEF worker
 returned SDK usage of 1,565 input tokens and zero output tokens. Independently
