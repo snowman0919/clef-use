@@ -278,6 +278,14 @@ class Observation:
     evidence: tuple[object, ...] | None = None
 
 
+class InputDelivery(StrictModel):
+    execution_id: str = Field(min_length=1, max_length=100)
+    kind: Literal["key", "chord"]
+    keys: tuple[str, ...] = Field(min_length=1, max_length=5)
+    acknowledged_at_ns: int = Field(gt=0)
+
+
 class ActionResult(StrictModel):
     ok: bool
     reason: str = "executed"
+    delivery: InputDelivery | None = None

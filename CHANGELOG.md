@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add typed keyboard, literal text, three-button pointer and modifier gestures
+  with bounded ownership and independent native abort recovery.
+
 ## 0.1.29
 
 - Accept genuine singleton action choices in archived/native decision benchmarks,

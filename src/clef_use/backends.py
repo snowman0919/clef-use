@@ -455,6 +455,36 @@ class DesktopAction:
         self.keys = set()
         self.buttons = set()
         self.gui = gui
+        self.input_executor = None
+
+    def execute_input(
+        self,
+        command,
+        frame,
+        cancelled,
+        context_guard=None,
+        deadline=None,
+        context=None,
+        after_input_guard=None,
+    ):
+        from .input_ir import InputExecutor
+
+        if self.gui is None:
+            if sys.platform == "win32":
+                self.gui = WindowsInput()
+            else:
+                import pyautogui
+
+                self.gui = pyautogui
+        if self.input_executor is None:
+            self.input_executor = InputExecutor(self.gui, self.keys, self.buttons)
+        coordinates = (
+            self.gui.physical_coordinates() if isinstance(self.gui, WindowsInput) else nullcontext()
+        )
+        with coordinates:
+            return self.input_executor.execute(
+                command, frame, cancelled, context_guard, deadline, context, after_input_guard
+            )
 
     def execute(self, action, observation, cancelled):
         if self.gui is None:
@@ -603,11 +633,11 @@ class DesktopAction:
                 gui.scroll(clicks)
             return
         try:
-            self.buttons.add("left")
             if native:
                 gui.mouseDown(button="left", target=frame.foreground_window)
             else:
                 gui.mouseDown(button="left")
+            self.buttons.add("left")
             for point in points[1:]:
                 if cancelled.wait(pointer.duration / (len(points) - 1)):
                     return
@@ -630,11 +660,11 @@ class DesktopAction:
             if cancelled.is_set():
                 return
             try:
-                self.buttons.add("left")
                 if native:
                     gui.mouseDown(button="left", target=target)
                 else:
                     gui.mouseDown(button="left")
+                self.buttons.add("left")
             finally:
                 self._release_with(gui)
             if count > 1:
@@ -652,21 +682,23 @@ class DesktopAction:
                 if native:
                     gui.ensure_target(target)
                 # Printable keys may press implicit layout modifiers inside PyAutoGUI.
+                implicit_modifiers = set()
                 if not native and len(key) == 1:
                     if gui.isShiftCharacter(key):
-                        self.keys.add("shift")
+                        implicit_modifiers.add("shift")
                     if sys.platform == "win32":
                         code = gui.platformModule.keyboardMapping.get(key)
                         if code is not None and code >= 0:
                             modifiers = code // 0x100
                             for flag, modifier in ((1, "shift"), (2, "ctrl"), (4, "alt")):
                                 if modifiers & flag:
-                                    self.keys.add(modifier)
-                self.keys.add(key)
+                                    implicit_modifiers.add(modifier)
                 if native:
                     gui.keyDown(key, target=target)
                 else:
                     gui.keyDown(key)
+                self.keys.add(key)
+                self.keys.update(implicit_modifiers)
         finally:
             self._release_with(gui)
 
@@ -700,6 +732,8 @@ class DesktopAction:
             raise errors[0]
 
     def release(self):
+        if self.input_executor is not None:
+            self.input_executor.release()
         with self.lock:
             if self.gui is not None:
                 self._release_with(self.gui)

@@ -355,10 +355,10 @@ def test_native_pointer_sendinput_failure_preserves_cleanup(operation, failure):
     api.refuse = (0, 2 if failure == "down" else 4)
     with pytest.raises(RuntimeError, match="SendInput"):
         adapter.execute(candidate, observation, Event())
-    assert api.events == ([(0, 0, 4)] if failure == "down" else [(0, 0, 2)])
+    assert api.events == ([] if failure == "down" else [(0, 0, 2)])
     assert adapter.buttons == (set() if failure == "down" else {"left"})
     assert api.contexts[-1] == 42
     api.refuse = None
     adapter.release()
     assert not adapter.buttons
-    assert api.events[-1] == (0, 0, 4)
+    assert api.events == ([] if failure == "down" else [(0, 0, 2), (0, 0, 4)])

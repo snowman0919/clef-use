@@ -63,6 +63,7 @@ class WindowsInput:
     def __init__(self, user32=None, kernel32=None):
         self.unicode_units: set[int] = set()
         self.key_events: dict[str, Input] = {}
+        self.ownership_changed = None
         if user32 is not None:
             self.user, self.kernel = user32, kernel32
             return
@@ -158,7 +159,7 @@ class WindowsInput:
     def _send(self, event, target=None):
         self._failsafe()
         releasing = (event.type == 1 and event.keyboard.flags & 2) or (
-            event.type == 0 and event.mouse.flags & 4
+            event.type == 0 and event.mouse.flags & (4 | 16 | 64)
         )
         if not releasing:
             self.ensure_target(target)
@@ -179,10 +180,34 @@ class WindowsInput:
             "shift": 0x10,
             "alt": 0x12,
             "command": 0x5B,
+            "delete": 0x2E,
+            "space": 0x20,
+            "left": 0x25,
+            "up": 0x26,
+            "right": 0x27,
+            "down": 0x28,
+            "home": 0x24,
+            "end": 0x23,
+            "pageup": 0x21,
+            "pagedown": 0x22,
+            "insert": 0x2D,
+            "minus": 0xBD,
+            "equal": 0xBB,
+            "period": 0xBE,
+            "comma": 0xBC,
+            "slash": 0xBF,
+            "backslash": 0xDC,
+            "semicolon": 0xBA,
+            "apostrophe": 0xDE,
+            "bracketleft": 0xDB,
+            "bracketright": 0xDD,
+            "grave": 0xC0,
         }
         vk = named.get(key)
-        if vk is None and key in {"a", "l"}:
+        if vk is None and len(key) == 1 and key.isascii() and key.isalnum():
             vk = ord(key.upper())
+        if vk is None and key.startswith("f") and key[1:].isdigit() and 1 <= int(key[1:]) <= 24:
+            vk = 0x6F + int(key[1:])
         if vk is None:
             raise ValueError("unsupported Windows shortcut key")
         thread = self.user.GetWindowThreadProcessId(self.foreground(), None)
@@ -195,8 +220,10 @@ class WindowsInput:
 
     def keyDown(self, key, target=None):
         event = self._key(key, False)
-        self.key_events[key] = event
         self._send(event, target)
+        self.key_events[key] = event
+        if self.ownership_changed:
+            self.ownership_changed()
 
     def keyUp(self, key):
         event = self.key_events.get(key)
@@ -212,6 +239,8 @@ class WindowsInput:
             )
         )
         self.key_events.pop(key, None)
+        if self.ownership_changed:
+            self.ownership_changed()
 
     def moveTo(self, x, y):
         self._failsafe()
@@ -225,17 +254,48 @@ class WindowsInput:
             raise RuntimeError("Windows pointer movement was not confirmed")
 
     def mouseDown(self, button, target=None):
-        if button != "left":
+        flags = {"left": 2, "right": 8, "middle": 32}.get(button)
+        if flags is None:
             raise ValueError("unsupported Windows mouse button")
-        self._send(Input(type=0, mouse=MouseInput(0, 0, 0, 2, 0, 0)), target)
+        self._send(Input(type=0, mouse=MouseInput(0, 0, 0, flags, 0, 0)), target)
 
     def mouseUp(self, button):
-        if button != "left":
+        flags = {"left": 4, "right": 16, "middle": 64}.get(button)
+        if flags is None:
             raise ValueError("unsupported Windows mouse button")
-        self._send(Input(type=0, mouse=MouseInput(0, 0, 0, 4, 0, 0)))
+        self._send(Input(type=0, mouse=MouseInput(0, 0, 0, flags, 0, 0)))
 
     def scroll(self, clicks, target=None):
         self._send(Input(type=0, mouse=MouseInput(0, 0, clicks * 120, 0x800, 0, 0)), target)
+
+    def hscroll(self, clicks, target=None):
+        self._send(Input(type=0, mouse=MouseInput(0, 0, clicks * 120, 0x1000, 0, 0)), target)
+
+    def unowned_input(self, keys, buttons):
+        """Conservatively reject held inputs that this injector did not acquire."""
+        query = getattr(self.user, "GetAsyncKeyState", None)
+        if query is None:
+            raise WindowsDesktopUnavailable("Windows held-input observation unavailable")
+        owned_scans = {event.keyboard.scan for key, event in self.key_events.items() if key in keys}
+        owned_vk = {event.keyboard.vk for key, event in self.key_events.items() if key in keys}
+        mouse = {"left": 1, "right": 2, "middle": 4}
+        for vk in range(1, 256):
+            if not query(vk) & 0x8000:
+                continue
+            if vk in mouse.values():
+                if any(mouse[button] == vk for button in buttons):
+                    continue
+                return True
+            # General and left/right modifier virtual keys can report the same hold.
+            logical = {0xA0: 0x10, 0xA1: 0x10, 0xA2: 0x11, 0xA3: 0x11, 0xA4: 0x12, 0xA5: 0x12}.get(
+                vk, vk
+            )
+            thread = self.user.GetWindowThreadProcessId(self.foreground(), None)
+            layout = self.user.GetKeyboardLayout(thread)
+            scan = self.user.MapVirtualKeyExW(logical, 4, layout) & 0xFF
+            if logical not in owned_vk and scan not in owned_scans:
+                return True
+        return False
 
     def type_text(self, text, cancelled, target=None):
         if any(ord(character) < 32 for character in text):
@@ -252,9 +312,11 @@ class WindowsInput:
                         return
                     self.ensure_target(target)
                     unit = int.from_bytes(encoded[index : index + 2], "little")
-                    self.unicode_units.add(unit)
                     try:
                         self._send(Input(type=1, keyboard=KeyboardInput(0, unit, 4, 0, 0)), target)
+                        self.unicode_units.add(unit)
+                        if self.ownership_changed:
+                            self.ownership_changed()
                     finally:
                         self.release_text()
         finally:
@@ -268,6 +330,8 @@ class WindowsInput:
                 try:
                     self._send(Input(type=1, keyboard=KeyboardInput(0, unit, 6, 0, 0)))
                     self.unicode_units.discard(unit)
+                    if self.ownership_changed:
+                        self.ownership_changed()
                 except Exception as exc:
                     errors.append(exc)
         finally:
