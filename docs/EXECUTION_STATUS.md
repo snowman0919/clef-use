@@ -2,12 +2,16 @@
 
 Date: 2026-10-11. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest committed implementation: `f4ec498` on `codex/reactive-agent-contracts`;
+Latest committed implementation before numeric diagnostics: `06340b0` on
+`codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
 Published evidence HEAD before the following measurements: `8e1eedf`.
-Latest local candidate: FINAL15, including the runtime identity correction;
-installed module hashes and its **792 passed / 34 skipped** source regression are
-recorded in [final15-install.json](validation/2026-10-11/final15-install.json).
+Latest local candidate: FINAL16, adding numeric request/SDK diagnostics and the
+platform-independent guide-manifest ordering correction. Its actual installation,
+61 exact packaged files and **804 passed / 34 skipped** source regression are
+recorded in [final16-install.json](validation/2026-10-11/final16-install.json).
+FINAL15's runtime identity correction and **792 passed / 34 skipped** regression
+retain their original [candidate record](validation/2026-10-11/final15-install.json).
 Earlier FINAL12 native tasks retain their original candidate and guide hashes.
 This is partial execution evidence, not specification completion or release approval.
 Current acceptance evidence is **33 PASS / 3 FAIL / 8 NOT_RUN**; the newly executed
@@ -60,6 +64,17 @@ The sanitized private probe summary SHA-256 is
 only the owned Blender/Xvfb processes were terminated.
 
 ## Executed evidence
+
+**OBSERVED / installed numeric diagnostics:** FINAL16's actual default CLEF worker
+returned SDK usage of 1,565 input tokens and zero output tokens. Independently
+re-serializing the actual request state/questions counted 3,198 UTF-8 bytes,
+nine questions and zero objects; all matched the returned diagnostics. The one
+request used retained development pixels with an empty roster and no candidate
+actions. Its original result was `BLOCKED`; this proves numeric retention, not
+task quality, full runtime execution, correct-target coverage or a latency gate.
+Worker streams/process and outer sandbox cleanup were observed. Raw requests
+and replies remain private. See [native result](validation/2026-10-11/decision-numeric-final16-native.json)
+and [cleanup scope](validation/2026-10-11/decision-numeric-final16-cleanup.json).
 
 **OBSERVED / actual general GUI tasks:** FINAL15's installed default factory ran
 one native Firefox form and one independent Tk editor task through actual cached

@@ -91,5 +91,10 @@ refuse before input. If cancelled before consumption, the owned literal remains
 available for a queued paste until transfer or another copy; previous data is not
 restored early. Windows operations use native Unicode insertion.
 Watchdog recovery is limited by native permissions and acknowledgement windows.
+Decision diagnostics retain the exact UTF-8 text-budget bytes (image excluded),
+object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integer
+from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are
+`INVALID`, both with a null count. These counters do not measure correct-target
+coverage, calibrated confidence or model latency.
 No measured 100ms profile or release-gate success is currently advertised.
 See [execution evidence](../EXECUTION_STATUS.md) and [acceptance](../../ACCEPTANCE.yaml).

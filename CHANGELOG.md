@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Retain decision request UTF-8 budget bytes, object/question counts and bounded
+  SDK-reported input tokens in numeric diagnostics without changing model packets
+  or confidence gates. Missing and invalid token usage remain explicit.
 - Order packaged guide manifest entries by relative POSIX spelling so Windows
   and Linux generate identical contract bytes from the same guide files.
 - Bind local runtime requests to executable version, protocol and API fingerprint.

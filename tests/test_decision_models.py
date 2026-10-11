@@ -136,6 +136,78 @@ def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():
         decision_request(obs, Contract(goal="Inspect"), (), [])
 
 
+def test_unicode_request_budget_counts_utf8_bytes_and_refuses_the_next_character():
+    import json
+
+    from clef_use.backends import decision_request
+
+    desktop = FixtureDesktop()
+    obj = desktop.parse(None)[0].model_copy(update={"label": ""})
+    observation = Observation("epoch", desktop.capture(), (obj,))
+    metrics = {}
+    packet = decision_request(observation, Contract(goal="Inspect"), (), [], metrics=metrics)
+    serialized = json.dumps(
+        {"state": packet["state"], "questions": packet["questions"]}, ensure_ascii=False
+    )
+    remaining = 32768 - len(serialized.encode("utf-8"))
+    label = "\uac00" * (remaining // 3) + "x" * (remaining % 3)
+    observation = Observation(
+        "epoch", observation.frame, (obj.model_copy(update={"label": label}),)
+    )
+    accepted = decision_request(observation, Contract(goal="Inspect"), (), [], metrics=metrics)
+    assert accepted["state"]["objects"][0]["label"] == label
+    assert metrics["request_text_bytes"] == 32768
+    assert metrics["request_object_count"] == len(observation.objects)
+    assert metrics["request_question_count"] == len(accepted["questions"])
+    overflow = Observation(
+        "epoch", observation.frame, (obj.model_copy(update={"label": label + "x"}),)
+    )
+    with pytest.raises(ValueError, match="bounded text budget"):
+        decision_request(overflow, Contract(goal="Inspect"), (), [])
+
+
+@pytest.mark.parametrize(
+    ("usage", "tokens", "source"),
+    [
+        (None, None, "UNAVAILABLE"),
+        ({"output_tokens": 0}, None, "UNAVAILABLE"),
+        ({"input_tokens": 1, "output_tokens": 0}, 1, "SDK_USAGE"),
+        ({"input_tokens": 8192, "output_tokens": 0}, 8192, "SDK_USAGE"),
+        *[
+            ({"input_tokens": value, "output_tokens": 0}, None, "INVALID")
+            for value in (None, True, 0, -1, 8193, 1.0, "17")
+        ],
+    ],
+)
+def test_decision_usage_never_invents_token_measurements_or_changes_answers(usage, tokens, source):
+    desktop = FixtureDesktop()
+    observation = Observation("epoch", desktop.capture(), desktop.parse(None))
+    backend = DecisionBackend(Config())
+    reply = {
+        "answers": {
+            "mode": {"choice": "WAIT", "confidence": 0.8},
+            "effect": {"noul": 0.1},
+            "action": {"choice": "none", "confidence": 1.0, "probabilities": {"none": 1.0}},
+            "complete": {"noul": 0.2},
+            "replan": {"noul": 0.3},
+            "unsafe": {"noul": 0.4},
+            "progress": {"score": 2.5},
+        }
+    }
+    if usage is not None:
+        reply["usage"] = usage
+    # The external worker supplies native answers; exercise their validation,
+    # metric classification and unchanged decision meaning at the consumer.
+    backend.worker.request = lambda _: reply
+    decision = backend.decide(observation, Contract(goal="Inspect"), (), [])
+    assert decision.diagnostics["input_tokens"] == tokens
+    assert decision.diagnostics["input_tokens_source"] == source
+    assert decision.mode == "WAIT" and decision.mode_confidence == 0.8
+    assert decision.action is None and decision.confidence == 1.0
+    assert decision.goal_probability == 0.2 and decision.replan_probability == 0.3
+    assert decision.safety_probability == 0.4 and decision.effect_probability == 0.1
+
+
 @pytest.mark.parametrize("tokens", [8192, 8193, 16384])
 def test_clef_worker_refuses_sdk_state_truncation_before_inference(tokens, monkeypatch):
     from types import SimpleNamespace

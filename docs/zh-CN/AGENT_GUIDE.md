@@ -81,5 +81,9 @@ X11 的字符输入（包括 ASCII）要求显式 clipboard 方式；键事件�
 也可能进入 IME。传输确认不等于输入框结果验证。无法保留原有 clipboard 格式时，
 会在输入前拒绝。接收前中止时，为已发送的粘贴保留文字，直到传输完成或发生其他
 复制，不提前恢复旧数据。Windows 操作使用 native Unicode 输入。
+decision 诊断保留不含图像的实际 UTF-8 文本预算字节数、object/question 数量和
+SDK 报告的输入 token 数。`SDK_USAGE` 表示 1～8192 的整数；缺失时为
+`UNAVAILABLE`，报告值无效时为 `INVALID`，后二者的数量均为 null。
+这些计数不衡量正确目标的 coverage、校准置信度或模型延迟。
 目前不宣称已测得通过的 100ms profile 或发布 gate 成功。
 参阅[执行证据](../EXECUTION_STATUS.md)及[验收要求](../../ACCEPTANCE.yaml)。

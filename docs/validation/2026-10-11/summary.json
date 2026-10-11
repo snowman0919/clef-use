@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T13:56:00.879479+00:00",
+  "generated_at": "2026-10-11T14:17:59.620709+00:00",
   "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
   "completion_claim": false,
   "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
@@ -2280,6 +2280,24 @@
       "artifact": "docs/validation/2026-10-11/ci6cdf182-linux-driver-stopped3.json",
       "sha256": "3ae3b3a6a2ca62eaf07499a9cd540ef587d8fe93a950dcafdcae6bafa6a0a914",
       "scope": "Third stopped driver: readonly status/current lazy runtime passed;shared helper imported .30-only capabilities module before genuine29 RuntimeClient import/request. No old consumer invocation reached. Original immediate cleanup flags and later process/endpoint absence both retained."
+    },
+    "decision_numeric_final16_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/decision-numeric-final16-native.json",
+      "sha256": "0d014676e56cc6bc927802ece357aff7b8f016dc140c2520117a71ee67a629a9",
+      "scope": "Actual installed default CLEF one request: SDK1565input/0output tokens and independently counted3198UTF8bytes/9questions/0objects equal retained diagnostics. Development excluded screenshot/empty roster, no perception/RuntimeClient/GUI/input/quality/latency claim; original BLOCKED outcome retained."
+    },
+    "decision_numeric_final16_cleanup": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/decision-numeric-final16-cleanup.json",
+      "sha256": "533f762fe681a0a8b3511a3704c283364cbea474fa378603d51b9ccce368d36b",
+      "scope": "Actual outer bwrap wait exit0 and ownUID proc readback with no owned-root argv/FINAL16 modelworker. No live namespace inode sampled; not stronger continuous namespace proof. Original numeric worker close/streams proof separate."
+    },
+    "final16_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/final16-install.json",
+      "sha256": "01853280eb4311acd970d8941c1f1bbdc869b511e79687a192976eabe93ad2fd",
+      "scope": "Actual complete FINAL16 local archive INSTALLED/CURRENT,46Python+15resources exact source/wheel/installed bytes,3guides3profiles idempotent/26HOME bytes/comments preserved,804passed34skipped source regression. Actual one installed CLEF numeric smoke separately recorded; no immutableCI/nativeharness/release/fulltask claim."
     }
   },
   "not_run": {
@@ -2436,6 +2454,9 @@
     "ci6cdf182-linux-install.json",
     "ci6cdf182-linux-driver-stopped1.json",
     "ci6cdf182-linux-driver-stopped2.json",
-    "ci6cdf182-linux-driver-stopped3.json"
+    "ci6cdf182-linux-driver-stopped3.json",
+    "decision-numeric-final16-native.json",
+    "decision-numeric-final16-cleanup.json",
+    "final16-install.json"
   ]
 }

@@ -92,5 +92,9 @@ X11에서는 ASCII를 포함한 문자 삽입에 명시적 clipboard 방식을 �
 수신 전에 중단되면 이미 전달된 붙여넣기를 위해 문자를 전송 완료 또는 다른 복사까지
 유지하며, 이전 데이터를 일찍 복원하지 않습니다. Windows 조작은 native Unicode를 사용합니다.
 watchdog 복구에는 OS 권한과 입력 확인 시점에 따른 한계가 있습니다.
+decision 진단은 이미지가 제외된 실제 UTF-8 텍스트 예산 바이트 수, object·question
+개수와 SDK가 보고한 입력 토큰 수를 보존합니다. `SDK_USAGE`는 1~8192의 정수이며,
+누락은 `UNAVAILABLE`, 잘못된 보고 값은 `INVALID`로 표시하고 토큰 수는 null입니다.
+이 수치는 올바른 대상의 coverage, 보정된 신뢰도나 모델 지연 시간을 측정하지 않습니다.
 현재 측정으로 통과한 100ms profile이나 출하 gate 성공을 주장하지 않습니다.
 [실행 증거](../EXECUTION_STATUS.md)와 [acceptance](../../ACCEPTANCE.yaml)를 확인하세요.

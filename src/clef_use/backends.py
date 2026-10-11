@@ -197,7 +197,9 @@ class VisualGroundingBackend:
         return GroundingResult(**reply["grounding"])
 
 
-def decision_request(observation, contract, candidates, history) -> dict:
+def decision_request(
+    observation, contract, candidates, history, *, metrics: dict | None = None
+) -> dict:
     if len(observation.objects) > 40:
         raise ValueError("decision packet exceeds the bounded object budget")
     width, height = observation.frame.image.size
@@ -336,8 +338,15 @@ def decision_request(observation, contract, candidates, history) -> dict:
         "image": encode_image(observation.frame.image),
     }
     text = json.dumps({"state": packet["state"], "questions": questions}, ensure_ascii=False)
-    if len(text.encode("utf-8")) > 32768:
+    text_bytes = len(text.encode("utf-8"))
+    if text_bytes > 32768:
         raise ValueError("decision packet exceeds the bounded text budget")
+    if metrics is not None:
+        metrics.update(
+            request_text_bytes=text_bytes,
+            request_question_count=len(questions),
+            request_object_count=len(objects),
+        )
     return packet
 
 
@@ -349,10 +358,12 @@ class DecisionBackend:
         )
 
     def decide(self, observation, goal, candidates, history):
-        request = decision_request(observation, goal, candidates, history)
+        request_metrics = {}
+        request = decision_request(observation, goal, candidates, history, metrics=request_metrics)
+        reply = self.worker.request(request)
         answers = validate_answers(
             request["questions"],
-            self.worker.request(request),
+            reply,
             answer_decimals=self.spec.answer_decimals,
         )
         choice = answers["action"]
@@ -360,6 +371,17 @@ class DecisionBackend:
         from .decision_diagnostics import distribution_metrics
 
         diagnostics = distribution_metrics(probabilities)
+        usage = reply.get("usage")
+        input_tokens = usage.get("input_tokens") if isinstance(usage, dict) else None
+        valid_tokens = type(input_tokens) is int and 0 < input_tokens <= 8192
+        missing_tokens = usage is None or "input_tokens" not in usage
+        diagnostics.update(
+            **request_metrics,
+            input_tokens=input_tokens if valid_tokens else None,
+            input_tokens_source=(
+                "SDK_USAGE" if valid_tokens else "UNAVAILABLE" if missing_tokens else "INVALID"
+            ),
+        )
         total = sum(probabilities.values())
         entropy = None
         if total > 0:

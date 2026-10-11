@@ -1,0 +1,85 @@
+{
+  "classification": "OBSERVED_INSTALLED_DECISION_NUMERIC_SMOKE",
+  "status": "PASS_NUMERIC_TRANSPORT_ONLY",
+  "scope": "Direct installed DecisionBackend.decide; retained browser development pixels and original browser contract, empty objects/candidates, no perception/parser/RuntimeClient/service/native effects/quality/generalization or timing gate claim.",
+  "version": "0.1.30",
+  "source_hashes": {
+    "backends.py": "52073a9dfe5a9709efbf368be2d21ed6f572870c6b8e511df6195d0faa448fe1",
+    "model_worker.py": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+    "decision_diagnostics.py": "e5b2826b53ee81adae9ed4429099bc2dcd12be0a9d7e7f5ba6f22f8833f91f10",
+    "decision_contract.py": "62681e6033c9a0841612a11fb4a4e3d86363481d9230a528f7b54ef5282ddb76"
+  },
+  "archive_sha256": "cbf7631a845ec35be2472d20b827b9ffb05ad8a2de23b7a4a3746e36e1fa6777",
+  "driver_sha256": "cc0500d81d9b2ce24a51d3eeef9133f736b2f5ea30949ed1d8d9369feaad27da",
+  "declaration_sha256": "c8664b3f2c2a57094e232d28f388d5477920b415386d57f78070618b1e46aa4d",
+  "image_sha256": "f91347634e01964d1ecfadb5403f84005c87f3264154d45784145f803b478c7b",
+  "image_size": [
+    1280,
+    900
+  ],
+  "image_split": "DEVELOPMENT_EXCLUDED_FROM_HELDOUT",
+  "objects": 0,
+  "candidates": 0,
+  "Omni_requests": 0,
+  "GUI_created": false,
+  "native_input_backend_instantiated": false,
+  "quality": "NOT_RUN; this is a direct ASSESS-only numeric transport smoke",
+  "latency_gate": "NOT_RUN; profiling/cold-start one sample has no p95 meaning",
+  "cleanup": {
+    "owned_worker_exited": true,
+    "worker_streams_closed": true
+  },
+  "diagnostics": {
+    "probabilities": {
+      "none": 1.0
+    },
+    "option_count": 1,
+    "classification": "SINGLETON",
+    "normalized_entropy": null,
+    "probability_stdev": null,
+    "top_two_margin": null,
+    "raw_logit_variance": null,
+    "repeat_invariance": "NOT_MEASURED",
+    "singleton_is_safety_evidence": false,
+    "request_text_bytes": 3198,
+    "request_question_count": 9,
+    "request_object_count": 0,
+    "input_tokens": 1565,
+    "input_tokens_source": "SDK_USAGE"
+  },
+  "actual_SDK_usage": {
+    "input_tokens": 1565,
+    "output_tokens": 0
+  },
+  "independent_request_metrics": {
+    "request_text_bytes": 3198,
+    "request_question_count": 9,
+    "request_object_count": 0
+  },
+  "semantic_text_sha256": "a78353a66231e4e90638310a2e8bfdb6c07852b21fffa9c646d8be1d67803e3b",
+  "actual_worker_route": {
+    "configured_python_match": true,
+    "installed_worker_source_match": true,
+    "kind": "clef"
+  },
+  "model_outcome": {
+    "mode": "BLOCKED",
+    "mode_confidence": 0.5006,
+    "action": null,
+    "confidence": 1.0,
+    "effect_probability": 0.0128,
+    "goal_probability": 0.0118,
+    "replan_probability": 0.8093,
+    "safety_probability": 0.039
+  },
+  "request_calls": 1,
+  "response_returns": 1,
+  "elapsed_seconds": 23.262463052058592,
+  "private_artifact_hashes": {
+    "private-request.json": "8ba7a0654704fc540d11d2bba3da4ac4ba5425ebd408d3c12be33f9990efe621",
+    "private-native-reply.json": "c0842ae74878e2a2f78d75dbba0ec751a76f122b00490462dde556341b58f71b",
+    "private-decision.json": "875e5147265985872a8086f2f3b19917a990a3b7a731f6b66f6d5993a407e6f7",
+    "private-worker-ready.json": "bbc4a8e869c436cbdc0cc1ac923d639533a61aaf384898e2dfccb9ba1a70f207"
+  },
+  "received_native_artifact_sha256": "403811959868ce810bce325117a167c11bc600348a0fe7a042e995f9f1938549"
+}

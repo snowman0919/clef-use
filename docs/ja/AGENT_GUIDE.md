@@ -94,5 +94,9 @@ X11 の文字入力は ASCII も明示的な clipboard 方式を使います。�
 既存 clipboard 形式を保存できない場合は入力前に拒否します。受信前に中止した
 場合、既に送られた貼り付け用の文字を転送完了または別のコピーまで維持し、以前の
 データを早く復元しません。Windows 操作は native Unicode を使います。
+decision 診断には画像を除く実際の UTF-8 テキスト予算のバイト数、object・question
+数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、
+欠落は `UNAVAILABLE`、不正な報告値は `INVALID` とし、後二者の数は null です。
+これらは正しい対象の coverage、校正された信頼度、モデル遅延の測定ではありません。
 現在、測定で合格した 100ms profile や出荷 gate の成功は主張していません。
 [実行証拠](../EXECUTION_STATUS.md)と[検証項目](../../ACCEPTANCE.yaml)を参照してください。
