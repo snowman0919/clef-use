@@ -1,6 +1,14 @@
 import pytest
 
-from clef_use.harness import install_mcp
+from clef_use.harness import atomic_write, install_mcp
+
+
+def test_atomic_write_preserves_exact_utf8_and_mixed_newline_bytes(tmp_path):
+    path = tmp_path / "managed-config"
+    original = '# user note\r\nname = "\ud55c\uae00"\n# last line\r'
+    path.write_bytes(b"previous configuration")
+    atomic_write(path, original)
+    assert path.read_bytes() == original.encode("utf-8")
 
 
 @pytest.mark.parametrize(
