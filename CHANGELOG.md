@@ -18,6 +18,8 @@
   verify effects; they do not establish pixels-only production support.
 - Record pre-pruning candidate coverage diagnostics without relaxing confidence
   gates; distinguish singleton/uniform distributions and numeric false completions.
+- Clarify linked-reference loading and read-only Blender skill discovery after
+  actual native Hermes guide-selection and reference-call failures.
 - Keep deadline goodput separate from fast-path eligibility coverage; unrecorded
   eligibility remains unmeasured in native benchmark reports.
 - Read localized guide contracts as UTF-8 and generate LF bytes independently of

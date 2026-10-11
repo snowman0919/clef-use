@@ -21,10 +21,17 @@ operations, input types, and limitations. Otherwise use the advertised schemas
 and the current baseline reference below. A missing capability is not permission
 to synthesize an unsupported tool.
 
+For Blender tasks, including read-only menu or scene-state assessment, load the
+discovered `clef-use-blender` guide before planning the operation.
+
 Read [the baseline API guide](references/API_BASELINE.md) for current examples.
 Read [installed contract examples](references/LIVE_API.md) for schema-checked
 discovery and registered operation requests. State providers are required for
 guarded operations; missing facts remain unknown and block input.
+These are files inside this skill. Keep `clef-use` as the owning skill name and
+use the reader's linked-file parameter or read the resolved file path. For
+Hermes `skill_view`, use `name="clef-use"` and
+`file_path="references/API_BASELINE.md"`.
 Prefer live, version-matched schemas if the installed runtime is newer.
 
 ## Plan
@@ -48,9 +55,8 @@ Structured targets suit clear semantic controls; dense UI and canvas work need
 supported grounding or operation contracts. Do not pass hundreds of unrelated
 controls as a substitute for identifying the current editor and operation.
 
-For text, separate exact characters from key chords and submission. For Blender,
-use the `clef-use-blender` guide if discovered. Never assume keymap, text focus,
-editor, or modal state from the application name alone.
+For text, separate exact characters from key chords and submission. Never assume
+keymap, text focus, editor, or modal state from the application name alone.
 
 Planner-supplied pointers require a real fresh frame reference, the correct
 original coordinate transform, and a bounded surface. Do not reuse a point after

@@ -6,9 +6,19 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+Load the Blender guide for read-only menu/state assessment as well as editing.
+Linked `references/` files belong to their owning skill. In Hermes, read the
+baseline with `skill_view(name="clef-use", file_path="references/API_BASELINE.md")`.
+
 OMP resolves `PI_CONFIG_DIR` as a name relative to HOME (default `.omp`). Use
 `PI_CODING_AGENT_DIR` for an absolute default agent directory. An explicit empty
 or `default` `OMP_PROFILE` selects the default even when `PI_PROFILE` is set.
+
+If the registered executable points to an immutable older installation, `refresh`
+preserves that path and refuses incompatible new guides. `--command-path` also
+preserves an existing registration. Review managed removal with `--dry-run`, remove
+only unchanged managed entries, then enroll with the current executable's
+`--command-path`. User edits and disabled-entry conflicts remain preserved.
 
 <!-- clef-use:commands -->
 ```sh

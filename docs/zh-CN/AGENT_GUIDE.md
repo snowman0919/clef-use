@@ -5,9 +5,18 @@ runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-us
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有
 `--integrate codex|hermes|omp|all` 时注册新工具环境。模型准备是独立选项。
 
+编辑和只读菜单、状态评估都应加载 Blender 技能。`references/` 文件属于原技能。
+在 Hermes 中使用
+`skill_view(name="clef-use", file_path="references/API_BASELINE.md")` 读取基准 API。
+
 OMP 将 `PI_CONFIG_DIR` 解析为相对于 HOME 的路径名称，默认是 `.omp`。
 绝对路径的默认 agent 目录请使用 `PI_CODING_AGENT_DIR`。
 明确为空或 `default` 的 `OMP_PROFILE` 优先于 `PI_PROFILE`，选择默认配置。
+
+如果注册的可执行文件指向固定的旧安装，`refresh` 会保留该路径并拒绝不兼容的新指南。
+`--command-path` 也不会覆盖现有注册。先用 `--dry-run` 检查受管理项的删除，
+仅删除未修改的受管理项，再通过 `--command-path` 注册当前可执行文件。
+用户修改及已禁用条目的冲突会被保留。
 
 <!-- clef-use:commands -->
 operation 的 `SUCCEEDED` 只验证类型化效果。自然语言目标需要另一次 fresh

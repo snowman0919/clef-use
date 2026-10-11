@@ -6,9 +6,19 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+編集だけでなく、読み取り専用のメニュー・状態評価にも Blender スキルをロードします。
+`references/` ファイルは元のスキルに属します。Hermes では
+`skill_view(name="clef-use", file_path="references/API_BASELINE.md")` で基準 API を読みます。
+
 OMP の `PI_CONFIG_DIR` は HOME からの相対パス名で、既定は `.omp` です。
 絶対パスの既定 agent ディレクトリには `PI_CODING_AGENT_DIR` を使います。
 空または `default` の `OMP_PROFILE` は `PI_PROFILE` より優先して既定 profile を選択します。
+
+登録先が固定された旧インストール先の場合、`refresh` はその実行パスを保持し、
+新しいガイドとの不一致を拒否します。`--command-path` も既存登録を上書きしません。
+まず管理対象の削除を `--dry-run` で確認し、未変更の管理対象だけを削除してから、
+現在の実行ファイルを `--command-path` で登録してください。ユーザーの編集や
+無効化された項目との競合は保持されます。
 
 <!-- clef-use:commands -->
 operation の `SUCCEEDED` は型付き効果の検証です。自然言語の目標には別の fresh

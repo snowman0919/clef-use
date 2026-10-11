@@ -6,9 +6,19 @@ Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미�
 선택한 대상만 변경합니다. 최초 무인 설치는 `--integrate codex|hermes|omp|all`
 없이 새 하네스를 등록하지 않습니다. 모델 준비는 별도 선택입니다.
 
+편집뿐 아니라 읽기 전용 메뉴·상태 평가에도 Blender 스킬을 로드하세요.
+`references/` 파일은 해당 스킬에 속합니다. Hermes에서는
+`skill_view(name="clef-use", file_path="references/API_BASELINE.md")`로 기준 API를 읽습니다.
+
 OMP의 `PI_CONFIG_DIR`는 HOME 기준 상대 경로 이름이며 기본값은 `.omp`입니다.
 절대 경로의 기본 agent 디렉터리는 `PI_CODING_AGENT_DIR`로 지정하세요.
 `OMP_PROFILE`을 빈 값이나 `default`로 지정하면 `PI_PROFILE`보다 우선하여 기본 프로필을 선택합니다.
+
+등록된 실행 경로가 고정된 이전 설치본이면 `refresh`는 그 경로를 보존하고
+새 지침과의 불일치를 거부합니다. `--command-path`도 기존 등록을 덮어쓰지
+않습니다. 먼저 관리된 항목 제거를 `--dry-run`으로 검토하고, 수정되지 않은
+관리본만 제거한 뒤 현재 실행본의 `--command-path`로 다시 등록하세요.
+사용자 수정이나 비활성화 항목의 충돌은 별도로 보존됩니다.
 
 <!-- clef-use:commands -->
 operation의 `SUCCEEDED`는 typed effect 검증입니다. 자연어 목표는 별도의 fresh

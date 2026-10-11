@@ -1,6 +1,6 @@
 ---
 name: clef-use-blender
-description: Use clef-use for Blender GUI editing, selection, transforms, viewport gestures, materials, or rig inspection. Check editor, mode, keymap, and effects. Not a primitive avatar generator or a substitute for asset-quality review.
+description: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection, transforms, viewport gestures, materials, or rig inspection. Not a primitive avatar generator or a substitute for asset-quality review.
 metadata:
   guide-contract: "1"
   authored-against: "0.1.29"

@@ -13,18 +13,18 @@
   "skills": {
     "clef-use": {
       "sha256": {
-        "SKILL.md": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f",
+        "SKILL.md": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
         "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
         "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
       },
-      "digest": "d76f10ebfe06e7ef706a7f0f3986188f3fd52aeee2807564df5afa9bed176339"
+      "digest": "83b67a2f2dc5865578accf6a54a833409a5acfb72cdbf04bac83327c4109ab6b"
     },
     "clef-use-blender": {
       "sha256": {
-        "SKILL.md": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6",
+        "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
         "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
       },
-      "digest": "dc6ec1039b7b3906909efead361a19482dd57bbc1ffe250ded690ba7b177c1f7"
+      "digest": "c1af3408ec928b31dcf87a5033f45d477665fa65c64bdf7ac1134c98297509b8"
     },
     "clef-use-diagnostics": {
       "sha256": {
