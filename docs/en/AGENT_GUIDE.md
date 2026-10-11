@@ -127,6 +127,10 @@ coverage, calibrated confidence or model latency.
 Decision candidates retain their operation and observed target ID so equally
 labelled controls can be distinguished by position. This preserves the mapping;
 it does not certify correct selection or relax confidence guards.
+Literal-text candidates retain every matching observed input, including equally
+labelled fields. If those alternatives exceed the configured action budget,
+structured execution requests replanning before a model call or input; narrow
+the target scope rather than assuming that the first field is correct.
 Missing targets or more than 40 distinct executable targets are refused instead
 of silently removing their observed geometry from the decision context.
 Reaction coverage stays null/`NOT_MEASURED` without prospective eligibility and

@@ -132,7 +132,21 @@ class CandidateBuilder:
                 )
 
         payloads = text_inputs(contract)
-        reserve = min(len(payloads), 8)
+        inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
+        text_options = [
+            (
+                payload,
+                tuple(
+                    obj
+                    for obj in inputs
+                    if payload.target_label is None
+                    or payload.target_label.casefold() in obj.label.casefold()
+                ),
+            )
+            for payload in payloads
+        ]
+        text_proposed = sum(len(matches) for _, matches in text_options)
+        reserve = min(text_proposed, self.limit)
         active_limit = self.limit - reserve
         for obj in objects:
             if "click" in obj.actions:
@@ -152,16 +166,10 @@ class CandidateBuilder:
                 for direction in ("up", "down"):
                     add("scroll", f"Scroll {direction}", obj, direction, "view_change")
         active_limit = self.limit
-        inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
-        for payload in payloads:
-            matching_inputs = [
-                obj
-                for obj in inputs
-                if payload.target_label is None
-                or payload.target_label.casefold() in obj.label.casefold()
-            ]
-            if matching_inputs:
-                obj = matching_inputs[0]
+        for payload, matching_inputs in text_options:
+            # A label match proposes every observed input; roster order cannot
+            # decide which distinct field should receive the supplied literal.
+            for obj in matching_inputs:
                 add(
                     "type",
                     f"Enter exact supplied text into {obj.label}: {payload.value!r}",
@@ -184,6 +192,7 @@ class CandidateBuilder:
         if dialogs:
             add("press", "Dismiss visible dialog", dialogs[0], "escape", "view_change")
         retained_targets = {candidate.target for candidate in candidates if candidate.target}
+        text_retained = sum(candidate.operation == "type" for candidate in candidates)
         self.metrics = {
             "proposals_before_limit": proposed,
             "proposals_after_limit": len(candidates),
@@ -191,6 +200,9 @@ class CandidateBuilder:
             "targets_after_limit": len(retained_targets),
             "proposal_target_retention": len(retained_targets) / len(targets) if targets else None,
             "semantic_duplicate_groups": [ids for ids in groups.values() if len(ids) > 1],
+            "text_proposals_before_limit": text_proposed,
+            "text_proposals_after_limit": text_retained,
+            "text_proposals_truncated": text_proposed - text_retained,
             "coverage_at_k": None,
             "target_absent": None,
             "ground_truth": "UNAVAILABLE; retention is not correct-target coverage",

@@ -1,0 +1,143 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Canonical software component with synthetic observations; no native GUI/model/E2E",
+  "path": "CandidateBuilder -> ExecutionRouter.decision_observation -> decision_request -> JSON",
+  "source_base": "2406a959a63110ec77c6735eb65b81af8c2059fc",
+  "source_sha256": {
+    "src/clef_use/candidates.py": "1857fda13731278818711a70da9b57ffd632091225724866d9a6c24adcfd366a",
+    "src/clef_use/runtime.py": "67ffcc2cdfdb644d9c78f3df70bb81088399347c23b34017d22cd29ee11f86f5",
+    "tests/test_candidate_text.py": "de3a212ec96229635840dd10a5dae843a5805c99e7bc5c2f995b0031bff57e49"
+  },
+  "literal_candidates": [
+    {
+      "operation": "type",
+      "target": "left",
+      "value": "Alice",
+      "bbox": {
+        "x1": 10,
+        "y1": 20,
+        "x2": 20,
+        "y2": 40
+      }
+    },
+    {
+      "operation": "type",
+      "target": "right",
+      "value": "Alice",
+      "bbox": {
+        "x1": 70,
+        "y1": 20,
+        "x2": 80,
+        "y2": 40
+      }
+    },
+    {
+      "operation": "type",
+      "target": "left",
+      "value": "Bob",
+      "bbox": {
+        "x1": 10,
+        "y1": 20,
+        "x2": 20,
+        "y2": 40
+      }
+    },
+    {
+      "operation": "type",
+      "target": "right",
+      "value": "Bob",
+      "bbox": {
+        "x1": 70,
+        "y1": 20,
+        "x2": 80,
+        "y2": 40
+      }
+    }
+  ],
+  "diagnostics": {
+    "proposals_before_limit": 8,
+    "proposals_after_limit": 8,
+    "targets_before_limit": 2,
+    "targets_after_limit": 2,
+    "proposal_target_retention": 1.0,
+    "semantic_duplicate_groups": [
+      [
+        "left",
+        "right"
+      ],
+      [
+        "left",
+        "right"
+      ],
+      [
+        "left",
+        "right"
+      ],
+      [
+        "left",
+        "right"
+      ]
+    ],
+    "text_proposals_before_limit": 4,
+    "text_proposals_after_limit": 4,
+    "text_proposals_truncated": 0,
+    "coverage_at_k": null,
+    "target_absent": null,
+    "ground_truth": "UNAVAILABLE; retention is not correct-target coverage"
+  },
+  "model_calls": 0,
+  "os_inputs": 0,
+  "not_run": [
+    "Installed runtime E2E",
+    "Whole-task or model accuracy",
+    "Reaction p95/goodput/coverage"
+  ],
+  "reproduced_before": {
+    "regression_cases_failed": 4,
+    "missing_right_field_literals": [
+      "Alice",
+      "Bob"
+    ],
+    "unmatched_label_click_slots": 11,
+    "expected_unmatched_label_click_slots": 12,
+    "text_roster_overflow": "Reached decision stage instead of requesting replanning"
+  },
+  "regression": {
+    "focused": {
+      "passed": 124,
+      "warnings": 7,
+      "seconds": 1.64
+    },
+    "first_full": {
+      "passed": 910,
+      "failed": 1,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 50.98,
+      "failure": "Pre-existing packaged Blender guide manifest drift from preceding observer documentation change"
+    },
+    "guide_manifest_fix_commit": "1e42658",
+    "contract_and_new_cases": {
+      "passed": 9,
+      "seconds": 0.65
+    },
+    "full_after_manifest_fix": {
+      "passed": 911,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 50.87
+    },
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS"
+  },
+  "invariants": {
+    "confidence_guards": "UNCHANGED",
+    "input_guards": "UNCHANGED",
+    "candidate_budget": "UNCHANGED; reserve actual matching text alternatives and replan on text overflow",
+    "old_changed_paths": [],
+    "acceptance_conditions": "UNCHANGED",
+    "task_quality_claim": false
+  },
+  "first_full_log_sha256": "9ad57d7f5b26c9cc1f8243f003969c26e6d767c0d230a49f1fa5acbc1e9f3aa5",
+  "full_after_fix_log_sha256": "b042c44e985721b9b8760235313a595dbdbce9f1d062e67620fffda70c33e067"
+}

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Preserve every matching observed input as a distinct literal-text alternative.
+  Reserve candidate slots for actual matches and request replanning before model
+  or input execution when text alternatives exceed the existing action budget.
 - Add an opt-in, read-only Blender public-RNA observer on Linux X11, bound to
   the native foreground client using Unix peer credentials and X-Resource PID.
   Keep unresolved popup, text/IME, effective keymap and busy state unknown;

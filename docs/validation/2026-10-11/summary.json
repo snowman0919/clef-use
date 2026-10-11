@@ -2697,6 +2697,12 @@
       "artifact": "docs/validation/2026-10-11/blender-rna-observer-component.json",
       "sha256": "16725bb7af20d700300c174d26d4af3b5cf03af460d46185bb5ab78f828f8bb0",
       "scope": "Currentsoftware source907PASS34SKIP/105targetedguidePASS;actualUI-threadpartialRNA/nativeUnixpeer-XResPID/decoratedclientbinding/resize-wrongpeer-streamlossrefusals. Models0/keyboardpointer0;all6guardedoperationsstillblockedunknowncontext. Component proof only,NOT wholeE2E orperformance;earlierstartupdiagnosticsretained."
+    },
+    "literal_candidate_alternatives": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/literal-candidate-alternatives.json",
+      "sha256": "a43fc60190b4355cc1dbbd78b76d66fe0c6a0e631620d261168646a43947de97",
+      "scope": "Canonical source component using synthetic observations preserves every matching input/literal; text overflow replans before model/input. Four reproduced failures corrected; 911 passed/34 skipped. Pre-existing guide manifest drift corrected separately. No new native GUI/model/installation/E2E or performance claim."
     }
   },
   "not_run": {
@@ -2921,7 +2927,8 @@
     "ci493-windows-installed.json",
     "ci493-native-quality-failure.json",
     "release-ci4932557.json",
-    "blender-rna-observer-component.json"
+    "blender-rna-observer-component.json",
+    "literal-candidate-alternatives.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

@@ -667,6 +667,12 @@ class SessionRuntime:
         )
         if route.semantic_targets and {a.target for a in candidates} != set(route.semantic_targets):
             raise GroundingUncertain("semantic targets exceed the bounded action budget")
+        if (
+            route.mode == "STRUCTURED"
+            and session.contract.visual_intent is None
+            and self.builder.metrics.get("text_proposals_truncated", 0)
+        ):
+            raise GroundingUncertain("text alternatives exceed the bounded action budget")
 
         def decide():
             row["clef_calls"] += 1

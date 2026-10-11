@@ -7,6 +7,8 @@ Latest built, installed and CI-verified implementation: `4932557` on
 the bounded Blender fixture remains unchanged from `a7a46b5`.
 The newer optional Blender observer source passed 907 regression tests and real
 component verification; its installation and whole-task E2E are NOT_RUN here.
+The subsequent literal-candidate correction passed **911 tests / 34 skipped**;
+its component verification uses synthetic observations, without model or OS input.
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical
@@ -41,6 +43,24 @@ Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-1
 Per-scenario status and remaining scope: [ACCEPTANCE.yaml](../ACCEPTANCE.yaml).
 
 ## Remaining work and specific verification boundaries
+
+**OBSERVED / literal input alternatives:** the canonical builder previously
+proposed only the first matching input per literal. Before correction, four new
+regression cases failed: right-field alternatives were missing, an unmatched
+label still reserved a candidate slot, and an incomplete text roster reached
+the decision stage. Each matching observed input now retains its own ID and
+literal. Reservation counts actual matching alternatives, and overflow requests
+`NEEDS_REPLAN` before model or input execution with explicit before/after counts.
+The actual builder/router/serializer/JSON component path preserved both equally
+labelled fields' distinct pixel boxes for both literals. These are synthetic
+observations, not native GUI or task-quality evidence. The focused source checks
+passed 124 tests. The first full run also exposed a pre-existing stale packaged
+Blender guide manifest from the preceding documentation change; regeneration
+is committed separately as `1e42658`. After that correction the full suite passed
+**911 tests / 34 skipped / 41 warnings**. Confidence, input guards and acceptance
+gates are unchanged. New installation/E2E/model-quality checks are `NOT_RUN`
+under the current session boundary. See
+[component evidence](validation/2026-10-11/literal-candidate-alternatives.json).
 
 The overall stop was not justified by the recorded failures. Unimplemented
 production observation and failed model decisions are engineering work, not proof
