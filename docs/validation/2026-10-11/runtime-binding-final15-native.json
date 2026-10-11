@@ -1,0 +1,680 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Actual immutable .29 client against real installed FINAL15 .30 idle service, plus real HTTP contract/invalid-request matrix; no GUI/models",
+  "passed": true,
+  "candidate": {
+    "version": "0.1.30",
+    "label": "FINAL15",
+    "archive_sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c"
+  },
+  "baseline": {
+    "version": "0.1.29",
+    "commit": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+    "wheel_sha256": "99fd4ed28317002894a1c0fb9f1cd796b297730f9c7cb49c817014294889b64e",
+    "installed_source_files_exact_wheel_match": 37
+  },
+  "declaration_sha256": "f3ede4585e82907245c5a506e72bb626c9fbc074459068671c29ee25ef0657bb",
+  "driver": {
+    "basename": "clef_installed_runtime_binding_verify_20261011.py",
+    "sha256": "3858bc733a792d1e9020a6288e7d4d1047646c968a83d28f2f580edd04169a88"
+  },
+  "raw_evidence": {
+    "basename": "report.json",
+    "sha256": "60fed2b24bfa56f903d3e95574c84bdcb5b1c2bbb260c0444a63fc8ef37d0a8d"
+  },
+  "health": {
+    "version": "0.1.30",
+    "busy": false,
+    "api_schema_version": 1,
+    "runtime_protocol_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "desktop_scope": null
+  },
+  "immutable_old_client_result": {
+    "ok": false,
+    "error_type": "RuntimeError",
+    "error": "runtime refused status; inspect session status"
+  },
+  "old_client_takeover_prevented": true,
+  "http_contract_matrix": {
+    "count": 36,
+    "all_409": true,
+    "all_preserved": true,
+    "rows": [
+      {
+        "identity_case": "missing",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "old_version",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "malformed_version",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "missing_schema",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "schema_mismatch",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "run",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "continue",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "abort",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "status",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "observe",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      },
+      {
+        "identity_case": "protocol_mismatch",
+        "route": "shutdown_idle",
+        "http_status": 409,
+        "reason": "Runtime contract changed; reload current clef-use",
+        "body": {
+          "error": "RUNTIME_CONTRACT_MISMATCH",
+          "runtime_version": "0.1.30",
+          "api_schema_version": 1,
+          "runtime_protocol_version": 1,
+          "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+          "guidance": "Reload the current clef-use executable and MCP session; the existing service and sessions were preserved."
+        },
+        "original_service_and_endpoint_preserved": true
+      }
+    ]
+  },
+  "invalid_run_bodies": [
+    {
+      "body_case": "unsupported_operation_family",
+      "route": "run",
+      "http_status": 400,
+      "reason": "Bad Request",
+      "body": {
+        "error": "INVALID_REQUEST",
+        "guidance": "Inspect current computer_capabilities or clef-use capabilities --detail --json; use only advertised schemas and supported operations."
+      }
+    },
+    {
+      "body_case": "missing_goal",
+      "route": "run",
+      "http_status": 400,
+      "reason": "Bad Request",
+      "body": {
+        "error": "INVALID_REQUEST",
+        "guidance": "Inspect current computer_capabilities or clef-use capabilities --detail --json; use only advertised schemas and supported operations."
+      }
+    },
+    {
+      "body_case": "nonobject_json",
+      "route": "run",
+      "http_status": 400,
+      "reason": "Bad Request",
+      "body": {
+        "error": "INVALID_REQUEST",
+        "guidance": "Inspect current computer_capabilities or clef-use capabilities --detail --json; use only advertised schemas and supported operations."
+      }
+    },
+    {
+      "body_case": "malformed_json",
+      "route": "run",
+      "http_status": 400,
+      "reason": "Bad Request",
+      "body": {
+        "error": "INVALID_REQUEST",
+        "guidance": "Inspect current computer_capabilities or clef-use capabilities --detail --json; use only advertised schemas and supported operations."
+      }
+    }
+  ],
+  "capabilities_discovery": {
+    "http_status": 200,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "runtime_protocol_version": 1,
+    "tool_names": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort",
+      "computer_capabilities"
+    ]
+  },
+  "matching_current_status": {
+    "http_status": 404,
+    "reason": "Not Found",
+    "body": {
+      "error": "NO_ACTIVE_SESSION"
+    }
+  },
+  "same_process_identity_preserved": true,
+  "endpoint_bytes_and_sha256_unchanged": true,
+  "no_steps_log": true,
+  "native_service_child_process_count": 0,
+  "runtime_initialization": {
+    "classification": "INFERRED_FROM_NATIVE_NO_SESSION_NO_WORKER_AND_SOURCE_VALIDATION_ORDER",
+    "direct_manager_introspection": "NOT_RUN"
+  },
+  "model_requests": 0,
+  "gui_sessions": 0,
+  "factory_substitution": false,
+  "cleanup": {
+    "matching_shutdown": {
+      "http_status": 200,
+      "body": {
+        "ok": true
+      }
+    },
+    "exit_code": 0,
+    "endpoint_removed": true
+  },
+  "distinctions": {
+    "transport_409_reload_guidance": "OBSERVED",
+    "immutable_old_cli_reload_guidance": "NOT_DISPLAYED_OLD_CLIENT_EXPOSES_GENERIC_REFUSAL",
+    "active_gui_update": "NOT_RUN_SEPARATE_DECLARATION_REQUIRED"
+  },
+  "prepatch_failure_preserved": {
+    "basename": "clef-idle-stale-client-native-public-20261011.json",
+    "sha256": "14129b876e3a8bf3669eb663619e44a1248326695ff9d7a843cfa7ffd3e5d172"
+  },
+  "privacy": "No private paths, endpoints, auth/account data, raw payloads, process IDs, screenshots or assets",
+  "received_native_artifact_sha256": "8261685d198b8bb0d788f7e3ef8d8aa6e88bad9956ea1cb7c63a895171ba158d"
+}

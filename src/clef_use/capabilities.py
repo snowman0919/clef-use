@@ -12,6 +12,7 @@ from . import __version__
 
 API_SCHEMA_VERSION = 1
 GUIDE_CONTRACT_VERSION = 1
+RUNTIME_PROTOCOL_VERSION = 1
 SKILL_NAMES = ("clef-use", "clef-use-blender", "clef-use-diagnostics")
 
 
@@ -78,6 +79,11 @@ def tool_schemas() -> dict:
     return json.loads(_schemas_json())
 
 
+@lru_cache(maxsize=1)
+def schema_sha256() -> str:
+    return digest(tool_schemas())
+
+
 def capabilities(*, detail: bool = False, operation_id: str | None = None) -> dict:
     from .models import DEFAULT_DECISION_MODEL, MODEL_REVISIONS
     from .operations import operation_registry
@@ -104,7 +110,8 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
     result = {
         "runtime_version": __version__,
         "api_schema_version": API_SCHEMA_VERSION,
-        "schema_sha256": digest(schemas),
+        "schema_sha256": schema_sha256(),
+        "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
         "operation_registry_version": 2,
         "default_runtime_state": {

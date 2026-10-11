@@ -68,6 +68,13 @@ fixture 中的过程得到验证。通用 production provider 仍是未完成的
 卸载只删除未修改的受管条目。Hermes 不支持 project scope，请使用选定的 user
 profile。移动技能前检查 source 和 shadow 状态。
 
+本地请求绑定执行文件版本、runtime protocol 和 API 指纹。旧客户端不能停止或控制
+新服务；发生不匹配时，请重新加载当前执行文件和 MCP 会话。新客户端可以替换空闲
+的旧服务，但正在执行输入或等待 modal 恢复时会拒绝替换。更新前已运行的会话，
+请先用保留的同版本执行文件完成或中止。不可修改的旧客户端可能隐藏服务器的重新
+加载说明，只显示一般拒绝信息。同版本的 protocol 或 schema 不匹配时，必须明确
+停止空闲服务后再重新加载，不会自动重启。
+
 仅中止自己的会话并验证输入释放。精确 Unicode clipboard 插入与 IME 组合不同；
 IME 活动或未知时会阻止快捷键。watchdog 恢复受 OS 权限和确认时间窗口限制。
 X11 的字符输入（包括 ASCII）要求显式 clipboard 方式；键事件即使在组合开始前

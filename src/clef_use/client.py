@@ -9,8 +9,10 @@ import urllib.error
 import urllib.request
 
 from filelock import FileLock
+from packaging.version import InvalidVersion, Version
 
 from . import __version__
+from .capabilities import RUNTIME_PROTOCOL_VERSION, schema_sha256
 from .config import desktop_scope, load_config, state_dir
 
 
@@ -33,6 +35,9 @@ class RuntimeClient:
                 "Authorization": "Bearer " + endpoint["token"],
                 "Content-Type": "application/json",
                 "X-Clef-Desktop-Scope": desktop_scope() or "",
+                "X-Clef-Client-Version": __version__,
+                "X-Clef-Api-Schema": schema_sha256(),
+                "X-Clef-Runtime-Protocol": str(RUNTIME_PROTOCOL_VERSION),
             },
             method="POST",
         )
@@ -41,8 +46,29 @@ class RuntimeClient:
             config = load_config()
             # Idle observation may cold-start its parser and then parse a fresh frame.
             timeout += 2 * config.backend_timeout + config.screen_timeout
-        with urllib.request.urlopen(request, timeout=timeout) as response:
-            return json.load(response)
+        try:
+            with urllib.request.urlopen(request, timeout=timeout) as response:
+                return json.load(response)
+        except urllib.error.HTTPError as exc:
+            if exc.code == 409:
+                exc.close()
+                raise RuntimeError(
+                    "runtime contract changed; reload the current clef-use executable and MCP "
+                    "session before retrying; the existing service was not replaced"
+                ) from None
+            if exc.code == 400:
+                try:
+                    reply = json.loads(exc.read(4096))
+                except (OSError, ValueError):
+                    reply = None
+                finally:
+                    exc.close()
+                if isinstance(reply, dict) and reply.get("error") == "INVALID_REQUEST":
+                    raise RuntimeError(
+                        "unsupported or invalid request; inspect current computer_capabilities "
+                        "or clef-use capabilities --detail --json before submitting a new request"
+                    ) from None
+            raise
 
     def _check_desktop(self, health):
         expected = desktop_scope()
@@ -53,14 +79,43 @@ class RuntimeClient:
         if health.get("desktop_scope") != expected:
             raise RuntimeError("runtime belongs to another desktop; match the desktop environment")
 
+    def _matching_runtime(self, health):
+        self._check_desktop(health)
+        if health.get("version") != __version__:
+            try:
+                remote = Version(health.get("version", ""))
+            except (InvalidVersion, TypeError):
+                raise RuntimeError(
+                    "runtime version is unknown; reload the current executable"
+                ) from None
+            if remote > Version(__version__):
+                raise RuntimeError(
+                    "a newer runtime is already running; reload the current clef-use executable "
+                    "and MCP session; the service was not replaced"
+                )
+            return False
+        if (
+            health.get("runtime_protocol_version") != RUNTIME_PROTOCOL_VERSION
+            or health.get("schema_sha256") != schema_sha256()
+        ):
+            raise RuntimeError(
+                "runtime contract differs; finish or abort its active session, explicitly stop "
+                "the idle service, then reload the current clef-use executable and MCP session"
+            )
+        return True
+
     def _ensure(self):
         try:
             health = self._send("health", {})
-            self._check_desktop(health)
-            if not self.start or health.get("version") == __version__:
+            if self._matching_runtime(health):
                 return
             if health.get("busy"):
-                raise RuntimeError("previous runtime version is active; finish or abort it first")
+                raise RuntimeError(
+                    "previous runtime version is active; finish or abort it first using its "
+                    "retained matching executable, then reload the current MCP session"
+                )
+            if not self.start:
+                raise RuntimeError("runtime version differs; reload the matching executable")
         except (OSError, ValueError):
             if not self.start:
                 raise RuntimeError("runtime service is not running") from None
@@ -69,12 +124,12 @@ class RuntimeClient:
         with FileLock(root / "start.lock", timeout=15):
             try:
                 health = self._send("health", {})
-                self._check_desktop(health)
-                if health.get("version") == __version__:
+                if self._matching_runtime(health):
                     return
                 if health.get("busy"):
                     raise RuntimeError(
-                        "previous runtime version is active; finish or abort it first"
+                        "previous runtime version is active; finish or abort it first using its "
+                        "retained matching executable, then reload the current MCP session"
                     )
                 self._send("shutdown_idle", {})
                 deadline = time.monotonic() + 10
@@ -96,8 +151,11 @@ class RuntimeClient:
             while time.monotonic() < deadline:
                 try:
                     health = self._send("health", {})
-                    self._check_desktop(health)
-                    return
+                    if self._matching_runtime(health):
+                        return
+                    raise RuntimeError(
+                        "runtime version differs after startup; reload the executable"
+                    )
                 except (OSError, ValueError):
                     time.sleep(0.1)
             raise RuntimeError("runtime service did not start")
@@ -120,6 +178,8 @@ class RuntimeClient:
                 raise RuntimeError(
                     "runtime does not support cached observations; update it explicitly while idle"
                 )
+            if not self._matching_runtime(health):
+                raise RuntimeError("runtime version differs; reload the matching executable")
         else:
             self._ensure()
         try:

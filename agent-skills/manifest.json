@@ -13,11 +13,11 @@
   "skills": {
     "clef-use": {
       "sha256": {
-        "SKILL.md": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
         "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
         "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
       },
-      "digest": "83b67a2f2dc5865578accf6a54a833409a5acfb72cdbf04bac83327c4109ab6b"
+      "digest": "d3084aaff89c7d989707c500b9967255183c087310fc4e949dbac23713ce05b6"
     },
     "clef-use-blender": {
       "sha256": {

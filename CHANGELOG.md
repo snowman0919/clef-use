@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Bind local runtime requests to executable version, protocol and API fingerprint.
+  Reject stale control and shutdown requests, prevent client-driven downgrades,
+  and preserve active sessions and owned-modal recovery during idle upgrades.
+  Explain retained matching-executable cancellation and explicit contract reload.
 - Bundle three portable Agent Skills with actual schema/capability discovery,
   managed harness enrollment, release contract hashes, conflict preservation,
   and distinct discovery/load/invoke verification stages.

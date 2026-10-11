@@ -71,6 +71,14 @@ task pass does not establish production availability or whole-goal completion.
 `MODIFIED` or `CONFLICT` preserves your edits and leaves a comparison under the
 integration state directory. Explicit disabled entries remain disabled. Reload
 cached clients after a compatible update; inspect capability versions first.
+Local requests bind the executable version, runtime protocol and API fingerprint.
+An older client cannot stop or control a newer service; reload the current
+executable and MCP session after a mismatch. A newer client may replace an idle
+older service, but active input or modal recovery blocks replacement. Finish or
+abort an active older session through its retained matching executable first.
+An immutable old client may display a generic refusal instead of the server's
+reload guidance. Same-version protocol/schema mismatches require explicitly
+stopping the idle service before reloading; they are never silently restarted.
 Uninstall removes unchanged managed entries only. Hermes project scope is unsupported;
 use its selected user profile. Inspect source/shadow status before moving guides.
 

@@ -33,6 +33,9 @@ use the reader's linked-file parameter or read the resolved file path. For
 Hermes `skill_view`, use `name="clef-use"` and
 `file_path="references/API_BASELINE.md"`.
 Prefer live, version-matched schemas if the installed runtime is newer.
+On a runtime contract mismatch, reload the current executable and MCP session;
+never downgrade a running service. After an update, finish or abort an active
+older session through its retained matching executable before replacing it.
 
 ## Plan
 

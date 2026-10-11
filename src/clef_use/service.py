@@ -9,9 +9,11 @@ import threading
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 from filelock import FileLock
+from packaging.version import InvalidVersion, Version
 
 from . import __version__
 from .backends import runtime
+from .capabilities import API_SCHEMA_VERSION, RUNTIME_PROTOCOL_VERSION, schema_sha256
 from .config import desktop_scope, load_config, state_dir
 from .runtime import Session
 from .schema import Contract, Status
@@ -166,6 +168,9 @@ class SessionManager:
                     "ok": True,
                     "pid": os.getpid(),
                     "version": __version__,
+                    "api_schema_version": API_SCHEMA_VERSION,
+                    "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
+                    "schema_sha256": schema_sha256(),
                     "busy": self._owns_desktop(),
                     "desktop_scope": self.desktop_scope,
                     "capabilities": {"cached_observe": True},
@@ -252,6 +257,41 @@ def make_server(manager, token):
                 self.end_headers()
                 self.wfile.write(raw)
                 return
+            if self.path not in {"/health", "/capabilities"}:
+                client_version = self.headers.get("X-Clef-Client-Version", "")
+                protocol_matches = self.headers.get("X-Clef-Runtime-Protocol") == str(
+                    RUNTIME_PROTOCOL_VERSION
+                )
+                contract_matches = (
+                    client_version == __version__
+                    and self.headers.get("X-Clef-Api-Schema") == schema_sha256()
+                )
+                # A newer executable may replace an idle older service. The
+                # manager still refuses shutdown while any session owns input
+                # or modal recovery. An older client never gets this authority.
+                if self.path == "/shutdown_idle" and protocol_matches:
+                    try:
+                        contract_matches |= Version(client_version) > Version(__version__)
+                    except InvalidVersion:
+                        pass
+                if not protocol_matches or not contract_matches:
+                    raw = json.dumps(
+                        {
+                            "error": "RUNTIME_CONTRACT_MISMATCH",
+                            "runtime_version": __version__,
+                            "api_schema_version": API_SCHEMA_VERSION,
+                            "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
+                            "schema_sha256": schema_sha256(),
+                            "guidance": "Reload the current clef-use executable and MCP session; "
+                            "the existing service and sessions were preserved.",
+                        }
+                    ).encode()
+                    self.send_response(409, "Runtime contract changed; reload current clef-use")
+                    self.send_header("Content-Type", "application/json")
+                    self.send_header("Content-Length", str(len(raw)))
+                    self.end_headers()
+                    self.wfile.write(raw)
+                    return
             try:
                 length = int(self.headers.get("Content-Length", "0"))
                 if not 0 < length <= 65536:
@@ -265,7 +305,13 @@ def make_server(manager, token):
                 status = 200
             except SessionLookupError as exc:
                 result, status = {"error": exc.code}, 404
-            except (ValueError, KeyError, RuntimeError) as exc:
+            except (ValueError, KeyError):
+                result, status = {
+                    "error": "INVALID_REQUEST",
+                    "guidance": "Inspect current computer_capabilities or clef-use capabilities "
+                    "--detail --json; use only advertised schemas and supported operations.",
+                }, 400
+            except RuntimeError as exc:
                 result, status = {"error": type(exc).__name__}, 400
             raw = json.dumps(result).encode()
             self.send_response(status)
