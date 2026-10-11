@@ -1884,7 +1884,7 @@
     "windows_installer_boundary": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/windows-installer-boundary-ci26d9252.json",
-      "sha256": "0223294848081d6cdde3a849ab0bd6e10a890caf8f0ecc76b819167350051295",
+      "sha256": "db98a05f0331a7079e3ee308c89f8bb0717a4c16b971cbbc7ac1b600fe739f60",
       "scope": "NativeimmutablePowerShelltraversal/absolute/backslash/symlink/duplicate/offline6/6refused beforeactivation,customized/disabled111HOMEfiles+wrapper/versionpreserved; priorchecksumPASS"
     },
     "linux_installer_boundary": {

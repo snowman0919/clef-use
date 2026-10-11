@@ -114,5 +114,6 @@
   "status": "PASS",
   "owned_server_stopped": true,
   "user_PATH_preserved": true,
-  "global_install_and_config_bytes_preserved": true
+  "global_install_and_config_bytes_preserved": true,
+  "original_public_report_sha256": "0223294848081d6cdde3a849ab0bd6e10a890caf8f0ecc76b819167350051295"
 }
