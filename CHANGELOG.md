@@ -22,6 +22,8 @@
   eligibility remains unmeasured in native benchmark reports.
 - Read localized guide contracts as UTF-8 and generate LF bytes independently of
   the build host locale, including Windows packaging.
+- Use managed MCP/guide integration in all four localized quick starts and
+  validate published CLI examples against the current parser during packaging.
 - Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
   full harness task success or public release is claimed for this candidate.
 

@@ -29,12 +29,14 @@ confidence_threshold = 0.55
 
 models prepare 创建两个固定版本的独立 ML 环境，并下载官方 snapshot。更新保留缓存。如果找不到 Python 3.11 命令，请用 --python 指定可执行文件的绝对路径。
 
+选择要使用的 harness，按需把下方 `codex` 换成 `hermes` 或 `omp`。受管集成一起安装 MCP 和所选指南。重启 harness 后逐项检查验证阶段；`NOT_RUN` 不表示任务成功。
+
 ```sh
 clef-use models prepare --python python3.11
 clef-use doctor
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort

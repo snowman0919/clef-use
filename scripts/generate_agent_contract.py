@@ -108,6 +108,38 @@ def outputs():
     }
 
 
+def validate_published_examples(root: Path = ROOT) -> int:
+    documents = [root / "README.md"]
+    historical = {"evidence", "validation", "decisions"}
+    records = {"BASELINE_AND_SOURCES.md", "PRIOR_PLATFORM_PLAN.md", "EXECUTION_STATUS.md"}
+    documents.extend(
+        path
+        for path in (root / "docs").rglob("*.md")
+        if not historical.intersection(path.relative_to(root / "docs").parts)
+        and path.name not in records
+    )
+    documents.extend((root / "agent-skills").rglob("*.md"))
+    cli = parser()
+    count = 0
+    for path in sorted(documents):
+        text = path.read_text(encoding="utf-8")
+        for block in re.findall(r"```(?:sh|bash|powershell)\s*\n(.*?)\n```", text, re.S):
+            for line in re.sub(r"\\\r?\n", " ", block).splitlines():
+                tokens = shlex.split(line, comments=True)
+                if tokens[:2] == ["uv", "run"]:
+                    tokens = tokens[2:]
+                if not tokens or tokens[0] != "clef-use":
+                    continue
+                try:
+                    cli.parse_args(tokens[1:])
+                except SystemExit as error:
+                    raise ValueError(
+                        f"invalid published CLI example in {path.relative_to(root)}: {line}"
+                    ) from error
+                count += 1
+    return count
+
+
 def main():
     argparser = argparse.ArgumentParser()
     argparser.add_argument("--check", action="store_true")
@@ -138,12 +170,14 @@ def main():
         blocks = re.findall(r"```sh\s*\n(.*?)\n```", path.read_text(encoding="utf-8"), re.S)
         if not blocks or blocks[0].splitlines() != COMMANDS:
             raise ValueError(f"localized command drift: {language}")
+    published_examples = validate_published_examples()
     print(
         json.dumps(
             {
                 "status": "PASS",
                 "tool_examples": len(EXAMPLES),
                 "cli_examples": len(COMMANDS),
+                "published_cli_examples": published_examples,
                 "guides": list(SKILL_NAMES),
             }
         )

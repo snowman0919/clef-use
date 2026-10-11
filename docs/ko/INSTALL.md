@@ -30,12 +30,14 @@ confidence_threshold = 0.55
 
 models prepare는 버전을 고정한 ML 환경 두 개를 만들고 공식 snapshot을 다운로드합니다. 업데이트는 캐시를 보존합니다. Python 3.11 명령이 없으면 --python에 실행 파일의 절대 경로를 지정하세요.
 
+사용할 harness를 하나 선택하고 아래 `codex`를 필요에 따라 `hermes` 또는 `omp`로 바꾸세요. 관리형 통합은 MCP와 선택한 가이드를 함께 설치합니다. harness를 다시 시작한 뒤 검증 단계를 각각 확인하세요. `NOT_RUN`은 작업 성공이 아닙니다.
+
 ```sh
 clef-use models prepare --python python3.11
 clef-use doctor
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort

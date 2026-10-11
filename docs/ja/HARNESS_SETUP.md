@@ -1,16 +1,16 @@
 # Harness の設定
 
 MCP と Agent Skills の管理には [エージェント設定ガイド](AGENT_GUIDE.md)を使ってください。
-以下の従来の `install-mcp` コマンドは通信接続のみを設定します。
+使用する harness を選び、必要に応じて下記の `codex` を `hermes` または `omp` に置き換えてください。管理対象の統合は MCP と選択したガイドを一緒にインストールします。harness を再起動して各検証段階を確認してください。`NOT_RUN` はタスク成功ではありません。
 
-他のサーバーとコメントを保持して非公開バックアップを作り、繰り返しても重複しません。異なる既存 clef-use 項目は競合として報告し、上書きしません。--dry-run で確認し、標準外の場所には --path を指定します。絶対実行パスを使い、harness を再起動して五つのツールを確認してください。Windows で CMD ラッパーを起動できない場合は有効バージョンの Scripts/clef-use.exe を使い、更新後に再登録してください。
+統合は他のサーバーとコメントを保持し、変更済みの項目を競合として報告します。`--dry-run` で確認し、標準外の home/profile はエージェントガイドの環境変数で選択してください。絶対実行パスは `--command-path` で指定します。再起動後、読み取り専用の `computer_capabilities` を含む六つのツールを確認してください。Windows で CMD ラッパーを起動できない harness は有効バージョンの `Scripts/clef-use.exe` を選択してください。
 
 ```sh
 clef-use doctor
 clef-use models prepare --python python3.11
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort
