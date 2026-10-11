@@ -617,6 +617,16 @@ Git exactly; the generated manifest has equal parsed values but platform-depende
 key ordering. That exception is explicit. No model, GUI, input or service task ran.
 See [CI Windows installation](validation/2026-10-11/windows-ci6cdf182-install.json).
 
+**OBSERVED / manifest ordering correction:** native Windows sorted `Path` objects
+with its case-insensitive ordering, placing `references/` before `SKILL.md`.
+The exact manifest generator in a separate private module reproduced the packaged
+digest. Sorting by relative POSIX spelling instead produced the existing Git/Linux
+digest, with all parsed values and guide files unchanged. The canonical correction
+has the exact tested source hash; 66 scoped tests and the real generated-contract
+check pass. This corrects reproducibility, not a previously failed schema contract.
+A new immutable corrected archive has not yet been exercised. See
+[native before/after](validation/2026-10-11/guide-manifest-native-ordering.json).
+
 **OBSERVED / earlier native Windows installation:** immutable f440de1 installed and
 repeated successfully, matched 61 package files (46 Python modules, 15 resources),
 enrolled three guides for three profiles and passed native Codex project discovery.

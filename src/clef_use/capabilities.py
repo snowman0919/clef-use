@@ -39,7 +39,7 @@ def guide_manifest() -> dict:
         if root.is_symlink():
             raise ValueError("Guide bundle must not contain symlinks")
         hashes = {}
-        for path in sorted(root.rglob("*")):
+        for path in sorted(root.rglob("*"), key=lambda path: path.relative_to(root).as_posix()):
             if path.is_symlink():
                 raise ValueError("Guide bundle must not contain symlinks")
             if path.is_file():

@@ -1,0 +1,73 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Native Windows private module copy only; unchanged installed guide root and canonical package-relative imports; no installed/source/guide patch or model/tool execution.",
+  "runtime_version": "0.1.30",
+  "native_python": "3.11.9",
+  "before_sha256": "f751982b04f5e6e25c9c939e92a824ba22816d57faa98644c7e18f0c4a9fe256",
+  "packaged_manifest_sha256": "f751982b04f5e6e25c9c939e92a824ba22816d57faa98644c7e18f0c4a9fe256",
+  "after_sha256": "1a84039cfecffbee554391b091465b7bc9c78ef2f80ceed139e01937c8703e5f",
+  "git_expected_sha256": "1a84039cfecffbee554391b091465b7bc9c78ef2f80ceed139e01937c8703e5f",
+  "source_before_sha256": "5e3e4b4eed6b4701892f968c3813b05dde537345841ce05a7b4922d0378c3733",
+  "private_patch_sha256": "eea0dd536827ad682b5e10e0cdcf1a8b6bfe93c1819d384acf82b81cb18e9290",
+  "replacement_count": 1,
+  "before_order": {
+    "clef-use": [
+      "references/API_BASELINE.md",
+      "references/LIVE_API.md",
+      "SKILL.md"
+    ],
+    "clef-use-blender": [
+      "references/OPERATIONS.md",
+      "SKILL.md"
+    ],
+    "clef-use-diagnostics": [
+      "references/FAILURES.md",
+      "SKILL.md"
+    ]
+  },
+  "after_order": {
+    "clef-use": [
+      "SKILL.md",
+      "references/API_BASELINE.md",
+      "references/LIVE_API.md"
+    ],
+    "clef-use-blender": [
+      "SKILL.md",
+      "references/OPERATIONS.md"
+    ],
+    "clef-use-diagnostics": [
+      "SKILL.md",
+      "references/FAILURES.md"
+    ]
+  },
+  "parsed_values_equal": true,
+  "canonical_source_unchanged": true,
+  "installed_guides_unchanged": true,
+  "canonical_skill_root_unchanged": true,
+  "before_equals_packaged": true,
+  "after_equals_git_expected": true,
+  "status": "PASS",
+  "setup_history": [
+    {
+      "status": "NOT_RUN",
+      "cause": "Inline -c launcher quoting failed before Python parse; no guide_manifest executed."
+    },
+    {
+      "status": "NOT_RUN",
+      "cause": "Transferred launcher invocation had missing dash on -EncodedCommand; PowerShell refused before launcher execution."
+    }
+  ],
+  "actual_probe_executions": 1,
+  "received_native_artifact_sha256": "05852f3213edee8ebf39f3b7f387df340dc8cde20b8881a185d55405b3599348",
+  "canonical_corrected_source_sha256": "eea0dd536827ad682b5e10e0cdcf1a8b6bfe93c1819d384acf82b81cb18e9290",
+  "scoped_source_regression": {
+    "passed": 66,
+    "seconds": 5.92,
+    "log_sha256": "ad08167918d9454011d1565b0e0ba5df94fc70a1225e42dbfbb03d48488a5acd",
+    "runtime_env_setup_history": [
+      "installed runtime intentionally omits pytest; no collection",
+      "global pytest lacks declared project dependencies; collection stopped",
+      "canonical .venv executed all66 successfully"
+    ]
+  }
+}

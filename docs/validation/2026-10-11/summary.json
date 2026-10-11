@@ -2250,6 +2250,12 @@
       "artifact": "docs/validation/2026-10-11/ui-tars2b-development-smoke.json",
       "sha256": "8e4598291399ecd3d6db1bca281663b2574c5d71fb538c711e4261f1a8f76c56",
       "scope": "Actual offline standard-transformers/trust_remote_codeFalse Qwen2VL BF16 CUDA development-only load/forward output native normalized coordinate tokens. Input explicitly excluded from heldout; no OS input, comparison/adoption/latency acceptance."
+    },
+    "guide_manifest_native_ordering": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/guide-manifest-native-ordering.json",
+      "sha256": "e12bd27f82a64cafb9fbe46d1af011a0a3457cd17ad44e1b28526aff362921cb",
+      "scope": "Real native Windows guide_manifest before differs only key-order; one identical-source private fix produces Linux/Git bytes with parsed values unchanged, sourceSHA matched root correction. Actual immutable corrected Windows archive not yet built/installed; existingCI remains original source."
     }
   },
   "not_run": {
@@ -2401,6 +2407,7 @@
     "general-gui-final15-diagnostic.json",
     "windows-ci6cdf182-install.json",
     "ui-tars2b-pinned-acquisition.json",
-    "ui-tars2b-development-smoke.json"
+    "ui-tars2b-development-smoke.json",
+    "guide-manifest-native-ordering.json"
   ]
 }
