@@ -12,8 +12,10 @@ import hashlib
 import json
 import os
 import secrets
+import signal
 import socket
 import subprocess
+import threading
 import time
 from pathlib import Path
 
@@ -142,18 +144,195 @@ def request(port, token):
     return result
 
 
+def serve_fixture(args, token, output, manager, runtime, action, state):
+    """Expose the real installed service only on this disposable desktop."""
+    import clef_use
+    from clef_use.capabilities import capabilities
+    from clef_use.config import desktop_scope, state_dir
+    from clef_use.service import make_server
+
+    endpoint_root = state_dir()
+    endpoint_root.mkdir(mode=0o700, parents=True)
+    endpoint = endpoint_root / "endpoint.json"
+    if endpoint.exists():
+        raise RuntimeError("private service endpoint already exists")
+    service_token = secrets.token_hex(32)
+    stopped = threading.Event()
+    previous_signals = {}
+    server_thread = None
+    endpoint_created = serve_completed = False
+    result = {
+        "access_level": "API_ASSISTED",
+        "execution_path": "PRIVATE_FIXTURE_SERVICE",
+        "runs": [],
+        "cleanup": {},
+        "fixture_passed": False,
+    }
+    server = make_server(manager, service_token)
+    try:
+        # Stalled HTTP clients must not extend the owned fixture's cleanup.
+        server.daemon_threads = True
+        server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            previous_signals[sig] = signal.getsignal(sig)
+            signal.signal(sig, lambda *_: stopped.set())
+        before = request(args.port, token)
+        allowed = dict(
+            family="numeric_transform",
+            target_id="Cube",
+            operation="translate",
+            axis="X",
+            space="GLOBAL",
+            unit=state.require("unit")["translate"],
+            amount=2,
+            commit=True,
+            tolerance=1e-5,
+            keymap_version=state.require("keymap_version"),
+        )
+        descriptor = dict(
+            access_level="API_ASSISTED",
+            provider="API_ASSISTED_FIXTURE_ONLY",
+            production_provider_available=False,
+            runtime_version=clef_use.__version__,
+            imported_package=str(Path(clef_use.__file__).resolve()),
+            desktop_scope=desktop_scope(),
+            display=args.display,
+            state_dir=str(endpoint_root),
+            schema_sha256=capabilities()["schema_sha256"],
+            fixture_invariant_scope="Private factory Blender/Xvfb; no XIM server; sole controller; "
+            "fixture-managed popup/text-focus/loading facts. Not a production state provider.",
+            allowed_operation=allowed,
+            before=before,
+            deadline_seconds=args.serve_seconds,
+            whole_goal_assess="NOT_RUN: operation-only fixture has no perception/decision backend",
+        )
+        fd = os.open(endpoint, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        endpoint_created = True
+        with os.fdopen(fd, "w") as stream:
+            json.dump(dict(port=server.server_port, token=service_token, pid=os.getpid()), stream)
+        server_thread.start()
+        (output / "fixture-ready.json").write_text(json.dumps(descriptor, indent=2))
+        deadline = time.monotonic() + args.serve_seconds
+        while not manager.stopping and not stopped.is_set() and time.monotonic() < deadline:
+            time.sleep(0.1)
+        result["stop_reason"] = (
+            "shutdown_idle" if manager.stopping else "signal" if stopped.is_set() else "deadline"
+        )
+        serve_completed = True
+    except Exception as exc:
+        result["error"] = f"{type(exc).__name__}: {exc}"
+        raise
+    finally:
+        cleanup = result["cleanup"]
+        try:
+            if manager.active is not None:
+                session = manager.get(manager.active)
+                if manager.busy:
+                    manager.dispatch("abort", {"session_id": session.id})
+                finish = time.monotonic() + 5
+                while manager.busy and time.monotonic() < finish:
+                    time.sleep(0.01)
+                cleanup["worker_finished"] = not manager.busy
+                runner = runtime.operation_runners.get(session.id)
+                actual = runtime._operation_state().require("modal")
+                if (
+                    not manager.busy
+                    and runner
+                    and isinstance(actual, dict)
+                    and runner.owns_modal(actual.get("id"))
+                ):
+                    manager.continue_session(
+                        session.id,
+                        "Cancel only the owned fixture modal",
+                        {"family": "modal_cancel", "modal_id": actual["id"]},
+                    )
+                    finish = time.monotonic() + 5
+                    while manager.busy and time.monotonic() < finish:
+                        time.sleep(0.01)
+                    cleanup["owned_modal_cleanup"] = session.snapshot()
+                result["sessions"] = [item.snapshot() for item in manager.sessions.values()]
+            action.release()
+            cleanup["owned_inputs_after_release"] = sorted(action.keys) + sorted(action.buttons)
+            cleanup["health"] = manager.dispatch("health", {})
+            result["after"] = request(args.port, token)
+        except Exception as exc:
+            cleanup["error"] = f"{type(exc).__name__}: {exc}"
+        finally:
+            try:
+                action.release()
+            except Exception as exc:
+                cleanup["release_error"] = f"{type(exc).__name__}: {exc}"
+            for name, operation in (
+                (
+                    "server_stop",
+                    lambda: (
+                        server.shutdown() if server_thread and server_thread.is_alive() else None
+                    ),
+                ),
+                (
+                    "server_join",
+                    lambda: (
+                        server_thread.join(timeout=5)
+                        if server_thread and server_thread.ident is not None
+                        else None
+                    ),
+                ),
+                ("server_close", server.server_close),
+                (
+                    "endpoint_remove",
+                    lambda: endpoint.unlink(missing_ok=True) if endpoint_created else None,
+                ),
+            ):
+                try:
+                    operation()
+                except Exception as exc:
+                    cleanup[name + "_error"] = f"{type(exc).__name__}: {exc}"
+            cleanup["endpoint_removed"] = not endpoint.exists()
+            cleanup["server_thread_stopped"] = not server_thread or not server_thread.is_alive()
+            cleanup["server_socket_closed"] = server.socket.fileno() == -1
+            for sig, handler in previous_signals.items():
+                try:
+                    signal.signal(sig, handler)
+                except Exception as exc:
+                    cleanup["signal_restore_error"] = f"{type(exc).__name__}: {exc}"
+            cleanup["signals_restored"] = all(
+                signal.getsignal(sig) == handler for sig, handler in previous_signals.items()
+            )
+            result["fixture_passed"] = (
+                serve_completed
+                and not any(key == "error" or key.endswith("_error") for key in cleanup)
+                and cleanup["endpoint_removed"]
+                and cleanup["server_thread_stopped"]
+                and cleanup["server_socket_closed"]
+                and cleanup["signals_restored"]
+                and not manager.busy
+                and cleanup.get("health", {}).get("busy") is False
+                and cleanup.get("owned_inputs_after_release") == []
+                and result.get("after", {}).get("modal_operators") == []
+            )
+            (output / "service-report.json").write_text(json.dumps(result, indent=2))
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--display", default=":198")
     parser.add_argument("--port", type=int, default=39851)
     parser.add_argument("--inspect-only", action="store_true")
+    parser.add_argument("--serve-seconds", type=int)
     parser.add_argument(
         "--runtime",
         action="store_true",
         help="Use the imported package's SessionRuntime/Contract operation path",
     )
     args = parser.parse_args()
+    if args.serve_seconds is not None and (
+        not args.runtime or args.inspect_only or not 1 <= args.serve_seconds <= 600
+    ):
+        parser.error(
+            "--serve-seconds requires --runtime, excludes --inspect-only, and must be 1..600"
+        )
     output = args.output.resolve()
     if output.exists() or Path("/tmp/.X11-unix/X" + args.display[1:]).exists():
         parser.error("output and display must both be newly owned")
@@ -172,6 +351,8 @@ def main():
         capture_output=True,
     )
     os.environ.update(DISPLAY=args.display, XAUTHORITY=str(authority))
+    if args.serve_seconds is not None:
+        os.environ["CLEF_USE_STATE_DIR"] = str(output / "runtime-state")
     (output / "start.py").write_text(
         STARTUP.replace("__ROOT__", repr(str(output))).replace("__PORT__", str(args.port))
     )
@@ -245,7 +426,8 @@ def main():
     except Exception as exc:
         report["error"] = f"{type(exc).__name__}: {exc}"
     finally:
-        (output / "report.json").write_text(json.dumps(report, indent=2))
+        if args.serve_seconds is None:
+            (output / "report.json").write_text(json.dumps(report, indent=2))
         for process in reversed(processes):
             process.terminate()
             try:
@@ -255,6 +437,23 @@ def main():
                 process.wait(timeout=5)
         for stream in streams:
             stream.close()
+        if args.serve_seconds is not None:
+            report["owned_process_cleanup"] = {
+                "all_exited": all(process.poll() is not None for process in processes),
+                "xvfb_socket_removed": not Path("/tmp/.X11-unix/X" + args.display[1:]).exists(),
+            }
+            report["fixture_passed"] = bool(report.get("fixture_passed")) and all(
+                report["owned_process_cleanup"].values()
+            )
+            service_report = output / "service-report.json"
+            if service_report.exists():
+                service_result = json.loads(service_report.read_text())
+                service_result["owned_process_cleanup"] = report["owned_process_cleanup"]
+                service_result["fixture_passed"] = (
+                    bool(service_result.get("fixture_passed")) and report["fixture_passed"]
+                )
+                service_report.write_text(json.dumps(service_result, indent=2))
+            (output / "report.json").write_text(json.dumps(report, indent=2))
     print(
         json.dumps(
             {
@@ -332,7 +531,8 @@ def exercise(args, token, capture, gui, output):
     connection.close()
     oracle = request(args.port, token)
     surface = next(a["surface"] for a in oracle["areas"] if a["type"] == "VIEW_3D")
-    gui.moveTo(int((surface[0] + surface[2]) * 640), int((surface[1] + surface[3]) * 450))
+    if args.serve_seconds is None:
+        gui.moveTo(int((surface[0] + surface[2]) * 640), int((surface[1] + surface[3]) * 450))
     gui.PAUSE = 0
     screenshots = 0
 
@@ -552,6 +752,8 @@ def exercise(args, token, capture, gui, output):
             log_path=output / "runtime.jsonl",
         )
         manager = SessionManager(factory=lambda: runtime)
+    if args.serve_seconds is not None:
+        return serve_fixture(args, token, output, manager, runtime, action, state)
     version = state.require("keymap_version")
     runs = []
     modal_sessions = {}

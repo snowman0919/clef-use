@@ -62,8 +62,11 @@ model triggering distinct from native catalog/guide/MCP adapter verification.
 
 Integration stages are separate: `INSTALLED`, `DISCOVERED`, `LOADED`, `INVOKED`,
 `TASK_VERIFIED`. A copied file, tool list, or guide-name echo proves no later stage.
-Live verification runs an actual fresh harness session with only read-only tools;
+Live trigger verification uses a fresh harness session with read-only tools;
 provider authentication failure leaves loading and invocation `NOT_RUN`.
+Task verification separately requires authorized input in an isolated target,
+fresh external state checks and input/process cleanup. A private API-assisted
+task pass does not establish production availability or whole-goal completion.
 
 `MODIFIED` or `CONFLICT` preserves your edits and leaves a comparison under the
 integration state directory. Explicit disabled entries remain disabled. Reload

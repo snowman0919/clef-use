@@ -1,0 +1,316 @@
+{
+  "classification": "PROPOSED",
+  "scope": "Native consumer-faithful read-only explicit/natural/negative model batch with official URI guard and untouched native MCP argument execution; awaiting START",
+  "immutable_candidate": {
+    "install_basename": "clef-use-installed-final11-20261011",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "public_readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "guard_audit": {
+    "basename": "clef-omp-native-read-selector-audit-public-20261011.json",
+    "sha256": "7058526436009ec1ead0207a28d8ee687a5444233d9befd3671800755e8661d2"
+  },
+  "artifacts": [
+    {
+      "basename": "clef_omp_native_schemafaithful_consumer_verify_20261011.py",
+      "sha256": "f6fe5ee47e5a030345be6ea9eed3c19a4e8a42f691b971bbcada4f53781f1c7b"
+    },
+    {
+      "basename": "clef_omp_native_schemafaithful_consumer_verify_20261011.ts",
+      "sha256": "4a35e1915543b41cbba9ce2f989efd009d810bea9ebbc12007965a0874c1d645"
+    },
+    {
+      "basename": "clef_omp_native_public_read_guard_20261011.ts",
+      "sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b"
+    }
+  ],
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "native_prompt_policy": {
+    "fixed_system_prompt": false,
+    "permissions_only_append": true,
+    "native_synchronous_catalog_snapshot": true,
+    "auxiliary_cache_readiness_gate": false,
+    "cache_seeding_or_repair": false,
+    "native_compression_warning_nonfatal": true
+  },
+  "case_prompts": {
+    "explicit": "Read the full installed clef-use SKILL.md guide body, then inspect current runtime capabilities. Do not capture or change the desktop or download anything. Finish with a brief answer after capabilities.",
+    "natural": "Determine whether the installed local runtime can assess whether Blender's File menu is open without sending input; report current supported runtime capabilities. Do not capture or change the desktop or download anything. Finish briefly.",
+    "negative": "Explain how a Python list comprehension differs from a generator expression. Do not access the GUI, local files, or runtime tools."
+  },
+  "append_instructions": "Only public files from the installed clef-use skill bundle may be read. Only computer_capabilities and computer_status are permitted runtime operations. Credentials, configs, environment, repository source, assets and screenshots are outside the permitted scope. GUI input, file writes, downloads, commands and other tools are forbidden.",
+  "case_order": [
+    "explicit",
+    "natural",
+    "negative"
+  ],
+  "budget": {
+    "auxiliary_native_completion_invocations_per_session": 3,
+    "auxiliary_native_completion_invocations_total": 9,
+    "auxiliary_native_completion_invocations_per_skill_per_session": 1,
+    "primary_cases": 3,
+    "primary_invocations_per_case": 8,
+    "primary_invocations_total": 24,
+    "case_deadline_ms": 180000,
+    "driver_or_session_retry_enabled": false,
+    "native_transport_retry_policy_preserved": true,
+    "actual_http_attempt_count": "NOT_OBSERVED",
+    "hard_http_attempt_ceiling": "NOT_OBSERVED",
+    "stop_first_failed_case": true,
+    "normal_runtime_required_for_models": true
+  },
+  "stop_policy": "Stop remaining cases on first actual primary case failure or native fatal bootstrap failure. Background auxiliary warnings do not stop primary turns; cleanup waits only already scheduled native work.",
+  "case_criteria": {
+    "explicit": "Completed native turn, full core body observed, successful current capabilities with exact candidate guide/schema bindings.",
+    "natural": "Completed native turn, full core and Blender bodies observed, successful current capabilities with exact candidate guide/schema bindings.",
+    "negative": "Completed native turn, zero requested and executed tools."
+  },
+  "tool_boundary": {
+    "enabled_tools": [
+      "read",
+      "mcp__clef_use_computer_capabilities",
+      "mcp__clef_use_computer_status"
+    ],
+    "public_markdown_realpath_allowlist_files": 7,
+    "native_read_path_only_schema": true,
+    "unadvertised_offset_limit_refused": true,
+    "native_original_read_args_and_output_unchanged": true,
+    "status_no_active_session_refusal_is_not_task_success": true,
+    "redundant_MCP_argument_guard": false,
+    "native_canonical_tool_validation_preserved": true,
+    "all_advertised_MCP_properties_native_preflight_exercised": true
+  },
+  "transport_accounting": {
+    "native_completion_starts_and_final_spans": true,
+    "transparent_fetch_phase_status_observer": true,
+    "fetch_counts_are_not_guaranteed_model_only_http_attempts": true,
+    "underlying_actual_http_attempt_count": "NOT_OBSERVED",
+    "native_transport_retries_preserved": true,
+    "driver_or_session_retries_added": false
+  },
+  "zero_inference_new_runner_preflight": {
+    "classification": "OBSERVED",
+    "result": "PASS",
+    "PI_TEST_RUNTIME": "1",
+    "native_model_invocations": 0,
+    "network_unshared": true,
+    "generated_prompt": {
+      "mode": "native-generated-plus-permissions-only-append",
+      "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+      "block_count": 2,
+      "matching_skill_instruction_present": true,
+      "native_catalog_present": true,
+      "public_catalog_lines": [
+        "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+        "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,…",
+        "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or…"
+      ],
+      "no_fixed_system_prompt": true,
+      "preflight_test_child": true,
+      "inference_invocations": 0
+    },
+    "readonly_mcp_preflight": "PASS",
+    "installed_schema_preflight": {
+      "advertised_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+      "api_schema_version": 1,
+      "guide_contract_version": 1,
+      "read_only_facade": true,
+      "tool_names": [
+        "computer_status",
+        "computer_capabilities"
+      ],
+      "schemas": {
+        "computer_status": {
+          "properties": {
+            "session_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Session Id"
+            }
+          },
+          "title": "computer_statusArguments",
+          "type": "object"
+        },
+        "computer_capabilities": {
+          "properties": {
+            "detail": {
+              "default": false,
+              "title": "Detail",
+              "type": "boolean"
+            },
+            "operation_id": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null,
+              "title": "Operation Id"
+            }
+          },
+          "title": "computer_capabilitiesArguments",
+          "type": "object"
+        }
+      }
+    },
+    "native_skill_uri_preflight": [
+      {
+        "guide": "clef-use",
+        "native_uri": "skill://clef-use",
+        "full_body_observed": true,
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "guide": "clef-use-blender",
+        "native_uri": "skill://clef-use-blender",
+        "full_body_observed": true,
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "guide": "clef-use-diagnostics",
+        "native_uri": "skill://clef-use-diagnostics",
+        "full_body_observed": true,
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "identical_guard_copy_sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b",
+    "separate_complete_selector_matrix_audit": {
+      "positive": 144,
+      "exact_native_equal": 144,
+      "negative": 13,
+      "artifact_sha256": "7058526436009ec1ead0207a28d8ee687a5444233d9befd3671800755e8661d2"
+    },
+    "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+    "native_mcp_argument_calls": 13,
+    "native_mcp_argument_schema_coverage": {
+      "computer_status": {
+        "advertised_properties": [
+          "session_id"
+        ],
+        "exercised_properties": [
+          "session_id"
+        ],
+        "driver_argument_guard": false,
+        "native_original_tool_execute": true,
+        "native_optional_empty_placeholder_omission_preserved": true
+      },
+      "computer_capabilities": {
+        "advertised_properties": [
+          "detail",
+          "operation_id"
+        ],
+        "exercised_properties": [
+          "detail",
+          "operation_id"
+        ],
+        "driver_argument_guard": false,
+        "native_original_tool_execute": true,
+        "native_optional_empty_placeholder_omission_preserved": true
+      }
+    },
+    "MCP_argument_audit_sha256": "6efd6c7d586b2806f0f708d1d3e086e0a48eb5475d52a6c273f2290270ccbb18"
+  },
+  "actual_run_requirements": {
+    "PI_TEST_RUNTIME": "unset",
+    "fresh_in_memory_native_sessions": 3,
+    "host_filesystem_readonly": true,
+    "only_owned_artifact_root_writable": true,
+    "configured_provider_resolver_uses_existing_auth_in_memory_only": true,
+    "credential_copy_or_authrepair": false,
+    "GUI_or_runtime_service_session_activation": false,
+    "use_existing_root_lifecycle_service": false,
+    "cleanup_native_sessions_MCP_processes": true,
+    "supported_state_directory_override": "CLEF_USE_STATE_DIR"
+  },
+  "preserves_all_prior_outcomes": true,
+  "model_batch_status": "NOT_RUN_AWAITING_START",
+  "public_reusable_command": "python3 /tmp/clef_omp_native_schemafaithful_consumer_verify_20261011.py --install-root /tmp/clef-use-installed-final11-20261011 --run-models",
+  "MCP_argument_fidelity_audit": {
+    "basename": "clef-omp-native-MCP-schema-fidelity-public-20261011.json",
+    "sha256": "6efd6c7d586b2806f0f708d1d3e086e0a48eb5475d52a6c273f2290270ccbb18"
+  },
+  "runtime_state_isolation": {
+    "environment_key": "CLEF_USE_STATE_DIR",
+    "installed_state_dir_matches_owned_root": true,
+    "endpoint_before_exists": false,
+    "state_directory_before_exists": false,
+    "native_readonly_client_start": false,
+    "endpoint_after_exists": false,
+    "state_directory_after_exists": false
+  },
+  "state_isolation_addendum": {
+    "basename": "clef-omp-native-state-isolation-addendum-public-20261011.json",
+    "sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e"
+  },
+  "changes_since_prior_declaration": [
+    "Corrected unsupported CLEF_USE_HOME to canonical CLEF_USE_STATE_DIR. Installed interpreter proves own state directory before MCP/model calls; no reuse of root lifecycle service.",
+    "Removed inherited custom MCP argument guard; exact read-only two-tool allowlist/server boundary unchanged. Native normalization, canonical validation and errors remain unchanged.",
+    "Zero-inference preflight exercises every advertised MCP property via actual original native tool/server; default/boolean/null/known/unknown/empty variants captured.",
+    "Natural-case success checker now explicitly requires both core and Blender full bodies, matching unchanged originally declared criteria. No prompt/model/provider/budget changes."
+  ],
+  "prior_stopped_batches": [
+    {
+      "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059",
+      "status": "NOT_RUN; 8 primary, old URI suffix guard false-refusals; partial body/caps; no final answer"
+    },
+    {
+      "basename": "clef-omp-native-guarded-consumer-readonly-public-20261011.json",
+      "sha256": "4eb7aaa78a1bb8d558a9a8b9f61fc50f0e2121f0eaed3c4e4725f71b7661862f",
+      "status": "NOT_RUN; 8 primary, old MCP guard refused advertised operation_id; partial body/caps; no final answer"
+    }
+  ]
+}

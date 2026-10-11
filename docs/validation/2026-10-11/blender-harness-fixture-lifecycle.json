@@ -1,0 +1,146 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Installed FINAL12 canonical MCP/RuntimeClient/SessionManager; fixture-only API_ASSISTED; no harness model; not production provider or whole-goal ASSESS",
+  "fixture_source_sha256": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+  "candidate": "FINAL12",
+  "operation_requests": 1,
+  "runtime_status": "NEEDS_REPLAN",
+  "operation_status": "SUCCEEDED",
+  "operation_input_count": 4,
+  "operation_access_level": "API_ASSISTED",
+  "independent_checks": {
+    "translate": true,
+    "other_transforms_unchanged": true,
+    "selection_unchanged": true,
+    "no_modal": true
+  },
+  "actual_translate_after": {
+    "X": 2.0,
+    "Y": 0.0,
+    "Z": 0.0
+  },
+  "initial_failure_preserved": true,
+  "cases": [
+    {
+      "case": "clef-harness-fixture-lifecycle-final12-20261011",
+      "error": "TypeError: Path.open() got an unexpected keyword argument 'opener'",
+      "lifecycle_passed": true,
+      "stop_reason": null,
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "owned_inputs_after_release": [],
+      "owned_process_cleanup": null,
+      "report_sha256": "e67f71fa3a81e73a42c96fda264f33c0062e010a6982f5d8c1b1cf92f8b51bd4"
+    },
+    {
+      "case": "clef-harness-fixture-lifecycle-final12-v2-20261011",
+      "error": null,
+      "lifecycle_passed": true,
+      "stop_reason": "shutdown_idle",
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "owned_inputs_after_release": [],
+      "owned_process_cleanup": null,
+      "report_sha256": "132125a074bf87618866f8a07e6d87cf79d418004043bb597d13dd4161f8b1bb"
+    },
+    {
+      "case": "clef-harness-fixture-deadline-final12-20261011",
+      "error": null,
+      "lifecycle_passed": true,
+      "stop_reason": "deadline",
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "owned_inputs_after_release": [],
+      "owned_process_cleanup": {
+        "all_exited": true,
+        "xvfb_socket_removed": true
+      },
+      "report_sha256": "696908e906ead91a32da839f8763392800e58b054e66213e725be59337f43b5f"
+    },
+    {
+      "case": "clef-harness-fixture-signal-final12-20261011",
+      "error": null,
+      "lifecycle_passed": true,
+      "stop_reason": "signal",
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "owned_inputs_after_release": [],
+      "owned_process_cleanup": {
+        "all_exited": true,
+        "xvfb_socket_removed": true
+      },
+      "report_sha256": "12d0bef40720445de3f1a512af63d8e6a86e24732048ce757b4211818e460b2d"
+    }
+  ],
+  "not_run": [
+    "Hermes/OMP actual harness GUI tasks (Codex later actual task separately curated by parent)",
+    "Pending owned-modal deadline cleanup branch in new serve lifecycle (existing22case ownership tests separate)",
+    "Full22case rerun after serve addition",
+    "Canonical whole-goal ASSESS"
+  ],
+  "production_blender_alive": true,
+  "repository_modified_paths": [
+    "scripts/blender_operations_fixture.py"
+  ],
+  "note": "The one actual transform ran before only signal handling/process-cleanup metadata/daemon HTTP-thread additions; final source executed deadline and signal zero-operation cleanup.",
+  "earlier_fixture_source_sha256": "3be7c3b19dc30ad6a05d6850ad356388441f6041e256a25c9aaaa7b1eb8747c7",
+  "cleanup_correction_evidence": [
+    {
+      "case": "cleanup-deadline",
+      "exit_code": 0,
+      "fixture_passed": true,
+      "error_type": null,
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "server_socket_closed": true,
+      "signals_restored": true,
+      "owned_process_cleanup": {
+        "all_exited": true,
+        "xvfb_socket_removed": true
+      },
+      "operation_inputs": 0
+    },
+    {
+      "case": "cleanup-descriptor-failure",
+      "exit_code": 1,
+      "fixture_passed": false,
+      "error_type": "IsADirectoryError",
+      "endpoint_removed": true,
+      "server_thread_stopped": true,
+      "server_socket_closed": true,
+      "signals_restored": true,
+      "owned_process_cleanup": {
+        "all_exited": true,
+        "xvfb_socket_removed": true
+      },
+      "operation_inputs": 0
+    }
+  ],
+  "cleanup_correction_source_sha256": "5eda9eff24c3a3527f1519d56bf38531dce3c9a3cad47864f10d4f3549a9d91a",
+  "cleanup_correction_note": "Both real no-operation paths observed cleanup success; descriptor IsADirectoryError remains exit1 and fixture_passed false. Current cd19 source additionally defers serve report write until owned processes are cleaned, and actual Codex fixture executed this current source; native harness task evidence curated separately by parent.",
+  "earlier_operation_source_attribution": {
+    "operation_fixture": "V2 lifecycle native installed MCP single transform, before signal/process metadata/daemon additions",
+    "exact_operation_time_helper_source_sha256": "NOT_RECORDED",
+    "installed_runtime_candidate": "FINAL12",
+    "earlier_public_artifact_source_hash_applies_to": "then-current helper after signal/daemon additions; not asserted to be exact transform-time helper hash",
+    "original_note_retained": "The one actual transform ran before only signal handling/process-cleanup metadata/daemon HTTP-thread additions; final source executed deadline and signal zero-operation cleanup."
+  },
+  "current_source_codex_fixture_cleanup": {
+    "report_sha256": "75c7ac397cffeeeb52e8b2682e7e1887b228e33ab397050fc741d813023a556d",
+    "service_report_sha256": "4033218acd13a5c813d645033ccf52b4c85da59ec9f442e99591e04605750872",
+    "fixture_passed": true,
+    "endpoint_removed": true,
+    "server_thread_stopped": true,
+    "server_socket_closed": true,
+    "signals_restored": true,
+    "owned_processes_exited": true,
+    "xvfb_socket_removed": true,
+    "harness_task_evidence": "SEPARATELY_CURATED_BY_PARENT"
+  },
+  "earlier_not_run_at_original_lifecycle_phase": [
+    "Actual harness model GUI tasks",
+    "Pending owned-modal deadline cleanup branch in new serve lifecycle (existing22case ownership tests are separate)",
+    "Full22case rerun after serve addition",
+    "Canonical whole-goal ASSESS"
+  ]
+}

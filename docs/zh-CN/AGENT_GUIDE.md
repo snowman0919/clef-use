@@ -58,8 +58,10 @@ fixture 中的过程得到验证。通用 production provider 仍是未完成的
 `clef-use run "Verify the complete original goal" --mode ASSESS`。
 
 分别记录 `INSTALLED`、`DISCOVERED`、`LOADED`、`INVOKED`、`TASK_VERIFIED`。
-文件复制、工具列表或技能名称回显不能证明后续阶段。live 验证使用实际工具环境
+文件复制、工具列表或技能名称回显不能证明后续阶段。live trigger 验证使用实际工具环境
 的新会话，只开放只读工具。provider 身份验证失败时，加载和调用保持 `NOT_RUN`。
+任务验证还需要在隔离目标中执行已获授权的输入，重新检查外部状态，并确认输入和
+进程已清理。私有 API 辅助任务通过不能证明 production 可用性或整个目标完成。
 
 `MODIFIED` 或 `CONFLICT` 保留用户修改，并在集成状态目录留下比较副本。
 明确禁用的条目不会重新启用。更新后检查 capability 版本，并重新加载缓存客户端。

@@ -1,0 +1,32 @@
+{
+  "classification": "PROPOSED",
+  "scope": "One actual authenticated native Codex task on private API_ASSISTED fixture; not production or whole-goal acceptance",
+  "preflight_root": "clef-codex-gui-native-20261011-7m6l5crt",
+  "preflight_status": "PASS",
+  "visual_gate": "OBSERVED root viewed initial.png factory Cube ObjectMode GLOBAL zero location/rotation scale1 no popup/caret",
+  "model": "gpt-6.1-sol",
+  "model_provider": "openai",
+  "auth": "existing owned Codex daemon ChatGPT; no credential refresh",
+  "task": "exactly one Cube translate +2 GLOBAL X METERS committed; preserve other transforms/selection",
+  "max_operations": 1,
+  "max_steps": 4,
+  "confidence_threshold": 0.9,
+  "model_turns": 1,
+  "turn_deadline_seconds": 180,
+  "added_retries": 0,
+  "whole_goal_assess": "NOT_RUN",
+  "files": [
+    {
+      "basename": "clef_codex_gui_native_verify_20261011.py",
+      "sha256": "c2c0412950f224b9c933e754d09f57e70195be910c633037aeca7d71558a5052"
+    },
+    {
+      "basename": "clef_codex_gui_native_driver_20261011.js",
+      "sha256": "ceda21e50f5a26903b57c3b09970432bc9b9bcf8f22572d24454b1aeace0d018"
+    },
+    {
+      "basename": "clef_fixture_mcp_entry_20261011.py",
+      "sha256": "e19fe6595e680553678760d6f1617d564fb6e4264682b32aa05ec56f445a01fb"
+    }
+  ]
+}

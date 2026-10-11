@@ -1,0 +1,208 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Actual authenticated Codex native fresh ephemeral session discovery/load/capabilities and exactly one GUI operation through installed FINAL12 MCP, RuntimeClient, loopback service and SessionManager. API_ASSISTED_FIXTURE_ONLY; not production state-provider or whole-goal completion.",
+  "candidate": "FINAL12",
+  "archive_sha256": "b2feb3b69340de567244015276c01072528d48e75546a80d552ef5288359a3e6",
+  "wheel_sha256": "5ca97a6407c8dcb18763d2caf6a8f12d1acd0981c79b2eecafe23d454f409594",
+  "fixture_source_sha256": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+  "model": "gpt-6.1-sol",
+  "auth_type": "chatgpt",
+  "native_discovery": "PASS",
+  "native_discovered": [
+    {
+      "name": "clef-use",
+      "enabled": true,
+      "exact_installed_path": true
+    },
+    {
+      "name": "clef-use-blender",
+      "enabled": true,
+      "exact_installed_path": true
+    },
+    {
+      "name": "clef-use-diagnostics",
+      "enabled": true,
+      "exact_installed_path": true
+    }
+  ],
+  "model_turns": 1,
+  "native_preflight": {
+    "ephemeral": true,
+    "model": "gpt-6.1-sol",
+    "model_provider": "openai",
+    "sandbox": {
+      "type": "readOnly",
+      "networkAccess": false
+    },
+    "instruction_source_count": 1,
+    "mcp": [
+      {
+        "name": "clef-use",
+        "tool_count": 4,
+        "tools": [
+          "computer_abort",
+          "computer_capabilities",
+          "computer_run",
+          "computer_status"
+        ],
+        "tools_error_present": false,
+        "runtime_status": "connected"
+      },
+      {
+        "name": "codex-security",
+        "tool_count": 0,
+        "tools_error_present": false,
+        "runtime_status": "disabled"
+      },
+      {
+        "name": "codex_apps",
+        "tool_count": 0,
+        "tools_error_present": false,
+        "runtime_status": "disabled"
+      },
+      {
+        "name": "node_repl",
+        "tool_count": 0,
+        "tools_error_present": false,
+        "runtime_status": "disabled"
+      },
+      {
+        "name": "openai-api-key-local-confirmation",
+        "tool_count": 0,
+        "tools_error_present": false,
+        "runtime_status": "disabled"
+      }
+    ],
+    "exact_installed_schemas": true,
+    "selected_schema_sha256": "0ba87a02c67f62743742a15840416857f8076d0c4c9eb9693d6127139e64b09d"
+  },
+  "full_guide_bodies_loaded": [
+    "clef-use",
+    "clef-use-blender",
+    "clef-use-diagnostics"
+  ],
+  "guide_hashes": {
+    "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+    "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+    "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+  },
+  "tool_order": [
+    "computer_capabilities",
+    "computer_run"
+  ],
+  "operation_requests": 1,
+  "operation": {
+    "family": "numeric_transform",
+    "target_id": "Cube",
+    "operation": "translate",
+    "axis": "X",
+    "space": "GLOBAL",
+    "unit": "METERS",
+    "amount": 2.0,
+    "keymap_version": "7dde70e665443a1a4babb6568d525760dd35b17396b732ca8e672dca5aeda9a3",
+    "commit": true,
+    "tolerance": 1e-05
+  },
+  "runtime_status": "NEEDS_REPLAN",
+  "operation_result": {
+    "family": "numeric_transform",
+    "status": "SUCCEEDED",
+    "reason": "application readback verified",
+    "assessment": null,
+    "transitions": [
+      "requires_verified",
+      "owned_modal_entered",
+      "preview_verified",
+      "committed",
+      "readback_verified"
+    ],
+    "state_version": 36,
+    "access_level": "API_ASSISTED",
+    "owned_modal_id": null,
+    "geometry_invalidated": false,
+    "input_count": 4
+  },
+  "product_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+  "default_runtime_state": {
+    "provider": "NONE",
+    "observation_access_level": "PIXELS_ONLY",
+    "trusted_application_evidence": "UNAVAILABLE",
+    "provider_configuration_path": "UNAVAILABLE",
+    "operation_availability": "BLOCKED",
+    "live_probe": "NOT_PROBED",
+    "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+    "native_state": "Window identity may be available; desktop permissions are not probed."
+  },
+  "independent_checks": {
+    "translate": true,
+    "other_transforms_unchanged": true,
+    "selection_unchanged": true,
+    "no_modal": true,
+    "mode_unchanged": true,
+    "space_unchanged": true,
+    "unit_unchanged": true
+  },
+  "actual_transform_after": {
+    "translate": {
+      "X": 2.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "rotate": {
+      "X": 0.0,
+      "Y": 0.0,
+      "Z": 0.0
+    },
+    "scale": {
+      "X": 1.0,
+      "Y": 1.0,
+      "Z": 1.0
+    }
+  },
+  "actual_selection_after": [
+    "Cube"
+  ],
+  "cleanup": {
+    "worker_finished": true,
+    "owned_inputs_after_release": [],
+    "health": {
+      "ok": true,
+      "pid": 2772486,
+      "version": "0.1.30",
+      "busy": false,
+      "desktop_scope": "0269eff7bc5a672262d5e4baa82229707c25188822b5077b6b7a1b236d7779eb",
+      "capabilities": {
+        "cached_observe": true
+      }
+    },
+    "endpoint_removed": true,
+    "server_thread_stopped": true,
+    "server_socket_closed": true,
+    "signals_restored": true
+  },
+  "owned_process_cleanup": {
+    "all_exited": true,
+    "xvfb_socket_removed": true
+  },
+  "native_turn_completed": true,
+  "native_unsubscribed": true,
+  "approval_count": 2,
+  "denied_approvals": 0,
+  "hook_started": false,
+  "added_retries": 0,
+  "credentials_or_global_config_changed": false,
+  "visual_gate_before": "Root viewed original factory Cube: ObjectMode/GLOBAL, location and rotation zero, scale one, no popup/caret.",
+  "visual_gate_after": "Root viewed Cube selected and location X2m/Y0/Z0, rotation zero/scale one; no popup/caret.",
+  "final_answer_interpretation": "Actual model reported operation SUCCEEDED, session NEEDS_REPLAN, whole-goal/independent preservation unverified at model level, no retry/continuation, fixture-only evidence and default product BLOCKED. Root independently verified preservation afterward.",
+  "task_verified": "PASS_AT_API_ASSISTED_FIXTURE_SCOPE",
+  "whole_goal_assess": "NOT_RUN: fixture has no perception/decision backend",
+  "performance": "NOT_MEASURED: one operation is not p95/1000-trial workload evidence",
+  "private_artifact_sha256": {
+    "summary.json": "ae76155dbdd70e90a6ba24df38616b5d73123e91f4c6a5c5aa0be26e37ed0dab",
+    "gui-private-trace.jsonl": "8943c467d5cf06a7835575ffe079324baec53e68474c7604b7ad587137a030e8",
+    "mcp-dispatch-receipt.json": "2eaaa7d785c2c9a23cdeb16f0a9cd0ba7aa23880fb1e656d832d1351783f079e",
+    "codex-external-readback.json": "ec3b9f5e09176c146a572dfdbacbc3c45b440f6691db690d1644814dc223c37c",
+    "report.json": "75c7ac397cffeeeb52e8b2682e7e1887b228e33ab397050fc741d813023a556d",
+    "service-report.json": "4033218acd13a5c813d645033ccf52b4c85da59ec9f442e99591e04605750872"
+  }
+}

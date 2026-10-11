@@ -1,0 +1,427 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Zero-inference native OMP two-tool MCP argument/schema fidelity; immutable installed FINAL11 read-only facade",
+  "result": "PASS_AT_EXACT_SCOPE",
+  "candidate": {
+    "install_basename": "clef-use-installed-final11-20261011",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "public_readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "actual_installed_schemas": {
+    "advertised_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "api_schema_version": 1,
+    "guide_contract_version": 1,
+    "read_only_facade": true,
+    "tool_names": [
+      "computer_status",
+      "computer_capabilities"
+    ],
+    "schemas": {
+      "computer_status": {
+        "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Session Id"
+          }
+        },
+        "title": "computer_statusArguments",
+        "type": "object"
+      },
+      "computer_capabilities": {
+        "properties": {
+          "detail": {
+            "default": false,
+            "title": "Detail",
+            "type": "boolean"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Operation Id"
+          }
+        },
+        "title": "computer_capabilitiesArguments",
+        "type": "object"
+      }
+    }
+  },
+  "native_mcp_argument_schema_coverage": {
+    "computer_status": {
+      "advertised_properties": [
+        "session_id"
+      ],
+      "exercised_properties": [
+        "session_id"
+      ],
+      "driver_argument_guard": false,
+      "native_original_tool_execute": true,
+      "native_optional_empty_placeholder_omission_preserved": true
+    },
+    "computer_capabilities": {
+      "advertised_properties": [
+        "detail",
+        "operation_id"
+      ],
+      "exercised_properties": [
+        "detail",
+        "operation_id"
+      ],
+      "driver_argument_guard": false,
+      "native_original_tool_execute": true,
+      "native_optional_empty_placeholder_omission_preserved": true
+    }
+  },
+  "actual_native_tool_server_invocations": [
+    {
+      "tool": "computer_capabilities",
+      "label": "default",
+      "args": {},
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "detail_true",
+      "args": {
+        "detail": true
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "detail_false",
+      "args": {
+        "detail": false
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_null",
+      "args": {
+        "operation_id": null
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_known",
+      "args": {
+        "operation_id": "numeric_transform"
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "b1346f56c429385f96af29847e9ea2e881ae731771a8768e0537edb2d9531709",
+      "returned_family": "numeric_transform",
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_known_detail",
+      "args": {
+        "operation_id": "numeric_transform",
+        "detail": true
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "b1346f56c429385f96af29847e9ea2e881ae731771a8768e0537edb2d9531709",
+      "returned_family": "numeric_transform",
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_unknown_skills",
+      "args": {
+        "operation_id": "skills",
+        "detail": true
+      },
+      "result_category": "CANONICAL_UNKNOWN_OPERATION",
+      "expected_categories": [
+        "CANONICAL_UNKNOWN_OPERATION"
+      ],
+      "observed_expected": true,
+      "output_sha256": "ae455f055b3e4fa48196a310b4dff6a94bae119d62a5bd62fc7788b22557a376",
+      "returned_family": null,
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_unknown_empty",
+      "args": {
+        "operation_id": ""
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_capabilities",
+      "label": "operation_null_detail",
+      "args": {
+        "operation_id": null,
+        "detail": true
+      },
+      "result_category": "CANONICAL_SUCCESS",
+      "expected_categories": [
+        "CANONICAL_SUCCESS"
+      ],
+      "observed_expected": true,
+      "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+      "returned_family": null,
+      "returned_readonly_facade": true,
+      "returned_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+    },
+    {
+      "tool": "computer_status",
+      "label": "default",
+      "args": {},
+      "result_category": "CANONICAL_SERVICE_NOT_RUNNING",
+      "expected_categories": [
+        "CANONICAL_NO_ACTIVE_SESSION",
+        "CANONICAL_SERVICE_NOT_RUNNING"
+      ],
+      "observed_expected": true,
+      "output_sha256": "5b93245034120098bba6b0efa49c1e109e21f40921d0344261e6bb65ff4050b0",
+      "returned_family": null,
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_status",
+      "label": "session_null",
+      "args": {
+        "session_id": null
+      },
+      "result_category": "CANONICAL_SERVICE_NOT_RUNNING",
+      "expected_categories": [
+        "CANONICAL_NO_ACTIVE_SESSION",
+        "CANONICAL_SERVICE_NOT_RUNNING"
+      ],
+      "observed_expected": true,
+      "output_sha256": "5b93245034120098bba6b0efa49c1e109e21f40921d0344261e6bb65ff4050b0",
+      "returned_family": null,
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_status",
+      "label": "session_owned_synthetic",
+      "args": {
+        "session_id": "clef-public-preflight-no-session"
+      },
+      "result_category": "CANONICAL_SERVICE_NOT_RUNNING",
+      "expected_categories": [
+        "CANONICAL_NO_ACTIVE_SESSION",
+        "CANONICAL_SERVICE_NOT_RUNNING"
+      ],
+      "observed_expected": true,
+      "output_sha256": "5b93245034120098bba6b0efa49c1e109e21f40921d0344261e6bb65ff4050b0",
+      "returned_family": null,
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    },
+    {
+      "tool": "computer_status",
+      "label": "session_empty",
+      "args": {
+        "session_id": ""
+      },
+      "result_category": "CANONICAL_SERVICE_NOT_RUNNING",
+      "expected_categories": [
+        "CANONICAL_NO_ACTIVE_SESSION",
+        "CANONICAL_SERVICE_NOT_RUNNING"
+      ],
+      "observed_expected": true,
+      "output_sha256": "5b93245034120098bba6b0efa49c1e109e21f40921d0344261e6bb65ff4050b0",
+      "returned_family": null,
+      "returned_readonly_facade": null,
+      "returned_schema_sha256": null
+    }
+  ],
+  "native_tool_count": 3,
+  "MCP_readonly_tool_count": 2,
+  "runtime_state_isolation": {
+    "environment_key": "CLEF_USE_STATE_DIR",
+    "installed_state_dir_matches_owned_root": true,
+    "endpoint_before_exists": false,
+    "state_directory_before_exists": false,
+    "native_readonly_client_start": false,
+    "endpoint_after_exists": false,
+    "state_directory_after_exists": false
+  },
+  "state_isolation_addendum": {
+    "basename": "clef-omp-native-state-isolation-addendum-public-20261011.json",
+    "sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e"
+  },
+  "argument_wrapper_removed": true,
+  "canonical_native_tool_execute_and_validation_preserved": true,
+  "native_optional_empty_semantics": {
+    "source_basename": "pi-coding-agent/src/mcp/tool-bridge.ts",
+    "source_sha256": "6f12cb70c98abda1b8002d7caf67a00ccd8430f15ef452c9e811fceb19f64d6d",
+    "relevant_lines": [
+      83,
+      91,
+      181,
+      191
+    ],
+    "observed_empty_operation_id_result": "Default general capabilities; official native outbound preparation drops optional empty-string placeholders",
+    "observed_nonempty_unknown_operation_id_skills_result": "Canonical UNKNOWN_OPERATION error",
+    "observed_null_operation_id_result": "Default general capabilities",
+    "observed_known_numeric_transform_result": "Actual numeric_transform operation registry object; no GUI effect",
+    "observed_status_default_null_empty_synthetic_id": "Canonical runtime-service-not-running error in verified fresh owned state; no start or GUI work"
+  },
+  "test_mode": {
+    "PI_TEST_RUNTIME": "1",
+    "network_unshared": true,
+    "model_invocations": 0
+  },
+  "generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,…",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or…"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": true,
+    "inference_invocations": 0
+  },
+  "full_native_public_skill_reads": [
+    {
+      "guide": "clef-use",
+      "native_uri": "skill://clef-use",
+      "full_body_observed": true,
+      "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+    },
+    {
+      "guide": "clef-use-blender",
+      "native_uri": "skill://clef-use-blender",
+      "full_body_observed": true,
+      "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+    },
+    {
+      "guide": "clef-use-diagnostics",
+      "native_uri": "skill://clef-use-diagnostics",
+      "full_body_observed": true,
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "URI_guard_identical_to_prior144positive13negative_audit": {
+    "guard_sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b",
+    "audit_basename": "clef-omp-native-read-selector-audit-public-20261011.json",
+    "audit_sha256": "7058526436009ec1ead0207a28d8ee687a5444233d9befd3671800755e8661d2"
+  },
+  "preflight_history": [
+    {
+      "classification": "OBSERVED",
+      "result": "STOPPED_EXPECTATION_MISMATCH_NO_MODELS",
+      "summary_sha256": "b3be8ff1055b71328c1a63533e75384934f26d3ef955744b12c6b2c9b82c56b5",
+      "reason": "Initial zero-inference checker expected empty operation_id to produce UNKNOWN_OPERATION, but actual native outbound optional-placeholder omission returned general capabilities; official native tool-bridge source explained this result. No product change.",
+      "completed_actual_calls_before_stop": 8,
+      "model_invocations": 0
+    },
+    {
+      "classification": "OBSERVED",
+      "result": "PASS_NO_MODELS",
+      "reason": "Expected native empty-placeholder semantics corrected; 13 actual calls PASS. Final criteria code also requires both core+Blender full bodies for natural, matching original declaration; final exact driver re-preflight 13 calls PASS."
+    }
+  ],
+  "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+  "GUI_TASK_VERIFIED": "NOT_RUN",
+  "runtime_session_activated": false,
+  "credential_or_global_configuration_changes": false,
+  "artifact_bindings": [
+    {
+      "basename": "clef_omp_native_schemafaithful_consumer_verify_20261011.py",
+      "sha256": "f6fe5ee47e5a030345be6ea9eed3c19a4e8a42f691b971bbcada4f53781f1c7b"
+    },
+    {
+      "basename": "clef_omp_native_schemafaithful_consumer_verify_20261011.ts",
+      "sha256": "4a35e1915543b41cbba9ce2f989efd009d810bea9ebbc12007965a0874c1d645"
+    },
+    {
+      "basename": "clef_omp_native_public_read_guard_20261011.ts",
+      "sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b"
+    }
+  ]
+}

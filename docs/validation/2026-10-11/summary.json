@@ -1976,6 +1976,78 @@
       "artifact": "docs/validation/2026-10-11/omp-native-profile-readonly.json",
       "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316",
       "scope": "Native bootstrap returned with all three original skill previews under actual configured default/smol. Three background completions/fetch deliveries returned 200; two accepted cache entries and one INVALID_COMPRESSION. Primary NOT_RUN due artificial driver readiness gate, not native fatal behavior. Prior wrong-role and controlled failures retained."
+    },
+    "cif440de1_linux_install": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/cif440de1-linux-install.json",
+      "sha256": "1e723d5fd93f9573e3638bd40a2e743908339e776a56e8c4fe97052bc978f849",
+      "scope": "Immutable f440de1 CI: 15 platform archives verified; actual Linux fresh/repeat install; three guides across three harnesses; 61 Python files exact and 26 HOME files preserved. Deployment skipped by existing branch policy. Native harness/GUI checks on this archive NOT_RUN."
+    },
+    "codex_final12_native_gui": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/codex-final12-native-gui.json",
+      "sha256": "0ed6d2a6924a01a45cc99af55fdd214ba7db1ed3be51cc7bc27f396de89bd24e",
+      "scope": "Actual Codex ephemeral authenticated session: native discovery, full three guide bodies, actual schema/capabilities, exactly one numeric transform and external fresh RNA/visual preservation check; all cleanup passed. TASK_VERIFIED only at private API_ASSISTED fixture scope. Whole-goal ASSESS/production/full performance remain NOT_RUN."
+    },
+    "omp_native_consumer_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-consumer-stopped.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059",
+      "scope": "Native consumer-faithful OMP partial run stopped at8 primary calls. Public selector URI false refusal was a private probe bug; final answer and remaining cases NOT_RUN. Status isolation limitation retained in later corrected evidence."
+    },
+    "omp_native_read_selector_audit": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-read-selector-audit.json",
+      "sha256": "7058526436009ec1ead0207a28d8ee687a5444233d9befd3671800755e8661d2",
+      "scope": "Zero-inference official native parser/read selector audit144 identical content arrays,13 negative refusals. Native schema path-only. No model or GUI task proof."
+    },
+    "omp_native_guarded_consumer_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-guarded-consumer-stopped.json",
+      "sha256": "4eb7aaa78a1bb8d558a9a8b9f61fc50f0e2121f0eaed3c4e4725f71b7661862f",
+      "scope": "Corrected native URI selector batch: actual full core/capabilities,8 primary completions all tool_calls, final answer and natural/negative NOT_RUN. Private MCP argument wrapper falsely refused advertised operation_id; inherited wrong state-directory environment also limits prior status isolation. Not attributed as product/model failure."
+    },
+    "codex_final12_gui_predeclaration": {
+      "claim": "PROPOSED",
+      "artifact": "docs/validation/2026-10-11/codex-final12-gui-predeclaration.json",
+      "sha256": "6fd0e5aa24cf2df80c4deb80130dacb2ec36d9cb89fb7c124fcaa31d36330426",
+      "scope": "Predeclared one actual Codex task/one operation/180sec, no retries. This declaration is PROPOSED; later actual result is recorded separately."
+    },
+    "blender_harness_fixture_lifecycle": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-harness-fixture-lifecycle.json",
+      "sha256": "ebad1286c87a9895b1d975bf07358ba41a7c14114122f6e304c6be82240905e6",
+      "scope": "Actual installed MCP fixture effect plus deadline/signal/error cleanup and exact current source Codex cleanup. Initial fixture failure and effect source attribution retained. API_ASSISTED only; pending-modal serve cleanup branch NOT_RUN."
+    },
+    "fixture_source_regression": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/fixture-source-regression.json",
+      "sha256": "4b5389ff00c8a31cedb4c964a567c3b17dd825d62d83527d3dfbed8911b9214d",
+      "scope": "Frozen bounded service fixture source; full regression783pass34skip41warnings45.35s; scopedRuff and actual generated contract4-language checks pass. Actual native GUI task evidence separately recorded."
+    },
+    "omp_native_schema_fidelity": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-mcp-schema-fidelity.json",
+      "sha256": "6efd6c7d586b2806f0f708d1d3e086e0a48eb5475d52a6c273f2290270ccbb18",
+      "scope": "Zero-inference13 actual native MCP calls exercise all advertised properties without custom argument validation. Actual canonical unknown-operation/no-service refusals retained; not model task proof."
+    },
+    "omp_native_state_isolation": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-state-isolation-addendum.json",
+      "sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e",
+      "scope": "Corrected CLEF_USE_STATE_DIR has exact installed config proof; inherited unsupported CLEF_USE_HOME limits earlier status isolation. Prior actual capabilities/body-read evidence remains separate."
+    },
+    "omp_native_schemafaithful_declaration": {
+      "claim": "PROPOSED",
+      "artifact": "docs/validation/2026-10-11/omp-native-schemafaithful-predeclaration.json",
+      "sha256": "cbe346e03514ac7b88246d49617a72d7fbe2ac9d9408102afcab641ba5ad2276",
+      "scope": "Predeclared same bounded native consumer3-case batch after schema/state corrections; declaration alone is PROPOSED."
+    },
+    "omp_native_schemafaithful_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/omp-native-schemafaithful-stopped.json",
+      "sha256": "accc5841a80363ab5c14ecd6e4e3e68571e02436474977654ca89102af2264d0",
+      "scope": "First actual native primary invocation stopped with workspace_violation before any parsed tools/reads/capabilities. No retries; later cases NOT_RUN. Exact error origin and rejected args NOT_OBSERVED. Owned state/service untouched."
     }
   },
   "not_run": {
@@ -2081,6 +2153,18 @@
     "blender-menu-context-pixel-final12.json",
     "installed-compatibility-final12.json",
     "omp-native-profile-readonly.json",
-    "omp-native-profile-predeclaration.json"
+    "omp-native-profile-predeclaration.json",
+    "cif440de1-linux-install.json",
+    "codex-final12-native-gui.json",
+    "omp-native-consumer-stopped.json",
+    "omp-native-read-selector-audit.json",
+    "omp-native-guarded-consumer-stopped.json",
+    "codex-final12-gui-predeclaration.json",
+    "blender-harness-fixture-lifecycle.json",
+    "fixture-source-regression.json",
+    "omp-native-mcp-schema-fidelity.json",
+    "omp-native-state-isolation-addendum.json",
+    "omp-native-schemafaithful-predeclaration.json",
+    "omp-native-schemafaithful-stopped.json"
   ]
 }

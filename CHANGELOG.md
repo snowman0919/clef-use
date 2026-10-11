@@ -16,6 +16,9 @@
 - Add provenance-aware State Compiler and six guarded Blender operation families.
   Missing hidden application state blocks execution. Native API-assisted fixtures
   verify effects; they do not establish pixels-only production support.
+- Expose a bounded disposable Blender fixture through the real installed MCP
+  service for native harness task checks, with independent RNA readback and
+  deadline/signal/input/process cleanup evidence.
 - Record pre-pruning candidate coverage diagnostics without relaxing confidence
   gates; distinguish singleton/uniform distributions and numeric false completions.
 - Use unused executable-target slots for observed decision evidence within the

@@ -448,6 +448,46 @@ Every case retained the previous environment and original user bytes. Windows
 crash recovery remains **NOT_RUN**, so INSTALL-07 stays partial. See
 [update crash evidence](validation/2026-10-11/linux-installer-update-crash-phases-ci26d9252.json).
 
+**OBSERVED / actual Codex GUI task:** an authenticated native ephemeral Codex
+session discovered the installed FINAL12 guides, read all three full bodies and
+inspected the actual capability/schema contract. It submitted exactly one bounded
+numeric transform through the installed MCP and private loopback service. The
+operation returned `SUCCEEDED` after four inputs; the session remained
+`NEEDS_REPLAN`, which the model reported without claiming whole-goal completion.
+Independent fresh RNA and visual checks confirmed Cube X +2 m, unchanged Y/Z,
+rotation, scale, selection, mode, space and unit, with no modal. Owned input,
+endpoint, server, Blender and Xvfb cleanup all passed. This establishes
+`TASK_VERIFIED` only at the controlled `API_ASSISTED_FIXTURE_ONLY` scope;
+production availability, whole-goal ASSESS and workload latency remain open.
+See [native Codex task evidence](validation/2026-10-11/codex-final12-native-gui.json).
+
+**OBSERVED / immutable f440de1 CI install:** all fifteen platform/Python builds
+and assembly succeeded. Every downloaded archive hash matched the immutable
+manifest. Actual isolated Linux installation/repeat returned `INSTALLED`/`CURRENT`;
+all three guides in three harnesses were installed and retained, 61 packaged
+Python files matched source and 26 HOME files retained their bytes. Deployment
+was skipped by the existing branch policy. Native harness execution on this new
+CI archive is separate from the differently hashed local FINAL12 task evidence.
+See [immutable CI installation](validation/2026-10-11/cif440de1-linux-install.json).
+
+**OBSERVED / OMP probe corrections:** consumer-native batches reached actual core
+body reads and current capabilities but stopped at the predeclared eight primary
+calls without a final answer. Earlier private probes incorrectly rejected native
+read selectors and an advertised capability argument. Their use of the unsupported
+`CLEF_USE_HOME` variable also limits prior status isolation claims. Those records
+remain partial and are not attributed as product or native-model failures.
+Official selector equivalence and native MCP schema/state-directory checks are
+recorded separately; they alone do not establish model task success. The subsequent
+schema-faithful batch stopped on its first native primary invocation with
+`workspace_violation`, before any parsed tool call. The precise error origin and
+rejected arguments were not observed; no retry or later case ran. See
+[stopped native batch](validation/2026-10-11/omp-native-schemafaithful-stopped.json).
+
+The bounded fixture source and four localized document updates passed the full
+regression (**783 passed, 34 skipped, 41 warnings, 45.35 s**), scoped Ruff and
+generated contract/example checks. This does not replace the actual GUI evidence
+or turn skipped acceptance work into a pass.
+
 PASS labels in ACCEPTANCE.yaml apply only to each exact condition at its recorded
 scope. Partial results retain `NOT_RUN` and explicit evidence; they never inherit
 native, harness, installed or public-release status from another evidence level.
@@ -455,11 +495,11 @@ native, harness, installed or public-release status from another evidence level.
 | Milestone | Status | Remaining condition |
 | --- | --- | --- |
 | M0 baseline | IN_PROGRESS | Software/attachment and original live menu baseline pinned; remaining full workflow matrix remains. |
-| M1 discovery/integration | IN_PROGRESS | Codex and Hermes FINAL11 read-only stages pass; OMP normal native bootstrap stopped before primary model; GUI task coverage remains. |
+| M1 discovery/integration | IN_PROGRESS | Codex and Hermes FINAL11 read-only stages pass; corrected OMP native consumer turns remain partial; Codex private fixture GUI task passes, other GUI coverage remains. |
 | M2 typed input | IN_PROGRESS | Linux checks and Windows component input cases observed; Windows overall FAIL/restoration and active IME composition remain. |
 | M3 state/operations | IN_PROGRESS | FINAL10 canonical API-assisted fixture21/22 and private instrumented22/22; original model menu replay FAIL and shipped production provider remain open. |
 | M4 reaction/quality | IN_PROGRESS | Bounded native profile measured; complete task workload/baseline/accuracy and release gates remain NOT_RUN. |
-| M5 harness/install/release | IN_PROGRESS | Local candidate/lifecycle checks observed; harness GUI tasks, full Windows matrix and public release verification remain NOT_RUN. |
+| M5 harness/install/release | IN_PROGRESS | Immutable f440de1 CI/Linux install and Codex private fixture task pass; remaining harness tasks, full Windows matrix and public release verification remain open. |
 
 Reici matched-view production edits, independent visual review, Warudo/VRChat
 verification and public artifact publication/download/hash/fresh public install

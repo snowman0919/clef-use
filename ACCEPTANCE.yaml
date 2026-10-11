@@ -341,10 +341,17 @@ scenarios:
     section: evidence.codex_actual_model
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.codex_final12_native_gui
+    claim: OBSERVED
+    partial: true
   execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
     FINAL6 and FINAL10 native discovery, actual full guide body reads and successful read-only capabilities.
     Negative non-GUI trigger passed. Earlier isolated CLI 401 and denied-approval rounds are
-    retained separately; GUI TASK_VERIFIED remains NOT_RUN.
+    retained separately. FINAL12 actual Codex native GUI task passed at the private
+    API_ASSISTED fixture scope, including full guide loads, capability/schema discovery, one numeric
+    transform, independent fresh RNA/visual preservation and complete owned cleanup.
+    Whole-goal ASSESS and production provider remain NOT_RUN.
 - id: HARNESS-02
   category: harness
   requirement: Hermes actual selected profile discovers and reads guide, then invokes read-only
