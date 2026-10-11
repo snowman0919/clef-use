@@ -3,13 +3,14 @@
 from __future__ import annotations
 
 import argparse
+import ast
 import json
 import re
 import shlex
 import tomllib
 from pathlib import Path
 
-from jsonschema import validate
+from jsonschema import ValidationError, validate
 
 from clef_use.capabilities import (
     SKILL_NAMES,
@@ -108,7 +109,7 @@ def outputs():
     }
 
 
-def validate_published_examples(root: Path = ROOT) -> int:
+def _published_documents(root: Path):
     documents = [root / "README.md"]
     historical = {"evidence", "validation", "decisions"}
     records = {"BASELINE_AND_SOURCES.md", "PRIOR_PLATFORM_PLAN.md", "EXECUTION_STATUS.md"}
@@ -119,9 +120,13 @@ def validate_published_examples(root: Path = ROOT) -> int:
         and path.name not in records
     )
     documents.extend((root / "agent-skills").rglob("*.md"))
+    return sorted(documents)
+
+
+def validate_published_examples(root: Path = ROOT) -> int:
     cli = parser()
     count = 0
-    for path in sorted(documents):
+    for path in _published_documents(root):
         text = path.read_text(encoding="utf-8")
         for block in re.findall(r"```(?:sh|bash|powershell)\s*\n(.*?)\n```", text, re.S):
             for line in re.sub(r"\\\r?\n", " ", block).splitlines():
@@ -137,6 +142,65 @@ def validate_published_examples(root: Path = ROOT) -> int:
                         f"invalid published CLI example in {path.relative_to(root)}: {line}"
                     ) from error
                 count += 1
+    return count
+
+
+def validate_published_tool_examples(root: Path = ROOT) -> int:
+    schemas = tool_schemas()
+    count = 0
+
+    class JsonConstants(ast.NodeTransformer):
+        def visit_Name(self, node):
+            values = {"true": True, "false": False, "null": None}
+            return ast.Constant(values[node.id]) if node.id in values else node
+
+    for path in _published_documents(root):
+        text = path.read_text(encoding="utf-8")
+        for code in re.findall(r"(?<!`)`([^`]+)`(?!`)", text, re.S):
+            if not re.fullmatch(r"computer_\w+\(.*\)", code, re.S):
+                continue
+            try:
+                call = ast.parse(code, mode="eval").body
+                if not isinstance(call, ast.Call) or not isinstance(call.func, ast.Name):
+                    raise ValueError("expected a named tool call")
+                schema = schemas[call.func.id]
+                properties = schema["properties"]
+                parameters = list(properties)
+                values, placeholders = {}, set()
+
+                arguments = [(parameters[index], value) for index, value in enumerate(call.args)]
+                arguments.extend((keyword.arg, keyword.value) for keyword in call.keywords)
+                for name, value in arguments:
+                    if name not in properties or name in values or name in placeholders:
+                        raise ValueError("unknown or repeated parameter")
+                    if isinstance(value, ast.Name) and value.id == name:
+                        # API signatures document a named parameter without
+                        # supplying a task-specific value, such as run(goal).
+                        placeholders.add(name)
+                    else:
+                        values[name] = ast.literal_eval(JsonConstants().visit(value))
+
+                validate(
+                    values,
+                    {
+                        **schema,
+                        "required": [
+                            n for n in schema.get("required", []) if n not in placeholders
+                        ],
+                    },
+                )
+            except (
+                KeyError,
+                IndexError,
+                SyntaxError,
+                ValueError,
+                TypeError,
+                ValidationError,
+            ) as error:
+                raise ValueError(
+                    f"invalid published tool example in {path.relative_to(root)}: {code}"
+                ) from error
+            count += 1
     return count
 
 
@@ -171,6 +235,7 @@ def main():
         if not blocks or blocks[0].splitlines() != COMMANDS:
             raise ValueError(f"localized command drift: {language}")
     published_examples = validate_published_examples()
+    published_tools = validate_published_tool_examples()
     print(
         json.dumps(
             {
@@ -178,6 +243,7 @@ def main():
                 "tool_examples": len(EXAMPLES),
                 "cli_examples": len(COMMANDS),
                 "published_cli_examples": published_examples,
+                "published_tool_examples": published_tools,
                 "guides": list(SKILL_NAMES),
             }
         )

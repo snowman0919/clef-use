@@ -43,3 +43,23 @@ def test_published_example_with_unavailable_flag_is_rejected(tmp_path):
     )
     with pytest.raises(ValueError, match="invalid published CLI example in README.md"):
         module.validate_published_examples(tmp_path)
+
+
+@pytest.mark.parametrize(
+    "example",
+    [
+        'computer_observe(refresh="false")',
+        "computer_observe(imaginary=true)",
+        "computer_imaginary(detail=false)",
+    ],
+)
+def test_published_tool_example_rejects_invalid_installed_contract(tmp_path, example):
+    root = Path(__file__).resolve().parents[1]
+    spec = importlib.util.spec_from_file_location(
+        "generate_agent_contract", root / "scripts/generate_agent_contract.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    (tmp_path / "README.md").write_text(f"Use `{example}`.\n", encoding="utf-8")
+    with pytest.raises(ValueError, match="invalid published tool example in README.md"):
+        module.validate_published_tool_examples(tmp_path)

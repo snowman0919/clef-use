@@ -23,7 +23,8 @@
 - Read localized guide contracts as UTF-8 and generate LF bytes independently of
   the build host locale, including Windows packaging.
 - Use managed MCP/guide integration in all four localized quick starts and
-  validate published CLI examples against the current parser during packaging.
+  validate published CLI examples and inline tool arguments against the current
+  parser and schemas during packaging.
 - Preserve exact UTF-8 and newline bytes in atomic managed writes on Windows,
   keeping guide hashes and existing CRLF configuration compatible with recovery.
 - Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
