@@ -1,0 +1,287 @@
+"""Partial public-RNA evidence bound to a fresh foreground X11 client PID.
+
+Unavailable popup, effective keymap, text/IME focus and busy facts remain
+UNKNOWN. This provider never authorizes an operation by assuming their absence.
+"""
+
+from __future__ import annotations
+
+import hashlib
+import json
+import os
+import socket
+import stat
+import time
+import uuid
+from functools import lru_cache
+from pathlib import Path
+
+from .blender_observer import MAX_RESPONSE_BYTES, peer_credentials, private_directory, read_message
+from .state import FactValidity, StateFact, StateSource
+
+
+@lru_cache(maxsize=1)
+def _query_ids():
+    from Xlib.protocol import rq
+
+    class IdByteLength(rq.LengthOf):
+        def parse_value(self, value, display):
+            # The native server sends byte length (4), not a four-PID array.
+            if value not in (0, 4):
+                raise ValueError("unsupported X-Resource client ID length")
+            return value // 4
+
+    # X-Resource 1.2 QueryClientIds, XResproto.h. Unlike _NET_WM_PID,
+    # this PID is supplied by the server from the client's local credentials.
+    class QueryIds(rq.ReplyRequest):
+        _request = rq.Struct(
+            rq.Card8("opcode"),
+            rq.Opcode(4),
+            rq.RequestLength(),
+            rq.LengthOf("specs", 4),
+            rq.List("specs", rq.Struct(rq.Card32("client"), rq.Card32("mask"))),
+        )
+        _reply = rq.Struct(
+            rq.ReplyCode(),
+            rq.Pad(1),
+            rq.Card16("sequence_number"),
+            rq.ReplyLength(),
+            rq.LengthOf("ids", 4),
+            rq.Pad(20),
+            rq.List(
+                "ids",
+                rq.Struct(
+                    rq.Card32("client"),
+                    rq.Card32("mask"),
+                    IdByteLength("value", 4),
+                    rq.List("value", rq.Card32Obj),
+                ),
+            ),
+        )
+
+    return QueryIds
+
+
+def window_pid(connection, window):
+    extension = connection.query_extension("X-Resource")
+    if not extension or not extension.present:
+        raise ValueError("X-Resource local PID query unavailable")
+    reply = _query_ids()(
+        display=connection.display,
+        opcode=extension.major_opcode,
+        specs=[{"client": window, "mask": 2}],
+    )
+    values = [item.value[0] for item in reply.ids if item.mask == 2 and len(item.value) == 1]
+    if len(values) != 1 or values[0] <= 0:
+        raise ValueError("foreground client PID unavailable")
+    return values[0]
+
+
+def foreground_client(connection, expected_window, expected_bounds):
+    """Bind the focused app client inside the captured root-child WM frame."""
+    from Xlib import X
+
+    root = connection.screen().root
+    focus = connection.get_input_focus().focus
+    if not hasattr(focus, "id") or focus.id == root.id:
+        raise ValueError("native foreground client unavailable")
+    pid = window_pid(connection, focus.id)
+    client = focus
+    current = focus
+    for _ in range(32):
+        if current.id == expected_window:
+            geometry = client.get_geometry()
+            if client.get_attributes().map_state != X.IsViewable:
+                raise ValueError("foreground client is not viewable")
+            position = root.translate_coords(client, 0, 0)
+            bounds = (
+                position.x,
+                position.y,
+                position.x + geometry.width,
+                position.y + geometry.height,
+            )
+            left, top, right, bottom = expected_bounds
+            if not (
+                left <= bounds[0] < bounds[2] <= right and top <= bounds[1] < bounds[3] <= bottom
+            ):
+                raise ValueError("foreground client outside captured window")
+            return pid, client.id, bounds
+        parent = current.query_tree().parent
+        if parent.id == root.id:
+            break
+        if window_pid(connection, parent.id) == pid:
+            client = parent
+        current = parent
+    raise ValueError("foreground client association unavailable")
+
+
+def compile_snapshot(
+    snapshot, *, pid, frame, version, started_at, completed_at, client_bounds=None
+):
+    """Convert only uniquely bound and fresh positive observations into facts."""
+    if (
+        snapshot.get("schema_version") != 1
+        or snapshot.get("source") != "BLENDER_PUBLIC_RNA"
+        or snapshot.get("pid") != pid
+        or not started_at <= snapshot.get("sampled_at", -1) <= completed_at
+        or not snapshot["sampled_at"] <= snapshot.get("completed_at", -1) <= completed_at
+        or completed_at - started_at > 0.5
+    ):
+        raise ValueError("snapshot identity or freshness mismatch")
+    windows = snapshot.get("windows", [])
+    # RNA exposes no native OS window handle. A single native client and single
+    # RNA window with matching dimensions is the only supported association.
+    if len(windows) != 1 or frame.foreground_bounds is None:
+        raise ValueError("ambiguous Blender window association")
+    window = windows[0]
+    left, top, right, bottom = client_bounds or frame.foreground_bounds
+    if (window["width"], window["height"]) != (right - left, bottom - top):
+        raise ValueError("Blender window geometry mismatch")
+
+    def fact(value):
+        return StateFact(
+            value=value,
+            source=StateSource.APP_TELEMETRY,
+            observed_at=snapshot["sampled_at"],
+            state_version=version,
+            validity=FactValidity.VALID,
+            uncertainty=0,
+        )
+
+    result = {
+        "application": fact("Blender"),
+        "selection": fact(window["selection"]),
+        "application_snapshot": fact(window),
+    }
+    if window["active_object_mode"] is not None:
+        result["mode"] = fact(window["active_object_mode"])
+    # Raw numeric values keep their explicit radians and scene-unit metadata;
+    # don't promote them to executable unit/space facts without context proof.
+    result["properties"] = fact(
+        {name: obj["properties"] for name, obj in window["objects"].items()}
+    )
+    modals = window["positive_modal_operators"]
+    if modals:
+        result["modal"] = fact({"positive_operators": modals})
+    viewports = [area for area in window["areas"] if area["type"] == "VIEW_3D"]
+    if len(viewports) == 1:
+        revision = hashlib.sha256(json.dumps(viewports[0], sort_keys=True).encode()).hexdigest()
+        result["view_revision"] = fact(revision)
+    return result
+
+
+class BlenderStateProvider:
+    def __init__(self, path: Path):
+        from .x11_input_state import X11InputState
+
+        self.path = path
+        self.query = X11InputState(os.environ.get("DISPLAY"))
+        self.status = {"status": "NOT_PROBED", "provider": "BLENDER_PUBLIC_RNA"}
+
+    def __call__(self, observation, version):
+        from Xlib.error import ConnectionClosedError, DisplayConnectionError, XError
+
+        stage = "socket_permissions"
+        try:
+            private_directory(self.path.parent)
+            info = self.path.lstat()
+            if (
+                not stat.S_ISSOCK(info.st_mode)
+                or info.st_uid != os.getuid()
+                or info.st_mode & 0o077
+            ):
+                raise ValueError("observer socket ownership or permissions mismatch")
+            query = self.query
+            started = time.time()
+            stage = "foreground_identity"
+            with query.query() as connection:
+                window, bounds = query.foreground()
+                frame = observation.frame
+                if window != frame.foreground_window or bounds != frame.foreground_bounds:
+                    raise ValueError("foreground changed before state sample")
+                native_pid, client_window, client_bounds = foreground_client(
+                    connection, window, bounds
+                )
+                stage = "observer_peer"
+                with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+                    client.settimeout(0.5)
+                    client.connect(str(self.path))
+                    pid, uid, _ = peer_credentials(client)
+                    if pid != native_pid or uid != os.getuid():
+                        raise ValueError("observer peer does not own foreground client")
+                    nonce = uuid.uuid4().hex
+                    stage = "snapshot_response"
+                    client.sendall(
+                        json.dumps({"request": "snapshot", "nonce": nonce}).encode() + b"\n"
+                    )
+                    message = read_message(client, MAX_RESPONSE_BYTES)
+                if message.get("nonce") != nonce or "snapshot" not in message:
+                    if (
+                        message.get("nonce") == nonce
+                        and message.get("error") == "snapshot unavailable"
+                    ):
+                        self.status = {
+                            "status": "UNAVAILABLE",
+                            "provider": "BLENDER_PUBLIC_RNA",
+                            "failed_check": "producer_snapshot",
+                            "error_type": message.get("error_type"),
+                            "reason": message.get("failed_check", "Blender public RNA read failed"),
+                        }
+                        return {}
+                    raise ValueError("observer response mismatch or unavailable")
+                stage = "foreground_recheck"
+                if query.foreground() != (window, bounds) or foreground_client(
+                    connection, window, bounds
+                ) != (pid, client_window, client_bounds):
+                    raise ValueError("foreground changed during state sample")
+                stage = "snapshot_binding"
+                facts = compile_snapshot(
+                    message["snapshot"],
+                    pid=pid,
+                    frame=frame,
+                    version=version,
+                    started_at=started,
+                    completed_at=time.time(),
+                    client_bounds=client_bounds,
+                )
+            self.status = {
+                "status": "PARTIAL",
+                "provider": "BLENDER_PUBLIC_RNA",
+                "verified_facts": sorted(facts),
+            }
+            return facts
+        except (
+            OSError,
+            ValueError,
+            KeyError,
+            TypeError,
+            RuntimeError,
+            XError,
+            ConnectionClosedError,
+            DisplayConnectionError,
+        ) as exc:
+            # Failure is public and explicit; no path, scene or credentials leak.
+            self.status = {
+                "status": "UNAVAILABLE",
+                "provider": "BLENDER_PUBLIC_RNA",
+                "reason": "Native peer/window binding or fresh snapshot unavailable",
+                "failed_check": stage,
+                "error_type": type(exc).__name__,
+                "errno": exc.errno if isinstance(exc, OSError) else None,
+                "detail": str(exc)
+                if str(exc)
+                in {
+                    "incomplete observer message",
+                    "invalid observer framing",
+                    "observer message exceeds limit",
+                    "observer response mismatch or unavailable",
+                    "foreground changed before state sample",
+                    "foreground changed during state sample",
+                    "observer peer does not own foreground client",
+                    "snapshot identity or freshness mismatch",
+                    "ambiguous Blender window association",
+                    "Blender window geometry mismatch",
+                }
+                else None,
+            }
+            return {}

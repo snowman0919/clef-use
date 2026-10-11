@@ -3,11 +3,15 @@
 These are semantic procedures to use through supported runtime contracts.
 They are not executable tool names or a new keyboard API.
 
-The default installation ships no trusted Blender state provider or provider
-configuration path. All six registered families currently return `BLOCKED` on
-missing facts there. The verified execution scope is the controlled API-assisted
-fixture; do not present it as general Blender support. Inspect each operation's
-`default_runtime_availability` before planning an invocation.
+The default configuration supplies pixels and possible native window identity.
+The optional Linux X11 `blender_state_socket` connects a read-only public-RNA
+observer, whose installed script path is exposed by `blender-observer-script`.
+It provides partial scene observations; popup, text/IME ownership, effective
+keymap and global busy absence remain unknown. All six registered families
+still return `BLOCKED` when required verified facts are missing. Procedure
+execution has been verified only in the controlled API-assisted fixture; partial
+production observation is not general Blender input support. Inspect each
+operation's `default_runtime_availability` before planning an invocation.
 
 A successful operation verifies its typed effect and returns session
 `NEEDS_REPLAN`. Verify the entire goal with a new input-free `ASSESS` contract.

@@ -44,13 +44,41 @@ Missing facts block input. The default screenshot provider cannot assert Blender
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 An operation report's `SUCCEEDED` verifies its typed effect. The session stays
 `NEEDS_REPLAN` until a separate fresh `ASSESS` verifies the actual task goal.
-The default installation supplies screenshots and possible native window identity,
-but no trusted Blender application provider or public provider configuration path.
-All six registered operations therefore return `BLOCKED` on missing verified facts.
-Discovery exposes implemented schemas and this default availability separately;
-it does not report a live `READY` state. Only the controlled `API_ASSISTED` Blender
-fixture has verified these procedures. A general production provider remains an
-open requirement; do not replace unknown focus, IME or popup state with assumptions.
+The default provider remains `NONE`: screenshots and available native window
+identity do not establish Blender's hidden state. An optional read-only Blender
+observer is available on Linux X11. `clef-use blender-observer-script` prints its
+installed path. Use that exact path with your approved Blender executable and a
+new, nonexistent directory under a private parent; the script creates the private
+directory and socket. It does not attach automatically to an existing Blender.
+
+```sh
+clef-use blender-observer-script
+blender --python "/absolute/installed/blender_observer.py" -- --clef-state-dir "/absolute/private/new-observer"
+```
+
+Set this top-level option in the runtime's `config.toml` (normally
+`~/.config/clef-use/config.toml`, or the file selected by `CLEF_USE_CONFIG`):
+
+```toml
+blender_state_socket = '/absolute/private/new-observer/state.sock'
+```
+
+The listener starts from the first Blender UI timer. Association requires Unix
+`SO_PEERCRED`, the XRes kernel process identity, a unique RNA window/client with
+matching dimensions, and native foreground focus. The observer reads window,
+selection, object mode, raw transforms/units, viewport and positive modal-operator
+records; it does not change scenes or invoke operators. Popup, text focus, IME,
+effective keymap and global busy/idle state remain unknown. An empty operator list
+does not prove absence. All six operations still return `BLOCKED` when their
+required verified facts are missing, including with this partial observer.
+
+A fresh observe response can expose `compiled_state`, `state_provider_status`
+and `state_pixel_association`. State has its own observation ID, is sampled near
+capture before parsing, and can expire while parsing. `FOREGROUND_WINDOW_ONLY`
+association is not pixel-synchronous scene evidence. Discovery describes schemas
+and default availability, not live `READY`. The existing `API_ASSISTED` fixture
+verification does not verify this new production path; full production operation
+support remains open. Never replace unknown dispatch context with assumptions.
 
 Continuing a typed operation session requires an explicit `operation` request
 (`clef-use continue ... --operation '<JSON>'`); planner guidance alone cannot repeat

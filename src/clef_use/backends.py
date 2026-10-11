@@ -796,6 +796,14 @@ def runtime(config: Config, log_path=None):
     from .activity import ActivityOverlay
     from .runtime import SessionRuntime
 
+    state_provider = None
+    if config.blender_state_socket is not None:
+        if sys.platform != "linux":
+            raise RuntimeError("Blender state socket currently requires Linux X11")
+        from .blender_state import BlenderStateProvider
+
+        state_provider = BlenderStateProvider(config.blender_state_socket)
+
     for repo in (config.decision_model, "microsoft/OmniParser-v2.0"):
         if not snapshot_path(config.model_dir, repo).is_dir():
             raise RuntimeError(
@@ -822,4 +830,5 @@ def runtime(config: Config, log_path=None):
         log_path=log_path,
         activity=ActivityOverlay(config.activity_overlay),
         grounder=VisualGroundingBackend(config) if config.visual_grounding else None,
+        state_provider=state_provider,
     )

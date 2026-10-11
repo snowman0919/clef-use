@@ -42,6 +42,7 @@ class StateFact(StrictModel):
 
 
 FACT_NAMES = (
+    "application_snapshot",
     "application",
     "window",
     "foreground",
@@ -101,6 +102,20 @@ class CompiledState(StrictModel):
             update={"validity": FactValidity.INVALIDATED}
         )
         return self.model_copy(update={"facts": facts})
+
+    def expire(self, max_age_seconds: float) -> CompiledState:
+        now = time.time()
+        return self.model_copy(
+            update={
+                "facts": {
+                    name: fact.model_copy(update={"validity": FactValidity.STALE})
+                    if fact.validity == FactValidity.VALID
+                    and not 0 <= now - fact.observed_at <= max_age_seconds
+                    else fact
+                    for name, fact in self.facts.items()
+                }
+            }
+        )
 
 
 class StateCompiler:

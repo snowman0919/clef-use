@@ -1,0 +1,223 @@
+{
+  "classification": "OBSERVED_ONCE_REAL_INSTALLED_NATIVE_TASKS_QUALITY_FAIL",
+  "status": "FAIL",
+  "requirement": "E2E-02",
+  "source_commit": "4932557713c290f7b63860e044c06587d227eae8",
+  "ci_run_id": 38183395770,
+  "archive_sha256": "8981c7756a3414dddcfa579f60c3f86a791b7d381fceae64d3e2e7ae602b4d90",
+  "wheel_sha256": "5d7d3eb20d2ad853c53bea2f02d8295943610b04bbd96925ddfe850b4a66b41f",
+  "install_public_artifact_sha256": "503b370d23d522b67652d29bee406adc9cbf3d68fe1fcf5a183ac989e44a2977",
+  "all61_git_wheel_installed_exact": true,
+  "driver_sha256": "93c8b744f5816f1d16e279c2f404e563d3ea53c73c86dae5ff00d5d9160a2f88",
+  "declaration_sha256": "54caebbadf44facff6e7d0f2c5d1dc6f1f662a5fc39640ae7a23dd04e780dce8",
+  "original_call_observer_sha256": "32d6a0da571036b3d6a4d17f24c1084e34a7ba20f6950329242e20cda9da13d3",
+  "root_model_start_sha256": "eb90a0e087d807bc0ff3d52d86f27ecb3e69ab48eb79ddaca1b8e6bf98818e04",
+  "received_native_artifact_sha256": "a33e13e6265945c22c3f1ff45acde0fdf19dd1f00998889e60a5322c2a026f33",
+  "private_prospective_roster_artifact_sha256": "042b44be38f87c0578960596ba9301eb938a61846eb5ec16cd43a476416614ef",
+  "independent_cleanup_artifact_sha256": "74aa9cec5f77dce79d5a7ae095e8044df463d4be8b6f2ca619faf42bc6a507ba",
+  "fixed_models": {
+    "Cloudflare/clef-flash": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "microsoft/OmniParser-v2.0": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+    "microsoft/Florence-2-base": "5ca5edf5bd017b9919c05d08aebef5e4c7ac3bac"
+  },
+  "guards": {
+    "confidence_threshold": 0.9,
+    "replan_threshold": 0.8,
+    "max_rounds_each": 5,
+    "native_event_abort_bound": 128,
+    "per_task_seconds": 1800,
+    "whole_sandbox_seconds": 4500
+  },
+  "cases": {
+    "browser": {
+      "status": "FAIL",
+      "terminal": "LOW_CONFIDENCE",
+      "reason": "execution mode confidence below threshold",
+      "steps": 0,
+      "rounds": 1,
+      "actual_CLEF_response_records": 1,
+      "actual_Omni_stage_records": 1,
+      "serialized_model_output": {
+        "mode": "ACT",
+        "mode_confidence": 0.7027,
+        "confidence": 0.8636,
+        "goal_probability": 0.0256,
+        "replan_probability": 0.6132,
+        "safety_probability": 0.0276,
+        "effect_probability": 0.0475,
+        "condition_probabilities": [
+          0.0109,
+          0.0099
+        ],
+        "entropy": 0.3462419321478668
+      },
+      "selected_operation": "type",
+      "selected_native_point_inside_independent_next_control": true,
+      "candidate_context": {
+        "candidate_count": 4,
+        "object_count": 5,
+        "operation_counts": {
+          "click": 2,
+          "focus": 1,
+          "type": 1
+        },
+        "dangling_non_null_targets": 0,
+        "request_text_bytes": 4839,
+        "request_input_tokens": 2193,
+        "input_tokens_source": "SDK_USAGE",
+        "complete_original_candidate_target_bbox_roster_retained_private": true
+      },
+      "prospective_geometric_next_control_coverage": {
+        "status": "MEASURED",
+        "next_control": "field",
+        "covered": true,
+        "matching_candidate_count": 3,
+        "matching_operations": {
+          "click": 1,
+          "focus": 1,
+          "type": 1
+        },
+        "oracle_age_ms": 43.94104,
+        "original_packet_before_policy_return": true,
+        "method": "Original executor-native target point inside independently observed actual control rectangle; exact literal123 checked for type",
+        "scope": "Geometric next-control opportunity only; not task accuracy, semantic completion, or fast-path eligibility"
+      },
+      "native_input_events": 0,
+      "adapter_entry_count": 0,
+      "native_effect_verified": false,
+      "false_completion": false,
+      "independent_native_readback": {
+        "submit_count": 0,
+        "input_change_count": 0,
+        "saved_literal123": false,
+        "last_input": null,
+        "auth_refusal_count": 0
+      },
+      "task_elapsed_seconds": 37.79292685294058,
+      "raw_head_logits": "NOT_CAPTURED; original serialized probabilities only; no fixed-model inference about latent cause",
+      "editor_type_candidate_boundary": null
+    },
+    "editor": {
+      "status": "FAIL",
+      "terminal": "NEEDS_REPLAN",
+      "reason": "executor needs planner guidance",
+      "steps": 0,
+      "rounds": 1,
+      "actual_CLEF_response_records": 1,
+      "actual_Omni_stage_records": 1,
+      "serialized_model_output": {
+        "mode": "ACT",
+        "mode_confidence": 0.6278,
+        "confidence": 0.9673,
+        "goal_probability": 0.0125,
+        "replan_probability": 0.9056,
+        "safety_probability": 0.0326,
+        "effect_probability": 0.0182,
+        "condition_probabilities": [
+          0.0068,
+          0.0071
+        ],
+        "entropy": 0.12581553776705973
+      },
+      "selected_operation": "click",
+      "selected_native_point_inside_independent_next_control": true,
+      "candidate_context": {
+        "candidate_count": 4,
+        "object_count": 10,
+        "operation_counts": {
+          "click": 4
+        },
+        "dangling_non_null_targets": 0,
+        "request_text_bytes": 5706,
+        "request_input_tokens": 2518,
+        "input_tokens_source": "SDK_USAGE",
+        "complete_original_candidate_target_bbox_roster_retained_private": true
+      },
+      "prospective_geometric_next_control_coverage": {
+        "status": "MEASURED",
+        "next_control": "field",
+        "covered": true,
+        "matching_candidate_count": 1,
+        "matching_operations": {
+          "click": 1
+        },
+        "oracle_age_ms": 43.232257,
+        "original_packet_before_policy_return": true,
+        "method": "Original executor-native target point inside independently observed actual control rectangle; exact literal123 checked for type",
+        "scope": "Geometric next-control opportunity only; not task accuracy, semantic completion, or fast-path eligibility"
+      },
+      "native_input_events": 0,
+      "adapter_entry_count": 0,
+      "native_effect_verified": false,
+      "false_completion": false,
+      "independent_native_readback": {
+        "native_widget_text": "",
+        "native_save_calls": 0,
+        "native_status_label": "Not saved",
+        "saved_file_exact123": false,
+        "saved_file_exists": false
+      },
+      "task_elapsed_seconds": 9.24262561800424,
+      "raw_head_logits": "NOT_CAPTURED; original serialized probabilities only; no fixed-model inference about latent cause",
+      "editor_type_candidate_boundary": "Current initial editor roster has onlyclick candidates. A correct fieldclick is present, but current-roster literaltype/focus capability is absent; future postclick perception was not exercised"
+    }
+  },
+  "task_successes": 0,
+  "declared_tasks": 2,
+  "actual_backend_worker_kinds": [
+    "clef",
+    "omni"
+  ],
+  "observational_scope": {
+    "no_function_replacement_or_result_substitution": true,
+    "profiled_original_function_events_only": true,
+    "ground_truth_not_fed_to_runtime_provider_or_models": true,
+    "prospective_records": 6,
+    "observer_error": false,
+    "same_prior_workloads_contracts_modelrevisions_and_gates": true,
+    "profiling_and50ms_geometry_overhead": "No timing efficacy or performance comparison claim"
+  },
+  "performance": {
+    "fast_eligible": null,
+    "fast_coverage": null,
+    "fast_coverage_status": "NOT_MEASURED",
+    "p95_statechange_to_OSinput_ms": null,
+    "release_gate_pass": false,
+    "reason": "No actual trusted prospective local fast-path policy receipt or1000paired opportunities; geometry is not policyauthority. Adapterentry is not OSACK."
+  },
+  "cleanup": {
+    "service_endpoint_removed": true,
+    "native_observer_stopped": true,
+    "native_held_input_empty": true,
+    "owned_children_exited": true,
+    "owned_form_listener_closed": true,
+    "private_xvfb_socket_removed": true,
+    "sandbox_exit": 1,
+    "original_execution_waited": true,
+    "independent_exact_owned_root_mount_matches": 0,
+    "independent_same_uid_processes_checked": 395,
+    "unreadable_mountinfo_entries": 5,
+    "all_unreadable_entries_observed_zombie": true,
+    "own_endpoint_absent": true,
+    "host_X252_socket_absent": true
+  },
+  "errors": [],
+  "attempts": 1,
+  "automatic_retries": 0,
+  "history": {
+    "prior_FINAL15_driver_sha256": "ebf4ae000f718b34645d6a9d3d0e892a74a0c2d300153b24927bf153ca1ae687",
+    "prior_FINAL15_declaration_sha256": "a17848cbad5c8e0569cb788507518388d29b7c765fb85b4b072c740cdfec0f6c",
+    "prior_FINAL15_outcomes": {
+      "browser": "LOW_CONFIDENCE",
+      "editor": "NEEDS_REPLAN"
+    },
+    "preservation": "Prior actual failures remain unchanged. Current493 newsource trial remainsFAIL; no retry/rescore/guardrelaxation or tasksubstitution."
+  },
+  "limitations": [
+    "No E2E efficacy gain observed:0/2 completed;0input/0effect/0falsecompletion",
+    "Exact next-control geometry coverage is observed for2packets; editor initiallylacks type/focus candidates",
+    "No claim rootcause of mode/replan probabilities established",
+    "No baseline029 same-task, statisticalcomparison, harnessmodel, general productionprovider, fullperformance or deployment proof",
+    "Raw images/candidateIDs/targetIDs/boxes/private paths/processIDs/auth values are retained privately and omitted here"
+  ]
+}

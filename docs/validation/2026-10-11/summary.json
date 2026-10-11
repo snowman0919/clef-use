@@ -2667,16 +2667,46 @@
       "artifact": "docs/validation/2026-10-11/candidate-target-context-fix.json",
       "sha256": "a1c763890340e517212b8fed1dad5b47de4835a760eec7aa3c9510882c45df88",
       "scope": "Source-only actualbuilder/router/serializer/JSON preserves equal-label target/operation and all33/40targets, explicitlyrefuses41/missingtarget;124scoped and880fullPASS34SKIP. NativeGUI/model efficacy/newinstallation/CI/fullperformanceNOT_RUN;historicalfailures/guardsunchanged."
+    },
+    "ci493_linux_installation": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci493-linux-installed.json",
+      "sha256": "503b370d23d522b67652d29bee406adc9cbf3d68fe1fcf5a183ac989e44a2977",
+      "scope": "Historical completed actual Linux fresh/repeat;61Git-wheel-installed exact,26HOME files and3guides3profiles preserved. NewerBlenderobserver source not included."
+    },
+    "ci493_windows_installation": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci493-windows-installed.json",
+      "sha256": "165ba29f0f8c3d9f3830c56bbdf300bd1af4dba38d2370a64293ace98bc4594b",
+      "scope": "Historical completed nativeWindows10commands;61exact/13checks/3actualflowYAML phases and preservedconfig. FullactiveV2identity NOT_ESTABLISHED/bootstraponly;noGUI/model."
+    },
+    "ci493_native_quality_failure": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/ci493-native-quality-failure.json",
+      "sha256": "4227ee45cf11d2fbe86be0d73eca09f2786e248c0974d230acd0c8607ad45c83",
+      "scope": "Historical completed0/2 actualtasks beforeuser scope reassignment;0nativeinput/effects/falsecompletion. Browsermode.7027/editorreplan.9056;0danglingtargets,nextcontrolgeometrycovered,editorinitialtype/focusabsent. Fasteligibilitynull;nofullcoverage/perfclaim."
+    },
+    "ci493_completed_build": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/release-ci4932557.json",
+      "sha256": "81d2e493e82b0351f4ddf91cfd84b4316c7ee934b703bcefdcd558f8655d085d",
+      "scope": "Historical exact493 CI38183395770 completedSUCCESS/all15builds+assembly;existingdeploy/tagguardSKIP. NewerBlenderobserver source notincluded;publicreleaseNOT_RUN."
+    },
+    "blender_rna_observer_component": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-rna-observer-component.json",
+      "sha256": "16725bb7af20d700300c174d26d4af3b5cf03af460d46185bb5ab78f828f8bb0",
+      "scope": "Currentsoftware source907PASS34SKIP/105targetedguidePASS;actualUI-threadpartialRNA/nativeUnixpeer-XResPID/decoratedclientbinding/resize-wrongpeer-streamlossrefusals. Models0/keyboardpointer0;all6guardedoperationsstillblockedunknowncontext. Component proof only,NOT wholeE2E orperformance;earlierstartupdiagnosticsretained."
     }
   },
   "not_run": {
-    "production_operations": "Default state provider NONE; configuration path UNAVAILABLE; all six registered operations advertise BLOCKED without verified local facts. API-assisted fixture success does not install a production provider. Separate directofficialELF/OSwindow/privateATSPI observer passed, but5shortsamples exposed no registered app; no universalabsence or verifiedpopup/text/IME/keymap feed was established. State remainsUNKNOWN ratherthanfalse.",
-    "windows": "Latest actualWindows committedbb971ef immutableCI11709226557 fresh/repeat10commands/61Git-wheel-installed/3guides3harness/3actualinstalledread_config flowYAML phases PASS. OriginalCRLFprefix/tail/usernote/settings and repeatHOME/config/guides preserved. Source354blockonly and historical6cdf182orderingexception/b321proof retained independently. Nativeharness/model/load/invoke/tasks/fullservicetransport/automaticIMM-TSFreader remainNOT_RUN;fullproductionV2runtimeidentity notestablished by bootstrap snapshot.",
+    "production_operations": "OptionalLinuxX11 read-only publicRNA provider/configurationnowimplemented and componentverified; defaultNONE and allsixoperationguardsretainunknownpopup/textIME/effectivekeymap/busy. Partialstate observationdoesnotprovegeneralinputoperations;wholeE2E belongsother session.",
+    "windows": "LatesthistoricalCI493 nativeWindows10commands/61exact/3guides3harness/13checksPASS,flowYAMLconsumeranduserbytespreserved. FullactiveV2identityNOT_ESTABLISHED/bootstraponly. NewBlenderobserver LinuxX11only;Windowsautomaticcontextreadersremainsoftwareworkopen. WholeE2E/modelverificationother session.",
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Latest bb971ef CI38157978139 all15build/install/upload pairs and assembly SUCCESS; productiondeploy/tagpublication SKIPPED by existing featurebranch guards. No bypass/main/tag/agent rerun. Publicdownload/freshpublicinstall NOT_RUN; source354andb321historicalresults retained independently.",
-    "general_gui_tasks": "Actual FINAL15 canonical default-runtime browser/editor tasks executed once each:0/2 completed/effects, browserLOW_CONFIDENCE mode.7271<.9/editorNEEDS_REPLAN replan.9041; nativeinput0/falsecompletion0/cleanup6PASS. Full task acceptance FAIL, no model/input/provider retries or threshold changes. Exactcandidate rosters/request lengths not retained; coverage unknown."
+    "public_release": "HistoricalCI493 exactcommit all15builds+assemblySUCCESS;existingfeaturebranchdeploy/tagguardsSKIP. Newsoftwareobservernotincluded. Publicrelease/fullE2Everificationremainexternalto thissoftwarecomponent proof;no bypass.",
+    "general_gui_tasks": "Historicalcompleted CI493 tasks0/2:browserLOW_CONFIDENCE mode.7027/editorNEEDS_REPLAN replan.9056;nativeinput0/effects0/falsecompletion0. No danglingcandidate targets, geometricnextcontrolcoverage truebuteditortype/focusabsent;fasteligibilitynull. E2E/modelquality nowother sessions;no newtaskruns here."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -2886,6 +2916,18 @@
     "production-atspi-factory-v4-observer-pass-app-failure.json",
     "production-atspi-factory-v5-startup-error-observation.json",
     "production-atspi-factory-v6-bounded-observation.json",
-    "candidate-target-context-fix.json"
-  ]
+    "candidate-target-context-fix.json",
+    "ci493-linux-installed.json",
+    "ci493-windows-installed.json",
+    "ci493-native-quality-failure.json",
+    "release-ci4932557.json",
+    "blender-rna-observer-component.json"
+  ],
+  "user_scope_update": {
+    "date": "2026-10-12",
+    "authority": "Direct user message",
+    "this_session": "clef-use software improvements plus component and regression verification",
+    "other_sessions": "Whole E2E verification, model production and evaluation",
+    "earlier_completed_evidence": "Retained; no new E2E or model-quality executions in this session"
+  }
 }

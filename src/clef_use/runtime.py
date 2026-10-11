@@ -1231,11 +1231,21 @@ class SessionRuntime:
     def observe(self, session: Session | None = None, *, refresh=True, include_image=False) -> dict:
         fresh = False
         observation = None
+        compiled_state = None
         if refresh and self.desktop_lock.acquire(blocking=False):
             try:
                 frame = self._capture()
+                if self.state_provider is not None:
+                    state_observation = Observation(uuid.uuid4().hex, frame, ())
+                    with self._operation_state_lock:
+                        evidence = self.state_provider(
+                            state_observation, self.state_compiler.version + 1
+                        )
+                        compiled_state = self.state_compiler.compile(state_observation, evidence)
                 objects = self._parse(frame)
                 observation = Observation(uuid.uuid4().hex, frame, objects)
+                if compiled_state is not None:
+                    compiled_state = compiled_state.expire(self.state_compiler.max_age_seconds)
                 if session is not None:
                     with session.lock:
                         session.observation = observation
@@ -1259,6 +1269,14 @@ class SessionRuntime:
                 if observation
                 else None,
                 "observation_fresh": fresh,
+                "compiled_state": compiled_state.model_dump(mode="json")
+                if compiled_state is not None
+                else None,
+                "state_provider_status": getattr(self.state_provider, "status", None),
+                "state_pixel_association": "FOREGROUND_WINDOW_ONLY; independently sampled "
+                "state observation, not pixel-synchronous scene evidence"
+                if compiled_state is not None
+                else None,
                 "image_sha256": hashlib.sha256(observation.frame.image.tobytes()).hexdigest()
                 if observation
                 else None,

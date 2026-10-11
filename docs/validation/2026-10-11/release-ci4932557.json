@@ -1,0 +1,97 @@
+{
+  "classification": "OBSERVED_PRIOR_COMPLETED_CI",
+  "run_id": 38183395770,
+  "conclusion": "success",
+  "headSha": "4932557713c290f7b63860e044c06587d227eae8",
+  "jobs": [
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04-arm, 3.11)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04, 3.12)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (windows-2022, 3.11)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04-arm, 3.13)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04, 3.11)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15-intel, 3.12)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04-arm, 3.12)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15-intel, 3.13)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (windows-2022, 3.13)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15, 3.12)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (windows-2022, 3.12)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15, 3.11)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15-intel, 3.11)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (macos-15, 3.13)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "build (ubuntu-24.04, 3.13)",
+      "status": "completed"
+    },
+    {
+      "conclusion": "success",
+      "name": "assemble",
+      "status": "completed"
+    },
+    {
+      "conclusion": "skipped",
+      "name": "deploy",
+      "status": "completed"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/snowman0919/clef-use/actions/runs/38183395770",
+  "scope": "CI493 prior candidate only; newer Blender observer source not included",
+  "public_release": "NOT_RUN; existing feature-branch publication/deploy guards preserved"
+}

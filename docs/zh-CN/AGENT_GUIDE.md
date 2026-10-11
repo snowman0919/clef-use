@@ -44,12 +44,37 @@ clef-use integrations refresh --managed-only
 未知状态会阻止输入。默认截图观察器不能确认 Blender 的隐藏状态。API 辅助
 fixture 的通过不能证明 pixels-only 操作成功。
 
-默认安装只使用截图和可获得的 native window identity，不包含可信的 Blender
-application provider，也没有公开的 provider 配置路径。由于缺少经过验证的状态，
-六个已注册 operation 都会返回 `BLOCKED`。discovery 分别报告已实现的 schema 和
-默认环境的可用性，不宣称实际处于 `READY` 状态。只有受控 `API_ASSISTED` Blender
-fixture 中的过程得到验证。通用 production provider 仍是未完成的要求；不要用
-假设代替未知的 focus、IME 或 popup 状态。
+默认 provider 仍为 `NONE`；截图和 native window identity 不能确认 Blender 的隐藏状态。
+Linux X11 支持可选的只读 Blender observer。`clef-use blender-observer-script` 会输出
+已安装脚本的路径，请将该确切路径传给已获准使用的 Blender 可执行文件。在 private
+父目录下指定一个尚不存在的新目录，脚本会创建 private 目录和 socket；它不会自动
+连接到已运行的 Blender。
+
+```sh
+clef-use blender-observer-script
+blender --python "/absolute/installed/blender_observer.py" -- --clef-state-dir "/absolute/private/new-observer"
+```
+
+在 runtime 的 `config.toml` 顶层设置以下选项。默认文件为
+`~/.config/clef-use/config.toml`，也可通过 `CLEF_USE_CONFIG` 选择其他文件。
+
+```toml
+blender_state_socket = '/absolute/private/new-observer/state.sock'
+```
+
+listener 从 Blender 的首个 UI timer 启动。状态关联需要验证 Unix `SO_PEERCRED`、
+XRes 的 kernel process identity、尺寸匹配的唯一 RNA window/client，以及 native
+foreground focus。observer 读取 window、selection、object mode、原始 transform/unit、
+viewport 和已观察到的 modal operator，不修改 scene 或执行 operator。popup、text focus、
+IME、有效 keymap 和整体 busy/idle 状态仍然未知。空 operator 列表也不能证明不存在。
+即使配置了此部分 observer，只要缺少必要的已验证状态，六个 operation 仍返回 `BLOCKED`。
+
+新的 observe 响应可包含 `compiled_state`、`state_provider_status` 和
+`state_pixel_association`。状态有独立的 observation ID，在 capture 附近、parse 之前
+采样，可能在 parse 期间过期。`FOREGROUND_WINDOW_ONLY` 关联不是与 pixel 同步的
+scene 证据。discovery 描述 schema 和默认可用性，不宣称 live `READY`。既有
+`API_ASSISTED` fixture 验证不能证明此新 production 路径通过验证；完整的 production
+operation 支持仍未完成。不要用假设补全未知的输入上下文。
 
 继续 typed operation 会话必须明确提供 `operation`
 (`clef-use continue ... --operation '<JSON>'`)；仅提供 planner 指导不会重复上次效果。

@@ -15,6 +15,26 @@ and a lazily initialized `SessionRuntime`. ML subprocesses remain resident in
 separate pinned Python 3.11 environments because CLEF and Florence require
 incompatible Transformers versions. They are components of one runtime.
 
+The optional `blender_state_socket` configuration connects the canonical runtime
+factory to the installed read-only `blender_observer.py` producer. The producer
+queues fixed snapshot requests over a private Unix socket and reads public RNA
+only on Blender's UI thread. No client code, file path, supplied fact, operator,
+or scene mutation is accepted. Linux peer credentials must match the X-Resource
+PID of the focused app client inside the captured top-level window; client bounds
+must match the single RNA window. A window manager's decoration PID is not the
+application identity. Unsupported or ambiguous binding leaves facts unknown.
+
+`blender_snapshot.py` records actual selection, mode, transform representations,
+unit settings, viewport matrices, regions and positive modal operator records.
+It refuses window/object/region overflow. Empty operator lists prove no absence
+of UI handlers. Popup, editing, IME, effective keymap and global busy absence are
+not supplied by this partial provider, so all six procedures retain their guards.
+Fresh observe responses give the state sample its own observation ID before
+perception parsing, expire delayed facts, and declare foreground-window-only
+association. These are independently sampled facts, not pixel-synchronous scene
+evidence or measured operation readiness. The default configuration remains
+pixels-only; discovery describes optional support without initializing Blender.
+
 `SessionRuntime.execute` captures a fresh frame, parses it into project-owned
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint
 CLEF answers, evaluates escalation gates, executes a deterministic adapter, and

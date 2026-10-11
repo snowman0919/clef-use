@@ -2,13 +2,17 @@
 
 Date: 2026-10-12. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
-Latest built, installed and CI-verified implementation: `bb971ef` on
+Latest built, installed and CI-verified implementation: `4932557` on
 `codex/reactive-agent-contracts`;
 the bounded Blender fixture remains unchanged from `a7a46b5`.
-The source-only candidate identity correction below is newer; its installed and
-native model task checks remain NOT_RUN.
+The newer optional Blender observer source passed 907 regression tests and real
+component verification; its installation and whole-task E2E are NOT_RUN here.
+**User scope update (2026-10-12):** this session owns clef-use improvements and
+component/regression verification. Whole-task E2E and model production/evaluation
+belong to other sessions. Earlier completed task failures remain historical
+evidence; this session will not execute new E2E or model-quality runs.
 Published evidence HEAD before the following measurements: `8e1eedf`.
-Latest installed local candidate: FINAL24, correcting complete-directory aliases and duplicate
+Earlier installed local candidate: FINAL24, correcting complete-directory aliases and duplicate
 declared names in active skill sources while preserving separate resources and
 unreadable metadata. Actual fresh and repeat shell installation, three guides across
 three harness profiles, 26 preserved HOME files and 61 exact source/wheel/installed
@@ -44,11 +48,11 @@ of an unavailable environment. The following boundaries apply to individual chec
 
 | Check | Observed result or missing prerequisite | Next action and ownership |
 | --- | --- | --- |
-| Production operations | The production factory does not bind a `state_provider`. Only native window/foreground and pixel geometry can be compiled; the six operations lack verified application facts. | Implementation remains ours: ship a real read-only producer, authenticate and bind its app/window observations, preserve UNKNOWN for unresolved popup, editing, IME, busy and effective keymap facts. A callback or fixture transport alone does not close this requirement. |
+| Production operations | The optional Linux X11 public-RNA producer is now bound through `blender_state_socket`. Actual UI-thread selection, mode, properties and viewport observations were verified with native PID/peer/window binding. Popup, editing, IME, busy and effective keymap facts remain UNKNOWN; all six operation guards remain in force. | Continue clef-use observation/input improvements without inventing absence facts. The partial producer does not close general operation support; whole-task verification belongs to the other session. |
 | OMP native model loading/invocation | The recorded `aipi/dgx-moa-fast` primary and three auxiliary requests returned HTTP 401 before any tool call. Current provider health and the credential cause were not checked. Actual Codex native loading/invocation succeeded separately. | This blocks that OMP route only. Do not request Codex desktop authentication repair or stop independent implementation. Keep OMP loading/invocation NOT_RUN until its selected provider can execute. |
-| Blender and general GUI accuracy | Actual Blender File assessment failed all five positives; the browser mode confidence was 0.7271 and the editor replan probability was 0.9041. Models executed; no input was sent in the browser/editor cases. | Diagnose context, candidates and state while retaining the original guards. Repeat the identical real tasks after a reviewed implementation change; these are product failures, not external blockers. |
+| Blender and general GUI accuracy | Earlier Blender assessment failed all five positives. The completed CI493 browser/editor check also failed 0/2: browser mode confidence 0.7027 and editor replan probability 0.9056. Native input/effects were zero. | Preserve this diagnosis for the E2E/model session. This session improves clef-use software and does not repeat model-quality or whole-task runs. |
 | Reici matched-view verification | A real private production checkpoint was located through an existing active task ledger. The earlier missing-scene assumption is withdrawn. That task records a default-computer-use approval timeout before an alignment input, and part-local/final quality gates remain open. | Preserve the other actor's scene and input boundary. Establish the permitted isolated verification target without rerouting or bypassing its unapproved input. Existing scene discovery proves neither edits nor independent review. No asset purchase is required to continue software work. |
-| Full reaction profile | Whole-workflow accuracy, prospective fast-path eligibility coverage and state-change-to-correct-input p95 are unmeasured. The bounded Tk profile is separate. | Complete the real task/state path, lock the workload and eligibility evidence, then measure at least 1000 opportunities. Do not count fast refusal, ACK or fixture success as this gate. |
+| Full reaction profile | Whole-workflow accuracy, prospective fast-path eligibility coverage and state-change-to-correct-input p95 are unmeasured. The bounded Tk profile is separate. | Owned by the E2E session. Do not count refusal, ACK, component observation or fixture success as this gate. |
 | Public release | CI built and checked all 15 combinations; deploy was skipped because the feature branch is outside the existing main/version-tag guard. Current deployment variable, runner and public server health were not verified. | Finish the candidate and use the existing authorized promotion/release workflow. A branch guard is not a deployment outage; do not bypass it or request release approval for an incomplete candidate. |
 
 **OBSERVED / candidate identity correction:** a direct canonical packet check with
@@ -64,12 +68,34 @@ All 33 or 40 targets are now retained within the unchanged 40-object budget;
 The canonical serializer also refuses a target absent from its observation.
 The focused suite passed 124 tests and the full source suite passed
 **880 tests / 34 skipped**; scoped Ruff and formatting passed.
-This check executed no model or OS input. Existing installed/CI measurements retain
-their earlier source identity. Identical native model tasks, installation and CI
-for this correction remain **NOT_RUN**, pending a new candidate; no acceptance
-status or confidence guard changed, and no cause of the historical task failures
-is claimed from this packet check alone. See
+The packet check itself executed no model or OS input. Subsequent immutable
+CI493 Linux/Windows installation matched all 61 Git/wheel/installed files;
+fresh installation returned `INSTALLED`, repeat returned `CURRENT`, preserving
+selected HOME/config/guide bytes. CI run 38183395770 completed successfully.
+The completed identical native tasks still failed both cases. Their prospective
+packets had no dangling targets and included the correct next control geometry;
+the editor still lacked an initial type/focus candidate. This is not full task
+coverage or a demonstrated cause of the quality failures. No acceptance status
+or confidence guard changed. See
 [source correction evidence](validation/2026-10-11/candidate-target-context-fix.json).
+
+**OBSERVED / optional Blender component:** the real factory UI producer sampled
+selection, mode, properties and viewport on Blender's main thread through the
+canonical provider. Three positive samples passed; an actual separate-process
+decoration frame was resolved to its Blender client. A wrong kernel peer, actual
+OS frame resize after capture and native query-stream loss returned UNAVAILABLE.
+The visible Quick Setup popup did not turn an empty operator roster into absence:
+popup/text/IME/keymap/loading facts remained UNKNOWN. The final component run used
+no profiling, models, keyboard or pointer input; owned children exited. Initial
+startup/transport failures are retained separately. Full regression:
+**907 passed / 34 skipped**; subsequent guide/integration checks: **105 passed**.
+The wheel contains the exact new collector/observer/provider and callers.
+This proves partial observation and refusal behavior, not operation readiness,
+installed E2E, task quality or p95. See [component evidence](validation/2026-10-11/blender-rna-observer-component.json),
+[Linux CI493 install](validation/2026-10-11/ci493-linux-installed.json),
+[Windows CI493 install](validation/2026-10-11/ci493-windows-installed.json),
+[historical task failure](validation/2026-10-11/ci493-native-quality-failure.json),
+and [completed CI493](validation/2026-10-11/release-ci4932557.json).
 
 ## Objective and invariants
 

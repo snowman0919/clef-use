@@ -85,6 +85,7 @@ class Config(StrictModel):
     visual_refinement_retries: int = Field(default=2, ge=0, le=4)
     visual_stale_retries: int = Field(default=2, ge=0, le=4)
     activity_overlay: bool = True
+    blender_state_socket: Path | None = None
     debug: bool = False
 
 

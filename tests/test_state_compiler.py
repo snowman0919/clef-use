@@ -57,6 +57,17 @@ def test_view_change_invalidates_geometry_until_new_observation():
     assert state.fact("target_geometry").validity == FactValidity.VALID
 
 
+def test_processing_delay_expires_state_without_promoting_unknown_facts(monkeypatch):
+    import clef_use.state as module
+
+    state = StateCompiler().compile(observation())
+    monkeypatch.setattr(module.time, "time", lambda: state.compiled_at + 2)
+    expired = state.expire(1)
+    assert expired.fact("target_geometry").validity == FactValidity.STALE
+    assert expired.fact("text_focus").validity == FactValidity.UNKNOWN
+    assert state.fact("target_geometry").validity == FactValidity.VALID
+
+
 def test_geometry_does_not_promote_uncertain_grounding_to_verified_coordinates():
     frame = observation().frame
     target = UIObject(

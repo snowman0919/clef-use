@@ -124,6 +124,9 @@ def parser():
     capability.add_argument("--json", action="store_true")
     capability.add_argument("--detail", action="store_true")
     capability.add_argument("--operation-id")
+    commands.add_parser(
+        "blender-observer-script", help="print installed read-only Blender observer script path"
+    )
     integrate = commands.add_parser("integrate", help="preview or install MCP and portable guides")
     integrate.add_argument("harness", choices=["codex", "hermes", "omp", "all"])
     integrate.add_argument("--scope", choices=["user", "project"], default="user")
@@ -182,6 +185,9 @@ def main(argv=None):
             return 0
         if args.command == "version":
             print(__version__)
+            return 0
+        if args.command == "blender-observer-script":
+            print(Path(__file__).with_name("blender_observer.py"))
             return 0
         if args.command == "capabilities":
             from .capabilities import capabilities

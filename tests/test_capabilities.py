@@ -57,7 +57,6 @@ def test_default_operation_availability_matches_unknown_compiled_state():
     state = StateCompiler().compile(Observation("default", Frame(Image.new("RGB", (64, 64))), ()))
     report = capabilities(detail=True)
     assert report["default_runtime_state"]["provider"] == "NONE"
-    assert report["default_runtime_state"]["provider_configuration_path"] == "UNAVAILABLE"
     for operation in report["operations"]:
         available = operation["default_runtime_availability"]
         assert available["status"] == "BLOCKED"

@@ -93,7 +93,9 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         operation["default_runtime_availability"] = {
             "status": "BLOCKED",
             "scope": "shipped_default_runtime",
-            "reason": "No trusted application state provider is configured or shipped.",
+            "reason": "Default capture supplies no verified application state; the optional "
+            "Blender public-RNA observer supplies only partial facts and does not prove "
+            "effective keymap, popup, text/IME ownership, or global busy absence.",
             "missing_verified_facts": [
                 name
                 for name in operation["requires"]
@@ -118,13 +120,27 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",
             "trusted_application_evidence": "UNAVAILABLE",
-            "provider_configuration_path": "UNAVAILABLE",
+            "provider_configuration_path": "config.toml: blender_state_socket (Linux X11 only)",
             "operation_availability": "BLOCKED",
             "live_probe": "NOT_PROBED",
             "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
             "native_state": "Window identity may be available; desktop permissions are not probed.",
         },
         "tools": list(schemas),
+        "optional_state_providers": [
+            {
+                "provider": "BLENDER_PUBLIC_RNA",
+                "access_level": "APP_TELEMETRY_ASSISTED",
+                "configuration": "blender_state_socket",
+                "producer": "blender --python <clef-use blender-observer-script output> "
+                "-- --clef-state-dir <new private directory>",
+                "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
+                "availability": "PARTIAL; NOT_PROBED",
+                "window_scope": "One RNA window matching the foreground native client dimensions",
+                "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
+                "input_authority": "No operation readiness inferred from partial snapshots",
+            }
+        ],
         "modes": ["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"],
         "inputs": {
             "legacy": ["text", "pointer", "press", "hotkey"],
@@ -151,7 +167,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "ASSESS sends no input; cached observations authorize no new input.",
             "State-dependent operations require verified fresh local provider facts.",
             "All six operations block on unknown facts in the default installation; "
-            "no application state provider configuration path is shipped.",
+            "the optional Blender public-RNA observer retains unknown dispatch context.",
             "Typed continuation requires an explicit operation; "
             "verify the complete goal with a new ASSESS contract.",
             "Operation SUCCEEDED verifies its typed effect; "

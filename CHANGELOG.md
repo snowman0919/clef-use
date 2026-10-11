@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Add an opt-in, read-only Blender public-RNA observer on Linux X11, bound to
+  the native foreground client using Unix peer credentials and X-Resource PID.
+  Keep unresolved popup, text/IME, effective keymap and busy state unknown;
+  partial snapshots do not enable guarded operations. Expose independently
+  sampled state and expire facts delayed by perception processing.
 - Preserve each decision candidate's operation and observed target identity so
   equally labelled controls remain distinguishable by their actual geometry.
   Keep every executable target within the existing 40-object context budget;

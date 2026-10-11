@@ -48,13 +48,40 @@ keymap の確認が必要です。不明な状態は入力を遮断します。�
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は
 pixels-only 操作の成功を証明しません。
 
-既定のインストールは screenshot と取得可能な native window identity を使います。
-信頼できる Blender application provider と公開 provider 設定経路は含みません。
-必要な検証済み状態がないため、登録された六つの operation はすべて `BLOCKED`
-を返します。discovery は実装済み schema と既定環境の実行可否を分け、実際の
-`READY` 状態を主張しません。検証済みなのは制御された `API_ASSISTED` Blender
-fixture の手順です。一般的な production provider は未完了の要件です。
-不明な focus・IME・popup 状態を仮定で置き換えないでください。
+既定の provider は `NONE` です。screenshot と native window identity だけでは
+Blender の隠れた状態を確定できません。Linux X11 では読み取り専用の Blender
+observer を任意で設定できます。`clef-use blender-observer-script` が表示する
+インストール済みパスを、許可済みの Blender 実行ファイルへ渡してください。
+private な親ディレクトリの下に、まだ存在しない新しいディレクトリを指定します。
+スクリプトが private ディレクトリと socket を作り、既存の Blender には自動接続しません。
+
+```sh
+clef-use blender-observer-script
+blender --python "/absolute/installed/blender_observer.py" -- --clef-state-dir "/absolute/private/new-observer"
+```
+
+runtime の `config.toml` の最上位に設定します。既定の場所は
+`~/.config/clef-use/config.toml` で、`CLEF_USE_CONFIG` で別のファイルを選べます。
+
+```toml
+blender_state_socket = '/absolute/private/new-observer/state.sock'
+```
+
+listener は Blender の最初の UI timer から起動します。Unix `SO_PEERCRED`、XRes の
+kernel process identity、寸法が一致する唯一の RNA window/client、native foreground
+focus を確認して状態を関連付けます。window・selection・object mode・生の transform/unit・
+viewport・観測された modal operator を読み取り、scene の変更や operator の実行は
+行いません。popup・text focus・IME・有効な keymap・全体の busy/idle は不明のままです。
+空の operator 一覧も不在の証拠にはなりません。この部分観測器を設定しても、必要な
+検証済み状態がなければ六つの operation はすべて `BLOCKED` を返します。
+
+新しい observe 応答は `compiled_state`、`state_provider_status`、
+`state_pixel_association` を返す場合があります。状態は独自の observation ID を持ち、
+capture の近くで parse 前に採取され、parse 中に期限切れになることがあります。
+`FOREGROUND_WINDOW_ONLY` は pixel と同時に観測した scene の証拠ではありません。
+discovery は schema と既定の実行可否を示し、live `READY` は主張しません。
+既存の `API_ASSISTED` fixture 検証はこの新しい production 経路の検証ではなく、
+production operation の完全な対応は未完了です。不明な入力文脈を仮定で補わないでください。
 
 typed operation セッションの継続には明示的な `operation` が必要です
 (`clef-use continue ... --operation '<JSON>'`)。planner の指示だけでは直前の効果を

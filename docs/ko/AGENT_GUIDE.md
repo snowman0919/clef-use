@@ -47,13 +47,40 @@ operation은 typed 상태 기계이며 Agent Skill의 자연어 지침과 분리
 입력합니다. 알 수 없는 상태는 차단합니다. 기본 screenshot 관측기는 Blender의
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.
 
-기본 설치는 screenshot과 제공 가능한 native window identity만 사용합니다.
-신뢰할 수 있는 Blender application provider와 공개 provider 설정 경로는 포함하지
-않습니다. 따라서 등록된 6개 operation은 필요한 검증 상태가 없어 모두 `BLOCKED`를
-반환합니다. discovery는 구현된 schema와 기본 설치의 실행 가능 여부를 구분하며,
-실제 `READY` 상태를 주장하지 않습니다. 이 절차들은 통제된 `API_ASSISTED` Blender
-fixture에서만 검증했습니다. 일반 production provider는 미완료 요구사항입니다.
-알 수 없는 focus·IME·popup 상태를 가정으로 대체하지 마세요.
+기본 provider는 `NONE`이며 screenshot과 native window identity만으로 Blender의
+숨은 상태를 확정하지 않습니다. Linux X11에서는 선택적으로 읽기 전용 Blender
+observer를 설정할 수 있습니다. `clef-use blender-observer-script`가 출력하는 설치
+경로를 허용된 Blender 실행 파일에 전달하세요. private 상위 경로 아래 아직 존재하지
+않는 새 디렉터리를 지정하면 스크립트가 private 디렉터리와 socket을 만듭니다.
+실행 중인 기존 Blender에 자동으로 연결하지 않습니다.
+
+```sh
+clef-use blender-observer-script
+blender --python "/absolute/installed/blender_observer.py" -- --clef-state-dir "/absolute/private/new-observer"
+```
+
+runtime의 `config.toml` 최상위에 다음을 설정하세요. 기본 경로는
+`~/.config/clef-use/config.toml`이며 `CLEF_USE_CONFIG`로 다른 파일을 선택할 수 있습니다.
+
+```toml
+blender_state_socket = '/absolute/private/new-observer/state.sock'
+```
+
+listener는 Blender의 첫 UI timer에서 시작합니다. Unix `SO_PEERCRED`, XRes의
+kernel process identity, 크기가 일치하는 유일한 RNA window/client, native foreground
+focus를 확인해야 상태를 연결합니다. window·selection·object mode·원시 transform/unit·
+viewport·관찰된 modal operator를 읽으며 scene을 변경하거나 operator를 실행하지
+않습니다. popup·text focus·IME·유효 keymap·전체 busy/idle 상태는 여전히 알 수 없습니다.
+빈 operator 목록도 부재 증거가 아닙니다. 이 부분 관측기를 설정해도 필요한 검증 상태가
+없으면 6개 operation 모두 `BLOCKED`를 반환합니다.
+
+새 observe 응답은 `compiled_state`, `state_provider_status`, `state_pixel_association`을
+제공할 수 있습니다. 상태는 별도 observation ID를 가지며 capture 근처에서 parse 전에
+수집되고 parse 중 만료될 수 있습니다. `FOREGROUND_WINDOW_ONLY` 연결은 pixel과
+동시에 관찰한 scene 증거가 아닙니다. discovery는 schema와 기본 실행 가능 여부를
+설명하며 live `READY`를 주장하지 않습니다. 기존 `API_ASSISTED` fixture 검증은 이 새
+production 경로의 검증이 아니며, 전체 production operation 지원은 미완료입니다.
+알 수 없는 입력 문맥을 가정으로 대체하지 마세요.
 
 typed operation 세션을 이어가려면 명시적인 `operation` 요청이 필요합니다
 (`clef-use continue ... --operation '<JSON>'`). planner 지침만으로 이전 효과를
