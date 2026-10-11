@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-10-11T13:32:40.206667+00:00",
+  "generated_at": "2026-10-11T13:45:06.724638+00:00",
   "overall_status": "PARTIAL_EXECUTION_EVIDENCE",
   "completion_claim": false,
   "claim_policy": "OBSERVED means an executed artifact/result was inspected. MEASURED values are attributed to the native runner and were not independently rerun by this evidence writer. Fixture, actual-harness, installed-candidate and public-release evidence remain distinct.",
@@ -2196,6 +2196,30 @@
       "artifact": "docs/validation/2026-10-11/hermes-final15-native-gui.json",
       "sha256": "28c45444c888358b16b1956eb324421e12439092d394bf2c20aafe7731708968",
       "scope": "Actual native configured Hermes FINAL15 resourcesfalse/promptsfalse: completeexactcore/Blender/3references in native modelmessages before1guardedCubeX+2run,4nativeinputs/SUCCEEDED/sessionNEEDS_REPLAN; rootRNA9/visual/cleanup16PASS. Unavailableexecute_code toolerror1 retained(actualcode0), historicalFINAL12terminal1separate. Wholegoal/production/100ms NOT_RUN."
+    },
+    "active_update_thread_transport_preflight": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/active-update-thread-transport-preflight.json",
+      "sha256": "ce792ccf0b87c5bb91de693f46ecb6e9d234d88fda7250a581a2482a58153595",
+      "scope": "Real native worker-thread child union/PPID observer and genuine .29 desktop transport preflight PASS; zero model/GUI task, not lifecycle evidence alone."
+    },
+    "active_gui_update_final15_leader_observer_stopped": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/active-gui-update-final15-leader-observer-stopped.json",
+      "sha256": "72fb4ff8555697068687400d407f8d06ee73cbb17ead9351ca15dc6244e7e9fe",
+      "scope": "Second actual attempt retained NOT_RUN: leader-only child observer missed model workers launched by execution thread. No installer update; no quality retry or threshold change."
+    },
+    "active_gui_update_final15_v3_declaration": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/active-gui-update-final15-v3-predeclaration.json",
+      "sha256": "4ee0025fc7dabf2cfa7725fa54124024e3b289eecf297712c2007a6186776994",
+      "scope": "Bounded one-case predeclaration preceding corrected all-thread native observer execution; not execution by itself."
+    },
+    "active_gui_update_final15_native": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/active-gui-update-final15-native.json",
+      "sha256": "23244ec601e546b15822cb8d0b9e4beea350540a1fa325b1de553dd87f820cae",
+      "scope": "Actual genuine installed .29 default-factory ASSESS GUI session remained RUNNING/busy with identity/session preserved across actual FINAL15 installation. New .30 client actionable refusal; matching old abort then separately observed busy False; .30 protocol/schema reload, provider NONE menu BLOCKED, own cleanup PASS. Sampled lifecycle only; no OS effect, all-platform, production-provider or latency claim."
     }
   },
   "not_run": {
@@ -2204,7 +2228,7 @@
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "Immutable f440de1 CI38137115873 all15platform/Pythonbuilds+assembly SUCCESS and Linux/Windows installation verified. Existing branch policy skipped deployment. FINAL15 compatibility source/local archive not yet verified by immutableCI; public upload/download/freshpublicinstall NOT_RUN."
+    "public_release": "Exact-source CI38143663561 HEAD6cdf182 all15platform/Pythonbuilds+assembly SUCCESS, deployment SKIPPED by existing branch policy. Immutable FINAL15 CI Linux/Windows fresh installation pending actual checks; public upload/download/freshpublicinstall NOT_RUN. Prior f440de1 install evidence retains its own artifact identity."
   },
   "privacy": {
     "raw_traces_copied": false,
@@ -2214,8 +2238,8 @@
     "projection": "Only selected statuses, counts, public identifiers, environment descriptions, artifact hashes and disposable fixture paths are retained. No raw harness messages, tokens, credentials, synthetic literal contents, screenshot data or application scene data are included."
   },
   "acceptance": {
-    "pass": 32,
-    "not_run": 10,
+    "pass": 33,
+    "not_run": 9,
     "status_by_id": {
       "BASE-01": "PASS",
       "GUIDE-01": "PASS",
@@ -2234,7 +2258,7 @@
       "INSTALL-07": "PASS",
       "INSTALL-08": "PASS",
       "INSTALL-09": "PASS",
-      "INSTALL-10": "NOT_RUN",
+      "INSTALL-10": "PASS",
       "HARNESS-01": "PASS",
       "HARNESS-02": "PASS",
       "HARNESS-03": "PASS",
@@ -2337,6 +2361,10 @@
     "active-gui-update-final15-observer-stopped.json",
     "codex-final15-native-gui.json",
     "codex-final15-guide-bytes-audit.json",
-    "hermes-final15-native-gui.json"
+    "hermes-final15-native-gui.json",
+    "active-update-thread-transport-preflight.json",
+    "active-gui-update-final15-leader-observer-stopped.json",
+    "active-gui-update-final15-v3-predeclaration.json",
+    "active-gui-update-final15-native.json"
   ]
 }

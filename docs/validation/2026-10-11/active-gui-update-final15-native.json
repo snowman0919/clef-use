@@ -1,0 +1,335 @@
+{
+  "classification": "OBSERVED",
+  "result": "PASS",
+  "scope": "One genuine installed Linux 0.1.29 read-only ASSESS GUI session survives actual FINAL15 0.1.30 installation; matching old abort drains, current runtime reloads. Controlled disposable Tk window; no OS input task completion claim.",
+  "requirement_adjudication": "Parent assesses exact ACCEPTANCE.yaml requirement; this artifact reports only the named observed lifecycle.",
+  "candidate": "FINAL15",
+  "actual_case_count": 1,
+  "elapsed_seconds": 45.287908,
+  "bindings": {
+    "baseline_commit": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+    "old_archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e",
+    "new_archive_sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c",
+    "existing_model_config_sha256": "e15a379e9823da220b95d671fbdb014650e35c1f81fbe9187185f9dcb986f7c5",
+    "driver": {
+      "basename": "driver.py",
+      "sha256": "41e729fe628817b9f73444ff2e997284c70936f74a089b71437ba5f1becc9c7d"
+    },
+    "observer": {
+      "basename": "thread_children_observer.py",
+      "sha256": "08a5dc6bf61ba1a00361837757da69b9cdfb6f1eef5cb00930069e8c10e52626"
+    },
+    "declaration": {
+      "basename": "declaration.json",
+      "sha256": "565ec107b62e01a19896ee37039ffbba46cc6121da0a8ef6e058b85a78a3a7ac"
+    },
+    "private_report_sha256": "d86871b00293e6801544d18738a438915c294232ae69026f10a7cbbd63fe962f"
+  },
+  "setup": {
+    "sandbox": "bwrap read-only host; private PID/network/IPC/tmp; only owned artifact root writable",
+    "actual_installer": true,
+    "genuine_retained_old_archive": true,
+    "default_session_runtime_factory_unsubstituted": true,
+    "own_static_public_Tk_window": true,
+    "production_changes": false,
+    "model_config_changed": false,
+    "provider_fallback": false,
+    "forced_hold": false,
+    "added_model_retry": false,
+    "confidence_threshold": 0.9,
+    "max_steps": 3,
+    "execution_mode": "ASSESS"
+  },
+  "preflight": {
+    "threaded_native_child": {
+      "main_thread_list_contains_thread_spawned_child": false,
+      "all_thread_union_contains_same_live_child": true,
+      "independent_ppid_oracle_contains_same_live_child": true,
+      "confirmed_intersection_contains_same_live_child": true,
+      "all_thread_and_ppid_sets_agree": true,
+      "captured_real_tid_vanished_before_read_explicitly_recorded": true,
+      "cleanup_child_exited": true,
+      "cleanup_thread_exited": true,
+      "classification": "OBSERVED_REAL_NATIVE_THREAD_SUBPROCESS_NO_MODEL_GUI"
+    },
+    "desktop_transport": {
+      "classification": "OBSERVED",
+      "raw_status": {
+        "status": 404,
+        "body": {
+          "error": "NO_ACTIVE_SESSION"
+        }
+      },
+      "genuine_native_transport_status": {
+        "ok": true,
+        "result": {
+          "http_status": 404,
+          "body": {
+            "error": "NO_ACTIVE_SESSION"
+          }
+        }
+      },
+      "genuine_consumer_status": {
+        "ok": false,
+        "error_type": "RuntimeError",
+        "error": "no active session; start computer_run first"
+      },
+      "desktop_scope_from_actual_owned_environment": true,
+      "health_scope_matches_owned_environment": true,
+      "before_any_model_or_gui_run": true
+    }
+  },
+  "activation": {
+    "old_install": {
+      "status": "PASS",
+      "record_version": "0.1.29",
+      "archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e",
+      "absolute_version_retained": true
+    },
+    "initial_active_gate": {
+      "elapsed_seconds": 5.150948,
+      "runtime_version": "0.1.29",
+      "busy": true,
+      "status": "RUNNING",
+      "phase": "Reading screen",
+      "steps": 0,
+      "thread_union_child_count": 1,
+      "ppid_oracle_child_count": 1,
+      "confirmed_child_count": 1,
+      "sets_agree": true,
+      "vanished_tid_count": 0,
+      "unreadable_tid_count": 0,
+      "vanished_process_count": 0,
+      "unreadable_process_count": 0,
+      "status_http_error": null
+    },
+    "immediately_before_installer": {
+      "elapsed_seconds": 5.153752,
+      "runtime_version": "0.1.29",
+      "busy": true,
+      "status": "RUNNING",
+      "phase": "Reading screen",
+      "steps": 0,
+      "thread_union_child_count": 0,
+      "ppid_oracle_child_count": 0,
+      "confirmed_child_count": 0,
+      "sets_agree": true,
+      "vanished_tid_count": 0,
+      "unreadable_tid_count": 0,
+      "vanished_process_count": 0,
+      "unreadable_process_count": 0,
+      "status_http_error": null
+    },
+    "after_installer_current_0_1_30_verified": {
+      "elapsed_seconds": 9.975876,
+      "runtime_version": "0.1.29",
+      "busy": true,
+      "status": "RUNNING",
+      "phase": "Finding controls",
+      "steps": 0,
+      "thread_union_child_count": 1,
+      "ppid_oracle_child_count": 1,
+      "confirmed_child_count": 1,
+      "sets_agree": true,
+      "vanished_tid_count": 0,
+      "unreadable_tid_count": 0,
+      "vanished_process_count": 0,
+      "unreadable_process_count": 0,
+      "status_http_error": null
+    },
+    "old_identity_preserved_before": true,
+    "old_identity_preserved_after": true,
+    "old_session_preserved_before": true,
+    "old_session_preserved_after": true,
+    "gate_poll_count": 2,
+    "changed_gate_snapshots": [
+      {
+        "elapsed_seconds": 5.04958,
+        "runtime_version": "0.1.29",
+        "busy": false,
+        "status": null,
+        "phase": null,
+        "steps": null,
+        "thread_union_child_count": 0,
+        "ppid_oracle_child_count": 0,
+        "confirmed_child_count": 0,
+        "sets_agree": true,
+        "vanished_tid_count": 0,
+        "unreadable_tid_count": 0,
+        "vanished_process_count": 0,
+        "unreadable_process_count": 0,
+        "status_http_error": {
+          "status": 404,
+          "body": {
+            "error": "NO_ACTIVE_SESSION"
+          }
+        }
+      },
+      {
+        "elapsed_seconds": 5.150948,
+        "runtime_version": "0.1.29",
+        "busy": true,
+        "status": "RUNNING",
+        "phase": "Reading screen",
+        "steps": 0,
+        "thread_union_child_count": 1,
+        "ppid_oracle_child_count": 1,
+        "confirmed_child_count": 1,
+        "sets_agree": true,
+        "vanished_tid_count": 0,
+        "unreadable_tid_count": 0,
+        "vanished_process_count": 0,
+        "unreadable_process_count": 0,
+        "status_http_error": null
+      }
+    ],
+    "gate_snapshot_overflow_count": 0,
+    "installer_interval_samples": {
+      "count": 48,
+      "elapsed_first": 5.152772,
+      "elapsed_last": 9.931252,
+      "all_old_identity_preserved": true,
+      "all_same_session_running": true,
+      "all_busy": true,
+      "confirmed_worker_count_min": 1,
+      "confirmed_worker_count_max": 1,
+      "all_thread_and_ppid_sets_agree": true,
+      "phases": [
+        "Finding controls",
+        "Reading screen"
+      ]
+    }
+  },
+  "new_client_while_old_active": {
+    "ok": false,
+    "error_type": "RuntimeError",
+    "error": "previous runtime version is active; finish or abort it first using its retained matching executable, then reload the current MCP session"
+  },
+  "matching_old_abort": {
+    "ok": true,
+    "status": "ABORTED",
+    "steps": 0,
+    "rounds_at_reply": 0,
+    "actual_drain": {
+      "elapsed_seconds": 42.646094,
+      "runtime_version": "0.1.29",
+      "busy": false,
+      "status": "ABORTED",
+      "phase": "Aborted",
+      "steps": 0,
+      "thread_union_child_count": 2,
+      "ppid_oracle_child_count": 2,
+      "confirmed_child_count": 2,
+      "sets_agree": true,
+      "vanished_tid_count": 0,
+      "unreadable_tid_count": 0,
+      "vanished_process_count": 0,
+      "unreadable_process_count": 0,
+      "status_http_error": null
+    },
+    "drained_status": "ABORTED",
+    "drained_rounds": 1,
+    "busy_false_elapsed_after_update_seconds": 32.670218
+  },
+  "current_reload": {
+    "version": "0.1.30",
+    "api_schema_version": 1,
+    "runtime_protocol_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "busy": false
+  },
+  "current_capabilities": {
+    "runtime_version": "0.1.30",
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "default_runtime_state": {
+      "provider": "NONE",
+      "observation_access_level": "PIXELS_ONLY",
+      "trusted_application_evidence": "UNAVAILABLE",
+      "provider_configuration_path": "UNAVAILABLE",
+      "operation_availability": "BLOCKED",
+      "live_probe": "NOT_PROBED",
+      "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+      "native_state": "Window identity may be available; desktop permissions are not probed."
+    }
+  },
+  "current_contract": {
+    "family": "menu_assess",
+    "menu": "File",
+    "status": "BLOCKED",
+    "steps": 0,
+    "reason": "menus: UNKNOWN, uncertainty=1",
+    "operation_result": {
+      "family": "menu_assess",
+      "status": "BLOCKED",
+      "reason": "menus: UNKNOWN, uncertainty=1",
+      "assessment": "UNKNOWN",
+      "transitions": [],
+      "state_version": 1,
+      "access_level": "PIXELS_ONLY",
+      "owned_modal_id": null,
+      "geometry_invalidated": false,
+      "input_count": 0
+    }
+  },
+  "input_and_pixels": {
+    "native_XRecord_event_count": 0,
+    "XRecord_start_of_data_ack": "NOT_OBSERVED; event count alone is not proof of complete recorder startup coverage",
+    "before_after_native_key_button_state_equal": true,
+    "before_after_pixels_equal": true,
+    "gui_os_input_task_claim": false
+  },
+  "cleanup": {
+    "matching_shutdown": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "all_observed_owned_service_workers_exited": true,
+    "all_direct_children_exited": true,
+    "endpoint_removed": true,
+    "xvfb_socket_removed": true,
+    "http_server_closed": true
+  },
+  "limits": [
+    "No exact atomic current-pointer activation timestamp was observed; status/identity were sampled during installation and immediately after successful installer return plus current version verification. No claim of unsampled continuous state.",
+    "Worker count was 1 at active gate, 0 at immediately-before snapshot, and 1 after installation; RUNNING and busy were true before and after.",
+    "Abort response preceded execution drain; busy=False was separately observed 32.670218 seconds after post-install snapshot. Idle worker subprocesses still existed at drain and exited during matching runtime reload/cleanup.",
+    "No native keyboard/pointer effect task, all-platform installation, release, general trusted state provider, or performance acceptance claim."
+  ],
+  "history_preserved": [
+    {
+      "artifact": {
+        "basename": "clef-idle-stale-client-native-public-20261011.json",
+        "sha256": "14129b876e3a8bf3669eb663619e44a1248326695ff9d7a843cfa7ffd3e5d172"
+      },
+      "result": "OBSERVED_PREPATCH_DOWNGRADE"
+    },
+    {
+      "artifact": {
+        "basename": "clef-runtime-binding-final15-native-public-20261011.json",
+        "sha256": "8261685d198b8bb0d788f7e3ef8d8aa6e88bad9956ea1cb7c63a895171ba158d"
+      },
+      "result": "OBSERVED_SCOPED_PASS_IDLE_REFUSAL_HTTP_MATRIX"
+    },
+    {
+      "artifact": {
+        "basename": "clef-active-gui-update-final15-attempt1-public-20261011.json",
+        "sha256": "4cc5e9493e975d1912804f9ff43ab886c3570b9d764025c9cd1975324a06a390"
+      },
+      "result": "NOT_RUN_ACTIVE_UPDATE_DRIVER_DESKTOP_SCOPE_403"
+    },
+    {
+      "artifact": {
+        "basename": "clef-active-gui-update-final15-attempt2-public-20261011.json",
+        "sha256": "923532180b3e04d0cfe230164f1d45678f65008a23707b1faf305017f6184650"
+      },
+      "result": "NOT_RUN_ACTIVE_UPDATE_LEADER_ONLY_CHILD_OBSERVER"
+    }
+  ],
+  "privacy": {
+    "raw_logs_screenshots_config_endpoint_auth_provider_payloads": "PRIVATE_NOT_INCLUDED",
+    "private_ids_and_paths_in_public_artifact": false
+  },
+  "received_native_artifact_sha256": "399d5adedac2627e2d9bf493d9dffad628631d96f59ed1a57b9bde34c81ba4e3"
+}

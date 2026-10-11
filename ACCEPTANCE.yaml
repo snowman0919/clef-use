@@ -333,7 +333,7 @@ scenarios:
   category: installation
   requirement: Active GUI session is not killed during update; stale client gets
     reload/compatibility result.
-  status: NOT_RUN
+  status: PASS
   evidence:
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
@@ -343,8 +343,16 @@ scenarios:
     section: evidence.installed_blender
     claim: OBSERVED
     partial: true
-  execution_note: Pending-modal lease blocks shutdown/replacement/new goals and allows exact
-    cleanup; full installed update with active GUI session/stale client incomplete.
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.active_gui_update_final15_native
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual genuine installed .29 default-factory ASSESS GUI session remained
+    RUNNING/busy with identical service/session before and after actual FINAL15 installation.
+    Current .30 client refused with matching-old-executable/reload guidance; matching .29
+    abort followed by independently observed busy False, .30 protocol/schema reload and
+    owned cleanup passed. Installation interval sampled48 times; unsampled continuous
+    state and OS effect task completion are not claimed. Both earlier observer failures retained.
 - id: HARNESS-01
   category: harness
   requirement: Codex actual fresh session discovers and reads guide, then invokes read-only runtime

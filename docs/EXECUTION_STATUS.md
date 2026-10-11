@@ -554,13 +554,29 @@ from the actionable server response and current client diagnostics. Matching
 capability discovery and idle shutdown passed. No session or model ran in this
 transport check. See [original defect](validation/2026-10-11/stale-client-downgrade-final12.json)
 and [installed correction](validation/2026-10-11/runtime-binding-final15-native.json).
-An update across an actual active GUI session remains a separate pending check.
+An actual active-session update subsequently passed in one disposable native Tk
+scene using the unchanged default factory and genuine installed .29 archive.
+The .29 session was RUNNING/busy before and after installing FINAL15; 48 interval
+samples preserved its PID/start time, endpoint and session. The current client
+refused with matching-old-executable/reload guidance. Matching .29 abort was
+followed by separately observed `busy=False`; .30 then reloaded the exact protocol
+and schema and honestly blocked a menu contract with provider `NONE`. All owned
+resources exited. The immediately-before snapshot had zero workers; the active
+gate, all interval samples and after snapshot had one. Sampling does not prove
+unsampled continuous state, and the XRecord startup acknowledgement was not
+observed. This is lifecycle evidence, not an OS-effect task or production-provider
+result. See [actual active update](validation/2026-10-11/active-gui-update-final15-native.json).
+
 Its first actual attempt had a status observer missing the desktop-scope header:
 the service correctly returned 403, but the driver failed to stop at preflight.
 One real local ASSESS ended LOW_CONFIDENCE at the unchanged 0.9 threshold; no
 installer update, abort or reload ran. Native input was zero, pixels/input maps
 were unchanged and owned cleanup passed. This observer defect is retained as
-NOT_RUN for INSTALL-10, not a product lifecycle or model-task failure. See
+NOT_RUN for that attempt, not a product lifecycle or model-task failure. A second
+attempt used only the service leader thread's children and missed actual workers
+launched by the execution thread; no update ran. A real native thread/subprocess
+preflight then verified the all-thread union against an independent PPID oracle.
+Both original observer failures remain retained. See
 [stopped observer attempt](validation/2026-10-11/active-gui-update-final15-observer-stopped.json).
 
 **OBSERVED / latest native Windows installation:** immutable f440de1 installed and

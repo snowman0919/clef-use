@@ -1,0 +1,102 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Actual lazy genuine .29 service/native RuntimeClient/raw desktop-bound HTTP comparison; no X server, GUI, model, session or installer started",
+  "passed": true,
+  "driver": {
+    "basename": "clef_active_gui_update_final15_thread_bound_v3_20261011.py",
+    "sha256": "41e729fe628817b9f73444ff2e997284c70936f74a089b71437ba5f1becc9c7d"
+  },
+  "observer": {
+    "basename": "clef_native_thread_children_observer_20261011.py",
+    "sha256": "08a5dc6bf61ba1a00361837757da69b9cdfb6f1eef5cb00930069e8c10e52626"
+  },
+  "declaration": {
+    "basename": "clef-active-gui-update-final15-thread-bound-v3-predeclaration-public-20261011.json",
+    "sha256": "565ec107b62e01a19896ee37039ffbba46cc6121da0a8ef6e058b85a78a3a7ac"
+  },
+  "evidence": {
+    "basename": "report.json",
+    "sha256": "e373b1309c34e6c7d054952675589953ef1d0b13b1fdb0d9590b6c449126d90a"
+  },
+  "real_thread_child_preflight": {
+    "main_thread_list_contains_thread_spawned_child": false,
+    "all_thread_union_contains_same_live_child": true,
+    "independent_ppid_oracle_contains_same_live_child": true,
+    "confirmed_intersection_contains_same_live_child": true,
+    "all_thread_and_ppid_sets_agree": true,
+    "captured_real_tid_vanished_before_read_explicitly_recorded": true,
+    "cleanup_child_exited": true,
+    "cleanup_thread_exited": true,
+    "classification": "OBSERVED_REAL_NATIVE_THREAD_SUBPROCESS_NO_MODEL_GUI"
+  },
+  "genuine_native_raw_desktop_transport_agreement": {
+    "classification": "OBSERVED",
+    "raw_status": {
+      "status": 404,
+      "body": {
+        "error": "NO_ACTIVE_SESSION"
+      }
+    },
+    "genuine_native_transport_status": {
+      "ok": true,
+      "result": {
+        "http_status": 404,
+        "body": {
+          "error": "NO_ACTIVE_SESSION"
+        }
+      }
+    },
+    "genuine_consumer_status": {
+      "ok": false,
+      "error_type": "RuntimeError",
+      "error": "no active session; start computer_run first"
+    },
+    "desktop_scope_from_actual_owned_environment": true,
+    "health_scope_matches_owned_environment": true,
+    "before_any_model_or_gui_run": true
+  },
+  "model_requests": 0,
+  "gui_sessions": 0,
+  "x_server_started": false,
+  "installer_started": false,
+  "factory_substitution": false,
+  "cleanup": {
+    "matching_shutdown": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "all_observed_owned_service_workers_exited": true,
+    "all_direct_children_exited": true,
+    "endpoint_removed": true,
+    "xvfb_socket_removed": true,
+    "http_server_closed": true
+  },
+  "elapsed_seconds": 0.676666,
+  "phase_payload_review": {
+    "classification": "INFERRED_FROM_GENUINE_CANONICAL_SOURCE",
+    "native_runtime_source_sha256": "f19c2d2e1530e08c46ede96b257acaff770d17ed40803ed4099046f23a1711bc",
+    "active_phase_assignment": "_phase stores supplied phase unchanged in session.activity.phase; Session.snapshot serializes it",
+    "accepted_active_literals": [
+      "Reading screen",
+      "Finding controls",
+      "Choosing next action"
+    ],
+    "actual_running_phase_history_from_v2": "NOT_RECORDED_BY_OLD_DRIVER",
+    "future_v3_history": "Bounded64 change snapshots plus explicit overflow/poll counts; raw phase preserved, IDs private"
+  },
+  "prior_actual_attempts": [
+    {
+      "basename": "clef-active-gui-update-final15-attempt1-public-20261011.json",
+      "sha256": "4cc5e9493e975d1912804f9ff43ab886c3570b9d764025c9cd1975324a06a390"
+    },
+    {
+      "basename": "clef-active-gui-update-final15-attempt2-public-20261011.json",
+      "sha256": "923532180b3e04d0cfe230164f1d45678f65008a23707b1faf305017f6184650"
+    }
+  ],
+  "corrected_gui_model_run": "NOT_RUN_AWAIT_ROOT_REVIEW_START",
+  "privacy": "No private paths/auth/endpoints/account/payloads/process or session IDs/screenshots/assets",
+  "received_native_artifact_sha256": "5af4e3928e39c18d04ec3ebc1b53f57f9f6f06f58021b5aa343685fd687b6af3"
+}
