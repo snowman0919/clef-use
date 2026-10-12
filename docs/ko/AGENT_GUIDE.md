@@ -63,6 +63,7 @@ scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v6를 �
 같은 scene 변환을 유지합니다. 단위 이름만 같아도 scene 배율은 바뀔 수 있습니다.
 amount/readback은 검증된 operation 단위를 유지하며 NONE은 원시 값입니다. 변환이
 없거나 바뀌면 추가 입력·성공을 차단합니다. 회전·scale에는 길이 단위를 요구하지 않습니다.
+각도 readback은 DEGREES/RADIANS 선언과 일치해야 하며, exact-property 좌표는 원시 값입니다.
 위치 `property_edit.value`는 Blender 단위의 원시 좌표입니다. 최신 `scene_units`
 근거로 명시적 미터 입력을 계산하고 입력·readback 동안 고정합니다. 단위가 없거나
 바뀌면 입력 또는 성공 판정을 멈춥니다. scale 값은 무차원입니다. 표시 단위가

@@ -58,6 +58,7 @@ Blender 使用进程范围的公开 `session_uid`；改名保留 ID，同名对�
 保持相同 scene 转换。单位名称不变也不能排除 scene 比例变化。amount/readback 保持
 已验证的 operation 单位，NONE 保持原始值。转换缺失或改变时阻止后续输入和成功判定。
 旋转和 scale 不要求 scene 长度设置。
+角度 readback 必须符合 DEGREES/RADIANS 声明，exact-property 坐标保持原始值。
 位置 `property_edit.value` 表示 Blender 单位的原始坐标。新鲜的 `scene_units`
 证据决定显式米制输入，并在输入与 readback 期间保持固定。单位缺失或变化会阻止
 输入或成功判定。scale 为无量纲；显示单位不会重新解释请求的原始坐标，实际

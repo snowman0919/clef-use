@@ -1,5 +1,32 @@
 # Reactive runtime execution status
 
+**OBSERVED / fixture numeric unit normalization:** the existing API-assisted
+Blender state producer now returns supported numeric translation/readback in
+METERS/CENTIMETERS using the actual scene scale and retains NONE as raw. Native
+Euler values remain radians when declaring RADIANS and convert only for DEGREES.
+Preview uses the same normalized values; exact properties and dimensionless scale
+retain raw values. Unsupported distance-unit names cannot authorize translation;
+their raw coordinates remain unchanged-channel evidence for rotation/scale.
+
+The actual standalone STARTUP producer ran in authenticated private factory
+Blender with fixed API-owned scene settings and token-authenticated local readback.
+Before correction, four of seven settings disagreed with independent native RNA
+expectations: METERS at scales 0.01/100, CENTIMETERS and RADIANS. The corrected
+producer matched all seven; preview and raw property preservation passed each.
+Both runs retained identical source hashes from start to end and cleaned up their
+four owned children and private X sockets. No whole fixture task, native input,
+OperationRunner, harness, model or production scene was executed.
+
+Eight permanent behavioral regressions exercise the real embedded reader with
+controlled data. Immutable prior-source execution reproduced four failures;
+current source passes all eight. Final integrated source passed **1216 tests /
+34 skipped / 41 warnings** in 62.83 seconds. Scoped Ruff/format, inner producer
+compilation and generated contracts pass. The fixture normalization finding in
+the earlier numeric-unit receipt is resolved; that historical evidence is retained.
+Installed-current E2E, actual numeric modal input, full-task performance and release
+remain NOT_RUN in this slice. See
+[fixture unit evidence](validation/2026-10-11/fixture-numeric-units.json).
+
 **OBSERVED / numeric translation scene conversion:** translation now validates
 and anchors complete `scene_units`, including unit NONE, through runner refresh,
 native input and final readback. Owned translation cancellation retains the same
@@ -32,9 +59,10 @@ seconds; scoped checks passed 174. Five changed Python files passed Ruff/format,
 and generated contracts passed. Four-language guides and ADR0008 are updated.
 Native final runner cancellation, Blender numeric text/commit, installed-current
 E2E, models, full-task performance and release remain NOT_RUN here. The existing
-API-assisted operations fixture has a separately identified unit-normalization
+API-assisted operations fixture had a separately identified unit-normalization
 defect (always-degree/raw-location values with current-unit declarations); it was
-neither changed nor run in this slice. No acceptance or release gate was promoted.
+neither changed nor run in that guard slice; the later producer correction above
+resolves it. No acceptance or release gate was promoted.
 See [numeric unit evidence](validation/2026-10-11/numeric-scene-units.json).
 
 **OBSERVED / configured Blender tool:** the canonical read-only collector and

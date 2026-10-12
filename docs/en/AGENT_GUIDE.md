@@ -63,6 +63,7 @@ scene conversion through input, readback and owned-modal cancellation. A stable
 unit name alone cannot detect changed scene scale. Amounts/readback keep their
 verified operation unit; NONE stays raw. Missing or changed conversion blocks
 further input/success. Rotation and scale do not require scene length settings.
+Angular readback must match DEGREES/RADIANS; exact-property coordinates remain raw.
 Location `property_edit.value` means the raw Blender-unit coordinate. Fresh
 `scene_units` evidence determines explicit meter input and stays anchored through
 entry and readback; missing or changed settings stop input/success. Scale values

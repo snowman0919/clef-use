@@ -2776,6 +2776,12 @@
       "sha256": "d951ca17820067c8174d4cae387f9be456fdb48b4d1d301ce27caf3c2bd2e598",
       "scope": "FinalIntegrated1208PASS/34SKIP. Canonicalpure oldsuccesscrossedscene.scale1to100 sameMETERS/readback2/raw.02; correctedBLOCKED/input0. NativeBlender sameunit/zerobaseline+parserdivision observed, noUItyping. NativeTk immutable554415d G/Escape leak; correctedruntime stableG1/changedGandEscape0/ownedcleanup. NativeAFTER precedes finalrunnercancelreadbackfix, explicitlyhistoricaloperationshash; thatfix2REDthenfinalGREEN. Registry6/sourceCLI/stdio conditionaltranslate/cancelunits, schemaunchanged/defaultBLOCKED. Fixtureunitnormalization separateopenfinding. No installed/harness/model/wholeE2E/performance/releaseclaim."
     },
+    "fixture_numeric_units": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/fixture-numeric-units.json",
+      "sha256": "5951dc7a26c0468f4279768dd10d14b2fa1335d05c1163648adc1dd02a89106b",
+      "scope": "Integrated1216PASS/34SKIP. ActualstandalonefixtureSTARTUP before4/7nativeunitmismatches; after7/7PASS supportedNONE/METERS/CENTIMETERS/DEGREES/RADIANS withactualscale/nativeRNA. Previewmatches/rawpropertiespreserved/sourcehashesstable/fourchildrenandsocketscleaned. Eightsemanticregressions prior4FAIL/current8PASS. Resolveshistoricalnumeric_scene_units fixturefinding withoutchangingpriorreceipt. No wholefixturetasks/input/OperationRunner/installed/harness/model/E2E/performance/releaseclaim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -3018,7 +3024,8 @@
     "viewport-input-baseline.json",
     "x11-legacy-key-binding.json",
     "blender-active-tool.json",
-    "numeric-scene-units.json"
+    "numeric-scene-units.json",
+    "fixture-numeric-units.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

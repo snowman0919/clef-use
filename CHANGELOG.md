@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Normalize the API-assisted Blender fixture's numeric readback and preview to
+  supported declared distance/angular units. Preserve raw exact-property values
+  and dimensionless scale; unsupported distance requests remain refused.
 - Anchor complete scene length conversion for numeric translation and its owned
   modal cancellation, including native input and final readback. Refuse missing
   settings or same-label scale/scene drift; leave rotation/scale independent of

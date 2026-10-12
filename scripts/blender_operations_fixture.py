@@ -20,7 +20,7 @@ import time
 from pathlib import Path
 
 STARTUP = r"""
-import bpy, hmac, json, os, socket
+import bpy, hmac, json, math, os, socket
 from pathlib import Path
 root = Path(__ROOT__)
 token = (root / "fixture-token").read_text()
@@ -55,9 +55,20 @@ def state():
         modal.append(dict(id=str(operator.as_pointer()), name=operator.bl_idname,
                           rna=operator.bl_rna.identifier))
     r3d = view.spaces.active.region_3d
+    units = win.scene.unit_settings
+    distance_unit = "NONE" if units.system == "NONE" else units.length_unit
+    location = list(cube.location)
+    if distance_unit in {"METERS", "CENTIMETERS"}:
+        factor = units.scale_length * (100 if distance_unit == "CENTIMETERS" else 1)
+        location = [value * factor for value in location]
+    # Other distance-unit names cannot be requested by NumericTransform. Their
+    # raw coordinates still verify unchanged channels during rotation/scale.
+    rotation = list(cube.rotation_euler)
+    if units.system_rotation == "DEGREES":
+        rotation = [math.degrees(value) for value in rotation]
     transform = {cube.name: {
-        "translate": dict(zip("XYZ", list(cube.location))),
-        "rotate": dict(zip("XYZ", [v * 180 / 3.141592653589793 for v in cube.rotation_euler])),
+        "translate": dict(zip("XYZ", location)),
+        "rotate": dict(zip("XYZ", rotation)),
         "scale": dict(zip("XYZ", list(cube.scale)))}}
     keymap = {name: binding(operator, key) for name, operator, key in (
         ("translate", "transform.translate", "G"), ("rotate", "transform.rotate", "R"),
@@ -82,9 +93,8 @@ def state():
         selection_identities={o.name:f"{os.getpid()}:OBJECT:{o.session_uid}"
             for o in win.view_layer.objects if o.select_get()},
         modal_operators=modal, has_modal_api=hasattr(win, "modal_operators"),
-        unit={"translate": ("NONE" if win.scene.unit_settings.system == "NONE"
-              else win.scene.unit_settings.length_unit),
-              "rotate":win.scene.unit_settings.system_rotation, "scale":"NONE"},
+        unit={"translate": distance_unit,
+              "rotate":units.system_rotation, "scale":"NONE"},
         scene_units=dict(scene_identity=f"{os.getpid()}:{win.scene.as_pointer()}",
             system=win.scene.unit_settings.system,
             length_unit=win.scene.unit_settings.length_unit,

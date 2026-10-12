@@ -53,6 +53,11 @@ the native guard also checks it for cancellation of an owned translation modal.
 Rotation and scale do not require scene length conversion. Registry v6 advertises
 these conditional requirements without changing requests or normalized numeric
 readback semantics. Property edits retain their separate raw-coordinate contract.
+The API-assisted Blender fixture normalizes numeric readback/preview for supported
+METERS/CENTIMETERS using the actual scene scale, keeps NONE raw, and converts
+native Euler radians only when declaring DEGREES. Exact properties remain raw RNA.
+Unsupported distance units cannot authorize translation and retain raw coordinates
+only for unchanged-channel comparisons during rotation/scale.
 The collector also retains initialized workspace tool references, bounded at 128.
 It reads native `Context.mode` only when context window, workspace and view layer
 match the owning window; it does not translate `Object.mode`. The provider emits
