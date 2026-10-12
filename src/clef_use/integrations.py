@@ -816,6 +816,23 @@ def _jsonlines(output: str) -> list[dict]:
     return events
 
 
+def _tool_result_failed(payload) -> bool:
+    if not isinstance(payload, dict):
+        return False
+    details = payload.get("details")
+    return bool(
+        payload.get("isError")
+        or payload.get("error")
+        or isinstance(details, dict)
+        and (details.get("isError") or details.get("error"))
+    )
+
+
+def _tool_result_succeeded(payload) -> bool:
+    """A completed call is only invocation evidence when its result succeeded."""
+    return isinstance(payload, dict) and bool(payload) and not _tool_result_failed(payload)
+
+
 def _compatibility(manifest: dict) -> dict:
     from .capabilities import digest, guide_manifest, tool_schemas
 
@@ -1004,7 +1021,7 @@ finally:
         ),
         {},
     )
-    succeeded = bool(invoked.get("result")) and not invoked["result"].get("isError")
+    succeeded = _tool_result_succeeded(invoked.get("result"))
     stages = result["stages"]
     stages["DISCOVERED"] = {
         "status": "PASS" if set(loaded) == set(manifest["skills"]) else "NOT_RUN",
@@ -1015,7 +1032,11 @@ finally:
         "skills": loaded,
     }
     stages["INVOKED"] = {
-        "status": "PASS" if succeeded else "NOT_RUN",
+        "status": "PASS"
+        if succeeded
+        else "FAIL"
+        if _tool_result_failed(invoked.get("result"))
+        else "NOT_RUN",
         "tools": [invoked["tool"]] if succeeded else [],
     }
     result.update(
@@ -1024,7 +1045,13 @@ finally:
         model_driven=False,
         method="installed Hermes native catalog/skill_view/MCP registry; no model task",
     )
-    result["status"] = "PASS" if loaded and succeeded else "NOT_RUN"
+    result["status"] = (
+        "PASS"
+        if loaded and succeeded
+        else "FAIL"
+        if _tool_result_failed(invoked.get("result"))
+        else "NOT_RUN"
+    )
     if run.returncode:
         result["native_reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
     return result
@@ -1097,8 +1124,18 @@ def _verify_hermes(
     result.update(trace=str(trace), exit_code=run.returncode, model_driven=True)
     loaded = []
     invoked = []
+    attempted = []
+    failed = False
     calls = {}
     for event in events:
+        selected_tool = event.get("name") in (
+            "mcp__clef_use__computer_capabilities",
+            "mcp__clef_use__computer_status",
+        )
+        if selected_tool and event.get("type") in ("tool_use", "tool_result"):
+            if event["name"] not in attempted:
+                attempted.append(event["name"])
+            failed |= event.get("type") == "tool_result" and bool(event.get("is_error"))
         key = event.get("tool_call_id", event.get("name"))
         if event.get("type") == "tool_use":
             calls.setdefault(key, []).append(event)
@@ -1134,15 +1171,13 @@ def _verify_hermes(
                 and payload.get("content")
             ):
                 loaded.append(name)
-        if event.get("name") in (
-            "mcp__clef_use__computer_capabilities",
-            "mcp__clef_use__computer_status",
-        ):
+        if selected_tool:
             try:
                 payload = json.loads(event.get("output", ""))
             except json.JSONDecodeError:
                 continue
-            if payload and not payload.get("isError") and not payload.get("error"):
+            failed |= _tool_result_failed(payload)
+            if _tool_result_succeeded(payload):
                 invoked.append(event["name"])
     expected = (
         "clef-use-blender"
@@ -1156,7 +1191,7 @@ def _verify_hermes(
         for event in events
     )
     passed = (
-        not any_gui_guide and not invoked
+        not any_gui_guide and not attempted
         if trigger == "negative"
         else expected in loaded and bool(invoked)
     )
@@ -1169,7 +1204,8 @@ def _verify_hermes(
         else "FAIL",
         "loaded": loaded,
         "invoked": invoked,
-        "stages": _model_stages(loaded, invoked),
+        "attempted": attempted,
+        "stages": _model_stages(loaded, invoked, failed),
     }
     if result["model_trigger_verification"]["status"] == "FAIL":
         result["status"] = "FAIL"
@@ -1194,10 +1230,13 @@ def _body_prefix_in_output(path: Path, output: str) -> bool:
     return f'"content": "{escaped}' in output or f'"content": "{twice}' in output
 
 
-def _model_stages(loaded: list[str], invoked: list[str]) -> dict:
+def _model_stages(loaded: list[str], invoked: list[str], failed: bool) -> dict:
     return {
         "LOADED": {"status": "PASS" if loaded else "NOT_RUN", "skills": loaded},
-        "INVOKED": {"status": "PASS" if invoked else "NOT_RUN", "tools": invoked},
+        "INVOKED": {
+            "status": "PASS" if invoked else "FAIL" if failed else "NOT_RUN",
+            "tools": invoked,
+        },
     }
 
 
@@ -1236,8 +1275,18 @@ def _verify_omp_model(
         if event.get("type") == "tool_execution_start"
     }
     loaded, invoked = [], []
+    attempted = []
+    failed = False
     any_gui_guide = False
     for event in events:
+        selected_tool = event.get("toolName") in (
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status",
+        )
+        if selected_tool and event.get("type") in ("tool_execution_start", "tool_execution_end"):
+            if event["toolName"] not in attempted:
+                attempted.append(event["toolName"])
+            failed |= event.get("type") == "tool_execution_end" and bool(event.get("isError"))
         if event.get("type") != "tool_execution_end" or event.get("isError"):
             continue
         call = starts.get(event.get("toolCallId"), {})
@@ -1256,18 +1305,17 @@ def _verify_omp_model(
                         prefix = json.dumps(body[:180], ensure_ascii=False)[1:-1]
                         if prefix in content:
                             loaded.append(name)
-        if event.get("toolName") in (
-            "mcp__clef_use_computer_capabilities",
-            "mcp__clef_use_computer_status",
-        ) and not event.get("result", {}).get("details", {}).get("isError"):
-            invoked.append(event["toolName"])
+        if selected_tool:
+            failed |= _tool_result_failed(event.get("result"))
+            if _tool_result_succeeded(event.get("result")):
+                invoked.append(event["toolName"])
     expected = (
         "clef-use-blender"
         if trigger == "natural" and "clef-use-blender" in manifest["skills"]
         else "clef-use"
     )
     passed = (
-        not any_gui_guide and not invoked
+        not any_gui_guide and not attempted
         if trigger == "negative"
         else expected in loaded and bool(invoked)
     )
@@ -1278,7 +1326,8 @@ def _verify_omp_model(
         "status": outcome,
         "loaded": loaded,
         "invoked": invoked,
-        "stages": _model_stages(loaded, invoked),
+        "attempted": attempted,
+        "stages": _model_stages(loaded, invoked, failed),
     }
     result["status"] = outcome
     if run.returncode:
@@ -1401,16 +1450,20 @@ try {{
         "status": "PASS" if set(loaded) == set(manifest["skills"]) else "NOT_RUN",
         "skills": loaded,
     }
-    succeeded = bool(invoked.get("result")) and not invoked["result"].get("details", {}).get(
-        "isError"
-    )
+    succeeded = _tool_result_succeeded(invoked.get("result"))
     stages["INVOKED"] = {
-        "status": "PASS" if succeeded else "NOT_RUN",
+        "status": "PASS"
+        if succeeded
+        else "FAIL"
+        if _tool_result_failed(invoked.get("result"))
+        else "NOT_RUN",
         "tools": [invoked["tool"]] if succeeded else [],
     }
     result["status"] = (
         "PASS"
         if all(stages[name]["status"] == "PASS" for name in ("DISCOVERED", "LOADED", "INVOKED"))
+        else "FAIL"
+        if _tool_result_failed(invoked.get("result"))
         else "NOT_RUN"
     )
     result["model_trigger_verification"] = {
@@ -1783,9 +1836,23 @@ def verify(
         result["exit_code"] = run.returncode
         loaded = []
         invoked = []
+        attempted = []
+        failed = False
         any_gui_guide = False
         for event in events:
             item = event.get("item", {})
+            selected_tool = (
+                item.get("type") == "mcp_tool_call"
+                and item.get("server") == "clef-use"
+                and item.get("tool") in ("computer_capabilities", "computer_status")
+            )
+            if selected_tool and event.get("type") in (
+                "item.started",
+                "item.updated",
+                "item.completed",
+            ):
+                if item["tool"] not in attempted:
+                    attempted.append(item["tool"])
             if event.get("type") != "item.completed":
                 continue
             if item.get("type") == "command_execution" and item.get("exit_code") == 0:
@@ -1800,16 +1867,19 @@ def verify(
                     body = (layout["root"] / name / "SKILL.md").read_text()
                     if expected[name] in item.get("command", "") and body.strip() in output:
                         loaded.append(name)
-            if (
-                item.get("type") == "mcp_tool_call"
-                and item.get("server") == "clef-use"
-                and item.get("tool") in ("computer_capabilities", "computer_status")
-                and item.get("status") == "completed"
-                and not item.get("error")
-                and item.get("result")
-            ):
-                invoked.append(item["tool"])
-        stages.update(_model_stages(loaded, invoked))
+            if selected_tool:
+                failed |= (
+                    item.get("status") == "failed"
+                    or bool(item.get("error"))
+                    or _tool_result_failed(item.get("result"))
+                )
+                if (
+                    item.get("status") == "completed"
+                    and not item.get("error")
+                    and _tool_result_succeeded(item.get("result"))
+                ):
+                    invoked.append(item["tool"])
+        stages.update(_model_stages(loaded, invoked, failed))
         stages["TASK_VERIFIED"]["reason"] = "read-only verification does not execute a GUI fixture"
         selected = (
             "clef-use-blender"
@@ -1817,7 +1887,7 @@ def verify(
             else "clef-use"
         )
         passed = (
-            not any_gui_guide and not invoked
+            not any_gui_guide and not attempted
             if trigger == "negative"
             else selected in loaded and bool(invoked)
         )
@@ -1830,7 +1900,8 @@ def verify(
             "status": outcome,
             "loaded": loaded,
             "invoked": invoked,
-            "stages": _model_stages(loaded, invoked),
+            "attempted": attempted,
+            "stages": _model_stages(loaded, invoked, failed),
         }
         if run.returncode:
             result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)

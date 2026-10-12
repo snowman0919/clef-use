@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Distinguish attempted harness tool calls from successful MCP responses. Error
+  results cannot pass invocation; negative triggers reject failed attempts too.
 - Retain validated integration bytes and guide inventories through capability
   discovery; refuse concurrent edits before journaling instead of overwriting them.
 - Apply explicit text-focus and IME shortcut guards to modifier gestures before

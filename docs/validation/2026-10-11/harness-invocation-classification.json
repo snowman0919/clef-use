@@ -1,0 +1,329 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT_WITH_REAL_READ_ONLY_MCP_RESPONSE",
+  "date": "2026-10-12",
+  "source_base": "d18fa0076a6b5014d4cfbff4d0e792b821f0ec05",
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-01",
+    "HARNESS-02",
+    "HARNESS-03"
+  ],
+  "scope": "Actual canonical read-only stdio MCP responses plus controlled external executable traces consumed by canonical verify/adapter parsers. Synthetic catalogs/bootstrap/traces are fixtures, not native harness discovery, installed-product checks, model sessions or whole E2E.",
+  "problem": "Codex counted a completed MCP error response as successful invocation. Model adapters tested negative triggering using successful calls only, allowing failed/incomplete attempts to pass. Other result wrappers could admit errors or crash on absent/nonmapping responses.",
+  "contracts": [
+    "Only a nonempty mapping response without top-level isError/error or OMP details.isError/error proves successful invocation, with existing transport success checks retained.",
+    "Explicit protocol or transport failure records INVOKED=FAIL when no successful call exists. Missing, malformed or incomplete results remain NOT_RUN.",
+    "Track selected-tool attempts independently at start/use and terminal events. Negative verification rejects attempts even without a successful response.",
+    "Native Hermes/OMP explicit response errors produce overall FAIL. Existing guide provenance, model loading and exit-status rules are unchanged."
+  ],
+  "integrated_source_sha256": {
+    "src/clef_use/integrations.py": "49713d80ca730bbbdb7fdcf9f0a95fe11a3a4f4d7b9835d0c1e480db0e9b9e00",
+    "tests/test_integrations.py": "5e5ecf2373c753d31396f095164f37c5e19cf62897e23d544014b4f16bff628a",
+    "src/clef_use/mcp_server.py": "1409a64ef97d13f3202a465152f426908203622ab1e453ba5404cc6d45bb0f37",
+    "src/clef_use/capabilities.py": "4e3fd5d834b52dc75f22c410b3ab52a0b9b90f744bf0f9c172cefd92d73a113d"
+  },
+  "real_stdio_component": {
+    "command": ".venv/bin/python -m clef_use.cli mcp --read-only",
+    "calls": [
+      {
+        "tool": "computer_capabilities",
+        "arguments": {},
+        "isError": false
+      },
+      {
+        "tool": "computer_capabilities",
+        "arguments": {
+          "operation_id": "unregistered_probe_operation"
+        },
+        "isError": true
+      }
+    ],
+    "read_only_facade": true,
+    "desktop_input_capture_or_model_task_requested": false,
+    "runtime_service_execution": "NOT_RUN: only the read-only capability facade was called"
+  },
+  "controlled_codex_consumer": {
+    "before": [
+      {
+        "payload": "success",
+        "trigger": "explicit",
+        "status": "PASS",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": null
+      },
+      {
+        "payload": "success",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [],
+        "attempted": null
+      },
+      {
+        "payload": "mcp_error",
+        "trigger": "explicit",
+        "status": "PASS",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": null
+      },
+      {
+        "payload": "mcp_error",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [],
+        "attempted": null
+      },
+      {
+        "payload": "transport_failed",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": null
+      },
+      {
+        "payload": "transport_failed",
+        "trigger": "negative",
+        "status": "PASS",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [],
+        "attempted": null
+      },
+      {
+        "payload": "incomplete",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": null
+      },
+      {
+        "payload": "incomplete",
+        "trigger": "negative",
+        "status": "PASS",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [],
+        "attempted": null
+      }
+    ],
+    "after": [
+      {
+        "payload": "success",
+        "trigger": "explicit",
+        "status": "PASS",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "success",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        },
+        "loaded": [],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "mcp_error",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "invoked": {
+          "status": "FAIL",
+          "tools": []
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "mcp_error",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "FAIL",
+          "tools": []
+        },
+        "loaded": [],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "transport_failed",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "invoked": {
+          "status": "FAIL",
+          "tools": []
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "transport_failed",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "FAIL",
+          "tools": []
+        },
+        "loaded": [],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "incomplete",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      },
+      {
+        "payload": "incomplete",
+        "trigger": "negative",
+        "status": "FAIL",
+        "invoked": {
+          "status": "NOT_RUN",
+          "tools": []
+        },
+        "loaded": [],
+        "attempted": [
+          "computer_capabilities"
+        ]
+      }
+    ],
+    "method": "Real source verify(), subprocess and JSON-RPC parser; controlled executable emits fixed discovery/guide/tool events, including responses obtained from the real read-only MCP server."
+  },
+  "permanent_regressions": {
+    "new_cases": 75,
+    "final_immutable_baseline": {
+      "failed": 50,
+      "passed": 25,
+      "deselected": 121,
+      "seconds": 4.76
+    },
+    "current_scoped": {
+      "passed": 196,
+      "seconds": 8.35
+    },
+    "initial_valid_baseline": {
+      "failed": 37,
+      "passed": 25,
+      "deselected": 121,
+      "seconds": 5.09
+    },
+    "coverage": [
+      "Five model/native adapter result boundaries: top-level and OMP wrapper errors, absent/empty/list/scalar responses, successful controls",
+      "Three model adapters: negative start-only, failed and terminal attempts with absent/error payloads; no-attempt controls",
+      "Failed transport cannot promote success-shaped response; Codex failed terminal without error detail"
+    ]
+  },
+  "integrated_regression": {
+    "passed": 1374,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 63.77
+  },
+  "static_checks": {
+    "two_python_ruff": "PASS",
+    "two_python_format": "PASS",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool",
+    "root_diff_review": "INFERRED: final source and permanent tests reviewed; not a separate execution claim"
+  },
+  "not_run": {
+    "real_harness_model_session": "Whole E2E and model work belong to other sessions under the direct user scope update. Controlled trace fixtures do not establish this.",
+    "installed_current": "No new installed-product execution.",
+    "native_blender_operation_readiness": "No native operation execution; popup/text/IME/effective keymap/busy/focused editor observation remains incomplete, required UNKNOWN facts still block operations.",
+    "full_task_accuracy_p95_goodput_coverage": "No full-task/model/performance trial in this software slice.",
+    "public_release": "Feature branch/draft PR only; no release executed."
+  },
+  "acceptance_and_release_status_changed": false,
+  "private_evidence_copied": false,
+  "retained_artifact_sha256": {
+    "clef-invocation-result-probe-20261012.py": "8355ca0a7b9403eb7f8becadfe477d54c22f11adad0801f7b3f2b538cd1c40af",
+    "clef-invocation-result-before-20261012.json": "148691d78d7b7ac9726ab5a8e7744413620a9bf4ac37b3329981aeecb29aca67",
+    "clef-invocation-result-expanded-probe-20261012.py": "8e3534f9d1e2af97b898a0b5e527f1aa902f22d463bf55e6fae4e3cbcdab3eb4",
+    "clef-invocation-result-expanded-before-20261012.json": "9afab7d4c31905aa57d7f43c29acc294d3438478fa9084d4724207483fa470a2",
+    "clef-invocation-result-expanded-after-20261012.json": "98781eedb5d1c07be2dbfed5c2470c25cdb44d8870e1ac7b9cc665c3a583f90d",
+    "clef-invocation-classification-baseline-20261012.py": "b822f236449ca91b9ca299ac095d7649cc25dbb7bd1cf1799c483be2b99c58e2",
+    "clef-invocation-classification-red-final-20261012.log": "c93360e7c0a8ca7339d9015435d707e2100613982542d931c101a97644c3f819",
+    "clef-invocation-classification-red-immutable-20261012.log": "34f401a6a0734a17cf1c729f69056825682474349f9d95544fc5a523f0d5aa0b",
+    "clef-invocation-classification-green-final-20261012.log": "9f76a897bd7dfa4581a63752310cddf83cd61c3aa3d463a76eaf1d8ba2d14737",
+    "clef-invocation-classification-integrated-20261012.log": "ea47341a99a2d8ab0fcd49e1e1be3412ece1a8257326278b1ef9424b7cf42b71"
+  }
+}

@@ -1,5 +1,33 @@
 # Reactive runtime execution status
 
+**OBSERVED / harness invocation classification:** the canonical read-only stdio
+MCP server returned `isError=true` for an unknown operation, yet the Codex source
+verifier counted the response as INVOKED=PASS and overall PASS. Controlled failed
+and incomplete call traces also passed negative-trigger verification.
+
+Five native/model response boundaries now share explicit error classification.
+Successful responses alone prove invocation; explicit protocol/transport errors
+produce INVOKED=FAIL when no successful invocation exists. Missing or incomplete
+results remain NOT_RUN. Three model adapters independently retain call attempts,
+so negative checks reject unsuccessful attempts too. Guide provenance, loading,
+exit-status rules and runtime guards remain unchanged.
+
+The real MCP response replay now fails correctly, successful response controls
+still pass, and failed/incomplete negative attempts fail. These are actual MCP
+responses consumed through controlled executable catalogs/traces and canonical
+source parsers, not real harness discovery or model sessions. Seventy-five new
+permanent cases produce 50 FAIL / 25 PASS on immutable prior source; current
+scoped checks pass 196. Integrated source passed **1374 tests / 34 skipped /
+41 warnings** in 63.77 seconds. Ruff/format and generated contracts passed;
+four-language guides describe the result distinctions.
+
+Real harness/model sessions, installed-current, whole E2E, full-task performance
+and release remain NOT_RUN in this slice under the user's scope. Production
+Blender popup/text/IME/effective keymap/busy/focused-editor observation remains
+incomplete; UNKNOWN required facts still block guarded operations. No acceptance
+or release gate changed. See
+[invocation classification evidence](validation/2026-10-11/harness-invocation-classification.json).
+
 **OBSERVED / integration ownership through discovery:** actual integration
 reproduced user data loss: a guide or MCP entry edited during the compatible
 executable's capability probe was overwritten by stale planned content, and the

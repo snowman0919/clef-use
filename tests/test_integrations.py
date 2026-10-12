@@ -1033,3 +1033,288 @@ def test_successful_tool_body_never_becomes_authentication_diagnostic():
     reason = integrations._probe_reason(json.dumps(event), 2)
     assert "exited 2" in reason
     assert "authentication" not in reason
+
+
+def _controlled_verification(installation, monkeypatch, adapter, payload, trigger, attempt="end"):
+    """Replay controlled external traces through real subprocesses and adapter parsers.
+
+    These executable fixtures are not installed harnesses, SDKs or model sessions.
+    Managed files and canonical verify/adapter implementations remain real.
+    """
+    home, command = installation
+    harness = adapter.split("_")[0]
+    assert (
+        integrations.integrate(harness, skills=["core"], command=command)["status"] == "INSTALLED"
+    )
+    layout = integrations._layout(harness)
+    manifest = integrations._load_manifest(layout)
+    skill = layout["root"] / "clef-use/SKILL.md"
+    body = skill.read_text()
+    name = {
+        "codex": "computer_capabilities",
+        "hermes": "mcp__clef_use__computer_capabilities",
+        "omp": "mcp__clef_use_computer_capabilities",
+    }[harness]
+    loaded = {
+        "name": "clef-use",
+        "path": str(skill),
+        "source": str(skill),
+        "sha256": manifest["skills"]["clef-use"]["files"]["SKILL.md"],
+        "contentLoaded": True,
+        "lineCount": 10,
+    }
+    discovery = {"loaded": [loaded], "selected": [{"name": "clef-use", "filePath": str(skill)}]}
+    native = [
+        "CLEF_DISCOVERY:" + json.dumps(discovery),
+        "CLEF_INVOKED:"
+        + json.dumps(
+            {
+                "tool": name,
+                "result": {"content": [], "isError": False}
+                if adapter == "hermes_model"
+                else payload,
+            }
+        ),
+    ]
+    events = []
+    if trigger != "negative":
+        if harness == "codex":
+            events.append(
+                {
+                    "type": "item.completed",
+                    "item": {
+                        "type": "command_execution",
+                        "exit_code": 0,
+                        "command": "cat " + str(skill),
+                        "aggregated_output": body,
+                    },
+                }
+            )
+        elif harness == "hermes":
+            events.extend(
+                [
+                    {
+                        "type": "tool_use",
+                        "tool_call_id": "load",
+                        "name": "skill_view",
+                        "input": {"name": "clef-use"},
+                    },
+                    {
+                        "type": "tool_result",
+                        "tool_call_id": "load",
+                        "name": "skill_view",
+                        "output": json.dumps(
+                            {"success": True, "_source_path": str(skill.resolve()), "content": body}
+                        ),
+                    },
+                ]
+            )
+        else:
+            events.extend(
+                [
+                    {
+                        "type": "tool_execution_start",
+                        "toolCallId": "load",
+                        "toolName": "read",
+                        "args": {"path": "skill://clef-use"},
+                    },
+                    {
+                        "type": "tool_execution_end",
+                        "toolCallId": "load",
+                        "toolName": "read",
+                        "result": {"content": body.split("---", 2)[-1].strip()},
+                    },
+                ]
+            )
+    if attempt != "none":
+        if harness == "codex":
+            events.append(
+                {
+                    "type": "item.started" if attempt == "start" else "item.completed",
+                    "item": {
+                        "type": "mcp_tool_call",
+                        "server": "clef-use",
+                        "tool": name,
+                        "status": "failed"
+                        if attempt in ("failed", "terminal_failed")
+                        else "completed",
+                        "error": {"message": "transport failed"} if attempt == "failed" else None,
+                        "result": payload,
+                    },
+                }
+            )
+        elif harness == "hermes":
+            events.append({"type": "tool_use", "tool_call_id": "invoke", "name": name, "input": {}})
+            if attempt != "start":
+                events.append(
+                    {
+                        "type": "tool_result",
+                        "tool_call_id": "invoke",
+                        "name": name,
+                        "is_error": attempt == "failed",
+                        "output": json.dumps(payload),
+                    }
+                )
+        else:
+            events.append(
+                {
+                    "type": "tool_execution_start",
+                    "toolCallId": "invoke",
+                    "toolName": name,
+                    "args": {},
+                }
+            )
+            if attempt != "start":
+                events.append(
+                    {
+                        "type": "tool_execution_end",
+                        "toolCallId": "invoke",
+                        "toolName": name,
+                        "isError": attempt == "failed",
+                        "result": payload,
+                    }
+                )
+    scripts = home / "controlled-traces"
+    scripts.mkdir(exist_ok=True)
+    interpreter = scripts / "native-interpreter"
+    interpreter.write_text(f"#!{sys.executable}\nfor line in {native!r}: print(line)\n")
+    interpreter.chmod(0o700)
+    executable = scripts / harness
+    catalog = {
+        "id": 2,
+        "result": {
+            "data": [{"skills": [{"name": "clef-use", "enabled": True, "path": str(skill)}]}]
+        },
+    }
+    script = f"""#!{sys.executable}
+import json, sys
+if sys.argv[1:2] == ['app-server']:
+ for line in sys.stdin:
+  request = json.loads(line)
+  if request.get('id') == 1: print(json.dumps({{'id':1, 'result':{{}}}}), flush=True)
+  elif request.get('id') == 2: print(json.dumps({catalog!r}), flush=True)
+elif sys.argv[1:2] == ['--print-runtime-command']:
+ print(json.dumps([{str(interpreter)!r}, '-I', '-c', "import runpy; runpy.run_module('fixture')"]))
+elif sys.argv[1:2] == ['skills']:
+ print('clef-use')
+else:
+ for event in {events!r}: print(json.dumps(event))
+"""
+    executable.write_text(script)
+    executable.chmod(0o700)
+    monkeypatch.setenv("PATH", str(scripts) + os.pathsep + os.environ.get("PATH", ""))
+    result = {"stages": integrations._stages("PASS"), "status": "NOT_RUN"}
+    if adapter == "codex_model":
+        return integrations.verify(harness, live=True, trigger=trigger)
+    if adapter == "hermes_model":
+        return integrations._verify_hermes(layout, manifest, str(executable), home, result, trigger)
+    if adapter == "hermes_native":
+        return integrations._hermes_native(layout, manifest, str(executable), home, result)
+    if adapter == "omp_model":
+        return integrations._verify_omp_model(
+            layout, manifest, str(executable), home, result, trigger
+        )
+    package = home / "controlled-omp-package"
+    (package / "bin").mkdir(parents=True)
+    (package / "package.json").write_text(json.dumps({"name": "@oh-my-pi/pi-coding-agent"}))
+    bun = scripts / "bun"
+    bun.write_text(interpreter.read_text())
+    bun.chmod(0o700)
+    return integrations._verify_omp(
+        layout, manifest, str(package / "bin/omp"), home, result, "native"
+    )
+
+
+@pytest.mark.parametrize(
+    "adapter", ["codex_model", "hermes_model", "omp_model", "hermes_native", "omp_native"]
+)
+@pytest.mark.parametrize(
+    "payload,expected_stage",
+    [
+        ({"content": [], "isError": True}, "FAIL"),
+        ({"content": [], "error": {"message": "tool failed"}}, "FAIL"),
+        ({"details": {"isError": True}}, "FAIL"),
+        ({"details": {"error": "tool failed"}}, "FAIL"),
+        (None, "NOT_RUN"),
+        ({}, "NOT_RUN"),
+        ([], "NOT_RUN"),
+        ("unexpected scalar", "NOT_RUN"),
+    ],
+)
+def test_error_or_absent_tool_results_do_not_prove_invocation(
+    installation, monkeypatch, adapter, payload, expected_stage
+):
+    result = _controlled_verification(installation, monkeypatch, adapter, payload, "explicit")
+    stages = (result if adapter.endswith("_native") else result["model_trigger_verification"])[
+        "stages"
+    ]
+    assert stages["INVOKED"]["status"] == expected_stage
+    assert stages["INVOKED"]["tools"] == []
+    assert result["status"] == (
+        "FAIL" if expected_stage == "FAIL" or adapter.endswith("_model") else "NOT_RUN"
+    )
+
+
+@pytest.mark.parametrize(
+    "adapter", ["codex_model", "hermes_model", "omp_model", "hermes_native", "omp_native"]
+)
+@pytest.mark.parametrize(
+    "payload",
+    [
+        {"content": [{"type": "text", "text": "capabilities"}], "isError": False},
+        {"content": [], "details": {"isError": False}},
+    ],
+)
+def test_successful_tool_results_prove_invocation(installation, monkeypatch, adapter, payload):
+    result = _controlled_verification(installation, monkeypatch, adapter, payload, "explicit")
+    stages = (result if adapter.endswith("_native") else result["model_trigger_verification"])[
+        "stages"
+    ]
+    assert stages["INVOKED"]["status"] == "PASS"
+    assert stages["INVOKED"]["tools"] == [
+        {
+            "codex": "computer_capabilities",
+            "hermes": "mcp__clef_use__computer_capabilities",
+            "omp": "mcp__clef_use_computer_capabilities",
+        }[adapter.split("_")[0]]
+    ]
+    assert result["status"] == "PASS"
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+@pytest.mark.parametrize("attempt", ["start", "failed", "end"])
+@pytest.mark.parametrize("payload", [None, {"content": [], "isError": True}])
+def test_negative_trigger_rejects_tool_attempt_even_without_success(
+    installation, monkeypatch, adapter, attempt, payload
+):
+    result = _controlled_verification(
+        installation, monkeypatch, adapter, payload, "negative", attempt
+    )
+    assert result["status"] == "FAIL"
+    assert result["model_trigger_verification"]["status"] == "FAIL"
+    assert result["model_trigger_verification"]["invoked"] == []
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+def test_failed_transport_cannot_promote_success_shaped_result(installation, monkeypatch, adapter):
+    result = _controlled_verification(
+        installation, monkeypatch, adapter, {"content": [], "isError": False}, "explicit", "failed"
+    )
+    assert result["status"] == "FAIL"
+    stage = result["model_trigger_verification"]["stages"]["INVOKED"]
+    assert stage == {"status": "FAIL", "tools": []}
+
+
+def test_codex_failed_terminal_without_error_payload_is_failed(installation, monkeypatch):
+    result = _controlled_verification(
+        installation, monkeypatch, "codex_model", None, "explicit", "terminal_failed"
+    )
+    assert result["status"] == "FAIL"
+    assert result["stages"]["INVOKED"] == {"status": "FAIL", "tools": []}
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+def test_negative_trigger_without_tool_attempt_passes(installation, monkeypatch, adapter):
+    result = _controlled_verification(installation, monkeypatch, adapter, None, "negative", "none")
+    assert result["status"] == "PASS"
+    assert result["model_trigger_verification"]["invoked"] == []

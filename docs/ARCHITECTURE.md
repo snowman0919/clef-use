@@ -222,6 +222,15 @@ Journal baselines use the approved bytes; per-file activation checks and existin
 recovery-conflict behavior remain in force. These checks do not make concurrent
 external editors participate in an atomic multi-file transaction.
 
+Harness verification separates selected-tool attempts from successful results.
+Transport completion alone does not establish INVOKED: a nonempty response must
+have no MCP error at the top level or in the OMP details wrapper. Negative trigger
+checks reject attempts, including failed or incomplete calls, independently of
+the successful invocation list. These checks classify trace evidence; they do
+not establish a GUI task or upgrade component traces to real harness evidence.
+An explicit response/transport error records INVOKED=FAIL when there is no
+successful invocation; missing or incomplete results remain NOT_RUN.
+
 ## Visual readiness revision, 0.1.5
 
 The user requested replacing fixed post-action sleeps with bounded visual

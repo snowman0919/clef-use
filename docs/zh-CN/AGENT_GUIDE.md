@@ -132,6 +132,9 @@ operation 支持仍未完成。不要用假设补全未知的输入上下文。
 分别记录 `INSTALLED`、`DISCOVERED`、`LOADED`、`INVOKED`、`TASK_VERIFIED`。
 文件复制、工具列表或技能名称回显不能证明后续阶段。live trigger 验证使用实际工具环境
 的新会话，只开放只读工具。provider 身份验证失败时，加载和调用保持 `NOT_RUN`。
+`INVOKED` 要求工具成功响应；传输完成但返回 MCP 错误不能通过。negative trigger
+也拒绝失败的工具调用尝试，避免用请求被拒绝掩盖不必要的 trigger。
+明确错误记为 `INVOKED=FAIL`；缺少结果或尚未完成时保持 `NOT_RUN`。
 任务验证还需要在隔离目标中执行已获授权的输入，重新检查外部状态，并确认输入和
 进程已清理。私有 API 辅助任务通过不能证明 production 可用性或整个目标完成。
 

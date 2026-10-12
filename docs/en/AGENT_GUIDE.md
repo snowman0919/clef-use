@@ -151,6 +151,10 @@ Integration stages are separate: `INSTALLED`, `DISCOVERED`, `LOADED`, `INVOKED`,
 `TASK_VERIFIED`. A copied file, tool list, or guide-name echo proves no later stage.
 Live trigger verification uses a fresh harness session with read-only tools;
 provider authentication failure leaves loading and invocation `NOT_RUN`.
+`INVOKED` requires a successful tool response; a completed transport event with
+an MCP error does not pass. Negative triggers reject tool-call attempts even when
+the call fails, so a rejected request cannot conceal unwanted triggering.
+Explicit errors make `INVOKED=FAIL`; missing or incomplete results remain `NOT_RUN`.
 Task verification separately requires authorized input in an isolated target,
 fresh external state checks and input/process cleanup. A private API-assisted
 task pass does not establish production availability or whole-goal completion.
