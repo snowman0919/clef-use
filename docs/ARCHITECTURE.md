@@ -89,6 +89,10 @@ the observed keymap content as well as its version label. Viewport dispatch anch
 the checked editor geometry; the input guard rechecks its editor surface before
 and during a gesture. A changed surface stops execution and releases owned input.
 These guards do not supply missing state or enable the partial Blender provider.
+Typed modifier gestures use the same explicit-context admission as shortcuts:
+known idle IME and no text focus are required before any movement or press,
+independently of an optional post-input transition guard. Unmodified gestures
+retain pointer behavior; recovery releases retain ownership-based authority.
 Context sampling and native queries cannot renew input authority: cancellation
 and deadline are checked again after sampling. Typed Windows Unicode encodes the
 complete payload before input and invokes the current guard before every UTF-16

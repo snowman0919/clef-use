@@ -658,9 +658,11 @@ class InputExecutor:
         exact_text_control = False
         if context is not None:
             context = InputContext.model_validate(context)
-            if isinstance(command, (KeyInput, ChordInput)) and not (
-                isinstance(command, KeyInput) and command.key == "escape"
-            ):
+            if (
+                isinstance(command, (KeyInput, ChordInput))
+                or isinstance(command, GestureInput)
+                and command.modifiers
+            ) and not (isinstance(command, KeyInput) and command.key == "escape"):
                 text_control = context.text_focus is True and (
                     (
                         context.text_control == "select_all"

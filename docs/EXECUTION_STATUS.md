@@ -1,5 +1,29 @@
 # Reactive runtime execution status
 
+**OBSERVED / modifier gesture context:** the actual typed input consumer
+previously admitted modifier strokes with explicit active text, composing IME or
+UNKNOWN context, while chords refused the same contexts. Modifier gestures now
+use the same shortcut admission before any movement or press, independently of
+an optional post-input transition guard. Existing exact text controls remain
+key/chord-only. Unmodified pointer gestures, calls without context and owned-up
+recovery retain their existing behavior.
+
+Seven permanent unsafe-context cases fail against immutable prior source and
+pass currently, with zero movement, key/button presses and strokes. Three control
+cases retain actual stateful-device strokes and release. The separate canonical
+consumer component confirms active/UNKNOWN direct gestures stop and idle gestures
+run. Existing registered viewport guards already blocked active contexts before
+the correction; no MCP/registered-operation bypass is claimed.
+
+Final integrated source passed **1263 tests / 34 skipped / 41 warnings** in
+58.56 seconds; scoped input/operation checks passed 88. Two Python files passed
+Ruff/format and generated contracts passed. Four-language guides are updated.
+This is deterministic source-component evidence, not native input or real IME
+observation. Production context discovery remains incomplete. New installed-current,
+harness, whole E2E/model, full-task performance and release checks remain NOT_RUN;
+no acceptance status or release gate changed. See
+[gesture context evidence](validation/2026-10-11/modifier-gesture-context.json).
+
 **OBSERVED / candidate identity and primitive budgeting:** normalization now
 preserves exact validated geometry and differing action, confidence or source
 evidence. Equivalent numeric spellings and signed zero deduplicate; object IDs

@@ -167,6 +167,8 @@ user profile을 사용합니다. 스킬을 옮기기 전에 source·shadow 상�
 
 자신의 세션만 중단하고 입력 해제를 확인하세요. 정확한 Unicode clipboard 삽입과
 IME 조합은 별개입니다. IME가 활성 상태이거나 불명이면 단축키를 차단합니다.
+명시된 입력 context가 있으면 modifier gesture도 이동·누름 전에 IME 유휴와
+text focus 비활성을 확인해야 합니다. 일반 포인터 gesture는 별도로 처리합니다.
 X11의 좌·가운데·우 버튼과 스크롤 방향은 현재 OS 포인터 매핑을 따릅니다.
 비활성화된 논리 버튼은 입력을 거부합니다. 정상 해제·독립 abort·guardian 복구는
 누를 때 확인한 물리 버튼을 해제합니다.

@@ -230,6 +230,85 @@ def test_ime_unknown_and_text_focus_block_shortcuts_but_do_not_rewrite_text():
         TextInput(text="literal\nsubmit")
 
 
+class GestureDevice(EditorDevice):
+    def __init__(self):
+        super().__init__()
+        self.presses = []
+
+    def keyDown(self, key, **kwargs):
+        super().keyDown(key, **kwargs)
+        self.presses.append(("key", key))
+
+    def mouseDown(self, button, **kwargs):
+        super().mouseDown(button, **kwargs)
+        self.presses.append(("button", button))
+
+
+@pytest.mark.parametrize(
+    "context",
+    [
+        {"text_focus": True, "ime_composing": False},
+        {"text_focus": False, "ime_composing": True},
+        {"text_focus": None, "ime_composing": False},
+        {"text_focus": False, "ime_composing": None},
+        {"text_focus": None, "ime_composing": None},
+        {"text_focus": True, "ime_composing": False, "text_control": "select_all"},
+        {"text_focus": True, "ime_composing": False, "text_control": "submit"},
+    ],
+)
+def test_modifier_gesture_refuses_unsafe_explicit_context_before_any_device_input(context):
+    from clef_use.input_ir import GestureInput
+
+    device = GestureDevice()
+    adapter = DesktopAction(device)
+    result = adapter.execute_input(
+        GestureInput(
+            points=((0.2, 0.3), (0.6, 0.3)),
+            surface=(0.1, 0.1, 0.8, 0.8),
+            modifiers=("shift",),
+            duration=0.001,
+        ),
+        Frame(Image.new("RGB", (100, 100))),
+        Event(),
+        context=context,
+        context_guard=lambda: True,
+    )
+    assert not result.ok
+    assert device.position == (0, 0) and device.presses == [] and device.strokes == []
+    assert not device.held and not device.buttons and not adapter.keys and not adapter.buttons
+
+
+@pytest.mark.parametrize(
+    "context,modifiers",
+    [
+        ({"text_focus": False, "ime_composing": False}, ("shift",)),
+        (None, ("shift",)),
+        ({"text_focus": True, "ime_composing": True}, ()),
+    ],
+)
+def test_gesture_admission_preserves_idle_shortcut_and_existing_pointer_paths(context, modifiers):
+    from clef_use.input_ir import GestureInput
+
+    device = GestureDevice()
+    adapter = DesktopAction(device)
+    result = adapter.execute_input(
+        GestureInput(
+            points=((0.2, 0.3), (0.6, 0.3)),
+            surface=(0.1, 0.1, 0.8, 0.8),
+            modifiers=modifiers,
+            duration=0.001,
+        ),
+        Frame(Image.new("RGB", (100, 100))),
+        Event(),
+        context=context,
+        context_guard=lambda: True,
+    )
+    assert result.ok
+    assert device.strokes == [((20, 30), (60, 30), frozenset(modifiers))]
+    assert device.presses == [("key", key) for key in modifiers] + [("button", "left")]
+    assert not device.held and not device.buttons and not adapter.keys and not adapter.buttons
+
+
 def test_out_of_surface_gesture_and_unbounded_holds_refuse_before_input():
     from clef_use.input_ir import GestureInput, KeyInput
 

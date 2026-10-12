@@ -171,6 +171,8 @@ use its selected user profile. Inspect source/shadow status before moving guides
 
 Cancel only your own session; verify owned input release. Exact Unicode clipboard
 insertion and IME composition are distinct; active or unknown IME blocks shortcuts.
+With an explicit input context, modifier gestures also require known idle IME and
+no text focus before moving or pressing. Ordinary pointer gestures remain separate.
 X11 left/middle/right buttons and wheel directions follow the current OS pointer
 mapping. Disabled logical buttons refuse input. Normal release, independent abort
 and guardian recovery release the physical button acknowledged at press.

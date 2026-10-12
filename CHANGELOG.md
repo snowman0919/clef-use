@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Apply explicit text-focus and IME shortcut guards to modifier gestures before
+  pointer movement, independently of optional post-input transition checks.
 - Preserve exact normalized geometry and conflicting action/confidence/source
   evidence when identifying parser objects; deduplicate only equivalent records.
 - Apply an explicit visual primitive before budgeting structured candidates so
