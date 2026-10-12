@@ -46,6 +46,14 @@ input boundary, and at final readback. Missing settings or conversion range loss
 blocks before input. Existing tolerances still apply to actual application
 readback; conversion does not guarantee arbitrary float precision. Registry v5
 advertises conditional field requirements and value semantics.
+The collector also retains initialized workspace tool references, bounded at 128.
+It reads native `Context.mode` only when context window, workspace and view layer
+match the owning window; it does not translate `Object.mode`. The provider emits
+`active_tool` for exactly one configured VIEW_3D tool matching that mode, with
+process-bound workspace and complete VIEW_3D area identities. Missing, ambiguous
+or malformed evidence stays UNKNOWN. This is configuration for those areas;
+focused editor and effective dispatch remain explicitly UNKNOWN. Reading never
+creates, refreshes or activates a tool and does not enable an operation.
 It also inventories relevant merged user keymaps, preserving inactive and duplicate
 entries, native tri-state modifiers and a retained-content digest. The provider
 publishes this as `keymap_inventory`, never effective `keymap`/`keymap_version`.

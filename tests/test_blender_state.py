@@ -64,6 +64,113 @@ def test_partial_scene_evidence_preserves_numbers_without_inventing_input_contex
         assert state.fact(name).validity == FactValidity.UNKNOWN
 
 
+def active_tool_document(context_mode="EDIT_MESH"):
+    document = viewport_document()
+    window = document["windows"][0]
+    window.update(
+        workspace_identity="123:20",
+        tool_context_mode=context_mode,
+        active_object_mode="EDIT",
+        workspace_tools=[
+            {"space_type": "VIEW_3D", "mode": "OBJECT", "idname": "builtin.select_box"},
+            {"space_type": "VIEW_3D", "mode": "EDIT_MESH", "idname": "builtin.extrude_region"},
+        ],
+    )
+    window["areas"][0]["id"] = "123:19"
+    return document
+
+
+def test_active_tool_uses_bound_context_mode_without_claiming_editor_focus():
+    document = active_tool_document()
+    window = document["windows"][0]
+    extra = copy.deepcopy(window["areas"][0])
+    extra["id"] = "123:21"
+    window["areas"].append(extra)
+    state = compile_document(document)
+    assert state.require("active_tool") == {
+        "workspace_identity": "123:20",
+        "space_type": "VIEW_3D",
+        "context_mode": "EDIT_MESH",
+        "idname": "builtin.extrude_region",
+        "area_ids": ["123:19", "123:21"],
+        "focused_editor": "UNKNOWN",
+        "effective_dispatch": "UNKNOWN",
+    }
+    assert state.require("mode") == "EDIT"
+    for name in ("editor", "keymap", "popup", "text_focus", "ime_composing", "loading"):
+        assert state.fact(name).validity == FactValidity.UNKNOWN
+
+
+@pytest.mark.parametrize("mode", ["OBJECT", "EDIT_MESH", "SCULPT", "PAINT_VERTEX"])
+def test_active_tool_matches_native_context_modes_without_object_mode_mapping(mode):
+    document = active_tool_document(mode)
+    document["windows"][0]["workspace_tools"] = [
+        {"space_type": "VIEW_3D", "mode": mode, "idname": "custom.observed_tool"}
+    ]
+    assert compile_document(document).require("active_tool")["context_mode"] == mode
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"workspace_identity": "124:20"},
+        {"workspace_identity": "123:0"},
+        {"workspace_identity": "123:\uff12\uff10"},
+        {"workspace_identity": None},
+        {"tool_context_mode": None},
+        {"tool_context_mode": False},
+        {"tool_context_mode": "edit_mesh"},
+        {"tool_context_mode": "EDIT"},
+        {"workspace_tools": []},
+        {"workspace_tools": None},
+        {"workspace_tools": [{"mode": "EDIT_MESH", "idname": "builtin.select_box"}]},
+        {"workspace_tools": [{"space_type": "VIEW_3D", "mode": "EDIT_MESH", "idname": ""}]},
+        {"workspace_tools": [{"space_type": "VIEW_3D", "mode": "EDIT_MESH", "idname": "x\0y"}]},
+        {"workspace_tools": [{"space_type": "VIEW_3D", "mode": "EDIT_MESH", "idname": "x" * 257}]},
+    ],
+)
+def test_incomplete_or_misbound_tool_evidence_stays_unknown(change):
+    document = active_tool_document()
+    document["windows"][0].update(change)
+    state = compile_document(document)
+    assert state.fact("active_tool").validity == FactValidity.UNKNOWN
+    assert state.require("properties")["Cube"]["location_x"] == 2.5
+
+
+@pytest.mark.parametrize(
+    "kind", ["duplicate_tool", "wrong_space", "no_area", "duplicate_area", "foreign_area"]
+)
+def test_active_tool_cannot_choose_ambiguous_or_unassociated_editor_evidence(kind):
+    document = active_tool_document()
+    window = document["windows"][0]
+    if kind == "duplicate_tool":
+        window["workspace_tools"].append(dict(window["workspace_tools"][-1]))
+    elif kind == "wrong_space":
+        window["workspace_tools"][-1]["space_type"] = "IMAGE_EDITOR"
+    elif kind == "no_area":
+        window["areas"] = []
+    elif kind == "duplicate_area":
+        window["areas"].append(copy.deepcopy(window["areas"][0]))
+    else:
+        window["areas"][0]["id"] = "124:19"
+    assert compile_document(document).fact("active_tool").validity == FactValidity.UNKNOWN
+
+
+def test_tool_inventory_at_limit_keeps_last_match_and_overflow_stays_unknown():
+    from clef_use.blender_snapshot import MAX_WORKSPACE_TOOLS
+
+    document = active_tool_document()
+    window = document["windows"][0]
+    match = window["workspace_tools"][-1]
+    window["workspace_tools"] = [
+        {"space_type": "IMAGE_EDITOR", "mode": "VIEW", "idname": ""}
+        for _ in range(MAX_WORKSPACE_TOOLS - 1)
+    ] + [match]
+    assert compile_document(document).require("active_tool")["idname"] == match["idname"]
+    window["workspace_tools"].append(dict(match))
+    assert compile_document(document).fact("active_tool").validity == FactValidity.UNKNOWN
+
+
 def test_selection_identity_tracks_same_name_object_replacement():
     document = snapshot()
     obj = document["windows"][0]["objects"]["Cube"]

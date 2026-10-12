@@ -109,6 +109,12 @@ effective keymap and global busy/idle state remain unknown. An empty operator li
 does not prove absence. All six operations still return `BLOCKED` when their
 required verified facts are missing, including with this partial observer.
 
+`active_tool` identifies a configured VIEW_3D workspace tool for the independently
+bound native context mode, with workspace and observed area IDs. Missing or
+ambiguous evidence stays UNKNOWN. Focused editor and effective dispatch remain
+UNKNOWN; this fact alone cannot authorize input. The collector reads initialized
+references without creating or refreshing tools and refuses more than 128.
+
 `keymap_inventory` preserves relevant merged user bindings, duplicate/inactive
 entries, tri-state modifiers (`-1` means any) and a content digest. It is raw
 inventory, not the effective `keymap` or `keymap_version`. `editor_layout` maps

@@ -15,6 +15,9 @@ global busy/idle facts are intentionally absent. A caller must independently
 bind the process/window and freshness before consuming even the observed facts.
 ``keymap_inventory`` reads the owning manager's merged user configuration, not
 effective dispatch. Its digest identifies retained content, not input authority.
+``workspace_tools`` preserves initialized tool references for every observed
+workspace mode. ``tool_context_mode`` is read only when the native context's
+window, workspace and view layer match the owning window; it is not editor focus.
 
 The document includes all windows (up to 8), all selected objects (64 across
 windows), and all area regions (128 across windows), refusing overflow rather
@@ -44,6 +47,7 @@ MAX_SHADING_POLYGONS = 100000
 MAX_KEYMAPS = 512
 MAX_SCANNED_KEYMAP_ITEMS = 16384
 MAX_RETAINED_KEYMAP_ITEMS = 256
+MAX_WORKSPACE_TOOLS = 128
 KEYMAP_OPERATORS = frozenset(
     {
         "transform.translate",
@@ -161,8 +165,17 @@ class KeymapInventory(TypedDict):
     content_sha256: str
 
 
+class WorkspaceToolSnapshot(TypedDict):
+    idname: str
+    space_type: str
+    mode: str
+
+
 class WindowSnapshot(TypedDict):
     id: str
+    workspace_identity: str
+    tool_context_mode: str | None
+    workspace_tools: list[WorkspaceToolSnapshot]
     width: int
     height: int
     scene_id: str
@@ -249,6 +262,34 @@ def _text(value: Any) -> str:
     if not isinstance(value, str) or "\x00" in value:
         raise SnapshotUnavailable("Invalid native text")
     return value
+
+
+def _workspace_tools(values: Iterable[Any]) -> list[WorkspaceToolSnapshot]:
+    """Read initialized references only; never create or refresh native tools."""
+    return [
+        {
+            "idname": _text(tool.idname),
+            "space_type": _enum(tool.space_type),
+            "mode": _enum(tool.mode),
+        }
+        for tool in _bounded(values, MAX_WORKSPACE_TOOLS, "workspace tools")
+    ]
+
+
+def _tool_context_mode(context: Any, window: Any) -> str | None:
+    """Keep native context modes distinct from Object.mode and editor focus."""
+    for name, owned in (
+        ("window", window),
+        ("workspace", window.workspace),
+        ("view_layer", window.view_layer),
+    ):
+        current = getattr(context, name, None)
+        if current is None or _integer(current.as_pointer(), minimum=1) != _integer(
+            owned.as_pointer(), minimum=1
+        ):
+            return None
+    mode = getattr(context, "mode", None)
+    return _enum(mode) if mode is not None else None
 
 
 def _boolean(value: Any) -> bool:
@@ -484,6 +525,7 @@ def collect_snapshot() -> BlenderSnapshot:
     windows: list[WindowSnapshot] = []
     window_ids: set[str] = set()
     keymaps: dict[str, KeymapInventory | None] = {}
+    workspace_tools: dict[str, list[WorkspaceToolSnapshot]] = {}
     selected_count = region_count = modal_count = 0
     for manager, window in native_windows:
         window_id = _identity(pid, window.as_pointer())
@@ -493,6 +535,10 @@ def collect_snapshot() -> BlenderSnapshot:
         manager_id = _identity(pid, manager.as_pointer())
         if manager_id not in keymaps:
             keymaps[manager_id] = _keymap_inventory(getattr(manager, "keyconfigs", None))
+        workspace = window.workspace
+        workspace_identity = _identity(pid, workspace.as_pointer())
+        if workspace_identity not in workspace_tools:
+            workspace_tools[workspace_identity] = _workspace_tools(workspace.tools)
         scene, layer = window.scene, window.view_layer
         layer_objects = _bounded(layer.objects, MAX_VIEW_LAYER_OBJECTS, "view layer objects")
         selected = _bounded(
@@ -554,6 +600,9 @@ def collect_snapshot() -> BlenderSnapshot:
         windows.append(
             {
                 "id": window_id,
+                "workspace_identity": workspace_identity,
+                "tool_context_mode": _tool_context_mode(bpy.context, window),
+                "workspace_tools": workspace_tools[workspace_identity],
                 "width": _integer(window.width, minimum=1),
                 "height": _integer(window.height, minimum=1),
                 "scene_id": _name(scene.name_full),

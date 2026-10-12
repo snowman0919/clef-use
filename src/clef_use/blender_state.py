@@ -10,6 +10,7 @@ import hashlib
 import json
 import math
 import os
+import re
 import socket
 import stat
 import time
@@ -18,6 +19,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .blender_observer import MAX_RESPONSE_BYTES, peer_credentials, private_directory, read_message
+from .blender_snapshot import MAX_WORKSPACE_TOOLS
 from .state import BlenderSceneUnits, FactValidity, StateFact, StateSource
 
 
@@ -215,6 +217,72 @@ def _view_pose_revision(areas):
     return hashlib.sha256(json.dumps(content, separators=(",", ":")).encode()).hexdigest()
 
 
+def _rna_identity_matches(value, pid):
+    if not isinstance(value, str) or len(value) > 256:
+        return False
+    prefix = f"{pid}:"
+    suffix = value.removeprefix(prefix)
+    return (
+        value.startswith(prefix)
+        and suffix.isascii()
+        and suffix.isdecimal()
+        and not suffix.startswith("0")
+    )
+
+
+def _configured_view3d_tool(window, pid):
+    """Resolve a workspace tool for the bound mode, without claiming UI focus."""
+    workspace = window.get("workspace_identity")
+    mode = window.get("tool_context_mode")
+    tools = window.get("workspace_tools")
+
+    def enum(value):
+        return (
+            isinstance(value, str)
+            and len(value) <= 128
+            and re.fullmatch(r"[A-Z][A-Z0-9_]*", value) is not None
+        )
+
+    if not (
+        _rna_identity_matches(workspace, pid)
+        and enum(mode)
+        and isinstance(tools, list)
+        and len(tools) <= MAX_WORKSPACE_TOOLS
+    ):
+        return None
+    matching = []
+    for tool in tools:
+        if not (
+            isinstance(tool, dict)
+            and enum(tool.get("space_type"))
+            and enum(tool.get("mode"))
+            and isinstance(tool.get("idname"), str)
+            and len(tool["idname"]) <= 256
+            and "\x00" not in tool["idname"]
+        ):
+            return None
+        if tool["space_type"] == "VIEW_3D" and tool["mode"] == mode:
+            matching.append(tool)
+    areas = [area["id"] for area in window["areas"] if area["type"] == "VIEW_3D"]
+    if (
+        len(matching) != 1
+        or not matching[0]["idname"]
+        or not areas
+        or not all(_rna_identity_matches(identity, pid) for identity in areas)
+        or len(set(areas)) != len(areas)
+    ):
+        return None
+    return {
+        "workspace_identity": workspace,
+        "space_type": "VIEW_3D",
+        "context_mode": mode,
+        "idname": matching[0]["idname"],
+        "area_ids": areas,
+        "focused_editor": "UNKNOWN",
+        "effective_dispatch": "UNKNOWN",
+    }
+
+
 def compile_snapshot(
     snapshot, *, pid, frame, version, started_at, completed_at, client_bounds=None
 ):
@@ -279,6 +347,9 @@ def compile_snapshot(
     inventory = window.get("keymap_inventory")
     if inventory is not None:
         result["keymap_inventory"] = fact(inventory)
+    tool = _configured_view3d_tool(window, pid)
+    if tool is not None:
+        result["active_tool"] = fact(tool)
     if window["active_object_mode"] is not None:
         result["mode"] = fact(window["active_object_mode"])
     try:
@@ -290,13 +361,7 @@ def compile_snapshot(
                 **{name: settings[name] for name in ("system", "length_unit", "scale_length")},
             }
         )
-        native_scene = scene_identity.removeprefix(f"{pid}:")
-        if (
-            not scene_identity.startswith(f"{pid}:")
-            or not native_scene.isascii()
-            or not native_scene.isdecimal()
-            or native_scene.startswith("0")
-        ):
+        if not _rna_identity_matches(scene_identity, pid):
             raise ValueError("scene identity is not bound to observer process")
     except (KeyError, TypeError, ValueError):
         pass  # Partial snapshots cannot establish the length conversion.

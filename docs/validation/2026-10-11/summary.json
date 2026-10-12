@@ -2764,6 +2764,12 @@
       "sha256": "e527ce45bad025f739ef3fc89136a569a6a2cdce22081bcd05be09da5256b80d",
       "scope": "FinalIntegrated1135PASS/34SKIP includes viewport andunownedmodifierfix. Actual old requested a/native b/okTrue; priorcandidate externalShift/Ctrl transformedliteral a/okTrue. New8nativecases verify type/press/hotkey/implicitShift exactnormal/refusedremap withnoevents, physicalcoderelease aftermappingmutation andexternala/Shift/Ctrlheldpreservation. Initial3mappingRED+2modifierRED; scoped31PASSincludingold9nativepointercases. Prior1133candidate retained. Ownedcleanup andearlierfocussetupfails retained. Windows/Darwin/concurrentremapatomicity/legacycrashguardian/wholeE2E/model/performance NOT_ESTABLISHED."
     },
+    "blender_active_tool": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-active-tool.json",
+      "sha256": "6ca75aa181a74d20fd172a9477775a07068e825c64624f00b5a646788cac73e2",
+      "scope": "Integrated1177PASS/34SKIP. Actual factory Blender OBJECT/EDIT_MESH canonical collector/socket/peercredentials/XRes/capture/provider/StateCompiler toolfact matches native configuredrefs and bound workspace/context/areaidentities. Focus/dispatch and otherguardsUNKNOWN; all6operationfamiliesBLOCKED/input0 eachmode. Sourcehashesstable/ownedcleanup. SourceCLI/stdio advertise scopedtool; registry5/schemaunchanged/defaultBLOCKED. No installed/harness/model/wholeE2E/performance/releaseclaim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -3004,7 +3010,8 @@
     "input-authority-and-clipboard.json",
     "property-scene-units.json",
     "viewport-input-baseline.json",
-    "x11-legacy-key-binding.json"
+    "x11-legacy-key-binding.json",
+    "blender-active-tool.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

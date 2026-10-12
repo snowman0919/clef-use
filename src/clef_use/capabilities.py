@@ -152,6 +152,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                     "keymap_inventory",
                     "selection_identities",
                     "scene_units",
+                    "active_tool",
                 ],
                 "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; "
                 "effective dispatch remains UNKNOWN",
@@ -159,6 +160,9 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "ID.session_uid; unavailable or incoherent identity remains UNKNOWN",
                 "scene_units": "Process-bound scene identity, length system/default unit and "
                 "scale; does not establish field focus, modal unit or coordinate space",
+                "active_tool": "Configured VIEW_3D workspace tool for the independently bound "
+                "current window context mode and observed area IDs; focused editor and effective "
+                "input dispatch remain UNKNOWN",
                 "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
                 "input_authority": "No operation readiness inferred from partial snapshots",
             }

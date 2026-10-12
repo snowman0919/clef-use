@@ -97,6 +97,11 @@ viewport 和已观察到的 modal operator，不修改 scene 或执行 operator�
 IME、有效 keymap 和整体 busy/idle 状态仍然未知。空 operator 列表也不能证明不存在。
 即使配置了此部分 observer，只要缺少必要的已验证状态，六个 operation 仍返回 `BLOCKED`。
 
+`active_tool` 表示独立绑定的 native context mode 下配置的 VIEW_3D workspace tool，
+并保留 workspace 和已观察到的 area ID。缺失或歧义时保持 UNKNOWN。
+focused editor 和有效 dispatch 也保持 UNKNOWN，不能仅凭此值授权输入。
+collector 只读取已初始化的引用，不创建或刷新 tool，超过 128 个时拒绝读取。
+
 `keymap_inventory` 保留合并 user keymap 中的相关 binding、重复和禁用项、
 tri-state modifier（`-1` 表示 any）及内容 digest。它是原始列表，不是代表实际
 dispatch 的 `keymap` 或 `keymap_version`。`editor_layout` 将 area/region 转为屏幕

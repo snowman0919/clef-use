@@ -108,6 +108,11 @@ viewport・観測された modal operator を読み取り、scene の変更や o
 空の operator 一覧も不在の証拠にはなりません。この部分観測器を設定しても、必要な
 検証済み状態がなければ六つの operation はすべて `BLOCKED` を返します。
 
+`active_tool` は独立に関連付けた native context mode の VIEW_3D workspace tool と、
+workspace・観測済み area ID を示します。欠落や曖昧さは UNKNOWN のままです。
+focused editor と有効な dispatch も UNKNOWN で、この値だけでは入力を許可しません。
+collector は初期化済み参照だけを読み、tool の作成・更新を行わず、128 個超を拒否します。
+
 `keymap_inventory` は統合された user keymap の関連 binding、重複・無効項目、
 tri-state modifier（`-1` は any）、内容 digest を保持する生の一覧です。
 有効な dispatch を示す `keymap` や `keymap_version` ではありません。

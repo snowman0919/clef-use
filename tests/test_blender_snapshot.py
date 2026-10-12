@@ -433,3 +433,129 @@ def test_inventory_exact_caps_and_overflow_refuse_without_truncation(boundary):
         maps[1].keymap_items.append(keymap_item())
     with pytest.raises(SnapshotUnavailable):
         _keymap_inventory(keyconfigs(maps))
+
+
+def workspace_tool(idname="builtin.select_box", space_type="VIEW_3D", mode="OBJECT"):
+    return SimpleNamespace(idname=idname, space_type=space_type, mode=mode)
+
+
+def native_reference(pointer):
+    return SimpleNamespace(as_pointer=lambda: pointer)
+
+
+def tool_context():
+    window = SimpleNamespace(
+        as_pointer=lambda: 11,
+        workspace=native_reference(22),
+        view_layer=native_reference(33),
+    )
+    context = SimpleNamespace(
+        window=native_reference(11),
+        workspace=native_reference(22),
+        view_layer=native_reference(33),
+        mode="EDIT_MESH",
+    )
+    return context, window
+
+
+def test_workspace_tools_preserve_mode_order_duplicates_and_uninitialized_identifiers():
+    from clef_use.blender_snapshot import _workspace_tools
+
+    observed = [
+        workspace_tool(mode="EDIT_MESH"),
+        workspace_tool(),
+        workspace_tool("", mode="SCULPT"),
+        workspace_tool("custom.select", mode="EDIT_MESH"),
+        workspace_tool("custom.node", space_type="NODE_EDITOR", mode="DEFAULT"),
+    ]
+    assert _workspace_tools(observed) == [
+        {"idname": "builtin.select_box", "space_type": "VIEW_3D", "mode": "EDIT_MESH"},
+        {"idname": "builtin.select_box", "space_type": "VIEW_3D", "mode": "OBJECT"},
+        {"idname": "", "space_type": "VIEW_3D", "mode": "SCULPT"},
+        {"idname": "custom.select", "space_type": "VIEW_3D", "mode": "EDIT_MESH"},
+        {"idname": "custom.node", "space_type": "NODE_EDITOR", "mode": "DEFAULT"},
+    ]
+
+
+@pytest.mark.parametrize(
+    "tool",
+    [
+        workspace_tool(idname=None),
+        workspace_tool(idname="custom.\x00tool"),
+        workspace_tool(space_type="view3d"),
+        workspace_tool(mode=None),
+        workspace_tool(mode="Object Mode"),
+    ],
+)
+def test_workspace_tools_refuse_malformed_native_text_and_enum(tool):
+    from clef_use.blender_snapshot import SnapshotUnavailable, _workspace_tools
+
+    with pytest.raises(SnapshotUnavailable):
+        _workspace_tools([tool])
+
+
+def test_workspace_tool_cap_accepts_exact_bound_and_refuses_overflow_without_truncation():
+    from clef_use.blender_snapshot import SnapshotUnavailable, _workspace_tools
+
+    tools = [workspace_tool(idname=f"custom.tool_{i}") for i in range(130)]
+    assert _workspace_tools(tools[:128]) == [vars(tool) for tool in tools[:128]]
+    unbounded = iter(tools)
+    with pytest.raises(SnapshotUnavailable, match="workspace tools limit"):
+        _workspace_tools(unbounded)
+    assert next(unbounded).idname == "custom.tool_129"
+
+
+def test_tool_context_mode_binds_native_pointers_not_python_wrapper_identity():
+    from clef_use.blender_snapshot import _tool_context_mode
+
+    context, window = tool_context()
+    assert context.window is not window
+    assert context.workspace is not window.workspace
+    assert _tool_context_mode(context, window) == "EDIT_MESH"
+    context.mode = "SCULPT"
+    assert _tool_context_mode(context, window) == "SCULPT"
+
+
+@pytest.mark.parametrize("name", ["window", "workspace", "view_layer"])
+def test_tool_context_mode_requires_every_owning_window_context_binding(name):
+    from clef_use.blender_snapshot import _tool_context_mode
+
+    context, window = tool_context()
+    setattr(context, name, native_reference(99))
+    assert _tool_context_mode(context, window) is None
+
+
+@pytest.mark.parametrize("name", ["window", "workspace", "view_layer", "mode"])
+def test_missing_native_context_never_falls_back_to_object_mode(name):
+    from clef_use.blender_snapshot import _tool_context_mode
+
+    context, window = tool_context()
+    window.view_layer.objects = SimpleNamespace(active=SimpleNamespace(mode="OBJECT"))
+    delattr(context, name)
+    assert _tool_context_mode(context, window) is None
+
+
+def test_context_mode_does_not_read_mode_from_an_unbound_window():
+    from clef_use.blender_snapshot import _tool_context_mode
+
+    context, window = tool_context()
+
+    class ForeignContext:
+        window = native_reference(99)
+        workspace = context.workspace
+        view_layer = context.view_layer
+
+        @property
+        def mode(self):
+            raise AssertionError("foreign context mode cannot establish this window's tool")
+
+    assert _tool_context_mode(ForeignContext(), window) is None
+
+
+def test_tool_context_mode_rejects_malformed_bound_native_enum():
+    from clef_use.blender_snapshot import SnapshotUnavailable, _tool_context_mode
+
+    context, window = tool_context()
+    context.mode = "Edit Mesh"
+    with pytest.raises(SnapshotUnavailable):
+        _tool_context_mode(context, window)

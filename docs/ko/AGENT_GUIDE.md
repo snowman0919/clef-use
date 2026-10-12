@@ -108,6 +108,11 @@ viewport·관찰된 modal operator를 읽으며 scene을 변경하거나 operato
 빈 operator 목록도 부재 증거가 아닙니다. 이 부분 관측기를 설정해도 필요한 검증 상태가
 없으면 6개 operation 모두 `BLOCKED`를 반환합니다.
 
+`active_tool`은 독립적으로 연결한 native context mode에 설정된 VIEW_3D workspace
+도구와 workspace·관찰된 area ID를 제공합니다. 누락되거나 모호하면 UNKNOWN입니다.
+focused editor와 실제 dispatch도 UNKNOWN으로 유지하며, 이 값만으로 입력을 허용하지
+않습니다. 관측기는 초기화된 참조만 읽고 도구를 생성·갱신하지 않으며, 128개 초과를 거부합니다.
+
 `keymap_inventory`는 병합된 사용자 키맵의 관련 바인딩, 중복·비활성 항목,
 tri-state modifier(`-1`은 any), 내용 digest를 보존합니다. 이는 원시 목록이며
 실제 dispatch를 나타내는 `keymap`이나 `keymap_version`이 아닙니다.

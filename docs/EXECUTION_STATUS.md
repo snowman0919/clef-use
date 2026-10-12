@@ -1,5 +1,34 @@
 # Reactive runtime execution status
 
+**OBSERVED / configured Blender tool:** the canonical read-only collector and
+provider now supply scoped `active_tool` evidence. Native `Context.mode` is used
+only when context window, workspace and view layer match the owning window;
+`Object.mode` is not translated. Exactly one configured VIEW_3D reference and
+complete process-bound area IDs are required. Missing, malformed, ambiguous or
+overflowing evidence stays UNKNOWN; focused editor and effective dispatch remain
+UNKNOWN even when this configuration fact is VALID. No product context override,
+tool creation, refresh or operator was added.
+
+An owned authenticated factory Blender 5.2 component exercised the actual UI
+collector, Unix socket/peer credentials, XRes foreground/client binding, capture,
+provider and State Compiler. OBJECT and EDIT_MESH facts matched independent RNA
+tool references and identities, including native Object.mode EDIT versus context
+mode EDIT_MESH. Nine other guard facts remained UNKNOWN; each of the six operation
+families returned BLOCKED in both modes with no input executor call. One private
+focus setup and one fixed EDIT fixture setup were recorded separately. Source
+hashes remained unchanged; both owned children exited and their sockets were
+removed. Production process existence was checked without reading its scene.
+
+The integrated source passed **1177 tests / 34 skipped / 41 warnings** in 58.59
+seconds; scoped checks passed 167 tests. Actual source CLI and stdio MCP discovery
+advertise the scoped fact with identical schemas, registry v5 and unchanged
+default BLOCKED availability. Five changed Python files passed Ruff/format and
+generated-contract checks passed. Other native modes, add-on tools, multiwindow,
+installed-current/harness E2E, models, full-task performance and release remain
+NOT_RUN in this slice. No acceptance status or release gate was promoted. See
+[tool observation evidence](validation/2026-10-11/blender-active-tool.json) and
+[scope decision](decisions/0007-scope-workspace-tool-observations.md).
+
 Date: 2026-10-12. Baseline: `b3f0b23309a7c7ea6a943e0c14e0ae51034552cd`.
 Initial evidence snapshot HEAD: `1c52c80877d94116071107c67454457bbd2da46c`.
 Latest built, installed and CI-verified implementation: `4932557` on

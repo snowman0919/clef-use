@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Collect scoped Blender `active_tool` evidence from initialized workspace tools
+  and independently bound native context mode. Preserve area identities and
+  UNKNOWN focus/dispatch; reject ambiguous, malformed or overflowing evidence
+  without creating tools or weakening operation guards.
 - Validate legacy X11 keyboard bindings before input, including implicit Shift.
   Refuse stale mappings without sending a wrong key, retain physical codes for
   release and preserve keys already held outside the legacy action.
