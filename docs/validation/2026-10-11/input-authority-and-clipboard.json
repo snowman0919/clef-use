@@ -1,0 +1,257 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Input authority and clipboard preservation software corrections; owned authenticated native X11 components and controlled Win32 API-boundary regressions. No whole-task E2E, models or production desktop.",
+  "source_base": "cd21c15b01f8f9805c4430019dc64806b3f79ce2",
+  "source_sha256": {
+    "src/clef_use/input_ir.py": "2521b2325bb7443ae9030c059c42f13f2ee564db7932a7541275cc39dac116bd",
+    "src/clef_use/windows_input.py": "a342b59afe308a845488ed7c07fe664c36c7ebee2fdc9604cd83708ac11d805b",
+    "src/clef_use/x11_clipboard.py": "0ff000104f49cd573f8b728bdaafd1684eb13326ef6a777089826271e6d369e8",
+    "tests/test_input_ir.py": "6d61326de69e24d84a5044ce8a9f82ea89cc6bcfea1ee9ac8d405fc93434d4eb",
+    "tests/test_input_ir_native.py": "5b95e05a2e478f62924559809891b2e4351b4d67c5e5baea746b308c1d189e1e",
+    "tests/test_operation_runtime.py": "8dec2ca9b6b794469378cecf7c0cae254618deee1c4ed59e762d4e69f8212391",
+    "tests/test_windows_input.py": "cab49db4f63e54b254b27d1f49e625ddb7ad0f14d142d7d9cacd0262af685b9d"
+  },
+  "context_sampling_native": {
+    "before": {
+      "status": "EXPECTED_GAP",
+      "cases": {
+        "cancel": {
+          "result_ok": false,
+          "native_entry_received_a": true,
+          "native_entry_empty": false,
+          "owned_keys_empty": true,
+          "owned_buttons_empty": true,
+          "native_keyboard_bitmap_zero": true
+        },
+        "deadline": {
+          "result_ok": false,
+          "native_entry_received_a": true,
+          "native_entry_empty": false,
+          "owned_keys_empty": true,
+          "owned_buttons_empty": true,
+          "native_keyboard_bitmap_zero": true
+        }
+      },
+      "source": {
+        "exit_code": 0,
+        "source_sha256": {
+          "operations.py": "c03d8ca654413bad0574c7090403dae0331ecf265b094ec2903de95aeb4f5818",
+          "runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970",
+          "input_ir.py": "2c40c16c3d74502b2275867a149568e81209cba567ad4e4b5f12f7d9f37f60ad",
+          "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+          "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+        },
+        "driver_sha256": "6695812268918b0e4d1bc0b158bc77e2c467f3a018b3cc25d11486174d88aa41"
+      },
+      "private_report_sha256": "b84925a5b9492e6d84647efe53d132af473a838dd34a0e69078e098bf5fab998"
+    },
+    "after": {
+      "status": "PASS",
+      "cases": {
+        "cancel": {
+          "result_ok": false,
+          "native_entry_received_a": false,
+          "native_entry_empty": true,
+          "owned_keys_empty": true,
+          "owned_buttons_empty": true,
+          "native_keyboard_bitmap_zero": true
+        },
+        "deadline": {
+          "result_ok": false,
+          "native_entry_received_a": false,
+          "native_entry_empty": true,
+          "owned_keys_empty": true,
+          "owned_buttons_empty": true,
+          "native_keyboard_bitmap_zero": true
+        }
+      },
+      "source": {
+        "exit_code": 0,
+        "source_sha256": {
+          "operations.py": "c03d8ca654413bad0574c7090403dae0331ecf265b094ec2903de95aeb4f5818",
+          "runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970",
+          "input_ir.py": "2521b2325bb7443ae9030c059c42f13f2ee564db7932a7541275cc39dac116bd",
+          "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+          "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+        },
+        "driver_sha256": "6695812268918b0e4d1bc0b158bc77e2c467f3a018b3cc25d11486174d88aa41"
+      },
+      "private_report_sha256": "c70df8926ba75a6d61d78719c8eaa9dcb711d7ee3a25ea692dc4d021e64dca7a"
+    }
+  },
+  "windows_api_boundary": {
+    "classification": "OBSERVED_API_BOUNDARY_COMPONENT",
+    "before": {
+      "classification": "OBSERVED_API_BOUNDARY_COMPONENT",
+      "result": {
+        "ok": false,
+        "reason": "input context guard refused current state",
+        "delivery": null
+      },
+      "guard_checks": [
+        true,
+        false
+      ],
+      "acknowledged_utf16_units": [
+        97,
+        98,
+        99
+      ],
+      "native_api_events": [
+        [
+          1,
+          97,
+          4
+        ],
+        [
+          1,
+          97,
+          6
+        ],
+        [
+          1,
+          98,
+          4
+        ],
+        [
+          1,
+          98,
+          6
+        ],
+        [
+          1,
+          99,
+          4
+        ],
+        [
+          1,
+          99,
+          6
+        ]
+      ],
+      "owned_keys": [],
+      "owned_unicode_units": [],
+      "limitation": "Controlled Win32 API fixture on Linux; not native Windows execution."
+    },
+    "after": {
+      "classification": "OBSERVED_API_BOUNDARY_COMPONENT",
+      "result": {
+        "ok": false,
+        "reason": "input context guard refused current state",
+        "delivery": null
+      },
+      "guard_checks": [
+        true,
+        true,
+        false
+      ],
+      "acknowledged_utf16_units": [
+        97
+      ],
+      "native_api_events": [
+        [
+          1,
+          97,
+          4
+        ],
+        [
+          1,
+          97,
+          6
+        ]
+      ],
+      "owned_keys": [],
+      "owned_unicode_units": [],
+      "limitation": "Controlled Win32 API fixture on Linux; not native Windows execution."
+    },
+    "red_regressions": {
+      "failed": 9,
+      "log_sha256": "b3254c8a3756553e7a860dc6d80d870fc8e5d757834bc42ba025f914dd3b6800"
+    },
+    "covered": [
+      "ASCII and Unicode prefix",
+      "changed trusted context",
+      "changed native geometry",
+      "unowned human Shift preserved",
+      "expired deadline",
+      "invalid UTF-16 refuses the entire payload before prefix input"
+    ],
+    "native_windows": "NOT_RUN: current patch was exercised on Linux with a controlled Win32 API fixture; historical Windows installation evidence does not certify it."
+  },
+  "clipboard_native": {
+    "before": {
+      "native_armed_receipt_observed": true,
+      "paste_key_attempts": 0,
+      "previous_supported_text_restored_before_native_read": false,
+      "unresolved_reported": true,
+      "private_report_sha256": "19e4a3c2206a7227f1030d2c913f43106fe2956bfcbfe4dfb0f2ea5f97cfa3b3"
+    },
+    "after": {
+      "scope": "Authenticated private X11 clipboard lifecycle component; no model/E2E or production desktop input",
+      "native": {
+        "armed_cancel_before_trigger_restores_exact_snapshot": true,
+        "armed_deadline_before_trigger_restores_exact_snapshot": true,
+        "concurrent_distinct_owner_preserved": true,
+        "concurrent_identical_owner_preserved": true,
+        "missing_native_recovery_ack_stays_unresolved": true,
+        "unknown_possible_trigger_retains_literal_until_native_consumption": true,
+        "direct_transfer_paste_key_attempts": 0,
+        "canonical_caller_cancel_before_v_restores": true,
+        "canonical_caller_cancel_v_key_events": 0,
+        "canonical_caller_arm_error_before_v_restores": true,
+        "canonical_caller_arm_error_v_key_events": 0,
+        "canonical_caller_possible_v_error_v_key_events": 1,
+        "canonical_caller_possible_v_error_retains_until_native_consumption": true,
+        "canonical_caller_guardian_reaped": true,
+        "all_private_providers_reaped": true
+      },
+      "native_report_sha256": "c7833cbc7c68a56ebb9b6e298664307a89f544e145d26f3e35e316f779f1480b",
+      "program_sha256": "ae74767f2b41d8b872fd7200cf528d1e2676e9658a35429d489e158c0bd114bc",
+      "source_sha256": "0ff000104f49cd573f8b728bdaafd1684eb13326ef6a777089826271e6d369e8",
+      "before_report": "/tmp/clef-x11-pretrigger-cancel-audit-20261012-_qifh7ek/native-button-evidence.json",
+      "cleanup": "Every private clipboard provider waited; authenticated Xvfb waited; own socket absence assertion passed"
+    },
+    "after_report_sha256": "7a214c92132e7ee65fae784457479316e68754f1a76aaf2e98336d06ab713101",
+    "caller_contract": "Explicit recovery only before the first V OS request attempt; release owned modifiers first. Bounded independent 0.5-second cleanup deadline. Native restored/new-owner ACK required. Possible V delivery, missing ACK and ordinary armed EOF remain conservative; concurrent owner never reacquired.",
+    "test_format_note": "Final test file differs from authenticated component receipt only by Ruff string-delimiter formatting. Integrated full suite executes the final committed test source."
+  },
+  "context_sampling_red": {
+    "failed": 2,
+    "log_sha256": "624a40e870071a0565fe2bedea4c9d8cc276b7f2d34fc6cdd8b7a04eaaf00677"
+  },
+  "setup_failures_not_counted_as_regressions": {
+    "initial_fake_clock_missing_monotonic_ns_sha256": "2b8a00485d260142569c61da22e418b49be8343136dd3543d005279f2f8b129a",
+    "initial_clipboard_unsupported_format_fixture_sha256": "ed2c692ecb3c29f98778e9220eaae9c505dc86a400bb77496ae051889aa421a6",
+    "initial_tk_internal_focus_oracle_failure_sha256": "40d9eed332c3bf350b775af672945a31aaf71273a36e2146ff6922524bbe2fd3"
+  },
+  "integrated_regression": {
+    "passed": 1074,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 55.63,
+    "log_sha256": "5f0cb55c1d14472d879e04504537ed00644e4ade5bf4fd9a577052a579674601"
+  },
+  "scoped_lint_format": "PASS: seven changed Python files",
+  "generated_contract": {
+    "status": "PASS",
+    "tool_examples": 3,
+    "cli_examples": 11,
+    "published_cli_examples": 198,
+    "published_tool_examples": 12
+  },
+  "native_cleanup": {
+    "owned_home_process_matches": 0,
+    "unreadable_unrelated_process_entries": 419,
+    "owned_private_sockets_absent": true,
+    "owned_x_sockets_absent": true,
+    "production_blender_preserved": true
+  },
+  "not_run": {
+    "whole_task_e2e_and_models": "Owned by other sessions under direct user scope.",
+    "installed_current_harness_e2e": "Not executed in software component slice.",
+    "full_accuracy_reaction_p95_goodput_coverage": "Not measured by these components; no performance or coverage claim.",
+    "windows_darwin_native": "Linux X11 and controlled Win32 API boundary only.",
+    "production_blender_operation": "Partial observer still cannot establish popup/text/IME/effective dispatch/global busy absence; UNKNOWN guards retained."
+  },
+  "acceptance_status_promotions": []
+}

@@ -206,6 +206,40 @@ def test_false_context_guard_refuses_key_before_editor_content_changes():
     assert adapter.gui.text == "" and not adapter.gui.held
 
 
+@pytest.mark.parametrize("interrupt", ["cancel", "deadline"])
+def test_context_sampling_cannot_outlive_input_authorization(monkeypatch, interrupt):
+    from types import SimpleNamespace
+
+    from clef_use import input_ir
+    from clef_use.input_ir import InputExecutor, KeyInput
+
+    adapter, frame, cancelled = setup_input()
+    executor = adapter.input_executor = InputExecutor(adapter.gui, adapter.keys, adapter.buttons)
+    now = [100.0]
+    calls = [0]
+    monkeypatch.setattr(
+        input_ir,
+        "time",
+        SimpleNamespace(monotonic=lambda: now[0], monotonic_ns=lambda: int(now[0] * 1e9)),
+    )
+    monkeypatch.setattr(executor, "_arm", lambda *args: None)
+
+    def sample_context():
+        calls[0] += 1
+        if calls[0] == 2:
+            if interrupt == "cancel":
+                cancelled.set()
+            else:
+                now[0] = 102.0
+        return True
+
+    result = adapter.execute_input(
+        KeyInput(key="a"), frame, cancelled, context_guard=sample_context, deadline=101.0
+    )
+    assert not result.ok
+    assert adapter.gui.text == "" and not adapter.gui.held
+
+
 def test_verified_text_controls_preserve_true_text_focus_and_reject_other_shortcuts():
     from clef_use.input_ir import ChordInput, InputContext, KeyInput
 

@@ -297,28 +297,25 @@ class WindowsInput:
                 return True
         return False
 
-    def type_text(self, text, cancelled, target=None):
+    def type_text(self, text, cancelled, target=None, *, before_input=None):
         if any(ord(character) < 32 for character in text):
             raise ValueError("control characters refused")
+        encoded = text.encode("utf-16-le")
         target = self.ensure_target(target)
         try:
-            for character in text:
+            for index in range(0, len(encoded), 2):
                 if cancelled.is_set():
                     return
-                self.ensure_target(target)
-                encoded = character.encode("utf-16-le")
-                for index in range(0, len(encoded), 2):
-                    if cancelled.is_set():
-                        return
-                    self.ensure_target(target)
-                    unit = int.from_bytes(encoded[index : index + 2], "little")
-                    try:
-                        self._send(Input(type=1, keyboard=KeyboardInput(0, unit, 4, 0, 0)), target)
-                        self.unicode_units.add(unit)
-                        if self.ownership_changed:
-                            self.ownership_changed()
-                    finally:
-                        self.release_text()
+                if before_input is not None:
+                    before_input()
+                unit = int.from_bytes(encoded[index : index + 2], "little")
+                try:
+                    self._send(Input(type=1, keyboard=KeyboardInput(0, unit, 4, 0, 0)), target)
+                    self.unicode_units.add(unit)
+                    if self.ownership_changed:
+                        self.ownership_changed()
+                finally:
+                    self.release_text()
         finally:
             self.release_text()
 

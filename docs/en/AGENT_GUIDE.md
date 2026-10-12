@@ -59,6 +59,12 @@ Missing facts block input. The default screenshot provider cannot assert Blender
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 Capture-derived coordinates and foreground facts retain capture time; slow capture
 or processing cannot renew them. Current provider facts keep their own timestamps.
+Windows literal input validates UTF-16 before sending and rechecks the current
+guard at every native unit. Cancellation/deadline is rechecked after state sampling.
+On X11, confirmed cancellation before the paste attempt releases owned modifiers
+and restores supported prior clipboard formats after native acknowledgement.
+Concurrent copies are preserved. If paste delivery is possible, offered text is
+retained for the queued paste; unacknowledged recovery remains unresolved.
 Blender view-effect readback uses the effective view matrix and perspective mode
 from one complete, unambiguous viewport. Region/layout/projection-only changes do
 not prove orbit/pan; missing pose and ambiguous quad views remain unknown.

@@ -79,9 +79,11 @@ class OperationEditor:
     def keyUp(self, key, **kwargs):
         self.held.discard(key)
 
-    def type_text(self, text, cancelled, target):
-        if self.values["text_focus"] and not cancelled.is_set():
-            self.text += text
+    def type_text(self, text, cancelled, target, *, before_input):
+        for character in text:
+            before_input()
+            if self.values["text_focus"] and not cancelled.is_set():
+                self.text += character
 
     def provide(self, observation, version):
         return {

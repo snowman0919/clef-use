@@ -10,6 +10,7 @@ The private process persists restored text like xsel until ownership changes.
 """
 
 import json
+import math
 import queue
 import select
 import subprocess
@@ -105,6 +106,60 @@ class X11ClipboardTransfer:
     def wait_consumed(self):
         self._await("consumed")
         self.consumed = True
+
+    def cancel_before_trigger(self, *, deadline: float) -> None:
+        """Terminal recovery only when the caller knows no paste was attempted.
+
+        Cancellation and target guards cannot block owned recovery. The caller
+        supplies its explicit cleanup deadline, independently of an expired
+        input deadline. Only a native restoration or new-owner ACK resolves
+        ownership; EOF alone remains conservative after arming.
+        """
+        try:
+            if self.restored or self.owner_changed or self.consumed:
+                self.armed = False
+                return
+            if self.closed:
+                raise ClipboardTransferError("clipboard recovery command pipe already closed")
+            if not math.isfinite(deadline):
+                raise ClipboardTransferError("clipboard recovery deadline invalid")
+            self._send({"cancel_before_trigger": True})
+            while True:
+                remaining = deadline - time.monotonic()
+                if remaining <= 0:
+                    raise ClipboardTransferError(
+                        "clipboard recovery acknowledgement deadline expired"
+                    )
+                try:
+                    message = self.events.get(timeout=remaining)
+                except queue.Empty as exc:
+                    raise ClipboardTransferError(
+                        "clipboard recovery acknowledgement deadline expired"
+                    ) from exc
+                event = message["event"]
+                if event == "restored":
+                    self.restored = True
+                    self.armed = False
+                    return
+                if event == "owner_changed":
+                    self.owner_changed = True
+                    self.armed = False
+                    return
+                if event == "error" and not message.get("ownership_acquired", True):
+                    self.offered = False
+                if event in {"error", "closed"}:
+                    raise ClipboardTransferError(
+                        message.get("reason", "clipboard provider closed before recovery ACK")
+                    )
+        finally:
+            # Do not let the later idempotent close add another input-deadline
+            # wait after this explicitly bounded cleanup attempt.
+            self.closed = True
+            if self.process.stdin and not self.process.stdin.closed:
+                try:
+                    self.process.stdin.close()
+                except (OSError, ValueError):
+                    pass
 
     def close(self):
         if self.closed:
@@ -433,6 +488,15 @@ def _provider():
         elif command.get("arm"):
             armed = True
             emit("armed")
+        elif command.get("cancel_before_trigger"):
+            # This authority comes only from the local caller's positive
+            # knowledge that the paste trigger has never been attempted.
+            if restore():
+                armed = False
+                emit("restored")
+            else:
+                owner_lost = True
+                emit("owner_changed")
         while c.pending_events():
             e = c.next_event()
             if e.type == X.SelectionClear:

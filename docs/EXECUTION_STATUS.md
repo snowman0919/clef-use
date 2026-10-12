@@ -102,6 +102,36 @@ files passed Ruff/format, and generated contract checks passed. Whole-task E2E,
 models, installed-current harness E2E and full p95/goodput/coverage are NOT_RUN in
 this slice. See [identity evidence](validation/2026-10-11/blender-selection-identity.json).
 
+**OBSERVED / input authority and clipboard preservation:** cancellation and
+deadline are checked again after potentially slow state/native queries. Actual
+authenticated private X11 Tk components reproduced the old key delivery after
+cancellation/deadline during sampling; the corrected path delivered no key and
+left the native keyboard released. Windows Unicode now validates the entire
+UTF-16 payload before input and rechecks context, geometry, unowned input and
+deadline before each unit. The controlled Win32 API fixture previously sent
+`abc` after the first unit invalidated the guard; it now sends only `a` and
+refuses further input. Native Windows execution of this patch is NOT_RUN.
+
+An actual native armed clipboard provider previously retained the new literal
+after cancellation with zero paste attempts. Confirmed pre-trigger cancellation
+now releases owned modifiers and restores supported prior contents with a
+bounded independent cleanup deadline and native acknowledgement. Authenticated
+X11 checks covered cancellation/deadline, distinct and identical concurrent
+copies, a stopped provider without ACK, and ordinary armed EOF. Canonical caller
+checks observed zero V events and restoration after pre-trigger cancel/arm error;
+an actual V event followed by a controlled OS error retained the literal until
+native consumption and reported unresolved ownership. No concurrent owner was
+reacquired. Owned providers/guardian/server exited and sockets were removed;
+the exact owned-HOME scan found zero matches, excluding 419 unreadable unrelated
+entries. Production Blender was preserved.
+
+The integrated source passed **1074 tests / 34 skipped / 41 warnings** in 55.63
+seconds. Seven changed Python files passed Ruff/format; generated contracts
+passed. Four-language guides document these boundaries. Whole-task E2E, models,
+installed-current harness E2E and full accuracy/p95/goodput/coverage remain
+NOT_RUN in this software slice; no acceptance or release gate was promoted.
+See [input evidence](validation/2026-10-11/input-authority-and-clipboard.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

@@ -2740,6 +2740,12 @@
       "sha256": "ab71d732b0b66b3437a5ac64e5c5fad60c0ace704b3c36d62ddd564f9684c22a",
       "scope": "Integrated1062PASS/34SKIP. Actual factory Blender old collector missing IDs/fouraxes; current stable publicUID acrossrename, differentUID same-name replacement, completesixproperties. Native Tk old g/Escape delivered afterreplacement; corrected inputboundary refuses both, unchangedidentity stilldelivers. UNKNOWN guards retained. No whole E2E/model/current-installed/performance claim."
     },
+    "input_authority_and_clipboard": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/input-authority-and-clipboard.json",
+      "sha256": "1445b60cd6186db495f1d72ec9014e33f25de8a411261af57a5a20d5951afc2e",
+      "scope": "Integrated1074PASS/34SKIP. Actual authenticated native X11 old key delivery after slow-sampling cancellation/deadline now refused; confirmed pre-paste cancel restores prior supported clipboard with ACK, concurrent owners preserved, possible V delivery retains literal/unresolved. Win32 API boundary old abc after invalidatedguard now only a; nativeWindows NOT_RUN. No whole E2E/model/current-installed/performance claim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2976,7 +2982,8 @@
     "x11-logical-pointer-mapping.json",
     "capture-fact-freshness.json",
     "blender-view-effect-revision.json",
-    "blender-selection-identity.json"
+    "blender-selection-identity.json",
+    "input-authority-and-clipboard.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

@@ -1,5 +1,6 @@
 import ctypes
 from threading import Event
+from types import SimpleNamespace
 
 import pytest
 from PIL import Image
@@ -143,6 +144,64 @@ def test_cancel_or_focus_change_during_text_sends_no_later_character():
             gui.type_text("ab", cancelled)
         assert api.events == [(1, ord("a"), 4), (1, ord("a"), 6)]
         assert not gui.unicode_units
+
+
+@pytest.mark.parametrize("change", ["context", "geometry", "human_input", "deadline"])
+@pytest.mark.parametrize("text", ["abc", "한😀b"])
+def test_typed_unicode_rechecks_each_native_unit_before_later_text(monkeypatch, change, text):
+    from clef_use import input_ir
+    from clef_use.input_ir import InputContext, InputExecutor, TextInput
+
+    api, gui = native()
+    now = [100.0]
+    safe = [True]
+    bounds = [0, 0, 100, 100]
+    human_held = set()
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk in human_held else 0
+    gui.window_rect = lambda _: tuple(bounds)
+    adapter = DesktopAction(gui)
+    executor = adapter.input_executor = InputExecutor(gui, adapter.keys, adapter.buttons)
+    # Event-boundary checks must work independently of watchdog polling.
+    monkeypatch.setattr(executor, "_arm", lambda *args: None)
+    monkeypatch.setattr(input_ir, "time", SimpleNamespace(monotonic=lambda: now[0]))
+    first_unit = ord(text[0])
+
+    def interrupt():
+        if api.events[-1] != (1, first_unit, 4):
+            return
+        if change == "context":
+            safe[0] = False
+        elif change == "geometry":
+            bounds[2] = 90
+        elif change == "human_input":
+            human_held.add(0x10)
+        else:
+            now[0] = 102.0
+
+    api.after_input = interrupt
+    frame = Frame(
+        Image.new("RGB", (100, 100)), foreground_window=100, foreground_bounds=(0, 0, 100, 100)
+    )
+    result = adapter.execute_input(
+        TextInput(text=text),
+        frame,
+        Event(),
+        context_guard=lambda: safe[0],
+        deadline=101.0,
+        context=InputContext(text_focus=True, ime_composing=False),
+    )
+    units = [scan for kind, scan, flags in api.events if kind == 1 and flags == 4]
+    assert not result.ok
+    assert units == [first_unit]
+    assert not gui.unicode_units and not adapter.keys and not adapter.buttons
+    assert human_held == ({0x10} if change == "human_input" else set())
+
+
+def test_invalid_unicode_is_rejected_before_any_prefix_is_inserted():
+    api, gui = native()
+    with pytest.raises(UnicodeEncodeError):
+        gui.type_text("a\ud800", Event())
+    assert api.events == [] and not gui.unicode_units
 
 
 def test_snapshot_target_change_refuses_action_and_control_characters():

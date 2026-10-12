@@ -56,6 +56,10 @@ Blender 使用进程范围的公开 `session_uid`；改名保留 ID，同名对�
 fixture 的通过不能证明 pixels-only 操作成功。
 截图产生的坐标和 foreground 保留捕获时刻；捕获或处理延迟不会更新有效期。
 provider 独立观察的值按各自的时刻判断。
+Windows 字符输入在发送前验证 UTF-16，并在每个 native 单位前重新检查当前 guard。
+状态观察后也会重新检查取消与 deadline。X11 确认在 paste 尝试前取消时，先释放
+自有 modifier，再经 native ACK 恢复支持的原 clipboard 格式；保留用户的并发复制。
+如果 paste 可能已送达，则保留待粘贴文本；没有恢复 ACK 时报告未解决状态。
 Blender view 效果使用单一、完整且无歧义 viewport 的实际 view matrix 和 perspective
 mode。仅 region、layout 或 projection 变化不能证明 orbit/pan；pose 缺失或 quad
 view 有歧义时保持 UNKNOWN。

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Recheck cancellation/deadline after context sampling and before each native
+  Windows Unicode unit. Reject invalid UTF-16 payloads before inserting a prefix.
+- Restore supported X11 clipboard contents on confirmed pre-paste cancellation
+  with an explicit bounded native acknowledgement. Release owned modifiers first,
+  preserve concurrent copies and retain offered text once paste delivery is possible.
 - Require complete stable selection identities across changing operations,
   readback and owned cancellation, including native input boundaries. The Blender
   observer uses process-scoped public session UIDs and exposes all six location/

@@ -61,6 +61,12 @@ scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v4를 �
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.
 캡처에서 얻은 좌표와 foreground는 캡처 시각을 유지합니다. 느린 캡처나 처리가 해당
 상태의 수명을 갱신하지 않으며, provider가 별도로 관측한 값은 자체 시각으로 판정합니다.
+Windows 문자 입력은 전송 전에 UTF-16을 검증하고, 각 native 단위마다 현재 guard를
+재확인합니다. 상태 관측 뒤에도 취소·deadline을 다시 확인합니다. X11에서는 붙여넣기
+시도 전 취소가 확정되면 소유 modifier를 먼저 해제하고, native ACK 뒤에 지원되는
+이전 클립보드 형식을 복원합니다. 사용자의 동시 복사는 보존합니다. 붙여넣기가 이미
+전달됐을 가능성이 있으면 대기 중인 paste를 위해 문자열을 유지하며, 복원 ACK가
+없으면 미해결 상태로 보고합니다.
 Blender의 view 효과는 완전하고 모호하지 않은 단일 viewport의 실제 view matrix와
 perspective mode로 확인합니다. region·레이아웃·projection만 바뀌면 orbit/pan 효과로
 판정하지 않으며, pose가 없거나 quad view가 모호하면 불명 상태를 유지합니다.

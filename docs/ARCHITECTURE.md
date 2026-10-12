@@ -58,6 +58,18 @@ the observed keymap content as well as its version label. Viewport dispatch anch
 the checked editor geometry; the input guard rechecks its editor surface before
 and during a gesture. A changed surface stops execution and releases owned input.
 These guards do not supply missing state or enable the partial Blender provider.
+Context sampling and native queries cannot renew input authority: cancellation
+and deadline are checked again after sampling. Typed Windows Unicode encodes the
+complete payload before input and invokes the current guard before every UTF-16
+unit, including geometry and unowned-input checks. Releases retain their independent
+recovery authority; this does not add automatic IME discovery.
+X11 clipboard input distinguishes provider arming from the first paste-key attempt.
+Before that attempt, cancellation releases owned modifiers and requests restoration
+with a separate explicit 0.5-second cleanup deadline. Only a native restored/new-owner
+acknowledgement resolves ownership; cleanup failure stays unresolved. The provider
+never reacquires ownership over a concurrent copy. Once V may have been delivered,
+offered text remains available for a queued paste, including failed OS acknowledgement
+and parent EOF. This recovery handshake adds no wait to successful input.
 X11 typed and legacy pointer paths resolve logical buttons and wheel directions
 through the current server pointer map. A disabled logical button refuses input.
 Release and the independent guardian use the physical code acknowledged at press,

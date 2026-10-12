@@ -63,6 +63,11 @@ keymap の確認が必要です。不明な状態は入力を遮断します。�
 pixels-only 操作の成功を証明しません。
 キャプチャ由来の座標と foreground は取得時刻を保持します。取得や処理の遅延で
 有効期間を更新せず、provider の独立した観測値は自身の時刻で判定します。
+Windows の文字入力は送信前に UTF-16 を検証し、native 単位ごとに現在の guard を
+再確認します。状態観測後にも取り消しと deadline を再確認します。X11 では paste
+試行前の取り消しが確定した場合、所有 modifier を解放し、native ACK 後に対応する
+元の clipboard 形式を復元します。同時に行われたコピーは保持します。paste が
+届いた可能性があれば文字列を保持し、復元 ACK がなければ未解決として報告します。
 Blender の view 効果は、完全で曖昧でない単一 viewport の実効 view matrix と
 perspective mode で確認します。region・layout・projection だけの変化は orbit/pan
 の証拠にせず、pose がない場合や quad view が曖昧な場合は UNKNOWN を保持します。

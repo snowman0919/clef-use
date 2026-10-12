@@ -1073,11 +1073,269 @@ print(json.dumps(results))
 """
 
 
+PRETRIGGER_CANCEL_PROGRAM = r"""
+import json, os, signal, threading, time, tkinter as tk
+import pyperclip
+from Xlib import X, display
+from clef_use.x11_clipboard import ClipboardTransferError, X11ClipboardTransfer
+
+root = tk.Tk()
+root.overrideredirect(True)
+root.geometry("400x300+0+0")
+root.update()
+connection = display.Display()
+connection.set_input_focus(root.winfo_id(), X.RevertToParent, X.CurrentTime)
+connection.sync()
+clip = connection.intern_atom("CLIPBOARD")
+key_events = []
+root.bind("<KeyPress>", lambda event: key_events.append(event.keysym))
+results = {}
+transfers = []
+previous = "previous supported text 한😀"
+literal = "aborted owned literal"
+
+def create_transfer(*, fail_arm=None):
+    pyperclip.copy(previous)
+    root.update()
+    cancelled = threading.Event()
+    stage = ["setup"]
+    current = []
+    def check():
+        root.update()
+        if stage[0] != "arming" or fail_arm is None:
+            return
+        transfer = current[0]
+        with transfer.events.mutex:
+            acknowledged = any(item.get("event") == "armed"
+                               for item in transfer.events.queue)
+        if acknowledged:
+            if fail_arm == "cancel":
+                cancelled.set()
+            else:
+                # Wait for this actual input deadline after a native armed ACK;
+                # recovery uses its own explicit, bounded deadline below.
+                cancelled.wait(max(0, transfer.deadline - time.monotonic()))
+    transfer = X11ClipboardTransfer(literal, connection.get_display_name(),
+                                    time.monotonic()+.5, cancelled, check)
+    transfers.append(transfer)
+    current.append(transfer)
+    stage[0] = "arming"
+    return transfer, cancelled
+
+def replace_and_reap(transfer):
+    root.clipboard_clear()
+    root.clipboard_append("owned cleanup selection")
+    root.update()
+    transfer.close()
+    transfer.process.wait(timeout=3)
+
+try:
+    for failure in ("cancel", "deadline"):
+        transfer, cancelled = create_transfer(fail_arm=failure)
+        try:
+            transfer.arm()
+        except ClipboardTransferError as error:
+            assert "cancelled or deadline expired" in str(error), error
+        else:
+            raise AssertionError("native armed receipt must precede pre-trigger failure")
+        transfer.cancel_before_trigger(deadline=time.monotonic()+.5)
+        assert transfer.restored and not transfer.armed and not transfer.unresolved
+        assert transfer.closed
+        assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == previous
+        results[f"armed_{failure}_before_trigger_restores_exact_snapshot"] = True
+        replace_and_reap(transfer)
+
+    for copied in ("independent user copy", literal):
+        transfer, cancelled = create_transfer()
+        transfer.arm()
+        cancelled.set()
+        root.clipboard_clear()
+        root.clipboard_append(copied)
+        root.update()
+        user_owner = connection.get_selection_owner(clip).id
+        transfer.cancel_before_trigger(deadline=time.monotonic()+.5)
+        assert transfer.owner_changed and not transfer.restored
+        assert not transfer.armed and not transfer.unresolved
+        assert connection.get_selection_owner(clip).id == user_owner
+        assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == copied
+        copy_kind = "identical" if copied == literal else "distinct"
+        results[f"concurrent_{copy_kind}_owner_preserved"] = True
+        transfer.process.wait(timeout=3)
+
+    # A genuine stopped provider cannot acknowledge recovery. Do not report
+    # success from sending a command or EOF; a later native ACK is separate.
+    transfer, cancelled = create_transfer()
+    transfer.arm()
+    cancelled.set()
+    provider_owner = connection.get_selection_owner(clip).id
+    os.kill(transfer.process.pid, signal.SIGSTOP)
+    stopped_pid, stopped_status = os.waitpid(transfer.process.pid, os.WUNTRACED)
+    assert stopped_pid == transfer.process.pid and os.WIFSTOPPED(stopped_status)
+    try:
+        try:
+            transfer.cancel_before_trigger(deadline=time.monotonic()+.05)
+        except ClipboardTransferError as error:
+            assert "acknowledgement deadline expired" in str(error), error
+        else:
+            raise AssertionError("stopped native provider falsely acknowledged restoration")
+        assert transfer.armed and transfer.unresolved and not transfer.restored
+        assert connection.get_selection_owner(clip).id == provider_owner
+    finally:
+        os.kill(transfer.process.pid, signal.SIGCONT)
+    end = time.monotonic()+2
+    while True:
+        event = transfer.events.get(timeout=max(.001, end-time.monotonic()))["event"]
+        if event == "restored":
+            break
+        assert time.monotonic() < end, "late native restoration ACK absent"
+    assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == previous
+    results["missing_native_recovery_ack_stays_unresolved"] = True
+    replace_and_reap(transfer)
+
+    # Without positive knowledge that no trigger was attempted, ordinary close
+    # must retain the offered literal even after cancellation/parent pipe EOF.
+    transfer, cancelled = create_transfer()
+    transfer.arm()
+    cancelled.set()
+    transfer.close()
+    assert transfer.unresolved and transfer.armed and not transfer.restored
+    assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == literal
+    end = time.monotonic()+2
+    while True:
+        event = transfer.events.get(timeout=max(.001, end-time.monotonic()))["event"]
+        if event == "consumed":
+            break
+        assert time.monotonic() < end, "actual native consumption ACK absent"
+    assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == previous
+    results["unknown_possible_trigger_retains_literal_until_native_consumption"] = True
+    replace_and_reap(transfer)
+    assert not key_events, key_events
+    results["direct_transfer_paste_key_attempts"] = 0
+
+    # Exercise the canonical caller with real arm acknowledgement and native
+    # Ctrl delivery, then cancel before it can attempt the paste trigger.
+    import clef_use.x11_clipboard as clipboard_module
+    from clef_use.backends import DesktopAction, DesktopCapture
+    from clef_use.input_ir import InputInterrupted, TextInput
+    original_transfer = clipboard_module.X11ClipboardTransfer
+    adapter = DesktopAction()
+    root.focus_force()
+    root.update()
+    def owned_frame():
+        assert root.focus_get() == root, "owned Tk keyboard event target unknown"
+        focused = connection.get_input_focus().focus
+        ancestry = []
+        while hasattr(focused, "id") and focused.id != connection.screen().root.id:
+            ancestry.append(focused.id)
+            focused = focused.query_tree().parent
+        assert root.winfo_id() in ancestry, "native keyboard focus outside owned Tk client"
+        # The real clipboard provider independently verifies this focus's
+        # X-Resource client identity before acquiring the selection.
+        return DesktopCapture().capture()
+    try:
+        for arm_error in (False, True):
+            class CancelAfterNativeArm(original_transfer):
+                def __init__(self, *args, **kwargs):
+                    super().__init__(*args, **kwargs)
+                    transfers.append(self)
+                def arm(self):
+                    super().arm()
+                    self.cancelled.set()
+                    if arm_error:
+                        raise ClipboardTransferError("controlled failure after native armed ACK")
+            clipboard_module.X11ClipboardTransfer = CancelAfterNativeArm
+            pyperclip.copy(previous)
+            key_events.clear()
+            cancelled = threading.Event()
+            result = adapter.execute_input(TextInput(text=literal, method="clipboard"),
+                                           owned_frame(), cancelled)
+            root.update()
+            transfer = transfers[-1]
+            assert not result.ok and "unresolved" not in result.reason, result
+            assert transfer.restored and not transfer.unresolved and not transfer.armed
+            assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == previous
+            assert "Control_L" in key_events, key_events
+            assert not any(k.lower() == "v" for k in key_events), key_events
+            assert not adapter.keys and not adapter.input_executor.owned
+            assert not any(connection.query_keymap()), "native Ctrl was left held"
+            failure_kind = "arm_error" if arm_error else "cancel"
+            results[f"canonical_caller_{failure_kind}_before_v_restores"] = True
+            results[f"canonical_caller_{failure_kind}_v_key_events"] = sum(
+                key.lower() == "v" for key in key_events)
+            replace_and_reap(transfer)
+
+        # An actual acknowledged V request followed by a controlled OS error
+        # must not use the known-pretrigger restoration authority.
+        class RecordNativeTransfer(original_transfer):
+            def __init__(self, *args, **kwargs):
+                super().__init__(*args, **kwargs)
+                transfers.append(self)
+        clipboard_module.X11ClipboardTransfer = RecordNativeTransfer
+        original_down = adapter.input_executor._key_down
+        def fail_after_native_v(key, frame, acknowledged=None):
+            original_down(key, frame, acknowledged)
+            if key == "v":
+                raise InputInterrupted("controlled OS error after acknowledged V")
+        adapter.input_executor._key_down = fail_after_native_v
+        pyperclip.copy(previous)
+        key_events.clear()
+        try:
+            result = adapter.execute_input(TextInput(text=literal, method="clipboard"),
+                                           owned_frame(), threading.Event())
+        finally:
+            adapter.input_executor._key_down = original_down
+        root.update()
+        transfer = transfers[-1]
+        assert not result.ok and "unresolved" in result.reason, result
+        assert transfer.armed and transfer.unresolved and not transfer.restored
+        assert any(k.lower() == "v" for k in key_events), key_events
+        results["canonical_caller_possible_v_error_v_key_events"] = sum(
+            key.lower() == "v" for key in key_events)
+        assert not adapter.keys and not adapter.input_executor.owned
+        assert not any(connection.query_keymap()), "native paste keys were left held"
+        assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == literal
+        end = time.monotonic()+2
+        while True:
+            event = transfer.events.get(timeout=max(.001, end-time.monotonic()))["event"]
+            if event == "consumed":
+                break
+            assert time.monotonic() < end, "actual native consumption ACK absent"
+        assert root.selection_get(selection="CLIPBOARD", type="UTF8_STRING") == previous
+        results["canonical_caller_possible_v_error_retains_until_native_consumption"] = True
+        replace_and_reap(transfer)
+    finally:
+        clipboard_module.X11ClipboardTransfer = original_transfer
+        adapter.release()
+        if adapter.input_executor is not None and adapter.input_executor.guardian is not None:
+            guardian = adapter.input_executor.guardian
+            guardian.stdin.close()
+            assert guardian.wait(timeout=3) == 0
+            results["canonical_caller_guardian_reaped"] = True
+
+    results["all_private_providers_reaped"] = all(t.process.poll() is not None for t in transfers)
+    assert results["all_private_providers_reaped"]
+    print(json.dumps(results))
+finally:
+    root.clipboard_clear()
+    root.clipboard_append("owned final cleanup selection")
+    root.update()
+    for transfer in transfers:
+        transfer.close()
+        transfer.process.wait(timeout=3)
+    connection.close()
+    root.destroy()
+"""
+
+
 @pytest.mark.skipif(
     not shutil.which("Xvfb") or not shutil.which("xsel"),
     reason="native X11 fixture requires Xvfb and xsel",
 )
-@pytest.mark.parametrize("program", [NATIVE_PROGRAM, CLIPBOARD_PROGRAM], ids=["input", "clipboard"])
+@pytest.mark.parametrize(
+    "program",
+    [NATIVE_PROGRAM, CLIPBOARD_PROGRAM, PRETRIGGER_CANCEL_PROGRAM],
+    ids=["input", "clipboard", "pretrigger-cancel"],
+)
 def test_native_widget_effects_and_independent_recovery(tmp_path, program):
     read_fd, write_fd = os.pipe()
     process = subprocess.Popen(

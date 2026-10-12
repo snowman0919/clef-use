@@ -418,6 +418,10 @@ class InputExecutor:
             )
         if self._unexpected_input():
             raise InputInterrupted("unowned input held; user intervention or source conflict")
+        # State providers and native queries may take longer than the lease.
+        # Their successful result cannot renew cancellation/deadline authority.
+        if cancelled.is_set() or time.monotonic() >= deadline:
+            raise InputInterrupted("input cancelled or deadline expired")
 
     def _unexpected_input(self):
         with self.lock:
@@ -829,12 +833,29 @@ class InputExecutor:
                 raise InputInterrupted(
                     "exact native Unicode unavailable; select clipboard explicitly"
                 )
-            self.gui.type_text(command.text, cancelled, frame.foreground_window)
+            self.gui.type_text(
+                command.text,
+                cancelled,
+                frame.foreground_window,
+                before_input=lambda: self._check(cancelled, deadline, guard, frame),
+            )
             return
         if getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
             from .x11_clipboard import ClipboardTransferError, X11ClipboardTransfer
 
             transfer = None
+            paste_attempted = False
+
+            def close_transfer():
+                if transfer is None:
+                    return
+                try:
+                    if not paste_attempted and not transfer.closed:
+                        self.release()
+                        transfer.cancel_before_trigger(deadline=time.monotonic() + 0.5)
+                finally:
+                    transfer.close()
+
             try:
                 transfer = X11ClipboardTransfer(
                     command.text,
@@ -847,21 +868,29 @@ class InputExecutor:
                     self._check(cancelled, deadline, guard, frame)
                     if key == "v":
                         transfer.arm()
+                        self._check(cancelled, deadline, guard, frame)
+                        # A failed OS request can still have delivered input.
+                        # Restoration is no longer authorized after this point.
+                        paste_attempted = True
                     self._key_down(key, frame)
                 self.release()
                 transfer.wait_consumed()
             except (ClipboardTransferError, InputInterrupted) as exc:
-                if transfer is not None:
-                    transfer.close()
+                recovery_error = None
+                try:
+                    close_transfer()
+                except ClipboardTransferError as cleanup:
+                    recovery_error = str(cleanup)
                 unresolved = transfer is not None and transfer.unresolved
                 reason = str(exc)
+                if recovery_error is not None:
+                    reason += f"; pre-paste recovery failed: {recovery_error}"
                 if unresolved:
                     reason += "; clipboard transfer unacknowledged"
                     reason += "; pending clipboard ownership unresolved"
                 raise InputInterrupted(reason) from exc
             finally:
-                if transfer is not None:
-                    transfer.close()
+                close_transfer()
             return
         import pyperclip
 
