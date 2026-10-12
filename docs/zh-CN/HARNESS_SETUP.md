@@ -19,15 +19,13 @@ clef-use update
 
 ### Codex
 
-0.1.33 候选版识别经 Windows shell 转义的指南路径，并为 capability 发现与
-只读 facade 声明准确的 MCP 只读效果。它不更改已有审批策略，拒绝的调用仍记为失败。
+0.1.35 使用新安装的可执行文件更新已有托管注册。用户修改过的指南或 MCP
+注册会报告为冲突并保留。手动更新可通过 `--command-path` 指定可执行文件。
 
-0.1.32 候选版使用新安装的可执行文件更新已有托管注册。用户修改过的指南或
-MCP 条目仍报告冲突并保留。手动更新可用 `--command-path` 选择目标版本。
-
-0.1.31 候选版修复了配置其他 MCP 服务器时实时验证出现的 `invalid transport`。
-重试前请确认安装的构建，不要为了通过验证而删除其他服务器配置。发现、指南加载、
-工具调用与 GUI 任务验证仍是独立结果。
+Codex 实时验证保留其他服务器的 transport，识别经 shell 转义的 Windows 指南
+完整路径，并保存私有 stdout/stderr 跟踪以诊断失败。capability 发现与只读
+facade 公布实际 MCP 效果，并遵守现有审批策略。被拒绝的调用判定为调用失败。
+发现、指南加载、工具调用与 GUI 任务验证分别判定。
 
 `~/.codex/config.toml` (`CODEX_HOME`):
 

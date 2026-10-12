@@ -2,88 +2,81 @@
 
 ## Windows SSH E2E scope resumed on 2026-10-12
 
-The user explicitly requested native Windows SSH E2E and authorized updating the
-existing installation. Earlier software-only/other-session boundaries below are
-historical. Separate Blender host API/build development remains excluded.
+The user explicitly requested SSH Windows E2E and permitted updating the existing
+installation. Earlier software-only/other-session boundaries below are historical.
+Separate Blender host observer/build development and model production remain
+excluded. Full results, earlier failures and private artifact digests are in
+[the Windows receipt](validation/2026-10-11/windows-ssh-current-e2e.json).
 
-**OBSERVED / installed 2639bea candidate:** native Windows updated 0.1.21 to 0.1.30,
-matched all 64 packaged source/guide files and repeated as CURRENT. Existing config
-bytes and the previous runtime files were preserved. The actual read-only stdio MCP
-matched live schemas and all three guide-resource hashes. Native ROCm/NF4 decision
-and CPU OmniParser preparation exited 0 after 809.585 seconds.
+**OBSERVED / current installation:** the canonical installer activated 0.1.35,
+bound all 64 packaged source/guide files to 7316837, and refreshed the previously
+managed Codex command to the new physical executable. Repeat installation returned
+CURRENT and managed refresh UNCHANGED. Unrelated configuration bytes, previous
+runtime files and model cache were preserved. The archive is a local source-bound
+candidate using unchanged pinned dependency wheels from CI 6cdf182; it is not a
+new immutable CI/public release. The later 53bf0a8 change affects the native
+verification fixture and project lock version only, not installed runtime bytes.
 
-**OBSERVED / canonical CLI GUI:** the installed, unpatched runtime completed the
-owned Continue/Confirm task in two native clicks and four decisions. Independent
-Tk readback recorded both expected buttons and `Task complete`; two fresh runtime
-observations verified completion. The endpoint was removed and held keys were
-empty. This is one bounded two-button task, not Blender/browser/editor coverage or
-the full reaction-performance gate.
+**OBSERVED / actual MCP and harness:** native installed read-only stdio MCP
+advertises the exact live two-tool schema, accurate effects and all three matching
+guide-resource hashes. Actual Codex 0.151.0 fresh model sessions pass explicit and
+natural discovery/load/invoke. Natural triggering reads all three complete guide
+bodies and successfully calls computer_capabilities; the negative request reads
+none and attempts no calls. Runtime/guide release compatibility is MATCH.
+Configured approval policies were not changed. These read-only harness checks
+leave TASK_VERIFIED=NOT_RUN; they do not prove a Codex-driven GUI operation.
+Hermes/OMP Windows model checks are NOT_RUN because their executables are absent.
 
-**OBSERVED / discovered verification defects:** original native smoke cleanup
-lost its result after closing the Tk window and receiving `Windows pointer move
-refused`. A read-only interactive probe confirmed an unlocked Default desktop;
-a bounded owned-window probe succeeded before destruction and failed after it.
-Restoring before destruction and synchronizing foreground activation through
-WM_NULL now passes native input/readback, clipboard preservation, cancellation,
-focus refusal and complete cleanup. Earlier FAIL runs are retained.
+**OBSERVED / actual CLI/model GUI:** the unpatched 0.1.35 installed CLI completed
+Continue then Confirm with two real native clicks and four decisions, followed by
+two fresh completion observations. Independent Tk readback recorded both buttons
+and Task complete. Endpoint removal, empty held-input readback, pointer restoration
+and owned scheduled-task removal were observed. Wall time was 286.265 seconds.
+Earlier identical-task 0.1.30 COMPLETED (332.868 seconds) and 0.1.32 NEEDS_REPLAN
+(259.747 seconds) are retained. The latter made both correct clicks but goal
+probability 0.8992 did not satisfy 0.9; that completion guard remains unchanged.
+These are individual bounded runs, not paired accuracy or a speedup estimate.
 
-Actual Codex 0.151.0 discovered all three project/user guides. Original model
-verification stopped before loading because quoted CLI override path segments
-created transport-less servers (`invalid transport` in `mcp_servers."node_repl"`).
-The 0.1.31 source candidate uses a single inline TOML override; an actual native
-Codex configuration preflight preserves transports and disables the selected
-other servers. A real-CLI regression also covers dotted, quoted and Unicode names.
-New 0.1.31 installed/harness/GUI results are NOT_RUN until the candidate is built
-and exercised. No confidence or operation guard was relaxed, and no public release
-or full acceptance status is claimed.
+**OBSERVED / native verification correction:** original 0.1.34/0.1.35 fixed-sleep
+smokes failed after Ctrl+A/Backspace. A diagnostic recorded correct native scan
+codes and Tk modifier/key receipt with IME closed and no preedit, but its added
+observation can perturb timing; it is not a replacement PASS. The old smoke blocked
+the receiver UI during injection and assumed consumption after a fixed sleep.
+The current 53bf0a8 fixture keeps the receiver loop alive and injects each action
+once. It requires the actual full selection range [0,17] before Backspace, exact
+empty text and independent click/wheel effects. This current fixture passes
+against installed 0.1.35, including cancellation, stale-focus refusal, clipboard
+preservation, input release and pointer/foreground restoration. No application
+binding changed. A separate diagnostic foreground-restoration FAIL is retained.
+Exact historical failure timing is INFERRED, not a proven backend scan-code defect.
+The one-second fixture readback bound is not the 100ms reaction release gate;
+raw acknowledgement/verification ticks and the roughly 672ms bulk text readback
+remain visible in the receipt.
 
-**OBSERVED / integrated source:** 1399 tests passed, 34 skipped and 41 warnings
-in 63.69 seconds. Scoped integration/real-Codex checks passed 211; Ruff/format
-and generated contracts passed. Native cleanup now attempts pointer and foreground
-restoration independently, rechecking owned foreground before each attempt and
-preserving both errors.
+**OBSERVED / defects corrected:** temporary Codex overrides preserve native MCP
+transports rather than creating quoted-name servers; managed refresh selects the
+activated release only for unchanged approved entries; complete shell-escaped
+Windows guide paths prove load while copied-body suffix paths do not. Pure MCP
+capability/status effects are accurate and failed runs retain private stderr.
+The earlier 0.1.31 INCOMPATIBLE update, 0.1.32 denied tool call and 0.1.34 CLI
+exit 1 remain recorded. Historical stderr for the last error was discarded by
+the old verifier, so its exact cause is NOT_CAPTURED; no authentication error is
+asserted. Controller-only path/parser/ordering failures are recorded separately.
 
-**OBSERVED / 0.1.31 update defect:** the canonical Windows installer activated
-0.1.31 and matched all 64 files, but managed refresh returned INCOMPATIBLE because
-it selected the old physical 0.1.30 executable from its retained manifest. The
-attempt, DEGRADED result and preserved configuration evidence remain retained.
-Passing a new command also exposed a second conflict: the standalone MCP installer
-could not distinguish an unchanged owned entry from an unowned registration.
+**OBSERVED / regression:** 1418 tests passed, 34 skipped and 41 warnings in
+66.37 seconds on 0.1.35 product source. Generated contracts, Ruff and formatting
+passed. The later fixture-only change was checked with Ruff/format and executed
+natively with strict effect readback. Frozen old/ is unchanged. Canonical pinned
+ROCm/NF4 and CPU OmniParser preparation passed in 809.585 seconds; no new model
+was trained. Doctor exit 2 correctly identifies noninteractive SSH Session 0;
+actual GUI checks use limited InteractiveToken tasks on Session 1/Default.
 
-The 0.1.32 candidate passes the newly activated native executable explicitly through
-`integrations refresh --managed-only --command-path`. Replacement is allowed only
-when the live entry exactly matches the approved managed entry; guide inventories,
-metadata revalidation, modified-entry conflicts and disabled settings remain intact.
-Three actual CLI consumer regressions exercise release-path replacement across
-Codex, Hermes and OMP, independently of real model/harness verification.
-
-**OBSERVED / 0.1.32 installed:** the genuine Windows update returned INSTALLED
-and managed Codex REFRESHED. All 64 packaged files match source 2a2638d; subsequent
-canonical checks return CURRENT, self-test passes and actual read-only stdio MCP
-schemas/three guide resources match. The first controller mistook an equivalent
-`bin\..\versions` path for a different executable; exact native file identity
-confirms equality. That failure is retained separately. Doctor's exit 2 identifies
-SSH Session 0 as unavailable for GUI; both prepared ML environments are ready.
-
-The corrected native smoke in interactive Session 1 passes Unicode, clipboard
-preservation, shortcuts, click/wheel readback, cancellation, stale focus refusal,
-owned input release and pointer/foreground restoration. The real Codex session
-read the complete core guide and references, but its trace double-escaped Windows
-paths, causing a false LOADED=NOT_RUN. Its capability call was refused with
-`MCP tool call requires approval, but approval policy is never`; no successful
-invocation is claimed. There are no configured per-server/per-tool approval modes.
-
-The 0.1.33 candidate normalizes native Windows trace separators for exact guide
-path recognition and adds accurate MCP read-only effect annotations to pure
-capability discovery and the read-only facade. Configured approval policies are
-not changed. Actual new installed/model/GUI outcomes remain NOT_RUN pending run.
-
-**OBSERVED / exact guide provenance:** review found that the initial Windows
-path boundary also accepted `SKILL.md~`, `SKILL.md+backup` and NTFS stream suffixes.
-The 0.1.34 candidate requires a complete quoted path or token boundary; identical
-body content read from a different filename cannot prove the managed guide loaded.
-Three controlled trace consumer regressions preserve successful tool invocation
-but keep LOADED=NOT_RUN and verification FAIL for these copied-body paths.
+**NOT_RUN / remaining acceptance:** general Windows Blender popup/input-owner/
+IME/effective-keymap/global-idle observation, full same-work paired accuracy,
+goodput/coverage and state-change-to-correct-OS-input p95<=100ms are not established
+by this bounded task. Six Blender operation guards retain UNKNOWN where evidence
+is unavailable. Original 44 conditions and numeric release gates remain unchanged;
+no whole-goal completion or public release is claimed.
 
 **OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
 collector omitted the owning manager's read-only running-job interface lock.

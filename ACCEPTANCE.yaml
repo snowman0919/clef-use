@@ -203,8 +203,14 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Same-version reinstall UNCHANGED; exact-byte/comments/disabled preservation
     exercised by integration fixtures.
+    Current Windows 0.1.35 repeat returns CURRENT and managed UNCHANGED with
+    unrelated bytes preserved.
 - id: INSTALL-03
   category: installation
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
@@ -218,8 +224,14 @@ scenarios:
     section: evidence.installed_candidate
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Local staged compatible runtime/guide update fixture observed; synthetic 0.1.31 is
     not public release.
+    Actual Windows 0.1.35 update binds 64 packaged files and refreshes the managed
+    physical executable; local source-bound candidate, not public release.
 - id: INSTALL-04
   category: installation
   requirement: User-modified guide or config entry is preserved and reported as conflict.
@@ -372,6 +384,10 @@ scenarios:
     section: evidence.codex_final12_native_gui
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
     FINAL6 and FINAL10 native discovery, actual full guide body reads and successful read-only capabilities.
     Negative non-GUI trigger passed. Earlier isolated CLI 401 and denied-approval rounds are
@@ -379,6 +395,9 @@ scenarios:
     API_ASSISTED fixture scope, including full guide loads, capability/schema discovery, one numeric
     transform, independent fresh RNA/visual preservation and complete owned cleanup.
     Whole-goal ASSESS and production provider remain NOT_RUN.
+    Current native Windows Codex explicit/natural discovery-load-invoke and
+    negative non-trigger pass; three complete guides read naturally.
+    Read-only TASK_VERIFIED remains NOT_RUN.
 - id: HARNESS-02
   category: harness
   requirement: Hermes actual selected profile discovers and reads guide, then invokes read-only
@@ -449,9 +468,16 @@ scenarios:
     section: evidence.windows
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux/X11 native fixture verified key/chord/down/up ownership and release.
-    Native Windows component checks pass, but overall
-    Windows fixture remains FAIL on foreground restoration; no all-platform PASS implied.
+    Historical Windows component checks passed but the whole fixture failed on
+    foreground restoration; no all-platform PASS implied. Current Windows
+    fixed-sleep smoke FAIL is retained; the corrected live-UI fixture verifies
+    full selection before Backspace and exact text, with no input replay.
+    Exact historical timing cause is INFERRED.
 - id: INPUT-02
   category: input
   requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
@@ -477,6 +503,10 @@ scenarios:
     section: evidence.windows_native_ime
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Actual immutable f440de1 installed Windows input layer observes native
     composition start/preedit/result/end; literal input during active composition is
     refused with preedit/widget/input count unchanged. After commit, Ctrl+A selects
@@ -486,6 +516,8 @@ scenarios:
     stopped attempt remains NOT_RUN. Caller supplies native-observed trusted context;
     automatic IMM/TSF discovery and service/model/harness E2E are not implied.
     Historical Windows foreground failure remains separately retained.
+    Current Windows Unicode and closed-IME shortcut readback pass with a live
+    receiver loop; diagnostic IME closed/no preedit does not re-prove active composition.
 - id: INPUT-03
   category: input
   requirement: Left/right/middle button and modifier-held drag/orbit/pan execute in bounded
@@ -504,9 +536,15 @@ scenarios:
     section: evidence.windows
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux native button/modifier gesture checks and installed Blender bounded
-    orbit/pan observed. Native Windows component checks pass, but overall Windows fixture remains
-    FAIL on foreground restoration; no all-platform PASS implied.
+    orbit/pan observed. Historical Windows component checks passed but the whole
+    fixture failed on foreground restoration; no all-platform PASS implied.
+    Current Windows bounded left click/double-click and wheel readback pass;
+    this new run does not re-prove right/middle/modifier gestures.
 - id: INPUT-04
   category: input
   requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
@@ -520,9 +558,16 @@ scenarios:
     section: evidence.windows
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux native deadline/cancel/intervention/guardian failure/process
-    crash/frozen injector release checks passed. Native Windows component checks pass, but overall
-    Windows fixture remains FAIL on foreground restoration; no all-platform PASS implied.
+    crash/frozen injector release checks passed. Historical Windows component checks
+    passed but the whole fixture failed on foreground restoration; no all-platform
+    PASS implied. Current Windows owned cancellation/release and cleanup pass;
+    earlier fixed-sleep and diagnostic foreground failures remain retained.
+    This slice does not re-prove worker hang/crash recovery.
 - id: INPUT-05
   category: input
   requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.

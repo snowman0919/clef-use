@@ -19,18 +19,16 @@ clef-use update
 
 ### Codex
 
-The 0.1.33 candidate recognizes shell-escaped Windows guide paths and advertises
-read-only MCP effects for capability discovery and the read-only facade. It does
-not change configured approval policies; a denied call remains a failed invocation.
+Version 0.1.35 refreshes previously managed registrations against the newly
+installed executable. User-modified guides or MCP entries remain conflicts and
+are preserved; manual refresh can select a release with `--command-path`.
 
-The 0.1.32 candidate also refreshes previously managed registrations against the
-newly installed executable. Modified guides or MCP entries remain conflicts and
-are preserved. Manual refresh can select a release with `--command-path`.
-
-The 0.1.31 candidate fixes `invalid transport` during live verification when other
-MCP servers are configured. Confirm the installed build before retrying; do not
-remove unrelated servers to make verification pass. Discovery, guide loading,
-tool invocation and GUI task verification remain separate results.
+Live Codex verification preserves other servers' transports, recognizes complete
+shell-escaped Windows guide paths, and retains private stdout/stderr traces for
+failed runs. Capability discovery and the read-only facade advertise their actual
+MCP effects. Configured approval policies stay in force; a denied call is a failed
+invocation. Discovery, guide loading, tool invocation and GUI task verification
+remain separate results.
 
 `~/.codex/config.toml` (`CODEX_HOME`):
 
