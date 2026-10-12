@@ -195,6 +195,13 @@ Windows의 누른 키 검사는 확장 scan code와 modifier 좌우를 구분하
 (예: 두 Enter 키)의 동시 누름은 이 조회로 구분할 수 없습니다.
 Windows guardian은 해제에 성공한 키·Unicode의 ACK를 제거합니다. 이후 부모 프로세스의
 EOF가 와도 다른 소유자가 다시 누른 해당 입력을 오래된 ACK로 해제하지 않습니다.
+
+설치된 Windows 0.1.36에서 좌·우·가운데 클릭과 제한된 영역의 Shift+좌/가운데
+드래그를 실제 비텍스트 수신 창으로 검증했습니다. worker가 멈춰 있어도 취소 시
+Shift와 가운데 버튼이 해제되며, 소유 worker 프로세스 종료 후에는 별도 guardian이
+해제합니다. 이 검증은 소유 수신 창의 IME만 비활성화합니다. 자동 IME 발견,
+Blender orbit/pan 의미나 하네스의 GUI 작업 완료를 입증하지 않습니다.
+
 decision 진단은 이미지가 제외된 실제 UTF-8 텍스트 예산 바이트 수, object·question
 개수와 SDK가 보고한 입력 토큰 수를 보존합니다. `SDK_USAGE`는 1~8192의 정수이며,
 누락은 `UNAVAILABLE`, 잘못된 보고 값은 `INVALID`로 표시하고 토큰 수는 null입니다.

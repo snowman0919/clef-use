@@ -195,6 +195,14 @@ Windows の押下キー検査は拡張 scan code と modifier の左右を区別
 （例: 二つの Enter）の同時押下は、この照会では区別できません。
 Windows guardian は解放に成功したキー・Unicode の ACK を削除します。その後の
 親プロセス EOF では、別の所有者が再取得した入力を古い ACK で解放しません。
+
+インストール済み Windows 0.1.36 で、左右・中央クリックと範囲内の
+Shift+左/中央ドラッグを実際の非テキスト受信ウィンドウで確認しました。
+worker が停止中でもキャンセルで Shift と中央ボタンを解放し、所有 worker
+プロセス終了後は別の guardian が解放します。この検証は所有受信側だけの
+IME を無効化します。自動 IME 検出、Blender の orbit/pan の意味、ハーネス
+による GUI 作業の完了を証明するものではありません。
+
 decision 診断には画像を除く実際の UTF-8 テキスト予算のバイト数、object・question
 数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、
 欠落は `UNAVAILABLE`、不正な報告値は `INVALID` とし、後二者の数は null です。

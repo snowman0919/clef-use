@@ -2833,8 +2833,8 @@
     "windows_ssh_current_e2e": {
       "claim": "OBSERVED_NATIVE_WINDOWS_INSTALLED_CANDIDATE",
       "artifact": "docs/validation/2026-10-11/windows-ssh-current-e2e.json",
-      "sha256": "c3c547e9238744582eda51a3c821cc00442e73ac3418596066b4a3b883dd7434",
-      "scope": "Actual immutable CI 0.1.36 Windows update with 64 exact Git/CI/installed files; real Codex discovery/load/invoke; native input PASS; installed CLI/model GUI NEEDS_REPLAN (whole task FAIL). Earlier attempts retained; no full Blender/performance/public-release promotion."
+      "sha256": "d1f23fc448d1a14f86b77440aa0fc2a96227817086fdf2928e8ca873c7fa0fc2",
+      "scope": "Actual immutable CI 0.1.36 Windows update with 64 exact Git/CI/installed files; real Codex discovery/load/invoke; native input PASS; installed CLI/model GUI NEEDS_REPLAN (whole task FAIL). Earlier attempts retained; no full Blender/performance/public-release promotion. Installed Windows typed three-button/modifier receiver effects and independent blocked-worker cancellation/crash guardian recovery also observed."
     }
   },
   "not_run": {

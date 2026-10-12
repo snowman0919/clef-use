@@ -172,6 +172,13 @@ Windows 按键检查保留扩展 scan code 和 modifier 左右区别；检测到
 无法通过此查询区分。
 Windows guardian 会移除已成功释放的键与 Unicode ACK；之后父进程 EOF 不会用
 旧 ACK 再次释放已被其他所有者重新按下的输入。
+
+已安装的 Windows 0.1.36 通过实际非文本接收窗口验证了左/右/中键点击和
+限定区域内的 Shift+左/中键拖动。worker 阻塞时，取消仍会释放 Shift 和中键；
+自有 worker 进程终止后，独立 guardian 也会释放它们。此验证仅禁用自有接收
+窗口的 IME，不能证明自动 IME 发现、Blender orbit/pan 语义或 harness GUI
+任务完成。
+
 decision 诊断保留不含图像的实际 UTF-8 文本预算字节数、object/question 数量和
 SDK 报告的输入 token 数。`SDK_USAGE` 表示 1～8192 的整数；缺失时为
 `UNAVAILABLE`，报告值无效时为 `INVALID`，后二者的数量均为 null。

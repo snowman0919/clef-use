@@ -72,6 +72,29 @@ failure is also retained separately; it sent no input. No activation or input is
 replayed within these fixtures. The one-second fixture observation bounds and
 raw Windows timing ticks do not establish the 100ms reaction release gate.
 
+**OBSERVED / installed Windows typed input and independent recovery:** the new
+[single native fixture](../scripts/windows_typed_input_smoke.py) uses installed
+0.1.36 DesktopAction.execute_input without a model, action bridge or mocked OS.
+Actual receiver events confirm left/right/middle down/up, Shift+left and
+Shift+middle bounded drags, and a middle drag without Shift. Final assertions
+check held-button/Shift state during motion, coordinates within the declared
+surface and the actual endpoint. The initial run (11.567 seconds) is retained;
+the final stricter fixture passed in 8.867 seconds. These are functional wall
+times, not a speed comparison. Receiver IMC is disabled only on the disposable
+non-text canvas and its absence is read back; no general IME observation is claimed.
+
+The same installed executor holds Shift and middle. After cancellation, both
+native holds disappear while the worker remains blocked, before any direct
+release call. A separate owned worker process then holds both; its guardian is
+confirmed live before abrupt worker termination. Both holds disappear and that
+guardian exits before the parent calls release. Held-input lists, exact original
+pointer/foreground restoration, own guardian/window closure and task removal all
+pass. Local and remote final fixture hashes match. This observes executor
+watchdog/guardian recovery, not service CLI abort with an admitted Blender gesture
+or full-process suspension/deadline recovery; those Windows checks remain NOT_RUN.
+No installed product byte changed. Four-language input guidance and INPUT-03/04
+partial Windows notes are updated without changing original criteria or gates.
+
 **OBSERVED / defects and regression:** native Codex overrides preserve other
 MCP transports; managed refresh rebinds only unchanged approved entries; complete
 shell-escaped guide paths prove load while copied-body suffixes do not. Pure MCP
@@ -81,7 +104,7 @@ The old verifier discarded stderr for the last error, so its cause is
 NOT_CAPTURED; no current authentication failure is asserted.
 Product b9af0e9: 1418 tests passed, 34 skipped, 41 warnings in 67.20 seconds.
 Generated contracts and active src/tests/scripts Ruff/format checks pass
-(147 files including the final validation helper). A broad read-only formatting
+(148 files including the final typed-input validation fixture). A broad read-only formatting
 check also found 20 pre-existing unformatted frozen old/ files; none was changed.
 Final validation scripts were executed natively; all 64 installed product files
 remain exact b9af0e9. Canonical pinned ROCm/NF4 and CPU OmniParser preparation

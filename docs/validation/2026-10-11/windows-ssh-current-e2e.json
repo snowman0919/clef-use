@@ -1545,7 +1545,7 @@
     "frozen_old_changed": false,
     "validation_fixture_checks": {
       "ruff": "PASS",
-      "format_files": 147,
+      "format_files": 148,
       "generated_contracts": "PASS",
       "native_effects_and_cleanup": "See native_completion and canonical0.1.36 actual receipts; product64files remain exact B9."
     }
@@ -2063,6 +2063,42 @@
       "sha256": "7add4762573c869fa8bfbd36e478ca3684c5b98c0d94bab5106866030fe911f8",
       "bytes": 3491,
       "raw_committed": false
+    },
+    {
+      "label": "0136/typed-controller-report.json",
+      "sha256": "780b1100c2f67a597e1559a4545ca1556bc2477515b561f77308c2d5ca6e3f3a",
+      "bytes": 4965,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/typed-native-result.json",
+      "sha256": "eb3f85aa86a38d8c51b80b0d91906bfcb0f6f51988e7e79c608d97b42ea39ba1",
+      "bytes": 4261,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/typed_strict-controller-report.json",
+      "sha256": "6b12aad5f7e8b1ff0296e386fb99af197d10d8d662cb0a71b95e09c717dea2df",
+      "bytes": 4978,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/typed_strict-native-result.child.json",
+      "sha256": "0be8e07c1879a137083660f3b72101588c9b94c1ddef9c8bdfcc88a631f87634",
+      "bytes": 40,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/typed_strict-native-result.child.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/typed_strict-native-result.json",
+      "sha256": "eb3f85aa86a38d8c51b80b0d91906bfcb0f6f51988e7e79c608d97b42ea39ba1",
+      "bytes": 4261,
+      "raw_committed": false
     }
   ],
   "historical_0135_candidate": {
@@ -2465,5 +2501,440 @@
         "reason": "Superseded by final distinct version0.1.36; duplicate38254659294 came from retry after ambiguous dispatch502."
       }
     ]
+  },
+  "typed_input_runs": [
+    {
+      "version": "0.1.36",
+      "stage": "typed",
+      "claim": "OBSERVED_INSTALLED_NATIVE_TYPED_INPUT",
+      "status": "PASS",
+      "wall_seconds": 11.566898107528687,
+      "task_exit": 0,
+      "task_removed": true,
+      "ime_scope": "Owned non-text canvas IMC disabled and absence read back; not general IME discovery",
+      "buttons": [
+        {
+          "button": "left",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 1,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 1,
+              "x": 100,
+              "y": 100,
+              "state": 256
+            }
+          ]
+        },
+        {
+          "button": "right",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 3,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 3,
+              "x": 100,
+              "y": 100,
+              "state": 1024
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 100,
+              "y": 100,
+              "state": 512
+            }
+          ]
+        }
+      ],
+      "gestures": [
+        {
+          "button": "left",
+          "modifiers": [
+            "shift"
+          ],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 1,
+              "x": 100,
+              "y": 199,
+              "state": 1
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 257
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 257
+            },
+            {
+              "phase": "up",
+              "button": 1,
+              "x": 300,
+              "y": 199,
+              "state": 257
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [
+            "shift"
+          ],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 199,
+              "state": 1
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 513
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 513
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 300,
+              "y": 199,
+              "state": 513
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 199,
+              "state": 0
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 512
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 512
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 300,
+              "y": 199,
+              "state": 512
+            }
+          ]
+        }
+      ],
+      "independent_cancel": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_still_blocked": true,
+        "explicit_release_called": false
+      },
+      "independent_crash_recovery": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_terminated": true,
+        "guardian_exited": true,
+        "parent_release_called": false
+      },
+      "cleanup": {
+        "errors": [],
+        "own_guardian_exited": true,
+        "held_after": [],
+        "pointer_restored": true,
+        "foreground_immediate": true,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true
+      },
+      "validation": "Initial live run retained. Final fixture adds explicit held-button-mask and in-surface motion assertions; original observed event records satisfy these checks offline. Original runner digest was not captured."
+    },
+    {
+      "version": "0.1.36",
+      "stage": "typed_strict",
+      "claim": "OBSERVED_INSTALLED_NATIVE_TYPED_INPUT",
+      "status": "PASS",
+      "wall_seconds": 8.866965055465698,
+      "task_exit": 0,
+      "task_removed": true,
+      "ime_scope": "Owned non-text canvas IMC disabled and absence read back; not general IME discovery",
+      "buttons": [
+        {
+          "button": "left",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 1,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 1,
+              "x": 100,
+              "y": 100,
+              "state": 256
+            }
+          ]
+        },
+        {
+          "button": "right",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 3,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 3,
+              "x": 100,
+              "y": 100,
+              "state": 1024
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 100,
+              "state": 0
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 100,
+              "y": 100,
+              "state": 512
+            }
+          ]
+        }
+      ],
+      "gestures": [
+        {
+          "button": "left",
+          "modifiers": [
+            "shift"
+          ],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 1,
+              "x": 100,
+              "y": 199,
+              "state": 1
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 257
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 257
+            },
+            {
+              "phase": "up",
+              "button": 1,
+              "x": 300,
+              "y": 199,
+              "state": 257
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [
+            "shift"
+          ],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 199,
+              "state": 1
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 513
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 513
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 300,
+              "y": 199,
+              "state": 513
+            }
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [],
+          "receiver_events": [
+            {
+              "phase": "down",
+              "button": 2,
+              "x": 100,
+              "y": 199,
+              "state": 0
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 200,
+              "y": 199,
+              "state": 512
+            },
+            {
+              "phase": "motion",
+              "button": "??",
+              "x": 300,
+              "y": 199,
+              "state": 512
+            },
+            {
+              "phase": "up",
+              "button": 2,
+              "x": 300,
+              "y": 199,
+              "state": 512
+            }
+          ]
+        }
+      ],
+      "independent_cancel": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_still_blocked": true,
+        "explicit_release_called": false
+      },
+      "independent_crash_recovery": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_terminated": true,
+        "guardian_exited": true,
+        "parent_release_called": false
+      },
+      "cleanup": {
+        "errors": [],
+        "own_guardian_exited": true,
+        "held_after": [],
+        "pointer_restored": true,
+        "foreground_immediate": true,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true
+      },
+      "fixture_sha256": "fb6fadbf0e480e4c5e7920a60e052127c60bb9664bbfec7ff9f967db8283ae26",
+      "remote_fixture_exact": true,
+      "validation": "Explicit motion button masks, Shift state, surface bounds and endpoint checks executed by the final fixture."
+    }
+  ],
+  "typed_input_limits": {
+    "service_abort_with_held_gesture": "NOT_RUN: this fixture exercises InputExecutor cancellation/watchdog and guardian recovery, not the service CLI abort path with an admitted Blender gesture. General Windows operation context remains UNKNOWN.",
+    "frozen_process_deadline": "NOT_RUN: blocked worker thread cancellation and abrupt owned process termination are observed; full-process suspension/deadline recovery is not established.",
+    "performance": "Two functional native runs, not paired task accuracy, p95 or eligibility coverage measurements."
   }
 }

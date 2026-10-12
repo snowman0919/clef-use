@@ -543,8 +543,10 @@ scenarios:
   execution_note: Source Linux native button/modifier gesture checks and installed Blender bounded
     orbit/pan observed. Historical Windows component checks passed but the whole
     fixture failed on foreground restoration; no all-platform PASS implied.
-    Current Windows bounded left click/double-click and wheel readback pass;
-    this new run does not re-prove right/middle/modifier gestures.
+    Current installed CI Windows 0.1.36 additionally verifies left/right/middle
+    receiver down/up and bounded Shift+left/middle drag motion with actual held
+    button/Shift state, endpoint and surface readbacks. This owned non-text
+    canvas fixture does not establish Blender orbit/pan semantics.
 - id: INPUT-04
   category: input
   requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
@@ -567,7 +569,11 @@ scenarios:
     passed but the whole fixture failed on foreground restoration; no all-platform
     PASS implied. Current Windows owned cancellation/release and cleanup pass;
     earlier fixed-sleep and diagnostic foreground failures remain retained.
-    This slice does not re-prove worker hang/crash recovery.
+    Current installed CI Windows 0.1.36 observes Shift/middle release while the
+    worker remains blocked after cancellation, and separate guardian recovery
+    after abrupt owned worker process termination, before parent release. Full
+    process suspension/deadline and service CLI abort with held gesture remain
+    NOT_RUN in this Windows slice.
 - id: INPUT-05
   category: input
   requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.

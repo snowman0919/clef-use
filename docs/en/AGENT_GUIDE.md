@@ -201,6 +201,14 @@ refuse a distinct human hold before further input. Same-virtual-key physical
 aliases (such as both Enter keys) cannot be distinguished by this query.
 The Windows guardian removes successful key/Unicode release acknowledgements;
 later parent EOF does not release those inputs again after a new owner acquires them.
+
+Installed Windows 0.1.36 validation observes left/right/middle clicks and bounded
+Shift-held left/middle drags in a disposable non-text canvas. Cancellation releases
+Shift and middle-button holds while the worker remains blocked; a separate guardian
+also releases them after the owned worker process terminates. This fixture disables
+IME only on its own receiver. It does not establish automatic IME discovery,
+Blender orbit/pan semantics or harness-driven GUI completion.
+
 Decision diagnostics retain the exact UTF-8 text-budget bytes (image excluded),
 object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integer
 from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are
