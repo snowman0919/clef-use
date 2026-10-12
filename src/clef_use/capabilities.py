@@ -115,7 +115,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         "schema_sha256": schema_sha256(),
         "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
-        "operation_registry_version": 3,
+        "operation_registry_version": 4,
         "default_runtime_state": {
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",
@@ -137,9 +137,16 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
                 "availability": "PARTIAL; NOT_PROBED",
                 "window_scope": "One RNA window matching the foreground native client dimensions",
-                "raw_observations": ["application_snapshot", "editor_layout", "keymap_inventory"],
+                "raw_observations": [
+                    "application_snapshot",
+                    "editor_layout",
+                    "keymap_inventory",
+                    "selection_identities",
+                ],
                 "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; "
                 "effective dispatch remains UNKNOWN",
+                "selection_identities": "Complete selected-name map to process-scoped public "
+                "ID.session_uid; unavailable or incoherent identity remains UNKNOWN",
                 "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
                 "input_authority": "No operation readiness inferred from partial snapshots",
             }

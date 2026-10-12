@@ -59,8 +59,76 @@ def test_partial_scene_evidence_preserves_numbers_without_inventing_input_contex
     assert state.require("properties")["Cube"]["location_x"] == 2.5
     assert state.require("mode") == "OBJECT"
     assert state.access_level == "APP_TELEMETRY_ASSISTED"
+    assert state.fact("selection_identities").validity == FactValidity.UNKNOWN
     for name in ("modal", "popup", "text_focus", "ime_composing", "keymap", "loading", "unit"):
         assert state.fact(name).validity == FactValidity.UNKNOWN
+
+
+def test_selection_identity_tracks_same_name_object_replacement():
+    document = snapshot()
+    obj = document["windows"][0]["objects"]["Cube"]
+    obj["id"] = "123:OBJECT:11"
+    assert compile_document(document).require("selection_identities") == {"Cube": "123:OBJECT:11"}
+    obj["id"] = "123:OBJECT:12"
+    assert compile_document(document).require("selection_identities") == {"Cube": "123:OBJECT:12"}
+
+
+@pytest.mark.parametrize(
+    "identity",
+    [
+        None,
+        True,
+        11,
+        "",
+        "999:OBJECT:11",
+        "123:11",
+        "123:OBJECT:0",
+        "123:OBJECT:-1",
+        "123:OBJECT:01",
+        "123:OBJECT:１２",
+        "123:OBJECT:1.0",
+    ],
+)
+def test_invalid_or_unavailable_object_identity_does_not_authorize_continuity(identity):
+    document = snapshot()
+    document["windows"][0]["objects"]["Cube"]["id"] = identity
+    assert compile_document(document).fact("selection_identities").validity == FactValidity.UNKNOWN
+
+
+@pytest.mark.parametrize(
+    "change", ["duplicate_id", "missing_object", "extra_object", "duplicate_name"]
+)
+def test_partial_or_ambiguous_identity_map_is_unknown(change):
+    document = snapshot()
+    window = document["windows"][0]
+    window["objects"]["Cube"]["id"] = "123:OBJECT:11"
+    if change in ("duplicate_id", "extra_object"):
+        window["objects"]["Other"] = copy.deepcopy(window["objects"]["Cube"])
+        if change == "duplicate_id":
+            window["selection"].append("Other")
+    elif change == "missing_object":
+        window["selection"].append("Other")
+    else:
+        window["selection"].append("Cube")
+    assert compile_document(document).fact("selection_identities").validity == FactValidity.UNKNOWN
+
+
+def test_empty_selection_has_verified_empty_identity_map():
+    document = snapshot()
+    document["windows"][0].update(selection=[], objects={})
+    assert compile_document(document).require("selection_identities") == {}
+
+
+def test_object_rename_preserves_identity_value():
+    document = snapshot()
+    window = document["windows"][0]
+    obj = window["objects"].pop("Cube")
+    obj["id"] = "123:OBJECT:11"
+    window["objects"]["Renamed"] = obj
+    window["selection"] = ["Renamed"]
+    assert compile_document(document).require("selection_identities") == {
+        "Renamed": "123:OBJECT:11"
+    }
 
 
 @pytest.mark.parametrize("change", ["pid", "stale", "future", "windows", "size", "source"])

@@ -50,6 +50,11 @@ axes. Property edits compare all observed fields and object identities afterward
 this does not establish preservation of fields that were never observed.
 Numeric literals preserve the requested float; application readback must still
 meet the requested tolerance.
+Changing operations and owned cancellation require a complete stable
+`selection_identities` map. Blender supplies process-scoped public `session_uid`
+IDs; a rename preserves the ID, while replacing an object under the same name
+blocks further input. Missing IDs remain unknown. The observer also exposes
+location and scale properties for X/Y/Z. Discover operation registry v4 before use.
 Missing facts block input. The default screenshot provider cannot assert Blender's
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 Capture-derived coordinates and foreground facts retain capture time; slow capture

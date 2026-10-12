@@ -52,6 +52,7 @@ FACT_NAMES = (
     "mode",
     "active_tool",
     "selection",
+    "selection_identities",
     "text_focus",
     "ime_composing",
     "keymap",

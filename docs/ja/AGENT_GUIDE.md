@@ -52,6 +52,11 @@ viewport ジェスチャーの前と途中に editor 領域を再確認し、変
 object ID を比較しますが、観測していないフィールドの保持までは確定しません。
 数値 literal は要求された float を保持します。アプリの実際の readback も指定した
 tolerance を満たす必要があります。
+状態を変える operation と所有 modal の取り消しには、完全で安定した
+`selection_identities` が必要です。Blender はプロセス範囲の公開 `session_uid` を
+使います。改名しても ID は維持され、同名の別 object への置き換えは以後の入力を
+遮断します。ID がない場合は UNKNOWN のままです。observer は位置と scale の
+X/Y/Z 属性も提供します。使用前に operation registry v4 を確認してください。
 信頼できるローカル観測器による editor・selection・mode・IME・
 keymap の確認が必要です。不明な状態は入力を遮断します。既定の screenshot
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は

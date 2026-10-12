@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Require complete stable selection identities across changing operations,
+  readback and owned cancellation, including native input boundaries. The Blender
+  observer uses process-scoped public session UIDs and exposes all six location/
+  scale scalar properties. Missing identity remains unknown; same-name object
+  replacement blocks input. Advertise the stronger contract as operation registry v4.
 - Derive Blender view-effect revisions from the effective view matrix and
   perspective mode, keeping layout/region IDs and projection changes separate.
   Missing, incomplete or ambiguous view readback remains unknown.

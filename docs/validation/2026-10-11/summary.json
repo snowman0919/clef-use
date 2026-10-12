@@ -2734,6 +2734,12 @@
       "sha256": "fa9cb109f1db540012d948ca62605cfb9489a13f6769dffc3cb5ecd0da448b23",
       "scope": "Integrated1014PASS/34SKIP. Source false-success and missing-pose counterexamples corrected. Actual factory Blender sidebar region changes with identical effective pose keep revision stable; actual view_matrix change changes revision. No keyboard/pointer/models; UNKNOWN guards retained; owned cleanup verified. No whole orbit/pan E2E or performance claim."
     },
+    "blender_selection_identity": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-selection-identity.json",
+      "sha256": "ab71d732b0b66b3437a5ac64e5c5fad60c0ace704b3c36d62ddd564f9684c22a",
+      "scope": "Integrated1062PASS/34SKIP. Actual factory Blender old collector missing IDs/fouraxes; current stable publicUID acrossrename, differentUID same-name replacement, completesixproperties. Native Tk old g/Escape delivered afterreplacement; corrected inputboundary refuses both, unchangedidentity stilldelivers. UNKNOWN guards retained. No whole E2E/model/current-installed/performance claim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2969,7 +2975,8 @@
     "transform-readback-and-dispatch.json",
     "x11-logical-pointer-mapping.json",
     "capture-fact-freshness.json",
-    "blender-view-effect-revision.json"
+    "blender-view-effect-revision.json",
+    "blender-selection-identity.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

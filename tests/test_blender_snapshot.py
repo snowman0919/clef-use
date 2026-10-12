@@ -16,6 +16,91 @@ def test_identity_is_process_scoped_and_rejects_null_or_boolean_pointers():
             _identity(pid, pointer)
 
 
+@pytest.fixture
+def native_object():
+    return SimpleNamespace(
+        name_full="Owned",
+        session_uid=77,
+        mode="OBJECT",
+        type="EMPTY",
+        location=[-2, 0, 3.25],
+        scale=[0.5, 2, 0],
+        rotation_mode="XYZ",
+        rotation_euler=[0.1, 0.2, 0.3],
+        rotation_quaternion=[1, 0, 0, 0],
+        rotation_axis_angle=[0, 0, 1, 0],
+        parent=None,
+        parent_type="OBJECT",
+        matrix_parent_inverse=[[1, 0, 0, 0], [0, 1, 0, 0], [0, 0, 1, 0], [0, 0, 0, 1]],
+        delta_location=[1, -1, 0],
+        delta_rotation_euler=[0.3, 0.2, 0.1],
+        delta_rotation_quaternion=[0, 1, 0, 0],
+        delta_scale=[1, 2, 3],
+    )
+
+
+def test_object_identity_survives_rename_and_distinguishes_native_uid_and_process(native_object):
+    from clef_use.blender_snapshot import _object
+
+    before = _object(native_object, 31)
+    native_object.name_full = "Renamed"
+    assert _object(native_object, 31)["id"] == before["id"] == "31:OBJECT:77"
+    native_object.session_uid = 78
+    assert _object(native_object, 31)["id"] == "31:OBJECT:78"
+    assert _object(native_object, 32)["id"] == "32:OBJECT:78"
+
+
+def test_missing_public_uid_stays_unknown_without_rna_pointer_fallback(native_object):
+    from clef_use.blender_snapshot import _object
+
+    del native_object.session_uid
+
+    def unsupported_pointer():
+        raise AssertionError("RNA address cannot establish stable object identity")
+
+    native_object.as_pointer = unsupported_pointer
+    snapshot = _object(native_object, 31)
+    assert snapshot["id"] is None
+    assert snapshot["location"] == [-2.0, 0.0, 3.25]
+
+
+@pytest.mark.parametrize("uid", [None, False, True, 0, -1, 1.0, "77"])
+def test_present_invalid_public_uid_refuses_snapshot(native_object, uid):
+    from clef_use.blender_snapshot import SnapshotUnavailable, _object
+
+    native_object.session_uid = uid
+    with pytest.raises(SnapshotUnavailable):
+        _object(native_object, 31)
+
+
+def test_object_axis_properties_and_complete_transform_baseline_are_preserved(native_object):
+    from clef_use.blender_snapshot import _object
+
+    snapshot = _object(native_object, 31)
+    assert snapshot["properties"] == {
+        "location_x": -2.0,
+        "location_y": 0.0,
+        "location_z": 3.25,
+        "scale_x": 0.5,
+        "scale_y": 2.0,
+        "scale_z": 0.0,
+        "shading": None,
+        "shading_observed": False,
+    }
+    assert snapshot["location"] == [-2.0, 0.0, 3.25]
+    assert snapshot["scale"] == [0.5, 2.0, 0.0]
+    assert snapshot["rotation_mode"] == "XYZ"
+    assert snapshot["rotation_euler_radians"] == [0.1, 0.2, 0.3]
+    assert snapshot["rotation_quaternion"] == [1.0, 0.0, 0.0, 0.0]
+    assert snapshot["rotation_axis_angle"] == [0.0, 0.0, 1.0, 0.0]
+    assert snapshot["parent"] is None and snapshot["parent_type"] == "OBJECT"
+    assert snapshot["matrix_parent_inverse"] == native_object.matrix_parent_inverse
+    assert snapshot["delta_location"] == [1.0, -1.0, 0.0]
+    assert snapshot["delta_rotation_euler_radians"] == [0.3, 0.2, 0.1]
+    assert snapshot["delta_rotation_quaternion"] == [0.0, 1.0, 0.0, 0.0]
+    assert snapshot["delta_scale"] == [1.0, 2.0, 3.0]
+
+
 @pytest.mark.parametrize("values", [[1, math.nan, 3], [math.inf, 0, 0], [True, 0, 0], [1, 2]])
 def test_transform_values_reject_nonfinite_boolean_and_wrong_dimension(values):
     from clef_use.blender_snapshot import SnapshotUnavailable, _vector

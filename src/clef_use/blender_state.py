@@ -254,6 +254,28 @@ def compile_snapshot(
         "application_snapshot": fact(window),
         "editor_layout": fact(editor_layout(window, (left, top, right, bottom), frame)),
     }
+    selection = window["selection"]
+    objects = window["objects"]
+    # Names can be reused while an operation is in flight. Only a complete
+    # process-bound public datablock identity map can establish continuity.
+    identities = {name: obj.get("id") for name, obj in objects.items()}
+    prefix = f"{pid}:OBJECT:"
+    if (
+        isinstance(selection, list)
+        and all(isinstance(name, str) for name in selection)
+        and len(selection) == len(set(selection))
+        and set(selection) == set(identities)
+        and all(
+            isinstance(identity, str)
+            and identity.startswith(prefix)
+            and identity[len(prefix) :].isascii()
+            and identity[len(prefix) :].isdecimal()
+            and not identity[len(prefix) :].startswith("0")
+            for identity in identities.values()
+        )
+        and len(set(identities.values())) == len(identities)
+    ):
+        result["selection_identities"] = fact(identities)
     inventory = window.get("keymap_inventory")
     if inventory is not None:
         result["keymap_inventory"] = fact(inventory)

@@ -51,6 +51,11 @@ transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 previe
 모든 필드와 객체 ID를 비교하며, 관측하지 않은 필드의 보존까지 확정하지 않습니다.
 숫자 literal은 요청한 float 값을 보존합니다. 앱의 실제 readback도 요청 tolerance를
 만족해야 합니다.
+상태를 바꾸는 operation과 소유 modal 취소에는 완전하고 안정적인
+`selection_identities`가 필요합니다. Blender는 프로세스 범위의 공개 `session_uid`로
+객체를 구분합니다. 이름을 바꿔도 ID는 유지되며, 같은 이름의 다른 객체로 교체되면
+추가 입력을 차단합니다. ID가 없으면 불명 상태를 유지합니다. observer는 위치와
+scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v4를 발견하세요.
 신뢰할 수 있는 로컬 관측기가 editor·selection·mode·IME·keymap 상태를 확인해야
 입력합니다. 알 수 없는 상태는 차단합니다. 기본 screenshot 관측기는 Blender의
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.

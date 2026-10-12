@@ -127,6 +127,7 @@ _CONTEXT_FACTS = (
     "mode",
     "keymap_version",
     "selection",
+    "selection_identities",
     "ime_composing",
     "text_focus",
 )
@@ -242,6 +243,26 @@ class OperationBlocked(ValueError):
     pass
 
 
+def selection_identity_anchor(state: CompiledState) -> dict[str, str]:
+    """Require an exact observed identity for every uniquely selected name."""
+    selection = state.require("selection")
+    identities = state.require("selection_identities")
+    if (
+        not isinstance(selection, list)
+        or any(not isinstance(name, str) or not name for name in selection)
+        or len(set(selection)) != len(selection)
+        or not isinstance(identities, dict)
+        or set(identities) != set(selection)
+        or any(
+            not isinstance(identity, str) or not 1 <= len(identity) <= 256 or "\x00" in identity
+            for identity in identities.values()
+        )
+        or len(set(identities.values())) != len(identities)
+    ):
+        raise OperationBlocked("selection identities must exactly identify unique selected objects")
+    return dict(identities)
+
+
 class OperationRunner:
     def __init__(
         self,
@@ -272,6 +293,7 @@ class OperationRunner:
         self._input_count = 0
         self._last_acknowledged_command = None
         self._view_input_sent = False
+        self._selection_anchor: dict[str, str] | None = None
         try:
             self._state = self.observer()
             if cancelled.is_set():
@@ -325,7 +347,9 @@ class OperationRunner:
         if not owned:
             return
         try:
-            self._refresh()
+            # Closure is read-only window evidence. It can release obsolete
+            # recovery authority even when the former target was replaced.
+            self._state = self.observer()
             for name in ("application", "window"):
                 self._expect(name, owned["anchor"][name])
             self._expect("modal", None)
@@ -336,8 +360,10 @@ class OperationRunner:
         self._owned_modal = None
         self._steps.append("owned_modal_closed_observed")
         try:
+            if selection_identity_anchor(self._state) != owned["anchor"]["selection_identities"]:
+                return
             unchanged = self._fact("transform_values") == owned["before"]
-        except StateUnavailable:
+        except (StateUnavailable, OperationBlocked):
             return
         self._steps.append(
             "unchanged_readback_observed" if unchanged else "changed_readback_observed"
@@ -374,6 +400,7 @@ class OperationRunner:
         self._fact("target_geometry")
         if hasattr(request, "target_id"):
             self._expect("selection", [request.target_id])
+        self._selection_anchor = selection_identity_anchor(self._state)
         if not isinstance(request, PropertyEdit):
             self._expect("text_focus", False)
         self._expected_popup = False
@@ -388,6 +415,11 @@ class OperationRunner:
 
     def _refresh(self):
         self._state = self.observer()
+        if (
+            self._selection_anchor is not None
+            and selection_identity_anchor(self._state) != self._selection_anchor
+        ):
+            raise OperationBlocked("selection identities changed during operation")
         return self._state
 
     def _send(self, command, cancelled):
@@ -750,6 +782,7 @@ class OperationRunner:
             raise OperationBlocked("modal is not owned by this operation runner")
         self._expect("modal", {"id": owned["id"], "name": owned["name"]})
         self._anchor = owned["anchor"]
+        self._selection_anchor = dict(self._anchor["selection_identities"])
         self._expected_popup = False
         self._send(owned["cancel"], cancelled)
         self._refresh()

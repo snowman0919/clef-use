@@ -146,12 +146,14 @@ class SessionRuntime:
 
     def _operation_input(self, command, state, cancelled, operation=None):
         from .input_ir import ChordInput, GestureInput, InputContext, InputDispatchError, KeyInput
+        from .operations import selection_identity_anchor
         from .schema import ActionResult
 
         frame = self._operation_frames.get(state.observation_id)
         if frame is None or not hasattr(self.action, "execute_input"):
             return ActionResult(ok=False, reason="fresh typed input backend unavailable")
         expected_window = frame.foreground_window
+        expected_selection = selection_identity_anchor(state)
         family = operation.get("family") if operation else None
         bindings = state.require("keymap") if operation else {}
 
@@ -200,6 +202,7 @@ class SessionRuntime:
                 "keymap_version",
                 "keymap",
                 "selection",
+                "selection_identities",
                 "ime_composing",
             )
             if family in {"numeric_transform", "modal_cancel"}:
@@ -216,6 +219,7 @@ class SessionRuntime:
             valid = (
                 same_context(frame, fresh)
                 and fresh.foreground_window == expected_window
+                and selection_identity_anchor(current) == expected_selection
                 and all(current.require(name) == state.require(name) for name in anchors)
                 and current.require("loading") is False
                 and state.require("loading") is False

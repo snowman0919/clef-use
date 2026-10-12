@@ -23,6 +23,7 @@ class Desktop:
             ime_composing=False,
             keymap_version="test-1",
             selection=["Cube"],
+            selection_identities={"Cube": "object-1"},
             unit={"translate": "NONE", "rotate": "DEGREES", "scale": "NONE"},
             space="GLOBAL",
             modal=None,
@@ -151,6 +152,131 @@ def test_transform_requires_preview_and_committed_numeric_readback():
     assert desktop.values["transform_values"]["Cube"]["translate"]["X"] == 2
     assert "preview_verified" in report.transitions
     assert "readback_verified" in report.transitions
+
+
+@pytest.mark.parametrize(
+    "identities",
+    [
+        None,
+        {},
+        {"Other": "object-1"},
+        {"Cube": ""},
+        {"Cube": 1},
+        {"Cube": "\x00"},
+        {"Cube": "x" * 257},
+        {"Cube": "object-1", "Other": "object-2"},
+    ],
+)
+def test_missing_or_malformed_selection_identities_block_before_input(identities):
+    desktop = Desktop(selection_identities=identities)
+    report = OperationRunner(desktop.observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert report.input_count == 0 and desktop.inputs == []
+
+
+def test_unknown_selection_identity_fact_blocks_before_input():
+    desktop = Desktop()
+    del desktop.values["selection_identities"]
+    report = OperationRunner(desktop.observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+
+
+def test_selection_identity_at_length_limit_allows_verified_effect():
+    desktop = Desktop(selection_identities={"Cube": "x" * 256})
+    report = OperationRunner(desktop.observe, desktop.execute).run(transform(), Event())
+    assert report.status == "SUCCEEDED"
+    assert desktop.values["transform_values"]["Cube"]["translate"]["X"] == 2
+
+
+def test_read_only_menu_assessment_needs_no_object_identity():
+    desktop = Desktop()
+    del desktop.values["selection_identities"]
+    report = OperationRunner(desktop.observe, desktop.execute).run(
+        parse_operation_request({"family": "menu_assess", "menu": "File"}), Event()
+    )
+    assert report.assessment == "ABSENT"
+    assert desktop.inputs == []
+
+
+@pytest.mark.parametrize(
+    "selection,identities",
+    [
+        (["Cube", "Cube"], {"Cube": "object-1"}),
+        (["Cube", "Other"], {"Cube": "object-1", "Other": "object-1"}),
+    ],
+)
+def test_duplicate_selected_name_or_identity_blocks_viewport_before_input(selection, identities):
+    desktop = Desktop(
+        selection=selection,
+        selection_identities=identities,
+        keymap={"orbit": {"button": "middle", "modifiers": []}},
+        target_geometry={"editor_surface": [0, 0, 1, 1]},
+    )
+    request = parse_operation_request(
+        dict(
+            family="viewport_gesture",
+            gesture="orbit",
+            keymap_version="test-1",
+            surface=(0, 0, 1, 1),
+            points=((0.4, 0.4), (0.5, 0.5)),
+        )
+    )
+    report = OperationRunner(desktop.observe, desktop.execute).run(request, Event())
+    assert report.status == "BLOCKED" and desktop.inputs == []
+
+
+@pytest.mark.parametrize("after_key", ["g", "x", "enter"])
+def test_same_name_replacement_never_succeeds_or_continues_input(after_key):
+    desktop = Desktop(application_snapshot={"objects": {"Cube": {"type": "MESH"}}})
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "key", None) == after_key:
+            desktop.values["selection_identities"] = {"Cube": "object-2"}
+            desktop.values["application_snapshot"] = {"objects": {"Cube": {"type": "EMPTY"}}}
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(transform(), Event())
+    assert report.status == "FAILED"
+    assert "selection" in report.reason
+    assert report.input_count == {"g": 1, "x": 2, "enter": 4}[after_key]
+    if after_key != "enter":
+        assert not any(getattr(command, "key", None) == "enter" for command in desktop.inputs)
+        assert desktop.values["transform_values"]["Cube"]["translate"]["X"] == 0
+    if after_key == "g":
+        assert report.owned_modal_id is None
+
+
+def test_owned_cancel_never_targets_same_name_replacement():
+    desktop = Desktop()
+    stop = Event()
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "key", None) == "g":
+            stop.set()
+        return result
+
+    runner = OperationRunner(desktop.observe, execute)
+    assert runner.run(transform(), stop).owned_modal_id == "modal-1"
+    desktop.values["selection_identities"] = {"Cube": "object-2"}
+    desktop.inputs.clear()
+    report = runner.run(
+        parse_operation_request({"family": "modal_cancel", "modal_id": "modal-1"}), Event()
+    )
+    assert report.status == "BLOCKED" and desktop.inputs == []
+    assert desktop.values["modal"] == {"id": "modal-1", "name": "translate"}
+    assert runner.owns_modal("modal-1")
+    desktop.values["modal"] = None
+    report = runner.run(
+        parse_operation_request({"family": "modal_cancel", "modal_id": "modal-1"}), Event()
+    )
+    assert report.status == "BLOCKED" and desktop.inputs == []
+    assert not runner.owns_modal()
+    assert "owned_modal_closed_observed" in report.transitions
+    assert "unchanged_readback_observed" not in report.transitions
+    assert "changed_readback_observed" not in report.transitions
 
 
 @pytest.mark.parametrize("group", ["translate", "rotate", "scale"])

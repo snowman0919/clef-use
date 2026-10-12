@@ -5,6 +5,8 @@ not import bpy and needs only the standard library. Coordinates are unmodified
 window pixels with Blender's bottom-left origin; rotations retain their native
 representation (Euler values are radians). Window/area/region/operator IDs are
 process-scoped RNA pointers, never OS window IDs.
+Object IDs use process-scoped public ID.session_uid, independent of names and
+RNA addresses; an unavailable public UID leaves object identity unobserved.
 
 ``positive_modal_operators`` is positive-only evidence. None means unavailable;
 an empty list does NOT establish absence of popups, text editing, modal UI
@@ -69,6 +71,7 @@ class Geometry(TypedDict):
 
 
 class ObjectSnapshot(TypedDict):
+    id: str | None
     mode: str
     type: str
     location: list[float]
@@ -398,7 +401,13 @@ def _geometry(value: Any) -> Geometry:
     }
 
 
-def _object(value: Any) -> ObjectSnapshot:
+def _object(value: Any, pid: int) -> ObjectSnapshot:
+    try:
+        uid = value.session_uid
+    except AttributeError:
+        object_id = None
+    else:
+        object_id = f"{_integer(pid, minimum=1)}:OBJECT:{_integer(uid, minimum=1)}"
     location = _vector(value.location, 3)
     scale = _vector(value.scale, 3)
     object_type = _enum(value.type)
@@ -409,6 +418,7 @@ def _object(value: Any) -> ObjectSnapshot:
             (polygon.use_smooth for polygon in polygons), len(polygons)
         )
     return {
+        "id": object_id,
         "mode": _enum(value.mode),
         "type": object_type,
         "location": location,
@@ -426,7 +436,11 @@ def _object(value: Any) -> ObjectSnapshot:
         "delta_scale": _vector(value.delta_scale, 3),
         "properties": {
             "location_x": location[0],
+            "location_y": location[1],
+            "location_z": location[2],
             "scale_x": scale[0],
+            "scale_y": scale[1],
+            "scale_z": scale[2],
             "shading": shading,
             "shading_observed": shading_observed,
         },
@@ -487,7 +501,7 @@ def collect_snapshot() -> BlenderSnapshot:
             "selected objects",
         )
         selected_count += len(selected)
-        objects = _selection_index((_name(obj.name_full), _object(obj)) for obj in selected)
+        objects = _selection_index((_name(obj.name_full), _object(obj, pid)) for obj in selected)
         active = layer.objects.active
         areas: list[AreaSnapshot] = []
         for area in _bounded(window.screen.areas, MAX_REGIONS, "areas"):

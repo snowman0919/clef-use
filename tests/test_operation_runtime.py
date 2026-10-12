@@ -27,6 +27,7 @@ class OperationEditor:
             "editor": "VIEW_3D",
             "mode": "OBJECT",
             "selection": ["Cube"],
+            "selection_identities": {"Cube": "object-1"},
             "ime_composing": False,
             "text_focus": False,
             "popup": False,
@@ -179,6 +180,56 @@ def test_numeric_baseline_change_at_native_boundary_refuses_modal_entry():
             {"family": "numeric_transform", "operation": "translate"},
         )
     assert editor.values["modal"] is None and not editor.held
+
+
+@pytest.mark.parametrize("family,key", [("numeric_transform", "g"), ("modal_cancel", "escape")])
+def test_native_boundary_refuses_same_name_replacement(family, key):
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    if family == "modal_cancel":
+        editor.values["modal"] = {"id": "owned", "name": "translate"}
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["selection_identities"] = {"Cube": "object-2"}
+    operation = {"family": family, "operation": "translate", "modal_id": "owned"}
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(KeyInput(key=key), state, Event(), operation)
+    assert editor.values["modal"] == (
+        {"id": "owned", "name": "translate"} if family == "modal_cancel" else None
+    )
+    assert not editor.held
+
+
+def test_acknowledged_entry_cannot_claim_same_name_replacement_modal():
+    editor = OperationEditor()
+    editor.after_enter = lambda: editor.values.update(selection_identities={"Cube": "object-2"})
+    runtime = editor.runtime()
+    session = Session(
+        Contract(
+            goal="Move Cube",
+            operation={
+                "family": "numeric_transform",
+                "target_id": "Cube",
+                "operation": "translate",
+                "axis": "X",
+                "space": "GLOBAL",
+                "unit": "METERS",
+                "amount": 2,
+                "keymap_version": "fixture-1",
+            },
+        )
+    )
+    result = runtime.execute(session)
+    assert result["status"] == "NEEDS_REPLAN"
+    assert result["blocker"]["observed"]["status"] == "FAILED"
+    assert result["blocker"]["observed"]["input_count"] == 1
+    runner = runtime.operation_runners[session.id]
+    assert not runner.owns_modal()
+    assert editor.values["transform_values"]["Cube"]["translate"]["X"] == 0
+    assert not editor.held
 
 
 def test_owned_cancel_rechecks_transform_context_at_native_boundary():

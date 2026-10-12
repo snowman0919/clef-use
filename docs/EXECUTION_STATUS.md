@@ -74,6 +74,34 @@ readiness. The integrated source passed **1014 tests / 34 skipped / 41 warnings*
 seven changed Python files passed Ruff/format and contract generation passed.
 See [view-effect evidence](validation/2026-10-11/blender-view-effect-revision.json).
 
+**OBSERVED / selected-object continuity:** changing operations and owned modal
+cancellation now require a complete, unique `selection_identities` map and retain
+it through dispatch, every refresh/readback and the native input boundary. Same-name
+replacement cannot continue input, acquire modal ownership or report success.
+Read-only observation of a closed modal still releases obsolete ownership, but
+does not attribute unchanged readback to a replacement object. Registry v4
+advertises the new required fact; the public request schema digest is unchanged.
+
+The Blender observer publishes process-scoped public `ID.session_uid` identities
+and all six location/scale scalar properties. Missing or incoherent identity
+remains UNKNOWN. In an authenticated private factory Blender component, the
+immutable prior collector omitted IDs and four axis properties. The current
+collector/provider retained the ID across a real rename and changed it for a
+same-name copy with identical transforms; all six numeric properties matched.
+Fixture setup used explicit public RNA setters, with zero keyboard/pointer input
+or model calls. Native Tk components separately reproduced old `g`/`Escape`
+delivery after same-name replacement, then refused both before OS input while
+unchanged-identity input still worked. These exercise the input boundary with
+API-assisted state, not a complete Blender operation.
+
+Owned children/sockets were removed and production Blender was preserved. An
+exact scan of both Tk fixture HOMEs found zero process matches; 417 unreadable
+unrelated entries were outside that check. The integrated source passed
+**1062 tests / 34 skipped / 41 warnings** in 54.13 seconds. Ten changed Python
+files passed Ruff/format, and generated contract checks passed. Whole-task E2E,
+models, installed-current harness E2E and full p95/goodput/coverage are NOT_RUN in
+this slice. See [identity evidence](validation/2026-10-11/blender-selection-identity.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

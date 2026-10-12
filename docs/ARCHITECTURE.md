@@ -26,6 +26,15 @@ application identity. Unsupported or ambiguous binding leaves facts unknown.
 
 `blender_snapshot.py` records actual selection, mode, transform representations,
 unit settings, viewport matrices, regions and positive modal operator records.
+Selected objects expose all six location/scale scalar properties and a
+process-scoped public `ID.session_uid` identity. The provider publishes
+`selection_identities` only for a complete, unique map matching the selection;
+missing public identity or incoherent maps remain UNKNOWN. Names and RNA pointers
+cannot establish object continuity. Changing operations and owned cancellation
+anchor this map at dispatch, readback and the native input boundary, so reusing a
+selected name for a different object blocks further input. Operation registry v4
+advertises this required fact; request schemas remain unchanged.
+See the [Blender ID API](https://docs.blender.org/api/5.2/bpy.types.ID.html).
 It also inventories relevant merged user keymaps, preserving inactive and duplicate
 entries, native tri-state modifiers and a retained-content digest. The provider
 publishes this as `keymap_inventory`, never effective `keymap`/`keymap_version`.

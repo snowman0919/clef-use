@@ -48,6 +48,10 @@ transform 上下文，进入前检查初始值，commit 前检查已验证的 pr
 成分判断其他轴未变。property 编辑后比较所有已观察字段和 object ID，但不能据此
 确认未观察字段保持不变。
 数值 literal 保留请求的 float；应用实际 readback 仍须满足请求的 tolerance。
+改变状态的 operation 和自有 modal 取消需要完整、稳定的 `selection_identities`。
+Blender 使用进程范围的公开 `session_uid`；改名保留 ID，同名对象被替换时阻止
+后续输入。缺失 ID 时保持 UNKNOWN。observer 还提供位置和 scale 的 X/Y/Z 属性。
+使用前请发现 operation registry v4。
 未知状态会阻止输入。默认截图观察器不能确认 Blender 的隐藏状态。API 辅助
 fixture 的通过不能证明 pixels-only 操作成功。
 截图产生的坐标和 foreground 保留捕获时刻；捕获或处理延迟不会更新有效期。
