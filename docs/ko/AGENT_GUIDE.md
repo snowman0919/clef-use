@@ -54,6 +54,11 @@ transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 previe
 신뢰할 수 있는 로컬 관측기가 editor·selection·mode·IME·keymap 상태를 확인해야
 입력합니다. 알 수 없는 상태는 차단합니다. 기본 screenshot 관측기는 Blender의
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.
+캡처에서 얻은 좌표와 foreground는 캡처 시각을 유지합니다. 느린 캡처나 처리가 해당
+상태의 수명을 갱신하지 않으며, provider가 별도로 관측한 값은 자체 시각으로 판정합니다.
+Blender의 view 효과는 완전하고 모호하지 않은 단일 viewport의 실제 view matrix와
+perspective mode로 확인합니다. region·레이아웃·projection만 바뀌면 orbit/pan 효과로
+판정하지 않으며, pose가 없거나 quad view가 모호하면 불명 상태를 유지합니다.
 
 기본 provider는 `NONE`이며 screenshot과 native window identity만으로 Blender의
 숨은 상태를 확정하지 않습니다. Linux X11에서는 선택적으로 읽기 전용 Blender

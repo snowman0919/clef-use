@@ -52,6 +52,11 @@ Numeric literals preserve the requested float; application readback must still
 meet the requested tolerance.
 Missing facts block input. The default screenshot provider cannot assert Blender's
 hidden state. API-assisted fixture results do not prove pixels-only operation.
+Capture-derived coordinates and foreground facts retain capture time; slow capture
+or processing cannot renew them. Current provider facts keep their own timestamps.
+Blender view-effect readback uses the effective view matrix and perspective mode
+from one complete, unambiguous viewport. Region/layout/projection-only changes do
+not prove orbit/pan; missing pose and ambiguous quad views remain unknown.
 An operation report's `SUCCEEDED` verifies its typed effect. The session stays
 `NEEDS_REPLAN` until a separate fresh `ASSESS` verifies the actual task goal.
 The default provider remains `NONE`: screenshots and available native window

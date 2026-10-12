@@ -56,6 +56,11 @@ tolerance を満たす必要があります。
 keymap の確認が必要です。不明な状態は入力を遮断します。既定の screenshot
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は
 pixels-only 操作の成功を証明しません。
+キャプチャ由来の座標と foreground は取得時刻を保持します。取得や処理の遅延で
+有効期間を更新せず、provider の独立した観測値は自身の時刻で判定します。
+Blender の view 効果は、完全で曖昧でない単一 viewport の実効 view matrix と
+perspective mode で確認します。region・layout・projection だけの変化は orbit/pan
+の証拠にせず、pose がない場合や quad view が曖昧な場合は UNKNOWN を保持します。
 
 既定の provider は `NONE` です。screenshot と native window identity だけでは
 Blender の隠れた状態を確定できません。Linux X11 では読み取り専用の Blender

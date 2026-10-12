@@ -47,6 +47,38 @@ def test_capture_maps_points_with_monitor_extent_and_preserves_retina(
     assert frame.pointer_point(PointerPoint(x=0.4, y=0.5)) == expected
 
 
+def test_capture_latency_cannot_renew_the_native_context(monkeypatch):
+    import clef_use.backends as backends
+    from clef_use.state import FactValidity, StateCompiler
+
+    clock = [1000.0]
+    image = Image.new("RGB", (100, 80))
+
+    class Screen:
+        monitors = [None, {"left": 0, "top": 0}]
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def grab(self, _):
+            clock[0] += 2
+            return SimpleNamespace(size=image.size, rgb=image.tobytes())
+
+    monkeypatch.setattr(backends.time, "time", lambda: clock[0])
+    monkeypatch.setattr(backends, "sys", SimpleNamespace(platform="linux"))
+    monkeypatch.setitem(sys.modules, "mss", SimpleNamespace(MSS=Screen))
+    monkeypatch.setattr(DesktopCapture, "_x11_context", staticmethod(lambda: (42, (0, 0, 100, 80))))
+    frame = DesktopCapture().capture()
+    state = StateCompiler().compile(Observation("slow-capture", frame, ()))
+    assert frame.captured_at == 1000.0
+    assert state.fact("target_geometry").validity == FactValidity.STALE
+    assert state.fact("window").validity == FactValidity.STALE
+    assert state.fact("foreground").validity == FactValidity.STALE
+
+
 class FailingGui:
     FAILSAFE = True
 

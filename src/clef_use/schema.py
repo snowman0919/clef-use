@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Literal
 
@@ -248,6 +249,7 @@ class Frame:
     logical_size: tuple[int, int] | None = None
     foreground_window: int | None = None
     foreground_bounds: tuple[int, int, int, int] | None = None
+    captured_at: float = field(default_factory=lambda: time.time())
 
     def reference(self) -> FrameReference:
         return FrameReference(

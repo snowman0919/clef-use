@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Derive Blender view-effect revisions from the effective view matrix and
+  perspective mode, keeping layout/region IDs and projection changes separate.
+  Missing, incomplete or ambiguous view readback remains unknown.
+- Preserve capture time through State Compiler processing so delayed screenshots
+  cannot renew target geometry or foreground facts. Independently current provider
+  evidence retains its own timestamp and validity.
 - Resolve logical X11 buttons and wheel directions through the current OS pointer
   mapping. Release the acknowledged physical button during normal completion,
   independent abort and guardian recovery after executor exit.

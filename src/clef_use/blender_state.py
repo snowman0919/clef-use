@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import math
 import os
 import socket
 import stat
@@ -170,6 +171,50 @@ def editor_layout(window, client_bounds, frame):
     }
 
 
+def _view_pose_revision(areas):
+    """Fingerprint one effective view, never layout or projection metadata."""
+    viewports = [area for area in areas if area["type"] == "VIEW_3D"]
+    if len(viewports) != 1 or viewports[0].get("quad_views") != []:
+        return None
+    pose = viewports[0].get("viewport")
+    if not isinstance(pose, dict):
+        return None
+
+    def finite(value):
+        try:
+            return type(value) in (int, float) and math.isfinite(value)
+        except OverflowError:
+            return False
+
+    location, rotation = pose.get("view_location"), pose.get("view_rotation")
+    if any(
+        not isinstance(vector, (list, tuple))
+        or len(vector) != length
+        or not all(finite(value) for value in vector)
+        for vector, length in ((location, 3), (rotation, 4))
+    ):
+        return None
+    distance, perspective = pose.get("view_distance"), pose.get("view_perspective")
+    if not finite(distance) or perspective not in ("PERSP", "ORTHO", "CAMERA"):
+        return None
+    matrix = pose.get("view_matrix")
+    if (
+        not isinstance(matrix, (list, tuple))
+        or len(matrix) != 4
+        or any(
+            not isinstance(row, (list, tuple))
+            or len(row) != 4
+            or not all(finite(value) for value in row)
+            for row in matrix
+        )
+    ):
+        return None
+    # Quaternion signs and pending RNA parameters can differ without changing
+    # the effective view. Projection/aspect matrices are intentionally excluded.
+    content = [[[float(value) if value else 0.0 for value in row] for row in matrix], perspective]
+    return hashlib.sha256(json.dumps(content, separators=(",", ":")).encode()).hexdigest()
+
+
 def compile_snapshot(
     snapshot, *, pid, frame, version, started_at, completed_at, client_bounds=None
 ):
@@ -222,9 +267,8 @@ def compile_snapshot(
     modals = window["positive_modal_operators"]
     if modals:
         result["modal"] = fact({"positive_operators": modals})
-    viewports = [area for area in window["areas"] if area["type"] == "VIEW_3D"]
-    if len(viewports) == 1:
-        revision = hashlib.sha256(json.dumps(viewports[0], sort_keys=True).encode()).hexdigest()
+    revision = _view_pose_revision(window["areas"])
+    if revision is not None:
         result["view_revision"] = fact(revision)
     return result
 

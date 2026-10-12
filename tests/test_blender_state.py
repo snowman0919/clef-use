@@ -11,7 +11,7 @@ import pytest
 from PIL import Image
 
 from clef_use.blender_observer import SnapshotServer, peer_credentials, read_message
-from clef_use.blender_state import compile_snapshot
+from clef_use.blender_state import _view_pose_revision, compile_snapshot
 from clef_use.schema import Frame, Observation
 from clef_use.state import FactValidity, StateCompiler
 
@@ -102,6 +102,156 @@ def area_geometry(x, y, width, height, *, identity="area", kind="VIEW_3D", regio
         "geometry_window_pixels_bottom_left": dict(x=x, y=y, width=width, height=height),
         "regions": list(regions),
     }
+
+
+def viewport_document():
+    document = snapshot()
+    area = area_geometry(
+        0,
+        0,
+        100,
+        80,
+        regions=[area_geometry(0, 0, 100, 80, identity="region", kind="WINDOW")],
+    )
+    area["viewport"] = {
+        "id": "viewport",
+        "view_location": [0.0, 0.0, 0.0],
+        "view_rotation": [1.0, 0.0, 0.0, 0.0],
+        "view_distance": 10.0,
+        "view_perspective": "PERSP",
+        "view_matrix": [[float(row == column) for column in range(4)] for row in range(4)],
+        "window_matrix": [[1.0]],
+        "revision": "producer-projection-revision",
+    }
+    area["quad_views"] = []
+    document["windows"][0]["areas"] = [area]
+    return document
+
+
+def test_view_revision_ignores_layout_ids_and_projection_changes():
+    document = viewport_document()
+    original = compile_document(document).require("view_revision")
+    area = document["windows"][0]["areas"][0]
+    area["id"] = "new-area"
+    area["regions"][0]["id"] = "new-region"
+    area["regions"][0]["geometry_window_pixels_bottom_left"]["width"] = 70
+    area["viewport"]["id"] = "new-viewport"
+    area["viewport"]["window_matrix"] = [[2.0]]
+    area["viewport"]["revision"] = "changed-projection-revision"
+    assert compile_document(document).require("view_revision") == original
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("view_location", [1.0, 0.0, 0.0]),
+        ("view_rotation", [0.0, 1.0, 0.0, 0.0]),
+        ("view_distance", 9.0),
+        ("view_perspective", "ORTHO"),
+    ],
+)
+def test_effective_view_change_changes_revision(field, value):
+    document = viewport_document()
+    original = compile_document(document).require("view_revision")
+    document["windows"][0]["areas"][0]["viewport"][field] = value
+    if field != "view_perspective":
+        document["windows"][0]["areas"][0]["viewport"]["view_matrix"][0][3] = 2.0
+    assert compile_document(document).require("view_revision") != original
+
+
+def test_pending_pose_and_quaternion_sign_do_not_invent_effective_view_change():
+    document = viewport_document()
+    original = compile_document(document).require("view_revision")
+    pose = document["windows"][0]["areas"][0]["viewport"]
+    pose["view_rotation"] = [-1.0, 0.0, 0.0, 0.0]
+    pose["view_matrix"][0][1] = -0.0
+    assert compile_document(document).require("view_revision") == original
+    pose["view_location"] = [1.0, 2.0, 3.0]
+    pose["view_distance"] = 12.0
+    assert compile_document(document).require("view_revision") == original
+
+
+def test_viewport_operation_cannot_report_layout_only_change_as_success():
+    from threading import Event
+
+    from test_operations import Desktop
+
+    from clef_use.operations import OperationRunner, parse_operation_request
+    from clef_use.schema import ActionResult
+
+    document = viewport_document()
+    desktop = Desktop(
+        target_geometry={"editor_surface": [0, 0, 1, 1]},
+        keymap={"orbit": {"button": "middle", "modifiers": []}},
+        view_revision=compile_document(document).require("view_revision"),
+    )
+
+    def execute(command, state, cancelled):
+        desktop.inputs.append(command)
+        document["windows"][0]["areas"][0]["regions"][0]["id"] = "new-layout-region"
+        desktop.values["view_revision"] = compile_document(document).require("view_revision")
+        return ActionResult(ok=True)
+
+    request = parse_operation_request(
+        dict(
+            family="viewport_gesture",
+            gesture="orbit",
+            keymap_version="test-1",
+            surface=(0, 0, 1, 1),
+            points=((0.4, 0.4), (0.5, 0.5)),
+        )
+    )
+    report = OperationRunner(desktop.observe, execute).run(request, Event())
+    assert report.status == "FAILED"
+    assert report.reason == "viewport readback did not change"
+    assert report.input_count == 1
+    assert "view_change_verified" not in report.transitions
+
+
+@pytest.mark.parametrize(
+    "field,value",
+    [
+        ("view_location", None),
+        ("view_location", [0, 0]),
+        ("view_location", [0, True, 0]),
+        ("view_location", [0, float("inf"), 0]),
+        ("view_rotation", [1, 0, 0]),
+        ("view_rotation", [1, 0, float("nan"), 0]),
+        ("view_distance", None),
+        ("view_distance", True),
+        ("view_distance", float("inf")),
+        ("view_perspective", None),
+        ("view_perspective", "UNKNOWN"),
+        ("view_matrix", None),
+        ("view_matrix", [[1.0] * 4] * 3),
+        ("view_matrix", [[True] * 4] * 4),
+        ("view_matrix", [[float("inf")] * 4] * 4),
+    ],
+)
+def test_incomplete_or_invalid_view_pose_never_establishes_revision(field, value):
+    document = viewport_document()
+    document["windows"][0]["areas"][0]["viewport"][field] = value
+    assert _view_pose_revision(document["windows"][0]["areas"]) is None
+    if "Infinity" in json.dumps(document) or "NaN" in json.dumps(document):
+        with pytest.raises(ValueError, match="finite number"):
+            compile_document(document)
+    else:
+        assert compile_document(document).fact("view_revision").validity == FactValidity.UNKNOWN
+
+
+@pytest.mark.parametrize("change", ["missing_pose", "missing_quad_inventory", "quad", "multiple"])
+def test_ambiguous_or_missing_view_never_establishes_revision(change):
+    document = viewport_document()
+    areas = document["windows"][0]["areas"]
+    if change == "missing_pose":
+        areas[0]["viewport"] = None
+    elif change == "missing_quad_inventory":
+        del areas[0]["quad_views"]
+    elif change == "quad":
+        areas[0]["quad_views"] = [copy.deepcopy(areas[0]["viewport"])]
+    else:
+        areas.append(copy.deepcopy(areas[0]))
+    assert compile_document(document).fact("view_revision").validity == FactValidity.UNKNOWN
 
 
 def layout_state(areas, *, origin=(-200, 40), client=(-180, 60, -80, 140)):

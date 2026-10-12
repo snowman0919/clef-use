@@ -70,6 +70,17 @@ checks progress. Candidate IDs are bound to one observation. CLEF selects
 bounded candidates. Model-facing candidates retain their operation and target
 object ID, linking equally labelled controls to their distinct observed geometry.
 This connection supplies evidence; it does not change input or confidence guards.
+Capture-derived geometry/window/foreground facts retain the frame's capture time,
+including time spent acquiring the image. Compilation and later perception do not
+renew them. Provider facts keep their independently observed times and pass the
+same age/version checks; a current application fact cannot refresh an older frame.
+The Blender view-effect revision requires one unambiguous non-quad viewport with
+complete finite pose readback. It fingerprints the effective `view_matrix` and
+perspective mode, excluding area/region identities, layout, projection matrices
+and redundant pending pose parameters. A layout-only change cannot establish an
+orbit/pan effect. Missing pose remains UNKNOWN. Blender documents the distinction
+between the current view matrix and the combined projection matrix in
+[RegionView3D](https://docs.blender.org/api/5.2/bpy.types.RegionView3D.html).
 All executable target objects must fit the existing 40-object context budget;
 overflow or missing target evidence is refused rather than silently truncated.
 The optional Foundation ViT produces screenshot coordinates

@@ -50,6 +50,11 @@ transform 上下文，进入前检查初始值，commit 前检查已验证的 pr
 数值 literal 保留请求的 float；应用实际 readback 仍须满足请求的 tolerance。
 未知状态会阻止输入。默认截图观察器不能确认 Blender 的隐藏状态。API 辅助
 fixture 的通过不能证明 pixels-only 操作成功。
+截图产生的坐标和 foreground 保留捕获时刻；捕获或处理延迟不会更新有效期。
+provider 独立观察的值按各自的时刻判断。
+Blender view 效果使用单一、完整且无歧义 viewport 的实际 view matrix 和 perspective
+mode。仅 region、layout 或 projection 变化不能证明 orbit/pan；pose 缺失或 quad
+view 有歧义时保持 UNKNOWN。
 
 默认 provider 仍为 `NONE`；截图和 native window identity 不能确认 Blender 的隐藏状态。
 Linux X11 支持可选的只读 Blender observer。`clef-use blender-observer-script` 会输出

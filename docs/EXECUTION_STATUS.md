@@ -49,6 +49,31 @@ is outside the atomicity claim. Windows/Darwin native execution is NOT_RUN in th
 slice. No production display or model was used. See
 [pointer component evidence](validation/2026-10-11/x11-logical-pointer-mapping.json).
 
+**OBSERVED / capture freshness and view effects:** capture-derived geometry,
+window and foreground facts now preserve the capture start time through
+compilation and later processing. Before correction, an actual owned native
+capture aged 1.15 seconds was renewed as VALID by compilation. After correction,
+all three facts remained STALE while independently current fixture evidence
+retained its own VALID timestamp. Age/future boundaries and slow acquisition have
+deterministic regression coverage. FrameReference and public API schemas did not
+change. See [capture evidence](validation/2026-10-11/capture-fact-freshness.json).
+
+The Blender provider previously hashed the entire VIEW_3D area, so a layout-only
+region identity change could make a viewport operation report SUCCEEDED without
+a view effect. It now requires a complete finite, unambiguous non-quad viewport
+and fingerprints its effective view matrix and perspective mode. Layout,
+projection, pointer IDs, quaternion sign and pending redundant pose values cannot
+alone count as the effect. Missing or ambiguous pose remains UNKNOWN.
+The actual factory Blender component kept the revision unchanged after a real
+sidebar/region layout change with identical pose, and changed it after an actual
+view-matrix change. Canonical observer/provider paths ran on an owned authenticated
+display; fixture setup used explicit RNA setters, with zero keyboard/pointer input
+or model calls. Owned children and sockets were removed; production Blender was
+preserved. This is component proof, not a complete orbit/pan task or provider
+readiness. The integrated source passed **1014 tests / 34 skipped / 41 warnings**;
+seven changed Python files passed Ruff/format and contract generation passed.
+See [view-effect evidence](validation/2026-10-11/blender-view-effect-revision.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

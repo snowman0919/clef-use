@@ -455,6 +455,7 @@ class DesktopCapture:
     def capture(self):
         import mss
 
+        captured_at = time.time()
         native = WindowsInput() if sys.platform == "win32" else None
         target = native.ensure_target(None) if native else None
         x11_context = self._x11_context() if sys.platform == "linux" else (None, None)
@@ -504,7 +505,7 @@ class DesktopCapture:
                 target, bounds = x11_context
                 if sys.platform == "linux" and self._x11_context() != x11_context:
                     raise RuntimeError("X11 foreground changed during capture")
-        return Frame(image, (monitor["left"], monitor["top"]), logical, target, bounds)
+        return Frame(image, (monitor["left"], monitor["top"]), logical, target, bounds, captured_at)
 
 
 class DesktopAction:

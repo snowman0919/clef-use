@@ -139,7 +139,7 @@ class StateCompiler:
         facts["target_geometry"] = StateFact(
             value={item.id: item.bbox.model_dump() for item in observation.objects},
             source=StateSource.PIXELS,
-            observed_at=now,
+            observed_at=observation.frame.captured_at,
             state_version=version,
             validity=FactValidity.VALID,
             uncertainty=max(
@@ -160,7 +160,7 @@ class StateCompiler:
                 facts[name] = StateFact(
                     value=value,
                     source=StateSource.NATIVE,
-                    observed_at=now,
+                    observed_at=observation.frame.captured_at,
                     state_version=version,
                     validity=FactValidity.VALID,
                     uncertainty=0,
@@ -168,6 +168,8 @@ class StateCompiler:
         for name, fact in (evidence or {}).items():
             if name not in facts:
                 raise ValueError(f"unregistered state fact: {name}")
+            facts[name] = fact
+        for name, fact in facts.items():
             if fact.validity == FactValidity.VALID and (
                 fact.source == StateSource.UNAVAILABLE
                 or fact.state_version != version

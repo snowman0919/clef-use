@@ -1,5 +1,6 @@
 import time
 
+import pytest
 from PIL import Image
 
 from clef_use.schema import BoundingBox, Frame, Observation, UIObject
@@ -75,3 +76,37 @@ def test_geometry_does_not_promote_uncertain_grounding_to_verified_coordinates()
     )
     state = StateCompiler().compile(Observation("uncertain", frame, (target,)))
     assert state.fact("target_geometry").uncertainty == 0.6
+
+
+@pytest.mark.parametrize("delay,valid", [(0, True), (1, True), (1.0001, False), (-0.001, False)])
+def test_capture_facts_keep_their_age_across_compilation(monkeypatch, delay, valid):
+    clock = [1000.0]
+    monkeypatch.setattr(time, "time", lambda: clock[0])
+    frame = Frame(Image.new("RGB", (100, 80)), foreground_window=42)
+    clock[0] += delay
+    state = StateCompiler(max_age_seconds=1).compile(Observation("delayed", frame, ()))
+    for name in ("target_geometry", "window", "foreground"):
+        fact = state.fact(name)
+        assert fact.observed_at == 1000.0
+        assert fact.validity == (FactValidity.VALID if valid else FactValidity.STALE)
+    assert state.fact("text_focus").validity == FactValidity.UNKNOWN
+
+
+def test_current_provider_evidence_does_not_renew_an_older_capture(monkeypatch):
+    clock = [1000.0]
+    monkeypatch.setattr(time, "time", lambda: clock[0])
+    frame = Frame(Image.new("RGB", (100, 80)), foreground_window=42)
+    clock[0] = 1002.0
+    evidence = StateFact(
+        value="OBJECT",
+        source=StateSource.APP_TELEMETRY,
+        observed_at=clock[0],
+        state_version=1,
+        validity=FactValidity.VALID,
+        uncertainty=0,
+    )
+    state = StateCompiler().compile(Observation("delayed", frame, ()), {"mode": evidence})
+    assert state.require("mode") == "OBJECT"
+    assert state.fact("target_geometry").validity == FactValidity.STALE
+    assert state.fact("foreground").validity == FactValidity.STALE
+    assert state.fact("mode").observed_at == 1002.0

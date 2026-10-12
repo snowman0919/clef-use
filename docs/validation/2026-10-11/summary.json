@@ -2722,6 +2722,18 @@
       "sha256": "fd31e4be199ff3a58cf19240a1815486f877f1b8ea987cde2cd0c8ccc5771bb5",
       "scope": "Nine authenticated native X11 cases; scoped49PASS and integrated982PASS/34SKIP. Actual prior swapped-map left click became right and upward wheel became downward. Correct logical buttons/wheel, modifier gesture, unrelated-held refusal, independent abort and executor-kill guardian release. Fresh mapping query is not atomic with external remap. No Windows/Darwin native, model, whole E2E or performance claim."
     },
+    "capture_fact_freshness": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/capture-fact-freshness.json",
+      "sha256": "7148aa113cb16da0f3533c935340578f756226482e5b8fe24b46f95e50053ac2",
+      "scope": "Integrated1014PASS/34SKIP. Actual native capture aged1.15s was falsely renewed VALID before; after capture-derived facts remain STALE while independently current fixture evidence remains VALID. Deterministic age/future boundary and capture-latency regressions. No whole E2E/model/current-installed/performance claim."
+    },
+    "blender_view_effect_revision": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-view-effect-revision.json",
+      "sha256": "fa9cb109f1db540012d948ca62605cfb9489a13f6769dffc3cb5ecd0da448b23",
+      "scope": "Integrated1014PASS/34SKIP. Source false-success and missing-pose counterexamples corrected. Actual factory Blender sidebar region changes with identical effective pose keep revision stable; actual view_matrix change changes revision. No keyboard/pointer/models; UNKNOWN guards retained; owned cleanup verified. No whole orbit/pan E2E or performance claim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2955,7 +2967,9 @@
     "literal-candidate-alternatives.json",
     "operation-context-guards.json",
     "transform-readback-and-dispatch.json",
-    "x11-logical-pointer-mapping.json"
+    "x11-logical-pointer-mapping.json",
+    "capture-fact-freshness.json",
+    "blender-view-effect-revision.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

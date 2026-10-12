@@ -1,0 +1,89 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Capture-time provenance software regression and owned native DesktopCapture -> delayed StateCompiler component; not whole-task E2E or model/performance proof",
+  "source_base": "73f3c489e31beec98b32a59f8bca76eac09001ec",
+  "source_sha256": {
+    "src/clef_use/schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+    "src/clef_use/backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+    "src/clef_use/state.py": "135215c355d9b88d023b199ac3eb5e8376daf55afa9abd6c37280f3d73701b9f",
+    "tests/test_state_compiler.py": "f46105ebea4baf7763b4dd143a17d5098fa96b44776fcacdefb14994dd8547be",
+    "tests/test_adapters.py": "2e30510e63d009a0df6ea108fea6f3bcf2a2f4cb0bdbbcbccafe3aaa8f9fd797"
+  },
+  "before_native": {
+    "scope": "Owned native DesktopCapture -> delayed StateCompiler component only",
+    "capture_elapsed_ms": 19.530296325683594,
+    "capture_age_at_compile_ms": 1150.0954627990723,
+    "capture_fact_results": {
+      "target_geometry": {
+        "validity": "VALID",
+        "observed_after_capture_ms": 1150.0954627990723
+      },
+      "window": {
+        "validity": "VALID",
+        "observed_after_capture_ms": 1150.0954627990723
+      },
+      "foreground": {
+        "validity": "VALID",
+        "observed_after_capture_ms": 1150.0954627990723
+      }
+    },
+    "independent_current_fact": "VALID",
+    "native_inputs": 0,
+    "production_display_access": 0
+  },
+  "after_native": {
+    "scope": "Owned native DesktopCapture -> delayed StateCompiler component only",
+    "capture_elapsed_ms": 19.17719841003418,
+    "capture_age_at_compile_ms": 1150.1197814941406,
+    "capture_fact_results": {
+      "target_geometry": {
+        "validity": "STALE",
+        "observed_after_capture_ms": -14.890909194946289
+      },
+      "window": {
+        "validity": "STALE",
+        "observed_after_capture_ms": -14.890909194946289
+      },
+      "foreground": {
+        "validity": "STALE",
+        "observed_after_capture_ms": -14.890909194946289
+      }
+    },
+    "independent_current_fact": "VALID",
+    "native_inputs": 0,
+    "production_display_access": 0
+  },
+  "before_report_sha256": "94c9b55a2dff10e0d722eefe612aba6634304d978582980db79e0d4e448f4962",
+  "after_report_sha256": "f37474338c8c8bf1580f0deb55248dee881426de7b758a811469029bba016b4b",
+  "native_driver_sha256_before_and_after": "b9f8b55da151a4f5361904966eb76d0deb72f3be5eee6ec7b1e2c0a1627df5fd",
+  "native_source_stable_across_run": true,
+  "native_cleanup": {
+    "scope": "Exact two owned component HOME values only",
+    "matches": [],
+    "unreadable_other_entries": 418
+  },
+  "deterministic_before": {
+    "result": "4 failed / 6 passed",
+    "log_sha256": "4be74a0da88644bcf6bfbb64a3b3c6ef18dcb392a7a06e90f62820fb9fe823aa"
+  },
+  "deterministic_after": {
+    "result": "102 passed",
+    "log_sha256": "5feefa3e1696e201e46ab2f78a71f9711df1d57d77578c70e02d9c98df3dbb36"
+  },
+  "integrated_regression": {
+    "passed": 1014,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 54.34,
+    "log_sha256": "bc6866cce8f3fdb03a585187f63799f355aead2a75843a4f11b179910fddf512",
+    "scope": "Both capture freshness and Blender view-effect patches applied; not isolated commit proof"
+  },
+  "api_schema_sha256_unchanged": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+  "limits": [
+    "The native fixture exercises capture and compilation with no OS keyboard/pointer input or models. Its current mode is explicit independent fixture evidence, not automatic app-state discovery.",
+    "Acquisition start is a conservative timestamp. Capture/perception/provider delay does not make old facts fresh; it may require reacquisition.",
+    "Frame capture time is internal metadata. Existing pixel/geometry FrameReference and API schemas are unchanged.",
+    "Native Windows/Darwin, current installed harness E2E, whole-task accuracy, p95/goodput/coverage and public release are NOT_RUN in this software slice."
+  ],
+  "acceptance_status_promotions": []
+}

@@ -1,0 +1,109 @@
+{
+  "scope": "Blender view-effect readback software regression and owned factory native observer/provider component; not whole operation E2E",
+  "keyboard_pointer_inputs": 0,
+  "models": 0,
+  "native_focus_calls": 1,
+  "production_display_access": 0,
+  "source_sha256": {
+    "blender_state.py": "821a9f674844c53d50d76635c0a51d96648705491f688d2b71d0a28615330a2d",
+    "blender_snapshot.py": "ab644335c833b0f56cf6d7e27880b3768816260311bf025d5ec267c7c8d1a6c4",
+    "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+    "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+    "state.py": "135215c355d9b88d023b199ac3eb5e8376daf55afa9abd6c37280f3d73701b9f",
+    "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4"
+  },
+  "blender_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+  "status": "PASS",
+  "checks": {
+    "actual_sidebar_regions_changed": true,
+    "sidebar_pose_unchanged": true,
+    "sidebar_revision_stable": true,
+    "actual_effective_matrix_changed": true,
+    "pose_revision_changed": true,
+    "unavailable_guards_unknown": true
+  },
+  "cleanup": {
+    "children_waited": 2,
+    "children_exited": true,
+    "child_proc_absent": true,
+    "observer_socket_removed": true,
+    "x_socket_removed": true,
+    "production_blender_preserved": true
+  },
+  "classification": "OBSERVED",
+  "driver_sha256": "81a341283a4515e5fc58f7761a5d5077cac8f60af90a9a88776ff7a09e27d1a4",
+  "tests_sha256": "ecc1bdf976fc720e0b960baa1ca66cbc92c34e3eac5e105535c73027c7ce4002",
+  "component_limits": [
+    "Private factory Blender RNA setup only; no keyboard or pointer input.",
+    "Public observer and authenticated native provider executed without function substitution.",
+    "Partial telemetry remains insufficient to authorize six guarded operations.",
+    "Not E2E, model quality, whole task verification, or performance evidence."
+  ],
+  "samples": {
+    "baseline": {
+      "view_revision": "36478b20b24e22992f78329cb221f6e1e10ed380eb9de278d8f5e122dd0e8b15",
+      "effective_view_matrix_sha256": "140c3d9fcafc08219e804770f735e168fcdf144cc699d7a4664734e07febd77e",
+      "region_inventory_sha256": "cb52acc3c148957207b8f43c5e043d8e71b4b5b5857d89b0a60faaf00e9667fc",
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    },
+    "sidebar": {
+      "view_revision": "36478b20b24e22992f78329cb221f6e1e10ed380eb9de278d8f5e122dd0e8b15",
+      "effective_view_matrix_sha256": "140c3d9fcafc08219e804770f735e168fcdf144cc699d7a4664734e07febd77e",
+      "region_inventory_sha256": "5fb9d0d68bb393ce8bd42a4602cab322258e7f5ffcb118b1eda268831ddf6928",
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    },
+    "pose": {
+      "view_revision": "2a064e22397d083b91b4b02d5892b7d45aa76c9a4625c49e35dee079c574a566",
+      "effective_view_matrix_sha256": "ce4eb591f6cb6fc517574193b570c475e472cabaa745091526a9af1dd26f18f7",
+      "region_inventory_sha256": "5fb9d0d68bb393ce8bd42a4602cab322258e7f5ffcb118b1eda268831ddf6928",
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    }
+  },
+  "source_base": "73f3c489e31beec98b32a59f8bca76eac09001ec",
+  "raw_native_report_sha256": "8c8a43412ff16b36992d8487de360d327445a4ccab9e6d61fe10a5be6f915660",
+  "worker_public_receipt_sha256": "26500a3fdaf98d51f9dda6e4013409477970a2a3d8f012fd4d75b419c983ba72",
+  "reproduced_before": {
+    "level": "SOURCE_COMPONENT",
+    "result": "15 failed / 27 passed initial counterexample suite",
+    "log_sha256": "430162ba92e7e872e37d28f207c8773dac853250c8ad4ed6d4841a62c3cb4048",
+    "false_effect": "A region identity change with unchanged view made canonical viewport OperationRunner report SUCCEEDED. Missing pose also incorrectly yielded a view revision."
+  },
+  "integrated_regression": {
+    "passed": 1014,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 54.34,
+    "log_sha256": "bc6866cce8f3fdb03a585187f63799f355aead2a75843a4f11b179910fddf512",
+    "scope": "Both capture freshness and Blender view-effect patches applied; not isolated commit proof",
+    "ruff_and_format": "PASS seven changed Python files",
+    "generated_contract": "PASS"
+  },
+  "official_api_source": "https://docs.blender.org/api/5.2/bpy.types.RegionView3D.html",
+  "additional_limits": [
+    "The prior defect is reproduced by source-component counterexamples; native current-source samples are separate evidence, not an executed immutable old Blender application run.",
+    "Layout-only and actual view-matrix changes are fixed private RNA fixture setup, not model-created assets or an OS gesture task.",
+    "New installed-current harness execution, whole-task quality, reaction p95/goodput/coverage and native Windows/Darwin are NOT_RUN in this software slice."
+  ],
+  "acceptance_status_promotions": []
+}
