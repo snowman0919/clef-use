@@ -11,6 +11,14 @@ The subsequent literal-candidate correction passed **911 tests / 34 skipped**;
 its component verification uses synthetic observations, without model or OS input.
 The newer operation-context guards passed **915 tests / 34 skipped** and a native
 owned Tk input-bridge component; this does not implement automatic Blender context discovery.
+The newer raw Blender inventory/editor layout and Linux monitor mapping passed
+**946 tests / 34 skipped**. An owned Blender 5.2 component observed 164 relevant
+bindings (80 wildcard modifier values) and 4 areas / 18 regions. A real native
+two-monitor click missed at `(640,300)` before the coordinate correction and hit
+the same target at `(320,300)` afterward. Raw bindings and rectangles do not
+establish effective dispatch, focused editor or operation readiness. See
+[component evidence](validation/2026-10-11/blender-inventory-and-coordinates.json).
+This changed source has no new installed/harness E2E or full performance result.
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

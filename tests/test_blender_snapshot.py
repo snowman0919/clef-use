@@ -126,3 +126,225 @@ def test_viewport_revision_changes_on_quaternion_or_matrix_change():
     moved = _viewport(native, 31)
     assert moved["view_matrix"][0][3] == 2.0
     assert moved["revision"] != rotated["revision"]
+
+
+def keymap_item(**changes):
+    values = dict(
+        id=7,
+        idname="transform.translate",
+        active=True,
+        type="G",
+        value="PRESS",
+        key_modifier="NONE",
+        repeat=False,
+        map_type="KEYBOARD",
+        direction="ANY",
+        any=False,
+        shift=-1,
+        ctrl=0,
+        alt=1,
+        oskey=0,
+        hyper=-1,
+        propvalue="NONE",
+        properties=SimpleNamespace(
+            orient_type="GLOBAL", constraint_axis=(True, False, False), release_confirm=False
+        ),
+    )
+    values.update(changes)
+    return SimpleNamespace(**values)
+
+
+def keymap(items, **changes):
+    values = dict(
+        name="3D View",
+        space_type="VIEW_3D",
+        region_type="WINDOW",
+        is_modal=False,
+        bl_owner_id="",
+        keymap_items=items,
+    )
+    values.update(changes)
+    return SimpleNamespace(**values)
+
+
+def keyconfigs(maps):
+    return SimpleNamespace(
+        user=SimpleNamespace(name="Blender User", keymaps=maps),
+        active=SimpleNamespace(name="Blender"),
+    )
+
+
+def test_inventory_keeps_tristate_modifiers_duplicates_and_original_binding_order():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    duplicate = keymap_item(id=8, active=False)
+    excluded = keymap_item(idname="wm.open_mainfile")
+    inventory = _keymap_inventory(keyconfigs([keymap([excluded, keymap_item(), duplicate])]))
+    assert inventory["effective_dispatch"] == "UNKNOWN"
+    assert inventory["active_preset_name"] == "Blender"
+    bindings = inventory["maps"][0]["items"]
+    assert [(item["order"], item["id"], item["active"]) for item in bindings] == [
+        (1, 7, True),
+        (2, 8, False),
+    ]
+    assert bindings[0]["modifiers"] == {"shift": -1, "ctrl": 0, "alt": 1, "oskey": 0, "hyper": -1}
+    assert bindings[0]["properties"] == {
+        "orient_type": "GLOBAL",
+        "constraint_axis": [True, False, False],
+        "release_confirm": False,
+        "confirm_on_release": None,
+    }
+    assert bindings[0]["properties"]["release_confirm"] is False
+    assert all(type(axis) is bool for axis in bindings[0]["properties"]["constraint_axis"])
+
+
+def test_inventory_only_retains_whitelisted_operators_and_actual_transform_modal_map():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    inventory = _keymap_inventory(
+        keyconfigs(
+            [
+                keymap([keymap_item(idname="wm.open_mainfile")]),
+                keymap([keymap_item(idname="", propvalue="CONFIRM")], is_modal=True),
+                keymap(
+                    [keymap_item(idname="", propvalue="CANCEL")],
+                    name="Transform Modal Map",
+                    is_modal=True,
+                ),
+            ]
+        )
+    )
+    assert [entry["order"] for entry in inventory["maps"]] == [2]
+    assert inventory["maps"][0]["items"][0]["propvalue"] == "CANCEL"
+    assert inventory["scanned_items"] == 3
+
+
+def test_inventory_retains_each_allowed_operator_and_original_map_context():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    ids = [
+        "transform.translate",
+        "transform.rotate",
+        "transform.resize",
+        "wm.search_menu",
+        "wm.search_operator",
+        "view3d.rotate",
+        "view3d.move",
+        "object.shade_smooth",
+        "object.shade_flat",
+    ]
+    maps = [
+        keymap([], name="Unrelated Map"),
+        keymap(
+            [keymap_item(idname=identifier) for identifier in ids],
+            name="Custom Context",
+            space_type="EMPTY",
+            region_type="HEADER",
+            bl_owner_id="own_workspace",
+        ),
+    ]
+    inventory = _keymap_inventory(keyconfigs(maps))
+    retained = inventory["maps"][0]
+    assert (
+        retained["order"],
+        retained["name"],
+        retained["space_type"],
+        retained["region_type"],
+    ) == (
+        1,
+        "Custom Context",
+        "EMPTY",
+        "HEADER",
+    )
+    assert retained["bl_owner_id"] == "own_workspace"
+    assert [item["idname"] for item in retained["items"]] == ids
+
+
+@pytest.mark.parametrize(
+    "properties",
+    [
+        SimpleNamespace(release_confirm=1),
+        SimpleNamespace(confirm_on_release=0.0),
+        SimpleNamespace(constraint_axis=(1, 0, 0)),
+        SimpleNamespace(constraint_axis=(True, False)),
+    ],
+)
+def test_inventory_property_booleans_and_axis_dimensions_cannot_be_coerced(properties):
+    from clef_use.blender_snapshot import SnapshotUnavailable, _keymap_inventory
+
+    with pytest.raises(SnapshotUnavailable):
+        _keymap_inventory(keyconfigs([keymap([keymap_item(properties=properties)])]))
+
+
+def test_inventory_content_digest_tracks_disabled_binding_and_preset_changes():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    configs = keyconfigs([keymap([keymap_item()])])
+    original = _keymap_inventory(configs)["content_sha256"]
+    configs.user.keymaps[0].keymap_items[0].active = False
+    disabled = _keymap_inventory(configs)["content_sha256"]
+    assert disabled != original
+    configs.active.name = "Industry Compatible"
+    assert _keymap_inventory(configs)["content_sha256"] != disabled
+
+
+def test_inventory_does_not_read_arbitrary_operator_properties_or_pointer_identity():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    class Properties:
+        orient_type = "LOCAL"
+
+        @property
+        def filepath(self):
+            raise AssertionError("private property must not be accessed")
+
+    item = keymap_item(properties=Properties())
+    configs = keyconfigs([keymap([item])])
+    before = _keymap_inventory(configs)
+    item.as_pointer = lambda: 123456
+    configs.user.as_pointer = lambda: 123456
+    assert _keymap_inventory(configs)["content_sha256"] == before["content_sha256"]
+    assert before["maps"][0]["items"][0]["properties"]["constraint_axis"] is None
+
+
+def test_inventory_unavailable_config_and_missing_optional_hyper_stay_unknown():
+    from clef_use.blender_snapshot import _keymap_inventory
+
+    assert _keymap_inventory(None) is None
+    assert _keymap_inventory(SimpleNamespace(user=None)) is None
+    item = keymap_item()
+    del item.hyper
+    configs = keyconfigs([keymap([item])])
+    configs.active = None
+    inventory = _keymap_inventory(configs)
+    assert inventory["active_preset_name"] is None
+    assert inventory["maps"][0]["items"][0]["modifiers"]["hyper"] is None
+
+
+@pytest.mark.parametrize("value", [True, -2, 2, None, "ANY"])
+def test_inventory_refuses_invalid_modifiers_instead_of_coercing_to_boolean(value):
+    from clef_use.blender_snapshot import SnapshotUnavailable, _keymap_inventory
+
+    with pytest.raises(SnapshotUnavailable):
+        _keymap_inventory(keyconfigs([keymap([keymap_item(shift=value)])]))
+
+
+@pytest.mark.parametrize("boundary", ["maps", "scanned_items", "retained_items"])
+def test_inventory_exact_caps_and_overflow_refuse_without_truncation(boundary):
+    from clef_use.blender_snapshot import SnapshotUnavailable, _keymap_inventory
+
+    excluded = keymap_item(idname="wm.open_mainfile")
+    if boundary == "maps":
+        maps = [keymap([]) for _ in range(512)]
+        assert _keymap_inventory(keyconfigs(maps))["scanned_maps"] == 512
+        maps.append(keymap([]))
+    elif boundary == "scanned_items":
+        maps = [keymap([excluded] * 8192), keymap([excluded] * 8192)]
+        assert _keymap_inventory(keyconfigs(maps))["scanned_items"] == 16384
+        maps[1].keymap_items.append(excluded)
+    else:
+        maps = [keymap([keymap_item()] * 128), keymap([keymap_item()] * 128)]
+        assert sum(len(m["items"]) for m in _keymap_inventory(keyconfigs(maps))["maps"]) == 256
+        maps[1].keymap_items.append(keymap_item())
+    with pytest.raises(SnapshotUnavailable):
+        _keymap_inventory(keyconfigs(maps))

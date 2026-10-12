@@ -7,9 +7,44 @@ from types import SimpleNamespace
 import pytest
 from PIL import Image
 
-from clef_use.backends import DesktopAction, JsonWorker
+from clef_use.backends import DesktopAction, DesktopCapture, JsonWorker
 from clef_use.config import Config
-from clef_use.schema import ActionCandidate, Frame, Observation
+from clef_use.schema import ActionCandidate, Frame, Observation, PointerPoint
+
+
+@pytest.mark.parametrize(
+    "platform,image_size,input_size,origin,expected",
+    [
+        ("linux", (800, 600), (1600, 600), (0, 0), (320, 300)),
+        ("linux", (800, 600), (1600, 600), (-800, 30), (-480, 330)),
+        ("darwin", (1600, 1200), (800, 600), (0, 0), (320, 300)),
+    ],
+)
+def test_capture_maps_points_with_monitor_extent_and_preserves_retina(
+    monkeypatch, platform, image_size, input_size, origin, expected
+):
+    import clef_use.backends as backends
+
+    image = Image.new("RGB", image_size)
+
+    class Screen:
+        monitors = [None, {"left": origin[0], "top": origin[1]}]
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def grab(self, _):
+            return SimpleNamespace(size=image.size, rgb=image.tobytes())
+
+    monkeypatch.setattr(backends, "sys", SimpleNamespace(platform=platform))
+    monkeypatch.setitem(sys.modules, "mss", SimpleNamespace(MSS=Screen))
+    monkeypatch.setitem(sys.modules, "pyautogui", SimpleNamespace(size=lambda: input_size))
+    monkeypatch.setattr(DesktopCapture, "_x11_context", staticmethod(lambda: (None, None)))
+    frame = DesktopCapture().capture()
+    assert frame.pointer_point(PointerPoint(x=0.4, y=0.5)) == expected
 
 
 class FailingGui:

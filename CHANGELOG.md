@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Expose bounded raw Blender keymap inventory and native-client-bound editor
+  layouts. Preserve duplicate/inactive bindings, tri-state modifiers and content
+  digests; keep effective dispatch and editor focus unknown. Clipped or hidden
+  regions never acquire a normalized rectangle by clamping their geometry.
+- Map Linux capture coordinates using the captured monitor's pixel extent,
+  avoiding displaced input when the X11 root spans multiple monitors. Keep
+  macOS logical/Retina scaling unchanged.
 - Recheck observed keymap content at operation dispatch and the native input
   boundary, even when the version label is unchanged. Revalidate viewport editor
   geometry before and during gestures, stopping and releasing owned input on change.

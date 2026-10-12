@@ -71,6 +71,15 @@ viewport 和已观察到的 modal operator，不修改 scene 或执行 operator�
 IME、有效 keymap 和整体 busy/idle 状态仍然未知。空 operator 列表也不能证明不存在。
 即使配置了此部分 observer，只要缺少必要的已验证状态，六个 operation 仍返回 `BLOCKED`。
 
+`keymap_inventory` 保留合并 user keymap 中的相关 binding、重复和禁用项、
+tri-state modifier（`-1` 表示 any）及内容 digest。它是原始列表，不是代表实际
+dispatch 的 `keymap` 或 `keymap_version`。`editor_layout` 将 area/region 转为屏幕
+pixel 和 capture 坐标；隐藏、裁切或 capture 外的矩形没有 normalized box。
+它不确定 focused editor、popup 所有权或已验证的 gesture surface。超过 keymap
+上限时拒绝整个 snapshot，不丢弃 binding。
+Linux 输入坐标使用捕获 monitor 的尺寸，不使用跨多个 monitor 的 X11 root 尺寸。
+capture/input 范围不一致时拒绝关联 Blender 状态。
+
 新的 observe 响应可包含 `compiled_state`、`state_provider_status` 和
 `state_pixel_association`。状态有独立的 observation ID，在 capture 附近、parse 之前
 采样，可能在 parse 期间过期。`FOREGROUND_WINDOW_ONLY` 关联不是与 pixel 同步的

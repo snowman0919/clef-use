@@ -26,6 +26,15 @@ application identity. Unsupported or ambiguous binding leaves facts unknown.
 
 `blender_snapshot.py` records actual selection, mode, transform representations,
 unit settings, viewport matrices, regions and positive modal operator records.
+It also inventories relevant merged user keymaps, preserving inactive and duplicate
+entries, native tri-state modifiers and a retained-content digest. The provider
+publishes this as `keymap_inventory`, never effective `keymap`/`keymap_version`.
+`editor_layout` converts bottom-left RNA rectangles using the bound native client
+and capture origin; hidden, clipped or off-capture regions have no normalized box.
+It retains separate region identities without guessing editor focus or associating
+quad-view matrices with a region. Bounds are raw evidence, not gesture authority.
+Per owning manager, inventory refuses more than 512 maps, 16384 scanned items or
+256 retained items instead of silently truncating them.
 It refuses window/object/region overflow. Empty operator lists prove no absence
 of UI handlers. Popup, editing, IME, effective keymap and global busy absence are
 not supplied by this partial provider, so all six procedures retain their guards.
@@ -53,6 +62,9 @@ overflow or missing target evidence is refused rather than silently truncated.
 The optional Foundation ViT produces screenshot coordinates
 that become observation-bound pointer candidates. `Frame.point` maps box centers to the
 primary monitor's logical coordinate space, including Retina scaling.
+On Linux, the input extent is the captured monitor's pixel size, not the larger
+multi-monitor X11 root size. The X11 Blender provider refuses frames whose input
+and capture extents disagree instead of publishing inconsistent editor geometry.
 
 The OmniParser wrapper composes official detection, overlap/OCR fusion and
 caption primitives. This avoids its annotation helper's empty-OCR and -1 caption

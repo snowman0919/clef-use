@@ -493,9 +493,14 @@ class DesktopCapture:
                 logical = image.size
                 bounds = native.window_rect(target)
             else:
-                import pyautogui
+                if sys.platform == "linux":
+                    # X11 capture and input use root pixels. pyautogui.size()
+                    # can cover every monitor while this image covers only one.
+                    logical = image.size
+                else:
+                    import pyautogui
 
-                logical = tuple(pyautogui.size())
+                    logical = tuple(pyautogui.size())
                 target, bounds = x11_context
                 if sys.platform == "linux" and self._x11_context() != x11_context:
                     raise RuntimeError("X11 foreground changed during capture")

@@ -115,6 +115,61 @@ def foreground_client(connection, expected_window, expected_bounds):
     raise ValueError("foreground client association unavailable")
 
 
+def editor_layout(window, client_bounds, frame):
+    """Map raw RNA regions, without guessing editor focus or usable surfaces."""
+    left, top, _, _ = client_bounds
+    width, height = frame.image.size
+    # This provider binds X11 native pixel coordinates. A frame with a different
+    # input extent cannot safely associate those pixels with normalized input.
+    if frame.logical_size not in (None, frame.image.size):
+        raise ValueError("Blender capture coordinate scale mismatch")
+    origin_x, origin_y = frame.origin
+
+    def geometry(item):
+        raw = item["geometry_window_pixels_bottom_left"]
+        x, y, w, h = (raw[name] for name in ("x", "y", "width", "height"))
+        if any(type(value) is not int for value in (x, y, w, h)) or w < 0 or h < 0:
+            raise ValueError("invalid Blender editor geometry")
+        bounds = [
+            left + x,
+            top + window["height"] - y - h,
+            left + x + w,
+            top + window["height"] - y,
+        ]
+        # Hidden, clipped or off-capture regions retain their raw geometry, but
+        # never gain a normalized actionable rectangle by clamping the edges.
+        contained = (
+            0 <= x < x + w <= window["width"]
+            and 0 <= y < y + h <= window["height"]
+            and origin_x <= bounds[0] < bounds[2] <= origin_x + width
+            and origin_y <= bounds[1] < bounds[3] <= origin_y + height
+        )
+        return {
+            "id": item["id"],
+            "type": item["type"],
+            "bounds_screen_pixels": bounds,
+            "bounds_capture_normalized": [
+                (bounds[0] - origin_x) / width,
+                (bounds[1] - origin_y) / height,
+                (bounds[2] - origin_x) / width,
+                (bounds[3] - origin_y) / height,
+            ]
+            if contained
+            else None,
+        }
+
+    areas = []
+    for area in window["areas"]:
+        mapped = geometry(area)
+        mapped["regions"] = [geometry(region) for region in area["regions"]]
+        areas.append(mapped)
+    return {
+        "client_bounds_screen_pixels": list(client_bounds),
+        "areas": areas,
+        "focused_editor": "UNKNOWN",
+    }
+
+
 def compile_snapshot(
     snapshot, *, pid, frame, version, started_at, completed_at, client_bounds=None
 ):
@@ -152,7 +207,11 @@ def compile_snapshot(
         "application": fact("Blender"),
         "selection": fact(window["selection"]),
         "application_snapshot": fact(window),
+        "editor_layout": fact(editor_layout(window, (left, top, right, bottom), frame)),
     }
+    inventory = window.get("keymap_inventory")
+    if inventory is not None:
+        result["keymap_inventory"] = fact(inventory)
     if window["active_object_mode"] is not None:
         result["mode"] = fact(window["active_object_mode"])
     # Raw numeric values keep their explicit radians and scene-unit metadata;

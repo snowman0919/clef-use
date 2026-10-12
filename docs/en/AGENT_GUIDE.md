@@ -75,6 +75,16 @@ effective keymap and global busy/idle state remain unknown. An empty operator li
 does not prove absence. All six operations still return `BLOCKED` when their
 required verified facts are missing, including with this partial observer.
 
+`keymap_inventory` preserves relevant merged user bindings, duplicate/inactive
+entries, tri-state modifiers (`-1` means any) and a content digest. It is raw
+inventory, not the effective `keymap` or `keymap_version`. `editor_layout` maps
+area/region rectangles to screen pixels and capture coordinates; hidden, clipped
+or off-capture rectangles have no normalized box. It does not establish focused
+editor, popup ownership or a verified gesture surface. Inventory limits refuse
+the snapshot rather than dropping bindings.
+Linux input coordinates use the captured monitor's size, including on a larger
+multi-monitor X11 root; inconsistent capture/input extents refuse Blender state.
+
 A fresh observe response can expose `compiled_state`, `state_provider_status`
 and `state_pixel_association`. State has its own observation ID, is sampled near
 capture before parsing, and can expire while parsing. `FOREGROUND_WINDOW_ONLY`

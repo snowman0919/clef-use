@@ -78,6 +78,16 @@ viewport・観測された modal operator を読み取り、scene の変更や o
 空の operator 一覧も不在の証拠にはなりません。この部分観測器を設定しても、必要な
 検証済み状態がなければ六つの operation はすべて `BLOCKED` を返します。
 
+`keymap_inventory` は統合された user keymap の関連 binding、重複・無効項目、
+tri-state modifier（`-1` は any）、内容 digest を保持する生の一覧です。
+有効な dispatch を示す `keymap` や `keymap_version` ではありません。
+`editor_layout` は area/region を画面 pixel と capture 座標に変換します。
+非表示・切断・capture 外の矩形には normalized box を与えません。focused editor、
+popup の所有権、検証済み gesture surface は確定しません。keymap の上限超過時は
+binding を捨てずに snapshot 全体を拒否します。
+Linux の入力座標は複数 monitor を含む X11 root ではなく capture した monitor の
+寸法を使います。capture/input の範囲が不一致なら Blender 状態の関連付けを拒否します。
+
 新しい observe 応答は `compiled_state`、`state_provider_status`、
 `state_pixel_association` を返す場合があります。状態は独自の observation ID を持ち、
 capture の近くで parse 前に採取され、parse 中に期限切れになることがあります。

@@ -43,6 +43,8 @@ class StateFact(StrictModel):
 
 FACT_NAMES = (
     "application_snapshot",
+    "editor_layout",
+    "keymap_inventory",
     "application",
     "window",
     "foreground",

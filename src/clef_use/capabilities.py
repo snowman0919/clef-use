@@ -137,6 +137,9 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
                 "availability": "PARTIAL; NOT_PROBED",
                 "window_scope": "One RNA window matching the foreground native client dimensions",
+                "raw_observations": ["application_snapshot", "editor_layout", "keymap_inventory"],
+                "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; "
+                "effective dispatch remains UNKNOWN",
                 "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
                 "input_authority": "No operation readiness inferred from partial snapshots",
             }

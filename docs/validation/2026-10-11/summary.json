@@ -2709,6 +2709,12 @@
       "artifact": "docs/validation/2026-10-11/operation-context-guards.json",
       "sha256": "a0396030571ca8318fa19ef186e6cdf90bc772163a08e76fb05624a701b03abe",
       "scope": "915passed/34skipped; three reproduced stale-binding/geometry failures corrected. API-assisted native owned Tk key/MMB positives and same-version binding/actual editor resize refusals; owned gesture interruption releases native middle button. No automatic Blender context, installed E2E, model or p95 claim."
+    },
+    "blender_inventory_and_coordinates": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
+      "sha256": "95340891894326e94a2c835443ae3070fb2aef31539e97c60b6cc584102bfebe",
+      "scope": "946 passed / 34 skipped. Actual Blender 5.2 read-only component observed 164 relevant bindings, 80 wildcard modifier values, four areas and 18 regions. A native Linux two-monitor click missed at (640,300) before correction and hit (320,300) afterward; original failure retained. Raw facts do not establish effective keymap or editor focus. No model, whole-task E2E, installed-current or performance claim."
     }
   },
   "not_run": {

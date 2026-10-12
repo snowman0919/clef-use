@@ -76,6 +76,16 @@ viewport·관찰된 modal operator를 읽으며 scene을 변경하거나 operato
 빈 operator 목록도 부재 증거가 아닙니다. 이 부분 관측기를 설정해도 필요한 검증 상태가
 없으면 6개 operation 모두 `BLOCKED`를 반환합니다.
 
+`keymap_inventory`는 병합된 사용자 키맵의 관련 바인딩, 중복·비활성 항목,
+tri-state modifier(`-1`은 any), 내용 digest를 보존합니다. 이는 원시 목록이며
+실제 dispatch를 나타내는 `keymap`이나 `keymap_version`이 아닙니다.
+`editor_layout`은 area/region을 화면 pixel과 capture 좌표로 변환합니다. 숨겨지거나
+잘리거나 capture 밖인 영역은 normalized box가 없습니다. focused editor, popup 소유권,
+검증된 gesture surface를 확정하지 않습니다. 키맵 한도를 넘으면 바인딩을 버리지 않고
+snapshot 전체를 거부합니다.
+Linux 입력 좌표는 여러 모니터를 합친 X11 root 크기가 아닌 캡처한 모니터 크기를
+사용합니다. capture/input 범위가 불일치하면 Blender 상태 연결을 거부합니다.
+
 새 observe 응답은 `compiled_state`, `state_provider_status`, `state_pixel_association`을
 제공할 수 있습니다. 상태는 별도 observation ID를 가지며 capture 근처에서 parse 전에
 수집되고 parse 중 만료될 수 있습니다. `FOREGROUND_WINDOW_ONLY` 연결은 pixel과

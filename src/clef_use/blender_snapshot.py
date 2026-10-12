@@ -11,6 +11,8 @@ an empty list does NOT establish absence of popups, text editing, modal UI
 handlers, or other input owners. Popup, text-focus, IME, effective keymap, and
 global busy/idle facts are intentionally absent. A caller must independently
 bind the process/window and freshness before consuming even the observed facts.
+``keymap_inventory`` reads the owning manager's merged user configuration, not
+effective dispatch. Its digest identifies retained content, not input authority.
 
 The document includes all windows (up to 8), all selected objects (64 across
 windows), and all area regions (128 across windows), refusing overflow rather
@@ -37,6 +39,22 @@ MAX_VIEW_LAYER_OBJECTS = 4096
 MAX_REGIONS = 128
 MAX_MODAL_OPERATORS = 128
 MAX_SHADING_POLYGONS = 100000
+MAX_KEYMAPS = 512
+MAX_SCANNED_KEYMAP_ITEMS = 16384
+MAX_RETAINED_KEYMAP_ITEMS = 256
+KEYMAP_OPERATORS = frozenset(
+    {
+        "transform.translate",
+        "transform.rotate",
+        "transform.resize",
+        "wm.search_menu",
+        "wm.search_operator",
+        "view3d.rotate",
+        "view3d.move",
+        "object.shade_smooth",
+        "object.shade_flat",
+    }
+)
 
 
 class SnapshotUnavailable(ValueError):
@@ -102,6 +120,44 @@ class ModalOperatorSnapshot(TypedDict):
     rna: str
 
 
+class KeymapItemSnapshot(TypedDict):
+    order: int
+    id: int
+    idname: str
+    active: bool
+    type: str
+    value: str
+    key_modifier: str
+    repeat: bool
+    map_type: str
+    direction: str | None
+    any: bool
+    modifiers: dict[str, int | None]
+    propvalue: str | None
+    properties: dict[str, str | list[bool] | bool | None]
+
+
+class KeymapSnapshot(TypedDict):
+    order: int
+    name: str
+    space_type: str
+    region_type: str
+    is_modal: bool
+    bl_owner_id: str
+    items: list[KeymapItemSnapshot]
+
+
+class KeymapInventory(TypedDict):
+    source: Literal["KEYCONFIGS_USER"]
+    user_config_name: str
+    active_preset_name: str | None
+    effective_dispatch: Literal["UNKNOWN"]
+    maps: list[KeymapSnapshot]
+    scanned_maps: int
+    scanned_items: int
+    content_sha256: str
+
+
 class WindowSnapshot(TypedDict):
     id: str
     width: int
@@ -118,6 +174,7 @@ class WindowSnapshot(TypedDict):
     pivot: str
     areas: list[AreaSnapshot]
     positive_modal_operators: list[ModalOperatorSnapshot] | None
+    keymap_inventory: KeymapInventory | None
 
 
 class BlenderSnapshot(TypedDict):
@@ -183,6 +240,127 @@ def _enum(value: Any) -> str:
     if not isinstance(value, str) or re.fullmatch(r"[A-Z][A-Z0-9_]*", value) is None:
         raise SnapshotUnavailable("Invalid native enum identifier")
     return value
+
+
+def _text(value: Any) -> str:
+    if not isinstance(value, str) or "\x00" in value:
+        raise SnapshotUnavailable("Invalid native text")
+    return value
+
+
+def _boolean(value: Any) -> bool:
+    if type(value) is not bool:
+        raise SnapshotUnavailable("Invalid native boolean")
+    return value
+
+
+def _modifier(value: Any) -> int:
+    if type(value) is not int or value not in (-1, 0, 1):
+        raise SnapshotUnavailable("Invalid native tri-state modifier")
+    return value
+
+
+def _keymap_properties(value: Any) -> dict[str, str | list[bool] | bool | None]:
+    """Read only explicitly allowed operator settings, never arbitrary properties."""
+    result = {}
+    for name in ("orient_type", "constraint_axis", "release_confirm", "confirm_on_release"):
+        observed = getattr(value, name, None)
+        if observed is None:
+            result[name] = None
+        elif name == "orient_type":
+            result[name] = _text(observed)
+        elif name == "constraint_axis":
+            axes = _bounded(observed, 3, "constraint axes")
+            if len(axes) != 3:
+                raise SnapshotUnavailable("Invalid native constraint axes")
+            result[name] = [_boolean(axis) for axis in axes]
+        else:
+            result[name] = _boolean(observed)
+    return result
+
+
+def _keymap_item(item: Any, order: int, modal: bool) -> KeymapItemSnapshot:
+    absent = object()
+    hyper = getattr(item, "hyper", absent)
+    direction = getattr(item, "direction", None)
+    return {
+        "order": order,
+        "id": _integer(item.id, minimum=None),
+        "idname": _text(item.idname),
+        "active": _boolean(item.active),
+        "type": _enum(item.type),
+        "value": _enum(item.value),
+        "key_modifier": _enum(item.key_modifier),
+        "repeat": _boolean(item.repeat),
+        "map_type": _enum(item.map_type),
+        "direction": _enum(direction) if direction is not None else None,
+        "any": _boolean(item.any),
+        "modifiers": {
+            **{name: _modifier(getattr(item, name)) for name in ("shift", "ctrl", "alt", "oskey")},
+            "hyper": None if hyper is absent else _modifier(hyper),
+        },
+        "propvalue": _text(item.propvalue) if modal else None,
+        "properties": _keymap_properties(item.properties),
+    }
+
+
+def _keymap_inventory(keyconfigs: Any) -> KeymapInventory | None:
+    """Bounded raw user-keyconfig inventory; never resolves polling or dispatch.
+
+    Caps apply to one owning manager's configuration: 512 scanned maps, 16384
+    scanned items across all maps, and 256 retained items across matching maps.
+    Original order, duplicate bindings and inactive items remain distinct. The
+    hash covers configuration names and retained maps/items with canonical JSON;
+    it excludes process-local pointers and unrelated map/item scan counts.
+    """
+    user = getattr(keyconfigs, "user", None)
+    if user is None:
+        return None
+    active = getattr(keyconfigs, "active", None)
+    maps: list[KeymapSnapshot] = []
+    scanned_maps = scanned_items = retained_items = 0
+    for map_order, keymap in enumerate(_bounded(user.keymaps, MAX_KEYMAPS, "keymaps")):
+        scanned_maps += 1
+        modal = _boolean(keymap.is_modal)
+        retain_modal = modal and keymap.name == "Transform Modal Map"
+        items: list[KeymapItemSnapshot] = []
+        for item_order, item in enumerate(keymap.keymap_items):
+            scanned_items += 1
+            if scanned_items > MAX_SCANNED_KEYMAP_ITEMS:
+                raise SnapshotUnavailable("Snapshot scanned keymap items limit exceeded")
+            if retain_modal or item.idname in KEYMAP_OPERATORS:
+                retained_items += 1
+                if retained_items > MAX_RETAINED_KEYMAP_ITEMS:
+                    raise SnapshotUnavailable("Snapshot retained keymap items limit exceeded")
+                items.append(_keymap_item(item, item_order, modal))
+        if items or retain_modal:
+            maps.append(
+                {
+                    "order": map_order,
+                    "name": _text(keymap.name),
+                    "space_type": _enum(keymap.space_type),
+                    "region_type": _enum(keymap.region_type),
+                    "is_modal": modal,
+                    "bl_owner_id": _text(keymap.bl_owner_id),
+                    "items": items,
+                }
+            )
+    content = {
+        "user_config_name": _text(user.name),
+        "active_preset_name": _text(active.name) if active is not None else None,
+        "maps": maps,
+    }
+    digest = hashlib.sha256(
+        json.dumps(content, sort_keys=True, separators=(",", ":"), allow_nan=False).encode("ascii")
+    ).hexdigest()
+    return {
+        "source": "KEYCONFIGS_USER",
+        **content,
+        "effective_dispatch": "UNKNOWN",
+        "scanned_maps": scanned_maps,
+        "scanned_items": scanned_items,
+        "content_sha256": digest,
+    }
 
 
 def _selection_index(entries: Iterable[tuple[str, Any]]) -> dict[str, Any]:
@@ -285,18 +463,22 @@ def collect_snapshot() -> BlenderSnapshot:
     pid = os.getpid()
     started_wall, started_monotonic = time.time(), time.monotonic_ns()
     native_windows = _bounded(
-        (window for manager in bpy.data.window_managers for window in manager.windows),
+        ((manager, window) for manager in bpy.data.window_managers for window in manager.windows),
         MAX_WINDOWS,
         "windows",
     )
     windows: list[WindowSnapshot] = []
     window_ids: set[str] = set()
+    keymaps: dict[str, KeymapInventory | None] = {}
     selected_count = region_count = modal_count = 0
-    for window in native_windows:
+    for manager, window in native_windows:
         window_id = _identity(pid, window.as_pointer())
         if window_id in window_ids:
             raise SnapshotUnavailable("Duplicate native window identity")
         window_ids.add(window_id)
+        manager_id = _identity(pid, manager.as_pointer())
+        if manager_id not in keymaps:
+            keymaps[manager_id] = _keymap_inventory(getattr(manager, "keyconfigs", None))
         scene, layer = window.scene, window.view_layer
         layer_objects = _bounded(layer.objects, MAX_VIEW_LAYER_OBJECTS, "view layer objects")
         selected = _bounded(
@@ -381,6 +563,7 @@ def collect_snapshot() -> BlenderSnapshot:
                 "pivot": _enum(scene.tool_settings.transform_pivot_point),
                 "areas": areas,
                 "positive_modal_operators": modals,
+                "keymap_inventory": keymaps[manager_id],
             }
         )
     return {

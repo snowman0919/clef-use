@@ -95,6 +95,112 @@ def test_positive_modal_never_becomes_absence():
     assert compile_document(document).require("modal") == {"positive_operators": operators}
 
 
+def area_geometry(x, y, width, height, *, identity="area", kind="VIEW_3D", regions=()):
+    return {
+        "id": identity,
+        "type": kind,
+        "geometry_window_pixels_bottom_left": dict(x=x, y=y, width=width, height=height),
+        "regions": list(regions),
+    }
+
+
+def layout_state(areas, *, origin=(-200, 40), client=(-180, 60, -80, 140)):
+    document = snapshot()
+    document["windows"][0]["areas"] = areas
+    frame = Frame(
+        Image.new("RGB", (200, 160)), origin=origin, foreground_window=42, foreground_bounds=client
+    )
+    facts = compile_snapshot(
+        document,
+        pid=123,
+        frame=frame,
+        version=1,
+        started_at=document["sampled_at"] - 0.01,
+        completed_at=document["sampled_at"] + 0.01,
+    )
+    return StateCompiler().compile(Observation("layout", frame, ()), facts)
+
+
+def test_editor_layout_maps_bottom_left_to_capture_and_keeps_separate_regions():
+    regions = [
+        area_geometry(10, 20, 30, 40, identity="region-a", kind="WINDOW"),
+        area_geometry(40, 20, 30, 40, identity="region-b", kind="WINDOW"),
+    ]
+    state = layout_state([area_geometry(0, 0, 100, 80, regions=regions)])
+    layout = state.require("editor_layout")
+    assert layout["client_bounds_screen_pixels"] == [-180, 60, -80, 140]
+    mapped = layout["areas"][0]
+    assert mapped["bounds_screen_pixels"] == [-180, 60, -80, 140]
+    assert mapped["bounds_capture_normalized"] == [0.1, 0.125, 0.6, 0.625]
+    assert mapped["regions"][0] == {
+        "id": "region-a",
+        "type": "WINDOW",
+        "bounds_screen_pixels": [-170, 80, -140, 120],
+        "bounds_capture_normalized": [0.15, 0.25, 0.3, 0.5],
+    }
+    assert mapped["regions"][1]["id"] == "region-b"
+    assert mapped["regions"][1]["bounds_capture_normalized"] == [0.3, 0.25, 0.45, 0.5]
+    assert layout["focused_editor"] == "UNKNOWN"
+    for name in ("editor", "keymap", "keymap_version"):
+        assert state.fact(name).validity == FactValidity.UNKNOWN
+    assert "editor_surface" not in state.require("target_geometry")
+
+
+@pytest.mark.parametrize("geometry", [(0, 0, 0, 40), (-1, 0, 100, 80), (0, 0, 101, 80)])
+def test_hidden_or_clipped_regions_never_gain_clamped_actionable_bounds(geometry):
+    state = layout_state([area_geometry(*geometry)])
+    assert state.require("editor_layout")["areas"][0]["bounds_capture_normalized"] is None
+
+
+def test_client_partly_outside_capture_keeps_actual_bounds_without_clamping():
+    state = layout_state([area_geometry(0, 0, 100, 80)], client=(-220, 60, -120, 140))
+    area = state.require("editor_layout")["areas"][0]
+    assert area["bounds_screen_pixels"] == [-220, 60, -120, 140]
+    assert area["bounds_capture_normalized"] is None
+
+
+def test_inconsistent_capture_and_native_coordinate_spaces_refuse_layout():
+    document = snapshot()
+    frame = Frame(
+        Image.new("RGB", (100, 80)),
+        logical_size=(200, 80),
+        foreground_window=42,
+        foreground_bounds=(0, 0, 100, 80),
+    )
+    with pytest.raises(ValueError, match="Blender capture coordinate scale mismatch"):
+        compile_snapshot(
+            document,
+            pid=123,
+            frame=frame,
+            version=1,
+            started_at=document["sampled_at"] - 0.01,
+            completed_at=document["sampled_at"] + 0.01,
+        )
+
+
+@pytest.mark.parametrize("geometry", [(True, 0, 100, 80), (0, 0, -1, 80), (0, 0, 100, 1.5)])
+def test_invalid_rna_geometry_refuses_state_instead_of_coercing(geometry):
+    with pytest.raises(ValueError, match="invalid Blender editor geometry"):
+        layout_state([area_geometry(*geometry)])
+
+
+def test_raw_inventory_is_observed_without_effective_keymap_authority():
+    document = snapshot()
+    inventory = {
+        "source": "KEYCONFIGS_USER",
+        "effective_dispatch": "UNKNOWN",
+        "maps": [],
+        "content_sha256": "raw-content-only",
+    }
+    document["windows"][0]["keymap_inventory"] = inventory
+    state = compile_document(document)
+    assert state.require("keymap_inventory") == inventory
+    for name in ("keymap", "keymap_version", "popup", "text_focus", "ime_composing"):
+        assert state.fact(name).validity == FactValidity.UNKNOWN
+    document["windows"][0]["keymap_inventory"] = None
+    assert compile_document(document).fact("keymap_inventory").validity == FactValidity.UNKNOWN
+
+
 def test_xres_pid_wire_byte_length_yields_one_real_pid():
     from clef_use.blender_state import _query_ids
 
