@@ -258,7 +258,12 @@ def atomic_write(path: Path, text: str):
 
 
 def install_mcp(
-    harness: str, path: Path | None = None, command: str | None = None, dry_run: bool = False
+    harness: str,
+    path: Path | None = None,
+    command: str | None = None,
+    dry_run: bool = False,
+    *,
+    managed_entry: dict | None = None,
 ) -> dict:
     path = path or target_path(harness)
     launcher_name = "clef-use.exe" if sys.platform == "win32" else "clef-use"
@@ -293,8 +298,10 @@ def install_mcp(
             "entry": entry,
             "reason": "existing explicit disabled setting preserved",
         }
-    if previous and (
-        previous.get("command") != command or list(previous.get("args", [])) != ["mcp"]
+    if (
+        previous
+        and previous != managed_entry
+        and (previous.get("command") != command or list(previous.get("args", [])) != ["mcp"])
     ):
         return {
             "status": "CONFLICT",

@@ -155,6 +155,7 @@ def parser():
     integration_remove.add_argument("--project", type=Path)
     integration_refresh = integration_commands.add_parser("refresh")
     integration_refresh.add_argument("--managed-only", action="store_true", required=True)
+    integration_refresh.add_argument("--command-path")
     install = commands.add_parser("install-mcp", help="register clef-use with Codex, Hermes or OMP")
     install.add_argument("harness", choices=["codex", "hermes", "omp"])
     install.add_argument("--path", type=Path)
@@ -225,7 +226,7 @@ def main(argv=None):
                     project=args.project,
                 )
             elif args.action == "refresh":
-                result = integrations.refresh_managed()
+                result = integrations.refresh_managed(command=args.command_path)
             else:
                 result = integrations.remove(
                     args.harness, dry_run=args.dry_run, scope=args.scope, project=args.project

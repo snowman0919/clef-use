@@ -19,6 +19,10 @@ clef-use update
 
 ### Codex
 
+The 0.1.32 candidate also refreshes previously managed registrations against the
+newly installed executable. Modified guides or MCP entries remain conflicts and
+are preserved. Manual refresh can select a release with `--command-path`.
+
 The 0.1.31 candidate fixes `invalid transport` during live verification when other
 MCP servers are configured. Confirm the installed build before retrying; do not
 remove unrelated servers to make verification pass. Discovery, guide loading,

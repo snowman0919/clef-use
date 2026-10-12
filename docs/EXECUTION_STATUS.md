@@ -43,6 +43,20 @@ and generated contracts passed. Native cleanup now attempts pointer and foregrou
 restoration independently, rechecking owned foreground before each attempt and
 preserving both errors.
 
+**OBSERVED / 0.1.31 update defect:** the canonical Windows installer activated
+0.1.31 and matched all 64 files, but managed refresh returned INCOMPATIBLE because
+it selected the old physical 0.1.30 executable from its retained manifest. The
+attempt, DEGRADED result and preserved configuration evidence remain retained.
+Passing a new command also exposed a second conflict: the standalone MCP installer
+could not distinguish an unchanged owned entry from an unowned registration.
+
+The 0.1.32 candidate passes the newly activated native executable explicitly through
+`integrations refresh --managed-only --command-path`. Replacement is allowed only
+when the live entry exactly matches the approved managed entry; guide inventories,
+metadata revalidation, modified-entry conflicts and disabled settings remain intact.
+Three actual CLI consumer regressions exercise release-path replacement across
+Codex, Hermes and OMP, independently of real model/harness verification.
+
 **OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
 collector omitted the owning manager's read-only running-job interface lock.
 In a private factory Blender component, native lock false/23 true/false samples

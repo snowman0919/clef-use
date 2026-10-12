@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Refresh previously managed integrations against the newly installed executable,
+  instead of probing a retained previous release against the new guide contract.
 - Correct temporary Codex verification overrides so existing MCP server names,
   including dots, quotes and Unicode, keep their transport configuration while
   other configured servers are disabled for the read-only session.

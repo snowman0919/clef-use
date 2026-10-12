@@ -1,5 +1,5 @@
 {
-  "runtime_version": "0.1.31",
+  "runtime_version": "0.1.32",
   "api_schema_version": 1,
   "guide_contract_version": 1,
   "api_range": ">=0.1.29,<0.2",

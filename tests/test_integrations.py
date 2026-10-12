@@ -433,6 +433,62 @@ def test_managed_refresh_does_not_register_unapproved_harnesses(installation):
     assert not (home / ".agents/skills/clef-use/SKILL.md").exists()
 
 
+@pytest.mark.parametrize("harness", integrations.HARNESSES)
+@pytest.mark.parametrize("modified", [None, "entry", "guide"])
+def test_cli_managed_refresh_moves_owned_entry_to_selected_runtime(installation, harness, modified):
+    import subprocess
+
+    home, previous = installation
+    integrations.integrate(harness, command=previous)
+    layout = integrations._layout(harness)
+    before = layout["config"].read_text()
+    unrelated = render_entry(harness, before, None)
+    selected = home / "updated runtime launcher"
+    selected.write_bytes(Path(previous).read_bytes())
+    selected.chmod(0o700)
+    # The old release no longer advertises the current guide contract.
+    Path(previous).write_text(f"#!{sys.executable}\nprint('{{}}')\n")
+    guide = layout["root"] / "clef-use/SKILL.md"
+    if modified == "entry":
+        changed = dict(server_entry(harness, before), command="user-selected-runtime")
+        layout["config"].write_text(render_entry(harness, before, changed))
+    elif modified == "guide":
+        guide.write_bytes(guide.read_bytes() + b"\nUser customization\n")
+    protected = [layout["config"], layout["state"] / "manifest.json", guide]
+    protected_before = [path.read_bytes() for path in protected]
+    run = subprocess.run(
+        [
+            sys.executable,
+            "-m",
+            "clef_use.cli",
+            "integrations",
+            "refresh",
+            "--managed-only",
+            "--command-path",
+            str(selected),
+        ],
+        stdin=subprocess.DEVNULL,
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert run.returncode == 0, run.stderr
+    result = json.loads(run.stdout)
+    if modified:
+        assert result["status"] == "PARTIAL"
+        assert result["integrations"][0]["status"] == "CONFLICT"
+        assert [path.read_bytes() for path in protected] == protected_before
+        return
+    assert result["status"] == "REFRESHED"
+    after = layout["config"].read_text()
+    assert server_entry(harness, after)["command"] == str(selected)
+    assert render_entry(harness, after, None) == unrelated
+    assert (
+        integrations.status()["integrations"][integrations.HARNESSES.index(harness)]["status"]
+        == "INSTALLED"
+    )
+
+
 @pytest.mark.parametrize("first,last", [("codex", "omp"), ("omp", "codex")])
 def test_shared_guides_survive_until_last_owner_removal(installation, first, last):
     home, command = installation

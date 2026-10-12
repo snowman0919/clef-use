@@ -573,9 +573,22 @@ def integrate(
     dry_run: bool = False,
     command: str | None = None,
     project: Path | str | None = None,
+    *,
+    replace_managed_command: bool = False,
 ) -> dict:
     if harness == "all":
-        results = [integrate(name, scope, skills, dry_run, command, project) for name in HARNESSES]
+        results = [
+            integrate(
+                name,
+                scope,
+                skills,
+                dry_run,
+                command,
+                project,
+                replace_managed_command=replace_managed_command,
+            )
+            for name in HARNESSES
+        ]
         successful = {"PREVIEW", "INSTALLED", "UNCHANGED"}
         return {
             "status": "PREVIEW"
@@ -589,14 +602,18 @@ def integrate(
     if "status" in layout:
         return layout
     if dry_run:
-        return _integrate(layout, skills, True, command)
+        return _integrate(layout, skills, True, command, replace_managed_command)
     with _locked(layout):
         _recover(layout)
-        return _integrate(layout, skills, False, command)
+        return _integrate(layout, skills, False, command, replace_managed_command)
 
 
 def _integrate(
-    layout: dict, selections: list[str] | None, dry_run: bool, command: str | None
+    layout: dict,
+    selections: list[str] | None,
+    dry_run: bool,
+    command: str | None,
+    replace_managed_command: bool = False,
 ) -> dict:
     from .capabilities import digest, guide_manifest, skill_root, tool_schemas
 
@@ -641,7 +658,13 @@ def _integrate(
     # Retain an approved public launcher alias on repeat enrollment. The installer
     # may register its stable wrapper while this process runs under its venv Python.
     selected_command = command or (manifest.get("mcp_entry") or {}).get("command")
-    preview = install_mcp(layout["harness"], layout["config"], selected_command, dry_run=True)
+    preview = install_mcp(
+        layout["harness"],
+        layout["config"],
+        selected_command,
+        dry_run=True,
+        managed_entry=manifest.get("mcp_entry") if replace_managed_command else None,
+    )
     if preview["status"] in ("CONFLICT", "DISABLED"):
         return preview
     bundle = guide_manifest()
@@ -1536,7 +1559,12 @@ def refresh_managed(command: str | None = None) -> dict:
             if not manifest:
                 continue
             selected_command = command or (manifest.get("mcp_entry") or {}).get("command")
-            result = integrate(harness, skills=manifest["selection"], command=selected_command)
+            result = integrate(
+                harness,
+                skills=manifest["selection"],
+                command=selected_command,
+                replace_managed_command=True,
+            )
             results.append({"harness": harness, **result})
         except (ValueError, OSError) as exc:
             results.append({"harness": harness, "status": "CONFLICT", "reason": str(exc)})

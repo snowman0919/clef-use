@@ -618,12 +618,15 @@ def integrations_ready(report):
 def refresh_integrations(result):
     """Refresh only enrollment previously recorded by this user's active profiles."""
     try:
+        command = integration_executable(result["executable"])
         refreshed = subprocess.run(
             [
-                integration_executable(result["executable"]),
+                command,
                 "integrations",
                 "refresh",
                 "--managed-only",
+                "--command-path",
+                command,
             ],
             capture_output=True,
             text=True,
