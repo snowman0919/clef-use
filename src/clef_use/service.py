@@ -306,11 +306,16 @@ def make_server(manager, token):
             except SessionLookupError as exc:
                 result, status = {"error": exc.code}, 404
             except (ValueError, KeyError):
-                result, status = {
-                    "error": "INVALID_REQUEST",
-                    "guidance": "Inspect current computer_capabilities or clef-use capabilities "
-                    "--detail --json; use only advertised schemas and supported operations.",
-                }, 400
+                result, status = (
+                    {
+                        "error": "INVALID_REQUEST",
+                        "guidance": (
+                            "Inspect current computer_capabilities or clef-use capabilities "
+                            "--detail --json; use only advertised schemas and supported operations."
+                        ),
+                    },
+                    400,
+                )
             except RuntimeError as exc:
                 result, status = {"error": type(exc).__name__}, 400
             raw = json.dumps(result).encode()
