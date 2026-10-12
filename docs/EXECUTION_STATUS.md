@@ -78,6 +78,13 @@ path recognition and adds accurate MCP read-only effect annotations to pure
 capability discovery and the read-only facade. Configured approval policies are
 not changed. Actual new installed/model/GUI outcomes remain NOT_RUN pending run.
 
+**OBSERVED / exact guide provenance:** review found that the initial Windows
+path boundary also accepted `SKILL.md~`, `SKILL.md+backup` and NTFS stream suffixes.
+The 0.1.34 candidate requires a complete quoted path or token boundary; identical
+body content read from a different filename cannot prove the managed guide loaded.
+Three controlled trace consumer regressions preserve successful tool invocation
+but keep LOADED=NOT_RUN and verification FAIL for these copied-body paths.
+
 **OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
 collector omitted the owning manager's read-only running-job interface lock.
 In a private factory Blender component, native lock false/23 true/false samples

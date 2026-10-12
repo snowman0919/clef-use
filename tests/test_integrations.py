@@ -1378,6 +1378,7 @@ def test_codex_failed_terminal_without_error_payload_is_failed(installation, mon
 def test_negative_trigger_without_tool_attempt_passes(installation, monkeypatch, adapter):
     result = _controlled_verification(installation, monkeypatch, adapter, None, "negative", "none")
     assert result["status"] == "PASS"
+    assert result["model_trigger_verification"]["invoked"] == []
 
 
 @pytest.mark.parametrize("separator", ["\\", "\\\\", "/"])
@@ -1395,5 +1396,23 @@ def test_codex_negative_trigger_rejects_windows_guide_read(installation, monkeyp
         guide_command=command,
     )
     assert result["model_trigger_verification"]["attempted"] == []
-    assert result["status"] == "FAIL"
     assert result["model_trigger_verification"]["invoked"] == []
+    assert result["status"] == "FAIL"
+
+
+@pytest.mark.parametrize("suffix", ["~", "+backup", ":copy"])
+def test_codex_copied_body_from_different_guide_path_does_not_prove_load(
+    installation, monkeypatch, suffix
+):
+    path = integrations._layout("codex")["root"] / "clef-use/SKILL.md"
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        guide_command=f"cat '{path}{suffix}'",
+    )
+    assert result["stages"]["LOADED"]["status"] == "NOT_RUN"
+    assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"

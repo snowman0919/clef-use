@@ -17,7 +17,10 @@ def test_codex_windows_guide_command_preserves_native_path_identity(separator):
     command = f'"pwsh.exe" -Command "Get-Content -Raw -LiteralPath \'{represented}\'"'
     assert _codex_guide_path_in_command(path, command)
     assert not _codex_guide_path_in_command(path, command.replace("clef-use", "other-guide"))
-    assert not _codex_guide_path_in_command(path, command.replace("SKILL.md", "SKILL.md.bak"))
+    for suffix in (".bak", "~", "+backup", ":copy"):
+        assert not _codex_guide_path_in_command(
+            path, command.replace("SKILL.md", "SKILL.md" + suffix)
+        )
 
 
 def test_native_codex_read_only_overrides_preserve_named_transports(tmp_path):

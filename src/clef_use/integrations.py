@@ -1731,7 +1731,7 @@ def _codex_guide_path_in_command(path: str, command: str) -> bool:
         # Native Codex traces can shell-escape Windows separators twice.
         path = re.sub(r"\\+", "/", path).casefold()
         command = re.sub(r"\\+", "/", command).casefold()
-    return re.search(rf"(?<![\w./-]){re.escape(path)}(?![\w./-])", command) is not None
+    return re.search(rf"(?:^|[\s\"']){re.escape(path)}(?=$|[\s\"'])", command) is not None
 
 
 def _codex_verification_override(config: dict) -> str:
