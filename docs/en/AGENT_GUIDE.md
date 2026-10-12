@@ -111,9 +111,15 @@ The listener starts from the first Blender UI timer. Association requires Unix
 matching dimensions, and native foreground focus. The observer reads window,
 selection, object mode, raw transforms/units, viewport and positive modal-operator
 records; it does not change scenes or invoke operators. Popup, text focus, IME,
-effective keymap and global busy/idle state remain unknown. An empty operator list
+effective keymap and global idle state remain unknown. An empty operator list
 does not prove absence. All six operations still return `BLOCKED` when their
 required verified facts are missing, including with this partial observer.
+
+The observer retains the owning manager's public `interface_locked` Boolean when
+available. Only `true` establishes the positive busy fact `loading=true` after
+native identity, window and freshness checks. `false` or unavailable leaves
+`loading` UNKNOWN: an unlocked manager can still have a modal or other input owner.
+This fact cannot authorize input or establish idle.
 
 `active_tool` identifies a configured VIEW_3D workspace tool for the independently
 bound native context mode, with workspace and observed area IDs. Missing or

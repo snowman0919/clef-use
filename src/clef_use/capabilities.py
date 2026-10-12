@@ -167,7 +167,9 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "active_tool": "Configured VIEW_3D workspace tool for the independently bound "
                 "current window context mode and observed area IDs; focused editor and effective "
                 "input dispatch remain UNKNOWN",
-                "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
+                "loading": "Positive-only busy evidence when the owning manager's public "
+                "interface lock is True; False or unavailable leaves global idle UNKNOWN",
+                "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap"],
                 "input_authority": "No operation readiness inferred from partial snapshots",
             }
         ],

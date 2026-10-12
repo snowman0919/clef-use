@@ -78,6 +78,12 @@ Per owning manager, inventory refuses more than 512 maps, 16384 scanned items or
 It refuses window/object/region overflow. Empty operator lists prove no absence
 of UI handlers. Popup, editing, IME, effective keymap and global busy absence are
 not supplied by this partial provider, so all six procedures retain their guards.
+The collector preserves the owning manager's optional public `interface_locked`
+Boolean. Only exact `true` compiles to the positive busy fact `loading=true`, after
+the same native identity, window and freshness checks. False or unavailable does
+not establish global idle and leaves `loading` UNKNOWN; a render modal can remain
+after the lock clears. Malformed native values refuse collection. No new input
+authority or operation readiness follows from this observation.
 Fresh observe responses give the state sample its own observation ID before
 perception parsing, expire delayed facts, and declare foreground-window-only
 association. These are independently sampled facts, not pixel-synchronous scene

@@ -109,9 +109,14 @@ listener は Blender の最初の UI timer から起動します。Unix `SO_PEER
 kernel process identity、寸法が一致する唯一の RNA window/client、native foreground
 focus を確認して状態を関連付けます。window・selection・object mode・生の transform/unit・
 viewport・観測された modal operator を読み取り、scene の変更や operator の実行は
-行いません。popup・text focus・IME・有効な keymap・全体の busy/idle は不明のままです。
+行いません。popup・text focus・IME・有効な keymap・全体の idle は不明のままです。
 空の operator 一覧も不在の証拠にはなりません。この部分観測器を設定しても、必要な
 検証済み状態がなければ六つの operation はすべて `BLOCKED` を返します。
+
+観測器は所有 manager の公開 `interface_locked` Boolean を取得できる場合に保持します。
+native identity・window・鮮度の検証を通過した `true` だけが、busy の陽性証拠として
+`loading=true` になります。`false` や取得不能の場合は `loading` を UNKNOWN に保ちます。
+解除後も modal や別の入力所有者が残り得るため、入力の許可や idle の判定には使いません。
 
 `active_tool` は独立に関連付けた native context mode の VIEW_3D workspace tool と、
 workspace・観測済み area ID を示します。欠落や曖昧さは UNKNOWN のままです。

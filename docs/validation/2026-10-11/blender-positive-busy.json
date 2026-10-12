@@ -1,0 +1,2368 @@
+{
+  "classification": "OBSERVED_POSITIVE_ONLY_BLENDER_BUSY_SOURCE_COMPONENT",
+  "problem": "The public running-job interface lock was omitted from actual collector/provider facts.",
+  "change": "Preserve owning-manager strict boolean or unavailable; exact true compiles loading=true only after existing binding/freshness checks.",
+  "invariant": "False/unavailable does not establish global idle; all missing guards still block operations.",
+  "requirements": [
+    "STATE-01",
+    "INPUT-05"
+  ],
+  "native_before": {
+    "claim": "OBSERVED_ACTUAL_NATIVE_SOURCE_COMPONENT",
+    "status": "PASS",
+    "source_sha256": {
+      "blender_snapshot.py": "376b78843ce6bcdcd9496da09ee32c79283eda04610bff253f7b8dfb3e8f0881",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+      "blender_state.py": "d4d9c7a3836e68082356292f09dc17b6a9e448943504a36b0a85eb5433ab53b4",
+      "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "backends.py": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+      "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "operations.py": "6dba1d94a31d07becbc18675d0f684ac58faa6a8ceaac22a30e966d1ed253d70",
+      "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+    },
+    "source_unchanged": true,
+    "elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "blender_version": "5.2.0 LTS",
+    "property": {
+      "identifier": "is_interface_locked",
+      "type": "BOOLEAN",
+      "is_readonly": true,
+      "meaning": "Running-job interface lock; does not establish global idle"
+    },
+    "render_setup": {
+      "operator_result": [
+        "RUNNING_MODAL"
+      ],
+      "use_lock_interface": true,
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 128,
+      "resolution": [
+        512,
+        512
+      ],
+      "threads": 4,
+      "render_display_type": "NONE",
+      "write_still": false,
+      "locks_after_invoke": [
+        {
+          "manager_id": 129764216227872,
+          "locked": true,
+          "window_ids": [
+            129764216174112
+          ]
+        }
+      ]
+    },
+    "samples": [
+      {
+        "phase": "before",
+        "native_locked": false,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780067.8280303,
+          "state_version": 1,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780067.8280303,
+          "state_version": 1,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780067.9124389,
+          "state_version": 2,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780067.905428,
+          "state_version": 2,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780067.946971,
+          "state_version": 3,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780067.9408233,
+          "state_version": 3,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780067.982327,
+          "state_version": 4,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780067.975075,
+          "state_version": 4,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.0157812,
+          "state_version": 5,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.0097957,
+          "state_version": 5,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.0499492,
+          "state_version": 6,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.0435026,
+          "state_version": 6,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.0986364,
+          "state_version": 7,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.0924263,
+          "state_version": 7,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.1323178,
+          "state_version": 8,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.1262333,
+          "state_version": 8,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.1681948,
+          "state_version": 9,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.160233,
+          "state_version": 9,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.207901,
+          "state_version": 10,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.2011158,
+          "state_version": 10,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.2526803,
+          "state_version": 11,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.2450318,
+          "state_version": 11,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.2944353,
+          "state_version": 12,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.2883136,
+          "state_version": 12,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.3285067,
+          "state_version": 13,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.3219743,
+          "state_version": 13,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.372996,
+          "state_version": 14,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.3663619,
+          "state_version": 14,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.4171803,
+          "state_version": 15,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.4107518,
+          "state_version": 15,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.4653966,
+          "state_version": 16,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.4575596,
+          "state_version": 16,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.5125833,
+          "state_version": 17,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.5024197,
+          "state_version": 17,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.5521786,
+          "state_version": 18,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.5434268,
+          "state_version": 18,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.5928144,
+          "state_version": 19,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.5845017,
+          "state_version": 19,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.6321363,
+          "state_version": 20,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.6253614,
+          "state_version": 20,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.6774385,
+          "state_version": 21,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.6689115,
+          "state_version": 21,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.7212408,
+          "state_version": 22,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.7137084,
+          "state_version": 22,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.7661822,
+          "state_version": 23,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.7580087,
+          "state_version": 23,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.8101468,
+          "state_version": 24,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.8031857,
+          "state_version": 24,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "after",
+        "native_locked": false,
+        "stable_through_collector": true,
+        "bound_window_identity": "3227452:129764216174112",
+        "raw_interface_locked_present": false,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780068.8590078,
+          "state_version": 25,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3227452:129762729309976",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780068.851392,
+          "state_version": 25,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      }
+    ],
+    "counts": {
+      "samples": 25,
+      "native_locked_true": 23,
+      "native_locked_false": 2,
+      "compiled_positive_busy": 0
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "children_absent": true,
+      "x_socket_removed": true,
+      "observer_socket_removed": true,
+      "production_blender_after": true
+    },
+    "render_output_saved": false,
+    "native_keyboard_pointer_inputs": 0,
+    "native_focus_setup_calls": 1,
+    "original_public_receipt_sha256": "5781c4da41cfef7ba49adedaebe93c5c0f28a79ac8e7e96863d12c77fb66cfd0",
+    "raw_report_sha256": "2efe8984f93231fb5d17906d2c8d777124af1ee1885669a9f625d2346df5019c",
+    "driver_sha256": "83f4cef023ff963ea5df760d9c43c609e3042a2078994ca4f1ca39898387b2ec",
+    "first_attempt": {
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "error": "",
+      "exact_failing_subexpression": "NOT_RECORDED: original controller grouped checks and did not retain traceback or during-true compiled facts",
+      "cause_inference": "Inherited assertion requiring modal UNKNOWN likely failed because real render legitimately exposes positive modal operator; inference only",
+      "raw_report_sha256": "38ef35f915b18c54078f1236585c104a84df8ec167cecb7e767d49bf33d15d55",
+      "driver_sha256": "7a424c2616f3d66cd802c73107957d7eec3d8b0f64dc5416f9a5797a86068389",
+      "retained_true_collector_oracle": {
+        "sampled_at": 1791779934.4817226,
+        "lock_before": [
+          {
+            "manager_id": 123452923332640,
+            "locked": true,
+            "window_ids": [
+              123452923278880
+            ]
+          }
+        ],
+        "lock_after": [
+          {
+            "manager_id": 123452923332640,
+            "locked": true,
+            "window_ids": [
+              123452923278880
+            ]
+          }
+        ],
+        "windows": 1,
+        "collector_retains_interface_locked": [
+          false
+        ]
+      },
+      "retained_true_collector_oracle_sha256": "00115e750c3de93efe5950b0b3c1113afa5c4078970fbdd0c00833967a2fc752",
+      "retained_render_start": {
+        "operator_result": [
+          "RUNNING_MODAL"
+        ],
+        "use_lock_interface": true,
+        "engine": "CYCLES",
+        "device": "CPU",
+        "samples": 128,
+        "resolution": [
+          512,
+          512
+        ],
+        "threads": 4,
+        "render_display_type": "NONE",
+        "write_still": false,
+        "locks_after_invoke": [
+          {
+            "manager_id": 123452923332640,
+            "locked": true,
+            "window_ids": [
+              123452923278880
+            ]
+          }
+        ]
+      },
+      "cleanup": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "observer_socket_removed": true,
+        "production_blender_after": true
+      },
+      "source_unchanged": true
+    }
+  },
+  "native_after": {
+    "claim": "OBSERVED_ACTUAL_NATIVE_SOURCE_COMPONENT",
+    "status": "PASS",
+    "source_sha256": {
+      "blender_snapshot.py": "ed06006e3ed014052a1afb85a7b3786467be1acad578fe12e08cac26c02a62e3",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+      "blender_state.py": "176d6d0b4a4ee507322c89e6e654cdb772b8cce612a0cb9a8bfbc0e65249aee8",
+      "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "backends.py": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+      "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "operations.py": "6dba1d94a31d07becbc18675d0f684ac58faa6a8ceaac22a30e966d1ed253d70",
+      "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+    },
+    "source_unchanged": true,
+    "elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "blender_version": "5.2.0 LTS",
+    "property": {
+      "identifier": "is_interface_locked",
+      "type": "BOOLEAN",
+      "is_readonly": true,
+      "meaning": "Running-job interface lock; does not establish global idle"
+    },
+    "render_setup": {
+      "operator_result": [
+        "RUNNING_MODAL"
+      ],
+      "use_lock_interface": true,
+      "engine": "CYCLES",
+      "device": "CPU",
+      "samples": 128,
+      "resolution": [
+        512,
+        512
+      ],
+      "threads": 4,
+      "render_display_type": "NONE",
+      "write_still": false,
+      "locks_after_invoke": [
+        {
+          "manager_id": 135995433633824,
+          "locked": true,
+          "window_ids": [
+            135995433580064
+          ]
+        }
+      ]
+    },
+    "samples": [
+      {
+        "phase": "before",
+        "native_locked": false,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780214.7326646,
+          "state_version": 1,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780214.7326646,
+          "state_version": 1,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.8099318,
+          "state_version": 2,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.8099318,
+          "state_version": 2,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.854559,
+          "state_version": 3,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.854559,
+          "state_version": 3,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.8890007,
+          "state_version": 4,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.8890007,
+          "state_version": 4,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.923067,
+          "state_version": 5,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.923067,
+          "state_version": 5,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.957786,
+          "state_version": 6,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780214.957786,
+          "state_version": 6,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.0069704,
+          "state_version": 7,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.0069704,
+          "state_version": 7,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.0513628,
+          "state_version": 8,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.0513628,
+          "state_version": 8,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.095967,
+          "state_version": 9,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.095967,
+          "state_version": 9,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.140407,
+          "state_version": 10,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.140407,
+          "state_version": 10,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.1783705,
+          "state_version": 11,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.1783705,
+          "state_version": 11,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.2193017,
+          "state_version": 12,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.2193017,
+          "state_version": 12,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.2640073,
+          "state_version": 13,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.2640073,
+          "state_version": 13,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3049762,
+          "state_version": 14,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3049762,
+          "state_version": 14,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3459098,
+          "state_version": 15,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3459098,
+          "state_version": 15,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3884919,
+          "state_version": 16,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.3884919,
+          "state_version": 16,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.4331205,
+          "state_version": 17,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.4331205,
+          "state_version": 17,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.4776115,
+          "state_version": 18,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.4776115,
+          "state_version": 18,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.5220022,
+          "state_version": 19,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.5220022,
+          "state_version": 19,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.573343,
+          "state_version": 20,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.573343,
+          "state_version": 20,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.6141229,
+          "state_version": 21,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.6141229,
+          "state_version": 21,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.65523,
+          "state_version": 22,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.65523,
+          "state_version": 22,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.6966248,
+          "state_version": 23,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.6966248,
+          "state_version": 23,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "during_or_after",
+        "native_locked": true,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": true,
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.7379732,
+          "state_version": 24,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.7379732,
+          "state_version": 24,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      },
+      {
+        "phase": "after",
+        "native_locked": false,
+        "stable_through_collector": true,
+        "bound_window_identity": "3228435:135995433580064",
+        "raw_interface_locked_present": true,
+        "compiled_loading": {
+          "value": null,
+          "source": "UNAVAILABLE",
+          "observed_at": 1791780215.793587,
+          "state_version": 25,
+          "validity": "UNKNOWN",
+          "uncertainty": 1.0
+        },
+        "compiled_modal": {
+          "value": {
+            "positive_operators": [
+              {
+                "id": "3228435:135994516159000",
+                "name": "RENDER_OT_render",
+                "rna": "Operator"
+              }
+            ]
+          },
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791780215.7868633,
+          "state_version": 25,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unavailable_guards": {
+          "popup": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "six_operations": "BLOCKED",
+        "input_count": 0
+      }
+    ],
+    "counts": {
+      "samples": 25,
+      "native_locked_true": 23,
+      "native_locked_false": 2,
+      "compiled_positive_busy": 23
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "children_absent": true,
+      "x_socket_removed": true,
+      "observer_socket_removed": true,
+      "production_blender_after": true
+    },
+    "render_output_saved": false,
+    "native_keyboard_pointer_inputs": 0,
+    "native_focus_setup_calls": 1,
+    "original_public_receipt_sha256": "9d97411ae93f4fe7d4b1f2116f5d87c4926d856c37e8685fb0f81a794ad2be22",
+    "raw_report_sha256": "30f382a49f9a889e9bb3fff49ad47f18b3250d72be4583a3900494be5c3a3d33",
+    "driver_sha256": "a7fe90e32306c3e85d4073c4ec821b99bbdd746a0b2dec16adc3032bf52d5b17"
+  },
+  "actual_read_only_stdio_mcp": {
+    "classification": "OBSERVED_REAL_READ_ONLY_STDIO_MCP_SOURCE_COMPONENT",
+    "status": "PASS",
+    "api_schema_version": 1,
+    "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "actual_list_tools_schema_match": true,
+    "loading_capability": "Positive-only busy evidence when the owning manager's public interface lock is True; False or unavailable leaves global idle UNKNOWN",
+    "default_operations_blocked": 6,
+    "capabilities_sha256": "fea62bdc0c2ce17a89eeac649f3230c47d92aa181d8901bd59cd2f52cf936bd7",
+    "native_input_requested": false,
+    "model_task_requested": false,
+    "NOT_RUN": [
+      "real harness discovery/load/invoke",
+      "installed-current",
+      "whole E2E",
+      "state-change-to-correct-OS-input performance",
+      "release"
+    ]
+  },
+  "regression": {
+    "new_cases": 24,
+    "immutable_baseline_commit": "57251d4780961408473d1ab6548db705023ba8a8",
+    "immutable_baseline": "11 FAIL / 13 PASS",
+    "scoped": "191 PASS",
+    "integrated": "1398 PASS / 34 SKIP / 41 warnings",
+    "red_log_sha256": "7c8d6b5ca4c5146f72a5896c5fbbeea6af62f2c4997db13ccd1fccb2d469fcba",
+    "green_log_sha256": "b024cc1065d569c231c931d0528a37eccec0066460fb9d7891ecbb4ca1c1d7f9",
+    "full_log_sha256": "97a222ba6ca9b614b47f496ba76b5920d49e4d867f93c4e9716b6094f833167b",
+    "test_sha256": "d115011c96b09edc84d663fa4529216f78521e3520d3d2eca533cf2c71d7fb65",
+    "capabilities_sha256": "fea62bdc0c2ce17a89eeac649f3230c47d92aa181d8901bd59cd2f52cf936bd7",
+    "ruff_and_format": "PASS; four changed Python files",
+    "generated_contract": "PASS"
+  },
+  "NOT_RUN": [
+    "General production popup/text/IME/effective-keymap/focused-editor/global-idle observation support",
+    "Whole E2E and real harness/model tasks; other session scope",
+    "Current installed-product and release checks",
+    "State-change-to-correct-OS-input p95/full-task accuracy/goodput/coverage"
+  ],
+  "acceptance_or_release_status_promoted": false
+}

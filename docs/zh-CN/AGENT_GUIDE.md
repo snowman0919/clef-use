@@ -99,8 +99,13 @@ listener 从 Blender 的首个 UI timer 启动。状态关联需要验证 Unix `
 XRes 的 kernel process identity、尺寸匹配的唯一 RNA window/client，以及 native
 foreground focus。observer 读取 window、selection、object mode、原始 transform/unit、
 viewport 和已观察到的 modal operator，不修改 scene 或执行 operator。popup、text focus、
-IME、有效 keymap 和整体 busy/idle 状态仍然未知。空 operator 列表也不能证明不存在。
+IME、有效 keymap 和整体 idle 状态仍然未知。空 operator 列表也不能证明不存在。
 即使配置了此部分 observer，只要缺少必要的已验证状态，六个 operation 仍返回 `BLOCKED`。
+
+observer 在可用时保留所属 manager 的公开 `interface_locked` Boolean。只有通过 native
+identity、window 和新鲜度验证的 `true` 才形成 busy 阳性证据 `loading=true`。
+`false` 或不可用时，`loading` 保持 UNKNOWN。解除锁定后仍可能存在 modal 或其他输入
+所有者，因此不能用此值授权输入或判定 idle。
 
 `active_tool` 表示独立绑定的 native context mode 下配置的 VIEW_3D workspace tool，
 并保留 workspace 和已观察到的 area ID。缺失或歧义时保持 UNKNOWN。

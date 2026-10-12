@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Preserve Blender's public owning-manager interface lock as positive busy
+  evidence. Compile only true to `loading=true`; unlocked or unavailable remains
+  UNKNOWN and cannot authorize input. Retain native identity/freshness guards.
 - Distinguish attempted harness tool calls from successful MCP responses. Error
   results cannot pass invocation; negative triggers reject failed attempts too.
 - Retain validated integration bytes and guide inventories through capability

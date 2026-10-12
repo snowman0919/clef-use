@@ -10,8 +10,10 @@ RNA addresses; an unavailable public UID leaves object identity unobserved.
 
 ``positive_modal_operators`` is positive-only evidence. None means unavailable;
 an empty list does NOT establish absence of popups, text editing, modal UI
-handlers, or other input owners. Popup, text-focus, IME, effective keymap, and
-global busy/idle facts are intentionally absent. A caller must independently
+handlers, or other input owners. ``interface_locked`` preserves the owning
+manager's public running-job lock, when available. True is positive busy
+evidence; false does not establish global idle. Popup, text-focus, IME, effective
+keymap and global idle facts are intentionally absent. A caller must independently
 bind the process/window and freshness before consuming even the observed facts.
 ``keymap_inventory`` reads the owning manager's merged user configuration, not
 effective dispatch. Its digest identifies retained content, not input authority.
@@ -190,6 +192,7 @@ class WindowSnapshot(TypedDict):
     pivot: str
     areas: list[AreaSnapshot]
     positive_modal_operators: list[ModalOperatorSnapshot] | None
+    interface_locked: bool | None
     keymap_inventory: KeymapInventory | None
 
 
@@ -533,6 +536,9 @@ def collect_snapshot() -> BlenderSnapshot:
             raise SnapshotUnavailable("Duplicate native window identity")
         window_ids.add(window_id)
         manager_id = _identity(pid, manager.as_pointer())
+        interface_locked = getattr(manager, "is_interface_locked", None)
+        if interface_locked is not None and type(interface_locked) is not bool:
+            raise SnapshotUnavailable("Invalid native interface lock")
         if manager_id not in keymaps:
             keymaps[manager_id] = _keymap_inventory(getattr(manager, "keyconfigs", None))
         workspace = window.workspace
@@ -626,6 +632,7 @@ def collect_snapshot() -> BlenderSnapshot:
                 "pivot": _enum(scene.tool_settings.transform_pivot_point),
                 "areas": areas,
                 "positive_modal_operators": modals,
+                "interface_locked": interface_locked,
                 "keymap_inventory": keymaps[manager_id],
             }
         )

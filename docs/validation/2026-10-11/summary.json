@@ -2817,6 +2817,18 @@
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
       "sha256": "95340891894326e94a2c835443ae3070fb2aef31539e97c60b6cc584102bfebe",
       "scope": "946 passed / 34 skipped. Actual Blender 5.2 read-only component observed 164 relevant bindings, 80 wildcard modifier values, four areas and 18 regions. A native Linux two-monitor click missed at (640,300) before correction and hit (320,300) afterward; original failure retained. Raw facts do not establish effective keymap or editor focus. No model, whole-task E2E, installed-current or performance claim."
+    },
+    "blender_positive_busy": {
+      "claim": "OBSERVED_SOURCE_COMPONENT",
+      "artifact": "docs/validation/2026-10-11/blender-positive-busy.json",
+      "sha256": "e371840be73d64e4a7a9bcc0fafcabcf592d6bca00f9f8feccf88b266777e259",
+      "scope": "Actual native before25UNKNOWN/after23positivebusy+2UNKNOWN; all6BLOCKED/input0; source1398PASS34SKIP. No global idle or operation readiness claim."
+    },
+    "blender_provider_performance_baseline": {
+      "claim": "MEASURED_SOURCE_COMPONENT",
+      "artifact": "docs/validation/2026-10-11/blender-provider-performance-baseline.json",
+      "sha256": "dab22038db94e13d3d2c5840b2b3347c62a66d806758cd0f84faf2c050c6767e",
+      "scope": "Five warm batches, 500 read-only capture/provider/compiler samples; total median13.025ms/p9523.573ms/max43.296ms. Same source, no speedup or correct-OS-input100ms claim; startupFAIL retained."
     }
   },
   "not_run": {
@@ -3060,7 +3072,9 @@
     "candidate-identity-and-primitive-budget.json",
     "modifier-gesture-context.json",
     "integration-validation-ownership.json",
-    "harness-invocation-classification.json"
+    "harness-invocation-classification.json",
+    "blender-positive-busy.json",
+    "blender-provider-performance-baseline.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

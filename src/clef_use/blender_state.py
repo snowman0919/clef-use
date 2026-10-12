@@ -1,7 +1,8 @@
 """Partial public-RNA evidence bound to a fresh foreground X11 client PID.
 
-Unavailable popup, effective keymap, text/IME focus and busy facts remain
-UNKNOWN. This provider never authorizes an operation by assuming their absence.
+Unavailable popup, effective keymap, text/IME focus and global idle facts remain
+UNKNOWN. A running-job interface lock is positive busy evidence only. This
+provider never authorizes an operation by assuming an input owner's absence.
 """
 
 from __future__ import annotations
@@ -322,6 +323,10 @@ def compile_snapshot(
         "application_snapshot": fact(window),
         "editor_layout": fact(editor_layout(window, (left, top, right, bottom), frame)),
     }
+    # The public lock covers running jobs, not every loading/input-owning state.
+    # An unlocked manager can still have a popup, modal or unobserved job.
+    if window.get("interface_locked") is True:
+        result["loading"] = fact(True)
     selection = window["selection"]
     objects = window["objects"]
     # Names can be reused while an operation is in flight. Only a complete

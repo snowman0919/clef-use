@@ -109,9 +109,15 @@ listener는 Blender의 첫 UI timer에서 시작합니다. Unix `SO_PEERCRED`, X
 kernel process identity, 크기가 일치하는 유일한 RNA window/client, native foreground
 focus를 확인해야 상태를 연결합니다. window·selection·object mode·원시 transform/unit·
 viewport·관찰된 modal operator를 읽으며 scene을 변경하거나 operator를 실행하지
-않습니다. popup·text focus·IME·유효 keymap·전체 busy/idle 상태는 여전히 알 수 없습니다.
+않습니다. popup·text focus·IME·유효 keymap·전체 idle 상태는 여전히 알 수 없습니다.
 빈 operator 목록도 부재 증거가 아닙니다. 이 부분 관측기를 설정해도 필요한 검증 상태가
 없으면 6개 operation 모두 `BLOCKED`를 반환합니다.
+
+관측기는 소유 manager의 공개 `interface_locked` Boolean을 읽을 수 있을 때 보존합니다.
+native identity·window·최신성 검증을 통과한 `true`만 busy 증거인 `loading=true`로
+컴파일합니다. `false`나 관측 불가는 `loading`을 UNKNOWN으로 유지합니다. 잠금이 풀려도
+modal이나 다른 입력 소유자가 남아 있을 수 있으므로 이 값으로 입력을 허용하거나 idle을
+판정하지 않습니다.
 
 `active_tool`은 독립적으로 연결한 native context mode에 설정된 VIEW_3D workspace
 도구와 workspace·관찰된 area ID를 제공합니다. 누락되거나 모호하면 UNKNOWN입니다.

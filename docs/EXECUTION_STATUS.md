@@ -1,5 +1,49 @@
 # Reactive runtime execution status
 
+**OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
+collector omitted the owning manager's read-only running-job interface lock.
+In a private factory Blender component, native lock false/23 true/false samples
+all compiled `loading` as UNKNOWN before the correction. The collector now
+retains the strict optional Boolean; the provider compiles only exact true to
+`loading=true` after existing native identity, window and freshness checks.
+False or unavailable remains UNKNOWN and cannot establish global idle.
+
+The same actual collector/socket/provider/compiler path now preserves all 25
+native lock samples: 23 true samples produce VALID APP_TELEMETRY busy evidence
+with matching acquisition time/version, and both false samples remain UNKNOWN.
+A positive render modal remained after the lock cleared, demonstrating why false
+cannot authorize input. Seven other unobserved guards remain UNKNOWN; all six
+operation families stay BLOCKED with zero input. The bounded render setup used an
+owned factory instance, saved no render/model artifact and left production display
+untouched. Owned processes and sockets were removed. An earlier controller
+assertion failure remains recorded; its exact failing subexpression was not
+recorded, so the suspected modal assertion is an inference, not a product result.
+
+The actual read-only stdio MCP advertises the positive-only busy semantics and
+matches its listed tool schemas. Twenty-four permanent collector/compiler cases
+produce 11 FAIL / 13 PASS on immutable prior source and pass currently; scoped
+checks pass 191. Final integrated source passed **1398 tests / 34 skipped /
+41 warnings** in 63.49 seconds. Four changed Python files passed Ruff/format;
+generated contracts and four-language guides are updated. See
+[positive busy evidence](validation/2026-10-11/blender-positive-busy.json).
+
+**MEASURED / pre-change read-only source baseline:** five warm batches of 100
+samples on an owned authenticated 800x600 factory Blender 5.2/software-GL instance
+measured capture to provider/socket/collector to State Compiler. Across 500 samples,
+total median was 13.025ms, nearest-rank p95 23.573ms and maximum 43.296ms; capture
+p95 was 9.049ms, provider 15.418ms, compiler 0.051ms and native collector 3.181ms.
+Raw timings, all five batches, separate profiles and the first startup readiness
+failure are retained. The later batch was slower; thermal state and competing
+workload were not controlled. No optimization or speedup is claimed. This is the
+prior source's read-only component baseline, not the actual state-change to correct
+OS-input latency or whole-task accuracy/goodput/coverage. See
+[baseline evidence](validation/2026-10-11/blender-provider-performance-baseline.json).
+
+General production popup/text/IME/effective-keymap/focused-editor/global-idle
+observation remains incomplete. Whole E2E and model tasks belong to other sessions;
+new installed-current, release and whole-task performance checks are NOT_RUN in
+this slice. No acceptance status or release gate changed.
+
 **OBSERVED / harness invocation classification:** the canonical read-only stdio
 MCP server returned `isError=true` for an unknown operation, yet the Codex source
 verifier counted the response as INVOKED=PASS and overall PASS. Controlled failed
@@ -551,7 +595,7 @@ of an unavailable environment. The following boundaries apply to individual chec
 
 | Check | Observed result or missing prerequisite | Next action and ownership |
 | --- | --- | --- |
-| Production operations | The optional Linux X11 public-RNA producer is now bound through `blender_state_socket`. Actual UI-thread selection, mode, properties and viewport observations were verified with native PID/peer/window binding. Popup, editing, IME, busy and effective keymap facts remain UNKNOWN; all six operation guards remain in force. | Continue clef-use observation/input improvements without inventing absence facts. The partial producer does not close general operation support; whole-task verification belongs to the other session. |
+| Production operations | The optional Linux X11 public-RNA producer is bound through `blender_state_socket`. Actual UI-thread scene/viewport facts and positive running-job busy evidence are verified with native PID/peer/window binding. Popup, editing, IME, effective keymap, focused editor and global idle remain unobserved; all six operation guards remain in force. | Continue clef-use observation/input improvements without inventing absence facts. The partial producer does not close general operation support; whole-task verification belongs to the other session. |
 | OMP native model loading/invocation | The recorded `aipi/dgx-moa-fast` primary and three auxiliary requests returned HTTP 401 before any tool call. Current provider health and the credential cause were not checked. Actual Codex native loading/invocation succeeded separately. | This blocks that OMP route only. Do not request Codex desktop authentication repair or stop independent implementation. Keep OMP loading/invocation NOT_RUN until its selected provider can execute. |
 | Blender and general GUI accuracy | Earlier Blender assessment failed all five positives. The completed CI493 browser/editor check also failed 0/2: browser mode confidence 0.7027 and editor replan probability 0.9056. Native input/effects were zero. | Preserve this diagnosis for the E2E/model session. This session improves clef-use software and does not repeat model-quality or whole-task runs. |
 | Reici matched-view verification | A real private production checkpoint was located through an existing active task ledger. The earlier missing-scene assumption is withdrawn. That task records a default-computer-use approval timeout before an alignment input, and part-local/final quality gates remain open. | Preserve the other actor's scene and input boundary. Establish the permitted isolated verification target without rerouting or bypassing its unapproved input. Existing scene discovery proves neither edits nor independent review. No asset purchase is required to continue software work. |
