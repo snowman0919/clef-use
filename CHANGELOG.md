@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Match native Windows shell-escaped guide paths during Codex verification and
+  retain negative-trigger checks across Windows separators. Advertise accurate
+  read-only MCP tool effects without changing the harness's approval policy.
 - Refresh previously managed integrations against the newly installed executable,
   instead of probing a retained previous release against the new guide contract.
 - Correct temporary Codex verification overrides so existing MCP server names,

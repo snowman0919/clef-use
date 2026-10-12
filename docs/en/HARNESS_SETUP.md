@@ -19,6 +19,10 @@ clef-use update
 
 ### Codex
 
+The 0.1.33 candidate recognizes shell-escaped Windows guide paths and advertises
+read-only MCP effects for capability discovery and the read-only facade. It does
+not change configured approval policies; a denied call remains a failed invocation.
+
 The 0.1.32 candidate also refreshes previously managed registrations against the
 newly installed executable. Modified guides or MCP entries remain conflicts and
 are preserved. Manual refresh can select a release with `--command-path`.

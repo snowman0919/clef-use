@@ -1094,7 +1094,9 @@ def test_successful_tool_body_never_becomes_authentication_diagnostic():
     assert "authentication" not in reason
 
 
-def _controlled_verification(installation, monkeypatch, adapter, payload, trigger, attempt="end"):
+def _controlled_verification(
+    installation, monkeypatch, adapter, payload, trigger, attempt="end", guide_command=None
+):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
     These executable fixtures are not installed harnesses, SDKs or model sessions.
@@ -1136,7 +1138,7 @@ def _controlled_verification(installation, monkeypatch, adapter, payload, trigge
         ),
     ]
     events = []
-    if trigger != "negative":
+    if trigger != "negative" or guide_command is not None:
         if harness == "codex":
             events.append(
                 {
@@ -1144,7 +1146,7 @@ def _controlled_verification(installation, monkeypatch, adapter, payload, trigge
                     "item": {
                         "type": "command_execution",
                         "exit_code": 0,
-                        "command": "cat " + str(skill),
+                        "command": guide_command or "cat " + str(skill),
                         "aggregated_output": body,
                     },
                 }
@@ -1376,4 +1378,22 @@ def test_codex_failed_terminal_without_error_payload_is_failed(installation, mon
 def test_negative_trigger_without_tool_attempt_passes(installation, monkeypatch, adapter):
     result = _controlled_verification(installation, monkeypatch, adapter, None, "negative", "none")
     assert result["status"] == "PASS"
+
+
+@pytest.mark.parametrize("separator", ["\\", "\\\\", "/"])
+def test_codex_negative_trigger_rejects_windows_guide_read(installation, monkeypatch, separator):
+    command = r"Get-Content C:\Users\profile\.agents\skills\clef-use\SKILL.md".replace(
+        "\\", separator
+    )
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        None,
+        "negative",
+        "none",
+        guide_command=command,
+    )
+    assert result["model_trigger_verification"]["attempted"] == []
+    assert result["status"] == "FAIL"
     assert result["model_trigger_verification"]["invoked"] == []

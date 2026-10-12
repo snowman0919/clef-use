@@ -57,6 +57,27 @@ metadata revalidation, modified-entry conflicts and disabled settings remain int
 Three actual CLI consumer regressions exercise release-path replacement across
 Codex, Hermes and OMP, independently of real model/harness verification.
 
+**OBSERVED / 0.1.32 installed:** the genuine Windows update returned INSTALLED
+and managed Codex REFRESHED. All 64 packaged files match source 2a2638d; subsequent
+canonical checks return CURRENT, self-test passes and actual read-only stdio MCP
+schemas/three guide resources match. The first controller mistook an equivalent
+`bin\..\versions` path for a different executable; exact native file identity
+confirms equality. That failure is retained separately. Doctor's exit 2 identifies
+SSH Session 0 as unavailable for GUI; both prepared ML environments are ready.
+
+The corrected native smoke in interactive Session 1 passes Unicode, clipboard
+preservation, shortcuts, click/wheel readback, cancellation, stale focus refusal,
+owned input release and pointer/foreground restoration. The real Codex session
+read the complete core guide and references, but its trace double-escaped Windows
+paths, causing a false LOADED=NOT_RUN. Its capability call was refused with
+`MCP tool call requires approval, but approval policy is never`; no successful
+invocation is claimed. There are no configured per-server/per-tool approval modes.
+
+The 0.1.33 candidate normalizes native Windows trace separators for exact guide
+path recognition and adds accurate MCP read-only effect annotations to pure
+capability discovery and the read-only facade. Configured approval policies are
+not changed. Actual new installed/model/GUI outcomes remain NOT_RUN pending run.
+
 **OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
 collector omitted the owning manager's read-only running-job interface lock.
 In a private factory Blender component, native lock false/23 true/false samples

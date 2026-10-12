@@ -43,6 +43,34 @@ async def test_capabilities_do_not_start_service_or_initialize_models(monkeypatc
     assert json.loads(text)["api_schema_version"] == 1
 
 
+async def test_read_only_mcp_tools_advertise_safe_effects_and_never_start_service(tmp_path):
+    import os
+    import sys
+
+    from mcp import ClientSession, StdioServerParameters
+    from mcp.client.stdio import stdio_client
+
+    parameters = StdioServerParameters(
+        command=sys.executable,
+        args=["-m", "clef_use.cli", "mcp", "--read-only"],
+        env={**os.environ, "CLEF_USE_STATE_DIR": str(tmp_path)},
+    )
+    async with stdio_client(parameters) as (read, write), ClientSession(read, write) as client:
+        await client.initialize()
+        tools = {tool.name: tool for tool in (await client.list_tools()).tools}
+        for name in ("computer_capabilities", "computer_status"):
+            hints = tools[name].annotations
+            assert hints is not None
+            assert hints.readOnlyHint is True
+            assert hints.destructiveHint is False
+            assert hints.openWorldHint is False
+        capability = await client.call_tool("computer_capabilities", {})
+        assert not capability.isError
+        unavailable = await client.call_tool("computer_status", {})
+        assert unavailable.isError
+        assert not (tmp_path / "endpoint.json").exists()
+
+
 def test_unknown_operation_is_not_discovered_as_executable():
     with pytest.raises(ValueError, match="UNKNOWN_OPERATION"):
         capabilities(operation_id="shell")

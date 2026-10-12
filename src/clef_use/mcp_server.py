@@ -3,7 +3,7 @@ import json
 import os
 
 from mcp.server.fastmcp import FastMCP
-from mcp.types import ImageContent, TextContent
+from mcp.types import ImageContent, TextContent, ToolAnnotations
 
 from .client import RuntimeClient
 from .config import load_config
@@ -102,7 +102,11 @@ def create_server(client=None, update_request="", read_only=False):
             contents.append(ImageContent(type="image", data=image, mimeType="image/png"))
         return contents
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=read_only, destructiveHint=False, openWorldHint=False
+        )
+    )
     async def computer_status(session_id: str | None = None) -> SessionResult:
         """Read session status without starting new GUI work."""
         return SessionResult.model_validate(
@@ -116,7 +120,11 @@ def create_server(client=None, update_request="", read_only=False):
             await asyncio.to_thread(client.request, "abort", session_id=session_id)
         )
 
-    @server.tool()
+    @server.tool(
+        annotations=ToolAnnotations(
+            readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
+        )
+    )
     def computer_capabilities(detail: bool = False, operation_id: str | None = None) -> dict:
         """Discover installed product versions, inputs and schemas; no capture/model/input."""
         from .capabilities import capabilities, digest

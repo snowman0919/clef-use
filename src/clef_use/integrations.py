@@ -13,7 +13,7 @@ import shutil
 import subprocess
 import threading
 from contextlib import ExitStack, contextmanager
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 
 from filelock import FileLock
 from packaging.specifiers import SpecifierSet
@@ -1726,6 +1726,14 @@ def _rpc(executable: str, method: str, params: dict, cwd: Path) -> dict:
             process.wait()
 
 
+def _codex_guide_path_in_command(path: str, command: str) -> bool:
+    if PureWindowsPath(path).drive:
+        # Native Codex traces can shell-escape Windows separators twice.
+        path = re.sub(r"\\+", "/", path).casefold()
+        command = re.sub(r"\\+", "/", command).casefold()
+    return re.search(rf"(?<![\w./-]){re.escape(path)}(?![\w./-])", command) is not None
+
+
 def _codex_verification_override(config: dict) -> str:
     # CLI dotted paths do not unquote key segments. Inline TOML preserves
     # arbitrary server names and merges these fields into existing transports.
@@ -1896,13 +1904,17 @@ def verify(
                 output = item.get("aggregated_output", "")
                 any_gui_guide |= bool(
                     re.search(
-                        r"/(?:clef-use(?:-blender|-diagnostics)?|computer-use)/SKILL.md",
+                        r"[\\/]+(?:clef-use(?:-blender|-diagnostics)?|computer-use)[\\/]+SKILL.md",
                         item.get("command", ""),
+                        re.IGNORECASE,
                     )
                 )
                 for name in expected:
                     body = (layout["root"] / name / "SKILL.md").read_text()
-                    if expected[name] in item.get("command", "") and body.strip() in output:
+                    if (
+                        _codex_guide_path_in_command(expected[name], item.get("command", ""))
+                        and body.strip() in output
+                    ):
                         loaded.append(name)
             if selected_tool:
                 failed |= (
