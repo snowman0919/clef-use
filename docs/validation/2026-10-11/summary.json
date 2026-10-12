@@ -2770,6 +2770,12 @@
       "sha256": "6ca75aa181a74d20fd172a9477775a07068e825c64624f00b5a646788cac73e2",
       "scope": "Integrated1177PASS/34SKIP. Actual factory Blender OBJECT/EDIT_MESH canonical collector/socket/peercredentials/XRes/capture/provider/StateCompiler toolfact matches native configuredrefs and bound workspace/context/areaidentities. Focus/dispatch and otherguardsUNKNOWN; all6operationfamiliesBLOCKED/input0 eachmode. Sourcehashesstable/ownedcleanup. SourceCLI/stdio advertise scopedtool; registry5/schemaunchanged/defaultBLOCKED. No installed/harness/model/wholeE2E/performance/releaseclaim."
     },
+    "numeric_scene_units": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/numeric-scene-units.json",
+      "sha256": "d951ca17820067c8174d4cae387f9be456fdb48b4d1d301ce27caf3c2bd2e598",
+      "scope": "FinalIntegrated1208PASS/34SKIP. Canonicalpure oldsuccesscrossedscene.scale1to100 sameMETERS/readback2/raw.02; correctedBLOCKED/input0. NativeBlender sameunit/zerobaseline+parserdivision observed, noUItyping. NativeTk immutable554415d G/Escape leak; correctedruntime stableG1/changedGandEscape0/ownedcleanup. NativeAFTER precedes finalrunnercancelreadbackfix, explicitlyhistoricaloperationshash; thatfix2REDthenfinalGREEN. Registry6/sourceCLI/stdio conditionaltranslate/cancelunits, schemaunchanged/defaultBLOCKED. Fixtureunitnormalization separateopenfinding. No installed/harness/model/wholeE2E/performance/releaseclaim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -3011,7 +3017,8 @@
     "property-scene-units.json",
     "viewport-input-baseline.json",
     "x11-legacy-key-binding.json",
-    "blender-active-tool.json"
+    "blender-active-tool.json",
+    "numeric-scene-units.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

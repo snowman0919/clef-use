@@ -161,6 +161,145 @@ def test_transform_requires_preview_and_committed_numeric_readback():
 
 
 @pytest.mark.parametrize(
+    "units",
+    [
+        None,
+        {},
+        {"scale_length": 1.0},
+        {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 0.0,
+        },
+        {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": True,
+        },
+    ],
+)
+def test_translation_requires_complete_scene_conversion_before_entry(units):
+    desktop = Desktop(scene_units=units)
+    report = OperationRunner(desktop.observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert desktop.values["modal"] is None
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"scene_identity": "scene-2"},
+        {"system": "IMPERIAL"},
+        {"length_unit": "CENTIMETERS"},
+        {"scale_length": 100.0},
+    ],
+)
+def test_translation_same_unit_label_cannot_cross_changed_scene_before_entry(change):
+    desktop = Desktop()
+    calls = 0
+
+    def observe():
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            desktop.values["scene_units"] = {**desktop.values["scene_units"], **change}
+        return desktop.observe()
+
+    report = OperationRunner(observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert desktop.values["transform_values"]["Cube"]["translate"]["X"] == 0
+
+
+@pytest.mark.parametrize("change_after,count", [("g", 1), ("x", 2), ("text", 3), ("enter", 4)])
+def test_translation_scene_change_stops_later_input_or_success(change_after, count):
+    desktop = Desktop()
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        stage = "text" if getattr(command, "text", None) else getattr(command, "key", None)
+        if stage == change_after:
+            desktop.values["scene_units"] = {**desktop.values["scene_units"], "scale_length": 100.0}
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(transform(), Event())
+    assert report.status == "FAILED"
+    assert report.input_count == count
+    if count < 4:
+        assert all(getattr(command, "key", None) != "enter" for command in desktop.inputs)
+
+
+def test_rotation_angular_readback_does_not_require_scene_length_conversion():
+    desktop = Desktop(scene_units=None)
+    request = parse_operation_request(
+        {**transform().model_dump(), "operation": "rotate", "unit": "DEGREES", "amount": 45}
+    )
+    report = OperationRunner(desktop.observe, desktop.execute).run(request, Event())
+    assert report.status == "SUCCEEDED"
+    assert desktop.values["transform_values"]["Cube"]["rotate"]["X"] == 45
+
+
+def test_owned_translation_cancel_retains_original_scene_conversion_guard():
+    desktop = Desktop()
+    stop = Event()
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "text", None):
+            stop.set()
+        return result
+
+    runner = OperationRunner(desktop.observe, execute)
+    entered = runner.run(transform(), stop)
+    assert entered.status == "ABORTED" and runner.owns_modal()
+    desktop.values["scene_units"]["scale_length"] = 100.0
+    report = runner.run(
+        parse_operation_request({"family": "modal_cancel", "modal_id": "modal-1"}), Event()
+    )
+    assert report.status == "BLOCKED" and runner.owns_modal()
+    assert desktop.values["modal"] == {"id": "modal-1", "name": "translate"}
+    assert all(getattr(command, "key", None) != "escape" for command in desktop.inputs)
+
+
+@pytest.mark.parametrize(
+    "after_close_units",
+    [
+        None,
+        {
+            "scene_identity": "scene-1",
+            "system": "NONE",
+            "length_unit": "ADAPTIVE",
+            "scale_length": 100.0,
+        },
+    ],
+)
+def test_closed_translation_cancel_cannot_verify_changed_scene_conversion(after_close_units):
+    desktop = Desktop()
+    stop = Event()
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "text", None):
+            stop.set()
+        if getattr(command, "key", None) == "escape":
+            desktop.values["scene_units"] = after_close_units
+        return result
+
+    runner = OperationRunner(desktop.observe, execute)
+    assert runner.run(transform(), stop).status == "ABORTED"
+    assert runner.owns_modal()
+    report = runner.run(
+        parse_operation_request({"family": "modal_cancel", "modal_id": "modal-1"}), Event()
+    )
+    assert report.status == "FAILED" and report.input_count == 1
+    assert desktop.values["modal"] is None and not runner.owns_modal()
+    assert "unchanged_readback_verified" not in report.transitions
+
+
+@pytest.mark.parametrize(
     "identities",
     [
         None,

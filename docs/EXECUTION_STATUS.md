@@ -1,5 +1,42 @@
 # Reactive runtime execution status
 
+**OBSERVED / numeric translation scene conversion:** translation now validates
+and anchors complete `scene_units`, including unit NONE, through runner refresh,
+native input and final readback. Owned translation cancellation retains the same
+conversion guard and checks it after closure; observed closure clears obsolete
+ownership even if final verification fails. Rotation and scale remain independent
+of scene length settings. Registry v6 advertises conditional translation and
+translation-modal requirements through actual source CLI and stdio MCP discovery;
+request schemas and default BLOCKED availability are unchanged.
+
+Canonical pure execution reproduced success across a scale change from 1 to 100:
+the same METERS/readback 2 accompanied raw movement 0.02 instead of 2. Current
+source blocks before input while stable conversion still succeeds. This is an
+explicit normalized-distance consumer model, not native Blender typing. Actual
+factory Blender observations independently confirmed unchanged METERS/zero
+baseline at scales 1 and 100. Public parser output plus division gives raw 2 and
+0.02; it is parser-only evidence, not numeric UI input.
+
+An authenticated owned Tk component loaded seven immutable baseline modules and
+observed stale-context G/Escape delivery. The corrected native runtime guard
+delivers stable G and refuses changed-context G/Escape with zero key events;
+explicit fixture state is API_ASSISTED, not automatic Blender context discovery.
+Native AFTER retains its earlier candidate operations hash: it exercises direct
+runtime input, not the subsequent runner cancellation-final-readback correction.
+That additional correction was reproduced by two source failures and verified
+in the final regression suite. All six owned child processes exited, their X
+sockets disappeared and input ownership was empty; production was not accessed.
+
+Final integrated source passed **1208 tests / 34 skipped / 41 warnings** in 59.98
+seconds; scoped checks passed 174. Five changed Python files passed Ruff/format,
+and generated contracts passed. Four-language guides and ADR0008 are updated.
+Native final runner cancellation, Blender numeric text/commit, installed-current
+E2E, models, full-task performance and release remain NOT_RUN here. The existing
+API-assisted operations fixture has a separately identified unit-normalization
+defect (always-degree/raw-location values with current-unit declarations); it was
+neither changed nor run in this slice. No acceptance or release gate was promoted.
+See [numeric unit evidence](validation/2026-10-11/numeric-scene-units.json).
+
 **OBSERVED / configured Blender tool:** the canonical read-only collector and
 provider now supply scoped `active_tool` evidence. Native `Context.mode` is used
 only when context window, workspace and view layer match the owning window;

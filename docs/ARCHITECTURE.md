@@ -32,7 +32,7 @@ process-scoped public `ID.session_uid` identity. The provider publishes
 missing public identity or incoherent maps remain UNKNOWN. Names and RNA pointers
 cannot establish object continuity. Changing operations and owned cancellation
 anchor this map at dispatch, readback and the native input boundary, so reusing a
-selected name for a different object blocks further input. Operation registry v5
+selected name for a different object blocks further input. Operation registry v6
 advertises this required fact; request schemas remain unchanged.
 See the [Blender ID API](https://docs.blender.org/api/5.2/bpy.types.ID.html).
 The bound scene exposes validated `scene_units`: scene identity, system,
@@ -44,8 +44,15 @@ Scale fields remain dimensionless and do not require scene-unit evidence.
 Location edits anchor scene units before input, through every refresh and native
 input boundary, and at final readback. Missing settings or conversion range loss
 blocks before input. Existing tolerances still apply to actual application
-readback; conversion does not guarantee arbitrary float precision. Registry v5
+readback; conversion does not guarantee arbitrary float precision. Registry v6
 advertises conditional field requirements and value semantics.
+Numeric translation also validates and anchors `scene_units`, even with unit NONE.
+A stable unit label and normalized zero baseline do not detect changed scene scale.
+Runner refresh, native input and final readback must retain the original conversion;
+the native guard also checks it for cancellation of an owned translation modal.
+Rotation and scale do not require scene length conversion. Registry v6 advertises
+these conditional requirements without changing requests or normalized numeric
+readback semantics. Property edits retain their separate raw-coordinate contract.
 The collector also retains initialized workspace tool references, bounded at 128.
 It reads native `Context.mode` only when context window, workspace and view layer
 match the owning window; it does not translate `Object.mode`. The provider emits

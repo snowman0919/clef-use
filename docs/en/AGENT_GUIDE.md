@@ -57,7 +57,12 @@ Changing operations and owned cancellation require a complete stable
 `selection_identities` map. Blender supplies process-scoped public `session_uid`
 IDs; a rename preserves the ID, while replacing an object under the same name
 blocks further input. Missing IDs remain unknown. The observer also exposes
-location and scale properties for X/Y/Z. Discover operation registry v5 before use.
+location and scale properties for X/Y/Z. Discover operation registry v6 before use.
+Numeric translation requires complete fresh `scene_units` and retains the same
+scene conversion through input, readback and owned-modal cancellation. A stable
+unit name alone cannot detect changed scene scale. Amounts/readback keep their
+verified operation unit; NONE stays raw. Missing or changed conversion blocks
+further input/success. Rotation and scale do not require scene length settings.
 Location `property_edit.value` means the raw Blender-unit coordinate. Fresh
 `scene_units` evidence determines explicit meter input and stays anchored through
 entry and readback; missing or changed settings stop input/success. Scale values

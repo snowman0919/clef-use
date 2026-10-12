@@ -103,15 +103,19 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             ],
             "live_probe": "NOT_PROBED",
         }
-        if "requires_by_field" in operation:
-            operation["default_runtime_availability"]["missing_verified_facts_by_field"] = {
-                field: [
-                    name
-                    for name in names
-                    if name not in {"window", "foreground", "target_geometry"}
-                ]
-                for field, names in operation["requires_by_field"].items()
-            }
+        for selector in ("field", "operation", "modal"):
+            conditional = operation.get(f"requires_by_{selector}")
+            if conditional is not None:
+                operation["default_runtime_availability"][
+                    f"missing_verified_facts_by_{selector}"
+                ] = {
+                    value: [
+                        name
+                        for name in names
+                        if name not in {"window", "foreground", "target_geometry"}
+                    ]
+                    for value, names in conditional.items()
+                }
     if operation_id is not None:
         operation = next((op for op in operations if op["family"] == operation_id), None)
         if operation is None:
@@ -124,7 +128,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         "schema_sha256": schema_sha256(),
         "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
-        "operation_registry_version": 5,
+        "operation_registry_version": 6,
         "default_runtime_state": {
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",

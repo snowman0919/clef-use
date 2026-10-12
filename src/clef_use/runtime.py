@@ -207,7 +207,15 @@ class SessionRuntime:
             )
             if family in {"numeric_transform", "modal_cancel"}:
                 anchors += ("space", "unit", "transform_context")
-            if family == "property_edit" and operation["field"].startswith("location_"):
+            if (
+                family == "property_edit"
+                and operation["field"].startswith("location_")
+                or family == "numeric_transform"
+                and operation["operation"] == "translate"
+                or family == "modal_cancel"
+                and isinstance(state.require("modal"), dict)
+                and state.require("modal").get("name") == "translate"
+            ):
                 anchors += ("scene_units",)
             if family == "viewport_gesture" and not after_input:
                 anchors += ("view_revision",)

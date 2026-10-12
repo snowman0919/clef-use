@@ -244,6 +244,20 @@ def operation_registry() -> tuple[dict, ...]:
                 if family == "property_edit"
                 else {}
             ),
+            **(
+                {
+                    "requires_by_operation": {"translate": ("scene_units",)},
+                    "value_semantics": {
+                        "translate/rotate": "Amount and complete readback use the verified "
+                        "matching operation unit; translation also anchors scene length conversion",
+                        "scale": "Dimensionless multiplicative factor",
+                    },
+                }
+                if family == "numeric_transform"
+                else {"requires_by_modal": {"translate": ("scene_units",)}}
+                if family == "modal_cancel"
+                else {}
+            ),
             "recovery": recovery,
             "execution": "guarded_local_finite_state_machine",
             "schema": model.model_json_schema(),
@@ -424,6 +438,8 @@ class OperationRunner:
         self._anchor["keymap"] = self._fact("keymap")
         if isinstance(request, NumericTransform):
             self._anchor.update({name: self._fact(name) for name in ("space", "unit")})
+            if request.operation == "translate":
+                self._anchor["scene_units"] = self._fact("scene_units")
         if isinstance(request, PropertyEdit):
             self._anchor["focused_property"] = self._fact("focused_property")
             if request.field.startswith("location_"):
@@ -558,6 +574,8 @@ class OperationRunner:
         self._steps.extend(("registered_command_selected", "readback_verified"))
 
     def _transform(self, request, cancelled):
+        if request.operation == "translate":
+            self._scene_length_units()
         self._expect("space", request.space)
         units = self._fact("unit")
         if not isinstance(units, dict) or units.get(request.operation) != request.unit:
@@ -614,6 +632,8 @@ class OperationRunner:
         # A closed modal cannot be cancelled, even when final values reveal a
         # failed effect. Do not retain a recovery authority for that old ID.
         self._owned_modal = None
+        if request.operation == "translate":
+            self._expect("scene_units", self._anchor["scene_units"])
         if not self._readback_matches(
             self._fact("transform_values"),
             before_values,
@@ -737,6 +757,12 @@ class OperationRunner:
                 "zero or negative scaling needs matrix readback; scalar path refuses it"
             )
 
+    def _scene_length_units(self):
+        try:
+            return BlenderSceneUnits.model_validate(self._fact("scene_units"))
+        except ValueError as exc:
+            raise OperationBlocked("complete scene length conversion is unavailable") from exc
+
     def _property(self, request, cancelled):
         self._expect("text_focus", True)
         self._expect("focused_property", {"target_id": request.target_id, "field": request.field})
@@ -746,10 +772,7 @@ class OperationRunner:
             raise OperationBlocked("exact property readback is unavailable")
         literal = repr(request.value)
         if request.field.startswith("location_"):
-            try:
-                units = BlenderSceneUnits.model_validate(self._fact("scene_units"))
-            except ValueError as exc:
-                raise OperationBlocked("complete scene length conversion is unavailable") from exc
+            units = self._scene_length_units()
             if units.system != "NONE":
                 meters = request.value * units.scale_length
                 if not math.isfinite(meters) or (request.value != 0 and meters == 0):
@@ -821,7 +844,9 @@ class OperationRunner:
         self._send(owned["cancel"], cancelled)
         self._refresh()
         self._expect("modal", None)
-        self._expect("transform_values", owned["before"])
         self._owned_modal = None
+        if owned["name"] == "translate":
+            self._expect("scene_units", owned["anchor"]["scene_units"])
+        self._expect("transform_values", owned["before"])
         self._steps.extend(("owned_modal_cancelled", "unchanged_readback_verified"))
         return self._report(request, "SUCCEEDED", "owned modal cancelled without commit")

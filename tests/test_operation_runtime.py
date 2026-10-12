@@ -18,6 +18,7 @@ class OperationEditor:
 
     def __init__(self):
         self.held = set()
+        self.key_events = []
         self.text = ""
         self.after_enter = None
         self.values = {
@@ -44,6 +45,12 @@ class OperationEditor:
             },
             "space": "GLOBAL",
             "unit": {"translate": "METERS", "rotate": "DEGREES", "scale": "NONE"},
+            "scene_units": {
+                "scene_identity": "scene-1",
+                "system": "METRIC",
+                "length_unit": "METERS",
+                "scale_length": 1.0,
+            },
             "properties": {"Cube": {"shading": "FLAT"}},
             "command_result": "",
             "transform_values": {
@@ -59,6 +66,7 @@ class OperationEditor:
         }
 
     def keyDown(self, key, **kwargs):
+        self.key_events.append(key)
         self.held.add(key)
         if key == "f3":
             self.values.update(popup="COMMAND_SEARCH", text_focus=True)
@@ -181,6 +189,105 @@ def test_location_text_stops_after_units_change_during_character_delivery():
             {"family": "property_edit", "target_id": "Cube", "field": "location_x"},
         )
     assert editor.text == "2" and not editor.held
+
+
+@pytest.mark.parametrize("input_kind", ["key", "text"])
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"scale_length": 100.0},
+        {"system": "IMPERIAL"},
+        {"length_unit": "CENTIMETERS"},
+        {"scene_identity": "scene-2"},
+    ],
+)
+def test_translation_refuses_changed_scene_units_before_first_input(input_kind, change):
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput, TextInput
+
+    editor = OperationEditor()
+    if input_kind == "text":
+        editor.values.update(modal={"id": "owned", "name": "translate"}, text_focus=True)
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["scene_units"] = {**editor.values["scene_units"], **change}
+    command = KeyInput(key="g") if input_kind == "key" else TextInput(text="2.0m")
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            command, state, Event(), {"family": "numeric_transform", "operation": "translate"}
+        )
+    assert editor.text == "" and editor.key_events == [] and not editor.held
+    assert editor.values["unit"]["translate"] == "METERS"
+    assert editor.values["transform_values"]["Cube"]["translate"] == {"X": 0, "Y": 0, "Z": 0}
+
+
+def test_translation_stops_after_scene_scale_change_during_character_delivery():
+    from threading import Event
+
+    from clef_use.input_ir import TextInput
+
+    class ChangingTranslation(OperationEditor):
+        def type_text(self, text, cancelled, target, *, before_input):
+            for character in text:
+                super().type_text(character, cancelled, target, before_input=before_input)
+                self.values["scene_units"] = {**self.values["scene_units"], "scale_length": 100.0}
+
+    editor = ChangingTranslation()
+    editor.values.update(modal={"id": "owned", "name": "translate"}, text_focus=True)
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            TextInput(text="2.0m"),
+            state,
+            Event(),
+            {"family": "numeric_transform", "operation": "translate"},
+        )
+    assert editor.text == "2" and not editor.held
+
+
+def test_translation_cancel_preserves_modal_after_scene_scale_change():
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    editor.values["modal"] = {"id": "owned", "name": "translate"}
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["scene_units"] = {**editor.values["scene_units"], "scale_length": 100.0}
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            KeyInput(key="escape"), state, Event(), {"family": "modal_cancel", "modal_id": "owned"}
+        )
+    assert editor.values["modal"] == {"id": "owned", "name": "translate"}
+    assert editor.key_events == [] and not editor.held
+
+
+@pytest.mark.parametrize("operation", ["rotate", "scale"])
+@pytest.mark.parametrize("family", ["numeric_transform", "modal_cancel"])
+def test_nontranslation_input_and_cancel_do_not_require_scene_units(operation, family):
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    editor.values.pop("scene_units")
+    editor.values["modal"] = {"id": "owned", "name": operation}
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    key = "escape" if family == "modal_cancel" else "x"
+    result = runtime._operation_input(
+        KeyInput(key=key),
+        state,
+        Event(),
+        {"family": family, "operation": operation, "modal_id": "owned"},
+    )
+    assert result.ok and editor.key_events == [key] and not editor.held
+    assert editor.values["modal"] == (
+        None if family == "modal_cancel" else {"id": "owned", "name": operation}
+    )
 
 
 def test_search_accepts_only_its_acknowledged_popup_transition_and_reads_effect():

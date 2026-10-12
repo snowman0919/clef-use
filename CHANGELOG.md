@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Anchor complete scene length conversion for numeric translation and its owned
+  modal cancellation, including native input and final readback. Refuse missing
+  settings or same-label scale/scene drift; leave rotation/scale independent of
+  scene length settings. Advertise conditional requirements in registry v6.
 - Collect scoped Blender `active_tool` evidence from initialized workspace tools
   and independently bound native context mode. Preserve area identities and
   UNKNOWN focus/dispatch; reject ambiguous, malformed or overflowing evidence

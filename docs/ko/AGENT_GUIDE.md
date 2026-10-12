@@ -58,7 +58,11 @@ transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 previe
 `selection_identities`가 필요합니다. Blender는 프로세스 범위의 공개 `session_uid`로
 객체를 구분합니다. 이름을 바꿔도 ID는 유지되며, 같은 이름의 다른 객체로 교체되면
 추가 입력을 차단합니다. ID가 없으면 불명 상태를 유지합니다. observer는 위치와
-scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v5를 발견하세요.
+scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v6를 발견하세요.
+수치 이동은 완전한 최신 `scene_units`를 요구하고, 입력·readback·소유 modal 취소까지
+같은 scene 변환을 유지합니다. 단위 이름만 같아도 scene 배율은 바뀔 수 있습니다.
+amount/readback은 검증된 operation 단위를 유지하며 NONE은 원시 값입니다. 변환이
+없거나 바뀌면 추가 입력·성공을 차단합니다. 회전·scale에는 길이 단위를 요구하지 않습니다.
 위치 `property_edit.value`는 Blender 단위의 원시 좌표입니다. 최신 `scene_units`
 근거로 명시적 미터 입력을 계산하고 입력·readback 동안 고정합니다. 단위가 없거나
 바뀌면 입력 또는 성공 판정을 멈춥니다. scale 값은 무차원입니다. 표시 단위가
