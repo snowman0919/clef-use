@@ -2782,6 +2782,12 @@
       "sha256": "5951dc7a26c0468f4279768dd10d14b2fa1335d05c1163648adc1dd02a89106b",
       "scope": "Integrated1216PASS/34SKIP. ActualstandalonefixtureSTARTUP before4/7nativeunitmismatches; after7/7PASS supportedNONE/METERS/CENTIMETERS/DEGREES/RADIANS withactualscale/nativeRNA. Previewmatches/rawpropertiespreserved/sourcehashesstable/fourchildrenandsocketscleaned. Eightsemanticregressions prior4FAIL/current8PASS. Resolveshistoricalnumeric_scene_units fixturefinding withoutchangingpriorreceipt. No wholefixturetasks/input/OperationRunner/installed/harness/model/E2E/performance/releaseclaim."
     },
+    "candidate_identity_and_primitive_budget": {
+      "claim": "OBSERVED_SOURCE_COMPONENT_AND_RETAINED_NATIVE_ORACLE_FAILURE",
+      "artifact": "docs/validation/2026-10-11/candidate-identity-and-primitive-budget.json",
+      "sha256": "6b6be0628a4e5794a2977393f00025b035ae46c5010ba66adc62d8cf9944d97c",
+      "scope": "Integrated1253PASS/34SKIP; scoped151PASS. Exact normalized geometry/evidence preserved and primitive eligibility applied before budget. Canonical old/new source packets geometry1->2, passive-first type0->1, equivalent2->1; explicit structured click/double-click/scroll rosters0->4/4/8. Native candidate actual adjacent click effects[1,0]->[1,1], original AFTER FAIL incidentalYoracle retained separately from offline assessment; predates final confidence signed-zero fix, native-final NOT_RUN. No threshold/guard relaxation or E2E/model/performance/release promotion."
+    },
     "windows_input_ownership": {
       "claim": "OBSERVED_SOURCE_COMPONENT",
       "artifact": "docs/validation/2026-10-11/windows-input-ownership.json",
@@ -3032,7 +3038,8 @@
     "blender-active-tool.json",
     "numeric-scene-units.json",
     "fixture-numeric-units.json",
-    "windows-input-ownership.json"
+    "windows-input-ownership.json",
+    "candidate-identity-and-primitive-budget.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

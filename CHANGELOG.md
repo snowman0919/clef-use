@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Preserve exact normalized geometry and conflicting action/confidence/source
+  evidence when identifying parser objects; deduplicate only equivalent records.
+- Apply an explicit visual primitive before budgeting structured candidates so
+  irrelevant literal alternatives cannot evict requested clicks or scrolls.
 - Preserve extended scan-code and modifier-side distinctions when checking
   unowned Windows input. Refuse unknown held-key mappings instead of treating
   zero scan codes as shared ownership.

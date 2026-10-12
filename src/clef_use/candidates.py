@@ -108,10 +108,13 @@ class CandidateBuilder:
             )
         )
 
+        requested_operation = contract.visual_intent.operation if contract.visual_intent else None
         active_limit = self.limit
 
         def add(operation, description, obj, value=None, effect="target_change"):
             nonlocal proposed
+            if requested_operation is not None and operation != requested_operation:
+                return
             proposed += 1
             targets.add(obj.id)
             # Group equivalent semantic proposals without losing their original identities.
@@ -131,7 +134,9 @@ class CandidateBuilder:
                     )
                 )
 
-        payloads = text_inputs(contract)
+        # Explicit visual primitives cannot execute literal proposals. Reserve
+        # slots only for eligible text alternatives, before consuming the budget.
+        payloads = text_inputs(contract) if requested_operation is None else []
         inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
         text_options = [
             (
@@ -158,8 +163,9 @@ class CandidateBuilder:
                 )
             if "focus" in obj.actions and obj.editable is not False:
                 add("focus", f"Focus input: {obj.label}", obj, effect="focus_change")
-            if "double_click" in obj.actions and re.search(
-                r"double.click|launch|open", contract.goal, re.I
+            if "double_click" in obj.actions and (
+                requested_operation == "double_click"
+                or re.search(r"double.click|launch|open", contract.goal, re.I)
             ):
                 add("double_click", f"Double click {obj.label}", obj)
             if "scroll" in obj.actions:

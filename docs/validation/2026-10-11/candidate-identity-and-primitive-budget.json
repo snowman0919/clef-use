@@ -1,0 +1,407 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT_AND_RETAINED_NATIVE_ORACLE_FAILURE",
+  "source_base": "91efa15f9351bbbe159752d2e3271f31390f54e8",
+  "scope": "Preserve observed object evidence and requested primitive candidates. Source consumers and regression verification; no model, whole E2E, installed-current, performance or release claim.",
+  "integrated_source_sha256": {
+    "src/clef_use/objects.py": "609f42e4e83ef0045548149ce4c1e06e5b6a597e705817a2e3a1c18b7ad0f686",
+    "src/clef_use/candidates.py": "c167fa303c997d9298bea251af751ebf2bd6092e5d80e6f9e51065c5ab347914",
+    "tests/test_object_identity.py": "bf15be7abd94463259089f1c34dde161043df34bafd3a3f7116d179e6484f128",
+    "tests/test_candidate_text.py": "634e969bf9b6c6e1420cf662a4c41dff5df11b03f384fdb75bca479a22a23ee7",
+    "tests/test_hybrid_runtime.py": "ea4fc9bb45fe5a93224ea0466bc526901a5607c6ef3e516e4e3118d69d41c516"
+  },
+  "contracts": [
+    "Exact validated geometry and differing normalized action, confidence or source evidence remain distinct; equivalent numeric spellings and signed zero deduplicate. IDs are observation-scoped.",
+    "Explicit primitive eligibility precedes proposal counting and text-slot reservation; observed capabilities, existing route selection, final operation filtering and overflow refusal remain enforced.",
+    "No confidence threshold, unknown-state guard, source capability or model behavior is weakened or fabricated."
+  ],
+  "normalizer_source_component": {
+    "method": "Specified normalizer module -> current CandidateBuilder -> ExecutionRouter decision observation -> decision_request. Current builder is held constant in both phases to isolate normalization; no model or OS input.",
+    "before": {
+      "normalizer_sha256": "898d3b9213d4075b98d7f35eae53c375d980e2ec8fe4f74a873bf365e170766e",
+      "cases": [
+        {
+          "case": "geometry",
+          "objects": 1,
+          "typing_targets": 1,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "passive_first",
+          "objects": 1,
+          "typing_targets": 0,
+          "type_dispatch_points": [],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "confidence",
+          "objects": 1,
+          "typing_targets": 1,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "source",
+          "objects": 1,
+          "typing_targets": 1,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "equivalent",
+          "objects": 2,
+          "typing_targets": 2,
+          "type_dispatch_points": [
+            [
+              500,
+              50
+            ],
+            [
+              500,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        }
+      ]
+    },
+    "after": {
+      "normalizer_sha256": "609f42e4e83ef0045548149ce4c1e06e5b6a597e705817a2e3a1c18b7ad0f686",
+      "cases": [
+        {
+          "case": "geometry",
+          "objects": 2,
+          "typing_targets": 2,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ],
+            [
+              550,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "passive_first",
+          "objects": 2,
+          "typing_targets": 1,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "confidence",
+          "objects": 2,
+          "typing_targets": 2,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ],
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "source",
+          "objects": 2,
+          "typing_targets": 2,
+          "type_dispatch_points": [
+            [
+              549,
+              50
+            ],
+            [
+              549,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        },
+        {
+          "case": "equivalent",
+          "objects": 1,
+          "typing_targets": 1,
+          "type_dispatch_points": [
+            [
+              500,
+              50
+            ]
+          ],
+          "packet_target_mapping_complete": true
+        }
+      ]
+    }
+  },
+  "regression_history": {
+    "initial_object_identity": {
+      "failed": 6,
+      "scope": "Six initial permanent cases against prior source"
+    },
+    "candidate_confidence_signed_zero": {
+      "failed": 1,
+      "passed": 1,
+      "deselected": 5,
+      "reason": "Independent review found +0/-0 split in initial correction; final canonicalization fixes it."
+    },
+    "initial_integrated": {
+      "failed": 1,
+      "passed": 1251,
+      "skipped": 34,
+      "warnings": 42,
+      "seconds": 58.72,
+      "reason": "Existing hybrid case expected overflow caused by irrelevant double-click budget spending. Replaced with all-12 requested click-target retention and no-input assertions."
+    },
+    "corrected_hybrid_test_prior_source": {
+      "failed": 1,
+      "error": "GroundingUncertain: semantic targets exceed bounded action budget"
+    },
+    "final_scoped": {
+      "passed": 151,
+      "warnings": 25,
+      "seconds": 2.95
+    }
+  },
+  "primitive_source_component": {
+    "scope": "PURE_CANONICAL_COMPONENT_RUNTIME_CHOOSE_NO_MODEL_NATIVE_GUI",
+    "source_sha256": "c167fa303c997d9298bea251af751ebf2bd6092e5d80e6f9e51065c5ab347914",
+    "test_sha256": "634e969bf9b6c6e1420cf662a4c41dff5df11b03f384fdb75bca479a22a23ee7",
+    "corrected_before": {
+      "explicit_structured_roster_counts": {
+        "click": 0,
+        "double_click": 0,
+        "scroll": 0
+      },
+      "permanent_tests_failed": 4,
+      "permanent_tests_passed": 6
+    },
+    "after": {
+      "explicit_structured_roster_counts": {
+        "click": 4,
+        "double_click": 4,
+        "scroll": 8
+      },
+      "all_four_observed_targets_retained": true,
+      "no_intent_literal_pairs_retained": 48,
+      "no_intent_50_opportunities": "NEEDS_REPLAN_BEFORE_DECISION_OR_INPUT",
+      "permanent_tests_passed": 10,
+      "owned_ruff_check": "PASS",
+      "owned_ruff_format_check": "PASS"
+    },
+    "history_correction": "Initial expanded double_click/scroll probes used AUTO, which correctly routes these primitives to VISUAL. Their empty rosters were a probe scope error, not CandidateBuilder failures. Initial histories retained; corrected STRUCTURED probe binds the actual builder/filter caller. Original explicit-click defect reproduced in both scopes."
+  },
+  "native_geometry_component": {
+    "scope": "Owned authenticated private Xvfb32000x120/Tk native one-pixel adjacent click targets; API-assisted true bounds -> canonical normalize_omni -> CandidateBuilder(no explicit intent) -> decision_request construction -> DesktopAction actual clicks. No model/typing/IME/E2E/productionprovider/performanceclaim.",
+    "method": "Actual API-owned Canvas coords on authenticated private Xvfb 32000x120; native PID/XRes/foreground admission, capture, normalizer, builder, decision packet and DesktopAction clicks. No OmniParser/model inference.",
+    "phases": {
+      "before": {
+        "original_execution_status": "PASS",
+        "original_error_type": null,
+        "original_error_message": null,
+        "retained_object_count": 1,
+        "retained_candidate_count": 1,
+        "native_target_counts": [
+          1,
+          0
+        ],
+        "native_held_mask": 0,
+        "action_owned_keys_empty": true,
+        "action_owned_buttons_empty": true,
+        "source_sha256_at_start": {
+          "objects": "3bdb3952fe1aac3605ddcac237606ba662f80e7830867d3bf8605db742b409a5",
+          "candidates": "c167fa303c997d9298bea251af751ebf2bd6092e5d80e6f9e51065c5ab347914",
+          "backends": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+          "schema": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd"
+        },
+        "source_unchanged": true,
+        "cleanup": {
+          "children_waited": 2,
+          "children_exited": true,
+          "children_absent": true,
+          "x_socket_removed": true,
+          "production_blender_after": true
+        },
+        "native_points": [
+          [
+            16002,
+            49
+          ]
+        ],
+        "executed_module_sha256": {
+          "objects": "898d3b9213d4075b98d7f35eae53c375d980e2ec8fe4f74a873bf365e170766e",
+          "candidates": "1857fda13731278818711a70da9b57ffd632091225724866d9a6c24adcfd366a"
+        }
+      },
+      "after": {
+        "original_execution_status": "FAIL",
+        "original_error_type": "AssertionError",
+        "original_error_message": "",
+        "retained_object_count": 2,
+        "retained_candidate_count": 2,
+        "native_target_counts": [
+          1,
+          1
+        ],
+        "native_held_mask": 0,
+        "action_owned_keys_empty": true,
+        "action_owned_buttons_empty": true,
+        "source_sha256_at_start": {
+          "objects": "3bdb3952fe1aac3605ddcac237606ba662f80e7830867d3bf8605db742b409a5",
+          "candidates": "c167fa303c997d9298bea251af751ebf2bd6092e5d80e6f9e51065c5ab347914",
+          "backends": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+          "schema": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd"
+        },
+        "source_unchanged": true,
+        "cleanup": {
+          "children_waited": 2,
+          "children_exited": true,
+          "children_absent": true,
+          "x_socket_removed": true,
+          "production_blender_after": true
+        },
+        "native_points": [
+          [
+            16002,
+            49
+          ],
+          [
+            16003,
+            49
+          ]
+        ]
+      }
+    },
+    "retained_failures": [
+      {
+        "phase": "after",
+        "original_execution_status": "FAIL",
+        "error_type": "AssertionError",
+        "error_message": "",
+        "original_oracle_assumption_native_points": [
+          [
+            16002,
+            50
+          ],
+          [
+            16003,
+            50
+          ]
+        ],
+        "observed_native_points": [
+          [
+            16002,
+            49
+          ],
+          [
+            16003,
+            49
+          ]
+        ],
+        "cause": "Private driver incorrectly assumed center multiplication floors to50. Actual Frame.point normalized floating-point center floors to49, within both genuine native bounds20..80. No product change or additional native replay performed.",
+        "whole_execution_status_remains": "FAIL"
+      }
+    ],
+    "offline_assessment": {
+      "classification": "OFFLINE_REANALYSIS_OF_RETAINED_NATIVE_OBSERVATIONS",
+      "criterion": "Two native1-pixel targets remain distinct and their existing click candidates produce independent native effects within their actual bounds.",
+      "result": "OBSERVED_NATIVE_EFFECTS_MATCH_SEMANTIC_CRITERION",
+      "not_whole_fixture_pass": true
+    },
+    "independent_cleanup": {
+      "before": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      },
+      "after": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      }
+    },
+    "limits": [
+      "Native AFTER uses recorded candidate before later confidence signed-zero canonicalization. It is not evidence of the subsequently modified exact final source.",
+      "Original AFTER FAIL remains visible; offline semantic assessment is separate, not a relabeled run or a retry.",
+      "Raw targets come from controlled native Canvas coords and same public names, not an OmniParser model. Targeting/geometry execution is the component under test.",
+      "No probability/calibration/model quality or operation readiness is established.",
+      "The unexecuted v2 driver merely corrects the private incidental Y-coordinate oracle; it was not run."
+    ],
+    "final_source_native_status": "NOT_RUN: native AFTER predates final confidence signed-zero canonicalization; no additional native run was performed.",
+    "before_provenance_note": "Start/end source hashes describe the canonical tree. BEFORE executed two separately loaded immutable Git modules whose hashes are recorded under executed_module_sha256."
+  },
+  "integrated_regression": {
+    "passed": 1253,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 58.4
+  },
+  "static_checks": {
+    "five_python_ruff_check": "PASS",
+    "five_python_ruff_format": "PASS",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool"
+  },
+  "not_run": {
+    "whole_e2e_and_models": "Other sessions under the direct user scope update.",
+    "installed_current_harness_release": "No new installation, harness or release run in this software slice.",
+    "full_task_accuracy_p95_goodput_coverage": "No full-task/model trials or performance measurement in this software slice.",
+    "operation_readiness": "Partial production observation still lacks popup/text/IME/effective keymap/global busy/focused editor evidence; default operation guards remain blocked.",
+    "native_final_source": "Native geometry AFTER uses earlier normalizer candidate. Final confidence signed-zero correction has source/regression evidence only.",
+    "corrected_native_driver": "Private v2 oracle adjustment was not executed; original AFTER FAIL retained."
+  },
+  "acceptance_and_release_status_changed": false,
+  "private_evidence_copied": false,
+  "retained_artifact_sha256": {
+    "clef-object-identity-component-before-20261012.json": "d2e81885a7516f7263f046c6b2d9765a93db2f4b445052d42ab1c73b4c64b5ff",
+    "clef-object-identity-component-after-20261012.json": "d1b68d5a08098b800eebfc50f68a81d68501eee68ed255684296bef89a0feb50",
+    "clef_object_identity_component_20261012.py": "a74ddb1dbb5c56fc28447e9ca569f9ac361c664607a3a768042dc998d8bd50ad",
+    "clef-object-identity-native-public-20261012.json": "5626d099dcbbb846d82863289cd1806017bbea53839ae32920c8dab1117fde96",
+    "clef_object_identity_native_20261012.py": "ad72237964bf016d657e5158328f64779e47e73cd34475b92a0b14145048f556",
+    "clef-candidate-primitive-fix-public-20261012.json": "a9aea2469f98f52da6576457cce84b28cf1c86969c81ed102327f9a2f73d0fea",
+    "clef-candidate-identity-integrated-final-20261012.log": "2db0a32f733925adfa6fb40642e558a36924946b3ed71ea3ce1206581a559a83",
+    "clef-candidate-identity-scoped-final-20261012.log": "d6b029a641d1633502807ca2180fd796e452a75abc4931b7864d21d330b4f6e7",
+    "clef-candidate-identity-integrated-20261012.log": "58e904bd8e3c8378d189ea6e93061948b1b49037dd0b55c3e9d97778360e987b",
+    "clef-object-identity-red-20261012.log": "f09199f96245793aa3bbdd56dcf6d49f00074ce507b2d6c093f8043e339abec7",
+    "clef-object-confidence-zero-candidate-red-20261012.log": "199150cdaca8061634354828f4d8a5bf477cf0f5e2a3693755acfe52cc9f2aba",
+    "clef-semantic-primitive-budget-red-20261012.log": "1f4e9a311111096bfe67dc042ee1421e0b472fc9331ab2b2011ba9f6f509e231",
+    "clef-object-identity-readonly-review-20261012.json": "ab5e4bab69dc878a5a3fc8fb70ad7a693c04f2241aa1987bf52fd407786ac358"
+  },
+  "primitive_retained_artifact_sha256": {
+    "clef-candidate-primitive-structured-probe-20261012.py": "a631f5d6e92033010402830c96b7a3f3bd2c9bf478d425a3730c6edad0b4ca53",
+    "clef-candidate-primitive-structured-before-20261012.json": "d7adf1e618d9b38ace8bfbfc800e8793c5fdabe785d75eb6d3f0c40368b2d8a2",
+    "clef-candidate-primitive-structured-after-20261012.json": "9b0a73558dd6a3c2c2e19ac24c10547f6a3dc19093a8266bd6478aae3fe1983b",
+    "clef-candidate-primitive-structured-red-20261012.log": "a96f1393ae68f276330941ad16238be94ec9ee2679ced52ad172e8c6b293dfbe",
+    "clef-candidate-primitive-structured-green-20261012.log": "0324e48f941794371649adda93db948840056d0d818d5a18cf340c4a132fa198",
+    "clef-candidate-primitive-probe-20261012.py": "9d68e07fa2d9b20685bd54c44372c06605235445b043d92437557f0a718117de",
+    "clef-candidate-primitive-before-20261012.json": "112fc1f3cbf18a043c3bdd2dcd10aba4d005b17860fb332e3861bce3c9193eef",
+    "clef-candidate-primitive-after-20261012.json": "e004ce276b7bd217e3d8cacf0b0ee507dc65e71132fe5225c20390aa25ed1ff3",
+    "clef-candidate-primitive-red-20261012.log": "dbf6b15080be1ae4c44779a221e2aac91bc79f904ce32361c043a9b2d239ee36",
+    "clef-candidate-primitive-green-20261012.log": "221a15bf598d151fe7753259ffaac98a3ba8e84b16f16e95b5070691a2d7f362"
+  },
+  "native_private_report_sha256": {
+    "before": "c14b77ad391aaca7316c38c86814e103f0789dd33676f16dc0e3856bb044ebd1",
+    "after": "12057d1cba2b74598bf7577e82d4decf118135537725164b7c56e09dfd710169"
+  }
+}

@@ -1,5 +1,42 @@
 # Reactive runtime execution status
 
+**OBSERVED / candidate identity and primitive budgeting:** normalization now
+preserves exact validated geometry and differing action, confidence or source
+evidence. Equivalent numeric spellings and signed zero deduplicate; object IDs
+remain observation-scoped. Canonical source consumers reproduced two real dispatch
+points collapsing into one, passive-first evidence erasing an input capability,
+and equivalent numeric observations consuming duplicate slots. Final source
+preserves both points and evidence while deduplicating equivalent records.
+
+Explicit structured primitives now filter eligible proposals before counting
+or reserving literal-text slots. With four input targets and twelve supplied
+literals, old explicit click/double-click/scroll rosters were empty; corrected
+rosters retain all four targets (4/4/8 proposals). No-intent literal alternatives
+and overflow refusal remain enforced. An existing hybrid test pinned the old
+irrelevant-double-click budget loss; its replacement checks all twelve requested
+click targets and zero input and fails on immutable prior source.
+
+An owned authenticated native Canvas component observed adjacent one-pixel click
+effects change from [1,0] to [1,1] through actual capture/normalization/candidate/
+DesktopAction consumers. **The original AFTER run remains FAIL / AssertionError**:
+its private oracle expected Y=50, while both actual in-bounds points had Y=49.
+Offline semantic assessment of the retained effects is separate from that failed
+run. Native AFTER used the earlier normalizer candidate; the final confidence
+signed-zero correction has source/regression proof only, native-final NOT_RUN.
+Targets came from controlled Canvas coordinates, not model inference. Owned
+children/sockets and held input were cleared; production was preserved.
+
+Final integrated regression passed **1253 tests / 34 skipped / 41 warnings** in
+58.40 seconds; scoped checks passed 151. Five Python files passed Ruff/format and
+generated contracts passed. Four-language guides are updated. Earlier RED results,
+the initial integrated failure and native oracle failure remain recorded. No
+threshold, capability, unknown-state guard, acceptance status or release gate was
+weakened. Historical model-quality failures and incomplete production context
+observation are not resolved by these corrections. Whole E2E/models belong to
+other sessions; new installed-current, full-task performance and release checks
+remain NOT_RUN here. See
+[candidate evidence](validation/2026-10-11/candidate-identity-and-primitive-budget.json).
+
 **OBSERVED / Windows input ownership:** controlled Win32 boundary execution
 reproduced missed user intervention: owned extended cursor keys masked distinct
 numeric-keypad holds, and left modifiers masked right modifiers. The canonical

@@ -128,6 +128,14 @@ checks progress. Candidate IDs are bound to one observation. CLEF selects
 bounded candidates. Model-facing candidates retain their operation and target
 object ID, linking equally labelled controls to their distinct observed geometry.
 This connection supplies evidence; it does not change input or confidence guards.
+Parser object identity retains exact validated geometry and normalized action,
+confidence and source evidence. Only equivalent records deduplicate; nearby boxes
+or conflicting capability/provenance evidence remain separate alternatives.
+Numeric spelling and signed zero do not split equivalent normalized geometry or
+confidence.
+An explicit visual primitive limits eligible structured proposals before budget
+reservation and truncation. Irrelevant literal options cannot evict requested
+clicks/scrolls; observed capabilities and the final runtime filter still apply.
 Capture-derived geometry/window/foreground facts retain the frame's capture time,
 including time spent acquiring the image. Compilation and later perception do not
 renew them. Provider facts keep their independently observed times and pass the
