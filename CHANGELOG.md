@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Correct temporary Codex verification overrides so existing MCP server names,
+  including dots, quotes and Unicode, keep their transport configuration while
+  other configured servers are disabled for the read-only session.
+- Restore Windows smoke-test pointer/focus before closing the owned Tk window,
+  synchronize cross-thread foreground activation once, and retain cleanup errors
+  in the result instead of losing the original verification evidence.
 - Preserve Blender's public owning-manager interface lock as positive busy
   evidence. Compile only true to `loading=true`; unlocked or unavailable remains
   UNKNOWN and cannot authorize input. Retain native identity/freshness guards.

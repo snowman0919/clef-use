@@ -1698,6 +1698,18 @@ def _rpc(executable: str, method: str, params: dict, cwd: Path) -> dict:
             process.wait()
 
 
+def _codex_verification_override(config: dict) -> str:
+    # CLI dotted paths do not unquote key segments. Inline TOML preserves
+    # arbitrary server names and merges these fields into existing transports.
+    fields = [
+        f"{json.dumps(server, ensure_ascii=False)}={{enabled=false}}"
+        for server in config.get("mcp_servers", {})
+        if server != "clef-use"
+    ]
+    fields.append('"clef-use"={enabled_tools=["computer_capabilities","computer_status"]}')
+    return "mcp_servers={" + ",".join(fields) + "}"
+
+
 def verify(
     harness: str,
     live: bool = False,
@@ -1799,6 +1811,7 @@ def verify(
             )
             return result
         # Only the two read-only runtime tools may be invoked during this fresh session.
+        config = read_config("codex", (_read(layout["config"]) or b"").decode())
         argv = [
             executable,
             "exec",
@@ -1810,12 +1823,8 @@ def verify(
             "-C",
             str(cwd),
             "-c",
-            'mcp_servers.clef-use.enabled_tools=["computer_capabilities","computer_status"]',
+            _codex_verification_override(config),
         ]
-        config = read_config("codex", (_read(layout["config"]) or b"").decode())
-        for server in config.get("mcp_servers", {}):
-            if server != "clef-use":
-                argv += ["-c", f"mcp_servers.{json.dumps(server)}.enabled=false"]
         argv.append(_verification_prompt(trigger))
         run = subprocess.run(
             argv,

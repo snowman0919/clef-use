@@ -19,6 +19,11 @@ clef-use update
 
 ### Codex
 
+0.1.31 候補版は、他の MCP サーバーが設定されている場合の live 検証で発生する
+`invalid transport` を修正します。再検証前にインストール済みビルドを確認し、
+検証を通すために他のサーバー設定を削除しないでください。検出、ガイド読込、
+ツール呼出し、GUI タスク検証はそれぞれ別の結果です。
+
 `~/.codex/config.toml` (`CODEX_HOME`):
 
 ```toml

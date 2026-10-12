@@ -19,6 +19,10 @@ clef-use update
 
 ### Codex
 
+0.1.31 候选版修复了配置其他 MCP 服务器时实时验证出现的 `invalid transport`。
+重试前请确认安装的构建，不要为了通过验证而删除其他服务器配置。发现、指南加载、
+工具调用与 GUI 任务验证仍是独立结果。
+
 `~/.codex/config.toml` (`CODEX_HOME`):
 
 ```toml

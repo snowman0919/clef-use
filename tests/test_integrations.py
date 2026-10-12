@@ -971,7 +971,10 @@ def test_stale_release_requires_refresh_and_fresh_harness_session(installation, 
     _, command = installation
     integrations.integrate("codex", command=command)
     changed = capabilities.guide_manifest()
-    changed["runtime_version"] = "0.1.31"
+    from packaging.version import Version
+
+    current = Version(changed["runtime_version"])
+    changed["runtime_version"] = f"{current.major}.{current.minor}.{current.micro + 1}"
     monkeypatch.setattr(capabilities, "guide_manifest", lambda: changed)
     result = integrations.status()["integrations"][0]
     assert result["status"] == "INCOMPATIBLE"

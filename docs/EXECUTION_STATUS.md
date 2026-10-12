@@ -1,5 +1,48 @@
 # Reactive runtime execution status
 
+## Windows SSH E2E scope resumed on 2026-10-12
+
+The user explicitly requested native Windows SSH E2E and authorized updating the
+existing installation. Earlier software-only/other-session boundaries below are
+historical. Separate Blender host API/build development remains excluded.
+
+**OBSERVED / installed 2639bea candidate:** native Windows updated 0.1.21 to 0.1.30,
+matched all 64 packaged source/guide files and repeated as CURRENT. Existing config
+bytes and the previous runtime files were preserved. The actual read-only stdio MCP
+matched live schemas and all three guide-resource hashes. Native ROCm/NF4 decision
+and CPU OmniParser preparation exited 0 after 809.585 seconds.
+
+**OBSERVED / canonical CLI GUI:** the installed, unpatched runtime completed the
+owned Continue/Confirm task in two native clicks and four decisions. Independent
+Tk readback recorded both expected buttons and `Task complete`; two fresh runtime
+observations verified completion. The endpoint was removed and held keys were
+empty. This is one bounded two-button task, not Blender/browser/editor coverage or
+the full reaction-performance gate.
+
+**OBSERVED / discovered verification defects:** original native smoke cleanup
+lost its result after closing the Tk window and receiving `Windows pointer move
+refused`. A read-only interactive probe confirmed an unlocked Default desktop;
+a bounded owned-window probe succeeded before destruction and failed after it.
+Restoring before destruction and synchronizing foreground activation through
+WM_NULL now passes native input/readback, clipboard preservation, cancellation,
+focus refusal and complete cleanup. Earlier FAIL runs are retained.
+
+Actual Codex 0.151.0 discovered all three project/user guides. Original model
+verification stopped before loading because quoted CLI override path segments
+created transport-less servers (`invalid transport` in `mcp_servers."node_repl"`).
+The 0.1.31 source candidate uses a single inline TOML override; an actual native
+Codex configuration preflight preserves transports and disables the selected
+other servers. A real-CLI regression also covers dotted, quoted and Unicode names.
+New 0.1.31 installed/harness/GUI results are NOT_RUN until the candidate is built
+and exercised. No confidence or operation guard was relaxed, and no public release
+or full acceptance status is claimed.
+
+**OBSERVED / integrated source:** 1399 tests passed, 34 skipped and 41 warnings
+in 63.69 seconds. Scoped integration/real-Codex checks passed 211; Ruff/format
+and generated contracts passed. Native cleanup now attempts pointer and foreground
+restoration independently, rechecking owned foreground before each attempt and
+preserving both errors.
+
 **OBSERVED / positive-only Blender busy evidence:** the actual public-RNA
 collector omitted the owning manager's read-only running-job interface lock.
 In a private factory Blender component, native lock false/23 true/false samples

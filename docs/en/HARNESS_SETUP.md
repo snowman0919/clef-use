@@ -19,6 +19,11 @@ clef-use update
 
 ### Codex
 
+The 0.1.31 candidate fixes `invalid transport` during live verification when other
+MCP servers are configured. Confirm the installed build before retrying; do not
+remove unrelated servers to make verification pass. Discovery, guide loading,
+tool invocation and GUI task verification remain separate results.
+
 `~/.codex/config.toml` (`CODEX_HOME`):
 
 ```toml

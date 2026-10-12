@@ -22,10 +22,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = {"mode": "REAL_WINDOWS_GUI_NATIVE_ADAPTER", "native_input": True}
-    root, gui, action = None, WindowsInput(), DesktopAction()
+    root, owned_target, gui, action = None, None, WindowsInput(), DesktopAction()
     previous_target, previous_pointer = gui.foreground(), Point()
     with gui.physical_coordinates():
-        gui.user.GetCursorPos(ctypes.byref(previous_pointer))
+        pointer_observed = bool(gui.user.GetCursorPos(ctypes.byref(previous_pointer)))
     try:
         result["desktop"] = gui.desktop_status()
         root = tk.Tk()
@@ -159,14 +159,70 @@ def main():
     except Exception:
         result.update(status="FAILED", traceback=traceback.format_exc())
     finally:
-        action.release()
-        if root:
-            root.destroy()
-        gui.FAILSAFE = False
-        with gui.physical_coordinates():
-            gui.moveTo(previous_pointer.x, previous_pointer.y)
-        gui.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
-        gui.user.SetForegroundWindow(previous_target)
+        cleanup = {"errors": []}
+        try:
+            action.release()
+            cleanup["input_released"] = True
+        except Exception:
+            cleanup["errors"].append(traceback.format_exc())
+        # Restore while the owned window still grants foreground input access.
+        # Destroying the last Tk window first can leave no input target on Windows.
+        if owned_target is not None and gui.foreground() == owned_target:
+            try:
+                if not pointer_observed:
+                    raise RuntimeError("previous pointer was not observed; restoration refused")
+                gui.FAILSAFE = False
+                with gui.physical_coordinates():
+                    gui.moveTo(previous_pointer.x, previous_pointer.y)
+                cleanup["pointer_restored"] = True
+            except Exception:
+                cleanup["errors"].append(traceback.format_exc())
+        else:
+            cleanup["pointer_restoration_skipped"] = "owned foreground unavailable or changed"
+            cleanup["errors"].append(cleanup["pointer_restoration_skipped"])
+        # Pointer restoration can fail independently; still restore the prior
+        # foreground if no other actor has taken it from our owned window.
+        if owned_target is not None and gui.foreground() == owned_target:
+            try:
+                gui.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
+                admitted = gui.user.SetForegroundWindow(previous_target)
+                cleanup["foreground_immediate"] = gui.foreground() == previous_target
+                # Cross-thread foreground activation is asynchronous. Synchronize
+                # its message queue once; do not replay focus or input requests.
+                gui.user.SendMessageTimeoutW.argtypes = [
+                    ctypes.c_void_p,
+                    ctypes.c_uint,
+                    ctypes.c_size_t,
+                    ctypes.c_ssize_t,
+                    ctypes.c_uint,
+                    ctypes.c_uint,
+                    ctypes.POINTER(ctypes.c_size_t),
+                ]
+                gui.user.SendMessageTimeoutW.restype = ctypes.c_ssize_t
+                response = ctypes.c_size_t()
+                acknowledged = admitted and gui.user.SendMessageTimeoutW(
+                    previous_target, 0, 0, 0, 2, 1000, ctypes.byref(response)
+                )
+                cleanup["foreground_queue_synchronized"] = bool(acknowledged)
+                cleanup["foreground_restored"] = bool(
+                    acknowledged and gui.foreground() == previous_target
+                )
+                if not cleanup["foreground_restored"]:
+                    raise RuntimeError("previous foreground restoration was not confirmed")
+            except Exception:
+                cleanup["errors"].append(traceback.format_exc())
+        else:
+            cleanup["foreground_restoration_skipped"] = "owned foreground unavailable or changed"
+            cleanup["errors"].append(cleanup["foreground_restoration_skipped"])
+        try:
+            if root:
+                root.destroy()
+            cleanup["owned_window_closed"] = True
+        except Exception:
+            cleanup["errors"].append(traceback.format_exc())
+        result["cleanup"] = cleanup
+        if cleanup["errors"]:
+            result["status"] = "FAILED"
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] == "PASSED" else 1
