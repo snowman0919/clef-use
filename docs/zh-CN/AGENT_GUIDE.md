@@ -155,6 +155,11 @@ X11 的字符输入（包括 ASCII）要求显式 clipboard 方式；键事件�
 也可能进入 IME。传输确认不等于输入框结果验证。无法保留原有 clipboard 格式时，
 会在输入前拒绝。接收前中止时，为已发送的粘贴保留文字，直到传输完成或发生其他
 复制，不提前恢复旧数据。Windows 操作使用 native Unicode 输入。
+Windows 按键检查保留扩展 scan code 和 modifier 左右区别；检测到用户按住其他
+键时会阻止后续输入。共享同一 virtual key 的物理键（例如两个 Enter）的同时按下
+无法通过此查询区分。
+Windows guardian 会移除已成功释放的键与 Unicode ACK；之后父进程 EOF 不会用
+旧 ACK 再次释放已被其他所有者重新按下的输入。
 decision 诊断保留不含图像的实际 UTF-8 文本预算字节数、object/question 数量和
 SDK 报告的输入 token 数。`SDK_USAGE` 表示 1～8192 的整数；缺失时为
 `UNAVAILABLE`，报告值无效时为 `INVALID`，后二者的数量均为 null。

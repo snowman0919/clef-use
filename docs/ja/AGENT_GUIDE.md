@@ -177,6 +177,11 @@ X11 の文字入力は ASCII も明示的な clipboard 方式を使います。�
 既存 clipboard 形式を保存できない場合は入力前に拒否します。受信前に中止した
 場合、既に送られた貼り付け用の文字を転送完了または別のコピーまで維持し、以前の
 データを早く復元しません。Windows 操作は native Unicode を使います。
+Windows の押下キー検査は拡張 scan code と modifier の左右を区別し、別のキーの
+ユーザー入力があれば後続入力を遮断します。同じ virtual key を共有する物理キー
+（例: 二つの Enter）の同時押下は、この照会では区別できません。
+Windows guardian は解放に成功したキー・Unicode の ACK を削除します。その後の
+親プロセス EOF では、別の所有者が再取得した入力を古い ACK で解放しません。
 decision 診断には画像を除く実際の UTF-8 テキスト予算のバイト数、object・question
 数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、
 欠落は `UNAVAILABLE`、不正な報告値は `INVALID` とし、後二者の数は null です。

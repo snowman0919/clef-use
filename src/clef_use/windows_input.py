@@ -276,8 +276,21 @@ class WindowsInput:
         query = getattr(self.user, "GetAsyncKeyState", None)
         if query is None:
             raise WindowsDesktopUnavailable("Windows held-input observation unavailable")
-        owned_scans = {event.keyboard.scan for key, event in self.key_events.items() if key in keys}
-        owned_vk = {event.keyboard.vk for key, event in self.key_events.items() if key in keys}
+        owned_scans = {
+            (event.keyboard.scan, bool(event.keyboard.flags & 1))
+            for key, event in self.key_events.items()
+            if key in keys and event.keyboard.flags & 8
+        }
+        owned_vk = {
+            event.keyboard.vk
+            for key, event in self.key_events.items()
+            if key in keys and not event.keyboard.flags & 8
+        }
+        # Generic virtual-key injection owns its left-side report, never the
+        # distinct right-side hold. Scan-code events use their exact tuple above.
+        for generic, left in ((0x10, 0xA0), (0x11, 0xA2), (0x12, 0xA4)):
+            if generic in owned_vk:
+                owned_vk.add(left)
         mouse = {"left": 1, "right": 2, "middle": 4}
         for vk in range(1, 256):
             if not query(vk) & 0x8000:
@@ -286,14 +299,17 @@ class WindowsInput:
                 if any(mouse[button] == vk for button in buttons):
                     continue
                 return True
-            # General and left/right modifier virtual keys can report the same hold.
-            logical = {0xA0: 0x10, 0xA1: 0x10, 0xA2: 0x11, 0xA3: 0x11, 0xA4: 0x12, 0xA5: 0x12}.get(
-                vk, vk
-            )
             thread = self.user.GetWindowThreadProcessId(self.foreground(), None)
             layout = self.user.GetKeyboardLayout(thread)
-            scan = self.user.MapVirtualKeyExW(logical, 4, layout) & 0xFF
-            if logical not in owned_vk and scan not in owned_scans:
+            if not thread or not layout:
+                raise WindowsDesktopUnavailable("Windows foreground keyboard layout unavailable")
+            # Keep the extended prefix and modifier side. Generic modifier VKs
+            # report an aggregate hold, but a held right-side VK must still be
+            # checked independently of our acknowledged left-side injection.
+            scan = self.user.MapVirtualKeyExW(vk, 4, layout)
+            if (scan and (scan & 0xFF, bool(scan & 0xFF00)) not in owned_scans) or (
+                not scan and vk not in owned_vk
+            ):
                 return True
         return False
 

@@ -1,0 +1,181 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT",
+  "source_base": "c3fb9df5d3e43b963f8f132876f5552ded3c2e7c",
+  "scope": "Canonical Windows input ownership and independent guardian execution against controlled Win32 API boundaries on Linux. No native Windows or task/E2E claim.",
+  "integrated_source_sha256": {
+    "src/clef_use/windows_input.py": "9a6b8ed8fe9a474822a89c2c4251ab5ab3155462ce7eda049213cea945ec349c",
+    "src/clef_use/input_ir.py": "b2455621c56fa9609f67354286a9f3c009099b9c34dabd458b6fabb71d735f9e",
+    "tests/test_windows_input.py": "4f4358fa154b8a6127183b020637d18efeeb93e9986197af04e117f09feb3c77",
+    "tests/test_input_guardian.py": "72235f25d3a07f7f36f8a93102f8623b0559fae6d946adaebc2e228238657865"
+  },
+  "contracts": [
+    "A scan-code acknowledgement owns the scan plus extended flag, not another key with the same low byte or the opposite modifier side.",
+    "A virtual-key fallback acknowledgement owns its exact VK and the left-side report of a generic modifier. A zero scan code is not shared ownership.",
+    "Missing held-key thread/layout observation fails closed.",
+    "Successfully released key/Unicode guardian acknowledgements are retired. Later EOF retries only previously failed pending entries under the existing recovery policy."
+  ],
+  "identity_regression": {
+    "immutable_before": {
+      "failed": 17,
+      "passed": 3,
+      "method": "Final 20 permanent cases execute immutable Git c3fb9df windows_input module in a separate process; no canonical source rollback"
+    },
+    "intermediate_fallback_finding": {
+      "failed": 3,
+      "reason": "Initial correction refused its own generic+left virtual-key fallback hold; fixed and retained as permanent tests"
+    },
+    "final_scoped": {
+      "passed": 90,
+      "scope": "Windows input, typed input and guardian regressions"
+    }
+  },
+  "canonical_executor_component": {
+    "method": "Actual InputExecutor acquires a bounded acknowledged hold, then executes G with/without a distinct held key. Actual watcher and cleanup run; Win32 responses and event sink are controlled. No mocked executor or native OS input.",
+    "before_source_sha256": "a342b59afe308a845488ed7c07fe664c36c7ebee2fdc9604cd83708ac11d805b",
+    "after_source_sha256": "9a6b8ed8fe9a474822a89c2c4251ab5ab3155462ce7eda049213cea945ec349c",
+    "before": [
+      {
+        "owned": "left",
+        "intervention": false,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      },
+      {
+        "owned": "left",
+        "intervention": true,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      },
+      {
+        "owned": "ctrl",
+        "intervention": false,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      },
+      {
+        "owned": "ctrl",
+        "intervention": true,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      }
+    ],
+    "after": [
+      {
+        "owned": "left",
+        "intervention": false,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      },
+      {
+        "owned": "left",
+        "intervention": true,
+        "next_key_allowed": false,
+        "next_key_events": 0,
+        "released": true
+      },
+      {
+        "owned": "ctrl",
+        "intervention": false,
+        "next_key_allowed": true,
+        "next_key_events": 1,
+        "released": true
+      },
+      {
+        "owned": "ctrl",
+        "intervention": true,
+        "next_key_allowed": false,
+        "next_key_events": 0,
+        "released": true
+      }
+    ]
+  },
+  "fallback_review": {
+    "cases": 3,
+    "own_generic_left_allowed": true,
+    "right_added_refused": true,
+    "right_removed_allowed": true,
+    "original_release_clears_ownership": true,
+    "method": "Independent controlled boundary execution of final source; no native Windows claim"
+  },
+  "guardian_component": {
+    "method": "Actual _guardian_main pipe-reader/queue/recovery loop with a stateful controlled send boundary. After deadline release, another owner reacquires successful entries before EOF; known refused entries remain pending.",
+    "before": {
+      "case_failures": 4,
+      "stale_release_counts": [
+        1,
+        1,
+        2,
+        2
+      ]
+    },
+    "after": {
+      "case_passes": 4,
+      "stale_release_counts": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    "final_regressions": 4,
+    "source_sha256": "b2455621c56fa9609f67354286a9f3c009099b9c34dabd458b6fabb71d735f9e",
+    "probe_test_version_note": "Probe receipts bind the pre-format test bytes; final test differs only by Ruff-required yield parentheses. Product source is unchanged after GREEN."
+  },
+  "integrated_regression": {
+    "passed": 1240,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 58.35,
+    "log_sha256": "7793b47978ebacf88af50979421f1a69a6c3a899ad8f11d89739ddf4aa4425f0",
+    "scoped_ruff_format": "PASS: four changed Python files",
+    "generated_contract": "PASS: 3 tool, 11 CLI, 198 published CLI, 12 published tool examples"
+  },
+  "primary_api_sources": [
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-mapvirtualkeyexw",
+      "fact": "MAPVK_VK_TO_VSC_EX preserves an extended prefix; generic modifier mapping selects the left instance and explicit left/right VKs are distinct."
+    },
+    {
+      "url": "https://learn.microsoft.com/en-us/windows/win32/api/winuser/ns-winuser-keybdinput",
+      "fact": "KEYEVENTF_SCANCODE and KEYEVENTF_EXTENDEDKEY are distinct flags on acknowledged keyboard input."
+    }
+  ],
+  "artifact_sha256": {
+    "clef-windows-input-identity-component-before-20261012.json": "fee77c5dc40f6da48c886dec7e8dfc8d006a504da9b7f37b5eb0a00fc99527bf",
+    "clef-windows-input-identity-component-after-20261012.json": "b4465d9e4dfcb7edb6d4557f327a0bf4e8fd8ee0e1dabe14e18fc23cb2c55d5f",
+    "clef_windows_input_identity_component_20261012.py": "a27a7d3bbc5fb76354be5ba7fd8019155b61dcbbbfde9aa709c6844d71865ff9",
+    "clef-windows-input-identity-final-red-20261012.log": "93ce2a35c74206c734ea7546dfb6ed6e82f094bf615d710d28d44a75210125b3",
+    "clef-windows-modifier-fallback-candidate-red-20261012.log": "0ae2b840de3e7085150daca06221512d8b86a981b159d11dcb47c408e1f4c780",
+    "clef-windows-modifier-fallback-review-20261012.json": "e930f677cc01f4772c8833a252e740359417e1a9c944e806b30e49f434a47d9e",
+    "clef-windows-modifier-fallback-review-after-20261012.json": "f3773e1fbed72baf9a67780764491daf7c2a10041b911191fa1f86824f40b31a",
+    "clef-input-guardian-fix-public-20261012.json": "d31e82153145a102f5968090a11aac9a80dc86cfbd7f7850b08401e8726272e8",
+    "clef-input-guardian-before-20261012.json": "e7fd9d6f4e2ddb6b0bd3eee579057130ab7674e4f12c30bea813ad4c37813fb2",
+    "clef-input-guardian-after-20261012.json": "1386c19cc5db8bd3d9211ec1f685d344e37abec21708a0370ce55f9a2e807b44",
+    "clef-input-guardian-red-20261012.log": "02d9600f9d2364be0f5a362891d02c0b88f2af3fa3e79156afdc6a47aa32a7e7",
+    "clef-input-guardian-green-20261012.log": "a00d95dfbc084b6eb22229f4a5b545b4452162a59797c0faa121535a79212580",
+    "clef-windows-input-identity-scoped-final-20261012.log": "aad117be194360cea62d09a5ae8500b631f559371d521285c042b260049f89ea",
+    "clef-windows-input-ownership-integrated-20261012.log": "7793b47978ebacf88af50979421f1a69a6c3a899ad8f11d89739ddf4aa4425f0"
+  },
+  "limits": [
+    "GetAsyncKeyState does not distinguish two physical keys sharing one virtual key, such as main and keypad Enter, or prove physical-device provenance.",
+    "A later parent ownership update is a separate protocol event; this component proves successful deadline recovery followed by EOF without a new acquisition update.",
+    "No latency, goodput, coverage, automatic application-context discovery or operation readiness is inferred.",
+    "No native Windows verification: current process is Linux and Win32 boundaries are controlled."
+  ],
+  "NOT_RUN": {
+    "native_windows_current_patch": "Windows native fixture not executed in this software slice",
+    "installed_current_harness_e2e_models": "Assigned to other sessions by the user",
+    "full_task_accuracy_p95_goodput_coverage": "Assigned to E2E/model session; no new measurement",
+    "public_release": "No promotion or release guard change; existing draft candidate only"
+  },
+  "invariants": {
+    "active_v2": "Preserved; no installation/runtime process mutation",
+    "old": "Frozen",
+    "acceptance_and_release_gates": "Unchanged; no status promotion"
+  }
+}

@@ -258,6 +258,98 @@ def test_key_release_uses_original_scan_even_after_layout_mapping_changes():
     assert gui.key_events == {}
 
 
+@pytest.mark.parametrize(
+    "key,owned_vk,scan,human_vk,human_scan",
+    [
+        ("left", 0x25, 0xE04B, 0x64, 0x4B),
+        ("right", 0x27, 0xE04D, 0x66, 0x4D),
+        ("up", 0x26, 0xE048, 0x68, 0x48),
+        ("down", 0x28, 0xE050, 0x62, 0x50),
+        ("home", 0x24, 0xE047, 0x67, 0x47),
+        ("end", 0x23, 0xE04F, 0x61, 0x4F),
+        ("insert", 0x2D, 0xE052, 0x60, 0x52),
+        ("delete", 0x2E, 0xE053, 0x6E, 0x53),
+        ("shift", 0x10, 0x2A, 0xA1, 0x36),
+        ("ctrl", 0x11, 0x1D, 0xA3, 0xE01D),
+        ("alt", 0x12, 0x38, 0xA5, 0xE038),
+    ],
+)
+def test_unowned_distinct_key_is_not_hidden_by_owned_scan_or_modifier_alias(
+    key, owned_vk, scan, human_vk, human_scan
+):
+    api, gui = native()
+    held = {owned_vk}
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk in held else 0
+    api.MapVirtualKeyExW = lambda vk, *_: {owned_vk: scan, human_vk: human_scan}.get(vk, vk)
+    gui.keyDown(key)
+    assert not gui.unowned_input({key}, set())
+    held.add(human_vk)
+    assert gui.unowned_input({key}, set())
+    gui.keyUp(key)
+    assert api.events == [
+        (1, scan & 0xFF, 9 if scan & 0xFF00 else 8),
+        (1, scan & 0xFF, 11 if scan & 0xFF00 else 10),
+    ]
+
+
+def test_unmapped_virtual_key_ownership_does_not_hide_other_unmapped_keys():
+    api, gui = native()
+    held = {ord("A")}
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk in held else 0
+    api.MapVirtualKeyExW = lambda *_: 0
+    gui.keyDown("a")
+    assert not gui.unowned_input({"a"}, set())
+    held.add(ord("B"))
+    assert gui.unowned_input({"a"}, set())
+    gui.keyUp("a")
+
+
+@pytest.mark.parametrize(
+    "key,generic,left,scan",
+    [("shift", 0x10, 0xA0, 0x2A), ("ctrl", 0x11, 0xA2, 0x1D), ("alt", 0x12, 0xA4, 0x38)],
+)
+def test_owned_modifier_generic_and_left_reports_are_one_acknowledged_hold(
+    key, generic, left, scan
+):
+    api, gui = native()
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk in {generic, left} else 0
+    api.MapVirtualKeyExW = lambda vk, *_: scan if vk in {generic, left} else vk
+    gui.keyDown(key)
+    assert not gui.unowned_input({key}, set())
+    assert gui.unowned_input(set(), set())
+    gui.keyUp(key)
+
+
+@pytest.mark.parametrize(
+    "key,generic,left,right",
+    [("shift", 0x10, 0xA0, 0xA1), ("ctrl", 0x11, 0xA2, 0xA3), ("alt", 0x12, 0xA4, 0xA5)],
+)
+def test_virtual_modifier_fallback_accepts_own_left_alias_but_refuses_right(
+    key, generic, left, right
+):
+    api, gui = native()
+    held = {generic, left}
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk in held else 0
+    api.MapVirtualKeyExW = lambda *_: 0
+    gui.keyDown(key)
+    assert not gui.unowned_input({key}, set())
+    held.add(right)
+    assert gui.unowned_input({key}, set())
+    gui.keyUp(key)
+
+
+@pytest.mark.parametrize("missing", ["thread", "layout"])
+def test_held_input_with_unavailable_keyboard_layout_fails_closed(missing):
+    api, gui = native()
+    api.GetAsyncKeyState = lambda vk: 0x8000 if vk == ord("A") else 0
+    if missing == "thread":
+        api.GetWindowThreadProcessId = lambda *_: 0
+    api.GetKeyboardLayout = lambda _: 0 if missing == "layout" else 0x409
+    with pytest.raises(RuntimeError, match="keyboard layout unavailable"):
+        gui.unowned_input(set(), set())
+    assert api.events == []
+
+
 @pytest.mark.parametrize("interrupt", [None, "cancel", "focus", "geometry"])
 def test_native_stroke_rechecks_foreground_and_releases_input(interrupt):
     from clef_use.candidates import CandidateBuilder

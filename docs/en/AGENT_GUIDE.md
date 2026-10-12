@@ -181,6 +181,11 @@ refuse before input. If cancelled before consumption, the owned literal remains
 available for a queued paste until transfer or another copy; previous data is not
 restored early. Windows operations use native Unicode insertion.
 Watchdog recovery is limited by native permissions and acknowledgement windows.
+Windows held-key checks preserve extended scan codes and modifier sides; they
+refuse a distinct human hold before further input. Same-virtual-key physical
+aliases (such as both Enter keys) cannot be distinguished by this query.
+The Windows guardian removes successful key/Unicode release acknowledgements;
+later parent EOF does not release those inputs again after a new owner acquires them.
 Decision diagnostics retain the exact UTF-8 text-budget bytes (image excluded),
 object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integer
 from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are

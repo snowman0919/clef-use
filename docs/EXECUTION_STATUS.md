@@ -1,5 +1,35 @@
 # Reactive runtime execution status
 
+**OBSERVED / Windows input ownership:** controlled Win32 boundary execution
+reproduced missed user intervention: owned extended cursor keys masked distinct
+numeric-keypad holds, and left modifiers masked right modifiers. The canonical
+checker now retains scan plus extended flag and modifier side, separates virtual
+fallback ownership, and refuses missing held-key layout observation. Generic+left
+modifier reports remain one acknowledged fallback hold; opposite-side holds block.
+The first correction's fallback false refusal was independently reproduced and
+fixed, with three permanent cases retained. The final 20 new identity regressions
+produce 17 failures / 3 passes against immutable prior source and pass currently.
+
+The actual InputExecutor acquired bounded Left/Ctrl holds against controlled
+Win32 APIs. Prior source sent G in all four stable/intervention cases; current
+source sends G only in the two stable cases and sends zero G events with a distinct
+human hold. Owned records clear in every case. The actual guardian loop separately
+reproduced stale key/Unicode releases after successful deadline recovery and later
+EOF. Successful ACKs are now retired; existing EOF recovery retains only failed
+pending entries. Four guardian regressions fail before and pass after correction,
+preserving the subsequent owner's holds and recovering known refused entries.
+
+These are source components on Linux with controlled native API boundaries,
+**not native Windows input**. Same-virtual-key physical aliases remain outside
+GetAsyncKeyState's distinction; a new parent ownership update is a separate
+protocol event. Integrated regression passed **1240 tests / 34 skipped /
+41 warnings** in 58.35 seconds; scoped input checks passed 90. Four Python files
+passed Ruff/format and generated contracts passed. Four-language guides are
+updated. Native Windows for this patch, new installed-current checks, whole E2E,
+models, full-task performance and release remain NOT_RUN; no acceptance status
+or release gate changed. See
+[Windows ownership evidence](validation/2026-10-11/windows-input-ownership.json).
+
 **OBSERVED / fixture numeric unit normalization:** the existing API-assisted
 Blender state producer now returns supported numeric translation/readback in
 METERS/CENTIMETERS using the actual scene scale and retains NONE as raw. Native

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Preserve extended scan-code and modifier-side distinctions when checking
+  unowned Windows input. Refuse unknown held-key mappings instead of treating
+  zero scan codes as shared ownership.
+- Retire successful Windows guardian key/Unicode release acknowledgements so
+  later parent EOF cannot replay them against a new owner's hold. Preserve only
+  failed releases for the existing EOF recovery attempt.
 - Normalize the API-assisted Blender fixture's numeric readback and preview to
   supported declared distance/angular units. Preserve raw exact-property values
   and dimensionless scale; unsupported distance requests remain refused.

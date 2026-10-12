@@ -178,6 +178,14 @@ physical capture coordinates and captured foreground identity; UTF-16 text does
 not change the clipboard. Other platforms restore the previous plain-text
 clipboard for Unicode; rich clipboard representations are not preserved.
 See WINDOWS_INPUT.md for the cua reference and native Windows evidence.
+Held Windows keys are compared with acknowledged scan code plus extended flag;
+left/right modifier reports retain their side. Virtual-key fallback ownership is
+separate from scan-code ownership. Unknown held-key layout queries fail closed.
+GetAsyncKeyState cannot distinguish simultaneous presses sharing the same virtual
+key (for example both Enter keys); this is not physical-device provenance.
+The Windows guardian retires each successful key/Unicode release acknowledgement.
+After deadline recovery, later EOF retries only still-pending failures, preventing
+an old acknowledgement from releasing a subsequent owner's hold.
 
 `computer_observe` refreshes the screen/object map while idle and marks cached
 observations while busy. It reserves the shared desktop during parsing, with

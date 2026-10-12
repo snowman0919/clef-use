@@ -970,6 +970,9 @@ def _guardian_main():
                             gui._send(
                                 Input(type=1, keyboard=KeyboardInput(vk, scan, flags | 2, 0, 0))
                             )
+                            # A later EOF must not release a new owner's hold
+                            # using an acknowledgement already discharged here.
+                            native_keys.pop(value)
                         elif sys.platform == "linux":
                             from Xlib import X
                             from Xlib.ext.xtest import fake_input
@@ -990,9 +993,10 @@ def _guardian_main():
                 except Exception:
                     pass  # Recovery is best effort under the same OS permissions.
             if sys.platform == "win32":
-                for unit in unicode_units:
+                for unit in tuple(unicode_units):
                     try:
                         gui._send(Input(type=1, keyboard=KeyboardInput(0, unit, 6, 0, 0)))
+                        unicode_units.remove(unit)
                     except Exception:
                         pass
             owned, deadline, x11_keys, x11_buttons = [], None, {}, {}
