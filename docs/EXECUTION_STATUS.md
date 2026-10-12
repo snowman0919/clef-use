@@ -8,68 +8,85 @@ Separate Blender host observer/build development and model production remain
 excluded. Full results, earlier failures and private artifact digests are in
 [the Windows receipt](validation/2026-10-11/windows-ssh-current-e2e.json).
 
-**OBSERVED / current installation:** the canonical installer activated 0.1.35,
-bound all 64 packaged source/guide files to 7316837, and refreshed the previously
-managed Codex command to the new physical executable. Repeat installation returned
-CURRENT and managed refresh UNCHANGED. Unrelated configuration bytes, previous
-runtime files and model cache were preserved. The archive is a local source-bound
-candidate using unchanged pinned dependency wheels from CI 6cdf182; it is not a
-new immutable CI/public release. The later 53bf0a8 change affects the native
-verification fixture and project lock version only, not installed runtime bytes.
+**OBSERVED / current immutable installation:** the canonical installer activated
+CI version 0.1.36 from source b9af0e9 and bound all 64 packaged source/guide files
+across Git, CI wheel and installed runtime. Managed Codex refresh selected the
+new physical executable; repeat installation returned CURRENT/UNCHANGED.
+Unrelated configuration bytes, previous runtime files and model cache were
+preserved. Only manifest download URLs were projected to the owned loopback;
+archive bytes, hashes, other metadata and every installer guard stayed intact.
+The first controller's unprojected production URL was refused with
+`artifact origin differs from configured release host`; that failure is retained.
+The older 0.1.35 local candidate has a different archive checksum from its CI
+artifact. A distinct 0.1.36 release preserves same-version checksum immutability.
+
+**OBSERVED / CI:** [run 38255521947](https://github.com/snowman0919/clef-use/actions/runs/38255521947)
+completed all 15 platform/Python build and actual installation-check jobs plus
+assembly. All 15 downloaded archive digests and each archive's 64 packaged
+source/guide files match. Superseded/cancelled runs, including the duplicate
+accepted after an ambiguous HTTP 502 dispatch, remain recorded. Tag publication
+and production deployment were skipped by the existing feature-branch policy;
+this is an immutable CI artifact installation, not a public release.
 
 **OBSERVED / actual MCP and harness:** native installed read-only stdio MCP
 advertises the exact live two-tool schema, accurate effects and all three matching
-guide-resource hashes. Actual Codex 0.151.0 fresh model sessions pass explicit and
-natural discovery/load/invoke. Natural triggering reads all three complete guide
-bodies and successfully calls computer_capabilities; the negative request reads
-none and attempts no calls. Runtime/guide release compatibility is MATCH.
-Configured approval policies were not changed. These read-only harness checks
-leave TASK_VERIFIED=NOT_RUN; they do not prove a Codex-driven GUI operation.
-Hermes/OMP Windows model checks are NOT_RUN because their executables are absent.
+guide-resource hashes. Actual Codex 0.151.0 fresh model sessions pass explicit
+(60.389 seconds) and natural (126.817 seconds) discovery/load/invoke. Natural
+triggering reads all three complete guides; negative triggering (24.168 seconds)
+reads none and attempts no calls. Compatibility is MATCH. Approval policies were
+not changed. These read-only checks leave TASK_VERIFIED=NOT_RUN; they do not prove
+a Codex-driven GUI operation. Hermes/OMP Windows sessions are NOT_RUN because
+their executables are absent. These are individual wall times, not latency gates.
 
-**OBSERVED / actual CLI/model GUI:** the unpatched 0.1.35 installed CLI completed
-Continue then Confirm with two real native clicks and four decisions, followed by
-two fresh completion observations. Independent Tk readback recorded both buttons
-and Task complete. Endpoint removal, empty held-input readback, pointer restoration
-and owned scheduled-task removal were observed. Wall time was 286.265 seconds.
-Earlier identical-task 0.1.30 COMPLETED (332.868 seconds) and 0.1.32 NEEDS_REPLAN
-(259.747 seconds) are retained. The latter made both correct clicks but goal
-probability 0.8992 did not satisfy 0.9; that completion guard remains unchanged.
-These are individual bounded runs, not paired accuracy or a speedup estimate.
+**OBSERVED / actual installed CLI/model GUI:** 0.1.36 runtime status is
+NEEDS_REPLAN, controller status FAIL, with 2 actions and
+3 decisions in 266.374 seconds. Independent Tk readback recorded
+stage 2 and visible result `Task complete`. Endpoint removal,
+input release, pointer restoration, exact original foreground restoration,
+owned-window closure and scheduled-task removal are recorded individually in the
+receipt. No action bridge was used. Current goal probability 0.8952 is below the
+unchanged 0.9 requirement, although the visible-condition probability is 0.9504;
+the exact blocker is COMPLETION_UNVERIFIED. The current whole task is FAIL, and
+was not repeated to obtain PASS. Earlier 0.1.30 COMPLETED (332.868 seconds),
+0.1.32 NEEDS_REPLAN (259.747 seconds) and 0.1.35 COMPLETED (286.265 seconds) remain
+retained. The earlier 0.1.32 NEEDS_REPLAN run made both correct clicks but goal probability
+0.8992 did not satisfy 0.9; that guard is unchanged. These individual bounded runs
+are not paired accuracy or a speedup estimate.
 
-**OBSERVED / native verification correction:** original 0.1.34/0.1.35 fixed-sleep
-smokes failed after Ctrl+A/Backspace. A diagnostic recorded correct native scan
-codes and Tk modifier/key receipt with IME closed and no preedit, but its added
-observation can perturb timing; it is not a replacement PASS. The old smoke blocked
-the receiver UI during injection and assumed consumption after a fixed sleep.
-The current 53bf0a8 fixture keeps the receiver loop alive and injects each action
-once. It requires the actual full selection range [0,17] before Backspace, exact
-empty text and independent click/wheel effects. This current fixture passes
-against installed 0.1.35, including cancellation, stale-focus refusal, clipboard
-preservation, input release and pointer/foreground restoration. No application
-binding changed. A separate diagnostic foreground-restoration FAIL is retained.
-Exact historical failure timing is INFERRED, not a proven backend scan-code defect.
-The one-second fixture readback bound is not the 100ms reaction release gate;
-raw acknowledgement/verification ticks and the roughly 672ms bulk text readback
-remain visible in the receipt.
+**OBSERVED / native fixture and cleanup:** original 0.1.34/0.1.35 fixed-sleep
+smokes failed after Ctrl+A/Backspace. The live receiver UI loop now verifies full
+selection [0,17] before Backspace, exact Unicode/empty text and independent
+click/wheel effects. Current 0.1.36 native input and cleanup passed in
+8.915 seconds, including clipboard preservation, cancellation,
+control-character/stale-focus refusal and empty held-input readback. The first
+0.1.36 smoke passed inputs but failed strict foreground restoration after target
+WM_NULL. A focus-only probe observed that consuming the owned UI queue resolved
+a mismatch; a later one-pump smoke still failed. Both failures are retained.
+Final shared cleanup sends one activation request, consumes the owned UI queue
+within a bounded completion observation, checks the exact original HWND and
+refuses intervening ownership. The final native PASS restored immediately;
+that single run does not establish delayed-completion reliability. The model
+fixture now applies the same ownership/foreground check before destroying its
+window and records independent cleanup errors. A controller runpy import-path
+failure is also retained separately; it sent no input. No activation or input is
+replayed within these fixtures. The one-second fixture observation bounds and
+raw Windows timing ticks do not establish the 100ms reaction release gate.
 
-**OBSERVED / defects corrected:** temporary Codex overrides preserve native MCP
-transports rather than creating quoted-name servers; managed refresh selects the
-activated release only for unchanged approved entries; complete shell-escaped
-Windows guide paths prove load while copied-body suffix paths do not. Pure MCP
-capability/status effects are accurate and failed runs retain private stderr.
-The earlier 0.1.31 INCOMPATIBLE update, 0.1.32 denied tool call and 0.1.34 CLI
-exit 1 remain recorded. Historical stderr for the last error was discarded by
-the old verifier, so its exact cause is NOT_CAPTURED; no authentication error is
-asserted. Controller-only path/parser/ordering failures are recorded separately.
-
-**OBSERVED / regression:** 1418 tests passed, 34 skipped and 41 warnings in
-66.37 seconds on 0.1.35 product source. Generated contracts, Ruff and formatting
-passed. The later fixture-only change was checked with Ruff/format and executed
-natively with strict effect readback. Frozen old/ is unchanged. Canonical pinned
-ROCm/NF4 and CPU OmniParser preparation passed in 809.585 seconds; no new model
-was trained. Doctor exit 2 correctly identifies noninteractive SSH Session 0;
-actual GUI checks use limited InteractiveToken tasks on Session 1/Default.
+**OBSERVED / defects and regression:** native Codex overrides preserve other
+MCP transports; managed refresh rebinds only unchanged approved entries; complete
+shell-escaped guide paths prove load while copied-body suffixes do not. Pure MCP
+effects are accurate and failed runs retain private stderr. Earlier 0.1.31
+INCOMPATIBLE update, 0.1.32 denied tool call and 0.1.34 CLI exit 1 remain recorded.
+The old verifier discarded stderr for the last error, so its cause is
+NOT_CAPTURED; no current authentication failure is asserted.
+Product b9af0e9: 1418 tests passed, 34 skipped, 41 warnings in 67.20 seconds.
+Generated contracts and active src/tests/scripts Ruff/format checks pass
+(147 files including the final validation helper). A broad read-only formatting
+check also found 20 pre-existing unformatted frozen old/ files; none was changed.
+Final validation scripts were executed natively; all 64 installed product files
+remain exact b9af0e9. Canonical pinned ROCm/NF4 and CPU OmniParser preparation
+passed in 809.585 seconds; no model was trained. Doctor exit 2 identifies SSH
+Session 0; actual GUI checks use limited InteractiveToken tasks on Session 1/Default.
 
 **NOT_RUN / remaining acceptance:** general Windows Blender popup/input-owner/
 IME/effective-keymap/global-idle observation, full same-work paired accuracy,

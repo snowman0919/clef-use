@@ -2833,17 +2833,17 @@
     "windows_ssh_current_e2e": {
       "claim": "OBSERVED_NATIVE_WINDOWS_INSTALLED_CANDIDATE",
       "artifact": "docs/validation/2026-10-11/windows-ssh-current-e2e.json",
-      "sha256": "0d9fea42559f861f3bd66a1a8d959b5586bf042ad4e767012c3258c54c1f7693",
-      "scope": "Actual current 0.1.35 native Windows installed source/refresh/MCP and real Codex explicit/natural/negative verification. All GUI/input attempts and failures retained; bounded owned Tk task only; no full acceptance/performance/release promotion."
+      "sha256": "c3c547e9238744582eda51a3c821cc00442e73ac3418596066b4a3b883dd7434",
+      "scope": "Actual immutable CI 0.1.36 Windows update with 64 exact Git/CI/installed files; real Codex discovery/load/invoke; native input PASS; installed CLI/model GUI NEEDS_REPLAN (whole task FAIL). Earlier attempts retained; no full Blender/performance/public-release promotion."
     }
   },
   "not_run": {
     "production_operations": "Optional LinuxX11 publicRNA component only; Windows general Blender input-owner/popup/IME/keymap/global-idle unavailable. Six guards retain UNKNOWN; separate Blender host/build excluded by user.",
-    "windows": "Current 0.1.35 SSH update and interactive Session1 E2E are recorded separately in evidence.windows_ssh_current_e2e; automatic Windows Blender input-owner/context and full acceptance remain open.",
+    "windows": "Current immutable CI 0.1.36 SSH update and interactive E2E are recorded in evidence.windows_ssh_current_e2e; automatic Windows Blender input-owner/context and full acceptance remain open.",
     "harness_gui_tasks": "Actual native Codex/Hermes FINAL15 exactchangedguidebody/schema/capability then oneAPI-assistedCubeX+2task each verified with rootRNA9/pixels/cleanup, localSUCCEEDED4/sessionNEEDS_REPLAN. Hermes nonexistentexecute_code request1 refused(actualcode0); earlierFINAL12terminal1retained separately. OMP FINAL12 configuredprovider401beforeanytool remainsNOT_RUN; currentCodexdesktop works independently. WholegoalASSESS/defaultproduction/fullaccuracy/100ms remainNOT_RUN/FAIL.",
     "full_task_performance": "Actual full-pinned-vs-FINAL6 original File-menu ASSESS executed30trials and failed positive completion0/5each. FINAL10 installed bounded native Tk warm1000/1000correct, p95=20.234534ms, goodput100=1.0; Text50/50correct p95=20.319422ms. Eligibility coverage NOT_MEASURED; fullA0-A5/model/Blender/harness reaction release gates NOT_RUN.",
     "reici": "Reici matched-view production work, independent visual review and Warudo/VRChat verification NOT_RUN.",
-    "public_release": "HistoricalCI493 exactcommit all15builds+assemblySUCCESS;existingfeaturebranchdeploy/tagguardsSKIP. Newsoftwareobservernotincluded. Publicrelease/fullE2Everificationremainexternalto thissoftwarecomponent proof;no bypass.",
+    "public_release": "Immutable CI b9af0e9 is recorded in evidence.windows_ssh_current_e2e; feature-branch tag publication and deployment guards retained. No public release or production deployment claimed.",
     "general_gui_tasks": "Historical CI493 browser/editor failures retained. New bounded owned Continue/Confirm Windows installed CLI task attempts are recorded in evidence.windows_ssh_current_e2e; no general browser/editor/Blender quality claim."
   },
   "privacy": {

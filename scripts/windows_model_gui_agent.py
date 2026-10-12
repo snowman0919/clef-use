@@ -14,6 +14,7 @@ from pathlib import Path
 from threading import Event
 
 from PIL import Image
+from windows_gui_support import restore_foreground
 
 from clef_use.backends import DesktopAction, DesktopCapture, encode_image
 from clef_use.schema import ActionCandidate, Frame, Observation, UIObject
@@ -30,7 +31,7 @@ def main():
     native, action = WindowsInput(), DesktopAction()
     previous_target, previous_pointer = native.foreground(), Point()
     with native.physical_coordinates():
-        native.user.GetCursorPos(ctypes.byref(previous_pointer))
+        previous_pointer_known = bool(native.user.GetCursorPos(ctypes.byref(previous_pointer)))
     desktop = native.desktop_status()
     root = tk.Tk()
     root.title("clef-use real model GUI validation")
@@ -316,32 +317,57 @@ def main():
     try:
         root.mainloop()
     finally:
-        server.shutdown()
-        server.server_close()
-        action.release()
+        cleanup = {}
+        for name, operation in (
+            ("server_shutdown", server.shutdown),
+            ("server_close", server.server_close),
+            ("input_release", action.release),
+        ):
+            try:
+                operation()
+            except Exception as exc:
+                cleanup[name + "_error"] = type(exc).__name__
         native.FAILSAFE = False
         native.user.GetAsyncKeyState.argtypes = [ctypes.c_int]
         native.user.GetAsyncKeyState.restype = ctypes.c_short
         held = [vk for vk in (1, 16, 17, 18, 65, 76) if native.user.GetAsyncKeyState(vk) & 0x8000]
-        cleanup = {"inputs_released": not held, "held_input_vks": held}
+        cleanup.update(inputs_released=not held, held_input_vks=held)
+        if previous_pointer_known and native.foreground() == owned_target:
+            try:
+                with native.physical_coordinates():
+                    native.moveTo(previous_pointer.x, previous_pointer.y)
+                cleanup["pointer_restored"] = True
+            except Exception as exc:
+                cleanup.update(pointer_restored=False, error=type(exc).__name__)
+        else:
+            cleanup["pointer_restoration_skipped"] = "owned foreground unavailable or changed"
+        # Keep pointer and focus cleanup independent, and preserve intervention.
+        if native.foreground() == owned_target:
+            try:
+                cleanup.update(restore_foreground(root, native, previous_target, owned_target))
+            except Exception as exc:
+                cleanup["foreground_error"] = type(exc).__name__
+        else:
+            cleanup["foreground_restoration_skipped"] = "owned foreground unavailable or changed"
         try:
-            with native.physical_coordinates():
-                native.moveTo(previous_pointer.x, previous_pointer.y)
-            cleanup["pointer_restored"] = True
-        except Exception as exc:
-            cleanup.update(pointer_restored=False, error=type(exc).__name__)
-        finally:
             root.destroy()
-            native.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
-            native.user.SetForegroundWindow(previous_target)
+            cleanup["owned_window_closed"] = True
+        except Exception as exc:
+            cleanup["window_close_error"] = type(exc).__name__
         path = args.root / "canonical-cli-result.json"
         if args.run_cli and path.exists():
             report = json.loads(path.read_text())
             report["cleanup"] = cleanup
             path.write_text(json.dumps(report), encoding="utf-8")
-        if not cleanup.get("pointer_restored"):
+        if (
+            not cleanup.get("pointer_restored")
+            or not cleanup.get("foreground_restored")
+            or not cleanup.get("inputs_released")
+            or not cleanup.get("owned_window_closed")
+            or any(key.endswith("_error") for key in cleanup)
+        ):
             raise RuntimeError(
-                "GUI probe pointer restoration was refused; cleanup evidence retained"
+                "GUI probe pointer/focus restoration was not confirmed; cleanup evidence retained"
             )
 
 

@@ -14,58 +14,53 @@
     "gpu": "AMD Radeon 890M / gfx1150"
   },
   "candidate": {
-    "source_commit": "7316837c53784c0f69ca0c55d5539b4cff6c95a7",
-    "classification": "LOCAL_CURRENT_SOURCE_CANDIDATE_NOT_PUBLIC_RELEASE_OR_CI",
-    "wheel_sha256": "25bd2a749315a89cd88fa4341e74869af7c26a5d267585bcee70f16df383c275",
-    "archive_sha256": "65ffd448aee3e81066e58212c62fa7a6477e0c45ab97bdf4b9d2afb1f4d13db7"
+    "source_commit": "b9af0e9726396edc34265b10469f6e458743a318",
+    "classification": "IMMUTABLE_CI_ARCHIVE_GIT_SOURCE_VERIFIED_NOT_PUBLIC_RELEASE",
+    "run_id": 38255521947,
+    "artifact_id": 11749792380,
+    "wheel_sha256": "a10164ec27939b136f3c6db25b20f4a79705aa3b02f1e6cfcf06145ef4a228bb",
+    "archive_sha256": "e312c26de516c192505804693ff8c3270937478aa5d579ca2dc0e1bea4b1aeb9"
   },
   "installation": {
     "status": "PASS",
-    "previous_version": "0.1.34",
-    "version": "0.1.35",
+    "previous_version": "0.1.35",
+    "version": "0.1.36",
     "source_hashes_exact": true,
     "bound_source_files": 64,
     "managed_codex_command_updated": true,
     "managed_refresh": "REFRESHED",
     "repeat": "CURRENT",
     "repeat_managed": "UNCHANGED",
-    "self_test": {
-      "mode": "DETERMINISTIC_FIXTURE",
-      "sample_statuses": [
-        "COMPLETED"
-      ],
-      "proves": "control flow only; not ML quality or desktop speed"
-    },
     "steps": [
       {
         "name": "update-current-source",
         "exit_code": 0,
-        "wall_seconds": 51.43350089993328
+        "wall_seconds": 53.9368015001528
       },
       {
         "name": "installed-version",
         "exit_code": 0,
-        "wall_seconds": 0.3053141001146287
+        "wall_seconds": 0.28336600004695356
       },
       {
         "name": "installed-capabilities",
         "exit_code": 0,
-        "wall_seconds": 0.6578340998385102
+        "wall_seconds": 0.6095879999920726
       },
       {
         "name": "installed-self-test",
         "exit_code": 0,
-        "wall_seconds": 0.7803740000817925
+        "wall_seconds": 0.7675862000323832
       },
       {
         "name": "installed-doctor",
         "exit_code": 2,
-        "wall_seconds": 16.859764399938285
+        "wall_seconds": 43.99340440006927
       },
       {
         "name": "repeat-current-source",
         "exit_code": 0,
-        "wall_seconds": 7.337572799995542
+        "wall_seconds": 7.502569300122559
       }
     ],
     "preservation": {
@@ -73,6 +68,12 @@
       "codex_unrelated_bytes_preserved": true,
       "old_version_files_preserved": true,
       "local_server_stopped": true
+    },
+    "transport_projection": {
+      "scope": "Only archive download URLs projected to the owned loopback server; all other metadata and immutable archive bytes unchanged",
+      "original_manifest_sha256": "740246032ee18f8036cb6991e639f9546009e0a3797c90a6b4aa1c881aad817e",
+      "projected_manifest_sha256": "536c084dc16940105e9ac6a5de559c35112ef955c39da47c366a8f6c845dfafe",
+      "metadata_except_urls_equal": true
     },
     "doctor_desktop": {
       "status": "UNAVAILABLE",
@@ -82,7 +83,14 @@
       "clef": true,
       "omni": true
     },
-    "dependency_baseline": "Unchanged pinned runtime dependency wheels from CI 6cdf182; current product wheel source-bound separately. Not new immutable CI or public release."
+    "self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "sample_statuses": [
+        "COMPLETED"
+      ],
+      "proves": "control flow only; not ML quality or desktop speed"
+    },
+    "archive_bytes": "Exactly immutable CI archive; only manifest download URLs projected to owned loopback. No checksum/origin/compatibility guard weakened."
   },
   "model_preparation": {
     "status": "PASS",
@@ -109,15 +117,24 @@
       "clef-use-diagnostics": true
     },
     "resource_count": 8,
-    "runtime_version": "0.1.35",
+    "runtime_version": "0.1.36",
     "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
     "operation_registry_version": 6,
     "model_or_gui_execution": false
   },
   "post_check": {
-    "fixture_sha256": "5254a4fbf221694af6900caf114b465b9c18706afc5f66cf66183317353e5a8e",
+    "status": "PASS",
+    "installed_version": "0.1.36",
+    "installed_archive_sha256_exact": true,
+    "source_files_exact": 64,
     "canonical_endpoint_absent": true,
-    "native_report_present": true
+    "canonical_task_removed": true,
+    "validation_script_hashes": {
+      "windows-gui-synced.py": "4b64395ac1ffb91abf60668a124f728834a10ab964625c8a43567e27cfd17100",
+      "windows_model_gui_agent.py": "24db97b5bd033af4c21a32b9a6ff5d5eef331ab7271957b80bf8ea3da1626f52",
+      "windows_gui_support.py": "77cf99d29508ae9d5a37fe28d589178e107a14ebb3ed1531c7bdd13d74110391"
+    },
+    "local_remote_validation_scripts_exact": true
   },
   "harness_runs": [
     {
@@ -313,6 +330,122 @@
       "private_stderr_trace_retained": true,
       "task_removed": true,
       "diagnostic_observation_only": false
+    },
+    {
+      "version": "0.1.36",
+      "stage": "harness",
+      "status": "PASS",
+      "controller_status": "PASS",
+      "wall_seconds": 60.388866901397705,
+      "exit_code": 0,
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "discovered": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "loaded": [
+        "clef-use"
+      ],
+      "successful_calls": [
+        "computer_capabilities",
+        "computer_capabilities"
+      ],
+      "attempted": [
+        "computer_capabilities"
+      ],
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.36",
+        "runtime_release": "0.1.36",
+        "action": null
+      },
+      "native_input": 0,
+      "private_stderr_trace_retained": true,
+      "task_removed": true
+    },
+    {
+      "version": "0.1.36",
+      "stage": "harness_natural",
+      "status": "PASS",
+      "controller_status": "PASS",
+      "wall_seconds": 126.81690168380737,
+      "exit_code": 0,
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "discovered": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "loaded": [
+        "clef-use-diagnostics",
+        "clef-use",
+        "clef-use-blender"
+      ],
+      "successful_calls": [
+        "computer_capabilities",
+        "computer_capabilities",
+        "computer_capabilities"
+      ],
+      "attempted": [
+        "computer_capabilities"
+      ],
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.36",
+        "runtime_release": "0.1.36",
+        "action": null
+      },
+      "native_input": 0,
+      "private_stderr_trace_retained": true,
+      "task_removed": true
+    },
+    {
+      "version": "0.1.36",
+      "stage": "harness_negative",
+      "status": "PASS",
+      "controller_status": "PASS",
+      "wall_seconds": 24.168396472930908,
+      "exit_code": 0,
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "NOT_RUN",
+        "INVOKED": "NOT_RUN",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "discovered": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "loaded": [],
+      "successful_calls": [],
+      "attempted": [],
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.36",
+        "runtime_release": "0.1.36",
+        "action": null
+      },
+      "native_input": 0,
+      "private_stderr_trace_retained": true,
+      "task_removed": true
     }
   ],
   "native_input_runs": [
@@ -853,6 +986,352 @@
         "owned_window_closed": true
       },
       "failure": null
+    },
+    {
+      "version": "0.1.36",
+      "stage": "native",
+      "status": "FAIL",
+      "wall_seconds": 12.032870769500732,
+      "task_exit": 1,
+      "task_removed": true,
+      "unicode_exact": true,
+      "clipboard_preserved": true,
+      "selection_present": true,
+      "selection_range": [
+        0,
+        17
+      ],
+      "shortcut_empty": true,
+      "click_count": 3,
+      "wheel": [
+        -360
+      ],
+      "cancelled_before_input": true,
+      "control_characters_refused": true,
+      "stale_foreground_refused": "Windows foreground changed since capture; no input sent",
+      "held_inputs_after_release": [],
+      "capture_pixels": [
+        2560,
+        1600
+      ],
+      "delivery_readbacks": [
+        {
+          "operation": "type",
+          "started_ns": 1146448328000000,
+          "acknowledged_ns": 1146448390000000,
+          "verified_ns": 1146448953000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "hotkey",
+          "started_ns": 1146449000000000,
+          "acknowledged_ns": 1146449000000000,
+          "verified_ns": 1146449015000000,
+          "selection_range": [
+            0,
+            17
+          ],
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1146449046000000,
+          "acknowledged_ns": 1146449062000000,
+          "verified_ns": 1146449062000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "click",
+          "started_ns": 1146449093000000,
+          "acknowledged_ns": 1146449109000000,
+          "verified_ns": 1146449109000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "double_click",
+          "started_ns": 1146449156000000,
+          "acknowledged_ns": 1146449359000000,
+          "verified_ns": 1146449375000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "scroll",
+          "started_ns": 1146449421000000,
+          "acknowledged_ns": 1146449421000000,
+          "verified_ns": 1146449421000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1146449468000000,
+          "acknowledged_ns": 1146449468000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1146449531000000,
+          "acknowledged_ns": 1146449531000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1146449812000000,
+          "acknowledged_ns": 1146449812000000,
+          "worker_joined": true
+        }
+      ],
+      "cleanup": {
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_restored": false,
+        "owned_window_closed": true,
+        "error_count": 1
+      },
+      "reason": "All input/effect checks passed; strict previous foreground restoration failed after target WM_NULL."
+    },
+    {
+      "version": "0.1.36",
+      "stage": "native_final",
+      "status": "FAIL",
+      "wall_seconds": 8.846893072128296,
+      "task_exit": 1,
+      "task_removed": true,
+      "unicode_exact": false,
+      "clipboard_preserved": null,
+      "selection_present": null,
+      "selection_range": null,
+      "shortcut_empty": false,
+      "click_count": null,
+      "wheel": null,
+      "cancelled_before_input": null,
+      "control_characters_refused": null,
+      "stale_foreground_refused": null,
+      "held_inputs_after_release": null,
+      "capture_pixels": null,
+      "delivery_readbacks": null,
+      "cleanup": {
+        "error_count": 0
+      },
+      "reason": "Controller runpy bootstrap omitted script directory from module search path: ModuleNotFoundError: No module named windows_gui_support. No native input ran; controller corrected, original failure retained."
+    },
+    {
+      "version": "0.1.36",
+      "stage": "native_synced",
+      "status": "FAIL",
+      "wall_seconds": 8.881065130233765,
+      "task_exit": 1,
+      "task_removed": true,
+      "unicode_exact": true,
+      "clipboard_preserved": true,
+      "selection_present": true,
+      "selection_range": [
+        0,
+        17
+      ],
+      "shortcut_empty": true,
+      "click_count": 3,
+      "wheel": [
+        -360
+      ],
+      "cancelled_before_input": true,
+      "control_characters_refused": true,
+      "stale_foreground_refused": "Windows foreground changed since capture; no input sent",
+      "held_inputs_after_release": [],
+      "capture_pixels": [
+        2560,
+        1600
+      ],
+      "delivery_readbacks": [
+        {
+          "operation": "type",
+          "started_ns": 1147098562000000,
+          "acknowledged_ns": 1147098625000000,
+          "verified_ns": 1147099203000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "hotkey",
+          "started_ns": 1147099250000000,
+          "acknowledged_ns": 1147099250000000,
+          "verified_ns": 1147099250000000,
+          "selection_range": [
+            0,
+            17
+          ],
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1147099296000000,
+          "acknowledged_ns": 1147099296000000,
+          "verified_ns": 1147099312000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "click",
+          "started_ns": 1147099343000000,
+          "acknowledged_ns": 1147099343000000,
+          "verified_ns": 1147099359000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "double_click",
+          "started_ns": 1147099421000000,
+          "acknowledged_ns": 1147099625000000,
+          "verified_ns": 1147099640000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "scroll",
+          "started_ns": 1147099687000000,
+          "acknowledged_ns": 1147099687000000,
+          "verified_ns": 1147099687000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1147099734000000,
+          "acknowledged_ns": 1147099734000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1147099781000000,
+          "acknowledged_ns": 1147099781000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1147100062000000,
+          "acknowledged_ns": 1147100062000000,
+          "worker_joined": true
+        }
+      ],
+      "cleanup": {
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": false,
+        "foreground_restored": false,
+        "owned_window_closed": true,
+        "error_count": 1
+      },
+      "reason": "All input/effect checks passed; one owned UI queue pump did not confirm previous foreground. Failure retained; no activation replay."
+    },
+    {
+      "version": "0.1.36",
+      "stage": "native_completion",
+      "status": "PASS",
+      "wall_seconds": 8.91549825668335,
+      "task_exit": 0,
+      "task_removed": true,
+      "unicode_exact": true,
+      "clipboard_preserved": true,
+      "selection_present": true,
+      "selection_range": [
+        0,
+        17
+      ],
+      "shortcut_empty": true,
+      "click_count": 3,
+      "wheel": [
+        -360
+      ],
+      "cancelled_before_input": true,
+      "control_characters_refused": true,
+      "stale_foreground_refused": "Windows foreground changed since capture; no input sent",
+      "held_inputs_after_release": [],
+      "capture_pixels": [
+        2560,
+        1600
+      ],
+      "delivery_readbacks": [
+        {
+          "operation": "type",
+          "started_ns": 1147160109000000,
+          "acknowledged_ns": 1147160156000000,
+          "verified_ns": 1147160734000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "hotkey",
+          "started_ns": 1147160781000000,
+          "acknowledged_ns": 1147160781000000,
+          "verified_ns": 1147160781000000,
+          "selection_range": [
+            0,
+            17
+          ],
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1147160828000000,
+          "acknowledged_ns": 1147160828000000,
+          "verified_ns": 1147160843000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "click",
+          "started_ns": 1147160890000000,
+          "acknowledged_ns": 1147160890000000,
+          "verified_ns": 1147160890000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "double_click",
+          "started_ns": 1147160937000000,
+          "acknowledged_ns": 1147161156000000,
+          "verified_ns": 1147161171000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "scroll",
+          "started_ns": 1147161218000000,
+          "acknowledged_ns": 1147161218000000,
+          "verified_ns": 1147161250000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1147161281000000,
+          "acknowledged_ns": 1147161281000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "type",
+          "started_ns": 1147161328000000,
+          "acknowledged_ns": 1147161328000000,
+          "worker_joined": true
+        },
+        {
+          "operation": "press",
+          "started_ns": 1147161609000000,
+          "acknowledged_ns": 1147161625000000,
+          "worker_joined": true
+        }
+      ],
+      "cleanup": {
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_immediate": true,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true,
+        "error_count": 0
+      },
+      "fixtures": {
+        "scripts/windows_gui_smoke.py": "4b64395ac1ffb91abf60668a124f728834a10ab964625c8a43567e27cfd17100",
+        "scripts/windows_gui_support.py": "77cf99d29508ae9d5a37fe28d589178e107a14ebb3ed1531c7bdd13d74110391"
+      },
+      "scope": "Final fixture uses one activation request plus bounded completion observation, exact previous HWND, intervention refusal. In this observed run restoration was already immediate; delayed-completion reliability is not established by one PASS."
     }
   ],
   "native_fixture_correction": {
@@ -861,7 +1340,8 @@
     "observed": "Once-only current canonical runtime input with a live Tk receiver loop verifies actual full selection [0,17] before Backspace, exact empty text, click/wheel effects and all cleanup. No application key bindings changed.",
     "cause_limit": "Original same-thread fixed-sleep smoke did not establish native event consumption. Correct event delivery observed in instrumented diagnostic; exact historical failure mechanism is INFERRED timing, not a proven backend scan-code defect.",
     "deadline": "One second is only a bounded owned fixture effect-readback wait, not the 100ms release reaction gate. Inputs are never replayed.",
-    "timing_limit": "Monotonic timestamps are raw runner values with coarse native clock resolution; zero tick difference is not zero latency. Bulk Unicode readback is about672ms, not state-change-to-first-correct-OS-input."
+    "timing_limit": "Monotonic timestamps are raw runner values with coarse native clock resolution; zero tick difference is not zero latency. Bulk Unicode readback is about672ms, not state-change-to-first-correct-OS-input.",
+    "final_0136": "Original target-only and one-pump foreground cleanup failures retained. Shared once-only activation with bounded exact-HWND completion observation and intervention refusal now used by native/model fixtures. Delayed completion observed in model cleanup; native final restored immediately."
   },
   "canonical_gui_runs": [
     {
@@ -968,6 +1448,65 @@
       },
       "task_removed": true,
       "task_exit": 0
+    },
+    {
+      "version": "0.1.36",
+      "source_label": "b9af0e9726396edc34265b10469f6e458743a318",
+      "controller_status": "FAIL",
+      "runtime_status": "NEEDS_REPLAN",
+      "wall_seconds": 266.3743050098419,
+      "actions": 2,
+      "decisions": 3,
+      "reason": "proposed completion lacks required visible condition evidence",
+      "blocker": {
+        "kind": "COMPLETION_UNVERIFIED",
+        "observed": {
+          "required_probability": 0.9,
+          "goal": {
+            "description": "Make Task complete visible using Continue then Confirm.",
+            "probability": 0.8952
+          },
+          "conditions": [
+            {
+              "description": "Task complete is visible",
+              "probability": 0.9504
+            }
+          ],
+          "condition_count_matches": true,
+          "observation_id": "2a6fd8c9549e4d429e3c7a8318246f00"
+        },
+        "resume_when": "new visible evidence for the goal and unverified conditions, or planner clarification of observable success conditions; prior input and pixel readiness alone do not prove completion"
+      },
+      "independent_gui_readback": {
+        "stage": 2,
+        "clicks": [
+          "Continue",
+          "Confirm"
+        ],
+        "visible_result": "Task complete",
+        "render_pending": false
+      },
+      "uses_action_bridge": false,
+      "endpoint_removed": true,
+      "cleanup": {
+        "inputs_released": true,
+        "held_input_vks": [],
+        "pointer_restored": true,
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true
+      },
+      "task_removed": true,
+      "task_exit": 0,
+      "fixtures": {
+        "scripts/windows_model_gui_agent.py": "24db97b5bd033af4c21a32b9a6ff5d5eef331ab7271957b80bf8ea3da1626f52",
+        "scripts/windows_gui_support.py": "77cf99d29508ae9d5a37fe28d589178e107a14ebb3ed1531c7bdd13d74110391"
+      }
     }
   ],
   "earlier_attempts_retained": [
@@ -979,34 +1518,52 @@
     "0.1.30 initial stdio probe assumed structuredContent when actual response was text; controller parser corrected without product change.",
     "0.1.32 Codex loaded actual guide body but adapter misclassified double-escaped Windows paths; MCP tool call requires approval, but approval policy is never. Successful invocation not claimed. Configured approval policy unchanged.",
     "0.1.34 primary Codex CLI exit 1, no tool attempts; stderr discarded by historical verifier, exact cause NOT_CAPTURED. Diagnostic actual canonical adapter copied stderr without altering results and passed; does not erase first NOT_RUN.",
-    "0.1.34 native shortcut FAIL and separate diagnostic foreground restore FAIL remain failures; no confidence threshold, input guard or cleanup success condition relaxed."
+    "0.1.34 native shortcut FAIL and separate diagnostic foreground restore FAIL remain failures; no confidence threshold, input guard or cleanup success condition relaxed.",
+    "First0.1.36 controller served immutable CI manifest on loopback without projecting its production artifact URL: artifact origin differs from configured release host. Installer refused before activation and preserved unrelated bytes. Controller-only URL projection corrected; exact archive bytes and every other metadata field unchanged."
   ],
   "source_validation": {
-    "claim": "OBSERVED",
+    "claim": "OBSERVED_SOURCE",
+    "commit": "b9af0e9726396edc34265b10469f6e458743a318",
     "pytest": {
       "passed": 1418,
       "skipped": 34,
       "warnings": 41,
-      "seconds": 66.37
+      "seconds": 67.2,
+      "private_log_sha256": "621255e27b5dc1056723c037014531c716523ededb6e44f1e1a0828bca1ad45a"
     },
     "ruff": "PASS",
+    "format_files": 146,
     "format": "PASS",
-    "generated_contracts": "PASS",
-    "frozen_old_changed": false
+    "generated_contracts": {
+      "status": "PASS",
+      "tool_examples": 3,
+      "cli_examples": 11,
+      "published_cli_examples": 198,
+      "published_tool_examples": 12,
+      "guides": 3
+    },
+    "frozen_old_changed": false,
+    "validation_fixture_checks": {
+      "ruff": "PASS",
+      "format_files": 147,
+      "generated_contracts": "PASS",
+      "native_effects_and_cleanup": "See native_completion and canonical0.1.36 actual receipts; product64files remain exact B9."
+    }
   },
   "measurement_limits": "Reported wall seconds measure entire cold preparation/task/controller runs on this machine. They are not state-change-to-correct-OS-input p95, a speedup, paired accuracy, goodput or coverage.",
   "not_run": {
     "hermes_omp_native": "Executables absent on Windows; cross-harness CLI consumer regression does not establish actual model discovery/load/invoke.",
     "general_blender_operations": "Windows automatic popup/input-owner/IME/effective-keymap/global-idle observations unavailable. Separate Blender host observer/build excluded by user; UNKNOWN cannot authorize six guarded operations.",
     "full_accuracy_goodput_coverage_p95": "No full declared same-work paired suite or 1000 opportunities/coverage distribution measured in this bounded E2E slice; original release gates remain unmet/unpromoted.",
-    "public_release": "Current candidate is local source-bound. Public release/tag/main deployment not authorized or executed; existing feature-branch CI/deployment guards retained.",
+    "public_release": "Immutable CI build/archive/installation checks recorded separately; tag publication and production deploy skipped by existing feature-branch policy. No bypass or public release claimed.",
     "model_production": "Only canonical pinned existing-model preparation and inference; no model training/new asset production."
   },
   "privacy": {
     "raw_traces_committed": false,
     "screenshots_committed": false,
     "credentials_committed": false,
-    "user_configs_committed": false
+    "user_configs_committed": false,
+    "raw_committed": false
   },
   "private_artifact_digests": [
     {
@@ -1326,6 +1883,587 @@
       "sha256": "b2dc9448b8f1a9d08c90c65ede01c06a9800e2805f7ad9c772f0f4f315c60f38",
       "bytes": 3118,
       "raw_committed": false
+    },
+    {
+      "label": "0136/bundle-proof.json",
+      "sha256": "c9947fdcf68377fcc8788242f59444446a5b76b0b37639c88e377ea268bdc315",
+      "bytes": 7030,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/canonical-canonical-cli-result.json",
+      "sha256": "615296b2b7615c76ce54c9fd0e49895d26a9a2a0f55bd72b6e5b50e243e75b5b",
+      "bytes": 1505,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/canonical-controller-report.json",
+      "sha256": "4dd68d6fb96b9322f1d1d75159af84ab3404879dcbcd379580f000fba5a7b8d6",
+      "bytes": 2327,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/desktop-controller-report.json",
+      "sha256": "aae3f0a34a5b7d9a41ef0978061ac8c6c62f45ab5f08e1308f8c5e964def30ae",
+      "bytes": 879,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/desktop-native-result.json",
+      "sha256": "cfb22ba2d0671127ab5efb9f7bf0a269ec00b7819a5283076ed0cd58cd6e3143",
+      "bytes": 558,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/first-install-report.json",
+      "sha256": "2b11305ebf8c804af38f28d532433efa2f332ec0c08aadc6e2975cd67508a861",
+      "bytes": 551,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/first-update.stderr",
+      "sha256": "ae601bd2a252c218680a70a6c0dcaed7320fc39bcd56c171c44b0b597d391d8c",
+      "bytes": 601,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/first-update.stdout",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-controller-report.json",
+      "sha256": "e68d5d3965b0d40208252efbbab9b450cd54ed2d95422b13974a4c1b8bae430f",
+      "bytes": 3979,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-native-result.json",
+      "sha256": "1e31c5dade2094a84cb63e41a234589e4da6f4614ae64b1a5a36b1c984b8588f",
+      "bytes": 3485,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-stderr_trace.private",
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "bytes": 39,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-trace.private",
+      "sha256": "16d0088518eacf67b88af7cebc7f575df360689f53af66161b88b72bb18d9ba7",
+      "bytes": 92090,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-verification.stderr",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness-verification.stdout",
+      "sha256": "2de8b26a9ab33ef15b1931ca32207d543c5bfa3f622bf72f9324058a579e1174",
+      "bytes": 3061,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_natural-controller-report.json",
+      "sha256": "eb65686235a1fba91a021af6bbe337f28cc65bee716bc6055ecab0333e730305",
+      "bytes": 4316,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_natural-native-result.json",
+      "sha256": "1f92d54f0a650bb43ba53f9d7c0cda6b21f6aea9af459929c9f1120a2d705d5e",
+      "bytes": 3788,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_natural-stderr_trace.private",
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "bytes": 39,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_natural-trace.private",
+      "sha256": "b6bbcd6b0fb359654bc8f52ef7917d1962eb943a12989fe4432fd63aa9a435cb",
+      "bytes": 115580,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_negative-controller-report.json",
+      "sha256": "5414b735af533365f3047f46e23875c30d6ecb21ab267074cf5e9c89f25f8649",
+      "bytes": 3594,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_negative-native-result.json",
+      "sha256": "b387250aac56419984d212125b00aec2aaf1eac0dcf755afd3f2dacc599c01b3",
+      "bytes": 3117,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_negative-stderr_trace.private",
+      "sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+      "bytes": 39,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/harness_negative-trace.private",
+      "sha256": "ccf7567780b603debc0e9c03caa4d89a1db5439074894d00d1e94c221292dd4e",
+      "bytes": 1004,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/install-report.json",
+      "sha256": "a05a423ba0ecd380a3094d052b4dd40d3eed0f9164293b4078d1385ca345c7f8",
+      "bytes": 74243,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/mcp-report.json",
+      "sha256": "49d7cfb8c01bc4f57b21daaf7d0f38888c42cec76e504bb305f7f14ac991c7db",
+      "bytes": 605,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native-controller-report.json",
+      "sha256": "09c48057893a944be665bf06ccf7f7beb5d06b1638be1d91ea9768f57da118b9",
+      "bytes": 4843,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native_completion-controller-report.json",
+      "sha256": "c1c186c78b4c06a81e96002dd4f5a993094782a710421e569de33c4b97176e48",
+      "bytes": 3823,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native_completion-native-result.json",
+      "sha256": "878766379441d7cca0b6886e3213c4b2f78deb0c8a5b64994370e58a83d3ab87",
+      "bytes": 3233,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native_final-controller-report.json",
+      "sha256": "1594f5ff786e19f867a51ed4b79620cccd8656f43d967b83785c3e34d2c390f0",
+      "bytes": 1259,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native_synced-controller-report.json",
+      "sha256": "84fb8ba113119384adc7881d6d138838e4d545db7cbd16face08096449d47bc6",
+      "bytes": 4915,
+      "raw_committed": false
+    },
+    {
+      "label": "0136/native_synced-native-result.json",
+      "sha256": "7add4762573c869fa8bfbd36e478ca3684c5b98c0d94bab5106866030fe911f8",
+      "bytes": 3491,
+      "raw_committed": false
     }
-  ]
+  ],
+  "historical_0135_candidate": {
+    "source_commit": "7316837c53784c0f69ca0c55d5539b4cff6c95a7",
+    "classification": "LOCAL_CURRENT_SOURCE_CANDIDATE_NOT_PUBLIC_RELEASE_OR_CI",
+    "wheel_sha256": "25bd2a749315a89cd88fa4341e74869af7c26a5d267585bcee70f16df383c275",
+    "archive_sha256": "65ffd448aee3e81066e58212c62fa7a6477e0c45ab97bdf4b9d2afb1f4d13db7"
+  },
+  "installation_history": [
+    {
+      "status": "PASS",
+      "previous_version": "0.1.34",
+      "version": "0.1.35",
+      "source_hashes_exact": true,
+      "bound_source_files": 64,
+      "managed_codex_command_updated": true,
+      "managed_refresh": "REFRESHED",
+      "repeat": "CURRENT",
+      "repeat_managed": "UNCHANGED",
+      "self_test": {
+        "mode": "DETERMINISTIC_FIXTURE",
+        "sample_statuses": [
+          "COMPLETED"
+        ],
+        "proves": "control flow only; not ML quality or desktop speed"
+      },
+      "steps": [
+        {
+          "name": "update-current-source",
+          "exit_code": 0,
+          "wall_seconds": 51.43350089993328
+        },
+        {
+          "name": "installed-version",
+          "exit_code": 0,
+          "wall_seconds": 0.3053141001146287
+        },
+        {
+          "name": "installed-capabilities",
+          "exit_code": 0,
+          "wall_seconds": 0.6578340998385102
+        },
+        {
+          "name": "installed-self-test",
+          "exit_code": 0,
+          "wall_seconds": 0.7803740000817925
+        },
+        {
+          "name": "installed-doctor",
+          "exit_code": 2,
+          "wall_seconds": 16.859764399938285
+        },
+        {
+          "name": "repeat-current-source",
+          "exit_code": 0,
+          "wall_seconds": 7.337572799995542
+        }
+      ],
+      "preservation": {
+        "unrelated_configs_unchanged": true,
+        "codex_unrelated_bytes_preserved": true,
+        "old_version_files_preserved": true,
+        "local_server_stopped": true
+      },
+      "doctor_desktop": {
+        "status": "UNAVAILABLE",
+        "reason": "Windows GUI unavailable in SSH/service session 0; use an interactive session"
+      },
+      "ml_ready": {
+        "clef": true,
+        "omni": true
+      },
+      "dependency_baseline": "Unchanged pinned runtime dependency wheels from CI 6cdf182; current product wheel source-bound separately. Not new immutable CI or public release."
+    }
+  ],
+  "focus_queue_probe": {
+    "status": "PASS",
+    "keyboard_mouse_input": 0,
+    "previous_window_alive": true,
+    "focus_request_admitted": true,
+    "wm_null_ack": true,
+    "before_own_pump_matched": false,
+    "after_own_pump_matched": true,
+    "own_pump_resolved_observed_mismatch": true,
+    "owned_window_closed": true,
+    "task_removed": true,
+    "scope": "Observed within-run own-queue barrier counterexample; does not prove that one pump always suffices, or a runtime input defect."
+  },
+  "historical_source_validation": {
+    "claim": "OBSERVED",
+    "pytest": {
+      "passed": 1418,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 66.37
+    },
+    "ruff": "PASS",
+    "format": "PASS",
+    "generated_contracts": "PASS",
+    "frozen_old_changed": false
+  },
+  "release_version_note": "0.1.35 local candidate and CI archive have different hashes. Final0.1.36 uses a distinct version so canonical immutable-release checksum guard remains intact.",
+  "ci": {
+    "status": "PASS",
+    "classification": "OBSERVED_CI_BUILD_AND_INSTALLATION_CHECKS_NOT_PUBLIC_RELEASE",
+    "source_commit": "b9af0e9726396edc34265b10469f6e458743a318",
+    "run_id": 38255521947,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38255521947",
+    "run_conclusion": "success",
+    "build_successes": 15,
+    "assemble": "success",
+    "deploy": "skipped",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.36-darwin-arm64-py311.zip",
+        "sha256": "b99fdd29e2dd097fbc07d72768e25c989ed1a5ab3372af48579fa3587ceeb624",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-darwin-arm64-py312.zip",
+        "sha256": "d0488251d28d804013c3c103ea5da7d2389940a9c7f25175b3f0dd6f083d955e",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-darwin-arm64-py313.zip",
+        "sha256": "3f46b8f63cb856447c34051ec218ee352a6f8dfc14f10bf6d1a9715f0f993919",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-darwin-x86_64-py311.zip",
+        "sha256": "ac5be8a7eb01286592c74a93de510393dea76cdee114af4471cb445b916cc2c4",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-darwin-x86_64-py312.zip",
+        "sha256": "e22b2dd5faf68508d12649db1d98b076068ed050e0340133c032419144a76881",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-darwin-x86_64-py313.zip",
+        "sha256": "b93542d5c664b01abbc2230e26da5973957793fbcc42b619af3056082b30574b",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-arm64-py311.zip",
+        "sha256": "8da8de4c619900dc442d46e36a22924c9d479545655cb852d22bca2b564c66e5",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-arm64-py312.zip",
+        "sha256": "445241f0b2166d27a4fa658da43fac6231ed3c9ccbc47d4a4a1762d38fcd7ee5",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-arm64-py313.zip",
+        "sha256": "958cb1d9d0a57b62fc7d3972cc660de502ae6ce9f72e5dd88b28aef46504a616",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-x86_64-py311.zip",
+        "sha256": "49b400c4485587977d832b061e7c187351ef7a9de2d19bfcf09ec060123e5b0a",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-x86_64-py312.zip",
+        "sha256": "f11dd5776032ef5d89f72f1c8bcdfc8c84937060e2494fffe5bf0a3891ebdb69",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-linux-x86_64-py313.zip",
+        "sha256": "3ed0dec9fe565cb756faab3b95a29f5c362fed2994266866b6ca9850e6cb956b",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-win32-x86_64-py311.zip",
+        "sha256": "e312c26de516c192505804693ff8c3270937478aa5d579ca2dc0e1bea4b1aeb9",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-win32-x86_64-py312.zip",
+        "sha256": "0892dcfdd5f26667442c9b997b69d50dd4068d3f45f828079610f6e319e83ed9",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      },
+      {
+        "filename": "clef-use-0.1.36-win32-x86_64-py313.zip",
+        "sha256": "8e27a6c761000e8fa3a77bcab225c82e2b27b82803603b23a9d22299083d8fa4",
+        "source_files_exact": 64,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+      }
+    ],
+    "manifest_sha256": "8ffb8082f399e5b182fc6865783b20e9ad4bd6d1e8e473b137ebd6534e8cedc0",
+    "jobs": [
+      {
+        "name": "build (macos-15, 3.12)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (windows-2022, 3.11)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (macos-15-intel, 3.12)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.12)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.12)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.13)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (macos-15, 3.11)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.11)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (macos-15-intel, 3.11)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (windows-2022, 3.13)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (macos-15, 3.13)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (macos-15-intel, 3.13)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.13)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.11)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "build (windows-2022, 3.12)",
+        "conclusion": "success",
+        "installation_checks": [
+          {
+            "name": "Run uv run --no-sync python scripts/check_installation.py --site release-site --output installer-report.json",
+            "conclusion": "success"
+          }
+        ]
+      },
+      {
+        "name": "assemble",
+        "conclusion": "success",
+        "installation_checks": []
+      },
+      {
+        "name": "deploy",
+        "conclusion": "skipped",
+        "installation_checks": []
+      }
+    ],
+    "superseded_runs": [
+      {
+        "run_id": 38254143272,
+        "head_sha": "5d0dfa9fcc60a753d076d70b909725e36e86f524",
+        "conclusion": "cancelled",
+        "reason": "Superseded by final distinct version0.1.36; duplicate38254659294 came from retry after ambiguous dispatch502."
+      },
+      {
+        "run_id": 38254622671,
+        "head_sha": "c9c9a5a317f1e94d2efb04e2d06e2a6976477357",
+        "conclusion": "cancelled",
+        "reason": "Superseded by final distinct version0.1.36; duplicate38254659294 came from retry after ambiguous dispatch502."
+      },
+      {
+        "run_id": 38254659294,
+        "head_sha": "c9c9a5a317f1e94d2efb04e2d06e2a6976477357",
+        "conclusion": "cancelled",
+        "reason": "Superseded by final distinct version0.1.36; duplicate38254659294 came from retry after ambiguous dispatch502."
+      }
+    ]
+  }
 }

@@ -12,6 +12,8 @@ import traceback
 from pathlib import Path
 from threading import Event, Thread
 
+from windows_gui_support import restore_foreground
+
 from clef_use.backends import DesktopAction, DesktopCapture
 from clef_use.schema import ActionCandidate, BoundingBox, Observation, UIObject
 from clef_use.windows_input import Point, WindowsInput
@@ -262,29 +264,7 @@ def main():
         # foreground if no other actor has taken it from our owned window.
         if owned_target is not None and gui.foreground() == owned_target:
             try:
-                gui.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
-                admitted = gui.user.SetForegroundWindow(previous_target)
-                cleanup["foreground_immediate"] = gui.foreground() == previous_target
-                # Cross-thread foreground activation is asynchronous. Synchronize
-                # its message queue once; do not replay focus or input requests.
-                gui.user.SendMessageTimeoutW.argtypes = [
-                    ctypes.c_void_p,
-                    ctypes.c_uint,
-                    ctypes.c_size_t,
-                    ctypes.c_ssize_t,
-                    ctypes.c_uint,
-                    ctypes.c_uint,
-                    ctypes.POINTER(ctypes.c_size_t),
-                ]
-                gui.user.SendMessageTimeoutW.restype = ctypes.c_ssize_t
-                response = ctypes.c_size_t()
-                acknowledged = admitted and gui.user.SendMessageTimeoutW(
-                    previous_target, 0, 0, 0, 2, 1000, ctypes.byref(response)
-                )
-                cleanup["foreground_queue_synchronized"] = bool(acknowledged)
-                cleanup["foreground_restored"] = bool(
-                    acknowledged and gui.foreground() == previous_target
-                )
+                cleanup.update(restore_foreground(root, gui, previous_target, owned_target))
                 if not cleanup["foreground_restored"]:
                     raise RuntimeError("previous foreground restoration was not confirmed")
             except Exception:

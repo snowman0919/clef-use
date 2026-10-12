@@ -19,7 +19,7 @@ clef-use update
 
 ### Codex
 
-Version 0.1.35 refreshes previously managed registrations against the newly
+Version 0.1.36 refreshes previously managed registrations against the newly
 installed executable. User-modified guides or MCP entries remain conflicts and
 are preserved; manual refresh can select a release with `--command-path`.
 

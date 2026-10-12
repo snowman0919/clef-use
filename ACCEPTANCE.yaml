@@ -230,8 +230,8 @@ scenarios:
     partial: true
   execution_note: Local staged compatible runtime/guide update fixture observed; synthetic 0.1.31 is
     not public release.
-    Actual Windows 0.1.35 update binds 64 packaged files and refreshes the managed
-    physical executable; local source-bound candidate, not public release.
+    Actual immutable CI Windows 0.1.36 update binds 64 packaged files and refreshes
+    the managed physical executable; public release/deploy remain skipped.
 - id: INSTALL-04
   category: installation
   requirement: User-modified guide or config entry is preserved and reported as conflict.
