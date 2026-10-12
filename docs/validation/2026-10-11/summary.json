@@ -2716,6 +2716,12 @@
       "sha256": "0235876e8682b15d12f3e39d58320159a04abac6bfaf8d5a0c84df76edc7a76b",
       "scope": "982 passed / 34 skipped integrated candidate. Complete transform vectors, original context/baseline and verified preview revalidation, all observed property readback, roundtrip numeric literals and owned-cancel context. API-assisted native Tk rectangle component; no Blender operation, model, whole-task E2E, installed-current or performance claim."
     },
+    "x11_logical_pointer_mapping": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/x11-logical-pointer-mapping.json",
+      "sha256": "fd31e4be199ff3a58cf19240a1815486f877f1b8ea987cde2cd0c8ccc5771bb5",
+      "scope": "Nine authenticated native X11 cases; scoped49PASS and integrated982PASS/34SKIP. Actual prior swapped-map left click became right and upward wheel became downward. Correct logical buttons/wheel, modifier gesture, unrelated-held refusal, independent abort and executor-kill guardian release. Fresh mapping query is not atomic with external remap. No Windows/Darwin native, model, whole E2E or performance claim."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2948,7 +2954,8 @@
     "blender-rna-observer-component.json",
     "literal-candidate-alternatives.json",
     "operation-context-guards.json",
-    "transform-readback-and-dispatch.json"
+    "transform-readback-and-dispatch.json",
+    "x11-logical-pointer-mapping.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

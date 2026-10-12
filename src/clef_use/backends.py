@@ -514,6 +514,47 @@ class DesktopAction:
         self.buttons = set()
         self.gui = gui
         self.input_executor = None
+        self.x11_state = None
+        self.x11_buttons = {}
+
+    def _button_down(self, gui, button, target=None):
+        if isinstance(gui, WindowsInput):
+            gui.mouseDown(button=button, target=target)
+        elif sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            from .x11_input_state import X11InputState, button_event
+
+            if self.x11_state is None:
+                self.x11_state = X11InputState(gui.platformModule._display.get_display_name())
+            code = self.x11_state.button_code(button)
+            button_event(gui.platformModule._display, code, True)
+            self.x11_buttons[button] = code
+        else:
+            gui.mouseDown(button=button)
+        self.buttons.add(button)
+
+    def _button_up(self, gui, button):
+        if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            from .x11_input_state import button_event
+
+            button_event(gui.platformModule._display, self.x11_buttons[button], False)
+            del self.x11_buttons[button]
+        else:
+            gui.mouseUp(button=button)
+        self.buttons.discard(button)
+
+    def _scroll(self, gui, clicks, *, horizontal=False, target=None):
+        if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            button = (7 if clicks > 0 else 6) if horizontal else (4 if clicks > 0 else 5)
+            for _ in range(abs(clicks)):
+                try:
+                    self._button_down(gui, button)
+                finally:
+                    if button in self.buttons:
+                        self._button_up(gui, button)
+        elif isinstance(gui, WindowsInput):
+            (gui.hscroll if horizontal else gui.scroll)(clicks, target=target)
+        else:
+            (gui.hscroll if horizontal else gui.scroll)(clicks)
 
     def execute_input(
         self,
@@ -648,10 +689,7 @@ class DesktopAction:
                 if target:
                     gui.moveTo(*observation.frame.point(target.bbox))
                 clicks = 3 if action.value == "up" else -3
-                if native:
-                    gui.scroll(clicks, observation.frame.foreground_window)
-                else:
-                    gui.scroll(clicks)
+                self._scroll(gui, clicks, target=observation.frame.foreground_window)
             elif op == "wait":
                 return ActionResult(ok=False, reason="visual wait is owned by the runtime")
             return ActionResult(ok=not cancelled.is_set())
@@ -684,18 +722,12 @@ class DesktopAction:
             if pointer.scroll_direction in {"left", "right"}:
                 if not hasattr(gui, "hscroll"):
                     raise RuntimeError("horizontal scrolling unavailable in input backend")
-                gui.hscroll(clicks)
-            elif native:
-                gui.scroll(clicks, frame.foreground_window)
+                self._scroll(gui, clicks, horizontal=True, target=frame.foreground_window)
             else:
-                gui.scroll(clicks)
+                self._scroll(gui, clicks, target=frame.foreground_window)
             return
         try:
-            if native:
-                gui.mouseDown(button="left", target=frame.foreground_window)
-            else:
-                gui.mouseDown(button="left")
-            self.buttons.add("left")
+            self._button_down(gui, "left", frame.foreground_window)
             for point in points[1:]:
                 if cancelled.wait(pointer.duration / (len(points) - 1)):
                     return
@@ -718,11 +750,7 @@ class DesktopAction:
             if cancelled.is_set():
                 return
             try:
-                if native:
-                    gui.mouseDown(button="left", target=target)
-                else:
-                    gui.mouseDown(button="left")
-                self.buttons.add("left")
+                self._button_down(gui, "left", target)
             finally:
                 self._release_with(gui)
             if count > 1:
@@ -775,8 +803,7 @@ class DesktopAction:
                     errors.append(exc)
             for button in tuple(self.buttons):
                 try:
-                    gui.mouseUp(button=button)
-                    self.buttons.discard(button)
+                    self._button_up(gui, button)
                 except Exception as exc:
                     errors.append(exc)
             if isinstance(gui, WindowsInput):

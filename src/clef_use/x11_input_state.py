@@ -1,10 +1,19 @@
-"""Private read-only X11 query connection; native state is never cached."""
+"""Private X11 state queries and physical button events; state is never cached."""
 
 import os
 import threading
 import weakref
 from contextlib import contextmanager
 from itertools import zip_longest
+
+
+def button_event(connection, code, pressed):
+    """Inject/release the physical button code acknowledged by this owner."""
+    from Xlib import X
+    from Xlib.ext.xtest import fake_input
+
+    fake_input(connection, X.ButtonPress if pressed else X.ButtonRelease, code)
+    connection.sync()
 
 
 class X11InputState:
@@ -78,3 +87,14 @@ class X11InputState:
             actual = tuple(connection.get_keyboard_mapping(code, 1)[0])
         # X11 pads keymap rows with NoSymbol to the longest server row.
         return all(left == right for left, right in zip_longest(expected, actual, fillvalue=0))
+
+    def button_code(self, button):
+        """Resolve a logical button through the current server mapping, never a cache."""
+        logical = {"left": 1, "middle": 2, "right": 3}.get(button, button)
+        if type(logical) is not int or not 1 <= logical <= 7:
+            raise RuntimeError("unsupported logical mouse button")
+        with self.query() as connection:
+            mapping = list(connection.get_pointer_mapping())
+        if mapping.count(logical) != 1:
+            raise RuntimeError("logical mouse button unavailable in current OS mapping")
+        return mapping.index(logical) + 1

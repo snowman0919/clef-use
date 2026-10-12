@@ -49,6 +49,11 @@ the observed keymap content as well as its version label. Viewport dispatch anch
 the checked editor geometry; the input guard rechecks its editor surface before
 and during a gesture. A changed surface stops execution and releases owned input.
 These guards do not supply missing state or enable the partial Blender provider.
+X11 typed and legacy pointer paths resolve logical buttons and wheel directions
+through the current server pointer map. A disabled logical button refuses input.
+Release and the independent guardian use the physical code acknowledged at press,
+preserving unrelated held input. Mapping lookup and injection are separate native
+requests, so this is not an atomic guarantee against an external concurrent remap.
 Numeric transforms require finite XYZ readback for translation, rotation and scale
 on every observed object before entry. Dispatch rechecks the transform context;
 the initial values must match before entry and the verified preview before commit.

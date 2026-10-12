@@ -34,6 +34,21 @@ readback helpers, not native numeric text parsing or a complete Blender operatio
 The exact owned HOME process scan found no matches; 420 unreadable unrelated
 process entries were outside that check. See
 [numeric component evidence](validation/2026-10-11/transform-readback-and-dispatch.json).
+
+**OBSERVED / X11 pointer mapping:** the exact prior source delivered Button3 for
+a logical left click and a negative native wheel delta for an upward scroll under
+an owned swapped pointer map. Typed and legacy paths now query the current map
+and retain the acknowledged physical code for release. Nine authenticated private
+Xvfb cases verified all three logical buttons, fresh remapping, both wheel axes,
+modifier gestures, disabled-button refusal, preservation of unrelated held input,
+independent abort and executor SIGKILL/guardian EOF recovery. Every case ended
+with native pointer mask zero, its server reaped and its socket absent. The scoped
+checks passed 49 tests; the integrated source result above includes all nine cases.
+Mapping lookup and injection are separate requests; a simultaneous external remap
+is outside the atomicity claim. Windows/Darwin native execution is NOT_RUN in this
+slice. No production display or model was used. See
+[pointer component evidence](validation/2026-10-11/x11-logical-pointer-mapping.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

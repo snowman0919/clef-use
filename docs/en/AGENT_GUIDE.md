@@ -132,6 +132,9 @@ use its selected user profile. Inspect source/shadow status before moving guides
 
 Cancel only your own session; verify owned input release. Exact Unicode clipboard
 insertion and IME composition are distinct; active or unknown IME blocks shortcuts.
+X11 left/middle/right buttons and wheel directions follow the current OS pointer
+mapping. Disabled logical buttons refuse input. Normal release, independent abort
+and guardian recovery release the physical button acknowledged at press.
 X11 literals require the explicit clipboard method, including ASCII; keyboard
 events can enter an idle IME instead of inserting the requested characters.
 Clipboard transfer is not widget readback. Unsupported prior clipboard formats

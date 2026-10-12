@@ -236,6 +236,7 @@ class InputExecutor:
         self.delivery = None
         self.x11_state = None
         self.x11_keys = {}
+        self.x11_buttons = {}
         self.x11_keymap = None
         if getattr(gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
             # This is the map used to construct PyAutoGUI's fixed logical
@@ -335,6 +336,7 @@ class InputExecutor:
                             "native_keys": native_keys,
                             "unicode_units": units,
                             "x11_keys": self.x11_keys,
+                            "x11_buttons": self.x11_buttons,
                         }
                     )
                     + "\n"
@@ -436,6 +438,8 @@ class InputExecutor:
                     ("left", X.Button1Mask),
                     ("middle", X.Button2Mask),
                     ("right", X.Button3Mask),
+                    (4, X.Button4Mask),
+                    (5, X.Button5Mask),
                 ):
                     if mask & bit and button not in self.buttons:
                         return True
@@ -456,9 +460,13 @@ class InputExecutor:
                         raise InputInterrupted("logical key unavailable in current OS keymap")
                     bitmap = connection.query_keymap()
                     return bool(bitmap[code // 8] & (1 << (code % 8)))
-                mask = {"left": X.Button1Mask, "middle": X.Button2Mask, "right": X.Button3Mask}[
-                    button
-                ]
+                mask = {
+                    "left": X.Button1Mask,
+                    "middle": X.Button2Mask,
+                    "right": X.Button3Mask,
+                    4: X.Button4Mask,
+                    5: X.Button5Mask,
+                }.get(button, 0)
                 return bool(connection.screen().root.query_pointer().mask & mask)
         return False
 
@@ -502,6 +510,12 @@ class InputExecutor:
                 raise InputInterrupted("button is already held outside this lease")
             if self._native():
                 self.gui.mouseDown(button, target=frame.foreground_window)
+            elif getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+                from .x11_input_state import button_event
+
+                code = self._x11_state().button_code(button)
+                button_event(self.gui.platformModule._display, code, True)
+                self.x11_buttons[button] = code
             else:
                 self.gui.mouseDown(button=button, _pause=False)
             self.buttons.add(button)
@@ -530,6 +544,11 @@ class InputExecutor:
             else:
                 if self._native():
                     self.gui.mouseUp(button=value)
+                elif getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+                    from .x11_input_state import button_event
+
+                    button_event(self.gui.platformModule._display, self.x11_buttons[value], False)
+                    del self.x11_buttons[value]
                 else:
                     self.gui.mouseUp(button=value, _pause=False)
             pool.discard(value)
@@ -771,14 +790,25 @@ class InputExecutor:
             elif isinstance(command, WheelInput):
                 self._move(command.point, frame)
                 self._check(cancelled, deadline, context_guard, frame)
-                name = "scroll" if command.axis == "vertical" else "hscroll"
-                function = getattr(self.gui, name, None)
-                if function is None:
-                    return ActionResult(ok=False, reason="wheel axis unavailable")
-                if self._native():
-                    function(command.amount, target=frame.foreground_window)
+                if getattr(self.gui, "__name__", "") == "pyautogui" and sys.platform == "linux":
+                    button = (
+                        (4 if command.amount > 0 else 5)
+                        if command.axis == "vertical"
+                        else (7 if command.amount > 0 else 6)
+                    )
+                    for _ in range(abs(command.amount)):
+                        self._check(cancelled, deadline, context_guard, frame)
+                        self._button_down(button, frame)
+                        self._up("button", button)
                 else:
-                    function(command.amount)
+                    name = "scroll" if command.axis == "vertical" else "hscroll"
+                    function = getattr(self.gui, name, None)
+                    if function is None:
+                        return ActionResult(ok=False, reason="wheel axis unavailable")
+                    if self._native():
+                        function(command.amount, target=frame.foreground_window)
+                    else:
+                        function(command.amount)
             else:
                 self._text(command, frame, cancelled, deadline, context_guard)
             self._check(cancelled, deadline, context_guard, frame)
@@ -867,17 +897,18 @@ def _guardian_main():
         updates.put(None)
 
     threading.Thread(target=read, daemon=True).start()
-    owned, deadline, native_keys, unicode_units, x11_keys = [], None, {}, [], {}
+    owned, deadline, native_keys, unicode_units, x11_keys, x11_buttons = [], None, {}, [], {}, {}
     while True:
         try:
             message = updates.get(timeout=0.01)
         except queue.Empty:
             message = {}
         if message is not None and message:
-            owned, deadline = message["owned"], message["deadline"]
+            owned, deadline = [tuple(item) for item in message["owned"]], message["deadline"]
             native_keys = message.get("native_keys", {})
             unicode_units = message.get("unicode_units", [])
             x11_keys = message.get("x11_keys", {})
+            x11_buttons = message.get("x11_buttons", {})
         expired = deadline is not None and time.monotonic() >= deadline
         if message is None or expired:
             if sys.platform == "win32":
@@ -889,6 +920,11 @@ def _guardian_main():
                 owned = [
                     *owned,
                     *[("key", key) for key in x11_keys if ("key", key) not in owned],
+                    *[
+                        ("button", int(value) if value.isdigit() else value)
+                        for value in x11_buttons
+                        if ("button", int(value) if value.isdigit() else value) not in owned
+                    ],
                 ]
             for kind, value in reversed(owned):
                 try:
@@ -908,7 +944,14 @@ def _guardian_main():
                         else:
                             gui.keyUp(KEY_ALIASES.get(value, value), _pause=False)
                     else:
-                        gui.mouseUp(button=value)
+                        if sys.platform == "linux":
+                            from .x11_input_state import button_event
+
+                            button_event(
+                                gui.platformModule._display, x11_buttons[str(value)], False
+                            )
+                        else:
+                            gui.mouseUp(button=value)
                 except Exception:
                     pass  # Recovery is best effort under the same OS permissions.
             if sys.platform == "win32":
@@ -917,7 +960,7 @@ def _guardian_main():
                         gui._send(Input(type=1, keyboard=KeyboardInput(0, unit, 6, 0, 0)))
                     except Exception:
                         pass
-            owned, deadline, x11_keys = [], None, {}
+            owned, deadline, x11_keys, x11_buttons = [], None, {}, {}
             if message is None:
                 return
 

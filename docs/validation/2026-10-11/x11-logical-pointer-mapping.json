@@ -1,0 +1,243 @@
+{
+  "scope": "Native X11 typed and legacy logical-button component only; no model, E2E, performance, or production desktop claim",
+  "source_base_commit": "f1a340d",
+  "source_sha256": {
+    "src/clef_use/input_ir.py": "b83414837d051883cdb758e09d02dce86707f4a17175285ca5d0da4dfe91e7b4",
+    "src/clef_use/x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139",
+    "src/clef_use/backends.py": "83621755d0123a3eaecc9a799338bc87b0d1d3c1de0d76b2079bfde60ce97c7d",
+    "tests/test_input_button_mapping_native.py": "a89664316a38c21ef70550ec33aa79aeb7bc9691912088efbcb53c3937bde9e9"
+  },
+  "before": {
+    "report_path": "/tmp/clef-buttonmap-before-20261012-ye04k44k/report.json",
+    "sha256": "42f692994cb88914c22e2c59d5ba015336a1ad73860a1a022ad81fef8291d2da",
+    "observed_typed_left_button": 3,
+    "observed_legacy_left_button": 3,
+    "observed_vertical_positive_tk_delta": -120,
+    "expected_left_button": 1,
+    "expected_vertical_positive_tk_delta": 120
+  },
+  "retained_setup_failure": {
+    "report_path": "/tmp/clef-typed-buttonmap-audit-20261012-ock7jmso/report.json",
+    "reason": "foreground changed or unknown",
+    "input_delivery": "NOT_ESTABLISHED"
+  },
+  "native_after": [
+    {
+      "evidence_sha256": "b072eff0ea353ba366ea34c60bcbaaa5f5c5d805f1b038e035343366f1d360cd",
+      "case": "abort",
+      "native_events": [
+        [
+          1,
+          0
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "beca2a8ace746e59c4d48bc3cb2d09efd2a75950190ec459a01fa2b5d00b6390",
+      "case": "crash",
+      "native_events": [
+        [
+          1,
+          0
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "7f239a68330853687686aab695261232b0bc766b254232170b5690d377a4cce4",
+      "case": "disabled",
+      "native_events": [],
+      "wheel_events": [],
+      "native_releases": [],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "cdbfaea39b2ca59ff331724fad6fc1a1b0646c9f8edf533e8901bdc72e95e29a",
+      "case": "gesture",
+      "native_events": [
+        [
+          3,
+          4
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [
+        [
+          3,
+          1028,
+          480,
+          300
+        ]
+      ],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "39e1da8a49203dc550ccf49d62956a88c7cf3ea735f2d36945e437bc58d93822",
+      "case": "human",
+      "native_events": [
+        [
+          3,
+          0
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [
+        [
+          3,
+          1024,
+          400,
+          300
+        ]
+      ],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "bf67dfd11d5dd4831b658a376bbe55fd82c8d2674f4cf2b4a417ae94b700cc7b",
+      "case": "legacy",
+      "native_events": [
+        [
+          1,
+          0
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [
+        [
+          1,
+          256,
+          400,
+          300
+        ]
+      ],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "06d753d875ba9e872d5e3a6a81fcfc11c9dfbfebf231fca270cc361282f17c8d",
+      "case": "legacy_scroll",
+      "native_events": [],
+      "wheel_events": [
+        [
+          120,
+          0
+        ],
+        [
+          120,
+          0
+        ],
+        [
+          120,
+          0
+        ]
+      ],
+      "native_releases": [],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "a40193eb34bf7622e6392faa632399abc0b3ec6c985e3dd00b4fff6951b2cedb",
+      "case": "typed",
+      "native_events": [
+        [
+          1,
+          0
+        ],
+        [
+          2,
+          0
+        ],
+        [
+          3,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "wheel_events": [],
+      "native_releases": [
+        [
+          1,
+          256,
+          400,
+          300
+        ],
+        [
+          2,
+          512,
+          400,
+          300
+        ],
+        [
+          3,
+          1024,
+          400,
+          300
+        ],
+        [
+          1,
+          256,
+          400,
+          300
+        ]
+      ],
+      "pointer_mask": 0
+    },
+    {
+      "evidence_sha256": "b0ef95bc5f02ced605e4453aafd82cd401e4aba9853d6e062899bf647a912a12",
+      "case": "wheel",
+      "native_events": [],
+      "wheel_events": [
+        [
+          120,
+          0
+        ],
+        [
+          -120,
+          0
+        ],
+        [
+          -120,
+          1
+        ],
+        [
+          120,
+          1
+        ]
+      ],
+      "native_releases": [],
+      "pointer_mask": 0
+    }
+  ],
+  "scoped_checks": {
+    "command": ".venv/bin/pytest -q tests/test_input_button_mapping_native.py tests/test_input_ir.py tests/test_adapters.py tests/test_input_ir_native.py",
+    "result": "49 passed in 7.99s",
+    "ruff_check": "PASS four owned files",
+    "ruff_format_check": "PASS four owned files"
+  },
+  "cleanup": {
+    "new_nine_cases": "each own authenticated Xvfb process waited and own socket absence asserted",
+    "crash_case": "actual executor SIGKILL; guardian EOF releases acknowledged physical code; guardian exit0 reaped",
+    "production_display_actions": 0
+  },
+  "limitations": [
+    "X11 mapping resolution is a fresh native query, not an atomic transaction against a simultaneous external remap before injection. Server refusal to remap an already held affected physical button was observed.",
+    "Windows and Darwin native behavior unchanged; Windows native execution NOT_RUN in this slice.",
+    "Guardian tuple normalization prevents duplicate recovery iterations inferred from JSON list-versus-tuple comparisons; duplicate native release events were not claimed observed."
+  ],
+  "classification": "OBSERVED",
+  "worker_receipt_sha256": "fa54027e0bec11f0a143cd43c13208bb4a2559742c30de9a14cf046f32464e24",
+  "integrated_regression": {
+    "passed": 982,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 57.9,
+    "scope": "Integrated numeric operation and X11 pointer-mapping source candidate",
+    "log_sha256": "fd1a9b8d7f79108e17ef1cca54f8a322c174b17d6dc1b66762e67ddb85b3fbbd"
+  },
+  "acceptance_status_promotions": []
+}

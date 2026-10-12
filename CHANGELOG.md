@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Resolve logical X11 buttons and wheel directions through the current OS pointer
+  mapping. Release the acknowledged physical button during normal completion,
+  independent abort and guardian recovery after executor exit.
 - Require complete transform vectors before numeric input, recheck context and
   baseline before entry, and recheck the verified preview before commit. Verify
   all observed properties after a scalar edit, including unchanged fields/objects.
