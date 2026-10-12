@@ -103,6 +103,174 @@ def test_modified_guide_and_modified_mcp_survive_update_and_removal(installation
     assert server_entry("codex", layout["config"].read_text())["tool_timeout_sec"] == 123
 
 
+def _ownership_edit(layout, change):
+    target = layout["root"] / "clef-use/SKILL.md"
+    data = target.read_bytes() + b"\nHuman customization\n"
+    if change == "config":
+        target = layout["config"]
+        original = target.read_text()
+        entry = dict(server_entry("codex", original), tool_timeout_sec=123)
+        data = render_entry("codex", original, entry).encode()
+    elif change == "unrelated_config":
+        target = layout["config"]
+        data = b'model = "human-choice"\n# Human comment\n' + target.read_bytes()
+    elif change == "new_file":
+        target = target.parent / "human-notes.md"
+        data = b"Human notes\n"
+    elif change == "deleted_file":
+        data = None
+    elif change == "removed_guide":
+        target = layout["root"] / "clef-use-diagnostics/SKILL.md"
+        data = target.read_bytes() + b"\nHuman customization\n"
+    elif change == "fresh_target":
+        target = layout["root"] / "clef-use-blender/SKILL.md"
+        data = b"Human-owned new skill\n"
+    elif change in ("manifest", "registry"):
+        target = layout["state"] / "manifest.json" if change == "manifest" else layout["registry"]
+        data = (
+            json.dumps(dict(json.loads(target.read_text()), human_note="preserve")) + "\n"
+        ).encode()
+    return target, data
+
+
+def _home_files(home):
+    return {path: path.read_bytes() for path in home.rglob("*") if path.is_file()}
+
+
+@pytest.mark.parametrize("dry_run", [False, True])
+@pytest.mark.parametrize(
+    "change",
+    [
+        "guide",
+        "config",
+        "unrelated_config",
+        "new_file",
+        "deleted_file",
+        "removed_guide",
+        "fresh_target",
+        "manifest",
+        "registry",
+    ],
+)
+def test_capability_probe_cannot_replace_later_user_edits(installation, change, dry_run):
+    home, command = installation
+    integrations.integrate("codex", command=command)
+    layout = integrations._layout("codex")
+    target, edited = _ownership_edit(layout, change)
+    launcher = Path(command)
+    # The real subprocess writes after ownership validation, before journaling.
+    lines = launcher.read_text().splitlines(keepends=True)
+    mutation = (
+        f"from pathlib import Path\np = Path({str(target)!r})\n"
+        "p.parent.mkdir(parents=True, exist_ok=True)\n"
+        + ("p.unlink()\n" if edited is None else f"p.write_bytes({edited!r})\n")
+    )
+    launcher.write_text("".join(lines[:-1]) + mutation + lines[-1])
+    expected = _home_files(home)
+    if edited is None:
+        del expected[target]
+    else:
+        expected[target] = edited
+    skills = (
+        ["core"]
+        if change == "removed_guide"
+        else ["core", "diagnostics", "blender"]
+        if change == "fresh_target"
+        else None
+    )
+
+    result = integrations.integrate("codex", command=command, skills=skills, dry_run=dry_run)
+
+    assert result["status"] == "CONFLICT"
+    assert _home_files(home) == expected
+
+
+@pytest.mark.parametrize(
+    "change",
+    ["guide", "config", "unrelated_config", "new_file", "deleted_file", "manifest", "registry"],
+)
+@pytest.mark.parametrize("dry_run", [False, True])
+def test_remove_cannot_adopt_changes_after_ownership_validation(
+    installation, monkeypatch, change, dry_run
+):
+    home, command = installation
+    integrations.integrate("codex", command=command)
+    layout = integrations._layout("codex")
+    target, edited = _ownership_edit(layout, change)
+    expected = _home_files(home)
+    if edited is None:
+        del expected[target]
+    else:
+        expected[target] = edited
+    original_render = integrations.render_entry
+
+    def edit_after_render(*args, **kwargs):
+        rendered = original_render(*args, **kwargs)
+        if edited is None:
+            target.unlink()
+        else:
+            target.write_bytes(edited)
+        return rendered
+
+    monkeypatch.setattr(integrations, "render_entry", edit_after_render)
+
+    result = integrations.remove("codex", dry_run=dry_run)
+
+    assert result["status"] == "CONFLICT"
+    assert _home_files(home) == expected
+
+
+@pytest.mark.parametrize("operation", ["integrate", "remove"])
+def test_metadata_change_during_parsing_is_preserved(installation, monkeypatch, operation):
+    home, command = installation
+    integrations.integrate("codex", command=command)
+    layout = integrations._layout("codex")
+    target, edited = _ownership_edit(layout, "manifest")
+    expected = _home_files(home)
+    expected[target] = edited
+    original_load = integrations._load_manifest
+
+    def edit_after_parse(selected):
+        manifest = original_load(selected)
+        target.write_bytes(edited)
+        return manifest
+
+    monkeypatch.setattr(integrations, "_load_manifest", edit_after_parse)
+
+    result = (
+        integrations.integrate("codex", command=command)
+        if operation == "integrate"
+        else integrations.remove("codex")
+    )
+
+    assert result["status"] == "CONFLICT"
+    assert _home_files(home) == expected
+
+
+@pytest.mark.parametrize("change", ["guide", "new_file"])
+def test_transaction_rechecks_ownership_before_journaling(installation, monkeypatch, change):
+    home, command = installation
+    integrations.integrate("codex", command=command)
+    layout = integrations._layout("codex")
+    target, edited = _ownership_edit(layout, change)
+    expected = _home_files(home)
+    expected[target] = edited
+    original_transaction = integrations._transaction
+
+    def edit_before_transaction(*args, **kwargs):
+        target.write_bytes(edited)
+        return original_transaction(*args, **kwargs)
+
+    monkeypatch.setattr(integrations, "_transaction", edit_before_transaction)
+
+    result = integrations.integrate(
+        "codex", command=command, skills=["core", "diagnostics", "blender"]
+    )
+
+    assert result["status"] == "CONFLICT"
+    assert _home_files(home) == expected
+
+
 @pytest.mark.parametrize(
     "harness,original",
     [

@@ -150,8 +150,10 @@ typed operation セッションの継続には明示的な `operation` が必要
 入力とプロセスの終了確認が別途必要です。非公開 API 補助作業の成功は、
 production での実行可能性や目標全体の完了を証明しません。
 
-`MODIFIED`・`CONFLICT` はユーザーの編集を保存し、統合状態ディレクトリに比較用
-コピーを残します。明示的に無効にした項目は有効にしません。更新後は capability
+`MODIFIED`・`CONFLICT` はユーザーの編集を保存します。既存の guide の競合は統合状態
+ディレクトリに比較用コピーを残します。capability 確認中の変更や guide ファイルの
+追加・削除は journal 作成前に適用を止め、preview と変更のない計画も所有権を再確認します。
+明示的に無効にした項目は有効にしません。更新後は capability
 のバージョンを確認し、キャッシュされたクライアントを再ロードしてください。
 削除するのは変更されていない管理項目だけです。Hermes は project scope 非対応
 なので、選択した user profile を使います。移動前に source・shadow を確認します。

@@ -1,0 +1,137 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT",
+  "source_base": "9e52785bf85b918b74c922673b5ab647255da6ea",
+  "requirements": [
+    "INSTALL-04",
+    "INSTALL-08"
+  ],
+  "scope": "Actual integrate/remove/transaction functions in isolated temporary HOME, real compatible executable capability fixture, deterministic file edits and byte preservation. No installed-product, native GUI/input, harness session, model, whole E2E or performance claim.",
+  "integrated_source_sha256": {
+    "src/clef_use/integrations.py": "b822f236449ca91b9ca299ac095d7649cc25dbb7bd1cf1799c483be2b99c58e2",
+    "tests/test_integrations.py": "188be249bd4117a40658e45ca9225d92da35db48ca6157c4e9263456b30704a8"
+  },
+  "problem": "Ownership validation preceded a potentially slow capability probe, but the transaction subsequently adopted edited bytes as its baseline and wrote stale approved content over them.",
+  "contracts": [
+    "Keep the metadata/config bytes and selected/removed guide inventories used for validation through runtime discovery. New write targets have approved None when absent from the validated inventory.",
+    "Revalidate approved bytes/inventories before PREVIEW/UNCHANGED decisions and journal creation. Changed files, added/deleted files or unreadable targets return CONFLICT before planned activation.",
+    "Both integrate and remove use required approved snapshot parameters; journal before bytes derive from these snapshots, not a later read.",
+    "Keep existing post-journal activation exceptions and recovery conflicts. No atomic compare-and-swap or multi-file atomicity with external writers is claimed."
+  ],
+  "actual_executable_component": {
+    "method": "Compatible executable performs an actual file edit during its capability invocation; canonical integrate and transaction execute without a mocked transaction. The editor receipt proves the write occurred.",
+    "before": [
+      {
+        "case": "guide",
+        "initial_status": "INSTALLED",
+        "reenrollment_status": "INSTALLED",
+        "user_edit_observed_in_actual_launcher": true,
+        "user_edit_preserved": false,
+        "target_restored_to_pre_edit_bytes": true,
+        "journal_exists": false
+      },
+      {
+        "case": "config_entry",
+        "initial_status": "INSTALLED",
+        "reenrollment_status": "INSTALLED",
+        "user_edit_observed_in_actual_launcher": true,
+        "user_edit_preserved": false,
+        "target_restored_to_pre_edit_bytes": true,
+        "journal_exists": false
+      }
+    ],
+    "after": [
+      {
+        "case": "guide",
+        "initial_status": "INSTALLED",
+        "reenrollment_status": "CONFLICT",
+        "user_edit_observed_in_actual_launcher": true,
+        "user_edit_preserved": true,
+        "target_restored_to_pre_edit_bytes": false,
+        "journal_exists": false
+      },
+      {
+        "case": "config_entry",
+        "initial_status": "INSTALLED",
+        "reenrollment_status": "CONFLICT",
+        "user_edit_observed_in_actual_launcher": true,
+        "user_edit_preserved": true,
+        "target_restored_to_pre_edit_bytes": false,
+        "journal_exists": false
+      }
+    ]
+  },
+  "permanent_regressions": {
+    "immutable_baseline": {
+      "failed": 36,
+      "deselected": 85,
+      "seconds": 2.72
+    },
+    "current_scoped": {
+      "passed": 121,
+      "seconds": 5.61
+    },
+    "boundaries": [
+      "capability probe: guide/MCP/unrelated config edit, new file, deleted file, removed guide, new target, manifest, registry; real and preview",
+      "remove after ownership validation: guide/MCP/unrelated config/new file/deleted file/metadata; real and preview",
+      "metadata drift during parser double read",
+      "transaction direct pre-journal drift: changed guide and new file"
+    ]
+  },
+  "regression_history": {
+    "initial": {
+      "failed": 30,
+      "deselected": 85,
+      "seconds": 3.58
+    },
+    "intermediate_scoped": [
+      {
+        "passed": 115,
+        "seconds": 5.27
+      },
+      {
+        "passed": 117,
+        "seconds": 6.18
+      }
+    ],
+    "final_scoped": {
+      "passed": 121,
+      "seconds": 5.61
+    },
+    "note": "Two transaction-entry drift cases and four benign config comment/model-field drift cases were added after the initial 30-case proof. Final 36 cases all fail against immutable Git9e52785 source."
+  },
+  "integrated_regression": {
+    "passed": 1299,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 64.43
+  },
+  "static_checks": {
+    "two_python_ruff": "PASS",
+    "two_python_format": "PASS",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool"
+  },
+  "independent_review": {
+    "classification": "INFERRED_STATIC_REVIEW",
+    "scope": "Exact final source/test hashes; both transaction callers cover every planned path with approved metadata/config or inventory bytes/None. No additional confirmed defect found; not execution evidence or an atomicity proof."
+  },
+  "not_run": {
+    "installed_current_native_harness_e2e": "No new installed-product or harness session; whole E2E belongs to the other session.",
+    "model_production_evaluation": "Other sessions under the direct user scope update.",
+    "full_task_accuracy_p95_goodput_coverage": "No full-task/model or performance trials in this software slice.",
+    "public_release": "Existing feature branch/draft PR only, no release execution."
+  },
+  "acceptance_and_release_status_changed": false,
+  "private_evidence_copied": false,
+  "retained_artifact_sha256": {
+    "clef-integration-ownership-9e52785-source-20261012.py": "b61ec02103dfda098b47d58b55a788a1bae6175089eefdacd678aca6ff1c55b7",
+    "clef-integration-ownership-before-20261012.json": "b80390925c776350b59f770f7fc45b0a99e896b8cd3bf97a8a51e3cadae45754",
+    "clef-integration-ownership-after-20261012.json": "d3551327d1ba0dddcf2f06a3e4edcc32fe43e73f2fd50955bf5346e12cb66f47",
+    "clef-integration-ownership-probe-20261012.py": "8be7ad6058dcd11eea8865c604048fd715bbc93ddf2c862c52c44ed41f407476",
+    "clef-integration-ownership-probe-after-20261012.py": "5bd4821f9a4dc215033e14d1c6d6dc8cdc3d1f985d361ce57cf8894a3a7f0e5a",
+    "clef-integration-ownership-red-20261012.log": "02c09eaaa796c840b393a35588edd1717836862d9954d7b635994e12a09c99b3",
+    "clef-integration-ownership-red-immutable-20261012.log": "248cc2b179975c5b6ed6c463e7051db19a69fb5248c4f02f1650822f76b05a23",
+    "clef-integration-ownership-green-final-20261012.log": "77a22e761c41c5ed84aca2b3cdd2add3521ea175d0c5897b032f6ffbbab6fcc9",
+    "clef-integration-ownership-fix-public-20261012.json": "15e302b826dead8ac3d15cfe9a54bdaf11a23965c36bdcc8ee67e9b8e595d700",
+    "clef-integration-ownership-integrated-20261012.log": "7892ca608a9ab1f546d6acd219502ce5e1170bb4330f557383caa7d274229364"
+  }
+}

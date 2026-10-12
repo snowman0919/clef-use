@@ -443,16 +443,55 @@ def _shadowed(layout: dict, names: list[str], original: str) -> list[dict]:
     return result
 
 
-def _transaction(layout: dict, writes: dict[Path, bytes | None]) -> None:
+def _metadata_inputs(layout: dict) -> dict[Path, bytes | None]:
+    paths = [layout["state"] / "manifest.json"]
+    if layout.get("registry"):
+        paths.append(layout["registry"])
+    return {path: _read(path) for path in paths}
+
+
+def _validate_preconditions(
+    approved: dict[Path, bytes | None], inventories: dict[Path, dict[str, bytes]]
+) -> dict | None:
+    """Compare against ownership evidence, never adopt a later edit as a baseline."""
+    for inputs, reader in ((approved, _read), (inventories, _files)):
+        for path, expected in inputs.items():
+            try:
+                current = reader(path)
+            except (OSError, ValueError) as exc:
+                return {
+                    "status": "CONFLICT",
+                    "reason": "managed inputs changed during validation; preserved",
+                    "path": str(path),
+                    "error_type": type(exc).__name__,
+                }
+            if current != expected:
+                return {
+                    "status": "CONFLICT",
+                    "reason": "managed inputs changed during validation; preserved",
+                    "path": str(path),
+                }
+    return None
+
+
+def _transaction(
+    layout: dict,
+    writes: dict[Path, bytes | None],
+    approved: dict[Path, bytes | None],
+    inventories: dict[Path, dict[str, bytes]],
+) -> dict | None:
     """Journal private before/after bytes, then activate each file atomically."""
     state = layout["state"]
     journal = state / "journal.json"
     changes = []
     for path, after in writes.items():
-        before = _read(path)
+        before = approved[path]
         if before == after:
             continue
         changes.append({"path": str(path), "before": _encode(before), "after": _encode(after)})
+    conflict = _validate_preconditions(approved, inventories)
+    if conflict:
+        return conflict
     record = {
         "phase": "plan",
         "root": str(layout["root"]),
@@ -561,8 +600,19 @@ def _integrate(
 ) -> dict:
     from .capabilities import digest, guide_manifest, skill_root, tool_schemas
 
-    manifest = _load_manifest(layout)
-    registry = _registry(layout)
+    approved = _metadata_inputs(layout)
+    try:
+        manifest = _load_manifest(layout)
+        registry = _registry(layout)
+    except (OSError, ValueError):
+        conflict = _validate_preconditions(approved, {})
+        if conflict:
+            return conflict
+        raise
+    conflict = _validate_preconditions(approved, {})
+    if conflict:
+        return conflict
+    inventories = {}
     selections = (
         selections
         if selections is not None
@@ -573,6 +623,7 @@ def _integrate(
         raise ValueError(f"unknown skill selections: {sorted(unknown)}")
     names = sorted({SKILLS[name] for name in selections})
     config_raw = _read(layout["config"])
+    approved[layout["config"]] = config_raw
     original = (config_raw or b"").decode("utf-8")
     disabled = _disabled(layout, original, names)
     if disabled:
@@ -605,6 +656,7 @@ def _integrate(
         if hashes != expected:
             raise ValueError(f"bundle checksum mismatch: {name}")
         existing = _files(layout["root"] / name)
+        inventories[layout["root"] / name] = existing
         managed = _managed_hashes(layout, manifest, name, registry)
         if not managed and layout.get("registry"):
             managed = registry["skills"].get(name, {}).get("files")
@@ -613,10 +665,13 @@ def _integrate(
         sources[name] = source
     removed = set(manifest.get("skills", {})) - set(names)
     for name in sorted(removed):
-        if _digests(_files(layout["root"] / name)) != _managed_hashes(
-            layout, manifest, name, registry
-        ):
+        existing = _files(layout["root"] / name)
+        inventories[layout["root"] / name] = existing
+        if _digests(existing) != _managed_hashes(layout, manifest, name, registry):
             conflicts.append({"name": name, "status": "MODIFIED"})
+    conflict = _validate_preconditions(approved, inventories)
+    if conflict:
+        return conflict
     if conflicts:
         # Leave a private comparison copy; never shadow it in a discoverable skill directory.
         if not dry_run:
@@ -718,9 +773,18 @@ def _integrate(
     writes[layout["state"] / "manifest.json"] = (json.dumps(updated, indent=2) + "\n").encode()
     if layout.get("registry"):
         writes[layout["registry"]] = (json.dumps(registry, indent=2) + "\n").encode()
+    for directory, files in inventories.items():
+        for path in writes:
+            if path.is_relative_to(directory):
+                approved[path] = files.get(path.relative_to(directory).as_posix())
+    conflict = _validate_preconditions(approved, inventories)
+    if conflict:
+        return conflict
     changed = [str(path) for path, data in writes.items() if _read(path) != data]
     if not dry_run and changed:
-        _transaction(layout, writes)
+        conflict = _transaction(layout, writes, approved, inventories)
+        if conflict:
+            return conflict
     return {
         "status": "PREVIEW" if dry_run else "INSTALLED" if changed else "UNCHANGED",
         "harness": layout["harness"],
@@ -1443,18 +1507,29 @@ def remove(
     with _locked(layout):
         if not dry_run:
             _recover(layout)
-        manifest = _load_manifest(layout)
-        registry = _registry(layout)
+        approved = _metadata_inputs(layout)
+        try:
+            manifest = _load_manifest(layout)
+            registry = _registry(layout)
+        except (OSError, ValueError):
+            conflict = _validate_preconditions(approved, {})
+            if conflict:
+                return conflict
+            raise
+        conflict = _validate_preconditions(approved, {})
+        if conflict:
+            return conflict
         if not manifest:
             return {"status": "NOT_INSTALLED"}
         writes = {}
         preserved = []
         remaining = dict(manifest["skills"])
         deleted = []
+        inventories = {}
         for name in manifest["skills"]:
-            if _digests(_files(layout["root"] / name)) != _managed_hashes(
-                layout, manifest, name, registry
-            ):
+            existing = _files(layout["root"] / name)
+            inventories[layout["root"] / name] = existing
+            if _digests(existing) != _managed_hashes(layout, manifest, name, registry):
                 preserved.append(name)
                 continue
             managed = _managed_hashes(layout, manifest, name, registry)
@@ -1463,7 +1538,9 @@ def remove(
                     writes[layout["root"] / name / relative] = None
                 deleted.append(name)
             del remaining[name]
-        config = (_read(layout["config"]) or b"").decode()
+        config_raw = _read(layout["config"])
+        approved[layout["config"]] = config_raw
+        config = (config_raw or b"").decode()
         if manifest["owns_mcp"]:
             if server_entry(harness, config) == manifest["mcp_entry"]:
                 writes[layout["config"]] = render_entry(
@@ -1490,8 +1567,17 @@ def remove(
             writes[layout["registry"]] = (
                 (json.dumps(registry, indent=2) + "\n").encode() if registry["skills"] else None
             )
+        for directory, files in inventories.items():
+            for path in writes:
+                if path.is_relative_to(directory):
+                    approved[path] = files.get(path.relative_to(directory).as_posix())
+        conflict = _validate_preconditions(approved, inventories)
+        if conflict:
+            return conflict
         if not dry_run:
-            _transaction(layout, writes)
+            conflict = _transaction(layout, writes, approved, inventories)
+            if conflict:
+                return conflict
             for name in deleted:
                 directory = layout["root"] / name
                 for child in sorted(directory.rglob("*"), reverse=True):

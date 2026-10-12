@@ -1,5 +1,32 @@
 # Reactive runtime execution status
 
+**OBSERVED / integration ownership through discovery:** actual integration
+reproduced user data loss: a guide or MCP entry edited during the compatible
+executable's capability probe was overwritten by stale planned content, and the
+operation returned INSTALLED. The transaction had adopted the later edit as its
+before baseline after ownership validation.
+
+Both integrate and remove now retain approved metadata/config bytes and targeted
+guide inventories through discovery. Snapshot drift, including added/deleted files,
+stops with CONFLICT before journaling; preview and otherwise unchanged plans also
+revalidate. Journal baselines use approved bytes. Existing post-journal activation
+exceptions and recovery conflicts remain unchanged; concurrent external editors
+do not participate in an atomic multi-file transaction.
+
+The same actual executable fixture now returns CONFLICT, preserves both edits
+and creates no journal. Thirty-six permanent cases fail on immutable prior source
+and pass currently, including benign config comments/model-field edits, metadata,
+new/removed targets, remove and direct transaction-entry boundaries. Scoped
+integration checks passed 121. Final integrated source passed **1299 tests /
+34 skipped / 41 warnings** in 64.43 seconds. Two Python files passed Ruff/format;
+generated contracts passed and four-language guides are updated.
+
+These are isolated software components with an executable capability fixture,
+not installed-product/harness E2E. New installed-current, native, model, full-task
+performance and release checks remain NOT_RUN. No acceptance status or release
+gate changed. See
+[integration ownership evidence](validation/2026-10-11/integration-validation-ownership.json).
+
 **OBSERVED / modifier gesture context:** the actual typed input consumer
 previously admitted modifier strokes with explicit active text, composing IME or
 UNKNOWN context, while chords refused the same contexts. Modifier gestures now

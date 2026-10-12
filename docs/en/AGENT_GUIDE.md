@@ -155,8 +155,11 @@ Task verification separately requires authorized input in an isolated target,
 fresh external state checks and input/process cleanup. A private API-assisted
 task pass does not establish production availability or whole-goal completion.
 
-`MODIFIED` or `CONFLICT` preserves your edits and leaves a comparison under the
-integration state directory. Explicit disabled entries remain disabled. Reload
+`MODIFIED` or `CONFLICT` preserves your edits. Pre-existing guide conflicts leave
+a comparison under the integration state directory. Changes during capability
+discovery stop activation before journaling, including new or removed guide files;
+preview and unchanged plans also recheck ownership. Explicit disabled entries
+remain disabled. Reload
 cached clients after a compatible update; inspect capability versions first.
 Local requests bind the executable version, runtime protocol and API fingerprint.
 An older client cannot stop or control a newer service; reload the current

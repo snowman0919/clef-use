@@ -214,6 +214,14 @@ atomic activation. POSIX uses a `current` symlink; Windows atomically replaces a
 managed CMD launcher. Updated clients restart an idle older resident service and
 refuse to switch a service with active desktop ownership.
 
+Integration activation retains the metadata/config bytes and targeted guide file
+inventories used for ownership validation. Runtime capability discovery cannot
+renew that ownership: changed bytes, removed files or new guide files produce
+CONFLICT before journaling, including preview and otherwise unchanged plans.
+Journal baselines use the approved bytes; per-file activation checks and existing
+recovery-conflict behavior remain in force. These checks do not make concurrent
+external editors participate in an atomic multi-file transaction.
+
 ## Visual readiness revision, 0.1.5
 
 The user requested replacing fixed post-action sleeps with bounded visual

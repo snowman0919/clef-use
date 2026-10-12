@@ -135,7 +135,9 @@ operation 支持仍未完成。不要用假设补全未知的输入上下文。
 任务验证还需要在隔离目标中执行已获授权的输入，重新检查外部状态，并确认输入和
 进程已清理。私有 API 辅助任务通过不能证明 production 可用性或整个目标完成。
 
-`MODIFIED` 或 `CONFLICT` 保留用户修改，并在集成状态目录留下比较副本。
+`MODIFIED` 或 `CONFLICT` 保留用户修改。已有 guide 冲突会在集成状态目录留下比较副本。
+capability 查询期间的修改或 guide 文件新增、删除会在 journal 创建前停止应用；
+preview 和无变更计划也会重新检查所有权。
 明确禁用的条目不会重新启用。更新后检查 capability 版本，并重新加载缓存客户端。
 卸载只删除未修改的受管条目。Hermes 不支持 project scope，请使用选定的 user
 profile。移动技能前检查 source 和 shadow 状态。

@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Retain validated integration bytes and guide inventories through capability
+  discovery; refuse concurrent edits before journaling instead of overwriting them.
 - Apply explicit text-focus and IME shortcut guards to modifier gestures before
   pointer movement, independently of optional post-input transition checks.
 - Preserve exact normalized geometry and conflicting action/confidence/source
