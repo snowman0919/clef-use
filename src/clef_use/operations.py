@@ -377,6 +377,8 @@ class OperationRunner:
             self._expect("text_focus", False)
         self._expected_popup = False
         self._anchor = {name: self._fact(name) for name in _CONTEXT_FACTS}
+        # Version labels do not substitute for the observed binding content.
+        self._anchor["keymap"] = self._fact("keymap")
         if isinstance(request, NumericTransform):
             self._anchor.update({name: self._fact(name) for name in ("space", "unit")})
         if isinstance(request, PropertyEdit):
@@ -685,6 +687,7 @@ class OperationRunner:
         x1, y1, x2, y2 = request.surface
         if not (observed[0] <= x1 < x2 <= observed[2] and observed[1] <= y1 < y2 <= observed[3]):
             raise OperationBlocked("requested surface leaves the observed viewport editor")
+        self._anchor["target_geometry"] = geometry
         keymap = self._fact("keymap")
         binding = keymap.get(request.gesture)
         if not isinstance(binding, dict) or binding.get("button") != "middle":

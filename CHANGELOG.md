@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Recheck observed keymap content at operation dispatch and the native input
+  boundary, even when the version label is unchanged. Revalidate viewport editor
+  geometry before and during gestures, stopping and releasing owned input on change.
 - Preserve every matching observed input as a distinct literal-text alternative.
   Reserve candidate slots for actual matches and request replanning before model
   or input execution when text alternatives exceed the existing action budget.

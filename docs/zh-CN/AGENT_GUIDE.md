@@ -41,6 +41,8 @@ clef-use integrations refresh --managed-only
 不要猜测 keymap。`ASSESS` 不发送输入。缓存观察不能授权新的 pointer，也不能
 证明最终完成。本地 operation 是有类型的有限状态过程，与 Agent Skill 的自然
 语言指导分离。可信本地观察器必须验证 editor、selection、mode、IME 和 keymap。
+有可信状态依据时，guard 会比较 keymap 内容和版本名。
+viewport 手势执行前及过程中会重新检查 editor 区域；区域变化时停止执行并释放自有输入。
 未知状态会阻止输入。默认截图观察器不能确认 Blender 的隐藏状态。API 辅助
 fixture 的通过不能证明 pixels-only 操作成功。
 

@@ -1,0 +1,82 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Operation context guards with software regression and API-assisted native input-bridge component; not automatic Blender state or whole-task E2E",
+  "source_base": "17f195e4ecd9e10d33fbad09949e9898ecb64cdb",
+  "source_sha256": {
+    "src/clef_use/operations.py": "e24d9b3f9be89241d773ca640bb3e0948e7e5d2b1863fdf127f22f230a13fb52",
+    "src/clef_use/runtime.py": "3f0490ad84920a37da101ab5448d6a6b2c6aa42db24f3f02e01809e55b104890",
+    "tests/test_operations.py": "399f70cb09207ff6a5ed8554693b6e7b747d7f2cf4945d5dae99970e48011327",
+    "tests/test_operation_runtime.py": "9102656810b487b8018c3ea4dd5929c1b5aa07299fcf00c9a3f5629531cb5914"
+  },
+  "reproduced_before": {
+    "counterexamples_failed": 3,
+    "same_version_keymap": "Operation returned SUCCEEDED instead of BLOCKED",
+    "viewport_resize": "Operation dispatched stale gesture and returned FAILED instead of BLOCKED",
+    "native_keymap_boundary": "DID NOT RAISE RuntimeError",
+    "log_sha256": "438fa940f8559c0819ce6f0eb18adcc8b55c731d99bad043bcf7cb5587adc560"
+  },
+  "native_component": {
+    "scope": "API_ASSISTED owned Tk input-bridge component; not Blender/provider/E2E/model proof",
+    "positive_native_key": [
+      "x"
+    ],
+    "same_version_binding_change": "CONTEXT_CHANGED",
+    "positive_native_middle_gesture": [
+      "middle_down",
+      "middle_up"
+    ],
+    "real_editor_resize_before_input": "CONTEXT_CHANGED",
+    "real_resize_during_owned_gesture": "input cancelled or deadline expired",
+    "status": "PASS",
+    "final_owned_keys": [],
+    "final_owned_buttons": [],
+    "native_middle_held": false,
+    "events": [
+      "x",
+      "middle_down",
+      "middle_up",
+      "middle_down_resize",
+      "middle_up"
+    ],
+    "model_calls": 0,
+    "production_display_touched": false,
+    "canonical_automatic_state_provider": false
+  },
+  "native_report_sha256": "8018d0c4c23bb2428b78afdb46465e2ca1ae79b31a59fcd989c1d1c4207fab8e",
+  "initial_native_attempt": {
+    "result": "SETUP_ERROR",
+    "reason": "GestureInput default left button was sent while the oracle expected middle; corrected the explicit fixture button without changing product code",
+    "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "regression": {
+    "focused_passed": 63,
+    "full_passed": 915,
+    "full_skipped": 34,
+    "warnings": 41,
+    "seconds": 50.74,
+    "log_sha256": "00122a3a5624dd635727ea27ff2159e25f959f2dd324cc00a7cf11abe06a6de3",
+    "ruff_check": "PASS",
+    "ruff_format": "PASS",
+    "contract_generation": "PASS"
+  },
+  "cleanup": {
+    "scope": "Two exact owned component HOME values only",
+    "matching_processes": [],
+    "other_process_entries_unreadable": 414
+  },
+  "invariants": {
+    "old_changed_paths": [],
+    "confidence_guards": "UNCHANGED",
+    "unknown_state_policy": "UNCHANGED; missing facts still block",
+    "acceptance_requirements_and_numeric_gates": "UNCHANGED",
+    "model_calls": 0,
+    "production_display_touched": false
+  },
+  "not_run": [
+    "Installed-runtime E2E on the changed source",
+    "Whole-task accuracy or model evaluation (other session)",
+    "Production Blender automatic popup/IME/effective-keymap discovery (not implemented)",
+    "Full reaction p95/goodput/coverage (other session)",
+    "Windows native component for this change"
+  ]
+}

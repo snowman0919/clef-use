@@ -2703,6 +2703,12 @@
       "artifact": "docs/validation/2026-10-11/literal-candidate-alternatives.json",
       "sha256": "a43fc60190b4355cc1dbbd78b76d66fe0c6a0e631620d261168646a43947de97",
       "scope": "Canonical source component using synthetic observations preserves every matching input/literal; text overflow replans before model/input. Four reproduced failures corrected; 911 passed/34 skipped. Pre-existing guide manifest drift corrected separately. No new native GUI/model/installation/E2E or performance claim."
+    },
+    "operation_context_guards": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/operation-context-guards.json",
+      "sha256": "a0396030571ca8318fa19ef186e6cdf90bc772163a08e76fb05624a701b03abe",
+      "scope": "915passed/34skipped; three reproduced stale-binding/geometry failures corrected. API-assisted native owned Tk key/MMB positives and same-version binding/actual editor resize refusals; owned gesture interruption releases native middle button. No automatic Blender context, installed E2E, model or p95 claim."
     }
   },
   "not_run": {
@@ -2928,7 +2934,8 @@
     "ci493-native-quality-failure.json",
     "release-ci4932557.json",
     "blender-rna-observer-component.json",
-    "literal-candidate-alternatives.json"
+    "literal-candidate-alternatives.json",
+    "operation-context-guards.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

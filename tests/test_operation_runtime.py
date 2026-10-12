@@ -122,6 +122,7 @@ def test_search_accepts_only_its_acknowledged_popup_transition_and_reads_effect(
     "change",
     [
         {"loading": True},
+        {"keymap": {"translate": ["r"], "axis_x": ["y"]}},
         {"space": "LOCAL"},
         {"modal": {"id": "foreign", "name": "rotate"}},
         {"unit": {"translate": "CENTIMETERS", "rotate": "DEGREES", "scale": "NONE"}},
@@ -144,6 +145,32 @@ def test_numeric_event_refuses_changed_safety_facts_at_native_boundary(change):
             {"family": "numeric_transform", "operation": "translate"},
         )
     assert editor.text == "" and not editor.held
+
+
+def test_viewport_region_change_at_native_boundary_refuses_pointer_movement():
+    from threading import Event
+
+    from clef_use.input_ir import GestureInput
+
+    editor = OperationEditor()
+    editor.values["target_geometry"] = {"editor_surface": [0, 0, 1, 1]}
+    editor.values["keymap"] = {"orbit": {"button": "middle", "modifiers": []}}
+
+    def move(*args, **kwargs):
+        pytest.fail("stale viewport geometry must refuse before moving the pointer")
+
+    editor.moveTo = move
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["target_geometry"]["editor_surface"] = [0, 0, 0.3, 1]
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            GestureInput(points=((0.4, 0.4), (0.5, 0.5)), surface=(0, 0, 1, 1), duration=0.05),
+            state,
+            Event(),
+            {"family": "viewport_gesture", "gesture": "orbit"},
+        )
+    assert not editor.held
 
 
 class Screen:

@@ -145,7 +145,7 @@ class SessionRuntime:
             return state
 
     def _operation_input(self, command, state, cancelled, operation=None):
-        from .input_ir import ChordInput, InputContext, InputDispatchError, KeyInput
+        from .input_ir import ChordInput, GestureInput, InputContext, InputDispatchError, KeyInput
         from .schema import ActionResult
 
         frame = self._operation_frames.get(state.observation_id)
@@ -198,6 +198,7 @@ class SessionRuntime:
                 "editor",
                 "mode",
                 "keymap_version",
+                "keymap",
                 "selection",
                 "ime_composing",
             )
@@ -235,6 +236,16 @@ class SessionRuntime:
                 text_valid = text_valid or text_focus is False
                 popup_valid = popup_valid or popup is False
             valid = valid and modal_valid and text_valid and popup_valid
+            if isinstance(command, GestureInput):
+                original = state.require("target_geometry")
+                observed = current.require("target_geometry")
+                valid = (
+                    valid
+                    and isinstance(original, dict)
+                    and isinstance(observed, dict)
+                    and original.get("editor_surface") is not None
+                    and observed.get("editor_surface") == original["editor_surface"]
+                )
             if operation and operation.get("family") == "property_edit":
                 if not after_input or text_focus is True:
                     valid = valid and current.require("focused_property") == state.require(

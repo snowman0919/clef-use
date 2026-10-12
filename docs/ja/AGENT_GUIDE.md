@@ -43,7 +43,10 @@ clef-use integrations refresh --managed-only
 文字入力とショートカットを区別してください。keymap を推測しないでください。
 `ASSESS` は入力しません。過去の観測は新しい pointer の許可や最終完了の証拠に
 なりません。ローカル operation は型付き有限状態手順で、Agent Skill の自然言語
-指示とは別です。信頼できるローカル観測器による editor・selection・mode・IME・
+指示とは別です。
+検証済みの状態がある場合、guard はバージョン名だけでなく keymap の内容も比較します。
+viewport ジェスチャーの前と途中に editor 領域を再確認し、変更時は停止して所有する入力を解放します。
+信頼できるローカル観測器による editor・selection・mode・IME・
 keymap の確認が必要です。不明な状態は入力を遮断します。既定の screenshot
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は
 pixels-only 操作の成功を証明しません。

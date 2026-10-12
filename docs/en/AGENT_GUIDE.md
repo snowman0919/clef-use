@@ -40,6 +40,9 @@ do not mix text with shortcuts or assume a keymap. `ASSESS` sends no input. Cach
 observations cannot authorize pointers or prove final completion. Registered local
 operations are finite typed procedures, separate from Agent Skill prose. They need
 verified editor, selection, mode, IME and keymap facts from a trusted local provider.
+With trusted facts, guards compare keymap content as well as its version label.
+Viewport editor geometry is rechecked before and during gestures; a change stops
+execution and releases owned input.
 Missing facts block input. The default screenshot provider cannot assert Blender's
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 An operation report's `SUCCEEDED` verifies its typed effect. The session stays

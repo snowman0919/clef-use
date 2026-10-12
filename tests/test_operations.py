@@ -200,6 +200,52 @@ def test_text_focus_change_between_guard_and_input_prevents_transform():
     assert desktop.inputs == []
 
 
+def test_changed_keymap_content_with_same_version_refuses_transform_before_input():
+    desktop = Desktop()
+    count = 0
+
+    def observe():
+        nonlocal count
+        count += 1
+        if count == 2:
+            desktop.values["keymap"]["translate"] = ["r"]
+        return desktop.observe()
+
+    report = OperationRunner(observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert desktop.values["modal"] is None
+
+
+def test_viewport_region_change_before_dispatch_refuses_the_old_gesture():
+    desktop = Desktop(
+        target_geometry={"editor_surface": [0, 0, 1, 1]},
+        keymap={"orbit": {"button": "middle", "modifiers": []}},
+    )
+    count = 0
+
+    def observe():
+        nonlocal count
+        count += 1
+        if count == 2:
+            desktop.values["target_geometry"]["editor_surface"] = [0, 0, 0.3, 1]
+        return desktop.observe()
+
+    request = parse_operation_request(
+        dict(
+            family="viewport_gesture",
+            gesture="orbit",
+            keymap_version="test-1",
+            surface=(0, 0, 1, 1),
+            points=((0.4, 0.4), (0.5, 0.5)),
+        )
+    )
+    report = OperationRunner(observe, desktop.execute).run(request, Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert not report.geometry_invalidated
+
+
 def test_preview_mismatch_can_only_cancel_the_modal_this_runner_entered():
     desktop = Desktop()
     execute = desktop.execute

@@ -35,6 +35,12 @@ association. These are independently sampled facts, not pixel-synchronous scene
 evidence or measured operation readiness. The default configuration remains
 pixels-only; discovery describes optional support without initializing Blender.
 
+With trusted state evidence, operation dispatch and the native input guard compare
+the observed keymap content as well as its version label. Viewport dispatch anchors
+the checked editor geometry; the input guard rechecks its editor surface before
+and during a gesture. A changed surface stops execution and releases owned input.
+These guards do not supply missing state or enable the partial Blender provider.
+
 `SessionRuntime.execute` captures a fresh frame, parses it into project-owned
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint
 CLEF answers, evaluates escalation gates, executes a deterministic adapter, and

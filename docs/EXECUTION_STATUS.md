@@ -9,6 +9,8 @@ The newer optional Blender observer source passed 907 regression tests and real
 component verification; its installation and whole-task E2E are NOT_RUN here.
 The subsequent literal-candidate correction passed **911 tests / 34 skipped**;
 its component verification uses synthetic observations, without model or OS input.
+The newer operation-context guards passed **915 tests / 34 skipped** and a native
+owned Tk input-bridge component; this does not implement automatic Blender context discovery.
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical
@@ -43,6 +45,28 @@ Latest input-candidate measurement: [reaction-final10.json](validation/2026-10-1
 Per-scenario status and remaining scope: [ACCEPTANCE.yaml](../ACCEPTANCE.yaml).
 
 ## Remaining work and specific verification boundaries
+
+**OBSERVED / operation context revalidation:** three counterexamples reproduced
+before correction. A transform continued after observed keymap content changed
+without a version-label change; a resized viewport received a stale gesture;
+and the runtime input bridge did not refuse a changed keymap. Dispatch now
+anchors actual keymap content, viewport dispatch anchors the checked geometry,
+and the input guard compares keymap content and editor surface again before
+and during native input. Four new regression cases passed; the focused state,
+operation and runtime checks passed 63 tests. An authenticated, owned Xvfb/Tk
+component observed one real key event and a normal middle-button gesture,
+refused a same-version native binding change and actual editor resize before
+input, and stopped an owned gesture after an actual resize during its button
+press. Native middle-button state and owned sets were released afterward.
+This is an API-assisted input-bridge fixture with explicit application facts,
+not automatic Blender observation, operation readiness or whole-task E2E.
+The first native attempt's default-left-button setup error is retained separately.
+Full regression: **915 passed / 34 skipped / 41 warnings**; scoped Ruff,
+formatting and contract generation passed. The independent process check found
+no matching processes for the two exact owned HOME values; unreadable unrelated
+process entries remain outside that check. No production display was accessed
+or model invoked.
+See [component evidence](validation/2026-10-11/operation-context-guards.json).
 
 **OBSERVED / literal input alternatives:** the canonical builder previously
 proposed only the first matching input per literal. Before correction, four new
