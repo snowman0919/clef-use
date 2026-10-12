@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Keep the Windows validation window's UI loop alive during once-only native
+  input. Require full selection, exact text and click/wheel readback instead of
+  assuming widget consumption after a fixed sleep; retain acknowledgement and
+  verification timestamps separately from reaction-performance claims.
 - Retain private Codex stderr beside its verification trace and preserve native
   shortcut selection/text readback before assertions, including failing runs.
 - Match native Windows shell-escaped guide paths during Codex verification and

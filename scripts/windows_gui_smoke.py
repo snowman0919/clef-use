@@ -10,7 +10,7 @@ import time
 import tkinter as tk
 import traceback
 from pathlib import Path
-from threading import Event
+from threading import Event, Thread
 
 from clef_use.backends import DesktopAction, DesktopCapture
 from clef_use.schema import ActionCandidate, BoundingBox, Observation, UIObject
@@ -88,12 +88,80 @@ def main():
                 description="disposable validation",
                 observation_id=obs.id,
             )
-            outcome = action.execute(candidate, obs, cancelled or Event())
-            root.update()
-            time.sleep(0.1)
-            root.update()
-            return outcome
+            # Keep the receiver's UI loop alive while native input is injected.
+            # SendInput acknowledgement is not widget-event consumption.
+            cancel = cancelled or Event()
+            delivery = {"operation": operation, "started_ns": time.monotonic_ns()}
+            completed, reply = Event(), {}
+            expected_clicks = len(clicks) + (2 if operation == "double_click" else 1)
+            expected_scrolls = len(scrolls) + 1
 
+            def inject():
+                try:
+                    reply["outcome"] = action.execute(candidate, obs, cancel)
+                except BaseException as exc:
+                    reply["error"] = exc
+                finally:
+                    delivery["acknowledged_ns"] = time.monotonic_ns()
+                    completed.set()
+
+            worker = Thread(target=inject)
+            deadline = time.monotonic() + 1
+
+            def readback():
+                if completed.is_set():
+                    if "error" in reply or not reply["outcome"].ok:
+                        root.quit()
+                        return
+                    actual = entry.get()
+                    if operation == "type":
+                        expected = actual == value
+                    elif operation == "hotkey":
+                        expected = (
+                            entry.selection_present()
+                            and entry.index(tk.SEL_FIRST) == 0
+                            and entry.index(tk.SEL_LAST) == entry.index(tk.END)
+                        )
+                    elif operation == "press" and value == "backspace":
+                        expected = actual == ""
+                    elif operation in {"click", "double_click"}:
+                        expected = len(clicks) == expected_clicks
+                    elif operation == "scroll":
+                        expected = len(scrolls) == expected_scrolls and scrolls[-1] < 0
+                    else:
+                        expected = True
+                    if expected:
+                        delivery["verified_ns"] = time.monotonic_ns()
+                        if operation == "hotkey":
+                            delivery["selection_range"] = [
+                                entry.index(tk.SEL_FIRST),
+                                entry.index(tk.SEL_LAST),
+                            ]
+                        root.quit()
+                        return
+                if time.monotonic() >= deadline:
+                    delivery["timeout"] = True
+                    cancel.set()
+                    root.quit()
+                    return
+                root.after(5, readback)
+
+            root.after(0, worker.start)
+            root.after(5, readback)
+            root.mainloop()
+            worker.join(3)
+            delivery["worker_joined"] = not worker.is_alive()
+            result.setdefault("delivery_readbacks", []).append(delivery)
+            if "error" in reply:
+                raise reply["error"]
+            if delivery.get("timeout"):
+                raise RuntimeError("once-only input effect not observed within one second")
+            if worker.is_alive():
+                raise RuntimeError("owned input worker did not finish")
+            return reply["outcome"]
+
+        result["select_all_virtual_mapping"] = root.tk.call("event", "info", "<<SelectAll>>")
+        result["select_all_class_binding"] = root.tk.call("bind", "Entry", "<<SelectAll>>")
         clipboard_sequence = gui.user.GetClipboardSequenceNumber()
         text = "Windows 한글 테스트 😀"
         assert execute("type", text, "entry").ok
