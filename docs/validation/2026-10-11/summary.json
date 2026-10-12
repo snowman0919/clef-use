@@ -2758,6 +2758,12 @@
       "sha256": "f08263edd844ae301e7119f757eae3d03a3715defef75c51421bcfd29dcf011b",
       "scope": "Integrated1133PASS/34SKIP includes separate legacy keyboard patch. Immutable4module native baseline falselySUCCEEDED with unchanged pre/postgesture Canvas pose. Current initialdriftBLOCKED/noevents, actualShiftMMBdrag changespose64x48/SUCCEEDED, initialpositiondrift stopsbeforeMMB (pointermoved). Allinputsreleased/sourceendhashesstable/ownedcleanup. API-assisted Tk component only, no Blender wholeE2E/model/installed/performanceclaim. Priorfixturefail and startup-only bindings retained."
     },
+    "x11_legacy_key_binding": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/x11-legacy-key-binding.json",
+      "sha256": "e527ce45bad025f739ef3fc89136a569a6a2cdce22081bcd05be09da5256b80d",
+      "scope": "FinalIntegrated1135PASS/34SKIP includes viewport andunownedmodifierfix. Actual old requested a/native b/okTrue; priorcandidate externalShift/Ctrl transformedliteral a/okTrue. New8nativecases verify type/press/hotkey/implicitShift exactnormal/refusedremap withnoevents, physicalcoderelease aftermappingmutation andexternala/Shift/Ctrlheldpreservation. Initial3mappingRED+2modifierRED; scoped31PASSincludingold9nativepointercases. Prior1133candidate retained. Ownedcleanup andearlierfocussetupfails retained. Windows/Darwin/concurrentremapatomicity/legacycrashguardian/wholeE2E/model/performance NOT_ESTABLISHED."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2997,7 +3003,8 @@
     "blender-selection-identity.json",
     "input-authority-and-clipboard.json",
     "property-scene-units.json",
-    "viewport-input-baseline.json"
+    "viewport-input-baseline.json",
+    "x11-legacy-key-binding.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

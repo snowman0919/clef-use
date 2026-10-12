@@ -66,6 +66,8 @@ Windows 字符输入在发送前验证 UTF-16，并在每个 native 单位前重
 状态观察后也会重新检查取消与 deadline。X11 确认在 paste 尝试前取消时，先释放
 自有 modifier，再经 native ACK 恢复支持的原 clipboard 格式；保留用户的并发复制。
 如果 paste 可能已送达，则保留待粘贴文本；没有恢复 ACK 时报告未解决状态。
+legacy X11 键盘输入也会在按键前验证当前绑定，包括隐式 Shift。缓存绑定发生变化时
+拒绝输入；释放使用已确认的物理 keycode，不释放外部已按住的键。
 Blender view 效果使用单一、完整且无歧义 viewport 的实际 view matrix 和 perspective
 mode。仅 region、layout 或 projection 变化不能证明 orbit/pan；pose 缺失或 quad
 view 有歧义时保持 UNKNOWN。

@@ -202,6 +202,34 @@ Windows/Darwin native and full accuracy/p95/goodput/coverage remain NOT_RUN here
 acceptance/release gates are unchanged. See
 [viewport evidence](validation/2026-10-11/viewport-input-baseline.json).
 
+**OBSERVED / legacy X11 keyboard bindings:** the canonical old legacy action
+requested `a` but delivered `b` and returned `ok=True` after the native keymap
+changed following PyAutoGUI import. Current legacy type/press/hotkey preflight
+every chord member and implicit Shift against the original binding, recheck each
+press, and release acknowledged physical codes. A stale binding refuses before
+any chord event. The full native held-key bitmap excludes only acknowledged owned
+physical keys, so unrelated external modifiers refuse input and remain held.
+
+Eight authenticated private native regressions verified exact normal `a`, Enter,
+Ctrl+A and uppercase input; changed mappings emitted no keys. Mapping mutation
+immediately after an acknowledged press still released the original physical
+code; external `a`, Shift and Ctrl stayed held on refusal until fixture-owned
+cleanup. A separate native counterexample reproduced uppercase `A` and Ctrl+A
+events for literal `a` before the unowned-modifier correction. The initial three
+mapping cases and two later modifier cases failed before their corrections.
+The corrected scoped suite passed 31 tests, including nine existing native pointer
+cases. Two earlier fixture focus failures remain retained; they stopped before
+product key input.
+Owned server, socket, keymap and input cleanup passed.
+
+The final integrated source, including the later unowned-modifier correction,
+passed **1135 tests / 34 skipped / 41 warnings** in 58.26 seconds. The preceding
+1133-test result remains the earlier candidate's record. Windows/Darwin native
+execution, a new legacy crash guardian, concurrent external remap atomicity and
+whole E2E/model/performance are
+not established by these components. No acceptance/release gate was promoted.
+See [legacy keyboard evidence](validation/2026-10-11/x11-legacy-key-binding.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Validate legacy X11 keyboard bindings before input, including implicit Shift.
+  Refuse stale mappings without sending a wrong key, retain physical codes for
+  release and preserve keys already held outside the legacy action.
 - Anchor viewport view readback until native gesture button acknowledgement so
   an independent pre-input change cannot verify a no-effect gesture. Preserve
   expected drag changes and all other context guards after acknowledgement.

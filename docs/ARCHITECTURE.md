@@ -86,6 +86,12 @@ through the current server pointer map. A disabled logical button refuses input.
 Release and the independent guardian use the physical code acknowledged at press,
 preserving unrelated held input. Mapping lookup and injection are separate native
 requests, so this is not an atomic guarantee against an external concurrent remap.
+Legacy X11 keyboard actions validate the original PyAutoGUI binding against the
+current server map for every chord member and implicit Shift before the first
+press, then revalidate each press. They retain the acknowledged physical code for
+release instead of consulting a mutable logical map. An already-held physical
+key is refused without acquiring or releasing it. The same separate-request
+atomicity limit applies; this adds no legacy process-crash guardian.
 Numeric transforms require finite XYZ readback for translation, rotation and scale
 on every observed object before entry. Dispatch rechecks the transform context;
 the initial values must match before entry and the verified preview before commit.

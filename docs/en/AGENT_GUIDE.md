@@ -73,6 +73,9 @@ On X11, confirmed cancellation before the paste attempt releases owned modifiers
 and restores supported prior clipboard formats after native acknowledgement.
 Concurrent copies are preserved. If paste delivery is possible, offered text is
 retained for the queued paste; unacknowledged recovery remains unresolved.
+Legacy X11 keyboard actions also validate current bindings before pressing keys,
+including implicit Shift. A changed cached binding refuses input. Releases use
+the acknowledged physical code, and an externally held key remains untouched.
 Blender view-effect readback uses the effective view matrix and perspective mode
 from one complete, unambiguous viewport. Region/layout/projection-only changes do
 not prove orbit/pan; missing pose and ambiguous quad views remain unknown.

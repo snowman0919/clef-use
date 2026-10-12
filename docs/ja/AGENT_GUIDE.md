@@ -74,6 +74,9 @@ Windows の文字入力は送信前に UTF-16 を検証し、native 単位ごと
 試行前の取り消しが確定した場合、所有 modifier を解放し、native ACK 後に対応する
 元の clipboard 形式を復元します。同時に行われたコピーは保持します。paste が
 届いた可能性があれば文字列を保持し、復元 ACK がなければ未解決として報告します。
+legacy X11 キーボード入力も暗黙の Shift を含め、押す前に現在の binding を検証します。
+キャッシュされた binding が変化すると入力を拒否します。解放には確認済みの物理
+keycode を使い、外部ですでに押されているキーは解放しません。
 Blender の view 効果は、完全で曖昧でない単一 viewport の実効 view matrix と
 perspective mode で確認します。region・layout・projection だけの変化は orbit/pan
 の証拠にせず、pose がない場合や quad view が曖昧な場合は UNKNOWN を保持します。

@@ -517,16 +517,49 @@ class DesktopAction:
         self.input_executor = None
         self.x11_state = None
         self.x11_buttons = {}
+        self.x11_keys = {}
+        self.x11_keymap = None
+
+    def _x11_input_state(self, gui):
+        from .x11_input_state import X11InputState
+
+        if self.x11_state is None:
+            self.x11_state = X11InputState(gui.platformModule._display.get_display_name())
+        return self.x11_state
+
+    def _x11_keycode(self, gui, key):
+        if self.x11_keymap is None:
+            # Match the original map that constructed PyAutoGUI's keycodes,
+            # including when this adapter starts after a native layout change.
+            self.x11_keymap = tuple(tuple(row) for row in gui.platformModule._display._keymap_codes)
+        code = gui.platformModule.keyboardMapping.get(key)
+        if not code or not self._x11_input_state(gui).binding_matches(code, self.x11_keymap[code]):
+            raise RuntimeError("logical key binding changed in current OS keymap")
+        return code
+
+    def _x11_key_down(self, gui, key):
+        from Xlib import X
+        from Xlib.ext.xtest import fake_input
+
+        gui.failSafeCheck()
+        code = self._x11_keycode(gui, key)
+        with self._x11_input_state(gui).query() as connection:
+            bitmap = connection.query_keymap()
+        held = {code for code in range(256) if bitmap[code // 8] & (1 << (code % 8))}
+        if key in self.keys or held - set(self.x11_keys.values()):
+            raise RuntimeError("key is already held outside this legacy input")
+        fake_input(gui.platformModule._display, X.KeyPress, code)
+        gui.platformModule._display.sync()
+        self.x11_keys[key] = code
+        self.keys.add(key)
 
     def _button_down(self, gui, button, target=None):
         if isinstance(gui, WindowsInput):
             gui.mouseDown(button=button, target=target)
         elif sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
-            from .x11_input_state import X11InputState, button_event
+            from .x11_input_state import button_event
 
-            if self.x11_state is None:
-                self.x11_state = X11InputState(gui.platformModule._display.get_display_name())
-            code = self.x11_state.button_code(button)
+            code = self._x11_input_state(gui).button_code(button)
             button_event(gui.platformModule._display, code, True)
             self.x11_buttons[button] = code
         else:
@@ -763,6 +796,20 @@ class DesktopAction:
         native = isinstance(gui, WindowsInput)
         target = gui.ensure_target(target) if native else None
         try:
+            if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+                expanded = []
+                for key in keys:
+                    if len(key) == 1 and gui.isShiftCharacter(key) and "shift" not in expanded:
+                        expanded.append("shift")
+                    expanded.append(key)
+                # Refuse a stale member before pressing any chord modifier.
+                for key in expanded:
+                    self._x11_keycode(gui, key)
+                for key in expanded:
+                    if cancelled.is_set():
+                        return
+                    self._x11_key_down(gui, key)
+                return
             for key in keys:
                 if cancelled.is_set():
                     return
@@ -798,7 +845,15 @@ class DesktopAction:
             modifiers = {"shift", "ctrl", "alt", "command"}
             for key in sorted(self.keys, key=lambda key: (key in modifiers, key)):
                 try:
-                    gui.keyUp(key)
+                    if key in self.x11_keys:
+                        from Xlib import X
+                        from Xlib.ext.xtest import fake_input
+
+                        fake_input(gui.platformModule._display, X.KeyRelease, self.x11_keys[key])
+                        gui.platformModule._display.sync()
+                        del self.x11_keys[key]
+                    else:
+                        gui.keyUp(key)
                     self.keys.discard(key)
                 except Exception as exc:
                     errors.append(exc)
