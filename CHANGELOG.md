@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Retain private Codex stderr beside its verification trace and preserve native
+  shortcut selection/text readback before assertions, including failing runs.
 - Match native Windows shell-escaped guide paths during Codex verification and
   retain negative-trigger checks across Windows separators. Advertise accurate
   read-only MCP tool effects without changing the harness's approval policy.

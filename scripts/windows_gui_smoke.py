@@ -103,9 +103,19 @@ def main():
         result["clipboard_preserved"] = True
         result["clipboard_verification"] = "sequence unchanged; no clipboard read/write"
         assert execute("hotkey", "ctrl+a").ok
+        result["select_all_readback"] = {
+            "text": entry.get(),
+            "selection_present": bool(entry.selection_present()),
+            "focused_widget": str(root.focus_get()),
+        }
+        if entry.selection_present():
+            result["select_all_readback"]["selected_range"] = [
+                entry.index(tk.SEL_FIRST),
+                entry.index(tk.SEL_LAST),
+            ]
         assert execute("press", "backspace").ok
-        assert entry.get() == ""
         result["shortcut_readback"] = entry.get()
+        assert result["shortcut_readback"] == ""
         assert execute("click", target="button").ok and len(clicks) == 1
         assert execute("double_click", target="button").ok and len(clicks) == 3
         result["click_readback"] = len(clicks)

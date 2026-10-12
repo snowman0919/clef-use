@@ -1877,7 +1877,9 @@ def verify(
                 continue
         trace = layout["state"] / f"verification-{trigger}-trace.jsonl"
         atomic_write(trace, run.stdout)
+        atomic_write(trace.with_suffix(".stderr"), run.stderr)
         result["trace"] = str(trace)
+        result["stderr_trace"] = str(trace.with_suffix(".stderr"))
         result["exit_code"] = run.returncode
         loaded = []
         invoked = []
