@@ -55,7 +55,11 @@ transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 previe
 `selection_identities`가 필요합니다. Blender는 프로세스 범위의 공개 `session_uid`로
 객체를 구분합니다. 이름을 바꿔도 ID는 유지되며, 같은 이름의 다른 객체로 교체되면
 추가 입력을 차단합니다. ID가 없으면 불명 상태를 유지합니다. observer는 위치와
-scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v4를 발견하세요.
+scale의 X/Y/Z 속성도 제공합니다. 사용 전 operation registry v5를 발견하세요.
+위치 `property_edit.value`는 Blender 단위의 원시 좌표입니다. 최신 `scene_units`
+근거로 명시적 미터 입력을 계산하고 입력·readback 동안 고정합니다. 단위가 없거나
+바뀌면 입력 또는 성공 판정을 멈춥니다. scale 값은 무차원입니다. 표시 단위가
+요청한 원시 좌표를 재해석하지 않으며, 실제 readback은 원래 tolerance를 만족해야 합니다.
 신뢰할 수 있는 로컬 관측기가 editor·selection·mode·IME·keymap 상태를 확인해야
 입력합니다. 알 수 없는 상태는 차단합니다. 기본 screenshot 관측기는 Blender의
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.

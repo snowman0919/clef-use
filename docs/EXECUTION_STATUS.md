@@ -132,6 +132,47 @@ installed-current harness E2E and full accuracy/p95/goodput/coverage remain
 NOT_RUN in this software slice; no acceptance or release gate was promoted.
 See [input evidence](validation/2026-10-11/input-authority-and-clipboard.json).
 
+**OBSERVED / property scene units:** location `PropertyEdit.value` retains the
+raw `Object.location` coordinate contract. Fresh validated `scene_units` now
+binds scene identity, system, default length unit and scale. Unit-enabled fields
+receive explicit meters computed from the observed scale; NONE receives the raw
+literal and scale fields remain dimensionless. Location input and final readback
+anchor these settings. Missing/malformed settings and conversion overflow or
+underflow refuse before input; changed units stop further input or success.
+The read-only provider publishes this positive scene evidence without inventing
+field focus, modal units or coordinate space. Source CLI and actual stdio MCP
+advertise registry v5, conditional field requirements and raw-value semantics;
+the request schema digest remains unchanged and default operations stay BLOCKED.
+
+Canonical in-memory runtime components reproduced the old raw 0.02 commit for a
+request of 2 in a centimeter field. Current complete evidence commits 2; missing
+units sends no input, and a mid-text unit change stops before commit. Independent
+actual factory Blender Location X input reproduced `2.0` -> raw
+`0.019999999552965164` under METRIC/cm/scale1 and `2.0m` -> raw2. With actual
+observed scale `0.009999999776482582`, a separate fixed single-edit driver admitted
+only `0.019999999552965164m` and observed raw `[2,0,0]`, preserving the scene/object/
+selection/mode/unit anchors. This proves the native field recipe, not native
+guarded OperationRunner execution or automatic field discovery.
+
+The earlier native unit matrix executed 12/13 declared cells. One external
+dispatch bypassed that test controller's literal admission; its result is excluded
+from controller proof and the replaced IMPERIAL/.01 nominal cell remains NOT_RUN.
+The separate fixed actual-scale check does not relabel that matrix as passed.
+Other observed rows include NONE/scale100 raw2 and explicit meters under METRIC/
+IMPERIAL scale1/100. Setup and positive visual field admission remain separate.
+Owned children and sockets were removed; HOME and authority scans found zero
+matches, excluding 418 unreadable unrelated entries. Production Blender PID was
+retained; no production scene/display was accessed.
+
+Final integrated source passed **1120 tests / 34 skipped / 41 warnings** in 55.99
+seconds. Nine changed Python files passed Ruff/format; generated contracts passed.
+The maintained native fixture now forwards actual scene units and selected-object
+identities; only its nested startup was statically compiled, with full fixture E2E
+NOT_RUN under the user's scope. Four-language guides and the decision record are
+updated. Native Windows/Darwin, installed-current harness E2E, whole-task/model
+and full accuracy/p95/goodput/coverage remain NOT_RUN here. No acceptance or release
+gate was promoted. See [unit evidence](validation/2026-10-11/property-scene-units.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

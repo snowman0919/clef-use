@@ -111,6 +111,78 @@ class OperationEditor:
         )
 
 
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"scale_length": 100.0},
+        {"system": "IMPERIAL"},
+        {"length_unit": "CENTIMETERS"},
+        {"scene_identity": "scene-2"},
+    ],
+)
+def test_location_text_refuses_changed_scene_units_before_first_input(change):
+    from threading import Event
+
+    from clef_use.input_ir import TextInput
+
+    editor = OperationEditor()
+    editor.values.update(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        scene_units={
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 1.0,
+        },
+    )
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["scene_units"] = {**editor.values["scene_units"], **change}
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            TextInput(text="2.0m"),
+            state,
+            Event(),
+            {"family": "property_edit", "target_id": "Cube", "field": "location_x"},
+        )
+    assert editor.text == "" and not editor.held
+
+
+def test_location_text_stops_after_units_change_during_character_delivery():
+    from threading import Event
+
+    from clef_use.input_ir import TextInput
+
+    class ChangingField(OperationEditor):
+        def type_text(self, text, cancelled, target, *, before_input):
+            for character in text:
+                super().type_text(character, cancelled, target, before_input=before_input)
+                self.values["scene_units"] = {**self.values["scene_units"], "scale_length": 100.0}
+
+    editor = ChangingField()
+    editor.values.update(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        scene_units={
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 1.0,
+        },
+    )
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            TextInput(text="2.0m"),
+            state,
+            Event(),
+            {"family": "property_edit", "target_id": "Cube", "field": "location_x"},
+        )
+    assert editor.text == "2" and not editor.held
+
+
 def test_search_accepts_only_its_acknowledged_popup_transition_and_reads_effect():
     editor = OperationEditor()
     runtime = editor.runtime()

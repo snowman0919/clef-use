@@ -41,6 +41,26 @@ class StateFact(StrictModel):
     uncertainty: float = Field(default=1, ge=0, le=1)
 
 
+class BlenderSceneUnits(StrictModel):
+    """Observed scene length conversion, independent of focused UI context."""
+
+    scene_identity: str = Field(min_length=1, max_length=256, strict=True)
+    system: Literal["NONE", "METRIC", "IMPERIAL"]
+    length_unit: Literal[
+        "ADAPTIVE",
+        "KILOMETERS",
+        "METERS",
+        "CENTIMETERS",
+        "MILLIMETERS",
+        "MICROMETERS",
+        "MILES",
+        "FEET",
+        "INCHES",
+        "THOU",
+    ]
+    scale_length: float = Field(gt=0, strict=True)
+
+
 FACT_NAMES = (
     "application_snapshot",
     "editor_layout",
@@ -64,6 +84,7 @@ FACT_NAMES = (
     "owned_inputs",
     "menus",
     "unit",
+    "scene_units",
     "space",
     "transform_values",
     "transform_preview",

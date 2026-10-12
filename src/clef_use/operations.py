@@ -17,7 +17,7 @@ from pydantic import Field, TypeAdapter, model_validator
 
 from .input_ir import ChordInput, GestureInput, KeyInput, TextInput
 from .schema import ActionResult, StrictModel
-from .state import CompiledState, StateUnavailable
+from .state import BlenderSceneUnits, CompiledState, StateUnavailable
 
 
 class MenuAssess(StrictModel):
@@ -229,6 +229,21 @@ def operation_registry() -> tuple[dict, ...]:
                 if family == "modal_cancel"
                 else None
             ),
+            **(
+                {
+                    "requires_by_field": {
+                        field: ("scene_units",)
+                        for field in ("location_x", "location_y", "location_z")
+                    },
+                    "value_semantics": {
+                        "location_x/location_y/location_z": "Raw Object.location coordinates in "
+                        "Blender units; observed scene scale determines explicit meter input",
+                        "scale_x/scale_y/scale_z": "Dimensionless Object.scale factors",
+                    },
+                }
+                if family == "property_edit"
+                else {}
+            ),
             "recovery": recovery,
             "execution": "guarded_local_finite_state_machine",
             "schema": model.model_json_schema(),
@@ -411,6 +426,8 @@ class OperationRunner:
             self._anchor.update({name: self._fact(name) for name in ("space", "unit")})
         if isinstance(request, PropertyEdit):
             self._anchor["focused_property"] = self._fact("focused_property")
+            if request.field.startswith("location_"):
+                self._anchor["scene_units"] = self._fact("scene_units")
         self._steps.append("requires_verified")
 
     def _refresh(self):
@@ -727,11 +744,24 @@ class OperationRunner:
         before = before_values[request.target_id][request.field]
         if isinstance(before, bool) or not isinstance(before, (int, float)):
             raise OperationBlocked("exact property readback is unavailable")
+        literal = repr(request.value)
+        if request.field.startswith("location_"):
+            try:
+                units = BlenderSceneUnits.model_validate(self._fact("scene_units"))
+            except ValueError as exc:
+                raise OperationBlocked("complete scene length conversion is unavailable") from exc
+            if units.system != "NONE":
+                meters = request.value * units.scale_length
+                if not math.isfinite(meters) or (request.value != 0 and meters == 0):
+                    raise OperationBlocked("scene length conversion exceeds numeric range")
+                literal = repr(meters) + "m"
         select, commit = self._binding("select_all"), self._binding("commit")
         self._send(select, cancelled)
-        self._send(TextInput(text=repr(request.value), method=self.text_method), cancelled)
+        self._send(TextInput(text=literal, method=self.text_method), cancelled)
         self._send(commit, cancelled)
         self._refresh()
+        if request.field.startswith("location_"):
+            self._expect("scene_units", self._anchor["scene_units"])
         if not self._readback_matches(
             self._fact("properties"),
             before_values,

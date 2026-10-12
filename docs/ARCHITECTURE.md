@@ -32,9 +32,20 @@ process-scoped public `ID.session_uid` identity. The provider publishes
 missing public identity or incoherent maps remain UNKNOWN. Names and RNA pointers
 cannot establish object continuity. Changing operations and owned cancellation
 anchor this map at dispatch, readback and the native input boundary, so reusing a
-selected name for a different object blocks further input. Operation registry v4
+selected name for a different object blocks further input. Operation registry v5
 advertises this required fact; request schemas remain unchanged.
 See the [Blender ID API](https://docs.blender.org/api/5.2/bpy.types.ID.html).
+The bound scene exposes validated `scene_units`: scene identity, system,
+default length unit and positive finite scale. These raw settings establish no
+focused field or effective modal unit. `PropertyEdit.value` for location fields
+is a raw `Object.location` coordinate in Blender units. Unit-enabled fields
+receive explicit meters (`value * scale_length`); NONE receives the raw literal.
+Scale fields remain dimensionless and do not require scene-unit evidence.
+Location edits anchor scene units before input, through every refresh and native
+input boundary, and at final readback. Missing settings or conversion range loss
+blocks before input. Existing tolerances still apply to actual application
+readback; conversion does not guarantee arbitrary float precision. Registry v5
+advertises conditional field requirements and value semantics.
 It also inventories relevant merged user keymaps, preserving inactive and duplicate
 entries, native tri-state modifiers and a retained-content digest. The provider
 publishes this as `keymap_inventory`, never effective `keymap`/`keymap_version`.

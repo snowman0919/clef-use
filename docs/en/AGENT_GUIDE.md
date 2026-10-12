@@ -54,7 +54,12 @@ Changing operations and owned cancellation require a complete stable
 `selection_identities` map. Blender supplies process-scoped public `session_uid`
 IDs; a rename preserves the ID, while replacing an object under the same name
 blocks further input. Missing IDs remain unknown. The observer also exposes
-location and scale properties for X/Y/Z. Discover operation registry v4 before use.
+location and scale properties for X/Y/Z. Discover operation registry v5 before use.
+Location `property_edit.value` means the raw Blender-unit coordinate. Fresh
+`scene_units` evidence determines explicit meter input and stays anchored through
+entry and readback; missing or changed settings stop input/success. Scale values
+are dimensionless. Default display units never reinterpret the requested raw
+coordinate. Actual readback must still meet the original tolerance.
 Missing facts block input. The default screenshot provider cannot assert Blender's
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 Capture-derived coordinates and foreground facts retain capture time; slow capture

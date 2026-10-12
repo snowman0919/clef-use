@@ -1,0 +1,777 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Property-unit software correction with pure canonical runtime components, actual owned native Blender field input and source CLI/stdio discovery. No whole E2E/models or production operation readiness.",
+  "source_base": "9ea968c5fe899b9b96d8c208c3a83f1bda9fe638",
+  "source_sha256": {
+    "src/clef_use/state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+    "src/clef_use/blender_state.py": "06621b4a227a552114f589282f60ff5be761ce9534c88f2fb630aa3709f6bc32",
+    "src/clef_use/operations.py": "cbd29f45171130e0b410229241bfca65dbb329ac8432abc9f5ca687d66f2b8d6",
+    "src/clef_use/runtime.py": "52b33facf7822465aae9129a9b9ad7c39dff3696fda0d995260920e5b17324e0",
+    "src/clef_use/capabilities.py": "f56828650d91c7f2367ddd33d14f57bf8f7d219e46e97e3ef284b05fc5c605fc",
+    "tests/test_operations.py": "79bee31ca2edc18d7f03041396d09da2071fc74ccb3c2f97439608683c31e6f1",
+    "tests/test_operation_runtime.py": "5fe369d2c93c740894792d295fbaede237ecb7655fbd71638b401dff9290cec0",
+    "tests/test_blender_state.py": "0d6bd238ba0bfe14abb6cad730bb5617a7a00c4604d8de611e0fd1bf38ff2ccb",
+    "scripts/blender_operations_fixture.py": "2924f92d0575e6854f04bf2166e69c7f32b418608564ca426339500983c0627a"
+  },
+  "contract": {
+    "operation_registry_version": 5,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "request_schema_changed": false,
+    "location_value": "Raw Blender Object.location coordinate, not default display-unit amount",
+    "unit_enabled_literal": "repr(value * observed scene.scale_length) + 'm'",
+    "NONE_literal": "repr(value)",
+    "scale_value": "Dimensionless; scene_units not required",
+    "anchors": "Fresh validated scene identity/system/length_unit/positive finite scale; before input, every refresh/native boundary, final readback",
+    "range": "Non-finite conversion or nonzero-to-zero underflow refuses before input",
+    "precision": "Existing requested tolerance unchanged; native parser/RNA rounding is not exact for all possible values"
+  },
+  "canonical_pure_runtime": {
+    "before": {
+      "classification": "OBSERVED_PURE_COMPONENT",
+      "scope": "Canonical SessionRuntime/DesktopAction with an explicit unit-aware in-memory field; no native UI/Blender/models",
+      "baseline": true,
+      "cases": {
+        "complete": {
+          "session_status": "NEEDS_REPLAN",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "FAILED",
+            "reason": "final literal property readback differs from requested value",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 17,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 3
+          },
+          "events": [
+            {
+              "key": "ctrl"
+            },
+            {
+              "key": "a"
+            },
+            {
+              "inserted_character": "2"
+            },
+            {
+              "inserted_character": "."
+            },
+            {
+              "inserted_character": "0"
+            },
+            {
+              "key": "enter"
+            }
+          ],
+          "committed_raw_property": 0.02,
+          "editor_buffer": "2.0",
+          "owned_keys_empty": true
+        },
+        "missing": {
+          "session_status": "NEEDS_REPLAN",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "FAILED",
+            "reason": "final literal property readback differs from requested value",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 17,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 3
+          },
+          "events": [
+            {
+              "key": "ctrl"
+            },
+            {
+              "key": "a"
+            },
+            {
+              "inserted_character": "2"
+            },
+            {
+              "inserted_character": "."
+            },
+            {
+              "inserted_character": "0"
+            },
+            {
+              "key": "enter"
+            }
+          ],
+          "committed_raw_property": 0.02,
+          "editor_buffer": "2.0",
+          "owned_keys_empty": true
+        },
+        "changed_during_text": {
+          "session_status": "NEEDS_REPLAN",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "FAILED",
+            "reason": "final literal property readback differs from requested value",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 17,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 3
+          },
+          "events": [
+            {
+              "key": "ctrl"
+            },
+            {
+              "key": "a"
+            },
+            {
+              "inserted_character": "2"
+            },
+            {
+              "inserted_character": "."
+            },
+            {
+              "inserted_character": "0"
+            },
+            {
+              "key": "enter"
+            }
+          ],
+          "committed_raw_property": 0.0002,
+          "editor_buffer": "2.0",
+          "owned_keys_empty": true
+        }
+      },
+      "source_sha256": {
+        "operations.py": "c03d8ca654413bad0574c7090403dae0331ecf265b094ec2903de95aeb4f5818",
+        "runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970"
+      }
+    },
+    "after": {
+      "classification": "OBSERVED_PURE_COMPONENT",
+      "scope": "Canonical SessionRuntime/DesktopAction with an explicit unit-aware in-memory field; no native UI/Blender/models",
+      "baseline": false,
+      "cases": {
+        "complete": {
+          "session_status": "NEEDS_REPLAN",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "SUCCEEDED",
+            "reason": "application readback verified",
+            "assessment": null,
+            "transitions": [
+              "requires_verified",
+              "exact_field_verified",
+              "readback_verified"
+            ],
+            "state_version": 18,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 3
+          },
+          "events": [
+            {
+              "key": "ctrl"
+            },
+            {
+              "key": "a"
+            },
+            {
+              "inserted_character": "2"
+            },
+            {
+              "inserted_character": "."
+            },
+            {
+              "inserted_character": "0"
+            },
+            {
+              "inserted_character": "m"
+            },
+            {
+              "key": "enter"
+            }
+          ],
+          "committed_raw_property": 2.0,
+          "editor_buffer": "2.0m",
+          "owned_keys_empty": true
+        },
+        "missing": {
+          "session_status": "BLOCKED",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "BLOCKED",
+            "reason": "scene_units: UNKNOWN, uncertainty=1",
+            "assessment": null,
+            "transitions": [],
+            "state_version": 1,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 0
+          },
+          "events": [],
+          "committed_raw_property": 0.0,
+          "editor_buffer": "",
+          "owned_keys_empty": true
+        },
+        "changed_during_text": {
+          "session_status": "NEEDS_REPLAN",
+          "operation_report": {
+            "family": "property_edit",
+            "status": "FAILED",
+            "reason": "registered operation context changed before OS input",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 7,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 1
+          },
+          "events": [
+            {
+              "key": "ctrl"
+            },
+            {
+              "key": "a"
+            },
+            {
+              "inserted_character": "2"
+            }
+          ],
+          "committed_raw_property": 0.0,
+          "editor_buffer": "2",
+          "owned_keys_empty": true
+        }
+      },
+      "source_sha256": {
+        "operations.py": "cbd29f45171130e0b410229241bfca65dbb329ac8432abc9f5ca687d66f2b8d6",
+        "runtime.py": "52b33facf7822465aae9129a9b9ad7c39dff3696fda0d995260920e5b17324e0"
+      }
+    },
+    "before_report_sha256": "5bd9273142d48306ab1287d3c691865a01768d8dca80d5278f5d4bd03b71ee75",
+    "after_report_sha256": "2d795fb33ed4e46d003241ec788e4637105184bc77e028ce379a2d24363f31c8",
+    "limits": "Controlled in-memory field with explicit unit semantics. Old immutable operation/runtime source with current compiler recognizing positive scene-unit facts; no native input claimed."
+  },
+  "native_field_matrix": {
+    "scope": "API_ASSISTED native Blender built-in Location X field component only; not guarded OperationRunner/E2E/task/performance proof",
+    "status": "PARTIAL_WITH_PROTOCOL_DEVIATION",
+    "planned_controller_cells": 13,
+    "executed_controller_cells": 12,
+    "not_run_controller_cells": [
+      {
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "nominal_scale_length": 0.01,
+        "literal": "0.02m",
+        "reason": "External exactactualscale dispatch replaced scheduled controller cell; not counted as authorized controller proof"
+      }
+    ],
+    "rows": [
+      {
+        "sequence": 5,
+        "literal": "2.0",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 1.0,
+        "raw_location": [
+          0.019999999552965164,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 8,
+        "literal": "2.0m",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 1.0,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 11,
+        "literal": "2.0",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 0.009999999776482582,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 14,
+        "literal": "0.02m",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 0.009999999776482582,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 17,
+        "literal": "2.0",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 100.0,
+        "raw_location": [
+          0.00019999999494757503,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 20,
+        "literal": "200.0m",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "actual_scale_length": 100.0,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 23,
+        "literal": "2.0",
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "actual_scale_length": 1.0,
+        "raw_location": [
+          0.6096000075340271,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 26,
+        "literal": "2.0m",
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "actual_scale_length": 1.0,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 29,
+        "literal": "2.0",
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "actual_scale_length": 0.009999999776482582,
+        "raw_location": [
+          60.96000289916992,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 35,
+        "literal": "2.0",
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "actual_scale_length": 100.0,
+        "raw_location": [
+          0.006095999851822853,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 38,
+        "literal": "200.0m",
+        "system": "IMPERIAL",
+        "length_unit": "FEET",
+        "actual_scale_length": 100.0,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      },
+      {
+        "sequence": 41,
+        "literal": "2.0",
+        "system": "NONE",
+        "length_unit": "ADAPTIVE",
+        "actual_scale_length": 100.0,
+        "raw_location": [
+          2.0,
+          0.0,
+          0.0
+        ],
+        "same_object_and_selection": true,
+        "mode": "OBJECT"
+      }
+    ],
+    "external_protocol_deviation": {
+      "literal": "0.019999999552965164m",
+      "actual_scale_length": 0.009999999776482582,
+      "raw_location": [
+        2.0,
+        0.0,
+        0.0
+      ],
+      "status": "OBSERVED_OUTSIDE_CONTROLLER_ADMISSION",
+      "included_in_controller_cells": false,
+      "receipt_sha256": "a717ad1cb0842ad5afef71cdccff63e3e5ed8486d0658912253408d3a188b5d0"
+    },
+    "setup_history": {
+      "factory_quick_setup_visible": true,
+      "native_continue_ack_no_observed_closure": true,
+      "known_factory_welcome_escape_closed": true,
+      "setup_inputs_separate_from_field_cells": true
+    },
+    "positive_field_focus": "Fresh private native screenshot visually admitted before each field edit; no guessed production textfocus/IME/effective keymap facts",
+    "limits": [
+      "METRIC .01 corrected literal0.02m used nominalscale, not actualRNA scale; separate gated actualscale component follows",
+      "InputContext None; native ownedPID/windowguard only, not production operation authorization",
+      "Rawtarget2 only; signed/zero/parser boundaries are separate evidence",
+      "Factory setup deliberately writes ownscene units/resetlocation; oracle reports rawRNA independently",
+      "Screenshots and scene assets remain private"
+    ],
+    "provenance": {
+      "blender_elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "driver_sha256": "11994157709c2b849be4e7a09cab83f5c1cefa894fee7b4e1771aabe20bb5749",
+      "source_sha256_at_start": {
+        "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+        "input_ir.py": "2521b2325bb7443ae9030c059c42f13f2ee564db7932a7541275cc39dac116bd",
+        "blender_snapshot.py": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12"
+      },
+      "raw_report_sha256": "83594a949942113bf26d6ae956fb83e74d92c09cc78c65d6f4a67ce8a774af98"
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "child_proc_absent": true,
+      "x_socket_removed": true,
+      "production_blender_after": true
+    }
+  },
+  "native_field_matrix_summary_sha256": "b2556fc23bba3fb5e15748675ec52a7fd0ad8f73a12024c7156dce2b8a60069e",
+  "native_actual_scale_field": {
+    "scope": "OBSERVED native Blender5.2 built-in Location X field actualscale formula component only; API_ASSISTED owned factory setup + independent RNA readback; not wholeE2E/model/productionoperation readiness",
+    "status": "PASS",
+    "planned_controller_edits": 1,
+    "executed_controller_edits": 1,
+    "controller_literal_admission": "No caller literal accepted; repr(raw_target * fresh observed scene.scale_length) + m; maxone edit; scene/object/selection/mode/units/PID/window anchored every native input",
+    "raw_target": 2.0,
+    "system": "METRIC",
+    "length_unit": "CENTIMETERS",
+    "actual_scale_length": 0.009999999776482582,
+    "admitted_literal": "0.019999999552965164m",
+    "before_raw_location": [
+      0.0,
+      0.0,
+      0.0
+    ],
+    "after_raw_location": [
+      2.0,
+      0.0,
+      0.0
+    ],
+    "checks": {
+      "one_controller_edit": true,
+      "literal_from_actual_scale": true,
+      "raw_X_exact_target": true,
+      "Y_Z_unchanged": true,
+      "scene_object_selection_mode_units_unchanged": true,
+      "all_native_commands_acknowledged": true,
+      "children_absent_independent": true,
+      "x_socket_absent_independent": true,
+      "production_blender_alive_independent": true
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "child_proc_absent": true,
+      "x_socket_removed": true,
+      "production_blender_after": true
+    },
+    "provenance": {
+      "blender_elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "driver_sha256": "5ada836107e2ba8cbb6edf296a3b7495c5d19d7263e4c571919f4cbd0f992e60",
+      "source_sha256_at_start": {
+        "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+        "input_ir.py": "2521b2325bb7443ae9030c059c42f13f2ee564db7932a7541275cc39dac116bd",
+        "blender_snapshot.py": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12"
+      },
+      "raw_report_sha256": "76ed1426c8a4db9632945645a8f7ac8231ec9bb196b720dfab421a8a92e8f489",
+      "focus_admission_sha256": "4a1a2c02dc5c8592198d423028c57b56ddd4e269194039a6b28b78dfe1d0c489"
+    },
+    "setup_separate": {
+      "own_scene_unit_and_location_initialization": true,
+      "known_owned_factory_welcome_escape": 1,
+      "native_focus_setup_commands": 3,
+      "fresh_field_focus_visually_admitted_before_text": true
+    },
+    "limits": [
+      "InputContext None: explicit private field admission, not shipped trusted popup/text/IME/effectivekeymap observer",
+      "Target2 only; no claim all raw values/signs/units fieldUI covered",
+      "Prior matrix external dispatch deviation remains separate, not repaired or relabeled",
+      "Production Blender scene/settings and activeV2 not touched; process existence checked only, not scene equality"
+    ]
+  },
+  "native_actual_scale_field_summary_sha256": "a43783707026e2e1c2cceba8db32b34dcacbedecffc5234d1c9b37b91cf318cc",
+  "native_scope": "Actual canonical DesktopAction/InputExecutor/clipboard to built-in Location X, with API-assisted factory unit setup and independent public RNA readback. Native field recipe proof, not native guarded OperationRunner execution or automatic field discovery.",
+  "prior_public_parser_component": {
+    "classification": "OBSERVED_NATIVE_PUBLIC_PARSER_COMPONENT",
+    "calls": 52,
+    "accepted": 52,
+    "summary_sha256": "a5af5cf1ae83a7a1756a6a03b0211e2490602dcd943c19bcbc2b1e751a4a489f",
+    "limits": "Parser alone does not prove field conversion; IMPERIAL roundoff is retained, not rounded away."
+  },
+  "source_discovery": {
+    "cli": {
+      "registry_version": 5,
+      "schema_unchanged": true,
+      "conditional_scene_units_advertised": true,
+      "default_availability": "BLOCKED",
+      "report_sha256": "1d4ce3bd87d9dd7972fe0240f42096831f49e3c137f1840d35a514d5ba89395b"
+    },
+    "stdio": {
+      "classification": "OBSERVED_SOURCE_STDIO_DISCOVERY",
+      "registry_version": 5,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "tools": [
+        "computer_run",
+        "computer_continue",
+        "computer_observe",
+        "computer_status",
+        "computer_abort",
+        "computer_capabilities"
+      ],
+      "property_edit": {
+        "family": "property_edit",
+        "description": "Exact focused property edit",
+        "authorized_commands": [],
+        "requires": [
+          "application",
+          "window",
+          "foreground",
+          "editor",
+          "mode",
+          "keymap_version",
+          "selection",
+          "selection_identities",
+          "ime_composing",
+          "text_focus",
+          "loading",
+          "popup",
+          "modal",
+          "owned_inputs",
+          "target_geometry",
+          "keymap",
+          "focused_property",
+          "properties"
+        ],
+        "requires_owned_modal": null,
+        "requires_by_field": {
+          "location_x": [
+            "scene_units"
+          ],
+          "location_y": [
+            "scene_units"
+          ],
+          "location_z": [
+            "scene_units"
+          ]
+        },
+        "value_semantics": {
+          "location_x/location_y/location_z": "Raw Object.location coordinates in Blender units; observed scene scale determines explicit meter input",
+          "scale_x/scale_y/scale_z": "Dimensionless Object.scale factors"
+        },
+        "recovery": "No blind Escape",
+        "execution": "guarded_local_finite_state_machine",
+        "schema": {
+          "additionalProperties": false,
+          "properties": {
+            "family": {
+              "const": "property_edit",
+              "default": "property_edit",
+              "title": "Family",
+              "type": "string"
+            },
+            "target_id": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Target Id",
+              "type": "string"
+            },
+            "field": {
+              "enum": [
+                "location_x",
+                "location_y",
+                "location_z",
+                "scale_x",
+                "scale_y",
+                "scale_z"
+              ],
+              "title": "Field",
+              "type": "string"
+            },
+            "value": {
+              "maximum": 100000,
+              "minimum": -100000,
+              "title": "Value",
+              "type": "number"
+            },
+            "keymap_version": {
+              "maxLength": 200,
+              "minLength": 1,
+              "title": "Keymap Version",
+              "type": "string"
+            },
+            "tolerance": {
+              "default": 1e-05,
+              "exclusiveMinimum": 0,
+              "maximum": 0.001,
+              "title": "Tolerance",
+              "type": "number"
+            }
+          },
+          "required": [
+            "target_id",
+            "field",
+            "value",
+            "keymap_version"
+          ],
+          "title": "PropertyEdit",
+          "type": "object"
+        },
+        "default_runtime_availability": {
+          "status": "BLOCKED",
+          "scope": "shipped_default_runtime",
+          "reason": "Default capture supplies no verified application state; the optional Blender public-RNA observer supplies only partial facts and does not prove effective keymap, popup, text/IME ownership, or global busy absence.",
+          "missing_verified_facts": [
+            "application",
+            "editor",
+            "mode",
+            "keymap_version",
+            "selection",
+            "selection_identities",
+            "ime_composing",
+            "text_focus",
+            "loading",
+            "popup",
+            "modal",
+            "owned_inputs",
+            "keymap",
+            "focused_property",
+            "properties"
+          ],
+          "live_probe": "NOT_PROBED",
+          "missing_verified_facts_by_field": {
+            "location_x": [
+              "scene_units"
+            ],
+            "location_y": [
+              "scene_units"
+            ],
+            "location_z": [
+              "scene_units"
+            ]
+          }
+        }
+      },
+      "limits": "Source MCP process, not installed harness/model/E2E. No input or runtime goal started."
+    },
+    "stdio_report_sha256": "43165ea3b98c0020071672a290636a06f66240a390d6a0ef7dfaa28739b23c2d",
+    "limits": "Source processes only; not installed-current harness discovery/load/invoke."
+  },
+  "regression": {
+    "immutable_operations_initial_red": {
+      "failed": 14,
+      "passed": 11,
+      "log_sha256": "a6229cb5200f7dcdb27c2c7169a61b95ffd78485a6a5bc20f765d694d83c7256"
+    },
+    "immutable_runtime_native_boundary_red": {
+      "failed": 5,
+      "log_sha256": "b4a9ab7cd4129204f0710ca55913c7a056237904740b9d87abc8b18cd096c9d9"
+    },
+    "initial_unregistered_new_fact_fixture_not_counted_as_bug_red_sha256": "084cb370bcb9ebd554831b41f91df86d8842ea4a5315f17342dad5081756a45c",
+    "scoped": {
+      "passed": 223,
+      "log_sha256": "0b9ebe1b2836c24f73cb195045520eba993e362f7a5ccc2eabaa451dd5d2a09f",
+      "note": "Before final test consumer refinement from cm to feet for IMPERIAL; integrated final suite below executes that refinement."
+    },
+    "integrated": {
+      "passed": 1120,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 55.99,
+      "log_sha256": "f4014e9729d6e6506710b687163caa3d4ccad1db215d19d278a8a8e677234991"
+    },
+    "lint_format": "PASS: nine changed Python files",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool examples"
+  },
+  "maintained_native_fixture": {
+    "change": "Publish actual selected native session UIDs and current scene identity/unit settings; forward both facts to the compiler",
+    "static_nested_startup_compile": "PASS",
+    "execution": "NOT_RUN: whole fixture E2E belongs to other sessions"
+  },
+  "cleanup": {
+    "owned_home_process_matches": 0,
+    "owned_authority_process_matches": 0,
+    "unreadable_unrelated_process_entries": 418,
+    "owned_private_sockets_absent": true,
+    "owned_x_sockets_absent": true,
+    "production_blender_pid_retained": true
+  },
+  "not_run": {
+    "whole_task_e2e_and_models": "Owned by other sessions under direct user scope.",
+    "installed_current_harness_e2e": "Source CLI/stdio discovery only; no current installation/harness run.",
+    "full_accuracy_reaction_p95_goodput_coverage": "Not measured in this software slice.",
+    "Windows_Darwin_native": "Linux X11 native fields only.",
+    "all_values_and_axes_native_field_matrix": "Actual native field input targets positive raw X=2; negative/fractional/range behavior has separate pure/parser regressions.",
+    "production_Blender_operations": "Partial provider still cannot establish popup/text/IME/effective dispatch/global busy absence; UNKNOWN guards retained."
+  },
+  "acceptance_status_promotions": []
+}

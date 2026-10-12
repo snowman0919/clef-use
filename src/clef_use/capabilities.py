@@ -103,6 +103,15 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             ],
             "live_probe": "NOT_PROBED",
         }
+        if "requires_by_field" in operation:
+            operation["default_runtime_availability"]["missing_verified_facts_by_field"] = {
+                field: [
+                    name
+                    for name in names
+                    if name not in {"window", "foreground", "target_geometry"}
+                ]
+                for field, names in operation["requires_by_field"].items()
+            }
     if operation_id is not None:
         operation = next((op for op in operations if op["family"] == operation_id), None)
         if operation is None:
@@ -115,7 +124,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         "schema_sha256": schema_sha256(),
         "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
-        "operation_registry_version": 4,
+        "operation_registry_version": 5,
         "default_runtime_state": {
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",
@@ -142,11 +151,14 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                     "editor_layout",
                     "keymap_inventory",
                     "selection_identities",
+                    "scene_units",
                 ],
                 "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; "
                 "effective dispatch remains UNKNOWN",
                 "selection_identities": "Complete selected-name map to process-scoped public "
                 "ID.session_uid; unavailable or incoherent identity remains UNKNOWN",
+                "scene_units": "Process-bound scene identity, length system/default unit and "
+                "scale; does not establish field focus, modal unit or coordinate space",
                 "unknown_facts": ["popup", "text_focus", "ime_composing", "keymap", "loading"],
                 "input_authority": "No operation readiness inferred from partial snapshots",
             }

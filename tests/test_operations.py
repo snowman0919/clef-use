@@ -25,6 +25,12 @@ class Desktop:
             selection=["Cube"],
             selection_identities={"Cube": "object-1"},
             unit={"translate": "NONE", "rotate": "DEGREES", "scale": "NONE"},
+            scene_units={
+                "scene_identity": "scene-1",
+                "system": "NONE",
+                "length_unit": "ADAPTIVE",
+                "scale_length": 1.0,
+            },
             space="GLOBAL",
             modal=None,
             popup=False,
@@ -628,6 +634,166 @@ def test_property_edit_verifies_all_observed_fields_without_rejecting_unchanged_
     assert desktop.values["properties"]["Cube"]["locked"] is True
     assert desktop.values["properties"]["Cube"]["label"] == "target"
     assert desktop.values["properties"]["Other"]["enabled"] is False
+
+
+def property_request(field="location_x", value=2):
+    return parse_operation_request(
+        dict(
+            family="property_edit",
+            target_id="Cube",
+            field=field,
+            value=value,
+            keymap_version="test-1",
+        )
+    )
+
+
+@pytest.mark.parametrize(
+    "units",
+    [
+        None,
+        {},
+        {"system": "METRIC"},
+        {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "CENTIMETERS",
+            "scale_length": True,
+        },
+        {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "CENTIMETERS",
+            "scale_length": 0,
+        },
+        {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "CENTIMETERS",
+            "scale_length": -1,
+        },
+    ],
+)
+def test_location_field_without_complete_units_refuses_before_input(units):
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        properties={"Cube": {"location_x": 0.0}},
+        scene_units=units,
+    )
+    report = OperationRunner(desktop.observe, desktop.execute).run(property_request(), Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert desktop.values["properties"]["Cube"]["location_x"] == 0.0
+
+
+@pytest.mark.parametrize("system", ["METRIC", "IMPERIAL", "NONE"])
+@pytest.mark.parametrize("scale", [0.01, 1.0, 100.0])
+@pytest.mark.parametrize("value", [2.0, -0.12345678901234566])
+def test_location_field_converts_raw_value_without_default_display_unit(system, scale, value):
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        properties={"Cube": {"location_x": 0.0}},
+        scene_units={
+            "scene_identity": "scene-1",
+            "system": system,
+            "length_unit": "FEET" if system == "IMPERIAL" else "CENTIMETERS",
+            "scale_length": scale,
+        },
+    )
+    pending = [None]
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "text", None):
+            text = command.text
+            # Explicit consumer model: a bare value uses cm or feet in a unit-enabled
+            # field; an explicit meter literal is divided by scene scale.
+            pending[0] = (
+                float(text[:-1]) / scale
+                if text.endswith("m")
+                else float(text)
+                if system == "NONE"
+                else float(text) * (0.3048 if system == "IMPERIAL" else 0.01) / scale
+            )
+        if getattr(command, "key", None) == "enter":
+            desktop.values["properties"]["Cube"]["location_x"] = pending[0]
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(property_request(value=value), Event())
+    assert report.status == "SUCCEEDED"
+    assert desktop.values["properties"]["Cube"]["location_x"] == pytest.approx(value, abs=1e-12)
+
+
+@pytest.mark.parametrize("change_after", ["select_all", "text", "commit"])
+def test_changed_scene_units_stop_property_entry_or_success(change_after):
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        properties={"Cube": {"location_x": 0.0}},
+    )
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        stage = (
+            "text"
+            if getattr(command, "text", None)
+            else "commit"
+            if getattr(command, "key", None) == "enter"
+            else "select_all"
+        )
+        if stage == "text":
+            desktop.values["properties"]["Cube"]["location_x"] = float(command.text)
+        if stage == change_after:
+            desktop.values["scene_units"] = {**desktop.values["scene_units"], "scale_length": 100.0}
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(property_request(), Event())
+    assert report.status == "FAILED"
+    assert report.input_count == {"select_all": 1, "text": 2, "commit": 3}[change_after]
+
+
+def test_scale_field_is_dimensionless_without_scene_unit_evidence():
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "scale_x"},
+        properties={"Cube": {"scale_x": 1.0}},
+        scene_units=None,
+    )
+
+    def execute(command, state, cancelled):
+        result = desktop.execute(command, state, cancelled)
+        if getattr(command, "text", None):
+            desktop.values["properties"]["Cube"]["scale_x"] = float(command.text)
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(
+        property_request(field="scale_x"), Event()
+    )
+    assert report.status == "SUCCEEDED"
+    assert desktop.values["properties"]["Cube"]["scale_x"] == 2.0
+
+
+@pytest.mark.parametrize("value, scale", [(100000.0, 1e308), (0.1, 5e-324)])
+def test_location_conversion_overflow_or_underflow_refuses_before_input(value, scale):
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        properties={"Cube": {"location_x": 0.0}},
+        scene_units={
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "CENTIMETERS",
+            "scale_length": scale,
+        },
+    )
+    report = OperationRunner(desktop.observe, desktop.execute).run(
+        property_request(value=value), Event()
+    )
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert desktop.values["properties"]["Cube"]["location_x"] == 0.0
 
 
 def test_viewport_cannot_use_a_caller_surface_outside_observed_editor():

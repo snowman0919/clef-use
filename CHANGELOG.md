@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Interpret location property values as raw Blender coordinates using validated,
+  anchored scene units and explicit meter input. Keep scale dimensionless; refuse
+  unknown units and numeric conversion range loss before input. Advertise conditional
+  field requirements and value semantics in operation registry v5.
 - Recheck cancellation/deadline after context sampling and before each native
   Windows Unicode unit. Reject invalid UTF-16 payloads before inserting a prefix.
 - Restore supported X11 clipboard contents on confirmed pre-paste cancellation

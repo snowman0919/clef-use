@@ -20,7 +20,7 @@ import time
 from pathlib import Path
 
 STARTUP = r"""
-import bpy, hmac, json, socket
+import bpy, hmac, json, os, socket
 from pathlib import Path
 root = Path(__ROOT__)
 token = (root / "fixture-token").read_text()
@@ -79,10 +79,16 @@ def state():
     return dict(version=bpy.app.version_string,
         application="Blender", mode=cube.mode,
         selection=[o.name for o in win.view_layer.objects if o.select_get()],
+        selection_identities={o.name:f"{os.getpid()}:OBJECT:{o.session_uid}"
+            for o in win.view_layer.objects if o.select_get()},
         modal_operators=modal, has_modal_api=hasattr(win, "modal_operators"),
         unit={"translate": ("NONE" if win.scene.unit_settings.system == "NONE"
               else win.scene.unit_settings.length_unit),
               "rotate":win.scene.unit_settings.system_rotation, "scale":"NONE"},
+        scene_units=dict(scene_identity=f"{os.getpid()}:{win.scene.as_pointer()}",
+            system=win.scene.unit_settings.system,
+            length_unit=win.scene.unit_settings.length_unit,
+            scale_length=win.scene.unit_settings.scale_length),
         space=win.scene.transform_orientation_slots[0].type, keymap=keymap,
         transform_values=transform, transform_preview=transform,
         transform_context={cube.name:dict(parent=cube.parent.name if cube.parent else None,
@@ -557,7 +563,9 @@ def exercise(args, token, capture, gui, output):
             "application",
             "mode",
             "selection",
+            "selection_identities",
             "unit",
+            "scene_units",
             "space",
             "keymap",
             "transform_values",

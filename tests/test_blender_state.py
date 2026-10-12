@@ -73,6 +73,62 @@ def test_selection_identity_tracks_same_name_object_replacement():
     assert compile_document(document).require("selection_identities") == {"Cube": "123:OBJECT:12"}
 
 
+def test_scene_units_preserve_bound_scale_without_inventing_field_or_modal_context():
+    document = snapshot()
+    window = document["windows"][0]
+    window["scene_identity"] = "123:88"
+    window["unit_settings"] = {
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "scale_length": 0.01,
+        "system_rotation": "DEGREES",
+    }
+    state = compile_document(document)
+    assert state.require("scene_units") == {
+        "scene_identity": "123:88",
+        "system": "METRIC",
+        "length_unit": "CENTIMETERS",
+        "scale_length": 0.01,
+    }
+    for name in ("focused_property", "text_focus", "unit", "space"):
+        assert state.fact(name).validity == FactValidity.UNKNOWN
+    window["scene_identity"] = "123:89"
+    assert compile_document(document).require("scene_units")["scene_identity"] == "123:89"
+
+
+@pytest.mark.parametrize(
+    "change",
+    [
+        {"scene_identity": "124:88"},
+        {"scene_identity": "123:0"},
+        {"scene_identity": "123:x"},
+        {"scene_identity": None},
+        {"unit_settings": None},
+        {"unit_settings": {"system": "METRIC", "length_unit": "CENTIMETERS", "scale_length": True}},
+        {"unit_settings": {"system": "METRIC", "length_unit": "CENTIMETERS", "scale_length": 0}},
+        {"unit_settings": {"system": "METRIC", "length_unit": "CENTIMETERS", "scale_length": -1}},
+        {"unit_settings": {"system": "METRIC", "length_unit": "UNKNOWN", "scale_length": 1}},
+        {"unit_settings": {"system": "UNKNOWN", "length_unit": "CENTIMETERS", "scale_length": 1}},
+    ],
+)
+def test_invalid_scene_length_settings_remain_unknown(change):
+    document = snapshot()
+    document["windows"][0].update(
+        {
+            "scene_identity": "123:88",
+            "unit_settings": {
+                "system": "METRIC",
+                "length_unit": "CENTIMETERS",
+                "scale_length": 1.0,
+            },
+            **change,
+        }
+    )
+    state = compile_document(document)
+    assert state.fact("scene_units").validity == FactValidity.UNKNOWN
+    assert state.require("properties")["Cube"]["location_x"] == 2.5
+
+
 @pytest.mark.parametrize(
     "identity",
     [

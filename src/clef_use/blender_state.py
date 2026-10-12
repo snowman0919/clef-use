@@ -18,7 +18,7 @@ from functools import lru_cache
 from pathlib import Path
 
 from .blender_observer import MAX_RESPONSE_BYTES, peer_credentials, private_directory, read_message
-from .state import FactValidity, StateFact, StateSource
+from .state import BlenderSceneUnits, FactValidity, StateFact, StateSource
 
 
 @lru_cache(maxsize=1)
@@ -281,8 +281,28 @@ def compile_snapshot(
         result["keymap_inventory"] = fact(inventory)
     if window["active_object_mode"] is not None:
         result["mode"] = fact(window["active_object_mode"])
-    # Raw numeric values keep their explicit radians and scene-unit metadata;
-    # don't promote them to executable unit/space facts without context proof.
+    try:
+        settings = window["unit_settings"]
+        scene_identity = window["scene_identity"]
+        units = BlenderSceneUnits.model_validate(
+            {
+                "scene_identity": scene_identity,
+                **{name: settings[name] for name in ("system", "length_unit", "scale_length")},
+            }
+        )
+        native_scene = scene_identity.removeprefix(f"{pid}:")
+        if (
+            not scene_identity.startswith(f"{pid}:")
+            or not native_scene.isascii()
+            or not native_scene.isdecimal()
+            or native_scene.startswith("0")
+        ):
+            raise ValueError("scene identity is not bound to observer process")
+    except (KeyError, TypeError, ValueError):
+        pass  # Partial snapshots cannot establish the length conversion.
+    else:
+        result["scene_units"] = fact(units.model_dump())
+    # Raw scene units do not prove focused field, effective modal units or space.
     result["properties"] = fact(
         {name: obj["properties"] for name, obj in window["objects"].items()}
     )

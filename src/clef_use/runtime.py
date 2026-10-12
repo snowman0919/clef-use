@@ -207,6 +207,8 @@ class SessionRuntime:
             )
             if family in {"numeric_transform", "modal_cancel"}:
                 anchors += ("space", "unit", "transform_context")
+            if family == "property_edit" and operation["field"].startswith("location_"):
+                anchors += ("scene_units",)
             if family == "numeric_transform":
                 if transition == "transform_enter" and not after_input:
                     anchors += ("transform_values",)

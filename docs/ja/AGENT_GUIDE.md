@@ -56,7 +56,11 @@ tolerance を満たす必要があります。
 `selection_identities` が必要です。Blender はプロセス範囲の公開 `session_uid` を
 使います。改名しても ID は維持され、同名の別 object への置き換えは以後の入力を
 遮断します。ID がない場合は UNKNOWN のままです。observer は位置と scale の
-X/Y/Z 属性も提供します。使用前に operation registry v4 を確認してください。
+X/Y/Z 属性も提供します。使用前に operation registry v5 を確認してください。
+位置の `property_edit.value` は Blender 単位の生座標です。新しい `scene_units`
+根拠から明示的な meter 入力を計算し、入力と readback の間で固定します。不明または
+変化した単位は入力・成功判定を止めます。scale は無次元です。表示単位による
+生座標の再解釈は行わず、実際の readback は元の tolerance を満たす必要があります。
 信頼できるローカル観測器による editor・selection・mode・IME・
 keymap の確認が必要です。不明な状態は入力を遮断します。既定の screenshot
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は
