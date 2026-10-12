@@ -167,6 +167,55 @@ def test_gesture_binds_surface_and_modifiers_and_cleans_up_on_guard_change():
     assert not adapter.gui.held and not adapter.gui.buttons
 
 
+@pytest.mark.parametrize("phase", ["button_ack", "modifier_drift", "failed_button"])
+def test_gesture_view_transition_requires_acknowledged_button_and_releases_modifiers(phase):
+    from clef_use.input_ir import GestureInput, InputContext
+
+    class ViewDevice(EditorDevice):
+        view = "baseline"
+
+        def keyDown(self, key, **kwargs):
+            super().keyDown(key, **kwargs)
+            if phase == "modifier_drift":
+                self.view = "independent"
+
+        def mouseDown(self, button, **kwargs):
+            if phase == "failed_button":
+                raise RuntimeError("button request refused")
+            super().mouseDown(button, **kwargs)
+            self.view = "owned-button"
+
+    adapter, frame, cancelled = setup_input()
+    adapter.gui = ViewDevice()
+    command = GestureInput(
+        points=((0.2, 0.2), (0.4, 0.4), (0.6, 0.6)),
+        surface=(0, 0, 1, 1),
+        modifiers=("shift",),
+        duration=0.01,
+    )
+    arguments = dict(
+        context=InputContext(text_focus=False, ime_composing=False),
+        context_guard=lambda: adapter.gui.view == "baseline",
+        after_input_guard=lambda: adapter.gui.view == "owned-button",
+    )
+    if phase == "button_ack":
+        result = adapter.execute_input(command, frame, cancelled, **arguments)
+        assert result.ok and result.delivery is None
+        assert adapter.gui.strokes == [
+            ((20, 20), (40, 40), frozenset({"shift"})),
+            ((40, 40), (60, 60), frozenset({"shift"})),
+        ]
+    elif phase == "failed_button":
+        with pytest.raises(RuntimeError, match="button request refused"):
+            adapter.execute_input(command, frame, cancelled, **arguments)
+        assert adapter.gui.view == "baseline" and adapter.gui.strokes == []
+    else:
+        result = adapter.execute_input(command, frame, cancelled, **arguments)
+        assert not result.ok and adapter.gui.strokes == []
+    assert not adapter.gui.held and not adapter.gui.buttons
+    assert not adapter.keys and not adapter.buttons
+
+
 def test_ime_unknown_and_text_focus_block_shortcuts_but_do_not_rewrite_text():
     from clef_use.input_ir import ChordInput, InputContext, TextInput
 

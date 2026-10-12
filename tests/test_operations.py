@@ -815,6 +815,36 @@ def test_viewport_cannot_use_a_caller_surface_outside_observed_editor():
     assert desktop.inputs == []
 
 
+def test_view_change_before_gesture_dispatch_cannot_count_as_its_effect():
+    desktop = Desktop(
+        target_geometry={"editor_surface": [0, 0, 1, 1]},
+        keymap={"orbit": {"button": "middle", "modifiers": []}},
+    )
+    calls = 0
+
+    def observe():
+        nonlocal calls
+        calls += 1
+        if calls == 2:
+            desktop.values["view_revision"] = "independent-before-gesture"
+        return desktop.observe()
+
+    request = parse_operation_request(
+        dict(
+            family="viewport_gesture",
+            gesture="orbit",
+            keymap_version="test-1",
+            surface=(0, 0, 1, 1),
+            points=((0.4, 0.4), (0.5, 0.5)),
+        )
+    )
+    report = OperationRunner(observe, desktop.execute).run(request, Event())
+    assert report.status == "BLOCKED"
+    assert desktop.inputs == []
+    assert "view_change_verified" not in report.transitions
+    assert not report.geometry_invalidated
+
+
 def test_view_change_rejects_reused_geometry_before_next_edit():
     desktop = Desktop(
         target_geometry={"editor_surface": [0, 0, 1, 1]},

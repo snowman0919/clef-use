@@ -113,6 +113,14 @@ and redundant pending pose parameters. A layout-only change cannot establish an
 orbit/pan effect. Missing pose remains UNKNOWN. Blender documents the distinction
 between the current view matrix and the combined projection matrix in
 [RegionView3D](https://docs.blender.org/api/5.2/bpy.types.RegionView3D.html).
+Viewport dispatch anchors the initial view revision through the runner's final
+pre-dispatch refresh and the input executor's pre-button checks. Only a successful
+native button-down acknowledgement switches to the gesture guard that allows
+expected view changes. The executor latches this phase under its ownership lock
+before guardian synchronization; no key delivery receipt is fabricated for a
+gesture. Other context and editor geometry guards remain exact. This prevents
+pre-existing view drift from verifying a no-effect gesture; it does not establish
+causal attribution against simultaneous external input after button acknowledgement.
 All executable target objects must fit the existing 40-object context budget;
 overflow or missing target evidence is refused rather than silently truncated.
 The optional Foundation ViT produces screenshot coordinates

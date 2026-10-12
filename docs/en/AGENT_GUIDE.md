@@ -43,6 +43,9 @@ verified editor, selection, mode, IME and keymap facts from a trusted local prov
 With trusted facts, guards compare keymap content as well as its version label.
 Viewport editor geometry is rechecked before and during gestures; a change stops
 execution and releases owned input.
+The view baseline must also stay exact until the native gesture button is
+acknowledged. An earlier independent view change cannot count as gesture success;
+after acknowledgement, expected drag changes are allowed under the other guards.
 Numeric transforms require full XYZ translation, rotation and scale readback.
 The transform context is rechecked before input, the initial values before entry,
 and the verified preview before commit. A partial vector cannot verify unchanged

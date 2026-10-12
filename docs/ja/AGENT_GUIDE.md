@@ -46,6 +46,8 @@ clef-use integrations refresh --managed-only
 指示とは別です。
 検証済みの状態がある場合、guard はバージョン名だけでなく keymap の内容も比較します。
 viewport ジェスチャーの前と途中に editor 領域を再確認し、変更時は停止して所有する入力を解放します。
+view の基準も native ジェスチャーのボタン入力が確認されるまで保持します。それ以前の
+独立した view 変化は成功に数えません。確認後の drag による変化は他の guard を保って許可します。
 数値 transform には移動・回転・scale の XYZ 全成分の readback が必要です。
 入力前に transform 文脈、開始前に初期値、commit 前に検証済み preview を再確認します。
 一部の成分だけで他の軸の保持を判定しません。property 編集後は観測した全フィールドと

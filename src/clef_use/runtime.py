@@ -209,6 +209,8 @@ class SessionRuntime:
                 anchors += ("space", "unit", "transform_context")
             if family == "property_edit" and operation["field"].startswith("location_"):
                 anchors += ("scene_units",)
+            if family == "viewport_gesture" and not after_input:
+                anchors += ("view_revision",)
             if family == "numeric_transform":
                 if transition == "transform_enter" and not after_input:
                     anchors += ("transform_values",)
@@ -316,7 +318,10 @@ class SessionRuntime:
                 deadline=time.monotonic() + 3,
                 context=context,
                 after_input_guard=(lambda: guard(after_input=True))
-                if text_control == "submit" or transition is not None
+                if text_control == "submit"
+                or transition is not None
+                or family == "viewport_gesture"
+                and isinstance(command, GestureInput)
                 else None,
             )
         except InputDispatchError as exc:

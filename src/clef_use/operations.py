@@ -789,16 +789,20 @@ class OperationRunner:
         if not isinstance(modifiers, list):
             raise OperationBlocked("observed viewport modifiers are unavailable")
         before = self._fact("view_revision")
-        self._send(
-            GestureInput(
-                points=request.points,
-                surface=request.surface,
-                duration=request.duration,
-                button="middle",
-                modifiers=tuple(modifiers),
-            ),
-            cancelled,
-        )
+        self._anchor["view_revision"] = before
+        try:
+            self._send(
+                GestureInput(
+                    points=request.points,
+                    surface=request.surface,
+                    duration=request.duration,
+                    button="middle",
+                    modifiers=tuple(modifiers),
+                ),
+                cancelled,
+            )
+        finally:
+            self._anchor.pop("view_revision", None)
         self._refresh()
         if self._fact("view_revision") == before:
             raise OperationBlocked("viewport readback did not change")

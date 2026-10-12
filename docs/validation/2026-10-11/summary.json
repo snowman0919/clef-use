@@ -2752,6 +2752,12 @@
       "sha256": "fd383a3820092de593d45c677df5e05f082e801a6fbee1518af62cd6452277bb",
       "scope": "Integrated1120PASS/34SKIP. Canonical pure runtime old raw.02 for request2 corrected, missingunits noinput and changedunits stops. Actual native Blender cm bare2 becomesraw.02; explicitmeters raw2. Separate fixed actualscale singleeditPASS. Prior12/13matrix retains external test-protocol deviation and1NOT_RUN. Registry5/sourceCLI/stdio conditionalunits advertised, schema unchanged/defaultBLOCKED. No whole E2E/model/current-installed/performance claim."
     },
+    "viewport_input_baseline": {
+      "claim": "OBSERVED",
+      "artifact": "docs/validation/2026-10-11/viewport-input-baseline.json",
+      "sha256": "f08263edd844ae301e7119f757eae3d03a3715defef75c51421bcfd29dcf011b",
+      "scope": "Integrated1133PASS/34SKIP includes separate legacy keyboard patch. Immutable4module native baseline falselySUCCEEDED with unchanged pre/postgesture Canvas pose. Current initialdriftBLOCKED/noevents, actualShiftMMBdrag changespose64x48/SUCCEEDED, initialpositiondrift stopsbeforeMMB (pointermoved). Allinputsreleased/sourceendhashesstable/ownedcleanup. API-assisted Tk component only, no Blender wholeE2E/model/installed/performanceclaim. Priorfixturefail and startup-only bindings retained."
+    },
     "blender_inventory_and_coordinates": {
       "claim": "OBSERVED",
       "artifact": "docs/validation/2026-10-11/blender-inventory-and-coordinates.json",
@@ -2990,7 +2996,8 @@
     "blender-view-effect-revision.json",
     "blender-selection-identity.json",
     "input-authority-and-clipboard.json",
-    "property-scene-units.json"
+    "property-scene-units.json",
+    "viewport-input-baseline.json"
   ],
   "user_scope_update": {
     "date": "2026-10-12",

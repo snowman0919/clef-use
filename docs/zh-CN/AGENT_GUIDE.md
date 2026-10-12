@@ -43,6 +43,8 @@ clef-use integrations refresh --managed-only
 语言指导分离。可信本地观察器必须验证 editor、selection、mode、IME 和 keymap。
 有可信状态依据时，guard 会比较 keymap 内容和版本名。
 viewport 手势执行前及过程中会重新检查 editor 区域；区域变化时停止执行并释放自有输入。
+view 基线也必须保持到 native 手势按钮输入被确认。此前的独立 view 变化不能算作
+手势成功；确认后的 drag 变化在保留其他 guard 的前提下允许。
 数值 transform 需要位移、旋转及 scale 的完整 XYZ readback。输入前重新检查
 transform 上下文，进入前检查初始值，commit 前检查已验证的 preview；不能仅凭部分
 成分判断其他轴未变。property 编辑后比较所有已观察字段和 object ID，但不能据此

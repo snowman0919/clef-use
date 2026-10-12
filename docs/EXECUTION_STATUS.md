@@ -173,6 +173,35 @@ updated. Native Windows/Darwin, installed-current harness E2E, whole-task/model
 and full accuracy/p95/goodput/coverage remain NOT_RUN here. No acceptance or release
 gate was promoted. See [unit evidence](validation/2026-10-11/property-scene-units.json).
 
+**OBSERVED / viewport input baseline:** the runner and native input guard now
+retain the initial view revision until the actual gesture button-down is
+acknowledged. A pre-existing independent change cannot verify a no-effect gesture.
+Only the acknowledged button switches to the existing phase guard that permits
+expected drag changes; selection, keymap, editor geometry and other context checks
+remain exact. No key/chord delivery receipt is fabricated for a gesture.
+
+An owned authenticated X11/Tk Canvas component loaded four exact historical Git
+modules and reproduced `SUCCEEDED` despite identical pre/post-gesture coordinates.
+The frozen corrected source refused that pre-dispatch change with zero input,
+performed a genuine Shift+middle drag with an independently read 64-by-48 change,
+and stopped a view change during initial positioning before middle-button press.
+The latter case moved the pointer to the starting point; it is not zero OS input.
+All owned buttons/modifiers were released and children/sockets removed. Fixture
+application/editor/keymap/idle facts are explicit API-assisted protocol assertions;
+this does not prove automatic Blender context discovery. One oracle-concurrency
+failure and two earlier startup-only dependency-binding runs remain retained;
+the final baseline and current source bindings are pinned through execution.
+
+The integrated candidate, including the separate legacy keyboard correction,
+passed **1133 tests / 34 skipped / 41 warnings** in 57.77 seconds. Eight changed
+Python files passed Ruff/format and contract generation passed. Source CLI still
+advertises registry v5 and the unchanged request schema. Four-language guides
+describe the baseline boundary. Simultaneous external changes after button ACK
+are outside this causality claim. Whole E2E/models, installed-current harness E2E,
+Windows/Darwin native and full accuracy/p95/goodput/coverage remain NOT_RUN here;
+acceptance/release gates are unchanged. See
+[viewport evidence](validation/2026-10-11/viewport-input-baseline.json).
+
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

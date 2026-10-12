@@ -45,6 +45,9 @@ clef-use integrations refresh --managed-only
 operation은 typed 상태 기계이며 Agent Skill의 자연어 지침과 분리됩니다.
 검증된 상태가 있으면 guard는 버전 이름뿐 아니라 실제 keymap 내용도 비교합니다.
 viewport 제스처 전과 도중에 editor 영역을 재확인하며, 영역이 바뀌면 중단하고 소유 입력을 해제합니다.
+view 기준도 native 제스처 버튼 입력이 확인될 때까지 유지돼야 합니다. 그 전에 발생한
+독립적인 view 변경을 성공으로 집계하지 않으며, 버튼 확인 뒤 drag의 view 변경은
+나머지 guard를 유지한 상태에서 허용합니다.
 수치 transform은 이동·회전·scale의 XYZ 전체 readback이 필요합니다. 입력 전에는
 transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 preview를 재확인합니다.
 일부 성분만으로 나머지 축의 보존을 판정하지 않습니다. property 편집 후에는 관측한

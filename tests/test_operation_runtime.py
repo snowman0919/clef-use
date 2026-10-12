@@ -373,6 +373,7 @@ def test_viewport_region_change_at_native_boundary_refuses_pointer_movement():
     from clef_use.input_ir import GestureInput
 
     editor = OperationEditor()
+    editor.values["view_revision"] = "view-1"
     editor.values["target_geometry"] = {"editor_surface": [0, 0, 1, 1]}
     editor.values["keymap"] = {"orbit": {"button": "middle", "modifiers": []}}
 
@@ -391,6 +392,67 @@ def test_viewport_region_change_at_native_boundary_refuses_pointer_movement():
             {"family": "viewport_gesture", "gesture": "orbit"},
         )
     assert not editor.held
+
+
+@pytest.mark.parametrize("change_at", ["before_input", "positioning", "drag"])
+def test_viewport_baseline_must_remain_exact_until_button_acknowledgement(change_at):
+    from threading import Event
+
+    from clef_use.input_ir import GestureInput
+
+    class ViewportEditor(OperationEditor):
+        def __init__(self):
+            super().__init__()
+            self.buttons = set()
+            self.strokes = []
+            self.position = (0, 0)
+            self.values.update(
+                target_geometry={"editor_surface": [0, 0, 1, 1]},
+                keymap={"orbit": {"button": "middle", "modifiers": ["shift"]}},
+                view_revision="view-1",
+            )
+
+        def moveTo(self, x, y, **kwargs):
+            if self.buttons:
+                self.strokes.append((self.position, (x, y)))
+                self.values["view_revision"] = "owned-drag"
+            elif change_at == "positioning":
+                self.values["view_revision"] = "independent-before-button"
+            self.position = (x, y)
+
+        def mouseDown(self, button, **kwargs):
+            self.buttons.add(button)
+
+        def mouseUp(self, button, **kwargs):
+            self.buttons.discard(button)
+
+    editor = ViewportEditor()
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    if change_at == "before_input":
+        editor.values["view_revision"] = "independent-before-input"
+    command = GestureInput(
+        points=((0.4, 0.4), (0.5, 0.5), (0.6, 0.6)),
+        surface=(0, 0, 1, 1),
+        modifiers=("shift",),
+        duration=0.01,
+    )
+    if change_at == "drag":
+        result = runtime._operation_input(
+            command, state, Event(), {"family": "viewport_gesture", "gesture": "orbit"}
+        )
+        assert result.ok
+        assert editor.values["view_revision"] == "owned-drag"
+        assert editor.strokes == [((40, 40), (50, 50)), ((50, 50), (60, 60))]
+    else:
+        with pytest.raises(RuntimeError, match="context changed"):
+            runtime._operation_input(
+                command, state, Event(), {"family": "viewport_gesture", "gesture": "orbit"}
+            )
+        assert editor.strokes == []
+        if change_at == "before_input":
+            assert editor.position == (0, 0)
+    assert not editor.held and not editor.buttons
 
 
 class Screen:

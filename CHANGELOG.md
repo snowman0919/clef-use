@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Anchor viewport view readback until native gesture button acknowledgement so
+  an independent pre-input change cannot verify a no-effect gesture. Preserve
+  expected drag changes and all other context guards after acknowledgement.
 - Interpret location property values as raw Blender coordinates using validated,
   anchored scene units and explicit meter input. Keep scale dimensionless; refuse
   unknown units and numeric conversion range loss before input. Advertise conditional

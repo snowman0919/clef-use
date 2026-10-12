@@ -506,7 +506,7 @@ class InputExecutor:
                 acknowledged()
             self._sync()
 
-    def _button_down(self, button, frame):
+    def _button_down(self, button, frame, acknowledged=None):
         with self.lock:
             if button in self.buttons:
                 raise InputInterrupted("button already owned")
@@ -524,6 +524,8 @@ class InputExecutor:
                 self.gui.mouseDown(button=button, _pause=False)
             self.buttons.add(button)
             self.owned.append(("button", button))
+            if acknowledged is not None:
+                acknowledged()
             self._sync()
 
     def _up(self, kind, value):
@@ -690,6 +692,8 @@ class InputExecutor:
             and context_guard is not None
             and (
                 isinstance(command, ChordInput)
+                or isinstance(command, GestureInput)
+                and context.text_focus is False
                 or (
                     isinstance(command, KeyInput)
                     and command.phase == "tap"
@@ -712,12 +716,13 @@ class InputExecutor:
         execution_id = uuid.uuid4().hex if trigger_keys is not None else None
 
         def acknowledged():
-            self.delivery = InputDelivery(
-                execution_id=execution_id,
-                kind=command.kind,
-                keys=trigger_keys,
-                acknowledged_at_ns=time.monotonic_ns(),
-            )
+            if trigger_keys is not None:
+                self.delivery = InputDelivery(
+                    execution_id=execution_id,
+                    kind=command.kind,
+                    keys=trigger_keys,
+                    acknowledged_at_ns=time.monotonic_ns(),
+                )
             if after_input_guard is not None:
                 phase_guard[0] = after_input_guard
 
@@ -785,8 +790,9 @@ class InputExecutor:
                 for key in command.modifiers:
                     self._check(cancelled, deadline, context_guard, frame)
                     self._key_down(key, frame)
-                self._check(cancelled, deadline, context_guard, frame)
-                self._button_down(command.button, frame)
+                with self.lock:
+                    self._check(cancelled, deadline, context_guard, frame)
+                    self._button_down(command.button, frame, acknowledged)
                 for point in command.points[1:]:
                     self._check(cancelled, deadline, context_guard, frame)
                     self._move(point, frame)
