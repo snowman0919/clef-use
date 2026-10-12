@@ -1,0 +1,91 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Numeric readback/dispatch software regression and API-assisted native input-bridge component only; not automatic Blender context or whole-operation E2E",
+  "source_base": "f1a340d62aa4f6a7e6d7c3a5c19369d1c3b72bfd",
+  "source_sha256": {
+    "src/clef_use/operations.py": "859c78393c5c323198729c54cc8ad970ed0e665dca94116d46b957c23885fb7f",
+    "src/clef_use/runtime.py": "8e4881dec1aa5d2a7b4f6c8c5fdaff4bcf8fd08fad0096ca3b93e2370fc6df24",
+    "src/clef_use/capabilities.py": "588bea0d0c966e2660d6eabcca781d3bd2c38eea0e1400ebb6eed69720c35f3d",
+    "tests/test_operations.py": "baafa6f1543577c0d51d04554f44e50b526397a8cf8e524ef423196a31db2c3a",
+    "tests/test_operation_runtime.py": "59a5d0c6196f2354ae9b7f59f6a0567c318c4941a5f6e2eed488498434517ad3",
+    "tests/test_transform_dispatch.py": "d92153e985f58035527cd948c5289faf1ba6e5c7f0666ce00ac51d3d0f960ce3"
+  },
+  "reproduced_before": {
+    "partial_vectors_and_property_collateral": {
+      "result": "8 failed, 47 passed",
+      "log_sha256": "e64ea99ddcd18d37b2e2e04dadf92d54943b9dfa9d61e13c24e3a73bcd2edce6"
+    },
+    "stale_context_baseline_and_preview": {
+      "result": "4 failed",
+      "log_sha256": "aa29c673d1c25c99755a18a6c0853c5c657e90ace3d34aafd9215dd3a6ad4ebe"
+    },
+    "numeric_literal_precision": {
+      "result": "2 failed",
+      "log_sha256": "e003ab15f381bb8dc342e046af8aff5be00012a6728a1d557b875200a7f063bf"
+    },
+    "owned_cancel_native_boundary": {
+      "result": "1 failed",
+      "log_sha256": "db904fa524338e32d19e3803af62f3361f2518570098049e27704bca8927d886"
+    }
+  },
+  "native_component": {
+    "scope": "API_ASSISTED owned Tk rectangle and canonical input bridge/readback helpers; not Blender context, numeric text parsing, whole operation E2E or model proof",
+    "actual_item_baseline_change": "CONTEXT_CHANGED_BEFORE_INPUT",
+    "actual_item_group_context_change": "CONTEXT_CHANGED_BEFORE_INPUT",
+    "acknowledged_entry_preview_allowed": true,
+    "actual_preview_change_refuses_commit": "CONTEXT_CHANGED_BEFORE_INPUT",
+    "status": "PASS",
+    "native_events": [
+      "g",
+      "enter"
+    ],
+    "final_item_coordinates": [
+      102.0,
+      100.0,
+      122.0,
+      120.0
+    ],
+    "native_group_tag_cleared": true,
+    "owned_keys": [],
+    "owned_buttons": [],
+    "models": 0,
+    "production_display_access": 0
+  },
+  "native_report_sha256": "e86627a4c589b036e6f17b184673055c95c957bd3fc0afcc4161b12c5abaffe2",
+  "native_driver_sha256": "5418cf5016ed7dbd00c36d0f788162c5821d96f62937ca11396524ffb1fed3b9",
+  "native_source_stable_across_run": true,
+  "native_input_dependency_sha256": {
+    "input_ir.py": "b83414837d051883cdb758e09d02dce86707f4a17175285ca5d0da4dfe91e7b4",
+    "backends.py": "83621755d0123a3eaecc9a799338bc87b0d1d3c1de0d76b2079bfde60ce97c7d",
+    "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+  },
+  "native_cleanup": {
+    "scope": "Exact owned native component HOME only; unrelated unreadable processes not audited",
+    "matches": [],
+    "unreadable_other_entries": 420
+  },
+  "cli_capabilities": {
+    "operation_registry_version": 3,
+    "modal_cancel_requires_transform_context": true,
+    "raw_report_sha256": "93c7a99db7e2f3f52aa2f89daa1861ee728e81ac2f732479a93f1bc0d174c69c"
+  },
+  "regression": {
+    "full_passed": 982,
+    "full_skipped": 34,
+    "warnings": 41,
+    "seconds": 57.9,
+    "log_sha256": "fd1a9b8d7f79108e17ef1cca54f8a322c174b17d6dc1b66762e67ddb85b3fbbd",
+    "scope": "Integrated candidate including the separately committed X11 pointer-mapping patch; not an isolated numeric-only commit run",
+    "ruff_check": "PASS ten changed Python files",
+    "ruff_format_check": "PASS ten changed Python files",
+    "generated_contract": "PASS"
+  },
+  "limits": [
+    "Native fixture reads an owned Tk rectangle and group tag. Its full vectors are explicit fixture facts; it does not establish Blender parent context or general 3D transform observation.",
+    "Native events g and Enter exercise the canonical input bridge. Numeric text parsing and the complete OperationRunner sequence are source-regression checks, not native Blender operation proof.",
+    "Unobserved property fields are outside the preservation claim; application numeric precision must still meet request tolerance.",
+    "Whole-task E2E, model production/evaluation, new installed harness executions and p95/goodput/coverage are NOT_RUN here under the user session split.",
+    "Default partial Blender facts still block operations that require unknown popup/text/IME/effective-keymap/global-busy context."
+  ],
+  "acceptance_status_promotions": []
+}

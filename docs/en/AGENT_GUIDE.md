@@ -43,6 +43,13 @@ verified editor, selection, mode, IME and keymap facts from a trusted local prov
 With trusted facts, guards compare keymap content as well as its version label.
 Viewport editor geometry is rechecked before and during gestures; a change stops
 execution and releases owned input.
+Numeric transforms require full XYZ translation, rotation and scale readback.
+The transform context is rechecked before input, the initial values before entry,
+and the verified preview before commit. A partial vector cannot verify unchanged
+axes. Property edits compare all observed fields and object identities afterward;
+this does not establish preservation of fields that were never observed.
+Numeric literals preserve the requested float; application readback must still
+meet the requested tolerance.
 Missing facts block input. The default screenshot provider cannot assert Blender's
 hidden state. API-assisted fixture results do not prove pixels-only operation.
 An operation report's `SUCCEEDED` verifies its typed effect. The session stays

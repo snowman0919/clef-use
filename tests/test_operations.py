@@ -38,7 +38,11 @@ class Desktop:
                 "select_all": ["ctrl", "a"],
             },
             transform_values={
-                "Cube": {"translate": {"X": 0.0}, "rotate": {"X": 0.0, "Y": 0.0, "Z": 0.0}}
+                "Cube": {
+                    "translate": {"X": 0.0, "Y": 0.0, "Z": 0.0},
+                    "rotate": {"X": 0.0, "Y": 0.0, "Z": 0.0},
+                    "scale": {"X": 1.0, "Y": 1.0, "Z": 1.0},
+                }
             },
             transform_context={
                 "Cube": {"parent": None, "delta_identity": True, "pivot": "MEDIAN_POINT"}
@@ -147,6 +151,21 @@ def test_transform_requires_preview_and_committed_numeric_readback():
     assert desktop.values["transform_values"]["Cube"]["translate"]["X"] == 2
     assert "preview_verified" in report.transitions
     assert "readback_verified" in report.transitions
+
+
+@pytest.mark.parametrize("group", ["translate", "rotate", "scale"])
+@pytest.mark.parametrize("axis", [None, "X", "Y", "Z"])
+def test_incomplete_transform_snapshot_blocks_before_any_input(group, axis):
+    desktop = Desktop()
+    values = desktop.values["transform_values"]["Cube"]
+    if axis is None:
+        del values[group]
+    else:
+        del values[group][axis]
+    report = OperationRunner(desktop.observe, desktop.execute).run(transform(), Event())
+    assert report.status == "BLOCKED"
+    assert report.input_count == 0
+    assert desktop.inputs == []
 
 
 def test_rotation_enters_only_numeric_literal_in_the_observed_angular_unit():
@@ -442,6 +461,47 @@ def test_property_delivery_without_exact_literal_readback_is_failure():
     report = OperationRunner(desktop.observe, desktop.execute).run(request, Event())
     assert report.status == "FAILED"
     assert "readback" in report.reason
+
+
+@pytest.mark.parametrize("changed_target", [None, "Cube", "Other"])
+def test_property_edit_verifies_all_observed_fields_without_rejecting_unchanged_metadata(
+    changed_target,
+):
+    desktop = Desktop(
+        text_focus=True,
+        focused_property={"target_id": "Cube", "field": "location_x"},
+        properties={
+            "Cube": {"location_x": 0.0, "location_y": 0.0, "locked": True, "label": "target"},
+            "Other": {"location_x": 5.0, "enabled": False},
+        },
+    )
+    request = parse_operation_request(
+        dict(
+            family="property_edit",
+            target_id="Cube",
+            field="location_x",
+            value=2,
+            keymap_version="test-1",
+        )
+    )
+
+    def execute(command, current, cancelled):
+        result = desktop.execute(command, current, cancelled)
+        if getattr(command, "text", None):
+            desktop.values["properties"]["Cube"]["location_x"] = float(command.text)
+        if getattr(command, "key", None) == "enter":
+            if changed_target == "Cube":
+                desktop.values["properties"]["Cube"]["location_y"] = 3.0
+            elif changed_target == "Other":
+                desktop.values["properties"]["Other"]["location_x"] = 9.0
+        return result
+
+    report = OperationRunner(desktop.observe, execute).run(request, Event())
+    assert report.status == ("SUCCEEDED" if changed_target is None else "FAILED")
+    assert desktop.values["properties"]["Cube"]["location_x"] == 2.0
+    assert desktop.values["properties"]["Cube"]["locked"] is True
+    assert desktop.values["properties"]["Cube"]["label"] == "target"
+    assert desktop.values["properties"]["Other"]["enabled"] is False
 
 
 def test_viewport_cannot_use_a_caller_surface_outside_observed_editor():

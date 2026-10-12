@@ -49,6 +49,14 @@ the observed keymap content as well as its version label. Viewport dispatch anch
 the checked editor geometry; the input guard rechecks its editor surface before
 and during a gesture. A changed surface stops execution and releases owned input.
 These guards do not supply missing state or enable the partial Blender provider.
+Numeric transforms require finite XYZ readback for translation, rotation and scale
+on every observed object before entry. Dispatch rechecks the transform context;
+the initial values must match before entry and the verified preview before commit.
+Owned entry may preview mouse movement without redefining the initial baseline.
+Phase-specific preview anchors do not restrict later owned cancellation. Property
+readback compares the edited value plus every other observed property and identity,
+including unchanged boolean/string/list metadata; unobserved fields remain outside
+that preservation claim.
 
 `SessionRuntime.execute` captures a fresh frame, parses it into project-owned
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint

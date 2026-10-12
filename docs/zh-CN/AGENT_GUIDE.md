@@ -43,6 +43,11 @@ clef-use integrations refresh --managed-only
 语言指导分离。可信本地观察器必须验证 editor、selection、mode、IME 和 keymap。
 有可信状态依据时，guard 会比较 keymap 内容和版本名。
 viewport 手势执行前及过程中会重新检查 editor 区域；区域变化时停止执行并释放自有输入。
+数值 transform 需要位移、旋转及 scale 的完整 XYZ readback。输入前重新检查
+transform 上下文，进入前检查初始值，commit 前检查已验证的 preview；不能仅凭部分
+成分判断其他轴未变。property 编辑后比较所有已观察字段和 object ID，但不能据此
+确认未观察字段保持不变。
+数值 literal 保留请求的 float；应用实际 readback 仍须满足请求的 tolerance。
 未知状态会阻止输入。默认截图观察器不能确认 Blender 的隐藏状态。API 辅助
 fixture 的通过不能证明 pixels-only 操作成功。
 

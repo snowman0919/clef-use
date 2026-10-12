@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Require complete transform vectors before numeric input, recheck context and
+  baseline before entry, and recheck the verified preview before commit. Verify
+  all observed properties after a scalar edit, including unchanged fields/objects.
+  Preserve the requested float in numeric text instead of rounding to 15 digits.
 - Expose bounded raw Blender keymap inventory and native-client-bound editor
   layouts. Preserve duplicate/inactive bindings, tri-state modifiers and content
   digests; keep effective dispatch and editor focus unknown. Clipped or hidden

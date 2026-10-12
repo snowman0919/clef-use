@@ -45,6 +45,16 @@ class OperationEditor:
             "unit": {"translate": "METERS", "rotate": "DEGREES", "scale": "NONE"},
             "properties": {"Cube": {"shading": "FLAT"}},
             "command_result": "",
+            "transform_values": {
+                "Cube": {
+                    "translate": {"X": 0.0, "Y": 0.0, "Z": 0.0},
+                    "rotate": {"X": 0.0, "Y": 0.0, "Z": 0.0},
+                    "scale": {"X": 1.0, "Y": 1.0, "Z": 1.0},
+                }
+            },
+            "transform_context": {
+                "Cube": {"parent": None, "delta_identity": True, "pivot": "MEDIAN_POINT"}
+            },
         }
 
     def keyDown(self, key, **kwargs):
@@ -126,6 +136,11 @@ def test_search_accepts_only_its_acknowledged_popup_transition_and_reads_effect(
         {"space": "LOCAL"},
         {"modal": {"id": "foreign", "name": "rotate"}},
         {"unit": {"translate": "CENTIMETERS", "rotate": "DEGREES", "scale": "NONE"}},
+        {
+            "transform_context": {
+                "Cube": {"parent": "Parent", "delta_identity": True, "pivot": "MEDIAN_POINT"}
+            }
+        },
     ],
 )
 def test_numeric_event_refuses_changed_safety_facts_at_native_boundary(change):
@@ -145,6 +160,86 @@ def test_numeric_event_refuses_changed_safety_facts_at_native_boundary(change):
             {"family": "numeric_transform", "operation": "translate"},
         )
     assert editor.text == "" and not editor.held
+
+
+def test_numeric_baseline_change_at_native_boundary_refuses_modal_entry():
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["transform_values"]["Cube"]["translate"]["X"] = 5.0
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            KeyInput(key="g"),
+            state,
+            Event(),
+            {"family": "numeric_transform", "operation": "translate"},
+        )
+    assert editor.values["modal"] is None and not editor.held
+
+
+def test_owned_cancel_rechecks_transform_context_at_native_boundary():
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    editor.values["modal"] = {"id": "owned", "name": "translate"}
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["transform_context"]["Cube"]["parent"] = "Parent"
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            KeyInput(key="escape"), state, Event(), {"family": "modal_cancel", "modal_id": "owned"}
+        )
+    assert editor.values["modal"] == {"id": "owned", "name": "translate"}
+    assert not editor.held
+
+
+def test_numeric_preview_change_at_native_boundary_refuses_commit():
+    from copy import deepcopy
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    editor.values["modal"] = {"id": "owned", "name": "translate"}
+    editor.values["transform_preview"] = deepcopy(editor.values["transform_values"])
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.values["transform_preview"]["Cube"]["translate"]["X"] = 99.0
+    with pytest.raises(RuntimeError, match="context changed"):
+        runtime._operation_input(
+            KeyInput(key="enter"),
+            state,
+            Event(),
+            {"family": "numeric_transform", "operation": "translate"},
+        )
+    assert editor.values["modal"] == {"id": "owned", "name": "translate"}
+    assert not editor.held
+
+
+def test_acknowledged_entry_can_preview_values_without_failing_the_context_guard():
+    from threading import Event
+
+    from clef_use.input_ir import KeyInput
+
+    editor = OperationEditor()
+    runtime = editor.runtime()
+    state = runtime._operation_state()
+    editor.after_enter = lambda: editor.values["transform_values"]["Cube"]["translate"].update(
+        X=5.0
+    )
+    result = runtime._operation_input(
+        KeyInput(key="g"), state, Event(), {"family": "numeric_transform", "operation": "translate"}
+    )
+    assert result.ok
+    assert editor.values["modal"] == {"id": "owned-modal", "name": "translate"}
+    assert editor.values["transform_values"]["Cube"]["translate"]["X"] == 5
+    assert not editor.held
 
 
 def test_viewport_region_change_at_native_boundary_refuses_pointer_movement():
@@ -208,14 +303,6 @@ def test_typed_continuation_requires_explicit_operation_to_avoid_repeating_effec
 
 def test_pending_modal_recovery_blocks_replacement_and_other_goals_until_cancelled():
     editor = OperationEditor()
-    editor.values.update(
-        transform_values={
-            "Cube": {"translate": {"X": 0.0}, "rotate": {"X": 0.0, "Y": 0.0, "Z": 0.0}}
-        },
-        transform_context={
-            "Cube": {"parent": None, "delta_identity": True, "pivot": "MEDIAN_POINT"}
-        },
-    )
     runtime = editor.runtime()
     manager = SessionManager(factory=lambda: runtime)
     manager.runtime = runtime

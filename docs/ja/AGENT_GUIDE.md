@@ -46,6 +46,12 @@ clef-use integrations refresh --managed-only
 指示とは別です。
 検証済みの状態がある場合、guard はバージョン名だけでなく keymap の内容も比較します。
 viewport ジェスチャーの前と途中に editor 領域を再確認し、変更時は停止して所有する入力を解放します。
+数値 transform には移動・回転・scale の XYZ 全成分の readback が必要です。
+入力前に transform 文脈、開始前に初期値、commit 前に検証済み preview を再確認します。
+一部の成分だけで他の軸の保持を判定しません。property 編集後は観測した全フィールドと
+object ID を比較しますが、観測していないフィールドの保持までは確定しません。
+数値 literal は要求された float を保持します。アプリの実際の readback も指定した
+tolerance を満たす必要があります。
 信頼できるローカル観測器による editor・selection・mode・IME・
 keymap の確認が必要です。不明な状態は入力を遮断します。既定の screenshot
 観測器は Blender の隠れた状態を断定できません。API 補助 fixture の成功は

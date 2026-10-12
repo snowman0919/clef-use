@@ -203,7 +203,16 @@ class SessionRuntime:
                 "ime_composing",
             )
             if family in {"numeric_transform", "modal_cancel"}:
-                anchors += ("space", "unit")
+                anchors += ("space", "unit", "transform_context")
+            if family == "numeric_transform":
+                if transition == "transform_enter" and not after_input:
+                    anchors += ("transform_values",)
+                if (
+                    transition == "modal_close"
+                    and matches_binding("commit")
+                    and (not after_input or current.require("modal") is not None)
+                ):
+                    anchors += ("transform_preview",)
             valid = (
                 same_context(frame, fresh)
                 and fresh.foreground_window == expected_window

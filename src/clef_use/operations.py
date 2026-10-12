@@ -146,6 +146,7 @@ _CANCEL_FACTS = _CONTEXT_FACTS + (
     "unit",
     "keymap",
     "transform_values",
+    "transform_context",
 )
 
 _REGISTRY = (
@@ -507,25 +508,17 @@ class OperationRunner:
             raise OperationBlocked("command result did not match target property readback")
         self._steps.extend(("registered_command_selected", "readback_verified"))
 
-    @staticmethod
-    def _number(values, request):
-        value = values[request.target_id][request.operation][request.axis]
-        if (
-            isinstance(value, bool)
-            or not isinstance(value, (int, float))
-            or not math.isfinite(value)
-        ):
-            raise OperationBlocked("numeric application readback is unavailable")
-        return value
-
     def _transform(self, request, cancelled):
         self._expect("space", request.space)
         units = self._fact("unit")
         if not isinstance(units, dict) or units.get(request.operation) != request.unit:
             raise OperationBlocked("observed operation unit differs from requested unit")
         before_values = self._fact("transform_values")
+        self._complete_transform(before_values)
         self._transform_frame(request, before_values)
-        before = self._number(before_values, request)
+        self._anchor["transform_context"] = self._fact("transform_context")
+        self._anchor["transform_values"] = before_values
+        before = before_values[request.target_id][request.operation][request.axis]
         expected = (
             before * request.amount if request.operation == "scale" else before + request.amount
         )
@@ -537,6 +530,9 @@ class OperationRunner:
             self._send(enter, cancelled)
             entered_normally = True
         finally:
+            # Entry can already preview a mouse delta. It must not redefine the
+            # baseline, and that owned effect is not a context mismatch.
+            self._anchor.pop("transform_values", None)
             # Cancellation can arrive immediately after the acknowledged key
             # that opens a modal. Reconcile read-only before returning abort so
             # the same session retains its narrowly verified cleanup authority.
@@ -551,26 +547,30 @@ class OperationRunner:
         # Blender, letters in a unit suffix can switch the active transform
         # (for example the "g" in "deg"). Never mix shortcuts into a number.
         self._send(
-            TextInput(text=format(request.amount, ".15g"), method=self.text_method),
+            TextInput(text=repr(request.amount), method=self.text_method),
             cancelled,
         )
         self._refresh()
-        if not self._transform_matches(
-            self._fact("transform_preview"), before_values, request, expected
-        ):
+        preview = self._fact("transform_preview")
+        path = (request.target_id, request.operation, request.axis)
+        if not self._readback_matches(preview, before_values, path, expected, request.tolerance):
             raise OperationBlocked("numeric preview differs from intended transform")
         self._steps.append("preview_verified")
+        if request.commit:
+            self._anchor["transform_preview"] = preview
         self._send(commit if request.commit else cancel, cancelled)
+        self._anchor.pop("transform_preview", None)
         self._refresh()
         self._expect("modal", None)
         # A closed modal cannot be cancelled, even when final values reveal a
         # failed effect. Do not retain a recovery authority for that old ID.
         self._owned_modal = None
-        if not self._transform_matches(
+        if not self._readback_matches(
             self._fact("transform_values"),
             before_values,
-            request,
+            path,
             expected if request.commit else before,
+            request.tolerance,
         ):
             raise OperationBlocked("final numeric readback differs from intended result")
         self._steps.extend(("committed" if request.commit else "cancelled", "readback_verified"))
@@ -593,15 +593,39 @@ class OperationRunner:
             "id": modal["id"],
             "name": modal["name"],
             "before": before_values,
-            "anchor": self._anchor,
+            "anchor": dict(self._anchor),
             "cancel": cancel,
         }
         self._steps.append("owned_modal_entered")
 
     @staticmethod
-    def _transform_matches(actual, before, request, intended):
-        """Verify the complete observed transform, including unaffected values."""
-        intended_path = (request.target_id, request.operation, request.axis)
+    def _complete_transform(values):
+        """A partial vector cannot verify unchanged axes or transform channels."""
+        if not isinstance(values, dict) or not values:
+            raise OperationBlocked("complete numeric transform readback is unavailable")
+        for transform in values.values():
+            if not isinstance(transform, dict) or set(transform) != {
+                "translate",
+                "rotate",
+                "scale",
+            }:
+                raise OperationBlocked("complete numeric transform readback is unavailable")
+            for vector in transform.values():
+                if (
+                    not isinstance(vector, dict)
+                    or set(vector) != set("XYZ")
+                    or any(
+                        isinstance(v, bool)
+                        or not isinstance(v, (int, float))
+                        or not math.isfinite(v)
+                        for v in vector.values()
+                    )
+                ):
+                    raise OperationBlocked("complete numeric transform readback is unavailable")
+
+    @staticmethod
+    def _readback_matches(actual, before, intended_path, intended, tolerance):
+        """Verify the edited scalar and every other observed value and identity."""
 
         def matches(value, original, path=()):
             if isinstance(original, dict):
@@ -610,7 +634,18 @@ class OperationRunner:
                     and value.keys() == original.keys()
                     and all(matches(value[k], v, (*path, k)) for k, v in original.items())
                 )
+            if isinstance(original, list):
+                return (
+                    isinstance(value, list)
+                    and len(value) == len(original)
+                    and all(
+                        matches(v, o, (*path, i))
+                        for i, (v, o) in enumerate(zip(value, original, strict=True))
+                    )
+                )
             expected = intended if path == intended_path else original
+            if type(expected) in (bool, str, type(None)):
+                return type(value) is type(expected) and value == expected
             return (
                 not isinstance(value, bool)
                 and not isinstance(expected, bool)
@@ -618,7 +653,7 @@ class OperationRunner:
                 and isinstance(expected, (int, float))
                 and math.isfinite(value)
                 and math.isfinite(expected)
-                and math.isclose(value, expected, rel_tol=0, abs_tol=request.tolerance)
+                and math.isclose(value, expected, rel_tol=0, abs_tol=tolerance)
             )
 
         return matches(actual, before)
@@ -634,10 +669,6 @@ class OperationRunner:
                 "scalar transform requires parentless target, identity delta and object pivot"
             )
         angles = values[request.target_id]["rotate"]
-        if any(
-            isinstance(angles[a], bool) or not isinstance(angles[a], (int, float)) for a in "XYZ"
-        ):
-            raise OperationBlocked("transform frame rotation is unavailable")
         aligned = all(abs(angles[a]) <= request.tolerance for a in "XYZ")
         if (
             (request.operation == "scale" and request.space == "GLOBAL")
@@ -660,21 +691,21 @@ class OperationRunner:
     def _property(self, request, cancelled):
         self._expect("text_focus", True)
         self._expect("focused_property", {"target_id": request.target_id, "field": request.field})
-        before = self._fact("properties")[request.target_id][request.field]
+        before_values = self._fact("properties")
+        before = before_values[request.target_id][request.field]
         if isinstance(before, bool) or not isinstance(before, (int, float)):
             raise OperationBlocked("exact property readback is unavailable")
         select, commit = self._binding("select_all"), self._binding("commit")
         self._send(select, cancelled)
-        self._send(
-            TextInput(text=format(request.value, ".15g"), method=self.text_method), cancelled
-        )
+        self._send(TextInput(text=repr(request.value), method=self.text_method), cancelled)
         self._send(commit, cancelled)
         self._refresh()
-        actual = self._fact("properties")[request.target_id][request.field]
-        if (
-            isinstance(actual, bool)
-            or not isinstance(actual, (int, float))
-            or not math.isclose(actual, request.value, rel_tol=0, abs_tol=request.tolerance)
+        if not self._readback_matches(
+            self._fact("properties"),
+            before_values,
+            (request.target_id, request.field),
+            request.value,
+            request.tolerance,
         ):
             raise OperationBlocked("final literal property readback differs from requested value")
         self._steps.extend(("exact_field_verified", "readback_verified"))

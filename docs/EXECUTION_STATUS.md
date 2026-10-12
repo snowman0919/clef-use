@@ -19,6 +19,21 @@ the same target at `(320,300)` afterward. Raw bindings and rectangles do not
 establish effective dispatch, focused editor or operation readiness. See
 [component evidence](validation/2026-10-11/blender-inventory-and-coordinates.json).
 This changed source has no new installed/harness E2E or full performance result.
+The subsequent numeric readback/dispatch correction requires complete transform
+vectors, stable context and baseline before entry, and a stable verified preview
+before commit. Scalar property edits verify all observed fields and identities.
+Roundtrip float literals avoid the former 15-digit rounding. Owned cancellation
+also rechecks transform context at the native boundary; the CLI advertises
+operation registry v3. Regression counterexamples reproduced the old false
+success, stale dispatch and precision failures before correction.
+The integrated candidate, including the separately recorded X11 pointer patch,
+passed **982 tests / 34 skipped / 41 warnings**. An owned API-assisted Tk rectangle
+component observed `g` and `Enter`, rejected real baseline/group/preview changes
+before input, and ended with no owned input. This verifies the input bridge and
+readback helpers, not native numeric text parsing or a complete Blender operation.
+The exact owned HOME process scan found no matches; 420 unreadable unrelated
+process entries were outside that check. See
+[numeric component evidence](validation/2026-10-11/transform-readback-and-dispatch.json).
 **User scope update (2026-10-12):** this session owns clef-use improvements and
 component/regression verification. Whole-task E2E and model production/evaluation
 belong to other sessions. Earlier completed task failures remain historical

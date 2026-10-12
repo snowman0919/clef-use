@@ -45,6 +45,12 @@ clef-use integrations refresh --managed-only
 operation은 typed 상태 기계이며 Agent Skill의 자연어 지침과 분리됩니다.
 검증된 상태가 있으면 guard는 버전 이름뿐 아니라 실제 keymap 내용도 비교합니다.
 viewport 제스처 전과 도중에 editor 영역을 재확인하며, 영역이 바뀌면 중단하고 소유 입력을 해제합니다.
+수치 transform은 이동·회전·scale의 XYZ 전체 readback이 필요합니다. 입력 전에는
+transform 문맥, 진입 전에는 초기 값, commit 전에는 검증한 preview를 재확인합니다.
+일부 성분만으로 나머지 축의 보존을 판정하지 않습니다. property 편집 후에는 관측한
+모든 필드와 객체 ID를 비교하며, 관측하지 않은 필드의 보존까지 확정하지 않습니다.
+숫자 literal은 요청한 float 값을 보존합니다. 앱의 실제 readback도 요청 tolerance를
+만족해야 합니다.
 신뢰할 수 있는 로컬 관측기가 editor·selection·mode·IME·keymap 상태를 확인해야
 입력합니다. 알 수 없는 상태는 차단합니다. 기본 screenshot 관측기는 Blender의
 숨은 상태를 확정할 수 없습니다. API 보조 fixture 통과는 pixels-only 통과가 아닙니다.

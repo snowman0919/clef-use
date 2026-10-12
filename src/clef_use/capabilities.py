@@ -115,7 +115,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         "schema_sha256": schema_sha256(),
         "runtime_protocol_version": RUNTIME_PROTOCOL_VERSION,
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
-        "operation_registry_version": 2,
+        "operation_registry_version": 3,
         "default_runtime_state": {
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",
