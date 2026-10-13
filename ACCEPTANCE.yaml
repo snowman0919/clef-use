@@ -120,6 +120,10 @@ scenarios:
   requirement: Cached observation is not used as new input or final-completion proof.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-codex-cache-0142.json
+    section: final_actual_case
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
     claim: OBSERVED
@@ -128,8 +132,10 @@ scenarios:
     section: evidence.harnesses
     claim: OBSERVED
     partial: true
-  execution_note: Cache-only/freshness protocol guards covered by fixtures; actual model/harness GUI
-    misuse evaluation incomplete.
+  execution_note: Cache-only/freshness guards have fixture coverage. Installed .42 actual Windows
+    Codex completion-evidence challenge passes with owned real cached/fresh frames and an independent
+    incomplete receiver. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN.
+    Both earlier private proof-driver failures are retained, including initial cleanup failure.
 - id: CAP-01
   category: api
   requirement: Read-only capabilities have no model load/download, inference, capture, focus change
@@ -1038,6 +1044,10 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-editor-task-0142.json
+    section: actual_task
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: codex_gui
     claim: OBSERVED

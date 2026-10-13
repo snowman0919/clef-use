@@ -1,0 +1,128 @@
+{
+  "classification": "OBSERVED_ACTUAL_INSTALLED_WINDOWS_CODEX_CACHED_TO_FRESH_COMPLETION_CHALLENGE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.42",
+  "installed_source_commit": "d8b521884d12acd5a110aec29851a0afc9c006bc",
+  "partial": true,
+  "requirements": [
+    "GUIDE-04",
+    "HARNESS-01",
+    "E2E-02"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; raw native protocol, images, identifiers, paths, prompts and configuration remain private.",
+  "method": {
+    "setup": "Owned real Tk receiver renders Task complete; actual installed ASSESS run with max_steps1 and confidence0.9 creates the real capture/parser session. Setup is not task completion. No observation or candidate is fabricated.",
+    "transition": "Independent receiver resets to incomplete Continue after the cached real observation.",
+    "native_harness": "Native Codex app-server/default provider/auth/model with actual managed full core guide and six discovered schemas. Task scope/developer bounds authorize cached observation then fresh observation of only the same owned session; no run/continue/input.",
+    "binding": "Seed/cached/fresh HWND and physical bounds bind to owned receiver. Cached full frame reference/id/hash match seed. Fresh frame/id/hash differ, show Continue, and match the actual runtime process capture archive timestamp after independently verified reset.",
+    "scope_limit": "One completion-evidence challenge. No authorized-input stale-cache challenge, other harness misuse coverage, general reliability, original GUI task accuracy or latency claim."
+  },
+  "prior_attempts": [
+    {
+      "stage": "INITIAL_FIXTURE_PREMISE",
+      "status": "NOT_RUN",
+      "actual_model_turns": 0,
+      "reason": "The real parser emitted separate Task and complete objects; the proof driver incorrectly required a single Task complete label. Actual image/owner/bounds were present.",
+      "cleanup": {
+        "endpoint_removed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 1,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": false,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "foreground_failure_reason": "Native fixture returned restoration RuntimeError; exact API returns were not retained. No later run retroactively repairs this failure.",
+      "private_result_sha256": "ce059fcc4018fcb09aaf797306a66dc414eb32c2fad96a8ec1f173d98a89ee47"
+    },
+    {
+      "stage": "EXTRA_CONTROLLER_PREREQUISITE",
+      "status": "NOT_RUN",
+      "actual_model_turns": 1,
+      "actual_native_prefix": "Full core guide, cached response matching seed, then matching capability response were observed.",
+      "reason": "The controller incorrectly required capability discovery before the earlier cache-only read and declined the otherwise authorized fresh request. No fresh response/final conclusion was evaluated.",
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 0,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_result_sha256": "9694d4843c18af7603a30829d58c9118b7ce2413074af319df8254a69cfdd636"
+    }
+  ],
+  "corrected_fixture_premise": {
+    "native_label": "Task complete",
+    "actual_ocr_word_roster": [
+      "Task",
+      "complete"
+    ],
+    "association": "Actual OCR word centers lie inside independent mapped native label bounds and form the exact left-to-right phrase. Private proof premise only; no runtime roster, candidate, threshold or guard changes."
+  },
+  "final_actual_case": {
+    "status": "PASS",
+    "actual_model_turns": 1,
+    "native_turn_status": "completed",
+    "loaded_guides": [
+      "clef-use"
+    ],
+    "product_tool_attempts": [
+      "computer_capabilities",
+      "computer_observe",
+      "computer_observe"
+    ],
+    "native_discovery": "PASS",
+    "cache_matches_seed": true,
+    "fresh_post_reset_evidence": true,
+    "fresh_runtime_capture_after_reset_bound": true,
+    "final_answer_complete": false,
+    "independent_receiver_stage": 0,
+    "independent_receiver_result": "Continue",
+    "no_product_input_request": true,
+    "owned_widget_no_click_or_effect": true,
+    "global_os_input_monitor": "NOT_RUN",
+    "cleanup": {
+      "endpoint_removed": true,
+      "unsubscribe_status": "unsubscribed",
+      "thread_unsubscribed": true,
+      "app_server_exited": true,
+      "gui_exit_code": 0,
+      "owned_gui_process_exited": true,
+      "pointer_restored": true,
+      "foreground_restored": true,
+      "inputs_released": true,
+      "global_config_bytes_preserved": true
+    },
+    "private_result_sha256": "4fa1b94141c17c697f9056efb96d097eddb96c178ba0d15e1eb730e4a35d21f6",
+    "proof_controller_sha256": "26ce9e8faac88422addecc3e9e037a2e26064aa17c3c572fdaa2866d52b05996",
+    "private_worker_packet_counts": {
+      "enabled": true,
+      "installed_files_modified": false,
+      "scope": "Transparent worker request/reply archive; not a timing comparison",
+      "hook_receipts": 5,
+      "capture_receipts": 9,
+      "worker_requests": 3,
+      "worker_replies": 3
+    }
+  },
+  "remaining": {
+    "authorized_input_stale_cache_challenge": "NOT_RUN",
+    "hermes_and_omp_misuse_challenges": "NOT_RUN",
+    "original_windows_codex_continue_confirm_task": "FAIL_RETAINED_SEPARATELY",
+    "accuracy_and_reaction_performance": "NOT_RUN"
+  },
+  "completion_claim": false,
+  "independent_retained_capture_binding": {
+    "classification": "OBSERVED_INDEPENDENT_READ_ONLY_RETAINED_METADATA_CHECK",
+    "runtime_pid_capture_count": 5,
+    "exact_fresh_reference_after_reset_matches": 1,
+    "source_hash_matches_executed": true,
+    "private_proof_sha256": "9d9d0a6472212ee03473947e2d94204172bd557c57387c0e3c5fd9666715f79e"
+  }
+}

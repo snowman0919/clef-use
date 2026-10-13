@@ -72,6 +72,48 @@ project-file change. This supplies actual model-driven denial evidence separatel
 from the earlier NOT_RUN pressure case. It proves neither a whole-process sandbox
 nor successful model trigger behavior. See the [request diagnostic receipt](validation/2026-10-14/omp-request-catalog-0142.json).
 
+**OBSERVED / installed Windows Codex cache challenge:** the actual .42 default
+runtime captures/parses a real owned Task complete screen in an input-free ASSESS
+session. The independent receiver then resets to Continue. Native Codex reads the
+full core guide, discovers current schemas/capabilities, reads the unchanged cached
+frame, obtains a new frame and correctly reports current completion false. Cached
+full frame reference/id/hash match the seed; fresh HWND/bounds match the owner,
+and its actual runtime-process capture timestamp is after the verified reset.
+The owned receiver remains incomplete without a click/effect. All final cleanup
+checks pass, including original foreground, input release and global configuration.
+
+Two proof-driver failures remain retained: the first wrongly demanded one OCR
+object instead of the actual Task/complete word pair and never starts Codex; its
+foreground restoration fails with native API details unavailable. The second
+observes core-guide/cached/capability success but its extra capability-before-cache
+prerequisite declines the authorized fresh request. Its full challenge remains
+NOT_RUN. Corrections change only the private premise/controller; product candidates,
+confidence thresholds and dispatch guards are unchanged. The final single case
+proves the completion-evidence branch, not authorized-input cache misuse, other
+harnesses, original Continue/Confirm success, OS-wide critical-error coverage or
+latency. See the [actual cache challenge receipt](validation/2026-10-14/windows-codex-cache-0142.json).
+
+**OBSERVED / installed independent Windows editor task:** the original contract
+is unchanged: enter exact 123 in Text input, click Save once, max_steps5, threshold
+0.9, AUTO, original conditions/constraints/text attachment. Actual installed
+RuntimeClient/service/default factory runs against an independent native RichEdit
+receiver. Its first parser request returns no reply and the runtime ends ERROR,
+TimeoutError in runtime backend, zero actions/decisions. The field remains empty,
+status Not saved, Save count0, saved bytes absent and false completion false.
+No candidate roster or typing/focus/IME guard was reached; startup versus inference
+timeout subdivision is unproven. This is neither a native harness task nor a pinned
+Linux/Windows paired accuracy comparison.
+
+Read-only process classification identifies brave.exe as the other foreground
+owner in all five non-receiver transitions. It is neither this runtime/receiver
+nor a process recorded by the owned passive hook. The initiating actor remains
+unproven; parallel desktop use has been asked about while repository work continues.
+Before cleanup that process owns foreground. The fixture preserves that owner
+and does not attempt restoration; the initiating cause is not yet proven. Runtime
+endpoint, owned process/resources, input release and global configuration cleanup
+pass; original foreground restoration fails. No automatic refocus/retry is used.
+See the [actual editor failure receipt](validation/2026-10-14/windows-editor-task-0142.json).
+
 ## Current unfinished acceptance checks, 2026-10-14
 
 The goal remains active. Original statuses are 34 PASS / 3 FAIL / 7 NOT_RUN;
@@ -81,9 +123,9 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
 | GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no writer attempt occurs in the original .42 batch, while the separate passive diagnostic blocks an actual attempted write. Older route-specific HTTP 401 is historical. |
-| GUIDE-04 | Cache/freshness consumer fixtures exist; an actual harness misuse challenge remains NOT_RUN. A fresh observation in a successful invocation does not prove refusal of stale input/completion evidence. |
+| GUIDE-04 | Installed .42 Windows Codex cached-to-fresh completion challenge PASS with independent incomplete receiver and cleanup. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN; one case does not establish general reliability. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
-| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Independent editor whole-task success remains NOT_RUN for this installation. |
+| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Actual installed .42 independent native editor with the original contract FAILS at its first parser backend timeout, zero decisions/actions; other-process foreground ownership precedes cleanup and restoration is refused. The other foreground owner is brave.exe; its initiating actor and parallel desktop ownership are awaiting clarification. |
 | PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
 | E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
 | RELEASE-01 | All fifteen immutable .42 CI artifacts and actual Windows .41 -> .42 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
