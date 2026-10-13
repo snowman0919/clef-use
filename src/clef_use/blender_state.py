@@ -1,4 +1,4 @@
-"""Partial public-RNA evidence bound to a fresh foreground X11 client PID.
+"""Partial public-RNA evidence bound to a fresh native foreground client PID.
 
 Unavailable popup, effective keymap, text/IME focus and global idle facts remain
 UNKNOWN. A running-job interface lock is positive busy evidence only. This
@@ -13,13 +13,20 @@ import math
 import os
 import re
 import socket
-import stat
+import sys
 import time
 import uuid
+from contextlib import nullcontext
 from functools import lru_cache
 from pathlib import Path
 
-from .blender_observer import MAX_RESPONSE_BYTES, peer_credentials, private_directory, read_message
+from .blender_observer import (
+    MAX_RESPONSE_BYTES,
+    current_user,
+    observer_address,
+    peer_credentials,
+    read_message,
+)
 from .blender_snapshot import MAX_WORKSPACE_TOOLS
 from .state import BlenderSceneUnits, FactValidity, StateFact, StateSource
 
@@ -123,7 +130,7 @@ def editor_layout(window, client_bounds, frame):
     """Map raw RNA regions, without guessing editor focus or usable surfaces."""
     left, top, _, _ = client_bounds
     width, height = frame.image.size
-    # This provider binds X11 native pixel coordinates. A frame with a different
+    # This provider binds native pixel coordinates. A frame with a different
     # input extent cannot safely associate those pixels with normalized input.
     if frame.logical_size not in (None, frame.image.size):
         raise ValueError("Blender capture coordinate scale mismatch")
@@ -387,42 +394,51 @@ def compile_snapshot(
 
 class BlenderStateProvider:
     def __init__(self, path: Path):
-        from .x11_input_state import X11InputState
-
         self.path = path
-        self.query = X11InputState(os.environ.get("DISPLAY"))
+        self.windows = sys.platform == "win32"
+        if self.windows:
+            from .windows_input import WindowsInput
+
+            self.query = WindowsInput()
+            self.native_errors = ()
+        else:
+            from Xlib.error import ConnectionClosedError, DisplayConnectionError, XError
+
+            from .x11_input_state import X11InputState
+
+            self.query = X11InputState(os.environ.get("DISPLAY"))
+            self.native_errors = (XError, ConnectionClosedError, DisplayConnectionError)
         self.status = {"status": "NOT_PROBED", "provider": "BLENDER_PUBLIC_RNA"}
 
-    def __call__(self, observation, version):
-        from Xlib.error import ConnectionClosedError, DisplayConnectionError, XError
+    def _foreground(self, connection, frame):
+        if self.windows:
+            from .windows_observer import foreground_client as native_client
 
+            return native_client(self.query, frame)
+        window, bounds = self.query.foreground()
+        if window != frame.foreground_window or bounds != frame.foreground_bounds:
+            raise ValueError("foreground changed before state sample")
+        pid, client, client_bounds = foreground_client(connection, window, bounds)
+        return window, bounds, pid, client, client_bounds
+
+    def __call__(self, observation, version):
         stage = "socket_permissions"
         try:
-            private_directory(self.path.parent)
-            info = self.path.lstat()
-            if (
-                not stat.S_ISSOCK(info.st_mode)
-                or info.st_uid != os.getuid()
-                or info.st_mode & 0o077
-            ):
-                raise ValueError("observer socket ownership or permissions mismatch")
-            query = self.query
+            address = observer_address(self.path)
             started = time.time()
             stage = "foreground_identity"
-            with query.query() as connection:
-                window, bounds = query.foreground()
+            with nullcontext() if self.windows else self.query.query() as connection:
                 frame = observation.frame
-                if window != frame.foreground_window or bounds != frame.foreground_bounds:
-                    raise ValueError("foreground changed before state sample")
-                native_pid, client_window, client_bounds = foreground_client(
-                    connection, window, bounds
-                )
+                identity = self._foreground(connection, frame)
+                window, bounds, native_pid, client_window, client_bounds = identity
                 stage = "observer_peer"
-                with socket.socket(socket.AF_UNIX, socket.SOCK_STREAM) as client:
+                with socket.socket(
+                    socket.AF_INET if self.windows else socket.AF_UNIX, socket.SOCK_STREAM
+                ) as client:
                     client.settimeout(0.5)
-                    client.connect(str(self.path))
+                    client.connect(address)
                     pid, uid, _ = peer_credentials(client)
-                    if pid != native_pid or uid != os.getuid():
+                    if pid != native_pid or uid != current_user():
                         raise ValueError("observer peer does not own foreground client")
                     nonce = uuid.uuid4().hex
                     stage = "snapshot_response"
@@ -445,9 +461,7 @@ class BlenderStateProvider:
                         return {}
                     raise ValueError("observer response mismatch or unavailable")
                 stage = "foreground_recheck"
-                if query.foreground() != (window, bounds) or foreground_client(
-                    connection, window, bounds
-                ) != (pid, client_window, client_bounds):
+                if self._foreground(connection, frame) != identity:
                     raise ValueError("foreground changed during state sample")
                 stage = "snapshot_binding"
                 facts = compile_snapshot(
@@ -471,9 +485,7 @@ class BlenderStateProvider:
             KeyError,
             TypeError,
             RuntimeError,
-            XError,
-            ConnectionClosedError,
-            DisplayConnectionError,
+            *self.native_errors,
         ) as exc:
             # Failure is public and explicit; no path, scene or credentials leak.
             self.status = {

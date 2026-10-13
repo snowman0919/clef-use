@@ -886,8 +886,8 @@ def runtime(config: Config, log_path=None):
 
     state_provider = None
     if config.blender_state_socket is not None:
-        if sys.platform != "linux":
-            raise RuntimeError("Blender state socket currently requires Linux X11")
+        if sys.platform not in {"linux", "win32"}:
+            raise RuntimeError("Blender state observation requires Linux X11 or Windows")
         from .blender_state import BlenderStateProvider
 
         state_provider = BlenderStateProvider(config.blender_state_socket)

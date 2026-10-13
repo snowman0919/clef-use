@@ -87,11 +87,11 @@ perspective mode で確認します。region・layout・projection だけの変�
 の証拠にせず、pose がない場合や quad view が曖昧な場合は UNKNOWN を保持します。
 
 既定の provider は `NONE` です。screenshot と native window identity だけでは
-Blender の隠れた状態を確定できません。Linux X11 では読み取り専用の Blender
+Blender の隠れた状態を確定できません。Linux X11 と Windows では読み取り専用の Blender
 observer を任意で設定できます。`clef-use blender-observer-script` が表示する
 インストール済みパスを、許可済みの Blender 実行ファイルへ渡してください。
 private な親ディレクトリの下に、まだ存在しない新しいディレクトリを指定します。
-スクリプトが private ディレクトリと socket を作り、既存の Blender には自動接続しません。
+スクリプトが private ディレクトリと endpoint を作り、既存の Blender には自動接続しません。
 
 ```sh
 clef-use blender-observer-script
@@ -105,9 +105,13 @@ runtime の `config.toml` の最上位に設定します。既定の場所は
 blender_state_socket = '/absolute/private/new-observer/state.sock'
 ```
 
-listener は Blender の最初の UI timer から起動します。Unix `SO_PEERCRED`、XRes の
-kernel process identity、寸法が一致する唯一の RNA window/client、native foreground
-focus を確認して状態を関連付けます。window・selection・object mode・生の transform/unit・
+listener は Blender の最初の UI timer から起動します。Linux は Unix `SO_PEERCRED` と
+XRes kernel process identity を確認します。Windows は明示的な `127.0.0.1` listener を
+使い、`state.sock` は Unix socket ではなく private NTFS port metadata になります。
+native TCP peer PID と process token user が foreground process に一致し、両 platform とも
+唯一の RNA window/client の物理 pixel 寸法と変化していない native foreground を確認します。
+UI timer が停止中なら provider は unavailable で、idle とは判定しません。
+window・selection・object mode・生の transform/unit・
 viewport・観測された modal operator を読み取り、scene の変更や operator の実行は
 行いません。popup・text focus・IME・有効な keymap・全体の idle は不明のままです。
 空の operator 一覧も不在の証拠にはなりません。この部分観測器を設定しても、必要な

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Extend the optional read-only Blender state provider to Windows using private
+  NTFS endpoint metadata, IPv4 loopback native peer PID/user verification and
+  physical foreground client bounds. Preserve UNKNOWN input-owner, popup, IME,
+  effective keymap and idle facts; unavailable state cannot authorize operations.
 - Keep the Windows validation window's UI loop alive during once-only native
   input. Require full selection, exact text and click/wheel readback instead of
   assuming widget consumption after a fixed sleep; retain acknowledgement and

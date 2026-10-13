@@ -78,9 +78,9 @@ mode。仅 region、layout 或 projection 变化不能证明 orbit/pan；pose �
 view 有歧义时保持 UNKNOWN。
 
 默认 provider 仍为 `NONE`；截图和 native window identity 不能确认 Blender 的隐藏状态。
-Linux X11 支持可选的只读 Blender observer。`clef-use blender-observer-script` 会输出
+Linux X11 和 Windows 支持可选的只读 Blender observer。`clef-use blender-observer-script` 会输出
 已安装脚本的路径，请将该确切路径传给已获准使用的 Blender 可执行文件。在 private
-父目录下指定一个尚不存在的新目录，脚本会创建 private 目录和 socket；它不会自动
+父目录下指定一个尚不存在的新目录，脚本会创建 private 目录和 endpoint；它不会自动
 连接到已运行的 Blender。
 
 ```sh
@@ -95,9 +95,12 @@ blender --python "/absolute/installed/blender_observer.py" -- --clef-state-dir "
 blender_state_socket = '/absolute/private/new-observer/state.sock'
 ```
 
-listener 从 Blender 的首个 UI timer 启动。状态关联需要验证 Unix `SO_PEERCRED`、
-XRes 的 kernel process identity、尺寸匹配的唯一 RNA window/client，以及 native
-foreground focus。observer 读取 window、selection、object mode、原始 transform/unit、
+listener 从 Blender 的首个 UI timer 启动。Linux 验证 Unix `SO_PEERCRED` 和 XRes
+kernel process identity。Windows 使用显式 `127.0.0.1` listener；`state.sock` 是
+private NTFS port metadata，而非 Unix socket。native TCP peer PID 与 process token
+user 必须匹配 foreground process。两平台均要求唯一 RNA window/client 的物理 pixel
+尺寸匹配，且 native foreground 未改变。UI timer 被阻塞时 provider 为 unavailable，
+不能判定 idle。observer 读取 window、selection、object mode、原始 transform/unit、
 viewport 和已观察到的 modal operator，不修改 scene 或执行 operator。popup、text focus、
 IME、有效 keymap 和整体 idle 状态仍然未知。空 operator 列表也不能证明不存在。
 即使配置了此部分 observer，只要缺少必要的已验证状态，六个 operation 仍返回 `BLOCKED`。

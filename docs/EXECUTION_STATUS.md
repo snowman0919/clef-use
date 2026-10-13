@@ -1,5 +1,64 @@
 # Reactive runtime execution status
 
+## Recovery execution resumed on 2026-10-13
+
+The user resumes the existing goal, authorizes Windows E2E and normal deployment,
+and keeps separate Blender host builds/model production outside this repository
+scope. Reici verification waits for the other session and does not stop clef-use
+development. The named `clef-use-unblock-recovery-goal.md` was not found by filename
+or matching content in the available local attachments; the user's explicit
+recovery instructions are applied. Reading that unavailable file is NOT_RUN.
+
+**OBSERVED / source Windows observation connection:** the four original dirty
+files were preserved with bytes/hashes in a private snapshot before editing.
+An owned factory Blender 5.2 on the actual Windows interactive desktop ran the
+standalone public-RNA collector. Native peer PID/user, private NTFS metadata and
+physical foreground/client geometry bind its facts through BlenderStateProvider
+and SessionRuntime's actual capture/State Compiler path. Selection/datablock
+identity, object mode/properties, scene units, editor layout, configured tool,
+raw keymap inventory and view revision arrive as partial application evidence.
+All eight inspected unobserved guards stay UNKNOWN. Six registered operation
+families return BLOCKED with input_count=0; wrong-foreground sampling returns
+UNAVAILABLE. Pointer and exact previous foreground restoration, owned Blender
+exit and scheduled-task removal pass. This is source-component execution, not an
+installed-current operation success or full E2E pass.
+
+The original Windows metadata probe failed ownership validation because the SSH
+admin token's default file owner was Administrators. Explicit exclusive native
+file creation with the current-user security descriptor fixes ownership without
+loosening ACL checks. Eight native transport tests pass, including a real distinct
+Python peer, foreign ACL refusal, metadata redirect/coercion refusal, preservation
+and UI-thread-only sampling. Failed/short native writes initially left a new
+incomplete endpoint in two fault-injection subcases. Both now remove only the new
+owned file; existing endpoint bytes remain preserved. The first PID test incorrectly compared the native peer
+against a venv launcher PID; its retained failure is corrected by comparing the
+actual receiver PID. Linux scoped checks pass 185; Windows-only cases skip.
+
+Two initial Blender smokes retain `UI thread did not sample within 400ms`.
+The first also used unsupported `--no-splash`, interpreted as a file to open.
+Removing that flag alone did not resolve the timeout. Disabling the disposable
+instance's startup splash through public preferences before UI startup produces
+the successful connection. No production preference was saved; timeout and
+input guards are unchanged. Full source regression passed 1418 tests with 42
+skips and 41 warnings in 66.02 seconds. Active Ruff/format checks cover 151 files;
+generated contracts pass. See [Windows observation evidence](validation/2026-10-13/windows-blender-observation.json).
+
+**OBSERVED / diagnostic separation:** existing FINAL12 menu packets preserve the
+actual before-image pixels and independent ground truth. File/Edit/absent scores
+separate, but File goal probability 0.7639-0.7694 and condition 0.8112-0.8157 fail
+the unchanged 0.9 completion gate. The ASSESS action roster is intentionally
+empty; these runs do not demonstrate action-candidate flattening. The 40-object
+context contains Open Recent, Save Copy and External Data. Five repeats per case
+cover only three unique screens, not general calibration or coverage.
+
+The preserved Windows 0.1.36 service steps were collected without rerunning its
+model task. Both actual clicks have NONUNIFORM distributions and retain all three
+proposed targets. This is proposal retention, not correct-target coverage. The
+last goal/condition probabilities remain 0.8952/0.9504 with independent stage 2
+and Task complete. Original object/packet contents were not archived in that
+attempt, so candidate coverage cannot be reconstructed. No confidence threshold,
+acceptance status or whole-task performance gate is promoted by this diagnosis.
+
 ## Windows SSH E2E scope resumed on 2026-10-12
 
 The user explicitly requested SSH Windows E2E and permitted updating the existing

@@ -1,0 +1,259 @@
+{
+  "regression": {
+    "claim": "OBSERVED",
+    "passed": 1418,
+    "skipped": 42,
+    "warnings": 41,
+    "seconds": 66.02,
+    "log_sha256": "cbd1a18e62af5a7f2b7f9b70abc5bd8f0534edcfd8267814abe1ce2ba565aaba",
+    "scope": "Linux full suite; Windows native8 tests recorded separately",
+    "static_checks": "Ruff check and format151 active files, generated contract and git diff check PASS"
+  },
+  "classification": "OBSERVED_WINDOWS_PUBLIC_RNA_SOURCE_COMPONENT",
+  "date": "2026-10-13",
+  "requirements": [
+    "STATE-01",
+    "INPUT-05",
+    "E2E-01",
+    "STATE-02",
+    "OP-01",
+    "OP-02",
+    "OP-03",
+    "OP-04",
+    "OP-05"
+  ],
+  "partial": true,
+  "environment": {
+    "platform": "Windows",
+    "Blender": "5.2",
+    "desktop": "Interactive Session 1 / Default",
+    "runtime_dependencies": "installed immutable 0.1.36; source component overlay, not installed new release"
+  },
+  "attempts": [
+    {
+      "status": "FAIL",
+      "result_sha256": "744c1f744ce7f92f4eaf9875dfd341ab7c5ce73591673927cd6cf66bb8e23de0",
+      "private_artifacts": {
+        "fixture.stdout": "1c583f5360e0c67acc7162484f57e5007e1c8ef89207508078bb0e5971358894",
+        "source.zip": "30f59d1768b63872c6e088b5d5d8f5421030bf8fefbe64a753f52db75d63f4f2",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "2dda9fcc4622caaf51c99d68a323087e56ff65aebd28a58f29cf95f95b20a91a",
+        "result.json": "744c1f744ce7f92f4eaf9875dfd341ab7c5ce73591673927cd6cf66bb8e23de0",
+        "controller.stdout": "44aa602f95f56526c45c71e58affba6d2ae906d31fd9091d0dd9e7a0a68fb690",
+        "blender.stdout": "166faf8a2dfffc3ae7a540202201212382c9087968e85e6af16bf86e9c704813",
+        "controller.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cleanup": {
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_blender_exited": true,
+        "pointer_unchanged": false
+      },
+      "failure": "{'status': 'UNAVAILABLE', 'provider': 'BLENDER_PUBLIC_RNA', 'failed_check': 'producer_snapshot', 'error_type': 'TimeoutError', 'reason': 'UI thread did not sample within 400ms'}"
+    },
+    {
+      "status": "FAIL",
+      "result_sha256": "f79148789883b2e3489de06adb0fa03947afe7371c7ad65f83e6c7e44bfe8400",
+      "private_artifacts": {
+        "fixture.stdout": "995f93e673d12289be0ecdfe896b8bc9343ea1285d641400227108a10e05dd11",
+        "source.zip": "30f59d1768b63872c6e088b5d5d8f5421030bf8fefbe64a753f52db75d63f4f2",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "9888cea112ce7702029eeefd2a8f56d860f4a55ddf323b1ae689a35c4d6cb1d4",
+        "result.json": "f79148789883b2e3489de06adb0fa03947afe7371c7ad65f83e6c7e44bfe8400",
+        "controller.stdout": "c05f27c79da028de82b0803a187333af4a6076ed2b4ddf08be6beb30a40313b7",
+        "blender.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cleanup": {
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_blender_exited": true,
+        "pointer_unchanged": true
+      },
+      "failure": "{'status': 'UNAVAILABLE', 'provider': 'BLENDER_PUBLIC_RNA', 'failed_check': 'producer_snapshot', 'error_type': 'TimeoutError', 'reason': 'UI thread did not sample within 400ms'}"
+    },
+    {
+      "status": "PASS",
+      "result_sha256": "b1388bca9c481b881acee1416cca7cddf256ef29bccf9d3a447c20a5433437e6",
+      "private_artifacts": {
+        "fixture.stdout": "dacd76aaebd16372b7dd087e5b1acddf21803a7a56a5cf26b8baebcc018174bb",
+        "source.zip": "30f59d1768b63872c6e088b5d5d8f5421030bf8fefbe64a753f52db75d63f4f2",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "c568b8a1abedb6a175d92f59605fab0cfa19995a0938ae24e164f615f0cf43ec",
+        "result.json": "b1388bca9c481b881acee1416cca7cddf256ef29bccf9d3a447c20a5433437e6",
+        "controller.stdout": "955c584be9565e22b2d59f1c41adadbab4459e5027ef700dfa3c4d5c5d46ba30",
+        "blender.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cleanup": {
+        "foreground_immediate": false,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_blender_exited": true,
+        "pointer_unchanged": true
+      },
+      "native_bound_state": {
+        "provider": {
+          "status": "PARTIAL",
+          "provider": "BLENDER_PUBLIC_RNA",
+          "verified_facts": [
+            "active_tool",
+            "application",
+            "application_snapshot",
+            "editor_layout",
+            "keymap_inventory",
+            "mode",
+            "properties",
+            "scene_units",
+            "selection",
+            "selection_identities",
+            "view_revision"
+          ]
+        },
+        "version": 1,
+        "access_level": "APP_TELEMETRY_ASSISTED",
+        "foreground": true,
+        "selected_cube": true,
+        "scene_units": {
+          "system": "METRIC",
+          "length_unit": "METERS",
+          "scale_length": 1.0
+        },
+        "editor_layout_count": 4,
+        "unknown_guards": [
+          "popup",
+          "text_focus",
+          "ime_composing",
+          "keymap",
+          "editor",
+          "loading",
+          "modal",
+          "unit"
+        ]
+      },
+      "operation_guards": [
+        {
+          "family": "menu_assess",
+          "status": "BLOCKED",
+          "reason": "menus: UNKNOWN, uncertainty=1",
+          "input_count": 0
+        },
+        {
+          "family": "command_search",
+          "status": "BLOCKED",
+          "reason": "ime_composing: UNKNOWN, uncertainty=1",
+          "input_count": 0
+        },
+        {
+          "family": "numeric_transform",
+          "status": "BLOCKED",
+          "reason": "ime_composing: UNKNOWN, uncertainty=1",
+          "input_count": 0
+        },
+        {
+          "family": "property_edit",
+          "status": "BLOCKED",
+          "reason": "ime_composing: UNKNOWN, uncertainty=1",
+          "input_count": 0
+        },
+        {
+          "family": "viewport_gesture",
+          "status": "BLOCKED",
+          "reason": "ime_composing: UNKNOWN, uncertainty=1",
+          "input_count": 0
+        },
+        {
+          "family": "modal_cancel",
+          "status": "BLOCKED",
+          "reason": "modal is not owned by this operation runner",
+          "input_count": 0
+        }
+      ],
+      "wrong_foreground_refused": {
+        "status": "UNAVAILABLE",
+        "provider": "BLENDER_PUBLIC_RNA",
+        "reason": "Native peer/window binding or fresh snapshot unavailable",
+        "failed_check": "foreground_identity",
+        "error_type": "ValueError",
+        "errno": null,
+        "detail": "foreground changed before state sample"
+      },
+      "executed_source_sha256": {
+        "windows_observer.py": "61a374467127cecb341bbb3c62798cb8b0961cbb132c12842d1ed292908ea892",
+        "blender_observer.py": "b8f87f44e14e5c98a9a1a7d4d6a58ac34418ab2e5be04b47e8da058d5a6222b1",
+        "blender_state.py": "d935fb543445de4e06ff5c878abf36baa8ffa8bac374794ceb800c1f5eec545c",
+        "blender_snapshot.py": "ed06006e3ed014052a1afb85a7b3786467be1acad578fe12e08cac26c02a62e3",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+        "runtime.py": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4",
+        "operations.py": "6dba1d94a31d07becbc18675d0f684ac58faa6a8ceaac22a30e966d1ed253d70",
+        "backends.py": "e2ec981f91fdfbf038f8ffddd5a44518eb051a2cf819dc9c477d282955932d80"
+      }
+    }
+  ],
+  "native_transport": {
+    "status": "PASS",
+    "tests": 8,
+    "scope": "real NTFS ACLs, native TCP peer, fixed protocol and I/O fault injection",
+    "first_pid_test_failure": "Expected venv launcher PID instead of actual connected Python receiver; retained and corrected without changing product identity checks",
+    "write_fault_before": "Two subcases FAIL: newly created incomplete endpoint remained",
+    "write_fault_after": "PASS: failed and short native writes remove new endpoint; existing-file collision still preserves bytes",
+    "private_artifact_sha256": {
+      "native-seven-tests-receiver-pid.stderr": "6521ddf92e3ab9a5722c40ab317d2da9ca1d323eca47db261112927ed6b1454e",
+      "native-eight-tests-final.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-write-fault-before.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blender-path-inventory.stdout": "530d08356399f77e742bdf66b35ee0be38c87258c33a4295a43fb0f8b20ea23f",
+      "native-transport-final.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "blender-path-inventory.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-transport-final.stdout": "0c16ce5e984503e36910261a344f90c2cd1a76d6a9a4c632e0b4219797e93958",
+      "native-seven-tests-receiver-pid.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-seven-tests.stderr": "a47937b17d8a915802ff8a8cf7bd59120f6e350efe84cd32b5de894cbc8d6a24",
+      "native-transport.stderr": "4c14692976ea78068d8b8f63b2c4631b0fbf8ab06fea0a04ae2c1495b01a3923",
+      "native-seven-tests.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-eight-tests-final.stderr": "1f047ed620430e1ca71f090839b9781b8d8d955412ab7a6d59f957c0f017dd6b",
+      "native-transport.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "native-write-fault-before.stderr": "b77ca3d919b20fec23ddb1990dc51f89beaaf25600c4a81cfbec461f952745f5"
+    }
+  },
+  "source": {
+    "base_commit": "47aa8cfe1973246c99cc0816c70d10922b869796",
+    "candidate_version": "0.1.37",
+    "sha256": {
+      "windows_observer.py": "b6be1321945ff7e03bb1095fd7c830bdc32347563fa3f2abc25ced0eac64295b",
+      "blender_observer.py": "b8f87f44e14e5c98a9a1a7d4d6a58ac34418ab2e5be04b47e8da058d5a6222b1",
+      "blender_state.py": "d935fb543445de4e06ff5c878abf36baa8ffa8bac374794ceb800c1f5eec545c",
+      "blender_snapshot.py": "ed06006e3ed014052a1afb85a7b3786467be1acad578fe12e08cac26c02a62e3",
+      "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "runtime.py": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4",
+      "operations.py": "6dba1d94a31d07becbc18675d0f684ac58faa6a8ceaac22a30e966d1ed253d70",
+      "backends.py": "e2ec981f91fdfbf038f8ffddd5a44518eb051a2cf819dc9c477d282955932d80"
+    },
+    "native_test_sha256": "895ba6a85ee44c33ad7ed6f5c087a20a8d32daedf5f918322210efbbc118112b"
+  },
+  "not_run": [
+    "Installed 0.1.37 Windows observation path",
+    "Successful production Blender menu/transform/property/viewport workflows",
+    "General popup/text/IME/effective-keymap/global-idle/focused-editor observation",
+    "Whole-work accuracy, state-change-to-correct-input p95, goodput and prospective eligibility coverage"
+  ],
+  "invariants": [
+    "Unknown states are not false or safe",
+    "Six operation families refuse missing guards with zero input",
+    "No host build, production scene modification or model training",
+    "All failed attempts retained; no timeout or confidence threshold relaxation"
+  ],
+  "privacy": "No screenshots, local paths, scene names, pointers, SIDs, credentials or raw model packets committed."
+}

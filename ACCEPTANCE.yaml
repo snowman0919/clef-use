@@ -591,6 +591,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: Native foreground/intervention and installed editor/keymap/text-focus guards plus
     fixture mode checks observed; full native application-state matrix incomplete.
 - id: STATE-01
@@ -602,6 +606,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: State compiler fixtures distinguish unknown/false, provenance, version, timestamp,
     uncertainty and invalidation.
 - id: STATE-02
@@ -617,6 +625,10 @@ scenarios:
     section: evidence.installed_blender
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: Menu absent/open/wrong-menu native read-only observations and duplicate-label
     fixture assessment passed without operation input.
 - id: OP-01
@@ -632,6 +644,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: API-assisted installed search uses verified binding and registered command;
     nonregistered command refused by fixture.
 - id: OP-02
@@ -647,6 +663,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: API-assisted installed translation/scale/rotation preview, commit/cancel/readback
     and guard cases passed.
 - id: OP-03
@@ -658,6 +678,10 @@ scenarios:
     section: evidence.installed_blender
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: API-assisted installed exact focused property and final numeric readback passed.
 - id: OP-04
   category: operations
@@ -672,6 +696,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: Installed orbit/pan invalidation and subsequent fresh observations plus
     reused-geometry/partial-gesture fixture refusal passed.
 - id: OP-05
@@ -687,6 +715,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: Known same-session modal cancellation verified unchanged readback; foreign modal
     and interrupted entry/closure authority fixtures passed.
 - id: DEC-01
@@ -767,6 +799,10 @@ scenarios:
     partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.blender_menu_context_pixel_final12
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
     claim: OBSERVED
     partial: true
   execution_note: FINAL5 API-assisted operation fixture passes 22 cases. In a fixed actual

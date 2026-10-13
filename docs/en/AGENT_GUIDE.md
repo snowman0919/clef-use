@@ -89,10 +89,10 @@ An operation report's `SUCCEEDED` verifies its typed effect. The session stays
 `NEEDS_REPLAN` until a separate fresh `ASSESS` verifies the actual task goal.
 The default provider remains `NONE`: screenshots and available native window
 identity do not establish Blender's hidden state. An optional read-only Blender
-observer is available on Linux X11. `clef-use blender-observer-script` prints its
+observer is available on Linux X11 and Windows. `clef-use blender-observer-script` prints its
 installed path. Use that exact path with your approved Blender executable and a
 new, nonexistent directory under a private parent; the script creates the private
-directory and socket. It does not attach automatically to an existing Blender.
+directory and endpoint. It does not attach automatically to an existing Blender.
 
 ```sh
 clef-use blender-observer-script
@@ -106,9 +106,13 @@ Set this top-level option in the runtime's `config.toml` (normally
 blender_state_socket = '/absolute/private/new-observer/state.sock'
 ```
 
-The listener starts from the first Blender UI timer. Association requires Unix
-`SO_PEERCRED`, the XRes kernel process identity, a unique RNA window/client with
-matching dimensions, and native foreground focus. The observer reads window,
+The listener starts from the first Blender UI timer. Linux association requires
+Unix `SO_PEERCRED` and the XRes kernel process identity. Windows uses an explicit
+`127.0.0.1` listener: `state.sock` is private NTFS port metadata, not a Unix socket.
+The native TCP peer PID and process token user must match the foreground process.
+Both platforms require a unique RNA window/client with matching physical pixel
+dimensions and unchanged native foreground focus. A blocked UI timer leaves the
+provider unavailable; it does not establish idle. The observer reads window,
 selection, object mode, raw transforms/units, viewport and positive modal-operator
 records; it does not change scenes or invoke operators. Popup, text focus, IME,
 effective keymap and global idle state remain unknown. An empty operator list

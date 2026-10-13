@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "windows_blender_observation_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-blender-observation.json", "sha256": "1ee88c97848ceeed9eb891274c6e7769c15cc561ff1e15eb2a5613a6426d055d", "raw_artifact_committed": true},
     "source_regression": {
       "local_artifact": "/tmp/clef-use-full-regression-final11-20261011.log",
       "sha256": "a2306fc18394086894f09790080a8ad9f02a32d5cf3c83e205954adaf72cdfed",
@@ -180,6 +181,7 @@
     }
   },
   "evidence": {
+    "windows_blender_observation_20261013": {"claim": "OBSERVED_SOURCE_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-blender-observation.json", "sha256": "1ee88c97848ceeed9eb891274c6e7769c15cc561ff1e15eb2a5613a6426d055d", "scope": "Actual Windows collector/provider/compiler,6guardrefusals/input0; native8 tests; source1418PASS42SKIP; not installed-current whole E2E."},
     "source_regression": {
       "claim": "OBSERVED",
       "level": "source_regression",

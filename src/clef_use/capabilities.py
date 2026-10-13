@@ -133,7 +133,8 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "provider": "NONE",
             "observation_access_level": "PIXELS_ONLY",
             "trusted_application_evidence": "UNAVAILABLE",
-            "provider_configuration_path": "config.toml: blender_state_socket (Linux X11 only)",
+            "provider_configuration_path": "config.toml: blender_state_socket "
+            "(Linux X11 or Windows)",
             "operation_availability": "BLOCKED",
             "live_probe": "NOT_PROBED",
             "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
@@ -147,7 +148,9 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "configuration": "blender_state_socket",
                 "producer": "blender --python <clef-use blender-observer-script output> "
                 "-- --clef-state-dir <new private directory>",
-                "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
+                "transport": "Linux private Unix socket with SO_PEERCRED and X-Resource local PID; "
+                "Windows IPv4 loopback with native TCP peer PID, process token user, private "
+                "NTFS endpoint metadata and foreground client identity",
                 "availability": "PARTIAL; NOT_PROBED",
                 "window_scope": "One RNA window matching the foreground native client dimensions",
                 "raw_observations": [

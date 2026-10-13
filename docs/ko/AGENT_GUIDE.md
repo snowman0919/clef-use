@@ -87,10 +87,10 @@ perspective mode로 확인합니다. region·레이아웃·projection만 바뀌�
 판정하지 않으며, pose가 없거나 quad view가 모호하면 불명 상태를 유지합니다.
 
 기본 provider는 `NONE`이며 screenshot과 native window identity만으로 Blender의
-숨은 상태를 확정하지 않습니다. Linux X11에서는 선택적으로 읽기 전용 Blender
+숨은 상태를 확정하지 않습니다. Linux X11과 Windows에서는 선택적으로 읽기 전용 Blender
 observer를 설정할 수 있습니다. `clef-use blender-observer-script`가 출력하는 설치
 경로를 허용된 Blender 실행 파일에 전달하세요. private 상위 경로 아래 아직 존재하지
-않는 새 디렉터리를 지정하면 스크립트가 private 디렉터리와 socket을 만듭니다.
+않는 새 디렉터리를 지정하면 스크립트가 private 디렉터리와 endpoint를 만듭니다.
 실행 중인 기존 Blender에 자동으로 연결하지 않습니다.
 
 ```sh
@@ -105,9 +105,13 @@ runtime의 `config.toml` 최상위에 다음을 설정하세요. 기본 경로�
 blender_state_socket = '/absolute/private/new-observer/state.sock'
 ```
 
-listener는 Blender의 첫 UI timer에서 시작합니다. Unix `SO_PEERCRED`, XRes의
-kernel process identity, 크기가 일치하는 유일한 RNA window/client, native foreground
-focus를 확인해야 상태를 연결합니다. window·selection·object mode·원시 transform/unit·
+listener는 Blender의 첫 UI timer에서 시작합니다. Linux는 Unix `SO_PEERCRED`와
+XRes의 kernel process identity를 확인합니다. Windows는 명시적인 `127.0.0.1`
+listener를 사용하며, `state.sock`은 Unix socket이 아닌 private NTFS port metadata입니다.
+native TCP peer PID와 process token user가 foreground process와 일치해야 합니다.
+두 플랫폼 모두 실제 pixel 크기가 일치하는 유일한 RNA window/client와 변경되지 않은
+native foreground를 확인합니다. UI timer가 막히면 provider는 unavailable이며 idle로
+판정하지 않습니다. window·selection·object mode·원시 transform/unit·
 viewport·관찰된 modal operator를 읽으며 scene을 변경하거나 operator를 실행하지
 않습니다. popup·text focus·IME·유효 keymap·전체 idle 상태는 여전히 알 수 없습니다.
 빈 operator 목록도 부재 증거가 아닙니다. 이 부분 관측기를 설정해도 필요한 검증 상태가
