@@ -1,0 +1,194 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_0143_CI_FAILED_ACTUAL_UPDATE_AND_SOURCE_0144_NATIVE_NTFS_COMPONENT",
+  "date": "2026-10-14",
+  "source_candidate_version": "0.1.44",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts/digests only. Private paths, user/SID identities, ACL bytes and raw logs remain private.",
+  "completion_claim": false,
+  "immutable_0143_ci": {
+    "status": "PASS",
+    "source_commit": "076d3347a493ab3e07b0fe25ab179c8bc5be4dbb",
+    "run_id": 38443273518,
+    "artifact_id": 11837507501,
+    "assembled_archive_sha256": "6a6d82e2a5b3504eef1147533541bf99c0585f8812f0821ac2d1f3d69375ef26",
+    "build_install_jobs_passed": 15,
+    "archives_passed": 15,
+    "exact_git_payload_files_per_archive": 68,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH",
+    "private_verification_report_sha256": "00cd41cb6c275d1985b42ce86d836d1d57bec80eb10cd25f261d7c3e36995dc3"
+  },
+  "actual_0143_update": {
+    "status": "FAIL",
+    "previous_version": "0.1.42",
+    "error_type": "TimeoutExpired",
+    "program_basename": "icacls.exe",
+    "operation": "/grant:r current installation user (OI)(CI)F /Q on global installation root",
+    "limit_seconds": 15,
+    "step_exit_code": 1,
+    "step_wall_seconds": 15.76126220007427,
+    "controller_error": "RuntimeError: update-current-source failed; retained stdout/stderr",
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "active_launcher_matches_preserved_previous_installation": true,
+    "active_version_after_failure": "0.1.42",
+    "repeat_attempt": "NOT_RUN; no automatic retry, timeout increase, old-version deletion or ACL bypass.",
+    "private_report_sha256": "a91451d8fdde9611a35840d738765ea441430a4a570a22267db2f088d657eed0",
+    "private_error_log_sha256": "9e6040b33614d5ffa045dad88d441f761ba370e2ac5551468952b6c3d4b6632c"
+  },
+  "native_attribution": {
+    "read_only_icacls": [
+      {
+        "case": "installation_root",
+        "read_only": true,
+        "timeout_seconds": 15,
+        "status": "PASS",
+        "exit_code": 0,
+        "wall_seconds": 0.016134300036355853
+      },
+      {
+        "case": "owned_empty_directory",
+        "read_only": true,
+        "timeout_seconds": 15,
+        "status": "PASS",
+        "exit_code": 0,
+        "wall_seconds": 0.012186800129711628
+      }
+    ],
+    "global_root_existing_explicit_current_user_full_control_flags3": true,
+    "global_root_all_aces_allow": true,
+    "global_root_entries": {
+      "files": 78579,
+      "directories": 10509,
+      "enumeration_complete": true
+    },
+    "owned_empty_same_user_grant_exit_code": 0,
+    "owned_empty_same_user_grant_seconds": 0.014538099989295006,
+    "critical_existing_path_readbacks": [
+      {
+        "case": "installation_root",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      },
+      {
+        "case": "bin",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      },
+      {
+        "case": "versions",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      },
+      {
+        "case": "active_runtime_package",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      },
+      {
+        "case": "active_runtime_python",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      },
+      {
+        "case": "configured_model_root",
+        "read_only": true,
+        "query_error": 0,
+        "full_control_current_user": true,
+        "deny_or_unsupported": false,
+        "status": "PASS"
+      }
+    ],
+    "scope": "Read-only grant checks on six critical path classes plus one canonical grant on an owned empty fixture; no global installation ACL writes in these diagnostics. Root readbacks are not a complete effective-token/subtree proof.",
+    "cause": "INFERRED: repeated inheritable grant propagation through retained versions may explain the timeout. No trace proves the exact 15-second root stall.",
+    "primary_source": "https://learn.microsoft.com/en-us/windows/win32/secauthz/automatic-propagation-of-inheritable-aces"
+  },
+  "source_0144_component": {
+    "candidate": {
+      "classification": "SOURCE_BUILT_NATIVE_NTFS_COMPONENT_NOT_INSTALLED",
+      "variant": "candidate",
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "source_sha256": "1d9b9a55cc1b47eabf3ee70ab57bdd4395a35f3736cf2f212312d6a1fbb262bb",
+      "test_sha256": "8719c802904eb423d0e7567a1e8d42a86443c91ebf7f7e2333ce3787bb45ad53",
+      "global_acl_write": false,
+      "independent_dacl_hash_new_child_inheritance_and_mutator_timeout_included": true
+    },
+    "mutant": {
+      "classification": "SOURCE_BUILT_NATIVE_NTFS_COMPONENT_NOT_INSTALLED",
+      "variant": "mutant",
+      "tests": 6,
+      "failures": 0,
+      "errors": 1,
+      "skipped": 0,
+      "status": "FAIL",
+      "source_sha256": "f8e6c575d104b14b1c7101aa361bdc4aca809eddca768697ca7a3053579ca8e8",
+      "test_sha256": "8719c802904eb423d0e7567a1e8d42a86443c91ebf7f7e2333ce3787bb45ad53",
+      "global_acl_write": false,
+      "independent_dacl_hash_new_child_inheritance_and_mutator_timeout_included": true
+    },
+    "mutant_change": "Remove only preserve_existing fast return; real native observation and all other code remain.",
+    "mutant_error_case": "test_proven_root_survives_mutator_timeout_and_preserves_user_data",
+    "mutant_error_type": "TimeoutExpired",
+    "injected_boundary": "Only icacls mutation is fault-injected. Identity, NTFS security descriptors, original user bytes and new-child inheritance use real OS APIs. No mutation tool success echo or forwarding assertion.",
+    "checks": [
+      "Native explicit current-user FILE_ALL_ACCESS with exact OI|CI flags3 is accepted.",
+      "Missing user grant is unproven, and real canonical grant repairs the owned fixture.",
+      "Partial/self-only, inherit-only, no-propagate and inherited-only grants remain unproven.",
+      "A real deny ACE is refused. Unsupported-ACE rejection is INFERRED from the conservative scan; no native unsupported-ACE fixture ran.",
+      "Already proven owned nonempty root survives mutator timeout; default repair path propagates the same error.",
+      "Owned root/existing-child ACL hashes and user bytes are unchanged; new directory/file inherit full current-user access."
+    ],
+    "scope": "Only installation root opts into native existing-grant proof. Staged runtime/model paths retain their original grant/15-second behavior; no existing-descendant repair is claimed by the root proof.",
+    "bootstrap": "Standalone stdlib-only Win32 helper; generated shell/PowerShell embed the canonical installer.",
+    "global_acl_write": false,
+    "private_candidate_log_sha256": "2105ebc42a95e85cc76a15f4246ebafae811013fd4229805c5a443962e41290a",
+    "private_mutant_log_sha256": "79159bfa5e88c617b1f8c0e7df112506b8d2e2ff2fa8977298cdcd1357097322",
+    "private_candidate_result_sha256": "560c0e158a492d5f7a36055a6ecf93d74ff20cb7422d6558c9abe39e561abc4c",
+    "private_mutant_result_sha256": "a6c3564925560e20237d7873fe830621bf09d6c3744195051ba2cf7b1eb260e2"
+  },
+  "source_regression": {
+    "passed": 1612,
+    "skipped": 55,
+    "warnings": 41,
+    "seconds": 68.03,
+    "prepared_native_cases": "Six new NTFS cases skip locally and pass on actual Windows separately. Three prepared-parser cases also skip locally; their .43 Windows evidence is separate.",
+    "ruff_files": 164,
+    "generated_contract_published_cli_examples": 198,
+    "generated_contract_published_tool_examples": 12,
+    "private_log_sha256": "86bbb9ec323cb13606e945e5f975af0856f7cb1643774d420497652cc18a66f5"
+  },
+  "remaining": {
+    "immutable_0144_ci_install": "NOT_RUN at source checkpoint",
+    "limited_desktop_token_access": "NOT_RUN; read-only SID grants are not actual limited-token execution.",
+    "installed_current_parser_and_gui_tasks": "NOT_RUN for .44; original tasks remain failed/open.",
+    "public_release": "NOT_RUN; existing deployment guard remains unchanged."
+  }
+}

@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "windows_installer_root_access_0144_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-installer-root-access-0144.json", "sha256": "bf4f9e0cdb0b496212f634739794de317e079691f7663d927cc39d3911ffd75a", "raw_artifact_committed": true},
     "windows_omni_thread_budget_0143_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-omni-thread-budget-0143.json", "sha256": "c41de9a1add6ab58ee13a8b2a6cf4f595a239da658e8eb24537b6106f24aa401", "raw_artifact_committed": true},
     "windows_editor_task_0142_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-editor-task-0142.json", "sha256": "e1e8fd07d08f13145a34e9c8b7fa5250a27015fdb6ad2d4e5cea8c505ccdae3c", "raw_artifact_committed": true},
     "windows_codex_cache_0142_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-codex-cache-0142.json", "sha256": "ca1ffefa912a1cafb3293f0e69832c7b75dbdce687b8ea09a03c4d9e77b3684c", "raw_artifact_committed": true},

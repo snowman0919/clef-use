@@ -12,6 +12,12 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
+Windows updates preserve a verified explicit, inheritable full-control grant for
+the current user on the installation root, avoiding ACL rewrites across retained
+versions. New runtime directories and model preparation still apply their normal
+access grants. Missing, denied, inherited-only or unsupported root permissions use
+the existing grant path; no permission or timeout check is bypassed.
+
 Updates keep previous runtime versions, model caches and configuration. If Ctrl-C interrupts
 installation before activation, cleanup removes only the unused staged environment; an existing
 runtime stays active. After the atomic activation switch, cleanup preserves the new live environment

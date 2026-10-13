@@ -261,7 +261,70 @@ def install_lock(path):
             yield
 
 
-def windows_user_access(path):
+def windows_existing_user_access(path, sid):
+    """Prove an explicit full-control root grant without changing descendant ACLs."""
+    import ctypes
+
+    handle, dword = ctypes.c_void_p, ctypes.c_uint32
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    security = ctypes.WinDLL("advapi32", use_last_error=True)
+    kernel.LocalFree.argtypes, kernel.LocalFree.restype = [handle], handle
+    signatures = (
+        (
+            "GetNamedSecurityInfoW",
+            [ctypes.c_wchar_p, ctypes.c_int, dword, *([ctypes.POINTER(handle)] * 5)],
+            dword,
+        ),
+        ("ConvertStringSidToSidW", [ctypes.c_wchar_p, ctypes.POINTER(handle)], ctypes.c_int),
+        ("GetAce", [handle, dword, ctypes.POINTER(handle)], ctypes.c_int),
+        ("EqualSid", [handle, handle], ctypes.c_int),
+    )
+    for name, arguments, result in signatures:
+        function = getattr(security, name)
+        function.argtypes, function.restype = arguments, result
+    descriptor, acl, user = handle(), handle(), handle()
+    try:
+        if not security.ConvertStringSidToSidW(sid, ctypes.byref(user)):
+            return False
+        if (
+            security.GetNamedSecurityInfoW(
+                str(path), 1, 4, None, None, ctypes.byref(acl), None, ctypes.byref(descriptor)
+            )
+            or not acl
+        ):
+            return False
+        size = ctypes.c_uint16.from_address(acl.value + 2).value
+        count = ctypes.c_uint16.from_address(acl.value + 4).value
+        if size < 8 or count > (size - 8) // 4:
+            return False
+        proven = False
+        for index in range(count):
+            ace = handle()
+            if not security.GetAce(acl, index, ctypes.byref(ace)):
+                return False
+            if not ace.value or not acl.value + 8 <= ace.value <= acl.value + size - 4:
+                return False
+            kind = ctypes.c_ubyte.from_address(ace.value).value
+            flags = ctypes.c_ubyte.from_address(ace.value + 1).value
+            length = ctypes.c_uint16.from_address(ace.value + 2).value
+            if kind != 0 or flags & ~0x1F or length < 16 or ace.value + length > acl.value + size:
+                return False
+            revision = ctypes.c_ubyte.from_address(ace.value + 8).value
+            subauthorities = ctypes.c_ubyte.from_address(ace.value + 9).value
+            if revision != 1 or subauthorities > 15 or 16 + subauthorities * 4 > length:
+                return False
+            mask = dword.from_address(ace.value + 4).value
+            if flags == 3 and mask == 0x1F01FF and security.EqualSid(ace.value + 8, user):
+                proven = True
+        return proven
+    finally:
+        if descriptor:
+            kernel.LocalFree(descriptor)
+        if user:
+            kernel.LocalFree(user)
+
+
+def windows_user_access(path, *, preserve_existing=False):
     # OpenSSH can create OWNER RIGHTS directories owned by Administrators. The
     # same account's limited desktop token then cannot traverse its installation.
     system = Path(os.environ["SystemRoot"]) / "System32"
@@ -279,6 +342,8 @@ def windows_user_access(path):
     sid = rows[0][1]
     if not re.fullmatch(r"S-1(?:-\d+){2,14}", sid):
         raise RuntimeError("invalid Windows installation user SID")
+    if preserve_existing and windows_existing_user_access(path, sid):
+        return
     result = subprocess.run(
         [str(system / "icacls.exe"), str(path), "/grant:r", f"*{sid}:(OI)(CI)F", "/Q"],
         capture_output=True,
@@ -320,7 +385,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
             "existing executable belongs to another installation; choose CLEF_USE_BIN_DIR"
         )
     if windows:
-        windows_user_access(root)
+        windows_user_access(root, preserve_existing=True)
     with install_lock(root / "install.lock"):
         report("Checking the latest version...")
         raw = fetch(base_url + "/latest/manifest.json", allow_local, 1024 * 1024)

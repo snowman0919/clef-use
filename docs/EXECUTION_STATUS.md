@@ -1,5 +1,46 @@
 # Reactive runtime execution status
 
+## Source 0.1.44 installation-root access proof, 2026-10-14
+
+**OBSERVED / .43 CI and failed actual update:** exact source `076d334` completes
+run `38443273518`, all fifteen build/install jobs and assembly; all archives match
+68 Git payload files. Public deploy is skipped. Actual Windows .42 -> .43 fails
+before download at the installation-root `icacls.exe /grant:r` command's unchanged
+15-second limit. Previous files/configuration and the owned server cleanup pass;
+independent launcher readback still matches the previous .42 installation. No
+automatic retry, deadline increase, old-version deletion or permission bypass runs.
+
+Read-only native ACL checks find an explicit current-user full-control ACE with
+flags3 on the existing root, and valid user grants on bin/versions/active runtime/
+Python/model-root samples. There are 78,579 files and 10,509 directories under the
+retained root. Read-only icacls takes about 0.01 seconds; the same grant on an owned
+empty fixture takes 0.0145 seconds. Redundant inheritance propagation is a supported
+hypothesis, not a trace-proven cause of the actual timeout.
+
+Source .44 opts only the installation root into native existing-grant proof. It
+requires the validated user SID, explicit FILE_ALL_ACCESS, flags exactly OI|CI,
+and a complete supported allow-only DACL. Deny/unknown/missing evidence retains the
+original grant path. Staged runtime/model directories keep their original repair
+behavior and 15-second limit. This root proof does not repair all old descendants.
+Both generated bootstraps embed the canonical stdlib-only implementation.
+
+**OBSERVED / actual Windows source component:** six native NTFS cases pass with
+real token identity/ACL queries. Existing root/child ACL hashes and user bytes
+remain unchanged, and new directory/file inherit full user access. Missing grants
+are repaired by the real canonical grant; partial/self-only, IO/NP, inherited-only
+and a real deny ACE are refused as proof. A mutation-tool timeout is injected only
+at the external grant boundary: the proven-root path succeeds and default repair
+still raises the error. Removing just that fast return produces one TimeoutExpired
+test error; the real candidate passes all six. This is component/fault evidence,
+separate from actual .44 installation or a whole-process/desktop safety claim.
+
+Local .44 regression passes 1612 tests, skips55 and reports41 warnings in68.03
+seconds. Six new NTFS cases skip locally and pass in Windows separately. Ruff checks
+164 files; canonical bootstrap and generated198 CLI/12 tool checks pass. Immutable
+.44 CI/installation, actual limited-token execution and current parser/GUI tasks
+remain NOT_RUN at this source checkpoint. Original acceptance statuses and numeric
+gates are unchanged. See the [root access receipt](validation/2026-10-14/windows-installer-root-access-0144.json).
+
 ## Source 0.1.43 caller Torch budget correction, 2026-10-14
 
 **OBSERVED / offscreen native control and source candidate:** the exact preserved
@@ -168,6 +209,7 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
+| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .43 CI passes, but actual .42 -> .43 update fails at the root icacls grant's 15-second limit and .42 remains active. Source .44 native root proof passes six Windows cases; immutable .44 installation and limited-token execution are pending. Earlier installed .42 evidence remains separate. |
 | GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no writer attempt occurs in the original .42 batch, while the separate passive diagnostic blocks an actual attempted write. Older route-specific HTTP 401 is historical. |
 | GUIDE-04 | Installed .42 Windows Codex cached-to-fresh completion challenge PASS with independent incomplete receiver and cleanup. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN; one case does not establish general reliability. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |

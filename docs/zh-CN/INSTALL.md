@@ -12,6 +12,11 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
 
+Windows 更新会验证安装 root 中当前用户的显式、可继承完全控制权限；
+满足条件时不重写保留旧版本的 ACL。新 runtime 目录和模型准备仍执行原有权限设置。
+权限缺失、被拒绝、仅继承或不支持时使用原有 grant 路径，
+不会绕过权限或 timeout 检查。
+
 更新保留旧运行时版本、模型缓存和配置。在激活前按 Ctrl-C 中断安装时，清理只删除未使用的
 临时环境，已有运行时仍保持激活。原子切换完成后，即使安装程序尚未显示成功，也会保留
 新的活动环境。重新运行安装程序可验证活动版本。强制终止进程或断电可能跳过清理并留下

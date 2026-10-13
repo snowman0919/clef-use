@@ -227,6 +227,16 @@ atomic activation. POSIX uses a `current` symlink; Windows atomically replaces a
 managed CMD launcher. Updated clients restart an idle older resident service and
 refuse to switch a service with active desktop ownership.
 
+On Windows, only the existing installation root can retain a native-proven
+explicit current-user FILE_ALL_ACCESS ACE with flags exactly OI|CI. The complete
+DACL must contain only supported allow ACEs; denies, inherited-only grants,
+no-propagate/inherit-only flags or failed queries keep the original grant path.
+The standalone bootstrap uses only stdlib Win32 bindings. Staged runtime/model
+directories still perform their canonical grant with the same 15-second limit.
+The root proof covers root access and future inheritance, not existing-descendant
+repair. This avoids unnecessary [inheritable ACL propagation](https://learn.microsoft.com/en-us/windows/win32/secauthz/automatic-propagation-of-inheritable-aces)
+over retained versions when the root grant is already correct.
+
 Integration activation retains the metadata/config bytes and targeted guide file
 inventories used for ownership validation. Runtime capability discovery cannot
 renew that ownership: changed bytes, removed files or new guide files produce
