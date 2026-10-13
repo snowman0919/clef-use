@@ -217,7 +217,15 @@ A separate installed 0.1.36 component verifies actual CLI/HTTP service abort:
 Shift/middle input is released while its injector remains blocked, and the
 cancelled injector refuses further input after unblocking. It uses an explicitly
 registered session and owned non-text receiver. Full gesture/Blender operation
-admission and whole-process suspension/deadline recovery remain unverified.
+admission remains unverified.
+
+A separate installed Windows 0.1.37 component suspends all worker threads through
+documented debug APIs. With the attach breakpoint pending and heartbeat unchanged,
+the separate guardian releases Shift/middle input at the six-second lease deadline,
+before worker EOF or parent release. After resume, the real watchdog cancels and
+further input is refused. Worker/guardian exit and exact pointer/foreground cleanup
+pass. This is partial input-recovery evidence, not full runtime/service operation
+admission, Blender semantics, model completion or a latency/performance result.
 
 Decision diagnostics retain the exact UTF-8 text-budget bytes (image excluded),
 object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integer

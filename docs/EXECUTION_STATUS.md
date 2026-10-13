@@ -57,6 +57,28 @@ NOT_RUN. First fixture lease60 violated the unchanged max30 guard; a second
 fixture misclassified the expected InputInterrupted after a successful abort.
 Both FAIL attempts remain retained. See [service abort evidence](validation/2026-10-13/windows-service-abort.json).
 
+**OBSERVED / installed Windows suspended-worker deadline:** installed 0.1.37
+holds native Shift/middle input in an owned non-text receiver with its IMC
+disabled and absence read back. The worker reports its actual PID separately
+from the venv launcher; documented DebugActiveProcess/WaitForDebugEvent bind the
+owned process and leave its attach breakpoint pending, suspending all worker
+threads. Its heartbeat stays unchanged while the distinct guardian family
+remains alive. At the six-second lease deadline, native held [4,16,160] -> []
+and receiver button/key releases are observed before worker EOF, debugger resume
+or any parent release. After the intentional breakpoint is continued and the
+debugger detached, the real worker watchdog cancels and further input raises
+InputInterrupted. Worker/guardian exit, no held input, exact pointer/foreground
+restoration, owned window closure and scheduled-task removal pass.
+
+This is partial additional evidence for original INPUT-04, not full
+SessionRuntime.execute, service-driven operation admission, full GestureInput,
+Blender semantics or model/harness completion. It adds no latency/p95, goodput or
+coverage claim and changes no acceptance status or numeric gate. Private paths,
+process/window identifiers and raw traces are omitted from the
+[suspension receipt](validation/2026-10-13/windows-suspended-input.json); original
+private artifact hashes and the executed script digest are retained there and
+the public receipt is digest-indexed in the validation summary.
+
 **OBSERVED / diagnostic separation:** existing FINAL12 menu packets preserve the
 actual before-image pixels and independent ground truth. File/Edit/absent scores
 separate, but File goal probability 0.7639-0.7694 and condition 0.8112-0.8157 fail
@@ -164,7 +186,9 @@ guardian exits before the parent calls release. Held-input lists, exact original
 pointer/foreground restoration, own guardian/window closure and task removal all
 pass. Local and remote final fixture hashes match. This observes executor
 watchdog/guardian recovery, not service CLI abort with an admitted Blender gesture
-or full-process suspension/deadline recovery; those Windows checks remain NOT_RUN.
+or full-process suspension/deadline recovery in that 0.1.36 slice. The separate
+0.1.37 suspension component above supplies bounded native deadline evidence;
+admitted Blender gesture execution remains NOT_RUN.
 No installed product byte changed. Four-language input guidance and INPUT-03/04
 partial Windows notes are updated without changing original criteria or gates.
 

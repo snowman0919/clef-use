@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Verify installed Windows whole-worker suspension with documented debug APIs:
+  a separate guardian releases owned Shift/middle input at its bounded deadline
+  before worker EOF or parent release. Retain resumed cancellation/refusal and
+  exact cleanup evidence separately from service/Blender/model admission.
 - Verify installed Windows CLI/HTTP service abort with an actual native held
   modifier/button lease, independent blocked injector, receiver release and
   refusal after cancellation. Retain failed fixture attempts separately.

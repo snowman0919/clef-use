@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "windows_suspended_input_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-suspended-input.json", "sha256": "5cde95ed3f366dafc8be0ae9c945ec4e43fc3c59a85c025ebe95e35c2cb1ed67", "raw_artifact_committed": true},
     "windows_service_abort_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-service-abort.json", "sha256": "d3fd5365587dc790519796b5a769f1b54558c386c65c8f6cdfe1a4df0e295739", "raw_artifact_committed": true},
     "windows_blender_observation_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-blender-observation.json", "sha256": "1ee88c97848ceeed9eb891274c6e7769c15cc561ff1e15eb2a5613a6426d055d", "raw_artifact_committed": true},
     "source_regression": {
@@ -182,6 +183,7 @@
     }
   },
   "evidence": {
+    "windows_suspended_input_20261013": {"claim": "OBSERVED_INSTALLED_WINDOWS_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-suspended-input.json", "sha256": "5cde95ed3f366dafc8be0ae9c945ec4e43fc3c59a85c025ebe95e35c2cb1ed67", "requirements": ["INPUT-04"], "partial": true, "scope": "Actual .37 whole-worker debug suspension; separate guardian releases native Shift/middle at deadline before worker EOF or parent release; resumed worker cancellation/refusal and cleanup. No full runtime/service/Blender/model admission or performance gate claim."},
     "windows_service_abort_20261013": {"claim": "OBSERVED_INSTALLED_WINDOWS_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-service-abort.json", "sha256": "d3fd5365587dc790519796b5a769f1b54558c386c65c8f6cdfe1a4df0e295739", "scope": "Actual .36 CLI/authenticatedHTTP/nativeShift+middle release whileinjectorblocked and no reacquisition; no fullGestureInput or Blenderadmission."},
     "windows_blender_observation_20261013": {"claim": "OBSERVED_SOURCE_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-blender-observation.json", "sha256": "1ee88c97848ceeed9eb891274c6e7769c15cc561ff1e15eb2a5613a6426d055d", "scope": "Actual Windows collector/provider/compiler,6guardrefusals/input0; native8 tests; source1418PASS42SKIP; not installed-current whole E2E."},
     "source_regression": {

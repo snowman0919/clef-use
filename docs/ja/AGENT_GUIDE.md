@@ -210,7 +210,15 @@ IME を無効化します。自動 IME 検出、Blender の orbit/pan の意味�
 別のインストール済み 0.1.36 component で実際の CLI/HTTP service abort を検証しました。
 injector の停止中に Shift/中央ボタンを解放し、再開後も取り消された injector は
 追加入力を拒否します。明示的に登録した session と所有する非テキスト受信窓の検証であり、
-完全な gesture/Blender operation admission や全 process 停止/deadline 復旧は未検証です。
+完全な gesture/Blender operation admission は未検証です。
+
+別のインストール済み Windows 0.1.37 component は、文書化された debug API で worker
+の全スレッドを停止します。attach breakpoint が保留され heartbeat が停止した間に、
+別の guardian が6秒の lease deadline で Shift/中央ボタンを解放します。worker EOF や
+親の解放呼び出しより前に native 解放を観測し、再開後は実際の watchdog による取消と
+追加入力の拒否を確認しました。worker/guardian の終了、正確なポインタ/foreground
+復元も成功しました。これは部分的な入力復旧の証拠であり、完全な runtime/service
+operation admission、Blender の意味、モデル完了や遅延・性能の結果ではありません。
 
 decision 診断には画像を除く実際の UTF-8 テキスト予算のバイト数、object・question
 数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、

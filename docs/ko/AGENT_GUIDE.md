@@ -209,8 +209,15 @@ Blender orbit/pan 의미나 하네스의 GUI 작업 완료를 입증하지 않�
 별도 설치본 0.1.36 component에서는 실제 CLI/HTTP service abort를 검증했습니다.
 injector가 막힌 동안 Shift·가운데 버튼이 해제되고, 재개 후에도 취소된 injector는
 추가 입력을 거부합니다. 명시적으로 등록한 session과 소유 비텍스트 수신 창을 사용한
-검증이며, 전체 gesture·Blender operation admission과 전체 프로세스 정지·deadline
-복구는 아직 검증되지 않았습니다.
+검증이며, 전체 gesture·Blender operation admission은 아직 검증되지 않았습니다.
+
+별도 설치본 Windows 0.1.37 component는 문서화된 debug API로 worker의 모든
+스레드를 정지합니다. attach breakpoint가 보류되고 heartbeat가 멈춘 동안 별도
+guardian이 6초 lease deadline에 Shift·가운데 버튼을 해제합니다. worker EOF나 부모의
+해제 호출보다 먼저 native 해제를 관찰했으며, 재개 후 실제 watchdog의 취소와 추가
+입력 거부도 확인했습니다. worker·guardian 종료와 정확한 포인터·foreground 복구가
+통과했습니다. 이는 부분적인 입력 복구 증거이며, 전체 runtime·service operation
+admission, Blender 의미, 모델 작업 완료나 지연·성능 결과를 입증하지 않습니다.
 
 decision 진단은 이미지가 제외된 실제 UTF-8 텍스트 예산 바이트 수, object·question
 개수와 SDK가 보고한 입력 토큰 수를 보존합니다. `SDK_USAGE`는 1~8192의 정수이며,
