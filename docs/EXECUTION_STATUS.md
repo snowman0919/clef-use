@@ -1,5 +1,50 @@
 # Reactive runtime execution status
 
+## Immutable installed Windows 0.1.44 verification, 2026-10-14
+
+**OBSERVED / immutable CI and actual update:** exact source `d4f1c8e` completes
+run `38448473500`, all fifteen build/install jobs and assembly. Every archive
+matches 68 Git payload files. Actual Windows .42 -> .44 returns INSTALLED;
+repeat returns CURRENT. Managed Codex refresh, unrelated configuration bytes,
+previous version files and owned loopback-server cleanup pass. The failed .43
+root grant remains recorded separately; its deadline was not increased.
+
+**OBSERVED / actual limited desktop token, windowless component:** native token
+queries report LIMITED and not elevated, with the expected desktop session/user
+digest. This token reads and hashes all 68 installed payload files and executes
+version, capabilities and offline self-test successfully. Configuration bytes
+remain unchanged; the owned task exits zero and is removed. Offline self-test
+uses deterministic fixtures. An initial diagnostic used the nonexistent
+GetActiveConsoleSessionId symbol and failed before starting a task; that attempt
+remains NOT_RUN. The corrected diagnostic uses WTSGetActiveConsoleSessionId.
+Its predecessor's single owned empty preparation directory is also removed.
+
+**OBSERVED / installed parser component:** the unmodified installed JsonWorker
+and native worker complete the preserved original editor parser request with 81
+objects, 59 caption regions and effective Torch budget12. Current configuration
+matches the earlier control. Single uncontrolled wall time is94.16 seconds,
+including initialization/cleanup; native parser telemetry is83.86 seconds.
+No new capture or input runs. This separates parser availability from the earlier
+whole editor-task failure; it does not prove task success, complete quality
+equivalence or state-change-to-input latency. The original control's later
+captions were censored by its timeout.
+
+**OBSERVED / installed native Codex discovery:** real app-server skills/list
+finds all three managed guides and runtime/guide version0.1.44 matches. This
+native-only run does not load their bodies or invoke capabilities through a
+model. The subsequent canonical natural model-verification attempt cannot prove
+load/invoke: the Windows subprocess reader raises UnicodeDecodeError on byte0x9d
+under its default charmap codec; CLI exits with AttributeError and no stdout JSON.
+The private proof driver then raises JSONDecodeError. This attempt remains NOT_RUN
+for load/invoke; captured stderr does not establish an authentication cause.
+
+The original 44 requirement statuses and numeric gates remain unchanged. Current
+GUI tasks await shared-desktop coordination after independently observed foreign
+foreground activation; the actor is unproven. Blender unknown contexts, full
+pinned accuracy/1000 opportunities/p95/coverage/goodput, Reici and public release
+remain open. Feature-branch deployment is skipped by its existing guard. See the
+[immutable installation and component receipt](validation/2026-10-14/windows-installed-ci-0144.json).
+
 ## Source 0.1.44 installation-root access proof, 2026-10-14
 
 **OBSERVED / .43 CI and failed actual update:** exact source `076d334` completes

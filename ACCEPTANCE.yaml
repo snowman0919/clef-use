@@ -221,6 +221,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0142.json
     section: installed_windows
     claim: OBSERVED
@@ -262,6 +266,14 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: limited_desktop_token
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
     section: actual_0143_update
     claim: OBSERVED
@@ -402,6 +414,10 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
     section: source_0144_component
     claim: OBSERVED
@@ -470,6 +486,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: native_codex_discovery
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: codex_gui
     claim: OBSERVED
@@ -1052,6 +1072,10 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_parser_component
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-omni-thread-budget-0143.json
     section: candidate
     claim: OBSERVED
@@ -1122,6 +1146,10 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: ci
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
     section: immutable_0143_ci
     claim: OBSERVED
