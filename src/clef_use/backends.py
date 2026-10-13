@@ -453,42 +453,52 @@ class DesktopCapture:
             self._excluded_windows = frozenset()
 
     def capture(self):
-        import mss
-
         captured_at = time.time()
         native = WindowsInput() if sys.platform == "win32" else None
         target = native.ensure_target(None) if native else None
         x11_context = self._x11_context() if sys.platform == "linux" else (None, None)
         with native.physical_coordinates() if native else nullcontext():
-            with mss.MSS() as screen:
-                monitor = screen.monitors[1]
-                excluded = getattr(self, "_excluded_windows", ())
-                if excluded and sys.platform == "darwin":
-                    import Quartz
+            if native:
+                from .windows_capture import capture_primary
 
-                    windows = Quartz.CGWindowListCreate(Quartz.kCGWindowListOptionOnScreenOnly, 0)
-                    windows = tuple(window for window in windows if window not in excluded)
-                    rect = (
-                        (monitor["left"], monitor["top"]),
-                        (monitor["width"], monitor["height"]),
-                    )
-                    cg = Quartz.CGWindowListCreateImageFromArray(
-                        rect, windows, Quartz.kCGWindowImageNominalResolution
-                    )
-                    if cg is None or Quartz.CGImageGetBitsPerPixel(cg) != 32:
-                        raise RuntimeError("cannot capture desktop without activity windows")
-                    pixels = bytes(Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(cg)))
-                    image = Image.frombytes(
-                        "RGB",
-                        (Quartz.CGImageGetWidth(cg), Quartz.CGImageGetHeight(cg)),
-                        pixels,
-                        "raw",
-                        "BGRX",
-                        Quartz.CGImageGetBytesPerRow(cg),
-                    )
-                else:
-                    shot = screen.grab(monitor)
-                    image = Image.frombytes("RGB", shot.size, shot.rgb)
+                image = capture_primary()
+                monitor = {"left": 0, "top": 0}
+            else:
+                import mss
+
+                with mss.MSS() as screen:
+                    monitor = screen.monitors[1]
+                    excluded = getattr(self, "_excluded_windows", ())
+                    if excluded and sys.platform == "darwin":
+                        import Quartz
+
+                        windows = Quartz.CGWindowListCreate(
+                            Quartz.kCGWindowListOptionOnScreenOnly, 0
+                        )
+                        windows = tuple(window for window in windows if window not in excluded)
+                        rect = (
+                            (monitor["left"], monitor["top"]),
+                            (monitor["width"], monitor["height"]),
+                        )
+                        cg = Quartz.CGWindowListCreateImageFromArray(
+                            rect, windows, Quartz.kCGWindowImageNominalResolution
+                        )
+                        if cg is None or Quartz.CGImageGetBitsPerPixel(cg) != 32:
+                            raise RuntimeError("cannot capture desktop without activity windows")
+                        pixels = bytes(
+                            Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(cg))
+                        )
+                        image = Image.frombytes(
+                            "RGB",
+                            (Quartz.CGImageGetWidth(cg), Quartz.CGImageGetHeight(cg)),
+                            pixels,
+                            "raw",
+                            "BGRX",
+                            Quartz.CGImageGetBytesPerRow(cg),
+                        )
+                    else:
+                        shot = screen.grab(monitor)
+                        image = Image.frombytes("RGB", shot.size, shot.rgb)
             if native:
                 native.ensure_target(target)
                 logical = image.size

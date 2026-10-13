@@ -56,6 +56,18 @@ def main():
             raise RuntimeError("owned test window did not become foreground")
         time.sleep(0.3)
 
+        with gui.physical_coordinates():
+            initial_bounds = gui.window_rect(owned_target)
+        first_frame = DesktopCapture().capture()
+        root.update()
+        with gui.physical_coordinates():
+            after_capture_bounds = gui.window_rect(owned_target)
+        result["capture_preserves_owned_geometry"] = (
+            first_frame.foreground_bounds == initial_bounds == after_capture_bounds
+        )
+        if not result["capture_preserves_owned_geometry"]:
+            raise RuntimeError("Desktop capture changed the owned window DPI geometry")
+
         def snapshot():
             root.update()
             frame = DesktopCapture().capture()

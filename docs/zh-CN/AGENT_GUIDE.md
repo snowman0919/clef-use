@@ -210,3 +210,5 @@ parser 对象分别保留精确坐标及不同的 action、confidence、source �
 仅有快速成功的输入不能通过发布 gate；实际 OS event 时刻与 backend ACK 分开记录。
 目前不宣称已测得通过的 100ms profile 或发布 gate 成功。
 参阅[执行证据](../EXECUTION_STATUS.md)及[验收要求](../../ACCEPTANCE.yaml)。
+
+Windows 截图在仅限当前线程的物理坐标 context 内使用 native GDI，不修改整个 process 的 DPI awareness。必须保留已打开 window 与 control 的物理 geometry；截图使它们发生变化即验证失败。此修正不证明 Blender popup、focus、IME、keymap 状态或100ms反应性能。

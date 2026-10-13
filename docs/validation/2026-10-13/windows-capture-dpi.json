@@ -1,0 +1,463 @@
+{
+  "classification": "OBSERVED_NATIVE_WINDOWS_DPI_REGRESSION_AND_MEASURED_CAPTURE_COMPONENT",
+  "date": "2026-10-13",
+  "requirements": [
+    "INPUT-01",
+    "INPUT-05",
+    "STATE-01",
+    "PERF-02"
+  ],
+  "partial": true,
+  "target_release": "0.1.38",
+  "installed_target_verification": "NOT_RUN; immutable CI/install pending",
+  "scope": "Source Windows capture fix, real native GUI/input regression and capture-only comparison. No whole task/model/reaction/coverage claim.",
+  "root_cause": {
+    "installed_baseline": "0.1.37",
+    "observed_before": {
+      "window_bounds": [
+        0,
+        0,
+        2560,
+        1600
+      ],
+      "button_bounds": [
+        88,
+        385,
+        823,
+        595
+      ]
+    },
+    "observed_during": {
+      "image_size": [
+        2560,
+        1600
+      ],
+      "window_bounds": [
+        0,
+        0,
+        1463,
+        914
+      ]
+    },
+    "observed_after": {
+      "window_bounds": [
+        0,
+        0,
+        1463,
+        914
+      ],
+      "button_bounds": [
+        50,
+        220,
+        470,
+        340
+      ]
+    },
+    "geometry_changed": true,
+    "mechanism": "MSS Windows constructor changes process-wide DPI awareness after an existing window is created. Native GDI avoids that setter; thread-scoped physical context retained."
+  },
+  "regression": {
+    "before": {
+      "status": "FAILED",
+      "capture_preserves_owned_geometry": false,
+      "error": "RuntimeError: Desktop capture changed the owned window DPI geometry",
+      "input_delivered": false,
+      "cleanup": {
+        "errors": [],
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_immediate": true,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true
+      }
+    },
+    "source_after": {
+      "status": "PASSED",
+      "capture_preserves_owned_geometry": true,
+      "unicode_readback": "Windows \ud55c\uae00 \ud14c\uc2a4\ud2b8 \ud83d\ude00",
+      "clipboard_preserved": true,
+      "clipboard_verification": "sequence unchanged; no clipboard read/write",
+      "shortcut_readback": "",
+      "click_readback": 3,
+      "wheel_readback": [
+        -360
+      ],
+      "cancelled_before_input": true,
+      "control_characters_refused": true,
+      "foreground_change_refused": "Windows foreground changed since capture; no input sent",
+      "held_inputs_after_release": [],
+      "capture_pixels": [
+        2560,
+        1600
+      ],
+      "physical_coordinates": true,
+      "cleanup": {
+        "errors": [],
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_immediate": true,
+        "foreground_queue_synchronized": true,
+        "foreground_before_own_ui_pump": true,
+        "foreground_completion_observations": [
+          "previous"
+        ],
+        "foreground_restored": true,
+        "owned_window_closed": true
+      }
+    }
+  },
+  "native_resource_regression": {
+    "classification": "OBSERVED_INTERACTIVE_WINDOWS_NATIVE_GDI",
+    "variants": [
+      {
+        "variant": "prior",
+        "run": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true
+      },
+      {
+        "variant": "current",
+        "run": 4,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "success": true
+      }
+    ],
+    "cases": [
+      "Actual invalid-HDC memory DC acquisition failure",
+      "Actual NULL-destination BitBlt failure after real DC/DIB acquisition",
+      "Conversion failure after native copy",
+      "Borrowed-stock restoration native failure cannot leave owned GDI resources"
+    ],
+    "result": "Both initial and revised cleanup implementations pass four cases; no native leak reproduction claimed. Current implementation retires owned memory DC before its bitmap.",
+    "session0_attempt": "Two preflight PermissionError WinError5 failures retained. Tests now explicitly require an interactive default desktop; four actual Session1 cases executed, no skip."
+  },
+  "capture_comparison": {
+    "classification": "MEASURED_COMPONENT_ONLY",
+    "environment": {
+      "hardware": {
+        "Name": "AMD Ryzen AI 9 HX 370 w/ Radeon 890M           ",
+        "NumberOfCores": 12,
+        "NumberOfLogicalProcessors": 24
+      },
+      "os": "Windows11 native interactive desktop",
+      "python": "3.11.9",
+      "previous": "immutable installed0.1.37",
+      "current": "separately loaded source overlay; installed metadata remains0.1.37",
+      "load": "No simultaneous model or build workload; power and thermal state not recorded"
+    },
+    "input": {
+      "image_size": [
+        2560,
+        1600
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "layout": "One unchanged owned fullscreen canvas",
+      "all_200_rgb_outputs_exact": true,
+      "geometry_preserved": true
+    },
+    "method": "Ten batches of10captures per variant, alternating order each batch, after5warmups per variant. Separate persistent hidden processes prevent either implementation from changing GUI process DPI. perf_counter_ns spans actual DesktopCapture.capture only; hashing/IPC outside timing.",
+    "summary_ms": {
+      "installed_previous": {
+        "samples": 100,
+        "min": 33.5068,
+        "p50": 43.8806,
+        "p95": 53.2624,
+        "p99": 55.8982,
+        "max": 56.3294
+      },
+      "source_current": {
+        "samples": 100,
+        "min": 23.0122,
+        "p50": 30.0796,
+        "p95": 42.4806,
+        "p99": 44.2392,
+        "max": 44.2615
+      }
+    },
+    "latency_ms_by_variant": {
+      "installed_previous": [
+        46.9127,
+        41.4536,
+        39.1086,
+        44.4358,
+        38.9131,
+        40.7487,
+        39.8246,
+        41.7017,
+        43.5564,
+        43.6519,
+        54.1294,
+        39.9364,
+        39.9452,
+        42.3606,
+        44.2029,
+        36.2227,
+        42.4393,
+        43.6382,
+        43.9946,
+        42.044,
+        42.2429,
+        43.2748,
+        33.5068,
+        39.7728,
+        40.5501,
+        41.1441,
+        43.3929,
+        43.8806,
+        55.8982,
+        48.0984,
+        54.0232,
+        39.8222,
+        41.6983,
+        41.7184,
+        43.4126,
+        44.3799,
+        38.4055,
+        39.4487,
+        44.8824,
+        39.5373,
+        48.3688,
+        51.148,
+        40.6448,
+        41.5841,
+        44.6001,
+        41.8395,
+        39.2127,
+        38.5213,
+        40.9472,
+        41.7036,
+        38.8625,
+        42.4447,
+        42.6385,
+        45.198,
+        43.9065,
+        38.8532,
+        46.3651,
+        45.0083,
+        46.3427,
+        46.4854,
+        43.3117,
+        43.8919,
+        50.3497,
+        44.9464,
+        46.46,
+        46.5532,
+        46.8414,
+        47.8515,
+        44.7792,
+        42.1362,
+        56.3294,
+        42.5669,
+        53.2624,
+        39.2636,
+        46.5471,
+        47.2616,
+        47.2567,
+        46.5284,
+        46.7046,
+        48.857,
+        48.8574,
+        48.7032,
+        53.3338,
+        43.8627,
+        47.927,
+        50.0338,
+        45.2429,
+        47.2689,
+        48.9369,
+        44.4554,
+        38.0257,
+        42.5083,
+        48.8759,
+        43.8018,
+        43.8768,
+        48.6465,
+        48.1396,
+        48.2672,
+        47.2907,
+        47.1127
+      ],
+      "source_current": [
+        36.9795,
+        24.9402,
+        27.339,
+        38.9971,
+        38.4228,
+        41.1621,
+        40.6732,
+        44.2392,
+        35.3035,
+        24.0785,
+        24.7425,
+        25.9211,
+        26.7739,
+        26.7515,
+        28.0861,
+        39.5244,
+        40.3063,
+        39.8698,
+        24.0972,
+        24.8386,
+        32.2179,
+        42.7587,
+        25.9824,
+        27.1106,
+        28.3649,
+        40.019,
+        40.1852,
+        42.4806,
+        38.3032,
+        27.2579,
+        39.4933,
+        39.5835,
+        39.8972,
+        38.9086,
+        38.1781,
+        41.7071,
+        40.2171,
+        24.4678,
+        25.3276,
+        24.9524,
+        36.5901,
+        40.4008,
+        25.5293,
+        26.7669,
+        38.7615,
+        34.4663,
+        37.0526,
+        39.922,
+        40.8184,
+        25.7116,
+        27.4181,
+        27.7667,
+        27.8868,
+        39.6424,
+        43.682,
+        26.9567,
+        27.7262,
+        28.2224,
+        39.3168,
+        28.5684,
+        42.3575,
+        41.9974,
+        39.9993,
+        27.9355,
+        28.9498,
+        27.8695,
+        30.0796,
+        23.0122,
+        33.095,
+        27.1761,
+        28.4137,
+        29.0207,
+        28.1571,
+        29.6855,
+        30.154,
+        28.3276,
+        32.2756,
+        25.6467,
+        30.1576,
+        30.7191,
+        44.2615,
+        27.3512,
+        27.9381,
+        26.5958,
+        26.8398,
+        27.3413,
+        25.8638,
+        29.6896,
+        26.4495,
+        32.1448,
+        43.4999,
+        42.4346,
+        39.6319,
+        30.9114,
+        27.1448,
+        30.2411,
+        29.7405,
+        31.5285,
+        30.9269,
+        25.4968
+      ]
+    },
+    "not_measured": [
+      "state-change-to-correct-input p95",
+      "goodput_100",
+      "fast-path eligibility coverage",
+      "full model/harness/Blender task accuracy"
+    ]
+  },
+  "source_sha256": {
+    "src/clef_use/backends.py": "1babeb25f008591e981f0f41706ac96fb2d8326b3252e3d9cff33a4bf6c6c485",
+    "src/clef_use/windows_capture.py": "a72a3ebc46b97c975801c20ea8a2a78e042479bc2ed70c2d8b2af9f2b3324431",
+    "scripts/windows_gui_smoke.py": "b07daeedd593f455325ac4fcf2fddeb011d977a22db42b89185352cb9c5c44de",
+    "tests/test_windows_capture.py": "6a5fcaff9294fdfc7817a61ba74e1105a3b2a11f018e4ca2581e4d2a6e35d243"
+  },
+  "source_regression": {
+    "result": "1418 passed,46 skipped,41 warnings",
+    "seconds": 66.29,
+    "scope": "Full active Linux suite; four Windows capture tests skipped here and executed separately on Windows",
+    "log_sha256": "96f9adf0cf3a6923faeee91dc822b91748157135035876c3dd7971b4df80e708",
+    "scoped_ruff": "PASS",
+    "generated_contract": "PASS;0.1.38"
+  },
+  "retained_driver_failures": [
+    {
+      "status": "FAIL_BEFORE_PRODUCT_IMPORT",
+      "kind": "SyntaxError",
+      "reason": "Throwaway source-overlay prefix preceded from-future import; corrected driver, fresh native attempt retained",
+      "raw_stderr_sha256": "f3b95f9246108c4bd937af14b057e37a2d2f5b0017b54e4f2c8c5fd2048022c8"
+    }
+  ],
+  "private_artifact_sha256": {
+    "dpi": {
+      "result.json": "4b222c290b867fa016a13c157f2ebaa0bdd59b82c45b6fb328918f79bfe7d449",
+      "controller-report.json": "dffabf30eb5f98928b345ba341f1a185928f71217501c904c3745a494ab8a2fb",
+      "controller.py": "8b974e3103e6679caa42bffb49bcfdf48f9636ae0987ab52aaf2518f5e3821f2",
+      "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixture.stdout": "f5f4d6e5fe567bb495907ad0a4a446794dddbd207b61b3d3e7008d45ad4cbbf0"
+    },
+    "before": {
+      "result.json": "5f331eefd83c7d14cdda0adf83a9418625faf63c4f734674cc60c491d073d414",
+      "controller-report.json": "91a3c8ad62e38ce083617bc26610401126c6d2c81c324915def0715d27a60521",
+      "controller.py": "75eced7659e5cf58a9355e3554058efadfff3087a5c35fc742b98a01b6448378",
+      "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixture.stdout": "c091c29598e7f8a5e8ec701647d776de91aade81b3d6f7f3dc3423ed712428c2"
+    },
+    "source_after": {
+      "result.json": "5875621a2f27821e1ba8a00900564a288525eb16885a856b01e4989eadeb1aea",
+      "controller-report.json": "0b0c0178fc25b03540d52ca50ce1ab1c12d4ee19987d060c97829a2e53e59066",
+      "controller.py": "c2d996a35034875200d029dfb80362fbdb78a4491fd26236db542c02bf241289",
+      "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixture.stdout": "440b8236fd1f763651fedd35dfac4a7fa616c8ee319ca7d6f5b714e14626d17b"
+    },
+    "capture_ab": {
+      "result.json": "589f3809a29e2ad5352c68cfa43c04cb39bed4e56c20f96e231ef82213fa4a26",
+      "controller-report.json": "f39feed8e19edb84d8667c57748272fd8ed6f1caaecd1f91ec1e5e1459b9d5d7",
+      "controller.py": "718854a25bcccf4c3cc1b07a0620247750f0532fc395ecef99f0618e5137e8b4",
+      "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixture.stdout": "1b1e7364e387836fff746d3805bb129f5a3b9ed41466ee50047ce37cd7c3dafa"
+    },
+    "native_resources": {
+      "result.json": "2feed3b16dc285d8d4cd04f8aefe5e52c279531523dd3d2a6c560a18db9d1efb",
+      "controller-report.json": "a43d457c68f4b1edec7f7778437291808bd813879349646ae7a3dccab655cb7c",
+      "controller.py": "1c252575fb89b421b37536a505fff3d7120d70c7457d79b8f358034c583d7c18",
+      "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "fixture.stdout": "f4b8677d697548bad2f9bf3bb6b919da644a7d8c7b514d07385f7eb1b5f81c05"
+    }
+  },
+  "acceptance": "Original44 requirement statuses and numeric release gates unchanged. Capture-only timing is not PERF-02 completion.",
+  "privacy": "Only fixture labels, sanitized summaries, numeric measurements and file digests; no process/window IDs, private paths, credentials or screenshots."
+}

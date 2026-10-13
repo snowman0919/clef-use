@@ -239,3 +239,5 @@ parser の object は正確な座標と異なる action・confidence・source �
 時刻と backend ACK は区別します。
 現在、測定で合格した 100ms profile や出荷 gate の成功は主張していません。
 [実行証拠](../EXECUTION_STATUS.md)と[検証項目](../../ACCEPTANCE.yaml)を参照してください。
+
+Windows のキャプチャは、スレッド限定の物理座標 context 内で native GDI を使い、process 全体の DPI awareness を変更しません。開いている window と control の物理 geometry を保つ必要があり、キャプチャで変われば検証失敗です。この修正は Blender popup・focus・IME・keymap の状態や100ms反応性能を証明しません。

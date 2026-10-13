@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Capture Windows primary-monitor pixels with native GDI without changing process
+  DPI awareness or resizing an already-open application. Preserve physical frame
+  coordinates, layered-window capture and owned GDI resource cleanup.
+
 - Verify installed Windows whole-worker suspension with documented debug APIs:
   a separate guardian releases owned Shift/middle input at its bounded deadline
   before worker EOF or parent release. Retain resumed cancellation/refusal and

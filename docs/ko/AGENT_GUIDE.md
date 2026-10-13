@@ -238,3 +238,5 @@ parser 객체는 정확한 좌표와 서로 다른 action·confidence·source �
 시각과 backend ACK는 구분합니다.
 현재 측정으로 통과한 100ms profile이나 출하 gate 성공을 주장하지 않습니다.
 [실행 증거](../EXECUTION_STATUS.md)와 [acceptance](../../ACCEPTANCE.yaml)를 확인하세요.
+
+Windows 캡처는 스레드별 물리 좌표 context 안에서 native GDI를 사용하며 프로세스 전체 DPI 설정을 변경하지 않습니다. 이미 열린 창과 컨트롤의 물리 geometry를 보존해야 하며, 캡처가 이를 바꾸면 검증 실패입니다. 이 수정은 Blender popup·focus·IME·keymap 상태나 100ms 반응 성능을 입증하지 않습니다.

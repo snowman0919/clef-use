@@ -95,6 +95,37 @@ and Task complete. Original object/packet contents were not archived in that
 attempt, so candidate coverage cannot be reconstructed. No confidence threshold,
 acceptance status or whole-task performance gate is promoted by this diagnosis.
 
+## Windows capture DPI correction on 2026-10-13
+
+**OBSERVED / real failure before correction:** installed0.1.37 DesktopCapture
+changed an already-open owned Tk window from2560x1600 to1463x914 and moved its
+button from[88,385,823,595] to[50,220,470,340]. Its image still had2560x1600 pixels.
+MSS calls a process-wide DPI setter after the window exists; restoring the
+thread DPI context cannot reverse that mutation. The native regression fails
+before delivering input and restores the owned window, foreground and pointer.
+
+**OBSERVED / source correction:** Windows now captures the existing primary
+monitor with native GDI inside the scoped physical coordinate context, without
+process DPI setters. The same native regression preserves geometry and passes
+Unicode/selection/click/scroll, cancellation, wrong-foreground refusal and exact
+cleanup. Four actual Windows GDI resource/error regressions pass without skips
+in InteractiveSession1. Earlier Session0 preflight access-denied errors and a
+throwaway source-loader syntax failure are retained, not hidden. Both tested
+cleanup revisions pass native resource counts; no leak reproduction is claimed.
+The full active Linux suite reports1418PASS/46SKIP/41warnings, including four
+Windows-only skips; native Windows results are recorded separately.
+
+**MEASURED / capture component only:** ten alternating batches,100captures per
+variant after five warmups, in separate processes against the same unchanged
+owned2560x1600 GUI produce identical RGB pixels in all200captures. Capture p95
+is53.2624ms for immutable installed0.1.37 and42.4806ms for the source correction.
+Hashing and IPC are outside the timer. Power/thermal state was not recorded.
+This is not state-change-to-correct-input latency, model accuracy, goodput or
+eligibility coverage. Original PERF-01/02/03 remain NOT_RUN. Immutable0.1.38
+build/install and full native Codex GUI rerun are pending. See the
+[capture DPI receipt](validation/2026-10-13/windows-capture-dpi.json) and
+[decision](decisions/0010-preserve-windows-capture-dpi.md).
+
 ## Installed Windows 0.1.37 CI and observer verification on 2026-10-13
 
 **OBSERVED / CI archives and installed component:** CI source commit `3cb3dc59` produced 15/15 passing platform/Python archives, each containing the exact 65-file source/guide payload. Assembly succeeded and deploy was skipped. The existing Windows installation updated from 0.1.36 to 0.1.37; repeat returned CURRENT, with unrelated configuration and prior runtime files preserved. The installed public-RNA collector fed partial state through the provider and compiler; six operation families remained BLOCKED with `input_count=0`. Installed native observer transport tests reported 8 tests and OK. This is bounded installation/component evidence, not public deployment or whole-task E2E. Original requirement statuses and numeric gates are unchanged. See the [installed Windows CI receipt](validation/2026-10-13/windows-installed-ci-0137.json), digest-indexed in the validation summary.

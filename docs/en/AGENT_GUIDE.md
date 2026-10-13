@@ -250,3 +250,5 @@ policy evidence for every opportunity; fast successful inputs alone cannot pass
 the release gate. Native event timestamps are distinct from backend ACKs.
 No measured 100ms profile or release-gate success is currently advertised.
 See [execution evidence](../EXECUTION_STATUS.md) and [acceptance](../../ACCEPTANCE.yaml).
+
+Windows capture uses native GDI in a scoped per-thread physical coordinate context. It does not change process-wide DPI awareness. Capture must preserve an already-open window and its controls; a frame that changes their physical geometry fails validation. This capture correction does not certify Blender popup, focus, IME or keymap state, nor the 100ms reaction gate.

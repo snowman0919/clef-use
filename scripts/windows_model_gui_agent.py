@@ -4,6 +4,7 @@ import argparse
 import ctypes
 import hmac
 import json
+import os
 import subprocess
 import sys
 import threading
@@ -19,6 +20,7 @@ from windows_gui_support import restore_foreground
 from clef_use.backends import DesktopAction, DesktopCapture, encode_image
 from clef_use.schema import ActionCandidate, Frame, Observation, UIObject
 from clef_use.windows_input import Point, WindowsInput
+from clef_use.windows_observer import foreground_client
 
 
 def main():
@@ -26,6 +28,7 @@ def main():
     parser.add_argument("--root", type=Path, required=True)
     parser.add_argument("--port", type=int, default=37943)
     parser.add_argument("--run-cli", action="store_true")
+    parser.add_argument("--canonical-layout", action="store_true")
     args = parser.parse_args()
     token = (args.root / "gui-token").read_text().strip()
     native, action = WindowsInput(), DesktopAction()
@@ -38,11 +41,13 @@ def main():
     root.geometry("900x600+500+200")
     root.configure(bg="white")
     root.attributes("-topmost", True)
-    if args.run_cli:
+    if args.run_cli or args.canonical_layout:
         root.attributes("-fullscreen", True)
     state = {
         "stage": 0,
         "clicks": [],
+        "click_evidence": [],
+        "target_evidence": [],
         "input_attempts": [],
         "render_delay_ms": 0,
         "no_effect": False,
@@ -53,6 +58,22 @@ def main():
     label.place(x=40, y=200)
 
     def advance():
+        with native.physical_coordinates():
+            physical_bounds = native.window_rect(button.winfo_id())
+        state["click_evidence"].append(
+            {
+                "label": button.cget("text"),
+                "observed_at_ns": time.monotonic_ns(),
+                "tk_logical_bounds": [
+                    button.winfo_rootx(),
+                    button.winfo_rooty(),
+                    button.winfo_rootx() + button.winfo_width(),
+                    button.winfo_rooty() + button.winfo_height(),
+                ],
+                "screen_bounds": list(physical_bounds),
+                "coordinate_space": "native_physical_screen_pixels",
+            }
+        )
         state["clicks"].append(button.cget("text"))
         if state["no_effect"]:
             return
@@ -66,6 +87,7 @@ def main():
             else:
                 button.place_forget()
                 label.configure(text="Task complete")
+            root.after_idle(record_target)
 
         if state["render_delay_ms"]:
             root.after(state["render_delay_ms"], render)
@@ -74,7 +96,7 @@ def main():
 
     button = tk.Button(root, text="Continue", font=("Segoe UI", 22), command=advance)
     button.place(x=50, y=220, width=260, height=80)
-    if args.run_cli:
+    if args.run_cli or args.canonical_layout:
         button.configure(font=("Segoe UI", 42))
         button.place(x=50, y=220, width=420, height=120)
         label.configure(font=("Segoe UI", 42))
@@ -90,14 +112,26 @@ def main():
     root.update()
     if native.foreground() != owned_target:
         raise RuntimeError("owned test window did not become foreground")
-    with native.physical_coordinates():
-        bounds = (
-            root.winfo_rootx(),
-            root.winfo_rooty(),
-            root.winfo_rootx() + root.winfo_width(),
-            root.winfo_rooty() + root.winfo_height(),
-        )
+    bounds = foreground_client(native, DesktopCapture().capture())[-1]
     target = native.foreground()
+
+    def record_target():
+        widget = button if state["stage"] < 2 else label
+        with native.physical_coordinates():
+            physical_bounds = native.window_rect(widget.winfo_id())
+        state["target_evidence"].append(
+            {
+                "stage": state["stage"],
+                "label": widget.cget("text"),
+                "screen_bounds": list(physical_bounds),
+                "coordinate_space": "native_physical_screen_pixels",
+                "mapped": bool(widget.winfo_ismapped()),
+                "observed_at_ns": time.monotonic_ns(),
+                "scope": "Independent widget/geometry readback; not a reaction start timestamp",
+            }
+        )
+
+    record_target()
 
     def on_ui(callback):
         done = Event()
@@ -123,6 +157,8 @@ def main():
             stage=0,
             render_pending=False,
             clicks=[],
+            click_evidence=[],
+            target_evidence=[],
             input_attempts=[],
             render_delay_ms=int(payload.get("delay_ms", 0)),
             no_effect=bool(payload.get("no_effect", False)),
@@ -132,14 +168,28 @@ def main():
         button.place(x=50, y=220, width=260, height=80)
         root.focus_force()
         root.update_idletasks()
+        record_target()
         return {"reset": True, "stage": 0}
 
     def capture():
         frame = DesktopCapture().capture()
         native.ensure_target(target)
-        pixels = frame.image.crop(bounds)
+        state["desktop_capture_reference"] = frame.reference().model_dump(mode="json")
+        pixels = frame.image.crop(
+            (
+                bounds[0] - frame.origin[0],
+                bounds[1] - frame.origin[1],
+                bounds[2] - frame.origin[0],
+                bounds[3] - frame.origin[1],
+            )
+        )
         return Frame(
-            pixels, bounds[:2], pixels.size, frame.foreground_window, frame.foreground_bounds
+            pixels,
+            bounds[:2],
+            pixels.size,
+            frame.foreground_window,
+            frame.foreground_bounds,
+            frame.captured_at,
         )
 
     class Handler(BaseHTTPRequestHandler):
@@ -210,11 +260,11 @@ def main():
                     action.release()
                     result = {"released": True}
                 elif self.path == "/result":
-                    frame = capture()
-                    frame.image.save(args.root / "windows-model-gui.png")
                     result = {
                         "stage": state["stage"],
                         "clicks": list(state["clicks"]),
+                        "click_evidence": list(state["click_evidence"]),
+                        "target_evidence": list(state["target_evidence"]),
                         "input_attempts": list(state["input_attempts"]),
                         "render_delay_ms": state["render_delay_ms"],
                         "no_effect": state["no_effect"],
@@ -227,6 +277,19 @@ def main():
                         "desktop": desktop,
                         "native_input": True,
                     }
+                    # Read the owned widget outcome independently of runtime
+                    # foreground admission; retain a failed screenshot separately.
+                    try:
+                        frame = capture()
+                        frame.image.save(args.root / "windows-model-gui.png")
+                        result["screenshot"] = "OWNED_FOREGROUND"
+                        result["desktop_capture_reference"] = state["desktop_capture_reference"]
+                    except Exception as exc:
+                        result["screenshot"] = "UNAVAILABLE"
+                        result["screenshot_error"] = {
+                            "kind": type(exc).__name__,
+                            "message": str(exc),
+                        }
                     (args.root / "windows-model-readback.json").write_text(
                         json.dumps(result), encoding="utf-8"
                     )
@@ -252,7 +315,15 @@ def main():
     thread = threading.Thread(target=server.serve_forever, daemon=True)
     thread.start()
     (args.root / "windows-model-agent-ready.json").write_text(
-        json.dumps({"session_id": desktop["session_id"], "port": args.port}), encoding="utf-8"
+        json.dumps(
+            {
+                "session_id": desktop["session_id"],
+                "port": args.port,
+                "pid": os.getpid(),
+                "foreground_window": owned_target,
+            }
+        ),
+        encoding="utf-8",
     )
     if args.run_cli:
 
