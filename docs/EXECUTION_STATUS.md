@@ -1,5 +1,37 @@
 # Reactive runtime execution status
 
+## Immutable installed Windows 0.1.47 verification, 2026-10-14
+
+**OBSERVED / immutable CI and installation:** exact source `88ec522` completes
+run `38475187220`, all fifteen build/install jobs and assembly. Native job metadata
+and retained installer logs prove first install, update, idempotence and three
+failure-preservation cases. All fifteen archives match 68 Git payload files and
+their guide/schema contracts. The synthetic installer update fixture ends at .48;
+the actual artifact/runtime is .47. No workflow retry or public guard bypass runs.
+
+Actual Windows .46 -> .47 returns INSTALLED in 43.81 seconds; repeat returns CURRENT
+in 3.44 seconds. Managed Codex registration refresh, unrelated configuration bytes,
+previous version files and owned loopback-server cleanup pass. The SSH Session0
+doctor returns exit 2 in 18.15 seconds because that session has no interactive desktop.
+A real LIMITED desktop token reads all 68 payload files and runs current version,
+capabilities and offline-fixture self-test; the windowless task exits zero and is
+removed. Offline fixtures do not prove real GUI success.
+
+**REPLAY / unmodified actual installation:** the installed .47 verifier runs real
+current native discovery, then consumes the exact retained .46 failed model stdout
+and stderr once. It reports all three prestart pipe-in failures, each 15000ms, with
+exact managed-guide bindings and `NATIVE_EXECUTOR_STARTUP_TIMEOUT` FAIL. Protected
+configuration/auth bytes stay unchanged. No new model/GUI/input runs. This closes
+installed failure-classification evidence, not a new actual model or task result.
+The successful actual LIMITED-token .46 model cases remain separately recorded
+below; they are not repeated solely for this diagnostic-only version update.
+
+Public deployment remains SKIPPED by the existing feature-branch guard. Actual
+GUI ownership coordination, whole-task accuracy/performance, Blender hidden state,
+Reici and public URL/fresh-install/update conditions remain outstanding. Original
+acceptance statuses and numeric gates are unchanged. See the
+[immutable .47 receipt](validation/2026-10-14/windows-installed-ci-0147.json).
+
 ## Source 0.1.47 native executor evidence and Windows context recovery, 2026-10-14
 
 **OBSERVED / actual prior failure:** installed .46 Codex explicit stderr records
@@ -18,8 +50,8 @@ three false PASS statuses and one observed FAIL incorrectly reduced to NOT_RUN.
 Two prose controls previously retain correct statuses but lack the new diagnostic
 field. Corrected negative fixtures contain no independent runtime-call violation;
 the initial weaker fixture proof is retained and excluded from that attribution.
-All six regressions now pass. Full source checks pass1670, skip55, with41 warnings
-in71.95 seconds; integration checks pass270. Active Ruff and generated198 CLI/12
+All six regressions now pass. Full source checks pass 1670, skip 55, with 41 warnings
+in 71.95 seconds; integration checks pass 270. Active Ruff and generated 198 CLI/12
 tool examples pass. A Windows replay through the full candidate consumer, with
 real .46 installed discovery and exact original stdout/stderr, reports all three
 errors and correct guide-path bindings; it starts no new model request. This is
@@ -29,7 +61,7 @@ hybrid source/installed replay, not an immutable .47 installation claim.
 and unified_exec enabled. Its advertised permission-profile catalog contains the
 allowed built-in `:read-only` profile, whose meaning is confirmed in the matching
 official source. A real LIMITED desktop token runs the official read-only sandbox
-and reads the exact installed guide hash, exit0, with protected configuration/auth
+and reads the exact installed guide hash, exit 0, with protected configuration/auth
 bytes preserved and no model/GUI/input. The initial smoke stopped at argument
 parsing because `--permission-profile` was missing; it is NOT_RUN for runner
 execution and its configuration preservation was not retained.
@@ -37,7 +69,7 @@ execution and its configuration preservation was not retained.
 The same original explicit/natural/negative model requests then run once each on
 immutable installed .46 under that LIMITED token: all three PASS. Explicit loads
 core; natural loads full core and Blender before matching current capabilities;
-negative makes no guide/runtime attempt. Native model exits are zero. All68 payload
+negative makes no guide/runtime attempt. Native model exits are zero. All 68 payload
 files, token/session/user association, protected configuration/auth bytes and
 owned task removal are checked. This proves a successful execution context; it
 does not isolate Session0, token elevation, ACLs or another variable as the cause
@@ -45,7 +77,7 @@ of the earlier runner failure. TASK_VERIFIED remains NOT_RUN. No prompts, provid
 runtime operation guards, confidence thresholds or global configuration changed.
 
 Immutable .47 CI/install remain NOT_RUN at this source checkpoint. Windows GUI
-ownership coordination, complete identical pinned tasks/1000opportunities/correct
+ownership coordination, complete identical pinned tasks/1000 opportunities/correct
 OS-input p95/coverage/goodput, Reici and public guarded promotion remain outstanding.
 Original acceptance statuses and gates are unchanged. See the
 [executor/context receipt](validation/2026-10-14/codex-executor-context-0147.json).
@@ -471,14 +503,14 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
-| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .46 CI passes all fifteen builds and assembly; actual .45 -> .46 update, repeat CURRENT and real LIMITED desktop-token payload/CLI checks pass. Native installer logs independently prove the CI checks despite incomplete job-step metadata. The failed .43 root grant remains historical evidence. |
-| GUIDE-03 | Source .46 actual Hermes explicit/natural/negative cases pass once each. Actual OMP positive cases load guides but attempt denied writes and retain runtime-call errors; its unrelated Python case calls capabilities and fails over-trigger. Installed .46 Codex explicit has no runtime attempt or observable guide read; natural invokes current capabilities without observable full-body load/order; negative passes. Silent native provider-context injection remains NOT_PROVEN; the experimental raw-context route stops before a model turn because the native wire schema does not advertise the required event. Older route-specific HTTP401 is historical. |
+| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .47 CI passes all fifteen builds/install checks and assembly; actual .46 -> .47 update, repeat CURRENT and real LIMITED desktop-token payload/CLI checks pass. Unrelated configuration bytes and previous version files stay preserved. The failed .43 root grant remains historical evidence. |
+| GUIDE-03 | Source .46 actual Hermes explicit/natural/negative cases pass once each. Actual OMP positive cases load guides but attempt denied writes and retain runtime-call errors; its unrelated Python case calls capabilities and fails over-trigger. Installed .46 Codex under the real LIMITED desktop token passes all three original cases, with full core/Blender load before capabilities where applicable. Earlier SSH explicit attempts three guide reads but native runner pipe-in startup times out15seconds each, without JSON command events; earlier natural lacks observable full-body/order. Source .47 retains these native errors as explicit FAIL and preserves all earlier evidence. This successful context comparison does not isolate the runner's root cause. Silent provider-context injection and the unadvertised raw-context route remain separate visibility limits. Older route-specific HTTP401 is historical. |
 | GUIDE-04 | Installed .42 Windows Codex cached-to-fresh completion challenge PASS with independent incomplete receiver and cleanup. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN; one case does not establish general reliability. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
 | E2E-02 | Original browser .40 parser times out with38captions unfinished. Installed .46 completes its exact retained request offscreen in71.91seconds with52objects/38captions; original-at-task config is absent and later snapshots differ by activity_overlay, so this is component availability, not whole-task or quality equivalence. Actual Codex delivers Continue once but refuses Confirm at ACT0.6958 below0.9 despite the correct candidate/geometry. Actual installed .42 editor FAILS at its first parser timeout, zero actions; installed .44 completes the same retained parser request offscreen. Other-process Brave foreground ownership precedes cleanup; its actor and parallel desktop ownership remain unproven, so new desktop-input trials await coordination. |
 | PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
 | E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
-| RELEASE-01 | All fifteen immutable .46 CI artifacts and actual Windows .45 -> .46 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
+| RELEASE-01 | All fifteen immutable .47 CI artifacts and actual Windows .46 -> .47 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
 
 ## Actual Hermes verification correction, source 0.1.41
 

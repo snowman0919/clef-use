@@ -75,6 +75,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: installed_native_failure_consumer_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-14/codex-executor-context-0147.json
     section: actual_limited_native_model_batch
     claim: OBSERVED
@@ -255,6 +260,11 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
     section: installed_windows
     claim: OBSERVED
@@ -313,6 +323,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
     section: installed_windows
     claim: OBSERVED
@@ -474,6 +489,11 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
     section: limited_desktop_token
     claim: OBSERVED
@@ -555,6 +575,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: installed_native_failure_consumer_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-14/codex-executor-context-0147.json
     section: actual_limited_native_model_batch
     claim: OBSERVED
@@ -1272,6 +1297,11 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: ci
+    claim: OBSERVED
+    level: release_artifact
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
     section: ci
     claim: OBSERVED
