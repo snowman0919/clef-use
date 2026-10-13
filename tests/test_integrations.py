@@ -917,19 +917,6 @@ def test_yaml_updates_existing_block_entry_without_eating_next_server():
     assert "  # User's comment\n  other:\n    command:    'keep'\nafter:    'keep'\n" in updated
 
 
-def test_truncated_harness_result_requires_actual_guide_body(tmp_path):
-    guide = tmp_path / "SKILL.md"
-    text = "---\nname: clef-use\n---\n\n# Desktop operations\n\n" + "Bounded input. " * 100
-    guide.write_text(text)
-    escaped = json.dumps(text)[1:-1]
-    for content in (text, escaped):
-        output = json.dumps({"success": True, "content": content})[:400]
-        assert integrations._body_prefix_in_output(guide, output)
-    assert not integrations._body_prefix_in_output(
-        guide, '{"success": true, "name": "clef-use", "content": "clef-use"}'
-    )
-
-
 @pytest.mark.parametrize("harness", integrations.HARNESSES)
 def test_windows_executable_path_survives_harness_encoding(harness):
     command = "C:\\Users\\Local User\\\ud55c\uae00\\bin\\clef-use.exe"
@@ -1125,15 +1112,27 @@ def _controlled_verification(
         "lineCount": 10,
     }
     discovery = {"loaded": [loaded], "selected": [{"name": "clef-use", "filePath": str(skill)}]}
+    schemas = {name: tool_schemas()[name] for name in ("computer_capabilities", "computer_status")}
+    facade = {
+        "runtime_version": manifest["release"],
+        "schema_sha256": digest(schemas),
+        "schemas": schemas,
+        "tools": list(schemas),
+        "read_only_facade": True,
+        "guides": {"skills": {"clef-use": {"sha256": manifest["skills"]["clef-use"]["files"]}}},
+    }
+    native_payload = payload
+    if harness == "hermes" and (
+        adapter == "hermes_model" or integrations._tool_result_succeeded(payload)
+    ):
+        native_payload = facade
     native = [
         "CLEF_DISCOVERY:" + json.dumps(discovery),
         "CLEF_INVOKED:"
         + json.dumps(
             {
                 "tool": name,
-                "result": {"content": [], "isError": False}
-                if adapter == "hermes_model"
-                else payload,
+                "result": native_payload,
             }
         ),
     ]
@@ -1205,6 +1204,14 @@ def _controlled_verification(
                 }
             )
         elif harness == "hermes":
+            if (
+                isinstance(payload, dict)
+                and "content" in payload
+                and integrations._tool_result_succeeded(payload)
+            ):
+                # A real capability response carries the advertised runtime/schema
+                # and selected-guide digests; transport success alone is insufficient.
+                payload = facade
             events.append({"type": "tool_use", "tool_call_id": "invoke", "name": name, "input": {}})
             if attempt != "start":
                 events.append(
@@ -1237,8 +1244,44 @@ def _controlled_verification(
                 )
     scripts = home / "controlled-traces"
     scripts.mkdir(exist_ok=True)
+    transcript = {"id": "controlled_session", "messages": []}
+    if harness == "hermes":
+        for event in events:
+            if event["type"] == "tool_use":
+                transcript["messages"].append(
+                    {
+                        "id": len(transcript["messages"]),
+                        "role": "assistant",
+                        "tool_calls": [
+                            {
+                                "id": event["tool_call_id"],
+                                "function": {
+                                    "name": event["name"],
+                                    "arguments": json.dumps(event["input"]),
+                                },
+                            }
+                        ],
+                    }
+                )
+            elif event["type"] == "tool_result":
+                transcript["messages"].append(
+                    {
+                        "id": len(transcript["messages"]),
+                        "role": "tool",
+                        "tool_call_id": event["tool_call_id"],
+                        "tool_name": event["name"],
+                        "content": event["output"],
+                    }
+                )
+        events.insert(0, {"type": "system", "subtype": "init", "session_id": transcript["id"]})
+        events.append({"type": "result", "session_id": transcript["id"], "exit_code": 0})
     interpreter = scripts / "native-interpreter"
-    interpreter.write_text(f"#!{sys.executable}\nfor line in {native!r}: print(line)\n")
+    interpreter.write_text(
+        f"#!{sys.executable}\nimport sys,json\n"
+        f"if 'committed_venv' in ' '.join(sys.argv): print(json.dumps({transcript!r}))\n"
+        f"elif 'chat' in sys.argv:\n for event in {events!r}: print(json.dumps(event))\n"
+        f"else:\n for line in {native!r}: print(line)\n"
+    )
     interpreter.chmod(0o700)
     executable = scripts / harness
     catalog = {
@@ -1255,7 +1298,9 @@ if sys.argv[1:2] == ['app-server']:
   if request.get('id') == 1: print(json.dumps({{'id':1, 'result':{{}}}}), flush=True)
   elif request.get('id') == 2: print(json.dumps({catalog!r}), flush=True)
 elif sys.argv[1:2] == ['--print-runtime-command']:
- print(json.dumps([{str(interpreter)!r}, '-I', '-c', "import runpy; runpy.run_module('fixture')"]))
+ bootstrap = "import sys,runpy;sys.path.insert(0," + {str(scripts)!r}.__repr__() + ");"
+ bootstrap += "runpy.run_module('fixture')"
+ print(json.dumps([{str(interpreter)!r}, '-I', '-c', bootstrap]))
 elif sys.argv[1:2] == ['skills']:
  print('clef-use')
 else:

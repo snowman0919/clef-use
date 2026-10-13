@@ -255,6 +255,24 @@ Windows capture uses native GDI in a scoped per-thread physical coordinate conte
 
 Actual native Windows Codex verification separates discovery/load/invoke from GUI task success. A completed tool response with LOW_CONFIDENCE is a failed task, even when a prior click was correct. Retain allowed candidate rosters, independently measured physical target geometry and actual widget outcomes; do not lower confidence guards to turn invocation success into task success.
 
+Hermes live verification retains the native event stream and reads only its exact
+session through the installed harness's read-only session-export API. Complete
+guide bodies and runtime responses must match the stream's original bytes,
+session/call identities and managed contract. Native spillover is confined to the
+selected profile and call. A truncated preview, error, ambiguous call or unavailable
+export cannot prove invocation; unavailable complete evidence is NOT_RUN. Failed
+calls remain recorded even when a later capability call succeeds. Native catalog
+loading and model-trigger verification have separate stages.
+Hermes filters parent environment variables before spawning MCP servers. Verification
+sets the selected managed server's read-only flag in native in-memory registration,
+preserving on-disk configuration, authentication, model selection and the native CLI
+prompt. The live two-tool capability/status schema must match before model work
+starts. Parallel responses require a unique full-response or bounded-preview match;
+shared prefixes remain ambiguous. Any effectful tool attempt fails verification.
+This enforces the MCP scope, not a whole-process write sandbox: the native
+`skills` toolset also exposes `skill_manage`. Such an attempt fails the verifier;
+the reported session evidence must distinguish observed calls from permissions.
+
 The current Windows state provider combines native UI Automation evidence with
 the optional Blender provider. Its standard-library base-Python worker proves
 its actual PID at readiness and uses a 500 ms query timeout. Each result binds
@@ -269,8 +287,13 @@ separately registered TextPattern document range. TextEdit composition support
 alone does not establish this. No text content is read. These facts do not
 establish popup ownership, keymap state, global idle or Blender operation
 admission. Installed 0.1.39 verifies active composition refusal through InputIR
-but reproduces an unsafe legacy type bypass; the 0.1.40 correction requires
-separate installed validation.
+but reproduces an unsafe legacy type bypass. The immutable installed 0.1.40
+correction separately passes exact Unicode, four active-composition refusals,
+selection/deletion, Enter focus transition and independent abort/recovery checks.
+Its actual Codex GUI task still fails the unchanged mode-confidence gate, and
+the browser model task times out in parsing. Input delivery, task success and
+the 100ms performance gate remain separate. See the
+[installed receipt](../validation/2026-10-13/windows-installed-ci-0140.json).
 
 Windows model keyboard actions use the State Compiler and typed InputIR. A literal
 target must already match the writable focused control; typing never clicks a

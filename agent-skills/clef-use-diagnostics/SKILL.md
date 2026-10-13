@@ -8,6 +8,11 @@ metadata:
 
 # Diagnose clef-use without manufacturing success
 
+For an application-specific question, load the discovered core and application
+guides when available before interpreting supported operations. For Blender,
+including read-only menu assessment, load `clef-use-blender`. Diagnostics does
+not replace those workflow guides or establish operation support.
+
 Inspect real tool schemas and runtime versions first. Do not invent diagnostic
 commands from a roadmap. CLI help, existing doctor/version/status, current
 capabilities when advertised, and private runtime evidence are starting points.

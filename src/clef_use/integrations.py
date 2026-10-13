@@ -942,6 +942,86 @@ def _verification_prompt(trigger: str) -> str:
     return prompts[trigger]
 
 
+def _hermes_command(
+    executable: str,
+    cwd: Path,
+    path: Path | None,
+    transcript: bool = False,
+    read_only_entry: dict | None = None,
+) -> list:
+    launch = subprocess.run(
+        [executable, "--print-runtime-command"], cwd=cwd, capture_output=True, text=True, timeout=30
+    )
+    if launch.returncode:
+        raise ValueError("installed Hermes launcher cannot advertise its runtime command")
+    command = json.loads(launch.stdout)
+    if not isinstance(command, list) or len(command) != 4 or command[1:3] != ["-I", "-c"]:
+        raise ValueError("unsupported Hermes runtime command; native adapter not executed")
+    bootstrap = ast.parse(command[3])
+    call = bootstrap.body[-1]
+    if not (
+        isinstance(call, ast.Expr)
+        and isinstance(call.value, ast.Call)
+        and isinstance(call.value.func, ast.Attribute)
+        and call.value.func.attr == "run_module"
+    ):
+        raise ValueError("Hermes bootstrap entrypoint differs; native adapter not executed")
+    if read_only_entry is not None:
+        # Native Hermes filters parent environment variables before MCP spawn.
+        # Set the selected server's permission in its in-memory native config;
+        # retain the original CLI entrypoint, model, auth and generated prompt.
+        hook = f"""
+from tools import mcp_tool_discovery as _clef_discovery
+_clef_register = _clef_discovery.register_mcp_servers
+def _clef_read_only_register(servers):
+    selected = {{}}
+    if 'clef-use' in servers:
+        config = dict(servers['clef-use'])
+        if (config.get('command') != {read_only_entry["command"]!r}
+                or config.get('args', []) != {read_only_entry.get("args", [])!r}):
+            raise ValueError('selected native MCP entry changed before verification')
+        config['env'] = {{**config.get('env', {{}}), 'CLEF_USE_MCP_READ_ONLY': '1'}}
+        selected['clef-use'] = config
+    return _clef_register(selected)
+_clef_discovery.register_mcp_servers = _clef_read_only_register
+"""
+        bootstrap.body[-1:-1] = ast.parse(hook).body
+        command[3] = ast.unparse(bootstrap)
+    elif transcript:
+        # The ordinary bootstrap may finish a dependency update. Transcript reads
+        # use the same committed native environment without taking updater locks.
+        sources = [
+            node.args[1].value
+            for node in ast.walk(bootstrap)
+            if isinstance(node, ast.Call)
+            and isinstance(node.func, ast.Attribute)
+            and ast.unparse(node.func) == "sys.path.insert"
+            and len(node.args) == 2
+            and isinstance(node.args[0], ast.Constant)
+            and node.args[0].value == 0
+            and isinstance(node.args[1], ast.Constant)
+            and isinstance(node.args[1].value, str)
+        ]
+        if len(sources) != 1 or not Path(sources[0]).is_absolute():
+            raise ValueError("Hermes launcher did not identify one native source root")
+        command[3] = (
+            "import sys,site,runpy;from pathlib import Path;"
+            f"sys.path.insert(0,{sources[0]!r});"
+            "from pm.environments import committed_venv,site_packages;"
+            f"environment=committed_venv(Path({sources[0]!r}));"
+            "assert environment is not None;site.addsitedir(str(site_packages(environment)));"
+            f"runpy.run_path({str(path)!r},run_name='__main__')"
+        )
+    else:
+        if path is None:
+            raise ValueError("native Hermes probe path is required")
+        bootstrap.body[-1] = ast.parse(f"runpy.run_path({str(path)!r}, run_name='__main__')").body[
+            0
+        ]
+        command[3] = ast.unparse(bootstrap)
+    return command
+
+
 def _hermes_native(layout: dict, manifest: dict, executable: str, cwd: Path, result: dict) -> dict:
     script = r"""
 import hashlib, json
@@ -964,13 +1044,14 @@ for skill in catalog:
        'contentLoaded':view.get('success') and body in view.get('content',''),
        'source':view.get('_source_path')})
 print('CLEF_DISCOVERY:' + json.dumps({'loaded':loaded}), flush=True)
-config = load_config()['mcp_servers']['clef-use']
+config = dict(load_config()['mcp_servers']['clef-use'])
+config['env'] = {**config.get('env', {}), 'CLEF_USE_MCP_READ_ONLY':'1'}
 try:
     names = register_mcp_servers({'clef-use':config})
     name = mcp_prefixed_tool_name('clef-use','computer_capabilities')
     if name not in names: raise RuntimeError('native registry did not discover capability tool')
     tool = registry.get_entry(name)
-    payload = tool.handler({})
+    payload = tool.handler({'detail':True})
     if isinstance(payload,str): payload = json.loads(payload)
     print('CLEF_INVOKED:' + json.dumps({'tool':name,'result':payload}))
 finally:
@@ -979,33 +1060,7 @@ finally:
     path = layout["state"] / "verification-hermes-native.py"
     atomic_write(path, script)
     try:
-        # Ask this installed launcher for its exact isolated interpreter/bootstrap.
-        # Replace only the fixed entrypoint with our private native-library probe.
-        launch = subprocess.run(
-            [executable, "--print-runtime-command"],
-            cwd=cwd,
-            capture_output=True,
-            text=True,
-            timeout=30,
-        )
-        if launch.returncode:
-            raise ValueError("installed Hermes launcher cannot advertise its runtime command")
-        command = json.loads(launch.stdout)
-        if not isinstance(command, list) or len(command) < 4 or command[1:3] != ["-I", "-c"]:
-            raise ValueError("unsupported Hermes runtime command; native adapter not executed")
-        bootstrap = ast.parse(command[3])
-        call = bootstrap.body[-1]
-        if (
-            not isinstance(call, ast.Expr)
-            or not isinstance(call.value, ast.Call)
-            or not isinstance(call.value.func, ast.Attribute)
-            or call.value.func.attr != "run_module"
-        ):
-            raise ValueError("Hermes bootstrap entrypoint differs; native adapter not executed")
-        bootstrap.body[-1] = ast.parse(f"runpy.run_path({str(path)!r}, run_name='__main__')").body[
-            0
-        ]
-        command[3] = ast.unparse(bootstrap)
+        command = _hermes_command(executable, cwd, path)
         run = subprocess.run(
             command,
             cwd=cwd,
@@ -1045,6 +1100,12 @@ finally:
         {},
     )
     succeeded = _tool_result_succeeded(invoked.get("result"))
+    payload = _hermes_payload(json.dumps(invoked.get("result")), invoked.get("tool", ""))
+    read_only_scope = (
+        isinstance(payload, dict)
+        and payload.get("read_only_facade") is True
+        and _hermes_capability_agrees(payload, manifest, detail=True)
+    )
     stages = result["stages"]
     stages["DISCOVERED"] = {
         "status": "PASS" if set(loaded) == set(manifest["skills"]) else "NOT_RUN",
@@ -1067,10 +1128,14 @@ finally:
         native_exit_code=run.returncode,
         model_driven=False,
         method="installed Hermes native catalog/skill_view/MCP registry; no model task",
+        native_read_only_scope={
+            "status": "PASS" if read_only_scope else "FAIL",
+            "method": "native MCP server environment and live two-tool schema",
+        },
     )
     result["status"] = (
         "PASS"
-        if loaded and succeeded
+        if set(loaded) == set(manifest["skills"]) and succeeded and read_only_scope
         else "FAIL"
         if _tool_result_failed(invoked.get("result"))
         else "NOT_RUN"
@@ -1080,11 +1145,418 @@ finally:
     return result
 
 
+def _hermes_capability_agrees(payload: dict, manifest: dict, *, detail: bool) -> bool:
+    from .capabilities import digest, tool_schemas
+
+    expected = manifest["schema_sha256"]
+    if payload.get("read_only_facade") is True:
+        schemas = tool_schemas()
+        names = ("computer_capabilities", "computer_status")
+        expected = digest({name: schemas[name] for name in names})
+        if set(payload.get("tools", [])) != set(names):
+            return False
+    return (
+        payload.get("runtime_version") == manifest["release"]
+        and payload.get("schema_sha256") == expected
+        and all(
+            payload.get("guides", {})
+            .get("skills", {})
+            .get(skill, {})
+            .get("sha256", {})
+            .get("SKILL.md")
+            == item["files"]["SKILL.md"]
+            for skill, item in manifest["skills"].items()
+        )
+        and (
+            not detail
+            or isinstance(payload.get("schemas"), dict)
+            and digest(payload["schemas"]) == expected
+        )
+    )
+
+
+_HERMES_TRANSCRIPT_LIMIT = 10 * 1024 * 1024
+_HERMES_MODEL_TOOLS = (
+    "skill_view",
+    "mcp__clef_use__computer_capabilities",
+    "mcp__clef_use__computer_status",
+    # Native Hermes adds these read-only MCP protocol adapters to the catalog.
+    # They remain attempts/errors, but cannot prove product-tool invocation.
+    "mcp__clef_use__list_resources",
+    "mcp__clef_use__read_resource",
+    "mcp__clef_use__list_prompts",
+    "mcp__clef_use__get_prompt",
+)
+
+
+def _hermes_session_id(events: list[dict]) -> str:
+    initial = [e for e in events if e.get("type") == "system" and e.get("subtype") == "init"]
+    terminal = [e for e in events if e.get("type") == "result"]
+    if len(initial) != 1 or len(terminal) != 1:
+        raise ValueError("Hermes stream must identify one initial and terminal session")
+    session = initial[0].get("session_id")
+    if (
+        not isinstance(session, str)
+        or not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", session)
+        or terminal[0].get("session_id") != session
+    ):
+        raise ValueError("Hermes stream session identities disagree")
+    return session
+
+
+def _hermes_transcript(
+    layout: dict, executable: str, cwd: Path, events: list[dict], trigger: str
+) -> dict:
+    session = _hermes_session_id(events)
+    _safe(layout["config"].parent / "state.db")
+    path = layout["state"] / f"verification-{trigger}-transcript-reader.py"
+    script = f"""
+import inspect,json
+from pathlib import Path
+from hermes_state import SessionDB
+from hermes_state_portability import SessionPortabilityMixin
+db=SessionDB(db_path=Path({str(layout["config"].parent / "state.db")!r}),read_only=True)
+try:
+    db.assert_export_safe({session!r},max_messages=1000)
+    exported=db.export_session({session!r},include_inactive=True)
+    if not exported or exported['id']!={session!r}:
+        raise ValueError('selected native session absent')
+    data={{'id':exported['id'],'model':exported.get('model'),'messages':exported['messages'],
+          'provenance':{{'sessiondb_module':inspect.getfile(SessionDB),
+          'export_module':inspect.getfile(SessionPortabilityMixin),'read_only':True}}}}
+    encoded=json.dumps(data,ensure_ascii=True)
+    if len(encoded.encode())>{_HERMES_TRANSCRIPT_LIMIT}:
+        raise ValueError('native transcript exceeds bound')
+    print(encoded)
+finally:
+    db.close()
+"""
+    atomic_write(path, script)
+    try:
+        command = _hermes_command(executable, cwd, path, transcript=True)
+        run = subprocess.run(
+            command,
+            cwd=cwd,
+            env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+    finally:
+        path.unlink(missing_ok=True)
+    atomic_write(layout["state"] / f"verification-{trigger}-transcript.stderr", run.stderr)
+    if run.returncode or len(run.stdout.encode()) > _HERMES_TRANSCRIPT_LIMIT:
+        raise ValueError("installed Hermes read-only session export unavailable or exceeds bound")
+    transcript = json.loads(run.stdout)
+    archive = layout["state"] / f"verification-{trigger}-transcript.json"
+    atomic_write(archive, run.stdout)
+    return transcript
+
+
+def _hermes_payload(content: str, name: str, depth: int = 0):
+    """Decode complete native output, retaining errors at every envelope level."""
+    if depth >= 6:
+        return None
+    if not isinstance(content, str) or len(content.encode()) > _HERMES_TRANSCRIPT_LIMIT:
+        raise ValueError("Hermes response exceeds bound")
+    value = content
+    for _ in range(6):
+        if isinstance(value, str):
+            try:
+                value = json.loads(value)
+            except (ValueError, TypeError):
+                return None
+        elif isinstance(value, dict):
+            if _tool_result_failed(value):
+                return value
+            if "result" in value and set(value) <= {"result", "structuredContent", "_meta"}:
+                if "structuredContent" in value:
+                    structured = _hermes_payload(
+                        json.dumps(value["structuredContent"]), name, depth + 1
+                    )
+                    if structured is None or _tool_result_failed(structured):
+                        return structured
+                value = value["result"]
+            else:
+                return value or None
+        else:
+            return None
+    return None
+
+
+def _hermes_output_candidates(layout: dict, call: dict, message: dict) -> list[str]:
+    raw, name, identity = message.get("content"), call["name"], call["tool_call_id"]
+    if not isinstance(raw, str):
+        raise ValueError("Hermes canonical result content is invalid")
+    if raw.startswith("<untrusted_tool_result"):
+        if (
+            not raw.startswith(f'<untrusted_tool_result source="{name}">\n')
+            or not raw.endswith("\n</untrusted_tool_result>")
+            or "\n\n" not in raw
+        ):
+            raise ValueError("Hermes canonical result wrapper disagrees with tool")
+        raw = raw.split("\n\n", 1)[1].removesuffix("\n</untrusted_tool_result>")
+    spill = re.search(r"^Full output saved to: (.+)$", raw, re.M)
+    if spill:
+        expected = layout["config"].parent / "cache/spillover" / f"{identity}.txt"
+        path = Path(spill[1].strip())
+        if "<persisted-output>" not in raw or path != expected:
+            raise ValueError("Hermes spillover is outside the selected profile and call")
+        _safe(path)
+        if not path.is_file() or path.stat().st_size > _HERMES_TRANSCRIPT_LIMIT:
+            raise ValueError("Hermes spillover is absent or exceeds bound")
+        with path.open("rb") as stream:
+            value = stream.read(_HERMES_TRANSCRIPT_LIMIT + 1)
+        if len(value) > _HERMES_TRANSCRIPT_LIMIT:
+            raise ValueError("Hermes spillover exceeds bound")
+        raw = value.decode("utf-8")
+        if name.startswith("mcp__"):
+            # The native MCP handler envelopes losslessly persisted text.
+            return [raw, json.dumps({"result": raw}, ensure_ascii=False)]
+    return [raw]
+
+
+def _hermes_matching_outputs(output, candidates: list[str]) -> list[str]:
+    if not isinstance(output, str) or not output:
+        return []
+    return [
+        candidate
+        for candidate in candidates
+        if candidate == output
+        or len(output) == 5003
+        and output.endswith("...")
+        and len(candidate) > 5000
+        and candidate[:5000] == output[:5000]
+    ]
+
+
+def _hermes_model_evidence(
+    layout: dict, manifest: dict, events: list[dict], transcript: dict, trigger: str
+) -> dict:
+    session = _hermes_session_id(events)
+    if not isinstance(transcript, dict) or transcript.get("id") != session:
+        raise ValueError("Hermes exported session disagrees with native stream")
+    messages = transcript.get("messages")
+    if (
+        not isinstance(messages, list)
+        or len(messages) > 1000
+        or len(json.dumps(transcript).encode()) > _HERMES_TRANSCRIPT_LIMIT
+    ):
+        raise ValueError("Hermes canonical transcript exceeds bound")
+    calls, results, ordered, message_ids = {}, {}, [], set()
+    for message in messages:
+        if (
+            not isinstance(message, dict)
+            or type(message.get("id")) not in (str, int)
+            or message.get("id") == ""
+        ):
+            raise ValueError("Hermes canonical message identity is invalid")
+        if message["id"] in message_ids:
+            raise ValueError("Hermes canonical message identities are ambiguous")
+        message_ids.add(message.get("id"))
+        native_calls = message.get("tool_calls")
+        if native_calls is None:
+            native_calls = []
+        if isinstance(native_calls, str):
+            native_calls = json.loads(native_calls)
+        if not isinstance(native_calls, list) or (
+            native_calls and message.get("role") != "assistant"
+        ):
+            raise ValueError("Hermes calls must belong to an assistant message")
+        for call in native_calls:
+            if not isinstance(call, dict) or not isinstance(call.get("function"), dict):
+                raise ValueError("Hermes canonical call shape is invalid")
+            identity = call.get("id")
+            if (
+                not isinstance(identity, str)
+                or not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", identity)
+                or identity in calls
+                or call.get("call_id", identity) != identity
+            ):
+                raise ValueError("Hermes canonical call identities are ambiguous")
+            function = call.get("function", {})
+            name, arguments = function.get("name"), function.get("arguments", {})
+            if not isinstance(name, str):
+                raise ValueError("Hermes canonical tool name is invalid")
+            if isinstance(arguments, str):
+                arguments = json.loads(arguments)
+            if name == "tool_call":
+                inner = arguments.get("calls") if isinstance(arguments, dict) else None
+                if not isinstance(inner, list) or len(inner) != 1 or not isinstance(inner[0], dict):
+                    raise ValueError("Hermes aggregate tool call cannot be linked unambiguously")
+                name, arguments = inner[0].get("name"), inner[0].get("arguments")
+            if not isinstance(name, str) or not isinstance(arguments, dict):
+                raise ValueError("Hermes canonical tool arguments are invalid")
+            calls[identity] = {"tool_call_id": identity, "name": name, "arguments": arguments}
+            if name in _HERMES_MODEL_TOOLS:
+                ordered.append(calls[identity])
+        if message.get("role") == "tool":
+            identity = message.get("tool_call_id")
+            if (
+                identity not in calls
+                or identity in results
+                or message.get("tool_name") != calls[identity]["name"]
+            ):
+                raise ValueError("Hermes canonical result has no unique matching native call")
+            results[identity] = message
+    loaded, invoked, attempted, failed_calls, responses = [], [], [], [], []
+    response_bytes = cached_bytes = 0
+    output_cache = {}
+
+    def outputs(call):
+        nonlocal cached_bytes
+        identity = call["tool_call_id"]
+        if identity not in output_cache:
+            if identity not in results:
+                raise ValueError("Hermes canonical response is absent")
+            values = _hermes_output_candidates(layout, call, results[identity])
+            cached_bytes += sum(len(value.encode()) for value in values)
+            if cached_bytes > _HERMES_TRANSCRIPT_LIMIT:
+                raise ValueError("Hermes recovered response candidates exceed bound")
+            output_cache[identity] = values
+        return output_cache[identity]
+
+    pending, position, completed, any_gui_guide = {}, 0, set(), False
+    for event in events:
+        name, kind = event.get("name"), event.get("type")
+        if name not in _HERMES_MODEL_TOOLS or kind not in ("tool_use", "tool_result"):
+            continue
+        if kind == "tool_use":
+            if position >= len(ordered):
+                raise ValueError("Hermes stream call is absent from selected native session")
+            call = ordered[position]
+            position += 1
+            if (
+                name != call["name"]
+                or event.get("input") != call["arguments"]
+                or event.get("tool_call_id", call["tool_call_id"]) != call["tool_call_id"]
+            ):
+                raise ValueError("Hermes stream call identity or arguments disagree")
+            pending.setdefault(name, []).append(call)
+            if name.startswith("mcp__") and name not in attempted:
+                attempted.append(name)
+            if name == "skill_view" and event["input"].get("name") in (
+                "computer-use",
+                *SKILLS.values(),
+            ):
+                any_gui_guide = True
+            continue
+        waiting = pending.get(name, [])
+        if not waiting:
+            raise ValueError("Hermes stream result has no matching call")
+        if event.get("tool_call_id"):
+            candidates = [c for c in waiting if c["tool_call_id"] == event["tool_call_id"]]
+        elif len(waiting) == 1:
+            candidates = waiting
+        else:
+            # Match bytes against every complete, identity-bound native result.
+            # Shared prefixes remain ambiguous; never guess FIFO completion.
+            candidates = [
+                c for c in waiting if _hermes_matching_outputs(event.get("output"), outputs(c))
+            ]
+        if len(candidates) != 1:
+            raise ValueError("Hermes concurrent stream result identities are ambiguous")
+        call = candidates[0]
+        waiting.remove(call)
+        identity = call["tool_call_id"]
+        if (
+            event.get("tool_call_id", identity) != identity
+            or identity in completed
+            or identity not in results
+        ):
+            raise ValueError("Hermes stream result identities disagree")
+        completed.add(identity)
+        matched = _hermes_matching_outputs(event.get("output"), outputs(call))
+        if len(matched) != 1:
+            raise ValueError("Hermes canonical response disagrees with native stream bytes")
+        raw = matched[0]
+        response_bytes += len(raw.encode())
+        if response_bytes > _HERMES_TRANSCRIPT_LIMIT:
+            raise ValueError("Hermes recovered responses exceed total bound")
+        payload = _hermes_payload(raw, name)
+        responses.append({"tool_call_id": identity, "tool": name, "content": raw})
+        if event.get("is_error") or _tool_result_failed(payload):
+            failed_calls.append(
+                {"tool_call_id": identity, "tool": name, "response_sha256": _hash(raw.encode())}
+            )
+            continue
+        if name == "skill_view":
+            skill = call["arguments"].get("name")
+            if (
+                skill in manifest["skills"]
+                and not call["arguments"].get("file_path")
+                and isinstance(payload, dict)
+            ):
+                path = layout["root"] / skill / "SKILL.md"
+                body = path.read_text().split("---", 2)[-1].strip()
+                if (
+                    payload.get("success") is True
+                    and payload.get("_source_path") == str(path.resolve())
+                    and _hash(path.read_bytes()) == manifest["skills"][skill]["files"]["SKILL.md"]
+                    and body in payload.get("content", "")
+                ):
+                    loaded.append(skill)
+        elif name.endswith("computer_capabilities") and isinstance(payload, dict):
+            if _hermes_capability_agrees(
+                payload, manifest, detail=bool(call["arguments"].get("detail"))
+            ):
+                invoked.append(name)
+        elif name.endswith("computer_status") and _tool_result_succeeded(payload):
+            invoked.append(name)
+    if position != len(ordered) or any(call["tool_call_id"] not in completed for call in ordered):
+        raise ValueError("Hermes canonical and stream call inventories disagree")
+    expected = (
+        "clef-use-blender"
+        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
+        else "clef-use"
+    )
+    violations = list(
+        dict.fromkeys(
+            name
+            for name in [
+                *(
+                    event.get("name")
+                    for event in events
+                    if event.get("type") in {"tool_use", "tool_result"}
+                ),
+                *(call["name"] for call in calls.values()),
+            ]
+            if isinstance(name, str)
+            and (
+                name == "skill_manage"
+                or name.startswith("mcp__clef_use__")
+                and name not in _HERMES_MODEL_TOOLS
+            )
+        )
+    )
+    passed = not violations and (
+        not any_gui_guide and not attempted
+        if trigger == "negative"
+        else expected in loaded and bool(invoked) and not failed_calls
+    )
+    return {
+        "case": trigger,
+        "session_id": session,
+        "status": "PASS" if passed else "FAIL",
+        "loaded": loaded,
+        "invoked": invoked,
+        "attempted": attempted,
+        "failed_calls": failed_calls,
+        "read_only_violations": violations,
+        "stages": _model_stages(loaded, invoked, bool(failed_calls)),
+        "_responses": responses,
+    }
+
+
 def _verify_hermes(
     layout: dict, manifest: dict, executable: str, cwd: Path, result: dict, trigger: str
 ) -> dict:
     result = _hermes_native(layout, manifest, executable, cwd, result)
     if trigger == "native":
+        return result
+    if result["native_read_only_scope"]["status"] != "PASS":
+        result["status"] = "FAIL"
+        result["reason"] = "native Hermes read-only MCP scope was not proven; model not started"
         return result
     environment = {**os.environ, "CLEF_USE_MCP_READ_ONLY": "1", "NO_COLOR": "1", "COLUMNS": "200"}
     listed = subprocess.run(
@@ -1116,8 +1588,8 @@ def _verify_hermes(
         return result
     prompt = _verification_prompt(trigger)
     run = subprocess.run(
-        [
-            executable,
+        _hermes_command(executable, cwd, None, read_only_entry=manifest["mcp_entry"])
+        + [
             "chat",
             "--oneshot",
             "--format",
@@ -1144,92 +1616,62 @@ def _verify_hermes(
     trace = layout["state"] / f"verification-{trigger}-trace.jsonl"
     atomic_write(trace, run.stdout)
     atomic_write(trace.with_suffix(".stderr"), run.stderr)
-    result.update(trace=str(trace), exit_code=run.returncode, model_driven=True)
-    loaded = []
-    invoked = []
-    attempted = []
-    failed = False
-    calls = {}
-    for event in events:
-        selected_tool = event.get("name") in (
-            "mcp__clef_use__computer_capabilities",
-            "mcp__clef_use__computer_status",
+    result.update(
+        trace=str(trace),
+        exit_code=run.returncode,
+        model_driven=True,
+        native_method=result.get("method"),
+        method=(
+            "installed Hermes native catalog/MCP registry + model CLI and canonical transcript; "
+            "in-memory read-only MCP permission overlay"
+        ),
+    )
+    try:
+        transcript = _hermes_transcript(layout, executable, cwd, events, trigger)
+        evidence = _hermes_model_evidence(layout, manifest, events, transcript, trigger)
+        responses = evidence.pop("_responses")
+        archive = layout["state"] / f"verification-{trigger}-canonical-results.json"
+        atomic_write(archive, json.dumps(responses, ensure_ascii=True))
+        evidence["canonical_transcript"] = {
+            "method": "installed Hermes SessionDB(read_only=True).export_session",
+            "transcript_sha256": _hash(json.dumps(transcript, sort_keys=True).encode()),
+            "responses_sha256": _hash(archive.read_bytes()),
+            "response_count": len(responses),
+        }
+        if run.returncode:
+            evidence["status"] = "NOT_RUN"
+    except (ValueError, OSError, KeyError, TypeError, subprocess.TimeoutExpired):
+        negative_attempt = trigger == "negative" and any(
+            event.get("type") == "tool_use"
+            and (
+                str(event.get("name", "")).startswith("mcp__clef_use__")
+                or event.get("name") == "skill_manage"
+                or event.get("name") == "skill_view"
+                and isinstance(event.get("input"), dict)
+                and event["input"].get("name") in ("computer-use", *SKILLS.values())
+            )
+            for event in events
         )
-        if selected_tool and event.get("type") in ("tool_use", "tool_result"):
-            if event["name"] not in attempted:
-                attempted.append(event["name"])
-            failed |= event.get("type") == "tool_result" and bool(event.get("is_error"))
-        key = event.get("tool_call_id", event.get("name"))
-        if event.get("type") == "tool_use":
-            calls.setdefault(key, []).append(event)
-            continue
-        if event.get("type") != "tool_result" or event.get("is_error"):
-            continue
-        pending = calls.get(key, [])
-        call = pending.pop(0) if pending else {}
-        if event.get("name") == "skill_view":
-            try:
-                payload = json.loads(event.get("output", ""))
-            except json.JSONDecodeError:
-                # Hermes caps tool outputs at 5000 characters. A successful body-read
-                # prefix plus the exact native catalog provenance proves a load,
-                # while a name echo or a file-existence check never does.
-                name = call.get("input", {}).get("name")
-                output = event.get("output", "")
-                if (
-                    name in manifest["skills"]
-                    and not call.get("input", {}).get("file_path")
-                    and '"success": true' in output
-                    and _body_prefix_in_output(layout["root"] / name / "SKILL.md", output)
-                    and result["stages"]["LOADED"]["status"] == "PASS"
-                ):
-                    loaded.append(name)
-                continue
-            name = call.get("input", {}).get("name")
-            expected = str((layout["root"] / str(name) / "SKILL.md").resolve())
-            if (
-                name in manifest["skills"]
-                and payload.get("success")
-                and payload.get("_source_path") == expected
-                and payload.get("content")
-            ):
-                loaded.append(name)
-        if selected_tool:
-            try:
-                payload = json.loads(event.get("output", ""))
-            except json.JSONDecodeError:
-                continue
-            failed |= _tool_result_failed(payload)
-            if _tool_result_succeeded(payload):
-                invoked.append(event["name"])
-    expected = (
-        "clef-use-blender"
-        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
-        else "clef-use"
-    )
-    any_gui_guide = any(
-        event.get("type") == "tool_use"
-        and event.get("name") == "skill_view"
-        and event.get("input", {}).get("name") in ("computer-use", *SKILLS.values())
-        for event in events
-    )
-    passed = (
-        not any_gui_guide and not attempted
-        if trigger == "negative"
-        else expected in loaded and bool(invoked)
-    )
-    result["model_trigger_verification"] = {
-        "case": trigger,
-        "status": "PASS"
-        if passed and run.returncode == 0
-        else "NOT_RUN"
-        if run.returncode
-        else "FAIL",
-        "loaded": loaded,
-        "invoked": invoked,
-        "attempted": attempted,
-        "stages": _model_stages(loaded, invoked, failed),
-    }
+        evidence = {
+            "case": trigger,
+            # A forbidden attempt disproves a negative trigger even if its
+            # result/export is incomplete; incompleteness cannot erase it.
+            "status": "FAIL" if negative_attempt else "NOT_RUN",
+            "loaded": [],
+            "invoked": [],
+            "attempted": list(
+                dict.fromkeys(
+                    e["name"]
+                    for e in events
+                    if e.get("type") == "tool_use" and e.get("name") in _HERMES_MODEL_TOOLS[1:]
+                )
+            ),
+            "stages": _model_stages([], [], False),
+            "reason": (
+                "complete linked native Hermes transcript unavailable; inspect private evidence"
+            ),
+        }
+    result["model_trigger_verification"] = evidence
     if result["model_trigger_verification"]["status"] == "FAIL":
         result["status"] = "FAIL"
     elif result["model_trigger_verification"]["status"] == "NOT_RUN":
@@ -1237,20 +1679,6 @@ def _verify_hermes(
     if run.returncode:
         result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
     return result
-
-
-def _body_prefix_in_output(path: Path, output: str) -> bool:
-    """Recognize actual guide text when a harness truncates its JSON tool result."""
-    source = path.read_text()
-    heading = source.find("\n# ")
-    if heading < 0:
-        return False
-    # Include frontmatter and body, rather than accepting a skill name echo.
-    prefix = source[: heading + 180]
-    escaped = json.dumps(prefix, ensure_ascii=False)[1:-1]
-    # Hermes stream-json may escape the rendered content before serializing it.
-    twice = json.dumps(escaped, ensure_ascii=False)[1:-1]
-    return f'"content": "{escaped}' in output or f'"content": "{twice}' in output
 
 
 def _model_stages(loaded: list[str], invoked: list[str], failed: bool) -> dict:

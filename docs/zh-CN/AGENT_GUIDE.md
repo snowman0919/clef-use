@@ -225,7 +225,24 @@ focus identity 还绑定 UIA runtime ID 与物理 bounds。可编辑状态必须
 non-password 属性，以及单独注册的 TextPattern document range 返回的 Boolean
 IsReadOnly。仅支持 TextEdit 不足以证明，且不读取文本内容。这不证明 popup 所有权、
 keymap、全局 idle 或 Blender operation admission。installed 0.1.39 已分别验证 InputIR
-拒绝活动组合以及危险的 legacy type bypass；0.1.40 修正仍需单独进行安装版验证。
+拒绝活动组合以及危险的 legacy type bypass。另行验证的 immutable 安装版 0.1.40
+通过了准确 Unicode、活动组合时四条路径的拒绝、选择和删除、Enter 焦点转移及独立
+abort 和恢复。实际 Codex GUI 任务仍未通过原有 mode-confidence 门槛，browser model
+任务因 parser timeout 失败。输入到达、任务成功和 100ms 性能门槛必须分别记录。
+参见[安装版证据](../validation/2026-10-13/windows-installed-ci-0140.json)。
+
+Hermes 在启动 MCP 时过滤父环境变量。验证在选定受管服务器的 native 内存注册中
+设置只读权限，保留磁盘配置、认证、模型选择及 native CLI prompt。模型执行前必须
+确认实际 capability/status 两个工具的 schema。并发响应必须与完整响应或有限 preview
+唯一匹配；相同 prefix 仍视为歧义。任何有副作用的工具尝试都会导致验证失败。
+此限制仅适用于 MCP。native `skills` toolset 仍包含 `skill_manage`，因此不能证明
+整个进程禁止写入。此工具尝试会使验证失败；证据必须区分观测到的调用与实际权限。
+
+Hermes live 验证保留 native event stream，并通过安装版 harness 的只读 session
+export API 仅读取对应会话。完整 guide 正文和 runtime 响应必须与原始 stream 字节、
+session/call ID 和管理 contract 一致；spillover 仅限选定 profile 和 call。截断
+preview、错误或不明确的 call 不能证明调用成功；无法获取完整 export 时为 `NOT_RUN`。
+后续调用成功也保留前面的失败，并区分 native catalog load 与 model trigger 阶段。
 
 Windows model keyboard action 经过 State Compiler 与 InputIR。文字 target 必须已是
 获得 focus 且可编辑的 control，type 不再隐式点击输入框。IME、identity 或可编辑状态

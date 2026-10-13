@@ -254,8 +254,27 @@ Windows 캡처는 스레드별 물리 좌표 context 안에서 native GDI를 사
 document range에서 읽은 명시적인 Boolean IsReadOnly 근거가 있어야 확정합니다.
 TextEdit 지원만으로 이를 확정하지 않으며 문자 내용은 읽지 않습니다. 이 사실은 popup
 소유권, keymap, 전체 유휴 여부나 Blender operation admission을 증명하지 않습니다.
+Hermes live 검증은 native event stream을 보존하고, 설치된 하네스의 읽기 전용 session
+export API로 정확히 해당 세션만 읽습니다. 전체 guide 본문과 runtime 응답은 원본
+stream 바이트, session·call 식별자, 관리 contract와 일치해야 합니다. spillover는 선택한
+profile과 call에 한정합니다. 잘린 preview·오류·모호한 call은 호출 성공 근거가 아니며,
+전체 export를 확인할 수 없으면 `NOT_RUN`입니다. 뒤의 호출이 성공해도 앞선 실패를
+보존하고, native catalog load와 모델 trigger 검증 단계를 구분합니다.
+Hermes는 MCP 실행 때 부모 환경 변수를 걸러냅니다. 검증은 선택한 관리 서버의
+native 메모리 등록에 읽기 전용 설정을 적용하고, 디스크 설정·인증·모델 선택·native
+CLI prompt를 보존합니다. 모델 실행 전에 실제 capability/status 두 도구의 schema가
+일치해야 합니다. 동시 응답은 전체 응답이나 제한된 preview가 유일하게 일치해야 하며,
+동일한 prefix는 모호한 상태로 남깁니다. 효과를 발생시키는 도구 시도는 검증 실패입니다.
+이는 MCP 범위의 제한입니다. native `skills` toolset에는 `skill_manage`도 있으므로
+전체 프로세스의 쓰기 차단을 증명하지 않습니다. 해당 도구 시도는 검증 실패이며,
+실제 관측한 호출과 허용 권한을 구분해 기록합니다.
+
 설치된 0.1.39는 InputIR의 활성 조합 거절을 검증했지만 일반 type 우회도 재현했습니다.
-0.1.40 수정본의 설치 검증은 별도로 필요합니다.
+별도의 immutable 설치본 0.1.40에서 정확한 Unicode, 활성 조합 중 네 경로의 입력 거절,
+선택·삭제, Enter 포커스 전환, 독립 abort·복구 검증이 통과했습니다. 실제 Codex GUI
+작업은 기존 실행 모드 확률 기준에서 실패했고, 브라우저 모델 작업은 parser timeout으로
+실패했습니다. 입력 전달·작업 성공·100ms 성능 기준은 구분합니다.
+[설치본 근거](../validation/2026-10-13/windows-installed-ci-0140.json)를 확인하세요.
 
 Windows 모델 키보드 입력은 State Compiler와 InputIR를 거칩니다. 문자 대상은 이미
 포커스된 편집 가능한 컨트롤과 일치해야 하며, type이 입력란을 암묵적으로 클릭하지

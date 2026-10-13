@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Validate Hermes model calls against the complete native read-only session
+  export, bound to stream session/call identities and original response bytes.
+  Recover only confined native spillover files; retain truncated/error/ambiguous
+  evidence and failed calls instead of treating previews as successful results.
+- Enforce Hermes verification's read-only MCP scope through native in-memory
+  registration and require the actual two-tool schema before model execution.
+  Resolve parallel stream results only by unique identity-bound response bytes.
+- Record immutable 0.1.40 Windows installation and native input/recovery passes
+  separately from failed Codex mode judgement and browser parser timeout.
+
 - Close the observed Windows legacy typing/IME bypass. Route model keyboard
   actions through compiled focused-control identity, explicit TextPattern
   writability and live InputIR guards; refuse missing context without an

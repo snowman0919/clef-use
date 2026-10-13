@@ -256,7 +256,29 @@ enabled・non-password 属性と、別途登録された TextPattern の documen
 Boolean IsReadOnly が必要です。TextEdit 対応だけでは確定せず、文字内容は読みません。
 popup 所有状態、keymap、全体の idle、Blender operation admission は証明しません。
 installed 0.1.39 では InputIR の active composition 拒否と危険な legacy type bypass を
-別々に再現しました。0.1.40 修正の installed 検証は別途必要です。
+別々に再現しました。別の immutable installed 0.1.40 では正確な Unicode、
+活動中の composition に対する四経路の拒否、選択・削除、Enter のフォーカス移動、
+独立 abort・復旧が通過しました。実際の Codex GUI 作業は既存の mode-confidence
+基準で失敗し、browser model 作業は parser timeout で失敗しました。入力の到達、
+作業成功、100ms 性能基準を区別します。
+[installed 証拠](../validation/2026-10-13/windows-installed-ci-0140.json)を参照してください。
+
+Hermes は MCP 起動時に親環境変数を除去します。検証では選択した管理サーバーの
+native メモリ登録に読み取り専用設定を適用し、ディスク設定、認証、モデル選択、
+native CLI prompt を保持します。モデル実行前に実際の capability/status 二ツールの
+schema 一致を確認します。同時応答には全文または限定 preview の一意な一致が必要です。
+共通 prefix は曖昧なまま扱い、副作用を伴うツールの試行は検証失敗になります。
+この制限は MCP の範囲です。native `skills` toolset は `skill_manage` も公開するため、
+プロセス全体の書き込み禁止を証明しません。この試行は検証失敗となり、観測した
+呼び出しと権限を区別して記録します。
+
+Hermes live 検証は native event stream を保持し、installed harness の読み取り専用
+session export API で同じセッションだけを読みます。guide 全文と runtime 応答は
+元の stream バイト、session/call ID、管理 contract と一致する必要があります。
+spillover は選択した profile と call に限定します。切れた preview、エラー、曖昧な
+call は成功の証拠ではありません。完全な export が利用できなければ `NOT_RUN` です。
+後の呼び出しが成功しても先の失敗を保持し、native catalog と model trigger の段階を
+区別します。
 
 Windows の model keyboard action は State Compiler と InputIR を経由します。文字の
 target は既に focus された編集可能な control と一致する必要があり、type は暗黙の

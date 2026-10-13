@@ -1,5 +1,136 @@
 # Reactive runtime execution status
 
+## Current unfinished acceptance checks, 2026-10-13
+
+The goal remains active. Original statuses are 34 PASS / 3 FAIL / 7 NOT_RUN;
+component passes below do not close whole-task requirements. Authentication is
+not the current cause of the executed Codex, Hermes or OMP model results.
+
+| Acceptance ID | Current evidence and exact remaining condition |
+| --- | --- |
+| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Current OMP explicit/unrelated cases exhaust the 90-second model budget and the natural case omits the required guide. Complete the three actual OMP cases; older route-specific HTTP 401 is historical. |
+| GUIDE-04 | Cache/freshness consumer fixtures exist; an actual harness misuse challenge remains NOT_RUN. A fresh observation in a successful invocation does not prove refusal of stale input/completion evidence. |
+| INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
+| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Independent editor whole-task success remains NOT_RUN for this installation. |
+| PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
+| E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
+| RELEASE-01 | All fifteen immutable .40 CI artifacts and actual Windows update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
+
+## Actual Hermes verification correction, source 0.1.41
+
+**OBSERVED:** native stream output truncates large tool responses to 5000 characters
+plus an ellipsis, and concurrent same-name calls omit result IDs. The verifier now
+recovers the complete read-only native session, binds exact session/call/argument
+inventories and uniquely matches response bytes. Confined spillover is bounded;
+shared prefixes, altered/truncated responses and failed calls cannot pass. The
+retained diagnostics pressure session now proves all three full guide loads and
+two successful capability responses without rerunning the model. It did not prove
+server-enforced read-only scope: native Hermes filters the parent's environment.
+
+The correction sets the selected unchanged managed MCP entry's read-only flag
+through native in-memory registration. It preserves disk configuration, native
+CLI entrypoint/generated prompt, authentication and selected model. Native live
+discovery must prove the actual capability/status two-tool schema before model
+execution. New actual explicit, natural Blender and unrelated-request model
+sessions each PASS with this scope; no effectful tool attempt is observed. These
+are one sample per case, not a measured trigger reliability or Windows installed
+release claim. A separate explicit diagnostics pressure run reads all three guides
+and invokes capabilities, but its status lookup returns `runtime service is not
+running`; the overall result remains FAIL. Native generated resource/prompt
+adapters are read-only protocol calls, not product invocation proof. Failed
+protocol calls still fail verification. See the
+[actual harness receipt](validation/2026-10-13/hermes-canonical-verification-0141.json).
+The native `skills` toolset also exposes `skill_manage`; native CLI/config cannot
+select only its two reading tools. This overlay enforces the MCP scope, not a
+whole-process write sandbox. Any native skill-management attempt in stream or
+canonical history fails verification. None is observed in the recorded sessions.
+Review additionally reproduced pending-tail and canonical-only omitted-effectful
+false passes; the final scorer rejects both and preserves their regression cases.
+
+## Actual installed Windows 0.1.40 on 2026-10-13
+
+**OBSERVED / immutable CI and installation:** commit `7e744c5` produced 15
+successful build/installation jobs and the assembled release-site artifact in
+run `38391697986`. All 15 archives match all 68 tracked/force-included product
+payload files, including the three guides, schemas and license notices. The
+actual Windows installation updated from 0.1.39 to 0.1.40, matches those 68
+payload hashes and refreshes the previously managed Codex command. Repeat update
+returns CURRENT. Unrelated configuration, unrelated Codex bytes and prior version
+files remain preserved. Feature-branch public deployment is SKIPPED. The SSH
+Session 0 doctor correctly reports no interactive desktop; the following native
+checks execute separately in the signed-in desktop session.
+
+**OBSERVED / installed keyboard and independent recovery:** the compiled generic
+route inserts the exact six-UTF16-unit fixture literal. Four active-IME refusal
+routes preserve the positive two-byte preedit and existing editor text with zero
+forwarded send calls. Native Ctrl+A selection, Backspace empty readback and a
+single acknowledged Enter callback moving focus to the second owned RichEdit
+pass. IMM/layout restoration, keys, worker/guardian, windows, foreground and
+scheduled-task cleanup pass. Left/right/middle buttons, three bounded gestures,
+blocked-injector cancellation and terminated-worker guardian recovery also pass.
+A separate installed CLI abort releases held Shift/middle input while the
+injector remains blocked and its lease is unexpired. Suspending every worker
+thread leaves its heartbeat unchanged; the independent guardian releases input
+at the six-second deadline before resume, EOF or parent release. After resume,
+the worker observes cancellation and refuses further input.
+
+**OBSERVED / default Blender state connection:** the actual runtime factory wraps
+the live collector's BlenderStateProvider in WindowsStateProvider. Eleven bound
+application facts reach the State Compiler. Unsupported custom Blender UI yields
+zero native UIA facts; eight dispatch facts remain UNKNOWN. All six registered
+operation families remain BLOCKED with input_count=0, and wrong-foreground
+sampling is refused. This proves the installed connection and guards, not
+successful menu/transform/property/viewport input. Owned Blender/UIA worker,
+pointer, foreground and task cleanup pass. Native installed GDI lifetime and
+observer transport regressions pass 12 tests with zero skips or failures.
+
+**OBSERVED / browser component and actual Codex task:** an owned real Chrome
+profile using `--force-renderer-accessibility` accepts the exact fixture literal
+through UIA/compiler/generic native input, independently verified by a nonce-bound
+DOM beacon. This input component is separate from model-task completion. In the
+actual native Codex GUI task, guide load, schema discovery and invocation pass.
+Continue is delivered once, but Confirm is refused: action confidence is 0.928
+and the separate ACT-mode confidence is 0.6958, below the unchanged 0.9 gate.
+Independent readback remains stage 1 with Confirm visible and no Task complete.
+Both actual packets retain the correct target among three nonuniform candidates;
+their geometry matches independent widget bounds. This failure is mode judgement,
+not candidate omission/flattening or authentication. All owned cleanup and global
+configuration preservation pass. Initial browser provenance/accessor fixture
+failures are retained separately; neither started model execution or task input.
+
+The [installed 0.1.40 receipt](validation/2026-10-13/windows-installed-ci-0140.json)
+contains whitelisted facts and private artifact digests. Literal wall times and
+forwarded method counts do not establish state-change-to-correct-input p95,
+prospective fast-path eligibility coverage or pinned whole-task accuracy.
+Original acceptance statuses and numeric release gates remain unchanged.
+
+**OBSERVED / actual browser model task FAIL:** a separate installed default
+Omni/CLEF factory executes the original E2E-02 semantic contract, entering exact
+123 in Text input and clicking Save once, at threshold 0.9/max_steps 5. Native
+focus, identity, writability and idle-IME facts are VALID before the task.
+The first parser call times out: runtime ERROR, zero decisions/actions/forwarded
+send calls, parser 194078.960ms and whole-task wall 194.131s. Independent DOM Save
+readback is absent; false completion is false. Model workers, owned browser,
+loopback server, inputs and previous foreground are cleaned up. This is an actual
+failed task, separate from successful browser input delivery. The original
+attempt did not archive startup-versus-inference failure state or worker stderr;
+the exact preserved image request is retained for a separate read-only diagnostic
+replay. Different OS/rendering prevents treating it as a paired Linux baseline.
+
+**OBSERVED / parser diagnostic separation:** the identical preserved request's
+canonical read-only replay becomes ready in 10.536s, then its inference receive
+exceeds the unchanged 180s backend timeout. A separate direct native stage probe
+records OCR 14 regions in 34.077s, detection 87 in 3.829s and fusion 52 objects;
+captioning starts with 38 regions and does not finish before timeout. Neither
+diagnostic sends desktop input. A single CPU batch-one feasibility attempt keeps
+the same model/dtype/processor/generation parameters and request bytes, completes
+19 of 38 generations and also times out. It is rejected without a production
+change. Exact baseline boxes were not saved, so full-roster/output equivalence,
+five alternating warm comparisons and an improvement claim remain NOT_RUN.
+Foreground-only cropping is also rejected before implementation: native menus
+can extend outside their owner window, losing structured candidates and public
+observation coverage. No candidate, timeout or confidence gate is weakened.
+
 ## Recovery execution resumed on 2026-10-13
 
 The user resumes the existing goal, authorizes Windows E2E and normal deployment,
@@ -937,6 +1068,12 @@ is committed separately as `1e42658`. After that correction the full suite passe
 gates are unchanged. New installation/E2E/model-quality checks are `NOT_RUN`
 under the current session boundary. See
 [component evidence](validation/2026-10-11/literal-candidate-alternatives.json).
+
+### Historical boundary assessment before Windows recovery
+
+The following table records the earlier scope and route state. Its authentication
+and other-session ownership entries are historical; the current table at the top
+supersedes them. Windows E2E is now authorized in this session.
 
 The overall stop was not justified by the recorded failures. Unimplemented
 production observation and failed model decisions are engineering work, not proof

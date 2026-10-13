@@ -75,6 +75,10 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: hermes
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.omp_actual_model
     claim: OBSERVED
@@ -168,6 +172,10 @@ scenarios:
   requirement: Existing five tools and goal-only contracts retain backward compatibility.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: source_regression
     claim: OBSERVED
@@ -199,6 +207,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: installed_windows
     claim: OBSERVED
@@ -228,6 +240,10 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: installed_windows
     claim: OBSERVED
@@ -352,6 +368,10 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: installed_windows
     claim: OBSERVED
@@ -404,6 +424,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: codex_gui
     claim: OBSERVED
@@ -440,6 +464,10 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: hermes
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.harnesses
     claim: OBSERVED
@@ -455,6 +483,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: omp_current_0140
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.omp_actual_model
     claim: OBSERVED
@@ -523,6 +555,10 @@ scenarios:
   requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: owned_browser_component
     claim: OBSERVED
@@ -576,6 +612,10 @@ scenarios:
     surfaces.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: pointer_and_recovery
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: source_native_pointer_and_recovery.corrected_typed_input
     claim: OBSERVED
@@ -616,6 +656,10 @@ scenarios:
   requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: cli_abort
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: source_native_pointer_and_recovery.corrected_typed_input
     claim: OBSERVED
@@ -659,6 +703,10 @@ scenarios:
   requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: final_native_script_run
     claim: OBSERVED
@@ -698,6 +746,10 @@ scenarios:
   requirement: Unknown/false, source, version, timestamp and validity remain distinguishable.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: blender_default_provider_chain
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: final_native_script_run
     claim: OBSERVED
@@ -905,6 +957,10 @@ scenarios:
   requirement: Installed release repeats real Blender menu/transform/property/viewport workflows.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: blender_default_provider_chain
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: codex_gui
     claim: OBSERVED
@@ -942,6 +998,10 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
     section: owned_browser_component
     claim: OBSERVED
@@ -984,6 +1044,11 @@ scenarios:
     NEEDS_REPLAN. All6 owned cleanup checks passed. Actual distributions NONUNIFORM;
     candidate rosters/request lengths not retained, so correct-target coverage remains unknown.
     Earlier input-only Firefox/Code/Tk effects remain separate and do not establish task success.
+    Installed .40 Windows Chrome original task fails first-parser inference timeout with zero
+    decisions/input and no independent Save readback. Captioning remains unfinished after
+    OCR/detection. Actual Codex GUI reaches stage1, then refuses Confirm at ACT .6958 below .9;
+    both correct targets are retained with independently matching geometry. Native input
+    delivery and harness invocation passes do not close either task failure.
 - id: E2E-03
   category: e2e
   requirement: Reici GUI edits have actual matched-view evidence and independent review status.
@@ -995,6 +1060,10 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: ci
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
     section: ci
     claim: OBSERVED
