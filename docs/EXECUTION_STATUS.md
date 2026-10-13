@@ -95,6 +95,10 @@ and Task complete. Original object/packet contents were not archived in that
 attempt, so candidate coverage cannot be reconstructed. No confidence threshold,
 acceptance status or whole-task performance gate is promoted by this diagnosis.
 
+## Installed Windows 0.1.37 CI and observer verification on 2026-10-13
+
+**OBSERVED / CI archives and installed component:** CI source commit `3cb3dc59` produced 15/15 passing platform/Python archives, each containing the exact 65-file source/guide payload. Assembly succeeded and deploy was skipped. The existing Windows installation updated from 0.1.36 to 0.1.37; repeat returned CURRENT, with unrelated configuration and prior runtime files preserved. The installed public-RNA collector fed partial state through the provider and compiler; six operation families remained BLOCKED with `input_count=0`. Installed native observer transport tests reported 8 tests and OK. This is bounded installation/component evidence, not public deployment or whole-task E2E. Original requirement statuses and numeric gates are unchanged. See the [installed Windows CI receipt](validation/2026-10-13/windows-installed-ci-0137.json), digest-indexed in the validation summary.
+
 ## Windows SSH E2E scope resumed on 2026-10-12
 
 The user explicitly requested SSH Windows E2E and permitted updating the existing

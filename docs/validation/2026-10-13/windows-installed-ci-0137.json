@@ -1,0 +1,554 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ARCHIVES_AND_INSTALLED_WINDOWS_COMPONENTS",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.37",
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "STATE-01",
+    "INPUT-05",
+    "E2E-01"
+  ],
+  "partial": true,
+  "scope": "CI artifact identity, existing Windows installation update/repeat, installed partial Blender state and native transport regression; not public deployment or whole-task E2E",
+  "ci": {
+    "source_commit": "3cb3dc59034287528fca31b34cda8df2c74da787",
+    "run_id": 38348265720,
+    "artifact_id": 11790095938,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38348265720",
+    "classification": "OBSERVED_IMMUTABLE_ARCHIVE_HASH_AND_GIT_PAYLOAD_VERIFICATION_ONLY",
+    "status": "PASS",
+    "version": "0.1.37",
+    "manifest_sha256": "7029a7de360736a34eedcb0d337f4250d6fbce5c792ce1d17446ed35b1dae8cd",
+    "sha256sums_sha256": "17acebc8d64032be8c4b17dd0bb02c2af894a253b86f9b8335273efcfcb13f63",
+    "source_payload_file_count": 65,
+    "python_source_file_count": 50,
+    "guide_payload_file_count": 9,
+    "git_payload_manifest_sha256": "8b90700823efb709c28b9494a203d23497dea958cb21d655c904f2adf6d2df7c",
+    "artifact_count": 15,
+    "passed_artifacts": 15
+  },
+  "ci_jobs": {
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build (ubuntu-24.04, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "assemble",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "archive_proofs": [
+    {
+      "filename": "clef-use-0.1.37-darwin-arm64-py311.zip",
+      "sha256": "88ef024710b3e5818649bf9b5de24d9517c19a88d36f916030d6a69264167854",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-darwin-arm64-py312.zip",
+      "sha256": "e79e2f139c610506a1c9224b7a008becf7a6ac7dc9ba70c55fc98e07b3dc8546",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-darwin-arm64-py313.zip",
+      "sha256": "0d41d938850f7d83aca809eb3c9e11fd2e45583fa7f12ec1646c4cfec89b222c",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-darwin-x86_64-py311.zip",
+      "sha256": "e3672969bc6fb2ef35aa20f44ebd40b1e7c0cfa58fc63ec99f3e4e35e8738bdd",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-darwin-x86_64-py312.zip",
+      "sha256": "ba16b049f2d39eab933ba4a28b6272360699cdd2c03cc5cab8da856cd203d49d",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-darwin-x86_64-py313.zip",
+      "sha256": "1517cf454653c0dae72b96bb097b134ce02b16df153e639511c32e68f9ad6b78",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-arm64-py311.zip",
+      "sha256": "52fb5888f6c9b292d4fc48e7ba6597f1c2139fc0f4b5992c99c705f54add61da",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-arm64-py312.zip",
+      "sha256": "4b4373932c79dcbfda004838055d6d088053e451ccf84f44d713aa99f80c3614",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-arm64-py313.zip",
+      "sha256": "57b4e8f2ebca13c4627e2aa949c55f3923fd20cee6db6581984799626b0b5ef2",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-x86_64-py311.zip",
+      "sha256": "a565e51bef022d68c3e9fe3609effefa12d2b36eca3c63dcfff3cf71453c0c81",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-x86_64-py312.zip",
+      "sha256": "7c93bc791a6c2afe02ebbf80c4f1f8f7eded56bedda6291b4bec7af5b368ed54",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-linux-x86_64-py313.zip",
+      "sha256": "ba256e2ca78234d8c255703d11a8f76288f8eb316a2992de6e8504ce54fc8550",
+      "wheel_sha256": "9e9279d8899740a32b73ca369d49f0faedf164282d19d5516dc036e5d1c5ea1a",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-win32-x86_64-py311.zip",
+      "sha256": "7bc554ec8f7eec2e9b40ed467fd9925927aa3831d3d15e977578dfe69e5fe675",
+      "wheel_sha256": "09c63439ceed6c36fcfd2c40e03b9e4959c98502c7b70baf09702d285b90785e",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-win32-x86_64-py312.zip",
+      "sha256": "df70bad45b9feb9512109510db20f96ab1389229279a7d7dca1589b559a1ca4a",
+      "wheel_sha256": "09c63439ceed6c36fcfd2c40e03b9e4959c98502c7b70baf09702d285b90785e",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.37-win32-x86_64-py313.zip",
+      "sha256": "174af36961adbe91a40e9ec8b9ccd1e8509c5e31764a313559177550891d882c",
+      "wheel_sha256": "09c63439ceed6c36fcfd2c40e03b9e4959c98502c7b70baf09702d285b90785e",
+      "status": "PASS",
+      "source_files_exact": 65,
+      "python_source_files_exact": 50,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    }
+  ],
+  "retained_local_proof_driver_history": [
+    {
+      "sha256": "eb36a6103c23725bf0d7317b1d7e9a6f09cfcc8da63d11cf0659114f9ab91c67",
+      "status": "STOPPED_DRIVER_INVENTORY_ASSERTION"
+    }
+  ],
+  "windows_installation": {
+    "status": "PASS",
+    "before_version": "0.1.36",
+    "version": "0.1.37",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "installed_source_hashes_match": true,
+    "bound_source_files": 65,
+    "managed_codex_command_updated_to_installed_lexical_command": true,
+    "managed_integrations": {
+      "update": {
+        "harness": "codex",
+        "status": "INSTALLED",
+        "profile": "default",
+        "scope": "user",
+        "skills": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ],
+        "changed_file_count": 2
+      },
+      "repeat": {
+        "harness": "codex",
+        "status": "UNCHANGED",
+        "profile": "default",
+        "scope": "user",
+        "skills": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ],
+        "changed_file_count": 0
+      }
+    },
+    "transport_projection": {
+      "scope": "Only archive download URLs projected to the owned loopback server; all other metadata and immutable archive bytes unchanged",
+      "original_manifest_sha256": "17d9821757b8d66671b4bc422383ef7726d1c910ce815cfb93c0201eb355ff7e",
+      "projected_manifest_sha256": "d99400065a7b0608ca4771439ebcbe9afca6dd3b5c59480a7938c7f2d4252795",
+      "metadata_except_urls_equal": true
+    },
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "commands": [
+      {
+        "name": "update-current-source",
+        "exit_code": 0
+      },
+      {
+        "name": "installed-version",
+        "exit_code": 0
+      },
+      {
+        "name": "installed-capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "installed-self-test",
+        "exit_code": 0
+      },
+      {
+        "name": "installed-doctor",
+        "exit_code": 2
+      },
+      {
+        "name": "repeat-current-source",
+        "exit_code": 0
+      }
+    ],
+    "installed_capability_contract": {
+      "runtime_version": "0.1.37",
+      "api_schema_version": 1,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "runtime_protocol_version": 1,
+      "guide_contract_version": 1,
+      "operation_registry_version": 6
+    },
+    "guide_digests": {
+      "clef-use": {
+        "sha256": {
+          "SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+          "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+          "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+        },
+        "digest": "d3084aaff89c7d989707c500b9967255183c087310fc4e949dbac23713ce05b6"
+      },
+      "clef-use-blender": {
+        "sha256": {
+          "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "references/OPERATIONS.md": "4c6b02d1611f1ddf1b1a68b6f011084650eb5dbf5f9b8cdc456ba7f530574571"
+        },
+        "digest": "b78e3dddf1621be12d46d86b3ed25e586720f22d54edc4d8813cfca171084d54"
+      },
+      "clef-use-diagnostics": {
+        "sha256": {
+          "SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+          "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+        },
+        "digest": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+      }
+    },
+    "default_runtime_state": {
+      "provider": "NONE",
+      "observation_access_level": "PIXELS_ONLY",
+      "trusted_application_evidence": "UNAVAILABLE",
+      "operation_availability": "BLOCKED",
+      "live_probe": "NOT_PROBED"
+    },
+    "self_test": {
+      "mode": "DETERMINISTIC_FIXTURE",
+      "proves": "control flow only; not ML quality or desktop speed"
+    },
+    "doctor": {
+      "ready": false,
+      "windows_desktop": {
+        "status": "UNAVAILABLE",
+        "reason": "Windows GUI unavailable in SSH/service session 0; use an interactive session"
+      },
+      "capture": {
+        "status": "NOT_RUN",
+        "reason": "disabled or permission unavailable"
+      },
+      "input": {
+        "status": "DESKTOP_CHECK_ONLY",
+        "reason": "doctor does not inject input"
+      }
+    }
+  },
+  "installed_native_transport_tests": {
+    "classification": "OBSERVED_INSTALLED_WINDOWS_UNITTEST_LOG",
+    "raw_summary_lines": [
+      "Ran 8 tests in 0.231s",
+      "OK"
+    ],
+    "runtime_binding": "Parent execution record identifies installed 0.1.37 interpreter without a source overlay; raw unittest output is separately digest-bound, not a fabricated structured test receipt.",
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr_sha256": "38cdae0b38f374d0bf5739fcc8a86bfef3349afc905d2992be2c1dbea1ac2db8"
+  },
+  "installed_blender_observation": {
+    "status": "PASS",
+    "profile": "owned-factory-Windows-public-RNA",
+    "runtime_version": "0.1.37",
+    "installed_observer_sha256": "b8f87f44e14e5c98a9a1a7d4d6a58ac34418ab2e5be04b47e8da058d5a6222b1",
+    "matches_pinned_git_observer_source": true,
+    "native_bound_state": {
+      "provider": {
+        "status": "PARTIAL",
+        "provider": "BLENDER_PUBLIC_RNA",
+        "verified_facts": [
+          "active_tool",
+          "application",
+          "application_snapshot",
+          "editor_layout",
+          "keymap_inventory",
+          "mode",
+          "properties",
+          "scene_units",
+          "selection",
+          "selection_identities",
+          "view_revision"
+        ]
+      },
+      "version": 1,
+      "access_level": "APP_TELEMETRY_ASSISTED",
+      "foreground": true,
+      "selected_cube": true,
+      "scene_units": {
+        "system": "METRIC",
+        "length_unit": "METERS",
+        "scale_length": 1.0
+      },
+      "editor_layout_count": 4,
+      "unknown_guards": [
+        "popup",
+        "text_focus",
+        "ime_composing",
+        "keymap",
+        "editor",
+        "loading",
+        "modal",
+        "unit"
+      ]
+    },
+    "operation_guards": [
+      {
+        "family": "menu_assess",
+        "status": "BLOCKED",
+        "reason": "menus: UNKNOWN, uncertainty=1",
+        "input_count": 0
+      },
+      {
+        "family": "command_search",
+        "status": "BLOCKED",
+        "reason": "ime_composing: UNKNOWN, uncertainty=1",
+        "input_count": 0
+      },
+      {
+        "family": "numeric_transform",
+        "status": "BLOCKED",
+        "reason": "ime_composing: UNKNOWN, uncertainty=1",
+        "input_count": 0
+      },
+      {
+        "family": "property_edit",
+        "status": "BLOCKED",
+        "reason": "ime_composing: UNKNOWN, uncertainty=1",
+        "input_count": 0
+      },
+      {
+        "family": "viewport_gesture",
+        "status": "BLOCKED",
+        "reason": "ime_composing: UNKNOWN, uncertainty=1",
+        "input_count": 0
+      },
+      {
+        "family": "modal_cancel",
+        "status": "BLOCKED",
+        "reason": "modal is not owned by this operation runner",
+        "input_count": 0
+      }
+    ],
+    "wrong_foreground_refused": {
+      "status": "UNAVAILABLE",
+      "provider": "BLENDER_PUBLIC_RNA",
+      "reason": "Native peer/window binding or fresh snapshot unavailable",
+      "failed_check": "foreground_identity",
+      "error_type": "ValueError"
+    },
+    "cleanup": {
+      "foreground_immediate": false,
+      "foreground_queue_synchronized": true,
+      "foreground_before_own_ui_pump": true,
+      "foreground_completion_observations": [
+        "previous"
+      ],
+      "foreground_restored": true,
+      "owned_blender_exited": true,
+      "pointer_unchanged": true
+    }
+  },
+  "private_artifact_sha256": {
+    "ci-verification.json": "58a2e9b48555ea98a96478798c66293aa9cbed865f68a16bb230ea56ecb13f76",
+    "ci-progress.json": "3a11aa5c968cb372b487971e26d31f9060dca410804b16eff9e165b9ddbf37fe",
+    "windows-install-report.json": "6df61279e1d54e9bd87f4f005fa7cebef9c2317121d8e5e25b7dab1924c2857f",
+    "installed-blender-result.json": "4e839fda10024a78c8cc894f73815d99e53c2795f1298d3bb736935bf8dbcca6"
+  },
+  "not_run": {
+    "RELEASE-01": "Public deployment skipped; no public-release download/fresh-install proof.",
+    "E2E-01": "All six installed Blender operations BLOCKED with zero input; successful workflows and model task completion not established.",
+    "INSTALL-09": "No new spaced/Unicode HOME, all-profile enrollment or no-reparse traversal claimed by this existing-install update.",
+    "PERF-ACCURACY": "No paired accuracy, goodput, coverage or reaction p95 claim."
+  },
+  "acceptance": "Original 44 requirement statuses and numeric gates unchanged; each linked requirement receives partial scoped evidence only.",
+  "privacy": "No private absolute Windows paths, process/window/user identifiers, endpoint/auth data or raw payloads included; private records are represented only by digests."
+}
