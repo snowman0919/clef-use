@@ -1,0 +1,278 @@
+{
+  "classification": "OBSERVED_INSTALLED_WINDOWS_CLI_HTTP_ABORT_COMPONENT",
+  "date": "2026-10-13",
+  "requirements": [
+    "INPUT-01",
+    "INPUT-03",
+    "INPUT-04"
+  ],
+  "partial": true,
+  "environment": {
+    "runtime": "immutable installed0.1.36",
+    "desktop": "Interactive Session1/Default",
+    "native_input": "Windows SendInput and receiver/native held-state readback"
+  },
+  "attempts": [
+    {
+      "result": {
+        "status": "FAILED",
+        "mode": "REAL_WINDOWS_CLI_HTTP_ABORT_COMPONENT",
+        "runtime_version": "0.1.36",
+        "script_sha256": "9fbc3104e557afa686760bf82519db9a9f6ee9dfec1f952dd4199a326262aa64",
+        "scope": "Explicit session setup; held Shift/middle lease; no models or full gesture",
+        "budgets_seconds": {
+          "lease": 60,
+          "injector_block": 45,
+          "cli": 10,
+          "readback": 5
+        },
+        "admission": {
+          "owned_foreground": true,
+          "nontext_canvas_focused": true,
+          "native_focus_in_owned_window": true,
+          "owned_canvas_imc_absent": true,
+          "ime_scope": "Only this disposable canvas; not general IME discovery"
+        },
+        "session_setup": {
+          "explicit_registration": true,
+          "initial_status": "RUNNING",
+          "runtime_execute_called": false,
+          "perception_and_decision_unused": true
+        },
+        "error": "RuntimeError: RuntimeError: input deadline exceeds 30 seconds",
+        "cleanup": {
+          "errors": [],
+          "owned_cli_exited": true,
+          "owned_injector_exited": true,
+          "held_after": [],
+          "owned_http_service_closed": true,
+          "owned_endpoint_removed": true,
+          "pointer_restored": true,
+          "foreground_immediate": true,
+          "foreground_queue_synchronized": true,
+          "foreground_before_own_ui_pump": true,
+          "foreground_completion_observations": [
+            "previous"
+          ],
+          "foreground_restored": true,
+          "owned_window_closed": true
+        }
+      },
+      "private_artifact_sha256": {
+        "fixture.stdout": "6bae6ad1bde907aef78cc96056a00177177112dfc00ee5e3544cd4896844515e",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "c02ca0432171f81ac65666a8687135813e7915335e1fddc9718768c13a4c361d",
+        "result.json": "fd2fbe6e2dac865a077a4aa87f5ea61c371fe0802b9e249389133036456ad577"
+      }
+    },
+    {
+      "result": {
+        "status": "FAILED",
+        "mode": "REAL_WINDOWS_CLI_HTTP_ABORT_COMPONENT",
+        "runtime_version": "0.1.36",
+        "script_sha256": "7fa83818c0f6aca301cc50c0d16cc8049ba2466b9017f3adf7092b9d9c47ce56",
+        "scope": "Explicit session setup; held Shift/middle lease; no models or full gesture",
+        "budgets_seconds": {
+          "lease": 25,
+          "injector_block": 20,
+          "cli": 10,
+          "readback": 5
+        },
+        "admission": {
+          "owned_foreground": true,
+          "nontext_canvas_focused": true,
+          "native_focus_in_owned_window": true,
+          "owned_canvas_imc_absent": true,
+          "ime_scope": "Only this disposable canvas; not general IME discovery"
+        },
+        "session_setup": {
+          "explicit_registration": true,
+          "initial_status": "RUNNING",
+          "runtime_execute_called": false,
+          "perception_and_decision_unused": true
+        },
+        "abort": {
+          "cli_exit_code": 0,
+          "session_status": "ABORTED",
+          "session_cancelled": true,
+          "held_before": [
+            4,
+            16,
+            160
+          ],
+          "held_after": [],
+          "injector_still_blocked": true,
+          "service_busy_while_injector_blocked": true,
+          "explicit_parent_release_before_observation": false,
+          "lease_deadline_not_reached": true,
+          "receiver_events": [
+            {
+              "phase": "key_down",
+              "key": "Shift_L",
+              "button": "??",
+              "at_ns": 1200732640000000
+            },
+            {
+              "phase": "button_down",
+              "key": "??",
+              "button": 2,
+              "at_ns": 1200732656000000
+            },
+            {
+              "phase": "button_up",
+              "key": "??",
+              "button": 2,
+              "at_ns": 1200734031000000
+            },
+            {
+              "phase": "key_up",
+              "key": "Shift_L",
+              "button": "??",
+              "at_ns": 1200734031000000
+            }
+          ]
+        },
+        "error": "RuntimeError: Cancelled injector did not refuse its subsequent command",
+        "cleanup": {
+          "errors": [],
+          "owned_cli_exited": true,
+          "owned_injector_exited": true,
+          "owned_guardian_exited": true,
+          "held_after": [],
+          "owned_http_service_closed": true,
+          "owned_endpoint_removed": true,
+          "pointer_restored": true,
+          "foreground_immediate": true,
+          "foreground_queue_synchronized": true,
+          "foreground_before_own_ui_pump": true,
+          "foreground_completion_observations": [
+            "previous"
+          ],
+          "foreground_restored": true,
+          "owned_window_closed": true
+        }
+      },
+      "private_artifact_sha256": {
+        "fixture.stdout": "6bae6ad1bde907aef78cc96056a00177177112dfc00ee5e3544cd4896844515e",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "7f1e879bd4f003b4c6e222ca318a60b1e1384f0c2ad33aea25e033824d610870",
+        "result.json": "67a2802adcb3a74f8ee1c68362ef98eb640cd82bd125de9a35b1237ab90d666d",
+        "result.cli.stdout": "9776f139dd737a6370d6fdec25d5de7d8d44563b80c5070d14e1e39340ecd1b8",
+        "result.cli.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "result": {
+        "status": "PASSED",
+        "mode": "REAL_WINDOWS_CLI_HTTP_ABORT_COMPONENT",
+        "runtime_version": "0.1.36",
+        "script_sha256": "bc2282caeab89bb19f76ee1cb610f659b9080f3fe5aff3a99a18b1a2659d21b0",
+        "scope": "Explicit session setup; held Shift/middle lease; no models or full gesture",
+        "budgets_seconds": {
+          "lease": 25,
+          "injector_block": 20,
+          "cli": 10,
+          "readback": 5
+        },
+        "admission": {
+          "owned_foreground": true,
+          "nontext_canvas_focused": true,
+          "native_focus_in_owned_window": true,
+          "owned_canvas_imc_absent": true,
+          "ime_scope": "Only this disposable canvas; not general IME discovery"
+        },
+        "session_setup": {
+          "explicit_registration": true,
+          "initial_status": "RUNNING",
+          "runtime_execute_called": false,
+          "perception_and_decision_unused": true
+        },
+        "abort": {
+          "cli_exit_code": 0,
+          "session_status": "ABORTED",
+          "session_cancelled": true,
+          "held_before": [
+            4,
+            16,
+            160
+          ],
+          "held_after": [],
+          "injector_still_blocked": true,
+          "service_busy_while_injector_blocked": true,
+          "explicit_parent_release_before_observation": false,
+          "lease_deadline_not_reached": true,
+          "receiver_events": [
+            {
+              "phase": "key_down",
+              "key": "Shift_L",
+              "button": "??",
+              "at_ns": 1200906671000000
+            },
+            {
+              "phase": "button_down",
+              "key": "??",
+              "button": 2,
+              "at_ns": 1200906687000000
+            },
+            {
+              "phase": "button_up",
+              "key": "??",
+              "button": 2,
+              "at_ns": 1200907640000000
+            },
+            {
+              "phase": "key_up",
+              "key": "Shift_L",
+              "button": "??",
+              "at_ns": 1200907640000000
+            }
+          ]
+        },
+        "no_reacquisition": true,
+        "cleanup": {
+          "errors": [],
+          "owned_cli_exited": true,
+          "owned_injector_exited": true,
+          "owned_guardian_exited": true,
+          "held_after": [],
+          "owned_http_service_closed": true,
+          "owned_endpoint_removed": true,
+          "pointer_restored": true,
+          "foreground_immediate": true,
+          "foreground_queue_synchronized": true,
+          "foreground_before_own_ui_pump": true,
+          "foreground_completion_observations": [
+            "previous"
+          ],
+          "foreground_restored": true,
+          "owned_window_closed": true
+        },
+        "injector_result": {
+          "after_abort_refused": true,
+          "refusal_type": "InputInterrupted",
+          "refusal_reason": "input cancelled or deadline expired"
+        }
+      },
+      "private_artifact_sha256": {
+        "fixture.stdout": "0a37295a2264f7bbf61146bf14cce6d6878d52e5821e8ede07cbd3a002edc9a0",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "controller-report.json": "83a16ce130821bd2aab3bde3f429349813b25d61ef6533b0480d811d2c3e2181",
+        "result.json": "c919e2c106a98cd8260584309001cab5033ed0a7b2c7aa0f0c6c1808c942b0ec",
+        "result.cli.stdout": "90a37dfd5b4604fb082fab9a82c8ebf93187547a2bb9383c02347768916ee04b",
+        "result.cli.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "scope": "Real CLI/authenticated loopback HTTP/SessionManager/SessionRuntime.abort/DesktopAction path; explicitly registered Session and native held lease, not runtime.execute or a full GestureInput",
+  "first_failure": "Fixture lease60 exceeded canonical max30; fixed fixture to25 without changing runtime guard",
+  "second_failure": "Actual CLI abort released input correctly, but fixture treated canonical InputInterrupted refusal as an unrelated error; specific canceled follow-up refusal now classified and retained",
+  "final_script_sha256": "bc2282caeab89bb19f76ee1cb610f659b9080f3fe5aff3a99a18b1a2659d21b0",
+  "not_run": [
+    "Admitted Blender gesture through operation guard",
+    "Full GestureInput abort",
+    "Full-process suspension/deadline recovery",
+    "General automatic IME or input-owner observation"
+  ],
+  "performance": "Functional execution only; no reaction p95/goodput/coverage claim",
+  "privacy": "No private paths, credentials, endpoint token or screenshots included"
+}

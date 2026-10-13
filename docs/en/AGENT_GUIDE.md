@@ -213,6 +213,12 @@ also releases them after the owned worker process terminates. This fixture disab
 IME only on its own receiver. It does not establish automatic IME discovery,
 Blender orbit/pan semantics or harness-driven GUI completion.
 
+A separate installed 0.1.36 component verifies actual CLI/HTTP service abort:
+Shift/middle input is released while its injector remains blocked, and the
+cancelled injector refuses further input after unblocking. It uses an explicitly
+registered session and owned non-text receiver. Full gesture/Blender operation
+admission and whole-process suspension/deadline recovery remain unverified.
+
 Decision diagnostics retain the exact UTF-8 text-budget bytes (image excluded),
 object/question counts and SDK-reported input tokens. `SDK_USAGE` means an integer
 from 1 through 8192; missing usage is `UNAVAILABLE`, invalid reported values are

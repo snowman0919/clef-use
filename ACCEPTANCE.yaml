@@ -564,6 +564,10 @@ scenarios:
     section: evidence.windows_ssh_current_e2e
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-service-abort.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux native deadline/cancel/intervention/guardian failure/process
     crash/frozen injector release checks passed. Historical Windows component checks
     passed but the whole fixture failed on foreground restoration; no all-platform

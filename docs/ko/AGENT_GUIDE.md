@@ -206,6 +206,12 @@ Shift와 가운데 버튼이 해제되며, 소유 worker 프로세스 종료 후
 해제합니다. 이 검증은 소유 수신 창의 IME만 비활성화합니다. 자동 IME 발견,
 Blender orbit/pan 의미나 하네스의 GUI 작업 완료를 입증하지 않습니다.
 
+별도 설치본 0.1.36 component에서는 실제 CLI/HTTP service abort를 검증했습니다.
+injector가 막힌 동안 Shift·가운데 버튼이 해제되고, 재개 후에도 취소된 injector는
+추가 입력을 거부합니다. 명시적으로 등록한 session과 소유 비텍스트 수신 창을 사용한
+검증이며, 전체 gesture·Blender operation admission과 전체 프로세스 정지·deadline
+복구는 아직 검증되지 않았습니다.
+
 decision 진단은 이미지가 제외된 실제 UTF-8 텍스트 예산 바이트 수, object·question
 개수와 SDK가 보고한 입력 토큰 수를 보존합니다. `SDK_USAGE`는 1~8192의 정수이며,
 누락은 `UNAVAILABLE`, 잘못된 보고 값은 `INVALID`로 표시하고 토큰 수는 null입니다.

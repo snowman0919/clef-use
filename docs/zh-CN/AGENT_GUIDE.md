@@ -182,6 +182,11 @@ Windows guardian 会移除已成功释放的键与 Unicode ACK；之后父进程
 窗口的 IME，不能证明自动 IME 发现、Blender orbit/pan 语义或 harness GUI
 任务完成。
 
+另一个安装版 0.1.36 component 验证了实际 CLI/HTTP service abort：injector 被阻塞时
+释放 Shift/中键，解除阻塞后已取消的 injector 仍拒绝追加输入。它使用显式注册的
+session 和自有非文本接收窗口。完整 gesture/Blender operation admission 以及整个
+进程暂停/deadline 恢复尚未验证。
+
 decision 诊断保留不含图像的实际 UTF-8 文本预算字节数、object/question 数量和
 SDK 报告的输入 token 数。`SDK_USAGE` 表示 1～8192 的整数；缺失时为
 `UNAVAILABLE`，报告值无效时为 `INVALID`，后二者的数量均为 null。

@@ -207,6 +207,11 @@ worker が停止中でもキャンセルで Shift と中央ボタンを解放し
 IME を無効化します。自動 IME 検出、Blender の orbit/pan の意味、ハーネス
 による GUI 作業の完了を証明するものではありません。
 
+別のインストール済み 0.1.36 component で実際の CLI/HTTP service abort を検証しました。
+injector の停止中に Shift/中央ボタンを解放し、再開後も取り消された injector は
+追加入力を拒否します。明示的に登録した session と所有する非テキスト受信窓の検証であり、
+完全な gesture/Blender operation admission や全 process 停止/deadline 復旧は未検証です。
+
 decision 診断には画像を除く実際の UTF-8 テキスト予算のバイト数、object・question
 数、SDK が報告した入力トークン数を保持します。`SDK_USAGE` は 1～8192 の整数、
 欠落は `UNAVAILABLE`、不正な報告値は `INVALID` とし、後二者の数は null です。

@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Verify installed Windows CLI/HTTP service abort with an actual native held
+  modifier/button lease, independent blocked injector, receiver release and
+  refusal after cancellation. Retain failed fixture attempts separately.
 - Extend the optional read-only Blender state provider to Windows using private
   NTFS endpoint metadata, IPv4 loopback native peer PID/user verification and
   physical foreground client bounds. Preserve UNKNOWN input-owner, popup, IME,

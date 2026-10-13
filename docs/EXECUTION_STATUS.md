@@ -43,6 +43,20 @@ input guards are unchanged. Full source regression passed 1418 tests with 42
 skips and 41 warnings in 66.02 seconds. Active Ruff/format checks cover 151 files;
 generated contracts pass. See [Windows observation evidence](validation/2026-10-13/windows-blender-observation.json).
 
+**OBSERVED / installed Windows CLI abort:** the actual immutable 0.1.36 executor
+holds native Shift/middle input while its injector is independently blocked.
+A separate installed CLI sends abort through the authenticated loopback HTTP
+service and real SessionManager/SessionRuntime.abort. Session ABORTED, cancellation,
+native held [4,16,160] -> [], receiver key/button release, still-blocked injector
+and an unexpired lease are observed before any explicit cleanup release.
+After unblocking, the cancelled injector receives InputInterrupted and sends no
+new input. Own guardian/HTTP service/endpoint/window/task exit and exact pointer/
+foreground restoration pass. The session is explicitly registered for this
+component; SessionRuntime.execute, full GestureInput and Blender admission are
+NOT_RUN. First fixture lease60 violated the unchanged max30 guard; a second
+fixture misclassified the expected InputInterrupted after a successful abort.
+Both FAIL attempts remain retained. See [service abort evidence](validation/2026-10-13/windows-service-abort.json).
+
 **OBSERVED / diagnostic separation:** existing FINAL12 menu packets preserve the
 actual before-image pixels and independent ground truth. File/Edit/absent scores
 separate, but File goal probability 0.7639-0.7694 and condition 0.8112-0.8157 fail
