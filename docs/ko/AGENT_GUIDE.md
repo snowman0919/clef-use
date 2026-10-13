@@ -269,6 +269,16 @@ CLI prompt를 보존합니다. 모델 실행 전에 실제 capability/status 두
 전체 프로세스의 쓰기 차단을 증명하지 않습니다. 해당 도구 시도는 검증 실패이며,
 실제 관측한 호출과 허용 권한을 구분해 기록합니다.
 
+OMP는 native 지연 등록으로 초기 도구 목록에 writer를 다시 추가할 수 있습니다.
+검증은 임시 native approval overlay로 writer와 기존 비조회 허용을 거절하고,
+reader의 deny/prompt와 인자별 읽기 승인 등급을 보존합니다. 전체 native SDK 결과는
+크기가 제한된 비공개 파일로 읽고, guide 전체 본문·runtime/schema 계약을 대조합니다.
+실패·예상 밖 호출은 이후 capability 성공이나 시간 초과로 지우지 않습니다. 관리
+integration lock으로 검증을 직렬화하며 native helper 실패 뒤 모델을 시작하지 않습니다.
+사용자 디스크 설정은 보존하고 overlay는 제거합니다.
+[실제 Windows .41 설치](../validation/2026-10-13/windows-installed-ci-0141.json)는
+CI15/15·업데이트·반복 실행을 통과했습니다. 기존 작업 실패와 수치 기준은 별개입니다.
+
 설치된 0.1.39는 InputIR의 활성 조합 거절을 검증했지만 일반 type 우회도 재현했습니다.
 별도의 immutable 설치본 0.1.40에서 정확한 Unicode, 활성 조합 중 네 경로의 입력 거절,
 선택·삭제, Enter 포커스 전환, 독립 abort·복구 검증이 통과했습니다. 실제 Codex GUI

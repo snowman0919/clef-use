@@ -1082,7 +1082,14 @@ def test_successful_tool_body_never_becomes_authentication_diagnostic():
 
 
 def _controlled_verification(
-    installation, monkeypatch, adapter, payload, trigger, attempt="end", guide_command=None
+    installation,
+    monkeypatch,
+    adapter,
+    payload,
+    trigger,
+    attempt="end",
+    guide_command=None,
+    native_exit_code=0,
 ):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
@@ -1182,7 +1189,9 @@ def _controlled_verification(
                         "type": "tool_execution_end",
                         "toolCallId": "load",
                         "toolName": "read",
-                        "result": {"content": body.split("---", 2)[-1].strip()},
+                        "result": {
+                            "content": [{"type": "text", "text": body.split("---", 2)[-1].strip()}]
+                        },
                     },
                 ]
             )
@@ -1224,6 +1233,12 @@ def _controlled_verification(
                     }
                 )
         else:
+            if (
+                integrations._tool_result_succeeded(payload)
+                and isinstance(payload, dict)
+                and "content" in payload
+            ):
+                payload = {"content": [{"type": "text", "text": json.dumps(facade)}]}
             events.append(
                 {
                     "type": "tool_execution_start",
@@ -1276,11 +1291,20 @@ def _controlled_verification(
         events.insert(0, {"type": "system", "subtype": "init", "session_id": transcript["id"]})
         events.append({"type": "result", "session_id": transcript["id"], "exit_code": 0})
     interpreter = scripts / "native-interpreter"
+    native_evidence = {
+        "discovery": discovery,
+        "invoked": {"tool": name, "result": native_payload},
+        "approval": {},
+    }
     interpreter.write_text(
-        f"#!{sys.executable}\nimport sys,json\n"
-        f"if 'committed_venv' in ' '.join(sys.argv): print(json.dumps({transcript!r}))\n"
+        f"#!{sys.executable}\nimport sys,json,os\nfrom pathlib import Path\n"
+        f"if 'CLEF_OMP_NATIVE_RESULT' in os.environ:\n"
+        f" Path(os.environ['CLEF_OMP_NATIVE_RESULT']).write_text(json.dumps({native_evidence!r}))\n"
+        f" sys.exit({native_exit_code})\n"
+        f"elif 'committed_venv' in ' '.join(sys.argv): print(json.dumps({transcript!r}))\n"
         f"elif 'chat' in sys.argv:\n for event in {events!r}: print(json.dumps(event))\n"
         f"else:\n for line in {native!r}: print(line)\n"
+        f" sys.exit({native_exit_code})\n"
     )
     interpreter.chmod(0o700)
     executable = scripts / harness
@@ -1318,7 +1342,7 @@ else:
         return integrations._hermes_native(layout, manifest, str(executable), home, result)
     if adapter == "omp_model":
         return integrations._verify_omp_model(
-            layout, manifest, str(executable), home, result, trigger
+            layout, manifest, str(executable), home, result, trigger, {}
         )
     package = home / "controlled-omp-package"
     (package / "bin").mkdir(parents=True)
@@ -1385,6 +1409,23 @@ def test_successful_tool_results_prove_invocation(installation, monkeypatch, ada
         }[adapter.split("_")[0]]
     ]
     assert result["status"] == "PASS"
+
+
+@pytest.mark.parametrize("adapter", ["hermes_native", "omp_native", "hermes_model"])
+def test_native_exit_failure_cannot_promote_component_evidence_or_start_model(
+    installation, monkeypatch, adapter
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        adapter,
+        {"content": [{"type": "text", "text": "capabilities"}]},
+        "explicit",
+        native_exit_code=1,
+    )
+    assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
+    assert result["model_driven"] is False
 
 
 @pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])

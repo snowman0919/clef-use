@@ -273,6 +273,17 @@ This enforces the MCP scope, not a whole-process write sandbox: the native
 `skills` toolset also exposes `skill_manage`. Such an attempt fails the verifier;
 the reported session evidence must distinguish observed calls from permissions.
 
+OMP's initial tool list can be expanded by native lazy registration. Verification
+uses a temporary native approval overlay to deny the writer and existing non-probe
+grants, preserve reader deny/prompt and retain argument-sensitive read tiers.
+Complete native SDK results use a bounded private file; full guide bodies and
+runtime/schema contracts must agree. Any failed or unexpected tool attempt remains
+a failure, including before a deadline or later successful capability call.
+Verification shares the managed integration lock, and native helper failure stops
+model startup. On-disk user settings are preserved and the overlay is removed.
+Latest [actual Windows .41 installation](../validation/2026-10-13/windows-installed-ci-0141.json)
+passes CI15/15/update/repeat; previous whole-task failures and numeric gates remain separate.
+
 The current Windows state provider combines native UI Automation evidence with
 the optional Blender provider. Its standard-library base-Python worker proves
 its actual PID at readiness and uses a 500 ms query timeout. Each result binds

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+- Apply a temporary native OMP approval overlay during verification: deny lazy
+  writer registration and existing non-probe grants, preserve reader restrictions
+  and argument-sensitive read tiers, and remove the overlay after execution.
+  Require full guide bodies, matching contracts and complete call inventories;
+  retain earlier errors and unexpected tool attempts even after later success.
+- Preserve complete OMP native results in a bounded private file after observed
+  stdout truncation/duplication. Serialize verification with managed updates and
+  refuse model startup after native helper failure. Retain failed native attempts.
+- Record immutable 0.1.41 CI15/15 and actual Windows update/repeat separately
+  from incomplete task, accuracy, coverage, latency and public-release gates.
+
 - Validate Hermes model calls against the complete native read-only session
   export, bound to stream session/call identities and original response bytes.
   Recover only confined native spillover files; retain truncated/error/ambiguous

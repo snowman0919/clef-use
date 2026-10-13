@@ -1,6 +1,63 @@
 # Reactive runtime execution status
 
-## Current unfinished acceptance checks, 2026-10-13
+## Actual installed Windows 0.1.41 and source 0.1.42 verification recovery
+
+**OBSERVED / immutable CI and installation:** `19f356e` completes run
+`38416021604`, all fifteen build/install jobs and assembly. Every archive matches
+all 68 Git product payload files. Actual Windows .40 -> .41 returns INSTALLED;
+repeat returns CURRENT, managed Codex refresh and unrelated configuration/previous
+version preservation pass. Session 0 doctor has no interactive desktop. Public
+deployment is skipped by the existing feature-branch guard. These results are
+[installation evidence](validation/2026-10-13/windows-installed-ci-0141.json),
+separate from prior .40 native inputs and failed whole tasks.
+
+**OBSERVED / OMP evidence correction:** replaying the retained actual .40 batch
+through the corrected consumer identifies two failed native `write` attempts in
+the explicit case and one successful `write` in the unrelated-request case.
+The earlier `--tools` list restricted the initial catalog, but native SDK lazy
+registration reintroduced the writer. Those sessions did not enforce read-only
+filesystem scope. Explicit/natural/unrelated cases now all classify FAIL; a
+deadline cannot erase an observed forbidden attempt or earlier status error.
+
+Source .42 uses native `--config` approval overlays without editing persistent
+settings. Existing non-probe grants become deny, explicit reader deny/prompt is
+preserved, and `read:null` leaves native argument-sensitive tiers in control.
+Native `Settings.loadReadOnly` avoids migration/storage writes; legacy-only
+settings require migration outside this read-only preflight. Full guide bodies,
+source hashes, runtime/schema/guide contracts, complete call inventories and
+actual selected-project cwd are verified. Unknown tool attempts and errors cannot
+pass after later success. Native helper nonzero exit prevents model startup;
+managed verification is serialized with installation/removal/update.
+
+Two initial .42 preflights fail before model execution: native stdout truncates
+at 8192 bytes, then an awaited stdout write duplicates its prefix at that boundary.
+Both batches remain NOT_RUN with no model requests. The helper now writes complete
+native results to a seeded private 0600 file, rejects symlinks and bounds its read.
+No stdout reconstruction/fallback is used. Final native preflight and two
+concurrent public native-only CLI verifications PASS with managed bytes preserved.
+
+The fresh actual .42 model batch remains FAIL: explicit reads the full core guide
+and invokes capabilities but repeats two absent-runtime status errors and reaches
+the 90-second budget; natural invokes capabilities without reading the required
+guide; unrelated invokes capabilities despite the actual no-runtime request and
+also reaches its budget. All three exact user prompts are observed in native
+messages. No writer attempt or unexpected project file is observed; global
+configuration is unchanged and the temporary policy is removed. Native source
+supports catalog inclusion, but the exact provider system request was not captured:
+catalog delivery is INFERRED. Unsafe native HTTP/header recording is not enabled.
+This does not close GUIDE-03, GUI E2E, model accuracy or reaction-performance gates.
+The native writer-wrapper component separately returns the actual user-policy
+block before creating its owned receiver file; native local reads remain allowed
+and SSH reads retain exec/prompt classification. This uses real native Settings,
+SessionManager and tool classes with unused runtime/model-registry context, not a
+complete SDK/model session. Actual model writer-pressure makes no completed write
+call before its budget and is NOT_RUN for model-driven denial. An initial component
+matcher used the wrong denial word and is retained separately. The existing owned
+Hermes profile refreshes to .42 and native catalog/load/invoke/two-tool scope PASS
+with its configuration unchanged; this refresh runs no model. See the
+[native harness receipt](validation/2026-10-14/omp-native-verification-0142.json).
+
+## Current unfinished acceptance checks, 2026-10-14
 
 The goal remains active. Original statuses are 34 PASS / 3 FAIL / 7 NOT_RUN;
 component passes below do not close whole-task requirements. Authentication is
@@ -8,7 +65,7 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
-| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Current OMP explicit/unrelated cases exhaust the 90-second model budget and the natural case omits the required guide. Complete the three actual OMP cases; older route-specific HTTP 401 is historical. |
+| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no write is observed in .42. Older route-specific HTTP 401 is historical. |
 | GUIDE-04 | Cache/freshness consumer fixtures exist; an actual harness misuse challenge remains NOT_RUN. A fresh observation in a successful invocation does not prove refusal of stale input/completion evidence. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
 | E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Independent editor whole-task success remains NOT_RUN for this installation. |

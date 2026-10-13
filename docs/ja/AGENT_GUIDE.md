@@ -272,6 +272,15 @@ schema 一致を確認します。同時応答には全文または限定 previe
 プロセス全体の書き込み禁止を証明しません。この試行は検証失敗となり、観測した
 呼び出しと権限を区別して記録します。
 
+OMP は native 遅延登録で初期ツール一覧に writer を追加できます。検証は一時的な
+native approval overlay で writer と既存の非照会権限を拒否し、reader の deny/prompt
+と引数別の読み取り承認等級を保持します。native SDK 全文をサイズ制限付き非公開
+ファイルから読み、guide 全文と runtime/schema 契約を確認します。先の失敗や未知の
+呼び出しは後の成功や期限切れで消しません。管理 integration lock で直列化し、
+native helper 失敗後はモデルを開始しません。ディスク設定を保持し overlay を除去します。
+[実際の Windows .41 インストール](../validation/2026-10-13/windows-installed-ci-0141.json)は
+CI15/15・更新・再実行を通過しました。作業失敗と数値基準は別の証拠です。
+
 Hermes live 検証は native event stream を保持し、installed harness の読み取り専用
 session export API で同じセッションだけを読みます。guide 全文と runtime 応答は
 元の stream バイト、session/call ID、管理 contract と一致する必要があります。

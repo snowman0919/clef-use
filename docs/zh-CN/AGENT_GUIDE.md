@@ -238,6 +238,14 @@ Hermes 在启动 MCP 时过滤父环境变量。验证在选定受管服务器�
 此限制仅适用于 MCP。native `skills` toolset 仍包含 `skill_manage`，因此不能证明
 整个进程禁止写入。此工具尝试会使验证失败；证据必须区分观测到的调用与实际权限。
 
+OMP 的 native 延迟注册可将 writer 重新加入初始工具列表。验证使用临时 native
+approval overlay 拒绝 writer 及既有非查询授权，保留 reader 的 deny/prompt 和参数
+相关读取审批等级。完整 native SDK 结果通过限长私有文件读取，并核对 guide 全文、
+runtime/schema 契约。先前失败和意外工具尝试不会被后续成功或超时抹去。验证与受管
+integration 共用锁；native helper 失败后不启动模型。磁盘设置保留，overlay 随后删除。
+[实际 Windows .41 安装](../validation/2026-10-13/windows-installed-ci-0141.json)通过
+CI15/15、更新和重复执行；原有任务失败与数值验收门槛仍单独记录。
+
 Hermes live 验证保留 native event stream，并通过安装版 harness 的只读 session
 export API 仅读取对应会话。完整 guide 正文和 runtime 响应必须与原始 stream 字节、
 session/call ID 和管理 contract 一致；spillover 仅限选定 profile 和 call。截断

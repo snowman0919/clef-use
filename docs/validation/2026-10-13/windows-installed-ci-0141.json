@@ -1,0 +1,61 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_AND_ACTUAL_WINDOWS_INSTALLATION",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.41",
+  "source_commit": "19f356e6c0afa91a4fcd10e9486ff3ff23a3a960",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration or raw traces.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38416021604,
+    "artifact_id": 11824168948,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38416021604",
+    "artifact_zip_sha256": "a36decef31f295c80e76fe3a1a5d7f479b8eebe1b513c77246d90bc0fe0450f9",
+    "artifact_zip_bytes": 383136824,
+    "builds_passed": 15,
+    "archives_verified": 15,
+    "source_payload_files_exact": 68,
+    "private_verification_sha256": "171a9a27ada63be5fba7fb1ecb2779821fd9fc47ebe310a5ef0aec7bb149a4f9",
+    "assemble": "PASS",
+    "deploy": "SKIPPED_FEATURE_BRANCH"
+  },
+  "installed_windows": {
+    "status": "PASS",
+    "from_version": "0.1.40",
+    "version": "0.1.41",
+    "payload_files_matching": 68,
+    "source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "wheel_sha256": "b7c559aac90afa2d817c5076609379a1a07d1aacd7aca72e911501bf5e425cc1",
+    "archive_sha256": "92b1d614d8f6c66f493cf279fe88ed2d5a599139ca1982553bf2f2e65e6febac",
+    "private_install_report_sha256": "00d718bac16182372f2ceb429ab2106130af1fd9539d5422917b80f8e132a150",
+    "doctor": {
+      "exit_code": 2,
+      "reason": "SSH Session 0 has no interactive desktop."
+    },
+    "self_test_scope": "Deterministic control flow, not model accuracy or native GUI reaction performance.",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT"
+  },
+  "native_gui_tasks_this_installation": {
+    "status": "NOT_RUN",
+    "reason": "Hermes verification changed; existing .40 task failures and native input proofs remain separate. No claim that installation fixes model confidence/parser timeout."
+  },
+  "public_release": {
+    "status": "NOT_RUN",
+    "reason": "Existing feature-branch deployment guard skips public deploy; no tag/main bypass."
+  },
+  "completion_claim": false
+}

@@ -1141,6 +1141,7 @@ finally:
         else "NOT_RUN"
     )
     if run.returncode:
+        result["status"] = "FAIL"
         result["native_reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
     return result
 
@@ -1554,6 +1555,9 @@ def _verify_hermes(
     result = _hermes_native(layout, manifest, executable, cwd, result)
     if trigger == "native":
         return result
+    if result["native_exit_code"]:
+        result["reason"] = "native Hermes preflight failed; model not started"
+        return result
     if result["native_read_only_scope"]["status"] != "PASS":
         result["status"] = "FAIL"
         result["reason"] = "native Hermes read-only MCP scope was not proven; model not started"
@@ -1691,99 +1695,207 @@ def _model_stages(loaded: list[str], invoked: list[str], failed: bool) -> dict:
     }
 
 
+def _omp_read_only_policy(policies: dict) -> dict:
+    """Tighten native approval policies without changing persistent configuration."""
+    if not isinstance(policies, dict) or not all(isinstance(key, str) for key in policies):
+        raise ValueError("native OMP approval policies are unavailable")
+    approval = dict.fromkeys(policies, "deny")
+    for name in (
+        "read",
+        "mcp__clef_use_computer_capabilities",
+        "mcp__clef_use_computer_status",
+    ):
+        previous = policies.get(name)
+        previous = previous.strip().lower() if isinstance(previous, str) else None
+        approval[name] = (
+            previous if previous in ("deny", "prompt") else None if name == "read" else "allow"
+        )
+    approval["write"] = "deny"
+    return {"tools": {"approvalMode": "always-ask", "approval": approval}}
+
+
 def _verify_omp_model(
-    layout: dict, manifest: dict, executable: str, cwd: Path, result: dict, trigger: str
+    layout: dict,
+    manifest: dict,
+    executable: str,
+    cwd: Path,
+    result: dict,
+    trigger: str,
+    approval_policies: dict,
 ) -> dict:
-    run = subprocess.run(
-        [
-            executable,
-            "--print",
-            "--mode",
-            "json",
-            "--no-session",
-            "--no-extensions",
-            "--no-lsp",
-            "--max-time",
-            "90",
-            "--tools",
-            "read,mcp__clef_use_computer_capabilities,mcp__clef_use_computer_status",
-            "--cwd",
-            str(cwd),
-            _verification_prompt(trigger),
-        ],
-        cwd=cwd,
-        env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
-        capture_output=True,
-        text=True,
-        timeout=120,
-    )
+    policy = layout["state"] / "verification-omp-read-only.json"
+    atomic_write(policy, json.dumps(_omp_read_only_policy(approval_policies)))
+    try:
+        run = subprocess.run(
+            [
+                executable,
+                "--print",
+                "--mode",
+                "json",
+                "--no-session",
+                "--no-extensions",
+                "--no-lsp",
+                "--max-time",
+                "90",
+                "--config",
+                str(policy),
+                "--approval-mode",
+                "always-ask",
+                "--tools",
+                "read,mcp__clef_use_computer_capabilities,mcp__clef_use_computer_status",
+                "--cwd",
+                str(cwd),
+                _verification_prompt(trigger),
+            ],
+            cwd=cwd,
+            env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
+            capture_output=True,
+            text=True,
+            timeout=120,
+        )
+    finally:
+        policy.unlink(missing_ok=True)
     trace = layout["state"] / f"verification-{trigger}-trace.jsonl"
     atomic_write(trace, run.stdout + run.stderr)
     events = _jsonlines(run.stdout)
-    starts = {
-        event.get("toolCallId"): event
-        for event in events
-        if event.get("type") == "tool_execution_start"
-    }
-    loaded, invoked = [], []
-    attempted = []
-    failed = False
+    evidence = _omp_model_evidence(layout, manifest, events, trigger, run.returncode, cwd)
+    result.update(
+        trace=str(trace),
+        model_driven=True,
+        exit_code=run.returncode,
+        model_trigger_verification=evidence,
+        status=evidence["status"],
+        permission_method="native temporary approval overlay; no persistent configuration changes",
+    )
+    if run.returncode:
+        result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
+    return result
+
+
+def _omp_model_evidence(
+    layout: dict, manifest: dict, events: list[dict], trigger: str, exit_code: int, cwd: Path
+) -> dict:
+    readers = ("mcp__clef_use_computer_capabilities", "mcp__clef_use_computer_status")
+    allowed = ("read", "tool_search", *readers)
+    starts, completed = {}, set()
+    loaded, invoked, attempted, failed_calls, violations = [], [], [], [], []
+    invalid = False
     any_gui_guide = False
-    for event in events:
-        selected_tool = event.get("toolName") in (
-            "mcp__clef_use_computer_capabilities",
-            "mcp__clef_use_computer_status",
+
+    def guide_matches(path: str, skill: str) -> bool:
+        physical = Path(path)
+        return (
+            path == f"skill://{skill}"
+            or (physical if physical.is_absolute() else cwd / physical).resolve()
+            == (layout["root"] / skill / "SKILL.md").resolve()
         )
-        if selected_tool and event.get("type") in ("tool_execution_start", "tool_execution_end"):
-            if event["toolName"] not in attempted:
-                attempted.append(event["toolName"])
-            failed |= event.get("type") == "tool_execution_end" and bool(event.get("isError"))
-        if event.get("type") != "tool_execution_end" or event.get("isError"):
+
+    for event in events:
+        kind, name, identity = event.get("type"), event.get("toolName"), event.get("toolCallId")
+        if kind not in ("tool_execution_start", "tool_execution_end"):
             continue
-        call = starts.get(event.get("toolCallId"), {})
-        arguments = call.get("args", {})
-        path = arguments.get("path", "")
-        content = json.dumps(event.get("result", {}))
-        if event.get("toolName") == "read":
+        if not isinstance(name, str) or not isinstance(identity, str) or not identity:
+            invalid = True
+            continue
+        if name not in allowed and name not in violations:
+            violations.append(name)
+        if name in readers and name not in attempted:
+            attempted.append(name)
+        if kind == "tool_execution_start":
+            if identity in starts or not isinstance(event.get("args"), dict):
+                invalid = True
+            else:
+                starts[identity] = event
+            if name == "read" and isinstance(event.get("args"), dict):
+                path = event["args"].get("path")
+                if isinstance(path, str):
+                    any_gui_guide |= any(
+                        guide_matches(path, skill) for skill in ("computer-use", *SKILLS.values())
+                    )
+            continue
+        call = starts.get(identity)
+        if call is None or call["toolName"] != name or identity in completed:
+            invalid = True
+            continue
+        completed.add(identity)
+        payload = event.get("result")
+        if event.get("isError") or _tool_result_failed(payload):
+            failed_calls.append({"tool": name, "tool_call_id": identity})
+            continue
+        content = payload.get("content") if isinstance(payload, dict) else None
+        texts = (
+            [
+                item["text"]
+                for item in content
+                if isinstance(item, dict)
+                and item.get("type") == "text"
+                and isinstance(item.get("text"), str)
+            ]
+            if isinstance(content, list)
+            else []
+        )
+        decoded = _hermes_payload(texts[0], name) if name in readers and len(texts) == 1 else None
+        if _tool_result_failed(decoded):
+            failed_calls.append({"tool": name, "tool_call_id": identity})
+            continue
+        if name == "read":
+            path = call["args"].get("path")
+            if not isinstance(path, str):
+                invalid = True
+                continue
             for name in (*SKILLS.values(), "computer-use"):
                 expected_path = layout["root"] / name / "SKILL.md"
-                if path == f"skill://{name}" or (
-                    path and Path(path).resolve() == expected_path.resolve()
-                ):
+                if guide_matches(path, name):
                     any_gui_guide = True
                     if name in manifest["skills"]:
                         body = expected_path.read_text().split("---", 2)[-1].strip()
-                        prefix = json.dumps(body[:180], ensure_ascii=False)[1:-1]
-                        if prefix in content:
+                        if _hash(expected_path.read_bytes()) == manifest["skills"][name]["files"][
+                            "SKILL.md"
+                        ] and any(body in text for text in texts):
                             loaded.append(name)
-        if selected_tool:
-            failed |= _tool_result_failed(event.get("result"))
-            if _tool_result_succeeded(event.get("result")):
-                invoked.append(event["toolName"])
+        elif name == readers[0] and len(texts) == 1:
+            if isinstance(decoded, dict) and _hermes_capability_agrees(
+                decoded, manifest, detail=bool(call["args"].get("detail"))
+            ):
+                invoked.append(name)
+        elif name == readers[1] and _tool_result_succeeded(decoded):
+            invoked.append(name)
     expected = (
         "clef-use-blender"
         if trigger == "natural" and "clef-use-blender" in manifest["skills"]
         else "clef-use"
     )
     passed = (
-        not any_gui_guide and not attempted
-        if trigger == "negative"
-        else expected in loaded and bool(invoked)
+        not failed_calls
+        and not violations
+        and (
+            not any_gui_guide and not attempted
+            if trigger == "negative"
+            else expected in loaded and bool(invoked)
+        )
     )
-    outcome = "PASS" if passed and not run.returncode else "NOT_RUN" if run.returncode else "FAIL"
-    result.update(trace=str(trace), model_driven=True, exit_code=run.returncode)
-    result["model_trigger_verification"] = {
+    incomplete = list(starts.keys() - completed)
+    outcome = (
+        "FAIL"
+        if violations or failed_calls or trigger == "negative" and (any_gui_guide or attempted)
+        else "NOT_RUN"
+        if invalid or incomplete or exit_code
+        else "PASS"
+        if passed
+        else "FAIL"
+    )
+    return {
         "case": trigger,
         "status": outcome,
         "loaded": loaded,
         "invoked": invoked,
         "attempted": attempted,
-        "stages": _model_stages(loaded, invoked, failed),
+        "failed_calls": failed_calls,
+        "read_only_violations": violations,
+        "incomplete_calls": incomplete,
+        "invalid_inventory": invalid,
+        "stages": _model_stages(loaded, invoked, bool(failed_calls)),
     }
-    result["status"] = outcome
-    if run.returncode:
-        result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
-    return result
 
 
 def _verify_omp(
@@ -1809,6 +1921,8 @@ def _verify_omp(
     skills_module = package / "src/extensibility/skills.ts"
     config_module = package / "src/mcp/config.ts"
     manager_module = package / "src/mcp/manager.ts"
+    settings_module = package / "src/config/settings.ts"
+    approval_module = package / "src/tools/settings.ts"
     settings = {}
     for suffix in ("config.yml", "config.yaml"):
         path = layout["config"].parent / suffix
@@ -1820,10 +1934,23 @@ def _verify_omp(
         "cwd": str(cwd),
         "disabledExtensions": settings.get("disabledExtensions", []),
     }
+    native_result = layout["state"] / "verification-native-results.json"
+    _safe(native_result)
+    atomic_write(native_result, "")
     script = f"""
 import {{loadSkills, buildSkillPromptMessage}} from {json.dumps(str(skills_module))};
 import {{loadAllMCPConfigs}} from {json.dumps(str(config_module))};
 import {{MCPManager}} from {json.dumps(str(manager_module))};
+import {{Settings}} from {json.dumps(str(settings_module))};
+import {{cfgToolsApproval}} from {json.dumps(str(approval_module))};
+const nativeSettings = await Settings.loadReadOnly({{cwd:{json.dumps(str(cwd))}}});
+const nativeRoot = nativeSettings.getAgentDir();
+if (!(await Bun.file(nativeRoot+'/config.yml').exists()) &&
+    !(await Bun.file(nativeRoot+'/config.yaml').exists()) &&
+    ((await Bun.file(nativeRoot+'/settings.json').exists()) ||
+     (await Bun.file(nativeRoot+'/agent.db').exists())))
+ throw new Error('native legacy-only settings require migration outside read-only verification');
+const evidence = {{approval:cfgToolsApproval.get(nativeSettings)}};
 const names = {json.dumps(list(manifest["skills"]))};
 const found = await loadSkills({json.dumps(options)});
 const selected = found.skills.filter(s => names.includes(s.name));
@@ -1835,7 +1962,8 @@ for (const skill of selected) {{
  loaded.push({{name:skill.name,path:skill.filePath,sha256,lineCount:prompt.details.lineCount,
    contentLoaded:prompt.message.includes(content.split('---').slice(2).join('---').trim())}});
 }}
-console.log('CLEF_DISCOVERY:' + JSON.stringify({{selected,loaded}}));
+evidence.discovery = {{selected,loaded}};
+await Bun.write(process.env.CLEF_OMP_NATIVE_RESULT, JSON.stringify(evidence));
 const configs = await loadAllMCPConfigs({json.dumps(str(cwd))});
 const config = configs.configs['clef-use'];
 if (!config) throw new Error('selected profile did not discover clef-use MCP');
@@ -1847,10 +1975,15 @@ try {{
  const tool=tools.find(t=>t.mcpServerName==='clef-use' && t.mcpToolName==='computer_capabilities');
  if (!tool) throw new Error('native MCP manager did not discover computer_capabilities');
  const response=await tool.execute('clef-read-only-verification',{{}},undefined,{{}});
- console.log('CLEF_INVOKED:' + JSON.stringify({{tool:tool.name,result:response}}));
+ evidence.invoked = {{tool:tool.name,result:response}};
+ await Bun.write(process.env.CLEF_OMP_NATIVE_RESULT, JSON.stringify(evidence));
 }} finally {{ await manager.disconnectAll(); }}
 """
-    environment = {**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"}
+    environment = {
+        **os.environ,
+        "CLEF_USE_MCP_READ_ONLY": "1",
+        "CLEF_OMP_NATIVE_RESULT": str(native_result),
+    }
     run = subprocess.run(
         [bun, "-e", script], cwd=cwd, env=environment, capture_output=True, text=True, timeout=90
     )
@@ -1861,15 +1994,15 @@ try {{
         exit_code=run.returncode,
         model_driven=False,
         method="installed native OMP SDK discovery/load/MCP invocation; no model task",
+        native_results=str(native_result),
     )
-    discovery = next(
-        (
-            json.loads(line.removeprefix("CLEF_DISCOVERY:"))
-            for line in run.stdout.splitlines()
-            if line.startswith("CLEF_DISCOVERY:")
-        ),
-        {},
-    )
+    _safe(native_result)
+    with native_result.open("rb") as stream:
+        raw = stream.read(_HERMES_TRANSCRIPT_LIMIT + 1)
+    if len(raw) > _HERMES_TRANSCRIPT_LIMIT:
+        raise ValueError("native OMP evidence exceeds verification bound")
+    evidence = json.loads(raw)
+    discovery = evidence.get("discovery", {})
     matches = [
         skill["name"]
         for skill in discovery.get("selected", [])
@@ -1884,14 +2017,7 @@ try {{
         and skill.get("lineCount", 0) > 0
         and skill.get("sha256") == manifest["skills"][skill["name"]]["files"]["SKILL.md"]
     ]
-    invoked = next(
-        (
-            json.loads(line.removeprefix("CLEF_INVOKED:"))
-            for line in run.stdout.splitlines()
-            if line.startswith("CLEF_INVOKED:")
-        ),
-        {},
-    )
+    invoked = evidence.get("invoked", {})
     stages = result["stages"]
     stages["DISCOVERED"] = {
         "status": "PASS" if set(matches) == set(manifest["skills"]) else "FAIL",
@@ -1924,9 +2050,15 @@ try {{
         ),
     }
     if run.returncode:
+        result["status"] = "FAIL"
         result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
     if trigger != "native" and result["status"] == "PASS":
-        return _verify_omp_model(layout, manifest, executable, cwd, result, trigger)
+        policies = evidence.get("approval")
+        if not isinstance(policies, dict):
+            result["status"] = "NOT_RUN"
+            result["reason"] = "native OMP approval policies unavailable; model not started"
+            return result
+        return _verify_omp_model(layout, manifest, executable, cwd, result, trigger, policies)
     return result
 
 
@@ -2189,6 +2321,15 @@ def verify(
     layout = _layout(harness, scope, project)
     if "status" in layout:
         return layout
+    if not _load_manifest(layout):
+        return _verify_selected(layout, harness, live, project, trigger)
+    with _locked(layout):
+        return _verify_selected(layout, harness, live, project, trigger)
+
+
+def _verify_selected(
+    layout: dict, harness: str, live: bool, project: Path | str | None, trigger: str
+) -> dict:
     manifest = _load_manifest(layout)
     stages = _stages()
     result = {

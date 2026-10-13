@@ -75,6 +75,10 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: actual_model_cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
     section: hermes
     claim: OBSERVED
@@ -207,6 +211,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: installed_windows
     claim: OBSERVED
@@ -240,6 +248,10 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: installed_windows
     claim: OBSERVED
@@ -368,6 +380,10 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: installed_windows
     claim: OBSERVED
@@ -464,6 +480,10 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: hermes_native_refresh
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
     section: hermes
     claim: OBSERVED
@@ -483,6 +503,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: actual_model_cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
     section: omp_current_0140
     claim: OBSERVED
@@ -1060,6 +1084,10 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: ci
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
     section: ci
     claim: OBSERVED
