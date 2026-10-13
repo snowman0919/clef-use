@@ -22,6 +22,16 @@ Codex 命令启动失败可能没有 JSON command event，只记录在私有 std
 证据 hash。读取尝试不能证明正文已加载；此错误本身也不能确定认证问题或
 原生执行器失败的具体原因。
 
+MCP 连接指引仅适用于已授权的 GUI 工作或明确的 clef-use capability/schema
+请求。普通代码问题及禁止 runtime 访问的请求不应选择这些工具。只读连接说明
+实际公布的 capability/status 工具和 schema/guide resource。发现 capability
+不需要正在运行的 GUI service；status 读取已有的 service/session，不能用于
+发现 Blender 的隐藏状态。
+在 OMP 中，通过所属技能的原生 reader 读取链接文件，例如
+`read(path="skill://clef-use/references/API_BASELINE.md")`。保留此 URI，不要转成
+`file://`。先发现实际 resource reader 再访问 MCP resource，不要猜测服务器别名或
+resource 地址。
+
 OmniParser 在 upstream import 前后保留调用者的 Torch thread 数，
 包括显式的单 thread 设置，无需新增 thread 配置。
 此初始化修复本身不能证明任务完成或 100ms 输入延迟；

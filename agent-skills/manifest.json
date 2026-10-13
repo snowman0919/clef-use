@@ -1,5 +1,5 @@
 {
-  "runtime_version": "0.1.47",
+  "runtime_version": "0.1.48",
   "api_schema_version": 1,
   "guide_contract_version": 1,
   "api_range": ">=0.1.29,<0.2",
@@ -13,11 +13,11 @@
   "skills": {
     "clef-use": {
       "sha256": {
-        "SKILL.md": "aa0f7498e0056a842117d442e8066f41f4dd5ff8a892fb72aafde1f6ddd4dd07",
+        "SKILL.md": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937",
         "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
         "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
       },
-      "digest": "72d42dd280ceee8343572dc1f1763f6c35c87689b9a98b44e713c37f8014f92a"
+      "digest": "d7ace875ff3058eb38b9e3316fa82539446ccf1085becd0e0f40a411ef1bc79e"
     },
     "clef-use-blender": {
       "sha256": {

@@ -36,6 +36,9 @@ These are files inside this skill. Keep `clef-use` as the owning skill name and
 use the reader's linked-file parameter or read the resolved file path. For
 Hermes `skill_view`, use `name="clef-use"` and
 `file_path="references/API_BASELINE.md"`.
+In OMP, use its native skill reader:
+`read(path="skill://clef-use/references/API_BASELINE.md")`. Keep the owning skill
+URI for linked files; do not convert it to a `file://` URL or invent an MCP alias.
 Prefer live, version-matched schemas if the installed runtime is newer.
 On a runtime contract mismatch, reload the current executable and MCP session;
 never downgrade a running service. After an update, finish or abort an active

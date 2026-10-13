@@ -17,15 +17,32 @@ def create_server(client=None, update_request="", read_only=False):
     server = FastMCP(
         "clef-use",
         instructions=(
-            "Submit bounded GUI goals to computer_run. The local runtime owns all "
-            "inner-loop actions. Observe after preparation to inspect fresh pixels "
-            "before supplying paths, or after escalation. Use observe refresh=False for "
-            "recorded diagnostic evidence, not fresh input/completion proof. "
-            "Continue resumes escalation; "
-            "abort stops input. Discover current schemas and registered operations with "
-            "computer_capabilities before using a newer guide. ASSESS never sends input. "
-            "Only continue/abort your own identified session. WAIT and executed input are "
-            "not completion proof; never lower confidence gates to bypass ambiguity."
+            "Use clef-use only for user-authorized GUI work or explicit requests about "
+            "clef-use capabilities and schemas. Do not invoke it for ordinary code-only "
+            "questions or when the user forbids runtime access. These instructions "
+            "apply only after the task selects clef-use. Load the applicable installed "
+            "Agent Skill before invoking runtime tools. "
+            + (
+                "This read-only connection exposes computer_capabilities and "
+                "computer_status. Use computer_capabilities to discover versions, "
+                "supported operations and schemas without a running GUI service. "
+                "Schema/guide resources are also advertised; use an actually discovered "
+                "harness reader and preserve the exact resource URI. Do not invent "
+                "resource addresses or aliases. computer_status reads an "
+                "existing runtime session and does not start a service; it is not "
+                "capability or Blender-state discovery. This connection cannot capture, "
+                "run, continue or abort GUI work."
+                if read_only
+                else "Submit bounded GUI goals to computer_run. The local runtime owns all "
+                "inner-loop actions. Observe after preparation to inspect fresh pixels "
+                "before supplying paths, or after escalation. Use observe refresh=False for "
+                "recorded diagnostic evidence, not fresh input/completion proof. "
+                "Continue resumes escalation; "
+                "abort stops input. Discover current schemas and registered operations with "
+                "computer_capabilities before using a newer guide. ASSESS never sends input. "
+                "Only continue/abort your own identified session. WAIT and executed input are "
+                "not completion proof; never lower confidence gates to bypass ambiguity."
+            )
             + (" " + update_request if update_request else "")
         ),
     )

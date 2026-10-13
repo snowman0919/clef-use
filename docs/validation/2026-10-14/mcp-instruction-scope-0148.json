@@ -1,0 +1,299 @@
+{
+  "classification": "OBSERVED_REAL_MCP_PROTOCOL_AND_ACTUAL_NATIVE_MODEL_SOURCE_0148_CANDIDATE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.48",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-02",
+    "HARNESS-03"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, prompts, configuration contents, tokens or raw traces.",
+  "source_binding": {
+    "mcp_server_sha256": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+    "integrations_sha256": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+    "guide_manifest_sha256": "6a51a45b7b52e0c9b7b045242b84ca8f60ab2ace5f8f7d283145a96fd6f4443f",
+    "core_guide_sha256": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937"
+  },
+  "change": "Scope MCP initialize instructions to selected authorized GUI/capability tasks; read-only facade describes its actual two readers rather than removed execution tools. Prefer actual capabilities and discovered resource readers. OMP linked references retain native owning-skill URIs. No provider/model/canonical request/budget/operation/input/threshold change.",
+  "actual_stdio": {
+    "before": {
+      "classification": "OBSERVED_ACTUAL_STDIO_INITIALIZE_AND_TOOL_DISCOVERY",
+      "source_sha256": "0fc4d802f8f189d2a88fa421c64004929c152004fe904d2804f46451cbdb710c",
+      "tools": [
+        "computer_capabilities",
+        "computer_status"
+      ],
+      "instructions_sha256": "30a7efd7403beb7ce4958d96a4f8bedeaa6e59a0ca8902b2b56f931f818b144a",
+      "unadvertised_instruction_tool_names": [
+        "computer_run"
+      ],
+      "model_requests": 0,
+      "gui_or_input_actions": 0,
+      "runtime_endpoint_absent": true,
+      "status": "FAIL"
+    },
+    "after": {
+      "classification": "OBSERVED_ACTUAL_STDIO_INITIALIZE_AND_TOOL_DISCOVERY",
+      "source_sha256": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+      "tools": [
+        "computer_capabilities",
+        "computer_status"
+      ],
+      "instructions_sha256": "c9f3485b72b56549f008df84944b364348e5d892bd02f18b32897ad15ccf0bf8",
+      "unadvertised_instruction_tool_names": [],
+      "model_requests": 0,
+      "gui_or_input_actions": 0,
+      "runtime_endpoint_absent": true,
+      "status": "PASS"
+    },
+    "before_private_result_sha256": "19252643edc910081b90c6f3339f7454bec77101401868174f78432bac668242",
+    "after_private_result_sha256": "4e0bd18971afa4bf1ef9d9146059dc6385f0fbab8166eb1d92efca911abadb0e",
+    "interpretation": "Actual initialize listed capability/status only but instructed use of unavailable computer_run. Corrected initialize mentions only advertised tools; no GUI endpoint/model/input starts."
+  },
+  "source_regression": {
+    "passed": 1670,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 71.69,
+    "private_full_log_sha256": "44ae31495e586045cc7de44b71f9652edd0621401d11176459cd582fb69f8069",
+    "prior_focused_capability_and_update_tests_passed": 17,
+    "prior_focused_log_sha256": "3e9606c04a11d82f65dfc87d1473813e15119916aa6f11ec7041874e030a1c3e",
+    "published_cli_examples": 198,
+    "published_tool_examples": 12,
+    "active_ruff_files": 165,
+    "permanent_wording_tests_added": false
+  },
+  "intermediate_actual_omp_scope_candidate": {
+    "runtime_version": "0.1.47",
+    "classification": "SOURCE_CANDIDATE_NOT_IMMUTABLE_0147_PACKAGE",
+    "source_files": {
+      "src/clef_use/mcp_server.py": "6ca9f4cf5810b99167b52aca2b36a6e8417d3db378a7d31eca76b32383633af6",
+      "src/clef_use/integrations.py": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+      "agent-skills/manifest.json": "c7dee293b0b30cf7904472574293128d1f5651a78c44b3e034cc761e671da601"
+    },
+    "private_result_sha256": "402198a285391989a25173fb84602c3ebefe62324b979cbe26cf0037245da1c3",
+    "case_statuses": {
+      "explicit": "FAIL",
+      "natural": "NOT_RUN",
+      "negative": "PASS"
+    },
+    "cases_per_original_trigger_in_this_phase": 1,
+    "protected_configuration_file_bytes_preserved": true,
+    "settings_table_unchanged": true,
+    "auth_credentials_table_unchanged": true,
+    "changed_native_table_names": [
+      "cache",
+      "model_perf"
+    ],
+    "initial_driver_attempt": {
+      "status": "NOT_RUN",
+      "reason": "Driver indexed status directly instead of the canonical integrations response wrapper, after one successful owned integration and before any model call. Original result/log retained; resume reuses the same owned integration.",
+      "model_requests": 0,
+      "private_result_sha256": "4c2f542614eaa06f1f697383172b808d13b1dec5351e21a4357e167d68a87fbf",
+      "private_controller_log_sha256": "d532eae07a4237f3512ffc3c722d29af742923dc1a03a505bbe44d98dee00a81"
+    },
+    "reference_comparison": {
+      "full_native_skill_reference_read_succeeded": true,
+      "reference_body_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+      "full_reference_body_present": true,
+      "original_explicit_trace_sha256": "807b65422b67f23d116cc74b6aad711a8f06ba3b883bfae09bfc671a7426254c",
+      "natural_terminal_error_code": "workspace_violation",
+      "redacted_error": "invalid tool call: workspace_violation: path escapes workspace [PRIVATE_PATH]",
+      "terminal_error_sha256": "2026f8e2616c4514706670b6361b84fb63ef476431ceb3322a41cfae248a1e7d",
+      "rejected_uri_scheme": "file",
+      "decoded_rejected_uri_is_exact_managed_baseline_inside_workspace": true,
+      "original_natural_trace_sha256": "378bea3392717dd43b3ee156e818417495a67665e01427efede90379b9c60b0b",
+      "limit": "Observed native error and missing dispatch event; validation actor/root cause not proven. Do not interpret the valid decoded path as actually outside the workspace."
+    }
+  },
+  "actual_native": {
+    "omp": {
+      "status": "FAIL",
+      "source_files": {
+        "src/clef_use/mcp_server.py": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+        "src/clef_use/integrations.py": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+        "agent-skills/manifest.json": "6a51a45b7b52e0c9b7b045242b84ca8f60ab2ace5f8f7d283145a96fd6f4443f",
+        "agent-skills/clef-use/SKILL.md": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937"
+      },
+      "source_unchanged_during_execution": true,
+      "private_result_sha256": "55cda897c460718eb69a5b14f4bfc2e24524c6daa77a6c47907aa8c6c2b1a13d",
+      "canonical_budget_seconds": 90,
+      "provider_model_canonical_prompt_override": false,
+      "cases_per_original_trigger_in_this_phase": 1,
+      "protected_configuration_file_bytes_preserved": true,
+      "runtime_endpoint_absent": true,
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "cli_exit_code": 0,
+          "wall_seconds": 91.50419766304549,
+          "loaded": [
+            "clef-use",
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "failed_tool_names": [
+            "mcp__clef_use_computer_status",
+            "write"
+          ],
+          "read_only_violation_tool_names": [
+            "write"
+          ],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "0cc787c94e35f5ff5b28b84498ca7e6173845552c9010306bb3e62449ea69766"
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 0,
+          "cli_exit_code": 0,
+          "wall_seconds": 52.17930834600702,
+          "loaded": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "failed_tool_names": [],
+          "read_only_violation_tool_names": [],
+          "runtime_before_guide": true,
+          "load_before_invoke": false,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "857d51186db58cf2a4ec1e86156cee05f69c95728d4a6a8ee418bcca4bb32ccd"
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "cli_exit_code": 0,
+          "wall_seconds": 41.595740505028516,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "failed_tool_names": [],
+          "read_only_violation_tool_names": [],
+          "runtime_before_guide": false,
+          "load_before_invoke": false,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "ebe2f11fc537c18341eb136942617b89096d69727613ee2f0f7c9339a0cbd84f"
+        }
+      ],
+      "temporary_policy_absent": true,
+      "native_database_preservation": {
+        "method": "Consistent readonly SQLite transactions, keyed SHA256 HMAC of complete serialized rows, order-independent table digests; no row values or HMAC key stored.",
+        "settings_table_unchanged": true,
+        "auth_credentials_table_unchanged": false,
+        "changed_table_names": [
+          "auth_change_revision",
+          "auth_credentials",
+          "cache",
+          "model_perf"
+        ],
+        "credential_material_preservation": "NOT_PROVEN",
+        "changed_columns_and_actor": "NOT_RETAINED_NOT_PROVEN",
+        "interpretation": "auth_credentials and auth_change_revision rows differ as well as generated cache/model_perf. Do not claim all authentication data preserved or restore prior credentials. Native model requests succeed; no authentication outage is inferred."
+      },
+      "failure_interpretation": "Explicit retains status/denied-write failures and90second native deadline; natural invokes capabilities before any observable selected-guide load; negative makes no guide/runtime attempt. No threshold or verifier pass condition is relaxed."
+    },
+    "hermes": {
+      "status": "PASS",
+      "source_files": {
+        "src/clef_use/mcp_server.py": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+        "src/clef_use/integrations.py": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+        "agent-skills/manifest.json": "6a51a45b7b52e0c9b7b045242b84ca8f60ab2ace5f8f7d283145a96fd6f4443f",
+        "agent-skills/clef-use/SKILL.md": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937"
+      },
+      "source_unchanged_during_execution": true,
+      "private_result_sha256": "24563b00f01b19b062821320a9e61d979f45b3cbf918a796e28afc60afeae87c",
+      "canonical_budget_seconds": 90,
+      "provider_model_canonical_prompt_override": false,
+      "cases_per_original_trigger_in_this_phase": 1,
+      "protected_configuration_file_bytes_preserved": true,
+      "runtime_endpoint_absent": true,
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "cli_exit_code": 0,
+          "wall_seconds": 21.406854768050835,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "failed_tool_names": [],
+          "read_only_violation_tool_names": [],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "f0a0a1b107fd27eb5a770e46be57719f6467c5fdb61612f57b128d0ca8b54178"
+        },
+        {
+          "trigger": "natural",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "cli_exit_code": 0,
+          "wall_seconds": 35.286273553967476,
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "failed_tool_names": [],
+          "read_only_violation_tool_names": [],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "83fc3afc22898f05b505cee6e58c87097c4efa442a2f30bccbddc760a2957f23"
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "cli_exit_code": 0,
+          "wall_seconds": 15.873996941023506,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "failed_tool_names": [],
+          "read_only_violation_tool_names": [],
+          "runtime_before_guide": false,
+          "load_before_invoke": false,
+          "task_verified": "NOT_RUN",
+          "original_native_trace_sha256": "9f89d614361b405a7baad6655d38481cda7d5bfafeabac262d97dbd061e2c602"
+        }
+      ]
+    }
+  },
+  "immutable_0148_installation": {
+    "status": "NOT_RUN",
+    "reason": "Source checkpoint precedes immutable build/update."
+  },
+  "whole_gui_and_performance": {
+    "status": "NOT_RUN",
+    "reason": "No new GUI capture/focus/input; desktop ownership coordination and full pinned task/1000 opportunity/correct OS-input p95/coverage/goodput proof remain open."
+  },
+  "completion_claim": false
+}

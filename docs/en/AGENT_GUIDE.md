@@ -24,6 +24,17 @@ The report publishes only the phase, timeout, guide-attempt flag and evidence
 digest. An attempted guide read does not prove its body loaded; this error does
 not diagnose authentication or establish why the native runner failed.
 
+MCP connection instructions apply only to authorized GUI work or explicit
+clef-use capability/schema requests. Ordinary code questions and requests that
+forbid runtime access do not select these tools. A read-only connection describes
+its advertised capability/status tools and schema/guide resources. Capability
+discovery does not need a running GUI service; status requires an existing
+service/session and cannot discover Blender's hidden state.
+In OMP, linked skill files use the native owning-skill reader, for example
+`read(path="skill://clef-use/references/API_BASELINE.md")`. Preserve this URI instead
+of converting it to `file://`. Discover resource readers before using MCP resources;
+do not guess server aliases or resource addresses.
+
 OmniParser preserves the caller's Torch thread budget across upstream imports,
 including an explicit single-thread setting. No new thread setting is required.
 This initialization fix does not establish whole-task completion or 100ms input

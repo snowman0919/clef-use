@@ -1,5 +1,56 @@
 # Reactive runtime execution status
 
+## Source 0.1.48 MCP instruction scope and actual harness checks, 2026-10-14
+
+**OBSERVED / actual MCP wire correction:** before the change, read-only stdio
+initialize advertised only `computer_capabilities` and `computer_status` but its
+instructions directed `computer_run` and other removed execution paths. The
+corrected server scopes instructions to selected authorized GUI/capability tasks,
+describes the actual read-only facade, and distinguishes service-free capabilities
+from status of an existing runtime. Resources require an actually discovered
+reader and exact URI. Full connections keep bounded execution/session guards.
+Actual final initialize/list-tools proves consistent instructions and no runtime
+endpoint. This does not guarantee a model follows the instructions.
+
+**OBSERVED / actual native reference failure:** an intermediate OMP natural turn
+ends with `invalid tool call: workspace_violation: path escapes workspace` for a
+`file://` URI. Decoding that URI proves it names the exact managed baseline file
+inside the workspace. The native validation actor/cause remains NOT_PROVEN. The
+same batch's explicit turn reads the complete baseline through
+`skill://clef-use/references/API_BASELINE.md`, with exact full body/hash and no
+tool error. The common guide now specifies that existing owning-skill reader;
+no workspace guard, permission or operation threshold is weakened.
+
+**OBSERVED / actual model sessions on final frozen candidate source:** Hermes
+explicit/natural/negative PASS, once each. Explicit loads core; natural loads core
+and Blender before matching current capabilities. OMP negative PASS without guide
+or runtime attempts. OMP explicit FAIL retains status and denied-write errors plus
+its original 90 second deadline; natural FAIL invokes capabilities before any
+observable guide load. Correct full/catalog calls remain partial evidence and
+do not erase failures. Canonical requests, provider/model selection and the budget
+remain unchanged; there is no retry-until-pass. Intermediate source outcomes remain
+separately recorded: explicit FAIL, natural NOT_RUN at native validation, negative
+PASS. A driver KeyError after a
+successful owned integration and before any model is retained as setup NOT_RUN;
+the corrected resume reuses that integration.
+
+Standalone protected configuration files remain unchanged. Consistent read-only
+SQLite transactions compare keyed hashes of complete rows without storing row
+values or the key. The intermediate OMP batch preserves all settings/auth tables,
+changing only cache/model_perf. Final OMP preserves settings but also changes
+auth_credentials/auth_change_revision rows. Changed columns, credential-material
+preservation and the writer/cause are NOT_PROVEN; no prior credentials are restored
+or overwritten. Native requests still succeed; terminal failures are reported
+separately. Generated state changes and unchanged standalone files remain distinct.
+
+Full source regression passes 1670, skips 55, with 41 warnings in 71.69 seconds.
+Active Ruff checks 165 files; generated 198 CLI/12 tool examples pass. Existing
+capability/update tests pass 17; no permanent wording-pinning tests are added.
+Immutable .48 installation, current .48 Codex model sessions, whole GUI tasks and
+performance remain NOT_RUN at this source checkpoint. Original acceptance statuses
+and numeric gates are unchanged. See the
+[MCP/native source receipt](validation/2026-10-14/mcp-instruction-scope-0148.json).
+
 ## Immutable installed Windows 0.1.47 verification, 2026-10-14
 
 **OBSERVED / immutable CI and installation:** exact source `88ec522` completes

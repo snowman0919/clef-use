@@ -287,6 +287,18 @@ Core/Blender guide routing explicitly includes read-only GUI capability question
 Their instruction order distinguishes native Skill catalog discovery from runtime
 invocation: load the applicable guide before capability calls. This changes prose
 routing only; it does not add runtime operations, permissions or safety facts.
+MCP initialize instructions use the same task scope: authorized GUI work or
+explicit clef-use capability/schema requests. They do not direct ordinary code
+questions or forbidden runtime access into product tools. Read-only connections
+describe only their advertised capability/status facade and schema/guide resources;
+they do not instruct callers to use removed execution tools. Capability discovery
+works without a GUI service. Status requires an existing service/session and
+does not establish Blender state. Full connections retain bounded execution and
+session-ownership guards. These instructions never authorize local operations.
+OMP linked references retain the native owning-skill `skill://` URI. An observed
+native read succeeds through that protocol; a later valid managed `file://` path
+is rejected before tool execution by workspace validation. The guidance preserves
+the discovered reader and exact resource addresses without relaxing any guard.
 
 ## Visual readiness revision, 0.1.5
 

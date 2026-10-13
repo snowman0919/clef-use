@@ -23,6 +23,16 @@ Codex 명령 시작 실패는 JSON command event 없이 비공개 stderr에만 �
 지침 읽기 시도 여부와 증거 해시만 공개합니다. 읽기 시도는 본문 로드를 증명하지
 않으며, 이 오류만으로 인증 문제나 네이티브 실행기 실패 원인을 단정하지 않습니다.
 
+MCP 연결 안내는 허가된 GUI 작업이나 명시적인 clef-use capability/schema 요청에
+적용합니다. 일반 코드 질문과 runtime 접근 금지 요청에는 이 도구를 선택하지 않습니다.
+읽기 전용 연결은 실제 공개한 capability/status 도구와 schema/guide resource를
+안내합니다. capability 발견에는 실행 중인 GUI service가 필요하지 않습니다.
+status는 기존 service/session을 읽으며 Blender의 숨은 상태를 발견하는 도구가 아닙니다.
+OMP의 연결된 지침 파일은
+`read(path="skill://clef-use/references/API_BASELINE.md")`처럼 소유 스킬의 네이티브
+reader로 읽습니다. 이 URI를 `file://`로 바꾸지 마세요. MCP resource는 실제 reader를
+발견한 뒤 사용하며, 서버 별칭이나 resource 주소를 추측하지 않습니다.
+
 OmniParser는 upstream import 전후에 호출자의 Torch thread 예산을 보존합니다.
 명시적인 단일 thread 설정도 유지하며 새 thread 설정은 필요하지 않습니다.
 이 초기화 수정만으로 전체 작업 완료나 100ms 입력 지연이 검증되지는 않습니다.

@@ -75,6 +75,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
     section: installed_native_failure_consumer_replay
     claim: OBSERVED
@@ -647,6 +652,11 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native.hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
     section: actual_linux_native
     claim: OBSERVED
@@ -682,6 +692,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native.omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
     section: actual_linux_native
     claim: OBSERVED

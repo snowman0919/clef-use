@@ -24,6 +24,17 @@ Codex のコマンド開始失敗は JSON command event がなく、非公開 st
 読み込み試行は本文ロードの証明ではなく、このエラーだけでは認証の問題や
 ネイティブ実行器の失敗原因を特定できません。
 
+MCP 接続の指示は、許可された GUI 作業または明示的な clef-use capability/schema
+要求に適用します。通常のコード質問や runtime へのアクセスを禁じる要求では、
+これらのツールを選択しません。読み取り専用接続は、実際に公開する
+capability/status ツールと schema/guide resource を案内します。capability の
+発見には実行中の GUI service は不要です。status は既存の service/session を
+読み取り、Blender の隠れた状態を発見するツールではありません。
+OMP のリンク先ファイルは
+`read(path="skill://clef-use/references/API_BASELINE.md")` のように所有スキルの
+ネイティブ reader で読みます。この URI を `file://` に変換しません。MCP resource
+は実際の reader を発見してから使い、サーバー別名や resource のアドレスを推測しません。
+
 OmniParser は upstream import 前後で呼び出し元の Torch thread 数を保持します。
 明示的な単一 thread 設定も保持し、新しい thread 設定は不要です。
 この初期化修正だけではタスク完了や 100ms の入力遅延を証明しません。
