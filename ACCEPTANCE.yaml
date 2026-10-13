@@ -75,6 +75,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
     section: actual_linux_native
     claim: OBSERVED
@@ -245,6 +250,11 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_windows
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: installed_windows
     claim: OBSERVED
@@ -298,6 +308,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_windows
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: installed_windows
     claim: OBSERVED
@@ -454,6 +469,11 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: limited_desktop_token
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: installed_windows
     claim: OBSERVED
@@ -530,6 +550,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
     section: retained_installed_codex_trace_replay
     claim: OBSERVED
@@ -1070,6 +1095,11 @@ scenarios:
   requirement: Predeclare workload/hardware/split; record at least 1000 reaction opportunities.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_browser_parser_component
+    claim: MEASURED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.reaction
     claim: MEASURED
@@ -1153,6 +1183,11 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_browser_parser_component
+    claim: OBSERVED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: installed_parser_component
     claim: OBSERVED
@@ -1227,6 +1262,11 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: ci
     claim: OBSERVED

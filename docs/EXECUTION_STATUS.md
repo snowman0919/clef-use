@@ -1,5 +1,46 @@
 # Reactive runtime execution status
 
+## Immutable installed Windows 0.1.46 verification, 2026-10-14
+
+**OBSERVED / immutable CI and actual installation:** source `a138ce6` completes
+run `38467041401`, all fifteen builds and assembly. Every archive matches all68
+Git payload files. Actual Windows .45 -> .46 returns INSTALLED; repeat returns
+CURRENT. Managed Codex refresh, unrelated configuration bytes, previous version
+files and loopback-server cleanup pass. A real LIMITED desktop token reads all68
+files and runs version/capabilities/offline fixture self-test; its owned task exits
+zero and is removed. Session0 doctor exit2 remains the expected desktop limitation.
+
+GitHub run-jobs reads and one individual metadata read fail with HTTP502; these
+observation failures are retained. Individual job metadata and actual native logs
+prove all fifteen installer command/reports, including first install, idempotence,
+update and failure-preservation checks. Native metadata has empty step arrays;
+no step entries are invented. The CI's synthetic update fixture ends at .47 while
+the immutable artifacts and actual installed runtime are .46. The workflow runs
+once; successful metadata/logs are retained when collecting missing evidence.
+
+**OBSERVED / actual installed Codex model sessions:** explicit FAIL, natural FAIL,
+negative PASS, once each with the original requests and cp1252 caller. Explicit
+completes with agent messages only, no observable guide read or runtime attempt.
+Natural successfully invokes the current matching capability catalog, but lacks
+observable full-guide load/order proof. Negative makes no GUI guide/tool attempt.
+Protected configuration bytes remain unchanged. Silent native provider-context
+injection remains NOT_PROVEN; missing read events do not prove absent guide bodies.
+These results are not authentication failures or whole GUI-task verification.
+
+**OBSERVED / installed offscreen browser parser component:** the unmodified .46
+JsonWorker/native worker completes the exact retained original .40 browser request:
+52objects,38caption regions, effective Torch12; worker closes and protected config
+bytes remain unchanged. Single uncontrolled wall time is71.91seconds, native parser
+telemetry61.17seconds. No capture/focus/OS input runs. Original-at-task config was
+not retained. Later .40 replay snapshots differ only by activity_overlay; current
+user settings are preserved. Source separates overlay construction from this direct
+parser path, but full configuration/quality equivalence is not claimed. The first
+diagnostic stops at its full-config comparison before inference and remains NOT_RUN.
+
+Original whole browser/editor/Codex GUI failures remain open, as do pinned quality,
+100ms reaction, coverage/goodput and public deployment. Windows desktop coordination
+is pending before new GUI input. See the [immutable .46 receipt](validation/2026-10-14/windows-installed-ci-0146.json).
+
 ## Source 0.1.46 capability binding and actual harness batch, 2026-10-14
 
 **OBSERVED / source correction:** typed operation-detail responses now require an
@@ -380,14 +421,14 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
-| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .45 CI passes all fifteen builds and assembly; actual .44 -> .45 update, repeat CURRENT and real LIMITED desktop-token payload/CLI checks pass. The failed .43 root grant remains historical evidence. Source .46 is a separate uninstalled candidate until its own immutable artifact/update checks execute. |
-| GUIDE-03 | Source .46 actual Hermes explicit/natural/negative cases pass once each. Actual OMP positive cases load guides but attempt denied writes and retain runtime-call errors; its unrelated Python case calls capabilities and fails over-trigger. Installed .45 Codex explicit/natural lack observable full-body load/order proof, while negative passes. Silent native provider-context injection remains NOT_PROVEN; the experimental raw-context route stops before a model turn because the actual native wire schema does not advertise the required event. Older route-specific HTTP 401 is historical. |
+| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .46 CI passes all fifteen builds and assembly; actual .45 -> .46 update, repeat CURRENT and real LIMITED desktop-token payload/CLI checks pass. Native installer logs independently prove the CI checks despite incomplete job-step metadata. The failed .43 root grant remains historical evidence. |
+| GUIDE-03 | Source .46 actual Hermes explicit/natural/negative cases pass once each. Actual OMP positive cases load guides but attempt denied writes and retain runtime-call errors; its unrelated Python case calls capabilities and fails over-trigger. Installed .46 Codex explicit has no runtime attempt or observable guide read; natural invokes current capabilities without observable full-body load/order; negative passes. Silent native provider-context injection remains NOT_PROVEN; the experimental raw-context route stops before a model turn because the native wire schema does not advertise the required event. Older route-specific HTTP401 is historical. |
 | GUIDE-04 | Installed .42 Windows Codex cached-to-fresh completion challenge PASS with independent incomplete receiver and cleanup. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN; one case does not establish general reliability. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
-| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Actual installed .42 independent native editor FAILS at its first parser timeout, zero decisions/actions. Installed .44 completes the same retained parser request offscreen after the Torch-budget correction; this component result does not prove the whole editor task. Other-process Brave foreground ownership precedes cleanup; its actor and parallel desktop ownership remain unproven, so new desktop-input trials await coordination. |
+| E2E-02 | Original browser .40 parser times out with38captions unfinished. Installed .46 completes its exact retained request offscreen in71.91seconds with52objects/38captions; original-at-task config is absent and later snapshots differ by activity_overlay, so this is component availability, not whole-task or quality equivalence. Actual Codex delivers Continue once but refuses Confirm at ACT0.6958 below0.9 despite the correct candidate/geometry. Actual installed .42 editor FAILS at its first parser timeout, zero actions; installed .44 completes the same retained parser request offscreen. Other-process Brave foreground ownership precedes cleanup; its actor and parallel desktop ownership remain unproven, so new desktop-input trials await coordination. |
 | PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
 | E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
-| RELEASE-01 | All fifteen immutable .45 CI artifacts and actual Windows .44 -> .45 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
+| RELEASE-01 | All fifteen immutable .46 CI artifacts and actual Windows .45 -> .46 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
 
 ## Actual Hermes verification correction, source 0.1.41
 
