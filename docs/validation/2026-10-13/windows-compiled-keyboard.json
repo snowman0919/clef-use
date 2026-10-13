@@ -1,0 +1,394 @@
+{
+  "classification": "OBSERVED_SOURCE_WHEEL_NATIVE_KEYBOARD_AND_FIXTURE_DIAGNOSIS",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.40",
+  "partial": true,
+  "requirements": ["INPUT-02", "INPUT-03", "INPUT-04", "INPUT-05", "STATE-01", "CAP-03", "E2E-02"],
+  "scope": "Complete source wheel executed on an owned native RichEdit receiver through the UIA provider, State Compiler and canonical generic runtime keyboard route. Source-overlay evidence, not installed .40, model/harness task completion or public release.",
+  "publication_policy": "Whitelisted facts, counts, public API identifiers and digests only. Native identities, Windows paths, process names, raw traces, screenshots, private text and layout values are omitted.",
+  "send_counter_scope": "All send counts in this receipt count WindowsInput._send method calls forwarded unchanged, including older native_send-named fields. They are not OS receiver instrumentation, global input monitoring or OS input latency. Zero forwarded calls means this action injected no events through that dispatch path.",
+  "source": {
+    "wheel_sha256": "c4ad3bc549a1aefd482979d65773e6c1c29d3315985343ac8f09f224c6950cb7",
+    "binding": "Final complete source candidate supplied and verified by the parent runner; native script reports a source overlay, not an installed release.",
+    "promoted_script": "scripts/windows_compiled_keyboard_smoke.py",
+    "promoted_script_sha256": "1a748703d26ccff84205f3af39ceb0f5023ca374633fe9c160df24900a816e98"
+  },
+  "earlier_source": {
+    "wheel_sha256": "84bbacb9990d122b5f5189bd4ae55014b0f033cdb3940afd72eb7a7b6b2f15fe",
+    "module_sha256": {
+      "runtime.py": "e87854c1fc4c2aa1d4760c7eac278fd0cea8c946bc9cae3e05b920466101cbdb",
+      "input_ir.py": "a27a7ed0c1114db74e21277bb2d3c47d1f24ad9f1ad1bc816db2dcbb98f075fd",
+      "backends.py": "89d36f5e7136f162545ffe17586605eb1fdd6c02e4f37dcd82f19aa71d7036b5",
+      "windows_state.py": "2984d6c6a1677a6a0237cd780644c2cde5a98e4c226be8ee575271328c3d4410",
+      "windows_uia.py": "110eef6e231ef66fca8369ebc1ecbaefb519ec07cd165aaef0931d711ebb5af4"
+    }
+  },
+  "retained_attempts": [
+    {
+      "stage": "Inherited TextEdit DocumentRange writability",
+      "status": "FAIL",
+      "wheel_sha256": "ebbc7f7b9fe73bcdd7cdea95b99130e804299099421bf0c6773862e335a9ca2c",
+      "document_range_hresult": "0x80040201",
+      "text_editable": "UNKNOWN",
+      "native_send_calls_observed": 0,
+      "owned_cleanup_passed": true,
+      "private_result_sha256": "9c85539480837980a522b4da2fddc0ea7ed349c1aa614a501f9621d6baf37be7"
+    },
+    {
+      "stage": "Separate registered TextPattern read-only feasibility",
+      "status": "OBSERVED_READ_ONLY",
+      "sample_count": 2,
+      "text_pattern_id": 10014,
+      "text_pattern_hresult": "0x00000000",
+      "text_pattern_present": true,
+      "document_range_hresult": "0x00000000",
+      "document_range_present": true,
+      "readonly_attribute_id": 40015,
+      "readonly_variant_type": 11,
+      "readonly_value": false,
+      "native_send_calls_observed": 0,
+      "owned_cleanup_passed": true,
+      "scope": "Cold and warm public UIA observation only; alternative diagnostic queries did not authorize input or become fallback product paths.",
+      "private_result_sha256": "c6a642653ac79a0e0ea565ada806cebd97778ea26274bca604d09525f54f96c3"
+    },
+    {
+      "stage": "Corrected source wheel with manual fixture pump",
+      "status": "FAIL",
+      "wheel_sha256": "84bbacb9990d122b5f5189bd4ae55014b0f033cdb3940afd72eb7a7b6b2f15fe",
+      "literal_elapsed_seconds": 3.5780000002123415,
+      "reason": "input cancelled or deadline expired",
+      "literal_prefix_only": true,
+      "literal_utf16_units_observed": 4,
+      "literal_native_send_calls_delta": 8,
+      "default_input_deadline_seconds": 3,
+      "active_ime_refusal_routes_passed": 4,
+      "owned_cleanup_passed": true,
+      "private_result_sha256": "ed16e0e754804afd0d28b3544be073fb6ed80aa9df2c05b3840603baace49402"
+    },
+    {
+      "stage": "Final candidate selection fixture expected a six-unit range",
+      "status": "FAIL",
+      "wheel_sha256": "c4ad3bc549a1aefd482979d65773e6c1c29d3315985343ac8f09f224c6950cb7",
+      "expected_em_getsel_end": 6,
+      "actual_em_getsel": [0, 7],
+      "diagnosis": "RichEdit selection includes its terminal paragraph; exact selected literal is verified separately with EM_GETSELTEXT in the corrected fixture.",
+      "owned_cleanup_passed": true,
+      "private_result_sha256": "4dc92c9bb7e4f66e441cd481ad4d0c277c642a62216da5e6cdf7615050b1f376"
+    },
+    {
+      "stage": "Final candidate submit fixture before second control paint settled",
+      "status": "FAIL",
+      "wheel_sha256": "c4ad3bc549a1aefd482979d65773e6c1c29d3315985343ac8f09f224c6950cb7",
+      "submit_reason": "keyboard target changed before input",
+      "send_method_calls_delta": 0,
+      "submit_callback_count": 0,
+      "diagnosis": "New owned control painting changed pixels; the strict pre-input guard refused before Enter delivery. The corrected fixture settles both controls before capture.",
+      "owned_cleanup_passed": true,
+      "private_result_sha256": "dbf4428e8d43b7ff06349469565c98ffc00f59c054a06a1e3457d2feb260f97c"
+    }
+  ],
+  "fixture_pump_diagnosis": {
+    "classification": "MEASURED_READ_ONLY_FIXTURE_DIAGNOSTIC_NOT_PRODUCT_SPEEDUP",
+    "same_source_wheel": true,
+    "order": ["A", "B", "B", "A"],
+    "arm_a": "manual ui.update plus sleep 0.005",
+    "arm_b": "canonical Tk mainloop plus bounded after completion poll",
+    "native_com_calls_per_observation": [34, 34, 34, 34],
+    "summed_native_com_qpc_ms": [260.7523, 3.8924, 4.9454, 245.8045],
+    "compiled_state_elapsed_ms": [390.5544, 38.0232, 60.3020, 282.2283],
+    "all_observed_states_valid": true,
+    "native_send_calls_observed": 0,
+    "owned_cleanup_passed": true,
+    "scope": "Four observations diagnose receiver pumping; this is not a five-runs-per-arm benchmark, product optimization, end-to-end reaction measurement or release performance gate.",
+    "private_result_sha256": "4053a8e2132a172617fa4cb575d66ad874df9727f99650e90bffc0f0ca4bff8f",
+    "earlier_profile": {
+      "scope": "Earlier monotonic timing diagnostic has approximately 15ms quantization; retained for call-path inspection and excluded from comparative timing conclusions.",
+      "private_result_sha256": "a17c3c9d75091ba17a3c0fd45de5578a63ea9aabd98021525353895a9830447c"
+    }
+  },
+  "canonical_mainloop_run": {
+    "status": "PASS_AT_SOURCE_COMPONENT_SCOPE",
+    "wheel_sha256": "84bbacb9990d122b5f5189bd4ae55014b0f033cdb3940afd72eb7a7b6b2f15fe",
+    "literal_route": "SessionRuntime._execute_selected(type,target=None)",
+    "literal_elapsed_seconds": 0.789056,
+    "literal_utf16_units": 6,
+    "literal_native_send_calls_delta": 12,
+    "literal_readback_exact": true,
+    "default_input_deadline_seconds": 3,
+    "input_guards_and_numeric_gates_unchanged": true,
+    "active_ime": {
+      "native_positive_preedit_bytes": 2,
+      "routes": ["InputIR with observed context", "direct legacy DesktopAction", "generic runtime literal", "direct InputIR without context"],
+      "routes_passed": 4,
+      "native_send_calls_delta_each": 0,
+      "preedit_bytes_exact_each": true,
+      "editor_text_exact_each": true
+    },
+    "own_imm_readback_exact": true,
+    "own_thread_layout_restored": true,
+    "uia_worker_exited": true,
+    "guardian_exited": true,
+    "cleanup": {
+      "foreground_restored": true,
+      "owned_window_closed": true,
+      "native_owned_keys_released": true
+    },
+    "private_result_sha256": "eb7ad5972dd6e5ead7fa0a5134e173c1975c77d6f058df4d7bfda0c090d1edbe"
+  },
+  "earlier_promoted_script_run": {
+    "status": "PASS_AT_SOURCE_COMPONENT_SCOPE",
+    "wheel_sha256": "84bbacb9990d122b5f5189bd4ae55014b0f033cdb3940afd72eb7a7b6b2f15fe",
+    "literal_readback_exact": true,
+    "literal_elapsed_seconds": 0.839343,
+    "literal_send_method_calls_delta": 12,
+    "valid_uia_samples": 22,
+    "active_ime_refusal_routes_passed": 4,
+    "owned_cleanup_passed": true,
+    "private_result_sha256": "14f78c7b28de5009541f12899bbcd98739109c5e6faaa020380ce029f3926083"
+  },
+  "final_native_script_run": {
+    "status": "PASS_AT_SOURCE_COMPONENT_SCOPE",
+    "wheel_sha256": "c4ad3bc549a1aefd482979d65773e6c1c29d3315985343ac8f09f224c6950cb7",
+    "literal_route": "SessionRuntime._execute_selected(type,target=None)",
+    "literal_elapsed_seconds": 0.8401943,
+    "literal_utf16_units": 6,
+    "literal_send_method_calls_delta": 12,
+    "literal_readback_exact": true,
+    "valid_uia_samples": 38,
+    "active_ime": {
+      "native_positive_preedit_bytes": 2,
+      "routes_passed": 4,
+      "send_method_calls_delta_each": 0,
+      "preedit_bytes_exact_each": true,
+      "editor_text_exact_each": true
+    },
+    "select_all": {
+      "status": "PASS",
+      "native_em_getsel": [0, 7],
+      "literal_utf16_units": 6,
+      "em_getseltext_matches_exact_literal": true,
+      "terminal_paragraph_mark_in_range": true
+    },
+    "delete_selection": {"status": "PASS", "native_editor_empty": true},
+    "submit_focus_transition": {
+      "status": "PASS",
+      "scope": "Input delivery and an owned native focus transition; not goal completion.",
+      "action_ok": true,
+      "delivery_acknowledged": true,
+      "native_wm_keydown_callback_count": 1,
+      "repeated_keydown": false,
+      "second_owned_control_focused": true,
+      "both_owned_controls_empty": true,
+      "owned_keys_and_native_enter_released": true,
+      "send_method_calls_delta": 2
+    },
+    "own_imm_readback_exact": true,
+    "own_thread_layout_readback_exact": true,
+    "owned_subclass_removed": true,
+    "uia_worker_exited": true,
+    "guardian_exited": true,
+    "cleanup": {
+      "foreground_restored": true,
+      "owned_window_closed": true,
+      "native_owned_keys_released": true
+    },
+    "default_input_deadline_seconds": 3,
+    "strict_pre_input_guard_and_numeric_gates_unchanged": true,
+    "private_result_sha256": "6befeed350ca88db81d18d729340bb0ab660731b0b9970411c6f620bc10f1901"
+  },
+  "submit_delivery_accounting": {
+    "classification": "SOURCE_REVIEW_AND_REGRESSION_WITH_NATIVE_POSITIVE_TRANSITION",
+    "strict_pre_input_guard_preserved": true,
+    "post_keydown_scope": "After acknowledged Enter only, cleanup/accounting rechecks top-level native window, process, thread and physical bounds; changing focused control within that bound window does not erase delivery acknowledgement.",
+    "retained_delivery_failure": "An acknowledged but unverified delivery consumes input budget, records DELIVERED_UNVERIFIED and returns NEEDS_REPLAN rather than becoming an undelivered failure or goal completion."
+  },
+  "owned_browser_component": {
+    "status": "PASS_AT_SOURCE_COMPONENT_SCOPE",
+    "wheel_sha256": "84bbacb9990d122b5f5189bd4ae55014b0f033cdb3940afd72eb7a7b6b2f15fe",
+    "fixture": "Owned Chrome app window, unique disposable profile, local HTML and nonce-bound DOM beacon readback.",
+    "renderer_accessibility_forced": true,
+    "renderer_accessibility_flag": "--force-renderer-accessibility",
+    "scope": "Explicit renderer accessibility fixture; default Chrome accessibility behavior and model/harness task generality are not established.",
+    "literal_elapsed_seconds": 1.0593251,
+    "literal_utf16_units": 6,
+    "literal_send_method_calls_delta": 12,
+    "independent_dom_readback_exact": true,
+    "valid_uia_samples": 19,
+    "cleanup": {
+      "owned_browser_exited": true,
+      "owned_browser_window_closed": true,
+      "foreground_restored": true,
+      "native_owned_keys_released": true,
+      "own_loopback_server_thread_exited": true
+    },
+    "private_result_sha256": "df0b8727117c8c5b7816ac49d2206b90df930978bb246921e91b8951dd575a52"
+  },
+  "earlier_source_regression": {
+    "passed": 1523,
+    "skipped": 46,
+    "warnings": 41,
+    "elapsed_seconds": 67.39,
+    "ruff_files_checked": 129,
+    "generated_cli_examples_checked": 198,
+    "generated_tool_examples_checked": 12,
+    "private_log_sha256": "e99ae84679686bc762c49c49630fc6519b5dc3691b5fd3da206ac6b081503c3e"
+  },
+  "source_regression": {
+    "classification": "OBSERVED_PARENT_RUN_SOURCE_CHECKS",
+    "passed": 1531,
+    "skipped": 46,
+    "warnings": 41,
+    "elapsed_seconds": 70.24,
+    "private_log_sha256": "a124586c07f88c8bb1584f75afeebfab715ad9525154e7b6d320324b3f434af9"
+  },
+  "source_native_pointer_and_recovery": {
+    "classification": "OBSERVED_COMPLETE_SOURCE_WHEEL_NATIVE_POINTER_AND_RECOVERY_COMPONENT",
+    "wheel_sha256": "c4ad3bc549a1aefd482979d65773e6c1c29d3315985343ac8f09f224c6950cb7",
+    "scope": "Owned composition-disabled canvas with current native identity/focus/IMC checks. Source overlay only; no installed .40, Blender semantics, model task or performance claim.",
+    "retained_crash_fixture_failure": {
+      "status": "FAILED",
+      "private_result_sha256": "60cead20e9d77daecc82e24c9f02b385c61a390f7618ad4c4a33db17c58516ae",
+      "buttons": [
+        "left",
+        "right",
+        "middle"
+      ],
+      "gestures": [
+        {
+          "button": "left",
+          "modifiers": [
+            "shift"
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [
+            "shift"
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": []
+        }
+      ],
+      "independent_cancel": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_still_blocked": true,
+        "explicit_release_called": false
+      },
+      "cleanup": {
+        "errors": [],
+        "own_guardian_exited": true,
+        "held_after": [],
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "owned_window_closed": true
+      },
+      "crash_subcase": "NOT_RUN",
+      "error": "Owned crash worker terminated before holding input; child raised PermissionError [WinError 5] while replacing a proof request file concurrently read by the parent. All preceding button/gesture/cancel checks passed; cleanup passed."
+    },
+    "fixture_correction": "Immutable per-nonce request/reply files avoid replacing a Windows file while the owning parent reads it. The 500 ms proof deadline, actual IMC absence and native input guards remain unchanged.",
+    "corrected_typed_input": {
+      "status": "PASSED",
+      "private_result_sha256": "7a4d9e020fc76cfa2768216f7fcd6eb59b457b576c20b9d02c72ebcd47d318f5",
+      "buttons": [
+        "left",
+        "right",
+        "middle"
+      ],
+      "gestures": [
+        {
+          "button": "left",
+          "modifiers": [
+            "shift"
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": [
+            "shift"
+          ]
+        },
+        {
+          "button": "middle",
+          "modifiers": []
+        }
+      ],
+      "independent_cancel": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_still_blocked": true,
+        "explicit_release_called": false
+      },
+      "cleanup": {
+        "errors": [],
+        "own_guardian_exited": true,
+        "held_after": [],
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "owned_window_closed": true
+      },
+      "independent_crash_recovery": {
+        "held_before": [
+          4,
+          16,
+          160
+        ],
+        "held_after": [],
+        "worker_terminated": true,
+        "guardian_exited": true,
+        "parent_release_called": false,
+        "ime_proof": "Per-guard IMC absence read back by the owning fixture process"
+      }
+    },
+    "native_capture_pointer_and_legacy_refusal": {
+      "status": "PASSED",
+      "private_result_sha256": "a2747a289b8dd7b0fcba1a9d2f03a4489647d7157433f3f29f27eb93894b16c1",
+      "capture_preserves_owned_geometry": true,
+      "input_preserves_owned_geometry": true,
+      "legacy_keyboard_refusals": [
+        {
+          "operation": "type",
+          "refused": true,
+          "reason": "Windows keyboard actions require compiled input context"
+        },
+        {
+          "operation": "hotkey",
+          "refused": true,
+          "reason": "Windows keyboard actions require compiled input context"
+        },
+        {
+          "operation": "press",
+          "refused": true,
+          "reason": "Windows keyboard actions require compiled input context"
+        }
+      ],
+      "keyboard_scope": "Legacy refusal only; this fixture does not prove compiled Unicode or shortcut success",
+      "clipboard_preserved": true,
+      "click_readback": 3,
+      "cancelled_before_input": true,
+      "control_characters_refused": true,
+      "foreground_change_refused": "Windows foreground changed since capture; no input sent",
+      "held_inputs_after_release": [],
+      "physical_coordinates": true,
+      "cleanup": {
+        "errors": [],
+        "input_released": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "owned_window_closed": true
+      }
+    }
+  },
+  "not_run": ["Installed 0.1.40", "Model/harness GUI task completion", "Successful Blender operations", "Whole-workload accuracy and performance gates", "Public deployment, download and fresh public installation"],
+  "acceptance_policy": "Original 44 requirement statuses and numeric gates remain unchanged; all new links are partial evidence."
+}

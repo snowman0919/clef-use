@@ -147,12 +147,14 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
                 "platform": "win32",
                 "activation": "automatic on Windows; native support requires a live probe",
                 "availability": "NOT_PROBED",
-                "facts": ["text_focus", "ime_composing"],
+                "facts": ["text_focus", "ime_composing", "focused_control", "text_editable"],
                 "scope": "Fresh supported TextEdit control bound to native foreground PID, "
                 "HWND, physical bounds and unchanged actual focus",
                 "composition_absence": "Supported GetActiveComposition S_OK plus null range only",
-                "limits": "Unsupported/error/stale remains UNKNOWN. No writability, global IME "
-                "idle, popup absence, effective keymap or Blender operation admission inferred.",
+                "writability": "Explicit enabled/non-password properties and supported "
+                "TextPattern document-range IsReadOnly boolean; no text content read",
+                "limits": "Unsupported/error/stale remains UNKNOWN. No global IME idle, popup "
+                "absence, effective keymap or Blender operation admission inferred.",
                 "isolation": "Owned stdlib worker with actual PID binding and bounded termination",
             }
         ],
@@ -197,6 +199,8 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "typed": ["key", "chord", "text", "pointer", "gesture", "wheel"],
             "physical_code": "UNSUPPORTED",
             "ime": "composition context guard; no IME engine control",
+            "windows_keyboard": "Compiled focused control identity and live per-input guard; "
+            "literal targets must already be focused and known writable; no implicit focus click",
             "unicode": "Windows native; X11 requires explicit clipboard, including ASCII literals",
             "macos_watchdog": "limited: native foreground and human-input query unavailable",
         },

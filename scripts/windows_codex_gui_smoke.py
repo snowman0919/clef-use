@@ -83,6 +83,9 @@ if not sys.argv[0].endswith("model_worker.py"):
         (root / (prefix + "-identity.json")).write_text(json.dumps({
             "input_sha256_before_after":hashlib.sha256(raw).hexdigest(),
             "worker_kind":self.kind, "replied_at_ns":time.monotonic_ns(),
+            "worker_interpreter":str(self.python),
+            "worker_config":self.config.model_dump(mode="json"),
+            "worker_ready":self.ready,
         }))
         return result
     JsonWorker.request = archived_request

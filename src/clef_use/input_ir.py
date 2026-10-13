@@ -88,7 +88,7 @@ class InputContext(InputModel):
     keymap: str | None = None
     text_focus: bool | None = None
     ime_composing: bool | None = None
-    text_control: Literal["select_all", "submit"] | None = None
+    text_control: Literal["select_all", "submit", "delete"] | None = None
 
 
 class KeyInput(InputModel):
@@ -655,6 +655,19 @@ class InputExecutor:
         )
         if hold and deadline is None:
             return ActionResult(ok=False, reason="held input requires a bounded deadline")
+        keyboard = isinstance(command, (KeyInput, ChordInput, TextInput)) or (
+            isinstance(command, GestureInput) and command.modifiers
+        )
+        cancellation = isinstance(command, KeyInput) and command.key == "escape"
+        if (
+            self._native()
+            and keyboard
+            and not cancellation
+            and (context is None or context_guard is None)
+        ):
+            return ActionResult(
+                ok=False, reason="native keyboard input requires observed context and a live guard"
+            )
         exact_text_control = False
         if context is not None:
             context = InputContext.model_validate(context)
@@ -678,6 +691,14 @@ class InputExecutor:
                         and command.repeat == 1
                         and command.hold_seconds == 0
                     )
+                    or (
+                        context.text_control == "delete"
+                        and isinstance(command, KeyInput)
+                        and command.key in {"backspace", "delete"}
+                        and command.phase == "tap"
+                        and command.repeat == 1
+                        and command.hold_seconds == 0
+                    )
                 )
                 exact_text_control = text_control
                 if context.ime_composing is not False or (
@@ -688,6 +709,8 @@ class InputExecutor:
                     )
             if isinstance(command, TextInput) and context.ime_composing is not False:
                 return ActionResult(ok=False, reason="literal insertion requires known idle IME")
+            if self._native() and isinstance(command, TextInput) and context.text_focus is not True:
+                return ActionResult(ok=False, reason="literal insertion requires known text focus")
         if after_input_guard is not None and not (
             context is not None
             and context.ime_composing is False

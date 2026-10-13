@@ -221,9 +221,20 @@ provider 组合。仅依赖标准库的 base Python worker 在就绪时验证其
 focused UIA element、process identity、ancestor chain 和 bounds。对于受支持的
 TextEdit，`GetActiveComposition` 返回 `S_OK` 且 composition 为 null 时表示
 `False`；interface 不受支持、发生错误、证据过期或不匹配时均保持 `UNKNOWN`。
-TextEdit 是否只读或可编辑尚未观测。该 provider 不证明 popup 所有权、keymap 状态、
-全局 idle 或 Blender operation admission。新 provider 的 installed end-to-end 验证仍待
-完成；这不代表 live readiness 或 operation 成功。
+focus identity 还绑定 UIA runtime ID 与物理 bounds。可编辑状态必须有明确的 enabled、
+non-password 属性，以及单独注册的 TextPattern document range 返回的 Boolean
+IsReadOnly。仅支持 TextEdit 不足以证明，且不读取文本内容。这不证明 popup 所有权、
+keymap、全局 idle 或 Blender operation admission。installed 0.1.39 已分别验证 InputIR
+拒绝活动组合以及危险的 legacy type bypass；0.1.40 修正仍需单独进行安装版验证。
+
+Windows model keyboard action 经过 State Compiler 与 InputIR。文字 target 必须已是
+获得 focus 且可编辑的 control，type 不再隐式点击输入框。IME、identity 或可编辑状态
+未知时拒绝输入，并在每个 native 单位前用 fresh guard 检查 focus 与 composition。
+keyboard、modifier input 必须有 observed context 和 live guard。明确的 Escape 与
+owned recovery release 保持独立；context 缺失不代表 IME idle。
+单次 Enter 获得传递 ACK 后允许 focus 移动；后续检查仍绑定原 native
+window/process/thread，仅允许 release 与传递记录。已传递但未验证的输入也消耗执行
+预算，并返回 NEEDS_REPLAN；传递本身不证明目标完成。
 
 Windows native input 会在发送前检查 failsafe，且不再 import PyAutoGUI。installed
 0.1.38 的一次 probe 在未发送任何 input 时，将自有 window geometry 从

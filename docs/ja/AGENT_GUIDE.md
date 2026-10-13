@@ -251,9 +251,22 @@ query 前後の native foreground 観測を同じ focused UIA element、process 
 ancestor chain、bounds に結び付けます。対応する TextEdit で
 `GetActiveComposition` が null composition とともに `S_OK` を返す場合は `False`
 です。未対応 interface、エラー、古い証拠や一致しない証拠は `UNKNOWN` のままです。
-TextEdit の read-only 状態と編集可否は観測しません。popup の所有状態、keymap、
-全体の idle、Blender operation admission を証明するものではありません。新 provider の
-installed end-to-end 検証は保留中であり、live readiness や operation 成功を示しません。
+focus identity は UIA runtime ID と物理 bounds も結び付けます。編集可否には明示的な
+enabled・non-password 属性と、別途登録された TextPattern の document range の
+Boolean IsReadOnly が必要です。TextEdit 対応だけでは確定せず、文字内容は読みません。
+popup 所有状態、keymap、全体の idle、Blender operation admission は証明しません。
+installed 0.1.39 では InputIR の active composition 拒否と危険な legacy type bypass を
+別々に再現しました。0.1.40 修正の installed 検証は別途必要です。
+
+Windows の model keyboard action は State Compiler と InputIR を経由します。文字の
+target は既に focus された編集可能な control と一致する必要があり、type は暗黙の
+focus click を行いません。IME・identity・編集可否が UNKNOWN なら拒否します。
+native 単位ごとに fresh guard で focus と composition を確認します。keyboard と
+modifier input は observed context と live guard が必要です。明示的な Escape と
+owned recovery release は独立して維持し、context 不在を idle IME と見なしません。
+一度の Enter の伝達 ACK 後は focus が移動できます。後続確認は元の native
+window/process/thread に結び付け、release と伝達記録のみを許可します。伝達済みでも
+未検証の入力は実行予算を消費し、NEEDS_REPLAN となります。伝達だけで完了しません。
 
 Windows native input は入力前に failsafe を確認し、PyAutoGUI を import しなく
 なりました。installed 0.1.38 の probe は入力を送る前に、所有 window の geometry

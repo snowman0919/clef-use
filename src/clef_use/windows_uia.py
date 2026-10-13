@@ -4,7 +4,8 @@ Only the expected foreground window is in scope. This creates no windows and
 never reads Name, Value, GetText or password data. The caller must enforce an
 outer child-process timeout for a hung native COM provider. No runtime/provider
 input authorization is implemented here. TextEdit support establishes a focused
-text control, never generic writability. Unsupported composition stays unknown.
+text control; writability additionally needs enabled, non-password and explicit
+document-range read-only evidence. Unsupported composition stays unknown.
 
 ABI source: Microsoft win32metadata UIAutomationClient.h, SHA256
 66b00453430cc6884482352ebc0ddf6db3916e38bf5684caba79d6e86aa1f038.
@@ -75,9 +76,12 @@ class VARIANT(C.Union):
 CLSID_UIA8 = GUID.parse("e22ad333-b25f-460c-83d0-0581107395c9")
 IID_UIA = GUID.parse("30cbe57d-d9d0-452a-ab13-7ac5ac4825ee")
 IID_TEXT_EDIT = GUID.parse("17e21576-996c-4870-99d9-bff323380c06")
+IID_TEXT = GUID.parse("32eba289-3583-42c9-9c59-3b6d9a1e9b6a")
 VT_I4, VT_BOOL = 3, 11
 PROCESS_ID, HAS_FOCUS, CONTROL_TYPE = 30002, 30008, 30003
+IS_ENABLED, IS_PASSWORD, IS_READONLY = 30010, 30019, 40015
 TEXT_EDIT_PATTERN = 10032
+TEXT_PATTERN = 10014
 
 
 class Unavailable(Exception):
@@ -127,6 +131,28 @@ class Session:
                 HRESULT,
             ),
             (self.automation, "VariantClear", [C.POINTER(VARIANT)], HRESULT),
+            (self.automation, "SafeArrayGetDim", [HANDLE], C.c_uint32),
+            (self.automation, "SafeArrayGetElemsize", [HANDLE], C.c_uint32),
+            (self.automation, "SafeArrayGetVartype", [HANDLE, C.POINTER(C.c_uint16)], HRESULT),
+            (
+                self.automation,
+                "SafeArrayGetLBound",
+                [HANDLE, C.c_uint32, C.POINTER(C.c_int32)],
+                HRESULT,
+            ),
+            (
+                self.automation,
+                "SafeArrayGetUBound",
+                [HANDLE, C.c_uint32, C.POINTER(C.c_int32)],
+                HRESULT,
+            ),
+            (
+                self.automation,
+                "SafeArrayGetElement",
+                [HANDLE, C.POINTER(C.c_int32), HANDLE],
+                HRESULT,
+            ),
+            (self.automation, "SafeArrayDestroy", [HANDLE], HRESULT),
         )
         for library, name, arguments, restype in signatures:
             function = getattr(library, name)
@@ -190,6 +216,96 @@ class Session:
                 self.result["cleanup_errors"].append(
                     {"operation": "VariantClear", "hresult": hex_hresult(hr)}
                 )
+
+    def runtime_id(self, element):
+        array = HANDLE()
+        try:
+            hr = com_method(element, 4, HRESULT, C.POINTER(HANDLE))(C.byref(array))
+            if hr != 0 or not array:
+                raise Unavailable("focused UIA runtime identity unavailable", hr)
+            if self.automation.SafeArrayGetDim(array) != 1:
+                raise Unavailable("focused UIA runtime identity is not one-dimensional")
+            kind, lower, upper = C.c_uint16(), C.c_int32(), C.c_int32()
+            hr = self.automation.SafeArrayGetVartype(array, C.byref(kind))
+            if hr != 0 or kind.value != VT_I4:
+                raise Unavailable("focused UIA runtime identity is not an integer array", hr)
+            if self.automation.SafeArrayGetElemsize(array) != C.sizeof(C.c_int32):
+                raise Unavailable("focused UIA runtime identity integer size mismatch")
+            hr = self.automation.SafeArrayGetLBound(array, 1, C.byref(lower))
+            if hr != 0:
+                raise Unavailable("focused UIA runtime identity lower bound unavailable", hr)
+            hr = self.automation.SafeArrayGetUBound(array, 1, C.byref(upper))
+            if hr != 0:
+                raise Unavailable("focused UIA runtime identity upper bound unavailable", hr)
+            if not 1 <= upper.value - lower.value + 1 <= 64:
+                raise Unavailable("focused UIA runtime identity exceeds bounded array size")
+            identity = []
+            for position in range(lower.value, upper.value + 1):
+                index, value = C.c_int32(position), C.c_int32()
+                hr = self.automation.SafeArrayGetElement(array, C.byref(index), C.byref(value))
+                if hr != 0:
+                    raise Unavailable("focused UIA runtime identity member unavailable", hr)
+                identity.append(value.value)
+            return identity
+        finally:
+            if array:
+                hr = self.automation.SafeArrayDestroy(array)
+                if hr != 0:
+                    self.result["cleanup_errors"].append(
+                        {"operation": "SafeArrayDestroy", "hresult": hex_hresult(hr)}
+                    )
+                    raise Unavailable("focused UIA runtime identity cleanup failed", hr)
+
+    def focused_control(self, element):
+        identity = self.runtime_id(element)
+        bounds = RECT()
+        hr = com_method(element, 43, HRESULT, C.POINTER(RECT))(C.byref(bounds))
+        if hr != 0 or bounds.left >= bounds.right or bounds.top >= bounds.bottom:
+            raise Unavailable("focused UIA geometry unavailable", hr)
+        return {
+            "runtime_id": identity,
+            "bounds": [bounds.left, bounds.top, bounds.right, bounds.bottom],
+        }
+
+    def editing(self, element):
+        evidence = {
+            "enabled": self.property(element, IS_ENABLED, VT_BOOL),
+            "password": self.property(element, IS_PASSWORD, VT_BOOL),
+        }
+        hr, pattern = self.returned(
+            element,
+            14,
+            (C.c_int32, TEXT_PATTERN),
+            (C.POINTER(GUID), C.byref(IID_TEXT)),
+        )
+        evidence["text_pattern_hresult"] = hex_hresult(hr)
+        evidence["text_pattern_present"] = pattern is not None
+        if hr != 0 or pattern is None:
+            return evidence, None
+        hr, document = self.returned(pattern, 7)
+        evidence["document_range_hresult"] = hex_hresult(hr)
+        if hr != 0 or document is None:
+            return evidence, None
+        value = VARIANT()
+        try:
+            hr = com_method(document, 9, HRESULT, C.c_int32, C.POINTER(VARIANT))(
+                IS_READONLY, C.byref(value)
+            )
+            readonly = {"hresult": hex_hresult(hr), "vt": value.tagged.vt}
+            if hr == 0 and value.tagged.vt == VT_BOOL and value.tagged.value.boolean in (-1, 0):
+                readonly["value"] = value.tagged.value.boolean == -1
+            evidence["readonly"] = readonly
+        finally:
+            hr = self.automation.VariantClear(C.byref(value))
+            if hr != 0:
+                self.result["cleanup_errors"].append(
+                    {"operation": "VariantClear", "hresult": hex_hresult(hr)}
+                )
+        values = [evidence[name].get("value") for name in ("enabled", "password", "readonly")]
+        if any(type(item) is not bool for item in values):
+            return evidence, None
+        enabled, password, readonly = values
+        return evidence, enabled and not password and not readonly
 
     def foreground(self, expected, expected_bounds):
         hwnd = self.user.GetForegroundWindow()
@@ -290,6 +406,10 @@ def native_observe(expected, result, expected_bounds=None):
         result["control_type"] = session.property(focus, CONTROL_TYPE, VT_I4)
         stage = "window_binding"
         result["ancestor_depth"] = session.bind_ancestor(uia, focus, expected, before["pid"])
+        try:
+            result["focused_control"] = session.focused_control(focus)
+        except Unavailable as error:
+            result["focused_control_reason"] = error.reason
         stage = "TextEdit_pattern"
         pattern_hr, pattern = session.returned(
             focus,
@@ -326,6 +446,10 @@ def native_observe(expected, result, expected_bounds=None):
                 result["ime_composing"] = None
                 result["status"] = "PARTIAL"
                 result["reason"] = "composition and conversion-target observations inconsistent"
+            try:
+                result["editing"], result["editable"] = session.editing(focus)
+            except Unavailable as error:
+                result["editing_reason"] = error.reason
         stage = "focus_recheck"
         again = session.require_returned(uia, 8, "focused UIA recheck unavailable")
         same = BOOL()
@@ -334,6 +458,13 @@ def native_observe(expected, result, expected_bounds=None):
         )
         if hr != 0 or not same.value:
             raise Unavailable("focused UIA element changed during observation", hr)
+        if result["focused_control"] is not None:
+            try:
+                if session.focused_control(again) != result["focused_control"]:
+                    raise Unavailable("focused UIA identity or geometry changed during observation")
+            except Unavailable as error:
+                result["focused_control"] = result["editable"] = None
+                result["focused_control_reason"] = error.reason
         stage = "foreground_after"
         after = session.foreground(expected, expected_bounds)
         result["native_after"] = after
@@ -346,9 +477,11 @@ def native_observe(expected, result, expected_bounds=None):
         if error.winerror is not None:
             result["winerror"] = error.winerror
         result["text_focus"] = result["ime_composing"] = None
+        result["focused_control"] = result["editable"] = None
     except Exception as error:
         result.update(status="UNAVAILABLE", error_type=type(error).__name__, failed_stage=stage)
         result["text_focus"] = result["ime_composing"] = None
+        result["focused_control"] = result["editable"] = None
     finally:
         if session is not None:
             session.close()
@@ -357,10 +490,12 @@ def native_observe(expected, result, expected_bounds=None):
         if result["cleanup_errors"]:
             result["status"] = "UNAVAILABLE"
             result["text_focus"] = result["ime_composing"] = None
+            result["focused_control"] = result["editable"] = None
         if result["acquisition_seconds"] > 0.5:
             result["status_before_stale"] = result["status"]
             result["status"] = "STALE"
             result["text_focus"] = result["ime_composing"] = None
+            result["focused_control"] = result["editable"] = None
 
 
 def unavailable(reason):
@@ -370,6 +505,7 @@ def unavailable(reason):
         "text_focus": None,
         "ime_composing": None,
         "editable": None,
+        "focused_control": None,
         "observed_at": None,
         "started_at": None,
         "completed_at": None,

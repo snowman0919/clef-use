@@ -102,6 +102,131 @@ def native():
     return api, gui
 
 
+@pytest.mark.parametrize(
+    "operation,value",
+    [("type", "Z"), ("press", "backspace"), ("hotkey", "ctrl+a")],
+)
+def test_legacy_keyboard_cannot_bypass_observed_input_context(operation, value):
+    api, gui = native()
+    gui.window_rect = lambda _: (0, 0, 100, 100)
+    observation = Observation(
+        "owned",
+        Frame(Image.new("RGB", (100, 100)), foreground_window=100),
+        (),
+    )
+    command = ActionCandidate(
+        id="keyboard",
+        observation_id=observation.id,
+        operation=operation,
+        value=value,
+        description="Owned keyboard input",
+    )
+    result = DesktopAction(gui).execute(command, observation, Event())
+    assert not result.ok
+    assert api.events == []
+
+
+@pytest.mark.parametrize(
+    "command",
+    [
+        {"kind": "text", "text": "Z"},
+        {"kind": "key", "key": "a"},
+        {"kind": "chord", "modifiers": ["ctrl"], "key": "a"},
+        {
+            "kind": "gesture",
+            "button": "middle",
+            "modifiers": ["shift"],
+            "points": [[0.2, 0.2], [0.3, 0.3]],
+            "surface": [0.1, 0.1, 0.9, 0.9],
+            "duration": 0.05,
+        },
+    ],
+)
+@pytest.mark.parametrize("missing", ["context", "guard"])
+def test_native_keyboard_refuses_missing_observation_authority(monkeypatch, command, missing):
+    from clef_use.input_ir import InputContext, InputExecutor
+
+    api, gui = native()
+    gui.window_rect = lambda _: (0, 0, 100, 100)
+    gui.unowned_input = lambda *_: False
+    adapter = DesktopAction(gui)
+    executor = adapter.input_executor = InputExecutor(gui, adapter.keys, adapter.buttons)
+    monkeypatch.setattr(executor, "_arm", lambda *args: None)
+    context = InputContext(text_focus=False, ime_composing=False)
+    frame = Frame(Image.new("RGB", (100, 100)), foreground_window=100)
+    result = adapter.execute_input(
+        command,
+        frame,
+        Event(),
+        context=None if missing == "context" else context,
+        context_guard=None if missing == "guard" else lambda: True,
+    )
+    assert not result.ok
+    assert api.events == []
+
+
+def test_owned_keyboard_release_remains_independent_of_focus_and_context():
+    from clef_use.input_ir import InputExecutor, KeyInput
+
+    api, gui = native()
+    gui.keyDown("shift", target=100)
+    adapter = DesktopAction(gui)
+    executor = adapter.input_executor = InputExecutor(gui, adapter.keys, adapter.buttons)
+    adapter.keys.add("shift")
+    executor.owned.append(("key", "shift"))
+    api.target = 200
+    frame = Frame(Image.new("RGB", (100, 100)), foreground_window=100)
+    result = adapter.execute_input(KeyInput(key="shift", phase="up"), frame, Event())
+    assert result.ok
+    assert api.events[-1] == (1, 0x10, 0xA)
+    assert not adapter.keys and not executor.owned
+
+
+@pytest.mark.parametrize("text_focus", [None, False])
+def test_native_literal_cannot_type_without_verified_text_focus(monkeypatch, text_focus):
+    from clef_use.input_ir import InputContext, InputExecutor, TextInput
+
+    api, gui = native()
+    gui.window_rect = lambda _: (0, 0, 100, 100)
+    gui.unowned_input = lambda *_: False
+    adapter = DesktopAction(gui)
+    executor = adapter.input_executor = InputExecutor(gui, adapter.keys, adapter.buttons)
+    monkeypatch.setattr(executor, "_arm", lambda *args: None)
+    frame = Frame(Image.new("RGB", (100, 100)), foreground_window=100)
+    result = adapter.execute_input(
+        TextInput(text="Z"),
+        frame,
+        Event(),
+        context=InputContext(ime_composing=False, text_focus=text_focus),
+        context_guard=lambda: True,
+    )
+    assert not result.ok
+    assert api.events == []
+
+
+@pytest.mark.parametrize("identity", [(222, 9), (223, 9), (222, 10), (0, 9), (222, 0)])
+def test_post_submit_recipient_checks_original_native_process_and_thread(identity):
+    api, gui = native()
+    gui.window_rect = lambda _: (0, 0, 100, 100)
+
+    def owner(window, output):
+        assert window == 100
+        output._obj.value = identity[0]
+        return identity[1]
+
+    api.GetWindowThreadProcessId = owner
+    frame = Frame(
+        Image.new("RGB", (100, 100)), foreground_window=100, foreground_bounds=(0, 0, 100, 100)
+    )
+    control = {"window": 100, "process": 222, "thread": 9}
+    if 0 in identity:
+        with pytest.raises(WindowsDesktopUnavailable, match="process identity unavailable"):
+            DesktopAction(gui).input_recipient_matches(frame, control)
+    else:
+        assert DesktopAction(gui).input_recipient_matches(frame, control) is (identity == (222, 9))
+    assert api.events == []
+
+
 @pytest.mark.parametrize("point", [(0, 0), (999, 0), (0, 799), (999, 799)])
 def test_native_corner_failsafe_refuses_input(point):
     api, gui = native()
@@ -295,7 +420,7 @@ def test_snapshot_target_change_refuses_action_and_control_characters():
     action = DesktopAction(gui)
     observation = Observation("epoch", Frame(Image.new("RGB", (20, 20)), foreground_window=99), ())
     candidate = ActionCandidate(
-        id="a", operation="press", value="enter", description="input", observation_id="epoch"
+        id="a", operation="scroll", value="down", description="input", observation_id="epoch"
     )
     with pytest.raises(RuntimeError, match="foreground changed"):
         action.execute(candidate, observation, Event())

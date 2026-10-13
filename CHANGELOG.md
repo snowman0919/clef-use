@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+- Close the observed Windows legacy typing/IME bypass. Route model keyboard
+  actions through compiled focused-control identity, explicit TextPattern
+  writability and live InputIR guards; refuse missing context without an
+  implicit focus click. Preserve explicit cancellation and owned releases.
+- Query registered TextPattern separately from TextEdit composition support.
+  Keep failed, unsupported and mixed read-only evidence unknown. Retain native
+  source/installed evidence and failed attempts separately; use the canonical
+  receiver event loop when measuring synchronous UIA calls.
+
 - Verify actual native Windows Codex guide loading, live MCP schemas and bounded
   GUI run/fresh observation. Keep failed task decisions, independent receiver
   results and retained attempts separate from successful harness invocation.

@@ -5,13 +5,15 @@ from __future__ import annotations
 import argparse
 import ctypes
 import json
+import os
+import secrets
 import subprocess
 import sys
 import time
 import tkinter as tk
 import traceback
 from pathlib import Path
-from threading import Event, Thread
+from threading import Event, Lock, Thread
 
 from windows_gui_support import restore_foreground, widget_point
 
@@ -20,19 +22,93 @@ from clef_use.input_ir import GestureInput, InputContext, KeyInput, PointerInput
 from clef_use.windows_input import Point, WindowsInput
 
 
+class GuiThreadInfo(ctypes.Structure):
+    _fields_ = [
+        ("size", ctypes.c_uint32),
+        ("flags", ctypes.c_uint32),
+        *[
+            (name, ctypes.c_void_p)
+            for name in ("active", "focus", "capture", "menu", "move", "caret")
+        ],
+        ("caret_bounds", ctypes.c_int32 * 4),
+    ]
+
+
+def owned_canvas_guard(gui, frame, canvas_hwnd, owner_pid, focus_hwnd=None, owner_imc_guard=None):
+    """Bind only this disposable, composition-disabled canvas and native focus."""
+    owned = frame.foreground_window
+    if owned is None or frame.foreground_bounds is None:
+        raise RuntimeError("owned receiver native identity or geometry unavailable")
+    if owner_pid != os.getpid() and owner_imc_guard is None:
+        raise RuntimeError("foreign receiver IMC absence requires live owning-process proof")
+    gui.user.GetAncestor.argtypes = [ctypes.c_void_p, ctypes.c_uint]
+    gui.user.GetAncestor.restype = ctypes.c_void_p
+    gui.user.IsWindow.argtypes = [ctypes.c_void_p]
+    gui.user.IsWindow.restype = ctypes.c_int
+    gui.user.GetGUIThreadInfo.argtypes = [ctypes.c_uint32, ctypes.POINTER(GuiThreadInfo)]
+    gui.user.GetGUIThreadInfo.restype = ctypes.c_int
+    imm = ctypes.WinDLL("imm32", use_last_error=True)
+    imm.ImmGetContext.argtypes = [ctypes.c_void_p]
+    imm.ImmGetContext.restype = ctypes.c_void_p
+    imm.ImmReleaseContext.argtypes = [ctypes.c_void_p, ctypes.c_void_p]
+    imm.ImmReleaseContext.restype = ctypes.c_int
+    process = ctypes.c_uint32()
+    thread = gui.user.GetWindowThreadProcessId(owned, ctypes.byref(process))
+    if not thread or process.value != owner_pid:
+        raise RuntimeError("owned receiver process identity differs")
+
+    def native_focus():
+        info = GuiThreadInfo()
+        info.size = ctypes.sizeof(info)
+        if not gui.user.GetGUIThreadInfo(thread, ctypes.byref(info)):
+            raise RuntimeError("owned receiver native keyboard focus unavailable")
+        if not info.focus or gui.user.GetAncestor(info.focus, 2) != owned:
+            raise RuntimeError("native keyboard focus outside owned receiver")
+        return info.focus
+
+    bound_focus = native_focus() if focus_hwnd is None else focus_hwnd
+
+    def guard():
+        gui.ensure_target(owned)
+        current_pid = ctypes.c_uint32()
+        current_thread = gui.user.GetWindowThreadProcessId(owned, ctypes.byref(current_pid))
+        if current_thread != thread or current_pid.value != owner_pid:
+            raise RuntimeError("owned receiver process or thread identity changed")
+        if gui.window_rect(owned) != frame.foreground_bounds:
+            raise RuntimeError("owned receiver physical geometry changed")
+        if not gui.user.IsWindow(canvas_hwnd) or gui.user.GetAncestor(canvas_hwnd, 2) != owned:
+            raise RuntimeError("owned canvas native identity changed")
+        if native_focus() != bound_focus:
+            raise RuntimeError("owned receiver native keyboard focus changed")
+        if owner_pid != os.getpid():
+            owner_imc_guard()
+            return
+        for hwnd in {canvas_hwnd, bound_focus}:
+            context = imm.ImmGetContext(hwnd)
+            if context:
+                if not imm.ImmReleaseContext(hwnd, context):
+                    raise RuntimeError("owned receiver unexpected IMC release failed")
+                raise RuntimeError("owned receiver IMC absence is no longer observed")
+
+    guard()
+    return guard, bound_focus
+
+
 def held(gui):
     gui.user.GetAsyncKeyState.argtypes = [ctypes.c_int]
     gui.user.GetAsyncKeyState.restype = ctypes.c_short
     return [vk for vk in (1, 2, 4, 16, 160, 161) if gui.user.GetAsyncKeyState(vk) & 0x8000]
 
 
-def hold_inputs(action, frame, cancel, point, deadline):
+def hold_inputs(action, frame, cancel, point, deadline, guard):
     context = InputContext(ime_composing=False, text_focus=False)
     for command in (
         KeyInput(phase="down", key="shift"),
         PointerInput(phase="down", point=point, button="middle"),
     ):
-        outcome = action.execute_input(command, frame, cancel, deadline=deadline, context=context)
+        outcome = action.execute_input(
+            command, frame, cancel, deadline=deadline, context=context, context_guard=guard
+        )
         if not outcome.ok:
             raise RuntimeError(outcome.reason)
 
@@ -41,8 +117,38 @@ def crash_worker(args):
     frame = DesktopCapture().capture()
     if frame.foreground_window != args.target:
         raise RuntimeError("owned receiver is no longer foreground")
+    proof_lock = Lock()
+
+    def owner_imc_guard():
+        # ImmGetContext can fail with NULL for another process's HWND. Ask the
+        # fixture owner to read its own IMC instead of treating failure as idle.
+        with proof_lock:
+            request = secrets.token_hex(16)
+            request_path = args.proof_request.with_name(
+                args.proof_request.stem + "-" + request + ".json"
+            )
+            reply_path = args.proof_reply.with_name(args.proof_reply.stem + "-" + request + ".json")
+            temporary = request_path.with_suffix(".tmp")
+            temporary.write_text(json.dumps({"request": request}), encoding="ascii")
+            # Publish immutable per-request files. Replacing a file concurrently
+            # read by the other process fails with a Windows sharing violation.
+            temporary.replace(request_path)
+            deadline = time.monotonic() + 0.5
+            while time.monotonic() < deadline:
+                if reply_path.exists():
+                    reply = json.loads(reply_path.read_text(encoding="ascii"))
+                    if reply.get("request") == request:
+                        if reply.get("ok") is not True:
+                            raise RuntimeError("owning process refused current IMC absence proof")
+                        return
+                time.sleep(0.005)
+            raise RuntimeError("live owning-process IMC absence proof timed out")
+
+    guard, _ = owned_canvas_guard(
+        WindowsInput(), frame, args.canvas, args.owner_pid, args.focused_window, owner_imc_guard
+    )
     action = DesktopAction()
-    hold_inputs(action, frame, Event(), tuple(args.point), time.monotonic() + 10)
+    hold_inputs(action, frame, Event(), tuple(args.point), time.monotonic() + 10, guard)
     args.output.write_text(
         json.dumps({"holding": True, "guardian_pid": action.input_executor.guardian.pid}),
         encoding="utf-8",
@@ -59,6 +165,9 @@ def main(args):
     with gui.physical_coordinates():
         pointer_known = bool(gui.user.GetCursorPos(ctypes.byref(pointer)))
     root, owned, child, guardian_handle = None, None, None, None
+    child_proof_guard, child_proof_seen = None, set()
+    child_proof_request = args.output.with_suffix(".proof-request.json")
+    child_proof_reply = args.output.with_suffix(".proof-reply.json")
     blocked, unblock, cancel = None, Event(), Event()
     report = {"mode": "REAL_WINDOWS_INSTALLED_TYPED_INPUT", "status": "FAILED"}
     try:
@@ -102,18 +211,50 @@ def main(args):
         imm = ctypes.WinDLL("imm32", use_last_error=True)
         imm.ImmAssociateContextEx.argtypes = [ctypes.c_void_p, ctypes.c_void_p, ctypes.c_uint]
         imm.ImmAssociateContextEx.restype = ctypes.c_int
-        imm.ImmGetContext.argtypes = [ctypes.c_void_p]
-        imm.ImmGetContext.restype = ctypes.c_void_p
-        if not imm.ImmAssociateContextEx(owned, None, 1) or imm.ImmGetContext(canvas.winfo_id()):
+        if not imm.ImmAssociateContextEx(owned, None, 0) or not imm.ImmAssociateContextEx(
+            owned, None, 1
+        ):
             raise RuntimeError("owned receiver IME disable/readback was not confirmed")
+        canvas_hwnd = canvas.winfo_id()
+        _, bound_focus = owned_canvas_guard(
+            gui, DesktopCapture().capture(), canvas_hwnd, os.getpid()
+        )
         report["ime_scope"] = (
             "Owned non-text canvas IMC disabled and absence read back; not general IME discovery"
         )
 
         def observe(predicate, seconds=3):
+            nonlocal child_proof_seen
             deadline = time.monotonic() + seconds
             while time.monotonic() < deadline:
                 root.update()
+                if child_proof_guard is not None:
+                    for request_path in child_proof_request.parent.glob(
+                        child_proof_request.stem + "-*.json"
+                    ):
+                        if request_path.name in child_proof_seen:
+                            continue
+                        request = json.loads(request_path.read_text(encoding="ascii")).get(
+                            "request"
+                        )
+                        if (
+                            not isinstance(request, str)
+                            or len(request) != 32
+                            or any(character not in "0123456789abcdef" for character in request)
+                            or request_path.name
+                            != child_proof_request.stem + "-" + request + ".json"
+                        ):
+                            raise RuntimeError("owned child IMC proof request is malformed")
+                        child_proof_guard()
+                        reply_path = child_proof_reply.with_name(
+                            child_proof_reply.stem + "-" + request + ".json"
+                        )
+                        temporary = reply_path.with_suffix(".tmp")
+                        temporary.write_text(
+                            json.dumps({"request": request, "ok": True}), encoding="ascii"
+                        )
+                        temporary.replace(reply_path)
+                        child_proof_seen.add(request_path.name)
                 if predicate():
                     return
                 time.sleep(0.005)
@@ -124,6 +265,9 @@ def main(args):
 
         def execute(command, frame, predicate):
             reply = {}
+            if root.focus_get() is not canvas:
+                raise RuntimeError("owned non-text canvas logical focus changed")
+            guard, _ = owned_canvas_guard(gui, frame, canvas_hwnd, os.getpid(), bound_focus)
 
             def worker():
                 try:
@@ -132,6 +276,7 @@ def main(args):
                         frame,
                         Event(),
                         context=InputContext(ime_composing=False, text_focus=False),
+                        context_guard=guard,
                     )
                 except BaseException as exc:
                     reply["error"] = exc
@@ -204,10 +349,13 @@ def main(args):
         frame = DesktopCapture().capture()
         point = coordinates(frame, 100, 300)
         ready, errors = Event(), []
+        if root.focus_get() is not canvas:
+            raise RuntimeError("owned non-text canvas logical focus changed")
+        guard, _ = owned_canvas_guard(gui, frame, canvas_hwnd, os.getpid(), bound_focus)
 
         def blocked_worker():
             try:
-                hold_inputs(action, frame, cancel, point, time.monotonic() + 8)
+                hold_inputs(action, frame, cancel, point, time.monotonic() + 8, guard)
                 ready.set()
                 unblock.wait(12)
             except BaseException as exc:
@@ -234,6 +382,9 @@ def main(args):
         assert not blocked.is_alive()
 
         child_report = args.output.with_suffix(".child.json")
+        child_proof_guard, _ = owned_canvas_guard(
+            gui, DesktopCapture().capture(), canvas_hwnd, os.getpid(), bound_focus
+        )
         with args.output.with_suffix(".child.stderr").open("w", encoding="utf-8") as stderr:
             child = subprocess.Popen(
                 [
@@ -242,6 +393,16 @@ def main(args):
                     "--crash-worker",
                     "--target",
                     str(owned),
+                    "--canvas",
+                    str(canvas_hwnd),
+                    "--owner-pid",
+                    str(os.getpid()),
+                    "--focused-window",
+                    str(bound_focus),
+                    "--proof-request",
+                    str(child_proof_request),
+                    "--proof-reply",
+                    str(child_proof_reply),
                     "--point",
                     *(str(x) for x in point),
                     "--output",
@@ -274,6 +435,7 @@ def main(args):
             "worker_terminated": child.poll() is not None,
             "guardian_exited": guardian_exited,
             "parent_release_called": False,
+            "ime_proof": "Per-guard IMC absence read back by the owning fixture process",
         }
         report["status"] = "PASSED"
     except Exception:
@@ -346,6 +508,11 @@ if __name__ == "__main__":
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--crash-worker", action="store_true")
     parser.add_argument("--target", type=int)
+    parser.add_argument("--canvas", type=int)
+    parser.add_argument("--owner-pid", type=int)
+    parser.add_argument("--focused-window", type=int)
+    parser.add_argument("--proof-request", type=Path)
+    parser.add_argument("--proof-reply", type=Path)
     parser.add_argument("--point", type=float, nargs=2)
     arguments = parser.parse_args()
     if arguments.crash_worker:

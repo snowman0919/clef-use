@@ -154,6 +154,15 @@ class WindowsInput:
                 raise WindowsDesktopUnavailable("Windows foreground geometry unavailable")
             return rect.left, rect.top, rect.right, rect.bottom
 
+    def window_identity(self, target):
+        self.ensure_target(target)
+        process = U32()
+        thread = self.user.GetWindowThreadProcessId(target, ctypes.byref(process))
+        self.ensure_target(target)
+        if not thread or not process.value:
+            raise WindowsDesktopUnavailable("Windows foreground process identity unavailable")
+        return process.value, thread
+
     def ensure_target(self, expected):
         actual = self.desktop_status()["foreground_window"]
         if expected is not None and actual != expected:

@@ -1,4 +1,8 @@
-"""Exercise the canonical native adapter against a disposable Windows Tk window."""
+"""Exercise native capture/pointers and reject unguarded legacy Tk keyboard input.
+
+Canonical compiled keyboard execution needs supported native focus/writability
+evidence. This Tk fixture does not supply it and makes no Unicode-success claim.
+"""
 
 from __future__ import annotations
 
@@ -128,18 +132,7 @@ def main():
                     if "error" in reply or not reply["outcome"].ok:
                         root.quit()
                         return
-                    actual = entry.get()
-                    if operation == "type":
-                        expected = actual == value
-                    elif operation == "hotkey":
-                        expected = (
-                            entry.selection_present()
-                            and entry.index(tk.SEL_FIRST) == 0
-                            and entry.index(tk.SEL_LAST) == entry.index(tk.END)
-                        )
-                    elif operation == "press" and value == "backspace":
-                        expected = actual == ""
-                    elif operation in {"click", "double_click"}:
+                    if operation in {"click", "double_click"}:
                         expected = len(clicks) == expected_clicks
                     elif operation == "scroll":
                         expected = len(scrolls) == expected_scrolls and scrolls[-1] < 0
@@ -147,11 +140,6 @@ def main():
                         expected = True
                     if expected:
                         delivery["verified_ns"] = time.monotonic_ns()
-                        if operation == "hotkey":
-                            delivery["selection_range"] = [
-                                entry.index(tk.SEL_FIRST),
-                                entry.index(tk.SEL_LAST),
-                            ]
                         root.quit()
                         return
                 if time.monotonic() >= deadline:
@@ -175,30 +163,24 @@ def main():
                 raise RuntimeError("owned input worker did not finish")
             return reply["outcome"]
 
-        result["select_all_virtual_mapping"] = root.tk.call("event", "info", "<<SelectAll>>")
-        result["select_all_class_binding"] = root.tk.call("bind", "Entry", "<<SelectAll>>")
         clipboard_sequence = gui.user.GetClipboardSequenceNumber()
-        text = "Windows 한글 테스트 😀"
-        assert execute("type", text, "entry").ok
-        assert entry.get() == text, repr(entry.get())
+        result["legacy_keyboard_refusals"] = []
+        for operation, value, target in (
+            ("type", "Windows 한글 테스트 😀", "entry"),
+            ("hotkey", "ctrl+a", None),
+            ("press", "backspace", None),
+        ):
+            outcome = execute(operation, value, target)
+            assert not outcome.ok and entry.get() == ""
+            result["legacy_keyboard_refusals"].append(
+                {"operation": operation, "refused": True, "reason": outcome.reason}
+            )
         assert gui.user.GetClipboardSequenceNumber() == clipboard_sequence
-        result["unicode_readback"] = entry.get()
         result["clipboard_preserved"] = True
         result["clipboard_verification"] = "sequence unchanged; no clipboard read/write"
-        assert execute("hotkey", "ctrl+a").ok
-        result["select_all_readback"] = {
-            "text": entry.get(),
-            "selection_present": bool(entry.selection_present()),
-            "focused_widget": str(root.focus_get()),
-        }
-        if entry.selection_present():
-            result["select_all_readback"]["selected_range"] = [
-                entry.index(tk.SEL_FIRST),
-                entry.index(tk.SEL_LAST),
-            ]
-        assert execute("press", "backspace").ok
-        result["shortcut_readback"] = entry.get()
-        assert result["shortcut_readback"] == ""
+        result["keyboard_scope"] = (
+            "Legacy refusal only; this fixture does not prove compiled Unicode or shortcut success"
+        )
         assert execute("click", target="button").ok and len(clicks) == 1
         assert execute("double_click", target="button").ok and len(clicks) == 3
         result["click_readback"] = len(clicks)
@@ -220,7 +202,7 @@ def main():
         root.update()
         time.sleep(0.2)
         try:
-            execute("press", "enter", observation=old)
+            execute("click", target="button", observation=old)
             raise AssertionError("stale foreground input accepted")
         except RuntimeError as exc:
             assert "foreground changed" in str(exc), str(exc)

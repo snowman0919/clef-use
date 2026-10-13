@@ -16,12 +16,13 @@ to `False`. An unsupported interface or query error does not mean composition
 is absent. Stale evidence, mismatched foreground or element identity, and
 unsupported or failed queries map to `UNKNOWN`.
 
-The provider does not observe whether the TextEdit is read-only or editable.
-It does not establish popup ownership, effective keymap, global idle, or Blender
-operation admission. These facts do not enable changing operations by
-confidence or by implication. The provider implementation exists, but its
-installed end-to-end verification is pending; no live readiness or operation
-success is claimed here.
+The original 0.1.39 boundary does not observe writability. The subsequent
+[compiled keyboard contract](0012-guard-model-keyboard-through-compiled-focus.md)
+adds explicit focused-control identity and separate TextPattern read-only
+evidence. Neither boundary establishes popup ownership, effective keymap,
+global idle or Blender operation admission. Installed 0.1.39 active-composition
+refusal and its legacy bypass are recorded separately; they do not establish
+whole-task end-to-end success.
 
 Foreground identity alone is insufficient for pointer input: a different native
 window can receive a click while the bound foreground check still passes.

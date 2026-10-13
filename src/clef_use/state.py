@@ -74,6 +74,8 @@ FACT_NAMES = (
     "selection",
     "selection_identities",
     "text_focus",
+    "focused_control",
+    "text_editable",
     "ime_composing",
     "keymap",
     "keymap_version",

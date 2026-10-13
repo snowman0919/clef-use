@@ -262,10 +262,26 @@ native foreground observations before and after the query to the same focused
 UIA element, process identity, ancestor chain and bounds. For a supported
 TextEdit, `GetActiveComposition` returning `S_OK` with a null composition
 means `False`; unsupported interfaces, errors and stale or mismatched evidence
-remain `UNKNOWN`. TextEdit read-only/editability is not observed. This does
-not establish popup ownership, keymap state, global idle, or Blender operation
-admission. The new provider’s installed end-to-end verification is pending; no
-live readiness or operation success is implied.
+remain `UNKNOWN`. Focused-control identity additionally binds its opaque UIA
+runtime ID and physical bounds. Writability requires explicit enabled and
+non-password properties plus a strict Boolean IsReadOnly attribute from the
+separately registered TextPattern document range. TextEdit composition support
+alone does not establish this. No text content is read. These facts do not
+establish popup ownership, keymap state, global idle or Blender operation
+admission. Installed 0.1.39 verifies active composition refusal through InputIR
+but reproduces an unsafe legacy type bypass; the 0.1.40 correction requires
+separate installed validation.
+
+Windows model keyboard actions use the State Compiler and typed InputIR. A literal
+target must already match the writable focused control; typing never clicks a
+field implicitly. Unknown IME, identity or writability refuses input. A fresh
+guard checks focus and composition before each native unit. Keyboard/modifier
+input requires observed context and a live guard, except explicit Escape and
+owned recovery releases. Missing context is never an idle-IME assumption.
+After an acknowledged one-shot Enter, focus may move; the post-input check binds
+the original native window/process/thread and authorizes only release/accounting.
+Delivered but unverified input consumes its action budget and returns NEEDS_REPLAN;
+delivery alone never proves goal completion.
 
 Windows native input checks its failsafe before dispatch and no longer imports
 PyAutoGUI. An installed 0.1.38 probe changed owned-window geometry from

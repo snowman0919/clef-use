@@ -335,6 +335,123 @@ class SessionRuntime:
         except InputDispatchError as exc:
             return ActionResult(ok=False, reason=str(exc), delivery=exc.delivery)
 
+    def _execute_selected(self, action, observation, cancelled):
+        """Route native model keyboard actions through observed, guarded input.
+
+        Typing never clicks a proposed field implicitly: that click could commit
+        an existing composition before its state is checked. A literal target
+        must already be the observed, writable focused control.
+        """
+        if action.operation not in {"type", "press", "hotkey"} or not getattr(
+            self.action, "requires_keyboard_context", False
+        ):
+            return self.action.execute(action, observation, cancelled)
+        from .input_ir import ChordInput, InputContext, InputDispatchError, KeyInput, TextInput
+        from .schema import ActionResult
+        from .state import StateUnavailable
+
+        target = next((item for item in observation.objects if item.id == action.target), None)
+        if (
+            action.observation_id != observation.id
+            or action.pointer is not None
+            or action.target is not None
+            and (target is None or target.sensitive or action.operation not in target.actions)
+            or target is None
+            and any(item.sensitive for item in observation.objects)
+        ):
+            return ActionResult(ok=False, reason="keyboard action target is stale or sensitive")
+        control = None
+        try:
+            if action.operation == "type":
+                command = TextInput(text=action.value or "")
+            elif action.operation == "press":
+                if action.value not in {"escape", "enter", "tab", "backspace"}:
+                    return ActionResult(ok=False, reason="key not allowed")
+                command = KeyInput(key=action.value)
+                control = {"enter": "submit", "backspace": "delete"}.get(action.value)
+            else:
+                keys = tuple((action.value or "").split("+"))
+                if keys not in {("ctrl", "a"), ("ctrl", "l"), ("command", "a"), ("command", "l")}:
+                    return ActionResult(ok=False, reason="hotkey not allowed")
+                command = ChordInput(modifiers=keys[:-1], key=keys[-1])
+                control = "select_all" if keys[-1] == "a" else None
+        except ValueError:
+            return ActionResult(ok=False, reason="invalid literal or keyboard command")
+        if isinstance(command, KeyInput) and command.key == "escape":
+            return self.action.execute_input(command, observation.frame, cancelled)
+        try:
+            initial = self._operation_state().expire(0.5)
+            frame = self._operation_frames[initial.observation_id]
+            if not same_context(observation.frame, frame) or region_changed(
+                observation.frame, frame, target.bbox if target else None
+            ):
+                return ActionResult(ok=False, reason="keyboard target changed before input")
+            focus = initial.require("focused_control")
+            text_focus = initial.require("text_focus")
+            ime = initial.require("ime_composing")
+            if ime is not False:
+                return ActionResult(ok=False, reason="keyboard input requires known idle IME")
+            if not isinstance(focus, dict) or not focus.get("runtime_id"):
+                return ActionResult(ok=False, reason="focused control identity is unavailable")
+            if isinstance(command, TextInput) or control is not None:
+                if text_focus is not True or initial.require("text_editable") is not True:
+                    return ActionResult(
+                        ok=False, reason="focused text control is not known writable"
+                    )
+            if target:
+                bounds = focus.get("bounds")
+                x, y = frame.point(target.bbox)
+                if not bounds or not bounds[0] <= x < bounds[2] or not bounds[1] <= y < bounds[3]:
+                    return ActionResult(
+                        ok=False, reason="literal target is not the focused control"
+                    )
+
+            def guard():
+                current = self._operation_state().expire(0.5)
+                current_frame = self._operation_frames[current.observation_id]
+                try:
+                    return (
+                        same_context(frame, current_frame)
+                        and current.require("focused_control") == focus
+                        and current.require("text_focus") is text_focus
+                        and current.require("ime_composing") is False
+                        and (
+                            not (isinstance(command, TextInput) or control is not None)
+                            or current.require("text_editable") is True
+                        )
+                    )
+                except StateUnavailable:
+                    return False
+
+            context = InputContext(
+                state_version=str(initial.version),
+                foreground=initial.require("window"),
+                text_focus=text_focus,
+                ime_composing=ime,
+                text_control=control,
+            )
+
+            def after_submit():
+                # An acknowledged one-shot Enter may replace the focused field.
+                # No further key-down is authorized by this post-input check.
+                current = self._capture()
+                return same_context(frame, current) and self.action.input_recipient_matches(
+                    current, focus
+                )
+
+            return self.action.execute_input(
+                command,
+                frame,
+                cancelled,
+                context=context,
+                context_guard=guard,
+                after_input_guard=after_submit if control == "submit" else None,
+            )
+        except StateUnavailable as exc:
+            return ActionResult(ok=False, reason=f"keyboard state unavailable: {exc}")
+        except InputDispatchError as exc:
+            return ActionResult(ok=False, reason=str(exc), delivery=exc.delivery)
+
     def _execute_operation(self, session):
         from .operations import OperationRunner, parse_operation_request
 
@@ -1151,16 +1268,32 @@ class SessionRuntime:
                     point = execution_observation.frame.pointer_point(selected.pointer.points[0])
                 self._phase(session, selected.operation.replace("_", " ").title(), label, point)
                 with _timing(row, "execution_ms"):
-                    result = self.action.execute(selected, execution_observation, session.cancelled)
+                    result = self._execute_selected(
+                        selected, execution_observation, session.cancelled
+                    )
                 row["action"] = selected.audit()
                 row["execution_ok"] = result.ok
+                if result.delivery is not None:
+                    row["input_delivery"] = result.delivery.model_dump(mode="json")
                 if session.cancelled.is_set():
                     return self._finish(session, Status.ABORTED, "abort requested")
                 if not result.ok:
-                    effect_history.update(verification="UNVERIFIED", failure_kind="INPUT_REFUSED")
+                    delivered = result.delivery is not None
+                    if delivered:
+                        with session.lock:
+                            session.steps += 1
+                            session.last_action = selected.audit()
+                    effect_history.update(
+                        verification="UNVERIFIED",
+                        failure_kind="DELIVERED_UNVERIFIED" if delivered else "INPUT_REFUSED",
+                    )
                     last_effect["pending"] = False
                     return self._finish(
-                        session, Status.ERROR, "action adapter refused or failed execution"
+                        session,
+                        Status.NEEDS_REPLAN if delivered else Status.ERROR,
+                        "input was delivered but its postcondition is unverified"
+                        if delivered
+                        else "action adapter refused or failed execution",
                     )
                 visual_stale_retries = 0
                 with session.lock:

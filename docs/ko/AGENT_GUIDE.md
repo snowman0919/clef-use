@@ -249,10 +249,24 @@ Windows 캡처는 스레드별 물리 좌표 context 안에서 native GDI를 사
 관측을 같은 focused UIA element, process identity, ancestor chain, bounds에 연결합니다.
 지원되는 TextEdit에서 `GetActiveComposition`이 null composition과 함께 `S_OK`를
 반환하면 `False`입니다. 지원하지 않는 interface, 오류, 오래되었거나 서로 맞지 않는
-근거는 `UNKNOWN`으로 남습니다. TextEdit의 읽기 전용 여부와 편집 가능 여부는
-관측하지 않습니다. popup 소유권, keymap 상태, 전체 UI 유휴 여부 또는 Blender
-operation admission을 증명하지 않습니다. 새 provider의 설치본 end-to-end 검증은
-아직 진행 중이며 live readiness나 operation 성공을 뜻하지 않습니다.
+근거는 `UNKNOWN`으로 남습니다. 포커스 식별자는 UIA runtime ID와 물리 영역도
+연결합니다. 편집 가능 여부는 enabled·non-password 속성과 별도로 등록된 TextPattern의
+document range에서 읽은 명시적인 Boolean IsReadOnly 근거가 있어야 확정합니다.
+TextEdit 지원만으로 이를 확정하지 않으며 문자 내용은 읽지 않습니다. 이 사실은 popup
+소유권, keymap, 전체 유휴 여부나 Blender operation admission을 증명하지 않습니다.
+설치된 0.1.39는 InputIR의 활성 조합 거절을 검증했지만 일반 type 우회도 재현했습니다.
+0.1.40 수정본의 설치 검증은 별도로 필요합니다.
+
+Windows 모델 키보드 입력은 State Compiler와 InputIR를 거칩니다. 문자 대상은 이미
+포커스된 편집 가능한 컨트롤과 일치해야 하며, type이 입력란을 암묵적으로 클릭하지
+않습니다. IME·식별자·편집 가능 여부가 불명확하면 거절하고, native 단위마다 새로운
+guard로 포커스와 조합 상태를 확인합니다. 키보드·modifier 입력은 관측 context와 live
+guard가 필요합니다. 명시적인 Escape와 소유 입력의 복구 release는 독립적으로 유지합니다.
+context가 없다는 이유로 IME가 유휴 상태라고 가정하지 않습니다.
+한 번의 Enter 전달이 확인된 뒤에는 포커스가 이동할 수 있습니다. 이후 검사는 원래
+native 창·프로세스·스레드를 확인하고 release와 전달 기록만 허용합니다. 전달됐지만
+결과가 검증되지 않은 입력도 실행 예산을 사용하며 `NEEDS_REPLAN`으로 남깁니다.
+입력 전달만으로 목표 완료를 선언하지 않습니다.
 
 Windows native input은 입력 전 failsafe를 확인하며 PyAutoGUI를 더는 import하지
 않습니다. 설치된 0.1.38에서 failsafe probe는 입력을 보내기 전에 소유 창 geometry를

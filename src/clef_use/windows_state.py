@@ -67,6 +67,57 @@ def focus_evidence(observation, version, sample):
         and composition.get("range_present") is ime
     ):
         facts["ime_composing"] = facts["text_focus"].model_copy(update={"value": ime})
+    focused = sample.get("focused_control")
+    if not isinstance(focused, dict):
+        return facts
+    identity, bounds = focused.get("runtime_id"), focused.get("bounds")
+    if (
+        not isinstance(identity, list)
+        or not 1 <= len(identity) <= 64
+        or any(type(item) is not int or not -(2**31) <= item < 2**31 for item in identity)
+        or not isinstance(bounds, list)
+        or len(bounds) != 4
+        or any(type(item) is not int or not -(2**31) <= item < 2**31 for item in bounds)
+        or not before["bounds"][0] <= bounds[0] < bounds[2] <= before["bounds"][2]
+        or not before["bounds"][1] <= bounds[1] < bounds[3] <= before["bounds"][3]
+    ):
+        return facts
+    facts["focused_control"] = facts["text_focus"].model_copy(
+        update={
+            "value": {
+                "runtime_id": identity.copy(),
+                "bounds": bounds.copy(),
+                "window": before["hwnd"],
+                "process": before["pid"],
+                "thread": before["tid"],
+            }
+        }
+    )
+    editing, editable = sample.get("editing"), sample.get("editable")
+    if (
+        not isinstance(editing, dict)
+        or type(editable) is not bool
+        or editing.get("text_pattern_hresult") != "0x00000000"
+        or editing.get("text_pattern_present") is not True
+    ):
+        return facts
+    values = []
+    for name in ("enabled", "password", "readonly"):
+        item = editing.get(name)
+        if (
+            not isinstance(item, dict)
+            or item.get("hresult") != "0x00000000"
+            or type(item.get("vt")) is not int
+            or item["vt"] != 11
+            or type(item.get("value")) is not bool
+        ):
+            return facts
+        values.append(item["value"])
+    enabled, password, readonly = values
+    if editing.get("document_range_hresult") == "0x00000000" and editable is (
+        enabled and not password and not readonly
+    ):
+        facts["text_editable"] = facts["text_focus"].model_copy(update={"value": editable})
     return facts
 
 

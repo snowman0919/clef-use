@@ -629,6 +629,26 @@ class DesktopAction:
                 command, frame, cancelled, context_guard, deadline, context, after_input_guard
             )
 
+    @property
+    def requires_keyboard_context(self):
+        return isinstance(self.gui, WindowsInput) or self.gui is None and sys.platform == "win32"
+
+    def input_recipient_matches(self, frame, control):
+        """Verify the native recipient after an acknowledged one-shot submit.
+
+        This authorizes no further key-down. The new text/IME state is unknown
+        until independently observed; owned releases remain unconditional.
+        """
+        if not isinstance(self.gui, WindowsInput):
+            return False
+        return (
+            frame.foreground_window == control.get("window")
+            and frame.foreground_bounds is not None
+            and self.gui.window_rect(frame.foreground_window) == frame.foreground_bounds
+            and self.gui.window_identity(frame.foreground_window)
+            == (control.get("process"), control.get("thread"))
+        )
+
     def execute(self, action, observation, cancelled):
         if self.gui is None:
             if sys.platform == "win32":
@@ -642,6 +662,10 @@ class DesktopAction:
         with self.lock, gui.physical_coordinates() if native else nullcontext():
             if cancelled.is_set():
                 return ActionResult(ok=False, reason="aborted")
+            if native and action.operation in {"type", "press", "hotkey"}:
+                return ActionResult(
+                    ok=False, reason="Windows keyboard actions require compiled input context"
+                )
             if action.observation_id != observation.id:
                 return ActionResult(ok=False, reason="stale observation")
             target = next((o for o in observation.objects if o.id == action.target), None)
@@ -699,9 +723,7 @@ class DesktopAction:
                         cancelled,
                         observation.frame.foreground_window,
                     )
-                if native:
-                    gui.type_text(value, cancelled, observation.frame.foreground_window)
-                elif not value.isascii():
+                if not value.isascii():
                     import pyperclip
 
                     previous = pyperclip.paste()

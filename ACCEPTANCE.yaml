@@ -168,6 +168,10 @@ scenarios:
   requirement: Existing five tools and goal-only contracts retain backward compatibility.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_regression
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
     claim: OBSERVED
@@ -195,6 +199,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_candidate
     claim: OBSERVED
@@ -220,6 +228,10 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installation_lifecycle
     claim: OBSERVED
@@ -340,6 +352,10 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.windows_ci26d9252_immutable
     claim: OBSERVED
@@ -388,6 +404,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.codex_actual_model
     claim: OBSERVED
@@ -503,6 +523,18 @@ scenarios:
   requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: owned_browser_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_native_input
     claim: OBSERVED
@@ -544,6 +576,10 @@ scenarios:
     surfaces.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_native_pointer_and_recovery.corrected_typed_input
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_native_input
     claim: OBSERVED
@@ -580,6 +616,10 @@ scenarios:
   requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_native_pointer_and_recovery.corrected_typed_input
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_native_input
     claim: OBSERVED
@@ -619,6 +659,14 @@ scenarios:
   requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_native_input
     claim: OBSERVED
@@ -650,6 +698,14 @@ scenarios:
   requirement: Unknown/false, source, version, timestamp and validity remain distinguishable.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
     claim: OBSERVED
@@ -849,6 +905,10 @@ scenarios:
   requirement: Installed release repeats real Blender menu/transform/property/viewport workflows.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_blender
     claim: OBSERVED
@@ -882,6 +942,18 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: owned_browser_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_browser
     claim: OBSERVED
@@ -923,6 +995,10 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: ci
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.installed_candidate
     claim: OBSERVED

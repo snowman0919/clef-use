@@ -1,0 +1,126 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_INSTALLATION_AND_RETAINED_NATIVE_FAILURES",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.39",
+  "partial": true,
+  "source_commit": "dd253df8fb6342c40298af716b8520e4f4992492",
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "HARNESS-01",
+    "STATE-01",
+    "INPUT-02",
+    "INPUT-05",
+    "E2E-01",
+    "E2E-02",
+    "RELEASE-01"
+  ],
+  "ci": {
+    "run_id": 38380136741,
+    "artifact_id": 11802938592,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38380136741",
+    "artifact_zip_sha256": "172e557759d12c509926ff297ba3335555870a842fdf8e7bf5c69d7c340e326c",
+    "artifact_zip_bytes": 383010688,
+    "source_payload_file_count": 68,
+    "python_source_file_count": 53,
+    "guide_payload_file_count": 9,
+    "git_payload_manifest_sha256": "0e32cfbb5b4a7dcc5197d5e6a10c61b03194900b626c3dfb7300794a36cf1f0a",
+    "artifact_count": 15,
+    "passed_artifacts": 15,
+    "ci_installation_checks_succeeded": 15
+  },
+  "installed_windows": {
+    "status": "PASS",
+    "from_version": "0.1.38",
+    "version": "0.1.39",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "payload_files_matching": 68,
+    "source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "self_test_scope": "control flow only; not ML quality or desktop speed",
+    "private_report_sha256": "c1eed863750a48ee000758cb234d7cb60ce774125410893620b50e244638179a"
+  },
+  "codex_gui": {
+    "status": "FAIL",
+    "native_discovery": "PASS",
+    "runtime_status": "NEEDS_REPLAN",
+    "reason": "screen changed during decision",
+    "steps": 0,
+    "rounds": 1,
+    "action_confidence": 0.9532,
+    "threshold": 0.9,
+    "independent_task_complete": false,
+    "error_type": "NativeRequestBlocked",
+    "error": "Native request requires interaction: mcpServer/elicitation/request",
+    "diagnosis": "Identical owned-fixture raster hashes, but native foreground identity/bounds changed during model decision. Own-session fresh-observe parameters matched; current foreground failed the owned-window approval rule. No authentication error. The other-window PID currently resolves to a browser executable, but trace-time process provenance was not recorded; who changed focus is NOT_PROVEN.",
+    "cleanup": {
+      "endpoint_removed": true,
+      "thread_unsubscribed": true,
+      "app_server_exited": true,
+      "owned_gui_process_exited": true,
+      "pointer_restored": true,
+      "foreground_restored": false,
+      "inputs_released": true,
+      "global_config_bytes_preserved": true
+    },
+    "private_result_sha256": "60ee3dc261cd3e3dfd6b04a7456caa72fe0f132dcd620a37d4278f8bc6c39dda",
+    "private_archive_sha256": "4aecc4a8bacd3e7b49170eb2125310053861f41f011a12d540b75f8322977293"
+  },
+  "installed_ime": {
+    "scope": "Owned RichEdit UIA provider -> State Compiler -> InputIR; separate direct legacy action bypass reproduction. No model/harness or Blender operation success.",
+    "primary_guard_status": "PASS",
+    "positive_native_preedit_bytes": 2,
+    "ime_validity": "VALID",
+    "ime_value": true,
+    "literal_refused": true,
+    "native_preedit_bytes_exact": true,
+    "native_editor_text_exact": true,
+    "legacy_bypass": {
+      "status": "UNSAFE_OBSERVED",
+      "action_ok": true,
+      "reason": "executed",
+      "native_positive_preedit_before_bytes": 2,
+      "native_preedit_after_bytes": 0,
+      "native_preedit_bytes_exact": false,
+      "native_editor_text_exact": false,
+      "native_editor_text_after_endswith_payload": true
+    },
+    "own_imm_readback_exact": true,
+    "own_thread_layout_restored": true,
+    "worker_exited": true,
+    "guardian_exited": true,
+    "cleanup": {
+      "foreground_restored": true,
+      "owned_window_closed": true,
+      "native_owned_keys_released": true
+    },
+    "private_result_sha256": "6d981c59a8de39911ea63f602854923e61f8e5447a63bd59a7cec2582c799499",
+    "input_count_scope": "Inherited count12 is calculated from initial literal UTF16 only; not measured total input. No total input-count claim."
+  },
+  "not_run": [
+    {
+      "check": "Public deployment",
+      "reason": "Feature-branch workflow deploy job skipped by existing branch policy; assembled CI artifacts are not public publication."
+    },
+    {
+      "check": "Whole-workload task accuracy, >=1000 opportunities, p95<=100ms, fast eligibility coverage>=0.8 and goodput",
+      "reason": "These component and one-model-task observations do not execute the complete predeclared baseline comparison."
+    },
+    {
+      "check": "Installed .40 bypass correction",
+      "reason": "Correction is under source/native verification; this receipt retains the installed .39 failure."
+    },
+    {
+      "check": "Reici E2E",
+      "reason": "Separate session result pending; clef-use development continues."
+    }
+  ]
+}
