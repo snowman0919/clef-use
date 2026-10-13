@@ -1044,6 +1044,10 @@ scenarios:
   requirement: Browser form and independent editor validate non-Blender generality.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-omni-thread-budget-0143.json
+    section: candidate
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-editor-task-0142.json
     section: actual_task
     claim: OBSERVED

@@ -1,5 +1,51 @@
 # Reactive runtime execution status
 
+## Source 0.1.43 caller Torch budget correction, 2026-10-14
+
+**OBSERVED / offscreen native control and source candidate:** the exact preserved
+original Windows editor parser request reproduces an inference timeout after
+readiness. Installed .42 initializes in 10.8 seconds, completes OCR 22/detection 139/
+fusion 81, returns the first caption generation, then exceeds its unchanged
+180-second receive limit during generation 2. This separates this replay's
+initialization from its inference failure; it does not retrospectively observe
+the original InteractiveToken worker's internal phases or environment.
+
+Paddle import changes absent OMP_NUM_THREADS to 1; native post-import Torch reports
+one thread. A separate real import intervention observes caller Torch 12 becoming 1
+and restores 12. Source .43 captures the resolved caller Torch budget before upstream
+imports and conditionally restores it before detector/Florence loading and task
+inference. It adds no thread setting or hardcoded CPU count. Paddle's environment
+change itself remains;
+the preserved contract is the caller's Torch budget in the isolated model worker.
+
+The private source candidate completes the same request with 81 objects and 59
+captions over four generations: 84.95 seconds from inference receive to reply,
+95.47 seconds including initialization/cleanup. These are single instrumented
+diagnostics with file I/O/copy/hash overhead, not production performance evidence.
+OCR output, source image and first 16 caption tokens match the retained control.
+Detection/fusion preserve count, order and all nonnumeric values, but are not byte
+identical: maximum numeric differences are 0.000244140625 for detection output and
+1.1920928955078125e-7 for normalized fused geometry. The control's later captions
+are censored, so complete numerical/task-quality equivalence remains NOT_RUN.
+
+**OBSERVED / real prepared-parser regression:** fresh child processes use actual
+Torch, pinned upstream models and constructor readback. Original code fails the
+native/default and explicit 4 budgets (1 != 12, 1 != 4); explicit 1 passes. The candidate
+passes all three without skips. An initial driver omitted canonical cache/offline
+environment and all six constructors failed before thread assertions; that attempt
+is retained as NOT_RUN for the invariant, with inner errors unavailable. Corrected
+tests set canonical cache/offline variables only in each child. Local .43 regression
+passes 1612 tests, skips 49 and reports 41 warnings in 110.70 seconds; the three new
+prepared-parser cases skip locally without its explicit configuration/dependencies
+and pass in actual Windows as above. Generated contract checks pass all 198 published
+CLI examples and 12 tool examples. Immutable .43 CI/installation remains NOT_RUN at
+this source checkpoint.
+
+No desktop capture or OS input runs in these diagnostics. Actual installed editor
+task, current Codex GUI task, complete pinned accuracy suite, 1000 opportunities,
+100ms p95/coverage/goodput, Blender hidden contexts and public release remain open.
+See the [partial native parser receipt](validation/2026-10-14/windows-omni-thread-budget-0143.json).
+
 ## Actual installed Windows and source 0.1.42 verification recovery
 
 **OBSERVED / immutable CI and installation:** `d8b5218` completes run

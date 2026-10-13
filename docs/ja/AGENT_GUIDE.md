@@ -6,6 +6,11 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+OmniParser は upstream import 前後で呼び出し元の Torch thread 数を保持します。
+明示的な単一 thread 設定も保持し、新しい thread 設定は不要です。
+この初期化修正だけではタスク完了や 100ms の入力遅延を証明しません。
+実際のインストール済み runtime で個別に検証してください。
+
 編集だけでなく、読み取り専用のメニュー・状態評価にも Blender スキルをロードします。
 `references/` ファイルは元のスキルに属します。Hermes では
 `skill_view(name="clef-use", file_path="references/API_BASELINE.md")` で基準 API を読みます。

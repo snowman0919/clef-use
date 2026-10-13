@@ -180,6 +180,13 @@ index failures. The pinned local Florence model identity must contain lowercase
 `florence` because upstream uses a case-sensitive string to select its prompt
 and documented image generation arguments.
 
+OmniParser preserves the caller's Torch compute-thread budget across upstream
+imports. Eager Paddle initialization can set an absent `OMP_NUM_THREADS` to one,
+even though this worker uses EasyOCR. The worker restores the previously resolved
+Torch budget before detector/Florence loading and task inference; caller budgets
+remain in control. This does not restore Paddle's environment changes or change the model,
+batch, candidate thresholds or backend deadline.
+
 The decision budget counts model rounds, including completion checks; actions
 are counted separately. Completion needs strong predictions for the goal and
 all supplied conditions on two fresh observations. Changed screens trigger

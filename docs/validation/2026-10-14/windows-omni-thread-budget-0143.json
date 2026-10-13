@@ -1,0 +1,289 @@
+{
+  "classification": "OBSERVED_OFFSCREEN_INSTALLED_NATIVE_CONTROL_AND_SOURCE_CANDIDATE",
+  "date": "2026-10-14",
+  "partial": true,
+  "requirements": [
+    "E2E-02",
+    "PERF-01",
+    "PERF-02",
+    "PERF-03"
+  ],
+  "completion_claim": false,
+  "publication_policy": "Whitelisted facts and digests only. Paths, native identities, config, screenshots, full rosters, arrays and model tokens remain private.",
+  "method": {
+    "control": "Installed immutable .42 JsonWorker and exact native OmniWorker with output-preserving diagnostic wrappers.",
+    "candidate": "Private native source candidate preserves resolved caller Torch budget across upstream imports; all supporting native modules copied unchanged from installed .42.",
+    "request": "One exact preserved actual original Windows editor parser request; same decoded input/config as control, no new capture or desktop input.",
+    "request_file_sha256": "52c28dc4adbe990b4d26bc59b2bad60ebadd42dfb4ab7426ddeb06f69ce2a889",
+    "source_patch": "Capture torch.get_num_threads before upstream imports; conditionally restore that value afterward. No new thread policy, CPU-count override, model, batch, threshold or timeout setting.",
+    "worker_backend_timeout_seconds": 180,
+    "caption_batch_size": 16,
+    "diagnostic_difference": "CREATE_NO_WINDOW on private launch; phase logging, full roster/array retention and pixel-input hashing add I/O/copy costs inside the deadline. These are single instrumented diagnostics, not controlled production latency/memory benchmarks.",
+    "original_environment_identity": "NOT_RUN; SSH diagnostic parent environment was not proven identical to the original InteractiveToken task. Current config is identical between control/candidate.",
+    "full_output_equivalence": "NOT_RUN; control second generation is censored by its unchanged deadline.",
+    "actual_task": "NOT_RUN for this source candidate; the original installed editor task remains FAIL.",
+    "performance_gate": "NOT_RUN; no whole real-task pinned-baseline comparison, 1000 predeclared opportunities, p95 input/coverage/goodput or OS-wide critical-error review."
+  },
+  "sources": {
+    "installed_control_version": "0.1.42",
+    "installed_control_commit": "d8b521884d12acd5a110aec29851a0afc9c006bc",
+    "installed_control_worker_sha256": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+    "executed_candidate_worker_sha256": "67336e06168a02b7fe119258d751f655aa51505c54d6fe7eeb3538f2b2b6be3b",
+    "production_source_version": "0.1.43",
+    "production_worker_sha256": "70cd42a1dc579a5d15602bdf4f70f05e58c2e6d5321c0161cdaabc02599c260e",
+    "production_candidate_ast_equal": true,
+    "production_difference": "Explanatory comment only; AST comparison is a one-off binding check, not behavioral regression proof.",
+    "probe_sha256": "b8c1ccd0802e0f312ad948fa6864164af7cd32da14092c97fd4544074f059200",
+    "upstream_utils_sha256": "1c702d08eb0d4150112dbbbaa27cfb60fba2dcd9304582a1dcd81f874ea5f994",
+    "paddle_base_sha256": "4a19fa627757284b01cba381f9310738fb83a57f30e1bde23c5247176ac851b8"
+  },
+  "control": {
+    "status": "FAIL",
+    "error_type": "TimeoutError",
+    "error": "model worker timed out",
+    "ready_receive_seconds": 10.8113861,
+    "inference_receive_seconds": 180.0173951,
+    "instrumented_wall_seconds": 190.8638638,
+    "effective_torch_threads": 1,
+    "phase_observations": [
+      {
+        "phase": "loaded",
+        "elapsed_seconds": 10.7166586
+      },
+      {
+        "phase": "check_ocr_box_finished",
+        "elapsed_seconds": 46.5420767,
+        "result_count": 22,
+        "native_call_seconds": 35.7935315
+      },
+      {
+        "phase": "predict_finished",
+        "elapsed_seconds": 50.36559,
+        "result_count": 139,
+        "native_call_seconds": 3.8215559
+      },
+      {
+        "phase": "overlap_finished",
+        "elapsed_seconds": 50.3853873,
+        "result_count": 81,
+        "native_call_seconds": 0.0182387
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 50.8812953,
+        "index": 0
+      },
+      {
+        "phase": "generate_finished",
+        "elapsed_seconds": 152.8304711,
+        "index": 0,
+        "native_call_seconds": 101.838322
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 153.2609608,
+        "index": 1
+      }
+    ],
+    "caption_generations_completed": 1,
+    "caption_generation_in_progress_at_termination": 1,
+    "full_reply_present": false,
+    "worker_closed": true,
+    "request_payload_after": "NOT_RUN; terminated before post-request assertion."
+  },
+  "import_only_intervention": {
+    "classification": "IMPORT_ONLY_INTERVENTION_NOT_INFERENCE_OR_PERFORMANCE",
+    "before": {
+      "OMP_NUM_THREADS": "UNSET",
+      "MKL_NUM_THREADS": "UNSET",
+      "OPENBLAS_NUM_THREADS": "UNSET"
+    },
+    "after": {
+      "OMP_NUM_THREADS": 1,
+      "MKL_NUM_THREADS": "UNSET",
+      "OPENBLAS_NUM_THREADS": "UNSET"
+    },
+    "caller_threads": 12,
+    "after_upstream_threads": 1,
+    "restored_threads": 12,
+    "restore_matches_caller": true
+  },
+  "candidate": {
+    "status": "PASS",
+    "ready_receive_seconds": 10.490809800000001,
+    "inference_receive_seconds": 84.9483211,
+    "instrumented_wall_seconds": 95.4743932,
+    "effective_torch_threads": 12,
+    "phase_observations": [
+      {
+        "phase": "loaded",
+        "elapsed_seconds": 10.4295952
+      },
+      {
+        "phase": "check_ocr_box_finished",
+        "elapsed_seconds": 18.7448144,
+        "result_count": 22,
+        "native_call_seconds": 8.2840887
+      },
+      {
+        "phase": "predict_finished",
+        "elapsed_seconds": 19.9233909,
+        "result_count": 139,
+        "native_call_seconds": 1.1758065
+      },
+      {
+        "phase": "overlap_finished",
+        "elapsed_seconds": 19.9589618,
+        "result_count": 81,
+        "native_call_seconds": 0.0330847
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 20.4089995,
+        "index": 0
+      },
+      {
+        "phase": "generate_finished",
+        "elapsed_seconds": 40.2734571,
+        "index": 0,
+        "native_call_seconds": 19.773319
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 40.8198282,
+        "index": 1
+      },
+      {
+        "phase": "generate_finished",
+        "elapsed_seconds": 60.7169859,
+        "index": 1,
+        "native_call_seconds": 19.8039375
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 61.1091944,
+        "index": 2
+      },
+      {
+        "phase": "generate_finished",
+        "elapsed_seconds": 81.0698858,
+        "index": 2,
+        "native_call_seconds": 19.867072
+      },
+      {
+        "phase": "generate_started",
+        "elapsed_seconds": 81.4438346,
+        "index": 3
+      },
+      {
+        "phase": "generate_finished",
+        "elapsed_seconds": 95.3663016,
+        "index": 3,
+        "native_call_seconds": 13.8571925
+      },
+      {
+        "phase": "caption_icons_finished",
+        "elapsed_seconds": 95.375905,
+        "result_count": 59,
+        "native_call_seconds": 75.3435967
+      },
+      {
+        "phase": "request_finished",
+        "elapsed_seconds": 95.3809531
+      }
+    ],
+    "reply_objects": 81,
+    "caption_generations_completed": 4,
+    "caption_regions": 59,
+    "full_reply_present": true,
+    "request_payload_unchanged": true,
+    "worker_closed": true
+  },
+  "retained_partial_quality_comparison": {
+    "full_rosters": {
+      "ocr": {
+        "full_control_sha256": "5a44e6207ce8abe39526f8b4a37518714320e8e8347cec542254b76517d4323e",
+        "full_candidate_sha256": "5a44e6207ce8abe39526f8b4a37518714320e8e8347cec542254b76517d4323e",
+        "byte_identical": true,
+        "compared_numeric_values": 88,
+        "max_abs_numeric_difference": 0,
+        "non_numeric_or_structural_mismatches": 0
+      },
+      "detection": {
+        "full_control_sha256": "9e55048008da394f4df84b30ee9f3cafcf0634d04cee68fe712de55a516044ad",
+        "full_candidate_sha256": "39884407af1eb9463cb89f0b2d6ec672a8da0c1e3a10bf0f18eb58de687ae809",
+        "byte_identical": false,
+        "compared_numeric_values": 695,
+        "max_abs_numeric_difference": 0.000244140625,
+        "non_numeric_or_structural_mismatches": 0
+      },
+      "fusion": {
+        "full_control_sha256": "0db813eef3c1500fbeea7cfe4ad5907a52f9382205000f83819a187f6f18559c",
+        "full_candidate_sha256": "cef245e26c5e75ca9e164e66f092d22a9d23576fcc09196a91a39d208bbf5dd0",
+        "byte_identical": false,
+        "compared_numeric_values": 324,
+        "max_abs_numeric_difference": 1.1920928955078125e-7,
+        "non_numeric_or_structural_mismatches": 0
+      },
+      "caption_arguments": {
+        "full_control_sha256": "6b1e2e6d6ca334e7b940a13956c5e495ee2ef5efe9793caf987c384ce1f9f305",
+        "full_candidate_sha256": "9e53eaa8cf1562a72e646e731c96a2607a2647fc41ba1e4d3f9664268b240dfd",
+        "byte_identical": false,
+        "compared_numeric_values": 238,
+        "max_abs_numeric_difference": 5.960464477539063e-8,
+        "non_numeric_or_structural_mismatches": 0
+      }
+    },
+    "full_source_image_array_identical": true,
+    "first_generation_complete_tokens_identical": true,
+    "first_generation_complete_token_sha256": "8c28a0a3eba82b99fa5a51467c6caa8eb1bd7fee1a1cf039793323ace26ee4ba",
+    "first_generation_batch_size": 16,
+    "limitation": "Matching counts/type/labels and small coordinate differences do not establish full numerical or task-quality equivalence. No tolerance or candidate threshold was changed."
+  },
+  "real_prepared_parser_regression": {
+    "method": "Fresh subprocess per case, real Torch and pinned upstream source/models, actual constructor and independent Torch thread readback; default OMP, explicit1, explicit4. Canonical cache/offline environment is set only for the child.",
+    "control": {
+      "tests": 3,
+      "failures": 2,
+      "errors": 0,
+      "skipped": 0,
+      "status": "FAIL",
+      "process_returncode": 1,
+      "worker_sha256": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+      "test_sha256": "1ada908de6d70eb0ce4069208a11b5241a1e9dcf17572f446c5f3855b9bac054"
+    },
+    "candidate": {
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "status": "PASS",
+      "process_returncode": 0,
+      "worker_sha256": "67336e06168a02b7fe119258d751f655aa51505c54d6fe7eeb3538f2b2b6be3b",
+      "test_sha256": "1ada908de6d70eb0ce4069208a11b5241a1e9dcf17572f446c5f3855b9bac054"
+    },
+    "observed_control_assertions": [
+      "1 != 4",
+      "1 != 12"
+    ],
+    "initial_driver_attempt": {
+      "thread_assertions": "NOT_RUN",
+      "baseline_constructor_failures": 3,
+      "candidate_constructor_failures": 3,
+      "reason": "Initial driver omitted canonical worker cache/offline environment; all six constructors failed before thread checks. Inner child errors were not retained. Original attempt logs and source are preserved privately.",
+      "receipt_sha256": "fbd8e2cd1e66ff9f795cc076ea9b3d0ca1aea7eb548f28fc211646800cda44a2"
+    }
+  },
+  "private_receipts": {
+    "control_result_sha256": "03b883165317ecf945a74d9fc67ee1d5805d2816bf9043955e76d9b61f6db2f0",
+    "control_stage_sha256": "20579c00de2e30d5fa7a6a9782b64ab8ffd70ced892fefac47450b0cf58cbaca",
+    "candidate_result_sha256": "09497e5bd296484c2a1be3e43ca06453f31f7dbed3f5c156bd9321133f0dfe1d",
+    "candidate_stage_sha256": "56428a493e3595c4ada6ab0ea5961b8ccb82b393e190b40827dde7395eec3a52",
+    "candidate_full_reply_sha256": "d9d134830a664b2501e45cf6cd7043277b3d55e6be4a1ea15cd9824cb8ea11fa",
+    "import_control_sha256": "bd5243ef86b539beb66a4f14a321c0700b2e452d28568eaac51a64e954c1563a",
+    "regression_result_sha256": "95e34a448c0442a6e9a98351db62f3fe1bf0cfa070d762c60e6e5e3e3b44587c",
+    "control_regression_log_sha256": "0d5e31e1f95cfee9c1a9a3839b4b6bd40e7803bd656e9204d5cbcedc509f2f00",
+    "candidate_regression_log_sha256": "ada7f5f4bd3a2dee37a0fd6ec6abbbb2ecb34ca72578143a8a4fa9a2315cfe8e"
+  },
+  "remaining": "Actual immutable .43 CI/install and current whole GUI tasks, model-quality, reaction performance, Blender unknown contexts and public release are separate required checks."
+}

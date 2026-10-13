@@ -6,6 +6,11 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+OmniParser preserves the caller's Torch thread budget across upstream imports,
+including an explicit single-thread setting. No new thread setting is required.
+This initialization fix does not establish whole-task completion or 100ms input
+latency; verify those independently with the installed runtime.
+
 Load the Blender guide for read-only menu/state assessment as well as editing.
 Linked `references/` files belong to their owning skill. In Hermes, read the
 baseline with `skill_view(name="clef-use", file_path="references/API_BASELINE.md")`.
