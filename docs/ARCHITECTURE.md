@@ -251,8 +251,23 @@ have no MCP error at the top level or in the OMP details wrapper. Negative trigg
 checks reject attempts, including failed or incomplete calls, independently of
 the successful invocation list. These checks classify trace evidence; they do
 not establish a GUI task or upgrade component traces to real harness evidence.
-An explicit response/transport error records INVOKED=FAIL when there is no
-successful invocation; missing or incomplete results remain NOT_RUN.
+An explicit response/transport error records INVOKED=FAIL even when another
+invocation succeeds. Codex retains observed errors and negative-trigger violations
+in the overall outcome independently of later success or process exit. Successful
+tool names remain listed as partial evidence; missing results remain NOT_RUN.
+Native harness JSON subprocess streams use strict UTF-8 decoding, including the
+Codex app-server protocol, instead of the caller's locale-dependent codec.
+Codex recognizes advertised guide resources only when the native event,
+arguments and response identify the canonical server and exact URI, and returned
+content equals the entire managed guide body. Product resource failures and
+negative-trigger resource attempts are retained. File-based loading remains
+bound to the managed path and complete body. A successful call must follow the
+selected guide's load to verify discovery/load/invoke; later loading cannot
+retroactively establish that order.
+Capability text is decoded before using the shared runtime/schema/guide digest
+validator, including requested detailed schemas. Codex also requires the native
+read-only two-tool facade. Its ephemeral server configuration sets the read-only
+environment explicitly; inherited parent environment alone is insufficient.
 
 ## Visual readiness revision, 0.1.5
 

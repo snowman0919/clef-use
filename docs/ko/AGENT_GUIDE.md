@@ -6,6 +6,13 @@ Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미�
 선택한 대상만 변경합니다. 최초 무인 설치는 `--integrate codex|hermes|omp|all`
 없이 새 하네스를 등록하지 않습니다. 모델 준비는 별도 선택입니다.
 
+하네스 JSON 스트림은 Windows locale과 무관하게 UTF-8로 읽습니다.
+runtime 호출 실패는 뒤의 capability 호출이 성공해도 검증 FAIL로 유지됩니다.
+발견만으로 모델의 지침 로드나 도구 호출을 증명하지 않습니다.
+파일 읽기와 공개된 guide resource는 관리된 본문 전체와 일치해야 합니다.
+capability의 runtime/schema/guide 해시와 read-only 두 도구 facade도 확인합니다.
+필요한 지침을 호출 후에 읽으면 검증 순서는 FAIL입니다.
+
 OmniParser는 upstream import 전후에 호출자의 Torch thread 예산을 보존합니다.
 명시적인 단일 thread 설정도 유지하며 새 thread 설정은 필요하지 않습니다.
 이 초기화 수정만으로 전체 작업 완료나 100ms 입력 지연이 검증되지는 않습니다.

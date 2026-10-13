@@ -1,6 +1,53 @@
 # Reactive runtime execution status
 
+## Source 0.1.45 native harness verification correction, 2026-10-14
+
+**OBSERVED / reproduced source defects:** an ASCII-locale subprocess cannot read
+valid UTF-8 native catalog output, and a failed runtime call followed by success
+incorrectly passes. Canonical resource guide reads are missed, and negative-trigger
+resource access incorrectly passes. Empty/stale capability payloads and a guide
+loaded after invocation also pass before correction. These executable-fixture
+regressions are separate from real native harness evidence.
+
+Source .45 uses strict UTF-8 for native harness subprocess JSON streams. Explicit
+errors remain FAIL after later success. Advertised guide resources require exact
+native server/URI/complete managed body. Codex capability results use the shared
+runtime/schema/guide digest validator, requested detailed schemas and the native
+read-only two-tool facade. Its ephemeral configuration sets the MCP environment
+explicitly; the persistent configuration is unchanged. A selected guide must load
+before invocation to verify the sequence. Four-language agent documentation is updated.
+
+**OBSERVED / actual Windows source component:** the final candidate module runs
+with the installed .44 runtime and actual Codex under cp1252. UTF-8 output is decoded
+successfully; a real capability response advertises the two-tool read-only facade
+and matching .44 runtime/schema/guide metadata. The natural model calls capabilities
+without loading the selected guide, so its result remains FAIL. Configuration bytes
+are preserved. This is not installed .45 or GUI-task evidence.
+
+**REPLAY / earlier actual native trace:** an earlier candidate had reported no
+guide load because its classifier only recognized file reads. The retained native
+resource contents actually match all three complete guides. The corrected classifier
+recognizes them, while retaining FAIL for the first wrong-server resource error,
+unrestricted capability facade and calls preceding guide load. No new model request
+runs during replay. This does not convert the earlier session into PASS.
+
+Final focused checks pass232; final .45 source regression passes1631, skips55 and
+reports41 warnings in68.68 seconds. Ruff checks165 files; generated198 CLI/12 tool
+checks pass. Earlier source checkpoints remain retained. Immutable .45 CI/install,
+whole GUI tasks, complete pinned quality and reaction-performance acceptance remain
+NOT_RUN at this checkpoint. See the [harness correction receipt](validation/2026-10-14/windows-harness-validation-0145.json).
+
 ## Immutable installed Windows 0.1.44 verification, 2026-10-14
+
+**OBSERVED / separate native Linux harness components:** current .44 Hermes and
+OMP discover and load three full guide bodies/hashes, and invoke actual MCP
+capabilities with matching runtime/schema/guide metadata and a two-tool facade.
+Hermes uses native skill_view; OMP builds the native Skill prompt and verifies
+its complete body against direct file bytes. Neither executes a model/provider
+request or GUI task. Global and owned-profile configuration bytes are preserved.
+Hermes SDK updates its goal-owned profile's generated schema cache and stderr log;
+the strict all-profile-file preservation guard is FAIL and is retained alongside
+native component PASS. See [native linkage evidence](validation/2026-10-14/native-harness-linkage-0144.json).
 
 **OBSERVED / immutable CI and actual update:** exact source `d4f1c8e` completes
 run `38448473500`, all fifteen build/install jobs and assembly. Every archive

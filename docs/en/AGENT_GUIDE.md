@@ -6,6 +6,13 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+Harness JSON streams are decoded as UTF-8 independently of the Windows locale.
+A failed runtime call keeps verification FAIL even if a later capability call
+succeeds. Discovery alone does not prove model guide loading or invocation.
+File reads and advertised guide resources must match the full managed body.
+Capability results must match runtime/schema/guide hashes and the read-only
+two-tool facade. Loading the required guide after invocation fails the sequence.
+
 OmniParser preserves the caller's Torch thread budget across upstream imports,
 including an explicit single-thread setting. No new thread setting is required.
 This initialization fix does not establish whole-task completion or 100ms input

@@ -713,6 +713,7 @@ def _integrate(
             [preview["entry"]["command"], "capabilities", "--json"],
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=20,
         )
         if probe.returncode:
@@ -950,7 +951,12 @@ def _hermes_command(
     read_only_entry: dict | None = None,
 ) -> list:
     launch = subprocess.run(
-        [executable, "--print-runtime-command"], cwd=cwd, capture_output=True, text=True, timeout=30
+        [executable, "--print-runtime-command"],
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=30,
     )
     if launch.returncode:
         raise ValueError("installed Hermes launcher cannot advertise its runtime command")
@@ -1067,6 +1073,7 @@ finally:
             env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=90,
         )
     finally:
@@ -1100,11 +1107,11 @@ finally:
         {},
     )
     succeeded = _tool_result_succeeded(invoked.get("result"))
-    payload = _hermes_payload(json.dumps(invoked.get("result")), invoked.get("tool", ""))
+    payload = _native_payload(json.dumps(invoked.get("result")), invoked.get("tool", ""))
     read_only_scope = (
         isinstance(payload, dict)
         and payload.get("read_only_facade") is True
-        and _hermes_capability_agrees(payload, manifest, detail=True)
+        and _capability_agrees(payload, manifest, detail=True)
     )
     stages = result["stages"]
     stages["DISCOVERED"] = {
@@ -1146,28 +1153,33 @@ finally:
     return result
 
 
-def _hermes_capability_agrees(payload: dict, manifest: dict, *, detail: bool) -> bool:
+def _capability_agrees(payload: dict, manifest: dict, *, detail: bool) -> bool:
     from .capabilities import digest, tool_schemas
 
+    guides = payload.get("guides")
+    if not isinstance(guides, dict) or not isinstance(guides.get("skills"), dict):
+        return False
+    for skill, item in manifest["skills"].items():
+        advertised = guides["skills"].get(skill)
+        if (
+            not isinstance(advertised, dict)
+            or not isinstance(advertised.get("sha256"), dict)
+            or advertised["sha256"].get("SKILL.md") != item["files"]["SKILL.md"]
+        ):
+            return False
     expected = manifest["schema_sha256"]
     if payload.get("read_only_facade") is True:
         schemas = tool_schemas()
         names = ("computer_capabilities", "computer_status")
         expected = digest({name: schemas[name] for name in names})
-        if set(payload.get("tools", [])) != set(names):
+        tools = payload.get("tools")
+        if not isinstance(tools, list) or not all(isinstance(name, str) for name in tools):
+            return False
+        if set(tools) != set(names):
             return False
     return (
         payload.get("runtime_version") == manifest["release"]
         and payload.get("schema_sha256") == expected
-        and all(
-            payload.get("guides", {})
-            .get("skills", {})
-            .get(skill, {})
-            .get("sha256", {})
-            .get("SKILL.md")
-            == item["files"]["SKILL.md"]
-            for skill, item in manifest["skills"].items()
-        )
         and (
             not detail
             or isinstance(payload.get("schemas"), dict)
@@ -1241,6 +1253,7 @@ finally:
             env={**os.environ, "PYTHONDONTWRITEBYTECODE": "1"},
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=30,
         )
     finally:
@@ -1254,7 +1267,7 @@ finally:
     return transcript
 
 
-def _hermes_payload(content: str, name: str, depth: int = 0):
+def _native_payload(content: str, name: str, depth: int = 0):
     """Decode complete native output, retaining errors at every envelope level."""
     if depth >= 6:
         return None
@@ -1272,7 +1285,7 @@ def _hermes_payload(content: str, name: str, depth: int = 0):
                 return value
             if "result" in value and set(value) <= {"result", "structuredContent", "_meta"}:
                 if "structuredContent" in value:
-                    structured = _hermes_payload(
+                    structured = _native_payload(
                         json.dumps(value["structuredContent"]), name, depth + 1
                     )
                     if structured is None or _tool_result_failed(structured):
@@ -1474,7 +1487,7 @@ def _hermes_model_evidence(
         response_bytes += len(raw.encode())
         if response_bytes > _HERMES_TRANSCRIPT_LIMIT:
             raise ValueError("Hermes recovered responses exceed total bound")
-        payload = _hermes_payload(raw, name)
+        payload = _native_payload(raw, name)
         responses.append({"tool_call_id": identity, "tool": name, "content": raw})
         if event.get("is_error") or _tool_result_failed(payload):
             failed_calls.append(
@@ -1498,9 +1511,7 @@ def _hermes_model_evidence(
                 ):
                     loaded.append(skill)
         elif name.endswith("computer_capabilities") and isinstance(payload, dict):
-            if _hermes_capability_agrees(
-                payload, manifest, detail=bool(call["arguments"].get("detail"))
-            ):
+            if _capability_agrees(payload, manifest, detail=bool(call["arguments"].get("detail"))):
                 invoked.append(name)
         elif name.endswith("computer_status") and _tool_result_succeeded(payload):
             invoked.append(name)
@@ -1569,6 +1580,7 @@ def _verify_hermes(
         env=environment,
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=60,
     )
     trace = layout["state"] / "verification-discovery.txt"
@@ -1614,6 +1626,7 @@ def _verify_hermes(
         env=environment,
         capture_output=True,
         text=True,
+        encoding="utf-8",
         timeout=120,
     )
     events = _jsonlines(run.stdout)
@@ -1689,7 +1702,7 @@ def _model_stages(loaded: list[str], invoked: list[str], failed: bool) -> dict:
     return {
         "LOADED": {"status": "PASS" if loaded else "NOT_RUN", "skills": loaded},
         "INVOKED": {
-            "status": "PASS" if invoked else "FAIL" if failed else "NOT_RUN",
+            "status": "FAIL" if failed else "PASS" if invoked else "NOT_RUN",
             "tools": invoked,
         },
     }
@@ -1751,6 +1764,7 @@ def _verify_omp_model(
             env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=120,
         )
     finally:
@@ -1834,7 +1848,7 @@ def _omp_model_evidence(
             if isinstance(content, list)
             else []
         )
-        decoded = _hermes_payload(texts[0], name) if name in readers and len(texts) == 1 else None
+        decoded = _native_payload(texts[0], name) if name in readers and len(texts) == 1 else None
         if _tool_result_failed(decoded):
             failed_calls.append({"tool": name, "tool_call_id": identity})
             continue
@@ -1854,7 +1868,7 @@ def _omp_model_evidence(
                         ] and any(body in text for text in texts):
                             loaded.append(name)
         elif name == readers[0] and len(texts) == 1:
-            if isinstance(decoded, dict) and _hermes_capability_agrees(
+            if isinstance(decoded, dict) and _capability_agrees(
                 decoded, manifest, detail=bool(call["args"].get("detail"))
             ):
                 invoked.append(name)
@@ -1985,7 +1999,13 @@ try {{
         "CLEF_OMP_NATIVE_RESULT": str(native_result),
     }
     run = subprocess.run(
-        [bun, "-e", script], cwd=cwd, env=environment, capture_output=True, text=True, timeout=90
+        [bun, "-e", script],
+        cwd=cwd,
+        env=environment,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=90,
     )
     trace = layout["state"] / "verification-native-trace.txt"
     atomic_write(trace, run.stdout + run.stderr)
@@ -2241,6 +2261,7 @@ def _rpc(executable: str, method: str, params: dict, cwd: Path) -> dict:
         stdout=subprocess.PIPE,
         stderr=subprocess.DEVNULL,
         text=True,
+        encoding="utf-8",
     )
     messages = queue.Queue()
 
@@ -2302,7 +2323,10 @@ def _codex_verification_override(config: dict) -> str:
         for server in config.get("mcp_servers", {})
         if server != "clef-use"
     ]
-    fields.append('"clef-use"={enabled_tools=["computer_capabilities","computer_status"]}')
+    fields.append(
+        '"clef-use"={enabled_tools=["computer_capabilities","computer_status"],'
+        'env={CLEF_USE_MCP_READ_ONLY="1"}}'
+    )
     return "mcp_servers={" + ",".join(fields) + "}"
 
 
@@ -2435,6 +2459,7 @@ def _verify_selected(
             argv,
             capture_output=True,
             text=True,
+            encoding="utf-8",
             timeout=180,
             env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
         )
@@ -2455,14 +2480,30 @@ def _verify_selected(
         attempted = []
         failed = False
         any_gui_guide = False
+        selected = (
+            "clef-use-blender"
+            if trigger == "natural" and "clef-use-blender" in expected
+            else "clef-use"
+        )
+        load_before_invoke = False
+        guide_resources = {f"clef-use://guides/{name}/SKILL.md": name for name in expected}
         for event in events:
             item = event.get("item", {})
+            arguments = item.get("arguments")
+            arguments = arguments if isinstance(arguments, dict) else {}
+            uri = arguments.get("uri")
+            selected_resource = (
+                item.get("type") == "mcp_tool_call"
+                and item.get("tool") == "read_mcp_resource"
+                and isinstance(uri, str)
+                and (uri == "clef-use://api/schema" or uri.startswith("clef-use://guides/"))
+            )
             selected_tool = (
                 item.get("type") == "mcp_tool_call"
                 and item.get("server") == "clef-use"
                 and item.get("tool") in ("computer_capabilities", "computer_status")
             )
-            if selected_tool and event.get("type") in (
+            if (selected_tool or selected_resource) and event.get("type") in (
                 "item.started",
                 "item.updated",
                 "item.completed",
@@ -2481,38 +2522,98 @@ def _verify_selected(
                     )
                 )
                 for name in expected:
-                    body = (layout["root"] / name / "SKILL.md").read_text()
+                    body = (layout["root"] / name / "SKILL.md").read_text(encoding="utf-8")
                     if (
                         _codex_guide_path_in_command(expected[name], item.get("command", ""))
                         and body.strip() in output
                     ):
                         loaded.append(name)
-            if selected_tool:
-                failed |= (
+            if selected_tool or selected_resource:
+                call_failed = (
                     item.get("status") == "failed"
                     or bool(item.get("error"))
                     or _tool_result_failed(item.get("result"))
                 )
+                failed |= call_failed
+            if selected_resource and not call_failed and item.get("status") == "completed":
+                payload = item.get("result")
+                blocks = payload.get("content", []) if isinstance(payload, dict) else []
+                for block in blocks if isinstance(blocks, list) else []:
+                    if not isinstance(block, dict) or block.get("type") != "text":
+                        continue
+                    try:
+                        resource = json.loads(block.get("text", ""))
+                    except (TypeError, json.JSONDecodeError):
+                        continue
+                    if (
+                        not isinstance(resource, dict)
+                        or item.get("server") != "clef-use"
+                        or arguments.get("server") != "clef-use"
+                        or resource.get("server") != "clef-use"
+                        or resource.get("uri") != uri
+                        or uri not in guide_resources
+                        or not isinstance(resource.get("contents"), list)
+                    ):
+                        continue
+                    name = guide_resources[uri]
+                    body = (layout["root"] / name / "SKILL.md").read_text(encoding="utf-8")
+                    if (
+                        any(
+                            isinstance(content, dict)
+                            and content.get("uri") == uri
+                            and content.get("text") == body
+                            for content in resource["contents"]
+                        )
+                        and name not in loaded
+                    ):
+                        loaded.append(name)
+            if selected_tool:
                 if (
                     item.get("status") == "completed"
                     and not item.get("error")
                     and _tool_result_succeeded(item.get("result"))
                 ):
+                    if item["tool"] == "computer_capabilities":
+                        payload = item["result"]
+                        blocks = payload.get("content", [])
+                        texts = [
+                            block.get("text")
+                            for block in (blocks if isinstance(blocks, list) else [])
+                            if isinstance(block, dict) and block.get("type") == "text"
+                        ]
+                        decoded = (
+                            _native_payload(texts[0], item["tool"])
+                            if len(texts) == 1 and isinstance(texts[0], str)
+                            else None
+                        )
+                        if (
+                            not isinstance(decoded, dict)
+                            or _tool_result_failed(decoded)
+                            or decoded.get("read_only_facade") is not True
+                            or not _capability_agrees(
+                                decoded, manifest, detail=arguments.get("detail") is True
+                            )
+                        ):
+                            failed = True
+                            continue
                     invoked.append(item["tool"])
+                    load_before_invoke |= selected in loaded
         stages.update(_model_stages(loaded, invoked, failed))
         stages["TASK_VERIFIED"]["reason"] = "read-only verification does not execute a GUI fixture"
-        selected = (
-            "clef-use-blender"
-            if trigger == "natural" and "clef-use-blender" in expected
-            else "clef-use"
-        )
         passed = (
             not any_gui_guide and not attempted
             if trigger == "negative"
-            else selected in loaded and bool(invoked)
+            else selected in loaded and bool(invoked) and load_before_invoke
         )
+        violation = failed or (trigger == "negative" and (any_gui_guide or attempted))
         outcome = (
-            "PASS" if passed and not run.returncode else "NOT_RUN" if run.returncode else "FAIL"
+            "FAIL"
+            if violation
+            else "PASS"
+            if passed and not run.returncode
+            else "NOT_RUN"
+            if run.returncode
+            else "FAIL"
         )
         result.update(status=outcome, model_driven=True)
         result["model_trigger_verification"] = {
@@ -2521,6 +2622,7 @@ def _verify_selected(
             "loaded": loaded,
             "invoked": invoked,
             "attempted": attempted,
+            "load_before_invoke": load_before_invoke,
             "stages": _model_stages(loaded, invoked, failed),
         }
         if run.returncode:

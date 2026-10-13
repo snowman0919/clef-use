@@ -5,6 +5,13 @@ runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-us
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有
 `--integrate codex|hermes|omp|all` 时注册新工具环境。模型准备是独立选项。
 
+工具环境的 JSON 流按 UTF-8 解码，不依赖 Windows locale。
+runtime 调用失败后，即使后续 capability 调用成功，验证仍保持 FAIL。
+仅发现技能不能证明模型已加载指南或调用工具。
+文件读取和已公布的 guide resource 必须匹配完整受管理正文。
+capability 的 runtime/schema/guide hash 和只读双工具 facade 也必须匹配。
+在调用之后才加载所需指南时，验证顺序为 FAIL。
+
 OmniParser 在 upstream import 前后保留调用者的 Torch thread 数，
 包括显式的单 thread 设置，无需新增 thread 配置。
 此初始化修复本身不能证明任务完成或 100ms 输入延迟；

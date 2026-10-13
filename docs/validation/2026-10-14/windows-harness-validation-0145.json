@@ -1,0 +1,181 @@
+{
+  "classification": "OBSERVED_SOURCE_CORRECTION_NATIVE_MODEL_FAILURE_AND_EXPLICIT_REPLAY",
+  "date": "2026-10-14",
+  "candidate_release": "0.1.45",
+  "native_installed_runtime": "0.1.44",
+  "source_sha256": "79570e2663fd8b5592cdfef32ceda6a5708484349441339087a79217664d1027",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-01",
+    "INSTALL-03",
+    "CAP-02"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration, message bodies or raw traces.",
+  "changes": [
+    "All native harness JSON subprocess streams use explicit strict UTF-8.",
+    "Invocation errors and negative-trigger violations cannot be overwritten by later success or nonzero exit.",
+    "Canonical guide resources require exact native origin, URI and entire managed body.",
+    "Capability text must advertise matching runtime/schema/guide digests, requested detailed schemas and the native read-only two-tool facade.",
+    "Ephemeral Codex MCP configuration explicitly supplies the read-only environment; persistent config is unchanged.",
+    "The selected guide must load before a successful invocation to verify the sequence."
+  ],
+  "regression": {
+    "classification": "OBSERVED_EXECUTABLE_FIXTURES_AND_SOURCE_REGRESSION_NOT_REAL_HARNESS",
+    "before": [
+      {
+        "cases": "Real ASCII-locale UTF-8 JSON IPC and failed-call then successful-call outcome",
+        "failed": 2,
+        "private_log_sha256": "aff800f7aab7ea3cdd8b364e855ef062356071b9dbdcd0069a46b073765e9073"
+      },
+      {
+        "cases": "Full resource load and negative-trigger resource read",
+        "failed": 2,
+        "passed": 3,
+        "private_log_sha256": "a3db8aab952245c8e15f82a3175c0e8846ab683b55c81f8d3839872e87778358"
+      },
+      {
+        "cases": "Empty/stale runtime/schema/guide/nested-error capabilities",
+        "failed": 5,
+        "private_log_sha256": "8e0c92a5eafcfdaf11282c144348aa05acaba46149dabda34f1cda89fa9aee9d"
+      },
+      {
+        "cases": "Guide loaded after invocation",
+        "failed": 1,
+        "private_log_sha256": "4739cf290ea7c114ba8de787a7228f288052d07a3a131ec1eefe2d7b16243867"
+      }
+    ],
+    "after_focused": {
+      "passed": 232,
+      "private_log_sha256": "639ef0991677eabb3ae3e78c59a4f1822ff931995e66a890acd10ae7dc314eae"
+    },
+    "after_full": {
+      "passed": 1631,
+      "skipped": 55,
+      "warnings": 41,
+      "seconds": 68.68,
+      "private_log_sha256": "76cb639e059aed4902c5d8329997cafdc37bbac41ab445dcc35da35d024abd7a"
+    },
+    "ruff_files": 165,
+    "generated_published_cli_examples": 198,
+    "generated_published_tool_examples": 12,
+    "utf8_test_source_sha256": "15367156aca08d36fb505a154c2530045a4502d03dbf1670d30e45133d7ade2b",
+    "integration_test_source_sha256": "e5cb53441b968faceeb9c98a9693dfa0b630146aef51a9b69c8190e87b7fc2ce"
+  },
+  "actual_native_candidate": {
+    "classification": "OBSERVED_REAL_WINDOWS_CODEX_MODEL_WITH_SOURCE_INTEGRATION_MODULE_OVER_INSTALLED_0144",
+    "status": "FAIL",
+    "caller_locale": "cp1252",
+    "native_exit_code": 0,
+    "global_config_bytes_preserved": true,
+    "stages": {
+      "INSTALLED": "PASS",
+      "DISCOVERED": "PASS",
+      "LOADED": "NOT_RUN",
+      "INVOKED": "PASS",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "model_case": {
+      "case": "natural",
+      "status": "FAIL",
+      "loaded": [],
+      "invoked": [
+        "computer_capabilities"
+      ],
+      "attempted": [
+        "computer_capabilities"
+      ],
+      "load_before_invoke": false,
+      "stages": {
+        "LOADED": {
+          "status": "NOT_RUN",
+          "skills": []
+        },
+        "INVOKED": {
+          "status": "PASS",
+          "tools": [
+            "computer_capabilities"
+          ]
+        }
+      }
+    },
+    "actual_capability_results": [
+      {
+        "runtime_version": "0.1.44",
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ]
+      }
+    ],
+    "reason": "Actual natural model invokes capabilities without loading the selected guide. This remains FAIL; no model retries are used to manufacture PASS.",
+    "scope": "Read-only model session; no GUI task, capture or OS input requested. Candidate module validates the actual .44 runtime and guide set, not an installed .45 release.",
+    "private_result_sha256": "a43c2b72d653ae8915776b0473f48a5b6155834f5b36a85fdcfdc6ec3daee123",
+    "private_trace_sha256": "21fce07024a0981a1965a937afaa7740da6416328c67ecd3e31d59b2367109f6",
+    "private_stderr_sha256": "179507bbac586fe4ce6c69cbcf65de67a1bb359f4597bd45f2280334753ef9d0",
+    "probe_source_sha256": "18f37eb906c5598b45320a042377a205130d9a82df18ff3f1707ebbd07835e0f",
+    "controller_source_sha256": "b386224ff6fb1a6b30461d8b1515b1d892e47cbe3f040230c45b20658077b8df"
+  },
+  "retained_actual_trace_replay": {
+    "classification": "REPLAY_OF_RETAINED_ACTUAL_NATIVE_TRACE_WITH_REAL_DISCOVERY_PREFLIGHT",
+    "replay_check": "PASS",
+    "source_verdict": "FAIL",
+    "stages": {
+      "INSTALLED": "PASS",
+      "DISCOVERED": "PASS",
+      "LOADED": "PASS",
+      "INVOKED": "FAIL",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "model_case": {
+      "case": "natural",
+      "status": "FAIL",
+      "loaded": [
+        "clef-use-diagnostics",
+        "clef-use",
+        "clef-use-blender"
+      ],
+      "invoked": [],
+      "attempted": [
+        "computer_capabilities",
+        "read_mcp_resource"
+      ],
+      "load_before_invoke": false,
+      "stages": {
+        "LOADED": {
+          "status": "PASS",
+          "skills": [
+            "clef-use-diagnostics",
+            "clef-use",
+            "clef-use-blender"
+          ]
+        },
+        "INVOKED": {
+          "status": "FAIL",
+          "tools": []
+        }
+      }
+    },
+    "new_model_request": false,
+    "global_config_bytes_preserved": true,
+    "original_actual_trace_sha256": "d970970e9b5d34b40291991b20fdbb3f89212e6b3a1332d8fc659700cfb055ea",
+    "private_result_sha256": "f6c55c1cbaa849a01cba0312c9e1c8c3685dbc597347fd7b1fe1b3b1c6c18f3f",
+    "source_sha256": "79570e2663fd8b5592cdfef32ceda6a5708484349441339087a79217664d1027",
+    "reason": "Earlier actual native model reads all three exact full guide resources. Its first wrong-server resource call fails; earlier capabilities expose a full facade, and precede guide load. New classifier recognizes all guide bodies while retaining FAIL. Replay is not a new model-session PASS."
+  },
+  "earlier_native_candidate": {
+    "private_result_sha256": "a76b2575f343de1f8ba43ec8598d784ae7a1e25510c5d423b4e92df70107e2a5",
+    "correction": "Its old classifier reported LOADED NOT_RUN because it recognized only command/file reads. Actual retained resource contents match all three full guide hashes; the replay above corrects this proof limitation."
+  },
+  "immutable_0145_installation": {
+    "status": "NOT_RUN",
+    "reason": "Source checkpoint before .45 commit/CI/installation."
+  },
+  "gui_quality_performance_public_release": {
+    "status": "NOT_RUN",
+    "reason": "This source/harness correction does not execute original GUI tasks, full pinned quality/1000-opportunity/100ms/coverage/goodput evaluation or public deployment."
+  },
+  "completion_claim": false
+}

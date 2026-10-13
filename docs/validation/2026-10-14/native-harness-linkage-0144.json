@@ -1,0 +1,119 @@
+{
+  "classification": "OBSERVED_NATIVE_ONLY_COMPONENT_LINKAGE",
+  "runtime_version": "0.1.44",
+  "source_commit": "d4f1c8e1e8c4e8659388326edac0febe0f79cc74",
+  "no_model_task": true,
+  "no_gui_or_input_task": true,
+  "no_runtime_service_task": true,
+  "status": "FAIL",
+  "global_config_bytes_unchanged": true,
+  "owned_profile_unrelated_bytes_unchanged": false,
+  "owned_profile_config_unchanged": true,
+  "date": "2026-10-14",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-02",
+    "HARNESS-03",
+    "INSTALL-02"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration or raw traces.",
+  "private_summary_sha256": "39a0d7b1d2688af255f0fea47f5da61bcfe8aaeff73bc1a8f03aea3622a6bc1d",
+  "cases": {
+    "hermes": {
+      "native_component_status": "PASS",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false,
+      "provider_request": "NOT_RUN",
+      "gui_e2e": "NOT_RUN",
+      "linkage": {
+        "checks": {
+          "manifest_release_current": true,
+          "manifest_schema_current": true,
+          "capability_runtime_current": true,
+          "capability_schema_current": true,
+          "capability_guides_current": true,
+          "full_guide_hash_load_agreement": true,
+          "read_only_facade": true,
+          "exact_two_tool_facade": true,
+          "native_probe_script_absent": true,
+          "runtime_endpoint_absent": true
+        },
+        "method": "Installed native _skill_catalog + skill_view full-body load; native MCP registry actual capability handler(detail=True). No provider context/model request.",
+        "loaded_guides": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ],
+        "actual_capability_sha256": "176a163f4cb324cdb0d9a036711b40c912d8640aa20cdd552f9de6e766d3f9b3",
+        "native_trace_sha256": "af091130bba0c75f142ddd6513ccbf0b7823a08a6244054c29c000e822752f69",
+        "temporary_model_policy": {
+          "status": "NOT_APPLICABLE",
+          "reason": "trigger=native never enters model approval-overlay path",
+          "absent_after": true
+        }
+      }
+    },
+    "omp": {
+      "native_component_status": "PASS",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false,
+      "provider_request": "NOT_RUN",
+      "gui_e2e": "NOT_RUN",
+      "linkage": {
+        "checks": {
+          "manifest_release_current": true,
+          "manifest_schema_current": true,
+          "capability_runtime_current": true,
+          "capability_schema_current": true,
+          "capability_guides_current": true,
+          "full_guide_hash_load_agreement": true,
+          "read_only_facade": true,
+          "exact_two_tool_facade": true,
+          "native_probe_script_absent": true,
+          "runtime_endpoint_absent": true
+        },
+        "method": "Installed OMP SDK loadSkills + buildSkillPromptMessage; direct Bun.file full-guide byte/hash read verifies native prompt construction. Native MCPManager actual capability execute({}). No provider context/model request.",
+        "loaded_guides": [
+          "clef-use",
+          "clef-use-blender",
+          "clef-use-diagnostics"
+        ],
+        "actual_capability_sha256": "abb33007e409d212f5d1881cb754c3b3989fed1902d8745c9885fe96c324fd2e",
+        "native_trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "temporary_model_policy": {
+          "status": "NOT_APPLICABLE",
+          "reason": "trigger=native never enters model approval-overlay path",
+          "absent_after": true
+        }
+      }
+    }
+  },
+  "preservation_limit": {
+    "strict_all_profile_file_guard": "FAIL",
+    "native_generated_files_changed": [
+      "cache/mcp_schema_cache.json",
+      "logs/mcp-stderr.log"
+    ],
+    "config_preservation": "PASS",
+    "interpretation": "Native SDK cache/log bytes changed in the preexisting goal-owned isolated profile; this is not proof of complete filesystem immutability or a provider/model session."
+  },
+  "completion_claim": false,
+  "initial_proof_driver": {
+    "status": "NOT_RUN",
+    "reason": "Driver read the integrate CLI envelope as a top-level status and stopped before native verification. Corrected envelope handling reuses the completed preparation and executes each native verifier once.",
+    "private_summary_sha256": "16eed25f385815ccf272ebecbc357ddcef557e74852cb4c2dd523fa4f1447dfc"
+  }
+}

@@ -75,6 +75,14 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: actual_native_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/omp-request-catalog-0142.json
     section: request_catalog
     claim: OBSERVED
@@ -158,6 +166,10 @@ scenarios:
     guidance.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: regression
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.source_regression
     claim: OBSERVED
@@ -221,6 +233,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: installed_windows
     claim: OBSERVED
@@ -266,6 +282,10 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: regression
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: installed_windows
     claim: OBSERVED
@@ -486,6 +506,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: actual_native_candidate
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: native_codex_discovery
     claim: OBSERVED
@@ -530,6 +554,10 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
     section: hermes_native_refresh
     claim: OBSERVED
@@ -553,6 +581,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
     section: actual_model_cases
     claim: OBSERVED

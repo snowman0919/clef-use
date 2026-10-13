@@ -1090,6 +1090,8 @@ def _controlled_verification(
     attempt="end",
     guide_command=None,
     native_exit_code=0,
+    guide_resource=None,
+    raw_capability=False,
 ):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
@@ -1145,7 +1147,64 @@ def _controlled_verification(
     ]
     events = []
     if trigger != "negative" or guide_command is not None:
-        if harness == "codex":
+        if harness == "codex" and guide_resource is not None:
+            uri = "clef-use://guides/clef-use/SKILL.md"
+            returned_uri = (
+                uri
+                if guide_resource != "wrong_uri"
+                else uri.replace("clef-use/", "clef-use-blender/")
+            )
+            events.append(
+                {
+                    "type": "item.completed",
+                    "item": {
+                        "type": "mcp_tool_call",
+                        "server": "clef-use" if guide_resource != "wrong_server" else "other",
+                        "tool": "read_mcp_resource",
+                        "arguments": {"server": "clef-use", "uri": uri},
+                        "status": "completed",
+                        "result": {
+                            "content": [
+                                {
+                                    "type": "text",
+                                    "text": json.dumps(
+                                        {
+                                            "server": "clef-use",
+                                            "uri": uri,
+                                            "contents": [
+                                                {
+                                                    "uri": returned_uri,
+                                                    "mimeType": "text/plain",
+                                                    "text": body
+                                                    if guide_resource != "partial"
+                                                    else body[:100],
+                                                }
+                                            ],
+                                        }
+                                    ),
+                                }
+                            ]
+                        },
+                    },
+                }
+            )
+            if guide_resource == "failed_then_valid":
+                events.insert(
+                    0,
+                    {
+                        "type": "item.completed",
+                        "item": {
+                            "type": "mcp_tool_call",
+                            "server": "clef_use",
+                            "tool": "read_mcp_resource",
+                            "arguments": {"server": "clef_use", "uri": uri},
+                            "status": "failed",
+                            "error": {"message": "unknown server"},
+                            "result": None,
+                        },
+                    },
+                )
+        elif harness == "codex":
             events.append(
                 {
                     "type": "item.completed",
@@ -1197,6 +1256,27 @@ def _controlled_verification(
             )
     if attempt != "none":
         if harness == "codex":
+            if (
+                not raw_capability
+                and isinstance(payload, dict)
+                and "content" in payload
+                and integrations._tool_result_succeeded(payload)
+            ):
+                payload = {"content": [{"type": "text", "text": json.dumps(facade)}]}
+            if attempt == "failed_then_success":
+                events.append(
+                    {
+                        "type": "item.completed",
+                        "item": {
+                            "type": "mcp_tool_call",
+                            "server": "clef-use",
+                            "tool": "computer_status",
+                            "status": "failed",
+                            "error": {"message": "runtime unavailable"},
+                            "result": None,
+                        },
+                    }
+                )
             events.append(
                 {
                     "type": "item.started" if attempt == "start" else "item.completed",
@@ -1204,6 +1284,7 @@ def _controlled_verification(
                         "type": "mcp_tool_call",
                         "server": "clef-use",
                         "tool": name,
+                        "arguments": {"detail": True},
                         "status": "failed"
                         if attempt in ("failed", "terminal_failed")
                         else "completed",
@@ -1257,6 +1338,8 @@ def _controlled_verification(
                         "result": payload,
                     }
                 )
+    if harness == "codex" and attempt == "invoke_before_load":
+        events.insert(0, events.pop())
     scripts = home / "controlled-traces"
     scripts.mkdir(exist_ok=True)
     transcript = {"id": "controlled_session", "messages": []}
@@ -1458,6 +1541,147 @@ def test_codex_failed_terminal_without_error_payload_is_failed(installation, mon
     )
     assert result["status"] == "FAIL"
     assert result["stages"]["INVOKED"] == {"status": "FAIL", "tools": []}
+
+
+def test_codex_failed_call_then_success_keeps_verification_failed(installation, monkeypatch):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        "failed_then_success",
+    )
+    assert result["stages"]["INVOKED"] == {
+        "status": "FAIL",
+        "tools": ["computer_capabilities"],
+    }
+    assert result["status"] == "FAIL"
+    assert result["model_trigger_verification"]["status"] == "FAIL"
+
+
+@pytest.mark.parametrize(
+    "resource,expected",
+    [("valid", "PASS"), ("wrong_uri", "FAIL"), ("wrong_server", "FAIL"), ("partial", "FAIL")],
+)
+def test_codex_resource_load_requires_exact_origin_uri_and_body(
+    installation, monkeypatch, resource, expected
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        guide_resource=resource,
+    )
+    assert result["status"] == expected
+    assert result["stages"]["LOADED"]["skills"] == (["clef-use"] if expected == "PASS" else [])
+
+
+def test_codex_negative_trigger_rejects_resource_guide_read(installation, monkeypatch):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        None,
+        "negative",
+        "none",
+        guide_command="resource",
+        guide_resource="valid",
+    )
+    assert result["status"] == "FAIL"
+
+
+def test_codex_failed_resource_then_valid_load_and_invocation_stays_failed(
+    installation, monkeypatch
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        guide_resource="failed_then_valid",
+    )
+    assert result["stages"]["LOADED"]["skills"] == ["clef-use"]
+    assert result["stages"]["INVOKED"] == {"status": "FAIL", "tools": ["computer_capabilities"]}
+    assert result["status"] == "FAIL"
+
+
+@pytest.mark.parametrize(
+    "fault",
+    [
+        "empty",
+        "runtime",
+        "schema",
+        "guide",
+        "nested_error",
+        "contents_none",
+        "guides_none",
+        "tools_invalid",
+        "full_facade",
+        "detail_schema",
+    ],
+)
+def test_codex_capability_requires_current_release_schema_and_guides(
+    installation, monkeypatch, fault
+):
+    from clef_use.capabilities import capabilities
+
+    advertised = capabilities(detail=True)
+    schemas = {name: tool_schemas()[name] for name in ("computer_capabilities", "computer_status")}
+    advertised.update(
+        read_only_facade=True, tools=list(schemas), schemas=schemas, schema_sha256=digest(schemas)
+    )
+    if fault == "runtime":
+        advertised["runtime_version"] = "0.0.0"
+    elif fault == "schema":
+        advertised["schema_sha256"] = "0" * 64
+    elif fault == "guide":
+        advertised["guides"]["skills"]["clef-use"]["sha256"]["SKILL.md"] = "0" * 64
+    elif fault == "nested_error":
+        advertised["isError"] = True
+    elif fault == "guides_none":
+        advertised["guides"] = None
+    elif fault == "tools_invalid":
+        advertised["tools"] = [{}]
+    elif fault == "full_facade":
+        advertised["read_only_facade"] = False
+    elif fault == "detail_schema":
+        advertised["schemas"] = {}
+    payload = (
+        {"content": []}
+        if fault == "empty"
+        else {"content": [{"type": "text", "text": json.dumps(advertised)}]}
+    )
+    if fault == "contents_none":
+        payload["content"] = None
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        payload,
+        "explicit",
+        raw_capability=True,
+    )
+    assert result["status"] == "FAIL"
+    assert result["stages"]["INVOKED"] == {"status": "FAIL", "tools": []}
+
+
+def test_codex_loading_guide_after_invocation_does_not_verify_sequence(installation, monkeypatch):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        "invoke_before_load",
+    )
+    assert result["stages"]["LOADED"]["status"] == "PASS"
+    assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
+    assert result["model_trigger_verification"]["load_before_invoke"] is False
 
 
 @pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])

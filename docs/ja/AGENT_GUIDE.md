@@ -6,6 +6,13 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+ハーネスの JSON ストリームは Windows locale に依存せず UTF-8 で読みます。
+runtime 呼び出しの失敗は、後の capability 呼び出しが成功しても検証 FAIL のままです。
+発見だけではモデルによるガイド読み込みやツール実行を証明しません。
+ファイル読み込みと公開 guide resource は管理された本文全体と一致する必要があります。
+capability の runtime/schema/guide hash と読み取り専用の二つのツールも確認します。
+必要なガイドを呼び出し後に読む場合、検証順序は FAIL です。
+
 OmniParser は upstream import 前後で呼び出し元の Torch thread 数を保持します。
 明示的な単一 thread 設定も保持し、新しい thread 設定は不要です。
 この初期化修正だけではタスク完了や 100ms の入力遅延を証明しません。
