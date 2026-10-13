@@ -58,6 +58,8 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "native_harness_validation_0146_20261014": {"local_artifact": "docs/validation/2026-10-14/native-harness-validation-0146.json", "sha256": "43b87c595332f16d4b360746647de723d501fbfe7f0e3c9bdcd8a8853cc427e9", "raw_artifact_committed": true},
+    "codex_native_skill_visibility_20261014": {"local_artifact": "docs/validation/2026-10-14/codex-native-skill-visibility.json", "sha256": "7f59449af149220bd86ae8f78487c1f3e0632314ca32e3c4d08a3d5dc636fcc1", "raw_artifact_committed": true},
     "windows_installed_ci_0145_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-installed-ci-0145.json", "sha256": "93a842b5cf96f36a2f1c26163b7ca26f2f1e52b352b103c3113bc110eecd51c9", "raw_artifact_committed": true},
     "windows_harness_validation_0145_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-harness-validation-0145.json", "sha256": "27240d059f67d23e8762a9cfa1d4b3efb431897f55b51f6b66f6a0416ce36461", "raw_artifact_committed": true},
     "native_harness_linkage_0144_20261014": {"local_artifact": "docs/validation/2026-10-14/native-harness-linkage-0144.json", "sha256": "501c8849afce39218c9e49501e258ef29150df53263818129211667d403b0f7a", "raw_artifact_committed": true},

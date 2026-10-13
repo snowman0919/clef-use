@@ -1,0 +1,613 @@
+{
+  "classification": "OBSERVED_SOURCE_REGRESSION_ACTUAL_NATIVE_MODEL_BATCH_AND_RETAINED_TRACE_REPLAY",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.46",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-01",
+    "HARNESS-02",
+    "HARNESS-03"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration, prompts, response bodies or raw traces.",
+  "change": "Bind typed operation details to the exact prior live catalog record; require independent catalog verification; preserve observed Hermes FAIL on nonzero process exit; clarify read-only GUI guide routing and Blender load-before-runtime ordering.",
+  "source_binding": {
+    "final_integrations_sha256": "d8af6fe773281aaabd2d80704aa381ef50e673a25b9aed4a2edf95ba978e9a81",
+    "executed_linux_model_integrations_sha256": "4a3209a27db91819d9c393ec9918d8a374ce5acde0851cd8731187fbd9e55013",
+    "difference": "The final source additionally preserves observed Hermes FAIL after nonzero exit and retains runtime-before-guide attempts in all three model adapters. The actual batch uses prior frozen source; original-bound inventory separately proves actual guide order. No failed-case result is upgraded.",
+    "guide_manifest": {
+      "runtime_version": "0.1.46",
+      "api_schema_version": 1,
+      "guide_contract_version": 1,
+      "api_range": ">=0.1.29,<0.2",
+      "required_tools": [
+        "computer_run",
+        "computer_continue",
+        "computer_observe",
+        "computer_status",
+        "computer_abort"
+      ],
+      "skills": {
+        "clef-use": {
+          "sha256": {
+            "SKILL.md": "aa0f7498e0056a842117d442e8066f41f4dd5ff8a892fb72aafde1f6ddd4dd07",
+            "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+            "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+          },
+          "digest": "72d42dd280ceee8343572dc1f1763f6c35c87689b9a98b44e713c37f8014f92a"
+        },
+        "clef-use-blender": {
+          "sha256": {
+            "SKILL.md": "942db48a02e05df559bd7d790f0d172b2e01d35c462f84b45a7f3494e66daa6f",
+            "references/OPERATIONS.md": "4c6b02d1611f1ddf1b1a68b6f011084650eb5dbf5f9b8cdc456ba7f530574571"
+          },
+          "digest": "ea3c054ccaeecf069a358b48deb682391354d2aa012661046d4369485cbcced1"
+        },
+        "clef-use-diagnostics": {
+          "sha256": {
+            "SKILL.md": "e9811bc7220c6c85391114c1e79fd621cbf39a2c733aa57839f968347f6da147",
+            "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+          },
+          "digest": "86c5752f7533476ea93df8b89a5db269e820396ba4bc0d3c7f80d3efddf8fb75"
+        }
+      }
+    },
+    "full_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+  },
+  "source_regression": {
+    "claim": "OBSERVED",
+    "passed": 1664,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 83.45,
+    "log_sha256": "62e7b741507b48b3f41dd5c52f9d1553f5779e2484f6cc3e759bbe8a805246f4",
+    "focused_passed": 264,
+    "focused_log_sha256": "80af4498e777390a15c7ee4a13d1b4e614f27c3b62fa415b4f1011b2eda91255",
+    "before_operation_correction": {
+      "failed": 2,
+      "passed": 3,
+      "log_sha256": "c504089257704b9ff8f0577c84ccd7cd953653db759fa165edc62e1af00b9bee"
+    },
+    "before_exit_correction": {
+      "failed": 2,
+      "passed": 7,
+      "log_sha256": "38d5661d03feccde987932cfa29e8dc0c1d75840d5325c6a4511084d081ced25"
+    },
+    "before_incomplete_exit_correction": {
+      "failed": 1,
+      "passed": 3,
+      "log_sha256": "0972b0f54ca108279d87261042d06d66dc44f3ca8856f5e9b254c4aefdb373bb"
+    },
+    "before_codex_sequence_correction": {
+      "failed": 2,
+      "passed": 1,
+      "log_sha256": "7c6dd8c80e702b44649af146f0998b2f8736ed15cfe55d098b41ad36b66741f5"
+    },
+    "before_sequence_precedence_correction": {
+      "failed": 6,
+      "passed": 9,
+      "log_sha256": "a10b67e66b16ad6449a293e5cfcb12f4837a008fe0f73024d471b16d80427f28"
+    },
+    "before_hermes_omp_sequence_correction": {
+      "failed": 4,
+      "log_sha256": "2b6023a0515f53cde13e9e26c6fe7a6c9165b52c4e113eadcf62b9271baa50a8"
+    },
+    "ruff_active_files": 165,
+    "published_cli_examples": 198,
+    "published_tool_examples": 12,
+    "scope": "Deterministic executable fixtures exercise consumer parsing; they are not actual model or GUI evidence.",
+    "diagnostic_limits": "An initial new OMP exit test inspected the wrong result level and was corrected before the authoritative before/after test. A broad read-only format check also reported pre-existing old/ formatting; active src/tests/scripts pass and old/ remains frozen."
+  },
+  "actual_linux_native": {
+    "harness_status": {
+      "hermes": "PASS",
+      "omp": "PASS"
+    },
+    "private_summary_sha256": "1eee69625fc82bec25c5618c08e15aba11ca536935063fdf9f0c978672514aa8",
+    "private_original_trace_inventory_sha256": "aed80312b6794135e35c9cea5de9abd8c52afdb49b8978c21ca06c3df39f2acb",
+    "model_case_limit_per_trigger": 1,
+    "model_budget_seconds": 90,
+    "subprocess_deadline_seconds": 120,
+    "provider_auth_model_override": false,
+    "gui_input_task": "NOT_RUN",
+    "cases": [
+      {
+        "harness": "hermes",
+        "trigger": "explicit",
+        "status": "PASS",
+        "canonical_status": "PASS",
+        "canonical_evidence_status": "PASS",
+        "canonical_exit_code": 0,
+        "model_driven": true,
+        "loaded": [
+          "clef-use"
+        ],
+        "invoked": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "attempted": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "read_only_violations": [],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [],
+        "selected_full_guide_before_first_product_call": true,
+        "core_and_blender_before_first_product_call": "NOT_APPLICABLE",
+        "all_native_tool_error_count": 0,
+        "original_trace_sha256": "7a81962e37c965249ea1e1ac73dbb3a8e7d28075210d62de611040d86aa6a308"
+      },
+      {
+        "harness": "hermes",
+        "trigger": "natural",
+        "status": "PASS",
+        "canonical_status": "PASS",
+        "canonical_evidence_status": "PASS",
+        "canonical_exit_code": 0,
+        "model_driven": true,
+        "loaded": [
+          "clef-use",
+          "clef-use-blender"
+        ],
+        "invoked": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "attempted": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "read_only_violations": [],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [],
+        "selected_full_guide_before_first_product_call": true,
+        "core_and_blender_before_first_product_call": true,
+        "all_native_tool_error_count": 0,
+        "original_trace_sha256": "05e0c27cc24360c832298cbb4ec4ca62f84f4a2ecbe2fa4530926ad389366b79"
+      },
+      {
+        "harness": "hermes",
+        "trigger": "negative",
+        "status": "PASS",
+        "canonical_status": "PASS",
+        "canonical_evidence_status": "PASS",
+        "canonical_exit_code": 0,
+        "model_driven": true,
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "read_only_violations": [],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [],
+        "selected_full_guide_before_first_product_call": "NOT_APPLICABLE",
+        "core_and_blender_before_first_product_call": "NOT_APPLICABLE",
+        "all_native_tool_error_count": 0,
+        "original_trace_sha256": "06bc45b511dbcd3818e8d8011f59180cb14b4e53442aac9efb04b0c2b3cf10ef"
+      },
+      {
+        "harness": "omp",
+        "trigger": "explicit",
+        "status": "FAIL",
+        "canonical_status": "FAIL",
+        "canonical_evidence_status": "FAIL",
+        "canonical_exit_code": 1,
+        "model_driven": true,
+        "loaded": [
+          "clef-use"
+        ],
+        "invoked": [
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "attempted": [
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_status"
+        ],
+        "read_only_violations": [
+          "write"
+        ],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [
+          "write",
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_status",
+          "write"
+        ],
+        "selected_full_guide_before_first_product_call": true,
+        "core_and_blender_before_first_product_call": "NOT_APPLICABLE",
+        "all_native_tool_error_count": 4,
+        "original_trace_sha256": "2da04a623ba3e0ecfc8f91d37d61f2938928e7ea091caa330cfcbf81c492601e"
+      },
+      {
+        "harness": "omp",
+        "trigger": "natural",
+        "status": "FAIL",
+        "canonical_status": "FAIL",
+        "canonical_evidence_status": "FAIL",
+        "canonical_exit_code": 1,
+        "model_driven": true,
+        "loaded": [
+          "clef-use-blender",
+          "clef-use"
+        ],
+        "invoked": [
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "attempted": [
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_status"
+        ],
+        "read_only_violations": [
+          "write"
+        ],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [
+          "mcp__clef_use_computer_status",
+          "mcp__clef_use_computer_status",
+          "write"
+        ],
+        "selected_full_guide_before_first_product_call": true,
+        "core_and_blender_before_first_product_call": true,
+        "all_native_tool_error_count": 3,
+        "original_trace_sha256": "c3b7607747a4cb627f7951114f8b1956a6f80529d5d7e470227e9dab405f4d90"
+      },
+      {
+        "harness": "omp",
+        "trigger": "negative",
+        "status": "FAIL",
+        "canonical_status": "FAIL",
+        "canonical_evidence_status": "FAIL",
+        "canonical_exit_code": 1,
+        "model_driven": true,
+        "loaded": [],
+        "invoked": [
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "attempted": [
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "read_only_violations": [],
+        "temporary_policy_absent_after": true,
+        "runtime_endpoint_absent": true,
+        "failed_tool_names": [],
+        "selected_full_guide_before_first_product_call": "NOT_APPLICABLE",
+        "core_and_blender_before_first_product_call": "NOT_APPLICABLE",
+        "all_native_tool_error_count": 0,
+        "original_trace_sha256": "dc0e6790f4d903412169e19e980c802951917b6258cbac466d228320f7e96edf"
+      }
+    ],
+    "preservation": {
+      "strict_global_file_bytes_unchanged": false,
+      "owned_profile_config_unchanged": true,
+      "all_owned_profile_unrelated_bytes_unchanged": false,
+      "interpretation": "Strict global-file preservation fails for native OMP agent.db. Standalone configuration/authentication files are unchanged. Native agent.db mixes settings, usage and authentication; only before/after hashes were retained, so row changes and their preservation are NOT_PROVEN. Generated native cache/log/state changes are recorded separately."
+    },
+    "postprocessing_limit": "The first sanitized-copy inventory redacted guide prose and cannot prove exact body equality. The corrected inventory reads SHA-bound original canonical traces and publishes hashes only; no model rerun.",
+    "native_component_details": {
+      "hermes": {
+        "status": "PASS",
+        "checks": {
+          "manifest_release_current": true,
+          "manifest_schema_current": true,
+          "capability_runtime_current": true,
+          "capability_schema_current": true,
+          "capability_guides_current": true,
+          "full_guide_hash_load_agreement": true,
+          "read_only_facade": true,
+          "exact_two_tool_facade": true,
+          "native_probe_script_absent": true,
+          "runtime_endpoint_absent": true
+        },
+        "method": "Installed native _skill_catalog + skill_view full-body load; native MCP registry actual capability handler(detail=True). No provider context/model request."
+      },
+      "omp": {
+        "status": "PASS",
+        "checks": {
+          "manifest_release_current": true,
+          "manifest_schema_current": true,
+          "capability_runtime_current": true,
+          "capability_schema_current": true,
+          "capability_guides_current": true,
+          "full_guide_hash_load_agreement": true,
+          "read_only_facade": true,
+          "exact_two_tool_facade": true,
+          "native_probe_script_absent": true,
+          "runtime_endpoint_absent": true
+        },
+        "method": "Installed OMP SDK loadSkills + buildSkillPromptMessage; direct Bun.file full-guide byte/hash read verifies native prompt construction. Native MCPManager actual capability execute({}). No provider context/model request."
+      }
+    },
+    "omp_failure_causes": {
+      "explicit": [
+        "Two write calls denied by native user policy; owned targets absent",
+        "Unsupported operation ID returned UNKNOWN_OPERATION",
+        "Status call returned runtime service is not running",
+        "Terminal native invalid tool call: workspace_violation; private path omitted"
+      ],
+      "natural": [
+        "Both full core and Blender reads completed before capability",
+        "Two status calls returned runtime service is not running",
+        "One write denied by native user policy; owned target absent",
+        "Terminal native invalid tool call: workspace_violation; private path omitted"
+      ],
+      "negative": [
+        "Undesired successful capability call disproves negative case",
+        "Four terminal socket-closed error messages in the one native CLI invocation; no controller retry"
+      ]
+    },
+    "cleanup": {
+      "all_temporary_model_policies_absent": true,
+      "all_private_runtime_endpoints_absent": true,
+      "native_hermes_helper_files_absent": true
+    },
+    "native_receipt_sha256": "0f2e9108eb7b54d2be819f63b7451bf435c0b9d81d6c53bb0d79bbc7216012c4"
+  },
+  "retained_installed_codex_trace_replay": {
+    "classification": "REPLAY_CONSUMER_CHECK_NOT_NEW_MODEL_REQUEST",
+    "status": "PASS",
+    "source_overall_status": "FAIL",
+    "installed_runtime": "0.1.45",
+    "candidate_runtime": "0.1.46",
+    "invoked_status": "PASS",
+    "loaded_status": "NOT_RUN",
+    "capability_catalog_verified": true,
+    "load_before_invoke": false,
+    "private_result_sha256": "358d4de48d470aec498f32199a59e66438235df34058f95e56b7687e511371bf",
+    "new_model_requests": 0,
+    "interpretation": "Actual retained full catalog and typed menu_assess detail are both accepted. Independent observable guide-load/order proof remains absent; overall FAIL is retained. Provider-context silent injection remains NOT_PROVEN.",
+    "first_attempt": {
+      "status": "NOT_RUN",
+      "reason": "Driver used stale .44 installation pointer; current managed integration was .45. Corrected driver asserts .45 before replay. Original first stderr was not retained; later read-only mismatch attribution is separate.",
+      "private_failure_summary_sha256": "2ccc6d9291652abeea5faaeba498329868844d138efaa830431724900a4d790d"
+    }
+  },
+  "immutable_0146_installation": {
+    "status": "NOT_RUN",
+    "reason": "Source checkpoint precedes immutable CI build/update."
+  },
+  "completion_claim": false,
+  "final_native_classifier_replay": {
+    "classification": "REPLAY_FROZEN_REAL_NATIVE_TRACES_THROUGH_FINAL_PURE_CLASSIFIERS",
+    "source_sha256": "d8af6fe773281aaabd2d80704aa381ef50e673a25b9aed4a2edf95ba978e9a81",
+    "new_harness_or_model_invocations": 0,
+    "private_result_sha256": "fe1566d69921dd274fa2921eff21bd2d7906b209af017b7f74726a8479911b80",
+    "cases": {
+      "hermes": {
+        "explicit": {
+          "status": "PASS",
+          "actual_original_status": "PASS",
+          "status_agrees": true,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "observed_violation": false,
+          "failed_tools": [],
+          "read_only_violations": [],
+          "stages": {
+            "LOADED": {
+              "status": "PASS",
+              "skills": [
+                "clef-use"
+              ]
+            },
+            "INVOKED": {
+              "status": "PASS",
+              "tools": [
+                "mcp__clef_use__computer_capabilities"
+              ]
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "7a81962e37c965249ea1e1ac73dbb3a8e7d28075210d62de611040d86aa6a308",
+            "canonical_transcript_sha256": "e97acb2312491b3e947f6872c43850973e0891b103aaa8a7709f54c8953babcb",
+            "canonical_recovered_responses_sha256": "ea5f0dba9718f8fb2a3792a95fc16ea78f122d79fb57e2067ed07c051eb768f5",
+            "response_count": 4
+          }
+        },
+        "natural": {
+          "status": "PASS",
+          "actual_original_status": "PASS",
+          "status_agrees": true,
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "observed_violation": false,
+          "failed_tools": [],
+          "read_only_violations": [],
+          "stages": {
+            "LOADED": {
+              "status": "PASS",
+              "skills": [
+                "clef-use",
+                "clef-use-blender"
+              ]
+            },
+            "INVOKED": {
+              "status": "PASS",
+              "tools": [
+                "mcp__clef_use__computer_capabilities"
+              ]
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "05e0c27cc24360c832298cbb4ec4ca62f84f4a2ecbe2fa4530926ad389366b79",
+            "canonical_transcript_sha256": "90e81da04d71dac8181b602de747643ea1d8c10ab6c2574920b2d98636337efd",
+            "canonical_recovered_responses_sha256": "ef83c2e6cc75001145bd50afdde4017b2d684850c254f02b5d803ebae10fc8ef",
+            "response_count": 3
+          }
+        },
+        "negative": {
+          "status": "PASS",
+          "actual_original_status": "PASS",
+          "status_agrees": true,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "runtime_before_guide": false,
+          "load_before_invoke": false,
+          "observed_violation": false,
+          "failed_tools": [],
+          "read_only_violations": [],
+          "stages": {
+            "LOADED": {
+              "status": "NOT_RUN",
+              "skills": []
+            },
+            "INVOKED": {
+              "status": "NOT_RUN",
+              "tools": []
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "06bc45b511dbcd3818e8d8011f59180cb14b4e53442aac9efb04b0c2b3cf10ef",
+            "canonical_transcript_sha256": "82a97a546c7332bd66075ba8eafa5e6434b8549c06c10e09418b1cf2695b7bfe",
+            "canonical_recovered_responses_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+            "response_count": 0
+          }
+        }
+      },
+      "omp": {
+        "explicit": {
+          "status": "FAIL",
+          "actual_original_status": "FAIL",
+          "status_agrees": true,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "observed_violation": "NOT_EXPORTED",
+          "failed_tools": [
+            "write",
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status",
+            "write"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "stages": {
+            "LOADED": {
+              "status": "PASS",
+              "skills": [
+                "clef-use"
+              ]
+            },
+            "INVOKED": {
+              "status": "FAIL",
+              "tools": [
+                "mcp__clef_use_computer_capabilities"
+              ]
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "2da04a623ba3e0ecfc8f91d37d61f2938928e7ea091caa330cfcbf81c492601e"
+          }
+        },
+        "natural": {
+          "status": "FAIL",
+          "actual_original_status": "FAIL",
+          "status_agrees": true,
+          "loaded": [
+            "clef-use-blender",
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "runtime_before_guide": false,
+          "load_before_invoke": true,
+          "observed_violation": "NOT_EXPORTED",
+          "failed_tools": [
+            "mcp__clef_use_computer_status",
+            "mcp__clef_use_computer_status",
+            "write"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "stages": {
+            "LOADED": {
+              "status": "PASS",
+              "skills": [
+                "clef-use-blender",
+                "clef-use"
+              ]
+            },
+            "INVOKED": {
+              "status": "FAIL",
+              "tools": [
+                "mcp__clef_use_computer_capabilities"
+              ]
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "c3b7607747a4cb627f7951114f8b1956a6f80529d5d7e470227e9dab405f4d90"
+          }
+        },
+        "negative": {
+          "status": "FAIL",
+          "actual_original_status": "FAIL",
+          "status_agrees": true,
+          "loaded": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "runtime_before_guide": true,
+          "load_before_invoke": false,
+          "observed_violation": "NOT_EXPORTED",
+          "failed_tools": [],
+          "read_only_violations": [],
+          "stages": {
+            "LOADED": {
+              "status": "NOT_RUN",
+              "skills": []
+            },
+            "INVOKED": {
+              "status": "PASS",
+              "tools": [
+                "mcp__clef_use_computer_capabilities"
+              ]
+            }
+          },
+          "original_hash_bindings": {
+            "native_trace_sha256": "dc0e6790f4d903412169e19e980c802951917b6258cbac466d228320f7e96edf"
+          }
+        }
+      }
+    },
+    "limit": "Actual Hermes sessions exit zero, so nonzero outer-wrapper correction is deterministic regression evidence only. No Codex session is part of these six traces."
+  }
+}

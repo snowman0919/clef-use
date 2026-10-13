@@ -1430,6 +1430,12 @@ def _hermes_model_evidence(
             output_cache[identity] = values
         return output_cache[identity]
 
+    expected = (
+        "clef-use-blender"
+        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
+        else "clef-use"
+    )
+    runtime_before_guide = False
     pending, position, completed, any_gui_guide = {}, 0, set(), False
     for event in events:
         name, kind = event.get("name"), event.get("type")
@@ -1447,6 +1453,15 @@ def _hermes_model_evidence(
             ):
                 raise ValueError("Hermes stream call identity or arguments disagree")
             pending.setdefault(name, []).append(call)
+            if (
+                name
+                in (
+                    "mcp__clef_use__computer_capabilities",
+                    "mcp__clef_use__computer_status",
+                )
+                and expected not in loaded
+            ):
+                runtime_before_guide = True
             if name.startswith("mcp__") and name not in attempted:
                 attempted.append(name)
             if name == "skill_view" and event["input"].get("name") in (
@@ -1517,11 +1532,6 @@ def _hermes_model_evidence(
             invoked.append(name)
     if position != len(ordered) or any(call["tool_call_id"] not in completed for call in ordered):
         raise ValueError("Hermes canonical and stream call inventories disagree")
-    expected = (
-        "clef-use-blender"
-        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
-        else "clef-use"
-    )
     violations = list(
         dict.fromkeys(
             name
@@ -1544,7 +1554,14 @@ def _hermes_model_evidence(
     passed = not violations and (
         not any_gui_guide and not attempted
         if trigger == "negative"
-        else expected in loaded and bool(invoked) and not failed_calls
+        else expected in loaded and bool(invoked) and not failed_calls and not runtime_before_guide
+    )
+    observed_violation = bool(
+        violations
+        or failed_calls
+        or runtime_before_guide
+        or trigger == "negative"
+        and (any_gui_guide or attempted)
     )
     return {
         "case": trigger,
@@ -1555,6 +1572,9 @@ def _hermes_model_evidence(
         "attempted": attempted,
         "failed_calls": failed_calls,
         "read_only_violations": violations,
+        "observed_violation": observed_violation,
+        "runtime_before_guide": runtime_before_guide,
+        "load_before_invoke": bool(invoked) and not runtime_before_guide,
         "stages": _model_stages(loaded, invoked, bool(failed_calls)),
         "_responses": responses,
     }
@@ -1655,7 +1675,7 @@ def _verify_hermes(
             "responses_sha256": _hash(archive.read_bytes()),
             "response_count": len(responses),
         }
-        if run.returncode:
+        if run.returncode and not evidence["observed_violation"]:
             evidence["status"] = "NOT_RUN"
     except (ValueError, OSError, KeyError, TypeError, subprocess.TimeoutExpired):
         negative_attempt = trigger == "negative" and any(
@@ -1795,6 +1815,12 @@ def _omp_model_evidence(
     loaded, invoked, attempted, failed_calls, violations = [], [], [], [], []
     invalid = False
     any_gui_guide = False
+    expected = (
+        "clef-use-blender"
+        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
+        else "clef-use"
+    )
+    runtime_before_guide = False
 
     def guide_matches(path: str, skill: str) -> bool:
         physical = Path(path)
@@ -1816,6 +1842,8 @@ def _omp_model_evidence(
         if name in readers and name not in attempted:
             attempted.append(name)
         if kind == "tool_execution_start":
+            if name in readers and expected not in loaded:
+                runtime_before_guide = True
             if identity in starts or not isinstance(event.get("args"), dict):
                 invalid = True
             else:
@@ -1874,24 +1902,23 @@ def _omp_model_evidence(
                 invoked.append(name)
         elif name == readers[1] and _tool_result_succeeded(decoded):
             invoked.append(name)
-    expected = (
-        "clef-use-blender"
-        if trigger == "natural" and "clef-use-blender" in manifest["skills"]
-        else "clef-use"
-    )
     passed = (
         not failed_calls
         and not violations
         and (
             not any_gui_guide and not attempted
             if trigger == "negative"
-            else expected in loaded and bool(invoked)
+            else expected in loaded and bool(invoked) and not runtime_before_guide
         )
     )
     incomplete = list(starts.keys() - completed)
     outcome = (
         "FAIL"
-        if violations or failed_calls or trigger == "negative" and (any_gui_guide or attempted)
+        if violations
+        or failed_calls
+        or runtime_before_guide
+        or trigger == "negative"
+        and (any_gui_guide or attempted)
         else "NOT_RUN"
         if invalid or incomplete or exit_code
         else "PASS"
@@ -1908,6 +1935,8 @@ def _omp_model_evidence(
         "read_only_violations": violations,
         "incomplete_calls": incomplete,
         "invalid_inventory": invalid,
+        "runtime_before_guide": runtime_before_guide,
+        "load_before_invoke": bool(invoked) and not runtime_before_guide,
         "stages": _model_stages(loaded, invoked, bool(failed_calls)),
     }
 
@@ -2485,7 +2514,8 @@ def _verify_selected(
             if trigger == "natural" and "clef-use-blender" in expected
             else "clef-use"
         )
-        load_before_invoke = False
+        runtime_before_guide = False
+        capability_catalog = None
         guide_resources = {f"clef-use://guides/{name}/SKILL.md": name for name in expected}
         for event in events:
             item = event.get("item", {})
@@ -2510,6 +2540,8 @@ def _verify_selected(
             ):
                 if item["tool"] not in attempted:
                     attempted.append(item["tool"])
+                if selected_tool and selected not in loaded:
+                    runtime_before_guide = True
             if event.get("type") != "item.completed":
                 continue
             if item.get("type") == "command_execution" and item.get("exit_code") == 0:
@@ -2586,26 +2618,55 @@ def _verify_selected(
                             if len(texts) == 1 and isinstance(texts[0], str)
                             else None
                         )
-                        if (
-                            not isinstance(decoded, dict)
-                            or _tool_result_failed(decoded)
-                            or decoded.get("read_only_facade") is not True
-                            or not _capability_agrees(
-                                decoded, manifest, detail=arguments.get("detail") is True
-                            )
-                        ):
+                        if not isinstance(decoded, dict) or _tool_result_failed(decoded):
                             failed = True
                             continue
+                        operation_id = arguments.get("operation_id")
+                        if operation_id is not None:
+                            from .capabilities import digest
+
+                            operations = (
+                                capability_catalog.get("operations", [])
+                                if capability_catalog is not None
+                                else []
+                            )
+                            matches = [
+                                operation
+                                for operation in (
+                                    operations if isinstance(operations, list) else []
+                                )
+                                if isinstance(operation, dict)
+                                and operation.get("family") == operation_id
+                            ]
+                            if len(matches) != 1 or digest(decoded) != digest(matches[0]):
+                                failed = True
+                                continue
+                        else:
+                            if decoded.get(
+                                "read_only_facade"
+                            ) is not True or not _capability_agrees(
+                                decoded, manifest, detail=arguments.get("detail") is True
+                            ):
+                                failed = True
+                                continue
+                            capability_catalog = decoded
                     invoked.append(item["tool"])
-                    load_before_invoke |= selected in loaded
+        load_before_invoke = bool(invoked) and not runtime_before_guide
         stages.update(_model_stages(loaded, invoked, failed))
         stages["TASK_VERIFIED"]["reason"] = "read-only verification does not execute a GUI fixture"
         passed = (
             not any_gui_guide and not attempted
             if trigger == "negative"
-            else selected in loaded and bool(invoked) and load_before_invoke
+            else selected in loaded
+            and bool(invoked)
+            and load_before_invoke
+            and capability_catalog is not None
         )
-        violation = failed or (trigger == "negative" and (any_gui_guide or attempted))
+        violation = (
+            failed
+            or runtime_before_guide
+            or (trigger == "negative" and (any_gui_guide or attempted))
+        )
         outcome = (
             "FAIL"
             if violation
@@ -2623,6 +2684,8 @@ def _verify_selected(
             "invoked": invoked,
             "attempted": attempted,
             "load_before_invoke": load_before_invoke,
+            "runtime_before_guide": runtime_before_guide,
+            "capability_catalog_verified": capability_catalog is not None,
             "stages": _model_stages(loaded, invoked, failed),
         }
         if run.returncode:

@@ -1092,6 +1092,9 @@ def _controlled_verification(
     native_exit_code=0,
     guide_resource=None,
     raw_capability=False,
+    operation_detail=None,
+    runtime_tool="computer_capabilities",
+    model_exit_code=0,
 ):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
@@ -1108,7 +1111,7 @@ def _controlled_verification(
     skill = layout["root"] / "clef-use/SKILL.md"
     body = skill.read_text()
     name = {
-        "codex": "computer_capabilities",
+        "codex": runtime_tool,
         "hermes": "mcp__clef_use__computer_capabilities",
         "omp": "mcp__clef_use_computer_capabilities",
     }[harness]
@@ -1130,6 +1133,11 @@ def _controlled_verification(
         "read_only_facade": True,
         "guides": {"skills": {"clef-use": {"sha256": manifest["skills"]["clef-use"]["files"]}}},
     }
+    if operation_detail is not None:
+        from clef_use.capabilities import capabilities
+
+        operation = capabilities(operation_id="menu_assess")
+        facade["operations"] = [operation]
     native_payload = payload
     if harness == "hermes" and (
         adapter == "hermes_model" or integrations._tool_result_succeeded(payload)
@@ -1338,8 +1346,71 @@ def _controlled_verification(
                         "result": payload,
                     }
                 )
+    if harness == "codex" and operation_detail is not None:
+        detail = json.loads(json.dumps(operation))
+        if operation_detail == "wrong_family":
+            detail["family"] = "viewport_pan"
+        elif operation_detail == "changed_schema":
+            detail["schema"] = {"type": "string"}
+        elif operation_detail == "changed_schema_type":
+            assert detail["schema"]["additionalProperties"] is False
+            detail["schema"]["additionalProperties"] = 0
+        elif operation_detail == "no_catalog":
+            events.pop()
+        events.append(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "mcp_tool_call",
+                    "server": "clef-use",
+                    "tool": "computer_capabilities",
+                    "arguments": {"detail": True, "operation_id": "menu_assess"},
+                    "status": "completed",
+                    "result": {"content": [{"type": "text", "text": json.dumps(detail)}]},
+                },
+            }
+        )
     if harness == "codex" and attempt == "invoke_before_load":
         events.insert(0, events.pop())
+    if harness == "codex" and attempt == "invoke_before_load_then_status":
+        events.insert(0, events.pop())
+        events.append(
+            {
+                "type": "item.completed",
+                "item": {
+                    "type": "mcp_tool_call",
+                    "server": "clef-use",
+                    "tool": "computer_status",
+                    "arguments": {},
+                    "status": "completed",
+                    "result": {"content": [{"type": "text", "text": '{"status":"IDLE"}'}]},
+                },
+            }
+        )
+    if harness == "codex" and attempt == "invoke_start_before_load":
+        started = json.loads(json.dumps(events[-1]))
+        started["type"] = "item.started"
+        started["item"].update(status="in_progress", result=None)
+        events.insert(0, started)
+    if harness != "codex" and attempt == "invoke_before_load":
+        events = events[-2:] + events[:-2]
+    if harness != "codex" and attempt == "invoke_start_before_load":
+        events.insert(0, events.pop(-2))
+    if harness == "hermes" and attempt == "protocol_discovery_before_load":
+        events[0:0] = [
+            {
+                "type": "tool_use",
+                "tool_call_id": "catalog",
+                "name": "mcp__clef_use__list_resources",
+                "input": {},
+            },
+            {
+                "type": "tool_result",
+                "tool_call_id": "catalog",
+                "name": "mcp__clef_use__list_resources",
+                "output": '{"resources": []}',
+            },
+        ]
     scripts = home / "controlled-traces"
     scripts.mkdir(exist_ok=True)
     transcript = {"id": "controlled_session", "messages": []}
@@ -1372,7 +1443,9 @@ def _controlled_verification(
                     }
                 )
         events.insert(0, {"type": "system", "subtype": "init", "session_id": transcript["id"]})
-        events.append({"type": "result", "session_id": transcript["id"], "exit_code": 0})
+        events.append(
+            {"type": "result", "session_id": transcript["id"], "exit_code": model_exit_code}
+        )
     interpreter = scripts / "native-interpreter"
     native_evidence = {
         "discovery": discovery,
@@ -1386,6 +1459,7 @@ def _controlled_verification(
         f" sys.exit({native_exit_code})\n"
         f"elif 'committed_venv' in ' '.join(sys.argv): print(json.dumps({transcript!r}))\n"
         f"elif 'chat' in sys.argv:\n for event in {events!r}: print(json.dumps(event))\n"
+        f" sys.exit({model_exit_code})\n"
         f"else:\n for line in {native!r}: print(line)\n"
         f" sys.exit({native_exit_code})\n"
     )
@@ -1412,6 +1486,7 @@ elif sys.argv[1:2] == ['skills']:
  print('clef-use')
 else:
  for event in {events!r}: print(json.dumps(event))
+ sys.exit({model_exit_code})
 """
     executable.write_text(script)
     executable.chmod(0o700)
@@ -1669,19 +1744,172 @@ def test_codex_capability_requires_current_release_schema_and_guides(
     assert result["stages"]["INVOKED"] == {"status": "FAIL", "tools": []}
 
 
-def test_codex_loading_guide_after_invocation_does_not_verify_sequence(installation, monkeypatch):
+@pytest.mark.parametrize(
+    "attempt", ["invoke_before_load", "invoke_before_load_then_status", "invoke_start_before_load"]
+)
+@pytest.mark.parametrize("model_exit_code", [0, 1])
+def test_codex_loading_guide_after_invocation_does_not_verify_sequence(
+    installation, monkeypatch, attempt, model_exit_code
+):
     result = _controlled_verification(
         installation,
         monkeypatch,
         "codex_model",
         {"content": [], "isError": False},
         "explicit",
-        "invoke_before_load",
+        attempt,
+        model_exit_code=model_exit_code,
     )
     assert result["stages"]["LOADED"]["status"] == "PASS"
     assert result["stages"]["INVOKED"]["status"] == "PASS"
     assert result["status"] == "FAIL"
     assert result["model_trigger_verification"]["load_before_invoke"] is False
+    assert result["model_trigger_verification"]["runtime_before_guide"] is True
+
+
+@pytest.mark.parametrize("adapter", ["hermes_model", "omp_model"])
+@pytest.mark.parametrize("attempt", ["invoke_before_load", "invoke_start_before_load"])
+@pytest.mark.parametrize("model_exit_code", [0, 1])
+def test_native_model_loading_guide_after_runtime_start_does_not_verify_sequence(
+    installation, monkeypatch, adapter, attempt, model_exit_code
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        adapter,
+        {"content": [], "isError": False},
+        "explicit",
+        attempt,
+        model_exit_code=model_exit_code,
+    )
+    evidence = result["model_trigger_verification"]
+    assert evidence["stages"]["LOADED"]["status"] == "PASS"
+    assert evidence["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
+    assert evidence["load_before_invoke"] is False
+    assert evidence["runtime_before_guide"] is True
+
+
+def test_hermes_native_protocol_discovery_before_guide_is_not_runtime_invocation(
+    installation, monkeypatch
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "hermes_model",
+        {"content": [], "isError": False},
+        "explicit",
+        "protocol_discovery_before_load",
+    )
+    assert result["status"] == "PASS"
+    assert result["model_trigger_verification"]["load_before_invoke"] is True
+
+
+@pytest.mark.parametrize(
+    "detail,expected",
+    [
+        ("matching", "PASS"),
+        ("wrong_family", "FAIL"),
+        ("changed_schema", "FAIL"),
+        ("changed_schema_type", "FAIL"),
+        ("no_catalog", "FAIL"),
+    ],
+)
+def test_codex_operation_detail_requires_prior_matching_catalog(
+    installation, monkeypatch, detail, expected
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        operation_detail=detail,
+    )
+    assert result["status"] == expected
+    assert result["stages"]["INVOKED"]["status"] == expected
+    if expected == "PASS":
+        assert result["stages"]["INVOKED"]["tools"] == [
+            "computer_capabilities",
+            "computer_capabilities",
+        ]
+
+
+def test_codex_status_alone_does_not_verify_current_capability_catalog(installation, monkeypatch):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [{"type": "text", "text": '{"status":"IDLE"}'}]},
+        "explicit",
+        raw_capability=True,
+        runtime_tool="computer_status",
+    )
+    assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+@pytest.mark.parametrize("trigger", ["explicit", "negative"])
+def test_observed_failure_survives_later_native_process_error(
+    installation, monkeypatch, adapter, trigger
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        adapter,
+        {"content": [], "isError": True},
+        trigger,
+        model_exit_code=1,
+    )
+    assert result["model_trigger_verification"]["status"] == "FAIL"
+    assert result["status"] == "FAIL"
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+def test_successful_calls_do_not_prove_model_completion_after_process_error(
+    installation, monkeypatch, adapter
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        adapter,
+        {"content": [], "isError": False},
+        "explicit",
+        model_exit_code=1,
+    )
+    assert result["model_trigger_verification"]["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "NOT_RUN"
+
+
+@pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])
+def test_loaded_guide_without_runtime_call_is_incomplete_after_process_error(
+    installation, monkeypatch, adapter
+):
+    result = _controlled_verification(
+        installation, monkeypatch, adapter, None, "explicit", "none", model_exit_code=1
+    )
+    evidence = result["model_trigger_verification"]
+    assert evidence["loaded"] == ["clef-use"]
+    assert evidence["attempted"] == []
+    assert result["status"] == "NOT_RUN"
+
+
+def test_hermes_negative_guide_attempt_remains_failed_after_process_error(
+    installation, monkeypatch
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "hermes_model",
+        None,
+        "negative",
+        "none",
+        guide_command="include forbidden guide read",
+        model_exit_code=1,
+    )
+    assert result["model_trigger_verification"]["loaded"] == ["clef-use"]
+    assert result["status"] == "FAIL"
 
 
 @pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])

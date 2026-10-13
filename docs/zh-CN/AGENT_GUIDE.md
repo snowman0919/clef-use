@@ -11,6 +11,10 @@ runtime 调用失败后，即使后续 capability 调用成功，验证仍保持
 文件读取和已公布的 guide resource 必须匹配完整受管理正文。
 capability 的 runtime/schema/guide hash 和只读双工具 facade 也必须匹配。
 在调用之后才加载所需指南时，验证顺序为 FAIL。
+先开始的 runtime 调用仍为 FAIL，后续加载、成功或进程异常退出不会抹去该证据。
+原生 Skill catalog 发现与 runtime 调用分开判断。
+operation 详细响应必须与先前已验证的实时列表中的对应 operation 完全一致。
+仅有 status 响应不能验证当前 capability 列表。
 
 OmniParser 在 upstream import 前后保留调用者的 Torch thread 数，
 包括显式的单 thread 设置，无需新增 thread 配置。
@@ -20,6 +24,8 @@ OmniParser 在 upstream import 前后保留调用者的 Torch thread 数，
 编辑和只读菜单、状态评估都应加载 Blender 技能。`references/` 文件属于原技能。
 在 Hermes 中使用
 `skill_view(name="clef-use", file_path="references/API_BASELINE.md")` 读取基准 API。
+只读 GUI capability/schema 问题也适用这些指南。先发现 Skill catalog，加载 core
+及适用的 Blender 指南，再调用 runtime 工具；不发送输入的 capability 请求也是调用。
 
 OMP 将 `PI_CONFIG_DIR` 解析为相对于 HOME 的路径名称，默认是 `.omp`。
 绝对路径的默认 agent 目录请使用 `PI_CODING_AGENT_DIR`。

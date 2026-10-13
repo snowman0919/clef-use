@@ -252,7 +252,7 @@ checks reject attempts, including failed or incomplete calls, independently of
 the successful invocation list. These checks classify trace evidence; they do
 not establish a GUI task or upgrade component traces to real harness evidence.
 An explicit response/transport error records INVOKED=FAIL even when another
-invocation succeeds. Codex retains observed errors and negative-trigger violations
+invocation succeeds. Native model adapters retain observed errors and negative-trigger violations
 in the overall outcome independently of later success or process exit. Successful
 tool names remain listed as partial evidence; missing results remain NOT_RUN.
 Native harness JSON subprocess streams use strict UTF-8 decoding, including the
@@ -262,12 +262,23 @@ arguments and response identify the canonical server and exact URI, and returned
 content equals the entire managed guide body. Product resource failures and
 negative-trigger resource attempts are retained. File-based loading remains
 bound to the managed path and complete body. A successful call must follow the
-selected guide's load to verify discovery/load/invoke; later loading cannot
-retroactively establish that order.
+selected guide's load to verify discovery/load/invoke. All three model adapters
+retain any runtime attempt before guide loading, including an invocation that
+starts before loading but completes afterwards. A later successful status call
+cannot repair the earlier sequence violation.
 Capability text is decoded before using the shared runtime/schema/guide digest
 validator, including requested detailed schemas. Codex also requires the native
 read-only two-tool facade. Its ephemeral server configuration sets the read-only
 environment explicitly; inherited parent environment alone is insufficient.
+An operation-specific capability reply is a typed operation record rather than a
+full catalog. Codex binds its exact canonical JSON digest to one matching family
+in a prior verified live catalog. Missing/ambiguous catalogs, changed families,
+schemas or JSON types remain refused. Status-only invocation cannot verify current
+capability metadata; overall positive verification requires a full catalog too.
+Core/Blender guide routing explicitly includes read-only GUI capability questions.
+Their instruction order distinguishes native Skill catalog discovery from runtime
+invocation: load the applicable guide before capability calls. This changes prose
+routing only; it does not add runtime operations, permissions or safety facts.
 
 ## Visual readiness revision, 0.1.5
 

@@ -1,5 +1,47 @@
 # Reactive runtime execution status
 
+## Source 0.1.46 capability binding and actual harness batch, 2026-10-14
+
+**OBSERVED / source correction:** typed operation-detail responses now require an
+exact canonical JSON digest match to the operation record in an already verified
+live catalog. Status alone cannot prove the catalog. Changed schema values,
+including boolean versus numeric JSON types, are rejected. Hermes preserves an
+already observed FAIL when its native process later exits nonzero. All three model
+adapters retain runtime attempts preceding guide load; later completion or status
+success cannot repair that sequence. No operation,
+input or confidence guard is weakened. The core and Blender guides explicitly
+cover read-only GUI capability questions and load before runtime invocation.
+
+**OBSERVED / actual native model sessions:** frozen source .46 Hermes passes the
+original explicit/natural/negative cases once each; natural loads both full guides
+before invoking capabilities. OMP fails all three: positive requests retain denied
+write attempts and runtime-call errors; the unrelated Python request invokes GUI
+capabilities. Native-only discovery/full-body/current-capability linkage passes
+for both. Standalone configuration/authentication files remain unchanged, but the
+stricter global-file hash guard fails for native OMP agent.db. This native database
+mixes settings, usage and authentication; only its before/after hashes were
+retained, so changed rows and their preservation are NOT_PROVEN. Generated profile/
+database changes are recorded separately; all-file preservation is not claimed.
+
+**REPLAY / retained installed .45 Codex trace:** the .46 consumer accepts the
+actual full catalog and matching menu_assess detail, correcting the false invocation
+failure. Overall FAIL remains because full-guide load/order is not observable.
+No new model request runs. Silent native provider-context injection is NOT_PROVEN.
+The separate native context-event prototype remains NOT_RUN: actual Codex .151
+experimental wire schemas omit its required event, so no model/session starts.
+An internal source type is not treated as an advertised API.
+
+The earlier source checkpoint passes1646 and skips55. Final source checks pass1664,
+skip55 and report41 warnings in83.45 seconds; focused integration checks pass264.
+Sequence and failure-precedence counterexamples are reproduced before correction. Active-code
+Ruff checks165 files and generated198 CLI/12 tool examples pass. The actual native
+batch predates the final exit-status and sequence corrections. A pure replay through
+the final classifiers retains all six actual outcomes and original-bound guide order;
+it makes no new model request. Source hashes are retained. Immutable .46 installation
+and whole GUI/performance acceptance remain NOT_RUN at this source checkpoint.
+See the [source and harness receipt](validation/2026-10-14/native-harness-validation-0146.json)
+and [native context visibility limits](validation/2026-10-14/codex-native-skill-visibility.json).
+
 ## Immutable installed Windows 0.1.45 verification, 2026-10-14
 
 **OBSERVED / immutable CI and installation:** exact source `c382d88` completes
@@ -338,14 +380,14 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
-| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .43 CI passes, but actual .42 -> .43 update fails at the root icacls grant's 15-second limit and .42 remains active. Source .44 native root proof passes six Windows cases; immutable .44 installation and limited-token execution are pending. Earlier installed .42 evidence remains separate. |
-| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no writer attempt occurs in the original .42 batch, while the separate passive diagnostic blocks an actual attempted write. Older route-specific HTTP 401 is historical. |
+| INSTALL-02 / INSTALL-03 / INSTALL-09 | Immutable .45 CI passes all fifteen builds and assembly; actual .44 -> .45 update, repeat CURRENT and real LIMITED desktop-token payload/CLI checks pass. The failed .43 root grant remains historical evidence. Source .46 is a separate uninstalled candidate until its own immutable artifact/update checks execute. |
+| GUIDE-03 | Source .46 actual Hermes explicit/natural/negative cases pass once each. Actual OMP positive cases load guides but attempt denied writes and retain runtime-call errors; its unrelated Python case calls capabilities and fails over-trigger. Installed .45 Codex explicit/natural lack observable full-body load/order proof, while negative passes. Silent native provider-context injection remains NOT_PROVEN; the experimental raw-context route stops before a model turn because the actual native wire schema does not advertise the required event. Older route-specific HTTP 401 is historical. |
 | GUIDE-04 | Installed .42 Windows Codex cached-to-fresh completion challenge PASS with independent incomplete receiver and cleanup. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN; one case does not establish general reliability. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
-| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Actual installed .42 independent native editor with the original contract FAILS at its first parser backend timeout, zero decisions/actions; other-process foreground ownership precedes cleanup and restoration is refused. The other foreground owner is brave.exe; its initiating actor and parallel desktop ownership are awaiting clarification. |
+| E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Actual installed .42 independent native editor FAILS at its first parser timeout, zero decisions/actions. Installed .44 completes the same retained parser request offscreen after the Torch-budget correction; this component result does not prove the whole editor task. Other-process Brave foreground ownership precedes cleanup; its actor and parallel desktop ownership remain unproven, so new desktop-input trials await coordination. |
 | PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
 | E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
-| RELEASE-01 | All fifteen immutable .42 CI artifacts and actual Windows .41 -> .42 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
+| RELEASE-01 | All fifteen immutable .45 CI artifacts and actual Windows .44 -> .45 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
 
 ## Actual Hermes verification correction, source 0.1.41
 

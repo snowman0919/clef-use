@@ -12,6 +12,10 @@ runtime 呼び出しの失敗は、後の capability 呼び出しが成功して
 ファイル読み込みと公開 guide resource は管理された本文全体と一致する必要があります。
 capability の runtime/schema/guide hash と読み取り専用の二つのツールも確認します。
 必要なガイドを呼び出し後に読む場合、検証順序は FAIL です。
+先行する runtime 呼び出しの FAIL は、後のロード・成功・プロセス異常終了で消えません。
+ネイティブ Skill catalog の発見は runtime 呼び出しと区別します。
+operation 詳細応答は、先に検証した実際の一覧の該当 operation と完全一致する必要があります。
+status 応答だけでは現在の capability 一覧を検証できません。
 
 OmniParser は upstream import 前後で呼び出し元の Torch thread 数を保持します。
 明示的な単一 thread 設定も保持し、新しい thread 設定は不要です。
@@ -21,6 +25,9 @@ OmniParser は upstream import 前後で呼び出し元の Torch thread 数を�
 編集だけでなく、読み取り専用のメニュー・状態評価にも Blender スキルをロードします。
 `references/` ファイルは元のスキルに属します。Hermes では
 `skill_view(name="clef-use", file_path="references/API_BASELINE.md")` で基準 API を読みます。
+読み取り専用の GUI capability/schema 質問にも該当ガイドを使います。Skill catalog
+を発見し、core と該当する Blender ガイドをロードしてから runtime ツールを呼びます。
+入力を送らない capability 要求もツール呼び出しです。
 
 OMP の `PI_CONFIG_DIR` は HOME からの相対パス名で、既定は `.omp` です。
 絶対パスの既定 agent ディレクトリには `PI_CODING_AGENT_DIR` を使います。

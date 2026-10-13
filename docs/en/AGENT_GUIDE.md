@@ -12,6 +12,10 @@ succeeds. Discovery alone does not prove model guide loading or invocation.
 File reads and advertised guide resources must match the full managed body.
 Capability results must match runtime/schema/guide hashes and the read-only
 two-tool facade. Loading the required guide after invocation fails the sequence.
+An early runtime attempt stays FAIL after later guide loading, success or a
+nonzero process exit. Native Skill catalog discovery remains distinct from runtime invocation.
+Operation-detail replies must exactly match an operation in a previously verified
+live catalog. A status reply alone does not verify the current capability catalog.
 
 OmniParser preserves the caller's Torch thread budget across upstream imports,
 including an explicit single-thread setting. No new thread setting is required.
@@ -21,6 +25,9 @@ latency; verify those independently with the installed runtime.
 Load the Blender guide for read-only menu/state assessment as well as editing.
 Linked `references/` files belong to their owning skill. In Hermes, read the
 baseline with `skill_view(name="clef-use", file_path="references/API_BASELINE.md")`.
+Read-only GUI capability/schema questions also use these guides. Discover the
+skill catalog, load core and the applicable Blender guide, then invoke runtime
+tools; a no-input capability call still counts as an invocation.
 
 OMP resolves `PI_CONFIG_DIR` as a name relative to HOME (default `.omp`). Use
 `PI_CODING_AGENT_DIR` for an absolute default agent directory. An explicit empty

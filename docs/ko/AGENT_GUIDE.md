@@ -12,6 +12,10 @@ runtime 호출 실패는 뒤의 capability 호출이 성공해도 검증 FAIL로
 파일 읽기와 공개된 guide resource는 관리된 본문 전체와 일치해야 합니다.
 capability의 runtime/schema/guide 해시와 read-only 두 도구 facade도 확인합니다.
 필요한 지침을 호출 후에 읽으면 검증 순서는 FAIL입니다.
+먼저 시작한 runtime 호출은 나중의 지침 로드·성공·프로세스 오류 종료로 지워지지 않습니다.
+네이티브 Skill catalog 발견은 runtime 호출과 구분합니다.
+operation 상세 응답은 앞서 검증한 실제 목록의 해당 operation과 정확히 일치해야 합니다.
+status 응답만으로 현재 capability 목록이 검증되지는 않습니다.
 
 OmniParser는 upstream import 전후에 호출자의 Torch thread 예산을 보존합니다.
 명시적인 단일 thread 설정도 유지하며 새 thread 설정은 필요하지 않습니다.
@@ -21,6 +25,9 @@ OmniParser는 upstream import 전후에 호출자의 Torch thread 예산을 보�
 편집뿐 아니라 읽기 전용 메뉴·상태 평가에도 Blender 스킬을 로드하세요.
 `references/` 파일은 해당 스킬에 속합니다. Hermes에서는
 `skill_view(name="clef-use", file_path="references/API_BASELINE.md")`로 기준 API를 읽습니다.
+읽기 전용 GUI capability/schema 질문에도 해당 지침을 사용합니다. Skill catalog를
+발견하고 core와 해당 Blender 지침을 로드한 뒤 runtime 도구를 호출하세요.
+입력을 보내지 않는 capability 요청도 도구 호출입니다.
 
 OMP의 `PI_CONFIG_DIR`는 HOME 기준 상대 경로 이름이며 기본값은 `.omp`입니다.
 절대 경로의 기본 agent 디렉터리는 `PI_CODING_AGENT_DIR`로 지정하세요.

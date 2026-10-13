@@ -75,6 +75,14 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-native-skill-visibility.json
+    section: native_schema_preflight
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: actual_codex_model_batch
     claim: OBSERVED
@@ -522,6 +530,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: retained_installed_codex_trace_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: actual_codex_model_batch
     claim: OBSERVED
@@ -574,6 +587,10 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: native_linux_linkage
     claim: OBSERVED
@@ -605,6 +622,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
     section: native_linux_linkage
     claim: OBSERVED
