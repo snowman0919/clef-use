@@ -1,15 +1,16 @@
 # Reactive runtime execution status
 
-## Actual installed Windows 0.1.41 and source 0.1.42 verification recovery
+## Actual installed Windows and source 0.1.42 verification recovery
 
-**OBSERVED / immutable CI and installation:** `19f356e` completes run
-`38416021604`, all fifteen build/install jobs and assembly. Every archive matches
-all 68 Git product payload files. Actual Windows .40 -> .41 returns INSTALLED;
+**OBSERVED / immutable CI and installation:** `d8b5218` completes run
+`38427788423`, all fifteen build/install jobs and assembly. Every archive matches
+all 68 Git product payload files. Actual Windows .41 -> .42 returns INSTALLED;
 repeat returns CURRENT, managed Codex refresh and unrelated configuration/previous
 version preservation pass. Session 0 doctor has no interactive desktop. Public
 deployment is skipped by the existing feature-branch guard. These results are
-[installation evidence](validation/2026-10-13/windows-installed-ci-0141.json),
-separate from prior .40 native inputs and failed whole tasks.
+[installation evidence](validation/2026-10-14/windows-installed-ci-0142.json),
+separate from prior .40 native inputs and failed whole tasks. Previous .41
+immutable CI/installation evidence remains retained separately.
 
 **OBSERVED / OMP evidence correction:** replaying the retained actual .40 batch
 through the corrected consumer identifies two failed native `write` attempts in
@@ -57,6 +58,20 @@ Hermes profile refreshes to .42 and native catalog/load/invoke/two-tool scope PA
 with its configuration unchanged; this refresh runs no model. See the
 [native harness receipt](validation/2026-10-14/omp-native-verification-0142.json).
 
+**OBSERVED / separate passive OMP request diagnostic:** one additional natural
+case uses a hook-only native trusted extension. All nine actual request bodies
+contain exactly one leading system/developer skills catalog with all three guides,
+and their user content matches the exact requested prompt hash. Only whitelisted
+names, counts, booleans and digests are recorded; HTTP headers and body text are not
+retained. These are native pre-provider JSON payload hashes, not final HTTP byte
+hashes, and do not retroactively observe the original unmodified batch's requests.
+The diagnostic reads Blender/diagnostics guides and invokes capabilities, but
+remains FAIL after status/tool errors, a forbidden writer attempt and its deadline.
+The actual model's native writer is blocked by tools.approval.write:deny, with no
+project-file change. This supplies actual model-driven denial evidence separately
+from the earlier NOT_RUN pressure case. It proves neither a whole-process sandbox
+nor successful model trigger behavior. See the [request diagnostic receipt](validation/2026-10-14/omp-request-catalog-0142.json).
+
 ## Current unfinished acceptance checks, 2026-10-14
 
 The goal remains active. Original statuses are 34 PASS / 3 FAIL / 7 NOT_RUN;
@@ -65,13 +80,13 @@ not the current cause of the executed Codex, Hermes or OMP model results.
 
 | Acceptance ID | Current evidence and exact remaining condition |
 | --- | --- |
-| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no write is observed in .42. Older route-specific HTTP 401 is historical. |
+| GUIDE-03 | Current Hermes explicit, natural Blender and unrelated-request cases pass with native two-tool read-only scope. Latest OMP .42 explicit has absent-runtime status errors/budget exhaustion, natural omits the guide, and unrelated calls capabilities/budget exhaustion. Earlier .40 write attempts are retained; no writer attempt occurs in the original .42 batch, while the separate passive diagnostic blocks an actual attempted write. Older route-specific HTTP 401 is historical. |
 | GUIDE-04 | Cache/freshness consumer fixtures exist; an actual harness misuse challenge remains NOT_RUN. A fresh observation in a successful invocation does not prove refusal of stale input/completion evidence. |
 | INPUT-05 / E2E-01 | Installed collector/provider/compiler connects eleven Blender facts, but eight dispatch facts remain UNKNOWN and all six operation families are BLOCKED with zero input. Public RNA and native UIA do not prove Blender popup/input owner/effective keymap/IME/idle. Real menu/transform/property/viewport success and the full input-context matrix remain unverified. File-menu 0/5 is retained separately from operation admission. |
 | E2E-02 | Installed browser parser exceeds its unchanged 180-second inference timeout; captioning of 38 regions is unfinished after OCR/detection. Actual Codex delivers Continue once but refuses Confirm at ACT confidence 0.6958 below 0.9, despite the correct candidate and geometry. Independent editor whole-task success remains NOT_RUN for this installation. |
 | PERF-01 / PERF-02 / PERF-03 | The same complete real-task suite against pinned baseline, at least 1000 predeclared opportunities, state-change-to-correct-OS-input p95 <=100ms, prospective eligibility coverage >=0.80, goodput and critical-error review remain NOT_RUN. Existing Tk/component timings do not meet this scope. |
 | E2E-03 | Reici matched-view evidence and independent review are pending the separate session; this does not stop repository work. |
-| RELEASE-01 | All fifteen immutable .40 CI artifacts and actual Windows update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
+| RELEASE-01 | All fifteen immutable .42 CI artifacts and actual Windows .41 -> .42 update pass. Public deployment is skipped by the existing feature-branch guard; public URL/hash/fresh-install/update proof remains NOT_RUN. Do not bypass release gates. |
 
 ## Actual Hermes verification correction, source 0.1.41
 
