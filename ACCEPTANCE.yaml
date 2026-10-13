@@ -75,6 +75,10 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
     section: actual_native_candidate
     claim: OBSERVED
@@ -233,6 +237,10 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
     section: cases
     claim: OBSERVED
@@ -282,6 +290,10 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
     section: regression
     claim: OBSERVED
@@ -434,6 +446,10 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: installed_windows
     claim: OBSERVED
@@ -506,6 +522,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
     section: actual_native_candidate
     claim: OBSERVED
@@ -554,6 +574,10 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: native_linux_linkage
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
     section: cases
     claim: OBSERVED
@@ -581,6 +605,10 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: native_linux_linkage
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
     section: cases
     claim: OBSERVED
@@ -1178,6 +1206,10 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: ci
+    claim: OBSERVED
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
     section: ci
     claim: OBSERVED

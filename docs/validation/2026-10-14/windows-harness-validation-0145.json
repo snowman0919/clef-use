@@ -110,7 +110,7 @@
         ]
       }
     ],
-    "reason": "Actual natural model invokes capabilities without loading the selected guide. This remains FAIL; no model retries are used to manufacture PASS.",
+    "reason": "No full selected-guide command/resource load is observed in the retained trace, so verification remains FAIL. Native silent Skill-body injection/provider context is not proven by this driver; absence of a read event alone is not proof that no body was supplied.",
     "scope": "Read-only model session; no GUI task, capture or OS input requested. Candidate module validates the actual .44 runtime and guide set, not an installed .45 release.",
     "private_result_sha256": "a43c2b72d653ae8915776b0473f48a5b6155834f5b36a85fdcfdc6ec3daee123",
     "private_trace_sha256": "21fce07024a0981a1965a937afaa7740da6416328c67ecd3e31d59b2367109f6",

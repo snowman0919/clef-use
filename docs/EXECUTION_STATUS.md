@@ -1,5 +1,41 @@
 # Reactive runtime execution status
 
+## Immutable installed Windows 0.1.45 verification, 2026-10-14
+
+**OBSERVED / immutable CI and installation:** exact source `c382d88` completes
+run `38458214088`, all fifteen build/install jobs and assembly. All archives match
+68 Git payload files. Actual Windows .44 -> .45 returns INSTALLED; repeat returns
+CURRENT. Managed Codex refresh, unrelated configuration bytes, previous version
+files and owned loopback-server cleanup pass. A real LIMITED desktop token reads
+all68 payload files and runs version/capabilities/offline self-test; the windowless
+owned task exits zero and is removed. Session0 doctor exit2 remains the expected
+absence of an interactive desktop in that SSH session.
+
+**OBSERVED / actual installed Codex model batch:** explicit FAIL, natural FAIL,
+negative PASS; each predeclared case executes once with the installed .45 CLI and
+actual native Codex. Configurations remain unchanged. Current full-catalog calls
+advertise the actual two-tool read-only facade and matching metadata. No complete
+guide command/resource load appears in these traces. Native silent Skill-body
+injection is a separate possible path; this driver does not prove the provider
+context, so absence of a read event is not proof that a body was never supplied.
+
+The natural case returns a valid typed menu_assess operation detail after its
+full catalog. The new catalog-only consumer incorrectly refuses that detail for
+lacking catalog metadata. This is a verification defect, not an MCP call failure.
+It requires exact binding to the prior verified catalog's operation record; it
+does not justify weakening metadata checks or marking the independent guide-load
+proof complete.
+
+**OBSERVED / separate current source Linux native components:** Hermes and OMP
+load all three complete guides and invoke actual capabilities with current .45
+runtime/schema/guide agreement. Hermes uses skill_view; OMP uses native prompt
+construction plus complete-file bytes. Neither runs a provider/model or GUI task.
+All configuration bytes are preserved; generated Hermes schema-cache/log changes
+are recorded, and all-profile-file immutability remains FAIL separately.
+
+Original GUI failures and numeric acceptance remain open. Public deployment is
+skipped by the existing feature guard. See the [immutable .45 receipt](validation/2026-10-14/windows-installed-ci-0145.json).
+
 ## Source 0.1.45 native harness verification correction, 2026-10-14
 
 **OBSERVED / reproduced source defects:** an ASCII-locale subprocess cannot read
@@ -20,8 +56,9 @@ before invocation to verify the sequence. Four-language agent documentation is u
 **OBSERVED / actual Windows source component:** the final candidate module runs
 with the installed .44 runtime and actual Codex under cp1252. UTF-8 output is decoded
 successfully; a real capability response advertises the two-tool read-only facade
-and matching .44 runtime/schema/guide metadata. The natural model calls capabilities
-without loading the selected guide, so its result remains FAIL. Configuration bytes
+and matching .44 runtime/schema/guide metadata. No full selected-guide load appears
+in its command/resource trace, so verification remains FAIL; silent native body
+injection into provider context is not proven by this driver. Configuration bytes
 are preserved. This is not installed .45 or GUI-task evidence.
 
 **REPLAY / earlier actual native trace:** an earlier candidate had reported no
