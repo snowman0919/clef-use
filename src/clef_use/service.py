@@ -358,6 +358,11 @@ def main():
             server.server_close()
             if manager.runtime:
                 manager.runtime.activity.close()
+                close_state_provider = getattr(
+                    getattr(manager.runtime, "state_provider", None), "close", None
+                )
+                if close_state_provider:
+                    close_state_provider()
                 for backend in (manager.runtime.perception, manager.runtime.decision):
                     worker = getattr(backend, "worker", None)
                     if worker:

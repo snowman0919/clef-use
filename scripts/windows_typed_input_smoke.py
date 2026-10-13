@@ -13,7 +13,7 @@ import traceback
 from pathlib import Path
 from threading import Event, Thread
 
-from windows_gui_support import restore_foreground
+from windows_gui_support import restore_foreground, widget_point
 
 from clef_use.backends import DesktopAction, DesktopCapture
 from clef_use.input_ir import GestureInput, InputContext, KeyInput, PointerInput
@@ -120,10 +120,7 @@ def main(args):
             raise RuntimeError("owned fixture effect not observed within declared bound")
 
         def coordinates(frame, x, y):
-            return (
-                (canvas.winfo_rootx() + x - frame.origin[0]) / frame.image.width,
-                (canvas.winfo_rooty() + y - frame.origin[1]) / frame.image.height,
-            )
+            return widget_point(gui, canvas, frame, x, y, owned)
 
         def execute(command, frame, predicate):
             reply = {}

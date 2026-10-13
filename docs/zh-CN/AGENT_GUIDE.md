@@ -214,3 +214,26 @@ parser 对象分别保留精确坐标及不同的 action、confidence、source �
 Windows 截图在仅限当前线程的物理坐标 context 内使用 native GDI，不修改整个 process 的 DPI awareness。必须保留已打开 window 与 control 的物理 geometry；截图使它们发生变化即验证失败。此修正不证明 Blender popup、focus、IME、keymap 状态或100ms反应性能。
 
 实际 Windows Codex 验证区分 discovery、load、invoke 与 GUI task 成功。即使前一次点击正确，tool 返回 LOW_CONFIDENCE 仍是 task 失败。保留真实候选列表、独立测量的物理 target geometry 和 widget 结果，不降低置信度 guard 来把调用成功变成 task 成功。
+
+当前 Windows 状态 provider 将 native UI Automation 证据与可选的 Blender
+provider 组合。仅依赖标准库的 base Python worker 在就绪时验证其实际 PID，query
+超时为 500ms。每次结果都把 query 前后的 native foreground 观测绑定到同一个
+focused UIA element、process identity、ancestor chain 和 bounds。对于受支持的
+TextEdit，`GetActiveComposition` 返回 `S_OK` 且 composition 为 null 时表示
+`False`；interface 不受支持、发生错误、证据过期或不匹配时均保持 `UNKNOWN`。
+TextEdit 是否只读或可编辑尚未观测。该 provider 不证明 popup 所有权、keymap 状态、
+全局 idle 或 Blender operation admission。新 provider 的 installed end-to-end 验证仍待
+完成；这不代表 live readiness 或 operation 成功。
+
+Windows native input 会在发送前检查 failsafe，且不再 import PyAutoGUI。installed
+0.1.38 的一次 probe 在未发送任何 input 时，将自有 window geometry 从
+`[210,210,1638,1066]` 改为 `[120,120,936,609]`，input count 为 0。同一路径的
+source 修正保留了 geometry。这是 source 级证据，不是 installed 0.1.38 PASS，
+也不支持任何 100ms 性能声明。
+
+watchdog 线程同样使用物理 window bounds。Windows 验证会把 widget 输入点映射到
+物理 bounds，并检查 native 接收 window 的所有权；capture 成功本身不能证明输入
+坐标正确。
+发送 button-down 或 wheel 前，native pointer 接收方的 root window 必须与绑定的
+foreground window 一致。仅 foreground 匹配不能授权向其他 window 输入；已持有
+输入的 recovery release 不依赖这一条件。

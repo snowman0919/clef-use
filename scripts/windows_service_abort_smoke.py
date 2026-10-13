@@ -21,7 +21,7 @@ import tkinter as tk
 from pathlib import Path
 from threading import Event, Thread
 
-from windows_gui_support import restore_foreground
+from windows_gui_support import restore_foreground, widget_point
 
 from clef_use import __version__
 from clef_use.backends import DesktopAction, DesktopCapture
@@ -214,10 +214,7 @@ def main(output):
         frame = capture.capture()
         if frame.foreground_window != owned:
             raise RuntimeError("Capture did not bind the owned foreground")
-        point = (
-            (canvas.winfo_rootx() + 100 - frame.origin[0]) / frame.image.width,
-            (canvas.winfo_rooty() + 200 - frame.origin[1]) / frame.image.height,
-        )
+        point = widget_point(gui, canvas, frame, 100, 200, owned)
         deadline = time.monotonic() + LEASE_SECONDS
         context = InputContext(text_focus=False, ime_composing=False)
 

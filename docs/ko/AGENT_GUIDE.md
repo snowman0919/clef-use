@@ -242,3 +242,27 @@ parser 객체는 정확한 좌표와 서로 다른 action·confidence·source �
 Windows 캡처는 스레드별 물리 좌표 context 안에서 native GDI를 사용하며 프로세스 전체 DPI 설정을 변경하지 않습니다. 이미 열린 창과 컨트롤의 물리 geometry를 보존해야 하며, 캡처가 이를 바꾸면 검증 실패입니다. 이 수정은 Blender popup·focus·IME·keymap 상태나 100ms 반응 성능을 입증하지 않습니다.
 
 실제 Windows Codex 검증은 discovery·load·invoke와 GUI 작업 성공을 구분합니다. 앞선 클릭이 맞아도 tool 응답이 LOW_CONFIDENCE라면 작업은 실패입니다. 실제 후보 목록, 독립 측정한 물리 좌표 target geometry, 위젯 결과를 보존하며 호출 성공을 작업 성공으로 만들기 위해 신뢰도 가드를 낮추지 않습니다.
+
+현재 Windows 상태 provider는 native UI Automation 근거와 선택적 Blender provider를
+결합합니다. 표준 라이브러리만 사용하는 base Python worker는 준비 시 실제 PID를
+증명하고 query 제한 시간은 500ms입니다. 각 결과는 query 전후의 native foreground
+관측을 같은 focused UIA element, process identity, ancestor chain, bounds에 연결합니다.
+지원되는 TextEdit에서 `GetActiveComposition`이 null composition과 함께 `S_OK`를
+반환하면 `False`입니다. 지원하지 않는 interface, 오류, 오래되었거나 서로 맞지 않는
+근거는 `UNKNOWN`으로 남습니다. TextEdit의 읽기 전용 여부와 편집 가능 여부는
+관측하지 않습니다. popup 소유권, keymap 상태, 전체 UI 유휴 여부 또는 Blender
+operation admission을 증명하지 않습니다. 새 provider의 설치본 end-to-end 검증은
+아직 진행 중이며 live readiness나 operation 성공을 뜻하지 않습니다.
+
+Windows native input은 입력 전 failsafe를 확인하며 PyAutoGUI를 더는 import하지
+않습니다. 설치된 0.1.38에서 failsafe probe는 입력을 보내기 전에 소유 창 geometry를
+`[210,210,1638,1066]`에서 `[120,120,936,609]`로 바꿨습니다. 입력 count는 0이었습니다.
+같은 경로의 source 수정은 geometry를 보존했습니다. 이는 source 검증이며 설치된
+0.1.38 PASS가 아닙니다. 100ms 성능 주장은 따르지 않습니다.
+
+watchdog 스레드에서도 창 영역은 물리 좌표로 조회합니다. Windows 검증은 위젯의
+입력점을 물리 영역으로 변환하고 native 수신 창의 소유권을 확인합니다. 캡처 성공만으로
+입력 좌표가 올바르다고 판정하지 않습니다.
+버튼 누르기와 wheel 입력 직전에는 실제 pointer 수신 창의 root가 관측한 foreground
+창과 일치해야 합니다. foreground 일치만으로 다른 창에 입력할 수는 없습니다.
+소유한 입력의 복구 release는 이 조건과 독립적으로 유지합니다.

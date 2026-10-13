@@ -207,6 +207,10 @@ scenarios:
     section: evidence.windows_ssh_current_e2e
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: windows_installation
+    claim: OBSERVED
+    partial: true
   execution_note: Same-version reinstall UNCHANGED; exact-byte/comments/disabled preservation
     exercised by integration fixtures.
     Current Windows 0.1.35 repeat returns CURRENT and managed UNCHANGED with
@@ -226,6 +230,10 @@ scenarios:
     partial: false
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: windows_installation
     claim: OBSERVED
     partial: true
   execution_note: Local staged compatible runtime/guide update fixture observed; synthetic 0.1.31 is
@@ -340,6 +348,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: archive_proofs
+    claim: OBSERVED
+    partial: true
   execution_note: Corrected immutable CI26d9252 actual native Windows spaced/Unicode HOME,
     executable and three-profile/three-guide managed lifecycle passed. Native Codex isolated
     user discovery remains FAIL, supported project discovery PASS; native Hermes/OMP unavailable.
@@ -386,6 +398,10 @@ scenarios:
     partial: true
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
     claim: OBSERVED
     partial: true
   execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
@@ -472,6 +488,10 @@ scenarios:
     section: evidence.windows_ssh_current_e2e
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_candidate_gui
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux/X11 native fixture verified key/chord/down/up ownership and release.
     Historical Windows component checks passed but the whole fixture failed on
     foreground restoration; no all-platform PASS implied. Current Windows
@@ -540,6 +560,14 @@ scenarios:
     section: evidence.windows_ssh_current_e2e
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_candidate_typed_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
   execution_note: Source Linux native button/modifier gesture checks and installed Blender bounded
     orbit/pan observed. Historical Windows component checks passed but the whole
     fixture failed on foreground restoration; no all-platform PASS implied.
@@ -566,6 +594,14 @@ scenarios:
     partial: true
   - summary: docs/validation/2026-10-13/windows-service-abort.json
     section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_cli_http_abort
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
     claim: OBSERVED
     partial: true
   execution_note: Source Linux native deadline/cancel/intervention/guardian failure/process
@@ -599,6 +635,14 @@ scenarios:
     section: attempts
     claim: OBSERVED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
   execution_note: Native foreground/intervention and installed editor/keymap/text-focus guards plus
     fixture mode checks observed; full native application-state matrix incomplete.
 - id: STATE-01
@@ -612,6 +656,10 @@ scenarios:
     partial: false
   - summary: docs/validation/2026-10-13/windows-blender-observation.json
     section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
     claim: OBSERVED
     partial: true
   execution_note: State compiler fixtures distinguish unknown/false, provenance, version, timestamp,
@@ -735,6 +783,10 @@ scenarios:
     section: evidence.source_regression
     claim: OBSERVED
     partial: false
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
+    claim: OBSERVED
+    partial: true
   execution_note: Distribution diagnostics and pre-pruning candidate retention fixture tests passed;
     target accuracy remains explicitly unknown.
 - id: DEC-02
@@ -786,6 +838,10 @@ scenarios:
     section: evidence.reaction
     claim: MEASURED
     partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
   execution_note: Zero reported critical errors and 1005/1005 correct per bounded variant; full
     pinned runtime/model/task accuracy comparison NOT_RUN.
 - id: E2E-01
@@ -807,6 +863,10 @@ scenarios:
     partial: true
   - summary: docs/validation/2026-10-13/windows-blender-observation.json
     section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
     claim: OBSERVED
     partial: true
   execution_note: FINAL5 API-assisted operation fixture passes 22 cases. In a fixed actual
@@ -840,6 +900,10 @@ scenarios:
     partial: false
   - summary: docs/validation/2026-10-11/summary.json
     section: evidence.general_gui_final15_diagnostic
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
     claim: OBSERVED
     partial: true
   execution_note: Actual FINAL15 default-runtime Omni/CLEF Firefox form and independent Tk

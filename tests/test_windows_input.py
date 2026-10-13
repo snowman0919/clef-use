@@ -1,5 +1,5 @@
 import ctypes
-from threading import Event
+from threading import Event, Thread, local
 from types import SimpleNamespace
 
 import pytest
@@ -7,13 +7,20 @@ from PIL import Image
 
 from clef_use.backends import DesktopAction
 from clef_use.schema import ActionCandidate, Contract, Frame, Observation
-from clef_use.windows_input import Input, WindowsForegroundChanged, WindowsInput
+from clef_use.windows_input import (
+    Input,
+    WindowsDesktopUnavailable,
+    WindowsForegroundChanged,
+    WindowsInput,
+    WindowsInputFailsafe,
+)
 
 
 class FakeAPI:
     def __init__(self):
         self.session = 1
         self.target = 100
+        self.recipient = 100
         self.desktop = "Default"
         self.events = []
         self.refuse = None
@@ -37,6 +44,12 @@ class FakeAPI:
 
     def GetForegroundWindow(self):
         return self.target
+
+    def WindowFromPoint(self, point):
+        return 301
+
+    def GetAncestor(self, window, flag):
+        return self.recipient
 
     def SendInput(self, count, events, size):
         assert count == 1 and size == ctypes.sizeof(Input)
@@ -71,7 +84,7 @@ class FakeAPI:
         return 42
 
     def GetSystemMetrics(self, index):
-        return {76: -100, 77: 0, 78: 1100, 79: 800}[index]
+        return {0: 1000, 1: 800, 76: -100, 77: 0, 78: 1100, 79: 800}[index]
 
     def SetCursorPos(self, x, y):
         self.position = (x, y)
@@ -87,6 +100,79 @@ def native():
     gui = WindowsInput(api, api)
     gui.FAILSAFE = False
     return api, gui
+
+
+@pytest.mark.parametrize("point", [(0, 0), (999, 0), (0, 799), (999, 799)])
+def test_native_corner_failsafe_refuses_input(point):
+    api, gui = native()
+    api.position, gui.FAILSAFE = point, True
+    with pytest.raises(WindowsInputFailsafe):
+        gui.keyDown("a", target=100)
+    assert not api.events and not gui.key_events
+
+
+def test_native_corner_failsafe_accepts_adjacent_pixel_and_fails_closed_on_unreadable_cursor():
+    api, gui = native()
+    api.position, gui.FAILSAFE = (1, 0), True
+    gui.keyDown("a", target=100)
+    gui.keyUp("a")
+    assert len(api.events) == 2 and not gui.key_events
+    api.events.clear()
+    api.GetCursorPos = lambda pointer: 0
+    with pytest.raises(WindowsDesktopUnavailable, match="cursor"):
+        gui.keyDown("a", target=100)
+    assert not api.events and not gui.key_events
+
+
+def test_window_geometry_is_physical_on_a_fresh_watchdog_thread_and_restores_its_context():
+    api, gui = native()
+    dpi = local()
+
+    def context(value):
+        previous = getattr(dpi, "value", 42)
+        dpi.value = value.value if isinstance(value, ctypes.c_void_p) else value
+        return previous
+
+    def rectangle(target, pointer):
+        extent = 200 if getattr(dpi, "value", 42) == ctypes.c_void_p(-4).value else 100
+        pointer._obj.left = pointer._obj.top = 0
+        pointer._obj.right = pointer._obj.bottom = extent
+        return 1
+
+    api.SetThreadDpiAwarenessContext = context
+    api.GetWindowRect = rectangle
+    results = []
+
+    def watchdog():
+        results.append((gui.window_rect(100), getattr(dpi, "value", 42)))
+
+    thread = Thread(target=watchdog)
+    thread.start()
+    thread.join(timeout=1)
+    assert not thread.is_alive()
+    assert results == [((0, 0, 200, 200), 42)]
+
+
+@pytest.mark.parametrize("operation", ["left", "right", "middle", "wheel", "horizontal_wheel"])
+def test_pointer_recipient_outside_bound_window_is_refused_before_os_input(operation):
+    api, gui = native()
+    api.recipient = 200  # Foreground still matches; recipient ownership differs.
+    with pytest.raises(RuntimeError, match="pointer recipient"):
+        if operation == "wheel":
+            gui.scroll(1, target=100)
+        elif operation == "horizontal_wheel":
+            gui.hscroll(1, target=100)
+        else:
+            gui.mouseDown(operation, target=100)
+    assert not api.events
+
+
+def test_pointer_recovery_release_remains_available_outside_bound_window():
+    api, gui = native()
+    gui.mouseDown("middle", target=100)
+    api.recipient = api.target = 200
+    gui.mouseUp("middle")
+    assert [flags for _, _, flags in api.events] == [32, 64]
 
 
 def test_windows_input_abi_and_unicode_surrogate_pairs():

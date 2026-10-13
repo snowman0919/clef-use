@@ -148,13 +148,45 @@ is53.2624ms for immutable installed0.1.37 and42.4806ms for the source correction
 Hashing and IPC are outside the timer. Power/thermal state was not recorded.
 This is not state-change-to-correct-input latency, model accuracy, goodput or
 eligibility coverage. Original PERF-01/02/03 remain NOT_RUN. Immutable0.1.38
-build/install and full native Codex GUI rerun are pending. See the
+build/install and the native Codex GUI run are recorded below. See the
 [capture DPI receipt](validation/2026-10-13/windows-capture-dpi.json) and
 [decision](decisions/0010-preserve-windows-capture-dpi.md).
 
 ## Installed Windows 0.1.37 CI and observer verification on 2026-10-13
 
 **OBSERVED / CI archives and installed component:** CI source commit `3cb3dc59` produced 15/15 passing platform/Python archives, each containing the exact 65-file source/guide payload. Assembly succeeded and deploy was skipped. The existing Windows installation updated from 0.1.36 to 0.1.37; repeat returned CURRENT, with unrelated configuration and prior runtime files preserved. The installed public-RNA collector fed partial state through the provider and compiler; six operation families remained BLOCKED with `input_count=0`. Installed native observer transport tests reported 8 tests and OK. This is bounded installation/component evidence, not public deployment or whole-task E2E. Original requirement statuses and numeric gates are unchanged. See the [installed Windows CI receipt](validation/2026-10-13/windows-installed-ci-0137.json), digest-indexed in the validation summary.
+
+## Installed Windows 0.1.38 CI, native input, and Codex GUI on 2026-10-13
+
+**OBSERVED / CI and installed update:** CI commit `cdcf3840` produced 15/15 passing platform/Python archives with the exact 66-file payload; assembly succeeded and deploy was skipped. The existing installation updated from 0.1.37 to 0.1.38, repeat returned CURRENT, managed Codex command refresh passed, and unrelated configuration/prior runtime files were preserved. Installed native capture/input regression and 8 transport tests passed.
+
+**OBSERVED / actual installed Codex GUI:** native discovery and guide/schema loading passed. The model clicked Continue once; independent readback observed Confirm in the actual physical target box `[88, 385, 823, 595]`. Both retained opportunities included the correct target, and its center was inside the target box. The runtime stopped after one action because ACT mode confidence was 0.7016 against the unchanged 0.9 gate; action selection confidence was 0.9372. The task remains FAIL, with no repeated input. Cleanup passed. This does not establish overall target coverage, fast eligibility, performance, or public deployment. Browser/editor E2E-02 and abort smoke remain NOT_RUN. Installed Blender evidence has two retained foreground-cleanup failures followed by a close-first cleanup PASS; all six operation guards remain BLOCKED with zero input, so this does not demonstrate operation success. The [installed Windows CI and Codex GUI receipt](validation/2026-10-13/windows-installed-ci-0138.json) is digest-indexed in the validation summary; original 44 requirement statuses and numeric gates are unchanged.
+
+## Source-built Windows state and input verification, 0.1.39, 2026-10-13
+
+**OBSERVED / source-built runtime and focused TextEdit:** a complete 0.1.39 wheel was built, but this does not establish installation or release. The source UIA provider-to-State-Compiler path produced cold and warm PARTIAL samples with valid `text_focus=true` and `ime_composing=false` for the bound focused TextEdit. Exact literal readback passed in an owned editable fixture whose explicit creation contract supplies editability; this is not a generic editability observer. Six other application facts remain UNKNOWN and `menu_assess` remains BLOCKED with `input_count=0`. The initial fixture failed because its UI-owning thread blocked COM pumping; moving the fixture caller to a background thread while the UI pumped COM resolved that setup failure without changing the 500ms query timeout. The UIA worker exited cleanly.
+
+**OBSERVED / native failsafe and watchdog geometry:** installed 0.1.38 failsafe probing changed the existing window bounds from `[210,210,1638,1066]` to `[120,120,936,609]` before input; input count was zero. The same-path source correction preserved the original bounds, which is source-only evidence, not an installed pass. A separate watchdog measurement found default-thread bounds `[120,120,936,609]` versus physical bounds `[210,210,1638,1066]`. The 0.1.39 source now reads intrinsic physical bounds on any thread; the failing unit passes. Console hypotheses were rejected without changing product console flags. These checks make no 100ms performance claim.
+
+**OBSERVED / source CLI abort and installed .38 regressions:** the actual 0.1.39 source-wheel CLI/HTTP abort cancelled a blocked injector before the deadline, observed no held inputs or reacquisition, and passed cleanup; the cancelled injector refused later input. Two earlier failed attempts remain digest-bound in the receipt. Installed 0.1.38 GDI resource tests passed 4/4 with zero skips and no source overlay. Four earlier suspended-worker attempts remain FAIL; the final installed .38 run passes after correcting validator point geometry only, with original console flags retained. The initial Chrome UIA probe was UNAVAILABLE with keyboard focus unverified and IME UNKNOWN. After acknowledged document-focus setup, a separate read-only native UIA query returned VALID for focused TextEdit and IME false with the same process, ancestor and foreground bounds; cleanup passed. Neither probe is browser/model task E2E.
+
+**OBSERVED / source-candidate GUI and suspension:** the 0.1.39 candidate GUI component passed Unicode, selection, click, scroll, cancellation, control-character and wrong-foreground checks; both capture and input preserved owned-window geometry, and cleanup passed. The suspension test stopped every worker thread while the separate guardian stayed alive and released owned input at its deadline. The resumed worker observed cancellation and refused later input; cleanup passed. These are source-candidate component results, not installed .39 runs.
+
+**OBSERVED / source checks:** the 0.1.39 regression suite passed 1440 tests, skipped 46, and reported 41 warnings in 82.09 seconds; Ruff and generated-contract checks passed. The [state/input/DPI receipt](validation/2026-10-13/windows-state-input-dpi.json) records source, installed and unavailable evidence separately. Installed .39 discovery, GUI and suspended-worker runs remain NOT_RUN. The original 44 requirement statuses and numeric gates are unchanged.
+
+## Native pointer scope correction on 2026-10-13
+
+The 0.1.39 candidate above was subsequently checked for native pointer scope.
+**OBSERVED:** a paired test with two disposable owned windows found that a click
+bound to A reached B and returned success. The corrected candidate checks the
+physical native recipient before button-down/wheel injection; the same test
+then delivered zero events to B. Recovery releases stay independent. Both
+attempts and their distinct wheel hashes are retained in the
+[pointer recipient receipt](validation/2026-10-13/windows-pointer-recipient.json).
+The corrected source wheel also passed the native GUI/input component, and
+the subsequent regression suite reported 1446 passed, 46 skipped, 41 warnings
+in67.17seconds. This paired case does not establish whole-workload critical
+zero, installed .39 E2E, or the original performance gates.
 
 ## Windows SSH E2E scope resumed on 2026-10-12
 

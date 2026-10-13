@@ -901,6 +901,10 @@ def runtime(config: Config, log_path=None):
         from .blender_state import BlenderStateProvider
 
         state_provider = BlenderStateProvider(config.blender_state_socket)
+    if sys.platform == "win32":
+        from .windows_state import WindowsStateProvider
+
+        state_provider = WindowsStateProvider(state_provider)
 
     for repo in (config.decision_model, "microsoft/OmniParser-v2.0"):
         if not snapshot_path(config.model_dir, repo).is_dir():

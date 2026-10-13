@@ -130,7 +130,7 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
         "guide_contract_version": GUIDE_CONTRACT_VERSION,
         "operation_registry_version": 6,
         "default_runtime_state": {
-            "provider": "NONE",
+            "provider": "WINDOWS_UIA" if sys.platform == "win32" else "NONE",
             "observation_access_level": "PIXELS_ONLY",
             "trusted_application_evidence": "UNAVAILABLE",
             "provider_configuration_path": "config.toml: blender_state_socket "
@@ -141,6 +141,21 @@ def capabilities(*, detail: bool = False, operation_id: str | None = None) -> di
             "native_state": "Window identity may be available; desktop permissions are not probed.",
         },
         "tools": list(schemas),
+        "built_in_state_providers": [
+            {
+                "provider": "WINDOWS_UIA",
+                "platform": "win32",
+                "activation": "automatic on Windows; native support requires a live probe",
+                "availability": "NOT_PROBED",
+                "facts": ["text_focus", "ime_composing"],
+                "scope": "Fresh supported TextEdit control bound to native foreground PID, "
+                "HWND, physical bounds and unchanged actual focus",
+                "composition_absence": "Supported GetActiveComposition S_OK plus null range only",
+                "limits": "Unsupported/error/stale remains UNKNOWN. No writability, global IME "
+                "idle, popup absence, effective keymap or Blender operation admission inferred.",
+                "isolation": "Owned stdlib worker with actual PID binding and bounded termination",
+            }
+        ],
         "optional_state_providers": [
             {
                 "provider": "BLENDER_PUBLIC_RNA",

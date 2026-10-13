@@ -57,6 +57,14 @@ class WindowsForegroundChanged(RuntimeError):
     pass
 
 
+class WindowsInputFailsafe(RuntimeError):
+    pass
+
+
+class WindowsPointerScopeChanged(RuntimeError):
+    pass
+
+
 class WindowsInput:
     FAILSAFE = True
 
@@ -74,6 +82,8 @@ class WindowsInput:
         signatures = {
             "SendInput": ([U32, ctypes.POINTER(Input), ctypes.c_int], U32),
             "GetForegroundWindow": ([], ctypes.c_void_p),
+            "WindowFromPoint": ([Point], ctypes.c_void_p),
+            "GetAncestor": ([ctypes.c_void_p, U32], ctypes.c_void_p),
             "GetWindowRect": ([ctypes.c_void_p, ctypes.POINTER(Rect)], ctypes.c_int),
             "SetCursorPos": ([ctypes.c_int, ctypes.c_int], ctypes.c_int),
             "GetCursorPos": ([ctypes.POINTER(Point)], ctypes.c_int),
@@ -137,10 +147,12 @@ class WindowsInput:
         return self.user.GetForegroundWindow()
 
     def window_rect(self, target):
-        rect = Rect()
-        if not self.user.GetWindowRect(target, ctypes.byref(rect)):
-            raise WindowsDesktopUnavailable("Windows foreground geometry unavailable")
-        return rect.left, rect.top, rect.right, rect.bottom
+        # Watchdogs query from fresh threads without the injector's DPI context.
+        with self.physical_coordinates():
+            rect = Rect()
+            if not self.user.GetWindowRect(target, ctypes.byref(rect)):
+                raise WindowsDesktopUnavailable("Windows foreground geometry unavailable")
+            return rect.left, rect.top, rect.right, rect.bottom
 
     def ensure_target(self, expected):
         actual = self.desktop_status()["foreground_window"]
@@ -152,9 +164,17 @@ class WindowsInput:
 
     def _failsafe(self):
         if self.FAILSAFE:
-            import pyautogui
-
-            pyautogui.failSafeCheck()
+            # Importing PyAutoGUI changes process DPI awareness, including any
+            # already-open host UI. Keep this native check in physical pixels.
+            with self.physical_coordinates():
+                point = Point()
+                if not self.user.GetCursorPos(ctypes.byref(point)):
+                    raise WindowsDesktopUnavailable("Windows failsafe cursor unavailable")
+                width, height = self.user.GetSystemMetrics(0), self.user.GetSystemMetrics(1)
+                if width <= 0 or height <= 0:
+                    raise WindowsDesktopUnavailable("Windows failsafe display unavailable")
+                if point.x in (0, width - 1) and point.y in (0, height - 1):
+                    raise WindowsInputFailsafe("Windows input stopped at a primary screen corner")
 
     def _send(self, event, target=None):
         self._failsafe()
@@ -162,7 +182,18 @@ class WindowsInput:
             event.type == 0 and event.mouse.flags & (4 | 16 | 64)
         )
         if not releasing:
-            self.ensure_target(target)
+            expected = self.ensure_target(target)
+            if event.type == 0:
+                with self.physical_coordinates():
+                    point = Point()
+                    if not self.user.GetCursorPos(ctypes.byref(point)):
+                        raise WindowsDesktopUnavailable("Windows pointer recipient unavailable")
+                    recipient = self.user.WindowFromPoint(point)
+                    if not recipient or self.user.GetAncestor(recipient, 2) != expected:
+                        raise WindowsPointerScopeChanged(
+                            "Windows pointer recipient is outside captured window; no input sent"
+                        )
+                self.ensure_target(expected)
         events = (Input * 1)(event)
         inserted = self.user.SendInput(1, events, ctypes.sizeof(Input))
         if inserted != 1:

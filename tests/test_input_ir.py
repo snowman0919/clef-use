@@ -635,7 +635,8 @@ def test_windows_rejected_key_does_not_release_human_key_and_all_buttons_release
         gui.keyDown("a")
     assert not gui.key_events
     for button in ("left", "right", "middle"):
+        api.target = api.recipient = 100
         gui.mouseDown(button)
-        api.target = 200
+        api.target = api.recipient = 200
         gui.mouseUp(button)
     assert [event[2] for event in api.events] == [2, 4, 8, 16, 32, 64]

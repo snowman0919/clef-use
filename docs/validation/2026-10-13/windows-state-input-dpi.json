@@ -1,0 +1,330 @@
+{
+  "classification": "OBSERVED_SOURCE_BUILT_WHEEL_AND_BOUNDED_WINDOWS_COMPONENTS",
+  "date": "2026-10-13",
+  "source_runtime_version": "0.1.39",
+  "partial": true,
+  "scope": "A complete source-built .39 wheel and source-path Windows UIA, failsafe, watchdog geometry, and CLI/HTTP abort evidence; separately records installed .38 GDI and suspended-worker validation. This is not installed .39 discovery, GUI, browser/model E2E, or a 100ms performance result.",
+  "requirements": [
+    "STATE-01",
+    "INPUT-01",
+    "INPUT-03",
+    "INPUT-04",
+    "INPUT-05",
+    "DEC-01",
+    "E2E-02"
+  ],
+  "source_wheel": {
+    "filename": "clef_use-0.1.39-py3-none-any.whl",
+    "sha256": "eea76fc5489eca6d7ee49bcb615185e875ac6e87a2e4d29d1b2157cb8707fb40",
+    "classification": "SOURCE_BUILT_COMPLETE_WHEEL_NOT_INSTALLED_CI_OR_PUBLIC_RELEASE"
+  },
+  "source_uia_textedit": {
+    "classification": "OBSERVED_SOURCE_RUNTIME_UIA_PROVIDER_TO_STATE_COMPILER_AND_OWNED_EDITOR_FIXTURE",
+    "cold_sample": {
+      "provider": "WINDOWS_UIA",
+      "status": "PARTIAL",
+      "verified_facts": [
+        "text_focus",
+        "ime_composing"
+      ],
+      "validity": "VALID",
+      "text_focus": true,
+      "ime_composing": false
+    },
+    "warm_sample": {
+      "provider": "WINDOWS_UIA",
+      "status": "PARTIAL",
+      "verified_facts": [
+        "text_focus",
+        "ime_composing"
+      ],
+      "validity": "VALID",
+      "text_focus": true,
+      "ime_composing": false
+    },
+    "fixture": "Owned editable TextEdit fixture under its explicit creation contract; not a generic editable-state observer.",
+    "literal_readback_exact": true,
+    "worker_cleanup": "PASS",
+    "other_application_facts": "UNKNOWN",
+    "menu_assess": {
+      "status": "BLOCKED",
+      "input_count": 0
+    },
+    "unmeasured_or_unobserved": [
+      "read-only/editability outside the owned fixture",
+      "popup ownership",
+      "keymap",
+      "global idle",
+      "general Blender operation admission"
+    ],
+    "input_count_note": "The report contains an expected UTF-16-derived value, not a native OS event counter; no native event count is claimed."
+  },
+  "retained_initial_uia_failure": {
+    "status": "FAIL",
+    "cold_and_warm": "UNAVAILABLE / UNKNOWN",
+    "cause": "The fixture blocked the UI-owning thread while COM needed it to pump; the bounded query timed out. The fixture caller was moved to a background thread while the UI thread pumped COM. The query timeout was not relaxed."
+  },
+  "source_cli_http_abort": {
+    "classification": "OBSERVED_ACTUAL_CLI_HTTP_ABORT_USING_SOURCE_BUILT_0.1.39",
+    "status": "PASS",
+    "injector_blocked_at_abort": true,
+    "lease_deadline_reached": false,
+    "session_aborted": true,
+    "no_held_inputs_after_abort": true,
+    "no_reacquisition": true,
+    "injector_refused_after_abort": true,
+    "cleanup": "PASS",
+    "scope": "Explicitly registered abort component; not full SessionRuntime.execute, model or GUI task completion.",
+    "retained_prior_failures": [
+      "One prior watchdog geometry/cancellation failure.",
+      "One source-overlay bundle omission that caused CLI service health failure."
+    ],
+    "private_artifact_sha256": {
+      "successful_result": "8fb56a91f62c8e76c26e7e7f8e2378165cba47df6217032f93d80a64694b15b6",
+      "retained_failure_results": [
+        "44534c8482e78de8f18afdb624f71c68de11fa825f7d1f9825674e2f5d4c75c1",
+        "53d3f533efb5ac0d54ef6605240f3e978ffddf857f997df4d92bf3fb3d459c74"
+      ]
+    }
+  },
+  "native_failsafe_geometry": {
+    "installed_0_1_38_before_source_correction": {
+      "status": "OBSERVED",
+      "before_bounds": [
+        210,
+        210,
+        1638,
+        1066
+      ],
+      "after_bounds": [
+        120,
+        120,
+        936,
+        609
+      ],
+      "input_count": 0,
+      "geometry_preserved": false
+    },
+    "source_correction_same_path": {
+      "status": "OBSERVED_SOURCE_ONLY",
+      "before_bounds": [
+        210,
+        210,
+        1638,
+        1066
+      ],
+      "after_bounds": [
+        210,
+        210,
+        1638,
+        1066
+      ],
+      "input_count": 0,
+      "geometry_preserved": true
+    },
+    "interpretation": "The native failsafe probe must not mutate process DPI awareness or an existing owned window. Source-path preservation is not an installed .38 pass."
+  },
+  "watchdog_window_geometry": {
+    "prior_observation": {
+      "default_thread_bounds": [
+        120,
+        120,
+        936,
+        609
+      ],
+      "physical_thread_bounds": [
+        210,
+        210,
+        1638,
+        1066
+      ],
+      "matched": false
+    },
+    "source_correction": "The .39 source window_rect path uses intrinsic physical bounds on any thread; its previously failing unit now passes. The source-built HTTP abort also passes.",
+    "console_hypothesis": "Rejected; no product console flags changed."
+  },
+  "installed_0_1_38_native_gdi": {
+    "status": "PASS",
+    "tests": 4,
+    "skipped": 0,
+    "source_overlay": false,
+    "scope": "Actual native Windows GDI resource regression in the interactive session; no overlay."
+  },
+  "installed_0_1_38_suspended_worker": {
+    "retained_failed_attempts": {
+      "count": 4,
+      "status": "FAIL",
+      "failure_types": [
+        "Wrong native point binding",
+        "Diagnostic failure",
+        "Hidden worker launch experiment: foreground guard failure before suspension",
+        "Hidden guardian launch experiment: foreground guard failure before suspension"
+      ],
+      "artifact_sha256": [
+        "645f130d8643b0139a187802f66595956cdc6442c4865961d45739742a3770bf",
+        "ecd291ed892a3f153d0622e7d52fc866fe019861b0d41708544de9dcd4e5f599",
+        "66f79ff5bf4818775d022d1e3b59282b58bc137a03ae73d3ad10098ea92026bc",
+        "f0c32f5a7eaf2ef83145ee7f582aad10fbdf92fca5718b204ae09e5271798c2e"
+      ]
+    },
+    "final_attempt": {
+      "status": "PASS",
+      "runtime_version": "0.1.38",
+      "validator_geometry": "Corrected the validator point binding only; original console flags retained.",
+      "deadline_release_proof": "PASS",
+      "cleanup": "PASS",
+      "artifact_sha256": "207f31d64eff4a74c30105033b807b5a180ca324ce9abdfdcdb7fb21644c6cb6"
+    },
+    "scope": "The final PASS verifies the corrected validator geometry for the installed suspended-worker check; failure history is retained."
+  },
+  "source_browser_uia_probe": {
+    "classification": "OBSERVED_UNAVAILABLE",
+    "status": "UNAVAILABLE",
+    "keyboard_focus": "NOT_VERIFIED",
+    "ime_composing": "UNKNOWN",
+    "renderer_accessibility_forced": true,
+    "browser_or_model_e2e": "NOT_RUN",
+    "scope": "The earlier pre-focus-setup probe was OBSERVED_UNAVAILABLE with keyboard focus unverified and IME UNKNOWN; retained as a fixture-state limitation."
+  },
+  "source_checks": {
+    "full_regression": {
+      "status": "PASS",
+      "passed": 1440,
+      "skipped": 46,
+      "warnings": 41,
+      "elapsed_seconds": 82.09,
+      "log_sha256": "cd2e1ef964acf5fdc766704cb3e78153738c05a5c547773b685166cb4782fd25"
+    },
+    "ruff": "PASS",
+    "generated_contract_checks": "PASS"
+  },
+  "not_run": {
+    "INSTALL_0139": "The .39 wheel has not been installed or verified as a release.",
+    "DISCOVERY_0139": "Installed .39 capability discovery is pending.",
+    "GUI_0139": "Installed .39 GUI task is pending.",
+    "SUSPENSION_0139": "Installed .39 suspended-worker run is pending.",
+    "E2E_02": "The browser/UIA availability probe is not browser or model task E2E.",
+    "PERFORMANCE": "No 100ms reaction, goodput, coverage, or latency claim.",
+    "BROWSER_MODEL_E2E": "No browser/model task E2E was run; the successful result is a read-only native UIA component observation only."
+  },
+  "acceptance": "The original 44 acceptance statuses and numeric gates remain unchanged. Related requirement evidence is partial only.",
+  "private_artifact_sha256": {
+    "wheel": "eea76fc5489eca6d7ee49bcb615185e875ac6e87a2e4d29d1b2157cb8707fb40",
+    "uia_success": "a7e6a618ee21db12ec0bb9be5975acfce5973bfd513583a42e2f2630ece9ff3d",
+    "uia_initial_failure": "7c213b09ea1b79cdf34f5152fe33105d40b84105b3e8c0ad3182b66674666e8b",
+    "failsafe_installed_before": "d76ef8cc307f12860c4a2e98d01da7178ccb33f645fc0b07c7f47405d7bdbca5",
+    "failsafe_source_after": "ebaf73b18493baf207fd9c0d04f43a6fd74bc4d3ee3f638210e539b6939220b3",
+    "watchdog_geometry_before": "21f7891db96de33e383b4929d14f584fbf3117884a28336001c7c561ca31605a",
+    "installed_gdi_0_1_38": "5e0824c63eb582605e0743edccdb243739ab4f72d3d01e116450893a584a432c",
+    "suspension_final_0_1_38": "207f31d64eff4a74c30105033b807b5a180ca324ce9abdfdcdb7fb21644c6cb6",
+    "browser_uia_unavailable": "5abbd1867b3a6daab493b427026b5c7704aac5181a015690e586fb921f438938",
+    "full_regression_log": "cd2e1ef964acf5fdc766704cb3e78153738c05a5c547773b685166cb4782fd25",
+    "source_candidate_gui": "7d5861ded6f5cf16b7636e55ffae834b8897c256923108dcb6491c3329afe567",
+    "source_candidate_suspended_worker": "a1118b9b1462e5d6de932d46f0250dfb066b892dedec7775a8f29947d8d21ee2",
+    "browser_uia_ready": "b4c2bab871ed21aa43fc3fbde23c34668bc62808f7530d4ffb263a229dca78ad"
+  },
+  "privacy": "Private source paths, PIDs, HWNDs, SIDs, raw traces, pixels, and credentials are omitted. Only allowlisted facts and cryptographic digests are retained.",
+  "source_candidate_gui": {
+    "classification": "OBSERVED_SOURCE_CANDIDATE_NATIVE_WINDOWS_GUI_COMPONENT",
+    "status": "PASS",
+    "runtime_version": "0.1.39",
+    "capture_preserves_owned_geometry": true,
+    "input_preserves_owned_geometry": true,
+    "checks": [
+      "Unicode readback",
+      "selection readback",
+      "click",
+      "scroll",
+      "cancellation",
+      "control-character refusal",
+      "wrong-foreground refusal"
+    ],
+    "held_inputs_after_release": [],
+    "cleanup": "PASS",
+    "source_candidate_sha256": "eea76fc5489eca6d7ee49bcb615185e875ac6e87a2e4d29d1b2157cb8707fb40",
+    "private_artifact_sha256": "7d5861ded6f5cf16b7636e55ffae834b8897c256923108dcb6491c3329afe567"
+  },
+  "source_candidate_suspended_worker": {
+    "classification": "OBSERVED_SOURCE_CANDIDATE_SUSPENDED_WORKER_DEADLINE",
+    "status": "PASS",
+    "runtime_version": "0.1.39",
+    "whole_worker_and_guardian_suspended": true,
+    "guardian_deadline_proof": "PASS",
+    "heartbeat_unchanged_during_suspension": true,
+    "parent_release_or_eof_before_observation": false,
+    "resumed_child_cancelled": true,
+    "post_deadline_input_refused": true,
+    "cleanup": "PASS",
+    "source_candidate_sha256": "eea76fc5489eca6d7ee49bcb615185e875ac6e87a2e4d29d1b2157cb8707fb40",
+    "private_artifact_sha256": "a1118b9b1462e5d6de932d46f0250dfb066b892dedec7775a8f29947d8d21ee2"
+  },
+  "source_browser_readiness_probe": {
+    "classification": "OBSERVED_SOURCE_NATIVE_UIA_READ_ONLY_BROWSER_COMPONENT",
+    "status": "PASS",
+    "provider_observation": "VALID",
+    "fixture_focus_setup_acknowledged": true,
+    "forced_renderer_accessibility": true,
+    "fixture": "Unique owned profile and local document; no external navigation.",
+    "focused_control": {
+      "supported_textedit": true,
+      "text_focus": true,
+      "ime_composing": false,
+      "same_native_process_ancestor_and_foreground_bounds_bound": true
+    },
+    "cleanup": "PASS",
+    "scope": "A read-only UIA observation after document-focus setup; not provider/compiler E2E and not browser/model task E2E.",
+    "private_artifact_sha256": "b4c2bab871ed21aa43fc3fbde23c34668bc62808f7530d4ffb263a229dca78ad"
+  },
+  "source_candidate_typed_input": {
+    "classification": "OBSERVED_COMPLETE_SOURCE_CANDIDATE_WHEEL_NATIVE_INPUT_COMPONENT_NOT_INSTALLED_RELEASE",
+    "status": "PASS",
+    "buttons": [
+      "left",
+      "right",
+      "middle"
+    ],
+    "gestures": [
+      {
+        "button": "left",
+        "modifiers": [
+          "shift"
+        ]
+      },
+      {
+        "button": "middle",
+        "modifiers": [
+          "shift"
+        ]
+      },
+      {
+        "button": "middle",
+        "modifiers": []
+      }
+    ],
+    "independent_cancel": {
+      "held_before": [
+        4,
+        16,
+        160
+      ],
+      "held_after": [],
+      "worker_still_blocked": true,
+      "explicit_release_called": false
+    },
+    "independent_crash_recovery": {
+      "held_before": [
+        4,
+        16,
+        160
+      ],
+      "held_after": [],
+      "worker_terminated": true,
+      "guardian_exited": true,
+      "parent_release_called": false
+    },
+    "cleanup": "PASS",
+    "ime_scope": "Owned non-text canvas IMC disabled and absence read back; not general IME discovery",
+    "limits": "Owned non-text receiver; no general Blender orbit/pan semantics or model task E2E.",
+    "private_result_sha256": "cda44d4c1735fda1c7dfcc41ef48f0cb7a79362bf07145d102c2e46171b63484"
+  }
+}

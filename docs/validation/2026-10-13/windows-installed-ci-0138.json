@@ -1,0 +1,524 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ARCHIVES_INSTALLED_WINDOWS_COMPONENTS_AND_CODEX_GUI",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.38",
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "STATE-01",
+    "INPUT-01",
+    "INPUT-04",
+    "INPUT-05",
+    "HARNESS-01",
+    "DEC-01",
+    "E2E-01",
+    "E2E-02"
+  ],
+  "partial": true,
+  "scope": "CI artifact identity, existing Windows installation update/repeat, native capture/input regression, and actual installed Blender observation plus one Codex GUI attempt. The GUI run completed one Continue click but did not complete the task; no repeated input, public deployment, overall target coverage, fast eligibility, or performance claim.",
+  "ci": {
+    "source_commit": "cdcf38404235964571fa767ff180b55092511194",
+    "run_id": 38363136229,
+    "artifact_id": 11795209284,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38363136229",
+    "classification": "OBSERVED_IMMUTABLE_ARCHIVE_HASH_AND_GIT_PAYLOAD_VERIFICATION_ONLY",
+    "status": "PASS",
+    "version": "0.1.38",
+    "manifest_sha256": "4b65e3f050cdd7f9b32fae3211257e953a89ef497e7a9f1dcf0e16097bd26764",
+    "sha256sums_sha256": "5bd3d45ea80fe1d2436b728d75f79eef7fe5bd1693bd9471381b0d1f94896d70",
+    "source_payload_file_count": 66,
+    "python_source_file_count": 51,
+    "guide_payload_file_count": 9,
+    "git_payload_manifest_sha256": "0a0a340190454cf5120ef4753700c4a4e665c06eb65ec4281ab0b46ddde1452d",
+    "artifact_count": 15,
+    "passed_artifacts": 15
+  },
+  "ci_jobs": {
+    "status": "completed",
+    "conclusion": "success",
+    "jobs": [
+      {
+        "name": "build (macos-15, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (macos-15-intel, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (windows-2022, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.13)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.11)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "assemble",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "name": "deploy",
+        "status": "completed",
+        "conclusion": "skipped"
+      }
+    ]
+  },
+  "archive_proofs": [
+    {
+      "filename": "clef-use-0.1.38-darwin-arm64-py311.zip",
+      "sha256": "bf6d45d657a4b8dfabeffa39a737603bac7ce6c269e311a2a587b4ca7ebd8e76",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-darwin-arm64-py312.zip",
+      "sha256": "f89fcfe805a89bea02d41809e8d5b257697b6dd0d12c3d7346a4e6dad46072b4",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-darwin-arm64-py313.zip",
+      "sha256": "cd41bdd1aa4bbfb72dc000b67d47c0f2d63ce736d788cc71330d2f25c2e89f48",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-darwin-x86_64-py311.zip",
+      "sha256": "c8ae0d523281e7875b8e3e5665bd413d0c127e10625491c11412702387ee9671",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-darwin-x86_64-py312.zip",
+      "sha256": "27d638b834a3d4f20c5519182e0dfc7b56fd2abf67980e769747b301bb065a1b",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-darwin-x86_64-py313.zip",
+      "sha256": "479973ed1e1ac3b441138bfcae9db3f26e6757a40c2420b222de875bbd06b132",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-arm64-py311.zip",
+      "sha256": "b26136b56fccc7b045c3620c71f275579df0769b2554ced9ecdbdded0a83f47f",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-arm64-py312.zip",
+      "sha256": "1fca6ee2e3c62b4a544968c1d585ca9bb92ce102d05a7d38251acdf552a1ab6b",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-arm64-py313.zip",
+      "sha256": "328aef592995dc8b67b9dc757e0ea704077b024b6a223926158edd06d3ca1896",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-x86_64-py311.zip",
+      "sha256": "6d7febc86f46f60701b469c1980f935e97011f621990b4e1fa00675d8042f37c",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-x86_64-py312.zip",
+      "sha256": "722aa7e30fa4c44f87879ab0d8b01e2703cd916cfcbcc1213401804d6ae4c5fa",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-linux-x86_64-py313.zip",
+      "sha256": "a41bccb1380ea1d3d04f98ef01be3a461755be9b7de56e25dd234458f5cce93f",
+      "wheel_sha256": "de7b54a3bdadf355b6a35c8b53739a0030a49f7041ac23a2a248d4281d6a8428",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-win32-x86_64-py311.zip",
+      "sha256": "7768b581031dbfb8cee1c47de73bca66444dc549e7b0614df8186453d0d2316c",
+      "wheel_sha256": "620e92a6c57f2b11d0dc9d1ced88b013fe85b45c1d15249fa36e996944aa4252",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-win32-x86_64-py312.zip",
+      "sha256": "a32eeb29c1ea558c2f556b980482bed787d2fcda8eb166d034f3a1b5520c0dbe",
+      "wheel_sha256": "620e92a6c57f2b11d0dc9d1ced88b013fe85b45c1d15249fa36e996944aa4252",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    },
+    {
+      "filename": "clef-use-0.1.38-win32-x86_64-py313.zip",
+      "sha256": "6df5f120d9f334e1f9ebdfad8580029509f8b98e632cc97ff9e37dd959dd851e",
+      "wheel_sha256": "620e92a6c57f2b11d0dc9d1ced88b013fe85b45c1d15249fa36e996944aa4252",
+      "status": "PASS",
+      "source_files_exact": 66,
+      "python_source_files_exact": 51,
+      "guide_payload_files_exact": 9,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "guide_bundle_sha256": "79eb3cc09d94e02773eef92190419c2e3db8eb3769bb748efb1df8798c8094e9"
+    }
+  ],
+  "windows_installation": {
+    "status": "PASS",
+    "before_version": "0.1.37",
+    "version": "0.1.38",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "installed_source_hashes_match": true,
+    "bound_source_files": 66,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "ci_bundle_proof": {
+      "classification": "IMMUTABLE_CI_ARCHIVE_GIT_SOURCE_VERIFIED_NOT_PUBLIC_RELEASE",
+      "source_commit": "cdcf38404235964571fa767ff180b55092511194",
+      "run_id": 38363136229,
+      "artifact_id": 11795632785,
+      "archive_sha256": "7768b581031dbfb8cee1c47de73bca66444dc549e7b0614df8186453d0d2316c",
+      "wheel_sha256": "620e92a6c57f2b11d0dc9d1ced88b013fe85b45c1d15249fa36e996944aa4252",
+      "source_files_exact": 66
+    }
+  },
+  "installed_native_transport_tests": {
+    "classification": "OBSERVED_INSTALLED_WINDOWS_UNITTEST_LOG",
+    "summary": [
+      "Ran 8 tests",
+      "OK"
+    ],
+    "skipped": 0,
+    "stdout_sha256": "09c3908e4fe02839ceaec3b0a86f75a4f0001d1f058b6d07532e7d127353ad0b",
+    "stderr_sha256": "d842049a54618a7d9bd0860226b1362d8144130b7c5df303b785aea14c6c1a1d"
+  },
+  "installed_native_capture_regression": {
+    "status": "PASSED",
+    "capture_preserves_owned_geometry": true,
+    "unicode_readback": "Windows \ud55c\uae00 \ud14c\uc2a4\ud2b8 \ud83d\ude00",
+    "clipboard_preserved": true,
+    "selected_range": [
+      0,
+      17
+    ],
+    "click_readback": 3,
+    "wheel_readback": [
+      -360
+    ],
+    "cancelled_before_input": true,
+    "control_characters_refused": true,
+    "foreground_change_refused": "Windows foreground changed since capture; no input sent",
+    "held_inputs_after_release": [],
+    "cleanup": {
+      "errors": [],
+      "input_released": true,
+      "pointer_restored": true,
+      "foreground_restored": true,
+      "owned_window_closed": true
+    }
+  },
+  "installed_codex_gui": {
+    "status": "FAILED",
+    "classification": "ACTUAL_NATIVE_WINDOWS_CODEX_MCP_GUI",
+    "runtime_version": "0.1.38",
+    "native_discovery": "PASS",
+    "turn_status": "completed",
+    "guide_sha256": {
+      "clef-use": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    },
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "model_turns_started": 1,
+    "bounded_run": true,
+    "fresh_observe_after_run": true,
+    "actual_clicks": [
+      "Continue"
+    ],
+    "visible_result_after_click": "Confirm",
+    "independent_task_complete": false,
+    "actual_target_bounds_physical_pixels": [
+      88,
+      385,
+      823,
+      595
+    ],
+    "retained_opportunities_with_correct_target_and_center_inside": 2,
+    "confidence": {
+      "action_selection": 0.9372,
+      "mode": "ACT",
+      "mode_selection": 0.7016,
+      "required_mode_selection": 0.9
+    },
+    "blocker": "CONFIDENCE_BELOW_THRESHOLD; Continue only, do not repeat already-delivered input.",
+    "cleanup": {
+      "endpoint_removed": true,
+      "thread_unsubscribed": true,
+      "app_server_exited": true,
+      "owned_gui_process_exited": true,
+      "pointer_restored": true,
+      "foreground_restored": true,
+      "inputs_released": true,
+      "global_config_bytes_preserved": true
+    },
+    "private_artifact_sha256": {
+      "codex-private-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "codex-private-trace.jsonl": "b50f35622021b1424fbeac65d3247812a0a8f9bedc80ea7e830a6b43ac752e5b",
+      "foreground-private-observations.jsonl": "2f6c7132a8344d029c1c1758b2860a0fcdb2e7344ea06c9a0f926b0d567efc19",
+      "gui-private-stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "gui-private-stdout.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "private_artifact_sha256": {
+    "ci-verification.json": "77d92cd47e3df77caab718d33c4fd96cd84366cceed5ccca6c0c1b0af5cded44",
+    "ci-progress.json": "5d9e6c5723303c91595b1dea0c49cb5e155eb79ff996a0d7fdfc4a0e052beeb9",
+    "windows-install-report.json": "35fc5d65ce02c3cc79ec7250c7cf4c11d23da97c2fee60cf6b18281f5c9e6320",
+    "bundle-proof.json": "0a53bd407acce45eaf10801e63f6c9bd4437453cb4b38dbcafabc77bbdb78ff0",
+    "installed-capture-regression-result.json": "877f3c8fc8b14890f14ab797cc3c791d0a0f01592c2dfb7f9c12b6c2460b9d91",
+    "codex-gui-result.json": "91b0fd406c37e023b10ff5334f9c87020f4ec9be2bf213a796eeda1e833f1647",
+    "codex-controller-report.json": "a250d9862f8039d83031545b87903a81059268b886b72185fa4cfe40c70e013f"
+  },
+  "not_run": {
+    "RELEASE-01": "Public deployment skipped; no public-release download/fresh-install proof.",
+    "E2E-02": "Browser/editor scenario was not part of this Tk GUI attempt.",
+    "ABORT-0138": "Separate abort smoke is pending in the root-owned follow-up; no result claimed.",
+    "PERF-ACCURACY": "No overall coverage, fast eligibility, latency, goodput, or performance claim."
+  },
+  "acceptance": "Original 44 requirement statuses and numeric gates unchanged; linked requirements receive partial evidence only. E2E-01 was executed and remains FAIL.",
+  "privacy": "No private Windows paths, process/window/user identifiers, nonce, credentials, raw pixels, model traces, or restricted assets included. Private inputs are represented by digests only.",
+  "installed_blender_observation": {
+    "classification": "OBSERVED_INSTALLED_WINDOWS_COMPONENT_WITH_CLEANUP_DIAGNOSTIC",
+    "runtime_version": "0.1.38",
+    "profile": "owned-factory-Windows-public-RNA",
+    "attempts": [
+      {
+        "kind": "initial",
+        "status": "FAIL",
+        "provider_status": "PARTIAL",
+        "verified_facts": 11,
+        "unknown_guards": 8,
+        "operation_guards_blocked": 6,
+        "operation_input_count_each": 0,
+        "wrong_foreground_refused": "UNAVAILABLE",
+        "cleanup": {
+          "foreground_restored": false,
+          "owned_blender_exited": true,
+          "pointer_unchanged": true
+        }
+      },
+      {
+        "kind": "instrumented_focus_diagnostic",
+        "status": "FAIL",
+        "provider_status": "PARTIAL",
+        "verified_facts": 11,
+        "unknown_guards": 8,
+        "operation_guards_blocked": 6,
+        "operation_input_count_each": 0,
+        "wrong_foreground_refused": "UNAVAILABLE",
+        "cleanup": {
+          "previous_target_valid_visible_before_restore": true,
+          "previous_target_foreground_before_restore": false,
+          "owned_blender_valid_visible_foreground_before_restore": true,
+          "foreground_restored_before_owned_exit": false,
+          "previous_target_valid_visible_foreground_after_owned_exit": true,
+          "owned_blender_exited": true,
+          "pointer_unchanged": true
+        },
+        "finding": "Foreground restoration could not be acknowledged while the owned Blender window remained foreground; after the owned child exited, the exact prior target was valid, visible, and foreground."
+      },
+      {
+        "kind": "close_owned_child_first",
+        "status": "PASS",
+        "provider_status": "PARTIAL",
+        "verified_facts": 11,
+        "unknown_guards": 8,
+        "operation_guards_blocked": 6,
+        "operation_input_count_each": 0,
+        "wrong_foreground_refused": "UNAVAILABLE",
+        "cleanup": {
+          "owned_blender_exited": true,
+          "foreground_restored": true,
+          "pointer_unchanged": true
+        },
+        "method": "Private cleanup-helper ordering change terminates only the owned child before reading the OS-restored foreground; it makes no foreground-setting or input call."
+      }
+    ],
+    "interpretation": "The first two whole-fixture attempts remain FAIL; the corrected cleanup ordering passes. Provider and compiler evidence is partial, all six operation families remain blocked with zero input, and wrong-foreground evidence remains unavailable. No operation success or guard change is claimed.",
+    "private_artifact_sha256": {
+      "initial": "1e1b1260208c201b1b208c20bdc71e86a5d3cbcb872176762b6fde1fbd3a2b3b",
+      "diagnostic": "bc4db08e9f7bbd88e70e80817372b434efb592aa0a6470643f0e7f951ba89e05",
+      "close_first": "5225b22b8e13322996015a9b5c00a06e0d1777b9ae68d3a8e04dabcbf9ae5380"
+    }
+  },
+  "installed_native_gdi_tests": {
+    "status": "PASS",
+    "runtime_version": "0.1.38",
+    "tests": 4,
+    "skipped": 0,
+    "source_overlay": false,
+    "scope": "Actual native Windows GDI resource regression in the interactive session.",
+    "private_artifact_sha256": "5e0824c63eb582605e0743edccdb243739ab4f72d3d01e116450893a584a432c"
+  },
+  "installed_suspended_worker": {
+    "runtime_version": "0.1.38",
+    "retained_failed_attempts": {
+      "count": 4,
+      "status": "FAIL",
+      "failure_types": [
+        "Wrong native point binding",
+        "Diagnostic failure",
+        "Hidden worker suspension failure",
+        "Hidden guardian suspension failure"
+      ],
+      "artifact_sha256": [
+        "645f130d8643b0139a187802f66595956cdc6442c4865961d45739742a3770bf",
+        "ecd291ed892a3f153d0622e7d52fc866fe019861b0d41708544de9dcd4e5f599",
+        "66f79ff5bf4818775d022d1e3b59282b58bc137a03ae73d3ad10098ea92026bc",
+        "f0c32f5a7eaf2ef83145ee7f582aad10fbdf92fca5718b204ae09e5271798c2e"
+      ]
+    },
+    "final_attempt": {
+      "status": "PASS",
+      "validator_geometry": "Corrected validator point binding only; original console flags retained.",
+      "deadline_release_proof": "PASS",
+      "cleanup": "PASS",
+      "private_artifact_sha256": "207f31d64eff4a74c30105033b807b5a180ca324ce9abdfdcdb7fb21644c6cb6"
+    },
+    "scope": "Final PASS is the corrected physical-point validator run. Four earlier FAIL attempts remain retained; no .39 installed claim."
+  }
+}

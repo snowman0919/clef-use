@@ -73,8 +73,9 @@ def main():
             frame = DesktopCapture().capture()
             objects = []
             for name, widget in [("entry", entry), ("button", button)]:
-                x, y = widget.winfo_rootx(), widget.winfo_rooty()
-                w, h = widget.winfo_width(), widget.winfo_height()
+                with gui.physical_coordinates():
+                    x, y, right, bottom = gui.window_rect(widget.winfo_id())
+                w, h = right - x, bottom - y
                 width, height = frame.image.size
                 objects.append(
                     UIObject(
@@ -240,12 +241,10 @@ def main():
         result["capture_pixels"] = frame.image.size
         result["physical_coordinates"] = True
         with gui.physical_coordinates():
-            bounds = (
-                root.winfo_rootx(),
-                root.winfo_rooty(),
-                root.winfo_rootx() + root.winfo_width(),
-                root.winfo_rooty() + root.winfo_height(),
-            )
+            bounds = gui.window_rect(owned_target)
+        result["input_preserves_owned_geometry"] = bounds == initial_bounds
+        if not result["input_preserves_owned_geometry"]:
+            raise RuntimeError("OS input changed the owned window DPI geometry")
         frame.image.crop(bounds).save(args.output.with_suffix(".png"))
         result["status"] = "PASSED"
     except Exception:

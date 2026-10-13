@@ -254,3 +254,29 @@ See [execution evidence](../EXECUTION_STATUS.md) and [acceptance](../../ACCEPTAN
 Windows capture uses native GDI in a scoped per-thread physical coordinate context. It does not change process-wide DPI awareness. Capture must preserve an already-open window and its controls; a frame that changes their physical geometry fails validation. This capture correction does not certify Blender popup, focus, IME or keymap state, nor the 100ms reaction gate.
 
 Actual native Windows Codex verification separates discovery/load/invoke from GUI task success. A completed tool response with LOW_CONFIDENCE is a failed task, even when a prior click was correct. Retain allowed candidate rosters, independently measured physical target geometry and actual widget outcomes; do not lower confidence guards to turn invocation success into task success.
+
+The current Windows state provider combines native UI Automation evidence with
+the optional Blender provider. Its standard-library base-Python worker proves
+its actual PID at readiness and uses a 500 ms query timeout. Each result binds
+native foreground observations before and after the query to the same focused
+UIA element, process identity, ancestor chain and bounds. For a supported
+TextEdit, `GetActiveComposition` returning `S_OK` with a null composition
+means `False`; unsupported interfaces, errors and stale or mismatched evidence
+remain `UNKNOWN`. TextEdit read-only/editability is not observed. This does
+not establish popup ownership, keymap state, global idle, or Blender operation
+admission. The new provider’s installed end-to-end verification is pending; no
+live readiness or operation success is implied.
+
+Windows native input checks its failsafe before dispatch and no longer imports
+PyAutoGUI. An installed 0.1.38 probe changed owned-window geometry from
+`[210,210,1638,1066]` to `[120,120,936,609]` before sending input; input count
+was zero. A source correction on the same path preserved geometry. That is
+source-only evidence, not an installed 0.1.38 pass. No 100 ms performance
+claim follows.
+
+Window bounds are physical on watchdog threads too. Owned Windows validation
+maps widget points to physical bounds and checks native receiver ownership
+before input; a successful capture does not establish input geometry.
+Button-down and wheel events also require the native pointer recipient's root
+window to match the bound foreground window. A matching foreground alone does
+not authorize input to another window. Owned recovery releases remain available.

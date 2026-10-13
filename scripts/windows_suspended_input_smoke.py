@@ -26,7 +26,7 @@ import tkinter as tk
 from pathlib import Path
 from threading import Event, Thread
 
-from windows_gui_support import restore_foreground
+from windows_gui_support import restore_foreground, widget_point
 
 from clef_use import __version__
 from clef_use.backends import DesktopAction, DesktopCapture
@@ -397,10 +397,7 @@ def main(output):
             "ime_scope": "Own disposable receiver only; not general IME discovery",
         }
         frame = DesktopCapture().capture()
-        point = (
-            (canvas.winfo_rootx() + 100 - frame.origin[0]) / frame.image.width,
-            (canvas.winfo_rooty() + 200 - frame.origin[1]) / frame.image.height,
-        )
+        point = widget_point(gui, canvas, frame, 100, 200, owned)
         publish(folder / "owner.json", {"pid": os.getpid(), "window": owned, "nonce": nonce})
         with (
             (folder / "child.stdout").open("w", encoding="utf-8") as stdout,

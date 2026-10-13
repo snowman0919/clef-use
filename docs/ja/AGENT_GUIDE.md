@@ -243,3 +243,28 @@ parser の object は正確な座標と異なる action・confidence・source �
 Windows のキャプチャは、スレッド限定の物理座標 context 内で native GDI を使い、process 全体の DPI awareness を変更しません。開いている window と control の物理 geometry を保つ必要があり、キャプチャで変われば検証失敗です。この修正は Blender popup・focus・IME・keymap の状態や100ms反応性能を証明しません。
 
 実際の Windows Codex 検証では discovery・load・invoke と GUI task 成功を分けます。前のクリックが正しくても、tool 応答が LOW_CONFIDENCE なら task は失敗です。実際の候補一覧、独立測定した物理 target geometry、widget 結果を保持し、呼び出し成功を task 成功にするために信頼度 guard を下げません。
+
+現在の Windows state provider は native UI Automation の証拠と optional な
+Blender provider を組み合わせます。標準ライブラリのみの base Python worker は
+準備完了時に実際の PID を証明し、query の timeout は 500ms です。各結果は
+query 前後の native foreground 観測を同じ focused UIA element、process identity、
+ancestor chain、bounds に結び付けます。対応する TextEdit で
+`GetActiveComposition` が null composition とともに `S_OK` を返す場合は `False`
+です。未対応 interface、エラー、古い証拠や一致しない証拠は `UNKNOWN` のままです。
+TextEdit の read-only 状態と編集可否は観測しません。popup の所有状態、keymap、
+全体の idle、Blender operation admission を証明するものではありません。新 provider の
+installed end-to-end 検証は保留中であり、live readiness や operation 成功を示しません。
+
+Windows native input は入力前に failsafe を確認し、PyAutoGUI を import しなく
+なりました。installed 0.1.38 の probe は入力を送る前に、所有 window の geometry
+を `[210,210,1638,1066]` から `[120,120,936,609]` に変化させました。input count は
+0 でした。同じ経路への source 修正では geometry が維持されました。これは source
+の証拠であり、installed 0.1.38 の PASS ではありません。100ms 性能の主張には
+つながりません。
+
+watchdog スレッドでも window bounds は物理座標で取得します。Windows 検証では
+widget の入力点を物理 bounds に変換し、native 受信 window の所有権を確認します。
+capture の成功だけでは入力座標の正しさを証明しません。
+button-down と wheel は、native pointer 受信側の root window が観測済み foreground
+window と一致する場合だけ送信します。foreground の一致だけでは別 window への入力を
+許可しません。所有入力の recovery release はこの条件に依存しません。
