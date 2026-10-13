@@ -2344,6 +2344,31 @@ def _codex_guide_path_in_command(path: str, command: str) -> bool:
     return re.search(rf"(?:^|[\s\"']){re.escape(path)}(?=$|[\s\"'])", command) is not None
 
 
+def _codex_executor_failures(stderr: str, guides: dict[str, str]) -> list[dict]:
+    failures = []
+    for line in stderr.splitlines():
+        match = re.match(
+            r"^\d{4}-\d{2}-\d{2}T\S+ +ERROR codex_core::tools::router: "
+            r"error=exec_command failed for `(.+)`: CreateProcess \{ message:.*?"
+            r"Failed to create unified exec process: timed out after (\d+)ms "
+            r"connecting runner (pipe-in|pipe-out)",
+            line,
+        )
+        if match:
+            failures.append(
+                {
+                    "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+                    "phase": match[3],
+                    "timeout_ms": int(match[2]),
+                    "selected_guide_attempt": any(
+                        _codex_guide_path_in_command(path, match[1]) for path in guides.values()
+                    ),
+                    "evidence_sha256": _hash(line.encode()),
+                }
+            )
+    return failures
+
+
 def _codex_verification_override(config: dict) -> str:
     # CLI dotted paths do not unquote key segments. Inline TOML preserves
     # arbitrary server names and merges these fields into existing transports.
@@ -2508,7 +2533,8 @@ def _verify_selected(
         invoked = []
         attempted = []
         failed = False
-        any_gui_guide = False
+        executor_failures = _codex_executor_failures(run.stderr, expected)
+        any_gui_guide = any(error["selected_guide_attempt"] for error in executor_failures)
         selected = (
             "clef-use-blender"
             if trigger == "natural" and "clef-use-blender" in expected
@@ -2664,6 +2690,7 @@ def _verify_selected(
         )
         violation = (
             failed
+            or bool(executor_failures)
             or runtime_before_guide
             or (trigger == "negative" and (any_gui_guide or attempted))
         )
@@ -2686,9 +2713,15 @@ def _verify_selected(
             "load_before_invoke": load_before_invoke,
             "runtime_before_guide": runtime_before_guide,
             "capability_catalog_verified": capability_catalog is not None,
+            "native_executor_failures": executor_failures,
             "stages": _model_stages(loaded, invoked, failed),
         }
-        if run.returncode:
+        if executor_failures:
+            result["reason_code"] = "NATIVE_EXECUTOR_STARTUP_TIMEOUT"
+            result["reason"] = (
+                "native command executor failed before command start; inspect private stderr trace"
+            )
+        elif run.returncode:
             result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
     except (OSError, ValueError, queue.Empty, subprocess.TimeoutExpired) as exc:
         result["reason"] = f"actual harness verification failed: {type(exc).__name__}: {exc}"

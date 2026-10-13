@@ -17,6 +17,13 @@ capability の runtime/schema/guide hash と読み取り専用の二つのツー
 operation 詳細応答は、先に検証した実際の一覧の該当 operation と完全一致する必要があります。
 status 応答だけでは現在の capability 一覧を検証できません。
 
+Codex のコマンド開始失敗は JSON command event がなく、非公開 stderr だけに
+残る場合があります。ネイティブ runner pipe 接続のタイムアウトは、後の成功や
+異常終了に関係なく `NATIVE_EXECUTOR_STARTUP_TIMEOUT` FAIL として保持します。
+公開するのは段階、制限時間、ガイド読み込み試行の有無と証拠 hash だけです。
+読み込み試行は本文ロードの証明ではなく、このエラーだけでは認証の問題や
+ネイティブ実行器の失敗原因を特定できません。
+
 OmniParser は upstream import 前後で呼び出し元の Torch thread 数を保持します。
 明示的な単一 thread 設定も保持し、新しい thread 設定は不要です。
 この初期化修正だけではタスク完了や 100ms の入力遅延を証明しません。

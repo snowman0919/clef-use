@@ -1095,6 +1095,7 @@ def _controlled_verification(
     operation_detail=None,
     runtime_tool="computer_capabilities",
     model_exit_code=0,
+    native_stderr=None,
 ):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
@@ -1109,6 +1110,18 @@ def _controlled_verification(
     layout = integrations._layout(harness)
     manifest = integrations._load_manifest(layout)
     skill = layout["root"] / "clef-use/SKILL.md"
+    if native_stderr in ("runner_guide", "runner_unrelated"):
+        command = f"cat '{skill}'" if native_stderr == "runner_guide" else "echo ready"
+        native_stderr = (
+            "2026-10-13T21:07:58.078820Z ERROR codex_core::tools::router: "
+            f"error=exec_command failed for `{command}`: CreateProcess {{ message: "
+            '"Rejected(\\"Failed to create unified exec process: timed out after '
+            '15000ms connecting runner pipe-in\\")" }\n'
+        )
+    elif native_stderr == "prose":
+        native_stderr = (
+            "A previous example mentioned timed out after 15000ms connecting runner pipe-in.\n"
+        )
     body = skill.read_text()
     name = {
         "codex": runtime_tool,
@@ -1486,6 +1499,7 @@ elif sys.argv[1:2] == ['skills']:
  print('clef-use')
 else:
  for event in {events!r}: print(json.dumps(event))
+ sys.stderr.write({native_stderr or ""!r})
  sys.exit({model_exit_code})
 """
     executable.write_text(script)
@@ -1846,6 +1860,52 @@ def test_codex_status_alone_does_not_verify_current_capability_catalog(installat
         runtime_tool="computer_status",
     )
     assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
+
+
+@pytest.mark.parametrize(
+    "trigger,diagnostic,expected",
+    [
+        ("explicit", "runner_guide", "FAIL"),
+        ("negative", "runner_guide", "FAIL"),
+        ("negative", "runner_unrelated", "FAIL"),
+        ("explicit", "prose", "PASS"),
+        ("negative", "prose", "PASS"),
+    ],
+)
+def test_codex_prestart_executor_failure_is_not_lost_without_json_command_event(
+    installation, monkeypatch, trigger, diagnostic, expected
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        trigger,
+        native_stderr=diagnostic,
+        attempt="none" if trigger == "negative" else "end",
+    )
+    assert result["status"] == expected
+    failures = result["model_trigger_verification"]["native_executor_failures"]
+    if expected == "FAIL":
+        assert len(failures) == 1
+        assert failures[0]["code"] == "NATIVE_EXECUTOR_STARTUP_TIMEOUT"
+        assert failures[0]["selected_guide_attempt"] is (diagnostic == "runner_guide")
+        assert result["reason_code"] == "NATIVE_EXECUTOR_STARTUP_TIMEOUT"
+    else:
+        assert failures == []
+
+
+def test_codex_prestart_executor_failure_survives_nonzero_process_exit(installation, monkeypatch):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        native_stderr="runner_guide",
+        model_exit_code=1,
+    )
     assert result["status"] == "FAIL"
 
 

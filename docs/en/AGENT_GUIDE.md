@@ -17,6 +17,13 @@ nonzero process exit. Native Skill catalog discovery remains distinct from runti
 Operation-detail replies must exactly match an operation in a previously verified
 live catalog. A status reply alone does not verify the current capability catalog.
 
+Codex can report command startup failures only in its private stderr trace, with
+no JSON command event. A native runner pipe connection timeout remains FAIL as
+`NATIVE_EXECUTOR_STARTUP_TIMEOUT`, even after later success or an error exit.
+The report publishes only the phase, timeout, guide-attempt flag and evidence
+digest. An attempted guide read does not prove its body loaded; this error does
+not diagnose authentication or establish why the native runner failed.
+
 OmniParser preserves the caller's Torch thread budget across upstream imports,
 including an explicit single-thread setting. No new thread setting is required.
 This initialization fix does not establish whole-task completion or 100ms input

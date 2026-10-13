@@ -255,6 +255,14 @@ An explicit response/transport error records INVOKED=FAIL even when another
 invocation succeeds. Native model adapters retain observed errors and negative-trigger violations
 in the overall outcome independently of later success or process exit. Successful
 tool names remain listed as partial evidence; missing results remain NOT_RUN.
+Native Codex unified-exec startup errors may appear only in stderr, without a
+JSON command event. The consumer recognizes the timestamped router/CreateProcess
+runner pipe timeout and retains `NATIVE_EXECUTOR_STARTUP_TIMEOUT` as overall FAIL,
+including negative controls and later nonzero exits. Exact managed guide paths
+bind attempted reads; failed startup never proves body loading. Published details
+contain only code, phase, milliseconds, attempt flag and line digest; raw commands
+and paths stay in private evidence. Similar prose is not a native error. This
+classification does not identify the underlying runner or authentication cause.
 Native harness JSON subprocess streams use strict UTF-8 decoding, including the
 Codex app-server protocol, instead of the caller's locale-dependent codec.
 Codex recognizes advertised guide resources only when the native event,

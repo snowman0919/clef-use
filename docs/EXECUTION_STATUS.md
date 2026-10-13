@@ -1,5 +1,55 @@
 # Reactive runtime execution status
 
+## Source 0.1.47 native executor evidence and Windows context recovery, 2026-10-14
+
+**OBSERVED / actual prior failure:** installed .46 Codex explicit stderr records
+three managed-guide file-read attempts rejected before command startup, each
+`timed out after 15000ms connecting runner pipe-in`. Its JSON stream contains no
+command events for these failures. Earlier wording "agent messages only" describes
+that JSON stream, not absence of attempted file reads. Authentication is not the
+observed failure. Native provider-context guide injection remains NOT_PROVEN.
+
+**OBSERVED / source correction and REPLAY:** the .47 consumer retains these native
+startup errors as `NATIVE_EXECUTOR_STARTUP_TIMEOUT` FAIL, including negative
+controls and later nonzero exit. Exact managed paths identify attempted guide
+reads; no failed startup proves body loading. Only codes, phases, milliseconds,
+attempt flags and evidence hashes leave private stderr. Prior HEAD reproduces
+three false PASS statuses and one observed FAIL incorrectly reduced to NOT_RUN.
+Two prose controls previously retain correct statuses but lack the new diagnostic
+field. Corrected negative fixtures contain no independent runtime-call violation;
+the initial weaker fixture proof is retained and excluded from that attribution.
+All six regressions now pass. Full source checks pass1670, skip55, with41 warnings
+in71.95 seconds; integration checks pass270. Active Ruff and generated198 CLI/12
+tool examples pass. A Windows replay through the full candidate consumer, with
+real .46 installed discovery and exact original stdout/stderr, reports all three
+errors and correct guide-path bindings; it starts no new model request. This is
+hybrid source/installed replay, not an immutable .47 installation claim.
+
+**OBSERVED / actual native context comparison:** Codex .151 advertises shell_tool
+and unified_exec enabled. Its advertised permission-profile catalog contains the
+allowed built-in `:read-only` profile, whose meaning is confirmed in the matching
+official source. A real LIMITED desktop token runs the official read-only sandbox
+and reads the exact installed guide hash, exit0, with protected configuration/auth
+bytes preserved and no model/GUI/input. The initial smoke stopped at argument
+parsing because `--permission-profile` was missing; it is NOT_RUN for runner
+execution and its configuration preservation was not retained.
+
+The same original explicit/natural/negative model requests then run once each on
+immutable installed .46 under that LIMITED token: all three PASS. Explicit loads
+core; natural loads full core and Blender before matching current capabilities;
+negative makes no guide/runtime attempt. Native model exits are zero. All68 payload
+files, token/session/user association, protected configuration/auth bytes and
+owned task removal are checked. This proves a successful execution context; it
+does not isolate Session0, token elevation, ACLs or another variable as the cause
+of the earlier runner failure. TASK_VERIFIED remains NOT_RUN. No prompts, provider,
+runtime operation guards, confidence thresholds or global configuration changed.
+
+Immutable .47 CI/install remain NOT_RUN at this source checkpoint. Windows GUI
+ownership coordination, complete identical pinned tasks/1000opportunities/correct
+OS-input p95/coverage/goodput, Reici and public guarded promotion remain outstanding.
+Original acceptance statuses and gates are unchanged. See the
+[executor/context receipt](validation/2026-10-14/codex-executor-context-0147.json).
+
 ## Immutable installed Windows 0.1.46 verification, 2026-10-14
 
 **OBSERVED / immutable CI and actual installation:** source `a138ce6` completes

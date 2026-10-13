@@ -16,6 +16,12 @@ capability 的 runtime/schema/guide hash 和只读双工具 facade 也必须匹�
 operation 详细响应必须与先前已验证的实时列表中的对应 operation 完全一致。
 仅有 status 响应不能验证当前 capability 列表。
 
+Codex 命令启动失败可能没有 JSON command event，只记录在私有 stderr 中。
+原生 runner pipe 连接超时始终保留为 `NATIVE_EXECUTOR_STARTUP_TIMEOUT` FAIL，
+不受后续成功或异常退出影响。报告只公开阶段、超时时间、指南读取尝试标志和
+证据 hash。读取尝试不能证明正文已加载；此错误本身也不能确定认证问题或
+原生执行器失败的具体原因。
+
 OmniParser 在 upstream import 前后保留调用者的 Torch thread 数，
 包括显式的单 thread 设置，无需新增 thread 配置。
 此初始化修复本身不能证明任务完成或 100ms 输入延迟；

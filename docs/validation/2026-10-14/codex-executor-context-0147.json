@@ -1,0 +1,264 @@
+{
+  "classification": "OBSERVED_SOURCE_REGRESSION_AND_ACTUAL_INSTALLED_0146_NATIVE_CONTEXT_COMPARISON_WITH_REPLAY",
+  "date": "2026-10-14",
+  "candidate_runtime_version": "0.1.47",
+  "actual_native_runtime_version": "0.1.46",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no identities, native paths, commands, raw traces, prompts or configuration contents.",
+  "source_binding": {
+    "integrations_sha256": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+    "actual_native_integrations_sha256": "d8af6fe773281aaabd2d80704aa381ef50e673a25b9aed4a2edf95ba978e9a81",
+    "actual_native_commit": "a138ce6dea6dec17f6fa926795065a906823239e"
+  },
+  "source_regression": {
+    "claim": "OBSERVED",
+    "full_passed": 1670,
+    "full_skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 71.95,
+    "full_log_sha256": "38111d7a39dfc640cb53a738de0b81518820fdd94f2a20de592f3c60fffe66ba",
+    "focused_passed": 270,
+    "focused_log_sha256": "3e8e2c12de532ac69f05a60ee917aa0a4fd16beca338055884e2d0d1ea00a461",
+    "prior_head_before_proof": {
+      "wrong_pass_statuses": 3,
+      "observed_failure_reduced_to_not_run": 1,
+      "prose_controls_correct_status_but_missing_new_field": 2,
+      "log_sha256": "ca132a950b5b28d390df2b24ac582152aa45f3a2dd9dcc5180b453addbf3d95a",
+      "negative_fixture_has_no_runtime_invocation": true
+    },
+    "initial_before_proof": {
+      "log_sha256": "981a88eaa9f52534be6efe7377357c9090e546e85e41443c886db01c56481d61",
+      "negative_failure_attribution": "INVALID_INDEPENDENT_CAPABILITY_VIOLATION_PRESENT_RETAINED_EXCLUDED"
+    },
+    "generated_examples_log_sha256": "18fa37be27f85ea84f46490281cf2c8c208676595c2b9b5ff5ae35f83f90e9f1"
+  },
+  "original_native_failure": {
+    "classification": "OBSERVED_PURE_HELPER_REPLAY_OF_FROZEN_NATIVE_STDERR",
+    "candidate": "uncommitted .47 verifier source",
+    "source_path": "src/clef_use/integrations.py",
+    "source_sha256": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+    "native_original_runtime": "0.1.46",
+    "native_version": "codex-cli 0.151.0",
+    "original_stderr_sha256": "cd56dcf98c79fd969d5570876c304f8fe9a1024db2c5aa4173fca7b9cb079f67",
+    "original_discovery_metadata_sha256": "4fcb94ac6aaeff498a212df7726bde98decd620f2e279492c65a415712cc766b",
+    "managed_guide_count": 3,
+    "managed_guide_names": [
+      "clef-use",
+      "clef-use-blender",
+      "clef-use-diagnostics"
+    ],
+    "exact_expected_path_mapping_sha256": "77df0f6999e0c3e9e36fc645fcf41651f3dc159d4f339d9b63b90a23c3060d72",
+    "failure_count": 3,
+    "managed_guide_bound_failure_count": 3,
+    "diagnostics": [
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "ba5e0d735dff9fd9e7919a0fed350d9dfd0d69f3c26da5e6db26c80d681ad559"
+      },
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "e4d851d4193731f9a6994d247597ada63a48f2b11faf397d98fbd4b78e1f84ac"
+      },
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "18dd152bf77c53672aa607fea1d8925016edf2c4284bcaac1f013d30d9db85a6"
+      }
+    ],
+    "method": "Pure _codex_executor_failures invocation on retained UTF8 native stderr; expected paths from retained native DISCOVERED skills metadata",
+    "new_native_harness_or_model_invocations": 0,
+    "source_unchanged_during_replay": true,
+    "raw_commands_paths_messages_auth_headers_retained_in_receipt": false,
+    "review": "No additional actionable source defect found; initial negative fixture attribution gap reported and root owns correction",
+    "limits": [
+      "Pattern proves recorded native runner pipe-in startup timeout; does not prove Session0 caused it",
+      "No runner smoke or GUI/model session executed",
+      "Initial negative fixtures contained an independent capability violation and are invalid for attributing negative falsePASS; corrected before/after proof is root-owned"
+    ]
+  },
+  "full_consumer_replay": {
+    "classification": "REPLAY_OF_RETAINED_ACTUAL_NATIVE_TRACE_WITH_REAL_DISCOVERY_PREFLIGHT",
+    "status": "PASS",
+    "source_sha256": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+    "original_stdout_sha256": "55c216654a1a761144813a7af5076791acd2fd66fce44a86d885644a7099c6f5",
+    "original_stderr_sha256": "cd56dcf98c79fd969d5570876c304f8fe9a1024db2c5aa4173fca7b9cb079f67",
+    "private_result_sha256": "c8d47a393cfa5776d99a6fef32db535cbbf4b73d2679828ee8306f5d690739a9",
+    "new_model_requests": 0,
+    "replayed_model_calls": 1,
+    "outcome": "FAIL",
+    "reason_code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+    "native_executor_failures": [
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "ba5e0d735dff9fd9e7919a0fed350d9dfd0d69f3c26da5e6db26c80d681ad559"
+      },
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "e4d851d4193731f9a6994d247597ada63a48f2b11faf397d98fbd4b78e1f84ac"
+      },
+      {
+        "code": "NATIVE_EXECUTOR_STARTUP_TIMEOUT",
+        "phase": "pipe-in",
+        "timeout_ms": 15000,
+        "selected_guide_attempt": true,
+        "evidence_sha256": "18dd152bf77c53672aa607fea1d8925016edf2c4284bcaac1f013d30d9db85a6"
+      }
+    ],
+    "protected_config_bytes_preserved": true,
+    "scope": "Candidate .47 consumer and real immutable .46 native discovery; hybrid replay, not immutable .47 execution."
+  },
+  "actual_read_only_sandbox_smoke": {
+    "status": "PASS",
+    "scope": "Native Codex read-only sandbox guide hash under a real LIMITED desktop token; no GUI/capture/focus/input or model request",
+    "runtime_version": "0.1.46",
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "native_codex_executable_sha256": "cf68265897197ac5f3bff6a10c168eec159842b353129726da5e3ed6b91ef0f4",
+    "commands": [
+      {
+        "name": "native_codex_read_only_sandbox_guide_hash",
+        "exit_code": 0
+      }
+    ],
+    "native_runner_pipe_timeout": false,
+    "guide_hash_matches": true,
+    "guide_sha256": "aa0f7498e0056a842117d442e8066f41f4dd5ff8a892fb72aafde1f6ddd4dd07",
+    "model_requests": 0,
+    "global_config_bytes_preserved": true,
+    "private_result_sha256": "5db8a322210aed9bd396c6fe2e79c2aa16716bb8160836cb8c80d2156b0459f6",
+    "owned_task_removed": true,
+    "permission_profile": ":read-only",
+    "semantics_source": "https://github.com/openai/codex/blob/rust-v0.151.0/codex-rs/protocol/src/models.rs",
+    "initial_argument_parse_attempt": {
+      "runner_execution": "NOT_RUN",
+      "exit_code": 2,
+      "missing_option": "--permission-profile",
+      "configuration_preservation": "NOT_RETAINED"
+    }
+  },
+  "actual_limited_native_model_batch": {
+    "status": "PASS",
+    "context": "LIMITED_INTERACTIVE_DESKTOP_TOKEN",
+    "caller_locale": "cp1252",
+    "installed_payload_files_verified": 68,
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "protected_configuration_and_auth_bytes_preserved": true,
+    "owned_task_removed": true,
+    "invocations_per_original_case": 1,
+    "private_result_sha256": "79e743ca9d67a882e8e6aa5f62180dfff084f5aecef0394ebe65ce23646df739",
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "54b4c9e655ad20725c7e17e057e2cd46d1fd48b0875a285d7e5c18c421b6d877",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use",
+          "clef-use-blender"
+        ],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "b4e62f2b50464fba5fde34ab08d40e505cf0f9c8c1b6ace9cdd1595bb9fa0af4",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "load_before_invoke": false,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": false,
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "2b5549a85af0e4ff42ce8d76cff20f381a069a86cef86d46bdc4af6763fa4fd4",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "limits": "Same installed .46 payload, original requests/provider/budget; successful context does not isolate Session0, elevation, ACL or other native runner cause. No GUI/input task requested."
+  },
+  "not_run": [
+    "immutable .47 CI/install at source checkpoint",
+    "actual Codex GUI TASK_VERIFIED",
+    "complete identical pinned task accuracy/1000 opportunities/correct OS-input p95/coverage/goodput",
+    "Reici separate-session outcome",
+    "guarded public promotion"
+  ],
+  "completion_claim": false
+}

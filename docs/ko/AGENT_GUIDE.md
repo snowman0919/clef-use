@@ -17,6 +17,12 @@ capability의 runtime/schema/guide 해시와 read-only 두 도구 facade도 확�
 operation 상세 응답은 앞서 검증한 실제 목록의 해당 operation과 정확히 일치해야 합니다.
 status 응답만으로 현재 capability 목록이 검증되지는 않습니다.
 
+Codex 명령 시작 실패는 JSON command event 없이 비공개 stderr에만 남을 수 있습니다.
+네이티브 runner pipe 연결 시간 초과는 뒤의 성공이나 오류 종료와 무관하게
+`NATIVE_EXECUTOR_STARTUP_TIMEOUT` FAIL로 유지합니다. 보고서에는 단계, 제한 시간,
+지침 읽기 시도 여부와 증거 해시만 공개합니다. 읽기 시도는 본문 로드를 증명하지
+않으며, 이 오류만으로 인증 문제나 네이티브 실행기 실패 원인을 단정하지 않습니다.
+
 OmniParser는 upstream import 전후에 호출자의 Torch thread 예산을 보존합니다.
 명시적인 단일 thread 설정도 유지하며 새 thread 설정은 필요하지 않습니다.
 이 초기화 수정만으로 전체 작업 완료나 100ms 입력 지연이 검증되지는 않습니다.
