@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+- Verify actual native Windows Codex guide loading, live MCP schemas and bounded
+  GUI run/fresh observation. Keep failed task decisions, independent receiver
+  results and retained attempts separate from successful harness invocation.
+
 - Capture Windows primary-monitor pixels with native GDI without changing process
   DPI awareness or resizing an already-open application. Preserve physical frame
   coordinates, layered-window capture and owned GDI resource cleanup.

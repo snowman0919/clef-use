@@ -240,3 +240,5 @@ parser 객체는 정확한 좌표와 서로 다른 action·confidence·source �
 [실행 증거](../EXECUTION_STATUS.md)와 [acceptance](../../ACCEPTANCE.yaml)를 확인하세요.
 
 Windows 캡처는 스레드별 물리 좌표 context 안에서 native GDI를 사용하며 프로세스 전체 DPI 설정을 변경하지 않습니다. 이미 열린 창과 컨트롤의 물리 geometry를 보존해야 하며, 캡처가 이를 바꾸면 검증 실패입니다. 이 수정은 Blender popup·focus·IME·keymap 상태나 100ms 반응 성능을 입증하지 않습니다.
+
+실제 Windows Codex 검증은 discovery·load·invoke와 GUI 작업 성공을 구분합니다. 앞선 클릭이 맞아도 tool 응답이 LOW_CONFIDENCE라면 작업은 실패입니다. 실제 후보 목록, 독립 측정한 물리 좌표 target geometry, 위젯 결과를 보존하며 호출 성공을 작업 성공으로 만들기 위해 신뢰도 가드를 낮추지 않습니다.

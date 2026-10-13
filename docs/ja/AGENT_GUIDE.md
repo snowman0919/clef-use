@@ -241,3 +241,5 @@ parser の object は正確な座標と異なる action・confidence・source �
 [実行証拠](../EXECUTION_STATUS.md)と[検証項目](../../ACCEPTANCE.yaml)を参照してください。
 
 Windows のキャプチャは、スレッド限定の物理座標 context 内で native GDI を使い、process 全体の DPI awareness を変更しません。開いている window と control の物理 geometry を保つ必要があり、キャプチャで変われば検証失敗です。この修正は Blender popup・focus・IME・keymap の状態や100ms反応性能を証明しません。
+
+実際の Windows Codex 検証では discovery・load・invoke と GUI task 成功を分けます。前のクリックが正しくても、tool 応答が LOW_CONFIDENCE なら task は失敗です。実際の候補一覧、独立測定した物理 target geometry、widget 結果を保持し、呼び出し成功を task 成功にするために信頼度 guard を下げません。

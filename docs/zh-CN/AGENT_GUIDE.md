@@ -212,3 +212,5 @@ parser 对象分别保留精确坐标及不同的 action、confidence、source �
 参阅[执行证据](../EXECUTION_STATUS.md)及[验收要求](../../ACCEPTANCE.yaml)。
 
 Windows 截图在仅限当前线程的物理坐标 context 内使用 native GDI，不修改整个 process 的 DPI awareness。必须保留已打开 window 与 control 的物理 geometry；截图使它们发生变化即验证失败。此修正不证明 Blender popup、focus、IME、keymap 状态或100ms反应性能。
+
+实际 Windows Codex 验证区分 discovery、load、invoke 与 GUI task 成功。即使前一次点击正确，tool 返回 LOW_CONFIDENCE 仍是 task 失败。保留真实候选列表、独立测量的物理 target geometry 和 widget 结果，不降低置信度 guard 来把调用成功变成 task 成功。

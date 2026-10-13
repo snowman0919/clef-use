@@ -95,6 +95,32 @@ and Task complete. Original object/packet contents were not archived in that
 attempt, so candidate coverage cannot be reconstructed. No confidence threshold,
 acceptance status or whole-task performance gate is promoted by this diagnosis.
 
+## Actual installed Windows Codex GUI on 2026-10-13
+
+**OBSERVED / harness invocation PASS, task FAIL:** actual native Codex app-server
+uses installed0.1.37, discovers all three managed guides and the six real MCP
+schemas, reads the complete core guide, then calls capabilities, one bounded
+computer_run and its own fresh computer_observe. The configured model and
+resolved on-request/readOnly policy are preserved. Only exact preauthorized
+owned-GUI run/observe requests receive one-off native approval; unknown requests
+remain refused. No global configuration or installed byte changes.
+
+The receiver observes one actual Continueclick and then visibleConfirm. The
+second action choice is.9378 with a NONUNIFORM three-candidate vector, but its
+ACT-mode probability.6967 fails the unchanged.9 guard. FinalTaskcomplete is
+absent, so task verification is FAIL. Both correct semantic targets occur in
+the actual rosters. The first-step image is bit-identical to a later independent
+native calibration; its top candidate center lies inside the measured physical
+Continuebutton[88,385,823,595]. This binds one retained opportunity, not overall
+coverage. Confirm spatial coverage and full reaction metrics are not established.
+
+All five native attempts are retained, including startup capability-isolation
+failures, missing controller handling of native approval, a screen-change refusal
+and failed cleanup in one attempt. Final invocation has complete cleanup and no
+current authentication error. The earlier installed0.1.36 final-completion
+confidence failure remains separately recorded. Native0.1.38 GUI rerun follows
+immutable installation. See [actual Codex GUI evidence](validation/2026-10-13/windows-codex-gui-0137.json).
+
 ## Windows capture DPI correction on 2026-10-13
 
 **OBSERVED / real failure before correction:** installed0.1.37 DesktopCapture

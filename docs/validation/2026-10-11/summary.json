@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "windows_codex_gui_0137_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-codex-gui-0137.json", "sha256": "1a3acb7736534dabc978dac1a6037892121c6280d1dfeaec7721f24495380d82", "raw_artifact_committed": true},
     "windows_capture_dpi_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-capture-dpi.json", "sha256": "899891d6e88b3cb164a56d858e839acc9db8fdceacf32116460c9ef82805b922", "raw_artifact_committed": true},
     "windows_suspended_input_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-suspended-input.json", "sha256": "5cde95ed3f366dafc8be0ae9c945ec4e43fc3c59a85c025ebe95e35c2cb1ed67", "raw_artifact_committed": true},
     "windows_service_abort_20261013": {"local_artifact": "docs/validation/2026-10-13/windows-service-abort.json", "sha256": "d3fd5365587dc790519796b5a769f1b54558c386c65c8f6cdfe1a4df0e295739", "raw_artifact_committed": true},
@@ -185,6 +186,7 @@
     }
   },
   "evidence": {
+    "windows_codex_gui_0137_20261013": {"claim": "OBSERVED_ACTUAL_INSTALLED_WINDOWS_CODEX_NATIVE_GUI", "artifact": "docs/validation/2026-10-13/windows-codex-gui-0137.json", "sha256": "1a3acb7736534dabc978dac1a6037892121c6280d1dfeaec7721f24495380d82", "requirements": ["HARNESS-01", "DEC-01"], "partial": true, "scope": "Native coreguide load, six real schemas, capability/run/freshobserve success; actual Continueclick thenACT.6967<.9 stopsTaskFAIL; all5attempts retained; first-step raster/nativegeometry bound. Not production task/performance pass."},
     "windows_capture_dpi_20261013": {"claim": "OBSERVED_SOURCE_NATIVE_AND_MEASURED_CAPTURE_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-capture-dpi.json", "sha256": "899891d6e88b3cb164a56d858e839acc9db8fdceacf32116460c9ef82805b922", "requirements": ["INPUT-01", "INPUT-05", "STATE-01", "PERF-02"], "partial": true, "scope": "Real installed.37 DPI mutation failure, source native GUI regression PASS, four Windows GDI resource tests PASS, exactRGB alternating100captures each. Capture-only p95 53.2624/42.4806ms, not full reaction/accuracy/goodput/coverage."},
     "windows_suspended_input_20261013": {"claim": "OBSERVED_INSTALLED_WINDOWS_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-suspended-input.json", "sha256": "5cde95ed3f366dafc8be0ae9c945ec4e43fc3c59a85c025ebe95e35c2cb1ed67", "requirements": ["INPUT-04"], "partial": true, "scope": "Actual .37 whole-worker debug suspension; separate guardian releases native Shift/middle at deadline before worker EOF or parent release; resumed worker cancellation/refusal and cleanup. No full runtime/service/Blender/model admission or performance gate claim."},
     "windows_service_abort_20261013": {"claim": "OBSERVED_INSTALLED_WINDOWS_COMPONENT", "artifact": "docs/validation/2026-10-13/windows-service-abort.json", "sha256": "d3fd5365587dc790519796b5a769f1b54558c386c65c8f6cdfe1a4df0e295739", "scope": "Actual .36 CLI/authenticatedHTTP/nativeShift+middle release whileinjectorblocked and no reacquisition; no fullGestureInput or Blenderadmission."},
