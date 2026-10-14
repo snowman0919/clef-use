@@ -1,5 +1,15 @@
 # 에이전트 설치·사용·복구
 
+불변 .52 CI의 15개 실제 빌드·설치 작업과 조립이 통과했습니다. 15개 패키지의
+68개 소스·가이드 파일과 계약이 고정 Git 커밋에 일치하며, 실제 설치 로그에서
+최초 설치·업데이트·CURRENT와 checksum/download/smoke 실패 시 보존을 확인했습니다.
+합성 업데이트 검증의 최종 버전은 .53이고 실제 후보는 .52입니다. 공개 배포는
+feature branch 가드로 건너뜁니다. Windows .52 설치와 LIMITED CLI/MCP는 NOT_RUN입니다.
+SSH 22번 포트와 Tailscale ping이 시간 초과됐고, 로컬 연결은 정상이지만 win 피어는
+오프라인으로 표시됩니다. 장애 원인은 미증명입니다. 과거 공유 .49·전용 .51 결과를
+이번에 재검증하지 않았습니다. 다른 Windows 조작 세션도 확인돼 입력 소유권 조율이
+필요합니다. [.52 CI·접속 기록](../validation/2026-10-14/ci-and-windows-transport-0152.json)을 확인하세요.
+
 .52의 `computer_capabilities.operation_id` 스키마는 정확한 등록 family ID를 표시합니다.
 먼저 인자를 생략해 조회한 뒤 `operations[].family`에서 고르세요. `blender` 같은 앱 이름은
 계속 거절됩니다. 실제 패키지의 일반·읽기 전용 MCP 검사는 통과했습니다. Hermes 세 요청은

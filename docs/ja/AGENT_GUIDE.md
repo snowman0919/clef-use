@@ -1,5 +1,15 @@
 # エージェントの設定・使用・復旧
 
+不変の .52 CI は15個の実際のビルド・インストールと結合に成功しました。
+全15アーカイブのソース・ガイド68ファイルと契約が固定 Git コミットに一致します。
+実際のログは初回・更新・CURRENT と checksum/download/smoke 失敗時の保持を示します。
+合成更新 fixture の最終版は .53、実際の候補は .52 です。公開配備は feature guard
+でスキップされます。Windows .52 のインストールと LIMITED CLI/MCP は NOT_RUN です。
+SSH port22 と Tailscale ping がタイムアウトし、ローカルは online ですが win peer は
+offline と表示されます。原因は未証明です。以前の共有 .49・専用 .51 の結果は今回
+再検証していません。別の Windows 操作セッションも確認済みで、入力の調整が必要です。
+[.52 CI・接続記録](../validation/2026-10-14/ci-and-windows-transport-0152.json)を参照してください。
+
 .52 の `computer_capabilities.operation_id` は登録済み family ID を広告します。
 まず引数を省略して取得し、`operations[].family` から選んでください。`blender` などの
 アプリ名は引き続き拒否します。実パッケージの通常/読み取り専用 MCP 検査は合格です。

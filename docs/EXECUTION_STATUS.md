@@ -1,5 +1,32 @@
 # Reactive runtime execution status
 
+## Immutable .52 CI and Windows transport boundary, 2026-10-14
+
+**OBSERVED / CI:** pinned b022b6d3, all15 native build/install jobs and assembly
+pass. All15 downloaded archives match68 Git payload files and version/schema/
+guide contracts. Native installer logs pass first/update/CURRENT and checksum,
+download and failed-smoke preservation. Synthetic final version .53 is distinct
+from actual .52. Feature-branch deployment is SKIPPED. This does not prove
+cross-platform full regression, native model GUI tasks or public release.
+
+**OBSERVED failure / Windows checks NOT_RUN:** the owned update preparation
+fails before executing its remote command: SSH cannot establish port22 and
+reports Connection timed out. A bounded read-only SSH check also exits255;
+native Tailscale status reports local Running/online, win offline, and a
+single native ping times out. No remote ownership metadata, installation,
+task, CLI/MCP, model, capture, focus or input is executed. Machine power state
+and outage cause remain NOT_PROVEN. Recovery must first inspect owned state.
+Historical shared .49/owned .51 results are not a fresh preservation check.
+Confirmed concurrent Windows use still requires input coordination after
+transport recovers. These are separate transport and input-ownership limits.
+
+Source .52 full regression1698/55, actual Linux package/MCP and native harness
+results remain in their source receipt; OMP positive FAIL and credential-row
+uncertainty are retained. Original44 statuses34PASS/3FAIL/7NOT_RUN and numeric
+quality/performance gates are unchanged. Blender unknown-state, Reici and
+public-release conditions remain open. See the
+[CI/transport receipt](validation/2026-10-14/ci-and-windows-transport-0152.json).
+
 ## Source .52 operation schema and native harness results, 2026-10-14
 
 **OBSERVED / actual .51 defect:** the immutable installed MCP schema accepts
@@ -967,7 +994,7 @@ endpoint, owned process/resources, input release and global configuration cleanu
 pass; original foreground restoration fails. No automatic refocus/retry is used.
 See the [actual editor failure receipt](validation/2026-10-14/windows-editor-task-0142.json).
 
-## Current unfinished acceptance checks, 2026-10-14
+## Earlier source .48 unfinished acceptance checks, 2026-10-14
 
 The goal remains active. Original statuses are 34 PASS / 3 FAIL / 7 NOT_RUN;
 component passes below do not close whole-task requirements. Authentication is

@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Verify immutable .52 CI15/15, source-bound archives and native installer
+  failure preservation. Record actual Windows SSH/Tailscale connection failures
+  before remote execution; leave .52 installed CLI/MCP/model/GUI checks NOT_RUN
+  and keep prior .51 results historical. Preserve concurrent input, quality,
+  Blender-state and guarded public-release conditions.
+
 - Disable native OMP automatic-learning writers/guidance only in the temporary
   read-only verification overlay. Preserve saved settings, reader restrictions,
   approval denials and canonical model requests/deadlines. Verify actual native

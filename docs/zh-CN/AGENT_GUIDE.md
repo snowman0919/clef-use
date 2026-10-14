@@ -1,5 +1,13 @@
 # 代理安装、使用与恢复
 
+不可变 .52 CI 的15项实际构建/安装与合并均通过；15个包中的68个源文件/指南及
+契约与固定 Git 提交一致。实际日志验证初次安装、更新、CURRENT，以及 checksum/
+download/smoke 失败时的保留。合成更新 fixture 最终为 .53，实际候选为 .52。
+公开部署由 feature guard 跳过。Windows .52 安装及 LIMITED CLI/MCP 为 NOT_RUN：
+SSH port22 与 Tailscale ping 均超时，本地连接 online，但 win peer 显示 offline。
+故障原因尚未证实。此次未重新验证历史共享 .49/独立 .51 结果。另一个 Windows 操作
+会话已确认，仍需要协调输入所有权。参见[.52 CI/连接记录](../validation/2026-10-14/ci-and-windows-transport-0152.json)。
+
 .52 的 `computer_capabilities.operation_id` 会公布精确的注册 family ID。
 先省略参数查询，再从 `operations[].family` 选择；`blender` 等应用名仍被拒绝。
 实际包的普通/只读 MCP 检查通过。Hermes 三项请求通过；OMP 正向请求仍因指南顺序、

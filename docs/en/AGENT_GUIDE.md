@@ -1,5 +1,16 @@
 # Agent setup, use and recovery
 
+Immutable .52 CI passes all fifteen native build/install jobs and assembly;
+all fifteen archives match the pinned Git payload68 and contracts. Installer
+logs prove first/update/CURRENT and checksum/download/smoke failure preservation.
+The synthetic fixture ends at .53; the actual candidate is .52. Public deploy
+is skipped by the feature guard. Windows .52 installation and LIMITED CLI/MCP
+are NOT_RUN: SSH port22 and native Tailscale ping time out; the local backend
+is online but the win peer reports offline. The outage cause is unproven.
+Historical shared .49/owned .51 results are not revalidated here. Another
+Windows operator remains confirmed, so input coordination is also required.
+See the [.52 CI/transport receipt](../validation/2026-10-14/ci-and-windows-transport-0152.json).
+
 In .52, `computer_capabilities.operation_id` advertises exact registered family
 IDs. Omit it first, then select `operations[].family`; application names such as
 `blender` remain unsupported. Real packaged normal/read-only MCP probes pass.

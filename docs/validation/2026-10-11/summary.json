@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "ci_windows_transport_0152_20261014": {"local_artifact": "docs/validation/2026-10-14/ci-and-windows-transport-0152.json", "sha256": "ef9ef420babfba78c810f3701f7e540cd8757384fe428a7ca3a00dc7c1d6efd0", "raw_artifact_committed": true},
     "operation_schema_0152_20261014": {"local_artifact": "docs/validation/2026-10-14/operation-schema-0152.json", "sha256": "4d9a09c0867abd3923653f465a3faca24900c6e0cf6a10b1db4f4126e3f6459e", "raw_artifact_committed": true},
     "windows_isolated_ci_0151_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-isolated-ci-0151.json", "sha256": "a29dc65bc556784997992814d1afb454a7114436b2c3c841a292f8813cff2dde", "raw_artifact_committed": true},
     "installer_ownership_0151_20261014": {"local_artifact": "docs/validation/2026-10-14/installer-ownership-0151.json", "sha256": "b4350a21dee3114de53788f39a9ac322b8cf8b16d5e1d04f7a3a386b3c50ef07", "raw_artifact_committed": true},
