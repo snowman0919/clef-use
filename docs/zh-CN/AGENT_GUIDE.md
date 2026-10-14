@@ -1,5 +1,11 @@
 # 代理安装、使用与恢复
 
+不可变的 .49 CI 已通过 15 个平台的安装检查及归档与源文件对照。
+实际 Windows .48 -> .49 更新、重复 CURRENT、LIMITED 令牌下的软件包与 MCP 检查，
+以及原始 Codex explicit/natural/negative 模型案例也已通过。这些无窗口检查不能证明
+GUI 任务成功或 100ms 输入延迟。此前 Hermes/OMP 失败仍保留，公开部署守卫不变。
+参见[安装验证记录](../validation/2026-10-14/windows-installed-ci-0149.json)。
+
 runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-use-blender`、
 `clef-use-diagnostics`。默认选择 core 和 diagnostics；Blender 需要明确选择。
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有

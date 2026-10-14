@@ -1,5 +1,12 @@
 # エージェントの設定・使用・復旧
 
+不変の .49 CI は 15 プラットフォームのインストール検証とアーカイブ・ソース照合に
+成功しました。実際の Windows .48 -> .49 更新、再実行 CURRENT、LIMITED トークンの
+パッケージ・MCP 検証と元の Codex explicit/natural/negative モデルケースも成功しました。
+これらのウィンドウを使わない検証は GUI タスクや 100ms 入力遅延を証明しません。
+以前の Hermes/OMP 失敗と公開配備のガードは維持します。
+[インストール記録](../validation/2026-10-14/windows-installed-ci-0149.json)を参照してください。
+
 runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blender`、
 `clef-use-diagnostics` が含まれます。既定は core と diagnostics で、Blender は
 明示的に選択します。適用前に変更先のパスを確認してください。選択した対象だけ

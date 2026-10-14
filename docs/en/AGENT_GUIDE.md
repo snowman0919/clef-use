@@ -1,5 +1,12 @@
 # Agent setup, use and recovery
 
+Immutable .49 CI passes fifteen platform installer checks and archive/source
+verification. Actual Windows .48 -> .49 update, repeat CURRENT, LIMITED-token
+payload/MCP checks and original native Codex explicit/natural/negative cases pass.
+These windowless checks do not verify GUI tasks or 100ms input latency. Earlier
+Hermes/OMP failures remain recorded, and public deployment stays guarded. See
+[the installed receipt](../validation/2026-10-14/windows-installed-ci-0149.json).
+
 The runtime wheel includes three portable, instruction-only guides: `clef-use`,
 `clef-use-blender`, and `clef-use-diagnostics`. Core and diagnostics are selected
 by default; select Blender explicitly. Preview the exact paths before applying.

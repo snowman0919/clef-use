@@ -1,5 +1,49 @@
 # Reactive runtime execution status
 
+## Published .49 immutable CI and actual Windows update, 2026-10-14
+
+**OBSERVED / publication recovery:** the user-selected gh CLI has repository push
+permission. Its per-invocation Git credential helper publishes the two preserved
+local commits by normal fast-forward to the existing feature branch. Remote head
+is cccadb1567f51e9ea6393d11b9a28f6b7a0e771b. The existing draft PR is updated through
+gh REST after gh pr edit fails on obsolete Projects GraphQL. The earlier Git
+publication blocker is closed; no persistent Git configuration or credentials
+are copied, and no release tag, force push or deployment guard bypass occurs.
+
+**OBSERVED / immutable CI:** [run 38494012983](https://github.com/snowman0919/clef-use/actions/runs/38494012983)
+passes all fifteen native build/install jobs and assembly for that exact source.
+All fifteen archives match 68 Git source/guide payloads and current contracts.
+Each native installer log proves first installation, update, CURRENT and three
+failure-preservation checks. Its synthetic update fixture is separate from the
+.49 runtime. Public deployment remains SKIPPED by the existing feature guard.
+
+**OBSERVED / actual Windows installation:** the standard installation updates
+.48 -> .49, then reports CURRENT on repeat. Installed payload hashes, managed
+Codex command, unrelated configuration bytes and previous-version files pass.
+The owned loopback server stops. Only archive transport URLs are projected;
+this is not public URL proof. The first controller's CRLF launcher check rejects
+before installation; correcting that check does not change the installer.
+Session0 doctor exit2 retains the absent-interactive-desktop diagnosis.
+
+An actual LIMITED desktop token verifies 68 installed payloads, version,
+capabilities, offline executable fixtures and read-only stdio MCP. Native Codex
+0.151.0 executes the original explicit/natural/negative requests once each: all
+PASS. Core and applicable Blender bodies load before current capabilities;
+negative loads/invokes neither. Protected configuration/auth file bytes and
+the native executable hash remain unchanged. The owned scheduled task is absent
+after cleanup. A 30-second collection timeout precedes successful result/trace
+recovery; the scheduler's final result is NOT_PROVEN, while all actual child
+exit codes/results are retained. No model request is repeated to recover evidence.
+
+**NOT_RUN / original open gates:** these checks request no GUI capture, focus
+or OS input. TASK_VERIFIED, new Windows GUI/abort, original Blender work,
+same-task 1000-opportunity accuracy/correct-input p95<=100ms/coverage/goodput,
+Reici and guarded public URL/install/update remain open. Source .49 Hermes
+natural FAIL and both OMP positive FAIL remain unchanged; Windows model passes
+do not erase them or the OMP credential-material uncertainty. Original 44
+statuses remain 34 PASS / 3 FAIL / 7 NOT_RUN. See the
+[immutable/installed receipt](validation/2026-10-14/windows-installed-ci-0149.json).
+
 ## Source 0.1.49 read-only harness boundary, 2026-10-14
 
 **OBSERVED / implementation and actual native permission proof:** the clef-use
@@ -41,13 +85,13 @@ settings rows remain unchanged. Credential material, changed columns and writer
 remain NOT_PROVEN. Prior credentials are not restored. These are preservation
 limits, not an authentication outage; native requests execute.
 
-**BLOCKED / source publication only:** local HTTPS Git lacks a noninteractive
+**BLOCKED / source publication at this earlier checkpoint:** local HTTPS Git lacks a noninteractive
 credential; SSH with the official verified host key rejects publickey; the
 connected GitHub app returns 403 Resource not accessible by integration on code
 blob writes. Read-only PR access and this model session work. No force push,
 alternate commit/history rewrite, secret transfer or public guard bypass occurs.
 The earlier .48 source/CI/install remains published; new local commits are preserved.
-Immutable .49 CI and installed Windows .49 remain NOT_RUN. Read-only SSH metadata
+Immutable .49 CI and installed Windows .49 were NOT_RUN at that checkpoint. Read-only SSH metadata
 confirms the standard Windows launcher is still .48, with valid capabilities;
 desktop ownership remains NOT_PROVEN. Original 44 statuses stay 34 PASS / 3 FAIL /
 7 NOT_RUN, with full GUI/quality/performance/Reici/public gates outstanding. See

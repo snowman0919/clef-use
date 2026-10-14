@@ -1,5 +1,11 @@
 # 에이전트 설치·사용·복구
 
+불변 .49 CI의 15개 플랫폼 설치 검사와 아카이브·소스 대조가 통과했습니다.
+실제 Windows .48 -> .49 업데이트, 반복 CURRENT, LIMITED 토큰의 패키지·MCP 검사와
+원래 Codex explicit/natural/negative 모델 사례도 통과했습니다. 이 창 없는 검증은
+GUI 작업이나 100ms 입력 지연을 증명하지 않습니다. 이전 Hermes/OMP 실패는 유지하며
+공개 배포 가드도 유지합니다. [설치본 기록](../validation/2026-10-14/windows-installed-ci-0149.json)을 확인하세요.
+
 runtime wheel에는 지침 전용 공통 스킬 `clef-use`, `clef-use-blender`,
 `clef-use-diagnostics`가 포함됩니다. 기본 선택은 core와 diagnostics이며
 Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미리 확인하세요.
