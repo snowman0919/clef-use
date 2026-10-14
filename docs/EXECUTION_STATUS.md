@@ -1,5 +1,22 @@
 # Reactive runtime execution status
 
+## Immutable .55 native CI, 2026-10-14
+
+**OBSERVED / exact source and native installers:** db47d23 passes all15 platform
+build/install jobs and assembly. All15 downloaded archives match69 immutable Git
+payload files and runtime/schema/guide contracts. Native logs prove first/update/
+CURRENT and checksum/download/smoke failure preservation. Actual .55 and synthetic
+fixture .56 are distinct. Public deploy is SKIPPED by the feature guard, not proved.
+No shared Windows installation/CLI/MCP/model/capture/focus/input is executed.
+
+Source .55 regression1754/55, actual Linux package/MCP, native guide-phase models
+and final installed exact-record stage replay stay separate. Codex natural proves
+selected Blender load; explicit/core origin, qualified Hermes preservation,
+OMP failures/credential material, Blender8 UNKNOWN/File0/5, original GUI tasks,
+same-task accuracy/coverage/goodput/100ms and separate Reici remain open. Original
+44 counts34 PASS/3 FAIL/7 NOT_RUN are unchanged. See the
+[.55 CI receipt](validation/2026-10-14/native-ci-0155.json).
+
 ## Source .55 guide paths and model-stage scope, 2026-10-14
 
 **OBSERVED / guide change and installed harness cases:** common Skill metadata

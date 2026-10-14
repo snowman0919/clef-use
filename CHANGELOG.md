@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verify immutable .55 CI15/15 against all69 source/guide files and contracts;
+  confirm native first/update/CURRENT and failure preservation. Keep actual .55
+  separate from synthetic .56, guide-phase models from final stage replay, and
+  shared Windows/GUI/quality/performance from feature-guarded public deployment.
+
 - Prefer native Skill readers or catalog-supplied absolute paths in the common
   guide metadata and linked-file guidance. Separate native SDK preflight stages
   from model-loaded/invoked evidence; preserve call failures and deadlines.

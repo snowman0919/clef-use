@@ -1,5 +1,13 @@
 # Agent setup, use and recovery
 
+Immutable .55 CI at db47d23 passes15 native platform builds/installations and
+assembly. All downloaded archives match69 source/guide files and contracts;
+native logs prove first/update/CURRENT and failed-update preservation. Actual
+.55 differs from synthetic .56. Public deploy is feature-guarded and skipped.
+No new shared Windows check is executed. Guide-phase model cases and final
+installed stage replay remain separate; real GUI and quality/100ms gates stay open.
+See [.55 CI evidence](../validation/2026-10-14/native-ci-0155.json).
+
 .55 guides prefer the native Skill reader or the absolute path supplied by the
 catalog, including filesystem references. Native Codex natural now verifies the
 selected Blender load before capabilities; core origin remains unproven and

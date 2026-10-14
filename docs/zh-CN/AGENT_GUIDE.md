@@ -1,5 +1,12 @@
 # 代理安装、使用与恢复
 
+固定到 db47d23 的 .55 CI 通过15项真实平台构建/安装与合并。所有下载包的
+69个文件及契约一致；真实日志验证初次/更新/CURRENT 及失败时保留。实际 .55
+与合成 .56 分开记录。公开部署由 feature guard 跳过，未执行新的共享 Windows
+验证。指南更新阶段的模型运行与最终安装版阶段重判分别记录，真实 GUI/
+准确率/100ms 条件仍未达成。
+参见[.55 CI 证据](../validation/2026-10-14/native-ci-0155.json)。
+
 .55 公共 Skill 使用 native reader 或目录提供的绝对路径读取正文及文件引用。
 真实 Codex 自然语言请求已验证 Blender Skill 加载后调用 capability；core 来源仍
 未证实，显式请求仍 FAIL，非 GUI 请求 PASS。Hermes 三种请求在另一专用 profile
