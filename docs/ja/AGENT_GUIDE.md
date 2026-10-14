@@ -6,6 +6,16 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+実際の .48 専用 Linux 画面のキャッシュ検証は Windows インストール検証と分けます。
+Hermes は実行限定の非公開読み取り専用制限の下で、キャッシュを完了証拠にせず、
+新しい Continue 画面を確認しました。OMP の現在セッション既定値のキャッシュ項目は
+成功しましたが、ガイド読み込み前の status 呼び出しにより native ケース全体は FAIL
+です。実際の status/cache 読み取り後も明示的 ID の検証は失敗しています。OMP は
+起動待機中にキャッシュのツール一覧を公開する場合があります。一時的な
+`mcp.startupTimeoutMs: 0` は実際の発見完了を待ち、保存済み設定は変更しません。
+これらの読み取り検証は GUI 入力精度や 100ms 遅延を証明しません。
+[検証記録](../validation/2026-10-14/linux-native-cache-0148.json)を参照してください。
+
 ハーネスの JSON ストリームは Windows locale に依存せず UTF-8 で読みます。
 runtime 呼び出しの失敗は、後の capability 呼び出しが成功しても検証 FAIL のままです。
 発見だけではモデルによるガイド読み込みやツール実行を証明しません。

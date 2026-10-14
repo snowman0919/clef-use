@@ -6,6 +6,15 @@ Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미�
 선택한 대상만 변경합니다. 최초 무인 설치는 `--integrate codex|hermes|omp|all`
 없이 새 하네스를 등록하지 않습니다. 모델 준비는 별도 선택입니다.
 
+실제 .48 전용 Linux 화면의 캐시 검증은 Windows 설치본 검증과 별도로 기록합니다.
+Hermes는 실행별 비공개 읽기 전용 제한 아래 캐시를 완료 증거로 쓰지 않고 새 Continue
+화면을 확인했습니다. OMP의 현재 활성 세션 기본값 캐시 항목은 통과했지만, 지침 로드
+전 status 호출 때문에 전체 native 사례는 FAIL입니다. 실제 status/cache를 읽은 뒤에도
+명시적 ID 검증은 실패했습니다. OMP는 시작 대기 중 캐시 도구 목록을 공개할 수 있으며,
+임시 `mcp.startupTimeoutMs: 0`은 실제 발견 완료를 기다립니다. 저장된 설정은 보존합니다.
+이 읽기 검증은 GUI 입력 정확도나 100ms 지연을 증명하지 않습니다.
+[검증 기록](../validation/2026-10-14/linux-native-cache-0148.json)을 확인하세요.
+
 하네스 JSON 스트림은 Windows locale과 무관하게 UTF-8로 읽습니다.
 runtime 호출 실패는 뒤의 capability 호출이 성공해도 검증 FAIL로 유지됩니다.
 발견만으로 모델의 지침 로드나 도구 호출을 증명하지 않습니다.

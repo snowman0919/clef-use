@@ -165,6 +165,16 @@ scenarios:
   requirement: Cached observation is not used as new input or final-completion proof.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/windows-codex-cache-0142.json
     section: final_actual_case
     claim: OBSERVED
@@ -179,7 +189,10 @@ scenarios:
     partial: true
   execution_note: Cache-only/freshness guards have fixture coverage. Installed .42 actual Windows
     Codex completion-evidence challenge passes with owned real cached/fresh frames and an independent
-    incomplete receiver. Authorized-input cache misuse and Hermes/OMP challenges remain NOT_RUN.
+    incomplete receiver. Source .48 actual owned Linux Hermes completion challenge passes
+    under an explicit private permission overlay. OMP current-session-default cache behavior
+    passes, but its native case remains FAIL for status before guide load; explicit-ID cases
+    remain FAIL at validation. Authorized-input cache misuse and full matrix remain NOT_RUN.
     Both earlier private proof-driver failures are retained, including initial cleanup failure.
 - id: CAP-01
   category: api
@@ -677,6 +690,11 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
     section: actual_native.hermes
     claim: OBSERVED
@@ -717,6 +735,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
     section: actual_native.omp
     claim: OBSERVED

@@ -6,6 +6,16 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+Actual .48 owned Linux cache tests are recorded separately from installed Windows
+checks. Hermes rejects cached completion evidence and verifies fresh Continue under
+an explicit private read-only permission overlay. OMP's current-session-default
+cache subcheck succeeds, but its early status-before-guide invocation keeps the
+native case FAIL. Explicit-ID validation still fails after real status/cache reads.
+Native OMP can advertise cached tools during its startup window; a temporary
+`mcp.startupTimeoutMs: 0` waits for live discovery. Saved settings remain unchanged.
+These read cases do not establish GUI input accuracy or 100ms latency. See
+[the receipt](../validation/2026-10-14/linux-native-cache-0148.json).
+
 Harness JSON streams are decoded as UTF-8 independently of the Windows locale.
 A failed runtime call keeps verification FAIL even if a later capability call
 succeeds. Discovery alone does not prove model guide loading or invocation.

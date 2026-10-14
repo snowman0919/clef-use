@@ -5,6 +5,14 @@ runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-us
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有
 `--integrate codex|hermes|omp|all` 时注册新工具环境。模型准备是独立选项。
 
+实际 .48 专用 Linux 桌面的缓存验证与 Windows 安装验证分别记录。
+Hermes 在仅对本次执行生效的私有只读限制下，不把缓存当作完成证据，并确认了新的
+Continue 画面。OMP 的当前活动会话默认值缓存子项通过，但在加载指南之前调用
+status，因此整个原生案例仍为 FAIL。读取真实 status/cache 后，显式 ID 验证仍失败。
+OMP 在启动等待期间可能公布缓存工具列表；临时 `mcp.startupTimeoutMs: 0` 等待实时
+发现完成，不更改保存的设置。这些只读案例不能证明 GUI 输入准确度或 100ms 延迟。
+参见[验证记录](../validation/2026-10-14/linux-native-cache-0148.json)。
+
 工具环境的 JSON 流按 UTF-8 解码，不依赖 Windows locale。
 runtime 调用失败后，即使后续 capability 调用成功，验证仍保持 FAIL。
 仅发现技能不能证明模型已加载指南或调用工具。

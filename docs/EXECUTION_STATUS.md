@@ -1,5 +1,57 @@
 # Reactive runtime execution status
 
+## Actual owned Linux cache completion challenges, 2026-10-14
+
+**OBSERVED / actual native Hermes:** one explicit native Skill case passes with
+the source .48 runtime and configured default models. Full core body appears in
+the native API system message; both linked references load in full. The real
+cached Task complete frame matches the seed. Fresh observation shows Continue
+with a changed id/hash on the same owned session/window/bounds. Both native
+images match runtime previews. Final JSON is complete=false; independent receiver
+is Continue with zero input events. Owned Xvfb/runtime cleanup and protected
+configuration bytes pass. Native wall time is 26.19 seconds; this is not OS-input
+latency or a whole GUI task.
+
+The native finite one-shot MCP refresh reintroduces skill_manage after its
+initial prune. Actual pre-provider advertisement is retained. This case uses a
+disclosed private schema filter and execution denial in addition to public MCP
+selection. Native one-shot options alone are not claimed strictly read-only.
+Normal generated context, real schemas/handlers and provider/model remain intact.
+
+**OBSERVED / actual native OMP failures and limited cache evidence:** the default
+250ms startup twice rejects observe as an unknown tool before any model request.
+The project is enabled and selects the correct server; real SDK discovery after
+connection completion advertises six tools. A supported temporary startupTimeoutMs0
+waits for live discovery without changing saved settings. An explicit owned ID is
+then rejected as unknown_resource before dispatch. A second actual case obtains
+real status/cache responses containing that same ID, but its later explicit-ID
+request is still rejected. The validation actor remains NOT_PROVEN. These native
+cases remain FAIL; no ID or input guard is bypassed.
+
+A separately declared current-session-default variant omits ID arguments and
+successfully reads actual cached/fresh frames and returns complete=false. Both
+images, owned session/surface and independent incomplete receiver match. Its cache
+behavior subcheck passes. Its first status starts before the full core load, so the
+whole native case remains FAIL despite exit0 and the later correct conclusion.
+The detailed capability consumer text does not parse as complete JSON; its exact
+catalog match remains NOT_PROVEN. Current model cases preserve complete auth/settings
+row hashes and protected configuration bytes, changing cache/model_perf only.
+This does not repair the earlier .48 auth-row preservation uncertainty.
+
+**NOT_RUN / limits:** GUIDE-04 remains incomplete for the full misuse matrix and
+authorized stale-cache input. These exclusively owned Linux read cases do not
+close Windows GUI, Blender, browser/editor, whole-task quality, coverage/goodput
+or 100ms gates. Global OS input monitoring and runtime capture archive timestamps
+were not collected. Original 44 statuses remain 34 PASS / 3 FAIL / 7 NOT_RUN.
+
+An interrupted setup lost its temporary script/result/runtime directory plus
+sampled earlier private handoff/install reports; the removal actor is NOT_PROVEN.
+Committed historical receipts/digests remain, but those sampled raw replay paths
+are absent. New evidence uses a private persistent directory. Observer syntax,
+signature and scope-guard failures before model requests remain NOT_RUN; a summary
+versus detailed capability comparison error was corrected without a model rerun.
+See the [Linux native cache receipt](validation/2026-10-14/linux-native-cache-0148.json).
+
 ## Immutable installed Windows 0.1.48 verification, 2026-10-14
 
 **OBSERVED / immutable CI and installation:** exact source `da5bbc7` completes

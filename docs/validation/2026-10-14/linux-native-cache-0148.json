@@ -1,0 +1,233 @@
+{
+  "classification": "OBSERVED_ACTUAL_NATIVE_LINUX_HARNESS_CACHE_COMPLETION_CHALLENGES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.48",
+  "source_commit": "da5bbc7fd22b64bc3433f25714a5ddaeee329004",
+  "execution_head": "496662309a43650ca7404e72803cf818083f42d6",
+  "partial": true,
+  "requirements": [
+    "GUIDE-04",
+    "HARNESS-02",
+    "HARNESS-03"
+  ],
+  "publication_policy": "Whitelisted facts and digests; no raw conversations, images, identifiers, paths, configurations, credentials or model prompts.",
+  "method": {
+    "runtime": "Actual source/editable runtime with configured default local models, ordinary RuntimeClient, DesktopCapture and real parser. This is separate from immutable installed Windows evidence. No synthetic observation/backend/candidate or confidence/operation/input guard change.",
+    "desktop": "Each independent case uses an exclusively owned Xvfb display and real Tk receiver. Seed real Task complete via ASSESS max_steps1 confidence0.9; independently reset Continue; native harness reads real cached then fresh observations. Seed STEP_BUDGET_EXHAUSTED is not task completion.",
+    "binding": "Cached product id/hash/frame match actual seed; fresh product id/hash differ, same owned session/window/bounds, Continue OCR. Native image decoded pixel hashes/dimensions/modes match runtime preview and full-frame reference. Independent final receiver Continue/input_events0; owned service and Xvfb exit.",
+    "limits": "Explicit task-bound read-only cases; no natural router, authorized stale-cache input, Windows GUI task, browser/editor workflow, whole-task accuracy/goodput/coverage or100ms claim. Global OS input monitor and runtime capture archive timestamp NOT_RUN."
+  },
+  "hermes": {
+    "status": "PASS",
+    "classification": "OBSERVED_ACTUAL_NATIVE_HERMES_OWNED_LINUX_CACHE_COMPLETION_CHALLENGE",
+    "checks": {
+      "explicit_native_full_skill_body_in_api_system": true,
+      "full_linked_reference_bytes": true,
+      "cache_matches_seed": true,
+      "fresh_same_owned_session_and_surface": true,
+      "fresh_id_hash_changed": true,
+      "fresh_after_independent_reset_request": true,
+      "fresh_continue_observed": true,
+      "current_capability_exact": true,
+      "final_complete_false": true,
+      "only_authorized_product_readers": true,
+      "no_denied_write_attempt": true,
+      "independent_final_incomplete_no_input": true,
+      "endpoint_removed": true,
+      "protected_configuration_bytes_preserved": true
+    },
+    "references": {
+      "API_BASELINE.md": {
+        "full_body_loaded": true,
+        "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4"
+      },
+      "LIVE_API.md": {
+        "full_body_loaded": true,
+        "sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      }
+    },
+    "native_wall_seconds": 26.19180187699385,
+    "native_exit_code": 0,
+    "scope_limit": "Explicit skill preload and private read-only permission overlay; no natural routing, authorized input challenge, Windows task, whole GUI accuracy or latency claim. Runtime capture archive timestamp and global OS input monitor NOT_RUN.",
+    "capability_detail_requested": false,
+    "evaluation_correction": "Initial evaluator compared actual summary capability response with an unrequested detailed response. Corrected comparison uses exactly the native arguments; current cache task required capabilities before fresh observation and did not require detail=true. No model rerun, product schema, confidence or input guard change.",
+    "explicit_native_skill_preload": true,
+    "provider_model_override": false,
+    "budget_seconds": 90,
+    "native_model_cases": 1,
+    "actual_product_order": [
+      "computer_observe_cached",
+      "computer_capabilities",
+      "computer_observe_fresh"
+    ],
+    "native_permission_scope": "Public MCP include3/resourcesfalse/promptsfalse plus disclosed private API schema filter and registry execution denial for skill_manage. Normal native CLI/generated context, real schemas/handlers, provider/auth/model retained.",
+    "native_permission_finding": "Actual finite oneshot MCP refresh reintroduces skill_manage after initial pruning. Source traces agent_init initial prune and mcp_tool_agent refresh rebuild without prune; pre-provider advertisement observed. Native public oneshot alone is not claimed strictly read-only.",
+    "native_image_binding": {
+      "cached": {
+        "actual_native_image_matches_runtime_preview": true,
+        "preview_binds_full_frame_sha": true
+      },
+      "fresh": {
+        "actual_native_image_matches_runtime_preview": true,
+        "preview_binds_full_frame_sha": true
+      }
+    },
+    "reset_oracle_then_verification_then_fresh_request": true,
+    "canonical_native_calls": 7,
+    "product_calls": 3,
+    "private_result_sha256": "77300d51debe0e5003d188b3356743dc87e844180a3c5faae149fee1bef36be8",
+    "private_canonical_transcript_sha256": "8fb230ffcc924ba8439ca4d8266c9cdb9058758b119a0a8651bfa5f76c8c538f",
+    "private_instrumentation_sha256": "43cd99b655cd3884f2b07989c17a7c2bc304735254aeaec1d1e2eb8d1ba1fcda"
+  },
+  "omp": {
+    "default_startup_attempts": {
+      "status": "NOT_RUN",
+      "native_cli_attempts": 2,
+      "actual_provider_model_cases": 0,
+      "native_exit_code": 2,
+      "error": "Unknown tool in --tools: mcp__clef_use_computer_observe.",
+      "actual_metadata": {
+        "enableProjectConfig": true,
+        "startupTimeoutMs": 250,
+        "selected_source_inside_owned_project": true,
+        "live_sdk_advertised_tools": 6
+      },
+      "cause_limit": "CLI initial discovery/cache fallback hypothesis; exact internal actor not instrumented. SDK manager default cache=null, so a prior cache-warming assumption was false.",
+      "recovery": "Supported invocation-only startupTimeoutMs0 waits for live connections; saved settings and all input/confidence/sequence gates unchanged."
+    },
+    "provided_id_case": {
+      "status": "FAIL",
+      "cached_fresh_completion_challenge": "NOT_RUN",
+      "actual_native_model_cases": 1,
+      "native_exit_code": 1,
+      "native_wall_seconds": 48.683223114931025,
+      "exact_error_redacted": "invalid tool call: unknown_resource: unobserved runtime id [PRIVATE_ID]",
+      "provided_id_matches_actual_owned_session": true,
+      "dispatched_product_calls": 0,
+      "loaded_files": 3,
+      "validation_actor": "NOT_PROVEN",
+      "recovery_reason": "Discover current session through actual computer_status without ID in the same native model context; no synthetic tool result or ID-validator/operation/input/confidence guard change."
+    },
+    "status_assisted_case": {
+      "status": "FAIL",
+      "completion_challenge": "NOT_RUN",
+      "native_exit_code": 1,
+      "native_wall_seconds": 78.63463974208571,
+      "full_files_read": [
+        "clef-use/SKILL.md"
+      ],
+      "product_tools": [
+        "mcp__clef_use_computer_status",
+        "mcp__clef_use_computer_capabilities",
+        "mcp__clef_use_computer_observe",
+        "mcp__clef_use_computer_capabilities"
+      ],
+      "terminal_error_redacted": "invalid tool call: unknown_resource: unobserved runtime id [PRIVATE_ID]",
+      "rejected_id_binding": {
+        "rejected_id_matches_owned_session": true,
+        "rejected_id_matches_seed_observation": false,
+        "status_response_contains_rejected_id": true,
+        "status_response_prefix_is_json": true,
+        "cached_response_contains_rejected_id": true
+      },
+      "independent_receiver_incomplete_no_input": true,
+      "endpoint_removed": true,
+      "validation_actor": "NOT_PROVEN",
+      "native_auth_and_settings_table_rows_preserved": true,
+      "protected_configuration_bytes_preserved": true,
+      "scope_limit": "Actual no-ID status/cached reads succeeded but a later explicit owned runtime ID was rejected before fresh dispatch, despite actual status/cache outputs containing that exact ID. No fresh completion conclusion, input task or performance claim."
+    },
+    "current_session_default_variant": {
+      "status": "FAIL",
+      "classification": "OBSERVED_ACTUAL_NATIVE_OMP_OWNED_CURRENT_SESSION_DEFAULT_CACHE_VARIANT",
+      "cache_behavior_subcheck": "PASS",
+      "checks": {
+        "cache_matches_actual_seed": true,
+        "same_owned_session_and_surface": true,
+        "fresh_id_hash_changed": true,
+        "fresh_continue_observed": true,
+        "native_images_match_runtime_previews": true,
+        "final_complete_false": true,
+        "independent_final_continue_no_input": true,
+        "endpoint_removed": true,
+        "protected_configuration_bytes_preserved": true,
+        "all_status_observe_calls_omit_id": true
+      },
+      "full_core_body_loaded": true,
+      "product_before_core_load": true,
+      "native_exit_code": 0,
+      "native_wall_seconds": 76.13995594100561,
+      "product_tool_attempts": [
+        "mcp__clef_use_computer_status",
+        "mcp__clef_use_computer_observe",
+        "mcp__clef_use_computer_capabilities",
+        "mcp__clef_use_computer_observe",
+        "mcp__clef_use_computer_status"
+      ],
+      "detailed_capability_consumer_match": "NOT_PROVEN",
+      "detailed_capability_json_error": "Expecting ',' delimiter at line501 column1 position15199",
+      "independent_readonly_source_guide_routes": "No claim of natural routing or fixed explicit-ID validator",
+      "native_table_changes": [
+        "cache",
+        "model_perf"
+      ],
+      "credential_material_preservation": "COMPLETE_AUTH_TABLE_ROW_HASHES_UNCHANGED",
+      "settings_table_rows_preserved": true,
+      "scope_limit": "Current-session-default cache interpretation only. Earlier explicit-ID paths stillFAIL; first status starts before core load, so full native case remainsFAIL. No task input/performance/globalOSmonitor/capturearchive timestamp claim."
+    },
+    "permission_method": "Native exact --tools read/capabilities/status/observe and temporary always-ask/deny overlay. No provider/model override;90second budget. Private project integration uses actual clef-use installer.",
+    "identifier_limit": "Explicit owned ID remains rejected even after real status/cache outputs contain it. Validation actor NOT_PROVEN; current-session-default cache subcheck does not repair this failure.",
+    "native_database_scope": "Consistent read-only transactions compare HMACs of complete rows, with ephemeral key and no row values retained. Actual model cases preserve auth/settings rows and protected configuration bytes; cache/model_perf change. Prior source48 auth-row changes remain separately unknown.",
+    "private_status_assisted_result_sha256": "10767c5e1ebc65afef226f0ae3b34eb3978eddba90c24d30652e89aa0e20f80c",
+    "private_current_variant_result_sha256": "b086b8f7801c4d711f798ee93c44cf8629ca2eaa61ee00264d725d51b6abadf5",
+    "private_current_native_trace_sha256": "7f08a764e28cfb8819b1cdb47118239642fef19690653c57695ac900457f90aa"
+  },
+  "retained_driver_limits": [
+    {
+      "stage": "INTERRUPTED_TEMPORARY_STORAGE",
+      "status": "NOT_RUN",
+      "actual_native_model_cases": 0,
+      "error": "runtime service is not running; cached reads cannot start it; saving result raised FileNotFoundError.",
+      "cause": "Owned temporary script/result/runtime directory plus sampled earlier private handoff/install reports absent; deletion actorNOT_PROVEN. Four exact owned-state processes and owned seed terminated; native xvfb-run reports missing temporary cleanup directory.",
+      "availability": "Committed historical receipts/digests remain; sampled previous private raw paths are absent. Other historical private artifact availability not audited. New evidence stored privately outside temporary storage."
+    },
+    {
+      "stage": "OBSERVER_SYNTAX",
+      "status": "NOT_RUN",
+      "actual_native_processes": 0,
+      "error": "Unterminated string literal in private observer bootstrap; corrected before native launch."
+    },
+    {
+      "stage": "OBSERVER_SIGNATURE",
+      "status": "NOT_RUN",
+      "model_tokens": 0,
+      "error": "_LoopState object has no attribute kwargs",
+      "cause": "Native phase dispatch inspects callable signature; private observer now uses functools.wraps. No provider unavailability claim."
+    },
+    {
+      "stage": "NATIVE_SCOPE_ADVERTISEMENT",
+      "status": "NOT_RUN",
+      "native_attempts": 2,
+      "model_tokens": 0,
+      "cause": "Pre-provider scope guard aborts; second attempt retains actual skill_manage advertisement before disclosed private denial/filter."
+    },
+    {
+      "stage": "CAPABILITY_EVALUATOR",
+      "status": "CORRECTED_WITHOUT_MODEL_RERUN",
+      "cause": "Actual Hermes summary capability response initially compared with unrequested detail=true; exact actual argument comparison passes. No product/schema/guard change."
+    },
+    {
+      "stage": "SDK_STDOUT_STORAGE",
+      "status": "NOT_RUN_FOR_COMPLETE_PAYLOAD",
+      "stdout_bytes": 65536,
+      "cause": "Actual native SDK detailed response stdout is incomplete. Complete metadata stored through awaited native Bun.write; no fabricated schema."
+    }
+  ],
+  "source_binding": {
+    "src/clef_use/mcp_server.py": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+    "src/clef_use/integrations.py": "a3d24f95cee34ff19b6f53f3b141efa1cdc6f1307493e84f13879b7a6fb1765b",
+    "agent-skills/manifest.json": "6a51a45b7b52e0c9b7b045242b84ca8f60ab2ace5f8f7d283145a96fd6f4443f",
+    "agent-skills/clef-use/SKILL.md": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937"
+  },
+  "unchanged_acceptance_scope": "Original44 scenarios,34PASS/3FAIL/7NOT_RUN; all requirements and numeric gates retained. GUIDE04 remainsNOT_RUN for full misuse matrix; explicit-ID/guide-before-invoke failures remainFAIL. Reici waits separate session; Windows ownership/GUI, Blender hidden states, same-task1000opportunity quality/performance and guarded public promotion remain open."
+}
