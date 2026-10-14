@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "ci_windows_transport_0153_20261014": {"local_artifact": "docs/validation/2026-10-14/ci-and-windows-transport-0153.json", "sha256": "4d1fb9ec438217deb10c489b3cc1be2272d0614b58eaac6d96c8e8ee9b7cf078", "raw_artifact_committed": true},
     "ci_windows_transport_0152_20261014": {"local_artifact": "docs/validation/2026-10-14/ci-and-windows-transport-0152.json", "sha256": "ef9ef420babfba78c810f3701f7e540cd8757384fe428a7ca3a00dc7c1d6efd0", "raw_artifact_committed": true},
     "codex_project_profile_0153_20261014": {"local_artifact": "docs/validation/2026-10-14/codex-project-profile-0153.json", "sha256": "a5f9337c2cbd38422c81c1674b21f4de3c6bcd98e8f87abf7e44a3ff29b6fc63", "raw_artifact_committed": true},
     "operation_schema_0152_20261014": {"local_artifact": "docs/validation/2026-10-14/operation-schema-0152.json", "sha256": "4d9a09c0867abd3923653f465a3faca24900c6e0cf6a10b1db4f4126e3f6459e", "raw_artifact_committed": true},

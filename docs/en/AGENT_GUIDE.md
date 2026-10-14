@@ -1,5 +1,17 @@
 # Agent setup, use and recovery
 
+Immutable .53 CI, pinned to666ed32, passes all15 native build/install jobs
+and assembly. All15 archives match68 Git payload files and version/schema/guide
+contracts; native logs verify first/update/CURRENT and checksum/download/smoke
+failure preservation. Actual candidate .53 is distinct from synthetic final .54.
+Public deployment is skipped by the existing feature guard. Fresh passive
+Tailscale status, bound to the actual SSH target, still shows win offline while
+the local backend is Running/online. No new SSH retry, Windows installation,
+CLI/MCP/model or GUI/input is executed. Another session retains input ownership;
+recovery must first inspect owned state and coordinate input. Original acceptance
+34PASS/3FAIL/7NOT_RUN and accuracy/100ms gates are unchanged. See
+[.53 CI/transport evidence](../validation/2026-10-14/ci-and-windows-transport-0153.json).
+
 Codex verification in .53 uses an owned private profile containing the approved
 MCP transport and CLI scope controls that also apply above trusted project
 settings. Native preflight and execution use the same working directory and

@@ -1,5 +1,14 @@
 # 代理安装、使用与恢复
 
+固定到666ed32 的不可变 .53 CI 已通过15项实际构建/安装及合并。15个包的68个
+Git 文件及版本/模式/指南契约一致；真实日志验证初次/更新/CURRENT，以及 checksum/
+download/smoke 失败时保留。实际候选 .53 与合成最终版 .54 分别记录。公开部署由
+现有 feature guard 跳过。与真实 SSH 目标匹配的新被动 Tailscale 状态仍为本地
+Running/online、win offline；未再次尝试 SSH，也未执行 Windows 安装/CLI/MCP/模型/
+GUI/输入。另一会话拥有输入，恢复连接后需先检查专用状态并协调输入。原始
+34PASS/3FAIL/7NOT_RUN 及准确率/100ms 条件不变。
+参见[.53 CI/连接证据](../validation/2026-10-14/ci-and-windows-transport-0153.json)。
+
 .53 Codex 验证将已批准的 MCP 连接放在专用私有 profile 中，并用优先于受信项目
 配置的 CLI 控制限制调用范围。预检与执行使用相同工作目录和配置，仅启用
 capabilities/status，保留用户配置及已修改的临时 profile。真实 Codex 的受信/不受信

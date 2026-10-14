@@ -1,5 +1,30 @@
 # Reactive runtime execution status
 
+## Immutable .53 CI and passive Windows boundary, 2026-10-14
+
+**OBSERVED / native CI:** exact666ed32 passes all15 build/install jobs and
+assembly. All15 downloaded archives match68 immutable Git payload files and
+version/schema/guide contracts. Native installer logs prove first/update/CURRENT
+and checksum/download/smoke failure preservation. Actual candidate .53 is distinct
+from synthetic fixture final .54. Deploy is SKIPPED by the existing feature guard;
+this does not prove public release, full cross-platform regression or model GUI.
+
+**OBSERVED / fresh passive Windows status; remote checks NOT_RUN:** native
+Tailscale, bound to actual ssh -G target only in memory, reports local Running/
+online and win offline. Initial literal HostName=win lookup has no match and is
+not credited as peer proof. Earlier bounded SSH port22/ping timeouts remain
+historical; no unchanged network retry, remote install/metadata/CLI/MCP/model,
+capture/focus/input or shared .49 update is requested. Outage cause and current
+shared preservation are NOT_PROVEN. Recovery must first inspect existing owned
+state; user-confirmed concurrent input ownership is a separate condition.
+
+Source .53 native package/model and regression evidence stays separate:1704
+PASS/55 SKIP, Codex positives FAIL for unproven relative-read origin despite
+complete body before current capabilities, negative PASS. No auth error observed.
+Original44 statuses34 PASS/3 FAIL/7 NOT_RUN, quality/performance gates, Blender
+unknown-state, OMP failures and separate Reici evidence remain open. See the
+[.53 CI/transport receipt](validation/2026-10-14/ci-and-windows-transport-0153.json).
+
 ## Source .53 native Codex project configuration, 2026-10-14
 
 **OBSERVED / native .52 failure:** project verification's inline-only MCP
@@ -41,6 +66,22 @@ unknown state/File-menu0/5, OMP positive failures, separate Reici review and
 original accuracy/coverage/goodput/100ms/public-deploy gates stay open. No .53
 Windows update or input check was executed. See the
 [.53 receipt](validation/2026-10-14/codex-project-profile-0153.json).
+
+## Current completion limits after source .53, 2026-10-14
+
+These conditions retain their original acceptance IDs. Older installed failures
+are historical observations, not fresh .53 desktop execution.
+
+| IDs | Status and exact missing evidence |
+|---|---|
+| INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .53 Windows: fresh passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
+| INPUT-04/05, E2E-01/02, PERF-01/02/03 | NOT_RUN for new shared-desktop checks independently of transport: the user confirms another session operates Windows. Exclusive input ownership has not been established; shared .49, active enrollment, focus and input are preserved. |
+| INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch facts remained UNKNOWN and all6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove popup/input owner/effective keymap/IME/idle. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
+| E2E-01/02 | FAIL historical original task results: Codex Continue reached stage1 but Confirm was refused at ACT0.6958 below0.9, despite retained correct candidate/geometry; browser/editor parser deadlines and missing independent completion readback remain. Later offscreen parser completion proves component availability, not full task success. No threshold is lowered. |
+| GUIDE-03 | FAIL final actual .53 Codex positives: complete selected bodies precede current capabilities, but relative command events lack per-call cwd/filesystem-origin proof; LOADED is NOT_RUN. Negative passes. Historical .52 OMP positives retain real status/write/deadline/order failures. No current auth outage is observed. |
+| PERF-01/02/03 | NOT_RUN: the same complete pinned real-task suite, at least1000 declared opportunities, correct state-change-to-OS-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review. Fixture/component timings do not satisfy this condition. |
+| E2E-03 | NOT_RUN: independent matched-view Reici evidence from the separate session has not arrived. |
+| RELEASE-01 | NOT_RUN public URL/hash/fresh-install/update: the existing deploy job permits main/tag refs and skips this feature branch. Artifact CI and an owned loopback install are partial evidence; no main/tag/force/guard bypass is authorized here. |
 
 ## Immutable .52 CI and Windows transport boundary, 2026-10-14
 

@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verify immutable .53 CI15/15 against the exact source payload/contracts and
+  native installer preservation. Keep actual .53 and synthetic .54 distinct.
+  Record fresh passive Windows peer-offline state without another failed SSH
+  retry; leave remote/model/GUI/performance and guarded public release NOT_RUN.
+
 - Bind native Codex verification to the approved MCP transport through an owned
   private profile and scope-only CLI controls above trusted project settings.
   Use the actual working directory for preflight and execution; preserve user
