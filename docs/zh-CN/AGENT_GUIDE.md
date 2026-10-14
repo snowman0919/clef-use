@@ -1,5 +1,15 @@
 # 代理安装、使用与恢复
 
+.54 Codex 验证将 CLI 事件与专用 native 会话记录、实际传递给模型的输出绑定。
+完整指南必须在调用 runtime 的 exec 开始前送达。重复或未完成 turn、缓冲输出、
+不明来源及 native MCP 错误均保持失败。shell 启动配置可能改变 cwd，因此即使
+启动 cwd 正确，相对 shell 读取也无法证明安装文件来源。最终真实 Codex 两个阳性
+请求因此 FAIL，非 GUI 阴性请求 PASS；不能断言实际读取过晚或 GUI 成功。
+全部回归1750通过/55跳过，真实 Linux 安装69个文件及普通/只读 MCP 通过。
+初始 HTTP429 容量错误与因来源缺陷作废的阳性 PASS 分别保留。另一会话仍拥有
+Windows 输入；未执行新的远程/GUI/100ms 验证。
+参见[.54 证据](../validation/2026-10-14/codex-native-recording-0154.json)。
+
 固定到666ed32 的不可变 .53 CI 已通过15项实际构建/安装及合并。15个包的68个
 Git 文件及版本/模式/指南契约一致；真实日志验证初次/更新/CURRENT，以及 checksum/
 download/smoke 失败时保留。实际候选 .53 与合成最终版 .54 分别记录。公开部署由

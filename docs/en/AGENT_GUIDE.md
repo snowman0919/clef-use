@@ -1,5 +1,18 @@
 # Agent setup, use and recovery
 
+In .54, Codex verification binds its CLI events to the owned native session
+recording and the output actually delivered to the model. A complete guide must
+arrive before the runtime-containing exec starts. Duplicate/incomplete turns,
+buffered output, ambiguous origin and native MCP errors fail verification.
+Shell startup can change cwd, so a relative shell read cannot prove installed
+file origin even when native launch cwd matches. Final actual Codex positives
+fail this origin check; the non-GUI negative passes. This does not prove a late
+read or GUI success. Full regression is1750 passed/55 skipped; actual Linux
+installation and normal/read-only MCP pass69 payload files. Initial HTTP429
+capacity failure and a superseded positive PASS are retained separately.
+Windows input remains owned by another session; no new remote/GUI/100ms proof.
+See [.54 evidence](../validation/2026-10-14/codex-native-recording-0154.json).
+
 Immutable .53 CI, pinned to666ed32, passes all15 native build/install jobs
 and assembly. All15 archives match68 Git payload files and version/schema/guide
 contracts; native logs verify first/update/CURRENT and checksum/download/smoke

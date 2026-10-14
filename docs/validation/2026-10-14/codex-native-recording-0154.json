@@ -1,0 +1,497 @@
+{
+  "classification": "OBSERVED_NATIVE_RECORDING_VERIFICATION_AND_INSTALLED_CANONICAL_CASES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.54",
+  "partial": true,
+  "requirements": [
+    "GUIDE-02",
+    "GUIDE-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Whitelisted facts/enums/digests only; paths, thread/call identities, recordings, context and auth/config values remain private.",
+  "actual_native_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.2209215989569202
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.487720630946569
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.54",
+    "source_files_exact": 69,
+    "artifact_sha256": "969686acb4c9991e0b4f8df61fd979f676bb90898e831dfcf5e7d6558b0c6014",
+    "owned_loopback_stopped": true,
+    "private_result_sha256": "31f7dce778fcdccea1c2e21d6362dd02ecd6228186309390bf974fbabdb96f30"
+  },
+  "actual_installed_codex_models": {
+    "classification": "ACTUAL_INSTALLED_LINUX_NATIVE_CODEX_CANONICAL_READ_ONLY_CASES",
+    "runtime_version": "0.1.54",
+    "native_cli_version": "codex-cli 0.162.1",
+    "status": "FAIL",
+    "provider_model_request_budget_override": false,
+    "gui_or_input_requested": false,
+    "integration_status": "INSTALLED",
+    "protected_config_auth_native_binary_bytes_preserved": true,
+    "source_unchanged_during_batch": true,
+    "owned_temporary_profiles_removed": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 25.89141430798918,
+        "reason_code": "GUIDE_ORIGIN_NOT_VERIFIED",
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [
+            "clef-use"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "b83a68e424d0b31014557d69f1dc4f668777f6e0906908199406378bfd6f1d44",
+          "bound_items": 3
+        },
+        "trace_sha256": "d1fe596d8c77378a75921ed47d8e059128fffb9716b263d24f9a6b9bc748cef8",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 42.264649761025794,
+        "reason_code": "GUIDE_ORIGIN_NOT_VERIFIED",
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "cc41bb1cdf7772a491a3c86dc75ac410eb5a6964aa8f7bca7d071ff645b545f4",
+          "bound_items": 3
+        },
+        "trace_sha256": "dfa408db1c8346d7f33e65157f4e17a871dcbfa609c9baa996dfd6aa178adfb9",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 13.887939890031703,
+        "reason_code": null,
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [],
+          "observed_body_before_invoke": false,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "a33c87d4a4ccb9fb86d4eb580661b0c1079d9b28ba3c7dc987dd736b6af9ddc9",
+          "bound_items": 0
+        },
+        "trace_sha256": "f929d685d2ea79175993f6033647927e4d5d96640b434242e354c7990a29e690",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "private_result_sha256": "be85de5768d5cce0861375a9b67a92b54880eabe002544c5f268d0c47f12ebe0"
+  },
+  "retained_initial_source_models": {
+    "classification": "ACTUAL_INSTALLED_LINUX_NATIVE_CODEX_CANONICAL_READ_ONLY_CASES",
+    "runtime_version": "0.1.54",
+    "native_cli_version": "codex-cli 0.162.1",
+    "status": "FAIL",
+    "provider_model_request_budget_override": false,
+    "gui_or_input_requested": false,
+    "integration_status": "INSTALLED",
+    "protected_config_auth_native_binary_bytes_preserved": true,
+    "source_unchanged_during_batch": true,
+    "owned_temporary_profiles_removed": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "NOT_RUN",
+        "native_exit_code": 1,
+        "wall_seconds": 16.83949678193312,
+        "reason_code": null,
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [],
+          "observed_body_before_invoke": false,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "98b5c9d35e6cead00d29b51846bb08d9756bf03a634f38ceee94ea2cdabc3fe2",
+          "bound_items": 0
+        },
+        "trace_sha256": "2c6f6cca30fd4337b0b652bff0217aef453d6c6abc40fb51cdb3869f44018b8b",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 30.261683777906,
+        "reason_code": null,
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "observed_guide_bodies": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": true,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "b60c6691af90fb7cc42274aa6b2c4846e8c8c0cb918e4976c57ce6f51f0ef876",
+          "bound_items": 3
+        },
+        "trace_sha256": "47fc9602a3a1048ed8edfeede7461c3946adc20e401c0de9861cfb936e1000b0",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 26.98049806803465,
+        "reason_code": null,
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [],
+          "observed_body_before_invoke": false,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "native_scope_violations": []
+        },
+        "native_executor_failure_count": 0,
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "14e93a1fe20d239db4ab2e0263634499375f62c9b43ce78afc346d38e6f2ba55",
+          "bound_items": 0
+        },
+        "trace_sha256": "6d3f2be37ddb94a67f91a7ca296cc9753c59813f8a488cbc68fb05de206594db",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "private_result_sha256": "c6a36e5281ff169d644b94175238b2293405286e94e07f449492dd12e2705a71"
+  },
+  "retained_initial_model_qualification": "Initial natural PASS is superseded: shell launch cwd did not prove post-startup relative-reader origin. Explicit initial nativeexit1 is HTTP429 capacity/too-many-requests, not invalid_api_key. Native negative passes. These initial cases are not final-origin-guard proof.",
+  "final_guard_replay": {
+    "classification": "REPLAY_ACTUAL_NATIVE_RECORDS_FINAL_ORIGIN_GUARD",
+    "model_requests": 0,
+    "gui_or_input_actions": 0,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "NOT_RUN",
+        "native_recording_verified": true,
+        "selected_installed_guide_origin_proven": false,
+        "bound_items": 0,
+        "native_initial_status": "NOT_RUN",
+        "cause": "HTTP429_CAPACITY_TOO_MANY_REQUESTS",
+        "model_or_tools_completed": false
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "native_recording_verified": true,
+        "selected_installed_guide_origin_proven": false,
+        "bound_items": 3,
+        "native_initial_status": "PASS",
+        "cause": "RELATIVE_SHELL_POST_STARTUP_CWD_NOT_PROVEN"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_recording_verified": true,
+        "selected_installed_guide_origin_proven": false,
+        "bound_items": 0,
+        "native_initial_status": "PASS",
+        "cause": null
+      }
+    ],
+    "completion_claim": false,
+    "retained_controller_error": "First replay categorized completed empty failure recording as positive load failure; native exit1/provider429 takes precedence."
+  },
+  "actual_local_os_shell_smoke": {
+    "classification": "ACTUAL_LOCAL_OS_SHELL_CONTROLLED_SMOKE",
+    "status": "PASS",
+    "startup_changed_cwd": true,
+    "identical_other_guide_output_observed": true,
+    "current_reader_refuses_relative_shell_origin": true,
+    "model_requests": 0,
+    "gui_or_input_actions": 0
+  },
+  "native_recording_contract": {
+    "session_binding": "one native session matching the CLI thread and selected project",
+    "execution_binding": "unique argv/output/exit/status or MCP server/tool/arguments/result within exactly one completed turn",
+    "model_delivery": "paired native exec call/output; whole guide output delivered before runtime-containing exec starts",
+    "origin": "literal direct-reader native cwd or absolute shell operand; shell startup may change cwd, so relative shell origin stays unproven",
+    "native_mcp_errors_and_scope": "isError and unapproved/foreign MCP invocations remain sticky failures",
+    "recording_retention": "native recording enabled; only own UUID-confined rollout copied privately; no global history read/deletion or hooks",
+    "limitations": "This is verification, not input authorization. Unknown/missing/ambiguous native shapes fail closed; actual Windows recording and PowerShell are NOT_RUN."
+  },
+  "regression": {
+    "classification": "OBSERVED",
+    "passed": 1750,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 76.33,
+    "scoped_passed": 332,
+    "full_log_sha256": "ba01bd3424615e7e21c67d1b463fd937cf888d397da98ee7d01a6a686a648694",
+    "ruff_and_format": "PASS169_FILES",
+    "generated_contract": "PASS4_TOOL_11_CLI",
+    "published_examples": "PASS198_CLI_12_TOOL",
+    "controlled_boundary_before": "6 FAIL /32 PASS: turn ordering/duplicates/end-before-output and bracket expansion",
+    "controlled_shell_cwd_before": "6 FAIL /38 PASS: relative shell origin inferred from launch cwd",
+    "controlled_after": "44 native evidence boundary cases PASS; serialized native fixture tests are not harness or GUI E2E",
+    "native_scope_before": "negative unknown runtime tool incorrectly PASS; corrected consumer regression PASS",
+    "earlier_snapshots_retained": true
+  },
+  "retained_failed_probes": [
+    {
+      "check": "existing ephemeral thread/read includeTurns and metadata recovery",
+      "status": "NOT_PROVEN",
+      "cause": "native -32600 thread not loaded; zero models/input"
+    },
+    {
+      "check": "first actual-record replay controller",
+      "status": "FAIL_RETAINED",
+      "cause": "controller incorrectly required later rereads before runtime; corrected predicate retained separately"
+    },
+    {
+      "check": "first final-guard replay explicit classification",
+      "status": "FAIL_RETAINED",
+      "cause": "empty completed failure recording was mistaken for load failure; exit1/provider429 takes precedence"
+    },
+    {
+      "check": "shell preparation using python alias",
+      "status": "NOT_RUN",
+      "cause": "shell exit127, no python alias; uv interpreter used before final installation/model"
+    },
+    {
+      "check": "focused test guessed profile filename",
+      "status": "NOT_RUN",
+      "cause": "pytest collection refused missing path; actual discovered MCP override suite subsequently332PASS"
+    }
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_OR_PARTIAL",
+      "condition": "Final native positive outcomes and unproven relative shell origin are retained; no origin/order guard relaxed. OMP positives and credential-row uncertainty remain historical."
+    },
+    {
+      "requirements": [
+        "INSTALL-02",
+        "INSTALL-03",
+        "INSTALL-09",
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02"
+      ],
+      "status": "NOT_RUN_WINDOWS_0154",
+      "condition": "Last native passive peer status offline; prior bounded SSH exit255 Connection timed out before remote execution. Another session owns input. No new remote install/MCP/model/capture/focus/input or shared .49 update."
+    },
+    {
+      "requirements": [
+        "INPUT-05",
+        "E2E-01"
+      ],
+      "status": "BLOCKED_UNKNOWN_DISPATCH_STATE",
+      "condition": "Historical collector/provider/compiler11 proven facts and8 UNKNOWN facts; all6 operation families BLOCKED with zero input. Public RNA/UIA cannot prove popup/input owner/effective keymap/IME/idle; external host build out of scope. File-menu0/5 remains separate recognition failure."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "E2E-02"
+      ],
+      "status": "FAIL_HISTORICAL_TASKS",
+      "condition": "Codex Confirm ACT0.6958 below0.9 despite retained candidate; browser/editor parser deadline and independent completion readback remain. No threshold lowered."
+    },
+    {
+      "requirements": [
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN",
+      "condition": "Same pinned complete real tasks >=1000 opportunities, correct state-change-to-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review remain unmeasured."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN",
+      "condition": "Separate-session matched-view Reici result pending."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY",
+      "condition": "Feature guard permits main/tag only. No main/tag/force/bypass; package/native CI is partial proof."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

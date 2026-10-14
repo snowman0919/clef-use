@@ -63,6 +63,11 @@ scenarios:
     schemas/parsers.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/codex-project-profile-0153.json
     section: actual_native_package
     claim: OBSERVED
@@ -85,6 +90,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_installed_codex_models
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/codex-project-profile-0153.json
     section: actual_installed_codex_models
     claim: OBSERVED
@@ -416,6 +426,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/ci-and-windows-transport-0153.json
     section: ci
     claim: OBSERVED

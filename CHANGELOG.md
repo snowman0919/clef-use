@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Bind Codex verification to its confined native recording, exact completed-turn
+  execution identities and model-facing delivery before runtime exec starts.
+  Retain native errors and scope violations; refuse shell expansion and relative
+  shell origin because startup can change cwd. Record actual installed canonical
+  failures, a superseded initial PASS, capacity429 and regression separately from
+  pending Windows GUI/input, quality/performance and public release acceptance.
+
 - Verify immutable .53 CI15/15 against the exact source payload/contracts and
   native installer preservation. Keep actual .53 and synthetic .54 distinct.
   Record fresh passive Windows peer-offline state without another failed SSH

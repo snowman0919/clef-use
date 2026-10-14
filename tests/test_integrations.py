@@ -1,5 +1,6 @@
 import json
 import os
+import shlex
 import sys
 from contextlib import nullcontext
 from pathlib import Path
@@ -1247,6 +1248,7 @@ def _controlled_verification(
     runtime_tool="computer_capabilities",
     model_exit_code=0,
     native_stderr=None,
+    native_buffered=False,
 ):
     """Replay controlled external traces through real subprocesses and adapter parsers.
 
@@ -1383,7 +1385,7 @@ def _controlled_verification(
                     "item": {
                         "type": "command_execution",
                         "exit_code": 0,
-                        "command": guide_command or "cat " + str(skill),
+                        "command": guide_command or "cat " + shlex.quote(str(skill)),
                         "aggregated_output": body,
                     },
                 }
@@ -1628,6 +1630,95 @@ def _controlled_verification(
         f" sys.exit({native_exit_code})\n"
     )
     interpreter.chmod(0o700)
+    recording = []
+    if adapter == "codex_model":
+        identity = "00000000-0000-0000-0000-000000000001"
+        recording = [
+            {"type": "session_meta", "payload": {"id": identity, "cwd": str(Path.cwd())}},
+            {
+                "type": "event_msg",
+                "payload": {"type": "task_started", "turn_id": "controlled-turn"},
+            },
+        ]
+        for index, event in enumerate(events):
+            item = event.get("item", {})
+            if event.get("type") != "item.completed" or item.get("type") not in (
+                "command_execution",
+                "mcp_tool_call",
+            ):
+                continue
+            item["id"] = f"controlled-cli-{index}"
+            item.setdefault("status", "completed")
+            native_item = json.loads(json.dumps(item))
+            native_item["id"] = f"controlled-native-{index}"
+            if item["type"] == "command_execution":
+                argv = ["/bin/sh", "-c", item["command"]]
+                item["command"] = shlex.join(argv)
+                native_item.update(type="CommandExecution", command=argv, cwd=Path.cwd().as_uri())
+                model_output = {"exit_code": item["exit_code"], "output": item["aggregated_output"]}
+            else:
+                native_item["type"] = "McpToolCall"
+                model_output = item.get("result")
+                if isinstance(native_item.get("result"), dict):
+                    native_item["result"]["structuredContent"] = native_item["result"].pop(
+                        "structured_content", None
+                    )
+            call_id = f"controlled-call-{index}"
+            recording.extend(
+                [
+                    {
+                        "type": "response_item",
+                        "payload": {"type": "custom_tool_call", "name": "exec", "call_id": call_id},
+                    },
+                    {
+                        "type": "event_msg",
+                        "payload": {
+                            "type": "item_completed",
+                            "thread_id": identity,
+                            "turn_id": "controlled-turn",
+                            "item": native_item,
+                        },
+                    },
+                    {
+                        "type": "response_item",
+                        "payload": {
+                            "type": "custom_tool_call_output",
+                            "call_id": call_id,
+                            "output": [{"type": "input_text", "text": json.dumps(model_output)}],
+                        },
+                    },
+                ]
+            )
+        recording.append(
+            {
+                "type": "event_msg",
+                "payload": {"type": "task_complete", "turn_id": "controlled-turn"},
+            }
+        )
+        if native_buffered:
+            calls = [
+                record
+                for record in recording
+                if record.get("payload", {}).get("type") == "custom_tool_call"
+            ]
+            guide_id, runtime_id = (call["payload"]["call_id"] for call in calls[:2])
+            guide_output = next(
+                record
+                for record in recording
+                if record.get("payload", {}).get("type") == "custom_tool_call_output"
+                and record["payload"]["call_id"] == guide_id
+            )
+            runtime_output = next(
+                record
+                for record in recording
+                if record.get("payload", {}).get("type") == "custom_tool_call_output"
+                and record["payload"]["call_id"] == runtime_id
+            )
+            recording.remove(guide_output)
+            recording.remove(calls[1])
+            runtime_output["payload"]["call_id"] = guide_id
+            runtime_output["payload"]["output"].extend(guide_output["payload"]["output"])
+        events.insert(0, {"type": "thread.started", "thread_id": identity})
     executable = scripts / harness
     catalog = {
         "id": 2,
@@ -1637,6 +1728,7 @@ def _controlled_verification(
     }
     script = f"""#!{sys.executable}
 import json, sys
+from pathlib import Path
 if sys.argv[1:2] == ['app-server']:
  for line in sys.stdin:
   request = json.loads(line)
@@ -1649,6 +1741,11 @@ elif sys.argv[1:2] == ['--print-runtime-command']:
 elif sys.argv[1:2] == ['skills']:
  print('clef-use')
 else:
+ if {adapter == "codex_model"!r}:
+  recording_dir = Path.home() / '.codex/sessions/2000/01/01'
+  recording_path = recording_dir / 'rollout-controlled-00000000-0000-0000-0000-000000000001.jsonl'
+  recording_path.parent.mkdir(parents=True, exist_ok=True)
+  recording_path.write_text('\\n'.join(json.dumps(record) for record in {recording!r}) + '\\n')
  for event in {events!r}: print(json.dumps(event))
  sys.stderr.write({native_stderr or ""!r})
  sys.exit({model_exit_code})
@@ -2170,6 +2267,8 @@ def test_codex_copied_body_from_different_guide_path_does_not_prove_load(
         guide_command=f"cat '{path}{suffix}'",
     )
     assert result["stages"]["LOADED"]["status"] == "NOT_RUN"
+    assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert result["status"] == "FAIL"
 
 
 @pytest.mark.parametrize("command", ["cat .agents/skills/clef-use/SKILL.md", "cat other/SKILL.md"])
@@ -2192,5 +2291,40 @@ def test_codex_full_body_without_installed_origin_does_not_prove_loaded_order(
     assert evidence["loaded"] == []
     assert evidence["load_before_invoke"] is False
     assert evidence["stages"]["LOADED"]["status"] == "NOT_RUN"
+
+
+def test_codex_buffered_body_is_not_loaded_before_runtime_even_if_command_completes_first(
+    installation, monkeypatch
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        native_buffered=True,
+    )
+    evidence = result["model_trigger_verification"]
+    assert result["native_recording"]["status"] == "PASS"
+    assert result["stages"]["LOADED"]["skills"] == ["clef-use"]
     assert result["stages"]["INVOKED"]["status"] == "PASS"
+    assert evidence["runtime_before_guide"] is True
+    assert evidence["load_before_invoke"] is False
     assert result["status"] == "FAIL"
+
+
+def test_codex_negative_case_rejects_unapproved_runtime_tool_in_native_inventory(
+    installation, monkeypatch
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "negative",
+        runtime_tool="computer_run",
+    )
+    assert result["status"] == "FAIL"
+    assert result["stages"]["INVOKED"]["status"] == "FAIL"
+    assert result["model_trigger_verification"]["invoked"] == []
+    assert result["reason_code"] == "NATIVE_READ_ONLY_SCOPE_VIOLATION"

@@ -1,5 +1,39 @@
 # Reactive runtime execution status
 
+## Source .54 native recording and strict origin, 2026-10-14
+
+**OBSERVED / implementation and actual OS smoke:** Codex verification now records
+the native session and binds CLI command/MCP items to unique native executions
+inside exactly one ordered completed turn. Full guide output must reach the model
+through its paired exec response before runtime-containing exec starts. Native
+isError and foreign/unapproved MCP calls stay failures. Controlled regressions
+first reproduce6 failures for turn boundaries/globbing and6 for shell cwd. The
+actual local zsh startup smoke changes cwd and reads another identical guide;
+relative shell paths are consequently unproven, not credited from launch cwd.
+No global history deletion, hooks, profile/auth edits or runtime input is used.
+
+**OBSERVED / final source and installation:**1750 PASS/55 SKIP/41 warnings in76.33s;
+scoped332 PASS, Ruff/format169 files and generated4 tool/11 CLI plus published198
+CLI/12 tool examples pass. Final actual Linux package69 files, normal6/read-only2
+MCP and unchanged unknown-state guards pass. Earlier package/source snapshots and
+controller errors remain separate. Fixture recording tests are not harness E2E.
+
+**OBSERVED / final installed native Codex0.162.1:** explicit FAIL25.8914s, natural
+FAIL42.2646s, negative PASS13.8879s; all native exits0. Both positives observe whole
+selected guide bodies before current capabilities, but relative shell origin is
+NOT_PROVEN: LOADED NOT_RUN, GUIDE_ORIGIN_NOT_VERIFIED. Actual late reading is not
+proved. Initial explicit exit1 is HTTP429 capacity/too-many-requests; initial
+natural PASS is superseded by the corrected origin guard and replay. Final cases
+run once after the guard correction, with the original provider/model/prompt/
+deadline. Protected config/auth/native binary bytes, source freeze, owned profile
+cleanup and endpoint absence pass. No auth failure or GUI/input is observed.
+
+GUIDE-02/03 and INSTALL-03 evidence remains partial. Original44 statuses remain
+34 PASS/3 FAIL/7 NOT_RUN. User-confirmed Windows input ownership is preserved;
+last passive peer-offline/SSH timeout, Blender unknown states and File0/5, OMP
+failures, separate Reici, accuracy/coverage/goodput/100ms and public deploy remain
+open. See the [.54 receipt](validation/2026-10-14/codex-native-recording-0154.json).
+
 ## Immutable .53 CI and passive Windows boundary, 2026-10-14
 
 **OBSERVED / native CI:** exact666ed32 passes all15 build/install jobs and
@@ -67,18 +101,18 @@ original accuracy/coverage/goodput/100ms/public-deploy gates stay open. No .53
 Windows update or input check was executed. See the
 [.53 receipt](validation/2026-10-14/codex-project-profile-0153.json).
 
-## Current completion limits after source .53, 2026-10-14
+## Current completion limits after source .54, 2026-10-14
 
 These conditions retain their original acceptance IDs. Older installed failures
-are historical observations, not fresh .53 desktop execution.
+are historical observations, not fresh .54 desktop execution.
 
 | IDs | Status and exact missing evidence |
 |---|---|
-| INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .53 Windows: fresh passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
+| INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .54 Windows: last passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
 | INPUT-04/05, E2E-01/02, PERF-01/02/03 | NOT_RUN for new shared-desktop checks independently of transport: the user confirms another session operates Windows. Exclusive input ownership has not been established; shared .49, active enrollment, focus and input are preserved. |
 | INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch facts remained UNKNOWN and all6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove popup/input owner/effective keymap/IME/idle. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
 | E2E-01/02 | FAIL historical original task results: Codex Continue reached stage1 but Confirm was refused at ACT0.6958 below0.9, despite retained correct candidate/geometry; browser/editor parser deadlines and missing independent completion readback remain. Later offscreen parser completion proves component availability, not full task success. No threshold is lowered. |
-| GUIDE-03 | FAIL final actual .53 Codex positives: complete selected bodies precede current capabilities, but relative command events lack per-call cwd/filesystem-origin proof; LOADED is NOT_RUN. Negative passes. Historical .52 OMP positives retain real status/write/deadline/order failures. No current auth outage is observed. |
+| GUIDE-03 | FAIL final actual .54 Codex positives: complete selected bodies precede current capabilities, but native launch cwd does not prove relative reader cwd after shell startup; LOADED is NOT_RUN. Negative passes. Initial HTTP429 capacity error and superseded natural PASS retained. Historical .52 OMP positives retain real status/write/deadline/order failures. No current auth outage is observed. |
 | PERF-01/02/03 | NOT_RUN: the same complete pinned real-task suite, at least1000 declared opportunities, correct state-change-to-OS-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review. Fixture/component timings do not satisfy this condition. |
 | E2E-03 | NOT_RUN: independent matched-view Reici evidence from the separate session has not arrived. |
 | RELEASE-01 | NOT_RUN public URL/hash/fresh-install/update: the existing deploy job permits main/tag refs and skips this feature branch. Artifact CI and an owned loopback install are partial evidence; no main/tag/force/guard bypass is authorized here. |

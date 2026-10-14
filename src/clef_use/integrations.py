@@ -2633,6 +2633,34 @@ def _codex_verification_profile(executable: str, cwd: Path, entry: dict):
         path.unlink()
 
 
+def _codex_recording(events: list[dict], cwd: Path, evidence_path: Path) -> dict:
+    identifiers = [
+        event.get("thread_id") for event in events if event.get("type") == "thread.started"
+    ]
+    if (
+        len(identifiers) != 1
+        or not isinstance(identifiers[0], str)
+        or not re.fullmatch(r"[a-fA-F0-9]{8}(?:-[a-fA-F0-9]{4}){3}-[a-fA-F0-9]{12}", identifiers[0])
+    ):
+        raise ValueError("native Codex thread identity is missing or ambiguous")
+    directory = target_path("codex").parent / "sessions"
+    _safe(directory)
+    paths = list(directory.glob(f"*/*/*/*-{identifiers[0]}.jsonl"))
+    if len(paths) != 1:
+        raise ValueError("native Codex rollout is missing or ambiguous")
+    path = paths[0]
+    _safe(path)
+    if not path.resolve().is_relative_to(directory.resolve()):
+        raise ValueError("native Codex rollout escapes the session directory")
+    data = path.read_text(encoding="utf-8")
+    atomic_write(evidence_path, data)
+    records = [json.loads(line) for line in data.splitlines()]
+    # Validate here before the caller uses recording to prove a guide load.
+    from .codex_evidence import recorded_items
+
+    return recorded_items(records, events, cwd)
+
+
 def verify(
     harness: str,
     live: bool = False,
@@ -2747,7 +2775,6 @@ def _verify_selected(
             executable,
             "exec",
             "--json",
-            "--ephemeral",
             "--skip-git-repo-check",
             "--sandbox",
             "read-only",
@@ -2777,11 +2804,28 @@ def _verify_selected(
                 events.append(json.loads(line))
             except json.JSONDecodeError:
                 continue
+        recorded = {}
+        native_recording_failed = False
+        try:
+            recording_path = trace.with_suffix(".rollout.jsonl")
+            recorded = _codex_recording(events, cwd, recording_path)
+            result["native_recording"] = {
+                "status": "PASS",
+                "path": str(recording_path),
+                "sha256": _hash(recording_path.read_bytes()),
+                "bound_items": len(recorded),
+            }
+        except (OSError, ValueError) as exc:
+            native_recording_failed = True
+            result["native_recording"] = {
+                "status": "FAIL",
+                "reason": f"{type(exc).__name__}: {exc}",
+            }
         loaded = []
         observed_guide_bodies = []
         invoked = []
         attempted = []
-        failed = False
+        failed = native_recording_failed or any(item["failed"] for item in recorded.values())
         executor_failures = _codex_executor_failures(run.stderr, expected)
         any_gui_guide = any(error["selected_guide_attempt"] for error in executor_failures)
         selected = (
@@ -2835,11 +2879,15 @@ def _verify_selected(
                     body = (layout["root"] / name / "SKILL.md").read_text(encoding="utf-8")
                     if body.strip() in output and name not in observed_guide_bodies:
                         observed_guide_bodies.append(name)
+                    delivery = recorded.get(item.get("id"), {})
                     if (
-                        _codex_guide_path_in_command(expected[name], item.get("command", ""))
+                        Path(expected[name]).resolve() in delivery.get("paths", set())
                         and body.strip() in output
+                        and name not in loaded
                     ):
                         loaded.append(name)
+                        if name == selected and not delivery["before_runtime"]:
+                            runtime_before_guide = True
             if selected_tool or selected_resource:
                 call_failed = (
                     item.get("status") == "failed"
@@ -2876,9 +2924,15 @@ def _verify_selected(
                             and content.get("text") == body
                             for content in resource["contents"]
                         )
+                        and any(
+                            body.strip() in text
+                            for text in recorded.get(item.get("id"), {}).get("model_texts", [])
+                        )
                         and name not in loaded
                     ):
                         loaded.append(name)
+                        if name == selected and not recorded[item["id"]]["before_runtime"]:
+                            runtime_before_guide = True
             if selected_tool:
                 if (
                     item.get("status") == "completed"
@@ -2970,6 +3024,9 @@ def _verify_selected(
             "runtime_before_guide": runtime_before_guide,
             "capability_catalog_verified": capability_catalog is not None,
             "native_executor_failures": executor_failures,
+            "native_scope_violations": [
+                item["scope_violation"] for item in recorded.values() if item["scope_violation"]
+            ],
             "stages": _model_stages(loaded, invoked, failed),
         }
         if executor_failures:
@@ -2979,6 +3036,12 @@ def _verify_selected(
             )
         elif run.returncode:
             result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
+        elif any(item["scope_violation"] for item in recorded.values()):
+            result["reason_code"] = "NATIVE_READ_ONLY_SCOPE_VIOLATION"
+            result["reason"] = "native recording includes MCP invocation outside read-only scope"
+        elif native_recording_failed:
+            result["reason_code"] = "NATIVE_RECORDING_NOT_VERIFIED"
+            result["reason"] = "native session recording could not be bound to the CLI execution"
         elif selected in observed_guide_bodies and selected not in loaded:
             result["reason_code"] = "GUIDE_ORIGIN_NOT_VERIFIED"
             result["reason"] = (
