@@ -1,5 +1,15 @@
 # 安装
 
+从 0.1.51 起，指南/MCP 自动刷新只更新属于当前安装的注册。在独立 root/bin
+中新安装不会接管其他安装已批准的配置。用户修改过或属于其他 root 的 launcher
+会保留并拒绝覆盖，请指定独立的 `CLEF_USE_BIN_DIR`。注册锁内会重新检查归属。
+launcher 保护需要新安装程序；已下载的 0.1.50 bootstrap 在运行新 CLI 前覆盖
+共享 launcher 的行为无法由新 CLI 修复。旧 CLI 更新自身安装时，新 CLI 仍会
+检查注册归属。手动迁移可在 `integrations refresh --managed-only --command-path`
+中显式指定 `--previous-command`。
+[实际包验证](../validation/2026-10-14/installer-ownership-0151.json)不代表
+模型/GUI 任务或输入延迟已通过。
+
 运行时安装完成后，会询问 **`Prepare models now? [Y/n]`**。按 Enter 或 Y 执行模型准备，按 N 跳过。接受前请设置模型缓存路径。没有交互终端或使用 `--json` 时默认跳过。自动化可使用 `--prepare-models` 或 `--skip-models` 明确选择，也可稍后运行 `clef-use models prepare`。
 
 请安装带有 venv/pip 的 Python 3.11-3.13。模型准备需要 Python 3.11/3.12 和 Git（Windows ROCm 需要 3.12）。不需要 root 或管理员权限。使用下载 URL 之前，请确认公开部署验证结果。

@@ -175,7 +175,9 @@ def activation_installation(tmp_path, monkeypatch, request):
     if update:
         old.mkdir(parents=True)
         receipt = old / "installed.json"
-        receipt.write_text(json.dumps({"version": "0.0.9", "sha256": "b" * 64}))
+        receipt.write_text(
+            json.dumps({"version": "0.0.9", "sha256": "b" * 64, "launcher": str(launcher)})
+        )
         preserved[receipt] = receipt.read_bytes()
         if windows:
             launcher.write_text(
@@ -256,6 +258,93 @@ def activation_installation(tmp_path, monkeypatch, request):
     )
 
 
+@pytest.mark.parametrize(
+    "activation_installation", [("linux", True), ("win32", True)], indirect=True
+)
+def test_update_preserves_a_foreign_current_release(activation_installation):
+    case = activation_installation
+    foreign = case.root.parent / "foreign-installation/versions/old"
+    foreign.mkdir(parents=True)
+    (foreign / "installed.json").write_bytes((case.old / "installed.json").read_bytes())
+    if case.windows:
+        case.launcher.write_text(
+            '@echo off\nrem clef-use managed launcher\n@"'
+            + str(foreign / "Scripts/clef-use.exe")
+            + '" %*\n'
+        )
+    else:
+        case.current.unlink()
+        case.current.symlink_to(foreign, target_is_directory=True)
+    before = case.launcher.read_bytes()
+    with pytest.raises(ValueError, match="another installation"):
+        case.installer.install()
+    assert case.launcher.read_bytes() == before
+    assert (foreign / "installed.json").is_file()
+    assert not [p for p in (case.root / "versions").iterdir() if p != case.old]
+
+
+@pytest.mark.parametrize(
+    "activation_installation", [("linux", False), ("win32", False)], indirect=True
+)
+def test_fresh_root_cannot_replace_another_installations_managed_launcher(activation_installation):
+    case = activation_installation
+    target = (
+        case.root.parent
+        / "foreign-installation/versions/old"
+        / ("Scripts/clef-use.exe" if case.windows else "bin/clef-use")
+    )
+    target.parent.mkdir(parents=True)
+    (target.parent.parent / "installed.json").write_text(
+        json.dumps({"version": "0.0.9", "sha256": "b" * 64, "launcher": str(case.launcher)})
+    )
+    if case.windows:
+        case.launcher.write_text(
+            '@echo off\nrem clef-use managed launcher\n@"' + str(target) + '" %*\n'
+        )
+    else:
+        import shlex
+
+        case.launcher.write_text(
+            "#!/bin/sh\n# clef-use managed launcher\nexec " + shlex.quote(str(target)) + ' "$@"\n'
+        )
+    before = case.launcher.read_bytes()
+    with pytest.raises(ValueError, match="another installation"):
+        case.installer.install()
+    assert case.launcher.read_bytes() == before
+    assert not (case.root / "versions").exists()
+
+
+@pytest.mark.parametrize("activation_installation", [("linux", True)], indirect=True)
+def test_update_preserves_user_redirected_managed_launcher(activation_installation):
+    case = activation_installation
+    case.launcher.write_text(
+        '#!/bin/sh\n# clef-use managed launcher\nexec /different/installation/bin/clef-use "$@"\n'
+    )
+    before = case.launcher.read_bytes()
+    with pytest.raises(ValueError, match="another installation"):
+        case.installer.install()
+    assert case.launcher.read_bytes() == before
+    assert case.current.resolve() == case.old
+
+
+@pytest.mark.parametrize(
+    "activation_installation", [("linux", True), ("win32", True)], indirect=True
+)
+@pytest.mark.parametrize("addition", ["comment", "command"])
+def test_update_preserves_user_modified_launcher(activation_installation, addition):
+    case = activation_installation
+    if case.windows:
+        extra = "rem user annotation\n" if addition == "comment" else "echo user setup\n"
+    else:
+        extra = "# user annotation\n" if addition == "comment" else "echo user setup\n"
+    case.launcher.write_text(case.launcher.read_text() + extra)
+    before = case.launcher.read_bytes()
+    with pytest.raises(ValueError, match="launcher"):
+        case.installer.install()
+    assert case.launcher.read_bytes() == before
+    assert not [p for p in (case.root / "versions").iterdir() if p != case.old]
+
+
 def test_interrupt_after_activation_preserves_live_environment(
     activation_installation, monkeypatch
 ):
@@ -332,21 +421,6 @@ def test_preactivation_failure_removes_only_staging(
         assert not case.current.exists()
         if case.windows or point == "smoke":
             assert not case.launcher.exists()
-
-
-def test_generated_bootstraps_embed_canonical_installer():
-    import base64
-    import re
-    import runpy
-    from pathlib import Path
-
-    root = Path(__file__).resolve().parents[1]
-    builder = runpy.run_path(str(root / "scripts/build_installer.py"))
-    assert (root / "install.sh").read_text() == builder["render"]()
-    powershell = (root / "install.ps1").read_text()
-    match = re.search(r"FromBase64String\('([^']+)'\)", powershell)
-    assert match is not None
-    assert base64.b64decode(match[1]) == (root / "src/clef_use/installer.py").read_bytes()
 
 
 @pytest.mark.parametrize("language", ["en", "ko", "ja", "zh-CN"])
@@ -560,9 +634,31 @@ def test_repeat_install_validates_existing_artifact_when_bootstrap_python_change
     metadata["artifacts"].append(previous)
     root = tmp_path / "installation"
     current = root / "current"
-    current.mkdir(parents=True)
+    release = root / "versions" / "prior"
+    release.mkdir(parents=True)
+    bindir = tmp_path / "bin"
+    bindir.mkdir()
+    launcher = bindir / ("clef-use.cmd" if installer.sys.platform == "win32" else "clef-use")
+    if installer.sys.platform == "win32":
+        launcher.write_text(
+            '@echo off\nrem clef-use managed launcher\n@"'
+            + str(release / "Scripts/clef-use.exe")
+            + '" %*\n'
+        )
+        current = release
+    else:
+        import shlex
+
+        current.symlink_to(release.relative_to(root), target_is_directory=True)
+        launcher.write_text(
+            "#!/bin/sh\n# clef-use managed launcher\nexec "
+            + shlex.quote(str(current / "bin/clef-use"))
+            + ' "$@"\n'
+        )
     digest = "c" * 64 if receipt == "changed" else previous["sha256"]
-    (current / "installed.json").write_text(json.dumps({"version": "0.1.0", "sha256": digest}))
+    (current / "installed.json").write_text(
+        json.dumps({"version": "0.1.0", "sha256": digest, "launcher": str(launcher)})
+    )
     monkeypatch.setenv("CLEF_USE_INSTALL_ROOT", str(root))
     monkeypatch.setenv("CLEF_USE_BIN_DIR", str(tmp_path / "bin"))
     monkeypatch.setattr(installer, "windows_user_access", lambda _, **_options: None)

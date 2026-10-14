@@ -1,5 +1,17 @@
 # インストール
 
+0.1.51 以降、ガイド/MCP の自動更新は更新対象のインストールに属する登録に限定します。
+別の root/bin への新規インストールは他の承認済みプロファイルを変更しません。
+ユーザーが編集した launcher や別 root の launcher は保持して拒否します。
+別の `CLEF_USE_BIN_DIR` を指定してください。登録ロック内で所有関係を再確認します。
+launcher 保護には新しいインストーラーが必要です。取得済みの 0.1.50 bootstrap が
+新しい CLI の起動前に共有 launcher を上書きする動作は修正できません。
+旧 CLI による自身の更新では新 CLI の登録所有チェックが適用されます。
+手動移行では `integrations refresh --managed-only --command-path` に
+`--previous-command` を明示できます。
+[実パッケージ検証](../validation/2026-10-14/installer-ownership-0151.json)は
+モデル/GUI の成功や入力遅延の合格を示すものではありません。
+
 ランタイムのインストール後、**`Prepare models now? [Y/n]`** と表示されます。Enter または Y でモデル準備を実行し、N で省略します。Y を選ぶ前にキャッシュを設定してください。対話端末がない場合や `--json` 使用時は既定で省略します。自動化では `--prepare-models` または `--skip-models` を指定できます。後から `clef-use models prepare` を実行することもできます。
 
 venv/pip を含む Python 3.11-3.13 をインストールしてください。モデル準備には Python 3.11/3.12 と Git が必要です（Windows ROCm は 3.12 が必要）。root や管理者権限は不要です。ダウンロード URL を使う前に公開配備の検証結果を確認してください。

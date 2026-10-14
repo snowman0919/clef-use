@@ -433,6 +433,154 @@ def test_managed_refresh_does_not_register_unapproved_harnesses(installation):
     assert not (home / ".agents/skills/clef-use/SKILL.md").exists()
 
 
+@pytest.mark.parametrize("status", ["INSTALLED", "CURRENT"])
+def test_installer_refresh_preserves_profiles_owned_by_other_installations(installation, status):
+    from clef_use.installer import refresh_integrations
+
+    home, previous = installation
+    foreign = home / "foreign runtime"
+    foreign.write_bytes(Path(previous).read_bytes())
+    foreign.chmod(0o700)
+    integrations.integrate("codex", command=previous, skills=["core"])
+    integrations.integrate("hermes", command=str(foreign), skills=["core"])
+    owned = integrations._layout("codex")
+    other = integrations._layout("hermes")
+    protected = [
+        other["config"],
+        other["state"] / "manifest.json",
+        other["root"] / "clef-use/SKILL.md",
+    ]
+    before = [p.read_bytes() for p in protected]
+    selected = home / "selected runtime"
+    # Execute the actual CLI/refresh/registration implementation, not an echo fixture.
+    selected.write_text(
+        f"#!{sys.executable}\nimport runpy\nrunpy.run_module('clef_use.cli', run_name='__main__')\n"
+    )
+    selected.chmod(0o700)
+    result = refresh_integrations(
+        {"status": status, "executable": str(selected), "previous_commands": [previous]}
+    )
+    assert server_entry("codex", owned["config"].read_text())["command"] == str(selected)
+    assert [p.read_bytes() for p in protected] == before
+    assert result.get("integration_status") != "DEGRADED"
+
+
+def test_fresh_installation_does_not_redirect_an_existing_approved_profile(installation):
+    from clef_use.installer import refresh_integrations
+
+    home, previous = installation
+    integrations.integrate("codex", command=previous, skills=["core"])
+    layout = integrations._layout("codex")
+    protected = [
+        layout["config"],
+        layout["state"] / "manifest.json",
+        layout["root"] / "clef-use/SKILL.md",
+    ]
+    before = [p.read_bytes() for p in protected]
+    selected = home / "new installation runtime"
+    selected.write_text(
+        f"#!{sys.executable}\nimport runpy\nrunpy.run_module('clef_use.cli', run_name='__main__')\n"
+    )
+    selected.chmod(0o700)
+    refresh_integrations(
+        {"status": "INSTALLED", "executable": str(selected), "previous_commands": []}
+    )
+    assert [p.read_bytes() for p in protected] == before
+
+
+def test_refresh_preserves_registration_replaced_before_mutation_lock(installation, monkeypatch):
+    from contextlib import contextmanager
+
+    home, previous = installation
+    foreign = home / "foreign runtime"
+    foreign.write_bytes(Path(previous).read_bytes())
+    foreign.chmod(0o700)
+    integrations.integrate("codex", command=previous, skills=["core"])
+    original_locked = integrations._locked
+    replacement = {}
+
+    @contextmanager
+    def concurrent_enrollment(layout):
+        if layout["harness"] == "codex" and not replacement:
+            replacement["started"] = True
+            integrations.remove("codex")
+            integrations.integrate("codex", command=str(foreign), skills=["core"])
+            replacement["bytes"] = [
+                path.read_bytes() for path in (layout["config"], layout["state"] / "manifest.json")
+            ]
+        with original_locked(layout):
+            yield
+
+    monkeypatch.setattr(integrations, "_locked", concurrent_enrollment)
+    integrations.refresh_managed(command=previous, previous_commands=[previous])
+    layout = integrations._layout("codex")
+    assert server_entry("codex", layout["config"].read_text())["command"] == str(foreign)
+    assert [
+        path.read_bytes() for path in (layout["config"], layout["state"] / "manifest.json")
+    ] == replacement["bytes"]
+
+
+@pytest.mark.parametrize("prior_owner_matches", [True, False])
+def test_installed_refresh_without_snapshot_checks_release_ownership(
+    installation, prior_owner_matches
+):
+    import subprocess
+
+    home, fixture_command = installation
+    root = home / "owned installation"
+    old = root / "versions/old/bin/clef-use"
+    selected = root / "versions/new/bin/clef-use"
+    public = root / "bin/clef-use"
+    foreign = home / "foreign runtime"
+    for path in [old, selected, foreign]:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(Path(fixture_command).read_bytes())
+        path.chmod(0o700)
+    selected.write_text(
+        f"#!{sys.executable}\nimport runpy\nrunpy.run_module('clef_use.cli', run_name='__main__')\n"
+    )
+    for binary, launcher in [(selected, public), (old, public if prior_owner_matches else foreign)]:
+        (binary.parent.parent / "installed.json").write_text(
+            json.dumps(
+                {
+                    "version": guide_manifest()["runtime_version"],
+                    "sha256": "a" * 64,
+                    "base_url": "https://example.invalid/clef-use",
+                    "launcher": str(launcher),
+                }
+            )
+        )
+    integrations.integrate("codex", command=str(old), skills=["core"])
+    integrations.integrate("hermes", command=str(foreign), skills=["core"])
+    owned = integrations._layout("codex")
+    other = integrations._layout("hermes")
+    protected = [
+        other["config"],
+        other["state"] / "manifest.json",
+        other["root"] / "clef-use/SKILL.md",
+    ]
+    before = [p.read_bytes() for p in protected]
+    # Older installer entrypoints send no ownership snapshot to the new runtime.
+    result = subprocess.run(
+        [
+            str(selected),
+            "integrations",
+            "refresh",
+            "--managed-only",
+            "--command-path",
+            str(selected),
+        ],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 0, result.stderr
+    assert server_entry("codex", owned["config"].read_text())["command"] == str(
+        selected if prior_owner_matches else old
+    )
+    assert [p.read_bytes() for p in protected] == before
+
+
 @pytest.mark.parametrize("harness", integrations.HARNESSES)
 @pytest.mark.parametrize("modified", [None, "entry", "guide"])
 def test_cli_managed_refresh_moves_owned_entry_to_selected_runtime(installation, harness, modified):
@@ -466,6 +614,8 @@ def test_cli_managed_refresh_moves_owned_entry_to_selected_runtime(installation,
             "--managed-only",
             "--command-path",
             str(selected),
+            "--previous-command",
+            previous,
         ],
         stdin=subprocess.DEVNULL,
         capture_output=True,

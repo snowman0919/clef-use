@@ -381,16 +381,39 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
         if f"{artifact['sha256']}  {artifact['filename']}" not in sums.splitlines():
             raise ValueError("release checksum metadata is inconsistent")
         current = root / "current"
+        previous_commands = []
         if windows and launcher.exists():
-            match = re.search(r'^@"([^"\r\n]+)" %\*$', launcher.read_text(), re.MULTILINE)
-            if not match:
-                raise ValueError("managed Windows launcher is malformed")
-            target = match[1]
-            if target.startswith("%~dp0"):
-                target = os.path.normpath(str(bindir / target[5:]))
-            current = Path(target).parent.parent
+            current = launcher_target(launcher).parent.parent
+        if launcher.exists() and not current.exists():
+            raise ValueError(
+                "managed launcher belongs to another installation or lacks its release; "
+                "choose CLEF_USE_BIN_DIR"
+            )
         if current.exists():
+            if current.resolve().parent != (root / "versions").resolve():
+                raise ValueError(
+                    "current runtime belongs to another installation; choose its installation root"
+                )
             installed = json.loads((current / "installed.json").read_text())
+            old_launcher = installed.get("launcher")
+            if not isinstance(old_launcher, str) or not Path(old_launcher).is_absolute():
+                raise ValueError("previous installation launcher ownership is unavailable")
+            previous_binary = environment_binary(current, "clef-use")
+            if launcher.exists() and (
+                Path(old_launcher).resolve() != launcher.resolve()
+                or launcher_target(launcher).resolve() != previous_binary.resolve()
+            ):
+                raise ValueError(
+                    "managed launcher belongs to another installation; choose CLEF_USE_BIN_DIR"
+                )
+            # Freeze both the public alias and physical executable before a
+            # POSIX current symlink or Windows launcher switches releases.
+            previous_commands = list(
+                dict.fromkeys(
+                    str(path.absolute())
+                    for path in (Path(old_launcher), previous_binary, previous_binary.resolve())
+                )
+            )
             if release_version(installed["version"]) > release_version(manifest["version"]):
                 raise ValueError("refusing release downgrade")
             if installed["version"] == manifest["version"]:
@@ -411,6 +434,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                     "status": "CURRENT",
                     "version": installed["version"],
                     "executable": str(launcher),
+                    "previous_commands": previous_commands,
                 }
             report(f"Updating {installed['version']} -> {manifest['version']}...")
         versions = root / "versions"
@@ -510,6 +534,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 "status": "INSTALLED",
                 "version": manifest["version"],
                 "executable": str(launcher),
+                "previous_commands": previous_commands,
                 "path_hint": (
                     f"Add {bindir} to PATH if needed. "
                     "Previous versions and model cache are retained."
@@ -641,20 +666,48 @@ def configure_integrations(executable, targets, skills=None, preview_only=False)
     return reports
 
 
-def integration_executable(executable):
-    path = Path(executable)
-    if sys.platform != "win32" or path.suffix.lower() != ".cmd":
-        return str(path)
+def launcher_target(path):
+    path = Path(path)
     text = path.read_text()
-    match = re.search(r'^@"([^"\r\n]+)" %\*$', text, re.MULTILINE)
-    if "clef-use managed launcher" not in text or not match:
+    if "clef-use managed launcher" not in text:
+        raise ValueError("managed launcher ownership marker is missing")
+    if path.suffix.lower() != ".cmd":
+        commands = [
+            shlex.split(line)
+            for line in text.splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+        if (
+            len(commands) != 1
+            or len(commands[0]) != 3
+            or commands[0][0] != "exec"
+            or commands[0][2] != "$@"
+            or not Path(commands[0][1]).is_absolute()
+            or text
+            != "#!/bin/sh\n# clef-use managed launcher\nexec "
+            + shlex.quote(commands[0][1])
+            + ' "$@"\n'
+        ):
+            raise ValueError("managed POSIX launcher is malformed")
+        return Path(commands[0][1])
+    match = re.fullmatch(r'@echo off\nrem clef-use managed launcher\n@"([^"\r\n]+)" %\*\n', text)
+    if not match:
         raise ValueError("managed Windows launcher is malformed")
     target = match[1]
     if target.startswith("%~dp0"):
         target = str(path.parent / target[5:])
     if "%" in target or not Path(target).is_absolute():
         raise ValueError("managed Windows executable path is unsafe")
-    return target
+    return Path(os.path.normpath(target))
+
+
+def integration_executable(executable):
+    path = Path(executable)
+    return (
+        str(launcher_target(path))
+        if sys.platform == "win32" and path.suffix.lower() == ".cmd"
+        else str(path)
+    )
 
 
 def integrations_ready(report):
@@ -663,7 +716,23 @@ def integrations_ready(report):
 
 
 def refresh_integrations(result):
-    """Refresh only enrollment previously recorded by this user's active profiles."""
+    """Refresh approved profiles bound to this installation before activation."""
+    previous = result.get("previous_commands")
+    if not isinstance(previous, list) or not all(
+        isinstance(command, str) and Path(command).is_absolute() for command in previous
+    ):
+        result["managed_refresh"] = {
+            "status": "NOT_RUN",
+            "reason": "previous installation ownership unavailable",
+        }
+        result["integration_status"] = "DEGRADED"
+        return result
+    if not previous:
+        result["managed_refresh"] = {
+            "status": "NOT_APPLICABLE",
+            "reason": "selected installation has no previous executable",
+        }
+        return result
     try:
         command = integration_executable(result["executable"])
         refreshed = subprocess.run(
@@ -674,6 +743,11 @@ def refresh_integrations(result):
                 "--managed-only",
                 "--command-path",
                 command,
+                *[
+                    argument
+                    for previous_command in previous
+                    for argument in ("--previous-command", previous_command)
+                ],
             ],
             capture_output=True,
             text=True,

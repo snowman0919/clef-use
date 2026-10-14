@@ -1,5 +1,18 @@
 # Installation
 
+Since 0.1.51, automatic guide/MCP refresh is limited to registrations owned by
+the installation being updated. A fresh installation in a separate root/bin
+does not redirect another installation's approved profiles. Modified launchers
+and launchers belonging to another root are refused and preserved; choose a
+separate `CLEF_USE_BIN_DIR`. Ownership is rechecked under the registration lock.
+Use the new installer for that launcher protection: an already downloaded 0.1.50
+bootstrap cannot protect a shared launcher before it runs the new CLI. An old
+CLI updating its own installation still receives the new CLI's registration
+ownership checks. Manual migration can explicitly name `--previous-command`
+with `integrations refresh --managed-only --command-path`. See the
+[actual package checks](../validation/2026-10-14/installer-ownership-0151.json);
+they do not establish native model/GUI success or input latency.
+
 After runtime installation, the installer asks **`Prepare models now? [Y/n]`**. Enter or Y runs model preparation; N skips it. Set the model cache path before accepting Y. Without an interactive terminal, or with `--json`, preparation is skipped by default. Use `--prepare-models` or `--skip-models` to choose explicitly. You can run `clef-use models prepare` later; `models download` downloads weights only.
 
 Install Python 3.11-3.13 with venv/pip. Model preparation requires Python 3.11/3.12 and Git (Windows ROCm requires 3.12). No root or Administrator privileges are needed. Public hosting must be verified before using the download URL.

@@ -11,6 +11,7 @@ import queue
 import re
 import shutil
 import subprocess
+import sys
 import threading
 from contextlib import ExitStack, contextmanager
 from pathlib import Path, PureWindowsPath
@@ -2250,26 +2251,90 @@ def status() -> dict:
     return {"integrations": results}
 
 
-def refresh_managed(command: str | None = None) -> dict:
+def refresh_managed(
+    command: str | None = None, *, previous_commands: list[str] | None = None
+) -> dict:
     """Refresh only approvals recorded for the currently selected harness profiles.
 
     This never discovers/registers a new harness or guesses an inactive profile's HOME.
     Project-scoped approvals are intentionally refreshed from that project, not globally.
     """
     results = []
+
+    def command_path(path: str | Path) -> str:
+        # Do not resolve a captured current alias after activation has switched it.
+        return os.path.normcase(os.path.normpath(str(Path(path).absolute())))
+
+    previous = (
+        {command_path(path) for path in previous_commands}
+        if previous_commands is not None
+        else None
+    )
+    selected = command_path(command) if command is not None else None
+    owner = None
+    if selected is not None and previous is None:
+        # Installed CLI entrypoints have authoritative release receipts even
+        # when an older updater did not pass a pre-activation snapshot. POSIX
+        # public shell aliases require the running venv's sibling executable.
+        native_name = "clef-use.exe" if os.name == "nt" else "clef-use"
+        for binary in (
+            Path(command).resolve(),
+            Path(sys.executable).with_name(native_name).resolve(),
+        ):
+            release = binary.parent.parent
+            if release.parent.name != "versions":
+                continue
+            raw = _read(release / "installed.json")
+            receipt = json.loads(raw) if raw else None
+            launcher = receipt.get("launcher") if isinstance(receipt, dict) else None
+            if not isinstance(launcher, str) or not Path(launcher).is_absolute():
+                continue
+            if selected in {command_path(binary), command_path(launcher)}:
+                owner = (command_path(launcher), release.parent, binary.parent.name, binary.name)
+                break
+
+    def owned_command(recorded: str) -> bool:
+        normalized = command_path(recorded)
+        if previous is not None:
+            return normalized in previous
+        if selected is None or normalized == selected:
+            return True
+        if owner is None:
+            return False
+        launcher, versions, directory, name = owner
+        if normalized == launcher:
+            return True
+        binary = Path(recorded).resolve()
+        if (
+            binary.name != name
+            or binary.parent.name != directory
+            or binary.parent.parent.parent != versions
+        ):
+            return False
+        raw = _read(binary.parent.parent / "installed.json")
+        receipt = json.loads(raw) if raw else None
+        prior_launcher = receipt.get("launcher") if isinstance(receipt, dict) else None
+        return (
+            isinstance(prior_launcher, str)
+            and Path(prior_launcher).is_absolute()
+            and command_path(prior_launcher) == launcher
+        )
+
     for harness in HARNESSES:
         try:
             layout = _layout(harness)
-            manifest = _load_manifest(layout)
-            if not manifest:
+            if not (layout["state"] / "manifest.json").exists():
                 continue
-            selected_command = command or (manifest.get("mcp_entry") or {}).get("command")
-            result = integrate(
-                harness,
-                skills=manifest["selection"],
-                command=selected_command,
-                replace_managed_command=True,
-            )
+            with _locked(layout):
+                _recover(layout)
+                manifest = _load_manifest(layout)
+                if not manifest:
+                    continue
+                recorded_command = (manifest.get("mcp_entry") or {}).get("command")
+                if not isinstance(recorded_command, str) or not owned_command(recorded_command):
+                    continue
+                selected_command = command or recorded_command
+                result = _integrate(layout, manifest["selection"], False, selected_command, True)
             results.append({"harness": harness, **result})
         except (ValueError, OSError) as exc:
             results.append({"harness": harness, "status": "CONFLICT", "reason": str(exc)})
@@ -2278,7 +2343,7 @@ def refresh_managed(command: str | None = None) -> dict:
         if all(item["status"] in ("INSTALLED", "UNCHANGED") for item in results)
         else "PARTIAL",
         "integrations": results,
-        "scope": "previously approved user integrations in currently selected profiles",
+        "scope": "approved current profiles for prior executables or the selected installation",
     }
 
 

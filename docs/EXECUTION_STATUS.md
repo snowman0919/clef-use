@@ -1,5 +1,43 @@
 # Reactive runtime execution status
 
+## Source .51 installation ownership, 2026-10-14
+
+**OBSERVED / actual .50 reproduction:** installing a second runtime in a distinct
+root/bin without enrollment flags redirected the first runtime's approved Codex
+registration. The original successful install/enrollment and changed bytes are
+retained privately. The fix captures prior executable aliases before activation,
+limits refresh to those aliases, and checks release ownership when an old updater
+calls the new CLI without that snapshot. Ownership checking and mutation share
+the registration lock. A real remove/enroll-before-lock regression reproduced
+the concurrent replacement bug before the fix and now preserves the new owner.
+
+**OBSERVED / actual Linux packages:** original .50 bootstrap installs a separate
+.51 runtime without changing Codex A; original .50 CLI updates A to .51, refreshes
+its guide release, and preserves foreign Hermes B bytes. New .51 bootstrap
+CURRENT and a fresh third installation preserve foreign profiles. Edited and
+foreign public launchers are refused with bytes preserved. All 68 source/guide
+payloads match both the package and installed environment; actual read-only
+stdio MCP exposes two tools/eight resources and returns .51 capabilities.
+Offline executable fixtures pass. Owned loopbacks stop and runtime endpoint
+remains absent. No model or GUI/input is requested by these installation checks.
+
+**OBSERVED / regression:** 1696 passed, 55 skipped, 41 warnings in 74.82 seconds;
+the focused installer/integration suite passes 337 checks. Ruff/format checks
+cover 167 files and generated 198 CLI/12 tool examples pass. Red cases and the
+initial native evaluator's incorrect expected refusal exit2 (actual exit1) remain
+retained; the final source runs in a new owned root with the corrected evaluator.
+Separate read-only review found the concurrency bug and verified its fix.
+
+**Limits:** the new installer protects shared launchers; a previously downloaded
+.50 bootstrap can overwrite a shared public alias before the new CLI executes.
+Distinct-root/bin old bootstrap and same-installation old CLI update are the
+executed supported cases. Immutable .51 CI and Windows candidate proof are
+NOT_RUN at this source checkpoint. Shared Windows .49 stays active because the
+user confirmed another operator. Original 44 acceptance statuses remain
+34 PASS / 3 FAIL / 7 NOT_RUN; GUI/abort/1000-opportunity quality/100ms/coverage/
+goodput, Reici and public release gates are not closed. See the
+[ownership receipt](validation/2026-10-14/installer-ownership-0151.json).
+
 ## Immutable .50 CI and isolated Windows candidate, 2026-10-14
 
 **OBSERVED / immutable CI:** [run 38498619741](https://github.com/snowman0919/clef-use/actions/runs/38498619741)

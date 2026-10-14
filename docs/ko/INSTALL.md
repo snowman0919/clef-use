@@ -1,5 +1,17 @@
 # 설치
 
+0.1.51부터 가이드/MCP 자동 갱신은 업데이트하는 설치본에 연결된 등록에만 적용됩니다.
+별도 root/bin에 새로 설치해도 다른 설치본의 승인된 프로필을 가져오지 않습니다.
+사용자가 수정했거나 다른 root에 속한 launcher는 보존하고 거절하므로 별도
+`CLEF_USE_BIN_DIR`을 지정하세요. 등록 잠금 안에서 소유권을 다시 확인합니다.
+이 launcher 보호에는 새 설치 프로그램이 필요합니다. 이미 내려받은 0.1.50
+bootstrap이 새 CLI 실행 전에 공용 launcher를 덮어쓰는 동작까지 고칠 수는 없습니다.
+구버전 CLI로 자기 설치본을 업데이트하면 새 CLI의 등록 소유권 검사가 적용됩니다.
+수동 이동은 `integrations refresh --managed-only --command-path`에
+`--previous-command`를 명시할 수 있습니다.
+[실제 패키지 검증](../validation/2026-10-14/installer-ownership-0151.json)은
+모델/GUI 작업 성공이나 입력 지연 통과를 뜻하지 않습니다.
+
 런타임 설치 후 **`Prepare models now? [Y/n]`**으로 모델 준비 여부를 묻습니다. Enter 또는 Y를 누르면 모델 준비를 실행하고, N이면 건너뜁니다. Y를 선택하기 전에 모델 캐시 경로를 설정하세요. 대화형 터미널이 없거나 `--json` 사용 시 기본적으로 건너뜁니다. 자동화에서는 `--prepare-models` 또는 `--skip-models`로 지정할 수 있습니다. 나중에 `clef-use models prepare`를 실행해도 됩니다. `models download`는 가중치만 다운로드합니다.
 
 venv/pip를 포함한 Python 3.11-3.13을 설치하세요. 모델 준비에는 Python 3.11/3.12와 Git이 필요합니다(Windows ROCm은 3.12 필요). root나 관리자 권한은 필요하지 않습니다. 다운로드 URL을 사용하기 전에 공개 호스팅 검증 결과를 확인하세요.

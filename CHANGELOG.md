@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Restrict automatic guide/MCP refresh to the updating installation's prior
+  executables or verified release ownership, including old CLI update paths.
+  Recheck ownership while holding the registration lock. Preserve foreign
+  registrations and refuse edited or foreign launchers. Record actual .50
+  reproduction, .51 native package/update/MCP checks and regression evidence
+  separately from pending Windows GUI, model and performance acceptance.
+
 - Recognize OMP virtual-device calls only when native MCP target, typed arguments,
   execution result and consumer payload are bound. Preserve early-invocation,
   ordinary-write, unpaired-result and native-error failures. Record source .50
