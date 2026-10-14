@@ -1,5 +1,13 @@
 # Agent setup, use and recovery
 
+.56 verification reports native provider socket errors separately from a later
+session deadline. Retained .55 OMP negative records contain three socket errors
+and no successful final response; positives have call/order failures and a deadline
+without socket errors. Installed diagnostic replay preserves these failures.
+Retries, model settings and guards are unchanged. Windows input belongs to the
+other session; fresh GUI and performance checks remain NOT_RUN. See
+[diagnostic evidence](../validation/2026-10-14/native-socket-diagnostic-0156.json).
+
 Immutable .55 CI at db47d23 passes15 native platform builds/installations and
 assembly. All downloaded archives match69 source/guide files and contracts;
 native logs prove first/update/CURRENT and failed-update preservation. Actual

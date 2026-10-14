@@ -1,5 +1,34 @@
 # Reactive runtime execution status
 
+## Source .56 native failure diagnosis, 2026-10-14
+
+**OBSERVED / retained actual records:** OMP .55 positives have no socket errors;
+call/order failures precede the deadline. The negative has3 native assistant
+socket errors, then aborts at the deadline. All3 cases have zero successful final
+stops. Native terminal/agent-end flags therefore do not prove a successful answer
+followed by cleanup hang. No authentication error is observed. Current installed
+OMP18.6.1 source classifies error135168 as transient socket closure and already
+provides HTTP/replay-safe recovery; the closing party/root cause is NOT_PROVEN.
+Supported stream watchdog settings do not establish a repair for this closure.
+
+**OBSERVED / correction and installed diagnostic replay:** .56 reports the3
+authoritative assistant errors before the final deadline without exposing private
+transport details or counting repeated summaries/guide/tool/user wording. Two
+regressions first fail, then the focused12 pass. Full1761 PASS/55 SKIP/41 warnings
+in85.90s with .56 metadata; an earlier91.78s run with stale .55 local metadata is
+retained separately. Lint/format169 and all generated/published examples pass. Actual Linux
+installation69 files, normal6/read-only2 MCP and unknown-state guards pass.
+The installed diagnostic reads retained native records with zero new models/input;
+original bytes, FAIL/FAIL/NOT_RUN, settings, budgets and guards remain unchanged.
+This is replay, not fresh harness/GUI E2E or a transport repair.
+
+Windows input remains with the user-confirmed other session. No new SSH, remote
+install, model, capture, focus or input occurs; last transport failure stays
+historical. Blender8 UNKNOWN/File0/5, GUIDE-03, original GUI/quality/100ms,
+separate Reici and public deployment remain open. Original44 counts34 PASS/
+3 FAIL/7 NOT_RUN stay unchanged. See the
+[.56 diagnostic receipt](validation/2026-10-14/native-socket-diagnostic-0156.json).
+
 ## Immutable .55 native CI, 2026-10-14
 
 **OBSERVED / exact source and native installers:** db47d23 passes all15 platform
@@ -181,10 +210,10 @@ original accuracy/coverage/goodput/100ms/public-deploy gates stay open. No .53
 Windows update or input check was executed. See the
 [.53 receipt](validation/2026-10-14/codex-project-profile-0153.json).
 
-## Current completion limits after source .55, 2026-10-14
+## Current completion limits after source .56, 2026-10-14
 
 These conditions retain their original acceptance IDs. Older installed failures
-are historical observations, not fresh .55 desktop execution.
+are historical observations, not fresh .56 desktop execution.
 
 | IDs | Status and exact missing evidence |
 |---|---|
@@ -192,7 +221,7 @@ are historical observations, not fresh .55 desktop execution.
 | INPUT-04/05, E2E-01/02, PERF-01/02/03 | NOT_RUN for new shared-desktop checks independently of transport: the user confirms another session operates Windows. Exclusive input ownership has not been established; shared .49, active enrollment, focus and input are preserved. |
 | INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch guards remained UNKNOWN: `popup`, `text_focus`, `ime_composing`, `keymap`, `editor`, `loading`, `modal`, `unit`. All6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove those guards in the installed run. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
 | E2E-01/02 | FAIL historical original task results: Codex Continue reached stage1 but Confirm was refused at ACT0.6958 below0.9, despite retained correct candidate/geometry; browser/editor parser deadlines and missing independent completion readback remain. Later offscreen parser completion proves component availability, not full task success. No threshold is lowered. |
-| GUIDE-03 | FAIL/partial .55: Codex explicit origin unproven, natural selected Blender PASS/core origin unproven, negative PASS. Hermes actual model3PASS with qualified preservation aggregate; original/global per-file post-SDK bytes not separately recovered. OMP positives FAIL/write/status/order/deadline; negative NOT_RUN/deadline. Model stages now separate from SDK preflight; auth-table material changes remain unproven. No auth outage is inferred. |
+| GUIDE-03 | FAIL/partial retained .55 models: Codex explicit origin unproven, natural selected Blender PASS/core origin unproven, negative PASS. Hermes model3PASS has qualified preservation. OMP positives FAIL/write/status/order/deadline, with zero socket errors; negative NOT_RUN has3 native socket errors then deadline. All3 OMP cases lack successful final stops. Installed .56 diagnostic replay preserves outcomes; no fresh models run. Closing party/root cause and auth-table material changes remain unproven. |
 | PERF-01/02/03 | NOT_RUN: the same complete pinned real-task suite, at least1000 declared opportunities, correct state-change-to-OS-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review. Fixture/component timings do not satisfy this condition. |
 | E2E-03 | NOT_RUN: independent matched-view Reici evidence from the separate session has not arrived. |
 | RELEASE-01 | NOT_RUN public URL/hash/fresh-install/update: the existing deploy job permits main/tag refs and skips this feature branch. Artifact CI and an owned loopback install are partial evidence; no main/tag/force/guard bypass is authorized here. |

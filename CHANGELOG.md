@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Preserve native OMP socket-closure failures in harness diagnostics when the
+  session later reaches its deadline. Count only completed assistant error
+  events, redact transport details, and retain original outcomes and budgets.
+  Verify retained actual records through the installed .56 diagnostic path;
+  keep replay separate from fresh model and GUI execution.
+
 - Verify immutable .55 CI15/15 against all69 source/guide files and contracts;
   confirm native first/update/CURRENT and failure preservation. Keep actual .55
   separate from synthetic .56, guide-phase models from final stage replay, and

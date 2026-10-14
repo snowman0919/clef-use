@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "native_socket_diagnostic_0156_20261014": {"local_artifact": "docs/validation/2026-10-14/native-socket-diagnostic-0156.json", "sha256": "a18e9808be8c3d5f92870fdd679b012f1e290c7fc9de0f5c825bb745ea4d807a", "raw_artifact_committed": true},
     "native_ci_0155_20261014": {"local_artifact": "docs/validation/2026-10-14/native-ci-0155.json", "sha256": "28a0e08b9be3d49ae1420232a8940b5ec1b6c98b5bc238bbcce2d610be52203f", "raw_artifact_committed": true},
     "guide_path_model_stages_0155_20261014": {"local_artifact": "docs/validation/2026-10-14/guide-path-and-model-stages-0155.json", "sha256": "9072a0d0141a6227970ed86b9239ebc484cedfcce202677485fb5fd97b95706d", "raw_artifact_committed": true},
     "native_ci_0154_20261014": {"local_artifact": "docs/validation/2026-10-14/native-ci-0154.json", "sha256": "7fb8990782017568f4e8558822dbc8b1b82b11d6c4a1721e772e96c9f4390db7", "raw_artifact_committed": true},

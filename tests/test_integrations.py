@@ -1233,6 +1233,73 @@ def test_successful_tool_body_never_becomes_authentication_diagnostic():
     assert "authentication" not in reason
 
 
+def test_native_socket_failure_remains_visible_before_session_deadline():
+    error = {
+        "role": "assistant",
+        "stopReason": "error",
+        "errorId": 135168,
+        "errorMessage": "The socket connection was closed unexpectedly. Private transport detail.",
+    }
+    events = [
+        {"type": "message_end", "message": error},
+        {"type": "turn_end", "message": error},
+        {"type": "message_end", "message": error},
+        {"type": "message_end", "message": error},
+        {
+            "type": "message_end",
+            "message": {
+                "role": "assistant",
+                "stopReason": "aborted",
+                "errorMessage": "Deadline exceeded",
+            },
+        },
+    ]
+    reason = integrations._probe_reason("\n".join(json.dumps(e) for e in events), 1)
+    assert "provider socket closed (3 native assistant errors)" in reason
+    assert "session deadline exceeded" in reason
+    assert "Private transport detail" not in reason
+    assert "authentication" not in reason
+
+
+@pytest.mark.parametrize(
+    "kind,role,stop",
+    [
+        ("message_end", "user", "error"),
+        ("message_end", "toolResult", "error"),
+        ("message_end", "assistant", "stop"),
+        ("turn_end", "assistant", "error"),
+        ("tool_execution_end", "assistant", "error"),
+    ],
+)
+def test_socket_words_outside_native_assistant_failure_are_not_transport_evidence(kind, role, stop):
+    event = {
+        "type": kind,
+        "message": {
+            "role": role,
+            "stopReason": stop,
+            "errorMessage": "The socket connection was closed unexpectedly.",
+        },
+    }
+    reason = integrations._probe_reason(json.dumps(event), 1)
+    assert "provider socket closed" not in reason
+    assert "exited 1" in reason
+
+
+def test_native_socket_failure_without_deadline_preserves_exit_code():
+    event = {
+        "type": "message_end",
+        "message": {
+            "role": "assistant",
+            "stopReason": "error",
+            "errorMessage": "The socket connection was closed unexpectedly.",
+        },
+    }
+    reason = integrations._probe_reason(json.dumps(event), 2)
+    assert "provider socket closed (1 native assistant errors)" in reason
+    assert "harness exited 2" in reason
+    assert "deadline" not in reason
+
+
 def _controlled_verification(
     installation,
     monkeypatch,

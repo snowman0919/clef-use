@@ -1,0 +1,93 @@
+{
+  "classification": "OBSERVED_NATIVE_FAILURE_DIAGNOSIS_AND_INSTALLED_DIAGNOSTIC_REPLAY",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.56",
+  "partial": true,
+  "requirements": ["GUIDE-02", "GUIDE-03", "INSTALL-03"],
+  "publication_policy": "Facts, safe diagnostic summaries and digests only; native transcripts, identities, paths and auth/config values remain private.",
+  "change": "Count only native completed assistant socket-error events and preserve their cause before a later deadline. Summary events and words in guide/tool/user content are not provider socket evidence. No retries, model/provider/prompt/deadline settings, runtime guard or original gate changes.",
+  "native_failure_diagnosis": {
+    "classification": "OBSERVED_RETAINED_ACTUAL_NATIVE_OMP_RECORDS",
+    "record_runtime_version": "0.1.55",
+    "cases": [
+      {"trigger": "explicit", "status": "FAIL", "native_exit_code": 1, "assistant_tool_stops": 8, "assistant_socket_errors": 0, "assistant_aborted_stops": 1, "successful_final_stops": 0},
+      {"trigger": "natural", "status": "FAIL", "native_exit_code": 1, "assistant_tool_stops": 6, "assistant_socket_errors": 0, "assistant_aborted_stops": 1, "successful_final_stops": 0},
+      {"trigger": "negative", "status": "NOT_RUN", "native_exit_code": 1, "assistant_tool_stops": 0, "assistant_socket_errors": 3, "assistant_aborted_stops": 1, "successful_final_stops": 0}
+    ],
+    "negative_native_error_id": 135168,
+    "negative_native_error_class": "TRANSIENT_UNEXPECTED_SOCKET_CLOSE",
+    "final_native_error": "Deadline exceeded",
+    "authentication_error_observed": false,
+    "successful_response_followed_by_cleanup_hang_proven": false,
+    "connection_closing_party_or_root_cause": "NOT_PROVEN"
+  },
+  "installed_sdk_inspection": {
+    "classification": "OBSERVED_LOCAL_INSTALLED_SOURCE",
+    "package": "@oh-my-pi/pi-coding-agent",
+    "version": "18.6.1",
+    "version_scope": "Current installed package inspection; not a new model run.",
+    "native_socket_error_is_transient": true,
+    "native_http_max_attempts": 6,
+    "bun_fetch_timeout_disabled_by_native_transport": true,
+    "native_replay_safe_provider_and_session_recovery_present": true,
+    "supported_watchdogs": ["providers.streamFirstEventTimeoutSeconds", "providers.streamIdleTimeoutSeconds"],
+    "native_cli_keepalive_connection_reuse_or_fetch_verbose_override_found": false,
+    "watchdog_change_repairs_explicit_socket_closure": "NOT_PROVEN",
+    "external_sdk_or_configuration_modified": false
+  },
+  "installed_diagnostic_replay": {
+    "classification": "ACTUAL_INSTALLED_DIAGNOSTIC_REPLAY_OF_RETAINED_NATIVE_OMP_RECORDS",
+    "status": "PASS",
+    "installed_runtime_version": "0.1.56",
+    "original_record_version": "0.1.55",
+    "negative_updated_reason": "actual harness provider socket closed (3 native assistant errors); session deadline exceeded; inspect private trace",
+    "positive_updated_reason": "actual harness model/session deadline exceeded; inspect private trace",
+    "all_original_trace_bytes_preserved": true,
+    "all_original_outcomes_preserved": true,
+    "model_requests": 0,
+    "gui_or_input_actions": 0,
+    "outcome_guard_or_deadline_changed": false,
+    "fresh_model_e2e": "NOT_RUN"
+  },
+  "actual_native_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "runtime_version": "0.1.56",
+    "source_files_exact": 69,
+    "artifact_sha256": "2da7b20e6a2cb7a8b815667636a605524f2664562a05d6c39258c8004611fe4f",
+    "normal_mcp_tool_count": 6,
+    "read_only_mcp_tool_count": 2,
+    "six_registered_operation_schema_choices_verified": true,
+    "omitted_and_null_operation_query": "PASS",
+    "unregistered_operation_schema_rejection_and_domain_error": "PASS",
+    "missing_state_stays_blocked": true,
+    "runtime_endpoint_absent": true,
+    "owned_loopback_stopped": true,
+    "model_requests": 0,
+    "gui_or_input_actions": 0
+  },
+  "regression": {
+    "classification": "OBSERVED_SOURCE_TESTS_NOT_GUI_E2E",
+    "before_correction": {"failed": 2, "passed": 5},
+    "focused_after_correction": {"passed": 12, "deselected": 279},
+    "initial_full_with_stale_local_metadata": {"source_version": "0.1.56", "local_distribution_metadata": "0.1.55", "passed": 1761, "skipped": 55, "warnings": 41, "seconds": 91.78},
+    "full_after_correction": {"local_distribution_metadata": "0.1.56", "passed": 1761, "skipped": 55, "warnings": 41, "seconds": 85.90},
+    "ruff_and_format": {"status": "PASS", "files": 169},
+    "generated_examples": {"status": "PASS", "tool": 4, "cli": 11, "published_cli": 198, "published_tool": 12}
+  },
+  "remaining_acceptance": {
+    "original_scenarios": 44,
+    "pass": 34,
+    "fail": 3,
+    "not_run": 7,
+    "guide_03": "FAIL_PARTIAL",
+    "shared_windows_input_owner": "OTHER_SESSION_USER_CONFIRMED",
+    "new_windows_actions": 0,
+    "windows_transport": "Last passive peer state offline and historical SSH timeout; not retried here.",
+    "blender_unproven_guards": 8,
+    "file_menu_task": "FAIL_0_OF_5_HISTORICAL",
+    "same_task_accuracy_coverage_goodput_and_correct_os_input_p95_100ms": "NOT_RUN",
+    "reici_separate_session_result": "NOT_RUN_PENDING",
+    "public_deployment": "NOT_RUN_FEATURE_GUARD_PRESERVED"
+  }
+}

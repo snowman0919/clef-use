@@ -890,6 +890,7 @@ def _probe_reason(output: str, code: int) -> str:
     # Tool outputs include guide bodies and schemas, so their words are never
     # evidence of provider failure. Inspect transport/model error fields instead.
     diagnostics = []
+    socket_failures = 0
     for line in output.splitlines():
         try:
             event = json.loads(line)
@@ -900,6 +901,17 @@ def _probe_reason(output: str, code: int) -> str:
         if not isinstance(event, dict):
             continue
         message = event.get("message")
+        if (
+            event.get("type") == "message_end"
+            and isinstance(message, dict)
+            and message.get("role") == "assistant"
+            and message.get("stopReason") == "error"
+            and isinstance(message.get("errorMessage"), str)
+            and message["errorMessage"].startswith("The socket connection was closed unexpectedly.")
+        ):
+            # OMP repeats messages in turn/agent summaries. Count only the
+            # authoritative completed assistant errors, without returning details.
+            socket_failures += 1
         if isinstance(message, dict) and message.get("errorMessage"):
             diagnostics.append(str(message["errorMessage"]))
         if event.get("type") in ("error", "turn.failed") or (
@@ -918,6 +930,16 @@ def _probe_reason(output: str, code: int) -> str:
         )
     if "api key" in lower or "credential" in lower or "no model" in lower:
         return "provider authentication/model is unavailable; inspect private trace"
+    if socket_failures:
+        ending = (
+            "session deadline exceeded"
+            if "deadline exceeded" in lower or "timed out" in lower
+            else f"harness exited {code}"
+        )
+        return (
+            f"actual harness provider socket closed ({socket_failures} native assistant errors); "
+            f"{ending}; inspect private trace"
+        )
     if "deadline exceeded" in lower or "timed out" in lower:
         return "actual harness model/session deadline exceeded; inspect private trace"
     if "unable to connect" in lower or "connection refused" in lower:

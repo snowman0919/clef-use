@@ -63,6 +63,11 @@ scenarios:
     schemas/parsers.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/guide-path-and-model-stages-0155.json
     section: actual_native_package
     claim: OBSERVED
@@ -95,6 +100,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: installed_diagnostic_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
   - summary: docs/validation/2026-10-14/guide-path-and-model-stages-0155.json
     section: actual_installed_codex_models
     claim: OBSERVED
@@ -446,6 +456,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/native-ci-0155.json
     section: ci
     claim: OBSERVED

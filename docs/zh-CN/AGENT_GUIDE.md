@@ -1,5 +1,12 @@
 # 代理安装、使用与恢复
 
+.56 区分 native provider 套接字错误与之后的会话 deadline。保留的 .55 OMP
+非 GUI 记录包含3次套接字错误，没有成功的最终响应；阳性案例没有套接字错误，
+但有调用、顺序与 deadline 失败。安装版诊断回放保留这些失败，不计为新的模型
+或 GUI 执行。重试、模型设置与 guard 不变。Windows 输入由其他会话使用，新的
+GUI 与性能验证保持 NOT_RUN。参见
+[诊断证据](../validation/2026-10-14/native-socket-diagnostic-0156.json)。
+
 固定到 db47d23 的 .55 CI 通过15项真实平台构建/安装与合并。所有下载包的
 69个文件及契约一致；真实日志验证初次/更新/CURRENT 及失败时保留。实际 .55
 与合成 .56 分开记录。公开部署由 feature guard 跳过，未执行新的共享 Windows
