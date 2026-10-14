@@ -1,5 +1,47 @@
 # Reactive runtime execution status
 
+## Source .53 native Codex project configuration, 2026-10-14
+
+**OBSERVED / native .52 failure:** project verification's inline-only MCP
+override fails native bootstrap with invalid transport, before model or tool
+execution. .53 supplies the approved complete entry in an owned0600 profile,
+preserves saved configuration, and disables foreign servers with CLI scope
+controls. Preflight and exec use identical configuration and actual cwd.
+Trusted-project precedence first reproduces2 FAIL/6 PASS; the corrected actual
+CLI cases pass8, including read-only env precedence and edited-profile retention.
+The guarantee uses the catalog snapshot; concurrent non-cooperative config
+changes between preflight and exec are not atomically excluded.
+
+**OBSERVED / final .53 package and regression:** actual Linux installation,
+all68 source/installed files, normal/read-only MCP and unchanged unknown-state
+guards pass. Full regression1704 PASS/55 SKIP/41 warnings in71.62s, scoped286,
+Ruff/format167, generated4 tool/11 CLI and published198 CLI/12 tool examples pass.
+The initial64 fixture failures are retained: the controlled event producer did
+not implement native configuration queries. Fixture adaptation preserves trace
+assertions and is separate from native configuration/model proof. Initial and
+final package snapshots are retained separately. Two controller-path failures
+occur before any model, and optional app-server profile context comparison
+times out at initialization; full effective-context comparison is NOT_PROVEN.
+
+**OBSERVED / actual final installed Codex0.162.1, once per case:** explicit
+FAIL17.5356s, natural FAIL21.4382s, negative PASS13.4005s; all native exits0.
+Both positive cases discover the three managed Skills, observe the selected
+complete body before invoking matching current .53 capabilities, and verify
+the read-only catalog. Their relative shell reads lack per-call cwd provenance
+in the native JSON stream, so installed file origin is NOT_PROVEN and LOADED
+stays NOT_RUN. Overall FAIL is retained as GUIDE_ORIGIN_NOT_VERIFIED; this is
+not proof the model actually read late. Verified load/order guards are unchanged.
+Initial source cases remain historical, not retries of unchanged final source.
+Protected global configuration/auth/native binary bytes, source freeze, owned
+profile cleanup and endpoint absence pass; no GUI/input or auth error is observed.
+
+GUIDE-02/03 and INSTALL-03 evidence is partial. Original44 statuses remain
+34 PASS/3 FAIL/7 NOT_RUN. Windows transport and concurrent-input limits, Blender
+unknown state/File-menu0/5, OMP positive failures, separate Reici review and
+original accuracy/coverage/goodput/100ms/public-deploy gates stay open. No .53
+Windows update or input check was executed. See the
+[.53 receipt](validation/2026-10-14/codex-project-profile-0153.json).
+
 ## Immutable .52 CI and Windows transport boundary, 2026-10-14
 
 **OBSERVED / CI:** pinned b022b6d3, all15 native build/install jobs and assembly

@@ -12,10 +12,12 @@ import re
 import shutil
 import subprocess
 import sys
+import tempfile
 import threading
 from contextlib import ExitStack, contextmanager
 from pathlib import Path, PureWindowsPath
 
+import tomlkit
 from filelock import FileLock
 from packaging.specifiers import SpecifierSet
 from ruamel.yaml.error import YAMLError
@@ -2532,19 +2534,103 @@ def _codex_executor_failures(stderr: str, guides: dict[str, str]) -> list[dict]:
     return failures
 
 
-def _codex_verification_override(config: dict) -> str:
-    # CLI dotted paths do not unquote key segments. Inline TOML preserves
-    # arbitrary server names and merges these fields into existing transports.
-    fields = [
-        f"{json.dumps(server, ensure_ascii=False)}={{enabled=false}}"
-        for server in config.get("mcp_servers", {})
-        if server != "clef-use"
-    ]
-    fields.append(
-        '"clef-use"={enabled_tools=["computer_capabilities","computer_status"],'
-        'env={CLEF_USE_MCP_READ_ONLY="1"}}'
+def _codex_mcp_configuration(executable: str, cwd: Path, config_args: tuple = ()) -> dict:
+    argv = [executable, *config_args, "-C", str(cwd)]
+    run = subprocess.run(
+        [*argv, "mcp", "list", "--json"],
+        stdin=subprocess.DEVNULL,
+        cwd=cwd,
+        capture_output=True,
+        text=True,
+        encoding="utf-8",
+        timeout=30,
     )
-    return "mcp_servers={" + ",".join(fields) + "}"
+    if run.returncode:
+        # Native diagnostics can contain transport credentials. Keep them out of results.
+        raise ValueError(f"native Codex MCP configuration failed (exit {run.returncode})")
+    servers = json.loads(run.stdout)
+    if not isinstance(servers, list):
+        raise ValueError("native Codex MCP configuration is not a server list")
+    catalog = {}
+    for server in servers:
+        if (
+            not isinstance(server, dict)
+            or not isinstance(server.get("name"), str)
+            or not server["name"]
+            or server["name"] in catalog
+            or not isinstance(server.get("enabled"), bool)
+            or not isinstance(server.get("transport"), dict)
+        ):
+            raise ValueError("native Codex MCP configuration has an invalid server")
+        catalog[server["name"]] = server
+    return catalog
+
+
+@contextmanager
+def _codex_verification_profile(executable: str, cwd: Path, entry: dict):
+    if entry.get("enabled", True) is not True:
+        raise ValueError("disabled managed Codex MCP entry is preserved")
+    servers = {}
+    for name, server in _codex_mcp_configuration(executable, cwd).items():
+        if name == "clef-use":
+            continue
+        transport = server["transport"]
+        # Disabled entries still require a valid native transport in profile files.
+        if isinstance(transport.get("command"), str):
+            transport = {"command": transport["command"], "args": transport.get("args") or []}
+        elif isinstance(transport.get("url"), str):
+            transport = {"url": transport["url"]}
+        else:
+            raise ValueError("native Codex MCP transport cannot be disabled safely")
+        servers[name] = {**transport, "enabled": False}
+    environment = {**entry.get("env", {}), "CLEF_USE_MCP_READ_ONLY": "1"}
+    servers["clef-use"] = {
+        **entry,
+        "enabled": True,
+        "enabled_tools": ["computer_capabilities", "computer_status"],
+        "env": environment,
+    }
+    directory = target_path("codex").parent
+    _safe(directory)
+    directory.mkdir(parents=True, exist_ok=True, mode=0o700)
+    data = tomlkit.dumps({"mcp_servers": servers}).encode("utf-8")
+    fd, filename = tempfile.mkstemp(
+        prefix="clef-use-verification-", suffix=".config.toml", dir=directory
+    )
+    path = Path(filename)
+    profile = path.name.removesuffix(".config.toml")
+    # Trusted project layers outrank profiles. Override only scope controls at
+    # CLI priority; approved transport values stay in the private profile.
+    controls = tomlkit.inline_table()
+    for name in servers:
+        controls[name] = {"enabled": False}
+    controls["clef-use"] = {
+        "enabled": True,
+        "enabled_tools": ["computer_capabilities", "computer_status"],
+        "env": {"CLEF_USE_MCP_READ_ONLY": "1"},
+    }
+    config_args = ("-p", profile, "-c", "mcp_servers=" + controls.as_string())
+    try:
+        with os.fdopen(fd, "wb") as stream:
+            stream.write(data)
+        actual = _codex_mcp_configuration(executable, cwd, config_args)
+        selected = actual.get("clef-use", {})
+        transport = selected.get("transport", {})
+        if (
+            not selected.get("enabled")
+            or any(server["enabled"] for name, server in actual.items() if name != "clef-use")
+            or transport.get("command") != entry.get("command")
+            or transport.get("args") != entry.get("args", [])
+            or transport.get("env") != environment
+            or (transport.get("env_vars") or []) != (entry.get("env_vars") or [])
+            or transport.get("cwd") != entry.get("cwd")
+        ):
+            raise ValueError("native Codex read-only profile does not match approved scope")
+        yield config_args
+    finally:
+        if _read(path) != data:
+            raise ValueError("modified temporary Codex profile preserved")
+        path.unlink()
 
 
 def verify(
@@ -2657,7 +2743,6 @@ def _verify_selected(
             )
             return result
         # Only the two read-only runtime tools may be invoked during this fresh session.
-        config = read_config("codex", (_read(layout["config"]) or b"").decode())
         argv = [
             executable,
             "exec",
@@ -2668,31 +2753,32 @@ def _verify_selected(
             "read-only",
             "-C",
             str(cwd),
-            "-c",
-            _codex_verification_override(config),
         ]
-        argv.append(_verification_prompt(trigger))
-        run = subprocess.run(
-            argv,
-            capture_output=True,
-            text=True,
-            encoding="utf-8",
-            timeout=180,
-            env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
-        )
+        trace = layout["state"] / f"verification-{trigger}-trace.jsonl"
+        with _codex_verification_profile(executable, cwd, manifest["mcp_entry"]) as config_args:
+            argv.extend([*config_args, _verification_prompt(trigger)])
+            run = subprocess.run(
+                argv,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                timeout=180,
+                cwd=cwd,
+                env={**os.environ, "CLEF_USE_MCP_READ_ONLY": "1"},
+            )
+            atomic_write(trace, run.stdout)
+            atomic_write(trace.with_suffix(".stderr"), run.stderr)
+            result["trace"] = str(trace)
+            result["stderr_trace"] = str(trace.with_suffix(".stderr"))
+            result["exit_code"] = run.returncode
         events = []
         for line in run.stdout.splitlines():
             try:
                 events.append(json.loads(line))
             except json.JSONDecodeError:
                 continue
-        trace = layout["state"] / f"verification-{trigger}-trace.jsonl"
-        atomic_write(trace, run.stdout)
-        atomic_write(trace.with_suffix(".stderr"), run.stderr)
-        result["trace"] = str(trace)
-        result["stderr_trace"] = str(trace.with_suffix(".stderr"))
-        result["exit_code"] = run.returncode
         loaded = []
+        observed_guide_bodies = []
         invoked = []
         attempted = []
         failed = False
@@ -2704,6 +2790,7 @@ def _verify_selected(
             else "clef-use"
         )
         runtime_before_guide = False
+        observed_body_before_invoke = True
         capability_catalog = None
         guide_resources = {f"clef-use://guides/{name}/SKILL.md": name for name in expected}
         for event in events:
@@ -2731,6 +2818,8 @@ def _verify_selected(
                     attempted.append(item["tool"])
                 if selected_tool and selected not in loaded:
                     runtime_before_guide = True
+                if selected_tool and selected not in observed_guide_bodies:
+                    observed_body_before_invoke = False
             if event.get("type") != "item.completed":
                 continue
             if item.get("type") == "command_execution" and item.get("exit_code") == 0:
@@ -2744,6 +2833,8 @@ def _verify_selected(
                 )
                 for name in expected:
                     body = (layout["root"] / name / "SKILL.md").read_text(encoding="utf-8")
+                    if body.strip() in output and name not in observed_guide_bodies:
+                        observed_guide_bodies.append(name)
                     if (
                         _codex_guide_path_in_command(expected[name], item.get("command", ""))
                         and body.strip() in output
@@ -2871,6 +2962,8 @@ def _verify_selected(
             "case": trigger,
             "status": outcome,
             "loaded": loaded,
+            "observed_guide_bodies": observed_guide_bodies,
+            "observed_body_before_invoke": bool(invoked) and observed_body_before_invoke,
             "invoked": invoked,
             "attempted": attempted,
             "load_before_invoke": load_before_invoke,
@@ -2886,6 +2979,13 @@ def _verify_selected(
             )
         elif run.returncode:
             result["reason"] = _probe_reason(run.stdout + run.stderr, run.returncode)
+        elif selected in observed_guide_bodies and selected not in loaded:
+            result["reason_code"] = "GUIDE_ORIGIN_NOT_VERIFIED"
+            result["reason"] = (
+                "complete selected guide body observed; command trace does not prove "
+                "the installed file origin. Invocation before verified load is not "
+                "proof of invocation before an actual read"
+            )
     except (OSError, ValueError, queue.Empty, subprocess.TimeoutExpired) as exc:
         result["reason"] = f"actual harness verification failed: {type(exc).__name__}: {exc}"
     return result

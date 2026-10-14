@@ -6,8 +6,7 @@ import sys
 
 import pytest
 
-from clef_use.harness import render_entry
-from clef_use.integrations import _codex_guide_path_in_command, _codex_verification_override
+from clef_use.integrations import _codex_guide_path_in_command, _codex_verification_profile
 
 
 @pytest.mark.parametrize("separator", ["\\", "\\\\", "/"])
@@ -23,7 +22,11 @@ def test_codex_windows_guide_command_preserves_native_path_identity(separator):
         )
 
 
-def test_native_codex_read_only_overrides_preserve_named_transports(tmp_path):
+@pytest.mark.parametrize("global_selected", [False, True])
+@pytest.mark.parametrize("trusted_project", [False, True])
+def test_native_codex_project_profile_binds_approved_transport_and_reader_scope(
+    tmp_path, monkeypatch, global_selected, trusted_project
+):
     executable = shutil.which("codex")
     if not executable:
         pytest.skip("native Codex CLI is unavailable")
@@ -31,32 +34,83 @@ def test_native_codex_read_only_overrides_preserve_named_transports(tmp_path):
 
     home = tmp_path / "codex-home"
     home.mkdir()
+    monkeypatch.setenv("CODEX_HOME", str(home))
+    project = tmp_path / "untrusted-project"
+    (project / ".codex").mkdir(parents=True)
     names = ["node_repl", "avatarforge-host", "server.with.dot", 'server "quote"', "ローカル"]
     data = {"mcp_servers": {name: {"command": sys.executable, "args": []} for name in names}}
-    text = render_entry("codex", tomlkit.dumps(data), {"command": sys.executable, "args": ["-V"]})
+    data["mcp_servers"]["remote"] = {"url": "https://example.invalid/mcp"}
+    if trusted_project:
+        data["projects"] = {str(project): {"trust_level": "trusted"}}
+    if global_selected:
+        data["mcp_servers"]["clef-use"] = {
+            "command": sys.executable,
+            "args": ["-V"],
+            "enabled": False,
+        }
+    entry = {
+        "command": sys.executable,
+        "args": ["-m", "clef_use.cli", "mcp"],
+        "env": {"CLEF_USE_CONFIG": "owned-config.toml", "SERVER_VALUE": "private-sentinel"},
+        "tool_timeout_sec": 60,
+    }
+    local = project / ".codex/config.toml"
+    local_servers = {"clef-use": {**entry, "env": {"CLEF_USE_MCP_READ_ONLY": "0"}}}
+    if trusted_project:
+        local_servers["project-server"] = {
+            "command": sys.executable,
+            "args": ["-V"],
+            "enabled": True,
+        }
+    local.write_text(tomlkit.dumps({"mcp_servers": local_servers}), encoding="utf-8")
+    local_before = local.read_bytes()
     config = home / "config.toml"
-    config.write_text(text, encoding="utf-8")
+    config.write_text(tomlkit.dumps(data), encoding="utf-8")
     before = config.read_bytes()
-    result = subprocess.run(
-        [
-            executable,
-            "-c",
-            _codex_verification_override(data),
-            "mcp",
-            "list",
-            "--json",
-        ],
-        stdin=subprocess.DEVNULL,
-        capture_output=True,
-        text=True,
-        env={**os.environ, "CODEX_HOME": str(home)},
-        timeout=30,
-        check=True,
-    )
-    servers = {item["name"]: item for item in json.loads(result.stdout)}
-    for name in names:
-        assert servers[name]["enabled"] is False
-        assert servers[name]["transport"]["command"] == sys.executable
-    assert servers["clef-use"]["enabled"] is True
-    assert servers["clef-use"]["transport"]["args"] == ["-V"]
+    with _codex_verification_profile(executable, project, entry) as config_args:
+        private_config = home / (config_args[1] + ".config.toml")
+        assert "private-sentinel" not in " ".join(config_args)
+        if os.name != "nt":
+            assert private_config.stat().st_mode & 0o777 == 0o600
+        result = subprocess.run(
+            [executable, *config_args, "-C", str(project), "mcp", "list", "--json"],
+            stdin=subprocess.DEVNULL,
+            cwd=project,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            check=True,
+        )
+        servers = {item["name"]: item for item in json.loads(result.stdout)}
+        assert {name for name, server in servers.items() if server["enabled"]} == {"clef-use"}
+        selected = servers["clef-use"]["transport"]
+        assert selected["command"] == entry["command"]
+        assert selected["args"] == entry["args"]
+        assert selected["env"] == {**entry["env"], "CLEF_USE_MCP_READ_ONLY": "1"}
+    assert not private_config.exists()
     assert config.read_bytes() == before
+    assert local.read_bytes() == local_before
+
+
+def test_native_codex_profile_preserves_user_edits_and_cleans_unchanged_on_failure(
+    tmp_path, monkeypatch
+):
+    executable = shutil.which("codex")
+    if not executable:
+        pytest.skip("native Codex CLI is unavailable")
+    home = tmp_path / "codex-home"
+    home.mkdir()
+    monkeypatch.setenv("CODEX_HOME", str(home))
+    (home / "config.toml").write_text("")
+    entry = {"command": sys.executable, "args": ["-m", "clef_use.cli", "mcp"]}
+    with pytest.raises(RuntimeError, match="consumer interrupted"):
+        with _codex_verification_profile(executable, tmp_path, entry) as config_args:
+            path = home / (config_args[1] + ".config.toml")
+            raise RuntimeError("consumer interrupted")
+    assert not path.exists()
+    with pytest.raises(ValueError, match="modified temporary Codex profile preserved"):
+        with _codex_verification_profile(executable, tmp_path, entry) as config_args:
+            path = home / (config_args[1] + ".config.toml")
+            changed = path.read_bytes() + b"\n# User edit\n"
+            path.write_bytes(changed)
+    assert path.read_bytes() == changed

@@ -1,6 +1,7 @@
 import json
 import os
 import sys
+from contextlib import nullcontext
 from pathlib import Path
 
 import pytest
@@ -1657,6 +1658,13 @@ else:
     monkeypatch.setenv("PATH", str(scripts) + os.pathsep + os.environ.get("PATH", ""))
     result = {"stages": integrations._stages("PASS"), "status": "NOT_RUN"}
     if adapter == "codex_model":
+        # These cases exercise event evidence. Native profile resolution is tested
+        # against the actual CLI separately, without a controlled trace producer.
+        monkeypatch.setattr(
+            integrations,
+            "_codex_verification_profile",
+            lambda *_: nullcontext(("-p", "controlled-profile")),
+        )
         return integrations.verify(harness, live=True, trigger=trigger)
     if adapter == "hermes_model":
         return integrations._verify_hermes(layout, manifest, str(executable), home, result, trigger)
@@ -2162,5 +2170,27 @@ def test_codex_copied_body_from_different_guide_path_does_not_prove_load(
         guide_command=f"cat '{path}{suffix}'",
     )
     assert result["stages"]["LOADED"]["status"] == "NOT_RUN"
+
+
+@pytest.mark.parametrize("command", ["cat .agents/skills/clef-use/SKILL.md", "cat other/SKILL.md"])
+def test_codex_full_body_without_installed_origin_does_not_prove_loaded_order(
+    installation, monkeypatch, command
+):
+    result = _controlled_verification(
+        installation,
+        monkeypatch,
+        "codex_model",
+        {"content": [], "isError": False},
+        "explicit",
+        guide_command=command,
+    )
+    evidence = result["model_trigger_verification"]
+    assert result["status"] == "FAIL"
+    assert result["reason_code"] == "GUIDE_ORIGIN_NOT_VERIFIED"
+    assert evidence["observed_guide_bodies"] == ["clef-use"]
+    assert evidence["observed_body_before_invoke"] is True
+    assert evidence["loaded"] == []
+    assert evidence["load_before_invoke"] is False
+    assert evidence["stages"]["LOADED"]["status"] == "NOT_RUN"
     assert result["stages"]["INVOKED"]["status"] == "PASS"
     assert result["status"] == "FAIL"

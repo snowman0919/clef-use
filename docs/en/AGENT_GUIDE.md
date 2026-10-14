@@ -1,5 +1,18 @@
 # Agent setup, use and recovery
 
+Codex verification in .53 uses an owned private profile containing the approved
+MCP transport and CLI scope controls that also apply above trusted project
+settings. Native preflight and execution use the same working directory and
+configuration. Only capabilities/status are enabled; saved settings and edited
+temporary profiles are preserved. Native trusted/untrusted project tests pass.
+Complete Skill text in a shell result is reported separately from proven file
+origin. A relative command without native working-directory provenance cannot
+prove loading the installed Skill; `GUIDE_ORIGIN_NOT_VERIFIED` keeps verification
+failed instead of claiming the model read too late. No guide-order guard is
+relaxed. Final source regression is1704 passed/55 skipped; actual Linux package
+and normal/read-only MCP pass. Windows GUI/abort/accuracy/100ms checks remain
+NOT_RUN. See [.53 evidence](../validation/2026-10-14/codex-project-profile-0153.json).
+
 Immutable .52 CI passes all fifteen native build/install jobs and assembly;
 all fifteen archives match the pinned Git payload68 and contracts. Installer
 logs prove first/update/CURRENT and checksum/download/smoke failure preservation.

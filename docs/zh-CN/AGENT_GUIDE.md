@@ -1,5 +1,15 @@
 # 代理安装、使用与恢复
 
+.53 Codex 验证将已批准的 MCP 连接放在专用私有 profile 中，并用优先于受信项目
+配置的 CLI 控制限制调用范围。预检与执行使用相同工作目录和配置，仅启用
+capabilities/status，保留用户配置及已修改的临时 profile。真实 Codex 的受信/不受信
+项目检查通过。shell 输出中的完整 Skill 正文与文件来源证明分别报告；没有原生
+工作目录证据的相对路径命令无法证明读取了安装的 Skill，因此以
+`GUIDE_ORIGIN_NOT_VERIFIED` 保持失败。不能断言模型实际读取过晚，也不降低顺序
+保护。最终回归1704通过/55跳过，真实 Linux 安装包与普通/只读 MCP 通过。
+Windows GUI/abort/准确率/100ms 检查仍为 NOT_RUN。
+参见[.53 记录](../validation/2026-10-14/codex-project-profile-0153.json)。
+
 不可变 .52 CI 的15项实际构建/安装与合并均通过；15个包中的68个源文件/指南及
 契约与固定 Git 提交一致。实际日志验证初次安装、更新、CURRENT，以及 checksum/
 download/smoke 失败时的保留。合成更新 fixture 最终为 .53，实际候选为 .52。

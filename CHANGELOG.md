@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+- Bind native Codex verification to the approved MCP transport through an owned
+  private profile and scope-only CLI controls above trusted project settings.
+  Use the actual working directory for preflight and execution; preserve user
+  settings and edited temporary profiles. Report complete observed guide text
+  separately from proven installed origin without weakening loading/order guards.
+  Record native configuration, packaged MCP, model and regression evidence
+  separately from pending Windows GUI and performance acceptance.
+
 - Verify immutable .52 CI15/15, source-bound archives and native installer
   failure preservation. Record actual Windows SSH/Tailscale connection failures
   before remote execution; leave .52 installed CLI/MCP/model/GUI checks NOT_RUN
