@@ -1,5 +1,25 @@
 # Reactive runtime execution status
 
+## .56 positive-failure and impasse audit, 2026-10-14
+
+**OBSERVED / retained .55 native records:** explicit OMP has3 failed calls:
+`write` to read-only `skill://clef-use`, then2 other write attempts denied by
+user policy. Natural has2 native `computer_status` errors:
+`runtime service is not running`, including invocation before the required
+guide. These are actual native errors, not successful results misclassified by
+the verifier. Current read-only MCP explicitly does not start runtime; capability
+discovery works without it. No permission/error/ordering guard is weakened.
+
+**OBSERVED / current boundary:** passive local native Tailscale state, uniquely
+bound to the actual `ssh -G win` target, reports local Running/online and target
+offline. No remote command, SSH/ping probe, model, capture, focus or input is
+requested. Another session retains user-confirmed input ownership. Own CI and
+agents are terminal; this is not a verified process wait. No supported source
+correction was identified in this audit. Original requirements/statuses/gates
+stay unchanged. This is the first consecutive impasse turn after .56 progress;
+Goal remains ACTIVE, not complete or blocked. See the
+[native failure audit](validation/2026-10-14/native-positive-failure-audit-0156.json).
+
 ## Immutable .56 native CI, 2026-10-14
 
 **OBSERVED / exact source and native installers:** 5c787bb passes all15 platform

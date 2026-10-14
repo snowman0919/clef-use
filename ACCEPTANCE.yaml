@@ -100,6 +100,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/native-positive-failure-audit-0156.json
+    section: positive_failures
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
     section: installed_diagnostic_replay
     claim: OBSERVED
