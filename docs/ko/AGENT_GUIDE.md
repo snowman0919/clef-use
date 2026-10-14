@@ -1,5 +1,13 @@
 # 에이전트 설치·사용·복구
 
+변경 불가능한 .51 CI의 플랫폼 설치/패키지 검사 15개가 통과했습니다. Windows 별도
+설치본은 integration-preview 없이 설치/CURRENT를 통과했고 공용 .49와 기존 등록을
+보존했습니다. 다른 설치본의 프로필 갱신은 0건입니다. LIMITED 토큰 CLI/MCP와
+수정·타 설치본 launcher 거부도 통과했습니다. 작업 부재는 확인했지만 SSH 제어 명령
+시간 초과 후 종료코드는 회수하지 못했습니다. 다른 세션이 Windows를 조작하므로
+Codex .51, 공용 업데이트, GUI/성능 검증은 NOT_RUN입니다.
+[.51 기록](../validation/2026-10-14/windows-isolated-ci-0151.json)을 확인하세요.
+
 불변 .50 CI의 15개 플랫폼 설치·아카이브 검사가 통과했습니다. 전용 Windows 후보
 설치본은 `--integration-preview`로 CLI 설치, CURRENT, 파일·LIMITED 토큰 MCP 검사를
 통과했습니다. 다른 세션이 Windows를 조작하므로 공유 .49와 활성 하네스 등록은 보존합니다.

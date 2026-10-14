@@ -1,5 +1,13 @@
 # エージェントの設定・使用・復旧
 
+不変の .51 CI で15件のネイティブインストール/パッケージ検査が合格しました。
+Windows の独立 .51 は integration-preview なしで install/CURRENT が合格し、
+共有 .49 と既存登録を保持しました。他のインストールのプロファイル更新は0件です。
+LIMITED トークンの CLI/MCP と編集済み・別所有 launcher の拒否も合格しました。
+タスクの不在は確認しましたが、SSH 制御の timeout 後の終了コードは取得できません。
+別セッションが Windows を操作中のため、Codex .51、共有更新、GUI/性能は NOT_RUN
+です。[.51 記録](../validation/2026-10-14/windows-isolated-ci-0151.json)を参照してください。
+
 不変 .50 CI は 15 プラットフォームのインストール・アーカイブ検証に成功しました。
 専用 Windows 候補は `--integration-preview` で CLI インストール、CURRENT、ファイルと
 LIMITED トークンの MCP 検証に成功しました。別セッションが Windows を操作中のため、

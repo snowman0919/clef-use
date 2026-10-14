@@ -1,5 +1,12 @@
 # 代理安装、使用与恢复
 
+不可变的 .51 CI 已通过15项原生安装/包检查。Windows 独立 .51 不使用
+integration-preview，安装/CURRENT 通过并保留共享 .49 与现有注册；其他安装的
+配置刷新为0。LIMITED 令牌 CLI/MCP、修改过或属于其他安装的 launcher 拒绝检查
+通过。已确认任务不存在，但 SSH 控制命令超时后未能取得退出码。其他会话仍操作
+Windows，因此 Codex .51、共享更新和 GUI/性能为 NOT_RUN。
+参见[.51 记录](../validation/2026-10-14/windows-isolated-ci-0151.json)。
+
 不可变 .50 CI 已通过 15 个平台的安装与归档检查。专用 Windows 候选安装使用
 `--integration-preview`，通过 CLI 安装、CURRENT、文件和 LIMITED 令牌下的 MCP 检查。
 另一会话正在操作 Windows，因此保留共享 .49 和活动工具环境注册。标准更新、

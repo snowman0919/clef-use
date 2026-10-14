@@ -4,8 +4,8 @@
 別の root/bin への新規インストールは他の承認済みプロファイルを変更しません。
 ユーザーが編集した launcher や別 root の launcher は保持して拒否します。
 別の `CLEF_USE_BIN_DIR` を指定してください。登録ロック内で所有関係を再確認します。
-launcher 保護には新しいインストーラーが必要です。取得済みの 0.1.50 bootstrap が
-新しい CLI の起動前に共有 launcher を上書きする動作は修正できません。
+launcher 保護には新しいインストーラーが必要です。0.1.50 bootstrap または CLI は
+新 CLI の登録チェック前に旧インストーラーを実行するため、この保護は遡及できません。
 旧 CLI による自身の更新では新 CLI の登録所有チェックが適用されます。
 手動移行では `integrations refresh --managed-only --command-path` に
 `--previous-command` を明示できます。

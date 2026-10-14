@@ -4,8 +4,8 @@
 별도 root/bin에 새로 설치해도 다른 설치본의 승인된 프로필을 가져오지 않습니다.
 사용자가 수정했거나 다른 root에 속한 launcher는 보존하고 거절하므로 별도
 `CLEF_USE_BIN_DIR`을 지정하세요. 등록 잠금 안에서 소유권을 다시 확인합니다.
-이 launcher 보호에는 새 설치 프로그램이 필요합니다. 이미 내려받은 0.1.50
-bootstrap이 새 CLI 실행 전에 공용 launcher를 덮어쓰는 동작까지 고칠 수는 없습니다.
+이 launcher 보호에는 새 설치 프로그램이 필요합니다. 0.1.50 bootstrap이나 CLI는
+새 CLI의 등록 검사 전에 구버전 설치 코드를 실행하므로 launcher 보호를 소급 적용할 수 없습니다.
 구버전 CLI로 자기 설치본을 업데이트하면 새 CLI의 등록 소유권 검사가 적용됩니다.
 수동 이동은 `integrations refresh --managed-only --command-path`에
 `--previous-command`를 명시할 수 있습니다.

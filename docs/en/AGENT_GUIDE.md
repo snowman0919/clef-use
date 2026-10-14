@@ -1,5 +1,14 @@
 # Agent setup, use and recovery
 
+Immutable .51 CI passes fifteen native installer/archive checks. An owned
+Windows .51 installation passes install/CURRENT WITHOUT integration-preview,
+preserving shared .49 and existing profiles; zero foreign profiles refresh.
+LIMITED-token CLI/MCP and edited/foreign-launcher refusal checks pass. Task
+absence is observed, but its exit code was not recovered after controller SSH
+timeouts. Native Codex .51, shared update and GUI/performance remain NOT_RUN
+while another session operates Windows. See the
+[.51 receipt](../validation/2026-10-14/windows-isolated-ci-0151.json).
+
 Immutable .50 CI passes fifteen platform installation/archive checks. An owned
 Windows candidate passes CLI installation, CURRENT, payload and LIMITED-token
 MCP checks with `--integration-preview`, preserving shared .49 and active harness

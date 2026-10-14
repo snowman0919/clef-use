@@ -1,5 +1,43 @@
 # Reactive runtime execution status
 
+## Immutable .51 CI and native Windows ownership, 2026-10-14
+
+**OBSERVED / immutable CI:** [run 38505383417](https://github.com/snowman0919/clef-use/actions/runs/38505383417)
+passes fifteen native build/install jobs and assembly for source
+f0871604b84ce5ea0b9324e4b4c59c6e0acf3ef6. All fifteen downloaded archives match
+68 Git payload files and current contracts. Native installer logs verify
+first/update/CURRENT plus checksum/download/smoke failure preservation. Their
+synthetic update ends at .52; the actual candidate runtime is .51. Public deploy
+is SKIPPED by the existing feature branch guard.
+
+**OBSERVED / actual Windows:** the owned alternate .51 installation now uses the
+canonical PowerShell bootstrap WITHOUT integration-preview. Fresh installation
+reports managed refresh NOT_APPLICABLE; repeat CURRENT refresh changes zero
+profiles. All 13668 protected file snapshots, shared launcher/configuration/auth
+bytes and previous active package files are preserved. Payload68, capabilities
+and offline executable fixtures pass. Separate native Windows checks refuse an
+edited candidate launcher and a fresh root reusing its launcher, preserve bytes,
+and restore only the test's own edit. A fresh shared-launcher version read still
+returns .49. Owned loopbacks stop and runtime endpoints remain absent.
+
+Actual interactive LIMITED-token CLI/payload and read-only stdio MCP checks pass,
+including a real .51 capability call, two tools and eight resources. Scheduled
+start and initial collection SSH controllers each time out after180 seconds;
+read-only inspection finds the actual successful native results. The first
+recovery controller rejects an accidental PowerShell automatic-variable name;
+the corrected controller collects the retained results and observes task absence
+through native Schedule.Service file-not-found HRESULT0x80070002. Native checks
+are not rerun. LastTaskResult is unavailable after the earlier collector and
+remains NOT_RUN, not an inferred zero. Controller failures are retained privately.
+
+No model/capture/focus/input, shared standard update or new harness enrollment is
+requested. The user-confirmed other Windows operator remains the input ownership
+condition. Installed Codex .51, GUI/abort/browser/editor, the same1000 declared
+opportunities with correct-input p95<=100ms/coverage/goodput, Reici independent
+results and public URL/hash/install/update proof remain open. Original acceptance
+statuses/gates are unchanged. See the
+[CI/Windows receipt](validation/2026-10-14/windows-isolated-ci-0151.json).
+
 ## Source .51 installation ownership, 2026-10-14
 
 **OBSERVED / actual .50 reproduction:** installing a second runtime in a distinct

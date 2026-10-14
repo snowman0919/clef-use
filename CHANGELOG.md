@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Verify immutable .51 CI15/15 and an actual Windows alternate install/CURRENT
+  without integration-preview, preserving shared .49 and foreign registrations.
+  Verify LIMITED CLI/MCP and native launcher refusals. Retain SSH controller
+  timeouts and unavailable task exit code separately from observed native passes
+  and task absence; keep GUI/model/performance/public-release gates open.
+
 - Restrict automatic guide/MCP refresh to the updating installation's prior
   executables or verified release ownership, including old CLI update paths.
   Recheck ownership while holding the registration lock. Preserve foreign

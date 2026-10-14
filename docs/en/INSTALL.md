@@ -5,8 +5,8 @@ the installation being updated. A fresh installation in a separate root/bin
 does not redirect another installation's approved profiles. Modified launchers
 and launchers belonging to another root are refused and preserved; choose a
 separate `CLEF_USE_BIN_DIR`. Ownership is rechecked under the registration lock.
-Use the new installer for that launcher protection: an already downloaded 0.1.50
-bootstrap cannot protect a shared launcher before it runs the new CLI. An old
+Use the new installer for that launcher protection: a 0.1.50 bootstrap or CLI
+still runs its old installer before the new CLI can apply registration checks. An old
 CLI updating its own installation still receives the new CLI's registration
 ownership checks. Manual migration can explicitly name `--previous-command`
 with `integrations refresh --managed-only --command-path`. See the
