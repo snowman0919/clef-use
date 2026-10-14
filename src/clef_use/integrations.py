@@ -1765,6 +1765,8 @@ def _omp_read_only_policy(policies: dict) -> dict:
     approval["write"] = "deny"
     return {
         "tools": {"approvalMode": "always-ask", "approval": approval},
+        # Native OMP force-adds learning writers even to an explicit --tools list.
+        "autolearn": {"enabled": False},
         # Validate against live discovery, not startup-window cached schemas.
         "mcp": {"startupTimeoutMs": 0},
     }

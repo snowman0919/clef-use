@@ -1,5 +1,15 @@
 # 代理安装、使用与恢复
 
+.52 的 `computer_capabilities.operation_id` 会公布精确的注册 family ID。
+先省略参数查询，再从 `operations[].family` 选择；`blender` 等应用名仍被拒绝。
+实际包的普通/只读 MCP 检查通过。Hermes 三项请求通过；OMP 正向请求仍因指南顺序、
+时限和写入拒绝失败，非相关请求通过。OMP 认证相关 DB 行变化的原因和认证值差异
+尚未证实，也未恢复旧值。参见[.52 记录](../validation/2026-10-14/operation-schema-0152.json)。
+此检查点的 Windows .52、GUI/性能验证仍为 NOT_RUN。
+OMP 只读验证会临时禁用被强制加入 `--tools` 之外的自动学习 writer 及其提示，
+保留持久配置。实际 SDK 组件检查通过；修正后，显式请求的 status/写入/时限错误
+及自然语言请求的指南顺序失败仍被保留。
+
 不可变的 .51 CI 已通过15项原生安装/包检查。Windows 独立 .51 不使用
 integration-preview，安装/CURRENT 通过并保留共享 .49 与现有注册；其他安装的
 配置刷新为0。LIMITED 令牌 CLI/MCP、修改过或属于其他安装的 launcher 拒绝检查

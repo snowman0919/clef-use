@@ -1,5 +1,74 @@
 # Reactive runtime execution status
 
+## Source .52 operation schema and native harness results, 2026-10-14
+
+**OBSERVED / actual .51 defect:** the immutable installed MCP schema accepts
+operation_id="blender", while the actual handler returns UNKNOWN_OPERATION.
+Operation IDs are exact registered families. .52 derives the parameter's nullable
+enum from the canonical registry and adds a generated numeric_transform lookup
+example. The existing handler still rejects unsupported IDs; no aliases, service
+startup, input authorization or state/confidence guard is added or weakened.
+
+**OBSERVED / actual .52 package:** canonical Linux installation, source/installed
+payload68 and both normal/read-only stdio MCP pass. All six advertised IDs return
+their actual descriptors, omitted/null discovery passes, and a consumer JSON
+Schema validator rejects blender. The real handler retains UNKNOWN_OPERATION.
+Missing observed state remains BLOCKED/NOT_PROBED. Owned loopback stops; runtime
+endpoint remains absent. These probes request no model, capture, focus or input.
+
+**OBSERVED / final regression:** 1698 passed, 55 skipped, 41 warnings in76.76 seconds.
+Capability regression9 passes after corrected RED cases reject the prior schema.
+Initial test-author KeyError in comparing a summary to a detail descriptor is
+retained separately, not credited as that defect's RED evidence. Ruff/format167,
+generated4 tool/11 CLI examples and published198 CLI/12 tool examples pass.
+Separate scoped read-only review reports no actionable finding.
+
+**OBSERVED / pre-overlay .52 models, once per case:** Hermes explicit/natural/
+negative pass, with4/6/1 actual API requests and management absent in all11.
+All three full native SessionDB exports and canonical response files are retained
+with verified digests. OMP explicit/natural fail at the unchanged90-second native
+deadline; both invoke capabilities before observable guide loading and retain
+denied writer attempts. Explicit also calls status without a running service.
+Negative passes without a guide/runtime attempt. Failures remain FAIL despite
+later valid capability responses; no request is retried to obtain PASS.
+
+**OBSERVED / native OMP read-only scope correction:** the installed SDK force-adds
+learn/manage_skill and automatic-learning guidance outside an explicit --tools
+list when automatic learning is enabled. The temporary verification overlay now
+disables autolearn.enabled while retaining all approval denials/reader policies.
+An actual Settings.loadReadOnly/builtin planner/factory/guidance component probe
+reproduces both writers and guidance before the correction, then retains readers
+while removing them afterward. The structural context is not a full AgentSession
+or executed learning effect. The native global setting remains enabled and its
+approval values stay unchanged. Other memory tools remain covered by existing
+denial/always-ask policies and evidence checks.
+
+The corrected source executes each original OMP case once in a new owned project.
+Explicit now loads core before invocation, but retains stopped-service status,
+denied write and native deadline failures. Natural loads Blender after its first
+capability call and remains FAIL, without failed reader calls. Negative passes
+without guide/runtime attempts. No learning-tool attempt is observed in these
+cases. This is a second source/tool-scope phase, not an unchanged retry; all first
+phase failures are retained. The final source has a separately rebuilt/installed
+package with all68 source payloads verified and the same tested MCP schemas.
+
+Protected configuration bytes and source freeze pass. OMP complete-table HMACs
+change auth_change_revision/auth_credentials/cache/model_perf during this batch.
+The cause and specific credential-material changes are NOT_PROVEN; values are
+not printed, copied into Git or restored. Historical .49 uncertainty and .50
+results remain. The corrected OMP phase changes only cache/model_perf HMACs;
+that does not erase earlier credential uncertainty or prove a causal relationship
+to this overlay. Tool read-only scope is not a claim that native harness auth or
+usage databases are immutable. Hermes export retention does not prove its whole
+database unchanged.
+
+Immutable .52 CI and Windows .52 update are NOT_RUN at this source checkpoint.
+Shared Windows .49 remains preserved under the user-confirmed other operator;
+latest actual Windows candidate proof is .51. Original44 acceptance statuses,
+numeric quality/performance gates, Blender unknown-state limits, Reici pending
+evidence and public-release conditions remain unchanged. See the
+[source .52 receipt](validation/2026-10-14/operation-schema-0152.json).
+
 ## Immutable .51 CI and native Windows ownership, 2026-10-14
 
 **OBSERVED / immutable CI:** [run 38505383417](https://github.com/snowman0919/clef-use/actions/runs/38505383417)

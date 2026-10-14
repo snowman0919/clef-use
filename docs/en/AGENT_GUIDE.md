@@ -1,5 +1,18 @@
 # Agent setup, use and recovery
 
+In .52, `computer_capabilities.operation_id` advertises exact registered family
+IDs. Omit it first, then select `operations[].family`; application names such as
+`blender` remain unsupported. Real packaged normal/read-only MCP probes pass.
+Native Hermes's three canonical cases pass; OMP positive cases still fail guide
+order/deadline/denied-write checks and its negative passes. Credential-related
+OMP database row changes remain unproven as to cause/material, and are not
+restored. See [.52 evidence](../validation/2026-10-14/operation-schema-0152.json);
+Windows .52 and GUI/performance proof remain NOT_RUN at this checkpoint.
+Read-only OMP verification temporarily disables automatic-learning writers and
+their native guidance, which can otherwise be force-added outside `--tools`.
+Persistent settings stay intact. Actual SDK component checks pass; corrected
+model cases retain explicit status/write/deadline and natural guide-order failures.
+
 Immutable .51 CI passes fifteen native installer/archive checks. An owned
 Windows .51 installation passes install/CURRENT WITHOUT integration-preview,
 preserving shared .49 and existing profiles; zero foreign profiles refresh.

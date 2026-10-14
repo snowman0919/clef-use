@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Disable native OMP automatic-learning writers/guidance only in the temporary
+  read-only verification overlay. Preserve saved settings, reader restrictions,
+  approval denials and canonical model requests/deadlines. Verify actual native
+  SDK construction and new model cases while retaining earlier failures and
+  credential-row uncertainty.
+
 - Advertise exact capability operation IDs from the canonical registry, including
   omitted/null discovery and a generated detail-query example. Preserve existing
   UNKNOWN_OPERATION errors and missing-state guards. Record actual .51 schema
