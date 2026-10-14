@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- Advertise exact capability operation IDs from the canonical registry, including
+  omitted/null discovery and a generated detail-query example. Preserve existing
+  UNKNOWN_OPERATION errors and missing-state guards. Record actual .51 schema
+  mismatch, .52 packaged MCP probes and canonical Hermes/OMP cases separately;
+  OMP positive failures and credential-row uncertainty remain visible.
+
 - Verify immutable .51 CI15/15 and an actual Windows alternate install/CURRENT
   without integration-preview, preserving shared .49 and foreign registrations.
   Verify LIMITED CLI/MCP and native launcher refusals. Retain SSH controller

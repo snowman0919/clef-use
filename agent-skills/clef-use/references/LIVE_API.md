@@ -12,6 +12,14 @@ Send to `computer_capabilities`:
 }
 ```
 
+Send to `computer_capabilities`:
+
+```json
+{
+  "operation_id": "numeric_transform"
+}
+```
+
 Send to `computer_observe`:
 
 ```json

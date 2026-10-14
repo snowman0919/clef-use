@@ -76,6 +76,31 @@ def test_unknown_operation_is_not_discovered_as_executable():
         capabilities(operation_id="shell")
 
 
+@pytest.mark.parametrize("read_only", [False, True])
+async def test_capability_schema_accepts_only_registered_operation_ids(read_only):
+    from jsonschema import Draft202012Validator
+    from mcp.server.fastmcp.exceptions import ToolError
+
+    server = create_server(read_only=read_only)
+    tools = {tool.name: tool for tool in await server.list_tools()}
+    validator = Draft202012Validator(tools["computer_capabilities"].inputSchema)
+    for arguments in ({}, {"operation_id": None}):
+        validator.validate(arguments)
+    for invalid in ("blender", "shell", "numeric-transform", ""):
+        assert not validator.is_valid({"operation_id": invalid})
+        with pytest.raises(ToolError, match="UNKNOWN_OPERATION"):
+            await server.call_tool("computer_capabilities", {"operation_id": invalid})
+    for operation in capabilities(detail=True)["operations"]:
+        arguments = {"operation_id": operation["family"]}
+        validator.validate(arguments)
+        result = await server.call_tool("computer_capabilities", arguments)
+        content = result[0] if isinstance(result, tuple) else result
+        descriptor = json.loads(content[0].text)
+        assert descriptor["family"] == operation["family"]
+        assert descriptor["requires"] == list(operation["requires"])
+        assert descriptor["default_runtime_availability"]["live_probe"] == "NOT_PROBED"
+
+
 def test_default_operation_availability_matches_unknown_compiled_state():
     from PIL import Image
 

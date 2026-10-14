@@ -24,6 +24,7 @@ from clef_use.cli import parser
 ROOT = Path(__file__).resolve().parents[1]
 EXAMPLES = [
     {"tool": "computer_capabilities", "arguments": {"detail": False}},
+    {"tool": "computer_capabilities", "arguments": {"operation_id": "numeric_transform"}},
     {"tool": "computer_observe", "arguments": {"include_image": True, "refresh": True}},
     {
         "tool": "computer_run",

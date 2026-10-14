@@ -7,6 +7,12 @@
       }
     },
     {
+      "tool": "computer_capabilities",
+      "arguments": {
+        "operation_id": "numeric_transform"
+      }
+    },
+    {
       "tool": "computer_observe",
       "arguments": {
         "include_image": true,

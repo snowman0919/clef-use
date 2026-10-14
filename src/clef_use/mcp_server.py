@@ -1,19 +1,22 @@
 import asyncio
 import json
 import os
+from typing import Annotated
 
 from mcp.server.fastmcp import FastMCP
 from mcp.types import ImageContent, TextContent, ToolAnnotations
+from pydantic import Field
 
 from .client import RuntimeClient
 from .config import load_config
-from .operations import OperationRequest
+from .operations import OperationRequest, operation_registry
 from .schema import Contract, PointerInput, SessionResult, TextInput, VisualIntent
 from .update_notice import startup_update_request
 
 
 def create_server(client=None, update_request="", read_only=False):
     client = client or RuntimeClient(start=not read_only)
+    operation_ids = [operation["family"] for operation in operation_registry()]
     server = FastMCP(
         "clef-use",
         instructions=(
@@ -142,7 +145,17 @@ def create_server(client=None, update_request="", read_only=False):
             readOnlyHint=True, destructiveHint=False, idempotentHint=True, openWorldHint=False
         )
     )
-    def computer_capabilities(detail: bool = False, operation_id: str | None = None) -> dict:
+    def computer_capabilities(
+        detail: bool = False,
+        operation_id: Annotated[
+            str | None,
+            Field(
+                description="Exact registered family from operations[].family; omit to discover "
+                "IDs. Application names are not operation IDs.",
+                json_schema_extra={"enum": [*operation_ids, None]},
+            ),
+        ] = None,
+    ) -> dict:
         """Discover installed product versions, inputs and schemas; no capture/model/input."""
         from .capabilities import capabilities, digest
 
