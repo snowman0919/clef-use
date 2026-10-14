@@ -1,5 +1,16 @@
 # 代理安装、使用与恢复
 
+.55 公共 Skill 使用 native reader 或目录提供的绝对路径读取正文及文件引用。
+真实 Codex 自然语言请求已验证 Blender Skill 加载后调用 capability；core 来源仍
+未证实，显式请求仍 FAIL，非 GUI 请求 PASS。Hermes 三种请求在另一专用 profile
+中 PASS；包含注册操作的原始保留汇总 false 保留，无关配置另行核实。OMP 阳性
+因 write/status/顺序/deadline 失败，阴性因 deadline 为 NOT_RUN。认证表的值变化
+仍未证实。验证将 SDK 预检和模型阶段分开，不能以 SDK PASS 代替未调用或失败的
+模型调用。最终安装版对真实记录的重判与新模型/GUI 运行分开。全部回归1754通过/
+55跳过，Linux 安装69个文件及 MCP 通过。Windows 输入仍由另一会话拥有，真实
+GUI/准确率/100ms 条件仍未达成。
+参见[.55 证据](../validation/2026-10-14/guide-path-and-model-stages-0155.json)。
+
 固定到 b6c9a27 的 .54 CI 通过15项真实平台构建/安装与合并。下载的69个 Git
 文件及契约一致；真实安装日志验证初次/更新/CURRENT，以及失败时保留。
 实际 .54 与合成最终 .55 分开记录。公开部署由 feature guard 跳过。保留另一

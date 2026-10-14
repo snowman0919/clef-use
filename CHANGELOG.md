@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- Prefer native Skill readers or catalog-supplied absolute paths in the common
+  guide metadata and linked-file guidance. Separate native SDK preflight stages
+  from model-loaded/invoked evidence; preserve call failures and deadlines.
+  Record installed native cases and final installed exact-record replay separately,
+  including partial Codex routing, Hermes enrollment preservation qualification
+  and OMP failures/credential-material uncertainty.
+
 - Verify immutable .54 CI15/15 and all69 source/guide payload files/contracts.
   Confirm native first/update/CURRENT and failed-update preservation, keeping
   actual .54 separate from synthetic .55. Leave shared Windows input, real-task

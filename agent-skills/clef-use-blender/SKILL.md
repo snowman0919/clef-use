@@ -1,6 +1,6 @@
 ---
 name: clef-use-blender
-description: Use clef-use for Blender GUI work, read-only questions about its Blender capabilities or limitations, menu or scene-state assessment, selection, transforms, viewport gestures, materials, or rig inspection. Not a primitive avatar generator or a substitute for asset-quality review.
+description: Use clef-use for Blender GUI work, read-only questions about its Blender capabilities or limitations, menu or scene-state assessment, selection, transforms, viewport gestures, materials, or rig inspection. Not a primitive avatar generator or a substitute for asset-quality review. When selected, load with the native Skill reader or its discovered absolute SKILL.md path.
 metadata:
   guide-contract: "1"
   authored-against: "0.1.29"
@@ -11,6 +11,9 @@ metadata:
 Use this guide for read-only Blender capability questions as well as GUI work.
 Load the core `clef-use` guide when available before invoking runtime tools, then
 inspect current server schemas.
+Use each guide's native Skill reader or catalog-supplied absolute path. For
+filesystem references, resolve them within that guide's discovered directory;
+shell startup directories and similarly named copies do not identify the guide.
 This document describes safe workflows; operation names below are semantic
 intent, not invented MCP tools or proof that the installed release supports them.
 

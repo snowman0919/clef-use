@@ -1,0 +1,769 @@
+{
+  "classification": "OBSERVED_GUIDE_ROUTING_AND_NATIVE_MODEL_STAGE_SCOPE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.55",
+  "partial": true,
+  "requirements": [
+    "GUIDE-02",
+    "GUIDE-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Facts/enums/digests only; native recordings/transcripts, identities, paths, copied profile context and auth/config values stay private.",
+  "change": "Common Skill index/body prefer native reader or catalog-supplied absolute paths. Verification keeps native SDK preflight stages separate and publishes actual model LOADED/INVOKED, including errors and deadlines. No model prompt/provider/deadline, runtime input guard or original gate is weakened.",
+  "actual_native_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.1909298920072615
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.637041117995977
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.55",
+    "source_files_exact": 69,
+    "artifact_sha256": "d145db75b5342c86d63046129819638789c46d56a0da6fd2e5bfa0dd5a1292a9",
+    "owned_loopback_stopped": true,
+    "private_result_sha256": "eeaf503cd42cd6dbca7d6af9383d4ef10f99dceeb211beeb003d05daeaf7860f"
+  },
+  "initial_guide_phase_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.2371407069731504
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.50234522507526
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.55",
+    "source_files_exact": 69,
+    "artifact_sha256": "76c2e6347ab47b6439d950b83cb7343a342f85916d9d666ba98bcee07a87fa8b",
+    "owned_loopback_stopped": true,
+    "private_result_sha256": "22ba3680721aa0cc7fdeb1db976b898ce067fb347c2192c0d81f95a29f4ca768"
+  },
+  "actual_installed_codex_models": {
+    "classification": "ACTUAL_INSTALLED_LINUX_NATIVE_CODEX_CANONICAL_READ_ONLY_CASES",
+    "runtime_version": "0.1.55",
+    "status": "FAIL",
+    "integration_status": "INSTALLED",
+    "source_unchanged_during_batch": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 26.603834399022162,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": "GUIDE_ORIGIN_NOT_VERIFIED",
+        "model_stage_statuses": {
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [
+            "clef-use"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "424bada44e3b08ad81f3ee5a6ae22ce8673df7267230c48aa00856e626e77680",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "fa14deb0156e1830ba71aa791ea071942ae51576efe5df3b42b519ec04b4c1e8",
+          "bound_items": 3
+        }
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 43.397449846961536,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use-blender"
+          ],
+          "observed_guide_bodies": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": true,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "d113f381a02d5cd8b057c51b361cba355ebfef4bad96b5bfecaa87b894fc4bd1",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "af9a1646a2c5d253dd353c3bdeecc53f558ab196d5ff1a1429f6d7591e1197f8",
+          "bound_items": 3
+        }
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 17.038459694944322,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [],
+          "observed_body_before_invoke": false,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "3c372238f61a79a8454151ae9b6cfd3b347f8f2610d09202c755d8fba4cfa1b9",
+        "stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721",
+        "native_recording": {
+          "status": "PASS",
+          "sha256": "a1ca5e6ff03599c3a8822e13dbdd2dfb0c032533f1d91c5bf0c56f0eeda850fb",
+          "bound_items": 0
+        }
+      }
+    ],
+    "private_result_sha256": "fe17ba206582d5f4af684cd8d659ce1909ddb6173ff537b7e6c71f271a71ffbc",
+    "native_cli_version": "codex-cli 0.162.1",
+    "provider_model_request_budget_override": false,
+    "gui_or_input_requested": false,
+    "protected_config_auth_native_binary_bytes_preserved": true,
+    "owned_temporary_profiles_removed": true
+  },
+  "actual_installed_hermes_models": {
+    "classification": "ACTUAL_NATIVE_CANONICAL_READ_ONLY_MODEL_BATCH",
+    "runtime_version": "0.1.55",
+    "status": "FAIL",
+    "integration_status": "INSTALLED",
+    "source_unchanged_during_batch": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 39.926990828011185,
+        "actual_api_attempts": 5,
+        "management_absent_all_actual_api_requests": true,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use"
+          ],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": null,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "51d1d53d342028ba65c8dfe2399e3ea5eda76195aac81afa8dcdb4b646f230ee"
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 32.566851372946985,
+        "actual_api_attempts": 4,
+        "management_absent_all_actual_api_requests": true,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use-diagnostics",
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": null,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "a5a07cfb04846354b65267c4cd1d556e399a9fe73ad40e994bd35d678b33a49e"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 13.686642908956856,
+        "actual_api_attempts": 1,
+        "management_absent_all_actual_api_requests": true,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": null,
+          "invalid_inventory": null
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "afd6eb313e82d8297ffd3851d7ece78addbd539a294ce5ab39d53e2ac74932f4"
+      }
+    ],
+    "private_result_sha256": "40f143322835a10c621063d770dadbec5a08fdd8cc34c8ad84b8a52563f561d1",
+    "harness": "hermes",
+    "provider_model_canonical_request_budget_override": false,
+    "protected_configuration_file_bytes_preserved": false,
+    "native_database_tables_changed": []
+  },
+  "actual_installed_omp_models": {
+    "classification": "ACTUAL_NATIVE_CANONICAL_READ_ONLY_MODEL_BATCH",
+    "runtime_version": "0.1.55",
+    "status": "FAIL",
+    "integration_status": "INSTALLED",
+    "source_unchanged_during_batch": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "native_exit_code": 1,
+        "wall_seconds": 91.05959685810376,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "FAIL"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use"
+          ],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": null,
+          "invalid_inventory": false
+        },
+        "failed_call_count": 3,
+        "read_only_violations": [
+          "write"
+        ],
+        "trace_sha256": "370b511f7642f0be6f317b00be42fa3793e935558ad6e183203f1005a427738a",
+        "native_results_sha256": "7ac715132c0fad62cd749b20ce1eb8b785fa8671ed42b4317e3d7b53fe09cae9"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "native_exit_code": 1,
+        "wall_seconds": 91.09313047805335,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "FAIL"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": null,
+          "invalid_inventory": false
+        },
+        "failed_call_count": 2,
+        "read_only_violations": [],
+        "trace_sha256": "8abdbd0816024ba392d9ffe3eda056826c5c0633a8a07938c156ddbde197747c",
+        "native_results_sha256": "7ac715132c0fad62cd749b20ce1eb8b785fa8671ed42b4317e3d7b53fe09cae9"
+      },
+      {
+        "trigger": "negative",
+        "status": "NOT_RUN",
+        "native_exit_code": 1,
+        "wall_seconds": 91.10606457502581,
+        "actual_api_attempts": null,
+        "management_absent_all_actual_api_requests": null,
+        "reason_code": null,
+        "model_stage_statuses": {
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN"
+        },
+        "initial_outer_stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": null,
+          "invalid_inventory": false
+        },
+        "failed_call_count": 0,
+        "read_only_violations": [],
+        "trace_sha256": "35aa44d27ec36cb087878103719566167f367daed5eae035a5d89309f82e0f78",
+        "native_results_sha256": "7ac715132c0fad62cd749b20ce1eb8b785fa8671ed42b4317e3d7b53fe09cae9"
+      }
+    ],
+    "private_result_sha256": "79c72ec102f0e7c0952d8175e6a30921bc4352f8b87f078a55ba394d05423f55",
+    "harness": "omp",
+    "provider_model_canonical_request_budget_override": false,
+    "protected_configuration_file_bytes_preserved": true,
+    "native_database_tables_changed": [
+      "auth_change_revision",
+      "auth_credentials",
+      "cache",
+      "model_perf"
+    ]
+  },
+  "model_scope": "These canonical cases ran once after the common guide change and before the display-stage correction. They are actual installed native harness cases, not final GUI tasks. No unchanged retry for PASS. Final stage projection is verified separately with fixtures and exact-record installed replay.",
+  "codex_qualification": "Explicit FAIL retains first relative core read. Natural PASS proves selected Blender load before current capabilities; core full body is observed but origin NOT_PROVEN. Negative PASS. Native recording proves the new loading description reached the model before its first exec; metadata is guidance, not enforcement.",
+  "hermes_native_profile_preparation": {
+    "classification": "ACTUAL_NATIVE_HERMES_PROFILE_PREPARATION",
+    "exit_code": 0,
+    "source_and_global_config_auth_soul_bytes_preserved": true,
+    "destination_created": true,
+    "gui_or_input_actions": 0,
+    "model_requests": 0,
+    "default_profile_switch_requested": false,
+    "alias_or_channel_clone_requested": false,
+    "first_failure": "CLI rejects --no-skills with --clone-from before creating profile"
+  },
+  "hermes_owned_profile_preparation": {
+    "classification": "OWNED_CLONED_PROFILE_PREPARATION",
+    "only_selected_mcp_namespace_changed": true,
+    "cloned_selected_guides_retained_outside_discovery": [
+      "clef-use",
+      "clef-use-blender",
+      "clef-use-diagnostics"
+    ],
+    "models_requested": 0,
+    "source_profile_modified": false,
+    "force_or_guard_bypass": false
+  },
+  "hermes_preservation_postcheck": {
+    "classification": "POSTCHECK_OWNED_PROFILE_ENROLLMENT",
+    "only_selected_mcp_configuration_changed": true,
+    "unrelated_configuration_bytes_preserved": true,
+    "raw_aggregate_preservation_false_retained": true,
+    "raw_controller_error": "Owned selected profile config was snapshotted before intentional enrollment; the aggregate includes its expected MCP change.",
+    "global_original_pre_model_per_file_hashes_saved": false,
+    "global_original_after_sdk_byte_preservation": "NOT_SEPARATELY_PROVEN_FROM_AGGREGATE",
+    "new_owned_env_matches_source": "NOT_PROVEN_SOURCE_ENV_ABSENT",
+    "retained_first_postcheck_error": "Source profile .env absent; controller incorrectly assumed it existed; no model or file mutation.",
+    "models_requested": 0,
+    "gui_or_input_actions": 0
+  },
+  "hermes_qualification": "Original owned profile CONFLICT before models was preserved. Native CLI created another profile with clone-from/no-alias, without channels/history/default switch. In the owned clone, only copied clef-use MCP namespace was changed and selected cloned guides retained outside discovery. Three actual model cases PASS; raw batch FAIL/aggregate preservation false is retained because the script included intentional enrollment. Postcheck proves unrelated cloned config bytes unchanged; original/global per-file post-SDK preservation is not separately recovered. No credential restoration.",
+  "omp_preservation_limits": {
+    "complete_table_hmac_changes_observed": true,
+    "changed_tables": [
+      "auth_change_revision",
+      "auth_credentials",
+      "cache",
+      "model_perf"
+    ],
+    "credential_material_difference": "NOT_PROVEN",
+    "cause": "NOT_PROVEN_FROM_WHOLE_TABLE_HMAC",
+    "values_printed_or_committed": false,
+    "credentials_restored": false,
+    "configuration_files_bytes_preserved": true
+  },
+  "installed_product_model_stage_replay": {
+    "classification": "ACTUAL_INSTALLED_PRODUCT_ADAPTER_REPLAY_OF_ACTUAL_NATIVE_OMP_RESULTS",
+    "status": "PASS",
+    "model_requests": 0,
+    "gui_or_input_actions": 0,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "outcome": "FAIL",
+        "before_model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "after_model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "FAIL"
+        },
+        "retained_sdk_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "original_trace_bytes_preserved": true
+      },
+      {
+        "trigger": "natural",
+        "outcome": "FAIL",
+        "before_model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "after_model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "FAIL"
+        },
+        "retained_sdk_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "original_trace_bytes_preserved": true
+      },
+      {
+        "trigger": "negative",
+        "outcome": "NOT_RUN",
+        "before_model_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "after_model_stage_statuses": {
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN"
+        },
+        "retained_sdk_stage_statuses": {
+          "LOADED": "PASS",
+          "INVOKED": "PASS"
+        },
+        "original_trace_bytes_preserved": true
+      }
+    ],
+    "outcomes_or_guards_changed": false
+  },
+  "regression": {
+    "classification": "OBSERVED",
+    "passed": 1754,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 108.55,
+    "scoped_passed": 333,
+    "full_log_sha256": "acf937bd03e8b215141706df7da8453e369fb8131e5e968addce48c1778cb715",
+    "stage_scope_red": "4FAIL: SDK preflight falsely credits no-call model deadlines and hides failed model invocation",
+    "stage_scope_green": "4PASS",
+    "skill_format_validation": "3PASS",
+    "ruff_and_format": "PASS169_FILES",
+    "generated_examples": "PASS4_TOOL_11_CLI_198_PUBLISHED_CLI_12_PUBLISHED_TOOL"
+  },
+  "windows_transport": {
+    "classification": "ACTUAL_PASSIVE_NATIVE_TRANSPORT_OBSERVATION",
+    "backend": "Running",
+    "local_online": true,
+    "win_online": false,
+    "ssh_or_ping_requested": false,
+    "remote_install_model_capture_focus_or_input_requested": false
+  },
+  "retained_controller_failures": [
+    "Native profile create rejects --no-skills with --clone-from before creating profile; supported CLI form succeeds without source/global config/auth/SOUL byte changes.",
+    "First profile postcheck assumes source .env exists; it is absent. Corrected postcheck keeps auth-source equivalence unproven.",
+    "Initial Hermes protected-file aggregate counted intentional own-profile enrollment; false flag is retained and not converted into broad preservation PASS."
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_OR_PARTIAL",
+      "condition": "Actual .55 Codex explicit FAIL/origin unproven, natural selected Blender PASS/core origin unproven, negative PASS. Hermes model3PASS with qualified preservation aggregate. OMP positives FAIL/write/status/order/deadline, negative NOT_RUN/deadline. Current stage projection preserves those failures; credential material/global preservation limitations remain."
+    },
+    {
+      "requirements": [
+        "INSTALL-02",
+        "INSTALL-03",
+        "INSTALL-09",
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02"
+      ],
+      "status": "NOT_RUN_WINDOWS_0154",
+      "condition": "Last native passive peer status offline; prior bounded SSH exit255 Connection timed out before remote execution. Another session owns input. No new remote install/MCP/model/capture/focus/input or shared .49 update."
+    },
+    {
+      "requirements": [
+        "INPUT-05",
+        "E2E-01"
+      ],
+      "status": "BLOCKED_UNKNOWN_DISPATCH_STATE",
+      "condition": "Historical collector/provider/compiler11 proven facts and8 UNKNOWN facts; all6 operation families BLOCKED with zero input. Public RNA/UIA cannot prove popup/input owner/effective keymap/IME/idle; external host build out of scope. File-menu0/5 remains separate recognition failure."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "E2E-02"
+      ],
+      "status": "FAIL_HISTORICAL_TASKS",
+      "condition": "Codex Confirm ACT0.6958 below0.9 despite retained candidate; browser/editor parser deadline and independent completion readback remain. No threshold lowered."
+    },
+    {
+      "requirements": [
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN",
+      "condition": "Same pinned complete real tasks >=1000 opportunities, correct state-change-to-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review remain unmeasured."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN",
+      "condition": "Separate-session matched-view Reici result pending."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY",
+      "condition": "Feature guard permits main/tag only. No main/tag/force/bypass; package/native CI is partial proof."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

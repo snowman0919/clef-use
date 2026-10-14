@@ -1,5 +1,5 @@
 {
-  "runtime_version": "0.1.54",
+  "runtime_version": "0.1.55",
   "api_schema_version": 1,
   "guide_contract_version": 1,
   "api_range": ">=0.1.29,<0.2",
@@ -13,25 +13,25 @@
   "skills": {
     "clef-use": {
       "sha256": {
-        "SKILL.md": "aa69c2d764bb76431895071007453462b22d2f65074016f6c6cbaad6adc34937",
+        "SKILL.md": "3e802b64f122cbf0156f4a13d3d5390ac49a56a98aaede05843c327b4588ec2c",
         "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
         "references/LIVE_API.md": "6170201d79ac54e74fe7ed7ac798039ef5979216e8fc4da5868eb155cf05e977"
       },
-      "digest": "1bd492306e5994ca3f085dccb8317feacf73356eeb122819fed043e6300e6581"
+      "digest": "e2251f0a09d69e0463b2b2128ae19cb3571dbf3d06d530efddb466e65bf56e43"
     },
     "clef-use-blender": {
       "sha256": {
-        "SKILL.md": "942db48a02e05df559bd7d790f0d172b2e01d35c462f84b45a7f3494e66daa6f",
+        "SKILL.md": "65d484815a39cc579c25afe8ee527cbbece6383b3d92d147f167fab6a888c4b7",
         "references/OPERATIONS.md": "4c6b02d1611f1ddf1b1a68b6f011084650eb5dbf5f9b8cdc456ba7f530574571"
       },
-      "digest": "ea3c054ccaeecf069a358b48deb682391354d2aa012661046d4369485cbcced1"
+      "digest": "6fc72a517079ed3cedfdc4126a7d5ae4e429e4f98e3de1bc7af081198b6f468e"
     },
     "clef-use-diagnostics": {
       "sha256": {
-        "SKILL.md": "e9811bc7220c6c85391114c1e79fd621cbf39a2c733aa57839f968347f6da147",
+        "SKILL.md": "a2fff631c96f1d96ee3d2775e497f73a842cc56dd78e2804515b6a2028125bc2",
         "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
       },
-      "digest": "86c5752f7533476ea93df8b89a5db269e820396ba4bc0d3c7f80d3efddf8fb75"
+      "digest": "97663a446464332462d33f32ac3fadafb46a35d537f0eebe0aca8317bf454dc1"
     }
   }
 }

@@ -1768,6 +1768,10 @@ else:
     if adapter == "hermes_native":
         return integrations._hermes_native(layout, manifest, str(executable), home, result)
     if adapter == "omp_model":
+        # The real model adapter receives a completed SDK preflight. Its guide
+        # reads and capability calls must not become model-trigger evidence.
+        result["stages"]["LOADED"] = {"status": "PASS", "skills": ["clef-use"]}
+        result["stages"]["INVOKED"] = {"status": "PASS", "tools": ["computer_capabilities"]}
         return integrations._verify_omp_model(
             layout, manifest, str(executable), home, result, trigger, {}
         )
@@ -2195,6 +2199,29 @@ def test_successful_calls_do_not_prove_model_completion_after_process_error(
     )
     assert result["model_trigger_verification"]["stages"]["INVOKED"]["status"] == "PASS"
     assert result["status"] == "NOT_RUN"
+
+
+@pytest.mark.parametrize("adapter", ["hermes_model", "omp_model"])
+def test_sdk_preflight_success_does_not_credit_model_guide_or_invocation_on_deadline(
+    installation, monkeypatch, adapter
+):
+    result = _controlled_verification(
+        installation, monkeypatch, adapter, None, "negative", "none", model_exit_code=1
+    )
+    assert result["status"] == "NOT_RUN"
+    assert result["stages"]["LOADED"]["status"] == "NOT_RUN"
+    assert result["stages"]["INVOKED"]["status"] == "NOT_RUN"
+
+
+@pytest.mark.parametrize("adapter", ["hermes_model", "omp_model"])
+def test_sdk_preflight_success_does_not_hide_native_model_call_failure(
+    installation, monkeypatch, adapter
+):
+    result = _controlled_verification(
+        installation, monkeypatch, adapter, {"content": [], "isError": True}, "explicit"
+    )
+    assert result["status"] == "FAIL"
+    assert result["stages"]["INVOKED"]["status"] == "FAIL"
 
 
 @pytest.mark.parametrize("adapter", ["codex_model", "hermes_model", "omp_model"])

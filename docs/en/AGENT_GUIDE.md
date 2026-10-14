@@ -1,5 +1,19 @@
 # Agent setup, use and recovery
 
+.55 guides prefer the native Skill reader or the absolute path supplied by the
+catalog, including filesystem references. Native Codex natural now verifies the
+selected Blender load before capabilities; core origin remains unproven and
+explicit still fails. Negative passes. Hermes cases pass in another owned profile;
+its intentional enrollment affects the raw preservation aggregate, qualified by
+an unrelated-config postcheck. OMP positives fail write/status/order/deadline
+checks and negative is NOT_RUN at the deadline; credential-table material changes
+remain unproven. Verification separates SDK preflight from actual model stages,
+so component PASS cannot credit a missing or failed model invocation. Actual-record
+installed replay passes; it is not a new model/GUI run. Final regression1754/55
+and Linux package/MCP69 files pass. Windows input stays with another session;
+actual GUI/accuracy/100ms acceptance remains open. See
+[.55 evidence](../validation/2026-10-14/guide-path-and-model-stages-0155.json).
+
 Immutable .54 CI at b6c9a27 passes all15 native platform builds/installations
 and assembly. Downloaded packages match69 Git payload files and contracts;
 native logs verify first/update/CURRENT and failure preservation. Actual .54

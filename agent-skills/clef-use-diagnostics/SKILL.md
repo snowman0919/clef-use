@@ -1,12 +1,16 @@
 ---
 name: clef-use-diagnostics
-description: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or mode, input failures, and latency. Use on actual errors or requested audits; prefer read-only evidence and preserve user settings.
+description: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or mode, input failures, and latency. Use on actual errors or requested audits; prefer read-only evidence and preserve user settings. When selected, load with the native Skill reader or its discovered absolute SKILL.md path.
 metadata:
   guide-contract: "1"
   authored-against: "0.1.29"
 ---
 
 # Diagnose clef-use without manufacturing success
+
+Use the native Skill reader or the catalog-supplied absolute Skill path. Resolve
+filesystem references inside that discovered directory. A shell's starting cwd
+does not prove where a relative read resolves after startup.
 
 For an application-specific question, load the discovered core and application
 guides when available before interpreting supported operations. For Blender,

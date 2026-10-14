@@ -1,5 +1,50 @@
 # Reactive runtime execution status
 
+## Source .55 guide paths and model-stage scope, 2026-10-14
+
+**OBSERVED / guide change and installed harness cases:** common Skill metadata
+and bodies prefer the native reader or catalog-supplied absolute paths. Native
+Codex records show the new description before the first exec. Actual installed
+Codex explicit FAIL26.6038s, natural PASS43.3974s, negative PASS17.0385s. Natural
+proves selected Blender guide origin/delivery before current capabilities; core
+whole text is observed but its origin is NOT_PROVEN. Explicit retains first
+relative core read and GUIDE_ORIGIN_NOT_VERIFIED. No unchanged retry for PASS.
+
+**OBSERVED / Hermes:** original owned profile CONFLICT before any model is
+preserved. Native CLI creates another profile using clone-from/no-alias without
+channels/history/default switch. Only its copied clef-use MCP namespace changes;
+selected copied guides remain outside discovery. Actual cases PASS39.9270s /
+PASS32.5669s /PASS13.6866s, with management absent from actual API schemas. Raw
+batch FAIL/aggregate preservation false remains: the controller snapshots owned
+config before intentional enrollment. Postcheck proves unrelated cloned config
+bytes unchanged; original/global per-file post-SDK preservation and auth-source
+equivalence are not separately proved. No credential restoration is attempted.
+
+**OBSERVED / OMP:** native discovery and actual model calls execute; all cases
+exit1 near91s. Explicit FAIL has denied write/failed calls; natural FAIL has early
+runtime/status failures; negative NOT_RUN has no guide/runtime call but reaches
+the90s model deadline. Configuration bytes remain unchanged. Whole-table HMACs
+change for auth revision/credentials/cache/model_perf; material/cause remain
+NOT_PROVEN, not restored or exposed. This is not an auth outage claim.
+
+**OBSERVED / presentation correction and final package:** four regressions first
+FAIL because SDK preflight PASS incorrectly credits model deadlines/errors; after
+correction4 PASS. `native_sdk_stages` retains component proof, while `stages`
+reports actual model LOADED/INVOKED. Exact actual OMP records replay through the
+final installed adapter: positive INVOKED FAIL; negative LOADED/INVOKED NOT_RUN;
+original traces/outcomes/guards unchanged, zero new models/input. These model
+cases precede the stage correction; replay is not a fresh final model or GUI run.
+Final actual Linux package69 files and normal6/read-only2 MCP pass. Full1754
+PASS/55 SKIP/41 warnings108.55s; scoped333, format/lint169 and all generated/
+published examples pass. Three Skill format checks pass.
+
+Fresh passive native status again reports local Running/online and win offline;
+no SSH/ping/install/model/capture/focus/input is requested there. Another session
+owns input. Original44 counts34 PASS/3 FAIL/7 NOT_RUN remain; GUIDE-03 is partial/
+FAIL. Blender8 UNKNOWN/File0/5, original GUI failures, same-task accuracy/100ms/
+coverage/goodput, separate Reici and public deployment stay open. See the
+[.55 receipt](validation/2026-10-14/guide-path-and-model-stages-0155.json).
+
 ## Immutable .54 native CI, 2026-10-14
 
 **OBSERVED / CI and downloaded artifacts:** exact b6c9a27 passes all15 native
@@ -119,18 +164,18 @@ original accuracy/coverage/goodput/100ms/public-deploy gates stay open. No .53
 Windows update or input check was executed. See the
 [.53 receipt](validation/2026-10-14/codex-project-profile-0153.json).
 
-## Current completion limits after source .54, 2026-10-14
+## Current completion limits after source .55, 2026-10-14
 
 These conditions retain their original acceptance IDs. Older installed failures
-are historical observations, not fresh .54 desktop execution.
+are historical observations, not fresh .55 desktop execution.
 
 | IDs | Status and exact missing evidence |
 |---|---|
-| INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .54 Windows: last passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
+| INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .55 Windows: fresh passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
 | INPUT-04/05, E2E-01/02, PERF-01/02/03 | NOT_RUN for new shared-desktop checks independently of transport: the user confirms another session operates Windows. Exclusive input ownership has not been established; shared .49, active enrollment, focus and input are preserved. |
 | INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch guards remained UNKNOWN: `popup`, `text_focus`, `ime_composing`, `keymap`, `editor`, `loading`, `modal`, `unit`. All6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove those guards in the installed run. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
 | E2E-01/02 | FAIL historical original task results: Codex Continue reached stage1 but Confirm was refused at ACT0.6958 below0.9, despite retained correct candidate/geometry; browser/editor parser deadlines and missing independent completion readback remain. Later offscreen parser completion proves component availability, not full task success. No threshold is lowered. |
-| GUIDE-03 | FAIL final actual .54 Codex positives: complete selected bodies precede current capabilities, but native launch cwd does not prove relative reader cwd after shell startup; LOADED is NOT_RUN. Negative passes. Initial HTTP429 capacity error and superseded natural PASS retained. Historical .52 OMP positives retain real status/write/deadline/order failures. No current auth outage is observed. |
+| GUIDE-03 | FAIL/partial .55: Codex explicit origin unproven, natural selected Blender PASS/core origin unproven, negative PASS. Hermes actual model3PASS with qualified preservation aggregate; original/global per-file post-SDK bytes not separately recovered. OMP positives FAIL/write/status/order/deadline; negative NOT_RUN/deadline. Model stages now separate from SDK preflight; auth-table material changes remain unproven. No auth outage is inferred. |
 | PERF-01/02/03 | NOT_RUN: the same complete pinned real-task suite, at least1000 declared opportunities, correct state-change-to-OS-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review. Fixture/component timings do not satisfy this condition. |
 | E2E-03 | NOT_RUN: independent matched-view Reici evidence from the separate session has not arrived. |
 | RELEASE-01 | NOT_RUN public URL/hash/fresh-install/update: the existing deploy job permits main/tag refs and skips this feature branch. Artifact CI and an owned loopback install are partial evidence; no main/tag/force/guard bypass is authorized here. |

@@ -1730,6 +1730,8 @@ def _verify_hermes(
             ),
         }
     result["model_trigger_verification"] = evidence
+    result["native_sdk_stages"] = {name: dict(stage) for name, stage in result["stages"].items()}
+    result["stages"].update(evidence["stages"])
     if result["model_trigger_verification"]["status"] == "FAIL":
         result["status"] = "FAIL"
     elif result["model_trigger_verification"]["status"] == "NOT_RUN":
@@ -1820,12 +1822,16 @@ def _verify_omp_model(
     atomic_write(trace, run.stdout + run.stderr)
     events = _jsonlines(run.stdout)
     evidence = _omp_model_evidence(layout, manifest, events, trigger, run.returncode, cwd)
+    result["native_sdk_stages"] = {name: dict(stage) for name, stage in result["stages"].items()}
+    result["stages"].update(evidence["stages"])
     result.update(
         trace=str(trace),
         model_driven=True,
         exit_code=run.returncode,
         model_trigger_verification=evidence,
         status=evidence["status"],
+        native_method=result.get("method"),
+        method="installed native OMP SDK preflight + model CLI and complete native results",
         permission_method="native temporary approval overlay; no persistent configuration changes",
     )
     if run.returncode:
