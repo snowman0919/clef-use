@@ -1,5 +1,21 @@
 # Reactive runtime execution status
 
+## Immutable .56 native CI, 2026-10-14
+
+**OBSERVED / exact source and native installers:** 5c787bb passes all15 platform
+build/install jobs and assembly. All15 downloaded archives match69 immutable Git
+payload files and runtime/schema/guide contracts. Native first/update/CURRENT and
+checksum/download/smoke failure preservation pass. Actual .56 and synthetic
+fixture .57 are separate. Public deploy is SKIPPED by the feature guard.
+
+Source .56 regression1761/55, actual Linux package/MCP and diagnostic replay of
+retained .55 native OMP records remain separate from fresh model/GUI execution.
+No shared Windows actions occur. Another session retains input ownership.
+Blender8 UNKNOWN/File0/5, GUIDE-03, original GUI and same-task accuracy/coverage/
+goodput/100ms, separate Reici and public URL/install/update remain open. Original
+44 counts34 PASS/3 FAIL/7 NOT_RUN are unchanged. See the
+[.56 CI receipt](validation/2026-10-14/native-ci-0156.json).
+
 ## Source .56 native failure diagnosis, 2026-10-14
 
 **OBSERVED / retained actual records:** OMP .55 positives have no socket errors;

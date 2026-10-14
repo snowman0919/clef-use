@@ -1,0 +1,211 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_NATIVE_PLATFORM_CI",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.56",
+  "source_commit": "5c787bbba43b52a3958d23294f93103850d7248c",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts/digests only; raw logs, transcripts, private targets, identities and config/auth values stay outside Git.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38533058873,
+    "source_commit": "5c787bbba43b52a3958d23294f93103850d7248c",
+    "assembled_artifact_id": 11879720810,
+    "assembled_artifact_sha256": "122d97dbdb9df616c9dc85015bc4703bb5f38c71e0feec77390150cb9e96f934",
+    "assembled_artifact_bytes": 383355247,
+    "native_build_install_jobs_passed": 15,
+    "native_installer_reports_passed": 15,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38533058873",
+    "archive_count": 15,
+    "git_payload_file_count": 69,
+    "source_and_contract_verification": "PASS",
+    "native_first_update_current_failure_preservation": "PASS",
+    "actual_candidate_version": "0.1.56",
+    "synthetic_installer_fixture_final_version": "0.1.57",
+    "workflow_dispatch_count": 1,
+    "manifest_sha256": "c53b819d776dc15535380c9f94c69a9b8f60738fa4b57de722bd67215bade3b9",
+    "sha256sums_sha256": "7e5b0da83311368c15f8df3d19159961bdf59bdfa46f0dd05eab3eca9ebac7b3",
+    "private_archive_verification_sha256": "f8213287acba20e3e44360b7a3008075f1c9bd6be7da64f29045b8286568df34",
+    "private_native_log_verification_sha256": "d1b6885feb120d3141e6a3513fc4a513474cc88a8d04fbc9f29f67cb121cbbad",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.56-darwin-arm64-py311.zip",
+        "sha256": "42d79d1a54786343edf4165f7256ed8cb0750ce8786757d362b43c0751b3044e",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-darwin-arm64-py312.zip",
+        "sha256": "360ff177fef044de17b01aa00d0da3d4316a865f282890d0c2af3a431fb57bce",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-darwin-arm64-py313.zip",
+        "sha256": "c57c48f3ca9c86d8e82191b7470330e28674aed0bf4d2600bcd34d0a02450d18",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-darwin-x86_64-py311.zip",
+        "sha256": "1dba433cd08ba295e5dc94f9c4f3c882a1bb0b86bff082f2cefd750d400dc24a",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-darwin-x86_64-py312.zip",
+        "sha256": "e32790c746730ded19c4c58cc5ceed8d7e22843c9ae4946f5836d2a41e773a31",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-darwin-x86_64-py313.zip",
+        "sha256": "93c39dd8d2f9a038478177d03bb4a31ca74ec5c597157088800e3aaf4e34018b",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-arm64-py311.zip",
+        "sha256": "a9894a6a95c4b5123b03a3dcf874f16682c32cf3cfdf222e074a339baaa5e411",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-arm64-py312.zip",
+        "sha256": "d60d802b2fad645737e27aea47cf1d8092382da7e3b4cb8f64ab4116f7ffe4ca",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-arm64-py313.zip",
+        "sha256": "6030305b88a183ca626c2c363f4c452de53f52c6528d9644908b66f47dc41dae",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-x86_64-py311.zip",
+        "sha256": "51890a7ffe84b1789f352052950671ddd54e56af90dfbf56e46238fff447b972",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-x86_64-py312.zip",
+        "sha256": "9a98a499b0144da762a7cec397feb5161cd8382bdf272c697a554198ac356f69",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-linux-x86_64-py313.zip",
+        "sha256": "8677abb2a93a240e90d9d722f5436e7064aa00d86ceef4c43ca9a43000045c2c",
+        "wheel_sha256": "3fd9d3c0c10feefd88cff2c8ad25c0a823738125ccade88a180957e9a944be36",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-win32-x86_64-py311.zip",
+        "sha256": "4adfc12110948ce9c430120a0476361e55ff1f5be596a56f3859c9804a0c29fa",
+        "wheel_sha256": "7fdbd9c1332fbf46386ce2873c75a69a4ddf3efd984005796b5bee11fbc64fd9",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-win32-x86_64-py312.zip",
+        "sha256": "61e6244401c0121c7a93ee174cf58a0366d36b155bd8dc3c3bfaa92fe4814ee1",
+        "wheel_sha256": "7fdbd9c1332fbf46386ce2873c75a69a4ddf3efd984005796b5bee11fbc64fd9",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      },
+      {
+        "filename": "clef-use-0.1.56-win32-x86_64-py313.zip",
+        "sha256": "2f0a0f7df9f602d05a772d032020db19e9c586a0ce2bbf383a3edec83956093a",
+        "wheel_sha256": "7fdbd9c1332fbf46386ce2873c75a69a4ddf3efd984005796b5bee11fbc64fd9",
+        "status": "PASS",
+        "source_files_exact": 69,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3c156910a37499bb0f74c3d2e335b6bb50ef1ae40d9c04174375e3b24d96415c"
+      }
+    ]
+  },
+  "source_checkpoint": {
+    "receipt": "docs/validation/2026-10-14/native-socket-diagnostic-0156.json",
+    "full_regression": {
+      "passed": 1761,
+      "skipped": 55,
+      "warnings": 41,
+      "seconds": 85.9,
+      "local_distribution_metadata": "0.1.56"
+    },
+    "actual_linux_package_and_mcp": "PASS",
+    "installed_native_record_diagnostic_replay": "PASS",
+    "fresh_model_or_gui_e2e": "NOT_RUN"
+  },
+  "windows": {
+    "new_shared_ssh_install_cli_mcp_model_capture_focus_or_input_actions": 0,
+    "input_owner": "OTHER_SESSION_USER_CONFIRMED",
+    "last_passive_peer_state": "OFFLINE_HISTORICAL",
+    "historical_ssh_error": "Connection timed out before remote execution",
+    "shared_last_installed_version": "0.1.49",
+    "current_remote_preservation": "NOT_PROVEN_WITHOUT_TRANSPORT",
+    "isolated_ci_windows_installer_is_shared_desktop_e2e": false
+  },
+  "remaining_conditions": [
+    "GUIDE-03 partial failures and qualified preservation; OMP negative socket closure before deadline, positive call/order failures, root cause unproven.",
+    "Blender eight UNKNOWN dispatch guards and all six operation families BLOCKED; File menu zero of five historical recognition failure.",
+    "Original GUI tasks and independent completion readback remain unverified.",
+    "Same pinned complete real tasks, at least 1000 opportunities, correct OS input p95 <= 100ms, coverage >= 0.80, goodput and critical errors remain NOT_RUN.",
+    "Reici matched-view evidence remains pending from the separate session.",
+    "Public URL/hash/fresh install/update remain NOT_RUN; feature-branch deploy is skipped, no main/tag/force/guard bypass."
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false,
+  "observation_policy": "One workflow dispatch, one immutable run observed; no redispatch or retry."
+}

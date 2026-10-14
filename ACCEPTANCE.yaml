@@ -348,6 +348,11 @@ scenarios:
     survive.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/native-ci-0155.json
     section: ci
     claim: OBSERVED
@@ -456,6 +461,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
     section: actual_native_package
     claim: OBSERVED
@@ -707,6 +717,11 @@ scenarios:
   requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/native-ci-0155.json
     section: ci
     claim: OBSERVED
@@ -1605,6 +1620,11 @@ scenarios:
   requirement: Public version downloads and hashes match; fresh install/update use that release.
   status: NOT_RUN
   evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
   - summary: docs/validation/2026-10-14/native-ci-0155.json
     section: ci
     claim: OBSERVED

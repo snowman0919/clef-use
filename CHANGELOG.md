@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verify immutable .56 CI15/15 and all69 source/guide payload files/contracts.
+  Confirm native first/update/CURRENT and checksum/download/smoke failure
+  preservation. Keep actual .56 separate from synthetic .57 and shared desktop,
+  full-task/performance and feature-guarded public release acceptance.
+
 - Preserve native OMP socket-closure failures in harness diagnostics when the
   session later reaches its deadline. Count only completed assistant error
   events, redact transport details, and retain original outcomes and budgets.

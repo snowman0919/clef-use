@@ -1,5 +1,12 @@
 # Agent setup, use and recovery
 
+Immutable .56 CI at 5c787bb passes all15 native build/install jobs and assembly.
+Downloaded archives match69 Git payload files/contracts; native first/update/
+CURRENT and failure preservation pass. Actual .56 differs from synthetic .57.
+Public deploy is feature-guarded and skipped. Shared Windows input and real
+GUI/quality/100ms gates remain open. See
+[.56 CI evidence](../validation/2026-10-14/native-ci-0156.json).
+
 .56 verification reports native provider socket errors separately from a later
 session deadline. Retained .55 OMP negative records contain three socket errors
 and no successful final response; positives have call/order failures and a deadline
