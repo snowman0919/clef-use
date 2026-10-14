@@ -1,5 +1,58 @@
 # Reactive runtime execution status
 
+## Source 0.1.49 read-only harness boundary, 2026-10-14
+
+**OBSERVED / implementation and actual native permission proof:** the clef-use
+verification adapter filters Hermes skill_manage at its native definition factory
+and rejects it at central native registry dispatch. This covers initial schemas,
+MCP refresh and deferred catalogs while preserving original reader schemas and
+handlers. No external harness source or persistent setting is changed. OMP's
+temporary read-only policy waits for live MCP discovery with startupTimeoutMs0;
+saved settings and the original model budget remain unchanged.
+
+Actual installed native Hermes SDK discovers the selected read-only server,
+rebuilds its catalog three times without management, rejects a real native
+skill_manage create dispatch, and reads the complete current core body. Managed
+file bytes, protected configuration and absent GUI endpoint pass. Native skill_view
+updates its own .usage.json; generated usage state is distinct from user guide
+content. The first proof's broader whole-skills-root comparison fails and remains
+retained; the corrected scope reports that metadata change explicitly.
+
+An isolated regression executes the historical adapter against an actual fixture
+file replacement: preservation fails before and passes after. This boundary test
+does not represent a real native harness. Actual SDK and model evidence are
+separate. Full regression passes 1671, skips 55, with 41 warnings in 73.59 seconds;
+focused integration/boundary checks pass 271. Ruff and generated 198 CLI/12 tool
+examples pass. All operation/input/confidence/sequence gates remain unchanged.
+
+**OBSERVED / actual canonical model batches, once each:** Hermes explicit PASS,
+natural FAIL, negative PASS. Natural invokes capabilities before any observable
+guide body load. Eight actual API requests across the batch omit skill_manage,
+including native refresh; a passive audit observes schemas without altering
+requests or generated context. OMP explicit FAIL, natural FAIL, negative PASS.
+Explicit loads core and invokes current capabilities, but retains a failed status,
+three denied writes and its deadline. Natural invokes capabilities before any
+observable guide load and reaches its deadline. Current valid calls never erase
+earlier violations. Provider/model, canonical tasks and deadlines are unchanged.
+
+Protected configuration bytes remain unchanged. OMP complete-row keyed comparisons
+show auth_credentials/auth_change_revision changes alongside cache/model_perf;
+settings rows remain unchanged. Credential material, changed columns and writer
+remain NOT_PROVEN. Prior credentials are not restored. These are preservation
+limits, not an authentication outage; native requests execute.
+
+**BLOCKED / source publication only:** local HTTPS Git lacks a noninteractive
+credential; SSH with the official verified host key rejects publickey; the
+connected GitHub app returns 403 Resource not accessible by integration on code
+blob writes. Read-only PR access and this model session work. No force push,
+alternate commit/history rewrite, secret transfer or public guard bypass occurs.
+The earlier .48 source/CI/install remains published; new local commits are preserved.
+Immutable .49 CI and installed Windows .49 remain NOT_RUN. Read-only SSH metadata
+confirms the standard Windows launcher is still .48, with valid capabilities;
+desktop ownership remains NOT_PROVEN. Original 44 statuses stay 34 PASS / 3 FAIL /
+7 NOT_RUN, with full GUI/quality/performance/Reici/public gates outstanding. See
+the [source .49 receipt](validation/2026-10-14/read-only-harness-boundary-0149.json).
+
 ## Actual owned Linux cache completion challenges, 2026-10-14
 
 **OBSERVED / actual native Hermes:** one explicit native Skill case passes with

@@ -5,6 +5,12 @@ runtime wheel 包含三个仅提供指导的通用技能：`clef-use`、`clef-us
 应用前预览具体路径，只更改选定目标。首次无人值守安装不会在没有
 `--integrate codex|hermes|omp|all` 时注册新工具环境。模型准备是独立选项。
 
+只读验证从 Hermes 的原生工具定义 factory 中移除 `skill_manage`，覆盖 MCP 更新和
+延迟发现列表，并拒绝其 registry 执行。原生 Skill reader 及原始 schema 保持可用。
+reader 使用 metadata 仍可能变化，因此指南和配置文件字节未变不代表全部原生生成
+状态未变。OMP 验证通过临时启动策略等待实时 MCP 发现完成，保存的设置和声明的
+模型时限保持不变。
+
 实际 .48 专用 Linux 桌面的缓存验证与 Windows 安装验证分别记录。
 Hermes 在仅对本次执行生效的私有只读限制下，不把缓存当作完成证据，并确认了新的
 Continue 画面。OMP 的当前活动会话默认值缓存子项通过，但在加载指南之前调用

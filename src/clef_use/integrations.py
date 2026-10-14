@@ -977,7 +977,25 @@ def _hermes_command(
         # Set the selected server's permission in its in-memory native config;
         # retain the original CLI entrypoint, model, auth and generated prompt.
         hook = f"""
+import functools as _clef_functools
+import model_tools as _clef_model_tools
+from tools.registry import registry as _clef_registry, tool_error as _clef_tool_error
 from tools import mcp_tool_discovery as _clef_discovery
+_clef_definitions = _clef_model_tools.get_tool_definitions
+@_clef_functools.wraps(_clef_definitions)
+def _clef_read_only_definitions(*args, **kwargs):
+    # Native MCP refresh rebuilds schemas after the one-shot constructor prune.
+    # Filtering the native factory also bounds deferred search/describe/call.
+    return [tool for tool in _clef_definitions(*args, **kwargs)
+            if tool.get('function', {{}}).get('name') != 'skill_manage']
+_clef_model_tools.get_tool_definitions = _clef_read_only_definitions
+_clef_dispatch = _clef_registry.dispatch
+@_clef_functools.wraps(_clef_dispatch)
+def _clef_read_only_dispatch(name, args, **kwargs):
+    if name == 'skill_manage':
+        return _clef_tool_error('Skill modifications are forbidden during read-only verification')
+    return _clef_dispatch(name, args, **kwargs)
+_clef_registry.dispatch = _clef_read_only_dispatch
 _clef_register = _clef_discovery.register_mcp_servers
 def _clef_read_only_register(servers):
     selected = {{}}
@@ -1744,7 +1762,11 @@ def _omp_read_only_policy(policies: dict) -> dict:
             previous if previous in ("deny", "prompt") else None if name == "read" else "allow"
         )
     approval["write"] = "deny"
-    return {"tools": {"approvalMode": "always-ask", "approval": approval}}
+    return {
+        "tools": {"approvalMode": "always-ask", "approval": approval},
+        # Validate against live discovery, not startup-window cached schemas.
+        "mcp": {"startupTimeoutMs": 0},
+    }
 
 
 def _verify_omp_model(

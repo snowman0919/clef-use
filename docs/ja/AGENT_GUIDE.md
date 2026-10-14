@@ -6,6 +6,13 @@ runtime wheel には指示専用の共通スキル `clef-use`、`clef-use-blende
 変更します。初回の無人インストールは `--integrate codex|hermes|omp|all` なしに
 新しいハーネスを登録しません。モデルの準備は別の選択です。
 
+読み取り専用検証では Hermes の native ツール定義 factory から `skill_manage` を
+除外し、MCP 更新と遅延発見の一覧にも適用します。registry 実行も拒否します。
+native Skill reader と元の schema は維持します。reader の使用 metadata は変わり得る
+ため、ガイド・設定ファイルの保持を全 native 生成状態の保持とはみなしません。
+OMP 検証は一時的な起動設定で実際の MCP 発見完了を待ちます。保存済み設定と
+宣言されたモデル制限時間は変更しません。
+
 実際の .48 専用 Linux 画面のキャッシュ検証は Windows インストール検証と分けます。
 Hermes は実行限定の非公開読み取り専用制限の下で、キャッシュを完了証拠にせず、
 新しい Continue 画面を確認しました。OMP の現在セッション既定値のキャッシュ項目は

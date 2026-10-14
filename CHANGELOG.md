@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+- Filter native Hermes skill management from read-only verification's initial,
+  refreshed and deferred tool definitions; deny its central registry dispatch
+  while preserving native readers. Verify actual SDK denial and byte preservation
+  separately from native routing failures and generated usage metadata.
+- Wait for live OMP MCP discovery through a temporary startup policy. Preserve
+  saved settings, canonical model requests/deadlines and all existing guards.
+- Record source 0.1.49 regression and actual native cases without erasing guide
+  order, denied-write or deadline failures. New CI/Windows installation remains
+  unexecuted while repository publication credentials are unavailable.
+
 - Apply a temporary native OMP approval overlay during verification: deny lazy
   writer registration and existing non-probe grants, preserve reader restrictions
   and argument-sensitive read tiers, and remove the overlay after execution.

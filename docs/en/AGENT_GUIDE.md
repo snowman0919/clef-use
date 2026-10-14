@@ -6,6 +6,14 @@ by default; select Blender explicitly. Preview the exact paths before applying.
 Only selected targets change. A first unattended installation does not enroll
 harnesses without `--integrate codex|hermes|omp|all`. Model preparation is separate.
 
+Read-only verification filters Hermes `skill_manage` from the native definition
+factory, including MCP refresh and deferred catalogs, and denies its registry
+execution. Native Skill readers and their original schemas remain available.
+Reader usage metadata can still change; preserved guide/configuration bytes do
+not imply all native generated state is unchanged. OMP verification waits for
+live MCP discovery through its temporary startup policy; saved settings and the
+declared model deadline remain unchanged.
+
 Actual .48 owned Linux cache tests are recorded separately from installed Windows
 checks. Hermes rejects cached completion evidence and verifies fresh Continue under
 an explicit private read-only permission overlay. OMP's current-session-default

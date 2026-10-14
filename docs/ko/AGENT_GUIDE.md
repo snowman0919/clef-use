@@ -6,6 +6,12 @@ Blender는 명시적으로 선택합니다. 적용 전에 변경 경로를 미�
 선택한 대상만 변경합니다. 최초 무인 설치는 `--integrate codex|hermes|omp|all`
 없이 새 하네스를 등록하지 않습니다. 모델 준비는 별도 선택입니다.
 
+읽기 전용 검증은 Hermes의 native 도구 정의 factory에서 `skill_manage`를 제외합니다.
+MCP 갱신과 지연 발견 목록에도 적용하고 registry 실행도 거절합니다. native Skill
+reader와 원래 schema는 유지합니다. reader 사용량 metadata는 바뀔 수 있으므로 지침·설정
+파일 보존을 모든 native 생성 상태 보존으로 확대하지 않습니다. OMP 검증은 임시 시작
+정책으로 실제 MCP 발견 완료를 기다립니다. 저장된 설정과 선언한 모델 제한 시간은 유지합니다.
+
 실제 .48 전용 Linux 화면의 캐시 검증은 Windows 설치본 검증과 별도로 기록합니다.
 Hermes는 실행별 비공개 읽기 전용 제한 아래 캐시를 완료 증거로 쓰지 않고 새 Continue
 화면을 확인했습니다. OMP의 현재 활성 세션 기본값 캐시 항목은 통과했지만, 지침 로드
