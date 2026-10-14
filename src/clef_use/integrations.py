@@ -1844,6 +1844,65 @@ def _omp_model_evidence(
     )
     runtime_before_guide = False
 
+    def device_call(event: dict) -> tuple[str, dict] | None:
+        arguments = event.get("args")
+        if event.get("toolName") != "write" or not isinstance(arguments, dict):
+            return None
+        target = next((name for name in readers if arguments.get("path") == f"xd://{name}"), None)
+        if target is None or not isinstance(arguments.get("content"), str):
+            return None
+        try:
+            supplied = json.loads(arguments["content"])
+        except ValueError:
+            return None
+        if not isinstance(supplied, dict):
+            return None
+        # Native device dispatch removes its string intent annotation before
+        # validating these MCP schemas, which do not declare an intent field.
+        if isinstance(supplied.get("i"), str):
+            supplied.pop("i")
+        if target == readers[0]:
+            valid = (
+                not supplied.keys() - {"detail", "operation_id"}
+                and isinstance(supplied.get("detail", False), bool)
+                and (
+                    supplied.get("operation_id") is None
+                    or isinstance(supplied["operation_id"], str)
+                )
+            )
+        else:
+            valid = not supplied.keys() - {"session_id"} and (
+                supplied.get("session_id") is None or isinstance(supplied["session_id"], str)
+            )
+        return (target, supplied) if valid else None
+
+    def device_matches(payload: dict, name: str, arguments: dict) -> bool:
+        details = payload.get("details")
+        native = details.get("xdev") if isinstance(details, dict) else None
+        if (
+            not isinstance(native, dict)
+            or native.get("tool") != name
+            or native.get("mode") != "execute"
+        ):
+            return False
+        validated = native.get("args")
+        defaults = (
+            {"detail": False, "operation_id": None} if name == readers[0] else {"session_id": None}
+        )
+        if not isinstance(validated, dict) or json.dumps(
+            {**defaults, **validated}, sort_keys=True
+        ) != json.dumps({**defaults, **arguments}, sort_keys=True):
+            return False
+        inner = native.get("inner")
+        return (
+            isinstance(inner, dict)
+            and inner.get("serverName") == "clef-use"
+            and inner.get("mcpToolName") == name.removeprefix("mcp__clef_use_")
+            and inner.get("isError") is False
+            and isinstance(inner.get("rawContent"), list)
+            and payload.get("content") == inner["rawContent"]
+        )
+
     def guide_matches(path: str, skill: str) -> bool:
         physical = Path(path)
         return (
@@ -1859,17 +1918,22 @@ def _omp_model_evidence(
         if not isinstance(name, str) or not isinstance(identity, str) or not identity:
             invalid = True
             continue
-        if name not in allowed and name not in violations:
-            violations.append(name)
-        if name in readers and name not in attempted:
-            attempted.append(name)
         if kind == "tool_execution_start":
+            device = device_call(event)
+            if device is not None:
+                name, arguments = device
+            else:
+                arguments = event.get("args")
+            if name not in allowed and name not in violations:
+                violations.append(name)
+            if name in readers and name not in attempted:
+                attempted.append(name)
             if name in readers and expected not in loaded:
                 runtime_before_guide = True
             if identity in starts or not isinstance(event.get("args"), dict):
                 invalid = True
             else:
-                starts[identity] = event
+                starts[identity] = (event, name, arguments, device is not None)
             if name == "read" and isinstance(event.get("args"), dict):
                 path = event["args"].get("path")
                 if isinstance(path, str):
@@ -1877,12 +1941,22 @@ def _omp_model_evidence(
                         guide_matches(path, skill) for skill in ("computer-use", *SKILLS.values())
                     )
             continue
-        call = starts.get(identity)
-        if call is None or call["toolName"] != name or identity in completed:
+        started = starts.get(identity)
+        if started is None or started[0]["toolName"] != name or identity in completed:
+            if name not in allowed and name not in violations:
+                violations.append(name)
             invalid = True
             continue
+        call, name, arguments, device = started
         completed.add(identity)
         payload = event.get("result")
+        if device and (
+            not isinstance(payload, dict) or not device_matches(payload, name, arguments)
+        ):
+            if "write" not in violations:
+                violations.append("write")
+            failed_calls.append({"tool": "write", "tool_call_id": identity})
+            continue
         if event.get("isError") or _tool_result_failed(payload):
             failed_calls.append({"tool": name, "tool_call_id": identity})
             continue
@@ -1919,7 +1993,7 @@ def _omp_model_evidence(
                             loaded.append(name)
         elif name == readers[0] and len(texts) == 1:
             if isinstance(decoded, dict) and _capability_agrees(
-                decoded, manifest, detail=bool(call["args"].get("detail"))
+                decoded, manifest, detail=bool(arguments.get("detail"))
             ):
                 invoked.append(name)
         elif name == readers[1] and _tool_result_succeeded(decoded):

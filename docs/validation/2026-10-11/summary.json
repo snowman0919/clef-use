@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "omp_device_evidence_0150_20261014": {"local_artifact": "docs/validation/2026-10-14/omp-device-evidence-0150.json", "sha256": "8e37c7267d36a3199b419040e2da9fedced13cc55f7a833211c488bf457f5353", "raw_artifact_committed": true},
     "windows_installed_ci_0149_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-installed-ci-0149.json", "sha256": "3598c662d08aba91b53cc398b4900ef689f87adbe67ea15aeccf129d8c713c4b", "raw_artifact_committed": true},
     "read_only_harness_boundary_0149_20261014": {"local_artifact": "docs/validation/2026-10-14/read-only-harness-boundary-0149.json", "sha256": "c3fd7ede357f8db7ac57d76860a836dea755e717e61dec29331579b29130ef8b", "raw_artifact_committed": true},
     "linux_native_cache_0148_20261014": {"local_artifact": "docs/validation/2026-10-14/linux-native-cache-0148.json", "sha256": "5398d17e53d4057e2f81346274316ba6a97887040c734ad2b0fcfb26aa0f8f7e", "raw_artifact_committed": true},

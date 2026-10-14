@@ -1,5 +1,52 @@
 # Reactive runtime execution status
 
+## Source .50 OMP virtual-device evidence, 2026-10-14
+
+**OBSERVED / correction:** native OMP uses write xd://<tool> for virtual tool
+dispatch as well as ordinary file writing. The verifier now credits only its
+two allowed MCP readers, with matching original start/end identity, known typed
+arguments, native target/mode, selected server/MCP name, native success and exact
+consumer/raw-content binding. Native dispatch removes its string intent metadata
+before schema validation; the verifier follows that observed behavior. An early
+device invocation still fails guide order. Ordinary writes, unpaired results,
+unknown arguments and mismatched native metadata remain failures. Permission,
+model/provider/request/deadline and all input/confidence gates are unchanged.
+
+Parser fixtures reproduce the missed valid-device and early-invocation cases,
+then pass eleven boundary checks. Full regression passes 1682, skips 55, with
+41 warnings in 80.79 seconds. Ruff/format checks cover 167 files; generated
+198 CLI/12 tool examples pass. These fixtures are not harness execution.
+
+**OBSERVED / separate native component and replay:** the actual installed MCP
+manager and native device dispatcher execute two real .50 read-only capability
+calls, with/without native intent metadata. Real schemas/handlers, two-tool
+facade, argument removal and payload bindings pass. No fake backend or model
+request is used. Parser packets are assembled from those actual results and a
+controlled guide read; native permission decorators/model streams/whole GUI
+session are not part of that component proof. Replaying identical retained .49
+native traces credits three capability calls instead of one, while retaining
+all four failed calls and overall explicit FAIL. Natural FAIL/negative PASS
+also remain unchanged. Replay never becomes a fresh native session claim.
+
+**OBSERVED / actual .50 canonical model sessions, once each:** Hermes explicit,
+natural and negative PASS. Nine actual API requests omit skill management, and
+three complete canonical transcripts are retained with verified digests. OMP
+explicit FAIL at its deadline, with two denied writes, status failures and a
+capability failure retained. Natural FAIL invokes capabilities before any
+observable guide load. Negative is NOT_RUN/native exit1 after the socket closes
+unexpectedly, before guide/runtime attempts; this is not a completed negative
+case or an authentication diagnosis. No unchanged request is retried to pass.
+Protected configuration bytes, frozen source and absent GUI endpoints pass.
+This OMP batch changes only cache/model_perf complete rows; its unchanged auth
+rows do not repair the earlier .49 credential-material uncertainty.
+
+**NOT_RUN / remaining validation:** .50 immutable CI and installed Windows .50
+are not yet executed. The verified Windows installation remains .49. New GUI
+input/abort, original Blender work, full same-task accuracy/100ms/coverage/goodput,
+Reici and guarded public verification remain open. Original acceptance statuses
+and gates remain unchanged. See the
+[source .50 receipt](validation/2026-10-14/omp-device-evidence-0150.json).
+
 ## Published .49 immutable CI and actual Windows update, 2026-10-14
 
 **OBSERVED / publication recovery:** the user-selected gh CLI has repository push

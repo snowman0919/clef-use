@@ -75,6 +75,11 @@ scenarios:
   requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
   status: FAIL
   evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
     section: actual_installed_codex_model_batch
     claim: OBSERVED
@@ -366,6 +371,11 @@ scenarios:
   requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_component
+    claim: OBSERVED
+    level: component
+    partial: true
   - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
     section: actual_windows_installation
     claim: OBSERVED
@@ -725,6 +735,11 @@ scenarios:
     runtime tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches.hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
     section: actual_native_model_batches.hermes
     claim: OBSERVED
@@ -775,6 +790,11 @@ scenarios:
     tool.
   status: PASS
   evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches.omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
   - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
     section: actual_native_model_batches.omp
     claim: OBSERVED

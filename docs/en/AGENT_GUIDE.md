@@ -1,5 +1,12 @@
 # Agent setup, use and recovery
 
+OMP can carry a read-only MCP call through `write xd://<tool>`. Verification
+requires matching native target/arguments/server/result and exact consumer
+payload before credit; the method name alone cannot prove a file write or a
+safe reader. Early invocation, actual denied writes and mismatches still fail.
+See [source .50 evidence](../validation/2026-10-14/omp-device-evidence-0150.json);
+native component, retained-trace replay and fresh model checks are separate.
+
 Immutable .49 CI passes fifteen platform installer checks and archive/source
 verification. Actual Windows .48 -> .49 update, repeat CURRENT, LIMITED-token
 payload/MCP checks and original native Codex explicit/natural/negative cases pass.
