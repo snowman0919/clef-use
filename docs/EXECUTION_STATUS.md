@@ -1,5 +1,23 @@
 # Reactive runtime execution status
 
+## Immutable .54 native CI, 2026-10-14
+
+**OBSERVED / CI and downloaded artifacts:** exact b6c9a27 passes all15 native
+platform build/install jobs and assembly. All15 downloaded archives match69
+immutable Git payload files and runtime/schema/guide contracts. Native installer
+logs prove first/update/CURRENT and checksum/download/smoke failure preservation.
+Actual candidate .54 is distinct from synthetic fixture final .55. Feature-branch
+deployment is SKIPPED; public URL/install/update and cross-platform full regression
+are not proved by this run. No new Windows SSH/install/model/capture/focus/input
+or shared .49 update occurs; another session retains input ownership.
+
+Source .54 regression1750 PASS/55 SKIP, actual Linux package/MCP and final native
+Codex FAIL/FAIL/PASS remain separate evidence. The eight UNKNOWN Blender guards,
+File-menu0/5, original task failures, OMP, separate Reici and complete same-task
+accuracy/coverage/goodput/100ms gates remain open. Original44 statuses remain
+34 PASS/3 FAIL/7 NOT_RUN. See the
+[.54 CI receipt](validation/2026-10-14/native-ci-0154.json).
+
 ## Source .54 native recording and strict origin, 2026-10-14
 
 **OBSERVED / implementation and actual OS smoke:** Codex verification now records
@@ -110,7 +128,7 @@ are historical observations, not fresh .54 desktop execution.
 |---|---|
 | INSTALL-02/03/09; Windows INPUT/E2E/PERF checks | NOT_RUN for .54 Windows: last passive Tailscale status, bound to the actual SSH alias, reports win offline with local Running/online. Earlier SSH port22 exits255 with Connection timed out before remote execution. Power state/cause is NOT_PROVEN. Existing owned installation/state must be inspected after recovery before mutation. |
 | INPUT-04/05, E2E-01/02, PERF-01/02/03 | NOT_RUN for new shared-desktop checks independently of transport: the user confirms another session operates Windows. Exclusive input ownership has not been established; shared .49, active enrollment, focus and input are preserved. |
-| INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch facts remained UNKNOWN and all6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove popup/input owner/effective keymap/IME/idle. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
+| INPUT-05, E2E-01 | BLOCKED for unproven Blender dispatch states: the installed collector/provider/compiler historically connected11 facts, but8 dispatch guards remained UNKNOWN: `popup`, `text_focus`, `ime_composing`, `keymap`, `editor`, `loading`, `modal`, `unit`. All6 operation families returned BLOCKED with zero input. Public RNA/UIA did not prove those guards in the installed run. An external host observer build is outside scope. File-menu0/5 remains a separate recognition failure. |
 | E2E-01/02 | FAIL historical original task results: Codex Continue reached stage1 but Confirm was refused at ACT0.6958 below0.9, despite retained correct candidate/geometry; browser/editor parser deadlines and missing independent completion readback remain. Later offscreen parser completion proves component availability, not full task success. No threshold is lowered. |
 | GUIDE-03 | FAIL final actual .54 Codex positives: complete selected bodies precede current capabilities, but native launch cwd does not prove relative reader cwd after shell startup; LOADED is NOT_RUN. Negative passes. Initial HTTP429 capacity error and superseded natural PASS retained. Historical .52 OMP positives retain real status/write/deadline/order failures. No current auth outage is observed. |
 | PERF-01/02/03 | NOT_RUN: the same complete pinned real-task suite, at least1000 declared opportunities, correct state-change-to-OS-input p95<=100ms, eligibility coverage>=0.80, goodput and critical-error review. Fixture/component timings do not satisfy this condition. |

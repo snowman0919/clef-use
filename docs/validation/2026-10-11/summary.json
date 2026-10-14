@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "native_ci_0154_20261014": {"local_artifact": "docs/validation/2026-10-14/native-ci-0154.json", "sha256": "7fb8990782017568f4e8558822dbc8b1b82b11d6c4a1721e772e96c9f4390db7", "raw_artifact_committed": true},
     "codex_native_recording_0154_20261014": {"local_artifact": "docs/validation/2026-10-14/codex-native-recording-0154.json", "sha256": "6629881cc3d1befda82bbe8af1ea5de602a9a4a0a2a1cf57dff2824dc43f309f", "raw_artifact_committed": true},
     "ci_windows_transport_0153_20261014": {"local_artifact": "docs/validation/2026-10-14/ci-and-windows-transport-0153.json", "sha256": "4d1fb9ec438217deb10c489b3cc1be2272d0614b58eaac6d96c8e8ee9b7cf078", "raw_artifact_committed": true},
     "ci_windows_transport_0152_20261014": {"local_artifact": "docs/validation/2026-10-14/ci-and-windows-transport-0152.json", "sha256": "ef9ef420babfba78c810f3701f7e540cd8757384fe428a7ca3a00dc7c1d6efd0", "raw_artifact_committed": true},

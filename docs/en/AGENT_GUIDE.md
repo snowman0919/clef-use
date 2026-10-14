@@ -1,5 +1,13 @@
 # Agent setup, use and recovery
 
+Immutable .54 CI at b6c9a27 passes all15 native platform builds/installations
+and assembly. Downloaded packages match69 Git payload files and contracts;
+native logs verify first/update/CURRENT and failure preservation. Actual .54
+and synthetic final .55 are distinct. Public deploy is skipped by the feature
+guard. Shared Windows input stays with the other session; no remote or GUI
+check is executed here. Source model failures and quality/100ms gates remain.
+See [.54 CI evidence](../validation/2026-10-14/native-ci-0154.json).
+
 In .54, Codex verification binds its CLI events to the owned native session
 recording and the output actually delivered to the model. A complete guide must
 arrive before the runtime-containing exec starts. Duplicate/incomplete turns,

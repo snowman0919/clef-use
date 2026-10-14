@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- Verify immutable .54 CI15/15 and all69 source/guide payload files/contracts.
+  Confirm native first/update/CURRENT and failed-update preservation, keeping
+  actual .54 separate from synthetic .55. Leave shared Windows input, real-task
+  quality/performance and feature-guarded public deployment unverified.
+
 - Bind Codex verification to its confined native recording, exact completed-turn
   execution identities and model-facing delivery before runtime exec starts.
   Retain native errors and scope violations; refuse shell expansion and relative
