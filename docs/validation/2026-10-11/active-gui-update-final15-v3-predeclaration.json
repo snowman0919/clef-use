@@ -1,0 +1,139 @@
+{
+  "classification": "PROPOSED_NOT_RUN",
+  "scope": "INSTALL-10 actual genuine .29 active read-only GUI session across real immutable FINAL15 .30 installer update; no OS-input or GUI task success claim",
+  "bindings": {
+    "baseline_commit": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+    "old_archive": {
+      "basename": "clef-use-0.1.29-linux-x86_64-py311.zip",
+      "sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e"
+    },
+    "new_archive": {
+      "basename": "clef-use-0.1.30-linux-x86_64-py311.zip",
+      "sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c"
+    },
+    "existing_model_config": {
+      "basename": "paired-config.toml",
+      "sha256": "e15a379e9823da220b95d671fbdb014650e35c1f81fbe9187185f9dcb986f7c5",
+      "decision_model": "Cloudflare/clef-flash",
+      "revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+      "quantization": "4bit",
+      "device": "cuda",
+      "parser_device": "cpu",
+      "visual_grounding": false
+    }
+  },
+  "actual_path": "Real installed RuntimeClient\u2192HTTP service\u2192default SessionManager factory\u2192canonical capture/OmniParser/decision runtime. No factory/backend/version replacement, signal suspension or artificial workload delay.",
+  "owned_setup": {
+    "filesystem": "Fresh private /tmp root HOME/STATE/config/install/bin only; production repository/config/V2/old untouched",
+    "gui": "Fresh authenticated private Xvfb and public static Tk label/button window only; no Blender or production application",
+    "models": "Existing pinned offline model cache and existing CUDA decision/CPU Omni worker interpreters; native worker implementation unchanged; no download or provider fallback",
+    "installer": "Actual .29 installer first creates genuine .29 installed record from retained real archive; actual FINAL15 installer later stages genuine .30 archive, smokes and atomically switches current. Local metadata truthfully identifies real bytes; no hand-written installed records.",
+    "sandbox": "Prefer bwrap host read-only, own writable root/private tmp, private PID/network/X11 socket namespace, inherited production display/Wayland/session-bus variables removed; native devices available only for selected real cached model execution"
+  },
+  "contract": {
+    "goal": "Determine whether the public INSTALL-10 label is visibly present in the owned window",
+    "success_conditions": [
+      "The public INSTALL-10 label is visibly present"
+    ],
+    "constraints": [
+      "Read only; never send keyboard or pointer input"
+    ],
+    "execution_mode": "ASSESS",
+    "max_steps": 3,
+    "confidence_threshold": 0.9
+  },
+  "fixed_sequence": [
+    "Validate archive/config hashes and genuine installer output/version .29; retain immutable absolute .29 Python/client path.",
+    "Launch actual .29 service and submit one ASSESS contract through genuine matching installed RuntimeClient; record returned own session ID privately.",
+    "Wait at most60sec for actual RUNNING+busyTrue and real Reading screen/Finding controls/Choosing next action phase with real worker child evidence; no timing hold or synthetic busy. Start actual .30 installer only after this observation.",
+    "Observe same service process identity/endpoint hash/session status at100ms while installer runs. Record real installer progress and atomic current target switch. Require old session RUNNING+busyTrue immediately before and after activation for full active-update condition.",
+    "Invoke current installed .30 client status once while old service still busy. Require actionable previous-runtime-active refusal and unchanged old PID/starttime/session/endpoint.",
+    "Use retained matching genuine .29 client to abort only the observed own old session. Record same-session ABORTED reply, then independently poll actual health busyFalse. Abort reply alone is insufficient.",
+    "Invoke current managed .30 client to replace the now-idle genuine .29 service through actual supported upgrade path. Verify actual .30 runtime protocol/schema health and independent old PID exit.",
+    "Load current advertised capabilities and submit one current finite menu_assess(File) contract, max_steps1/confidence.9. Expect honest BLOCKED under shipped missing trusted provider with input0; this proves new contract acceptance and current runtime reload, not a production provider or GUI goal.",
+    "Independent native pixels/window label remain unchanged, native input event count0 and baseline/final held key/button maps unchanged; matching current shutdown, own worker/window/Xvfb/HTTP server cleanup and socket/endpoint removal."
+  ],
+  "budget": {
+    "old_gui_contracts": 1,
+    "old_decision_rounds_max": 3,
+    "new_current_provider_blocked_contracts": 1,
+    "harness_or_remote_model_calls": 0,
+    "native_model_retries_added": 0,
+    "installer_attempts_per_real_version": 1,
+    "old_active_gate_seconds": 60,
+    "each_installer_seconds": 180,
+    "busy_drain_after_abort_seconds": 370,
+    "total_wall_seconds": 720,
+    "status_observer_interval_ms": 100,
+    "first_failure_stop": true,
+    "automatic_case_retries": 0
+  },
+  "outcome_rules": {
+    "early_session_end": "Retain native result as partial; active-at-update condition NOT_RUN/inconclusive. No retry, model substitution, SIGSTOP or arbitrary delay.",
+    "native_model_error": "Retain exact native diagnostic and cleanup; never relabel a model error as successful active update.",
+    "full_lifecycle_pass": "Actual .29 RUNNING busy session survives real .30 activation; new client actionable refusal; matching old abort and actual busyFalse; current .30 service/current contract reload; independent UI/input/process cleanup.",
+    "completion_scope": "Read-only active GUI lifecycle only. No OS input task, 100ms performance, production provider, all-platform or harness GUI task claim."
+  },
+  "prior_evidence": {
+    "prepatch_failure": {
+      "basename": "clef-idle-stale-client-native-public-20261011.json",
+      "sha256": "14129b876e3a8bf3669eb663619e44a1248326695ff9d7a843cfa7ffd3e5d172"
+    },
+    "installed_final15_idle_fix": {
+      "basename": "clef-runtime-binding-final15-native-public-20261011.json",
+      "sha256": "8261685d198b8bb0d788f7e3ef8d8aa6e88bad9956ea1cb7c63a895171ba158d"
+    }
+  },
+  "authorization": "Prepare combined native thread+desktop transport preflight only; no next GUI/model attempt until root review and START.",
+  "original_declaration_sha256": "e2cf64eaae1b97f94c541e1a8476dbeb94cc48f92978fcf8a39e76c59f331a92",
+  "driver": {
+    "basename": "clef_active_gui_update_final15_thread_bound_v3_20261011.py",
+    "sha256": "41e729fe628817b9f73444ff2e997284c70936f74a089b71437ba5f1becc9c7d"
+  },
+  "correction_scope": {
+    "material_cause": "Actual first attempt observer status403 DESKTOP_MISMATCH due missing X-Clef-Desktop-Scope; driver also failed to stop before model on that refusal",
+    "raw_http_binding": "Every raw health/status request carries desktop_scope() from actual owned environment; returned health scope must match that independently computed scope",
+    "before_model_preflight": "Both genuine immutable .29 RuntimeClient._send(status) and raw desktop-bound status must return actual NO_ACTIVE_SESSION404; genuine consumer request(status) must map the same failure. Any disagreement/refusal stops before model execution.",
+    "gate_refusals": "Any raw status refusal other than initial pre-session NO_ACTIVE_SESSION404 immediately stops; never waits60s after403.",
+    "matching_abort_shutdown": "All abort/shutdown requests use actual matching installed RuntimeClient native transport; raw observer performs health/status only.",
+    "current_client": "Actual current RuntimeClient supplies native version/protocol/schema/desktop headers. Raw current observer adds same actual health contract identity plus independently computed desktop scope.",
+    "unchanged": [
+      "model/revision/config bytes",
+      "confidence0.9",
+      "max3 old rounds",
+      "native parser/CUDA execution",
+      "no forced hold",
+      "one real update attempt",
+      "matching old independent abort and busyFalse",
+      "current contract reload",
+      "no retry"
+    ]
+  },
+  "prior_failed_actual_attempt": {
+    "basename": "clef-active-gui-update-final15-attempt1-public-20261011.json",
+    "sha256": "4cc5e9493e975d1912804f9ff43ab886c3570b9d764025c9cd1975324a06a390",
+    "status": "INSTALL10_NOT_RUN_DRIVER_CONTAMINATED",
+    "actual_native_result": "LOW_CONFIDENCE after1decision/input0; preserved unchanged"
+  },
+  "observer": {
+    "basename": "clef_native_thread_children_observer_20261011.py",
+    "sha256": "08a5dc6bf61ba1a00361837757da69b9cdfb6f1eef5cb00930069e8c10e52626"
+  },
+  "previous_v2_declaration_sha256": "2a3c965248ead5c6fb5748f1842fa09eb91f6b138906cf71c393b59e5bf3aeb2",
+  "correction_scope_v3": {
+    "cause": "Actual Linux leader-only children observation omits model subprocesses while their spawning execution thread lives",
+    "algorithm": "Snapshot every existing service task directory once; read each children file once; union observed child IDs; explicitly record vanished and unreadable TIDs; independently scan native proc stat PPID as oracle in owned PID namespace; require a positive intersection for actual worker gate",
+    "races": "Partial/vanished process observations remain explicitly recorded. Different snapshot instants may differ; no null-to-zero assumption or retry to manufacture agreement.",
+    "native_preflight": "Before any GUI/model, real worker thread spawns one real bounded no-model child. Leader omission, all-thread union, independent PPID and intersection must be observed; capture a real TID then let it naturally exit and verify vanished-TID handling. Cleanup must pass.",
+    "pre_gate_history": "Retain phase/status/busy/union/oracle/intersection/vanished count changes, max64 full private snapshots and explicit overflow count; retain total poll count. IDs stay private.",
+    "activity_compatibility": "Genuine .29 runtime _phase stores its supplied phase string unchanged in activity.phase; snapshot serializes that object. Known active gate strings are Reading screen, Finding controls, Choosing next action. Terminal Low Confidence comes from _finish title conversion, not an active gate. Actual RUNNING payload histories will now be retained; no canonical runtime phase rewrite.",
+    "other_changes": "None: same archives/model/config/0.9/max3/nohold/no retry, genuine matching abort and actual busyFalse/current reload unchanged"
+  },
+  "prior_failed_v2_actual_attempt": {
+    "basename": "clef-active-gui-update-final15-attempt2-public-20261011.json",
+    "sha256": "923532180b3e04d0cfe230164f1d45678f65008a23707b1faf305017f6184650",
+    "status": "INSTALL10_NOT_RUN_OBSERVER_DEFECT",
+    "native_model_terminal": "LOW_CONFIDENCE after1decision/input0, unchanged0.9; not attributed as lifecycle cause"
+  },
+  "received_native_artifact_sha256": "565ec107b62e01a19896ee37039ffbba46cc6121da0a8ef6e058b85a78a3a7ac"
+}

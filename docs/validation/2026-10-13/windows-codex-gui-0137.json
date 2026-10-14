@@ -1,0 +1,485 @@
+{
+  "classification": "OBSERVED_ACTUAL_INSTALLED_WINDOWS_CODEX_GUI_HARNESS_WITH_FAILED_TASK",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.37",
+  "requirements": [
+    "HARNESS-01",
+    "DEC-01"
+  ],
+  "partial": true,
+  "status": "TASK_FAIL",
+  "attempts": [
+    {
+      "status": "FAILED",
+      "script_sha256": "cad4a271de83cb71cc2249effe8dab8465dc3773ce0a7153528a0c48413b271d",
+      "model_turns_started": 0,
+      "native_discovery": "NOT_RUN",
+      "loaded_guides": [],
+      "tool_attempts": [],
+      "error": {
+        "type": "RuntimeError",
+        "message": "Thread-specific MCP isolation was not established"
+      },
+      "runtime_result": null,
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 0,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_artifact_sha256": {
+        "result.json": "dd5c5b947c8926e487059b7a8a0cf96d61a2b686b198087798259e9de5b396ae",
+        "controller-report.json": "097c394a30be82cd2e8f8fdcd92f6bcb8db4f644db35f1ac8c43fd85056fd4af",
+        "fixture.stdout": "fdef99eea50cf3b4504971acadfa25fae3347313bf475b4f204847834ce37024",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "FAILED",
+      "script_sha256": "399616241fb95303240c5b79305d7473917f4decc9272849add822928d59b545",
+      "model_turns_started": 0,
+      "native_discovery": "NOT_RUN",
+      "loaded_guides": [],
+      "tool_attempts": [],
+      "error": {
+        "type": "Empty",
+        "message": ""
+      },
+      "runtime_result": null,
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 0,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_artifact_sha256": {
+        "result.json": "65c184722c756c464fe145ba4a4748f85831dbc52bb7b56a22dc610c5de0ac9a",
+        "controller-report.json": "425976f6bc650a3546ce60895edb89d67bbaf7a69e1553a7c03be7f60cb204a3",
+        "fixture.stdout": "8529e79f70ea57197a1d6115da01797114dd9f488327f109ef160e568df3380a",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "FAILED",
+      "script_sha256": "6961a63ffb9516ae746cf371bf0548a20fad5dc834606029f8b7439cb9fd2afe",
+      "model_turns_started": 1,
+      "native_discovery": "PASS",
+      "loaded_guides": [
+        "clef-use"
+      ],
+      "tool_attempts": [
+        "computer_capabilities",
+        "computer_run"
+      ],
+      "error": {
+        "type": "NativeRequestBlocked",
+        "message": "Native request requires interaction: mcpServer/elicitation/request"
+      },
+      "runtime_result": null,
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 0,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_artifact_sha256": {
+        "result.json": "364818a4bc5fa69a6acdd17766314d2b9124e2209d6a19687d580816047fb096",
+        "controller-report.json": "b66785bd79241041858ec79e9138b22af6f50f767c093f3dad81ece44212d459",
+        "fixture.stdout": "dbf8b8c3b6eb84c9d7a427041157e2d6471bb0e7d71eff369ddb9efc172a8212",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "FAILED",
+      "script_sha256": "2c4fd8d93c2bed11bd987325ebd49be03ce749247e1580844f6491334bf22572",
+      "model_turns_started": 1,
+      "native_discovery": "PASS",
+      "loaded_guides": [
+        "clef-use"
+      ],
+      "tool_attempts": [
+        "computer_capabilities",
+        "computer_run",
+        "computer_observe"
+      ],
+      "error": {
+        "type": "NativeRequestBlocked",
+        "message": "Native request requires interaction: mcpServer/elicitation/request"
+      },
+      "runtime_result": {
+        "status": "NEEDS_REPLAN",
+        "steps": 0,
+        "rounds": 1,
+        "last_action": null,
+        "confidence": 0.9517,
+        "reason": "screen changed during decision",
+        "summary": "NEEDS_REPLAN after 0 actions, 1 decisions",
+        "blocker": null
+      },
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_error": "HTTPError",
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": false,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_artifact_sha256": {
+        "result.json": "d77c4636fbdac514040cfe7821247a485c43601632818d5c3c98d81266f9d32d",
+        "controller-report.json": "51deb29f9f5a73c510ecd860ba8986206ea2495f8e25d7668004d66f2d5e452f",
+        "fixture.stdout": "d083214fdd8b4c0aae9c47a67acd0ad2966b51a1119b7e7d9985567ada1cab69",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    },
+    {
+      "status": "FAILED",
+      "script_sha256": "940c1a9b1e8152f43d04c57a45e5bdd866a37c45eeb8384e92c25e0323b76f07",
+      "model_turns_started": 1,
+      "native_discovery": "PASS",
+      "loaded_guides": [
+        "clef-use"
+      ],
+      "tool_attempts": [
+        "computer_capabilities",
+        "computer_run",
+        "computer_observe"
+      ],
+      "error": null,
+      "runtime_result": {
+        "status": "LOW_CONFIDENCE",
+        "steps": 1,
+        "rounds": 2,
+        "last_action": {
+          "id": "a0",
+          "operation": "click",
+          "target": "obj_7067d9b50418"
+        },
+        "confidence": 0.9378,
+        "reason": "execution mode confidence below threshold",
+        "summary": "LOW_CONFIDENCE after 1 actions, 2 decisions",
+        "blocker": {
+          "kind": "CONFIDENCE_BELOW_THRESHOLD",
+          "observed": {
+            "source": "execution_mode",
+            "probability": 0.6967,
+            "required_probability": 0.9,
+            "action_selection_confidence": 0.9378,
+            "mode": "ACT",
+            "mode_confidence": 0.6967,
+            "goal_probability": 0.0901,
+            "condition_probabilities": [
+              0.0149
+            ]
+          },
+          "resume_when": "new relevant evidence or planner clarification; do not repeat already-delivered input"
+        }
+      },
+      "cleanup": {
+        "endpoint_removed": true,
+        "unsubscribe_status": "unsubscribed",
+        "thread_unsubscribed": true,
+        "app_server_exited": true,
+        "gui_exit_code": 0,
+        "owned_gui_process_exited": true,
+        "pointer_restored": true,
+        "foreground_restored": true,
+        "inputs_released": true,
+        "global_config_bytes_preserved": true
+      },
+      "private_artifact_sha256": {
+        "result.json": "0d5e2bf0d3199c9b68884a7b2cf99ac1c13df2b25795e28433b1602e3659e792",
+        "controller-report.json": "44373d17b84eee02a3da1e43f5db704c7b17d3a7ac5b92928526546afe085bf6",
+        "fixture.stdout": "4bb2ee6cce11df4800cb396472f2da366917ea2ccb4e6a79e07751c0c1c77b3a",
+        "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "final_native_harness": {
+    "stages": {
+      "INSTALLED": "PASS",
+      "DISCOVERED": "PASS",
+      "LOADED": "PASS; complete core guide body",
+      "INVOKED": "PASS; capabilities, one bounded run, own fresh observe",
+      "TASK_VERIFIED": "FAIL;1of2requiredclicks, finalstateabsent"
+    },
+    "configured_model": "gpt-5.6-sol",
+    "resolved_policy": "on-request",
+    "resolved_sandbox": {
+      "type": "readOnly",
+      "networkAccess": false
+    },
+    "model_overridden": false,
+    "approval_policy_overridden": false,
+    "sandbox_overridden": false,
+    "native_approval_scope": "Exact preauthorized owned GUI computer_run and its own-session computer_observe accepted once each; unknown requests declined; no persistence/global policy change",
+    "other_capabilities": "Only disposable app-server child scope restricts unrelated MCP/plugins/apps; managed command/args and global configuration preserved",
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_sha256": {
+      "clef-use": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    },
+    "runtime_status": "LOW_CONFIDENCE",
+    "stop_reason": "execution mode confidence below threshold",
+    "execution_mode_probability": 0.6967,
+    "required_probability": 0.9,
+    "action_selection_confidence": 0.9378,
+    "independent_readback": {
+      "stage": 1,
+      "clicks": [
+        "Continue"
+      ],
+      "render_delay_ms": 500,
+      "visible_result": "Confirm",
+      "render_pending": false,
+      "native_input": true,
+      "screenshot": "OWNED_FOREGROUND"
+    },
+    "cleanup": {
+      "endpoint_removed": true,
+      "unsubscribe_status": "unsubscribed",
+      "thread_unsubscribed": true,
+      "app_server_exited": true,
+      "gui_exit_code": 0,
+      "owned_gui_process_exited": true,
+      "pointer_restored": true,
+      "foreground_restored": true,
+      "inputs_released": true,
+      "global_config_bytes_preserved": true
+    }
+  },
+  "decision_packets": [
+    {
+      "image_sha256": "e1a35ae857b855e73b5c94d73661b6b8bae7d7b7439dbb07bc71d3825cf863f1",
+      "object_count": 4,
+      "allowed_candidate_count": 3,
+      "allowed_candidate_labels": [
+        "Click icon: Confirm ",
+        "Click icon: unanswerable",
+        "Click icon: Local test "
+      ],
+      "answers": {
+        "action": {
+          "type": "choice",
+          "choice": "a0",
+          "confidence": 0.9378,
+          "probabilities": {
+            "a0": 0.9378,
+            "a1": 0.0149,
+            "a2": 0.0473
+          }
+        },
+        "complete": {
+          "type": "noul",
+          "noul": 0.0901
+        },
+        "replan": {
+          "type": "noul",
+          "noul": 0.3551
+        },
+        "unsafe": {
+          "type": "noul",
+          "noul": 0.0144
+        },
+        "progress": {
+          "type": "score",
+          "score": 2.2662,
+          "confidence": 0.4116,
+          "legend": {
+            "0": "No progress",
+            "1": "Early progress",
+            "2": "Partial progress",
+            "3": "Almost complete",
+            "4": "Complete"
+          },
+          "probabilities": {
+            "0": 0.0865,
+            "1": 0.1263,
+            "2": 0.2987,
+            "3": 0.4116,
+            "4": 0.0769
+          }
+        },
+        "condition_0": {
+          "type": "noul",
+          "noul": 0.0149
+        },
+        "mode": {
+          "type": "choice",
+          "choice": "ACT",
+          "confidence": 0.6967,
+          "probabilities": {
+            "ACT": 0.6967,
+            "WAIT": 0.0511,
+            "BLOCKED": 0.0943,
+            "NEEDS_REPLAN": 0.1042,
+            "COMPLETED": 0.0537
+          }
+        },
+        "effect": {
+          "type": "noul",
+          "noul": 0.1812
+        }
+      },
+      "input_tokens": 2115,
+      "request_sha256": "f785b3ebeea7b19b0972faab82d98e9c6a381721f59ad9921669584f0683ca9a",
+      "reply_sha256": "8cbed5e606c221b73b8b4b61c88f893edcc793f82a633a9a8b73b79d482574f6"
+    },
+    {
+      "image_sha256": "270f602bbd6e57138e60a39781104a3309a9e3dccfc3577bbc9008d89e61b909",
+      "object_count": 4,
+      "allowed_candidate_count": 3,
+      "allowed_candidate_labels": [
+        "Click icon: Continue ",
+        "Click icon: unanswerable",
+        "Click icon: Local test "
+      ],
+      "answers": {
+        "action": {
+          "type": "choice",
+          "choice": "a0",
+          "confidence": 0.9536,
+          "probabilities": {
+            "a0": 0.9536,
+            "a1": 0.0116,
+            "a2": 0.0348
+          }
+        },
+        "complete": {
+          "type": "noul",
+          "noul": 0.0308
+        },
+        "replan": {
+          "type": "noul",
+          "noul": 0.2242
+        },
+        "unsafe": {
+          "type": "noul",
+          "noul": 0.0121
+        },
+        "progress": {
+          "type": "score",
+          "score": 1.3604,
+          "confidence": 0.5651,
+          "legend": {
+            "0": "No progress",
+            "1": "Early progress",
+            "2": "Partial progress",
+            "3": "Almost complete",
+            "4": "Complete"
+          },
+          "probabilities": {
+            "0": 0.0951,
+            "1": 0.5651,
+            "2": 0.2436,
+            "3": 0.0768,
+            "4": 0.0194
+          }
+        },
+        "condition_0": {
+          "type": "noul",
+          "noul": 0.0051
+        },
+        "mode": {
+          "type": "choice",
+          "choice": "ACT",
+          "confidence": 0.9108,
+          "probabilities": {
+            "ACT": 0.9108,
+            "WAIT": 0.0164,
+            "BLOCKED": 0.0259,
+            "NEEDS_REPLAN": 0.032,
+            "COMPLETED": 0.0149
+          }
+        },
+        "effect": {
+          "type": "noul",
+          "noul": 0.042
+        }
+      },
+      "input_tokens": 1903,
+      "request_sha256": "dd5c704c5c6a5df2eb88319bec2eaf5e0eeb4f575d3fcd11dd3a3e7370a36415",
+      "reply_sha256": "4922ab5e59975b4ee3cdb722d748be930a68dd84059908a47e2725ca68f82629"
+    }
+  ],
+  "candidate_diagnosis": {
+    "semantic_target_inclusion": "Both Continue and Confirm occur in the actual allowed candidate rosters; three allowed candidates each",
+    "distribution": "NONUNIFORM; no flattening inferred from low execution-mode confidence",
+    "first_decision_spatial_oracle": {
+      "classification": "OBSERVED_IDENTICAL_RASTER_NATIVE_GEOMETRY_CALIBRATION",
+      "image_sha256": "270f602bbd6e57138e60a39781104a3309a9e3dccfc3577bbc9008d89e61b909",
+      "image_size": [
+        2560,
+        1600
+      ],
+      "origin": [
+        0,
+        0
+      ],
+      "independent_button_label": "Continue",
+      "independent_physical_bounds": [
+        88,
+        385,
+        823,
+        595
+      ],
+      "candidate_pixel_bounds": {
+        "x1": 88,
+        "y1": 386,
+        "x2": 822,
+        "y2": 595
+      },
+      "candidate_center": [
+        455.0,
+        490.5
+      ],
+      "center_inside_native_button": true,
+      "candidate_rank": 1,
+      "covered_opportunities": 1,
+      "declared_spatially_bound_opportunities": 1,
+      "scope": "One retained first-step raster only; not whole-workload coverage or fast eligibility",
+      "calibration_result_sha256": "cbeb45073fc01cb980595c225531a236311387e1f0402fc31b90bc900e65b48a"
+    },
+    "confirm_spatial_coverage": "NOT_RUN for this .37 attempt; new helper records native geometry per rendered stage for next installed rerun",
+    "proposal_retention": "1.0 in both decisions; retention alone is not correct-target coverage"
+  },
+  "failure_separation": {
+    "authentication": "No current401 observed. Final native model turn completed and all3toolcalls succeeded.",
+    "candidate_inclusion": "Correct semantic target retained; first spatial target independently bound to identicalpixels.",
+    "state_recognition": "Second decision chooses ACT but probability.6967 below unchanged.9 guard.",
+    "independent_outcome": "Actual receiver records Continue, visibleConfirm; finalTaskcomplete absent.",
+    "historical_0136_completion": "Separate earlier receipt records two correct clicks but final goal.8952<.9 despite independently visibleTaskcomplete; not overwritten by this different failure.",
+    "dpi": "Source correction independently reproduces/fixes GUI-process capture DPI mutation; its effect on the historical screen-changed decision is not established."
+  },
+  "not_run": [
+    "Current0.1.38 installed full GUI task",
+    "Production Blender operation success",
+    "Actual browser/editor tasks in this CodexGUI case",
+    "Whole reaction p95/goodput/fast eligibility coverage",
+    "Reici task from separate session"
+  ],
+  "acceptance": "Original44 statuses/gates unchanged. Native invocation success is not task completion. All five attempts retained.",
+  "privacy": "Only owned fixture labels, sanitized observations and private artifact digests; raw images/traces remain private."
+}

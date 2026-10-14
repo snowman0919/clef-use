@@ -1,0 +1,221 @@
+{
+  "classification": "OBSERVED",
+  "source_commit": "bb971ef01c3d9083cb823a1e5673cc847360d5b0",
+  "run_id": 38157978139,
+  "url": "https://github.com/snowman0919/clef-use/actions/runs/38157978139",
+  "event": "workflow_dispatch",
+  "status": "completed",
+  "conclusion": "success",
+  "build_matrix": [
+    {
+      "job": "build (ubuntu-24.04, 3.12)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (ubuntu-24.04, 3.13)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (ubuntu-24.04-arm, 3.12)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15, 3.11)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15, 3.13)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15-intel, 3.11)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (ubuntu-24.04-arm, 3.13)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (ubuntu-24.04-arm, 3.11)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15-intel, 3.12)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (windows-2022, 3.11)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (windows-2022, 3.12)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15, 3.12)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (windows-2022, 3.13)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (macos-15-intel, 3.13)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    },
+    {
+      "job": "build (ubuntu-24.04, 3.11)",
+      "build": "success",
+      "installation_check": "success",
+      "upload": "success"
+    }
+  ],
+  "assemble": "success",
+  "deploy": "skipped",
+  "tag_release_assets": "skipped",
+  "scope": "Actual 15-platform/Python build and installation-check pairs plus assembled release site. Branch dispatch is not production publication or fresh public installation.",
+  "deployment_guard": "Existing workflow requires CLEF_DEPLOY_ENABLED and main or version tag; current authorized feature branch does not satisfy ref condition. No bypass/main/tag/agent rerun.",
+  "artifacts": [
+    {
+      "id": 11709801045,
+      "name": "site-windows-2022-3.12",
+      "sha256": "c660a266408d1f80ce6ac2661dfdce22f3be97a9154ee4f83151e3758e682c12",
+      "size_in_bytes": 28718634,
+      "expired": false
+    },
+    {
+      "id": 11709746346,
+      "name": "site-windows-2022-3.13",
+      "sha256": "bc1e5904ca2aeeef4a5011fc8b6c4bf6b57a2491d82ba19fa437f9fdf2ad64fc",
+      "size_in_bytes": 28728366,
+      "expired": false
+    },
+    {
+      "id": 11709522252,
+      "name": "site-macos-15-intel-3.12",
+      "sha256": "51beb8f088e5975ef92e744e0be255d1528c6a2e0d0e7625f10f32cdf36a9a80",
+      "size_in_bytes": 25085948,
+      "expired": false
+    },
+    {
+      "id": 11709422029,
+      "name": "site-macos-15-3.11",
+      "sha256": "0fa388c4fe090fad7a9c158f730f96ce5745159f8ef58d1877da472cf0f1a027",
+      "size_in_bytes": 26125237,
+      "expired": false
+    },
+    {
+      "id": 11709382712,
+      "name": "site-macos-15-intel-3.13",
+      "sha256": "f17a6359e2b89be4cd08480b1f93d3576c330fb3a2987992a21d738a6267c639",
+      "size_in_bytes": 25084080,
+      "expired": false
+    },
+    {
+      "id": 11709332186,
+      "name": "site-macos-15-3.13",
+      "sha256": "5b5c7d17af764c36ea2ac0eadf56ffba0793b220f3acf73e22c6bd51cea17c4f",
+      "size_in_bytes": 26068042,
+      "expired": false
+    },
+    {
+      "id": 11709287180,
+      "name": "site-ubuntu-24.04-arm-3.12",
+      "sha256": "ad430cc9ca5a844f240e667802bb09ba1201cc767b4e9220a44addd92d3076d4",
+      "size_in_bytes": 23345567,
+      "expired": false
+    },
+    {
+      "id": 11709257421,
+      "name": "site-ubuntu-24.04-arm-3.11",
+      "sha256": "4b67261618ccd332149baf06b775076f8930444035c3ae4404f9df9f496e246e",
+      "size_in_bytes": 23336243,
+      "expired": false
+    },
+    {
+      "id": 11709226557,
+      "name": "site-windows-2022-3.11",
+      "sha256": "8c28fbcecd2d8bf2cc2f74914715b547be5433ab269f76c6e6dabe854a7038a1",
+      "size_in_bytes": 28747270,
+      "expired": false
+    },
+    {
+      "id": 11709076892,
+      "name": "site-ubuntu-24.04-3.12",
+      "sha256": "bb865520f8cdd0474806126e7eb4a8ccc94f2b2be4eb684f4c905b135497ef8c",
+      "size_in_bytes": 24451631,
+      "expired": false
+    },
+    {
+      "id": 11709017251,
+      "name": "site-macos-15-intel-3.11",
+      "sha256": "ef49e85bc7c5c5fc3f47749eeb34935ce2752d1475e6c84f59bcf571d8574706",
+      "size_in_bytes": 25143359,
+      "expired": false
+    },
+    {
+      "id": 11708902158,
+      "name": "site-ubuntu-24.04-3.13",
+      "sha256": "2782f81e53b24b89378cfa616e8154a250da075922998d4d87048df6bc4bace8",
+      "size_in_bytes": 24436016,
+      "expired": false
+    },
+    {
+      "id": 11708857321,
+      "name": "site-macos-15-3.12",
+      "sha256": "1288268804e5c99f39067a86d52e8230fd92d8ef177836596c460a7a7e8b610b",
+      "size_in_bytes": 26064922,
+      "expired": false
+    },
+    {
+      "id": 11708767935,
+      "name": "clef-use-release-site",
+      "sha256": "d84df7e144b50196d63aacfd5ff1ab35bd7bb989c48c7107e56ffc53ea3c190d",
+      "size_in_bytes": 382415690,
+      "expired": false
+    },
+    {
+      "id": 11708742617,
+      "name": "site-ubuntu-24.04-3.11",
+      "sha256": "c90bb92b8bba8e1cfbf763d5ab257671cb24db2c13cb996c0fce8b5e209e3423",
+      "size_in_bytes": 24432086,
+      "expired": false
+    },
+    {
+      "id": 11708658114,
+      "name": "site-ubuntu-24.04-arm-3.13",
+      "sha256": "f9e71548d43bc5bac9d0adb2a774b94ed497fdc2e021149a04677bd8f0bdf0be",
+      "size_in_bytes": 23328319,
+      "expired": false
+    }
+  ],
+  "raw_run_sha256": "262c199c2c49d19b988b84c67b197a0bc9d071ab3b3822e84440075fc90737ca"
+}

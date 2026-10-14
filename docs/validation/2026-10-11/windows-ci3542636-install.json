@@ -1,0 +1,329 @@
+{
+  "scope": "Immutable 35426367aac52f2c1ae994e4c4cc822c61e7350e native win32 fresh/repeat + installed capability contract and three managed guide enrollments; no harness/model/GUI/input/service invocation",
+  "ci_commit": "35426367aac52f2c1ae994e4c4cc822c61e7350e",
+  "ci_run": 38156320672,
+  "fresh_expected": "INSTALLED",
+  "repeat_expected": "CURRENT",
+  "package_files": 61,
+  "python_modules": 46,
+  "resource_files": 15,
+  "source_modified": false,
+  "git_source_exact_files": 61,
+  "source_ordering_exception": false,
+  "repeat_crash_matrix": false,
+  "reason": "Current immutable CI artifact fresh/repeat native exact package and live contract verification",
+  "server_bind": "127.0.0.1",
+  "classification": "OBSERVED_NATIVE_WINDOWS_INSTALL_ONLY",
+  "native_platform": "win32",
+  "native_python": "3.11.9",
+  "free_bytes_before": 520143138816,
+  "steps": [
+    {
+      "name": "fresh-install",
+      "exit_code": 0,
+      "seconds": 48.187999999849126
+    },
+    {
+      "name": "wrapper-version",
+      "exit_code": 0,
+      "seconds": 0.3279999999795109
+    },
+    {
+      "name": "native-version",
+      "exit_code": 0,
+      "seconds": 0.2660000000614673
+    },
+    {
+      "name": "capabilities-detail",
+      "exit_code": 0,
+      "seconds": 0.6559999999590218
+    },
+    {
+      "name": "explicit-three-guides",
+      "exit_code": 0,
+      "seconds": 2.780999999959022
+    },
+    {
+      "name": "repeat-bootstrap",
+      "exit_code": 0,
+      "seconds": 10.562999999849126
+    },
+    {
+      "name": "repeat-explicit-three",
+      "exit_code": 0,
+      "seconds": 2.671000000089407
+    }
+  ],
+  "status": "PASS",
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_config_comments_preserved": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "OMP_disabled_agents_setting_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "repeat_HOME_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true
+  },
+  "digests": {
+    "actual_archive_sha": "253800927befe90cefd479b12ac594fa905ff9966561198d69968b91d9905345",
+    "wheel_sha": "6e9e0ef3d7e5d098de7e42e70c5e48e45a349e769463fbbc9a1e9280be49392e",
+    "installer_ps1_sha": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "packaged_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e"
+  },
+  "fresh_install_status": "INSTALLED",
+  "schema_tool_names": [
+    "computer_abort",
+    "computer_capabilities",
+    "computer_continue",
+    "computer_observe",
+    "computer_run",
+    "computer_status"
+  ],
+  "live_contract": {
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "default_runtime_state": {
+    "provider": "NONE",
+    "observation_access_level": "PIXELS_ONLY",
+    "trusted_application_evidence": "UNAVAILABLE",
+    "provider_configuration_path": "UNAVAILABLE",
+    "operation_availability": "BLOCKED",
+    "live_probe": "NOT_PROBED",
+    "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+    "native_state": "Window identity may be available; desktop permissions are not probed."
+  },
+  "installed_package_files": {
+    "clef_use/__init__.py": true,
+    "clef_use/activity.py": true,
+    "clef_use/activity_display.py": true,
+    "clef_use/activity_macos.py": true,
+    "clef_use/activity_windows.py": true,
+    "clef_use/activity_x11.py": true,
+    "clef_use/backends.py": true,
+    "clef_use/benchmark.py": true,
+    "clef_use/candidates.py": true,
+    "clef_use/capabilities.py": true,
+    "clef_use/cli.py": true,
+    "clef_use/client.py": true,
+    "clef_use/config.py": true,
+    "clef_use/decision_benchmark.py": true,
+    "clef_use/decision_contract.py": true,
+    "clef_use/decision_diagnostics.py": true,
+    "clef_use/deployment_profiles.py": true,
+    "clef_use/doctor.py": true,
+    "clef_use/grounding.py": true,
+    "clef_use/harness.py": true,
+    "clef_use/head_trace.py": true,
+    "clef_use/input_ir.py": true,
+    "clef_use/installer.py": true,
+    "clef_use/integrations.py": true,
+    "clef_use/interfaces.py": true,
+    "clef_use/maintenance.py": true,
+    "clef_use/mcp_server.py": true,
+    "clef_use/ml_probe.py": true,
+    "clef_use/model_worker.py": true,
+    "clef_use/models.py": true,
+    "clef_use/native_dependencies.py": true,
+    "clef_use/objects.py": true,
+    "clef_use/operations.py": true,
+    "clef_use/preparation_progress.py": true,
+    "clef_use/provision.py": true,
+    "clef_use/reaction_metrics.py": true,
+    "clef_use/router.py": true,
+    "clef_use/runtime.py": true,
+    "clef_use/schema.py": true,
+    "clef_use/service.py": true,
+    "clef_use/state.py": true,
+    "clef_use/update_notice.py": true,
+    "clef_use/verification.py": true,
+    "clef_use/windows_input.py": true,
+    "clef_use/x11_clipboard.py": true,
+    "clef_use/x11_input_state.py": true,
+    "clef_use/assets/ml-clef.txt": true,
+    "clef_use/assets/ml-d1.txt": true,
+    "clef_use/assets/ml-omni.txt": true,
+    "clef_use/assets/ml-windows-nf4.txt": true,
+    "clef_use/assets/ml-windows-rocm.txt": true,
+    "clef_use/assets/ml-windows-torch-cpu.txt": true,
+    "clef_use/agent-skills/examples.json": true,
+    "clef_use/agent-skills/manifest.json": true,
+    "clef_use/agent-skills/clef-use/SKILL.md": true,
+    "clef_use/agent-skills/clef-use/references/API_BASELINE.md": true,
+    "clef_use/agent-skills/clef-use/references/LIVE_API.md": true,
+    "clef_use/agent-skills/clef-use-blender/SKILL.md": true,
+    "clef_use/agent-skills/clef-use-blender/references/OPERATIONS.md": true,
+    "clef_use/agent-skills/clef-use-diagnostics/SKILL.md": true,
+    "clef_use/agent-skills/clef-use-diagnostics/references/FAILURES.md": true
+  },
+  "three_user_enrollment": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED"
+    }
+  ],
+  "deployed_three_guides": {
+    "codex": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    },
+    "hermes": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    },
+    "omp": {
+      "clef-use": {
+        "SKILL.md": true,
+        "references/API_BASELINE.md": true,
+        "references/LIVE_API.md": true
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": true,
+        "references/FAILURES.md": true
+      },
+      "clef-use-blender": {
+        "SKILL.md": true,
+        "references/OPERATIONS.md": true
+      }
+    }
+  },
+  "repeat_install_status": "CURRENT",
+  "repeat_three_enrollment": [
+    {
+      "harness": "codex",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "hermes",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "omp",
+      "status": "UNCHANGED"
+    }
+  ],
+  "preservation_and_cleanup": {
+    "owned_loopback_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true,
+    "bootstrap_parent_parent_runtime_tree_bytes_preserved": true
+  },
+  "cleanup_scope": "Ownedloopback stopped, all subprocesses waited, no scheduled tasks created; private artifacts retained.",
+  "not_run": "All harness discovery/load/invoke, models, GUI/input/service actions NOT_RUN. No auth copying, new harness install, production changes or source edits.",
+  "ci_artifact_id": 11708468810,
+  "immutable_artifact": {
+    "outer_artifact_sha256": "2fa6dd7f57eee24427bd3763665803559aecab096f19060c244694558981dd6e",
+    "actual_archive_sha": "253800927befe90cefd479b12ac594fa905ff9966561198d69968b91d9905345",
+    "wheel_sha": "6e9e0ef3d7e5d098de7e42e70c5e48e45a349e769463fbbc9a1e9280be49392e",
+    "wheel_count": 52,
+    "installer_ps1_sha": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "packaged_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "latest_manifest_sha256": "3389227ec4ecd590766b8e991296e7fd3821b6ddb034d3233ecef84651318d97"
+  },
+  "Git_wheel_installed_exact_file_count": 61,
+  "installed_package_files_scope": "46Python modules +15resources from actual Windows wheel compared to pinned Git354 before execution, then each installed native file verified against same bytes.",
+  "native_command_count": 7,
+  "native_discovery_load_invoke_count": 0,
+  "automatic_retries": 0,
+  "root_start_receipt_sha256": "1ba7d9fd66c7cf58456fa8d8023eddc571359ab8d6154ba0a9d73af59b422102",
+  "preauthorization_declaration_sha256": "93ff7658a949a7afa86298aebece64d51f8550db6a90302d9065e46968fd58b2",
+  "actual_authorized_declaration_sha256": "36b2e67d855954aa3c9967efc54972269d77fcb78c8c11d336882dc62f50d368",
+  "remote_driver_sha256": "db5f310143f2a4c79a3b43a036fe69648ef249216ac16ff9615abb7191d50575",
+  "controller_sha256": "e43e635ac5fc5760c208b82a76e3f030ab97792646d4f308f9837adeccb24331",
+  "payload_proof_sha256": "175a2c1769cd487e9533af9c7c2daad2db1752639cecaed06787df1329c97c72",
+  "raw_received_report_sha256": "a7e13accadcab86fa5cb40291f8e5fb7a298fa99104249bd9b3a2bc85dc8257c",
+  "raw_native_predeclaration_sha256": "e1043f8fa9ec84dd158aa15877f39b6b3016aa638897d119d78cac1299e21e8e",
+  "raw_remote_stdout_sha256": "fd2e52c579a15759006ee0738a642d6d6ceb4300e02dfa4e8c23a0a241e86575",
+  "raw_remote_stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "independent_native_postrun": {
+    "classification": "OBSERVED_READ_ONLY_NATIVE_POSTRUN",
+    "exit": 0,
+    "seconds": 1.6793032550485805,
+    "automatic_retries": 0,
+    "stdout_sha256": "22862d74b4cb10467684d8d5ab6796ac4f8f0f9b0ad705a8d71425b168afeba1",
+    "stderr_sha256": "6f45e253158f7a1f385ac1e13734a2639bd32c80c3ac658fddac1596bffb2d4f",
+    "native": {
+      "classification": "OBSERVED_READ_ONLY_NATIVE_POSTRUN",
+      "owned_root_exists": true,
+      "ownership_marker_verified": true,
+      "owned_process_count": 0,
+      "owned_processes": [],
+      "native_report_status": "PASS",
+      "config_or_process_mutation": false
+    },
+    "native_termination_inferred_from_timeout": false
+  },
+  "postrun_readonly_helper_sha256": "53f3f2d7491a2e0a46509b1ce55100bd44b572f5d27f84856d45afb6bc260895",
+  "budget_scope": {
+    "native_required_command_phase_seconds": 600,
+    "remote_preparation_outside_command_phase": "Archive/source checks, read-only preservation snapshots and own config seeding precede native command deadline. No shared600whole-batch claim.",
+    "outer_SSH_execution_timeout_seconds": 660,
+    "transfer_calls": 4,
+    "each_transfer_timeout_seconds": 90,
+    "create_call_timeout_seconds": 30,
+    "fetch_calls": 2,
+    "each_fetch_timeout_seconds": 30,
+    "total_external_call_wait_seconds_upper_bound": 1110,
+    "added_retries": 0,
+    "models": 0,
+    "harness_invocations": 0,
+    "GUI_input_service_actions": 0,
+    "SSH_timeout_policy": "Stop; client timeout does not prove native process termination. Independent read-only exact-owned-root process readback required; never claim cleanup without observing it."
+  },
+  "preservation_attribution_correction": {
+    "observed_runtime_snapshot_target": "Existing private-reference bootstrap Python parent.parent tree; before/after native bytes equal.",
+    "raw_helper_field_name": "global_V2_runtime_bytes_preserved",
+    "full_production_V2_runtime_tree_snapshot": "NOT_ESTABLISHED; raw field name does not establish that bootstrap tree is the active V2 runtime.",
+    "observed_production_checks": "Actual global wrapper/config file hashes and user PATH before/after match; prior customized fixture HOME/runtime snapshots match."
+  },
+  "config_scope_limit": "Seeded owned block-comment YAML configs and own selected profiles only. Separately observed Hermes valid flow-JSON YAML corruption is not tested or cleared by this historical354 installation.",
+  "explicit_NOT_RUN": [
+    "Native Codex/Hermes/OMP discovery/load/invoke",
+    "Models, runtime services, GUI and OS inputs",
+    "Crash/resume matrix for this candidate",
+    "Hermes flow-JSON YAML configuration counterexample and subsequent source fix",
+    "Full active production V2 runtime identity/snapshot attribution"
+  ],
+  "privacy": "Native private roots, bootstrap path, reference locations and credentials omitted; raw evidence remains private. No auth copy, global changes, scheduled tasks or source changes."
+}

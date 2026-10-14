@@ -1,0 +1,127 @@
+{
+  "classification": "OBSERVED_INSTALLED_WINDOWS_SUSPENDED_WORKER_DEADLINE_COMPONENT",
+  "date": "2026-10-13",
+  "requirements": [
+    "INPUT-04"
+  ],
+  "partial": true,
+  "status": "PASS",
+  "environment": {
+    "runtime_version": "0.1.37",
+    "desktop": "Interactive Session 1/Default",
+    "native_input": "Windows SendInput with native held-state and Tk receiver readback"
+  },
+  "scope": "Native input component; no HTTP/service/models/full gesture/Blender operation",
+  "lease_seconds": 6,
+  "recovery_grace_seconds": 2,
+  "source": {
+    "script": "scripts/windows_suspended_input_smoke.py",
+    "script_sha256": "8a66f2e6665929276a91e778dedb16a238cf1d895d4572778d8386480449b123"
+  },
+  "admission": {
+    "owned_foreground": true,
+    "nontext_canvas_focused": true,
+    "owned_imc_disabled_and_absent": true,
+    "ime_scope": "Own disposable receiver only; not general IME discovery"
+  },
+  "suspension": {
+    "api": "DebugActiveProcess / WaitForDebugEvent",
+    "actual_worker_distinct_from_launcher": true,
+    "debug_event_matches_actual_worker": true,
+    "guardian_family_distinct_from_worker": true,
+    "guardian_family_process_count": 2,
+    "initial_event_code": 3,
+    "attach_event_counts": {
+      "1": 1,
+      "2": 6,
+      "3": 1,
+      "6": 55
+    },
+    "held_event_code": 1,
+    "attach_breakpoint_left_uncontinued": true,
+    "kill_on_debugger_exit": false,
+    "privileges_enabled": false
+  },
+  "recovery": {
+    "held_before": [
+      4,
+      16,
+      160
+    ],
+    "held_after": [],
+    "heartbeat_unchanged": true,
+    "pending_debug_event": true,
+    "worker_alive": true,
+    "guardian_family_alive": true,
+    "explicit_release_or_eof_before_observation": false
+  },
+  "receiver_events_in_order": [
+    {
+      "phase": "key_down",
+      "key": "Shift_L"
+    },
+    {
+      "phase": "button_down",
+      "button": 2
+    },
+    {
+      "phase": "button_up",
+      "button": 2
+    },
+    {
+      "phase": "key_up",
+      "key": "Shift_L"
+    }
+  ],
+  "resumed_child": {
+    "status": "PASSED",
+    "cancelled_observed": true,
+    "refused_after_deadline": true,
+    "refusal_type": "InputInterrupted",
+    "cleanup": {
+      "errors": [],
+      "heartbeat_stopped": true,
+      "guardian_exited": true
+    }
+  },
+  "cleanup": {
+    "errors": [],
+    "http_service_started": false,
+    "debugger_detached": true,
+    "owned_worker_exited": true,
+    "guardian_family_exited": true,
+    "held_after": [],
+    "pointer_restored": true,
+    "foreground_immediate": true,
+    "foreground_queue_synchronized": true,
+    "foreground_before_own_ui_pump": true,
+    "foreground_completion_observations": [
+      "previous"
+    ],
+    "foreground_restored": true,
+    "owned_window_closed": true,
+    "owned_scheduled_task_removed": true,
+    "native_task_exit_code": 0
+  },
+  "private_artifact_sha256": {
+    "result.json": "c0d80333ed1a5bb4f9e2ea8b5eb98490f7b95ab611637c7e812eec5b7a2d959d",
+    "controller-report.json": "0c262ef7a958eddaa818eb5b1b27a576aef20a476bdfb01938a79b9556751641",
+    "controller.py": "c79f53c806cd3e215b883a6b10faa1c2d0470fa508f8788d9305d6f752bd6162",
+    "fixture.stdout": "af95a7b7aecc53eae36dd18070e99fcb0962d92dfb0471f21160e7af5b91adc2",
+    "fixture.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "not_run": [
+    "Full SessionRuntime.execute or service-driven operation admission",
+    "Full GestureInput or Blender viewport semantics",
+    "Model or harness GUI completion",
+    "General automatic IME/input-owner observation",
+    "Reaction p95, goodput or coverage gates"
+  ],
+  "performance": "Functional deadline recovery only. Native receipt clock ticks do not establish state-change-to-correct-input latency or p95.",
+  "acceptance": "Partial additional evidence for original INPUT-04; acceptance status, criteria and numeric gates unchanged.",
+  "privacy": "Private absolute paths, credentials, nonce, process/window identifiers and raw traces are omitted; only private artifact digests are public.",
+  "protocol_references": [
+    "https://learn.microsoft.com/en-us/windows/win32/api/debugapi/nf-debugapi-debugactiveprocess",
+    "https://learn.microsoft.com/en-us/windows/win32/debug/debugging-events"
+  ]
+}

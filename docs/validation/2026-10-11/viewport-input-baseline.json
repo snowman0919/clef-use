@@ -1,0 +1,535 @@
+{
+  "classification": "OBSERVED",
+  "source_base": "df1ad84914db6455b3eae101163427f859fb7a59",
+  "integrated_source_sha256": {
+    "src/clef_use/operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+    "src/clef_use/runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+    "src/clef_use/input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+    "src/clef_use/backends.py": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+    "tests/test_operations.py": "43600be164e0c5a779f941f2f4ac6724947029b24abe2cc717a8ea3972cea1df",
+    "tests/test_operation_runtime.py": "6840c29549039f2d75219a4ec557a29d6e3da294c708d89f7e8453c423dd89bf",
+    "tests/test_input_ir.py": "868ee2a45b5e06f3e911050a141ea30ce769a812f85376d2d18a5ad85a8d38be",
+    "tests/test_legacy_keyboard_native.py": "345bc64afa947721a2b9488616fd000153825b3554137590ae4655f3fc5e3051"
+  },
+  "regression": {
+    "integrated": {
+      "passed": 1133,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 57.77,
+      "log_sha256": "512e6f5fce0285b1272c26c66785fba1e4e3161bfefbbba5917f137aed61b0fa",
+      "scope": "Integrated candidate includes both viewport baseline and legacy keyboard patches; not a standalone intermediate commit run"
+    },
+    "lint_format": "PASS: eight changed Python files",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool examples"
+  },
+  "source_cli": {
+    "registry_version": 5,
+    "request_schema_unchanged": true,
+    "report_sha256": "f7ccd712cc20454ed286f20a5080e6bcae6894424f0ca9a166bc59f5bb452c43",
+    "scope": "Actual source CLI only; not installed-current harness discovery/load/invoke"
+  },
+  "not_run": [
+    "Whole-task E2E and model work: owned by other sessions",
+    "Installed-current harness E2E",
+    "Full-task accuracy, reaction p95, goodput and eligibility coverage",
+    "Windows/Darwin native execution for these patches",
+    "Public release"
+  ],
+  "acceptance": "No scenario status or release gate promoted",
+  "scope": "Viewport view-baseline software correction, controlled canonical components and actual authenticated private native Canvas input; no general Blender provider readiness",
+  "contract": {
+    "baseline": "Exact initial view revision through runner predispatch refresh and native button-down acknowledgement",
+    "phase": "Expected view changes allowed only after button ACK; other context and geometry guards remain exact",
+    "delivery": "Gesture does not fabricate key/chord InputDelivery",
+    "limit": "No causal attribution guarantee against simultaneous external input after ACK; native state sampling and injection are separate requests"
+  },
+  "pure_component": {
+    "before": {
+      "classification": "OBSERVED_PURE_COMPONENT",
+      "scope": "Canonical OperationRunner with explicit state/effect consumer; no native UI/model/E2E",
+      "independent_change_before_dispatch": true,
+      "gesture_changed_view": false,
+      "report": {
+        "family": "viewport_gesture",
+        "status": "SUCCEEDED",
+        "reason": "application readback verified",
+        "assessment": null,
+        "transitions": [
+          "requires_verified",
+          "view_change_verified",
+          "geometry_invalidated"
+        ],
+        "state_version": 3,
+        "access_level": "APP_TELEMETRY_ASSISTED",
+        "owned_modal_id": null,
+        "geometry_invalidated": true,
+        "input_count": 1
+      },
+      "dispatched_commands": [
+        {
+          "kind": "gesture",
+          "points": [
+            [
+              0.4,
+              0.4
+            ],
+            [
+              0.5,
+              0.5
+            ]
+          ],
+          "surface": [
+            0.0,
+            0.0,
+            1.0,
+            1.0
+          ],
+          "modifiers": [],
+          "button": "middle",
+          "duration": 0.05
+        }
+      ],
+      "source_sha256": "cbd29f45171130e0b410229241bfca65dbb329ac8432abc9f5ca687d66f2b8d6"
+    },
+    "after": {
+      "classification": "OBSERVED_PURE_COMPONENT",
+      "scope": "Canonical OperationRunner with explicit state/effect consumer; no native UI/model/E2E",
+      "independent_change_before_dispatch": true,
+      "gesture_changed_view": false,
+      "report": {
+        "family": "viewport_gesture",
+        "status": "BLOCKED",
+        "reason": "view_revision does not match required 'view-1'",
+        "assessment": null,
+        "transitions": [
+          "requires_verified"
+        ],
+        "state_version": 2,
+        "access_level": "APP_TELEMETRY_ASSISTED",
+        "owned_modal_id": null,
+        "geometry_invalidated": false,
+        "input_count": 0
+      },
+      "dispatched_commands": [],
+      "source_sha256": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6"
+    },
+    "before_sha256": "6d0c9656af7f43eea5e97d6b03a6e83561380cfae1ae1fcb2408242b7312f072",
+    "after_sha256": "0907908e1c7dc461e1a193af83c854b72d3faf70a25b9d8153a842b2ed369695"
+  },
+  "native_component": {
+    "classification": "OBSERVED_NATIVE_COMPONENT",
+    "scope": "Actual authenticated private X11 Tk Canvas + canonical DesktopCapture/DesktopAction/SessionRuntime operation guard/OperationRunner; API_ASSISTED fixed viewport bridge, not Blender/E2E/model/publicprovider/performance evidence",
+    "status": "PASS",
+    "before": {
+      "immutable_commit": "df1ad84914db6455b3eae101163427f859fb7a59",
+      "module_sha256": {
+        "input_ir": "2521b2325bb7443ae9030c059c42f13f2ee564db7932a7541275cc39dac116bd",
+        "operations": "cbd29f45171130e0b410229241bfca65dbb329ac8432abc9f5ca687d66f2b8d6",
+        "runtime": "52b33facf7822465aae9129a9b9ad7c39dff3696fda0d995260920e5b17324e0",
+        "backends": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4"
+      },
+      "canonical_source_context_at_start_sha256": {
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+        "input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+        "backends.py": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9"
+      },
+      "canonical_source_context_at_end_sha256": {
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+        "input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+        "backends.py": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9"
+      },
+      "canonical_context_unchanged": true,
+      "case": {
+        "name": "independent_view_change_before_noeffect_gesture",
+        "operation_report": {
+          "family": "viewport_gesture",
+          "status": "SUCCEEDED",
+          "reason": "application readback verified",
+          "assessment": null,
+          "transitions": [
+            "requires_verified",
+            "view_change_verified",
+            "geometry_invalidated"
+          ],
+          "state_version": 19,
+          "access_level": "API_ASSISTED",
+          "owned_modal_id": null,
+          "geometry_invalidated": true,
+          "input_count": 1
+        },
+        "initial_pose": [
+          150.0,
+          150.0,
+          250.0,
+          250.0
+        ],
+        "final_pose": [
+          180.0,
+          150.0,
+          280.0,
+          250.0
+        ],
+        "native_events": [
+          {
+            "type": "6",
+            "x": 256,
+            "y": 192,
+            "state": 0
+          },
+          {
+            "type": "4",
+            "x": 256,
+            "y": 192,
+            "state": 1
+          },
+          {
+            "type": "6",
+            "x": 320,
+            "y": 240,
+            "state": 513
+          },
+          {
+            "type": "5",
+            "x": 320,
+            "y": 240,
+            "state": 513
+          }
+        ],
+        "pointer_before": [
+          320,
+          240
+        ],
+        "pointer_after": [
+          320,
+          240
+        ],
+        "native_button_modifier_mask": 0,
+        "executor_owned": [],
+        "executor_calls": 1,
+        "dispatch_observations": [
+          {
+            "before_pose": [
+              180.0,
+              150.0,
+              280.0,
+              250.0
+            ],
+            "after_pose": [
+              180.0,
+              150.0,
+              280.0,
+              250.0
+            ],
+            "returned_action_result": {
+              "ok": true,
+              "reason": "executed",
+              "delivery": null
+            },
+            "note": null
+          }
+        ]
+      },
+      "raw_report_sha256": "0b269c09560e74fc10362e2c34a73e3fbb0dad13d801e578c23b3a00005ac21a",
+      "cleanup": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      }
+    },
+    "after": {
+      "source_sha256": {
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+        "input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+        "backends.py": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9"
+      },
+      "source_sha256_at_end": {
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+        "input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+        "backends.py": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9"
+      },
+      "all_source_bytes_unchanged_during_run": true,
+      "cases": [
+        {
+          "name": "independent_view_change_before_noeffect_gesture",
+          "operation_report": {
+            "family": "viewport_gesture",
+            "status": "BLOCKED",
+            "reason": "view_revision does not match required 'eff244f5bf4fc5299d3eede8733ed4fa29a285a7c70c6f406569b529b2894f55'",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 2,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": false,
+            "input_count": 0
+          },
+          "initial_pose": [
+            150.0,
+            150.0,
+            250.0,
+            250.0
+          ],
+          "final_pose": [
+            180.0,
+            150.0,
+            280.0,
+            250.0
+          ],
+          "native_events": [],
+          "pointer_before": [
+            320,
+            240
+          ],
+          "pointer_after": [
+            320,
+            240
+          ],
+          "native_button_modifier_mask": 0,
+          "executor_owned": [],
+          "executor_calls": 0,
+          "dispatch_observations": []
+        },
+        {
+          "name": "stable_baseline_actual_native_drag",
+          "operation_report": {
+            "family": "viewport_gesture",
+            "status": "SUCCEEDED",
+            "reason": "application readback verified",
+            "assessment": null,
+            "transitions": [
+              "requires_verified",
+              "view_change_verified",
+              "geometry_invalidated"
+            ],
+            "state_version": 18,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": true,
+            "input_count": 1
+          },
+          "initial_pose": [
+            150.0,
+            150.0,
+            250.0,
+            250.0
+          ],
+          "final_pose": [
+            214.0,
+            198.0,
+            314.0,
+            298.0
+          ],
+          "native_events": [
+            {
+              "type": "6",
+              "x": 256,
+              "y": 192,
+              "state": 0
+            },
+            {
+              "type": "4",
+              "x": 256,
+              "y": 192,
+              "state": 1
+            },
+            {
+              "type": "6",
+              "x": 320,
+              "y": 240,
+              "state": 513
+            },
+            {
+              "type": "5",
+              "x": 320,
+              "y": 240,
+              "state": 513
+            }
+          ],
+          "pointer_before": [
+            320,
+            240
+          ],
+          "pointer_after": [
+            320,
+            240
+          ],
+          "native_button_modifier_mask": 0,
+          "executor_owned": [],
+          "executor_calls": 1,
+          "dispatch_observations": [
+            {
+              "before_pose": [
+                150.0,
+                150.0,
+                250.0,
+                250.0
+              ],
+              "after_pose": [
+                214.0,
+                198.0,
+                314.0,
+                298.0
+              ],
+              "returned_action_result": {
+                "ok": true,
+                "reason": "executed",
+                "delivery": null
+              },
+              "note": null
+            }
+          ]
+        },
+        {
+          "name": "view_change_on_initial_native_pointer_positioning",
+          "operation_report": {
+            "family": "viewport_gesture",
+            "status": "BLOCKED",
+            "reason": "registered operation context changed before OS input",
+            "assessment": null,
+            "transitions": [
+              "requires_verified"
+            ],
+            "state_version": 2,
+            "access_level": "API_ASSISTED",
+            "owned_modal_id": null,
+            "geometry_invalidated": true,
+            "input_count": 0
+          },
+          "initial_pose": [
+            150.0,
+            150.0,
+            250.0,
+            250.0
+          ],
+          "final_pose": [
+            180.0,
+            150.0,
+            280.0,
+            250.0
+          ],
+          "native_events": [
+            {
+              "type": "6",
+              "x": 256,
+              "y": 192,
+              "state": 0
+            }
+          ],
+          "pointer_before": [
+            320,
+            240
+          ],
+          "pointer_after": [
+            256,
+            192
+          ],
+          "native_button_modifier_mask": 0,
+          "executor_owned": [],
+          "executor_calls": 1,
+          "dispatch_observations": [
+            {
+              "before_pose": [
+                150.0,
+                150.0,
+                250.0,
+                250.0
+              ],
+              "after_pose": null,
+              "returned_action_result": null,
+              "note": "No ActionResult/postdispatchsample when native guard raises; final independent oracle retained"
+            }
+          ]
+        }
+      ],
+      "raw_report_sha256": "e26ea4fa662f1adfe2198eb57e5fe28e9f3fbd8d6c52f32363c90e6c623f6820",
+      "cleanup": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      }
+    },
+    "retained_setup_failure": {
+      "status": "FAIL",
+      "error_type": "TimeoutError",
+      "error": "native widget oracle acknowledgement",
+      "root_cause": "Fixture shared oracle request counter lacked lock across guardian and controller readbacks; Tk strictsequence assertion stopped polling after actual native gesture. No OperationReport obtained; false success NOT_ESTABLISHED on this attempt.",
+      "minimal_fixture_correction": "Serialize complete command+nativeack with RLock only; originaldriver retained, workload/product/Gitbaseline unchanged",
+      "report_sha256": "903e1206bc959210b847bddafd8fcda87662e91787ea79d34c47da899e143489",
+      "driver_sha256": "dece9456bf72ed84c20de2c995f120d4cf767d4bab1c3023f69e9b1b8e99bd04",
+      "cleanup": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      }
+    },
+    "driver_sha256": "b0bd0ec44436f801e98506e2839cac20cfd9b4b9a87608f77d7b0345ca05e947",
+    "fixture_assertions": [
+      "application Blender/editor VIEW_3D are finite operation protocol labels for this Tk viewport adapter, not native application identity",
+      "selection object is owned Canvas rectangle; native identity includes process/itemID",
+      "popup/text/IME/loading absence are controlled solefixture Canvas invariants, not production observer claims"
+    ],
+    "checks": {
+      "before_false_success_no_native_gesture_effect": true,
+      "after_predispatch_change_zero_nativeevents": true,
+      "after_real_native_drag_changed_pose": true,
+      "after_initial_pointer_change_refused_before_middle": true,
+      "all_cases_native_button_modifier_released": true,
+      "all_owned_children_and_sockets_absent": true,
+      "production_blender_process_preserved": true,
+      "current_source_bytes_unchanged_start_end": true
+    },
+    "limits": [
+      "Canvas pose is actual independent nativewidget state; Blender/application/editor/keymap/selection label facts are explicit testprotocol assertions, not public Blender native telemetry",
+      "No model, wholeE2E, productiondisplay/scene, parser, service/MCP/harness, or latencygate execution",
+      "Before loads exact4historicalGitmodules (operations/runtime/input_ir/backends) in own namespace and reuses separately pinned canonical dependencies; not a historical fullinstallation",
+      "Factory handler independentchange and no-effect/effect modes are fixture setup, never sent as operator request or inferred successfulgesture",
+      "Production process existence only; no production scene read or equality claim"
+    ],
+    "retained_earlier_native_passes": {
+      "before_report_sha256": "757e33ac4c6973b744cb9ed56b8c47512101e820aa18e7c5f340aa7dc943f9e9",
+      "after_report_sha256": "d6fb4a14b30215acb0fe467015f66fa62c939842431afc3f0d0c422f0609ba48",
+      "status": "OBSERVED_PASS_WITH_STARTUP_ONLY_MUTABLE_BACKEND_BINDING",
+      "limitation": "Immediate endhash absent; file mtime shows subsequentbackendchange15.1243s after reportend, no immutabledependencyclaim; final nativecomponent separately pins baselinebackend Gitblob and newcanonical start/end hashes",
+      "earlier_public_receipt_sha256": "27ef3b3705e486b1b21e43fec91ccfcf2aa5696e016f0da3ada0ebd6f803f1a7"
+    }
+  },
+  "native_component_sha256": "55c95f6594cd682120ef95e83e2e091256c194c9215517c386188e47d2c89658",
+  "independent_cleanup": {
+    "classification": "INDEPENDENT_POSTRUN_READBACK",
+    "retained_attempt_count": 5,
+    "owned_fixture_processes_matching_exact_argv": [],
+    "owned_children_absent": true,
+    "private_display_X1_socket_absent": true,
+    "production_blender_pid_exists": true
+  },
+  "independent_cleanup_sha256": "057b2a3898ba16714047f80f4967f6b68c2839f06c0240691e8a951eb8ed8b2c",
+  "regression_red": {
+    "runner_false_success": 1,
+    "runtime_missed_drift": 2,
+    "runtime_stable_drag_already_passed": 1
+  },
+  "scoped_regression": {
+    "passed": 167
+  }
+}

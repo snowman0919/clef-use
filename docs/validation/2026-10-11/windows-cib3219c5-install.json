@@ -1,0 +1,227 @@
+{
+  "claim": "OBSERVED",
+  "status": "PASS_INSTALLATION_SCOPE",
+  "scope": "Actual native Win32 immutable successful Windows CI job artifact installed into a new owned TEMP root. Installer/contract/configuration evidence only; no harness execution, models, GPU, GUI input, runtime service, or task completion.",
+  "provenance": {
+    "ci_run": 38148208835,
+    "ci_commit": "b3219c5665a3d38228801b0166196053fa9e0aab",
+    "artifact_id": 11705591194,
+    "artifact_name": "site-windows-2022-3.11",
+    "outer_artifact_sha256": "6d2e0aa379e721a113000d608dbfbfa4af4a124c3637fda5c88913ad15fc718a",
+    "archive_basename": "clef-use-0.1.30-win32-x86_64-py311.zip",
+    "archive_sha256": "ca37bbdc09748f5bfd7d338adc9ae3ab94a9cf5927e285890bf7fc4f20efda3d",
+    "wheel_basename": "clef_use-0.1.30-py3-none-any.whl",
+    "wheel_sha256": "ab2fff46e6298e7904051f5fd1cb0a4afcd9b3d5167859580b0fc6b4142639fd",
+    "installer_ps1_sha256": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "embedded_installer_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "received_native_artifact_sha256": "252633ab5c1c11f7be9fabc08dff3846114c0b2c634f2324dedc6a431be978b2",
+    "predeclaration_sha256": "67c492ad7d81d58424d621bdcdb032a7641115a3377481e1cb33a73943aae979",
+    "remote_script_sha256": "a6170587fd29322fb2a7f9b7b4c8352f0f92c91211875df291bf5e3282d093b8",
+    "controller_sha256": "b27b7b774ba70259cf58881ae2bfff52a9a6f4a2dd49f9b17a556515d858bbf2"
+  },
+  "overall_ci": {
+    "outcome": "FAIL",
+    "build_and_installer_steps": "15 successful builds/installer steps; separate from artifact upload job outcome",
+    "job_outcome": "14 successful jobs; macOS Intel Python3.12 artifact upload failed after action-native attempts",
+    "assembly": "SKIPPED",
+    "deployment": "SKIPPED",
+    "scope_separation": "Successful Windows job artifact and observed installation remain valid; no whole CI/release success claim.",
+    "independent_ci_evidence_basename": "ci-b3219c5.json",
+    "independent_ci_evidence_sha256": "8544e2ef3b340467b77d1b70094c849b5add47f39fdbfd964a586010063346f5"
+  },
+  "native": {
+    "platform": "win32",
+    "python": "3.11.9",
+    "remote_exit_code": 0,
+    "fresh_install": "INSTALLED",
+    "repeat_install": "CURRENT",
+    "steps": [
+      {
+        "name": "fresh-install",
+        "exit_code": 0,
+        "seconds": 48.23399999993853
+      },
+      {
+        "name": "wrapper-version",
+        "exit_code": 0,
+        "seconds": 0.3130000000819564
+      },
+      {
+        "name": "native-version",
+        "exit_code": 0,
+        "seconds": 0.29600000008940697
+      },
+      {
+        "name": "capabilities-detail",
+        "exit_code": 0,
+        "seconds": 0.6409999998286366
+      },
+      {
+        "name": "explicit-three-guides",
+        "exit_code": 0,
+        "seconds": 2.7339999999385327
+      },
+      {
+        "name": "repeat-bootstrap",
+        "exit_code": 0,
+        "seconds": 10.422000000020489
+      },
+      {
+        "name": "repeat-explicit-three",
+        "exit_code": 0,
+        "seconds": 2.6869999999180436
+      }
+    ],
+    "added_retries": 0
+  },
+  "package_bytes": {
+    "files": 61,
+    "python_modules": 46,
+    "resources": 15,
+    "git_to_wheel_exact": 61,
+    "wheel_to_installed_exact": 61,
+    "ordering_exception": false,
+    "all_source_wheel_installed_exact": true
+  },
+  "installed_capability_contract": {
+    "transport": "Native installed CLI capabilities --json --detail; no harness MCP invocation",
+    "actual_tool_names": [
+      "computer_abort",
+      "computer_capabilities",
+      "computer_continue",
+      "computer_observe",
+      "computer_run",
+      "computer_status"
+    ],
+    "actual_tool_count": 6,
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "managed_guides": {
+    "skills": [
+      "clef-use",
+      "clef-use-blender",
+      "clef-use-diagnostics"
+    ],
+    "first_enrollment": [
+      {
+        "harness": "codex",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "hermes",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "omp",
+        "status": "INSTALLED"
+      }
+    ],
+    "repeat_enrollment": [
+      {
+        "harness": "codex",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "hermes",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "omp",
+        "status": "UNCHANGED"
+      }
+    ],
+    "deployed_files_match": {
+      "codex": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      },
+      "hermes": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      },
+      "omp": {
+        "clef-use": {
+          "SKILL.md": true,
+          "references/API_BASELINE.md": true,
+          "references/LIVE_API.md": true
+        },
+        "clef-use-diagnostics": {
+          "SKILL.md": true,
+          "references/FAILURES.md": true
+        },
+        "clef-use-blender": {
+          "SKILL.md": true,
+          "references/OPERATIONS.md": true
+        }
+      }
+    },
+    "harness_body_load": "NOT_RUN",
+    "harness_invocation": "NOT_RUN"
+  },
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_config_comments_preserved": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "OMP_disabled_agents_setting_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "repeat_HOME_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true
+  },
+  "check_count": 12,
+  "preservation_and_cleanup": {
+    "owned_loopback_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_V2_runtime_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "preservation_check_count": 6,
+  "postrun_owned_process_readback": {
+    "scope": "READ_ONLY_POSTRUN_OWNED_ROOT_CHECK",
+    "ownership_marker_matches": true,
+    "owned_commandline_processes": 0
+  },
+  "cleanup_evidence_sha256": "54913240cdb5cda8089f6640900fb7706f2f103c5379604bf06832569f87f8d6",
+  "private_evidence": "Retained locally; raw paths/stdout/stderr and private reference metadata are excluded.",
+  "not_run": [
+    "Native harness discovery/body load/invocation",
+    "Models and provider authentication",
+    "GUI input and task verification",
+    "Runtime service lifecycle/active update on this Windows archive",
+    "Windows input/IME and crash matrix",
+    "Performance and release gates"
+  ],
+  "history": "Previous CI6cdf182 source-manifest ordering difference remains historical evidence; current source/wheel/installed equality has no exception.",
+  "received_public_artifact_sha256": "da8776d235d3f9f2089cc44a3e4940622e0b94d5a67d9242111944251fbb2298"
+}

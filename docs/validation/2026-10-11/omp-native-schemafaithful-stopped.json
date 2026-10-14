@@ -1,0 +1,490 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Schema-faithful native OMP consumer read-only explicit/natural/negative bounded batch, immutable FINAL11 guides; no GUI/task result",
+  "overall_status": "NOT_RUN",
+  "reason": "First primary invocation returned native assistant stopReason=error before any tool execution; remaining cases not started under stop-first-failure policy",
+  "candidate": {
+    "install_basename": "clef-use-installed-final11-20261011",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "public_readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "predeclaration": {
+    "basename": "clef-omp-native-schemafaithful-consumer-predeclaration-public-20261011.json",
+    "sha256": "cbe346e03514ac7b88246d49617a72d7fbe2ac9d9408102afcab641ba5ad2276"
+  },
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "native_generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,…",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or…"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": false,
+    "inference_invocations": 3
+  },
+  "harness_fidelity": {
+    "fixed_system_prompt": false,
+    "append_permissions_only": true,
+    "native_description_policy": "Native synchronous preview/cache snapshot; no cache-readiness gate; compression warnings nonfatal; only cleanup awaits already scheduled native background work",
+    "test_child": false
+  },
+  "runtime_state_isolation": {
+    "environment_key": "CLEF_USE_STATE_DIR",
+    "installed_state_dir_matches_owned_root": true,
+    "endpoint_before_exists": false,
+    "state_directory_before_exists": false,
+    "native_readonly_client_start": false,
+    "endpoint_after_exists": false,
+    "state_directory_after_exists": false
+  },
+  "state_isolation_addendum": {
+    "basename": "clef-omp-native-state-isolation-addendum-public-20261011.json",
+    "sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e"
+  },
+  "cases": {
+    "explicit": {
+      "status": "NOT_RUN",
+      "stop_reason": "error",
+      "loaded": [],
+      "invoked": [],
+      "tool_calls": 0,
+      "requested_tool_calls": 0,
+      "reason": "Native primary did not complete; stop without retry"
+    },
+    "natural": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    },
+    "negative": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    }
+  },
+  "stage_checks": {
+    "native_three_guide_catalog_discovered": "PASS",
+    "native_synchronous_catalog_rendered": "PASS",
+    "model_requested_full_body_load": "NOT_RUN",
+    "model_actual_full_body_load": "NOT_RUN",
+    "model_capabilities_invocation": "NOT_RUN",
+    "model_status_invocation": "NOT_RUN",
+    "native_completed_final_answer": "NOT_RUN",
+    "natural": "NOT_RUN",
+    "negative": "NOT_RUN",
+    "GUI_TASK_VERIFIED": "NOT_RUN"
+  },
+  "native_primary_error": {
+    "classification": "OBSERVED",
+    "stop_reason": "error",
+    "sanitized_error": "invalid tool call: workspace_violation: path escapes workspace <path-redacted>",
+    "error_message_chars": 189,
+    "error_message_sha256": "6c3a219fa5f5986696f732f3b167bc2fc396f368fc30237477c22a199ac636e7",
+    "quoted_path_scope": "Exactly selected installed public agent-skills bundle DIRECTORY; path prefix withheld",
+    "quoted_path_is_exact_allowed_public_guide_file": false,
+    "tool_execution_started": false,
+    "requested_parsed_tool_calls": 0,
+    "local_read_guard_invoked": false,
+    "local_MCP_argument_guard_present": false,
+    "canonical_readonly_tool_invoked": false,
+    "specific_rejected_tool_name_and_arguments": "NOT_OBSERVED",
+    "source_boundary": "Error recorded in native primary assistant message; literal error text absent from inspected native pi-ai/pi-coding-agent TypeScript sources",
+    "underlying_origin_and_cause": "NOT_OBSERVED; no model/product/driver attribution beyond observed native error",
+    "HTTP_status_proves_successful_model_answer": false
+  },
+  "actual_native_accounting": {
+    "native_completion_starts": {
+      "native_auxiliary": 3,
+      "primary": 1
+    },
+    "native_final_spans": {
+      "native_auxiliary": 3,
+      "primary": 1
+    },
+    "starts": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 443.85981200000003
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 445.1009170000001
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 445.20540200000005
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 0,
+        "elapsed_ms": 515.0879780000001
+      }
+    ],
+    "spans": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6410.896873,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2321,
+          "gen_ai.usage.output_tokens": 18
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6433.853996,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2299,
+          "gen_ai.usage.output_tokens": 13
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6774.492889,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2333,
+          "gen_ai.usage.output_tokens": 18
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 10077.068072,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "error"
+          ],
+          "omp.gen_ai.agent.step.number": 0,
+          "gen_ai.usage.input_tokens": 0,
+          "gen_ai.usage.output_tokens": 0,
+          "error.type": "error"
+        },
+        "status_code": 2,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      }
+    ],
+    "native_primary_response_statuses": [
+      {
+        "case": "explicit",
+        "status": 200,
+        "provider": "aipi",
+        "model": "dgx-moa-fast"
+      }
+    ],
+    "phase_fetch_count": 4,
+    "phase_fetch_calls": [
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      }
+    ],
+    "phase_counts": {
+      "create_native_session": 3,
+      "primary_turn": 1
+    },
+    "delivered_status_counts": {
+      "200": 4
+    },
+    "rejected_fetch_calls": 0,
+    "phase_fetch_counts_are_model_only_HTTP_requests": false,
+    "underlying_actual_HTTP_attempt_count": "NOT_OBSERVED",
+    "native_primary_model_token_usage_or_inference_beyond_error_response": "NOT_OBSERVED",
+    "native_transport_retries_preserved": true,
+    "driver_retries_added": false
+  },
+  "native_auxiliary": {
+    "native_starts": 3,
+    "native_final_spans": 3,
+    "cache_snapshots": [
+      {
+        "stage": "before_create_session",
+        "case": "explicit",
+        "elapsed_ms": 403.881838,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_create_session_return",
+        "case": "explicit",
+        "elapsed_ms": 460.40734800000007,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "before_primary_no_wait",
+        "case": "explicit",
+        "elapsed_ms": 464.70765500000005,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_primary_before_dispose",
+        "case": "explicit",
+        "elapsed_ms": 10083.525028,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": true
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": true
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": true
+          }
+        ]
+      },
+      {
+        "stage": "after_background_cleanup_wait",
+        "case": "explicit",
+        "elapsed_ms": 10090.071157,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": true
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": true
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": true
+          }
+        ]
+      }
+    ],
+    "final_genuine_cache_entries": 3,
+    "logger_events": [],
+    "readiness_gate": false,
+    "cache_seed_or_repair": false,
+    "warnings_would_not_abort_primary": true
+  },
+  "budget": {
+    "auxiliary_native_completion_invocations_per_session": 3,
+    "auxiliary_native_completion_invocations_total": 9,
+    "auxiliary_native_completion_invocations_per_skill_per_session": 1,
+    "primary_cases": 3,
+    "primary_invocations_per_case": 8,
+    "primary_invocations_total": 24,
+    "case_deadline_ms": 180000,
+    "driver_or_session_retry_enabled": false,
+    "native_transport_retry_policy_preserved": true,
+    "actual_http_attempt_count": "NOT_OBSERVED",
+    "hard_http_attempt_ceiling": "NOT_OBSERVED",
+    "stop_first_failed_case": true,
+    "normal_runtime_required_for_models": true
+  },
+  "cleanup": {
+    "native_report": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+    "normal_native_runtime_test_flag": false,
+    "in_memory_sessions_not_persisted": true,
+    "MCP_disconnected": true,
+    "runtime_service_or_session_created": false,
+    "GUI_input_requested_or_executed": false,
+    "no_endpoint_or_state_directory_created": true,
+    "credential_or_global_configuration_changes": false
+  },
+  "previous_outcomes_unchanged": [
+    {
+      "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059"
+    },
+    {
+      "basename": "clef-omp-native-guarded-consumer-readonly-public-20261011.json",
+      "sha256": "4eb7aaa78a1bb8d558a9a8b9f61fc50f0e2121f0eaed3c4e4725f71b7661862f"
+    },
+    {
+      "basename": "clef-omp-native-profile-readonly-public-20261011.json",
+      "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316"
+    },
+    {
+      "basename": "clef-omp-final10-native-generated-public-20261011.json",
+      "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784"
+    }
+  ],
+  "previous_state_isolation_limitation_retained": true,
+  "private_evidence": {
+    "summary_basename": "summary.json",
+    "summary_sha256": "826edc129041e298768500f04ad9601106422d2eb7873ea2bce5561c0862df81",
+    "trace_basename": "explicit-private-trace.jsonl",
+    "trace_sha256": "5914f2e66c46f7b4283d45c1b23c6e78f41aef7f9d7fbc46e2baa629194c5ef9"
+  },
+  "additional_model_calls": "NOT_RUN; no rerun without separately authorized new material cause"
+}

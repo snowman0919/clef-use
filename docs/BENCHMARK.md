@@ -1,5 +1,18 @@
 # Benchmark methodology
 
+Reaction coverage requires prospective evidence on every declared opportunity.
+Both reaction scorers validate exact boolean `fast_eligible` and `attempted`, a
+nonempty `eligibility_source`, and same-monotonic-clock timestamps satisfying
+`state_change <= eligibility_observed_ns <= policy_decision_ns`. An attempted
+input needs `input_dispatch_ns` after that decision, before the native event if
+one was delivered. An unattempted opportunity must have neither dispatch nor
+native event. Eligibility counts do not depend on successful actions or the
+100ms deadline. Missing/contradictory evidence or missing declared opportunities
+leave `fast_coverage=null`, `fast_coverage_status=NOT_MEASURED`, and the numeric
+release gate closed. The scorer validates ordering, not the truth of supplied
+provenance or clock calibration. Never backfill eligibility from latency or
+success. Historical native rows remain unchanged and unmeasured for coverage.
+
 `clef-use benchmark --repetitions 5` runs deterministic fixtures. Its results
 measure control-flow overhead and prove no model-quality or desktop-speed claim.
 

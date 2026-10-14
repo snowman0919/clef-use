@@ -1,0 +1,623 @@
+{
+  "classification": "OBSERVED_INSTALLED_CAPABILITY_SCHEMA_CORRECTION_AND_ACTUAL_NATIVE_HARNESS_CASES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.52",
+  "partial": true,
+  "requirements": [
+    "GUIDE-02",
+    "GUIDE-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Whitelisted facts/enums/digests only; raw paths, identities, messages, transcripts and configuration/auth contents remain private.",
+  "actual_before": {
+    "classification": "OBSERVED_IMMUTABLE_INSTALLED_MCP_SCHEMA_AND_HANDLER",
+    "runtime_version": "0.1.51",
+    "advertised_schema_accepts_unregistered_blender": true,
+    "actual_call_is_error": true,
+    "unknown_operation_error": true,
+    "registered_families": [
+      "menu_assess",
+      "command_search",
+      "numeric_transform",
+      "property_edit",
+      "viewport_gesture",
+      "modal_cancel"
+    ],
+    "schema_sha256": "53191b3834fc71f6457c4018ebe72c3a39898ffcd14472a1d1d1de12c2f06884",
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "runtime_endpoint_absent": true,
+    "private_summary_sha256": "fcfdb4014112e9c1c0a66ba5c3e0bae12caf543fc63f572d3263caa6cbb1255a"
+  },
+  "actual_native_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.1474426880013198
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.277296799002215
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.52",
+    "source_files_exact": 68,
+    "artifact_sha256": "799ccae704e8a2c27e5b0c422b13f64f9c193f29f163d9fa5c56678c4547f877",
+    "owned_loopback_stopped": true,
+    "source_payload_sha256": "9860cd530e353138a9f16156f4f79e73d186583911cfaa274720f57e41c393fe",
+    "private_summary_sha256": "ac2a0797af6ffa7c81dd790e80d0b28e57e8854548abb937493dd9ed1b706910",
+    "scope": "Separately rebuilt final-source Linux package and installed normal/read-only MCP, after temporary OMP overlay correction; no model/GUI/input."
+  },
+  "regression": {
+    "classification": "OBSERVED_FIXTURE_REGRESSION",
+    "corrected_red_cases": 2,
+    "focused_capability_passed": 9,
+    "full_passed": 1698,
+    "full_skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 76.76,
+    "full_log_sha256": "61e1c0dc42b7b28f7feae3e6303686a0685b33a3daa83e6250afc236a984e76e",
+    "ruff": "PASS",
+    "format_files": 167,
+    "generated_tool_examples": 4,
+    "generated_cli_examples": 11,
+    "published_cli_examples": 198,
+    "published_tool_examples": 12,
+    "initial_test_author_error": "Summary descriptor lacks requires; initial KeyError retained and not credited as defect reproduction. Corrected original-schema tests fail because the consumer validator accepts blender.",
+    "independent_review": "No actionable scoped findings; tests/native not rerun by reviewer.",
+    "pre_overlay_wall_seconds": 71.21,
+    "final_source_after_overlay": "1698 PASS /55 SKIP /41 warnings"
+  },
+  "actual_native_models": {
+    "hermes": {
+      "status": "PASS",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 19.26780488109216,
+          "actual_api_attempts": 4,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        },
+        {
+          "trigger": "natural",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 37.10967139597051,
+          "actual_api_attempts": 6,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 15.788184123928659,
+          "actual_api_attempts": 1,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "native_database_tables_changed": [],
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_summary_sha256": "5647d2b70368ef1d590405a57411d990d5977f7ef007c85766fbf2ab102ebb00",
+      "snapshot_scope": "Source .52 MCP/schema/guide snapshot before OMP-only overlay correction; Hermes branch and its tested contracts unchanged. Not reexecuted solely for another PASS."
+    },
+    "omp": {
+      "status": "FAIL",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.04638854204677,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "failed_call_tools": [
+            "mcp__clef_use_computer_status",
+            "write"
+          ]
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 0,
+          "wall_seconds": 62.31210831098724,
+          "loaded": [
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "read_only_violations": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "failed_call_tools": []
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 43.89711627806537,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "read_only_violations": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "failed_call_tools": []
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "native_database_tables_changed": [
+        "cache",
+        "model_perf"
+      ],
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_summary_sha256": "d3b99efc47093da8042f1b117405ef3698aa96f7d33ff5f49ec2548158eb13fc"
+    }
+  },
+  "native_transcript_retention": {
+    "hermes_full_exports_verified": 3,
+    "hermes_canonical_response_files_verified": 3,
+    "private_digest_report_sha256": "0590d6ae0d0dc4395d2a39a5b76a5c156ab1d43f3a524d6b75398a5e2730d2f2",
+    "all_actual_hermes_api_requests": 11,
+    "management_absent_all_actual_api_requests": true,
+    "scope": "Complete canonical exports retained; not a claim of whole native usage/database immutability."
+  },
+  "omp_preservation_limits": {
+    "credential_related_complete_table_hmacs_changed": [
+      "auth_change_revision",
+      "auth_credentials"
+    ],
+    "other_changed_tables": [
+      "cache",
+      "model_perf"
+    ],
+    "cause": "NOT_PROVEN",
+    "credential_material_difference": "NOT_PROVEN",
+    "credential_values_printed_or_committed": false,
+    "credentials_restored": false,
+    "historical_49_uncertainty_retained": true,
+    "scope": "Protected configuration file bytes pass. MCP/tool read-only scope does not freeze native harness credential/usage databases.",
+    "pre_overlay_changed_tables": [
+      "auth_change_revision",
+      "auth_credentials",
+      "cache",
+      "model_perf"
+    ],
+    "final_phase_changed_tables": [
+      "cache",
+      "model_perf"
+    ],
+    "final_phase_auth_rows_unchanged_does_not_erase_prior_uncertainty": true
+  },
+  "failure_classification": {
+    "source50_explicit": "Two skill URI writes correctly denied; two status queries fail without an existing service; unregistered operation_id blender rejected. No guard bypass or service startup performed.",
+    "source52_explicit": "Final phase loads core before invocation; stopped-service status, denied write and native90s deadline retain FAIL.",
+    "source52_natural": "Final phase invokes capabilities before Blender guide; no failed reader call, guide order retains FAIL.",
+    "source52_negative": "PASS without guide/runtime attempt; source50 socket NOT_RUN remains historical.",
+    "requests_retried_to_obtain_pass": false,
+    "authentication_outage_inferred": false,
+    "retained_pre_overlay_source52": "Two positive deadline/guide-order/denied learning and write failures retained; new source scope fixes native forced learners and guidance, not a retry of unchanged context.",
+    "canonical_user_request_provider_model_deadlines_overridden": false,
+    "omp_source_scope_phases": 2,
+    "canonical_case_runs_per_phase": 1,
+    "native_context_change": "Temporary autolearn.enabled=false removes native auto-learning writers/guidance; approval denials and all runtime input guards retained."
+  },
+  "not_run_at_source_checkpoint": [
+    "IMMUTABLE_CI_0152",
+    "WINDOWS_INSTALLED_UPDATE_0152",
+    "NATIVE_CODEX_MODEL_0152",
+    "WINDOWS_GUI_ABORT_BROWSER_EDITOR_0152",
+    "SAME_TASK_1000_OPPORTUNITIES_ACCURACY_CORRECT_OS_INPUT_P95_100MS_COVERAGE_GOODPUT",
+    "PUBLIC_RELEASE_0152"
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "User confirms another session currently operates Windows. Shared installation and GUI are preserved; coordinate exclusive input before full native abort/task/1000-opportunity comparisons."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "INPUT-05"
+      ],
+      "status": "BLOCKED_FOR_UNPROVEN_BLENDER_STATES",
+      "condition": "Prior File-menu0/5 and unknown popup/IME/input-owner/effective-keymap facts remain. Public Blender/OS evidence does not prove those states; no guard/threshold weakened. External Blender host build remains outside user scope."
+    },
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_POSITIVE_CANONICAL_MODEL_CASES",
+      "condition": "Final source .52 OMP explicit retains stopped-service status, denied write and native deadline; natural invokes capabilities before guide. Negative passes. Pre-overlay .52/.50 failures and .49 credential uncertainty remain; no unchanged retry or credential restoration."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN_SEPARATE_SESSION_RESULT_PENDING",
+      "condition": "Reici edits/review evidence belongs to the separate session; its matched-view independent result has not arrived."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY_GUARDED",
+      "condition": "Existing feature branch guard skips public deployment; public URL/hash/fresh-install/update proof is not obtained by CI or owned loopback installation."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false,
+  "retained_native_package_before_autolearn_correction": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.1949656669748947
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.474451104993932
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.52",
+    "source_files_exact": 68,
+    "artifact_sha256": "0798e1613c2c54537550e7ae081b184f4ae1032a18bf0ec0685feb67161d2209",
+    "owned_loopback_stopped": true,
+    "source_payload_sha256": "765e97d0cfe8bb0ea50186947b89d0f9ce24429987543683a51e1520b1277c95",
+    "private_summary_sha256": "cac906384d1dc4d2106ec15dbe7dd4381a9ebc14979c074bc888bdff09b80c62",
+    "scope": "Canonical Linux bootstrap and actual installed normal/read-only MCP; query descriptors and schema validity, not GUI execution or model compliance."
+  },
+  "operation_schema_source_commit": "a9f5f3e7da7a213e5c7ae83ca3e9941eb6a3e9c8",
+  "retained_native_models_before_autolearn_correction": {
+    "hermes": {
+      "status": "PASS",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 19.26780488109216,
+          "actual_api_attempts": 4,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        },
+        {
+          "trigger": "natural",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 37.10967139597051,
+          "actual_api_attempts": 6,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 15.788184123928659,
+          "actual_api_attempts": 1,
+          "management_absent_all_actual_api_requests": true,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "native_database_tables_changed": [],
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_summary_sha256": "5647d2b70368ef1d590405a57411d990d5977f7ef007c85766fbf2ab102ebb00"
+    },
+    "omp": {
+      "status": "FAIL",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.08140172192361,
+          "actual_api_attempts": null,
+          "management_absent_all_actual_api_requests": null,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "read_only_violations": [
+            "learn",
+            "write"
+          ],
+          "failed_call_tools": [
+            "learn",
+            "write",
+            "mcp__clef_use_computer_status"
+          ]
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.07742694590706,
+          "actual_api_attempts": null,
+          "management_absent_all_actual_api_requests": null,
+          "loaded": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "read_only_violations": [
+            "write"
+          ],
+          "failed_call_tools": [
+            "write",
+            "write"
+          ]
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 76.03511272894684,
+          "actual_api_attempts": null,
+          "management_absent_all_actual_api_requests": null,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_call_tools": []
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "native_database_tables_changed": [
+        "auth_change_revision",
+        "auth_credentials",
+        "cache",
+        "model_perf"
+      ],
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_summary_sha256": "b4fbc2103c99ffad51de0a8ccf992178362902456753e5ecbe881758555f5e92"
+    }
+  },
+  "native_autolearn_scope_component": {
+    "status": "PASS",
+    "native_global_autolearn_stays_enabled": true,
+    "native_approval_values_unchanged": true,
+    "before": {
+      "classification": "ACTUAL_NATIVE_SDK_COMPONENT_NO_MODEL_OR_TOOL_EXECUTION",
+      "effectiveAutolearnEnabled": true,
+      "requestedReadersRetained": true,
+      "learnInBuiltinPlan": true,
+      "manageSkillInBuiltinPlan": true,
+      "learnFactoryCreatesWriter": true,
+      "manageSkillFactoryCreatesWriter": true,
+      "autolearnGuidancePresent": true,
+      "modelRequests": 0,
+      "guiOrInputRequested": false
+    },
+    "after": {
+      "classification": "ACTUAL_NATIVE_SDK_COMPONENT_NO_MODEL_OR_TOOL_EXECUTION",
+      "effectiveAutolearnEnabled": false,
+      "requestedReadersRetained": true,
+      "learnInBuiltinPlan": false,
+      "manageSkillInBuiltinPlan": false,
+      "learnFactoryCreatesWriter": false,
+      "manageSkillFactoryCreatesWriter": false,
+      "autolearnGuidancePresent": false,
+      "modelRequests": 0,
+      "guiOrInputRequested": false
+    },
+    "scope": "Actual Settings.loadReadOnly plus builtin planner/factories/guidance; structural ToolSession context, no full AgentSession/model/tool effect. Reconciliation/lazy guarantee remains source-inferred until actual CLI model checks.",
+    "private_summary_sha256": "25b99e137fde0a06c9266946e72929e9257cd269cb92a11c1daeefb8e12de991",
+    "persistent_settings_override": false,
+    "canonical_user_request_provider_model_deadlines_override": false,
+    "other_memory_tool_restrictions_retained": true
+  }
+}

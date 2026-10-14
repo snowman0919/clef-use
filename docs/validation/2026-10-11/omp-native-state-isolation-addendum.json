@@ -1,0 +1,37 @@
+{
+  "classification": "OBSERVED_AND_INFERRED_DISTINGUISHED",
+  "scope": "Private OMP driver runtime state-directory isolation correction; no new model calls",
+  "observed": {
+    "immutable_installed_config_source_basename": "clef_use/config.py",
+    "source_sha256": "ae1497a5ccbf7d57c054b19fb3f9363765ccb4184e554e3f5c31ae91d3100aa1",
+    "relevant_lines": [
+      38,
+      39,
+      40,
+      42,
+      44
+    ],
+    "supported_override": "CLEF_USE_STATE_DIR",
+    "unsupported_previous_driver_variable": "CLEF_USE_HOME",
+    "prior_stopped_batch_status_results": "Canonical no-active-session errors only; no session payload or GUI operation",
+    "previous_driver_private_root_endpoint_absence": "Does not establish isolation because unsupported env variable was ignored"
+  },
+  "inferred": {
+    "previous_runtime_status_route": "Could address default canonical desktop service if present; exact endpoint identity was not recorded",
+    "model_or_product_failure_attribution": "Not established; prior batches are driver-contaminated and remain partial NOT_RUN"
+  },
+  "preserved_prior_artifacts": [
+    {
+      "basename": "clef-omp-native-guarded-consumer-readonly-public-20261011.json",
+      "sha256": "4eb7aaa78a1bb8d558a9a8b9f61fc50f0e2121f0eaed3c4e4725f71b7661862f"
+    },
+    {
+      "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059"
+    }
+  ],
+  "correction": "Private driver now sets supported CLEF_USE_STATE_DIR; actual installed interpreter proves owned state path before MCP/model calls; readonly server start=false; native status correctly returns service-not-running in fresh owned state; no endpoint or state directory created",
+  "credential_configuration_or_product_changes": false,
+  "new_model_calls": 0,
+  "GUI_TASK_VERIFIED": "NOT_RUN"
+}

@@ -2,6 +2,327 @@
 
 ## Unreleased
 
+- Verify immutable .56 CI15/15 and all69 source/guide payload files/contracts.
+  Confirm native first/update/CURRENT and checksum/download/smoke failure
+  preservation. Keep actual .56 separate from synthetic .57 and shared desktop,
+  full-task/performance and feature-guarded public release acceptance.
+
+- Preserve native OMP socket-closure failures in harness diagnostics when the
+  session later reaches its deadline. Count only completed assistant error
+  events, redact transport details, and retain original outcomes and budgets.
+  Verify retained actual records through the installed .56 diagnostic path;
+  keep replay separate from fresh model and GUI execution.
+
+- Verify immutable .55 CI15/15 against all69 source/guide files and contracts;
+  confirm native first/update/CURRENT and failure preservation. Keep actual .55
+  separate from synthetic .56, guide-phase models from final stage replay, and
+  shared Windows/GUI/quality/performance from feature-guarded public deployment.
+
+- Prefer native Skill readers or catalog-supplied absolute paths in the common
+  guide metadata and linked-file guidance. Separate native SDK preflight stages
+  from model-loaded/invoked evidence; preserve call failures and deadlines.
+  Record installed native cases and final installed exact-record replay separately,
+  including partial Codex routing, Hermes enrollment preservation qualification
+  and OMP failures/credential-material uncertainty.
+
+- Verify immutable .54 CI15/15 and all69 source/guide payload files/contracts.
+  Confirm native first/update/CURRENT and failed-update preservation, keeping
+  actual .54 separate from synthetic .55. Leave shared Windows input, real-task
+  quality/performance and feature-guarded public deployment unverified.
+
+- Bind Codex verification to its confined native recording, exact completed-turn
+  execution identities and model-facing delivery before runtime exec starts.
+  Retain native errors and scope violations; refuse shell expansion and relative
+  shell origin because startup can change cwd. Record actual installed canonical
+  failures, a superseded initial PASS, capacity429 and regression separately from
+  pending Windows GUI/input, quality/performance and public release acceptance.
+
+- Verify immutable .53 CI15/15 against the exact source payload/contracts and
+  native installer preservation. Keep actual .53 and synthetic .54 distinct.
+  Record fresh passive Windows peer-offline state without another failed SSH
+  retry; leave remote/model/GUI/performance and guarded public release NOT_RUN.
+
+- Bind native Codex verification to the approved MCP transport through an owned
+  private profile and scope-only CLI controls above trusted project settings.
+  Use the actual working directory for preflight and execution; preserve user
+  settings and edited temporary profiles. Report complete observed guide text
+  separately from proven installed origin without weakening loading/order guards.
+  Record native configuration, packaged MCP, model and regression evidence
+  separately from pending Windows GUI and performance acceptance.
+
+- Verify immutable .52 CI15/15, source-bound archives and native installer
+  failure preservation. Record actual Windows SSH/Tailscale connection failures
+  before remote execution; leave .52 installed CLI/MCP/model/GUI checks NOT_RUN
+  and keep prior .51 results historical. Preserve concurrent input, quality,
+  Blender-state and guarded public-release conditions.
+
+- Disable native OMP automatic-learning writers/guidance only in the temporary
+  read-only verification overlay. Preserve saved settings, reader restrictions,
+  approval denials and canonical model requests/deadlines. Verify actual native
+  SDK construction and new model cases while retaining earlier failures and
+  credential-row uncertainty.
+
+- Advertise exact capability operation IDs from the canonical registry, including
+  omitted/null discovery and a generated detail-query example. Preserve existing
+  UNKNOWN_OPERATION errors and missing-state guards. Record actual .51 schema
+  mismatch, .52 packaged MCP probes and canonical Hermes/OMP cases separately;
+  OMP positive failures and credential-row uncertainty remain visible.
+
+- Verify immutable .51 CI15/15 and an actual Windows alternate install/CURRENT
+  without integration-preview, preserving shared .49 and foreign registrations.
+  Verify LIMITED CLI/MCP and native launcher refusals. Retain SSH controller
+  timeouts and unavailable task exit code separately from observed native passes
+  and task absence; keep GUI/model/performance/public-release gates open.
+
+- Restrict automatic guide/MCP refresh to the updating installation's prior
+  executables or verified release ownership, including old CLI update paths.
+  Recheck ownership while holding the registration lock. Preserve foreign
+  registrations and refuse edited or foreign launchers. Record actual .50
+  reproduction, .51 native package/update/MCP checks and regression evidence
+  separately from pending Windows GUI, model and performance acceptance.
+
+- Recognize OMP virtual-device calls only when native MCP target, typed arguments,
+  execution result and consumer payload are bound. Preserve early-invocation,
+  ordinary-write, unpaired-result and native-error failures. Record source .50
+  native component, exact .49 replay and fresh model cases separately.
+- Verify immutable .50 CI and an isolated native Windows candidate with LIMITED
+  token and MCP checks. Preserve shared .49 and active harness registrations while
+  another session operates Windows; standard update and GUI E2E remain pending.
+- Filter native Hermes skill management from read-only verification's initial,
+  refreshed and deferred tool definitions; deny its central registry dispatch
+  while preserving native readers. Verify actual SDK denial and byte preservation
+  separately from native routing failures and generated usage metadata.
+- Wait for live OMP MCP discovery through a temporary startup policy. Preserve
+  saved settings, canonical model requests/deadlines and all existing guards.
+- Record source 0.1.49 regression and actual native cases without erasing guide
+  order, denied-write or deadline failures. Restore publication through gh CLI;
+  immutable .49 CI and actual Windows update/model checks pass. Public deployment
+  remains guarded; source .50 CI/Windows checks are recorded separately.
+
+- Apply a temporary native OMP approval overlay during verification: deny lazy
+  writer registration and existing non-probe grants, preserve reader restrictions
+  and argument-sensitive read tiers, and remove the overlay after execution.
+  Require full guide bodies, matching contracts and complete call inventories;
+  retain earlier errors and unexpected tool attempts even after later success.
+- Preserve complete OMP native results in a bounded private file after observed
+  stdout truncation/duplication. Serialize verification with managed updates and
+  refuse model startup after native helper failure. Retain failed native attempts.
+- Record immutable 0.1.41 CI15/15 and actual Windows update/repeat separately
+  from incomplete task, accuracy, coverage, latency and public-release gates.
+
+- Validate Hermes model calls against the complete native read-only session
+  export, bound to stream session/call identities and original response bytes.
+  Recover only confined native spillover files; retain truncated/error/ambiguous
+  evidence and failed calls instead of treating previews as successful results.
+- Enforce Hermes verification's read-only MCP scope through native in-memory
+  registration and require the actual two-tool schema before model execution.
+  Resolve parallel stream results only by unique identity-bound response bytes.
+- Record immutable 0.1.40 Windows installation and native input/recovery passes
+  separately from failed Codex mode judgement and browser parser timeout.
+
+- Close the observed Windows legacy typing/IME bypass. Route model keyboard
+  actions through compiled focused-control identity, explicit TextPattern
+  writability and live InputIR guards; refuse missing context without an
+  implicit focus click. Preserve explicit cancellation and owned releases.
+- Query registered TextPattern separately from TextEdit composition support.
+  Keep failed, unsupported and mixed read-only evidence unknown. Retain native
+  source/installed evidence and failed attempts separately; use the canonical
+  receiver event loop when measuring synchronous UIA calls.
+
+- Verify actual native Windows Codex guide loading, live MCP schemas and bounded
+  GUI run/fresh observation. Keep failed task decisions, independent receiver
+  results and retained attempts separate from successful harness invocation.
+
+- Capture Windows primary-monitor pixels with native GDI without changing process
+  DPI awareness or resizing an already-open application. Preserve physical frame
+  coordinates, layered-window capture and owned GDI resource cleanup.
+
+- Verify installed Windows whole-worker suspension with documented debug APIs:
+  a separate guardian releases owned Shift/middle input at its bounded deadline
+  before worker EOF or parent release. Retain resumed cancellation/refusal and
+  exact cleanup evidence separately from service/Blender/model admission.
+- Verify installed Windows CLI/HTTP service abort with an actual native held
+  modifier/button lease, independent blocked injector, receiver release and
+  refusal after cancellation. Retain failed fixture attempts separately.
+- Extend the optional read-only Blender state provider to Windows using private
+  NTFS endpoint metadata, IPv4 loopback native peer PID/user verification and
+  physical foreground client bounds. Preserve UNKNOWN input-owner, popup, IME,
+  effective keymap and idle facts; unavailable state cannot authorize operations.
+- Keep the Windows validation window's UI loop alive during once-only native
+  input. Require full selection, exact text and click/wheel readback instead of
+  assuming widget consumption after a fixed sleep; retain acknowledgement and
+  verification timestamps separately from reaction-performance claims.
+- Retain private Codex stderr beside its verification trace and preserve native
+  shortcut selection/text readback before assertions, including failing runs.
+- Match native Windows shell-escaped guide paths during Codex verification and
+  retain negative-trigger checks across Windows separators. Advertise accurate
+  read-only MCP tool effects without changing the harness's approval policy.
+- Refresh previously managed integrations against the newly installed executable,
+  instead of probing a retained previous release against the new guide contract.
+- Correct temporary Codex verification overrides so existing MCP server names,
+  including dots, quotes and Unicode, keep their transport configuration while
+  other configured servers are disabled for the read-only session.
+- Restore Windows smoke-test pointer/focus before closing the owned Tk window,
+  synchronize cross-thread foreground activation once, and retain cleanup errors
+  in the result instead of losing the original verification evidence.
+- Preserve Blender's public owning-manager interface lock as positive busy
+  evidence. Compile only true to `loading=true`; unlocked or unavailable remains
+  UNKNOWN and cannot authorize input. Retain native identity/freshness guards.
+- Distinguish attempted harness tool calls from successful MCP responses. Error
+  results cannot pass invocation; negative triggers reject failed attempts too.
+- Retain validated integration bytes and guide inventories through capability
+  discovery; refuse concurrent edits before journaling instead of overwriting them.
+- Apply explicit text-focus and IME shortcut guards to modifier gestures before
+  pointer movement, independently of optional post-input transition checks.
+- Preserve exact normalized geometry and conflicting action/confidence/source
+  evidence when identifying parser objects; deduplicate only equivalent records.
+- Apply an explicit visual primitive before budgeting structured candidates so
+  irrelevant literal alternatives cannot evict requested clicks or scrolls.
+- Preserve extended scan-code and modifier-side distinctions when checking
+  unowned Windows input. Refuse unknown held-key mappings instead of treating
+  zero scan codes as shared ownership.
+- Retire successful Windows guardian key/Unicode release acknowledgements so
+  later parent EOF cannot replay them against a new owner's hold. Preserve only
+  failed releases for the existing EOF recovery attempt.
+- Normalize the API-assisted Blender fixture's numeric readback and preview to
+  supported declared distance/angular units. Preserve raw exact-property values
+  and dimensionless scale; unsupported distance requests remain refused.
+- Anchor complete scene length conversion for numeric translation and its owned
+  modal cancellation, including native input and final readback. Refuse missing
+  settings or same-label scale/scene drift; leave rotation/scale independent of
+  scene length settings. Advertise conditional requirements in registry v6.
+- Collect scoped Blender `active_tool` evidence from initialized workspace tools
+  and independently bound native context mode. Preserve area identities and
+  UNKNOWN focus/dispatch; reject ambiguous, malformed or overflowing evidence
+  without creating tools or weakening operation guards.
+- Validate legacy X11 keyboard bindings before input, including implicit Shift.
+  Refuse stale mappings without sending a wrong key, retain physical codes for
+  release and preserve keys already held outside the legacy action.
+- Anchor viewport view readback until native gesture button acknowledgement so
+  an independent pre-input change cannot verify a no-effect gesture. Preserve
+  expected drag changes and all other context guards after acknowledgement.
+- Interpret location property values as raw Blender coordinates using validated,
+  anchored scene units and explicit meter input. Keep scale dimensionless; refuse
+  unknown units and numeric conversion range loss before input. Advertise conditional
+  field requirements and value semantics in operation registry v5.
+- Recheck cancellation/deadline after context sampling and before each native
+  Windows Unicode unit. Reject invalid UTF-16 payloads before inserting a prefix.
+- Restore supported X11 clipboard contents on confirmed pre-paste cancellation
+  with an explicit bounded native acknowledgement. Release owned modifiers first,
+  preserve concurrent copies and retain offered text once paste delivery is possible.
+- Require complete stable selection identities across changing operations,
+  readback and owned cancellation, including native input boundaries. The Blender
+  observer uses process-scoped public session UIDs and exposes all six location/
+  scale scalar properties. Missing identity remains unknown; same-name object
+  replacement blocks input. Advertise the stronger contract as operation registry v4.
+- Derive Blender view-effect revisions from the effective view matrix and
+  perspective mode, keeping layout/region IDs and projection changes separate.
+  Missing, incomplete or ambiguous view readback remains unknown.
+- Preserve capture time through State Compiler processing so delayed screenshots
+  cannot renew target geometry or foreground facts. Independently current provider
+  evidence retains its own timestamp and validity.
+- Resolve logical X11 buttons and wheel directions through the current OS pointer
+  mapping. Release the acknowledged physical button during normal completion,
+  independent abort and guardian recovery after executor exit.
+- Require complete transform vectors before numeric input, recheck context and
+  baseline before entry, and recheck the verified preview before commit. Verify
+  all observed properties after a scalar edit, including unchanged fields/objects.
+  Preserve the requested float in numeric text instead of rounding to 15 digits.
+- Expose bounded raw Blender keymap inventory and native-client-bound editor
+  layouts. Preserve duplicate/inactive bindings, tri-state modifiers and content
+  digests; keep effective dispatch and editor focus unknown. Clipped or hidden
+  regions never acquire a normalized rectangle by clamping their geometry.
+- Map Linux capture coordinates using the captured monitor's pixel extent,
+  avoiding displaced input when the X11 root spans multiple monitors. Keep
+  macOS logical/Retina scaling unchanged.
+- Recheck observed keymap content at operation dispatch and the native input
+  boundary, even when the version label is unchanged. Revalidate viewport editor
+  geometry before and during gestures, stopping and releasing owned input on change.
+- Preserve every matching observed input as a distinct literal-text alternative.
+  Reserve candidate slots for actual matches and request replanning before model
+  or input execution when text alternatives exceed the existing action budget.
+- Add an opt-in, read-only Blender public-RNA observer on Linux X11, bound to
+  the native foreground client using Unix peer credentials and X-Resource PID.
+  Keep unresolved popup, text/IME, effective keymap and busy state unknown;
+  partial snapshots do not enable guarded operations. Expose independently
+  sampled state and expire facts delayed by perception processing.
+- Preserve each decision candidate's operation and observed target identity so
+  equally labelled controls remain distinguishable by their actual geometry.
+  Keep every executable target within the existing 40-object context budget;
+  refuse overflow or missing targets instead of silently dropping their evidence.
+- Keep Hermes MCP registration inside existing YAML flow mappings, respecting
+  trailing commas and document endings while preserving user settings and comments.
+- Ignore active-source aliases of the same complete managed skill directory
+  during repeat enrollment; separate resource roots still report conflicts,
+  including aliases of only SKILL.md with different relative references.
+- Detect duplicate declared skill names in selected and other active skill
+  sources, including nested directories with different folder names; preserve
+  conflicting guides and configuration.
+- Include Hermes trusted current-project sources and configured create/external
+  directories in enrollment collision checks, preserving inactive project discovery.
+- Match Hermes terminal working-directory validation: trim whitespace, expand
+  the home directory, and ignore missing directories when no project is explicit.
+- Recognize Hermes directory aliases, malformed-frontmatter name recovery and
+  legacy Markdown guides without treating package support files as active guides.
+- Ignore disabled Codex SKILL.md copies in collision reports and retain active
+  guides when a configuration entry targets only their directory.
+- Require prospective policy/eligibility evidence in reaction scorers; unknown
+  coverage remains unmeasured and cannot pass release gates. Eligibility counts
+  include verified opportunities independently of attempts and deadlines.
+- Retain decision request UTF-8 budget bytes, object/question counts and bounded
+  SDK-reported input tokens in numeric diagnostics without changing model packets
+  or confidence gates. Missing and invalid token usage remain explicit.
+- Order packaged guide manifest entries by relative POSIX spelling so Windows
+  and Linux generate identical contract bytes from the same guide files.
+- Bind local runtime requests to executable version, protocol and API fingerprint.
+  Reject stale control and shutdown requests, prevent client-driven downgrades,
+  and preserve active sessions and owned-modal recovery during idle upgrades.
+  Explain retained matching-executable cancellation and explicit contract reload.
+- Bundle three portable Agent Skills with actual schema/capability discovery,
+  managed harness enrollment, release contract hashes, conflict preservation,
+  and distinct discovery/load/invoke verification stages.
+- Resolve OMP configuration names relative to HOME and preserve explicit default
+  profile precedence. Reject absolute config names before writing to a location
+  the native harness would not discover.
+- Add typed keyboard, literal text, three-button pointer and modifier gestures
+  with bounded ownership and independent native abort recovery.
+- Validate finite UI transitions only after an acknowledged trigger; retain
+  exact modal, loading, unit and coordinate-frame guards before input. Preserve
+  owned-modal cleanup after abort and prevent replacement during pending recovery.
+- Add provenance-aware State Compiler and six guarded Blender operation families.
+  Missing hidden application state blocks execution. Native API-assisted fixtures
+  verify effects; they do not establish pixels-only production support.
+- Expose a bounded disposable Blender fixture through the real installed MCP
+  service for native harness task checks, with independent RNA readback and
+  deadline/signal/input/process cleanup evidence.
+- Record pre-pruning candidate coverage diagnostics without relaxing confidence
+  gates; distinguish singleton/uniform distributions and numeric false completions.
+- Use unused executable-target slots for observed decision evidence within the
+  existing 40-object packet limit, retaining deeper dropdown rows in ASSESS.
+- Declare shared unknown defaults and model-only outward pixel envelopes to
+  reduce repeated decision text while preserving exact native execution geometry.
+- Clarify linked-reference loading and read-only Blender skill discovery after
+  actual native Hermes guide-selection and reference-call failures.
+- Keep deadline goodput separate from fast-path eligibility coverage; unrecorded
+  eligibility remains unmeasured in native benchmark reports.
+- Read localized guide contracts as UTF-8 and generate LF bytes independently of
+  the build host locale, including Windows packaging.
+- Use managed MCP/guide integration in all four localized quick starts and
+  validate published CLI examples and inline tool arguments against the current
+  parser and schemas during packaging.
+- Preserve exact UTF-8 and newline bytes in atomic managed writes on Windows,
+  keeping guide hashes and existing CRLF configuration compatible with recovery.
+- Reuse a process-bound X11 query connection while reading fresh native guards;
+  refuse changed logical key bindings and recover acknowledged physical keycodes.
+- Replace X11 clipboard time-based restoration with verified application transfer
+  acknowledgement. Preserve queued text after interrupted paste and concurrent
+  clipboard ownership; require explicit clipboard delivery for Linux literals,
+  including ASCII, because an idle IME can compose native key events.
+- Observe actual editor change events in the native benchmark preflight instead
+  of waiting a fixed interval before reading the widget.
+- Keep CLEF-Flash/NF4 as default. No 100ms grade, cross-platform native acceptance,
+  full harness task success or public release is claimed for this candidate.
+
 ## 0.1.29
 
 - Accept genuine singleton action choices in archived/native decision benchmarks,

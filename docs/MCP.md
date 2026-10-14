@@ -1,8 +1,17 @@
 # Canonical MCP contract
 
-Five tools are exported: `computer_run`, `computer_continue`, `computer_observe`,
-`computer_status`, `computer_abort`. Runtime execution is inside one service;
+Six tools are exported: `computer_capabilities`, `computer_run`, `computer_continue`,
+`computer_observe`, `computer_status`, `computer_abort`. Runtime execution is inside one service;
 MCP calls do not expose per-click primitives.
+
+`computer_capabilities(detail=false)` discovers installed versions, actual schemas,
+input support, guide references and operation availability without starting models,
+capture or input. Request `operation_id` for one registered operation's contract.
+`computer_run` and `computer_continue` accept an optional typed `operation`; guide
+prose cannot register executable procedures. The default installation has no trusted
+Blender state provider, so these operations block on missing verified facts. A local
+operation `SUCCEEDED` result leaves the session `NEEDS_REPLAN`; verify the complete
+goal through a separate fresh ASSESS contract. See the [agent guide](en/AGENT_GUIDE.md).
 
 `computer_run(goal, success_conditions=[], constraints=[], max_steps=30,
 confidence_threshold=0.55, text_inputs=[], pointer_inputs=[], execution_mode="AUTO")`

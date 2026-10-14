@@ -1,0 +1,112 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Immutable f440de1 native win32 fresh/repeat + installed discovery and isolated Codex project native catalog; no model/GUI/service invocation",
+  "ci_commit": "f440de1",
+  "ci_run": 38137115873,
+  "status": "PASS",
+  "fresh": "INSTALLED",
+  "repeat": "CURRENT",
+  "package_files_exact": 61,
+  "python_modules": 46,
+  "resources": 15,
+  "three_user_enrollment": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED"
+    }
+  ],
+  "repeat_three_enrollment": [
+    {
+      "harness": "codex",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "hermes",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "omp",
+      "status": "UNCHANGED"
+    }
+  ],
+  "project_codex_native": {
+    "status": "NOT_RUN",
+    "stages": {
+      "INSTALLED": {
+        "status": "PASS"
+      },
+      "DISCOVERED": {
+        "status": "PASS"
+      },
+      "LOADED": {
+        "status": "NOT_RUN"
+      },
+      "INVOKED": {
+        "status": "NOT_RUN"
+      },
+      "TASK_VERIFIED": {
+        "status": "NOT_RUN"
+      }
+    },
+    "compatibility": {
+      "status": "MATCH",
+      "reload_required": false,
+      "installed_release": "0.1.30",
+      "runtime_release": "0.1.30",
+      "action": null
+    }
+  },
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "preexisting_config_comments_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true
+  },
+  "digests": {
+    "actual_archive_sha": "36dca7156d60171a63b39a0b8345768fc0d2ed13ec8322ed1bf1293ae86bd5fc",
+    "wheel_sha": "8755168230b5c8eda20e68520caaeeead8951a5a791e796c19a958be52412a2d",
+    "installer_ps1_sha": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "packaged_installer_sha": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e"
+  },
+  "preservation_and_cleanup": {
+    "owned_loopback_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_V2_runtime_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "artifact_digests": {
+    "final-report.json": "420406efcd6a7cabb47e1017da44ebdadbd3cf879d4541ce7f0e7c034c748624",
+    "predeclaration.json": "12af3ca54640f423d8675e5394a907ae834bedbdf731f537934ba7e1af7c7fb8",
+    "initial-failure-report.json": "c342ab2fc7dd3f897008d8a12fd15748326489615d9039e6cbe3bbd262a0754c",
+    "native-source.py": "96e463881f9c512605aee999920189f85751c1de891008d2ae8e0265964c6888",
+    "continuation-source.py": "6c2860b3fdd3e1a86e327ca17f8c7a0f56ea7db92c32161b0a361bc2c73e88dd"
+  },
+  "prior_fixture_failure": {
+    "report_sha256": "c342ab2fc7dd3f897008d8a12fd15748326489615d9039e6cbe3bbd262a0754c",
+    "source_sha256": "96e463881f9c512605aee999920189f85751c1de891008d2ae8e0265964c6888",
+    "failure": "Fixture incorrectly demanded lexical Path equality; read-only native samefile confirmed registered path and normalized target are one owned physical file. Initial report and original runner retained."
+  },
+  "transport_failures_retained": [
+    "Read-only direct-c quote stripping produced SyntaxError; base64 code transport verified",
+    "Continuation controller omitted -EncodedCommand dash and never executed source; CommandNotFoundException retained; corrected transport ran remaining checks once"
+  ],
+  "not_run": "Model LOADED/INVOKED/TASK_VERIFIED, GUI/input/service actions outside this installation scope; Hermes/OMP native CLI absent on PATH. No auth copying, new harness install, production changes or source edits.",
+  "received_native_artifact_sha256": "deafc55d297685593c73b255134dad8ae3b2197ea28ba760d85a3c19f26d6e20"
+}

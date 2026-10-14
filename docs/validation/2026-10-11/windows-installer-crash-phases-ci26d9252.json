@@ -1,0 +1,262 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "native_platform": "win32",
+  "native_python": "3.11.9 (observed feasibility probe)",
+  "scope": "Native process-exit crash/resume of immutable CI26d9252 installer: fresh11 + genuine b3f0b233 source-built .29 to CI .30 update11. Not a FINAL12 runtime/model/GUI test; not power-loss or machine-reboot durability.",
+  "fresh_pass": 11,
+  "genuine_update_pass": 11,
+  "not_run": 0,
+  "source_modified": false,
+  "global_config_or_PATH_changes_requested": false,
+  "no_GUI_service_or_model_commands": true,
+  "free_bytes_before": 525024202752,
+  "preservation_and_cleanup": {
+    "owned_loopback_server_stopped": true,
+    "global_V2_wrapper_and_config_bytes_preserved": true,
+    "global_V2_runtime_bytes_preserved": true,
+    "global_user_PATH_preserved": true,
+    "existing_customized_fixture_HOME_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "digests": {
+    "installer_ps1_sha256": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_source_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "packaged_installer_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "current_payload_sha256": "e2f514469772bc680fc5315e68ee32bdb789326e2fa1e4f452b423cf04fa5e7a",
+    "current_wheel_sha256": "4c04b6d1a31a79f53ad5c9fae58e2dfb8d47122bdf9a831672240e986f9f6943",
+    "baseline_payload_sha256": "68231ea9e6932c46ffc2218cc5efa2387c14c73d1cb6bf30f0f27eb0f0f88df7",
+    "baseline_wheel_sha256": "99fd4ed28317002894a1c0fb9f1cd796b297730f9c7cb49c817014294889b64e",
+    "evidence_files": {
+      "report.json": "b1ebc8c5a9159540bbe54bdee53fe9a49d4c53ede56159881c345d88d075df38",
+      "predeclaration.json": "bbbd6a29cce2ebf31e3019e6b8e988b1dc1afd4e6955d0f9873a391b858997a0",
+      "native-runner.py": "9db61cfee7e0379cc02705d7f6406fb9e219a6e846d829303494626167d195bd",
+      "crash-child.py": "d6da66196d3fb7836fe5ab4881eff7daf2f9a9e9424eaf06dc9d4d414107981e",
+      "decoded-installer.py": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e"
+    }
+  },
+  "baseline_limitation": "Genuine pinned .29 universal wheel with current immutable CI Windows hash-pinned dependencies; reconstructed actual .29 payload, not claimed historical .29 release archive. No fabricated installed records or .30 baseline contracts.",
+  "cleanup": "Owned 127.0.0.1 server stopped, all installer children waited, no scheduled tasks created; crash remnants and evidence intentionally retained. Original fixture and global V2 unchanged by byte/hash comparison.",
+  "cases": [
+    {
+      "mode": "fresh",
+      "phase": "staging_directory_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 0.25,
+      "resume_seconds": 39.45300000021234
+    },
+    {
+      "mode": "fresh",
+      "phase": "archive_downloaded",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 0.2190000000409782,
+      "resume_seconds": 41.25
+    },
+    {
+      "mode": "fresh",
+      "phase": "archive_verified",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 0.28199999989010394,
+      "resume_seconds": 43.95300000021234
+    },
+    {
+      "mode": "fresh",
+      "phase": "archive_extracted",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 0.375,
+      "resume_seconds": 41.67200000002049
+    },
+    {
+      "mode": "fresh",
+      "phase": "venv_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 11.312000000150874,
+      "resume_seconds": 41.51600000006147
+    },
+    {
+      "mode": "fresh",
+      "phase": "offline_wheels_installed",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 39.89100000006147,
+      "resume_seconds": 42.75
+    },
+    {
+      "mode": "fresh",
+      "phase": "staged_runtime_smoked",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 43.45299999997951,
+      "resume_seconds": 44.062000000150874
+    },
+    {
+      "mode": "fresh",
+      "phase": "installed_record_written",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 43.875,
+      "resume_seconds": 48.42100000008941
+    },
+    {
+      "mode": "fresh",
+      "phase": "launcher_temporary_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 44.875,
+      "resume_seconds": 47.985000000102445
+    },
+    {
+      "mode": "fresh",
+      "phase": "launcher_temporary_fsynced",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": null,
+      "crash_seconds": 45.45299999997951,
+      "resume_seconds": 46.96900000004098
+    },
+    {
+      "mode": "fresh",
+      "phase": "launcher_atomically_switched",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "CURRENT",
+      "baseline_seconds": null,
+      "crash_seconds": 46.48399999993853,
+      "resume_seconds": 3.3910000000614673
+    },
+    {
+      "mode": "update",
+      "phase": "staging_directory_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 47.110000000102445,
+      "crash_seconds": 0.7970000000204891,
+      "resume_seconds": 50.90599999995902
+    },
+    {
+      "mode": "update",
+      "phase": "archive_downloaded",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 47.57799999997951,
+      "crash_seconds": 0.8439999998081475,
+      "resume_seconds": 49.031999999890104
+    },
+    {
+      "mode": "update",
+      "phase": "archive_verified",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 48.07800000021234,
+      "crash_seconds": 0.8909999998286366,
+      "resume_seconds": 50.15599999995902
+    },
+    {
+      "mode": "update",
+      "phase": "archive_extracted",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 49.51600000006147,
+      "crash_seconds": 1.0309999999590218,
+      "resume_seconds": 51.57899999991059
+    },
+    {
+      "mode": "update",
+      "phase": "venv_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 50.687000000150874,
+      "crash_seconds": 15.093999999808148,
+      "resume_seconds": 51.875
+    },
+    {
+      "mode": "update",
+      "phase": "offline_wheels_installed",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 51.10899999993853,
+      "crash_seconds": 50.75,
+      "resume_seconds": 54.375
+    },
+    {
+      "mode": "update",
+      "phase": "staged_runtime_smoked",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 52.75,
+      "crash_seconds": 54.10899999993853,
+      "resume_seconds": 55.625
+    },
+    {
+      "mode": "update",
+      "phase": "installed_record_written",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 53.65600000019185,
+      "crash_seconds": 54.843000000109896,
+      "resume_seconds": 57.29699999978766
+    },
+    {
+      "mode": "update",
+      "phase": "launcher_temporary_created",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 56.01600000006147,
+      "crash_seconds": 57.937000000150874,
+      "resume_seconds": 59.45299999997951
+    },
+    {
+      "mode": "update",
+      "phase": "launcher_temporary_fsynced",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "INSTALLED",
+      "baseline_seconds": 56.890000000130385,
+      "crash_seconds": 59.562999999849126,
+      "resume_seconds": 61.0
+    },
+    {
+      "mode": "update",
+      "phase": "launcher_atomically_switched",
+      "status": "PASS",
+      "crash_exit_code": 87,
+      "resume_status": "CURRENT",
+      "baseline_seconds": 59.65599999995902,
+      "crash_seconds": 60.687999999849126,
+      "resume_seconds": 6.672000000020489
+    }
+  ]
+}

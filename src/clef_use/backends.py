@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import io
 import json
+import math
 import os
 import queue
 import subprocess
@@ -196,9 +197,29 @@ class VisualGroundingBackend:
         return GroundingResult(**reply["grounding"])
 
 
-def decision_request(observation, contract, candidates, history) -> dict:
+def decision_request(
+    observation, contract, candidates, history, *, metrics: dict | None = None
+) -> dict:
     if len(observation.objects) > 40:
         raise ValueError("decision packet exceeds the bounded object budget")
+    object_ids = {obj.id for obj in observation.objects}
+    if any(action.target is not None and action.target not in object_ids for action in candidates):
+        raise ValueError("candidate target missing from observed decision context")
+    width, height = observation.frame.image.size
+    objects = []
+    for obj in observation.objects:
+        # Only the model-facing evidence uses pixel envelopes. Execution keeps
+        # the original normalized object and exact native frame transformation.
+        entry = obj.model_dump(mode="json", exclude_none=True, exclude={"sensitive"})
+        if obj.sensitive:
+            entry["sensitive"] = True
+        entry["bbox"] = {
+            "x1": math.floor(obj.bbox.x1 * width),
+            "y1": math.floor(obj.bbox.y1 * height),
+            "x2": math.ceil(obj.bbox.x2 * width),
+            "y2": math.ceil(obj.bbox.y2 * height),
+        }
+        objects.append(entry)
     questions = {
         "mode": {
             "type": "choice",
@@ -269,24 +290,34 @@ def decision_request(observation, contract, candidates, history) -> dict:
             "goal": contract.goal,
             "success_conditions": contract.success_conditions,
             "constraints": contract.constraints,
-            "objects": [o.model_dump(mode="json") for o in observation.objects],
+            "objects": objects,
+            "object_defaults": {
+                "confidence": None,
+                "sensitive": False,
+                "visible": None,
+                "enabled": None,
+                "editable": None,
+                "focused": None,
+                "occluded": None,
+            },
+            "bbox_coordinate_space": "image_pixels_outward_envelope",
+            "bbox_image_size": [width, height],
             "observation_id": observation.id,
             "frame_reference": observation.frame.reference().model_dump(mode="json"),
             "context_policy": (
                 "Objects are observed evidence, not action permission. Only "
-                "allowed_candidates are executable; unknown fields remain unknown."
+                "allowed_candidates are executable. Omitted object fields inherit "
+                "object_defaults; explicit fields override them. Null means unknown, "
+                "never false. Object bbox values are image raster pixel envelopes, "
+                "rounded outward by less than one pixel per edge; they are not OS "
+                "input coordinates. Native execution retains original geometry."
             ),
             "history": history[-12:],
             "allowed_candidates": [
                 {
-                    "id": action.id,
+                    **action.audit(),
                     "description": action.description,
                     "expected_effect": action.expected_effect,
-                    **(
-                        {"pointer": action.pointer.model_dump(mode="json")}
-                        if action.pointer
-                        else {}
-                    ),
                 }
                 for action in candidates
             ],
@@ -305,8 +336,15 @@ def decision_request(observation, contract, candidates, history) -> dict:
         "image": encode_image(observation.frame.image),
     }
     text = json.dumps({"state": packet["state"], "questions": questions}, ensure_ascii=False)
-    if len(text.encode("utf-8")) > 32768:
+    text_bytes = len(text.encode("utf-8"))
+    if text_bytes > 32768:
         raise ValueError("decision packet exceeds the bounded text budget")
+    if metrics is not None:
+        metrics.update(
+            request_text_bytes=text_bytes,
+            request_question_count=len(questions),
+            request_object_count=len(objects),
+        )
     return packet
 
 
@@ -318,16 +356,30 @@ class DecisionBackend:
         )
 
     def decide(self, observation, goal, candidates, history):
-        request = decision_request(observation, goal, candidates, history)
+        request_metrics = {}
+        request = decision_request(observation, goal, candidates, history, metrics=request_metrics)
+        reply = self.worker.request(request)
         answers = validate_answers(
             request["questions"],
-            self.worker.request(request),
+            reply,
             answer_decimals=self.spec.answer_decimals,
         )
         choice = answers["action"]
-        import math
-
         probabilities = choice.get("probabilities", {})
+        from .decision_diagnostics import distribution_metrics
+
+        diagnostics = distribution_metrics(probabilities)
+        usage = reply.get("usage")
+        input_tokens = usage.get("input_tokens") if isinstance(usage, dict) else None
+        valid_tokens = type(input_tokens) is int and 0 < input_tokens <= 8192
+        missing_tokens = usage is None or "input_tokens" not in usage
+        diagnostics.update(
+            **request_metrics,
+            input_tokens=input_tokens if valid_tokens else None,
+            input_tokens_source=(
+                "SDK_USAGE" if valid_tokens else "UNAVAILABLE" if missing_tokens else "INVALID"
+            ),
+        )
         total = sum(probabilities.values())
         entropy = None
         if total > 0:
@@ -346,6 +398,7 @@ class DecisionBackend:
             action=None if choice["choice"] == "none" else choice["choice"],
             confidence=choice["confidence"],
             entropy=entropy,
+            diagnostics=diagnostics,
             goal_probability=answers["complete"]["noul"],
             replan_probability=answers["replan"]["noul"],
             safety_probability=answers["unsafe"]["noul"],
@@ -400,53 +453,69 @@ class DesktopCapture:
             self._excluded_windows = frozenset()
 
     def capture(self):
-        import mss
-
+        captured_at = time.time()
         native = WindowsInput() if sys.platform == "win32" else None
         target = native.ensure_target(None) if native else None
         x11_context = self._x11_context() if sys.platform == "linux" else (None, None)
         with native.physical_coordinates() if native else nullcontext():
-            with mss.MSS() as screen:
-                monitor = screen.monitors[1]
-                excluded = getattr(self, "_excluded_windows", ())
-                if excluded and sys.platform == "darwin":
-                    import Quartz
+            if native:
+                from .windows_capture import capture_primary
 
-                    windows = Quartz.CGWindowListCreate(Quartz.kCGWindowListOptionOnScreenOnly, 0)
-                    windows = tuple(window for window in windows if window not in excluded)
-                    rect = (
-                        (monitor["left"], monitor["top"]),
-                        (monitor["width"], monitor["height"]),
-                    )
-                    cg = Quartz.CGWindowListCreateImageFromArray(
-                        rect, windows, Quartz.kCGWindowImageNominalResolution
-                    )
-                    if cg is None or Quartz.CGImageGetBitsPerPixel(cg) != 32:
-                        raise RuntimeError("cannot capture desktop without activity windows")
-                    pixels = bytes(Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(cg)))
-                    image = Image.frombytes(
-                        "RGB",
-                        (Quartz.CGImageGetWidth(cg), Quartz.CGImageGetHeight(cg)),
-                        pixels,
-                        "raw",
-                        "BGRX",
-                        Quartz.CGImageGetBytesPerRow(cg),
-                    )
-                else:
-                    shot = screen.grab(monitor)
-                    image = Image.frombytes("RGB", shot.size, shot.rgb)
+                image = capture_primary()
+                monitor = {"left": 0, "top": 0}
+            else:
+                import mss
+
+                with mss.MSS() as screen:
+                    monitor = screen.monitors[1]
+                    excluded = getattr(self, "_excluded_windows", ())
+                    if excluded and sys.platform == "darwin":
+                        import Quartz
+
+                        windows = Quartz.CGWindowListCreate(
+                            Quartz.kCGWindowListOptionOnScreenOnly, 0
+                        )
+                        windows = tuple(window for window in windows if window not in excluded)
+                        rect = (
+                            (monitor["left"], monitor["top"]),
+                            (monitor["width"], monitor["height"]),
+                        )
+                        cg = Quartz.CGWindowListCreateImageFromArray(
+                            rect, windows, Quartz.kCGWindowImageNominalResolution
+                        )
+                        if cg is None or Quartz.CGImageGetBitsPerPixel(cg) != 32:
+                            raise RuntimeError("cannot capture desktop without activity windows")
+                        pixels = bytes(
+                            Quartz.CGDataProviderCopyData(Quartz.CGImageGetDataProvider(cg))
+                        )
+                        image = Image.frombytes(
+                            "RGB",
+                            (Quartz.CGImageGetWidth(cg), Quartz.CGImageGetHeight(cg)),
+                            pixels,
+                            "raw",
+                            "BGRX",
+                            Quartz.CGImageGetBytesPerRow(cg),
+                        )
+                    else:
+                        shot = screen.grab(monitor)
+                        image = Image.frombytes("RGB", shot.size, shot.rgb)
             if native:
                 native.ensure_target(target)
                 logical = image.size
                 bounds = native.window_rect(target)
             else:
-                import pyautogui
+                if sys.platform == "linux":
+                    # X11 capture and input use root pixels. pyautogui.size()
+                    # can cover every monitor while this image covers only one.
+                    logical = image.size
+                else:
+                    import pyautogui
 
-                logical = tuple(pyautogui.size())
+                    logical = tuple(pyautogui.size())
                 target, bounds = x11_context
                 if sys.platform == "linux" and self._x11_context() != x11_context:
                     raise RuntimeError("X11 foreground changed during capture")
-        return Frame(image, (monitor["left"], monitor["top"]), logical, target, bounds)
+        return Frame(image, (monitor["left"], monitor["top"]), logical, target, bounds, captured_at)
 
 
 class DesktopAction:
@@ -455,6 +524,130 @@ class DesktopAction:
         self.keys = set()
         self.buttons = set()
         self.gui = gui
+        self.input_executor = None
+        self.x11_state = None
+        self.x11_buttons = {}
+        self.x11_keys = {}
+        self.x11_keymap = None
+
+    def _x11_input_state(self, gui):
+        from .x11_input_state import X11InputState
+
+        if self.x11_state is None:
+            self.x11_state = X11InputState(gui.platformModule._display.get_display_name())
+        return self.x11_state
+
+    def _x11_keycode(self, gui, key):
+        if self.x11_keymap is None:
+            # Match the original map that constructed PyAutoGUI's keycodes,
+            # including when this adapter starts after a native layout change.
+            self.x11_keymap = tuple(tuple(row) for row in gui.platformModule._display._keymap_codes)
+        code = gui.platformModule.keyboardMapping.get(key)
+        if not code or not self._x11_input_state(gui).binding_matches(code, self.x11_keymap[code]):
+            raise RuntimeError("logical key binding changed in current OS keymap")
+        return code
+
+    def _x11_key_down(self, gui, key):
+        from Xlib import X
+        from Xlib.ext.xtest import fake_input
+
+        gui.failSafeCheck()
+        code = self._x11_keycode(gui, key)
+        with self._x11_input_state(gui).query() as connection:
+            bitmap = connection.query_keymap()
+        held = {code for code in range(256) if bitmap[code // 8] & (1 << (code % 8))}
+        if key in self.keys or held - set(self.x11_keys.values()):
+            raise RuntimeError("key is already held outside this legacy input")
+        fake_input(gui.platformModule._display, X.KeyPress, code)
+        gui.platformModule._display.sync()
+        self.x11_keys[key] = code
+        self.keys.add(key)
+
+    def _button_down(self, gui, button, target=None):
+        if isinstance(gui, WindowsInput):
+            gui.mouseDown(button=button, target=target)
+        elif sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            from .x11_input_state import button_event
+
+            code = self._x11_input_state(gui).button_code(button)
+            button_event(gui.platformModule._display, code, True)
+            self.x11_buttons[button] = code
+        else:
+            gui.mouseDown(button=button)
+        self.buttons.add(button)
+
+    def _button_up(self, gui, button):
+        if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            from .x11_input_state import button_event
+
+            button_event(gui.platformModule._display, self.x11_buttons[button], False)
+            del self.x11_buttons[button]
+        else:
+            gui.mouseUp(button=button)
+        self.buttons.discard(button)
+
+    def _scroll(self, gui, clicks, *, horizontal=False, target=None):
+        if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+            button = (7 if clicks > 0 else 6) if horizontal else (4 if clicks > 0 else 5)
+            for _ in range(abs(clicks)):
+                try:
+                    self._button_down(gui, button)
+                finally:
+                    if button in self.buttons:
+                        self._button_up(gui, button)
+        elif isinstance(gui, WindowsInput):
+            (gui.hscroll if horizontal else gui.scroll)(clicks, target=target)
+        else:
+            (gui.hscroll if horizontal else gui.scroll)(clicks)
+
+    def execute_input(
+        self,
+        command,
+        frame,
+        cancelled,
+        context_guard=None,
+        deadline=None,
+        context=None,
+        after_input_guard=None,
+    ):
+        from .input_ir import InputExecutor
+
+        if self.gui is None:
+            if sys.platform == "win32":
+                self.gui = WindowsInput()
+            else:
+                import pyautogui
+
+                self.gui = pyautogui
+        if self.input_executor is None:
+            self.input_executor = InputExecutor(self.gui, self.keys, self.buttons)
+        coordinates = (
+            self.gui.physical_coordinates() if isinstance(self.gui, WindowsInput) else nullcontext()
+        )
+        with coordinates:
+            return self.input_executor.execute(
+                command, frame, cancelled, context_guard, deadline, context, after_input_guard
+            )
+
+    @property
+    def requires_keyboard_context(self):
+        return isinstance(self.gui, WindowsInput) or self.gui is None and sys.platform == "win32"
+
+    def input_recipient_matches(self, frame, control):
+        """Verify the native recipient after an acknowledged one-shot submit.
+
+        This authorizes no further key-down. The new text/IME state is unknown
+        until independently observed; owned releases remain unconditional.
+        """
+        if not isinstance(self.gui, WindowsInput):
+            return False
+        return (
+            frame.foreground_window == control.get("window")
+            and frame.foreground_bounds is not None
+            and self.gui.window_rect(frame.foreground_window) == frame.foreground_bounds
+            and self.gui.window_identity(frame.foreground_window)
+            == (control.get("process"), control.get("thread"))
+        )
 
     def execute(self, action, observation, cancelled):
         if self.gui is None:
@@ -469,6 +662,10 @@ class DesktopAction:
         with self.lock, gui.physical_coordinates() if native else nullcontext():
             if cancelled.is_set():
                 return ActionResult(ok=False, reason="aborted")
+            if native and action.operation in {"type", "press", "hotkey"}:
+                return ActionResult(
+                    ok=False, reason="Windows keyboard actions require compiled input context"
+                )
             if action.observation_id != observation.id:
                 return ActionResult(ok=False, reason="stale observation")
             target = next((o for o in observation.objects if o.id == action.target), None)
@@ -526,9 +723,7 @@ class DesktopAction:
                         cancelled,
                         observation.frame.foreground_window,
                     )
-                if native:
-                    gui.type_text(value, cancelled, observation.frame.foreground_window)
-                elif not value.isascii():
+                if not value.isascii():
                     import pyperclip
 
                     previous = pyperclip.paste()
@@ -560,10 +755,7 @@ class DesktopAction:
                 if target:
                     gui.moveTo(*observation.frame.point(target.bbox))
                 clicks = 3 if action.value == "up" else -3
-                if native:
-                    gui.scroll(clicks, observation.frame.foreground_window)
-                else:
-                    gui.scroll(clicks)
+                self._scroll(gui, clicks, target=observation.frame.foreground_window)
             elif op == "wait":
                 return ActionResult(ok=False, reason="visual wait is owned by the runtime")
             return ActionResult(ok=not cancelled.is_set())
@@ -596,18 +788,12 @@ class DesktopAction:
             if pointer.scroll_direction in {"left", "right"}:
                 if not hasattr(gui, "hscroll"):
                     raise RuntimeError("horizontal scrolling unavailable in input backend")
-                gui.hscroll(clicks)
-            elif native:
-                gui.scroll(clicks, frame.foreground_window)
+                self._scroll(gui, clicks, horizontal=True, target=frame.foreground_window)
             else:
-                gui.scroll(clicks)
+                self._scroll(gui, clicks, target=frame.foreground_window)
             return
         try:
-            self.buttons.add("left")
-            if native:
-                gui.mouseDown(button="left", target=frame.foreground_window)
-            else:
-                gui.mouseDown(button="left")
+            self._button_down(gui, "left", frame.foreground_window)
             for point in points[1:]:
                 if cancelled.wait(pointer.duration / (len(points) - 1)):
                     return
@@ -630,11 +816,7 @@ class DesktopAction:
             if cancelled.is_set():
                 return
             try:
-                self.buttons.add("left")
-                if native:
-                    gui.mouseDown(button="left", target=target)
-                else:
-                    gui.mouseDown(button="left")
+                self._button_down(gui, "left", target)
             finally:
                 self._release_with(gui)
             if count > 1:
@@ -646,27 +828,43 @@ class DesktopAction:
         native = isinstance(gui, WindowsInput)
         target = gui.ensure_target(target) if native else None
         try:
+            if sys.platform == "linux" and getattr(gui, "__name__", "") == "pyautogui":
+                expanded = []
+                for key in keys:
+                    if len(key) == 1 and gui.isShiftCharacter(key) and "shift" not in expanded:
+                        expanded.append("shift")
+                    expanded.append(key)
+                # Refuse a stale member before pressing any chord modifier.
+                for key in expanded:
+                    self._x11_keycode(gui, key)
+                for key in expanded:
+                    if cancelled.is_set():
+                        return
+                    self._x11_key_down(gui, key)
+                return
             for key in keys:
                 if cancelled.is_set():
                     return
                 if native:
                     gui.ensure_target(target)
                 # Printable keys may press implicit layout modifiers inside PyAutoGUI.
+                implicit_modifiers = set()
                 if not native and len(key) == 1:
                     if gui.isShiftCharacter(key):
-                        self.keys.add("shift")
+                        implicit_modifiers.add("shift")
                     if sys.platform == "win32":
                         code = gui.platformModule.keyboardMapping.get(key)
                         if code is not None and code >= 0:
                             modifiers = code // 0x100
                             for flag, modifier in ((1, "shift"), (2, "ctrl"), (4, "alt")):
                                 if modifiers & flag:
-                                    self.keys.add(modifier)
-                self.keys.add(key)
+                                    implicit_modifiers.add(modifier)
                 if native:
                     gui.keyDown(key, target=target)
                 else:
                     gui.keyDown(key)
+                self.keys.add(key)
+                self.keys.update(implicit_modifiers)
         finally:
             self._release_with(gui)
 
@@ -679,14 +877,21 @@ class DesktopAction:
             modifiers = {"shift", "ctrl", "alt", "command"}
             for key in sorted(self.keys, key=lambda key: (key in modifiers, key)):
                 try:
-                    gui.keyUp(key)
+                    if key in self.x11_keys:
+                        from Xlib import X
+                        from Xlib.ext.xtest import fake_input
+
+                        fake_input(gui.platformModule._display, X.KeyRelease, self.x11_keys[key])
+                        gui.platformModule._display.sync()
+                        del self.x11_keys[key]
+                    else:
+                        gui.keyUp(key)
                     self.keys.discard(key)
                 except Exception as exc:
                     errors.append(exc)
             for button in tuple(self.buttons):
                 try:
-                    gui.mouseUp(button=button)
-                    self.buttons.discard(button)
+                    self._button_up(gui, button)
                 except Exception as exc:
                     errors.append(exc)
             if isinstance(gui, WindowsInput):
@@ -700,6 +905,8 @@ class DesktopAction:
             raise errors[0]
 
     def release(self):
+        if self.input_executor is not None:
+            self.input_executor.release()
         with self.lock:
             if self.gui is not None:
                 self._release_with(self.gui)
@@ -708,6 +915,18 @@ class DesktopAction:
 def runtime(config: Config, log_path=None):
     from .activity import ActivityOverlay
     from .runtime import SessionRuntime
+
+    state_provider = None
+    if config.blender_state_socket is not None:
+        if sys.platform not in {"linux", "win32"}:
+            raise RuntimeError("Blender state observation requires Linux X11 or Windows")
+        from .blender_state import BlenderStateProvider
+
+        state_provider = BlenderStateProvider(config.blender_state_socket)
+    if sys.platform == "win32":
+        from .windows_state import WindowsStateProvider
+
+        state_provider = WindowsStateProvider(state_provider)
 
     for repo in (config.decision_model, "microsoft/OmniParser-v2.0"):
         if not snapshot_path(config.model_dir, repo).is_dir():
@@ -735,4 +954,5 @@ def runtime(config: Config, log_path=None):
         log_path=log_path,
         activity=ActivityOverlay(config.activity_overlay),
         grounder=VisualGroundingBackend(config) if config.visual_grounding else None,
+        state_provider=state_provider,
     )

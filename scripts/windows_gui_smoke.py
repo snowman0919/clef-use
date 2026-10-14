@@ -1,4 +1,8 @@
-"""Exercise the canonical native adapter against a disposable Windows Tk window."""
+"""Exercise native capture/pointers and reject unguarded legacy Tk keyboard input.
+
+Canonical compiled keyboard execution needs supported native focus/writability
+evidence. This Tk fixture does not supply it and makes no Unicode-success claim.
+"""
 
 from __future__ import annotations
 
@@ -10,7 +14,9 @@ import time
 import tkinter as tk
 import traceback
 from pathlib import Path
-from threading import Event
+from threading import Event, Thread
+
+from windows_gui_support import restore_foreground
 
 from clef_use.backends import DesktopAction, DesktopCapture
 from clef_use.schema import ActionCandidate, BoundingBox, Observation, UIObject
@@ -22,10 +28,10 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     result = {"mode": "REAL_WINDOWS_GUI_NATIVE_ADAPTER", "native_input": True}
-    root, gui, action = None, WindowsInput(), DesktopAction()
+    root, owned_target, gui, action = None, None, WindowsInput(), DesktopAction()
     previous_target, previous_pointer = gui.foreground(), Point()
     with gui.physical_coordinates():
-        gui.user.GetCursorPos(ctypes.byref(previous_pointer))
+        pointer_observed = bool(gui.user.GetCursorPos(ctypes.byref(previous_pointer)))
     try:
         result["desktop"] = gui.desktop_status()
         root = tk.Tk()
@@ -54,13 +60,26 @@ def main():
             raise RuntimeError("owned test window did not become foreground")
         time.sleep(0.3)
 
+        with gui.physical_coordinates():
+            initial_bounds = gui.window_rect(owned_target)
+        first_frame = DesktopCapture().capture()
+        root.update()
+        with gui.physical_coordinates():
+            after_capture_bounds = gui.window_rect(owned_target)
+        result["capture_preserves_owned_geometry"] = (
+            first_frame.foreground_bounds == initial_bounds == after_capture_bounds
+        )
+        if not result["capture_preserves_owned_geometry"]:
+            raise RuntimeError("Desktop capture changed the owned window DPI geometry")
+
         def snapshot():
             root.update()
             frame = DesktopCapture().capture()
             objects = []
             for name, widget in [("entry", entry), ("button", button)]:
-                x, y = widget.winfo_rootx(), widget.winfo_rooty()
-                w, h = widget.winfo_width(), widget.winfo_height()
+                with gui.physical_coordinates():
+                    x, y, right, bottom = gui.window_rect(widget.winfo_id())
+                w, h = right - x, bottom - y
                 width, height = frame.image.size
                 objects.append(
                     UIObject(
@@ -88,24 +107,80 @@ def main():
                 description="disposable validation",
                 observation_id=obs.id,
             )
-            outcome = action.execute(candidate, obs, cancelled or Event())
-            root.update()
-            time.sleep(0.1)
-            root.update()
-            return outcome
+            # Keep the receiver's UI loop alive while native input is injected.
+            # SendInput acknowledgement is not widget-event consumption.
+            cancel = cancelled or Event()
+            delivery = {"operation": operation, "started_ns": time.monotonic_ns()}
+            completed, reply = Event(), {}
+            expected_clicks = len(clicks) + (2 if operation == "double_click" else 1)
+            expected_scrolls = len(scrolls) + 1
+
+            def inject():
+                try:
+                    reply["outcome"] = action.execute(candidate, obs, cancel)
+                except BaseException as exc:
+                    reply["error"] = exc
+                finally:
+                    delivery["acknowledged_ns"] = time.monotonic_ns()
+                    completed.set()
+
+            worker = Thread(target=inject)
+            deadline = time.monotonic() + 1
+
+            def readback():
+                if completed.is_set():
+                    if "error" in reply or not reply["outcome"].ok:
+                        root.quit()
+                        return
+                    if operation in {"click", "double_click"}:
+                        expected = len(clicks) == expected_clicks
+                    elif operation == "scroll":
+                        expected = len(scrolls) == expected_scrolls and scrolls[-1] < 0
+                    else:
+                        expected = True
+                    if expected:
+                        delivery["verified_ns"] = time.monotonic_ns()
+                        root.quit()
+                        return
+                if time.monotonic() >= deadline:
+                    delivery["timeout"] = True
+                    cancel.set()
+                    root.quit()
+                    return
+                root.after(5, readback)
+
+            root.after(0, worker.start)
+            root.after(5, readback)
+            root.mainloop()
+            worker.join(3)
+            delivery["worker_joined"] = not worker.is_alive()
+            result.setdefault("delivery_readbacks", []).append(delivery)
+            if "error" in reply:
+                raise reply["error"]
+            if delivery.get("timeout"):
+                raise RuntimeError("once-only input effect not observed within one second")
+            if worker.is_alive():
+                raise RuntimeError("owned input worker did not finish")
+            return reply["outcome"]
 
         clipboard_sequence = gui.user.GetClipboardSequenceNumber()
-        text = "Windows 한글 테스트 😀"
-        assert execute("type", text, "entry").ok
-        assert entry.get() == text, repr(entry.get())
+        result["legacy_keyboard_refusals"] = []
+        for operation, value, target in (
+            ("type", "Windows 한글 테스트 😀", "entry"),
+            ("hotkey", "ctrl+a", None),
+            ("press", "backspace", None),
+        ):
+            outcome = execute(operation, value, target)
+            assert not outcome.ok and entry.get() == ""
+            result["legacy_keyboard_refusals"].append(
+                {"operation": operation, "refused": True, "reason": outcome.reason}
+            )
         assert gui.user.GetClipboardSequenceNumber() == clipboard_sequence
-        result["unicode_readback"] = entry.get()
         result["clipboard_preserved"] = True
         result["clipboard_verification"] = "sequence unchanged; no clipboard read/write"
-        assert execute("hotkey", "ctrl+a").ok
-        assert execute("press", "backspace").ok
-        assert entry.get() == ""
-        result["shortcut_readback"] = entry.get()
+        result["keyboard_scope"] = (
+            "Legacy refusal only; this fixture does not prove compiled Unicode or shortcut success"
+        )
         assert execute("click", target="button").ok and len(clicks) == 1
         assert execute("double_click", target="button").ok and len(clicks) == 3
         result["click_readback"] = len(clicks)
@@ -127,7 +202,7 @@ def main():
         root.update()
         time.sleep(0.2)
         try:
-            execute("press", "enter", observation=old)
+            execute("click", target="button", observation=old)
             raise AssertionError("stale foreground input accepted")
         except RuntimeError as exc:
             assert "foreground changed" in str(exc), str(exc)
@@ -148,25 +223,57 @@ def main():
         result["capture_pixels"] = frame.image.size
         result["physical_coordinates"] = True
         with gui.physical_coordinates():
-            bounds = (
-                root.winfo_rootx(),
-                root.winfo_rooty(),
-                root.winfo_rootx() + root.winfo_width(),
-                root.winfo_rooty() + root.winfo_height(),
-            )
+            bounds = gui.window_rect(owned_target)
+        result["input_preserves_owned_geometry"] = bounds == initial_bounds
+        if not result["input_preserves_owned_geometry"]:
+            raise RuntimeError("OS input changed the owned window DPI geometry")
         frame.image.crop(bounds).save(args.output.with_suffix(".png"))
         result["status"] = "PASSED"
     except Exception:
         result.update(status="FAILED", traceback=traceback.format_exc())
     finally:
-        action.release()
-        if root:
-            root.destroy()
-        gui.FAILSAFE = False
-        with gui.physical_coordinates():
-            gui.moveTo(previous_pointer.x, previous_pointer.y)
-        gui.user.SetForegroundWindow.argtypes = [ctypes.c_void_p]
-        gui.user.SetForegroundWindow(previous_target)
+        cleanup = {"errors": []}
+        try:
+            action.release()
+            cleanup["input_released"] = True
+        except Exception:
+            cleanup["errors"].append(traceback.format_exc())
+        # Restore while the owned window still grants foreground input access.
+        # Destroying the last Tk window first can leave no input target on Windows.
+        if owned_target is not None and gui.foreground() == owned_target:
+            try:
+                if not pointer_observed:
+                    raise RuntimeError("previous pointer was not observed; restoration refused")
+                gui.FAILSAFE = False
+                with gui.physical_coordinates():
+                    gui.moveTo(previous_pointer.x, previous_pointer.y)
+                cleanup["pointer_restored"] = True
+            except Exception:
+                cleanup["errors"].append(traceback.format_exc())
+        else:
+            cleanup["pointer_restoration_skipped"] = "owned foreground unavailable or changed"
+            cleanup["errors"].append(cleanup["pointer_restoration_skipped"])
+        # Pointer restoration can fail independently; still restore the prior
+        # foreground if no other actor has taken it from our owned window.
+        if owned_target is not None and gui.foreground() == owned_target:
+            try:
+                cleanup.update(restore_foreground(root, gui, previous_target, owned_target))
+                if not cleanup["foreground_restored"]:
+                    raise RuntimeError("previous foreground restoration was not confirmed")
+            except Exception:
+                cleanup["errors"].append(traceback.format_exc())
+        else:
+            cleanup["foreground_restoration_skipped"] = "owned foreground unavailable or changed"
+            cleanup["errors"].append(cleanup["foreground_restoration_skipped"])
+        try:
+            if root:
+                root.destroy()
+            cleanup["owned_window_closed"] = True
+        except Exception:
+            cleanup["errors"].append(traceback.format_exc())
+        result["cleanup"] = cleanup
+        if cleanup["errors"]:
+            result["status"] = "FAILED"
         args.output.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps(result, ensure_ascii=False))
     return 0 if result["status"] == "PASSED" else 1

@@ -1,0 +1,54 @@
+{
+  "classification": "OBSERVED",
+  "overall_result": "NOT_RUN",
+  "source_commit": "6cdf18281b404663591057b4f1cef9529ebb0294",
+  "archive_sha256": "3e0119c7ea6f7283c81a30b0851d2c1c44ec3c9fbf3cc7be7d80bf668ed3ff87",
+  "private_report_sha256": "3a91906afc41675cc7ce1e1fd499ed8b51c8c4351701d49a87ef8a6f0666131a",
+  "completed_checks": {
+    "native_readonly_status": {
+      "status_is_error": true,
+      "status_text": [
+        "Error executing tool computer_status: runtime service is not running"
+      ],
+      "status_created_runtime": false,
+      "official_stdio_context_exited": true
+    },
+    "native_current_idle": {
+      "status": {
+        "ok": false,
+        "error_type": "RuntimeError",
+        "error": "no active session; start computer_run first"
+      },
+      "health": {
+        "version": "0.1.30",
+        "busy": false,
+        "api_schema_version": 1,
+        "runtime_protocol_version": 1,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+      },
+      "all_thread_union_child_count": 0,
+      "tid_snapshot_count": 1,
+      "vanished_tid_count": 0
+    }
+  },
+  "driver_failure": "Shared helper imported clef_use.capabilities at module scope; genuine 0.1.29 lacks that newly added module. ModuleNotFoundError occurred before importing RuntimeClient or invoking the old consumer.",
+  "genuine29_consumer_invocation_reached": false,
+  "cleanup_report_preserved": {
+    "matching_shutdown": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "bounded_own_pid_termination": true,
+    "endpoint_removed": true,
+    "service_process_exited": false,
+    "stdio_context_exited": true
+  },
+  "later_cleanup_readback": {
+    "classification": "OBSERVED",
+    "same_owned_service_proc_entry_exists": false,
+    "endpoint_exists": false
+  },
+  "no_models_gui_gpu_input_production_changes": true
+}

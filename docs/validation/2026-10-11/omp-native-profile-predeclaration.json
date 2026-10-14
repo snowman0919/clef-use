@@ -1,0 +1,126 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL11 frozen guide/schema bundle",
+  "scope": "Native configured OMP profile correction and zero-inference observer preflight; actual batch NOT_RUN at this snapshot",
+  "source_mechanism": "Official Settings.loadReadOnly(cwd=owned project, agentDir=canonical native profile) followed by nonpersistent safety overlay",
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "predeclared_budget": {
+    "auxiliary_compressions": 3,
+    "auxiliary_native_completion_invocations_per_skill": 1,
+    "primary_cases": 3,
+    "primary_invocations_per_case": 8,
+    "primary_invocations_total": 24,
+    "case_deadline_ms": 180000,
+    "driver_or_session_retry_enabled": false,
+    "native_transport_retry_policy_preserved": true,
+    "actual_http_attempt_count": "NOT_OBSERVED",
+    "hard_http_attempt_ceiling": "NOT_OBSERVED",
+    "stop_first_failed_case": true,
+    "normal_runtime_required_for_models": true
+  },
+  "native_generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,\u2026",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": true,
+    "inference_invocations": 0
+  },
+  "native_skill_uri_preflight": [
+    {
+      "guide": "clef-use",
+      "native_uri": "skill://clef-use",
+      "full_body_observed": true,
+      "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+    },
+    {
+      "guide": "clef-use-blender",
+      "native_uri": "skill://clef-use-blender",
+      "full_body_observed": true,
+      "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+    },
+    {
+      "guide": "clef-use-diagnostics",
+      "native_uri": "skill://clef-use-diagnostics",
+      "full_body_observed": true,
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+  "fetch_observer_preflight": {
+    "scope": "native data URL only; no HTTP or model",
+    "records_added": 1,
+    "delivered_status": 200,
+    "original_fetch_properties_preserved": true,
+    "argument_or_payload_capture": false
+  },
+  "inference_invocations": 0,
+  "native_retry_diagnosis": {
+    "session_retries": false,
+    "transport_retries_preserved": true,
+    "openai_wire_transport_total_attempts_per_post_call": 6,
+    "replay_safe_empty_retries": 2,
+    "replay_safe_transient_provider_retries": 1,
+    "compatibility_recovery": "Native bounded recovery retained; combined hard HTTP ceiling NOT_OBSERVED",
+    "actual_http_model_attempt_count": "NOT_OBSERVED",
+    "phase_fetch_calls": "Counted separately; may include native auth/discovery calls; no guaranteed model-only mapping",
+    "primary_onResponse": "Delivered response metadata only; not all retry attempts"
+  },
+  "safe_error_capture": {
+    "native_logger": "setTransports(file=false,console=false) + registerLogSink(exact compression-failure event)",
+    "native_spans": "Installed BasicTracerProvider local-only span processor, content capture false; final status/final reason/provider/model/usage allowlist",
+    "raw_error_or_exception_message_saved": false,
+    "headers_urls_bodies_auth_read_or_logged": false
+  },
+  "prior_failure_preserved": {
+    "basename": "clef-omp-final10-native-generated-public-20261011.json",
+    "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784",
+    "cause_of_underlying_failed_requests": "NOT_OBSERVED; prior profile omitted configured smol and therefore selected different auxiliary route"
+  },
+  "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+  "no_gui_or_service_session": true,
+  "drivers": {
+    "clef_omp_native_profile_verify_20261011.py": "eb54a6d197965bc7c7c9d0740bff015f7023d4fca560e1a2eb2410a6a194026a",
+    "clef_omp_native_profile_verify_20261011.ts": "6d1a235505be015212be440ae46f638988e258147514fee02c9c5ccc08a54996"
+  },
+  "local_diagnostic_self_check": {
+    "scope": "Synthetic native local span/logger only, no provider/HTTP",
+    "status": "PASS",
+    "prior_attempt": "First incomplete bwrap (without private /dev and /proc) Bun abort134; corrected same sandbox surfaces as runner passed; no model calls in either"
+  }
+}

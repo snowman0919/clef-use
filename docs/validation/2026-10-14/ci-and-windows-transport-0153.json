@@ -1,0 +1,308 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_NATIVE_CI_AND_PASSIVE_WINDOWS_TRANSPORT_STATE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.53",
+  "source_commit": "666ed32b5681f055673610e38771127d3dc6e4a5",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts/digests only; private identities, native transcripts, transport targets and configuration/auth values remain outside Git.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38517795789,
+    "source_commit": "666ed32b5681f055673610e38771127d3dc6e4a5",
+    "assembled_artifact_id": 11873175661,
+    "assembled_artifact_sha256": "b6ecb3911fc444ce14d95c20a21df0959d3fbb0aa92df0aacc2c04011e5334c0",
+    "assembled_artifact_bytes": 383272050,
+    "native_build_install_jobs_passed": 15,
+    "native_installer_reports_passed": 15,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38517795789",
+    "archive_count": 15,
+    "git_payload_file_count": 68,
+    "source_and_contract_verification": "PASS",
+    "native_first_update_current_failure_preservation": "PASS",
+    "synthetic_installer_fixture_final_version": "0.1.54",
+    "actual_candidate_version": "0.1.53",
+    "workflow_dispatch_count": 1,
+    "manifest_sha256": "455f397bc55ba9e1f3f10d3a617a91a72924d17c65a95d003d3bca92d3c05694",
+    "sha256sums_sha256": "1853993c8ff2f4e8f07bb180ba4903ddd4d9df97eb589788065f42f3f17733f4",
+    "private_archive_verification_sha256": "322704fc5c0d5a3d2971941dbf5b3d6aef35212a016723d66d6c61e78217daa0",
+    "private_native_log_verification_sha256": "c8c0492a0ad245efa45b745dde00d113671866222fd7a0bb0b1a91d831f494ac",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.53-darwin-arm64-py311.zip",
+        "sha256": "295cdfa56fe3ad0055ce92d92745ea7e17947e078fe79c379feb35e3f0d6bd0a",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-darwin-arm64-py312.zip",
+        "sha256": "57e663ea3e81f443ca9b567760d7ecf24d043d4c4b2da40f288b1e505792cf02",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-darwin-arm64-py313.zip",
+        "sha256": "09e525caf03ffe81562a6a298b6651a5951ff5a0943ee669767a5a2e183da3da",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-darwin-x86_64-py311.zip",
+        "sha256": "ccbc15ec370d7819e6b9a30efa7fee01d5865d6d1d682dcccb3bf8fee10865c2",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-darwin-x86_64-py312.zip",
+        "sha256": "07f463211403b5ecf8cc147769217c9bc9b27dbca0b4e342627d9f1264f89d9a",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-darwin-x86_64-py313.zip",
+        "sha256": "0371b52799f2f6bd4329d847276d35edd6e024b88235d0c9a63e8d66e0840408",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-arm64-py311.zip",
+        "sha256": "7a28e0725a9d938a4b2c8f54ce81bcf9f246af32ae64e0ec9917b0e1b45c64a2",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-arm64-py312.zip",
+        "sha256": "65cd31f233071b71db64faeb3de56f8dc9a0f048dae7d8013c772ffa9b55eb5c",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-arm64-py313.zip",
+        "sha256": "9e2289060949756679f20e68905b19192fb12fce8f2c7f2f9a732310eb274be3",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-x86_64-py311.zip",
+        "sha256": "4b662d1f2608401dc506312de7de59be3a76c16f4e0e83ba92e4c9b9bb04f2b3",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-x86_64-py312.zip",
+        "sha256": "5e2f512269f15465353f875f17c864c0fa981c80c80b6116cb8f0477f3950c87",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-linux-x86_64-py313.zip",
+        "sha256": "615ae133c5cc10c9fe5669493b2191c9617486b1209146cdd52937fcb3dab729",
+        "wheel_sha256": "7b3dcefe7c9f2edb75424415c7f985a11b2ee0a7921e81f0f9e0770f76ac8b66",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-win32-x86_64-py311.zip",
+        "sha256": "be7d50a124c8305a2264ae8aff8412d3f5a282d2f503699b135f34030ac1a451",
+        "wheel_sha256": "a4b8800f54a5e952d353aca4b98e684028db44609ebcc2a3499a65364c2ebc39",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-win32-x86_64-py312.zip",
+        "sha256": "27e3d42386a2fd174d872ada9486b06caa0e22ce9327a0949a7aefec7bcd75fb",
+        "wheel_sha256": "a4b8800f54a5e952d353aca4b98e684028db44609ebcc2a3499a65364c2ebc39",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.53-win32-x86_64-py313.zip",
+        "sha256": "1387ca939f1d402523fb7c4e6de4d4c54422aa65ab8e42af38440c7d06db6149",
+        "wheel_sha256": "a4b8800f54a5e952d353aca4b98e684028db44609ebcc2a3499a65364c2ebc39",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      }
+    ]
+  },
+  "windows_transport": {
+    "classification": "OBSERVED_PASSIVE_NATIVE_TAILSCALE_STATUS_BOUND_TO_SSH_ALIAS",
+    "backend_state": "Running",
+    "self_online": true,
+    "win_online": false,
+    "gui_or_input_requested": false,
+    "ssh_network_connection_requested": false,
+    "initial_exact_hostname_match": "NOT_PROVEN_NO_MATCH",
+    "remote_command_execution": "NOT_RUN",
+    "candidate_installation": "NOT_RUN",
+    "limited_cli_mcp": "NOT_RUN",
+    "model_requests": 0,
+    "capture_focus_or_input_requested": false,
+    "shared_standard_update_requested": false,
+    "new_harness_enrollment_requested": false,
+    "fresh_passive_status_private_sha256": "f1a6f4f40d39b2a38475cc612aa59f090c4730a5ec247a34facfe6c45e2cc46c",
+    "historical_bounded_ssh_and_ping": {
+      "receipt": "docs/validation/2026-10-14/ci-and-windows-transport-0152.json",
+      "ssh_connection_timeout": true,
+      "ssh_exit_code": 255,
+      "native_tailscale_ping_timeout": true,
+      "repeated_at_this_checkpoint": false
+    },
+    "technical_limit": "Fresh passive native status bound to resolved SSH alias still reports peer offline while local backend is Running/online. No unchanged SSH/ping retry. Power state/outage cause are NOT_PROVEN. Inspect owned state after recovery before any mutation; independent user-confirmed input ownership still needs coordination."
+  },
+  "historical_windows_checkpoint": {
+    "receipt": "docs/validation/2026-10-14/windows-isolated-ci-0151.json",
+    "last_observed_shared_runtime": "0.1.49",
+    "last_observed_owned_candidate_runtime": "0.1.51",
+    "revalidated_at_current_checkpoint": false,
+    "current_shared_launcher_config_auth_payload_preservation": "NOT_RUN_TRANSPORT_UNAVAILABLE"
+  },
+  "source_and_harness_checkpoint": {
+    "receipt": "docs/validation/2026-10-14/codex-project-profile-0153.json",
+    "full_regression": {
+      "passed": 1704,
+      "skipped": 55,
+      "warnings": 41,
+      "seconds": 71.62
+    },
+    "actual_packaged_linux_normal_read_only_mcp": "PASS",
+    "final_installed_codex_cases": [
+      "FAIL",
+      "FAIL",
+      "PASS"
+    ],
+    "codex_positive_complete_body_before_matching_capability": "OBSERVED",
+    "codex_positive_installed_file_origin": "NOT_PROVEN",
+    "codex_positive_LOADED": "NOT_RUN",
+    "codex_auth_error_observed": false,
+    "prior_hermes_omp_results_and_credential_uncertainty_retained": true
+  },
+  "not_run": [
+    "WINDOWS_OWNED_CANDIDATE_UPDATE_0153",
+    "WINDOWS_LIMITED_CLI_MCP_0153",
+    "SHARED_WINDOWS_UPDATE_0153",
+    "WINDOWS_NATIVE_CODEX_MODEL_0153",
+    "WINDOWS_GUI_ABORT_BROWSER_EDITOR_0153",
+    "SAME_TASK_1000_OPPORTUNITIES_ACCURACY_CORRECT_OS_INPUT_P95_100MS_COVERAGE_GOODPUT",
+    "REICI_SEPARATE_SESSION_MATCHED_VIEW_REVIEW",
+    "PUBLIC_URL_HASH_FRESH_INSTALL_UPDATE_0153"
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_ORIGIN_UNPROVEN",
+      "condition": "Actual final .53 Codex positive cases observe full selected body before matching capabilities but lack native filesystem-origin proof; negative passes. Auth failure is not observed. LOADED remains NOT_RUN."
+    },
+    {
+      "requirements": [
+        "INSTALL-03",
+        "INSTALL-09",
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "Last bounded SSH port22 and Tailscale peer checks fail before remote execution; user confirms another session owns Windows input. No .53 remote installation/model/GUI/abort/performance execution."
+    },
+    {
+      "requirements": [
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "User confirms another session currently operates Windows. Shared installation and GUI are preserved; coordinate exclusive input before full native abort/task/1000-opportunity comparisons."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "INPUT-05"
+      ],
+      "status": "BLOCKED_FOR_UNPROVEN_BLENDER_STATES",
+      "condition": "Prior File-menu0/5 and unknown popup/IME/input-owner/effective-keymap facts remain. Public Blender/OS evidence does not prove those states; no guard/threshold weakened. External Blender host build remains outside user scope."
+    },
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_POSITIVE_CANONICAL_MODEL_CASES",
+      "condition": "Final source .52 OMP explicit retains stopped-service status, denied write and native deadline; natural invokes capabilities before guide. Negative passes. Pre-overlay .52/.50 failures and .49 credential uncertainty remain; no unchanged retry or credential restoration."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN_SEPARATE_SESSION_RESULT_PENDING",
+      "condition": "Reici edits/review evidence belongs to the separate session; its matched-view independent result has not arrived."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY_GUARDED",
+      "condition": "Existing feature branch guard skips public deployment; public URL/hash/fresh-install/update proof is not obtained by CI or owned loopback installation."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

@@ -1,0 +1,251 @@
+{
+  "classification": "READ_ONLY_SOURCE_FEASIBILITY_ANALYSIS",
+  "date": "2026-10-12",
+  "scope": {
+    "canonical_edits": 0,
+    "new_native_calls": 0,
+    "GUI_inputs": 0,
+    "provider_calls": 0,
+    "model_calls": 0,
+    "tests_or_process_probes": 0,
+    "method": "Read retained evidence, current local source and official Blender5.2 primary source only."
+  },
+  "local_sources": [
+    {
+      "file": "src/clef_use/runtime.py",
+      "line_refs": [
+        102,
+        124,
+        129,
+        141
+      ],
+      "sha256": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b"
+    },
+    {
+      "file": "src/clef_use/state.py",
+      "line_refs": [
+        35,
+        44,
+        92,
+        121,
+        136,
+        151
+      ],
+      "sha256": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8"
+    },
+    {
+      "file": "src/clef_use/backends.py",
+      "line_refs": [
+        415,
+        419,
+        449,
+        775
+      ],
+      "sha256": "52073a9dfe5a9709efbf368be2d21ed6f572870c6b8e511df6195d0faa448fe1"
+    },
+    {
+      "file": "src/clef_use/operations.py",
+      "line_refs": [
+        122,
+        133,
+        352,
+        379
+      ],
+      "sha256": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67"
+    },
+    {
+      "file": "src/clef_use/capabilities.py",
+      "line_refs": [
+        118,
+        122
+      ],
+      "sha256": "eea0dd536827ad682b5e10e0cdcf1a8b6bfe93c1819d384acf82b81cb18e9290"
+    },
+    {
+      "file": "scripts/blender_operations_fixture.py",
+      "line_refs": [
+        630,
+        649
+      ],
+      "sha256": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce"
+    },
+    {
+      "file": "docs/EXECUTION_STATUS.md",
+      "line_refs": [
+        50,
+        66
+      ],
+      "sha256": "6f7cdaf16e19296261b05850e0cc84d194487b306a7ee6762fffca3910ba19de"
+    }
+  ],
+  "primary_sources": [
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/makesrna/intern/rna_wm.cc",
+      "lines": [
+        1016,
+        1026,
+        2631,
+        2643
+      ],
+      "observed_source_behavior": "modal_operators skips all handlers whose type is not WM_HANDLER_TYPE_OP."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/windowmanager/intern/wm_event_system.cc",
+      "lines": [
+        856,
+        880,
+        2218,
+        2272
+      ],
+      "observed_source_behavior": "UI dispatch installs handler-local area/region/popup context then restores or clears it; key matching checks active flag, event type/value and other dispatch conditions."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/editors/interface/interface_handlers.cc",
+      "lines": [
+        213,
+        221,
+        3813,
+        3818,
+        8767,
+        8777
+      ],
+      "observed_source_behavior": "Internal button states distinguish numeric/text editing and open menus; IME composition is read from window runtime ime_data and ime_data_is_composing."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/python/intern/bpy_app_handlers.cc",
+      "lines": [
+        88,
+        166
+      ],
+      "observed_source_behavior": "Public handler enumeration includes load/render lifecycle callbacks, not a transparent general UI post-dispatch observer."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/python/intern/bpy_app.cc",
+      "lines": [
+        668,
+        702
+      ],
+      "observed_source_behavior": "is_job_running(job_type) queries the specified WM job type, with a special shader compilation path."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/source/blender/windowmanager/WM_api.hh",
+      "lines": [
+        163,
+        226
+      ],
+      "observed_source_behavior": "Internal window-system capability flags distinguish window position and IME support; support is not per-window composition state."
+    }
+  ],
+  "prior_native_evidence": {
+    "classification": "RETAINED_OBSERVED_NOT_REEXECUTED",
+    "summary_basename": "summary.json",
+    "summary_sha256": "e8d2c3eb249196150d6b05cf895865e78ee5455feba63fbb10b3b7c5bd12d3b4",
+    "phases": 10,
+    "samples_per_phase": 5,
+    "observations": [
+      "Timer/draw region_popup remained null with actual F3 popup and numeric editing.",
+      "Hovered property did not establish active editing ownership.",
+      "Actual translate modal operator was observed in five samples."
+    ],
+    "limit": "Disproves null-to-false use for these tested observers, not every possible native observer."
+  },
+  "observed_local_source": {
+    "provider": "NONE",
+    "configuration": "UNAVAILABLE",
+    "six_operations": "BLOCKED",
+    "interface": "SessionRuntime.state_provider(observation,next_state_version) -> StateFact mapping; missing facts remain UNKNOWN and required uncertainty must be <=0.1.",
+    "native_partial": [
+      "OS foreground window identity and geometry",
+      "Executor-owned input ledger"
+    ],
+    "RNA_partial": [
+      "Selection and mode in a selected window/view layer",
+      "Scene unit and transform orientation/context",
+      "Object transform/property readback",
+      "Region geometry and view revision",
+      "Positive modal operator identity"
+    ],
+    "specific_lifecycle_partial": [
+      "Specified running WM job type",
+      "load_pre/load_post/load_post_fail",
+      "Render lifecycle callbacks"
+    ],
+    "fixture_only": [
+      "loading=False",
+      "ime_composing=False",
+      "Controller-supplied popup/text_focus/focused_property",
+      "Cursor-hit editor selection and first viewport selection are not proven keyboard dispatch identity."
+    ]
+  },
+  "inferred_feasibility": {
+    "classification": "INFERRED_NOT_IMPLEMENTED_OR_EXECUTED",
+    "smallest_reachable_path": "Use the existing provider callback for fresh version-bound native and explicitly window/view-layer/region-bound RNA facts over an authenticated read-only transport. Leave unresolved UI authorization facts UNKNOWN.",
+    "provenance": "RNA bridge is APP_TELEMETRY/API-assisted; read-only does not mean PIXELS_ONLY.",
+    "missing_deployed_capability": "No supported authenticated production per-window observer/transport or transparent UI-state observer is shipped or verified.",
+    "native_state_needed": "A supported window-scoped observation of actual UI handlers/active editing button, IME runtime, dispatch receiver and busy/load state, with native-window association and effective context keymap resolution. Existing internal C++ source owns relevant state; public Python timer/draw sampling does not expose it completely.",
+    "source_boundary": "Internal C++ existence does not establish a supported binary ABI/Python API or deployable observer. No pointer offsets, modal listener, guessed false values or thresholds are proposed.",
+    "partial_work_remains_reachable": true,
+    "full_operation_authorization_from_partial_facts": false
+  },
+  "missing_guard_facts": [
+    {
+      "facts": [
+        "editor"
+      ],
+      "reason": "Cursor hit or a selected area does not identify actual keyboard/event receiving editor."
+    },
+    {
+      "facts": [
+        "text_focus",
+        "focused_property"
+      ],
+      "reason": "Hovered property is distinct from active edit button identity and ownership."
+    },
+    {
+      "facts": [
+        "popup",
+        "menus",
+        "modal"
+      ],
+      "reason": "Timer context null and operator-only collection do not enumerate all active UI/menu handlers or establish absence."
+    },
+    {
+      "facts": [
+        "ime_composing"
+      ],
+      "reason": "XIM registration/input method presence and IME support flags do not establish target-window composition state."
+    },
+    {
+      "facts": [
+        "loading"
+      ],
+      "reason": "Specified job and load lifecycle evidence is partial; no complete busy/event-quiescence observer established."
+    },
+    {
+      "facts": [
+        "application",
+        "window",
+        "foreground",
+        "target_geometry"
+      ],
+      "reason": "OS facts and RNA window/region data are separately available, but authenticated OS-to-RNA mapping including multi-window/scale/namespaces is not established."
+    },
+    {
+      "facts": [
+        "keymap",
+        "keymap_version"
+      ],
+      "reason": "Effective dispatch includes context/modal routing, disabled/conflicting entries and event matching; first matching RNA binding is insufficient."
+    }
+  ],
+  "accessibility": {
+    "classification": "NOT_VERIFIED",
+    "observed_local_scope": "Source enums/router labels and macOS permission check exist; no actual AT-SPI/UIA/AX active-widget collector or verified Blender accessibility tree is present in this repository/evidence.",
+    "limit": "No claim that Blender accessibility is universally impossible or unavailable on every platform."
+  },
+  "conclusion": "Partial trusted scene/window evidence is feasible. The named missing UI authorization facts prevent claiming a complete production provider or six-operation support; they do not block unrelated reachable tasks.",
+  "authority_limits": [
+    "No production/provider implementation or activation.",
+    "No guard/threshold change, fixture invariant substitution, data lock, quality PASS or adoption decision."
+  ]
+}

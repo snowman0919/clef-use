@@ -1,0 +1,724 @@
+{
+  "classification": "OBSERVED",
+  "source_base": "554415dc2ac742b64b44f104c8282ad949d93937",
+  "scope": "Numeric translation scene conversion and owned cancellation guards; source and native components, not whole operation E2E",
+  "integrated_source_sha256": {
+    "src/clef_use/operations.py": "6dba1d94a31d07becbc18675d0f684ac58faa6a8ceaac22a30e966d1ed253d70",
+    "src/clef_use/runtime.py": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4",
+    "src/clef_use/capabilities.py": "4e3fd5d834b52dc75f22c410b3ab52a0b9b90f744bf0f9c172cefd92d73a113d",
+    "tests/test_operations.py": "a17641c9acb0b7d467441c2d2e7e82fd38b493ee6ad05d75c7c83871973c7396",
+    "tests/test_operation_runtime.py": "62d79901ed05c48e703ee1306adb4885f7c82775878a000a622f98dd0d85a079"
+  },
+  "contract": {
+    "requires": "All numeric translation including NONE requires validated scene_units: scene identity/system/default length unit/positive finite actual scale",
+    "anchors": "Runner refresh, native input, final translation and owned translation-modal cancellation readback retain original scene conversion",
+    "semantics": "Numeric amount/readback retain independently verified matching operation units; bare numeric input unchanged; property locations keep raw-coordinate semantics",
+    "closure": "Observed modal closure clears obsolete ownership even when final conversion/readback fails",
+    "unaffected": "Rotation and scale do not acquire a scene length requirement; independent input abort remains separate"
+  },
+  "pure_counterexample": {
+    "before": {
+      "scope": "Canonical OperationRunner with explicit in-memory normalized distance consumer; not native Blender/E2E/model/performance",
+      "cases": [
+        {
+          "scene_conversion_changed_before_entry": false,
+          "status": "SUCCEEDED",
+          "reason": "application readback verified",
+          "input_count": 4,
+          "raw_location": 2.0,
+          "readback_meters": 2.0,
+          "scene_units": {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 1.0
+          }
+        },
+        {
+          "scene_conversion_changed_before_entry": true,
+          "status": "SUCCEEDED",
+          "reason": "application readback verified",
+          "input_count": 4,
+          "raw_location": 0.02,
+          "readback_meters": 2.0,
+          "scene_units": {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 100.0
+          }
+        }
+      ]
+    },
+    "before_sha256": "609148049adc404260b9b22730c2973c56f93ed430cfd53922b357c22014c3ff",
+    "after": {
+      "scope": "Canonical OperationRunner with explicit in-memory normalized distance consumer; not native Blender/E2E/model/performance",
+      "cases": [
+        {
+          "scene_conversion_changed_before_entry": false,
+          "status": "SUCCEEDED",
+          "reason": "application readback verified",
+          "input_count": 4,
+          "raw_location": 2.0,
+          "readback_meters": 2.0,
+          "scene_units": {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 1.0
+          }
+        },
+        {
+          "scene_conversion_changed_before_entry": true,
+          "status": "BLOCKED",
+          "reason": "scene_units does not match required {'scene_identity': 'scene-1', 'system': 'METRIC', 'length_unit': 'METERS', 'scale_length': 1.0}",
+          "input_count": 0,
+          "raw_location": 0.0,
+          "readback_meters": 0.0,
+          "scene_units": {
+            "scene_identity": "scene-1",
+            "system": "METRIC",
+            "length_unit": "METERS",
+            "scale_length": 100.0
+          }
+        }
+      ]
+    },
+    "after_sha256": "a72ceded022e3b21419ccd022106ca405cbd54d5dc618ec8cdf1aaae80001f54",
+    "scope": "Canonical OperationRunner with explicit in-memory normalized-unit consumer; not native Blender typing"
+  },
+  "regression": {
+    "runner_red": {
+      "failed": 13,
+      "passed": 1,
+      "deselected": 103,
+      "log_sha256": "06b3f3acdccb8ae205d2418975abf7dcae3e032b622b34131f4adb898de1c52c"
+    },
+    "native_boundary_api_red": {
+      "failed": 10,
+      "passed": 4,
+      "deselected": 34,
+      "log_sha256": "ce8174d277b68aee42a38a8e82c3f1159a776d48034973625f7f224f6330579b"
+    },
+    "cancel_final_readback_red": {
+      "failed": 2,
+      "deselected": 118,
+      "observation": "Closed translation cancel falsely SUCCEEDED with changed or missing scene units",
+      "log_sha256": "1e3b79e064d8637aab2386ad5ac36892247587a7cd583375d56e01c36bd78a3c"
+    },
+    "scoped_final": {
+      "passed": 174,
+      "log_sha256": "a0ec7316f5553dad6766596cceba50c47279e06d7e0723ac87358b9ba1673cb6"
+    },
+    "integrated_final": {
+      "passed": 1208,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 59.98,
+      "log_sha256": "04392ad6144c4954a0ef79e548bebc4ec3e6544b9ee9ea8823e63ad4ae24e7c2"
+    },
+    "prior_candidate": {
+      "passed": 1206,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 58.44,
+      "scope": "Before final cancellation-readback correction; historical candidate only",
+      "log_sha256": "d54b2c431eff957b33086270a974f9216bc64c5ce9d73c51ac34f0192dc5ec92"
+    },
+    "lint_format": "PASS: five changed Python files",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool examples",
+    "review": "Static review identified cancellation final-readback asymmetry; reproduced with two failing cases then corrected. Static follow-up found no additional concrete defect."
+  },
+  "native_receipt_sha256": "1cbc9d92f37a25de9cb0d189a28b222fab6d6c72ac33d3cbaf658f261ecbb861",
+  "native": {
+    "classification": "OBSERVED_NATIVE_COMPONENT",
+    "scope": "Owned authenticated private X11 components: native Blender scene-unit observations and native Tk SessionRuntime._operation_input guard. No whole task/E2E/model/production provider or performance gate claim.",
+    "historical_commit": "554415dc2ac742b64b44f104c8282ad949d93937",
+    "driver_sha256": {
+      "blender": "19eb67dea7745238221aa6cf9c84f91489a55b1e9bea2ff168104a46a1965cea",
+      "tk": "0539310649bc0895acf362af7a955f9d5b05cff013358aac92145afc199a4f04"
+    },
+    "private_raw_report_sha256": {
+      "blender": "ee82205a14c8688b3223615d1f9ffb6f70265af1647591d283fa269138290629",
+      "before": "a61e2a978faadd784aa6bb31571df4b5f6b0058a90521cff440d6571d863c6bf",
+      "after": "e451f1d8c45dbb522124a071c7bfd281671ac711ad5b945bc1b6be2a24f7920f"
+    },
+    "status": {
+      "blender": "PASS",
+      "before": "PASS",
+      "after": "PASS"
+    },
+    "historical_module_sha256": {
+      "input_ir": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+      "operations": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+      "runtime": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+      "backends": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+      "schema": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "state": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "config": "c7f609b73a98eaeace811557422600a7c99c2bce550b5f77b7a7e98543d20cdf"
+    },
+    "after_source_sha256": {
+      "input_ir": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+      "operations": "d4d0d27f25df4ab52c7e26fd8a06d5d85a2c1a13e6a918c1c1c31e9ec97e82b7",
+      "runtime": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4",
+      "backends": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+      "schema": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "state": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "config": "c7f609b73a98eaeace811557422600a7c99c2bce550b5f77b7a7e98543d20cdf"
+    },
+    "after_source_sha256_at_end": {
+      "input_ir": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+      "operations": "d4d0d27f25df4ab52c7e26fd8a06d5d85a2c1a13e6a918c1c1c31e9ec97e82b7",
+      "runtime": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4",
+      "backends": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+      "schema": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "state": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+      "config": "c7f609b73a98eaeace811557422600a7c99c2bce550b5f77b7a7e98543d20cdf"
+    },
+    "after_source_unchanged": true,
+    "blender": {
+      "version": [
+        5,
+        2,
+        0
+      ],
+      "executable_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "fixed_setup": "Owned factory scene METRIC/METERS. Only unit scale is set1 then100. No OS input. Cube location remains native zero.",
+      "samples": [
+        {
+          "system": "METRIC",
+          "length_unit": "METERS",
+          "scale_length": 1.0,
+          "unit_label": "METERS",
+          "raw_location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "normalized_location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_parser_meters": 2.0,
+          "derived_raw_from_parser": 2.0
+        },
+        {
+          "system": "METRIC",
+          "length_unit": "METERS",
+          "scale_length": 100.0,
+          "unit_label": "METERS",
+          "raw_location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "normalized_location": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "public_parser_meters": 2.0,
+          "derived_raw_from_parser": 0.02
+        }
+      ],
+      "same_scene_identity": true,
+      "native_inputs": 0,
+      "parser_limit": "Public units.to_value result and derived division only; no actual numeric field or modal typing. Conversion semantics additionally checked against official Blender5.2 numinput.cc/unit.cc."
+    },
+    "tk": {
+      "before": [
+        {
+          "case": "stable_translate",
+          "before_scale": 1.0,
+          "after_scale": 1.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [
+            "g"
+          ],
+          "native_keypress_count": 1,
+          "native_key_release_count": 1,
+          "action_ok": true,
+          "error_type": null,
+          "error_message": null,
+          "modal_remains_after": true,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        },
+        {
+          "case": "changed_units_translate",
+          "before_scale": 1.0,
+          "after_scale": 100.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [
+            "g"
+          ],
+          "native_keypress_count": 1,
+          "native_key_release_count": 1,
+          "action_ok": true,
+          "error_type": null,
+          "error_message": null,
+          "modal_remains_after": true,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        },
+        {
+          "case": "changed_units_owned_escape",
+          "before_scale": 1.0,
+          "after_scale": 100.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [
+            "Escape"
+          ],
+          "native_keypress_count": 1,
+          "native_key_release_count": 1,
+          "action_ok": true,
+          "error_type": null,
+          "error_message": null,
+          "modal_remains_after": false,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        }
+      ],
+      "after": [
+        {
+          "case": "stable_translate",
+          "before_scale": 1.0,
+          "after_scale": 1.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [
+            "g"
+          ],
+          "native_keypress_count": 1,
+          "native_key_release_count": 1,
+          "action_ok": true,
+          "error_type": null,
+          "error_message": null,
+          "modal_remains_after": true,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        },
+        {
+          "case": "changed_units_translate",
+          "before_scale": 1.0,
+          "after_scale": 100.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [],
+          "native_keypress_count": 0,
+          "native_key_release_count": 0,
+          "action_ok": null,
+          "error_type": "RuntimeError",
+          "error_message": "registered operation context changed before OS input",
+          "modal_remains_after": false,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        },
+        {
+          "case": "changed_units_owned_escape",
+          "before_scale": 1.0,
+          "after_scale": 100.0,
+          "same_unit_label": "METERS",
+          "same_normalized_baseline": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "native_keypresses": [],
+          "native_keypress_count": 0,
+          "native_key_release_count": 0,
+          "action_ok": null,
+          "error_type": "RuntimeError",
+          "error_message": "registered operation context changed before OS input",
+          "modal_remains_after": true,
+          "native_held_mask": 0,
+          "executor_owned_empty": true
+        }
+      ]
+    },
+    "cleanup": {
+      "blender": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      },
+      "before": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      },
+      "after": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      }
+    },
+    "independent_cleanup": {
+      "blender": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      },
+      "before": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      },
+      "after": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      }
+    },
+    "retained_failures": [],
+    "limits": [
+      "Tk application/editor/scene/selection and idle-popup-IME facts are explicit controlled API-assisted fixture assertions, not production Blender facts. Native foreground window admitted by actual XRes PID plus DesktopCapture on private authenticated X11.",
+      "Escape has a fixture-owned translate modal; this runtime input guard alone does not prove same-session cleanup authority. No OperationRunner task invoked.",
+      "All7 historical modules loaded byte-identically from Git554415d in an isolated module namespace. Current canonical bytes may be edited during BEFORE but these historical modules are immutable; AFTER sources are pinned equal at entry/end.",
+      "Fixture numeric readback normalization finding remains separate unresolved software defect; original Blender operations fixture was neither changed nor executed.",
+      "No numeric OS field/modal input and no performance/model/E2E check executed."
+    ]
+  },
+  "native_provenance_limit": "Native AFTER predates the final OperationRunner._cancel readback correction and retains that candidate operations hash. All other seven-module bindings, including the final runtime guard bytes, match final source. Native component directly invokes SessionRuntime._operation_input and does not execute OperationRunner._cancel. Final cancellation readback is verified by source RED/GREEN, not native.",
+  "source_discovery_sha256": "728eef5bff2ca44c9c2b428ad364f2211263a5064b47f073191d8db5d19c91b6",
+  "source_discovery": {
+    "classification": "OBSERVED_SOURCE_CLI_AND_STDIO_DISCOVERY",
+    "registry_version": 6,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort",
+      "computer_capabilities"
+    ],
+    "optional_provider": {
+      "provider": "BLENDER_PUBLIC_RNA",
+      "access_level": "APP_TELEMETRY_ASSISTED",
+      "configuration": "blender_state_socket",
+      "producer": "blender --python <clef-use blender-observer-script output> -- --clef-state-dir <new private directory>",
+      "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
+      "availability": "PARTIAL; NOT_PROBED",
+      "window_scope": "One RNA window matching the foreground native client dimensions",
+      "raw_observations": [
+        "application_snapshot",
+        "editor_layout",
+        "keymap_inventory",
+        "selection_identities",
+        "scene_units",
+        "active_tool"
+      ],
+      "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; effective dispatch remains UNKNOWN",
+      "selection_identities": "Complete selected-name map to process-scoped public ID.session_uid; unavailable or incoherent identity remains UNKNOWN",
+      "scene_units": "Process-bound scene identity, length system/default unit and scale; does not establish field focus, modal unit or coordinate space",
+      "active_tool": "Configured VIEW_3D workspace tool for the independently bound current window context mode and observed area IDs; focused editor and effective input dispatch remain UNKNOWN",
+      "unknown_facts": [
+        "popup",
+        "text_focus",
+        "ime_composing",
+        "keymap",
+        "loading"
+      ],
+      "input_authority": "No operation readiness inferred from partial snapshots"
+    },
+    "numeric_transform": {
+      "family": "numeric_transform",
+      "description": "Numeric transform with preview and readback",
+      "authorized_commands": [],
+      "requires": [
+        "application",
+        "window",
+        "foreground",
+        "editor",
+        "mode",
+        "keymap_version",
+        "selection",
+        "selection_identities",
+        "ime_composing",
+        "text_focus",
+        "loading",
+        "popup",
+        "modal",
+        "owned_inputs",
+        "target_geometry",
+        "keymap",
+        "space",
+        "unit",
+        "transform_values",
+        "transform_preview",
+        "transform_context"
+      ],
+      "requires_owned_modal": null,
+      "requires_by_operation": {
+        "translate": [
+          "scene_units"
+        ]
+      },
+      "value_semantics": {
+        "translate/rotate": "Amount and complete readback use the verified matching operation unit; translation also anchors scene length conversion",
+        "scale": "Dimensionless multiplicative factor"
+      },
+      "recovery": "Cancel only the observed modal entered by this runner",
+      "execution": "guarded_local_finite_state_machine",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "family": {
+            "const": "numeric_transform",
+            "default": "numeric_transform",
+            "title": "Family",
+            "type": "string"
+          },
+          "target_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Target Id",
+            "type": "string"
+          },
+          "operation": {
+            "enum": [
+              "translate",
+              "rotate",
+              "scale"
+            ],
+            "title": "Operation",
+            "type": "string"
+          },
+          "axis": {
+            "enum": [
+              "X",
+              "Y",
+              "Z"
+            ],
+            "title": "Axis",
+            "type": "string"
+          },
+          "space": {
+            "enum": [
+              "GLOBAL",
+              "LOCAL"
+            ],
+            "title": "Space",
+            "type": "string"
+          },
+          "unit": {
+            "enum": [
+              "NONE",
+              "METERS",
+              "CENTIMETERS",
+              "DEGREES",
+              "RADIANS"
+            ],
+            "title": "Unit",
+            "type": "string"
+          },
+          "amount": {
+            "maximum": 100000,
+            "minimum": -100000,
+            "title": "Amount",
+            "type": "number"
+          },
+          "keymap_version": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Keymap Version",
+            "type": "string"
+          },
+          "commit": {
+            "default": true,
+            "title": "Commit",
+            "type": "boolean"
+          },
+          "tolerance": {
+            "default": 1e-05,
+            "exclusiveMinimum": 0,
+            "maximum": 0.001,
+            "title": "Tolerance",
+            "type": "number"
+          }
+        },
+        "required": [
+          "target_id",
+          "operation",
+          "axis",
+          "space",
+          "unit",
+          "amount",
+          "keymap_version"
+        ],
+        "title": "NumericTransform",
+        "type": "object"
+      },
+      "default_runtime_availability": {
+        "status": "BLOCKED",
+        "scope": "shipped_default_runtime",
+        "reason": "Default capture supplies no verified application state; the optional Blender public-RNA observer supplies only partial facts and does not prove effective keymap, popup, text/IME ownership, or global busy absence.",
+        "missing_verified_facts": [
+          "application",
+          "editor",
+          "mode",
+          "keymap_version",
+          "selection",
+          "selection_identities",
+          "ime_composing",
+          "text_focus",
+          "loading",
+          "popup",
+          "modal",
+          "owned_inputs",
+          "keymap",
+          "space",
+          "unit",
+          "transform_values",
+          "transform_preview",
+          "transform_context"
+        ],
+        "live_probe": "NOT_PROBED",
+        "missing_verified_facts_by_operation": {
+          "translate": [
+            "scene_units"
+          ]
+        }
+      }
+    },
+    "modal_cancel": {
+      "family": "modal_cancel",
+      "description": "Cancel a known owned modal",
+      "authorized_commands": [],
+      "requires": [
+        "application",
+        "window",
+        "foreground",
+        "editor",
+        "mode",
+        "keymap_version",
+        "selection",
+        "selection_identities",
+        "ime_composing",
+        "text_focus",
+        "loading",
+        "popup",
+        "modal",
+        "space",
+        "unit",
+        "keymap",
+        "transform_values",
+        "transform_context"
+      ],
+      "requires_owned_modal": {
+        "scope": "same_session",
+        "identity": "exact_current_modal_id"
+      },
+      "requires_by_modal": {
+        "translate": [
+          "scene_units"
+        ]
+      },
+      "recovery": "Refuse unknown or externally replaced modal",
+      "execution": "guarded_local_finite_state_machine",
+      "schema": {
+        "additionalProperties": false,
+        "properties": {
+          "family": {
+            "const": "modal_cancel",
+            "default": "modal_cancel",
+            "title": "Family",
+            "type": "string"
+          },
+          "modal_id": {
+            "maxLength": 200,
+            "minLength": 1,
+            "title": "Modal Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "modal_id"
+        ],
+        "title": "ModalCancel",
+        "type": "object"
+      },
+      "default_runtime_availability": {
+        "status": "BLOCKED",
+        "scope": "shipped_default_runtime",
+        "reason": "Default capture supplies no verified application state; the optional Blender public-RNA observer supplies only partial facts and does not prove effective keymap, popup, text/IME ownership, or global busy absence.",
+        "missing_verified_facts": [
+          "application",
+          "editor",
+          "mode",
+          "keymap_version",
+          "selection",
+          "selection_identities",
+          "ime_composing",
+          "text_focus",
+          "loading",
+          "popup",
+          "modal",
+          "space",
+          "unit",
+          "keymap",
+          "transform_values",
+          "transform_context"
+        ],
+        "live_probe": "NOT_PROBED",
+        "missing_verified_facts_by_modal": {
+          "translate": [
+            "scene_units"
+          ]
+        }
+      }
+    },
+    "default_operations": {
+      "menu_assess": "BLOCKED",
+      "command_search": "BLOCKED",
+      "numeric_transform": "BLOCKED",
+      "property_edit": "BLOCKED",
+      "viewport_gesture": "BLOCKED",
+      "modal_cancel": "BLOCKED"
+    },
+    "cli_matches_stdio": true,
+    "limits": "Source CLI and stdio component only. Installed/harness/model/E2E NOT_RUN; no input or runtime goal started."
+  },
+  "primary_conversion_sources": [
+    "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/editors/util/numinput.cc#L265",
+    "https://github.com/blender/blender/blob/blender-v5.2-release/source/blender/blenkernel/intern/unit.cc#L1898"
+  ],
+  "not_run": [
+    "Native final OperationRunner cancellation readback correction",
+    "Actual native Blender numeric modal text/commit for this patch",
+    "Windows/Darwin native execution for this patch",
+    "Installed-current/harness E2E and models: owned by other sessions",
+    "Full-task accuracy, reaction p95, goodput and eligibility coverage",
+    "Public release"
+  ],
+  "separate_open_software_finding": "Existing API-assisted Blender operations fixture always returns degrees and raw locations while declaring current scene units. RADIANS/non-default length normalization is inconsistent; source-derived finding only, fixture neither modified nor executed in this slice.",
+  "acceptance": "No scenario status or release gate promoted"
+}

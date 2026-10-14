@@ -1,0 +1,1956 @@
+{
+  "classification": "MEASURED local image hashes/distances and OBSERVED selected original-image review; no model result",
+  "date": "2026-10-12",
+  "status": "LOCAL_HASH_AND_FLAG_REVIEW_COMPLETE_NO_EXACT_DUPLICATE_OBSERVED",
+  "scope": {
+    "captured_screens": 36,
+    "declared_query_opportunities": 72,
+    "origin_counts": {
+      "v4": 12,
+      "v5": 5,
+      "v6": 19
+    },
+    "prior_reviews_exactly_reused_screens": 17,
+    "new_originals": 19,
+    "new_flagged_originals_visually_reviewed": 5,
+    "all_current_flagged_screens": 15,
+    "local_trainval_unique_images": 20,
+    "known_excluded_development_images": 1,
+    "new_GUI_inputs": 0,
+    "model_calls": 0,
+    "GPU_calls": 0,
+    "canonical_edits": 0
+  },
+  "provenance": {
+    "private_review_sha256": "c647e8add13055ac616d69479bfa9b43199bd76d4d4dd1f0374f1352540f2d12",
+    "native_v6_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+    "trainval_index_sha256": "bedc7a4c60b64c02c62de15dc2b12019c448a400de957177c75b9375915c2874",
+    "trainval_source_manifest_sha256": "4db747a775e04038c11883e438827111b38db88241ae5577d5d6b6170f21f39d",
+    "reused_browser_public_receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+    "reused_Tk5_public_receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d"
+  },
+  "method": {
+    "encoded_identity": "SHA256 original unmodified PNG bytes.",
+    "decoded_identity": "SHA256 full RGB pixel bytes, dimensions checked separately.",
+    "dhash64": "Original acquisition grayscale/default Pillow resize9x8 in memory; bit(y*8+x)=left>right;64-bit Hamming distance; exact integer comparisons.",
+    "near_duplicate_threshold": 8,
+    "threshold_changed": false,
+    "selection": "Every scene compared with all20 locked local index images; every nearest tie retained.",
+    "index_verification": "All20 unique index rows reverified via40 previously index-matched aliases in the same two specified preexisting folders; no unrelated user-file scan.",
+    "capture_provenance": "Every image rehashed and matched to native v6 record; carried17 also matched original v4/v5 PNGs and original report/driver/declaration hashes. Embedded carried-v4/v5 report bytes match original reports.",
+    "visual_scope": "New five flagged original Tk images and both nearest tied source originals viewed with view_image; prior flagged-pair reviews reused only after exact bytes/provenance checks. New14 nonflagged images hash-checked only.",
+    "original_data_unchanged_after_review": true,
+    "saved_transformed_or_copied_images": 0,
+    "versions": {
+      "python": "3.14.7",
+      "Pillow": "12.3.0"
+    }
+  },
+  "uniform_new_flag_nearest_sources": [
+    {
+      "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+      "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "0000000000000000",
+      "source_basename": "dense-negative-train.png",
+      "uniform_RGB": [
+        83,
+        83,
+        83
+      ]
+    },
+    {
+      "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+      "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "0000000000000000",
+      "source_basename": "dense-negative-validation.png",
+      "uniform_RGB": [
+        149,
+        149,
+        149
+      ]
+    }
+  ],
+  "per_scene": [
+    {
+      "screen_id": "browser-01",
+      "encoded_sha256": "689332423d35903c91a6119cbfb762ca4afc6930df94eabbcbf71eb303210cae",
+      "decoded_rgb_sha256": "686e450b0146e090fb6eb74e1802d0ab56227ec6970d5fe4e2a9b9e519d49f6f",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "000206061082020b",
+      "minimum_trainval_dhash_distance": 12,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-02",
+      "encoded_sha256": "0addeecaf703758432434a28b5f7e3980a98fee9f763eff64ae4ad52893c1adc",
+      "decoded_rgb_sha256": "96f860bc8bc467e2cfed3786f4fbfbcff3800c74c1f8a5dc0bbc9d144a4d28e8",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "000000809488180b",
+      "minimum_trainval_dhash_distance": 11,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 11,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 11,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-03",
+      "encoded_sha256": "2e3d06d44d8b8968e05f7b7f20d7f82dcc8fb348db2645ff9d453c566b7d3f32",
+      "decoded_rgb_sha256": "5e9b4214ed287885e7fdfa465c7f008efeeb9d4b9641da3326519acc760d79e1",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "00000000d2f44043",
+      "minimum_trainval_dhash_distance": 13,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 13,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 13,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-04",
+      "encoded_sha256": "4f682ac79184b6d126e02469d4039909bdbd65d75983ac141a3e84b8cd403f12",
+      "decoded_rgb_sha256": "2ab57f2618ccb9f9203f149ad271ecab36cce4ffc68b20ef797b428ee6a3de38",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "0000008082820209",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "browser-05",
+      "encoded_sha256": "1695402d1d64645258445bce4f175d7ef09d734cce0e8770010af9a0e17d534b",
+      "decoded_rgb_sha256": "15ac7e77dc88c08d516accffaa1c95b712bcb961c9fc5c57d5b5cc8235b9a56a",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "000000141c9c180b",
+      "minimum_trainval_dhash_distance": 14,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 14,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 14,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-06",
+      "encoded_sha256": "e34734f0647cee21c49de6327df7d092ec53cd69ad20bdd3ee298e8ff6c3ef8d",
+      "decoded_rgb_sha256": "a70698b110194e436944ad0644f50c5cf09bfaa76efeea40a5c460cd3e5f25d7",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "0000000606044041",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "browser-07",
+      "encoded_sha256": "3f6c1879bdb2051f70e11b4fc4fcd063e1e1878debee5799cad4b3ecacdca289",
+      "decoded_rgb_sha256": "5e5bb54f4bfac46ea91e174ad8dc13bae13690bc7efb496689c437d2ad787521",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "0000000112122603",
+      "minimum_trainval_dhash_distance": 10,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-08",
+      "encoded_sha256": "5b8117b5a05b68e99aea36f6dd7a8050cae46231a4f72855225b222f1cd9cdc1",
+      "decoded_rgb_sha256": "a44ba7c5c352ba5a0d10ef41e609a0d2eaa5113434c1aa86558267285f118509",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "0000000000181881",
+      "minimum_trainval_dhash_distance": 6,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 6,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 6,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "browser-09",
+      "encoded_sha256": "52e449e1e39b4dc0c79ce89d19883126c6e4ef040adec4d645f721936621ec96",
+      "decoded_rgb_sha256": "158cc58664153ba61cb37c0c3274a69453c4a54a29a2019ff0a9b8a5bc38804e",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "00000000100c0c31",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "browser-10",
+      "encoded_sha256": "5ae4f4cca0c4c7a8ef512ddcd5d51cace94e4b68cba2501f2cce3a6c9e9ec156",
+      "decoded_rgb_sha256": "10a32440de819f78361c9ca0415e25844d89f87f763551ac48013ebc210f3d1d",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "000008868680020b",
+      "minimum_trainval_dhash_distance": 12,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-11",
+      "encoded_sha256": "d75a5de74e58b6f91aa1592b7f442ad34c52c9e10a32a9d57552d22b1c6f79ed",
+      "decoded_rgb_sha256": "d5804ebd87ba4c629e907ac403bd2fe71fbcf80e1c19c37a35c8a7508e4bbdda",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "000000419898080b",
+      "minimum_trainval_dhash_distance": 12,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 12,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "browser-12",
+      "encoded_sha256": "b280704f8272e5030cac1f4deae476fddd9337a0dbf9adfd20c9d7a7bce9c4f2",
+      "decoded_rgb_sha256": "40956e1e0b316c9e0b0e2215a05da0e6b31a0894cbf04dd18e3bda7918ce9978",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "0000000060604041",
+      "minimum_trainval_dhash_distance": 7,
+      "origin": "v4",
+      "origin_report_sha256": "82d0fc124c363e70d95cb947d0dabb1f931f50c4bad341b6df43e28996efedb9",
+      "origin_driver_sha256": "428a028cfa091ef1d45fd08c88761b30b461951323dfbcd3efb05607be97749b",
+      "origin_declaration_sha256": "8fa35be1e583394fe9783be364b32c6d948585e6dfc70a2ddf4f4f9cf761cb77",
+      "carry_chain": [
+        "v5",
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9a50d506409f436bd4b2efebbacc1aff5294e489dcb8780a194a0bf0f078d031",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-01",
+      "encoded_sha256": "b353a239075874362a721c0962eeceefb80470a7307652d1c3ad599b39257db1",
+      "decoded_rgb_sha256": "030685777a17383f0cdeaad5ba94ef1ddc4316a6e82f660cf4a4c5893394b60a",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "8080808080808008",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v5",
+      "origin_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+      "origin_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+      "origin_declaration_sha256": "066b61beb64d2ac00b66e9420430b58cdcc84c636b34220d9dbacb1cbcd2ddbf",
+      "carry_chain": [
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-02",
+      "encoded_sha256": "55130104a4a3976e16d476c9773dd0e502c1e1757ce13ec3298763797a4c6c43",
+      "decoded_rgb_sha256": "43872e37894ba8a6b10553eb02e908f1cc9f71da59606b64ad971deef0a2b9c4",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "8080808080808000",
+      "minimum_trainval_dhash_distance": 7,
+      "origin": "v5",
+      "origin_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+      "origin_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+      "origin_declaration_sha256": "066b61beb64d2ac00b66e9420430b58cdcc84c636b34220d9dbacb1cbcd2ddbf",
+      "carry_chain": [
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-03",
+      "encoded_sha256": "cf5856dff5ccb498392fb36adff3df93e16256e3169eaa98c0c22eeef862c805",
+      "decoded_rgb_sha256": "079e8436c98d77c600b9a74c15d2a95d6888de012efe60448116b62769aed335",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "8080808080808404",
+      "minimum_trainval_dhash_distance": 9,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 9,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 9,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "tk_editor-04",
+      "encoded_sha256": "adf2a0f47ff5328f8654e7b45bbb3a82639e32880b6fe30a361214ad5deb6dfd",
+      "decoded_rgb_sha256": "8de4352fe6e87e59d4d0dc84660d2aac577a0e1a4b50b857e3d16aba9f6a66c0",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "8080808080808008",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v5",
+      "origin_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+      "origin_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+      "origin_declaration_sha256": "066b61beb64d2ac00b66e9420430b58cdcc84c636b34220d9dbacb1cbcd2ddbf",
+      "carry_chain": [
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-05",
+      "encoded_sha256": "9dd6ea056d7cc45dd5d116e5073ba4593c111c3afa4f596e12f340bf56a636d1",
+      "decoded_rgb_sha256": "436e0a4050392cbfc53c911c1b684d87ca5e7499e7379bf90735b6c4f8932c57",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "8080808080808008",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "OBSERVED",
+        "original_viewed": true,
+        "all_nearest_ties_viewed": true,
+        "content": "Native document editor with gray header/sidebar, plus button, notes.txt tab and white document text region.",
+        "comparison": "Native editor layout/controls/text differ visibly from both nearest uniform-gray local sources."
+      }
+    },
+    {
+      "screen_id": "tk_editor-06",
+      "encoded_sha256": "af6647a64c4a6d50edd7106e7ee6aeb92872affc676c2562c1916f55c96e0300",
+      "decoded_rgb_sha256": "f55246d2202d4222e39793516a9982027fe6fbd78c6b1fc9d30ea98490978280",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "8080808088888080",
+      "minimum_trainval_dhash_distance": 10,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "tk_editor-07",
+      "encoded_sha256": "030489c1a4dfe6dc1344f73886cf97cc145c3c66445e424b04210005eec483fa",
+      "decoded_rgb_sha256": "9b8697f7d440fe69e2e0cd7cfe0fbcb2ca2f7ee1d7bb7a4c28aa12b73131067a",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "8080808080808010",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v5",
+      "origin_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+      "origin_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+      "origin_declaration_sha256": "066b61beb64d2ac00b66e9420430b58cdcc84c636b34220d9dbacb1cbcd2ddbf",
+      "carry_chain": [
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-08",
+      "encoded_sha256": "dec5572761826209e9f1a6374b87ae4dea2a66df4ea15c91e41cde943b710de8",
+      "decoded_rgb_sha256": "564c90760d5fdb73b708c75522f4fe99607e4049980f81b8f03bd33155377cc0",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "8080808080808000",
+      "minimum_trainval_dhash_distance": 7,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "OBSERVED",
+        "original_viewed": true,
+        "all_nearest_ties_viewed": true,
+        "content": "Native editor with Cancel dialog control and partially visible review text above a white document area; distinct actual controls/text absent from uniform source images.",
+        "comparison": "Native editor layout/controls/text differ visibly from both nearest uniform-gray local sources."
+      }
+    },
+    {
+      "screen_id": "tk_editor-09",
+      "encoded_sha256": "abd9d772917bbad616914c65654980abe62dfae39ef9842890780820fa80dc21",
+      "decoded_rgb_sha256": "48739309c9297adef1b75002f1bae740a33d9d375ad0f7348c9332071ff4cd7a",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "8080808080808004",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "OBSERVED",
+        "original_viewed": true,
+        "all_nearest_ties_viewed": true,
+        "content": "Native editor with Find button, sidebar labels and a large white meeting-note text area.",
+        "comparison": "Native editor layout/controls/text differ visibly from both nearest uniform-gray local sources."
+      }
+    },
+    {
+      "screen_id": "tk_editor-10",
+      "encoded_sha256": "c026b8fa56fb3698c035168a0b7b9eaeb97317bce66d19871b36c7cc26a963d4",
+      "decoded_rgb_sha256": "1fd5b4f33628e6e1e083767329aaf981ce85d55613699645c64476b6f69b199e",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "8080808080808008",
+      "minimum_trainval_dhash_distance": 8,
+      "origin": "v5",
+      "origin_report_sha256": "fdb5eea2e40a4d94b28bdf29c0b4f6c8038fba48763260a241f829348524df8c",
+      "origin_driver_sha256": "5c959d3b690278f33a7e9af48c91df762feca5cd09c0afb66b2a31ca45bd167a",
+      "origin_declaration_sha256": "066b61beb64d2ac00b66e9420430b58cdcc84c636b34220d9dbacb1cbcd2ddbf",
+      "carry_chain": [
+        "v6"
+      ],
+      "reused_review": true,
+      "prior_visual_review_reused": true,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 8,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "REUSED_OBSERVED_EXACT_BYTES",
+        "receipt_sha256": "9cabd769cd6285f1dd7b02dd7013d66180d5038568a9a12f8446a4cd4af2058d",
+        "comparison": "Prior actual original/nearest-pair visual review reused after exact pixels and original capture provenance verification."
+      }
+    },
+    {
+      "screen_id": "tk_editor-11",
+      "encoded_sha256": "89a7418e66eabcf728998a451f2c98abb5970f533ac83b71f8bc7eba278f8981",
+      "decoded_rgb_sha256": "60e6bca524d56833847712a4e60af03276a0c5eacf153f97a5e67cc1eda1a726",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "8080808080808000",
+      "minimum_trainval_dhash_distance": 7,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "OBSERVED",
+        "original_viewed": true,
+        "all_nearest_ties_viewed": true,
+        "content": "Native editor with New file button and two separate cross controls, sidebar and white document area.",
+        "comparison": "Native editor layout/controls/text differ visibly from both nearest uniform-gray local sources."
+      }
+    },
+    {
+      "screen_id": "tk_editor-12",
+      "encoded_sha256": "8a91c9dbb8fe8a3768443309f4a52c5a9dd0deb7d39c4a365dd05666f1eeb95f",
+      "decoded_rgb_sha256": "91a29717db5362d74d170511ede6c2d89daad76063f41f7b0e9a0f0293f57f56",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "8080808080808000",
+      "minimum_trainval_dhash_distance": 7,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 7,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "OBSERVED",
+        "original_viewed": true,
+        "all_nearest_ties_viewed": true,
+        "content": "Native editor with Help and Open toolbar controls plus a separate sidebar Open control and white document area.",
+        "comparison": "Native editor layout/controls/text differ visibly from both nearest uniform-gray local sources."
+      }
+    },
+    {
+      "screen_id": "blender-01",
+      "encoded_sha256": "506f4a492927bb3bd0116d44a0662b8a5a995c04396bf302825bf5d31d774786",
+      "decoded_rgb_sha256": "ae17d817802bd1f649ad5040d6d5d3ec09ad87ae38b1f7b75247a64de8d7863f",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "4941645859d8c7cf",
+      "minimum_trainval_dhash_distance": 11,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f221ac19a8c5ec7b12e496d9daf9657c0c1d064c84bd8b9b9a25d02eb837333a",
+          "decoded_rgb_sha256": "88d40d7b46b3a6b0a9a72f85545a60d33870744d69d26c72553a18afc5271ed2",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b78787879d8c7c7",
+          "distance": 11,
+          "source_basename": "dense-train-v10-properties_tiny_icon.png"
+        },
+        {
+          "encoded_sha256": "a533c945a8e99a6f81be46db86bf747210190a472d669b01b36382b92e33cf2e",
+          "decoded_rgb_sha256": "8b535f1c08c84b8c3b815a040997e240c15641879cf273396c4f526461eb4715",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "5b78787879d8c7cf",
+          "distance": 11,
+          "source_basename": "train-thin-wall.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-02",
+      "encoded_sha256": "065d47a1ee28cad3135ed0ca125f19e86e07d6b01a8f73b7d559b354918c14e5",
+      "decoded_rgb_sha256": "648d9232821fe59f70febc5af62fec466147b19b8acfe022e6ec7049b24ce091",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "494964585858c6cb",
+      "minimum_trainval_dhash_distance": 13,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f530ef298756e1c7c57bbe0be158ca5dde07c6938c94b03ec8bf4536c7297bf2",
+          "decoded_rgb_sha256": "4bec0f2ddf6ffa8a295aed84537d4ab8d434ad67f67a3d30297912d9606447e5",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b7878787958c7c7",
+          "distance": 13,
+          "source_basename": "dense-train-v10-material_property.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-03",
+      "encoded_sha256": "b1488550343fa5842b956ad0cf86a1d5262846791d529a04a62af117f9eb2083",
+      "decoded_rgb_sha256": "87f9fb9809d502a0cbb23aa6b2c47cb09aad766e6418d4bd243620fe0cbfb49e",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "494844585858c6cb",
+      "minimum_trainval_dhash_distance": 13,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f530ef298756e1c7c57bbe0be158ca5dde07c6938c94b03ec8bf4536c7297bf2",
+          "decoded_rgb_sha256": "4bec0f2ddf6ffa8a295aed84537d4ab8d434ad67f67a3d30297912d9606447e5",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b7878787958c7c7",
+          "distance": 13,
+          "source_basename": "dense-train-v10-material_property.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-04",
+      "encoded_sha256": "50e29a4937a961d47d161a5176f5468a9a50bbb0f4252f962a94911edde0e696",
+      "decoded_rgb_sha256": "92ce64a5f4b36fd6dc479ad33297bbe726450fcd600ad1a29dcc0a0f542bedcf",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "4951665859d8c7cf",
+      "minimum_trainval_dhash_distance": 11,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f221ac19a8c5ec7b12e496d9daf9657c0c1d064c84bd8b9b9a25d02eb837333a",
+          "decoded_rgb_sha256": "88d40d7b46b3a6b0a9a72f85545a60d33870744d69d26c72553a18afc5271ed2",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b78787879d8c7c7",
+          "distance": 11,
+          "source_basename": "dense-train-v10-properties_tiny_icon.png"
+        },
+        {
+          "encoded_sha256": "a533c945a8e99a6f81be46db86bf747210190a472d669b01b36382b92e33cf2e",
+          "decoded_rgb_sha256": "8b535f1c08c84b8c3b815a040997e240c15641879cf273396c4f526461eb4715",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "5b78787879d8c7cf",
+          "distance": 11,
+          "source_basename": "train-thin-wall.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-05",
+      "encoded_sha256": "3cfdbd8e5d23934ead10048783602d52f0ed10e55a6939264fa06797c95c5c7d",
+      "decoded_rgb_sha256": "8cea52d2a4ac64304b970ea56105c4a72c96eecae1e3e291390803795bbd53f7",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "4949665819d8c6cb",
+      "minimum_trainval_dhash_distance": 14,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f221ac19a8c5ec7b12e496d9daf9657c0c1d064c84bd8b9b9a25d02eb837333a",
+          "decoded_rgb_sha256": "88d40d7b46b3a6b0a9a72f85545a60d33870744d69d26c72553a18afc5271ed2",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b78787879d8c7c7",
+          "distance": 14,
+          "source_basename": "dense-train-v10-properties_tiny_icon.png"
+        },
+        {
+          "encoded_sha256": "a533c945a8e99a6f81be46db86bf747210190a472d669b01b36382b92e33cf2e",
+          "decoded_rgb_sha256": "8b535f1c08c84b8c3b815a040997e240c15641879cf273396c4f526461eb4715",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "5b78787879d8c7cf",
+          "distance": 14,
+          "source_basename": "train-thin-wall.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-06",
+      "encoded_sha256": "0d4d4437bcd972ffa3308745676c04a816739b55edc0bbdf147006786f3047fd",
+      "decoded_rgb_sha256": "ef326b08b79feeaff22ade3b92545a5673e746800ebee8fdadc0478285b77408",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "49c8c4595958c6db",
+      "minimum_trainval_dhash_distance": 16,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f530ef298756e1c7c57bbe0be158ca5dde07c6938c94b03ec8bf4536c7297bf2",
+          "decoded_rgb_sha256": "4bec0f2ddf6ffa8a295aed84537d4ab8d434ad67f67a3d30297912d9606447e5",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b7878787958c7c7",
+          "distance": 16,
+          "source_basename": "dense-train-v10-material_property.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-07",
+      "encoded_sha256": "37dfb95a828f5623d3f326455f5d2b1b9a53b9596359f2e8a99853a63571456b",
+      "decoded_rgb_sha256": "d768af8cdcd6714e47ca6d4d82f7274d3f6e4f27e3b0bd824981d063d4155090",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "292820202030268b",
+      "minimum_trainval_dhash_distance": 17,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 17,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 17,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-08",
+      "encoded_sha256": "759b7c66718a0561f5b653b842add01d4c5960f6dba57f50665b541ca9d23de0",
+      "decoded_rgb_sha256": "3227d4c89d58a41a4a51f78c7a17ae227919b006f3d9b7b54bba20d68fce7235",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "490128383818c099",
+      "minimum_trainval_dhash_distance": 16,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "8b71f9ba61e667a3c91d83c2a318dcc83ff7230675dfb99d0cc6108da1070651",
+          "decoded_rgb_sha256": "a0a386d6321c009db7c95a48d00c61cb23d554883c43f93940f5f6e4102ba1d3",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "c9d978383839b98b",
+          "distance": 16,
+          "source_basename": "train-material.png"
+        },
+        {
+          "encoded_sha256": "0d594ee6cb97f2762d675e476a346a3e74c1e97075f6f703ad8932eb674be39d",
+          "decoded_rgb_sha256": "b524b33c846d0b0663c2cbd15a0ba74eb5e4a763f9baa8c1a866adb3992e2849",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "c9d978383839b98b",
+          "distance": 16,
+          "source_basename": "train-other-layout.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-09",
+      "encoded_sha256": "ef8d75d5b30c08e4fa0ba51f98b02f0463b8c63dec103d545eaae9a9eec54561",
+      "decoded_rgb_sha256": "f59b6e74631d90b6cdcb65b581b1d4971cfee3a2f660d3a85d0029bca3b7be3b",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "0000010101c1c081",
+      "minimum_trainval_dhash_distance": 10,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 10,
+          "source_basename": "dense-negative-validation.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-10",
+      "encoded_sha256": "dcaf3e986466a3d7a2f0083b3df7ece87b31fda0cb19ad6d1ba5bcec7b33999a",
+      "decoded_rgb_sha256": "f854c1e4d2e8d9da47d5a9b696aadb04431a2e29e9f552ced774847f7383b837",
+      "image_size": [
+        1200,
+        800
+      ],
+      "dhash64": "4961645a5ad8c6cd",
+      "minimum_trainval_dhash_distance": 15,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f221ac19a8c5ec7b12e496d9daf9657c0c1d064c84bd8b9b9a25d02eb837333a",
+          "decoded_rgb_sha256": "88d40d7b46b3a6b0a9a72f85545a60d33870744d69d26c72553a18afc5271ed2",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b78787879d8c7c7",
+          "distance": 15,
+          "source_basename": "dense-train-v10-properties_tiny_icon.png"
+        },
+        {
+          "encoded_sha256": "a533c945a8e99a6f81be46db86bf747210190a472d669b01b36382b92e33cf2e",
+          "decoded_rgb_sha256": "8b535f1c08c84b8c3b815a040997e240c15641879cf273396c4f526461eb4715",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "5b78787879d8c7cf",
+          "distance": 15,
+          "source_basename": "train-thin-wall.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-11",
+      "encoded_sha256": "80181c926e667b6603da546b8a27b0301f2a8acaa725ae6cee774dd855f93c2b",
+      "decoded_rgb_sha256": "f88b4b9b42c26078d0c8677f7619c57082afcd5f741e40355477fdd9ed9ceccb",
+      "image_size": [
+        1360,
+        900
+      ],
+      "dhash64": "4948445a5a18c6cf",
+      "minimum_trainval_dhash_distance": 15,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "f530ef298756e1c7c57bbe0be158ca5dde07c6938c94b03ec8bf4536c7297bf2",
+          "decoded_rgb_sha256": "4bec0f2ddf6ffa8a295aed84537d4ab8d434ad67f67a3d30297912d9606447e5",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "4b7878787958c7c7",
+          "distance": 15,
+          "source_basename": "dense-train-v10-material_property.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    },
+    {
+      "screen_id": "blender-12",
+      "encoded_sha256": "3de83998633af763debecd7adb8ca0ea05e19d1709ade0b4ea62f70d96b19e01",
+      "decoded_rgb_sha256": "2b44f26ea449a589b7d030ebb14711225e117233ed38fc4e8cb40eb68a8a277b",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "dhash64": "c9e292226210d2d1",
+      "minimum_trainval_dhash_distance": 25,
+      "origin": "v6",
+      "origin_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+      "origin_driver_sha256": "28f365aa1fe3dff70dcaf049f206bae567638c140a344b98883aa05dde7acecb",
+      "origin_declaration_sha256": "008e8a7723d30c4e88c2df7ba2437e4496515a975ecf7bdc678458d60a7747f7",
+      "carry_chain": [],
+      "reused_review": false,
+      "prior_visual_review_reused": false,
+      "trainval_encoded_overlap": false,
+      "trainval_decoded_overlap": false,
+      "dev_encoded_overlap": false,
+      "dev_decoded_overlap": false,
+      "all_nearest_trainval_ties": [
+        {
+          "encoded_sha256": "e13219d96b60cd6abd6bb97d913261c8359c13b23f86e98dc2f4d03435624139",
+          "decoded_rgb_sha256": "028037c09ffcb4b1fc7b94c16dc5083759ea2024303e0324e1b7311cb1b4fc53",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 25,
+          "source_basename": "dense-negative-train.png"
+        },
+        {
+          "encoded_sha256": "7431d2d04d1be45e1287365b8f386e8a70563d002eb605d32ca3eedaf3f225b1",
+          "decoded_rgb_sha256": "56ca0392c931ed2cd042cad74be351497d03d5101f698d97d22fb730bf77f7cc",
+          "image_size": [
+            1600,
+            1000
+          ],
+          "dhash64": "0000000000000000",
+          "distance": 25,
+          "source_basename": "dense-negative-validation.png"
+        },
+        {
+          "encoded_sha256": "1fd9062d809569e11430e2077a195e7d5cfae45a5c24f275caa38995091dbd6d",
+          "decoded_rgb_sha256": "273b048a8239aac5bc93ea8f55da3d048d90234187889ccca239e1aa104be685",
+          "image_size": [
+            1280,
+            900
+          ],
+          "dhash64": "dbda14143af2e3c7",
+          "distance": 25,
+          "source_basename": "dense-train-v10-prior_splash_failure.png"
+        }
+      ],
+      "visual_review": {
+        "classification": "NOT_RUN",
+        "reason": "Nearest trainval dHash distance >8 and no additional native near-duplicate flag recorded; exact hashes checked."
+      }
+    }
+  ],
+  "all36_overlap_counts": {
+    "trainval_encoded_overlap": 0,
+    "trainval_decoded_overlap": 0,
+    "dev_encoded_overlap": 0,
+    "dev_decoded_overlap": 0
+  },
+  "within_heldout36": {
+    "pairs_compared": 630,
+    "unique_encoded": 36,
+    "unique_decoded_RGB": 36,
+    "encoded_or_decoded_exact_duplicate_pairs": []
+  },
+  "known_excluded_development": {
+    "encoded_sha256": "f91347634e01964d1ecfadb5403f84005c87f3264154d45784145f803b478c7b",
+    "decoded_rgb_sha256": "3e736a6d2d35d0191261e7396a5fa47ad5329c64502144a7a69efe6c73f00e4c",
+    "image_size": [
+      1280,
+      900
+    ],
+    "dhash64": "c0c0ccccceca8383"
+  },
+  "assessment": {
+    "observed": "All36 exact PNG/RGB identities are disjoint from the20 local trainval identities and separately excluded development image; all36 are exact-identity unique within heldout. New five dHash flags8,7,8,7,7 each tie to two uniform-gray references; their visible editor content differs.",
+    "inferred": "New five coarse dHash flags do not show copied local trainval screen content in the closest-reference pairs.",
+    "sample_structure": "Screens and queries are clustered in three UI families; multiple queries share each screen and same-family screens share layout/content. Statistical independence and concept-generation independence are not established or claimed.",
+    "limits": [
+      "Exact disjointness and selected nearest-pair visual review do not exclude every transformed duplicate.",
+      "No absence-from-public-model-pretraining claim; that exposure remains UNKNOWN/NOT_RUN."
+    ]
+  },
+  "authority_limits": [
+    "No box annotations, data lock, inference START, quality PASS, adoption or release decision.",
+    "All original data/source/report preserved; only review receipts created.",
+    "Actual36 images complete the image-count observation only; full72-query model comparison remains NOT_RUN."
+  ]
+}

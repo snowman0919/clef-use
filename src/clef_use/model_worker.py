@@ -489,6 +489,7 @@ class OmniWorker:
         started = time.perf_counter()
         import torch
 
+        caller_torch_threads = torch.get_num_threads()
         self.backend = select_backend(torch, config["parser_device"])
         self.device = torch_device(self.backend)
         source = config.get("omni_source")
@@ -505,6 +506,10 @@ class OmniWorker:
             predict_yolo,
             remove_overlap_new,
         )
+
+        # Eager, unused Paddle initialization can replace Torch's native budget.
+        if torch.get_num_threads() != caller_torch_threads:
+            torch.set_num_threads(caller_torch_threads)
 
         self.load_metrics = {
             "upstream_import_ms": (time.perf_counter() - import_started) * 1000,

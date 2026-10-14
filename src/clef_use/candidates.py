@@ -60,9 +60,13 @@ def pointer_allowed(pointer, observation):
 class CandidateBuilder:
     def __init__(self, limit: int = 48):
         self.limit = limit
+        self.metrics = {}
 
     def build(self, observation: Observation, contract: Contract) -> tuple[ActionCandidate, ...]:
         candidates = []
+        proposed = 0
+        targets = set()
+        groups = {}
         for pointer in contract.pointer_inputs:
             if len(candidates) < self.limit and pointer_allowed(pointer, observation):
                 candidates.append(
@@ -79,6 +83,12 @@ class CandidateBuilder:
                     )
                 )
         if contract.pointer_inputs:
+            self.metrics = {
+                "requested_pointers": len(contract.pointer_inputs),
+                "retained_pointers": len(candidates),
+                "coverage_at_k": None,
+                "ground_truth": "UNAVAILABLE",
+            }
             return tuple(candidates)
         objects = [
             obj
@@ -98,8 +108,19 @@ class CandidateBuilder:
             )
         )
 
+        requested_operation = contract.visual_intent.operation if contract.visual_intent else None
+        active_limit = self.limit
+
         def add(operation, description, obj, value=None, effect="target_change"):
-            if len(candidates) < self.limit:
+            nonlocal proposed
+            if requested_operation is not None and operation != requested_operation:
+                return
+            proposed += 1
+            targets.add(obj.id)
+            # Group equivalent semantic proposals without losing their original identities.
+            signature = (operation, description.casefold().strip())
+            groups.setdefault(signature, []).append(obj.id)
+            if len(candidates) < active_limit:
                 candidates.append(
                     ActionCandidate(
                         id=f"a{len(candidates)}",
@@ -113,11 +134,26 @@ class CandidateBuilder:
                     )
                 )
 
-        payloads = text_inputs(contract)
-        reserve = min(len(payloads), 8)
+        # Explicit visual primitives cannot execute literal proposals. Reserve
+        # slots only for eligible text alternatives, before consuming the budget.
+        payloads = text_inputs(contract) if requested_operation is None else []
+        inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
+        text_options = [
+            (
+                payload,
+                tuple(
+                    obj
+                    for obj in inputs
+                    if payload.target_label is None
+                    or payload.target_label.casefold() in obj.label.casefold()
+                ),
+            )
+            for payload in payloads
+        ]
+        text_proposed = sum(len(matches) for _, matches in text_options)
+        reserve = min(text_proposed, self.limit)
+        active_limit = self.limit - reserve
         for obj in objects:
-            if len(candidates) >= self.limit - reserve:
-                break
             if "click" in obj.actions:
                 add(
                     "click",
@@ -127,23 +163,19 @@ class CandidateBuilder:
                 )
             if "focus" in obj.actions and obj.editable is not False:
                 add("focus", f"Focus input: {obj.label}", obj, effect="focus_change")
-            if "double_click" in obj.actions and re.search(
-                r"double.click|launch|open", contract.goal, re.I
+            if "double_click" in obj.actions and (
+                requested_operation == "double_click"
+                or re.search(r"double.click|launch|open", contract.goal, re.I)
             ):
                 add("double_click", f"Double click {obj.label}", obj)
             if "scroll" in obj.actions:
                 for direction in ("up", "down"):
                     add("scroll", f"Scroll {direction}", obj, direction, "view_change")
-        inputs = [obj for obj in objects if "type" in obj.actions and obj.editable is not False]
-        for payload in payloads:
-            targets = [
-                obj
-                for obj in inputs
-                if payload.target_label is None
-                or payload.target_label.casefold() in obj.label.casefold()
-            ]
-            if targets:
-                obj = targets[0]
+        active_limit = self.limit
+        for payload, matching_inputs in text_options:
+            # A label match proposes every observed input; roster order cannot
+            # decide which distinct field should receive the supplied literal.
+            for obj in matching_inputs:
                 add(
                     "type",
                     f"Enter exact supplied text into {obj.label}: {payload.value!r}",
@@ -165,4 +197,20 @@ class CandidateBuilder:
         ]
         if dialogs:
             add("press", "Dismiss visible dialog", dialogs[0], "escape", "view_change")
+        retained_targets = {candidate.target for candidate in candidates if candidate.target}
+        text_retained = sum(candidate.operation == "type" for candidate in candidates)
+        self.metrics = {
+            "proposals_before_limit": proposed,
+            "proposals_after_limit": len(candidates),
+            "targets_before_limit": len(targets),
+            "targets_after_limit": len(retained_targets),
+            "proposal_target_retention": len(retained_targets) / len(targets) if targets else None,
+            "semantic_duplicate_groups": [ids for ids in groups.values() if len(ids) > 1],
+            "text_proposals_before_limit": text_proposed,
+            "text_proposals_after_limit": text_retained,
+            "text_proposals_truncated": text_proposed - text_retained,
+            "coverage_at_k": None,
+            "target_absent": None,
+            "ground_truth": "UNAVAILABLE; retention is not correct-target coverage",
+        }
         return tuple(candidates)

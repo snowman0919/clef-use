@@ -1,0 +1,990 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Corrected official-selector native OMP read-only explicit/natural/negative bounded batch, immutable FINAL11 guides; no GUI/task result",
+  "overall_status": "NOT_RUN",
+  "reason": "Explicit exhausted predeclared8 primary-completion budget without final answer; remaining cases not started; one inherited MCP argument guard falsely refused advertised operation_id",
+  "model_attribution": "NOT_ESTABLISHED: partial outcome is driver-contaminated; no counterfactual completion claim",
+  "candidate": {
+    "install_basename": "clef-use-installed-final11-20261011",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "public_readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "predeclaration": {
+    "basename": "clef-omp-native-guarded-consumer-predeclaration-public-20261011.json",
+    "sha256": "b69b2a016a6cd061b16e2eefa2b1e29432060534c52d1835b32c5800afcb452a"
+  },
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "native_generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,…",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or…"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": false,
+    "inference_invocations": 3
+  },
+  "harness_fidelity": {
+    "fixed_system_prompt": false,
+    "append_permissions_only": true,
+    "native_description_policy": "Native synchronous preview/cache snapshot; no cache-readiness gate; compression warnings nonfatal; only cleanup awaits already scheduled native background work",
+    "test_child": false
+  },
+  "cases": {
+    "explicit": {
+      "status": "NOT_RUN",
+      "reason": "Primary invocation budget exhausted before native send",
+      "stop_reason": "toolUse",
+      "loaded": [
+        "clef-use"
+      ],
+      "invoked": [
+        "mcp__clef_use_computer_capabilities"
+      ],
+      "tool_calls": 10,
+      "requested_tool_calls": 10
+    },
+    "natural": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    },
+    "negative": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    }
+  },
+  "stage_checks": {
+    "native_catalog_discovered": "PASS",
+    "core_full_body_loaded": "PASS",
+    "successful_caps_exact_schema_after_core_body": "PASS",
+    "explicit_final_answer": "NOT_RUN",
+    "natural": "NOT_RUN",
+    "negative": "NOT_RUN",
+    "GUI_TASK_VERIFIED": "NOT_RUN"
+  },
+  "partial_evidence": {
+    "read_checks": [
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      }
+    ],
+    "caps_checks": [
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "after_core_body": false
+      },
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "after_core_body": false
+      },
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "after_core_body": true
+      },
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "after_core_body": true
+      }
+    ],
+    "public_event_order": [
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": [
+          "detail"
+        ],
+        "detail": true
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 20526,
+        "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          },
+          "after_core_body": false
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_status",
+        "arg_keys": []
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_status",
+        "is_error": true,
+        "output_chars": 88,
+        "output_sha256": "356c7599c60c8cd75ef171f94e46b80e56eddae2c306b1e661082da2b93dfc32",
+        "error_category": "CANONICAL_NO_ACTIVE_SESSION",
+        "public_error": "no active session; start computer_run first"
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": [
+          "detail"
+        ],
+        "detail": true
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_status",
+        "arg_keys": []
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 20526,
+        "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          },
+          "after_core_body": false
+        }
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_status",
+        "is_error": true,
+        "output_chars": 88,
+        "output_sha256": "356c7599c60c8cd75ef171f94e46b80e56eddae2c306b1e661082da2b93dfc32",
+        "error_category": "CANONICAL_NO_ACTIVE_SESSION",
+        "public_error": "no active session; start computer_run first"
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": [
+          "detail",
+          "operation_id"
+        ],
+        "detail": true,
+        "operation_id": "skills"
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": true,
+        "output_chars": 30,
+        "output_sha256": "c1803bf0009ef3f5fe082528c73babc4f9d5d1928c334fc143e2cb4f2550baa9",
+        "error_category": "DRIVER_ADVERTISED_OPERATION_ID_REFUSAL"
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "path": "skill://clef-use/SKILL.md"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 4764,
+        "output_sha256": "244888edbd57c5355fe8848f1040b0f44aecb5363de6b31ddb72726378a807e3",
+        "full_public_reads": [
+          {
+            "basename": "clef-use/SKILL.md",
+            "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "full_body_observed": true
+          }
+        ]
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": []
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 8395,
+        "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          },
+          "after_core_body": true
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "path": "skill://clef-use/SKILL.md"
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": []
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 4764,
+        "output_sha256": "244888edbd57c5355fe8848f1040b0f44aecb5363de6b31ddb72726378a807e3",
+        "full_public_reads": [
+          {
+            "basename": "clef-use/SKILL.md",
+            "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "full_body_observed": true
+          }
+        ]
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 8395,
+        "output_sha256": "f598740ecea113a1a80920e52cc4c7bce8a5de9f3ea3e0c30d32688529e7cabf",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          },
+          "after_core_body": true
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "path": "skill://clef-use/SKILL.md:raw"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 4654,
+        "output_sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_public_reads": [
+          {
+            "basename": "clef-use/SKILL.md",
+            "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "full_body_observed": true
+          }
+        ]
+      }
+    ]
+  },
+  "actual_native_accounting": {
+    "completion_starts": {
+      "native_auxiliary": 3,
+      "primary": 8
+    },
+    "final_spans": {
+      "native_auxiliary": 3,
+      "primary": 8
+    },
+    "starts": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 350.60562500000003
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 351.73635
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 351.84008000000006
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 0,
+        "elapsed_ms": 406.361215
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 1,
+        "elapsed_ms": 7069.0631060000005
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 2,
+        "elapsed_ms": 15012.943632999999
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 3,
+        "elapsed_ms": 22719.210764
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 4,
+        "elapsed_ms": 30298.975846
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 5,
+        "elapsed_ms": 38656.010885
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 6,
+        "elapsed_ms": 47531.856214
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 7,
+        "elapsed_ms": 55836.177237
+      }
+    ],
+    "spans": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6174.413843,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2299,
+          "gen_ai.usage.output_tokens": 13
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6328.183506,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2317,
+          "gen_ai.usage.output_tokens": 17
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6555.762507,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2320,
+          "gen_ai.usage.output_tokens": 18
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 7058.65602,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 0,
+          "gen_ai.usage.input_tokens": 8369,
+          "gen_ai.usage.output_tokens": 47
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 15007.938067,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 1,
+          "gen_ai.usage.input_tokens": 21307,
+          "gen_ai.usage.output_tokens": 35
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 22713.367845,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 2,
+          "gen_ai.usage.input_tokens": 17004,
+          "gen_ai.usage.output_tokens": 87
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 30297.350789,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 3,
+          "gen_ai.usage.input_tokens": 17965,
+          "gen_ai.usage.output_tokens": 61
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 38649.206945,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 4,
+          "gen_ai.usage.input_tokens": 16613,
+          "gen_ai.usage.output_tokens": 48
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 47527.153744,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 5,
+          "gen_ai.usage.input_tokens": 17823,
+          "gen_ai.usage.output_tokens": 35
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 55831.295162,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 6,
+          "gen_ai.usage.input_tokens": 20521,
+          "gen_ai.usage.output_tokens": 83
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 64042.603099,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 7,
+          "gen_ai.usage.input_tokens": 20910,
+          "gen_ai.usage.output_tokens": 48
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      }
+    ],
+    "phase_fetch_calls": [
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "create_native_session",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "primary_turn",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      }
+    ],
+    "phase_fetch_count": 11,
+    "phase_counts": {
+      "create_native_session": 3,
+      "primary_turn": 8
+    },
+    "delivered_status_counts": {
+      "200": 11
+    },
+    "rejected_fetch_calls": 0,
+    "phase_fetch_counts_are_model_only_HTTP_requests": false,
+    "actual_underlying_HTTP_attempt_count": "NOT_OBSERVED",
+    "native_transport_retries_preserved": true
+  },
+  "native_auxiliary": {
+    "logger_events": [],
+    "cache_snapshots": [
+      {
+        "stage": "before_create_session",
+        "case": "explicit",
+        "elapsed_ms": 313.891744,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_create_session_return",
+        "case": "explicit",
+        "elapsed_ms": 365.24281099999996,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "before_primary_no_wait",
+        "case": "explicit",
+        "elapsed_ms": 369.18603199999995,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": false
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": false
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": false
+          }
+        ]
+      },
+      {
+        "stage": "after_primary_before_dispose",
+        "case": "explicit",
+        "elapsed_ms": 64051.611828,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": true
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": true
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": true
+          }
+        ]
+      },
+      {
+        "stage": "after_background_cleanup_wait",
+        "case": "explicit",
+        "elapsed_ms": 64058.369068,
+        "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+        "entries": [
+          {
+            "guide": "clef-use",
+            "present": true
+          },
+          {
+            "guide": "clef-use-blender",
+            "present": true
+          },
+          {
+            "guide": "clef-use-diagnostics",
+            "present": true
+          }
+        ]
+      }
+    ],
+    "readiness_gate": false,
+    "final_cache_successes": 3,
+    "nonfatal_warning_policy": true
+  },
+  "driver_limitations": [
+    {
+      "observed": "Model requested capabilities(operation_id=\"skills\", detail=true), which installed schema advertises as a string property; inherited wrapper refused before canonical server.",
+      "native_result_of_that_request_in_batch": "NOT_OBSERVED",
+      "correction_scope": "Remove redundant MCP argument guard or faithfully permit all advertised read-only fields; retain two-tool allowlist and read-only server.",
+      "counterfactual_final_completion": "NOT_OBSERVED"
+    }
+  ],
+  "selector_guard": {
+    "read_tool_calls": 3,
+    "actual_suffix_read": "skill://clef-use/SKILL.md:raw",
+    "actual_selector_false_refusals": 0,
+    "separate_audit_basename": "clef-omp-native-read-selector-audit-public-20261011.json",
+    "separate_audit_sha256": "7058526436009ec1ead0207a28d8ee687a5444233d9befd3671800755e8661d2"
+  },
+  "cleanup": {
+    "native_report": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+    "normal_runtime_flag_test_mode": false,
+    "in_memory_sessions_not_persisted": true,
+    "MCP_disconnected": true,
+    "GUI_or_runtime_session_activated": false,
+    "credential_or_global_configuration_changes": false
+  },
+  "history_preserved": [
+    {
+      "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+      "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059"
+    },
+    {
+      "basename": "clef-omp-native-profile-readonly-public-20261011.json",
+      "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316"
+    }
+  ],
+  "private_evidence": {
+    "summary_basename": "summary.json",
+    "summary_sha256": "45672e30d6d8920085b26c4777a6a4863ae3b307c2755c6c2c7438d25f1a1937",
+    "trace_basename": "explicit-private-trace.jsonl",
+    "trace_sha256": "ef1c40d4b77fc6897d7e6f5beef1e5fec9f0690391b132c56ce7a65ec61a1a15"
+  },
+  "no_added_retry": true,
+  "remaining_cases_not_started": true
+}

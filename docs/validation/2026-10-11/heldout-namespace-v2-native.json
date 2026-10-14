@@ -1,0 +1,117 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Exact candidate helper NO-GUI preflight: readonlyIFF_UP\u2192existingcapdrop\u2192privateTCP. No HTTP/task/model or GUI retry.",
+  "exit_code": 0,
+  "candidate_sha256": "fff508014c29c3496096c662c1cbe60193f8341c2b76c1d1b06b65bf0a23b99d",
+  "probe_executions": 1,
+  "native_ioctl_initialization_attempts": 0,
+  "GUI_launches": 0,
+  "model_calls": 0,
+  "failed_acquisition_root_unchanged": true,
+  "original_driver_unchanged_sha256": "50365be5a110ba960cf741aade080a73a6911f280321b1537e19aa99b90f347d",
+  "probe": {
+    "scope": "NO_GUI_NO_HTTP_NO_MODEL_NO_TASK",
+    "before": {
+      "Uid": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Gid": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "CapInh": 0,
+      "CapPrm": 0,
+      "CapEff": 0,
+      "CapBnd": 0,
+      "CapAmb": 0,
+      "NoNewPrivs": 1,
+      "Seccomp": 0
+    },
+    "namespaces": {
+      "user": {
+        "inode": 4026534652,
+        "owning_user_namespace_errno": 1
+      },
+      "net": {
+        "inode": 4026534656,
+        "owning_user_namespace_inode": 4026534652,
+        "owner_uid": 0
+      },
+      "pid": {
+        "inode": 4026534655,
+        "owning_user_namespace_inode": 4026534652,
+        "owner_uid": 0
+      },
+      "ipc": {
+        "inode": 4026534654,
+        "owning_user_namespace_inode": 4026534652,
+        "owner_uid": 0
+      }
+    },
+    "uid_map": [
+      [
+        0,
+        1000,
+        1
+      ]
+    ],
+    "gid_map": [
+      [
+        0,
+        1000,
+        1
+      ]
+    ],
+    "namespace_interface_count": 1,
+    "namespace_only_loopback": true,
+    "loopback_flags_before": 73,
+    "corrected_readonly_guard_and_existing_capdrop": "ACKNOWLEDGED",
+    "initialization": {
+      "attempts": 0,
+      "status": "NOT_ATTEMPTED_READ_ONLY"
+    },
+    "loopback_flags_after": 73,
+    "after": {
+      "Uid": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "Gid": [
+        0,
+        0,
+        0,
+        0
+      ],
+      "CapInh": 0,
+      "CapPrm": 0,
+      "CapEff": 0,
+      "CapBnd": 0,
+      "CapAmb": 0,
+      "NoNewPrivs": 1,
+      "Seccomp": 0
+    },
+    "private_loopback_TCP": {
+      "HTTP": false,
+      "outside_namespace_connection": false,
+      "roundtrip_exact": true
+    },
+    "cap_net_admin_effective": false,
+    "current_user_namespace_owns_net_namespace": true
+  },
+  "corrected_path_passed": true,
+  "cleanup": {
+    "owned_probe_processes_remaining": [],
+    "subprocess_waited": true,
+    "local_TCP_sockets_closed_by_finally": true,
+    "X_servers_started": 0,
+    "production_Blender_PID_alive": true
+  },
+  "received_artifact_sha256": "fa33a1714f4081e01f9c217fbf0f58b2c2ac0595b8235422980a655fca148a70"
+}

@@ -1,0 +1,122 @@
+{
+  "classification": "OBSERVED",
+  "status": "PASS",
+  "scope": "Immutable f440de1 CI38137115873 installed Windows typed input on one owned native EDIT/BUTTON; no model/MCP/service/end-to-end task claim",
+  "source_attribution": {
+    "archive_sha256": "36dca7156d60171a63b39a0b8345768fc0d2ed13ec8322ed1bf1293ae86bd5fc",
+    "wheel_sha256": "8755168230b5c8eda20e68520caaeeead8951a5a791e796c19a958be52412a2d",
+    "input_ir_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+    "windows_input_sha256": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648"
+  },
+  "source_hashes_observed": {
+    "input_ir": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+    "windows_input": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648"
+  },
+  "authorization": "Separate native-mode fixture explicitly START-authorized by root after original conversion0 stopped attempt; no automatic retry",
+  "setup": {
+    "initial_own_IMC": {
+      "open": false,
+      "conversion": 0,
+      "sentence": 8
+    },
+    "actual_own_IMC_mode_readback_before_keys": {
+      "conversion": 1,
+      "sentence": 8,
+      "open": true
+    },
+    "only_existing_Korean_layout_used": true,
+    "global_settings_modified": false
+  },
+  "cases": {
+    "composition_begin": {
+      "status": "PASS",
+      "actual_comp_bytes": 2,
+      "actual_comp_sha256": "b79f477f6d435116155b1121455748240bb5e7c81f7043519980df21a8167ca1"
+    },
+    "literal_refused_active": {
+      "status": "PASS",
+      "reason": "literal insertion requires known idle IME",
+      "actual_preedit_and_widget_bytes_unchanged": true
+    },
+    "composition_commit": {
+      "status": "PASS",
+      "result_sha256": "b79f477f6d435116155b1121455748240bb5e7c81f7043519980df21a8167ca1",
+      "widget_utf16_sha256": "f58d865613687363a558aa3082666bb31a00abdf7335c106b96e843ffc54da91",
+      "actual_idle": true
+    },
+    "chord_distinct": {
+      "status": "PASS",
+      "native_EM_GETSEL_full_utf16_selection": true
+    },
+    "literal_after_commit": {
+      "status": "PASS",
+      "raw_utf16_bytes": 12,
+      "raw_utf16_sha256": "2d7c3d1e35600551d330a5da6bc837173cc13367349a1d2439df6b2bd2f772d1",
+      "clipboard_sequence_unchanged": true
+    },
+    "independent_abort": {
+      "status": "PASS",
+      "native_shift_released": true,
+      "elapsed_ns": 0,
+      "main_worker_waited_without_release_call": true
+    }
+  },
+  "real_native_oracles": {
+    "start_composition_event": true,
+    "composition_event_positive_native_comp": true,
+    "native_result_string_event": true,
+    "end_composition_event": true,
+    "WM_CHAR_observed": true,
+    "BUTTON_Shift_WM_KEYUP": true,
+    "exit_widget_UTF16": {
+      "bytes": 12,
+      "sha256": "2d7c3d1e35600551d330a5da6bc837173cc13367349a1d2439df6b2bd2f772d1"
+    },
+    "exit_actual_comp_bytes": 0
+  },
+  "bounds_observed": {
+    "SendInput_events": 22,
+    "SendInput_max": 30,
+    "fixture_seconds": 0.75,
+    "fixture_max_seconds": 90,
+    "native_task_exit": 0
+  },
+  "cleanup": {
+    "runtime_owned_keys_released": true,
+    "guardian_exited": true,
+    "own_ime_state_restored": true,
+    "own_thread_HKL_restored": true,
+    "owned_window_destroyed": true,
+    "original_foreground_restored": true,
+    "restore_attempted_once": true,
+    "owned_class_unregistered": true,
+    "preparation_owned_keys_empty": true,
+    "native_shift_state_released": true
+  },
+  "preservation": {
+    "owned_task_removed": true,
+    "global_config_bytes_preserved": true,
+    "user_PATH_preserved": true,
+    "global_runtime_bytes_preserved": true,
+    "existing_fixture_home_bytes_preserved": true,
+    "existing_fixture_runtime_bytes_preserved": true
+  },
+  "limitations": [
+    "Actual active composition is proved by native events and GCS_COMPSTR, not conversion mode alone",
+    "Typed executor received caller-owned truthfully observed InputContext; canonical automatic IMM/TSF state discovery is not proved",
+    "No session0/secure-desktop/UIPI claim",
+    "Independent abort elapsed_ns0 is below Windows observation-clock resolution in this one event; no zero-latency, p95 or100ms claim",
+    "Original conversion0 stopped attempt remains NOT_RUN, not erased by this separately authorized corrected setup",
+    "Historical earlier foreground-restore failure retained separately; this fixture restoration actually PASS"
+  ],
+  "primary_mode_reference": "https://learn.microsoft.com/en-us/windows/win32/intl/ime-conversion-mode-values",
+  "digests": {
+    "clef-win-ime-native-mode-controller-report-20261011.json": "d2a060c5c5f4a4d967666ffe1640d395383a74b6c5ee29007604dae806526603",
+    "clef-win-ime-native-mode-report-20261011.json": "7006b509a99835d8a1b784be8f668360fb071e5819a7a67d50f934c1e1b373d3",
+    "clef-win-ime-native-mode-fixture-20261011.py": "51e9c7f7ac5a25157cd5ed4cef7b049939c1d101c1c55e1cde0df9d40bce7dd5",
+    "clef-win-ime-native-mode-controller-20261011.py": "ee867741282e739cc1b9db4f4e77bceb35fd5609f95acb77dd2b0fc36f91d023",
+    "clef-win-ime-owned-native-mode-PROPOSED-20261011.json": "f644c9ca3eeaab4f726ce8caa84859813d7efcd0157be5ab0dff6bc9dd9f6f0b",
+    "clef-win-ime-owned-SUMMARY-20261011.json": "c3b6eeda70b65ae7179d69351662b1419371b6926c23e073ac07ae868d3e3c68"
+  },
+  "received_native_artifact_sha256": "80a8a1dd4f878036446e1d4a0d497e46ed7a2a97c511076a93394a80e2c98fc7"
+}

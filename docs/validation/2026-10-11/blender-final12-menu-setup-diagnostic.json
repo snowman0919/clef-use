@@ -1,0 +1,312 @@
+{
+  "classification": "OBSERVED",
+  "status": "OBSERVED_FAIL",
+  "scope": "One exact canonical22 workload with passive Python call/return and XRecord instrumentation; no added native inputs, sleeps or OCR within workload.",
+  "candidate": "FINAL12",
+  "runtime_version": "0.1.30",
+  "models": 0,
+  "workload_runs": 1,
+  "retries": 0,
+  "scheduled": 22,
+  "executed": 22,
+  "passed": 21,
+  "failed": 1,
+  "failure": {
+    "case": "menu_edit",
+    "expected": "WRONG_MENU",
+    "observed": "ABSENT",
+    "runtime_status": "BLOCKED",
+    "native_popup_present_in_saved_final_pixels": false,
+    "interpretation": "Runtime refused correctly on actually absent popup; this is a fixture menu-setup failure, not evidence to weaken menu confidence or signatures."
+  },
+  "hypotheses": {
+    "H1_previous_File_popup_still_open_before_Edit_click": {
+      "status": "REJECTED_IN_THIS_CAPTURE",
+      "evidence": "Existing pre-Edit input frame shows no popup; postrun OCR lacks File signature."
+    },
+    "H2_Edit_pointer_input_refused_by_guard": {
+      "status": "REJECTED_IN_THIS_CAPTURE",
+      "evidence": "Actual ActionResult ok=true; passive XRecord contains MotionNotify(80,13), ButtonPress/Release left at(80,13)."
+    },
+    "H3_application_hover_or_activation_transition_not_settled": {
+      "status": "INFERRED_NOT_CAUSALLY_PROVEN",
+      "evidence": "Motion and ButtonPress occur within 1 server millisecond; header ends hovered with no popup. Previous probe2 adding separate move and screenshot/OCR checkpoints opened Edit, but those changes confounded motion staging and time."
+    }
+  },
+  "native_setup_timeline": [
+    {
+      "input_index": 0,
+      "command": {
+        "kind": "pointer",
+        "phase": "click",
+        "point": [
+          0.0328125,
+          0.014444444444444444
+        ],
+        "button": "left"
+      },
+      "context_menu": null,
+      "call_relative_ms": 0.0,
+      "return_relative_ms": 52.682776,
+      "actual_result": {
+        "ok": true,
+        "reason": "executed",
+        "delivery": null
+      }
+    },
+    {
+      "input_index": 1,
+      "command": {
+        "kind": "key",
+        "phase": "tap",
+        "key": "escape",
+        "physical_code": null,
+        "repeat": 1,
+        "hold_seconds": 0.0
+      },
+      "context_menu": "File",
+      "call_relative_ms": 754.828685,
+      "return_relative_ms": 806.576761,
+      "actual_result": {
+        "ok": true,
+        "reason": "executed",
+        "delivery": {
+          "kind": "key",
+          "keys": [
+            "escape"
+          ],
+          "acknowledged_at_relative_ms": 755.945721
+        }
+      }
+    },
+    {
+      "input_index": 2,
+      "command": {
+        "kind": "pointer",
+        "phase": "click",
+        "point": [
+          0.0625,
+          0.014444444444444444
+        ],
+        "button": "left"
+      },
+      "context_menu": null,
+      "call_relative_ms": 817.785673,
+      "return_relative_ms": 870.390577,
+      "actual_result": {
+        "ok": true,
+        "reason": "executed",
+        "delivery": null
+      }
+    },
+    {
+      "input_index": 3,
+      "command": {
+        "kind": "key",
+        "phase": "tap",
+        "key": "escape",
+        "physical_code": null,
+        "repeat": 1,
+        "hold_seconds": 0.0
+      },
+      "context_menu": "Edit",
+      "call_relative_ms": 1528.978043,
+      "return_relative_ms": 1580.762601,
+      "actual_result": {
+        "ok": true,
+        "reason": "executed",
+        "delivery": {
+          "kind": "key",
+          "keys": [
+            "escape"
+          ],
+          "acknowledged_at_relative_ms": 1530.201528
+        }
+      }
+    }
+  ],
+  "passive_header_events": [
+    {
+      "relative_ms": 0.949341,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 1.682647,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 1.850863,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 1.955509,
+      "event_type": "ButtonPress",
+      "detail": 1,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 2.410563,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 2.475004,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 2.535658,
+      "event_type": "ButtonRelease",
+      "detail": 1,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 756.121611,
+      "event_type": "KeyPress",
+      "detail": 9,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 756.159772,
+      "event_type": "KeyRelease",
+      "detail": 9,
+      "root_x": 42,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 818.638863,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 819.534765,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 819.572796,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 819.643268,
+      "event_type": "ButtonPress",
+      "detail": 1,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 820.247502,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 820.330227,
+      "event_type": "MotionNotify",
+      "detail": 0,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 820.348812,
+      "event_type": "ButtonRelease",
+      "detail": 1,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 1530.156113,
+      "event_type": "KeyPress",
+      "detail": 9,
+      "root_x": 80,
+      "root_y": 13
+    },
+    {
+      "relative_ms": 1530.297488,
+      "event_type": "KeyRelease",
+      "detail": 9,
+      "root_x": 80,
+      "root_y": 13
+    }
+  ],
+  "escape_ack_to_Edit_dispatch_ms": 61.839952,
+  "postrun_pixel_ocr_checks": [
+    {
+      "image": "observer-before-input-01.png",
+      "File_signature": true,
+      "Edit_signature": false,
+      "sha256": "16daba4fd523d51c9496f55031a0890de459aa61e55ea80168d7e4544b719003"
+    },
+    {
+      "image": "observer-before-input-02.png",
+      "File_signature": false,
+      "Edit_signature": false,
+      "sha256": "223eb8648da03c24b8b485ca29444e63b7656411e82b90133e742f3921404edb"
+    },
+    {
+      "image": "menu_edit.png",
+      "File_signature": false,
+      "Edit_signature": false,
+      "sha256": "5f661a7ef38b142a28be1f81d8c0c718ee7730444f15e2c4913454a69f4c691a"
+    }
+  ],
+  "instrumentation_limit": "The observer adds Python profiling and passive event collector overhead. Its reproduced failure rejects two hypotheses for this capture; no claim of consumer-side event handling or causal fix is made.",
+  "native_event_collector": {
+    "events_observed": 148,
+    "termination_status": "ERROR",
+    "termination_error_type": "ConnectionClosedError",
+    "termination_error": "Display connection closed by server after owned Xvfb teardown.",
+    "cleanup_error_type": "TypeError",
+    "note": "Collector termination and cleanup errors are retained; they occurred after the workload and do not erase the actual observed header events."
+  },
+  "cleanup": {
+    "fixture_process_exit_code": 1,
+    "owned_live_Blender_Xvfb_count": 0,
+    "owned_display_socket_absent": true,
+    "production_blender_preserved": true,
+    "held_input_readback_after_teardown": "NOT_RUN: owned display was already destroyed; no post-teardown key-state inference."
+  },
+  "candidate_correction": {
+    "classification": "PROPOSED",
+    "scope": "Fixture setup only",
+    "description": "Separate preparation of an observed menu target from its one click; require acknowledged setup input and an observed popup identity before using that scene as menu_assess ground truth. Preserve refusal and all operation thresholds. Existing extra-move probe is supporting evidence, not isolated causal proof."
+  },
+  "sha256": {
+    "frozen_fixture": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+    "observer": "74e88e8e0471a75ca7122a846d789a89dac7da68317e5e4b4c3ede217e97c7c3",
+    "original_canonical22_report": "f5638dfc030ece6ef8edfa21dc2161bd2e120f0f0d86a06314e5d4524baf1738",
+    "instrumented_probe2_report": "8665781d1c1b3c805868074e6bf7ed38a707976d14cebfb86163e4d12612bebf"
+  },
+  "private_proof_sha256": {
+    "report.json": "8516060bdbda8aa9c7bbcda4195cd9f0e7612b0d19564946cb585197b2c3c59a",
+    "observer-input-events.json": "306561eb131e71c270a0341f726560e15f5bd3ae91f2e006e72758f84310fc17",
+    "observer-native-events.json": "f3ea6fec967c3e063b680c1bdf0da7df12a448b34ceef975802f189ee5b7a3b7",
+    "observer-postrun-ocr-checks.json": "c57fc8d87141b0c959be441a4d0ca22be3f280f172633e41dde705b7537696f2"
+  },
+  "privacy": "No raw screenshots, scene payloads, native IDs, tokens, credentials or user assets included.",
+  "received_native_artifact_sha256": "6b5c0edb7dc06bfcce7f63e6ac12041824cad17a80ad7d7e8e58cf34c5700021"
+}

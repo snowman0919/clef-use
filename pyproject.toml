@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "clef-use"
-version = "0.1.29"
+version = "0.1.56"
 description = "A shared, bounded computer-use runtime with swappable decision models and hybrid grounding"
 readme = "README.md"
 license = "Apache-2.0"
@@ -38,3 +38,6 @@ select = ["E", "F", "I", "UP", "B"]
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/clef_use"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"agent-skills" = "clef_use/agent-skills"

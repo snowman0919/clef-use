@@ -1,0 +1,595 @@
+{
+  "classification": "OBSERVED original-pixel and annotation review, before model predictions",
+  "status": "ROOT_REVIEW_COMPLETED",
+  "source_report_sha256": "aa2a9a8f4e4a5b67b15fcf9de05be96e290a1d7834a89bb0fcc9c4df3df5f589",
+  "manual_blender_annotations_sha256": "c4e127637bf366de52d6a8be6d8403743f7a89a78eefe9606792226cc0d09a80",
+  "local_leakage_review_sha256": "abb946fbf7d8b15b53088bdab6275caf1aa50bc09d24c0fa46969cd6a373d3e3",
+  "screens_reviewed": 36,
+  "query_annotations": 72,
+  "model_queries_executed": 0,
+  "scenes": [
+    {
+      "screen_id": "browser-01",
+      "application": "browser",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "689332423d35903c91a6119cbfb762ca4afc6930df94eabbcbf71eb303210cae",
+      "decoded_rgb_sha256": "686e450b0146e090fb6eb74e1802d0ab56227ec6970d5fe4e2a9b9e519d49f6f",
+      "native_oracle_sha256": "3e13c866c21d132005000ff0f25d9ab862856e4ad7a8d92201c9ea591ed15bda",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-02",
+      "application": "browser",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "0addeecaf703758432434a28b5f7e3980a98fee9f763eff64ae4ad52893c1adc",
+      "decoded_rgb_sha256": "96f860bc8bc467e2cfed3786f4fbfbcff3800c74c1f8a5dc0bbc9d144a4d28e8",
+      "native_oracle_sha256": "2d660c8779aa86af990efeb03a4b74e0346cf1447dfa1224ec0a5c01a9c7d1cc",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-03",
+      "application": "browser",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "2e3d06d44d8b8968e05f7b7f20d7f82dcc8fb348db2645ff9d453c566b7d3f32",
+      "decoded_rgb_sha256": "5e9b4214ed287885e7fdfa465c7f008efeeb9d4b9641da3326519acc760d79e1",
+      "native_oracle_sha256": "452696b64783363a3919587be716fa03fb24a04d4917628022fd5dd0a8dcffd5",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-04",
+      "application": "browser",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "4f682ac79184b6d126e02469d4039909bdbd65d75983ac141a3e84b8cd403f12",
+      "decoded_rgb_sha256": "2ab57f2618ccb9f9203f149ad271ecab36cce4ffc68b20ef797b428ee6a3de38",
+      "native_oracle_sha256": "95174134ce40d985ce3cb9a9aaf332ec6e901c643884d45443c9a2d4d5c304c8",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-05",
+      "application": "browser",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "1695402d1d64645258445bce4f175d7ef09d734cce0e8770010af9a0e17d534b",
+      "decoded_rgb_sha256": "15ac7e77dc88c08d516accffaa1c95b712bcb961c9fc5c57d5b5cc8235b9a56a",
+      "native_oracle_sha256": "4ce4153f096d6d99dfd35578f107ecbb2ed0abd40c5e60ea231f5221df50eed9",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-06",
+      "application": "browser",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "e34734f0647cee21c49de6327df7d092ec53cd69ad20bdd3ee298e8ff6c3ef8d",
+      "decoded_rgb_sha256": "a70698b110194e436944ad0644f50c5cf09bfaa76efeea40a5c460cd3e5f25d7",
+      "native_oracle_sha256": "6e54585295534cf561649b8813bad4e76b324d8133004d9c3df0b1e7d3fd709a",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-07",
+      "application": "browser",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "3f6c1879bdb2051f70e11b4fc4fcd063e1e1878debee5799cad4b3ecacdca289",
+      "decoded_rgb_sha256": "5e5bb54f4bfac46ea91e174ad8dc13bae13690bc7efb496689c437d2ad787521",
+      "native_oracle_sha256": "61b04695327ff0acfc7e57eb8aefb22425ab3b0d72a73521f62200d280d2ee93",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-08",
+      "application": "browser",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "5b8117b5a05b68e99aea36f6dd7a8050cae46231a4f72855225b222f1cd9cdc1",
+      "decoded_rgb_sha256": "a44ba7c5c352ba5a0d10ef41e609a0d2eaa5113434c1aa86558267285f118509",
+      "native_oracle_sha256": "f6696c06361883d5b339c5ecaa465b5b8184b44fcaf8d3b499af9610909c6bbf",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-09",
+      "application": "browser",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "52e449e1e39b4dc0c79ce89d19883126c6e4ef040adec4d645f721936621ec96",
+      "decoded_rgb_sha256": "158cc58664153ba61cb37c0c3274a69453c4a54a29a2019ff0a9b8a5bc38804e",
+      "native_oracle_sha256": "64ff3c7d0676320f825a4e3a5ce53db1182b3549c0ce8192edb3ea1eee6f4024",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-10",
+      "application": "browser",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "5ae4f4cca0c4c7a8ef512ddcd5d51cace94e4b68cba2501f2cce3a6c9e9ec156",
+      "decoded_rgb_sha256": "10a32440de819f78361c9ca0415e25844d89f87f763551ac48013ebc210f3d1d",
+      "native_oracle_sha256": "12f1a97e76a96171d20e5b932f0e29c655fc7051812186fdeacf5000b89c44ca",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-11",
+      "application": "browser",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "d75a5de74e58b6f91aa1592b7f442ad34c52c9e10a32a9d57552d22b1c6f79ed",
+      "decoded_rgb_sha256": "d5804ebd87ba4c629e907ac403bd2fe71fbcf80e1c19c37a35c8a7508e4bbdda",
+      "native_oracle_sha256": "e784d4b55b22844fe5d4b1070a7382ad91b0d3fd50786249cad5cb4056d97535",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "browser-12",
+      "application": "browser",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "b280704f8272e5030cac1f4deae476fddd9337a0dbf9adfd20c9d7a7bce9c4f2",
+      "decoded_rgb_sha256": "40956e1e0b316c9e0b0e2215a05da0e6b31a0894cbf04dd18e3bda7918ce9978",
+      "native_oracle_sha256": "5ed854065b7ca56d4459ef29fc82bf4bf7edab7a1dd6973cdd984f791f65dbe9",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_DOM",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-01",
+      "application": "tk_editor",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "b353a239075874362a721c0962eeceefb80470a7307652d1c3ad599b39257db1",
+      "decoded_rgb_sha256": "030685777a17383f0cdeaad5ba94ef1ddc4316a6e82f660cf4a4c5893394b60a",
+      "native_oracle_sha256": "174174fae71bdc864ba02fc99e23d0c39983632d8c3991cda26fd1519cd5c969",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-02",
+      "application": "tk_editor",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "55130104a4a3976e16d476c9773dd0e502c1e1757ce13ec3298763797a4c6c43",
+      "decoded_rgb_sha256": "43872e37894ba8a6b10553eb02e908f1cc9f71da59606b64ad971deef0a2b9c4",
+      "native_oracle_sha256": "42487d995d916ea2940e6fedc5d572f31b81f3bc66b7a6336b863a25abc13947",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-03",
+      "application": "tk_editor",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "cf5856dff5ccb498392fb36adff3df93e16256e3169eaa98c0c22eeef862c805",
+      "decoded_rgb_sha256": "079e8436c98d77c600b9a74c15d2a95d6888de012efe60448116b62769aed335",
+      "native_oracle_sha256": "dff2e31fb77c62f924d53320de04d023f048ed381f379b9dec5913e97371521c",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-04",
+      "application": "tk_editor",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "adf2a0f47ff5328f8654e7b45bbb3a82639e32880b6fe30a361214ad5deb6dfd",
+      "decoded_rgb_sha256": "8de4352fe6e87e59d4d0dc84660d2aac577a0e1a4b50b857e3d16aba9f6a66c0",
+      "native_oracle_sha256": "bd7768123456aff6fd7d9e89c30f1de720c33719135a4b92810dad24fa5dbcea",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-05",
+      "application": "tk_editor",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "9dd6ea056d7cc45dd5d116e5073ba4593c111c3afa4f596e12f340bf56a636d1",
+      "decoded_rgb_sha256": "436e0a4050392cbfc53c911c1b684d87ca5e7499e7379bf90735b6c4f8932c57",
+      "native_oracle_sha256": "01f278457c7e1632496513c901a0a5a73888bb426268f2952ae1759c358d1a9a",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-06",
+      "application": "tk_editor",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "af6647a64c4a6d50edd7106e7ee6aeb92872affc676c2562c1916f55c96e0300",
+      "decoded_rgb_sha256": "f55246d2202d4222e39793516a9982027fe6fbd78c6b1fc9d30ea98490978280",
+      "native_oracle_sha256": "7f3d39dc9e5517bcc7761e316888c441bb63ced31f529867c2777a7f74b17f80",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-07",
+      "application": "tk_editor",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "030489c1a4dfe6dc1344f73886cf97cc145c3c66445e424b04210005eec483fa",
+      "decoded_rgb_sha256": "9b8697f7d440fe69e2e0cd7cfe0fbcb2ca2f7ee1d7bb7a4c28aa12b73131067a",
+      "native_oracle_sha256": "90a60297b4103553b1ba31e12ffaf88df14b122e7e6bfae2470b5889affd556f",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-08",
+      "application": "tk_editor",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "dec5572761826209e9f1a6374b87ae4dea2a66df4ea15c91e41cde943b710de8",
+      "decoded_rgb_sha256": "564c90760d5fdb73b708c75522f4fe99607e4049980f81b8f03bd33155377cc0",
+      "native_oracle_sha256": "773e62c176c6951d6613682fb09126764d69b36d77b71e0261d41f5e6f03dcdf",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-09",
+      "application": "tk_editor",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "abd9d772917bbad616914c65654980abe62dfae39ef9842890780820fa80dc21",
+      "decoded_rgb_sha256": "48739309c9297adef1b75002f1bae740a33d9d375ad0f7348c9332071ff4cd7a",
+      "native_oracle_sha256": "f977151060ce9af3d23a146e787b33cc9907838e1d490f9fc7fd511686769f51",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-10",
+      "application": "tk_editor",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "c026b8fa56fb3698c035168a0b7b9eaeb97317bce66d19871b36c7cc26a963d4",
+      "decoded_rgb_sha256": "1fd5b4f33628e6e1e083767329aaf981ce85d55613699645c64476b6f69b199e",
+      "native_oracle_sha256": "ac983e6632a2e6b37464ab133251c9f56928ddf0db92512906152237352cab1d",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-11",
+      "application": "tk_editor",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "89a7418e66eabcf728998a451f2c98abb5970f533ac83b71f8bc7eba278f8981",
+      "decoded_rgb_sha256": "60e6bca524d56833847712a4e60af03276a0c5eacf153f97a5e67cc1eda1a726",
+      "native_oracle_sha256": "db7de5ca3f01020c543016575397a8ff866b3982423dfb0c7140fbb89a8c22a9",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "tk_editor-12",
+      "application": "tk_editor",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "8a91c9dbb8fe8a3768443309f4a52c5a9dd0deb7d39c4a365dd05666f1eeb95f",
+      "decoded_rgb_sha256": "91a29717db5362d74d170511ede6c2d89daad76063f41f7b0e9a0f0293f57f56",
+      "native_oracle_sha256": "88f0d18cb49d97887e056921b622a467fcff1fa020fcd765fe4702adf6dfbb0e",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "NATIVE_TK_WIDGETS",
+      "query_count": 2,
+      "native_boxes_unchanged": true,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-01",
+      "application": "blender",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "506f4a492927bb3bd0116d44a0662b8a5a995c04396bf302825bf5d31d774786",
+      "decoded_rgb_sha256": "ae17d817802bd1f649ad5040d6d5d3ec09ad87ae38b1f7b75247a64de8d7863f",
+      "native_oracle_sha256": "66b47d12f33080112b2098c2a329c6661be7af46a75a549714517df66356b8bf",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-02",
+      "application": "blender",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "065d47a1ee28cad3135ed0ca125f19e86e07d6b01a8f73b7d559b354918c14e5",
+      "decoded_rgb_sha256": "648d9232821fe59f70febc5af62fec466147b19b8acfe022e6ec7049b24ce091",
+      "native_oracle_sha256": "0b0415fb24086350b8641d61a36126781ba53fa697daa09d63be8f4e1ac1b253",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-03",
+      "application": "blender",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "b1488550343fa5842b956ad0cf86a1d5262846791d529a04a62af117f9eb2083",
+      "decoded_rgb_sha256": "87f9fb9809d502a0cbb23aa6b2c47cb09aad766e6418d4bd243620fe0cbfb49e",
+      "native_oracle_sha256": "1bf899e91d87f90da418d2e5b7634cda7c7cead1c844735348c44dd6d38ba935",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-04",
+      "application": "blender",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "50e29a4937a961d47d161a5176f5468a9a50bbb0f4252f962a94911edde0e696",
+      "decoded_rgb_sha256": "92ce64a5f4b36fd6dc479ad33297bbe726450fcd600ad1a29dcc0a0f542bedcf",
+      "native_oracle_sha256": "4858d90c7aab094f4597acb730d183679c57f4b4bd126e1b2afd2327b0651649",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-05",
+      "application": "blender",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "3cfdbd8e5d23934ead10048783602d52f0ed10e55a6939264fa06797c95c5c7d",
+      "decoded_rgb_sha256": "8cea52d2a4ac64304b970ea56105c4a72c96eecae1e3e291390803795bbd53f7",
+      "native_oracle_sha256": "eedef74d8951ac7425364db86bb698af24eec940370dc9df5ebf66fde811508e",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-06",
+      "application": "blender",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "0d4d4437bcd972ffa3308745676c04a816739b55edc0bbdf147006786f3047fd",
+      "decoded_rgb_sha256": "ef326b08b79feeaff22ade3b92545a5673e746800ebee8fdadc0478285b77408",
+      "native_oracle_sha256": "e5f900997b670d73345334d286af6efbd4d64110e06d5d3c163990d5644b67e5",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-07",
+      "application": "blender",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "37dfb95a828f5623d3f326455f5d2b1b9a53b9596359f2e8a99853a63571456b",
+      "decoded_rgb_sha256": "d768af8cdcd6714e47ca6d4d82f7274d3f6e4f27e3b0bd824981d063d4155090",
+      "native_oracle_sha256": "3cad51b452a5954163c85fd10a9fc1846434a5a216fd9a5f0d676e9135f9ed24",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-08",
+      "application": "blender",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "759b7c66718a0561f5b653b842add01d4c5960f6dba57f50665b541ca9d23de0",
+      "decoded_rgb_sha256": "3227d4c89d58a41a4a51f78c7a17ae227919b006f3d9b7b54bba20d68fce7235",
+      "native_oracle_sha256": "0efd5e1cf0b8193bbc40eeafb9031f791ce95a5cfcb33256bcf26776c470e258",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-09",
+      "application": "blender",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "ef8d75d5b30c08e4fa0ba51f98b02f0463b8c63dec103d545eaae9a9eec54561",
+      "decoded_rgb_sha256": "f59b6e74631d90b6cdcb65b581b1d4971cfee3a2f660d3a85d0029bca3b7be3b",
+      "native_oracle_sha256": "b7c2fb7915001a7aa5101c04635e4973ac0b519196c8606c087c3713b1e1590d",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-10",
+      "application": "blender",
+      "image_size": [
+        1200,
+        800
+      ],
+      "encoded_sha256": "dcaf3e986466a3d7a2f0083b3df7ece87b31fda0cb19ad6d1ba5bcec7b33999a",
+      "decoded_rgb_sha256": "f854c1e4d2e8d9da47d5a9b696aadb04431a2e29e9f552ced774847f7383b837",
+      "native_oracle_sha256": "ec998b84dcec7d7ff71bb2cc653ec0ea8454d77980a753206b2c047aae6a5e9a",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-11",
+      "application": "blender",
+      "image_size": [
+        1360,
+        900
+      ],
+      "encoded_sha256": "80181c926e667b6603da546b8a27b0301f2a8acaa725ae6cee774dd855f93c2b",
+      "decoded_rgb_sha256": "f88b4b9b42c26078d0c8677f7619c57082afcd5f741e40355477fdd9ed9ceccb",
+      "native_oracle_sha256": "e92745b54ce3c4c4760ea6593b200681200b1921aeb13bb22f055429121a6971",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    },
+    {
+      "screen_id": "blender-12",
+      "application": "blender",
+      "image_size": [
+        1600,
+        1000
+      ],
+      "encoded_sha256": "3de83998633af763debecd7adb8ca0ea05e19d1709ade0b4ea62f70d96b19e01",
+      "decoded_rgb_sha256": "2b44f26ea449a589b7d030ebb14711225e117233ed38fc4e8cb40eb68a8a277b",
+      "native_oracle_sha256": "edb2d31d87a681f0f7c14ef710e8abf6bef20401cde499b69fb312fc9494dc2f",
+      "actual_original_pixels_viewed": true,
+      "annotation_source": "INDEPENDENT_MANUAL_PIXELS",
+      "query_count": 2,
+      "native_boxes_unchanged": false,
+      "model_queries_executed": 0
+    }
+  ],
+  "limits": [
+    "Localization boxes only; visible disabled controls remain localization positives and do not authorize input.",
+    "Visible absence includes full occlusion; it is not object absence. Ambiguous queries require abstention.",
+    "Blender enabled status is unknown. Blender-10 generic X-field alternatives include coordinate components inferred from visible Y/Z and explicit Scale X; this annotation limitation is retained.",
+    "No statistical independence, public-pretraining exclusion, production served-baseline equivalence, task success or OS-input latency claim.",
+    "Local exact/dHash review is bounded to the recorded20 training/validation images and one prior development image."
+  ]
+}

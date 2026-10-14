@@ -1,0 +1,154 @@
+{
+  "classification": "OBSERVED_SOURCE_BUILT_WINDOWS_POINTER_RECIPIENT_SCOPE_COMPONENT",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.39",
+  "partial": true,
+  "scope": "Two disposable owned windows reproduced and then verified a native pointer-recipient admission guard in a source-built .39 candidate. The observation covers one target outside the captured foreground window and one scoped correction; it is not a broad input correctness or critical-error benchmark, installed .39 verification, or model/task E2E.",
+  "requirements": [
+    "INPUT-03",
+    "INPUT-04",
+    "INPUT-05",
+    "PERF-03"
+  ],
+  "prior_source_wheel": {
+    "version": "0.1.39",
+    "sha256": "eea76fc5489eca6d7ee49bcb615185e875ac6e87a2e4d29d1b2157cb8707fb40",
+    "classification": "SOURCE_BUILT_COMPLETE_WHEEL_BEFORE_POINTER_RECIPIENT_GUARD"
+  },
+  "reproduction": {
+    "status": "FAIL",
+    "bound_foreground_window": "Owned window A",
+    "physical_pointer_recipient": "Different owned window B",
+    "pointer_point_in_other_owned_window": true,
+    "other_window_receiver_events": [
+      "down",
+      "up"
+    ],
+    "action_result_ok": true,
+    "wrong_window_received_input": true,
+    "artifact_sha256": "47bd6e8006073cc74dc0c9267507cbf0346f8f057fff6310b940c8a1415c482b"
+  },
+  "corrected_source_wheel": {
+    "version": "0.1.39",
+    "sha256": "d66849f99403a52e7db772eedbaa9924071dd7cce220087d5095b5ba225c1486",
+    "classification": "SOURCE_BUILT_COMPLETE_WHEEL_WITH_POINTER_RECIPIENT_GUARD"
+  },
+  "verification": {
+    "status": "PASS",
+    "bound_foreground_window": "Owned window A",
+    "physical_pointer_recipient": "Different owned window B",
+    "pointer_point_in_other_owned_window": true,
+    "other_window_receiver_events": [],
+    "wrong_window_received_input": false,
+    "rejection": "WindowsPointerScopeChanged before SendInput",
+    "cleanup": "PASS",
+    "both_owned_windows_closed": true,
+    "artifact_sha256": "8281084611d1c8232fdae23fdd74a1ae7df4120dc86587bcffa528056a1e3a86"
+  },
+  "guard_behavior": {
+    "admission_point": "Immediately before pointer button-down and vertical or horizontal wheel input.",
+    "recipient_check": "Read the physical cursor position, resolve WindowFromPoint, and require its GA_ROOT ancestor to equal the captured native foreground window.",
+    "release_behavior": "Button releases skip recipient and foreground admission so recovery remains independent.",
+    "scope": "The two tested windows were both owned fixture windows. No user-application input was sent."
+  },
+  "focused_unit_tests": {
+    "before": {
+      "failed": 5,
+      "status": "FAIL"
+    },
+    "after": {
+      "passed": 112,
+      "status": "PASS"
+    },
+    "scope": "Focused pointer and input tests only; this does not establish full-suite status."
+  },
+  "critical_scope_observation": {
+    "before_wrong_recipient_events": 1,
+    "after_wrong_recipient_events": 0,
+    "method": "One paired disposable-window reproduction and corrected verification.",
+    "classification": "BOUNDED_COMPONENT_OBSERVATION_NOT_FULL_BENCHMARK",
+    "note": "This is not a whole-workload zero-critical-errors or critical-zero release claim."
+  },
+  "not_run": [
+    {
+      "check": "Installed .39 pointer-recipient behavior",
+      "reason": "The corrected candidate is source-built; immutable installed CI verification is pending."
+    },
+    {
+      "check": "100 ms performance gates",
+      "reason": "No performance benchmark was run for this scoped recipient check."
+    },
+    {
+      "check": "Model/task end-to-end behavior",
+      "reason": "This fixture exercises native pointer admission only."
+    }
+  ],
+  "post_change_regression": {
+    "status": "PASS",
+    "passed": 1446,
+    "skipped": 46,
+    "warnings": 41,
+    "seconds": 67.17,
+    "log_sha256": "41892b831ce6339688658c50d1e371a97e8e3fb520c6b6a9c3198aab3e45fe83",
+    "lint": "PASS",
+    "generated_contract": "PASS"
+  },
+  "post_change_native_gui": {
+    "status": "PASS",
+    "scope": "Corrected complete source wheel native GUI/input component; not installed/model E2E",
+    "capture_preserves_owned_geometry": true,
+    "input_preserves_owned_geometry": true,
+    "cleanup": "PASS",
+    "private_result_sha256": "9a99e7e2d5404312b3ad50f9b50021879c765fc3901a955fd2cda8f1af9ab0c8"
+  },
+  "post_change_native_typed": {
+    "status": "PASS",
+    "scope": "Corrected complete source wheel; not installed release or Blender semantics",
+    "buttons": [
+      "left",
+      "right",
+      "middle"
+    ],
+    "gestures": [
+      {
+        "button": "left",
+        "modifiers": [
+          "shift"
+        ]
+      },
+      {
+        "button": "middle",
+        "modifiers": [
+          "shift"
+        ]
+      },
+      {
+        "button": "middle",
+        "modifiers": []
+      }
+    ],
+    "independent_cancel": {
+      "held_before": [
+        4,
+        16,
+        160
+      ],
+      "held_after": [],
+      "worker_still_blocked": true,
+      "explicit_release_called": false
+    },
+    "independent_crash_recovery": {
+      "held_before": [
+        4,
+        16,
+        160
+      ],
+      "held_after": [],
+      "worker_terminated": true,
+      "guardian_exited": true,
+      "parent_release_called": false
+    },
+    "cleanup": "PASS",
+    "private_result_sha256": "4a12771109d62b2eec0fdfe5d6062cf8a028cbef72714d054a850cafa4c889c6"
+  }
+}

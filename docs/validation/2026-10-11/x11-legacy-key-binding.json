@@ -1,0 +1,244 @@
+{
+  "classification": "OBSERVED",
+  "source_base": "df1ad84914db6455b3eae101163427f859fb7a59",
+  "integrated_source_sha256": {
+    "src/clef_use/operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+    "src/clef_use/runtime.py": "17c4573fc6651de290ad7c5a3e267ba77f635852882c9725fb4ec54998ce5362",
+    "src/clef_use/input_ir.py": "7a1159aafcb70d072c9bb7b0554fd0f283393d2f18455f9f96d5afed7df23b47",
+    "src/clef_use/backends.py": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+    "tests/test_operations.py": "43600be164e0c5a779f941f2f4ac6724947029b24abe2cc717a8ea3972cea1df",
+    "tests/test_operation_runtime.py": "6840c29549039f2d75219a4ec557a29d6e3da294c708d89f7e8453c423dd89bf",
+    "tests/test_input_ir.py": "868ee2a45b5e06f3e911050a141ea30ce769a812f85376d2d18a5ad85a8d38be",
+    "tests/test_legacy_keyboard_native.py": "f9f6d7eba5e198de1bf8c4f4733e58acd6fe5d8448d6fe5a4ca10dd06e07b819"
+  },
+  "regression": {
+    "integrated": {
+      "passed": 1135,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 58.26,
+      "log_sha256": "cb745e236a65c67cd62511dccdfa9b223152443803401f1f9bc198b339e5a739",
+      "scope": "Final integrated viewport and legacy keyboard candidate including unowned-modifier correction"
+    },
+    "lint_format": "PASS: eight changed Python files",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool examples"
+  },
+  "source_cli": {
+    "registry_version": 5,
+    "request_schema_unchanged": true,
+    "report_sha256": "f7ccd712cc20454ed286f20a5080e6bcae6894424f0ca9a166bc59f5bb452c43",
+    "scope": "Actual source CLI only; not installed-current harness discovery/load/invoke"
+  },
+  "not_run": [
+    "Whole-task E2E and model work: owned by other sessions",
+    "Installed-current harness E2E",
+    "Full-task accuracy, reaction p95, goodput and eligibility coverage",
+    "Windows/Darwin native execution for these patches",
+    "Public release"
+  ],
+  "acceptance": "No scenario status or release gate promoted",
+  "scope": "Legacy DesktopAction Linux keyboard component only; explicit API-assisted private authenticated Xvfb/Tk fixture. No model/runtime E2E/production display.",
+  "contract": {
+    "preflight": "Validate every chord key and implicit Shift against current X11 bindings before first press, then recheck each press",
+    "release": "Retain acknowledged physical keycodes; release those codes despite logical/native mapping mutation",
+    "ownership": "Refuse any native held key outside acknowledged own physical keycodes, including unrelated Shift/Ctrl; never release the external hold",
+    "limits": "Mapping checks and native injection are separate requests; no concurrent external remap atomicity or new legacy crash guardian claimed"
+  },
+  "native_before": {
+    "hypothesis": "Legacy type uses cached keycodes without checking current X11 symbol; requested a yields b with ok true after remap.",
+    "head": "df1ad84914db6455b3eae101163427f859fb7a59",
+    "source_sha256": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+    "observed": {
+      "identity": {
+        "ok": true,
+        "reason": "executed",
+        "text": "a",
+        "events": [
+          {
+            "keysym": "a",
+            "char": "a",
+            "keycode": 38
+          }
+        ]
+      },
+      "remapped": {
+        "ok": true,
+        "reason": "executed",
+        "text": "b",
+        "events": [
+          {
+            "keysym": "b",
+            "char": "b",
+            "keycode": 38
+          }
+        ],
+        "requested": "a",
+        "current_symbol": 98,
+        "cached_code": 38
+      },
+      "physical_keys_released": true,
+      "owned_keymap_restored": true
+    },
+    "authenticated_private_xvfb_reaped_socket_absent": true,
+    "status": "CONFIRMED"
+  },
+  "native_before_sha256": "40af4ae6d46c2c62f9510c9027183e680a5192db6a414e6bbf54074e69aa4873",
+  "native_after_receipt_sha256": "ac94181d0b9c66962a34f93074a3cae733b4c1079722bd8f3cdd4b2e6a6e878b",
+  "native_after_cases": [
+    {
+      "case": "type",
+      "native_evidence": {
+        "case": "type",
+        "normal_events": [
+          [
+            "a",
+            "a",
+            38
+          ]
+        ],
+        "refusal": "logical key binding changed in current OS keymap",
+        "remapped_events": [],
+        "physical_keys_released": true
+      },
+      "sha256": "dc0458f7cd63d55f8963bbf792bf97ba46d07fbcde4fa8aed5783ea8358b9ce3"
+    },
+    {
+      "case": "press",
+      "native_evidence": {
+        "case": "press",
+        "normal_events": [
+          [
+            "Return",
+            "\r",
+            36
+          ]
+        ],
+        "refusal": "logical key binding changed in current OS keymap",
+        "remapped_events": [],
+        "physical_keys_released": true
+      },
+      "sha256": "0d0b8cec3bddcec991bf2e0d2e5dbae6d975e3b17db0c48692c2c306efe434be"
+    },
+    {
+      "case": "hotkey",
+      "native_evidence": {
+        "case": "hotkey",
+        "normal_events": [
+          [
+            "Control_L",
+            "",
+            37
+          ],
+          [
+            "a",
+            "\u0001",
+            38
+          ]
+        ],
+        "refusal": "logical key binding changed in current OS keymap",
+        "remapped_events": [],
+        "physical_keys_released": true
+      },
+      "sha256": "d6f9b47e96938afbac8642cb48bec07e84a0c04c5f6c07fa45861b7d764e656e"
+    },
+    {
+      "case": "shift",
+      "native_evidence": {
+        "case": "shift",
+        "normal_events": [
+          [
+            "Shift_L",
+            "",
+            50
+          ],
+          [
+            "A",
+            "A",
+            38
+          ]
+        ],
+        "refusal": "logical key binding changed in current OS keymap",
+        "remapped_events": [],
+        "physical_keys_released": true
+      },
+      "sha256": "c312849821a41a34b707a3bc344312f14bdbeb69da9e53b3e3690365b786ceb4"
+    },
+    {
+      "case": "release",
+      "native_evidence": {
+        "case": "release",
+        "physical_keys_released": true
+      },
+      "sha256": "1f3189c3175bb21ba88a1463ee3ee032b09bb84d843771b1dea06e469606e7af"
+    },
+    {
+      "case": "human",
+      "native_evidence": {
+        "case": "human",
+        "refusal": "key is already held outside this legacy input",
+        "physical_keys_released": true
+      },
+      "sha256": "590b083e9566d6a4daee0a251dee1753e26401221d8413f81e1ba0fa0d473027"
+    },
+    {
+      "case": "human_shift",
+      "native_evidence": {
+        "case": "human_shift",
+        "refusal": "key is already held outside this legacy input",
+        "physical_keys_released": true
+      },
+      "sha256": "4b4ddcc58c9b41c929176485e52ba8c48c45e3b088d5eadc0f9907a78f0e5336"
+    },
+    {
+      "case": "human_ctrl",
+      "native_evidence": {
+        "case": "human_ctrl",
+        "refusal": "key is already held outside this legacy input",
+        "physical_keys_released": true
+      },
+      "sha256": "382ad2e1b032629d47e27af07b9945255b2e34b4fab805142953506a7fbe80e2"
+    }
+  ],
+  "cleanup": {
+    "all_private_servers_reaped": true,
+    "all_private_x_sockets_absent": true,
+    "owned_native_keymaps_restored": true,
+    "acknowledged_physical_keys_released": true
+  },
+  "regression_red": {
+    "failed": 3,
+    "deselected": 3,
+    "seconds": 2.67,
+    "log_sha256": "89bb7d93ea219f86949457c93db719f7158ebb4e6cdcf5c7c432a80308806413"
+  },
+  "scoped_regression": {
+    "passed": 31,
+    "seconds": 6.01,
+    "log_sha256": "d62685d5f632347f491af53c9d7dde05e18fafff55558802ff81dc2e80bd4e92",
+    "scope": "Eight new actual native keyboard cases, nine existing pointer native cases, adapter regressions"
+  },
+  "retained_setup_failures": [
+    {
+      "report_sha256": "d72c11c1ec0ff3ad7153fc538b34227e110811169820047a45b682a6638a19e7",
+      "scope": "Owned fixture setup failure before any product native key input"
+    },
+    {
+      "report_sha256": "0edb3eedcb6fce75bf0501bb3fdbcc6f56737d23ab97fde8165531d92e993fd5",
+      "scope": "Owned fixture setup failure before any product native key input"
+    }
+  ],
+  "curation_setup_failure": "First glob also included pytest bicurrent symlink, stopped before report creation; changed curation to exact numeric six native fixture directories. No native rerun.",
+  "unowned_modifier_before": {
+    "classification": "OBSERVED_NATIVE_COMPONENT",
+    "source_backend_sha256": "16d650d8d1986c5b237749e1fb1b057e574d7a497b8be89f58f0df92e9a6a049",
+    "result": "external Shift + literal a delivered A/okTrue; external Ctrl delivered U+0001/okTrue",
+    "red_failed": 2,
+    "deselected": 6,
+    "seconds": 0.71,
+    "log_sha256": "986ed21105619a2478de8bd6216daf176e81802e8c95de80b61a736d7c2aaf58"
+  },
+  "retained_prior_candidate": {
+    "public_receipt_sha256": "e901d7aa44d19a04d561baf6a2e4273f9e069269bb4f1585d84ae39a9b3c2ba5",
+    "scope": "Six native cases and integrated1133PASS before review exposed unowned modifier defect; not final correctness proof"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "kind": "NATIVE_WINDOWS_IMMUTABLE_INSTALLER_CRASH_RESUME",
+  "platform": "win32",
+  "ci_commit": "26d9252e3f169112789c920eb1c9507d5d9e9d0a",
+  "checkpoints": [
+    [
+      "staging_directory_created",
+      "install",
+      355
+    ],
+    [
+      "archive_downloaded",
+      "install",
+      362
+    ],
+    [
+      "archive_verified",
+      "install",
+      364
+    ],
+    [
+      "archive_extracted",
+      "install",
+      369
+    ],
+    [
+      "venv_created",
+      "install",
+      372
+    ],
+    [
+      "offline_wheels_installed",
+      "install",
+      398
+    ],
+    [
+      "staged_runtime_smoked",
+      "install",
+      400
+    ],
+    [
+      "installed_record_written",
+      "install",
+      412
+    ],
+    [
+      "launcher_temporary_created",
+      "atomic_text",
+      153
+    ],
+    [
+      "launcher_temporary_fsynced",
+      "atomic_text",
+      158
+    ],
+    [
+      "launcher_atomically_switched",
+      "install",
+      443
+    ]
+  ],
+  "exit_code": 87,
+  "stop_first_failure": true,
+  "no_retry": true,
+  "server_bind": "127.0.0.1",
+  "fresh_count": 11,
+  "update_count": 11,
+  "windows_activation": "Native atomic launcher temp/create/fsync/replace. Unix .next/current pointer phases do not exist on Windows.",
+  "update_baseline": "Genuine source-built b3f0b2330.1.29 universal wheel with existing Windows hash-pinned dependencies; installed records only written by actual installer.",
+  "preserve": "Global V2, config/PATH, existing customized fixture, and case user bytes/old real runtime; no GUI/service/model inputs."
+}

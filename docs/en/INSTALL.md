@@ -1,5 +1,18 @@
 # Installation
 
+Since 0.1.51, automatic guide/MCP refresh is limited to registrations owned by
+the installation being updated. A fresh installation in a separate root/bin
+does not redirect another installation's approved profiles. Modified launchers
+and launchers belonging to another root are refused and preserved; choose a
+separate `CLEF_USE_BIN_DIR`. Ownership is rechecked under the registration lock.
+Use the new installer for that launcher protection: a 0.1.50 bootstrap or CLI
+still runs its old installer before the new CLI can apply registration checks. An old
+CLI updating its own installation still receives the new CLI's registration
+ownership checks. Manual migration can explicitly name `--previous-command`
+with `integrations refresh --managed-only --command-path`. See the
+[actual package checks](../validation/2026-10-14/installer-ownership-0151.json);
+they do not establish native model/GUI success or input latency.
+
 After runtime installation, the installer asks **`Prepare models now? [Y/n]`**. Enter or Y runs model preparation; N skips it. Set the model cache path before accepting Y. Without an interactive terminal, or with `--json`, preparation is skipped by default. Use `--prepare-models` or `--skip-models` to choose explicitly. You can run `clef-use models prepare` later; `models download` downloads weights only.
 
 Install Python 3.11-3.13 with venv/pip. Model preparation requires Python 3.11/3.12 and Git (Windows ROCm requires 3.12). No root or Administrator privileges are needed. Public hosting must be verified before using the download URL.
@@ -11,6 +24,12 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 ```powershell
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
+
+Windows updates preserve a verified explicit, inheritable full-control grant for
+the current user on the installation root, avoiding ACL rewrites across retained
+versions. New runtime directories and model preparation still apply their normal
+access grants. Missing, denied, inherited-only or unsupported root permissions use
+the existing grant path; no permission or timeout check is bypassed.
 
 Updates keep previous runtime versions, model caches and configuration. If Ctrl-C interrupts
 installation before activation, cleanup removes only the unused staged environment; an existing
@@ -31,17 +50,41 @@ confidence_threshold = 0.55
 
 models prepare creates two isolated pinned environments and downloads canonical upstream snapshots. Updates retain the cache. If Python 3.11 is not discoverable, pass its absolute executable path using --python.
 
+Choose the harness you use: replace `codex` below with `hermes` or `omp`. The managed integration installs MCP and the selected guides together. Restart the harness, then inspect each verification stage; `NOT_RUN` is not task success.
+
 ```sh
 clef-use models prepare --python python3.11
 clef-use doctor
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort
 clef-use update
 ```
+
+Repeat enrollment ignores active-source aliases of the same complete managed
+skill directory. A separate resource directory with the same skill name still
+reports a conflict, including a symlink of only `SKILL.md`, because relative
+references can differ. User files and configuration remain preserved.
+Duplicate names declared in `SKILL.md` are also reported within the selected
+source and other active sources, even when nested directory names differ.
+Hermes checks configured create/external directories and the current trusted Git
+project's `.hermes/skills` and `.agents/skills`. Disabled project discovery stays
+disabled. Without an explicit project, `TERMINAL_CWD` is trimmed and home-expanded
+and used only when it names an existing directory; otherwise the launch directory
+is used. These preservation checks report possible conflicts; native discovery
+and loading remain separate verification stages.
+Hermes collision checks also recognize directory-name aliases and legacy named
+Markdown guides. Package support files are not independent guides. Excluded
+cache/dependency folders are skipped by the `SKILL.md` catalog, while explicit
+legacy Markdown remains checked wherever native lookup can load it. Malformed
+frontmatter follows Hermes's name fallback.
+Hermes MCP registration preserves YAML flow mappings, trailing commas, comments
+and document endings; existing settings remain in the same YAML document.
+Codex disables individual `SKILL.md` entries. A disabled project file does not
+conflict with the active managed guide; a directory entry alone does not disable it.
 
 Grant Screen Recording and Accessibility to the actual macOS terminal/harness and restart it. Linux requires an accessible graphical display; Wayland may restrict capture/input. Windows packaging is a CI target, while actual ML/GUI compatibility remains experimental. Acceleration detection does not establish model support.
 

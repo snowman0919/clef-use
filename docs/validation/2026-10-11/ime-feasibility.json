@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-11",
+  "claim": "OBSERVED",
+  "status": "PARTIAL",
+  "scope": "Owned disposable Xvfb/private D-Bus/private IBus Hangul and owner GtkEntry official preedit/changed signals; API_ASSISTED fixture, no host IME changes",
+  "installed_candidate": "FINAL5 .30 before new X11 literal correction",
+  "input_ir_sha256": "4dac061bb63aa2424ba022aa20392453ff4ce59d90c02ea436f7f6410f703d87",
+  "raw_artifact_sha256": "037259047dc66a43f41195a91e96b197e1e9eca474fb28d821b037ba0f4bbc57",
+  "composition_observed": true,
+  "exact_commit_observed": true,
+  "truthful_active_composition_guards": true,
+  "idle_engine_counterexample": {
+    "status": "FAIL",
+    "returned_ok": true,
+    "actual_effect": "ASCII native key substitution created Hangul preedit rather than the requested committed literal",
+    "reason": "OS keymap validation does not bypass an idle enabled IME"
+  },
+  "external_peer_observer": "NOT_ESTABLISHED: separate read-only IBus peer received no composition signals",
+  "new_literal_method": "Linux keyboard unicode substitution removed; explicit clipboard required. Fresh FINAL10 installed actual idle Hangul ASCII/Unicode clipboard exact-commit and active-composition refusal checks PASS; see final10.json. Formal composition remains NOT_RUN.",
+  "formal_ime_composition": "NOT_RUN: no shipped trusted observer and typed begin/input/commit/cancel transaction integrated",
+  "privacy": "No preedit or committed literal contents, scene data, auth or screenshots copied."
+}

@@ -1,0 +1,3359 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Zero-inference official native ReadTool public Markdown selector/allowlist audit; not a model or GUI result",
+  "immutable_candidate": {
+    "install_basename": "clef-use-installed-final11-20261011",
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "public_readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "guard": {
+    "basename": "clef_omp_native_public_read_guard_20261011.ts",
+    "sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b",
+    "uses_native_exports": [
+      "InternalUrlRouter.normalize/split/target",
+      "parseInternalUrl",
+      "extractUriScheme",
+      "validateRelativePath",
+      "parseSel",
+      "expandPath",
+      "splitPathAndSelPreferringLiteral",
+      "resolveReadPathAsync"
+    ],
+    "preserves_original_execute_args_and_native_output": true,
+    "exact_realpath_allowlist_files": 7
+  },
+  "native_sources": [
+    {
+      "basename": "pi-coding-agent/src/tools/read.ts",
+      "sha256": "c5d5d038deef103c8363b42c803aa535a1ee83ad7e19003dc479bb97acb5ff65",
+      "relevant_lines": [
+        688,
+        1595
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/internal-urls/router.ts",
+      "sha256": "b27c7ccd96b84d54b676d6b6d6c62616d17fd4eade5529a7aeb91457827bb2a3",
+      "relevant_lines": [
+        260,
+        280
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/internal-urls/skill-protocol.ts",
+      "sha256": "11231fff8d186aab3a9830b55552fa477cb58b276fec612639bc75b031255c7f",
+      "relevant_lines": [
+        42,
+        110
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/internal-urls/parse.ts",
+      "sha256": "9392339374585e452a15d3d0a719ae38d81463362b3adbd0451af99999e549d9",
+      "relevant_lines": [
+        53
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/tools/read-selector.ts",
+      "sha256": "f825036b46e0d8d070e05cc568a01baf1d57f8dc23236a0bba50d39e50eb703f",
+      "relevant_lines": [
+        66
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/tools/path-utils.ts",
+      "sha256": "7cc697eae3b6bdc1d8ecdddf9bada87249ab652683a0624e8128b13d1d7c4d72",
+      "relevant_lines": [
+        119,
+        248,
+        1196
+      ]
+    },
+    {
+      "basename": "pi-coding-agent/src/internal-urls/filesystem-resource.ts",
+      "sha256": "ec12f14b4c8331e4c764d4de945c0802bb538156d37759cc77be2e347e3485a3",
+      "relevant_lines": [
+        18
+      ]
+    },
+    {
+      "basename": "pi-tui/src/tools/read.ts",
+      "sha256": "603255d0db19e9c34d5e246b8f09bf9bfc7947930a2b50d06d5cda39d688e268",
+      "relevant_lines": [
+        105,
+        134
+      ]
+    }
+  ],
+  "test_mode": {
+    "PI_TEST_RUNTIME": "1",
+    "network_unshared": true,
+    "native_model_invocations": 0,
+    "data_url_observer_selfcheck_calls": 1,
+    "data_url_is_model_or_http_request": false
+  },
+  "positive_guarded_native_comparisons": 144,
+  "exact_native_content_array_equal": 144,
+  "negative_cases_refused_before_native_reader": 13,
+  "selector_audit": [
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "native_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "guarded_output_chars": 4886,
+      "native_output_chars": 4886
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "native_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "guarded_output_chars": 4886,
+      "native_output_chars": 4886
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:26-",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4e0ee28b9376849570bb539cadd6b004d63f96cf6ce45fbf90741161550387ee",
+      "native_output_sha256": "4e0ee28b9376849570bb539cadd6b004d63f96cf6ce45fbf90741161550387ee",
+      "guarded_output_chars": 3885,
+      "native_output_chars": 3885
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:44-120",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "578695eba3df3ea22d90c854eac49cea7ecae0a2818d5965c238829ce86e5616",
+      "native_output_sha256": "578695eba3df3ea22d90c854eac49cea7ecae0a2818d5965c238829ce86e5616",
+      "guarded_output_chars": 2824,
+      "native_output_chars": 2824
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1-3",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "52712a15074e6f328a0109df284b72b43d2d233db0834611b5797c4a33043f5e",
+      "native_output_sha256": "52712a15074e6f328a0109df284b72b43d2d233db0834611b5797c4a33043f5e",
+      "guarded_output_chars": 492,
+      "native_output_chars": 492
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1+3",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "52712a15074e6f328a0109df284b72b43d2d233db0834611b5797c4a33043f5e",
+      "native_output_sha256": "52712a15074e6f328a0109df284b72b43d2d233db0834611b5797c4a33043f5e",
+      "guarded_output_chars": 492,
+      "native_output_chars": 492
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:-3",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "b2d0cfc66f9d818db5b32aaf3571aac761528050e19965880d20ec8a9cffbf69",
+      "native_output_sha256": "b2d0cfc66f9d818db5b32aaf3571aac761528050e19965880d20ec8a9cffbf69",
+      "guarded_output_chars": 418,
+      "native_output_chars": 418
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1,3,5",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ab500ce2464ea7a5ffa6b494a0abcd48c6292b83c9165122c78e6b48729d7aba",
+      "native_output_sha256": "ab500ce2464ea7a5ffa6b494a0abcd48c6292b83c9165122c78e6b48729d7aba",
+      "guarded_output_chars": 395,
+      "native_output_chars": 395
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1-2,4-5",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "5582be0718b2b4f89bd5295ec76ab4c52c60e13c38315cc41251dd0acbe74a6c",
+      "native_output_sha256": "5582be0718b2b4f89bd5295ec76ab4c52c60e13c38315cc41251dd0acbe74a6c",
+      "guarded_output_chars": 203,
+      "native_output_chars": 203
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:raw",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "native_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "guarded_output_chars": 4778,
+      "native_output_chars": 4778
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:1-3:raw",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ff233ddadff8cbc76241da7e4a64799bb4ee712ab111111a0810f1ce5a63eb30",
+      "native_output_sha256": "ff233ddadff8cbc76241da7e4a64799bb4ee712ab111111a0810f1ce5a63eb30",
+      "guarded_output_chars": 309,
+      "native_output_chars": 309
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:raw:1-3",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ff233ddadff8cbc76241da7e4a64799bb4ee712ab111111a0810f1ce5a63eb30",
+      "native_output_sha256": "ff233ddadff8cbc76241da7e4a64799bb4ee712ab111111a0810f1ce5a63eb30",
+      "guarded_output_chars": 309,
+      "native_output_chars": 309
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:raw:-3",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "native_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "guarded_output_chars": 172,
+      "native_output_chars": 172
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/SKILL.md:conflicts",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "db7aab500e2e969d36ef840bffcd0b7a3431bef377fb35200a39be18781517b6",
+      "native_output_sha256": "db7aab500e2e969d36ef840bffcd0b7a3431bef377fb35200a39be18781517b6",
+      "guarded_output_chars": 207,
+      "native_output_chars": 207
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "native_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "guarded_output_chars": 2447,
+      "native_output_chars": 2447
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "native_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "guarded_output_chars": 2447,
+      "native_output_chars": 2447
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:26-",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "661fae3af0f340405e273b7c2e323617f218ebe381067aa9286bcd3c53a55bcc",
+      "native_output_sha256": "661fae3af0f340405e273b7c2e323617f218ebe381067aa9286bcd3c53a55bcc",
+      "guarded_output_chars": 1659,
+      "native_output_chars": 1659
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:44-120",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "956aa3f30ca51ac50d66a55740fe202b8d87e26ca17ba61c3ca8e64eb1d1c02a",
+      "native_output_sha256": "956aa3f30ca51ac50d66a55740fe202b8d87e26ca17ba61c3ca8e64eb1d1c02a",
+      "guarded_output_chars": 1140,
+      "native_output_chars": 1140
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1-3",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "372707325c59b9a9396a7cb994c7f02b98b428a3cc7e39a24ca79aef8df64a91",
+      "native_output_sha256": "372707325c59b9a9396a7cb994c7f02b98b428a3cc7e39a24ca79aef8df64a91",
+      "guarded_output_chars": 564,
+      "native_output_chars": 564
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1+3",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "372707325c59b9a9396a7cb994c7f02b98b428a3cc7e39a24ca79aef8df64a91",
+      "native_output_sha256": "372707325c59b9a9396a7cb994c7f02b98b428a3cc7e39a24ca79aef8df64a91",
+      "guarded_output_chars": 564,
+      "native_output_chars": 564
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:-3",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "807a3878396ceaa58b9d1b6be752ed749275a89709a6dbe8f219246465b54ef8",
+      "native_output_sha256": "807a3878396ceaa58b9d1b6be752ed749275a89709a6dbe8f219246465b54ef8",
+      "guarded_output_chars": 458,
+      "native_output_chars": 458
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1,3,5",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "3faec43e4b858c5ef2b621fea24fd16b42e2552428b009ee59c5ceb94c691b59",
+      "native_output_sha256": "3faec43e4b858c5ef2b621fea24fd16b42e2552428b009ee59c5ceb94c691b59",
+      "guarded_output_chars": 432,
+      "native_output_chars": 432
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1-2,4-5",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "5795c05e27b90800bb0d36e6ddc6670f5efa60212dd8ec3688142c1cd3e0032a",
+      "native_output_sha256": "5795c05e27b90800bb0d36e6ddc6670f5efa60212dd8ec3688142c1cd3e0032a",
+      "guarded_output_chars": 431,
+      "native_output_chars": 431
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:raw",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "e45a1d2ca0c51c2dfcd6487f755a76ad0fc8fa99e62655f77b3b64d46024b801",
+      "native_output_sha256": "e45a1d2ca0c51c2dfcd6487f755a76ad0fc8fa99e62655f77b3b64d46024b801",
+      "guarded_output_chars": 2321,
+      "native_output_chars": 2321
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:1-3:raw",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "da19b58c7435998e8bda35e88c107b8bc237d74d0a0dafed991d33b2041dba4f",
+      "native_output_sha256": "da19b58c7435998e8bda35e88c107b8bc237d74d0a0dafed991d33b2041dba4f",
+      "guarded_output_chars": 200,
+      "native_output_chars": 200
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:raw:1-3",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "da19b58c7435998e8bda35e88c107b8bc237d74d0a0dafed991d33b2041dba4f",
+      "native_output_sha256": "da19b58c7435998e8bda35e88c107b8bc237d74d0a0dafed991d33b2041dba4f",
+      "guarded_output_chars": 200,
+      "native_output_chars": 200
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:raw:-3",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c78e6cbf4791408d68637fe293ae7dcdf18015b6c82480950adae542be1ed68a",
+      "native_output_sha256": "c78e6cbf4791408d68637fe293ae7dcdf18015b6c82480950adae542be1ed68a",
+      "guarded_output_chars": 175,
+      "native_output_chars": 175
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/API_BASELINE.md:conflicts",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "50d5897937bf9c839c98529e60777febde3ad71e31ae616602845179b0c6fd11",
+      "native_output_sha256": "50d5897937bf9c839c98529e60777febde3ad71e31ae616602845179b0c6fd11",
+      "guarded_output_chars": 243,
+      "native_output_chars": 243
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "5497e9e2c6583183e1dd75cee7d8e985ef7ede27dcd5e28570079b53658c9c11",
+      "native_output_sha256": "5497e9e2c6583183e1dd75cee7d8e985ef7ede27dcd5e28570079b53658c9c11",
+      "guarded_output_chars": 1361,
+      "native_output_chars": 1361
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "5497e9e2c6583183e1dd75cee7d8e985ef7ede27dcd5e28570079b53658c9c11",
+      "native_output_sha256": "5497e9e2c6583183e1dd75cee7d8e985ef7ede27dcd5e28570079b53658c9c11",
+      "guarded_output_chars": 1361,
+      "native_output_chars": 1361
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:26-",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "15f05385c864d9e3e54345a3aaaefcef4e2866ac93d3eab6e75e0e83d65dbfb7",
+      "native_output_sha256": "15f05385c864d9e3e54345a3aaaefcef4e2866ac93d3eab6e75e0e83d65dbfb7",
+      "guarded_output_chars": 930,
+      "native_output_chars": 930
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:44-120",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "5200748d6a0e795ac3326fb2dd4fa965fa8b9e64eed2e122d17ac54ec91d4932",
+      "native_output_sha256": "5200748d6a0e795ac3326fb2dd4fa965fa8b9e64eed2e122d17ac54ec91d4932",
+      "guarded_output_chars": 627,
+      "native_output_chars": 627
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1-3",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cba8844c193e1fb48df89a40944f6bf86c7a2a17691bec2524589281fd6199ba",
+      "native_output_sha256": "cba8844c193e1fb48df89a40944f6bf86c7a2a17691bec2524589281fd6199ba",
+      "guarded_output_chars": 463,
+      "native_output_chars": 463
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1+3",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cba8844c193e1fb48df89a40944f6bf86c7a2a17691bec2524589281fd6199ba",
+      "native_output_sha256": "cba8844c193e1fb48df89a40944f6bf86c7a2a17691bec2524589281fd6199ba",
+      "guarded_output_chars": 463,
+      "native_output_chars": 463
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:-3",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1fbb5574b64292c9502e5b457664182a7f2ad3b1943dfaae1b2f34f59a077284",
+      "native_output_sha256": "1fbb5574b64292c9502e5b457664182a7f2ad3b1943dfaae1b2f34f59a077284",
+      "guarded_output_chars": 386,
+      "native_output_chars": 386
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1,3,5",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4d412e0e7bfa2839df1d13bac884a40bb171aeb668721f358642189054214e15",
+      "native_output_sha256": "4d412e0e7bfa2839df1d13bac884a40bb171aeb668721f358642189054214e15",
+      "guarded_output_chars": 338,
+      "native_output_chars": 338
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1-2,4-5",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "9c1cc152a966c58f09b574bf814b8bd1d3a6f58173765531bc570297db74dbfa",
+      "native_output_sha256": "9c1cc152a966c58f09b574bf814b8bd1d3a6f58173765531bc570297db74dbfa",
+      "guarded_output_chars": 414,
+      "native_output_chars": 414
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:raw",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "7a39f6c2ef996938e3a3aabee31e1e2e98a0a2b15e431e3a7d8025c2b87fe61e",
+      "native_output_sha256": "7a39f6c2ef996938e3a3aabee31e1e2e98a0a2b15e431e3a7d8025c2b87fe61e",
+      "guarded_output_chars": 1239,
+      "native_output_chars": 1239
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:1-3:raw",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "e7c4746a4bf441ee4f64cd04c493c9d762d010dcadc5d9efce23f20860ff0b68",
+      "native_output_sha256": "e7c4746a4bf441ee4f64cd04c493c9d762d010dcadc5d9efce23f20860ff0b68",
+      "guarded_output_chars": 166,
+      "native_output_chars": 166
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:raw:1-3",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "e7c4746a4bf441ee4f64cd04c493c9d762d010dcadc5d9efce23f20860ff0b68",
+      "native_output_sha256": "e7c4746a4bf441ee4f64cd04c493c9d762d010dcadc5d9efce23f20860ff0b68",
+      "guarded_output_chars": 166,
+      "native_output_chars": 166
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:raw:-3",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "6bf5be923e448939ae99d6c227cb76a24c29ed39df844754ff9b0d709dc365f9",
+      "native_output_sha256": "6bf5be923e448939ae99d6c227cb76a24c29ed39df844754ff9b0d709dc365f9",
+      "guarded_output_chars": 78,
+      "native_output_chars": 78
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use/references/LIVE_API.md:conflicts",
+      "selected_public_basename": "clef-use/references/LIVE_API.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf6c099d3068804ed207d77863a0dfb5746d3fd717ecbb268fad4ca5153ccd94",
+      "native_output_sha256": "bf6c099d3068804ed207d77863a0dfb5746d3fd717ecbb268fad4ca5153ccd94",
+      "guarded_output_chars": 235,
+      "native_output_chars": 235
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a511c6bd3a78c8e647d83e98acc21cb8bad81a9cb526027c0fba1917547c4ddd",
+      "native_output_sha256": "a511c6bd3a78c8e647d83e98acc21cb8bad81a9cb526027c0fba1917547c4ddd",
+      "guarded_output_chars": 3807,
+      "native_output_chars": 3807
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a511c6bd3a78c8e647d83e98acc21cb8bad81a9cb526027c0fba1917547c4ddd",
+      "native_output_sha256": "a511c6bd3a78c8e647d83e98acc21cb8bad81a9cb526027c0fba1917547c4ddd",
+      "guarded_output_chars": 3807,
+      "native_output_chars": 3807
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:26-",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "49661158ec448612d3bf2ea58f73ded5ca57bdda7d4d2d388b31429d590832ed",
+      "native_output_sha256": "49661158ec448612d3bf2ea58f73ded5ca57bdda7d4d2d388b31429d590832ed",
+      "guarded_output_chars": 2660,
+      "native_output_chars": 2660
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:44-120",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "744bf277311e297024f63871dca81c44d25a525bf17855d8689f24ffea735276",
+      "native_output_sha256": "744bf277311e297024f63871dca81c44d25a525bf17855d8689f24ffea735276",
+      "guarded_output_chars": 1742,
+      "native_output_chars": 1742
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1-3",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b7feccd58ba6899e8b5476147ed5e6574504dcd7ff8300e3df39c1acc56b24a",
+      "native_output_sha256": "1b7feccd58ba6899e8b5476147ed5e6574504dcd7ff8300e3df39c1acc56b24a",
+      "guarded_output_chars": 530,
+      "native_output_chars": 530
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1+3",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b7feccd58ba6899e8b5476147ed5e6574504dcd7ff8300e3df39c1acc56b24a",
+      "native_output_sha256": "1b7feccd58ba6899e8b5476147ed5e6574504dcd7ff8300e3df39c1acc56b24a",
+      "guarded_output_chars": 530,
+      "native_output_chars": 530
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:-3",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "93953a01fb4d8bbdbe86abd91372a680cb3d4f1e2a623a976c9536d6bb6f136d",
+      "native_output_sha256": "93953a01fb4d8bbdbe86abd91372a680cb3d4f1e2a623a976c9536d6bb6f136d",
+      "guarded_output_chars": 421,
+      "native_output_chars": 421
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1,3,5",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "454c3dac97b8e050633d269e91d8640d7ad5b1ca5e14895dcb832af877756af1",
+      "native_output_sha256": "454c3dac97b8e050633d269e91d8640d7ad5b1ca5e14895dcb832af877756af1",
+      "guarded_output_chars": 425,
+      "native_output_chars": 425
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1-2,4-5",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2496cbd7283f3ab2a7adc1775cb8019eb636c26ad9e4f1555e875f8a6fa61143",
+      "native_output_sha256": "2496cbd7283f3ab2a7adc1775cb8019eb636c26ad9e4f1555e875f8a6fa61143",
+      "guarded_output_chars": 219,
+      "native_output_chars": 219
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:raw",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "6c2558d429b4e0d86f4cd0bedb139ad7cc81a56f06207c438bd2f90f30a64878",
+      "native_output_sha256": "6c2558d429b4e0d86f4cd0bedb139ad7cc81a56f06207c438bd2f90f30a64878",
+      "guarded_output_chars": 3691,
+      "native_output_chars": 3691
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:1-3:raw",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "34cfeb15b2224fdd2e45eb32fa849e755683779a1b8f663552a5e12250eb4b17",
+      "native_output_sha256": "34cfeb15b2224fdd2e45eb32fa849e755683779a1b8f663552a5e12250eb4b17",
+      "guarded_output_chars": 339,
+      "native_output_chars": 339
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:raw:1-3",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "34cfeb15b2224fdd2e45eb32fa849e755683779a1b8f663552a5e12250eb4b17",
+      "native_output_sha256": "34cfeb15b2224fdd2e45eb32fa849e755683779a1b8f663552a5e12250eb4b17",
+      "guarded_output_chars": 339,
+      "native_output_chars": 339
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:raw:-3",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "88f913475f55171b94c12d7be6119cfc683ae0ee74e0494e46aa8a07ced7c44c",
+      "native_output_sha256": "88f913475f55171b94c12d7be6119cfc683ae0ee74e0494e46aa8a07ced7c44c",
+      "guarded_output_chars": 173,
+      "native_output_chars": 173
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/SKILL.md:conflicts",
+      "selected_public_basename": "clef-use-blender/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "b056f0c5776d7817556c006a6cd140ddbf723beb2d3fd7b180a29c5109e44e41",
+      "native_output_sha256": "b056f0c5776d7817556c006a6cd140ddbf723beb2d3fd7b180a29c5109e44e41",
+      "guarded_output_chars": 223,
+      "native_output_chars": 223
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "d1f1b3ba8ac5f7a1b9f628578b949a9fe08f4691c299658b5fc02ddf4d1ccf97",
+      "native_output_sha256": "d1f1b3ba8ac5f7a1b9f628578b949a9fe08f4691c299658b5fc02ddf4d1ccf97",
+      "guarded_output_chars": 3268,
+      "native_output_chars": 3268
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "d1f1b3ba8ac5f7a1b9f628578b949a9fe08f4691c299658b5fc02ddf4d1ccf97",
+      "native_output_sha256": "d1f1b3ba8ac5f7a1b9f628578b949a9fe08f4691c299658b5fc02ddf4d1ccf97",
+      "guarded_output_chars": 3268,
+      "native_output_chars": 3268
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:26-",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2eeff67d6885cb58f72bc38460988baa0e2afad7400dbf0467ebf2b3e5199b05",
+      "native_output_sha256": "2eeff67d6885cb58f72bc38460988baa0e2afad7400dbf0467ebf2b3e5199b05",
+      "guarded_output_chars": 2227,
+      "native_output_chars": 2227
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:44-120",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "fbc0376f9dc2588709f1a9b5b668b27f64cbed1da2dff313b4dd4d3b7fa8b0e5",
+      "native_output_sha256": "fbc0376f9dc2588709f1a9b5b668b27f64cbed1da2dff313b4dd4d3b7fa8b0e5",
+      "guarded_output_chars": 1306,
+      "native_output_chars": 1306
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1-3",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "266b8799f549117112de72c37468d7ec6c1af5d11f66edb53d48d3e64c572e0f",
+      "native_output_sha256": "266b8799f549117112de72c37468d7ec6c1af5d11f66edb53d48d3e64c572e0f",
+      "guarded_output_chars": 551,
+      "native_output_chars": 551
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1+3",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "266b8799f549117112de72c37468d7ec6c1af5d11f66edb53d48d3e64c572e0f",
+      "native_output_sha256": "266b8799f549117112de72c37468d7ec6c1af5d11f66edb53d48d3e64c572e0f",
+      "guarded_output_chars": 551,
+      "native_output_chars": 551
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:-3",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "6820baf3831959b83be24a40580c636d1e623890934a9b918891eaef8f34f6c8",
+      "native_output_sha256": "6820baf3831959b83be24a40580c636d1e623890934a9b918891eaef8f34f6c8",
+      "guarded_output_chars": 492,
+      "native_output_chars": 492
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1,3,5",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "9aead55202f4f71ea0c3eb5becc4bdd390caf499be447b7a859fab0bdddb1cd7",
+      "native_output_sha256": "9aead55202f4f71ea0c3eb5becc4bdd390caf499be447b7a859fab0bdddb1cd7",
+      "guarded_output_chars": 361,
+      "native_output_chars": 361
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1-2,4-5",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2927c8674824226069b04518ec722eb10d9a68cb75eade87fc5112314314d51a",
+      "native_output_sha256": "2927c8674824226069b04518ec722eb10d9a68cb75eade87fc5112314314d51a",
+      "guarded_output_chars": 360,
+      "native_output_chars": 360
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:raw",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "9f4c897a71c3aa8a5d100efbaf9ff06aa9fa98d3876a5fbbb09f22b5694644af",
+      "native_output_sha256": "9f4c897a71c3aa8a5d100efbaf9ff06aa9fa98d3876a5fbbb09f22b5694644af",
+      "guarded_output_chars": 3136,
+      "native_output_chars": 3136
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:1-3:raw",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2682cac6364bcf5337500df694ff462f5023df4e23459fb6e4f19132601d17d3",
+      "native_output_sha256": "2682cac6364bcf5337500df694ff462f5023df4e23459fb6e4f19132601d17d3",
+      "guarded_output_chars": 178,
+      "native_output_chars": 178
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:raw:1-3",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2682cac6364bcf5337500df694ff462f5023df4e23459fb6e4f19132601d17d3",
+      "native_output_sha256": "2682cac6364bcf5337500df694ff462f5023df4e23459fb6e4f19132601d17d3",
+      "guarded_output_chars": 178,
+      "native_output_chars": 178
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:raw:-3",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c05d6bcd62f0fe24e40aa9e58d684336dba7bf3d42b1900972b9a0811561647f",
+      "native_output_sha256": "c05d6bcd62f0fe24e40aa9e58d684336dba7bf3d42b1900972b9a0811561647f",
+      "guarded_output_chars": 135,
+      "native_output_chars": 135
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-blender/references/OPERATIONS.md:conflicts",
+      "selected_public_basename": "clef-use-blender/references/OPERATIONS.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b397b645bc7ff34f4ca284411e7e64b8d8a2d01d6d0ec7d89929332ee35d3d2",
+      "native_output_sha256": "1b397b645bc7ff34f4ca284411e7e64b8d8a2d01d6d0ec7d89929332ee35d3d2",
+      "guarded_output_chars": 255,
+      "native_output_chars": 255
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4f05a60718ccc23791c1f2da2fe4406c1339113d7fb4cfa44ea1827db3394c89",
+      "native_output_sha256": "4f05a60718ccc23791c1f2da2fe4406c1339113d7fb4cfa44ea1827db3394c89",
+      "guarded_output_chars": 3309,
+      "native_output_chars": 3309
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4f05a60718ccc23791c1f2da2fe4406c1339113d7fb4cfa44ea1827db3394c89",
+      "native_output_sha256": "4f05a60718ccc23791c1f2da2fe4406c1339113d7fb4cfa44ea1827db3394c89",
+      "guarded_output_chars": 3309,
+      "native_output_chars": 3309
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:26-",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "871c36bf4b438d6b28c5bda4612806a085a4fbceb86dd7574e09a5e91623593c",
+      "native_output_sha256": "871c36bf4b438d6b28c5bda4612806a085a4fbceb86dd7574e09a5e91623593c",
+      "guarded_output_chars": 2295,
+      "native_output_chars": 2295
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:44-120",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "afb5df6b02d73d758ce411616537e13fac8dc1fa260997183f49babd42ace6e8",
+      "native_output_sha256": "afb5df6b02d73d758ce411616537e13fac8dc1fa260997183f49babd42ace6e8",
+      "guarded_output_chars": 1227,
+      "native_output_chars": 1227
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1-3",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "6c71c1eed9697fd6fc15bf1421ea4a9c3cd2edfe3a51ebc1038f6739fb74bae3",
+      "native_output_sha256": "6c71c1eed9697fd6fc15bf1421ea4a9c3cd2edfe3a51ebc1038f6739fb74bae3",
+      "guarded_output_chars": 539,
+      "native_output_chars": 539
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1+3",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "6c71c1eed9697fd6fc15bf1421ea4a9c3cd2edfe3a51ebc1038f6739fb74bae3",
+      "native_output_sha256": "6c71c1eed9697fd6fc15bf1421ea4a9c3cd2edfe3a51ebc1038f6739fb74bae3",
+      "guarded_output_chars": 539,
+      "native_output_chars": 539
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:-3",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "738ea40e6aaed86cecc4a6b2de198a74fbee4e5ed209ade3ed6ac7b75df961db",
+      "native_output_sha256": "738ea40e6aaed86cecc4a6b2de198a74fbee4e5ed209ade3ed6ac7b75df961db",
+      "guarded_output_chars": 468,
+      "native_output_chars": 468
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1,3,5",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "d0ab03c07f8cf16a58fa0bc8ef2a0f76a49809d5baf816a632d042fa1da466d3",
+      "native_output_sha256": "d0ab03c07f8cf16a58fa0bc8ef2a0f76a49809d5baf816a632d042fa1da466d3",
+      "guarded_output_chars": 430,
+      "native_output_chars": 430
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1-2,4-5",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "102ef3c9d3290b4b5701b39e40501ac3241d9f79996d2390acfbb36a54ce89f6",
+      "native_output_sha256": "102ef3c9d3290b4b5701b39e40501ac3241d9f79996d2390acfbb36a54ce89f6",
+      "guarded_output_chars": 227,
+      "native_output_chars": 227
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:raw",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a1bfda106b8b4ad134f783b1dbcd0e8c883da0e91af4b604b212807777e3b22e",
+      "native_output_sha256": "a1bfda106b8b4ad134f783b1dbcd0e8c883da0e91af4b604b212807777e3b22e",
+      "guarded_output_chars": 3189,
+      "native_output_chars": 3189
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:1-3:raw",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "731fe3aa9c83607211cfb14d7a1d09ac195e64249144e7c45186b498b583d9bd",
+      "native_output_sha256": "731fe3aa9c83607211cfb14d7a1d09ac195e64249144e7c45186b498b583d9bd",
+      "guarded_output_chars": 344,
+      "native_output_chars": 344
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:raw:1-3",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "731fe3aa9c83607211cfb14d7a1d09ac195e64249144e7c45186b498b583d9bd",
+      "native_output_sha256": "731fe3aa9c83607211cfb14d7a1d09ac195e64249144e7c45186b498b583d9bd",
+      "guarded_output_chars": 344,
+      "native_output_chars": 344
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:raw:-3",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "534cd54c00b0fd60110d9b68fa78506ee0d0bc23b0edc0de7c376f8c5b9476fd",
+      "native_output_sha256": "534cd54c00b0fd60110d9b68fa78506ee0d0bc23b0edc0de7c376f8c5b9476fd",
+      "guarded_output_chars": 189,
+      "native_output_chars": 189
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/SKILL.md:conflicts",
+      "selected_public_basename": "clef-use-diagnostics/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "df6174e677f67925748076ec490970091f662df9e74dd06cef218eea515e2509",
+      "native_output_sha256": "df6174e677f67925748076ec490970091f662df9e74dd06cef218eea515e2509",
+      "guarded_output_chars": 231,
+      "native_output_chars": 231
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "d798c4d2efdca1aa82adced93fe543123ce4f07a9f9c4c352973605131062f3d",
+      "native_output_sha256": "d798c4d2efdca1aa82adced93fe543123ce4f07a9f9c4c352973605131062f3d",
+      "guarded_output_chars": 1788,
+      "native_output_chars": 1788
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "d798c4d2efdca1aa82adced93fe543123ce4f07a9f9c4c352973605131062f3d",
+      "native_output_sha256": "d798c4d2efdca1aa82adced93fe543123ce4f07a9f9c4c352973605131062f3d",
+      "guarded_output_chars": 1788,
+      "native_output_chars": 1788
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:26-",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c57785958906d4fb7682084abdcabbcfcf2efc1e640f3906440353675be093bc",
+      "native_output_sha256": "c57785958906d4fb7682084abdcabbcfcf2efc1e640f3906440353675be093bc",
+      "guarded_output_chars": 271,
+      "native_output_chars": 271
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:44-120",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4e6a721494819b3b21aac47adec3af6d5ee2b1f0aa2271825b981912ecf6782b",
+      "native_output_sha256": "4e6a721494819b3b21aac47adec3af6d5ee2b1f0aa2271825b981912ecf6782b",
+      "guarded_output_chars": 271,
+      "native_output_chars": 271
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1-3",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "e56b144613a3962d279399c3af41b4be0429ddafc6e29366287d98ee036a4e50",
+      "native_output_sha256": "e56b144613a3962d279399c3af41b4be0429ddafc6e29366287d98ee036a4e50",
+      "guarded_output_chars": 645,
+      "native_output_chars": 645
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1+3",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "e56b144613a3962d279399c3af41b4be0429ddafc6e29366287d98ee036a4e50",
+      "native_output_sha256": "e56b144613a3962d279399c3af41b4be0429ddafc6e29366287d98ee036a4e50",
+      "guarded_output_chars": 645,
+      "native_output_chars": 645
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:-3",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "437138facf5f49827db35eb9f8f44c176b9485ff1e4e8cf84bdb92de8f4c8e5b",
+      "native_output_sha256": "437138facf5f49827db35eb9f8f44c176b9485ff1e4e8cf84bdb92de8f4c8e5b",
+      "guarded_output_chars": 418,
+      "native_output_chars": 418
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1,3,5",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "4e806010b450db25ab8353b8a95c5ff424c126d33094b4ebab6e5f7363d568dd",
+      "native_output_sha256": "4e806010b450db25ab8353b8a95c5ff424c126d33094b4ebab6e5f7363d568dd",
+      "guarded_output_chars": 482,
+      "native_output_chars": 482
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1-2,4-5",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "982d6295e6511fd8ac7ad3b49ccdd5c9ef38721d1bbaefd3eb200a0691f481d7",
+      "native_output_sha256": "982d6295e6511fd8ac7ad3b49ccdd5c9ef38721d1bbaefd3eb200a0691f481d7",
+      "guarded_output_chars": 360,
+      "native_output_chars": 360
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:raw",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ceb20daf38df89647845acdf4ae28b7fc30d5cd17d92e9d17f63ed78c251e406",
+      "native_output_sha256": "ceb20daf38df89647845acdf4ae28b7fc30d5cd17d92e9d17f63ed78c251e406",
+      "guarded_output_chars": 1654,
+      "native_output_chars": 1654
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:1-3:raw",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "953f65d3bf90bb45fb7b8978e5ebe27fc8c73f55b059fb374c96dba896c61935",
+      "native_output_sha256": "953f65d3bf90bb45fb7b8978e5ebe27fc8c73f55b059fb374c96dba896c61935",
+      "guarded_output_chars": 148,
+      "native_output_chars": 148
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:raw:1-3",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "953f65d3bf90bb45fb7b8978e5ebe27fc8c73f55b059fb374c96dba896c61935",
+      "native_output_sha256": "953f65d3bf90bb45fb7b8978e5ebe27fc8c73f55b059fb374c96dba896c61935",
+      "guarded_output_chars": 148,
+      "native_output_chars": 148
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:raw:-3",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "dd01e1326c2e35eb284368bb76a4c0204f8bf474a208da544dd147f2c7b5efc5",
+      "native_output_sha256": "dd01e1326c2e35eb284368bb76a4c0204f8bf474a208da544dd147f2c7b5efc5",
+      "guarded_output_chars": 161,
+      "native_output_chars": 161
+    },
+    {
+      "form": "skill_uri",
+      "path": "skill://clef-use-diagnostics/references/FAILURES.md:conflicts",
+      "selected_public_basename": "clef-use-diagnostics/references/FAILURES.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2efff8d63b7dde701838b911839ee60901f2edd41c13dc0c7be8585564e77d55",
+      "native_output_sha256": "2efff8d63b7dde701838b911839ee60901f2edd41c13dc0c7be8585564e77d55",
+      "guarded_output_chars": 259,
+      "native_output_chars": 259
+    },
+    {
+      "form": "native_skill_alias",
+      "path": "skill://clef-use",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "native_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "guarded_output_chars": 4886,
+      "native_output_chars": 4886
+    },
+    {
+      "form": "native_skill_alias",
+      "path": "skill://clef-use/",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "native_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "guarded_output_chars": 4886,
+      "native_output_chars": 4886
+    },
+    {
+      "form": "native_skill_alias",
+      "path": "skill://clef-use/%53KILL.md",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "native_output_sha256": "37ead6aa48c044bb04af00c4e097392229f13f263ccbdb10492b1fc15e133c68",
+      "guarded_output_chars": 4886,
+      "native_output_chars": 4886
+    },
+    {
+      "form": "native_skill_alias",
+      "path": "skill://clef-use/references/%41PI_BASELINE.md",
+      "selected_public_basename": "clef-use/references/API_BASELINE.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "native_output_sha256": "1b17483fdf5b084ae5b64060655bec12b712d54f49006c3afbc74fe59c7feafb",
+      "guarded_output_chars": 2447,
+      "native_output_chars": 2447
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "native_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "guarded_output_chars": 3775,
+      "native_output_chars": 3775
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "native_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "guarded_output_chars": 2714,
+      "native_output_chars": 2714
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "native_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "guarded_output_chars": 308,
+      "native_output_chars": 308
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "native_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "guarded_output_chars": 285,
+      "native_output_chars": 285
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "native_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "guarded_output_chars": 93,
+      "native_output_chars": 93
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "native_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "guarded_output_chars": 4778,
+      "native_output_chars": 4778
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "native_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "guarded_output_chars": 172,
+      "native_output_chars": 172
+    },
+    {
+      "form": "absolute",
+      "path": "absolute",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "f3ebfaa1681bd0c86fb6575c6107d803589b8e8b13f80e67d131b43d8bfb1647",
+      "native_output_sha256": "f3ebfaa1681bd0c86fb6575c6107d803589b8e8b13f80e67d131b43d8bfb1647",
+      "guarded_output_chars": 207,
+      "native_output_chars": 207
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "native_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "guarded_output_chars": 3775,
+      "native_output_chars": 3775
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "native_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "guarded_output_chars": 2714,
+      "native_output_chars": 2714
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "native_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "guarded_output_chars": 308,
+      "native_output_chars": 308
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "native_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "guarded_output_chars": 285,
+      "native_output_chars": 285
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "native_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "guarded_output_chars": 93,
+      "native_output_chars": 93
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "native_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "guarded_output_chars": 4778,
+      "native_output_chars": 4778
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "native_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "guarded_output_chars": 172,
+      "native_output_chars": 172
+    },
+    {
+      "form": "project_relative",
+      "path": "project_relative",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c185589675c0304a2eded3aead6d1dda75e3fae33a853a3163083e4a297c1973",
+      "native_output_sha256": "c185589675c0304a2eded3aead6d1dda75e3fae33a853a3163083e4a297c1973",
+      "guarded_output_chars": 97,
+      "native_output_chars": 97
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "none"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "native_output_sha256": "bf19b851b22f024e75f5b1e2a849e336dc9047f58f3badc7283a9df1525227e1",
+      "guarded_output_chars": 4776,
+      "native_output_chars": 4776
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 26
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "native_output_sha256": "a99f849ef057afb5c4f10a706848faccbb04eb792f877008cfbfe8c728bccb21",
+      "guarded_output_chars": 3775,
+      "native_output_chars": 3775
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 44,
+            "endLine": 120
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "native_output_sha256": "8ea00c871fa4ed8a6e12ce6cd3831804b96839b15e935a55cc6a85915b1dab7f",
+      "guarded_output_chars": 2714,
+      "native_output_chars": 2714
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "native_output_sha256": "c847209ca858eb4d811e32941987f43e3f41cbcf7d8e42bea671277b11b1eb64",
+      "guarded_output_chars": 384,
+      "native_output_chars": 384
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "native_output_sha256": "2cebb9c646d597e0634c4a527c275aab6394cab007d6660583833a180e681bfe",
+      "guarded_output_chars": 308,
+      "native_output_chars": 308
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 1
+          },
+          {
+            "startLine": 3,
+            "endLine": 3
+          },
+          {
+            "startLine": 5,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "native_output_sha256": "48efbdce9854ed28c77fbace4515f3788260e6da2aaad4423edf4a1be995dd73",
+      "guarded_output_chars": 285,
+      "native_output_chars": 285
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 2
+          },
+          {
+            "startLine": 4,
+            "endLine": 5
+          }
+        ]
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "native_output_sha256": "792cfa097c38badfd4e1049ea29f3393b0d90f25e3fb046fbc285e39be615bf1",
+      "guarded_output_chars": 93,
+      "native_output_chars": 93
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "raw"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "native_output_sha256": "ffba447bf3ddfb5d35e27f4c38ed3330a87406a5df918d341bc79006a870b08d",
+      "guarded_output_chars": 4778,
+      "native_output_chars": 4778
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "lines",
+        "ranges": [
+          {
+            "startLine": 1,
+            "endLine": 3
+          }
+        ],
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "native_output_sha256": "cadb3b9f49e2786ced06a131b09f5af5bae36e70141f24c6c9d756b7bc182197",
+      "guarded_output_chars": 311,
+      "native_output_chars": 311
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "tail",
+        "count": 3,
+        "raw": true
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "native_output_sha256": "fdb263bf5190b4a34cab77199f0e6e403e57a39015ebd4a8519d50407bb5aab6",
+      "guarded_output_chars": 172,
+      "native_output_chars": 172
+    },
+    {
+      "form": "file_uri",
+      "path": "file_uri",
+      "selected_public_basename": "clef-use/SKILL.md",
+      "selector": {
+        "kind": "conflicts"
+      },
+      "guard_succeeded": true,
+      "native_succeeded": true,
+      "guard_error": null,
+      "native_error": null,
+      "exact_native_content_equal": true,
+      "guarded_output_sha256": "f3ebfaa1681bd0c86fb6575c6107d803589b8e8b13f80e67d131b43d8bfb1647",
+      "native_output_sha256": "f3ebfaa1681bd0c86fb6575c6107d803589b8e8b13f80e67d131b43d8bfb1647",
+      "guarded_output_chars": 207,
+      "native_output_chars": 207
+    }
+  ],
+  "negative_read_audit": [
+    {
+      "label": "unknown_skill",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "nonpublic_local",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "escaping_symlink",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "literal_skill_traversal",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "encoded_skill_traversal",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "encoded_slash_traversal",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "local_traversal",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "nonpublic_scheme",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "unknown_internal_scheme",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "directory",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "offset_only_not_advertised",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "limit_only_not_advertised",
+      "refused": true,
+      "native_reader_invoked": false
+    },
+    {
+      "label": "offset_limit_not_advertised",
+      "refused": true,
+      "native_reader_invoked": false
+    }
+  ],
+  "actual_native_read_schema": {
+    "type": "object",
+    "properties": {
+      "path": {
+        "type": "string",
+        "description": "Local path, internal URI, or URL; selectors inline."
+      }
+    },
+    "required": [
+      "path"
+    ]
+  },
+  "actual_native_read_description": {
+    "sha256": "06867533de35899dfc3d94db58de1d6394ce81279d70356377d8348b6aa490d7",
+    "text": "Use `read` for static web; browser only if needed.\n\nPath suffixes: :50 or :50- starts at line 50; :50-200 inclusive; :50+150 counts lines; :-60 last 60; commas join ranges (:5-16,960-973) or individual lines (:19,59). :raw verbatim without anchors/prefixes; combine :2-4:raw or :raw:2-4. :conflicts lists one line per unresolved merge block. SVG/SVGZ default text; :img PNG, :raw original. Video requires ffmpeg/ffprobe: bare preview grid+metadata, :412 frame, :1h5m42s/:90s/:01:23 time.\n\nSources:\n- Bare code: declarations only; re-read ONLY footer-named omissions, NEVER guess `..`/`…`.\n- Directory: complete root; child listings cap at 12 (`… N more`), read child; page via :N-M/:-N.\n- SQLite: file.db tables; :table schema/rows; :table:key by primary key; ?limit=, ?where=, ?q=SELECT.\n- Archives: ZIP/JAR/APK/WHL, compressed TAR, RAR/7z/ISO/CAB/DEB/RPM/CPIO/AR/LZH/ARJ/ASAR, compressed streams; member via archive.ext:member/path.\n- PDF/documents: extracted text; notebooks: editable cells; images: decoded inline. URLs: reader text/markdown, :raw original HTML; bare host:port needs trailing slash."
+  },
+  "offset_limit_contract": {
+    "native_schema_properties": [
+      "path"
+    ],
+    "separate_offset_limit_advertised": false,
+    "direct_native_execute_ignores_extra_pagination_and_reads_full_body": true,
+    "guard_refuses_unadvertised_keys": true
+  },
+  "scope_limits": [
+    "Finite advertised text-selector families tested against seven installed Markdown files; no universal claim for all possible strings.",
+    "Image, video, archive, SQLite, network and other internal schemes remain outside the public Markdown allowlist.",
+    "Separate offset/limit fields are not advertised; native direct execute ignored them and returned full body. Guard refuses unadvertised keys.",
+    "Read output was compared as exact JSON content arrays, including native formatting/range behavior.",
+    "No model selection, completion, GUI operation or task verification was exercised."
+  ],
+  "prior_actual_batch": {
+    "basename": "clef-omp-native-consumer-readonly-public-20261011.json",
+    "sha256": "64845e9fd298976460cf8799e56400dd9523e22d6e64bd41a364d0561d4d5059",
+    "unchanged_status": "Stopped after 8 primary calls, no final answer; two native suffix reads were falsely refused by previous driver; counterfactual completion is unobserved."
+  },
+  "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+  "result": "PASS_AT_EXACT_ZERO_INFERENCE_SCOPE"
+}

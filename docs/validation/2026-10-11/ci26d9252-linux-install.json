@@ -1,0 +1,332 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Actual immutable assembled CI site installation on isolated Linux HOME; no model downloads or global mutation",
+  "ci_run_id": 38132441002,
+  "ci_url": "https://github.com/snowman0919/clef-use/actions/runs/38132441002",
+  "ci_head": "26d9252e3f169112789c920eb1c9507d5d9e9d0a",
+  "build_matrix_successes": 15,
+  "assembly": "SUCCESS",
+  "deploy": "SKIPPED: existing branch policy",
+  "first_status": "INSTALLED",
+  "repeat_status": "CURRENT",
+  "default_integrations": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ],
+  "explicit_three": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ],
+  "explicit_three_repeat": [
+    {
+      "harness": "codex",
+      "status": "UNCHANGED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "hermes",
+      "status": "UNCHANGED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "harness": "omp",
+      "status": "UNCHANGED",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ],
+  "comment_prefixes_preserved": {
+    ".codex/config.toml": true,
+    ".hermes/config.yaml": true,
+    ".omp/config.yml": true
+  },
+  "repeat_all_home_bytes_preserved": true,
+  "home_files": 26,
+  "packaged_python_exact_frozen_source": true,
+  "all_archive_hashes_verified": [
+    {
+      "filename": "clef-use-0.1.30-darwin-arm64-py311.zip",
+      "sha256": "bef575c0c93d71cd29dfdc41e79b71490c07b2e775645be1c04021b7dc7a281b"
+    },
+    {
+      "filename": "clef-use-0.1.30-darwin-arm64-py312.zip",
+      "sha256": "c8366d79a620645f2f6875b2c3fe3ff62f6fdafdb5b4a56528e1d580bd6543e4"
+    },
+    {
+      "filename": "clef-use-0.1.30-darwin-arm64-py313.zip",
+      "sha256": "a8cb4c1c91da557d5895887a944666ded1930a7eb8f0acc660527a37d7914720"
+    },
+    {
+      "filename": "clef-use-0.1.30-darwin-x86_64-py311.zip",
+      "sha256": "9454c3bc3d85c783c2c8b2cc180b3f723b4d739c0897b59e3ea5e9aab2f672b8"
+    },
+    {
+      "filename": "clef-use-0.1.30-darwin-x86_64-py312.zip",
+      "sha256": "c88787d1feeacbdb7fafcc46d74f1f8029390d1d19415c7d65f45ab52c6480d2"
+    },
+    {
+      "filename": "clef-use-0.1.30-darwin-x86_64-py313.zip",
+      "sha256": "0903dd79fc90ef0318ee8695a1a2e088eeb3716992648a155e07b078cbf67bb6"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-arm64-py311.zip",
+      "sha256": "06f4cc8d4d08b3272976d248938902af67cee725e5ea204acc87ab27406204d9"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-arm64-py312.zip",
+      "sha256": "c724c7a09fe9eebaa6fc72d59c5d3926b2e20a1df776eeb9d5966fe75abe2124"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-arm64-py313.zip",
+      "sha256": "4a20f3a62b4a077e9453347d25c175d989a45b183c28482751a99f8e722b1160"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-x86_64-py311.zip",
+      "sha256": "3806d0952a7d3e6734ae4879ce4d81f606525b8d71fb5339874da628581a44ae"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-x86_64-py312.zip",
+      "sha256": "b873f30c277b81050904739dca5f7d9e44990e074be55704bdeec5f1e39c2a6a"
+    },
+    {
+      "filename": "clef-use-0.1.30-linux-x86_64-py313.zip",
+      "sha256": "9b3b8db2f693b649789dff70d6084fbbedf7d0cdfe84d4011761905c366e7938"
+    },
+    {
+      "filename": "clef-use-0.1.30-win32-x86_64-py311.zip",
+      "sha256": "e2f514469772bc680fc5315e68ee32bdb789326e2fa1e4f452b423cf04fa5e7a"
+    },
+    {
+      "filename": "clef-use-0.1.30-win32-x86_64-py312.zip",
+      "sha256": "63069f772bee40d89b0479d8e197c447140141b3f138d45edb95570584fd0c1d"
+    },
+    {
+      "filename": "clef-use-0.1.30-win32-x86_64-py313.zip",
+      "sha256": "685826fa8e2e17c16a3da17cba566c7b089f8bcf72fe56885423cb4ce1333a86"
+    }
+  ],
+  "contract": {
+    "runtime_version": "0.1.30",
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "owned_loopback_stopped": true,
+  "raw_report_sha256": "27e1fd0d8d9db49d2afc708aed6741bf4132c29ea193d73c2c1c941312f34fc3",
+  "manifest_file_sha256": "08f9967c040da10eca2f52be97b9ba234afb289eb9d61e8f887fe6c0400e647b",
+  "manifest_URL_handling": "Memory-only loopback URLs; immutable CI archive/manifest files are not rewritten",
+  "public_release": "NOT_RUN",
+  "harness_model_or_GUI": "NOT_RUN: separate actual harness evidence only"
+}

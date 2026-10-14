@@ -1,0 +1,3771 @@
+{
+  "classification": "OBSERVED",
+  "acceptance_id": "INSTALL-05",
+  "candidate": "FINAL20",
+  "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+  "scope": "Actual FINAL20 installed CLI reports plus real Codex app-server skills/list, actual committed Hermes SDK catalog/skill_view and OMP SDK loadSkills, twelve cases in private native namespaces. No automatic acceptancePASS.",
+  "archive_sha256": "59833b6d07bb87f18154aed41c41fe7c9178282d4f4662e23eaa1dfd42c5925f",
+  "wheel_sha256": "31412f9d0576e90339a64b1afc088bc952946a20c3fdab78ac7150ffda10a8ed",
+  "installed_integrations_sha256": "d3d29e53db634484c4e0627d4b7ad17edd3478c380f12a8caaddf5c7a0c0b5d0",
+  "driver_sha256": "54db728c976b98eef7c940d91c2288f4d572a151d2fcd488b2a21b4c647d171a",
+  "declaration_sha256": "8ced5e0b5310cda15547183a4b06dbf9a5701550681291e7417e5cbc8a2e6cf1",
+  "message_authorized_receipt_sha256": "295bb68c70ff66c8bf5cb7c557f512630c9bb7d706eb5e51a38045868d0d5551",
+  "authorization_provenance": "Child-bound exact receipt from parent explicit ROOT_MESSAGE authorization; no independently root-written signature claim.",
+  "raw_matrix_sha256": "f8d9d45f7e020620ff52483da2c5ec6623538def75e5369032f351ce377ee4f9",
+  "cases": [
+    {
+      "case_id": "codex/SAME_REALPATH",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "raw_sha256": "6f72ccf933a93ad3d8b22bebe2d9f1f4be12ef0edae23baff0d7f687e643a079",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "native_after": {
+        "method": "skills/list",
+        "raw_sha256": "6f72ccf933a93ad3d8b22bebe2d9f1f4be12ef0edae23baff0d7f687e643a079",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "codex",
+            "profile": "default",
+            "scope": "user",
+            "changed": [],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.codex/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "2e35e44186ac7be6d492af761af4f0becf9e92daba870b87313c38dc5e751902",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "8ed8e07095459bb0eb4a7b70d1c31e956d853ee9b79d39271da719dc38c2d81b",
+        "install.stdout": "11d5d623b1798778f73e468b1f2dfb3815c9b728c2c8af457d2d13bc2b08236f",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "6ab689b11edef4712ea1f2c70f62b4d1b2948ba10635ae390613c914cade1c4c",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "a4096c2de2c556c598c6633f91ed0cbc7444d2f724960391cdeacf7dd5d4b377",
+        "native-after.stdout": "6f72ccf933a93ad3d8b22bebe2d9f1f4be12ef0edae23baff0d7f687e643a079",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "e806f06fec12a2236809060dd55a1a5c5242e46b494f87985a388bcac739dd93",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "eb355c96bd9c95f43ed3721ed32312f8b72bc74960f7db59ced96114dbcfca17",
+        "native-before.stdout": "6f72ccf933a93ad3d8b22bebe2d9f1f4be12ef0edae23baff0d7f687e643a079",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "home/.codex/skills/.system/skill-creator/SKILL.md": "6656e54755638e8efcf275a472b9672eaa8a9a1b9e59dc210e275b03b59e1e66",
+        "home/.codex/skills/.system/imagegen/SKILL.md": "681ddb4ad6d06a2acc78a3535b583f8d0c1ea800ecda3d56370d3310fd2cd4ba",
+        "home/.codex/skills/.system/openai-docs/SKILL.md": "aa6829e21df2223167c85d2e49b6337a7345c84c1033f1ec10182c7882b36d45",
+        "home/.codex/skills/.system/skill-installer/SKILL.md": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee",
+        "home/.codex/skills/.system/review-agent/SKILL.md": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228"
+      }
+    },
+    {
+      "case_id": "codex/DUPLICATE_NAME",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "raw_sha256": "8e12958305d7a8c87eb21e34084d8ddede84cdbcf7492ae657558be9c93d237f",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "native_after": {
+        "method": "skills/list",
+        "raw_sha256": "b56ba3d57bda7c819e5d006a8929f96a8022c48946c4aed263eaa92a048b734e",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+                "realpath": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "b0b02eacd1c56b2b8f67f508c869e21ecc4594be86c6f76ccce8632d3b14534b",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "48e4c5689b7e3839b3ac8a7d2e370d382a2cb7b0366d1e3ad58a1ec83c373d8f",
+        "install.stdout": "8c2abb9d655ee913f99f123b17a6cb4a8916f977bd175e81f987b204bb86bd08",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "12bd977e86cf932d192b414ade88e05d088f305267c93000d1ffd9bcff41d334",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "f61035ba657b75b38e0b0d7fb096cc942a41cfa0ac655a6bb63e9ca7139d4d6f",
+        "native-after.stdout": "b56ba3d57bda7c819e5d006a8929f96a8022c48946c4aed263eaa92a048b734e",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "8481b4a9d708b5cd83af3f01e29d98fdcc123ba9d784de80ecf68484929f38c3",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "5837a38e87521d6c6ad07d5ac995394835bf03d264441ba3b4289952251b0254",
+        "native-before.stdout": "8e12958305d7a8c87eb21e34084d8ddede84cdbcf7492ae657558be9c93d237f",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/duplicate-clef/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c",
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "home/.codex/skills/.system/skill-creator/SKILL.md": "6656e54755638e8efcf275a472b9672eaa8a9a1b9e59dc210e275b03b59e1e66",
+        "home/.codex/skills/.system/imagegen/SKILL.md": "681ddb4ad6d06a2acc78a3535b583f8d0c1ea800ecda3d56370d3310fd2cd4ba",
+        "home/.codex/skills/.system/openai-docs/SKILL.md": "aa6829e21df2223167c85d2e49b6337a7345c84c1033f1ec10182c7882b36d45",
+        "home/.codex/skills/.system/skill-installer/SKILL.md": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee",
+        "home/.codex/skills/.system/review-agent/SKILL.md": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228"
+      }
+    },
+    {
+      "case_id": "codex/PROJECT_OVERRIDE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "raw_sha256": "751649e2bb22584d6358bb4a485dc6d8b3e6c5f3c44ea098ce4b9d2183a64e55",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "native_after": {
+        "method": "skills/list",
+        "raw_sha256": "dae0ffec11120646423c922f53b1eb6001355972a4fd321ce69a734da0c0cf2f",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                  "scope": "repo",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                "realpath": "$CASE/project/.agents/skills/clef-use/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "287d0ba763d11becfbf6c5f4f273cc82d95a24ecf1f0183a506fdc9a0b5f8347",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "49477965149e158eff4319cb0fa453da95c4dbf08f463e2fc6b6ff9ced310ba7",
+        "install.stdout": "afc7301ed8f6a4d3d63409be13cb78a493af24aab41eb9b2ddb343a145d2d441",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "40910442f79cca470c8ed999087b705a333517e33d9d3b67537e7fa23eb82cea",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "b9846e54d6f8a8a8f593df77425618ac9e28ee6b23440cfe8dd66226321a00b5",
+        "native-after.stdout": "dae0ffec11120646423c922f53b1eb6001355972a4fd321ce69a734da0c0cf2f",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "da38a25b881e7d50ef0a93c5352aa58d31aea79f40abe34d976979b3cc428d43",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "ad48f6f09e52a0487782e839f73fbc518357d7d2d8854e4079d0890856fb6bfa",
+        "native-before.stdout": "751649e2bb22584d6358bb4a485dc6d8b3e6c5f3c44ea098ce4b9d2183a64e55",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "home/.codex/skills/.system/skill-creator/SKILL.md": "6656e54755638e8efcf275a472b9672eaa8a9a1b9e59dc210e275b03b59e1e66",
+        "home/.codex/skills/.system/imagegen/SKILL.md": "681ddb4ad6d06a2acc78a3535b583f8d0c1ea800ecda3d56370d3310fd2cd4ba",
+        "home/.codex/skills/.system/openai-docs/SKILL.md": "aa6829e21df2223167c85d2e49b6337a7345c84c1033f1ec10182c7882b36d45",
+        "home/.codex/skills/.system/skill-installer/SKILL.md": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee",
+        "home/.codex/skills/.system/review-agent/SKILL.md": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    },
+    {
+      "case_id": "codex/INACTIVE_SOURCE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "raw_sha256": "4cbd155164208dca32fdda67e926b4d9ceec4caba7d70bdc7c3b9ad19c624aad",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "native_after": {
+        "method": "skills/list",
+        "raw_sha256": "0321b7d2ba861fbb69bc59a3a10350ba097c01c7bc2817dd1ea2c831f995ac5d",
+        "native_result_without_descriptions": {
+          "data": [
+            {
+              "cwd": "$CASE/project",
+              "skills": [
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                  "scope": "repo",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use",
+                  "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-blender",
+                  "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "clef-use-diagnostics",
+                  "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                  "scope": "user",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "imagegen",
+                  "interface": {
+                    "displayName": "Image Gen",
+                    "shortDescription": "Generate or edit images for websites, games, and more",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/imagegen/assets/imagegen.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $imagegen to make or edit an image for this project."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/imagegen/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "openai-docs",
+                  "shortDescription": "Codex models/pricing, scheduled tasks, skills, settings, setup, troubleshooting, and self-knowledge; OpenAI APIs and ChatGPT Work. 'You'/'this app' means Codex only.",
+                  "interface": {
+                    "displayName": "OpenAI Docs",
+                    "shortDescription": "OpenAI and Codex docs for models, skills, tasks, and setup",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/openai-docs/assets/openai.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use OpenAI Docs for official docs lookup, questions about Codex itself or Codex surfaces, model selection, model migration, and prompt-upgrade work."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/openai-docs/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "review-agent",
+                  "interface": {
+                    "displayName": "Review Agent",
+                    "shortDescription": "Find actionable bugs in code changes",
+                    "iconSmall": null,
+                    "iconLarge": null,
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": "Use $review-agent to review the requested code changes and return actionable findings."
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/review-agent/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-creator",
+                  "shortDescription": "Create or update a skill",
+                  "interface": {
+                    "displayName": "Skill Creator",
+                    "shortDescription": "Create or update a skill",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-creator/assets/skill-creator.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-creator/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                },
+                {
+                  "name": "skill-installer",
+                  "shortDescription": "Install curated skills from openai/skills or other repos",
+                  "interface": {
+                    "displayName": "Skill Installer",
+                    "shortDescription": "Install curated skills from openai/skills or other repos",
+                    "iconSmall": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer-small.svg",
+                    "iconLarge": "$CASE/home/.codex/skills/.system/skill-installer/assets/skill-installer.png",
+                    "iconSmallUrl": null,
+                    "iconLargeUrl": null,
+                    "brandColor": null,
+                    "defaultPrompt": null
+                  },
+                  "path": "$CASE/home/.codex/skills/.system/skill-installer/SKILL.md",
+                  "scope": "system",
+                  "enabled": true,
+                  "pluginId": null
+                }
+              ],
+              "errors": []
+            }
+          ]
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                "realpath": "$CASE/project/.agents/skills/clef-use/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "5b8ebfb16faf2babe5605cd8363723375ed0895eeae0beb822f13ee7a3d7fff0",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "fde358cd2a0879e8b37e1164d88a66115fc7b0189b34b1dc630e5f9b8b9d334c",
+        "install.stdout": "e657bd33cfb3a0e15e363bb81fa2113edd67130d517fde2d6fb020f20de3e018",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "df9183da6b5d0e9ebf754cb5766cde6c95c78e0608576ad174589b649cfbf6dc",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "99b368e66d610bd5cd90cc7562fc7a2adc041f10c0bf1551047a9f19742c1f68",
+        "native-after.stdout": "0321b7d2ba861fbb69bc59a3a10350ba097c01c7bc2817dd1ea2c831f995ac5d",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "4488bf81c2f9becb55f49c44dfd1541eddb9fb4ffa87e01150582276cdeac470",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "411aa9cd0a6bf9d23e573ddf23be02a8992ac1f1a39e3230fa57a89d8fb39ae0",
+        "native-before.stdout": "4cbd155164208dca32fdda67e926b4d9ceec4caba7d70bdc7c3b9ad19c624aad",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "home/.codex/skills/.system/skill-creator/SKILL.md": "6656e54755638e8efcf275a472b9672eaa8a9a1b9e59dc210e275b03b59e1e66",
+        "home/.codex/skills/.system/imagegen/SKILL.md": "681ddb4ad6d06a2acc78a3535b583f8d0c1ea800ecda3d56370d3310fd2cd4ba",
+        "home/.codex/skills/.system/openai-docs/SKILL.md": "aa6829e21df2223167c85d2e49b6337a7345c84c1033f1ec10182c7882b36d45",
+        "home/.codex/skills/.system/skill-installer/SKILL.md": "d68b77e5bbb34dedab89d134da52855f140fc4b4299b80104f534e3b9e98f8ee",
+        "home/.codex/skills/.system/review-agent/SKILL.md": "07079efd0dc76f05fade424e5dfb048dce1de2df7626e1a4f56292a4f3f92228",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    },
+    {
+      "case_id": "hermes/SAME_REALPATH",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "e3abc23527c1a043c7f39c77e52cc052797ac05eef76d6766cf08e206a7cb658",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "roots": [
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/home/.hermes/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "native_after": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "c615e3212602bc24e259b6297073fb2a47651c238e5625ff38fa626f10ed8f13",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 0,
+              "root": "$CASE/project/.agents/skills",
+              "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            },
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "shadowed",
+              "load_name": null
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 0,
+              "root": "$CASE/project/.agents/skills",
+              "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            },
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "shadowed",
+              "load_name": null
+            }
+          ],
+          "roots": [
+            [
+              0,
+              "$CASE/project/.agents/skills"
+            ],
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/project/.agents/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "hermes",
+            "profile": "default",
+            "scope": "user",
+            "changed": [],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.hermes/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "e874c39b74c6d725cb1e7499a201c716b134ca3896c0a25a54c57afc856a8652",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "3e318defb6ea5df526c21b591752831ac83cf457f817de2a1648727e2a8c0a68",
+        "install.stdout": "cb998d01e2bae3512b3d72f178bf15a7eb6338a819f2b4a39a1540256a132fa5",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "ac543b7634c4a8c1458ec9df0458f701d15cede2e8d78566ec588fe4389fcefb",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "0999fdf17d815a482cbed21ca811a00bf249152d74c67c00c06c290a0b35f636",
+        "native-after.receipt.json": "3f08d74f74a9b90c1d299d567030ec77cc0488ed9055ca2c07f8abb21d0a8016",
+        "native-after.stdout": "c615e3212602bc24e259b6297073fb2a47651c238e5625ff38fa626f10ed8f13",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "ba1d7f67214f19d3ebee9d8b87c5a8808f4bf866149227e132f98b17e5f0cfe5",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "fb4aee2a556958f4f18c239c06273c023cd4e2b21b2660998751f83b55d56f68",
+        "native-before.stdout": "e3abc23527c1a043c7f39c77e52cc052797ac05eef76d6766cf08e206a7cb658",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.hermes/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.hermes/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.hermes/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+      }
+    },
+    {
+      "case_id": "hermes/DUPLICATE_NAME",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "fbdef1d91d3a6fa9245ed347d0beda89d22034024e78ccc0f54f2cb631cc86af",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "roots": [
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/home/.hermes/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "native_after": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "ce48f54e7805fbb0f2727af6135db7b520a50bdc2ff9a881b2db5f0131993b3a",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "ambiguous",
+              "load_name": null
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/duplicate-clef/SKILL.md",
+              "relative_path": "duplicate-clef",
+              "status": "ambiguous",
+              "load_name": "duplicate-clef"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "ambiguous",
+              "load_name": null
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/duplicate-clef/SKILL.md",
+              "relative_path": "duplicate-clef",
+              "status": "ambiguous",
+              "load_name": "duplicate-clef"
+            }
+          ],
+          "roots": [
+            [
+              0,
+              "$CASE/project/.agents/skills"
+            ],
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": false,
+            "error": "Ambiguous skill name 'clef-use': use one of duplicate-clef. 2 different skills share this name in the same skills directory tier; refusing to guess.",
+            "matches": [
+              "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "$CASE/home/.hermes/skills/duplicate-clef/SKILL.md"
+            ],
+            "load_names": [
+              "duplicate-clef"
+            ],
+            "hint": "Pass the exact relative path instead of the bare name, or rename one of the colliding skills so each name is unique."
+          }
+        },
+        "core_view_actual_body_sha256": null
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/home/.hermes/skills/duplicate-clef/SKILL.md",
+                "realpath": "$CASE/home/.hermes/skills/duplicate-clef/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "624a32e267d5315770ec80bdf090b077544f5d96d2b5f4a8d51fdd23d30a744e",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "79b882c472ec49eb91a63c01a110ed991128d37de546d18f3e580325f85a1a36",
+        "install.stdout": "b6e7898fe21ee82bc16f84eed3ce47d73da7b30b9cc4bea7944988aa21bed2fb",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "013aa2c0f595d52b0dc4f5ff1d8620f88e2c0c911d2e64043ff1b44d701001c3",
+        "native-after.stderr": "bfb1a0b207649bd4721ab0e987e5bdf40e805b8fc146ae680f50dea5d2c37075",
+        "status.stdout": "0999fdf17d815a482cbed21ca811a00bf249152d74c67c00c06c290a0b35f636",
+        "native-after.receipt.json": "5cc70e9fdff6f006a74fd3ad447998396b0afb6a33b48b89d7c2a05c3e76835c",
+        "native-after.stdout": "ce48f54e7805fbb0f2727af6135db7b520a50bdc2ff9a881b2db5f0131993b3a",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "34ac93ffbf4363f4ee8b6bf2fa24f5acd8b8926f4cb61cc8b6ca4e8cac74ce1c",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "aa2a8c2e1d5fe15afa766a569f235a798efe6718b4e23d9373071a22d008998c",
+        "native-before.stdout": "fbdef1d91d3a6fa9245ed347d0beda89d22034024e78ccc0f54f2cb631cc86af",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.hermes/skills/duplicate-clef/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c",
+        "home/.hermes/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.hermes/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.hermes/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+      }
+    },
+    {
+      "case_id": "hermes/PROJECT_OVERRIDE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "2170d561c13ee6115f0e0ba0f282a0d5b80ef10e0a49aff9c925c668f5d65cda",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "roots": [
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/home/.hermes/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "native_after": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "d9372998d69ac84d66fc03ce3b84c8609b155bf4d1ca0cc717f35d72c3c51434",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 0,
+              "root": "$CASE/project/.agents/skills",
+              "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            },
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "shadowed",
+              "load_name": null
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 0,
+              "root": "$CASE/project/.agents/skills",
+              "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            },
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "shadowed",
+              "load_name": null
+            }
+          ],
+          "roots": [
+            [
+              0,
+              "$CASE/project/.agents/skills"
+            ],
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/project/.agents/skills/clef-use",
+            "linked_files": null,
+            "usage_hint": null,
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "hermes",
+            "profile": "default",
+            "scope": "user",
+            "changed": [],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.hermes/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "c7fd49471078cc8b9948709feba0b3d361c6c58cc76f91521b156514fc9624f2",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "bd83ca05b68f50c01c9fdbb3cd9fe963f383c8ccdf15abcc56ba97d6338c24e6",
+        "install.stdout": "61d305465df1cf6b00e0ef886eeeec3ca24a878ae6cdab65929c7931691e86d8",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "4d6f5a6c99c7004255308efee16f0f5d6ade5fd2f6c34b1d2efde38b472b74b4",
+        "native-after.stderr": "68c4d132819c701e3e2e04972f0f02eb98dc49618837ef85bab49269714bcd8f",
+        "status.stdout": "0999fdf17d815a482cbed21ca811a00bf249152d74c67c00c06c290a0b35f636",
+        "native-after.receipt.json": "cb3ae140aaf99f5174476e53dab57f0ce6b2c6ca7d79dbe9f6f0201f6adbc3bb",
+        "native-after.stdout": "d9372998d69ac84d66fc03ce3b84c8609b155bf4d1ca0cc717f35d72c3c51434",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "3a279c9de9f676c8eda2c24a54d17f71bb0eb4882fd5873279efc20b393ca189",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "3a4c137a95f73ffe41817be6688d6666df128b980f7d3e9fbadb2421e52dfc98",
+        "native-before.stdout": "2170d561c13ee6115f0e0ba0f282a0d5b80ef10e0a49aff9c925c668f5d65cda",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.hermes/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.hermes/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.hermes/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    },
+    {
+      "case_id": "hermes/INACTIVE_SOURCE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "f2d8deba826e2377cab6fc65aec91803bc9f4bf2cf1383f392844023eb302c7d",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "roots": [
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/home/.hermes/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "native_after": {
+        "method": "Hermes catalog/view",
+        "raw_sha256": "f2d8deba826e2377cab6fc65aec91803bc9f4bf2cf1383f392844023eb302c7d",
+        "actual_profiled_discovery_entries": {
+          "_skill_catalog": 2,
+          "_skill_search_dirs": 4,
+          "_locate_skill": 1
+        },
+        "native_result_without_guide_body": {
+          "all": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "filtered": [
+            {
+              "name": "clef-use-blender",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-blender/SKILL.md",
+              "relative_path": "clef-use-blender",
+              "status": "unique",
+              "load_name": "clef-use-blender"
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use-diagnostics/SKILL.md",
+              "relative_path": "clef-use-diagnostics",
+              "status": "unique",
+              "load_name": "clef-use-diagnostics"
+            },
+            {
+              "name": "clef-use",
+              "category": null,
+              "tier": 1,
+              "root": "$CASE/home/.hermes/skills",
+              "path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+              "relative_path": "clef-use",
+              "status": "unique",
+              "load_name": "clef-use"
+            }
+          ],
+          "roots": [
+            [
+              1,
+              "$CASE/home/.hermes/skills"
+            ]
+          ],
+          "active": "$CASE/home/.hermes/skills",
+          "untrusted": null,
+          "core_view": {
+            "success": true,
+            "name": "clef-use",
+            "tags": [],
+            "related_skills": [],
+            "path": "clef-use/SKILL.md",
+            "skill_dir": "$CASE/home/.hermes/skills/clef-use",
+            "linked_files": {
+              "references": [
+                "references/API_BASELINE.md",
+                "references/LIVE_API.md"
+              ]
+            },
+            "usage_hint": "To view linked files, call skill_view(name, file_path) where file_path is e.g. 'references/api.md' or 'assets/config.yaml'",
+            "required_environment_variables": [],
+            "required_commands": [],
+            "missing_required_environment_variables": [],
+            "missing_credential_files": [],
+            "missing_required_commands": [],
+            "setup_needed": false,
+            "setup_skipped": false,
+            "readiness_status": "available",
+            "_source_path": "$CASE/home/.hermes/skills/clef-use/SKILL.md",
+            "metadata": {
+              "guide-contract": "1",
+              "authored-against": "0.1.29"
+            }
+          }
+        },
+        "core_view_actual_body_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "native_loaded_body_contains_exact_selected_input_body": true
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "hermes",
+            "profile": "default",
+            "scope": "user",
+            "changed": [
+              "$CASE/home/.hermes/config.yaml",
+              "$CASE/home/.hermes/clef-use-integrations/manifest.json"
+            ],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.hermes/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          },
+          {
+            "harness": "omp",
+            "status": "NOT_INSTALLED"
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "ee87da4c4e776887675b952f966c5d2101c3a2c13a2cb3524a49a6db08ea2c7a",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "16dc7150386ca497dbcdeffce4fbbe33f216754b7b1eb5673397e1139f9d47c9",
+        "install.stdout": "f328ac3f56bad256da0f4085742aeee6cf7fe3d2b67b5bc118d227dca2c7a611",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "d26e213223428787fc6b3d35bd1aaf593e5a38d1a794aacdccb0771c9ac0dfa6",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "0999fdf17d815a482cbed21ca811a00bf249152d74c67c00c06c290a0b35f636",
+        "native-after.receipt.json": "c94b669be4d14d67d3cb23fbe7fdb145b89461a2c161c7d84a2e62302fe655c5",
+        "native-after.stdout": "f2d8deba826e2377cab6fc65aec91803bc9f4bf2cf1383f392844023eb302c7d",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "a57302be27e8e3ab66e4474e4fe804361db2c1e81875edb3df1fd6c42178fe2f",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "58fac563c40b3872fd9acdc504fe4b2b5f0a4dc3d33921abdda30c65ac853a86",
+        "native-before.stdout": "f2d8deba826e2377cab6fc65aec91803bc9f4bf2cf1383f392844023eb302c7d",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.hermes/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.hermes/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.hermes/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    },
+    {
+      "case_id": "omp/SAME_REALPATH",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "loadSkills",
+        "raw_sha256": "129657a74bbe884c143f9fd0a79183fa8d2033dc6b9bf833017bcc689b966892",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "native_after": {
+        "method": "loadSkills",
+        "raw_sha256": "e4f927fbee78c56d8cdccc25978e9fa9f8dde5bc019018ee7f22f67492dbf7ae",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/project/.agents/skills/clef-use",
+              "source": "agents:project",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                "level": "project"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "omp",
+            "profile": "default",
+            "scope": "user",
+            "changed": [],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.omp/agent/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "407687b92c1ddc0a8cbbd95a4bdda0dd6b9d26ebbfd4206abeb7144804d58e5b",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "ebb6c2bf113beb66a8a549b988d671d8c5f8b73523b2ce18503162b0589c2041",
+        "install.stdout": "69ec95094443b4cdaae1f5df768f3a265fa4a2dbc998dbbb7db49459d9b2121f",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "0884c2302f9d68c350ef8dd7677856b39cf61de5d7b3f4dd4fe825726770f454",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "1630c660c49b225eb163c7a476db99f688852d5af186fd0e43f6fa284eb3b4ba",
+        "native-after.receipt.json": "b374e6c3a2e07b6a180664f33941092a964a4c8aaa781a2735dae85a1dd9fefd",
+        "native-after.stdout": "e4f927fbee78c56d8cdccc25978e9fa9f8dde5bc019018ee7f22f67492dbf7ae",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "e2f1499adcc6589dd1f3054fe0e553edcc28bbb5e9c62561b275d216a0e04dae",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "3b204ea8a0717188bd86793286d5711843c3b739c943c96ca596527ee7f71163",
+        "native-before.stdout": "129657a74bbe884c143f9fd0a79183fa8d2033dc6b9bf833017bcc689b966892",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+      }
+    },
+    {
+      "case_id": "omp/DUPLICATE_NAME",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "loadSkills",
+        "raw_sha256": "edfbe5597a185688f5f2bce4732ff6ea6b2045c4e79580c20e1ac4f135b59da1",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "native_after": {
+        "method": "loadSkills",
+        "raw_sha256": "b06405841aa68ba0c4a58da29822abab4994b8f92c6f7043dde828c5ea2f803b",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "agents/clef-use",
+              "filePath": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/duplicate-clef",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": [
+            {
+              "skillPath": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+              "message": "name collision: \"clef-use\" from $CASE/home/.agents/skills/duplicate-clef/SKILL.md differs from $CASE/home/.agents/skills/clef-use/SKILL.md; available as \"agents/clef-use\""
+            }
+          ]
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md",
+                "realpath": "$CASE/home/.agents/skills/duplicate-clef/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "fc5555e19571828c6040b89e67d5c5d39ac511c94ae3626cadc872703820c552",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "3dafe7d91174117f6fae38e9c918407d0cbbbec706e93b85e08d82dae2a543fd",
+        "install.stdout": "79aed1df60c55584b00937c740c52cfb95e3bf404774de9702663576d1be01ef",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "1e9bf483f38ca59dcb7c3f59bf73a5799bdaa286377b41406d6e03eff078c2e7",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "1630c660c49b225eb163c7a476db99f688852d5af186fd0e43f6fa284eb3b4ba",
+        "native-after.receipt.json": "d32cdbf05683891aa54c4ba01efd57aad8ebdd7a116829fc9249d1e9d1866941",
+        "native-after.stdout": "b06405841aa68ba0c4a58da29822abab4994b8f92c6f7043dde828c5ea2f803b",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "6339cc5aa6fd8570ca8abf705942b3d7f6a9ad3851d930c0ebbf052e0b3342c9",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "fae506ac660850c0b17f00e6fce1ce4b1cb114cfecc8994065d342d13c625ec6",
+        "native-before.stdout": "edfbe5597a185688f5f2bce4732ff6ea6b2045c4e79580c20e1ac4f135b59da1",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/duplicate-clef/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c",
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+      }
+    },
+    {
+      "case_id": "omp/PROJECT_OVERRIDE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 2,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "loadSkills",
+        "raw_sha256": "d5fc304e23b3fa02033b864d700222167ce88bddfab377248cc034da2c941181",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "native_after": {
+        "method": "loadSkills",
+        "raw_sha256": "1f241f1dcbb4745953bf9b4fb524386489eb66b9cefc3d73cc9d84a4c76fc772",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "agents/clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/project/.agents/skills/clef-use",
+              "source": "agents:project",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                "level": "project"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": [
+            {
+              "skillPath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "message": "name collision: \"clef-use\" from $CASE/home/.agents/skills/clef-use/SKILL.md differs from $CASE/project/.agents/skills/clef-use/SKILL.md; available as \"agents/clef-use\""
+            }
+          ]
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "CONFLICT",
+            "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+            "shadowed": [
+              {
+                "name": "clef-use",
+                "path": "$CASE/project/.agents/skills/clef-use/SKILL.md",
+                "realpath": "$CASE/project/.agents/skills/clef-use/SKILL.md"
+              }
+            ]
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "6e3942dfc013ce43c8b9ff9a7418108d37ae80b57524e5cbf5ba1f10b0fa6c6c",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "c020358348a01b6bab442157daea21a7ef91e77edf2f8d14cb832f87c7e8d606",
+        "install.stdout": "011f9dd32476ecd9e81dcec0c5d64c13f0b5a95480f0512f7c4585a341c44dea",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "a5fc16922723216881536bdceddc9b1a0275e651f6826abf2aa915e8b5ec1d6a",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "1630c660c49b225eb163c7a476db99f688852d5af186fd0e43f6fa284eb3b4ba",
+        "native-after.receipt.json": "b8457c361520e7654db0bb8014a5be0c323a9608b4b72ecf9ed02704ffee3142",
+        "native-after.stdout": "1f241f1dcbb4745953bf9b4fb524386489eb66b9cefc3d73cc9d84a4c76fc772",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "ba4d674a14951aec47cbaae326408ad7ac0300ddb199005ffcfc08f9f543818f",
+        "dry-run.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "dry-run.receipt.json": "0917ab47f8cd2de323ee0f6df1ce1fb598f6e7d47c7eb62458488d4e6295d0e4",
+        "native-before.stdout": "d5fc304e23b3fa02033b864d700222167ce88bddfab377248cc034da2c941181",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    },
+    {
+      "case_id": "omp/INACTIVE_SOURCE",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "loadSkills",
+        "raw_sha256": "c1869388b948aea0be3e80e13cfad1ebe4b26bf331c156b3d0fd7a9350f213bf",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": true,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "native_after": {
+        "method": "loadSkills",
+        "raw_sha256": "b7279e3fd7b1328511d80a20bcd2760fa0b9dddcb02821ad3245e0513c96b2b2",
+        "native_result_without_descriptions": {
+          "skills": [
+            {
+              "name": "clef-use",
+              "filePath": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-blender",
+              "filePath": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-blender",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-blender/SKILL.md",
+                "level": "user"
+              }
+            },
+            {
+              "name": "clef-use-diagnostics",
+              "filePath": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+              "baseDir": "$CASE/home/.agents/skills/clef-use-diagnostics",
+              "source": "agents:user",
+              "hide": false,
+              "_source": {
+                "provider": "agents",
+                "providerName": "Agent Dirs (.agent/.agents)",
+                "path": "$CASE/home/.agents/skills/clef-use-diagnostics/SKILL.md",
+                "level": "user"
+              }
+            }
+          ],
+          "warnings": []
+        },
+        "actual_native_options": {
+          "enabled": true,
+          "enableAgentsUser": true,
+          "enableAgentsProject": false,
+          "enablePiUser": false,
+          "enablePiProject": false,
+          "enableClaudeUser": false,
+          "enableClaudeProject": false,
+          "enableCodexUser": false,
+          "cwd": "$CASE/project",
+          "disabledExtensions": []
+        }
+      },
+      "installed_dry_run": {
+        "integrations": [
+          {
+            "status": "PREVIEW",
+            "harness": "omp",
+            "profile": "default",
+            "scope": "user",
+            "changed": [],
+            "skills": [
+              "clef-use",
+              "clef-use-blender",
+              "clef-use-diagnostics"
+            ],
+            "manifest": "$CASE/home/.omp/agent/clef-use-integrations/manifest.json",
+            "stages": {
+              "INSTALLED": {
+                "status": "NOT_RUN"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "installed_status": {
+        "integrations": [
+          {
+            "harness": "codex",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "hermes",
+            "status": "NOT_INSTALLED"
+          },
+          {
+            "harness": "omp",
+            "profile": "default",
+            "status": "INSTALLED",
+            "modified": [],
+            "disabled": [],
+            "release": "0.1.30",
+            "compatibility": {
+              "status": "MATCH",
+              "reload_required": false,
+              "installed_release": "0.1.30",
+              "runtime_release": "0.1.30",
+              "action": null
+            },
+            "stages": {
+              "INSTALLED": {
+                "status": "PASS"
+              },
+              "DISCOVERED": {
+                "status": "NOT_RUN"
+              },
+              "LOADED": {
+                "status": "NOT_RUN"
+              },
+              "INVOKED": {
+                "status": "NOT_RUN"
+              },
+              "TASK_VERIFIED": {
+                "status": "NOT_RUN"
+              }
+            }
+          }
+        ]
+      },
+      "raw_artifact_sha256": {
+        "install.receipt.json": "4890e68c458f6eaefc74f0bf1b1d0e4d7818b2b2b02b9b86a058f720eecefb0a",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "16d02acc1ed1ab4233e693b6b55a242d9db045762a4db3ebe323cd0b45d46a90",
+        "install.stdout": "635a96ce9976d4c59bd6644f4cece7d9ceeddbe286c74fd6ff9c95aeca9d0f55",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "77f492010dea15aac319ffb48cf64bee394b87ad369bef62e47ad0c49c05600b",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "1630c660c49b225eb163c7a476db99f688852d5af186fd0e43f6fa284eb3b4ba",
+        "native-after.receipt.json": "ee95851f1aa3e401de941013f3b13bb84d0d2b879a4b206b7130dbf46e7026dd",
+        "native-after.stdout": "b7279e3fd7b1328511d80a20bcd2760fa0b9dddcb02821ad3245e0513c96b2b2",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "8ce0a4fdce0df278d23a40311df142ec602d0f0a9a929315e7c2a87a9c712589",
+        "dry-run.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288",
+        "dry-run.receipt.json": "a3881846526f136f665688252b6b38c13b90f4312ee6409ceefef0fca21a4c8a",
+        "native-before.stdout": "c1869388b948aea0be3e80e13cfad1ebe4b26bf331c156b3d0fd7a9350f213bf",
+        "status.audit.json": "7aa36a30d74dc8402f0550610ea82050f498dee86197c16ccde5daf6106d1a00",
+        "install.audit.json": "e45b22ec1852123b0697adfc46418565ee8107d318e90699da6a18520d4e8288"
+      },
+      "guide_input_file_sha256": {
+        "home/.agents/skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "home/.agents/skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "home/.agents/skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "project/.agents/skills/clef-use/SKILL.md": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+      }
+    }
+  ],
+  "actual_counts": {
+    "codex_native_report_processes": 8,
+    "Codex_skills_list_successful_responses": 8,
+    "runtime_capability_subprocesses": 18,
+    "hermes_native_report_processes": 8,
+    "omp_native_report_processes": 8,
+    "OMP_public_loadSkills_calls": 8
+  },
+  "Hermes_actual_profiled_internal_entries": {
+    "_skill_catalog": 16,
+    "_skill_search_dirs": 32,
+    "_locate_skill": 8
+  },
+  "explicit_native_report_processes": 24,
+  "installed_initial_integrations": 12,
+  "installed_dry_run_reports": 12,
+  "installed_status_reports": 12,
+  "native_remaining_cases_NOT_RUN": 0,
+  "policy_review_flags": [
+    "Hermes PROJECT_OVERRIDE: actual trusted project tier0 core selected and native skill_view returns project body; actual user core catalog status shadowed, while installed dry-run PREVIEW exit0. Independent product-policy review required.",
+    "Codex INACTIVE_SOURCE is only individual disabled-skill coverage; installed dry-run CONFLICT exit2 requires interpretation of actual enabled flags, never whole inactive-source proof.",
+    "All installed status reports are retained independently of dry-run and native rosters; no default PASS from successful process exit."
+  ],
+  "cleanup": {
+    "outer_processes_waited": 60,
+    "all_after_wait_thread_children": 0,
+    "all_after_wait_direct_PPID_children": 0,
+    "all_after_wait_sets_agree": true,
+    "own_install_and_matrix_root_process_matches": 0,
+    "process_scan_permission_denials": 0,
+    "owned_filesystem_sockets": 0,
+    "live_sequential_snapshot_disagreements_preserved": 8
+  },
+  "install_public_evidence_sha256": "212d027b131feb86ba2940b20cc850fc935a0e53a4b7d024b93183fb8b66283c",
+  "history": {
+    "FINAL17_first_setup_failure_preserved": true,
+    "FINAL17_actual_false_conflict_preserved": true,
+    "FINAL18_execution": "NEVER_STARTED_SUPERSEDED",
+    "FINAL19_actual_duplicate_failure_preserved": true,
+    "FINAL19_remaining_NOT_RUN": 10,
+    "all_admission_failures_preserved": true
+  },
+  "NOT_RUN": [
+    "Whole inactive-source/profile inventory in Codex: no verified native source-toggle/report API.",
+    "Codex native guide body load/invoke, OMP guide body invoke, model activation and whole task E2E: outside this discovery-only scope.",
+    "OMP internal per-provider scan count: not separately observed; public loadSkills calls only.",
+    "Windows FINAL20 installation/harness discovery: not exercised in this Linux-only slice."
+  ],
+  "models": 0,
+  "services": 0,
+  "GUI": 0,
+  "OS_inputs": 0,
+  "automatic_retries": 0
+}

@@ -1,0 +1,460 @@
+{
+  "classification": "OBSERVED",
+  "source_base": "bf7b74c9147aad64582b702646da0d5e6ab700ba",
+  "scope": "Scoped configured Blender workspace tool observation; source/component verification only",
+  "integrated_source_sha256": {
+    "src/clef_use/blender_snapshot.py": "376b78843ce6bcdcd9496da09ee32c79283eda04610bff253f7b8dfb3e8f0881",
+    "src/clef_use/blender_state.py": "d4d9c7a3836e68082356292f09dc17b6a9e448943504a36b0a85eb5433ab53b4",
+    "src/clef_use/capabilities.py": "6c7cbd0aab5a07438201fe448caedc7c88b03309c40072a96027ac4ce681df57",
+    "tests/test_blender_snapshot.py": "350447314a17ce0d263188f7d53b570f3a41db450a8acee74773ae94acda4852",
+    "tests/test_blender_state.py": "6acd7ac01397f93c1381f3fa4b0436b7133120e750b5bce7d3d268c1022b00d1"
+  },
+  "contract": {
+    "native_mode_binding": "Context window, workspace and view_layer pointers must match owning window; never map Object.mode to Context.mode",
+    "tool_scope": "Exactly one nonempty configured VIEW_3D reference for bound native context mode, with process-bound workspace and complete unique VIEW_3D area IDs",
+    "authority": "Focused editor and effective dispatch explicitly UNKNOWN; no operation readiness inferred",
+    "bounds": "Retain initialized references in native order; refuse more than 128, malformed or ambiguous evidence; no silent truncation",
+    "read_only": "No product context overrides, tool creation/refresh/getters, operators or scene writes"
+  },
+  "regression": {
+    "collector_before": {
+      "failed": 17,
+      "passed": 42,
+      "log_sha256": "7703cf2af7f4b05f5b78e30c4f6c81e12f7767de6534184883c8909fef2a7cd4"
+    },
+    "provider_positive_before": {
+      "failed": 5,
+      "passed": 5,
+      "deselected": 87,
+      "scope": "Initial positive active_tool filter only; invalid-evidence cases not all selected",
+      "log_sha256": "9b994dae74c64c4511fc26800698cbad608f7076f1916194d7ca0d9bc02d5b45"
+    },
+    "scoped_final": {
+      "passed": 167,
+      "log_sha256": "1533804f1e563f69193da0fd57a57ff6f6ba03cac610639e6cd7744c460c48d6"
+    },
+    "integrated": {
+      "passed": 1177,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 58.59,
+      "log_sha256": "1ace3c033d90a6fc8252371b30478d148f65ecdb7f47f27016e90c3d8e0da39a"
+    },
+    "lint_format": "PASS: five changed Python files",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool examples",
+    "review": "Read-only scoped review found no additional concrete defect; no independent execution claimed"
+  },
+  "historical_native_before": {
+    "receipt_sha256": "e9dc59effa4b1884e2bf95a2134f833bd87a18b0d3c0792a08eb0105e4d6bebd",
+    "collector_sha256": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12",
+    "observation": "Native OBJECT/EDIT_MESH initialized references and all three context bindings available; old collector omitted active_tool evidence",
+    "checks": {
+      "both_modes_observed": true,
+      "three_native_context_pointer_bindings_match": true,
+      "current_mode_direct_ref_unique": true,
+      "object_mode_is_distinct_in_edit": true,
+      "all_reads_restore_context_and_toolrefs": true,
+      "collector_source_unchanged": true
+    },
+    "provenance": {
+      "elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "driver_sha256": "69e12d32a7ef79d0f1e926fc22fb350cb7128eb59426cc5dfad5d3acc843c20e",
+      "snapshot_source_sha256": {
+        "blender_snapshot.py": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12"
+      },
+      "snapshot_source_sha256_at_end": {
+        "blender_snapshot.py": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12"
+      },
+      "native_report_sha256": "5ef31adf0751492c3b4253879f3480b235d60aa06f33f44c8d7517543bb9505c",
+      "native_rna_sha256": "a9268a271540a54749f33725f8bb3e5fdc3fc55bd3579b2793124d233f177399"
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "children_absent": true,
+      "x_socket_removed": true,
+      "production_blender_after": true
+    },
+    "limits": "Historical tool API probe only; diagnostic override restored context. One fixed private EDIT setup separate. Not current-product proof."
+  },
+  "native_after_receipt_sha256": "614319d6dcfeea6e9ccc7da15b834be3f5f56f0fe5adc3b6a595a7db4b28de31",
+  "native_after": {
+    "classification": "OBSERVED_NATIVE_SOURCE_COMPONENT",
+    "scope": "Actual canonical Blender UIthread collector -> private Unix socket/SO_PEERCRED -> native XRes foreground PID/client dimensions -> BlenderStateProvider -> StateCompiler; ownedfactory OBJECT+EDIT_MESH; not installed/E2E/model/whole-task/performance evidence",
+    "status": "PASS",
+    "samples": [
+      {
+        "expected_context_mode": "OBJECT",
+        "native_context_mode": "OBJECT",
+        "native_active_object_mode": "OBJECT",
+        "native_context_area_is_none": true,
+        "native_context_region_is_none": true,
+        "native_context_pointer_equalities": {
+          "window": true,
+          "workspace": true,
+          "view_layer": true
+        },
+        "native_tool_refs": [
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "OBJECT"
+          }
+        ],
+        "raw_snapshot_tool_refs": [
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "OBJECT"
+          }
+        ],
+        "configured_active_tool": {
+          "space_type": "VIEW_3D",
+          "context_mode": "OBJECT",
+          "idname": "builtin.select_box",
+          "focused_editor": "UNKNOWN",
+          "effective_dispatch": "UNKNOWN"
+        },
+        "bindings": {
+          "native_pid": true,
+          "native_client_dimensions": true,
+          "workspace_identity_matches_native": true,
+          "area_identities_match_native": true,
+          "native_and_snapshot_refs_equal": true,
+          "unique_mode_matched_ref_equals_fact": true
+        },
+        "active_tool_fact_metadata": {
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791772702.4219496,
+          "state_version": 1,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unknown_facts": {
+          "popup": "UNKNOWN",
+          "modal": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "provider_status": {
+          "status": "PARTIAL",
+          "provider": "BLENDER_PUBLIC_RNA",
+          "verified_facts": [
+            "active_tool",
+            "application",
+            "application_snapshot",
+            "editor_layout",
+            "keymap_inventory",
+            "mode",
+            "properties",
+            "scene_units",
+            "selection",
+            "selection_identities",
+            "view_revision"
+          ]
+        },
+        "operation_refusals": [
+          {
+            "family": "menu_assess",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "menus: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "command_search",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "ime_composing: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "numeric_transform",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "ime_composing: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "property_edit",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "ime_composing: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "viewport_gesture",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "ime_composing: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "modal_cancel",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "modal is not owned by this operation runner"
+          }
+        ],
+        "fixture_setup": null
+      },
+      {
+        "expected_context_mode": "EDIT_MESH",
+        "native_context_mode": "EDIT_MESH",
+        "native_active_object_mode": "EDIT",
+        "native_context_area_is_none": true,
+        "native_context_region_is_none": true,
+        "native_context_pointer_equalities": {
+          "window": true,
+          "workspace": true,
+          "view_layer": true
+        },
+        "native_tool_refs": [
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "EDIT_MESH"
+          },
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "OBJECT"
+          }
+        ],
+        "raw_snapshot_tool_refs": [
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "EDIT_MESH"
+          },
+          {
+            "idname": "builtin.select_box",
+            "space_type": "VIEW_3D",
+            "mode": "OBJECT"
+          }
+        ],
+        "configured_active_tool": {
+          "space_type": "VIEW_3D",
+          "context_mode": "EDIT_MESH",
+          "idname": "builtin.select_box",
+          "focused_editor": "UNKNOWN",
+          "effective_dispatch": "UNKNOWN"
+        },
+        "bindings": {
+          "native_pid": true,
+          "native_client_dimensions": true,
+          "workspace_identity_matches_native": true,
+          "area_identities_match_native": true,
+          "native_and_snapshot_refs_equal": true,
+          "unique_mode_matched_ref_equals_fact": true
+        },
+        "active_tool_fact_metadata": {
+          "source": "APP_TELEMETRY",
+          "observed_at": 1791772702.667965,
+          "state_version": 2,
+          "validity": "VALID",
+          "uncertainty": 0.0
+        },
+        "unknown_facts": {
+          "popup": "UNKNOWN",
+          "modal": "UNKNOWN",
+          "text_focus": "UNKNOWN",
+          "ime_composing": "UNKNOWN",
+          "keymap": "UNKNOWN",
+          "keymap_version": "UNKNOWN",
+          "loading": "UNKNOWN",
+          "editor": "UNKNOWN",
+          "menus": "UNKNOWN"
+        },
+        "provider_status": {
+          "status": "PARTIAL",
+          "provider": "BLENDER_PUBLIC_RNA",
+          "verified_facts": [
+            "active_tool",
+            "application",
+            "application_snapshot",
+            "editor_layout",
+            "keymap_inventory",
+            "mode",
+            "properties",
+            "scene_units",
+            "selection",
+            "selection_identities",
+            "view_revision"
+          ]
+        },
+        "operation_refusals": [
+          {
+            "family": "menu_assess",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "menus: UNKNOWN, uncertainty=1"
+          },
+          {
+            "family": "command_search",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "mode does not match required 'OBJECT'"
+          },
+          {
+            "family": "numeric_transform",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "mode does not match required 'OBJECT'"
+          },
+          {
+            "family": "property_edit",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "mode does not match required 'OBJECT'"
+          },
+          {
+            "family": "viewport_gesture",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "mode does not match required 'OBJECT'"
+          },
+          {
+            "family": "modal_cancel",
+            "status": "BLOCKED",
+            "input_count": 0,
+            "reason": "modal is not owned by this operation runner"
+          }
+        ],
+        "fixture_setup": {
+          "operator": "object.mode_set",
+          "requested_mode": "EDIT",
+          "result": [
+            "FINISHED"
+          ],
+          "explicit_fixture_setup_not_reader": true
+        }
+      }
+    ],
+    "checks": {
+      "both_object_and_edit_context_modes_observed": true,
+      "all_native_context_pointer_bindings_match": true,
+      "all_active_tool_bindings_match": true,
+      "fact_source_actual_telemetry": true,
+      "other_guards_unknown": true,
+      "all_six_families_blocked_each_mode": true,
+      "source_hashes_unchanged": true,
+      "all_owned_resources_cleaned": true,
+      "production_blender_process_preserved": true
+    },
+    "native_keyboard_pointer_input_calls": 0,
+    "native_focus_setup_calls": 1,
+    "provenance": {
+      "blender_elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+      "driver_sha256": "13f61d6fa4d298a4a4027dd0ea47b2a7dcaf013794210b2635ed3ad9023a580c",
+      "source_sha256_at_start": {
+        "blender_snapshot.py": "376b78843ce6bcdcd9496da09ee32c79283eda04610bff253f7b8dfb3e8f0881",
+        "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+        "blender_state.py": "d4d9c7a3836e68082356292f09dc17b6a9e448943504a36b0a85eb5433ab53b4",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+        "backends.py": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "capabilities.py": "6c7cbd0aab5a07438201fe448caedc7c88b03309c40072a96027ac4ce681df57"
+      },
+      "source_sha256_at_end": {
+        "blender_snapshot.py": "376b78843ce6bcdcd9496da09ee32c79283eda04610bff253f7b8dfb3e8f0881",
+        "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+        "blender_state.py": "d4d9c7a3836e68082356292f09dc17b6a9e448943504a36b0a85eb5433ab53b4",
+        "state.py": "02e3ef41effdf881ecf7a262002ac12abecc500f79402e73f195e1cf9315a8f9",
+        "backends.py": "f7328844ed57b0e22b379e40c18f68f1802b903add1878e932a419374168edf8",
+        "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+        "operations.py": "2152ec33fde29b936f96028c4900a944b90b8be22b27257e934dc1fc755abbc6",
+        "capabilities.py": "6c7cbd0aab5a07438201fe448caedc7c88b03309c40072a96027ac4ce681df57"
+      },
+      "native_raw_report_sha256": "1eb7c97a687355443d44d80bdf8c722e2b09e91004777d65dcfff763cb633d30",
+      "historical_before_native_tool_api_receipt_sha256": "e9dc59effa4b1884e2bf95a2134f833bd87a18b0d3c0792a08eb0105e4d6bebd"
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "children_absent": true,
+      "x_socket_removed": true,
+      "observer_socket_removed": true,
+      "production_blender_after": true
+    },
+    "independent_postrun_cleanup": {
+      "owned_processes_matching_exact_argv": [],
+      "owned_processes_absent": true,
+      "private_X1_socket_absent": true,
+      "observer_socket_absent": true,
+      "production_blender_pid_exists": true
+    },
+    "limits": [
+      "Configured workspace VIEW3D tool for bound currentwindowmode; focusededitor/effectivedispatch UNKNOWN, not inputauthority",
+      "Native oracle and telemetrysampled nearcapture, no pixel-synchronous sceneproof",
+      "One explicit object.mode_set EDIT is ownfactory fixture setup, using diagnosticoverride; canonical productreader has no overrides/getters/create/refresh/operators",
+      "Factory native inputfocusset once for actualprovider foreground association; keyboard/pointer input0",
+      "Initial factory welcome may remainvisible; popupabsence never inferred",
+      "Othermodes/addon tools/multiwindow notnative-tested; deterministicsource guards cover malformed/ambiguous/unbound cases",
+      "Production process existence only; no production scene equality/read claim",
+      "Private raw oracle misnames Blender version_string field pid; native PID binding independently uses actual process PID and XRes, not this metadata field"
+    ]
+  },
+  "source_discovery_sha256": "a25112eed2f5adfd160de25163b238caa39113e23a692a38009923c6ea1c83a8",
+  "source_discovery": {
+    "classification": "OBSERVED_SOURCE_CLI_AND_STDIO_DISCOVERY",
+    "registry_version": 5,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "tools": [
+      "computer_run",
+      "computer_continue",
+      "computer_observe",
+      "computer_status",
+      "computer_abort",
+      "computer_capabilities"
+    ],
+    "optional_provider": {
+      "provider": "BLENDER_PUBLIC_RNA",
+      "access_level": "APP_TELEMETRY_ASSISTED",
+      "configuration": "blender_state_socket",
+      "producer": "blender --python <clef-use blender-observer-script output> -- --clef-state-dir <new private directory>",
+      "transport": "Linux private Unix socket; SO_PEERCRED and X-Resource local PID",
+      "availability": "PARTIAL; NOT_PROBED",
+      "window_scope": "One RNA window matching the foreground native client dimensions",
+      "raw_observations": [
+        "application_snapshot",
+        "editor_layout",
+        "keymap_inventory",
+        "selection_identities",
+        "scene_units",
+        "active_tool"
+      ],
+      "keymap_inventory": "Merged user bindings, tri-state modifiers and content digest; effective dispatch remains UNKNOWN",
+      "selection_identities": "Complete selected-name map to process-scoped public ID.session_uid; unavailable or incoherent identity remains UNKNOWN",
+      "scene_units": "Process-bound scene identity, length system/default unit and scale; does not establish field focus, modal unit or coordinate space",
+      "active_tool": "Configured VIEW_3D workspace tool for the independently bound current window context mode and observed area IDs; focused editor and effective input dispatch remain UNKNOWN",
+      "unknown_facts": [
+        "popup",
+        "text_focus",
+        "ime_composing",
+        "keymap",
+        "loading"
+      ],
+      "input_authority": "No operation readiness inferred from partial snapshots"
+    },
+    "default_operations": {
+      "menu_assess": "BLOCKED",
+      "command_search": "BLOCKED",
+      "numeric_transform": "BLOCKED",
+      "property_edit": "BLOCKED",
+      "viewport_gesture": "BLOCKED",
+      "modal_cancel": "BLOCKED"
+    },
+    "cli_matches_stdio": true,
+    "limits": "Source CLI and stdio component only. Installed/harness/model/E2E NOT_RUN; no input or runtime goal started."
+  },
+  "not_run": [
+    "Other Blender modes, add-on tools and multiwindow native verification",
+    "Windows/Darwin native observation for this patch",
+    "Installed-current/harness E2E and model production/evaluation: owned by other sessions",
+    "Full-task accuracy, reaction p95, goodput and eligibility coverage",
+    "Public release"
+  ],
+  "acceptance": "No scenario status or release gate promoted"
+}

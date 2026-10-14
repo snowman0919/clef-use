@@ -1,0 +1,515 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ACTUAL_INSTALLATION_FAILED_NATIVE_MODEL_BATCH_AND_OFFSCREEN_PARSER_COMPONENT",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.46",
+  "source_commit": "a138ce6dea6dec17f6fa926795065a906823239e",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "GUIDE-03",
+    "HARNESS-01",
+    "E2E-02",
+    "PERF-01",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration values, messages, raw traces or screenshots.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38467041401,
+    "artifact_id": 11849866303,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38467041401",
+    "artifact_zip_sha256": "e9703af9cb212c804b5d87d9e8f576f3a17a1fd4dd8dd98ee9331b871ef1a383",
+    "artifact_zip_bytes": 383194859,
+    "native_installation_checks_passed": 15,
+    "archives_verified": 15,
+    "source_payload_files_exact": 68,
+    "assemble": "PASS",
+    "deploy": "SKIPPED_FEATURE_BRANCH",
+    "private_verification_sha256": "a35d62e224e842f8e4ecc8105d15098d63e21ddf24eaaf659d69b626d27136f5",
+    "method": "Native job metadata and SHA-bound artifacts; all fifteen exact installer commands and reports parsed from native job logs. Check-run details URLs bind individual job IDs to the same run and commit.",
+    "observation_failures": "Run-jobs list and one individual job metadata read returned HTTP502. The first Windows observer stderr was not retained. Successful per-job metadata/logs were cached; only missing evidence was read on resume. The workflow ran once.",
+    "step_metadata_limit": "Individual job API responses had empty steps. Installation checks are proven by exact source-defined command plus parsed native log report, not invented step entries.",
+    "installer_fixture_limit": "Synthetic final_version0.1.47 in CI logs is the deliberate update fixture, not a published package. Immutable artifacts and actual installed runtime are0.1.46.",
+    "native_log_summary_sha256": "24a4f8e40884763d26eeb224c6db0b8332df471cffbd03273f1141a8a490ff4a",
+    "native_installation_reports": [
+      {
+        "name": "build (macos-15-intel, 3.13)",
+        "job_id": 115536403383,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "994b54384bb47982a87f61848ccee069522aaa0841384db5a0c680ca82ec05ef"
+      },
+      {
+        "name": "build (macos-15-intel, 3.12)",
+        "job_id": 115536403336,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "5fc978e93b8424aee2c6853ca6367f150de26f4d64e1dec86bc4710263423743"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.13)",
+        "job_id": 115536403325,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "5e602d75adcb75bfbb686f933df6c3216cd74795ff6d954b98c8c1026ab7eed5"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.11)",
+        "job_id": 115536403324,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "377f45b9a8bf498341e654ed0180b4e4ba0c585d8fb41694bf9d845c3033fd2a"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.11)",
+        "job_id": 115536403271,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "e9c37c1253fe7192116fc241333d7fbcc2bbcf146e5915d5fde49f8b311b1217"
+      },
+      {
+        "name": "build (ubuntu-24.04-arm, 3.12)",
+        "job_id": 115536403241,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "b1469a0bb01d4a8dcd9512b75dfaab741280204f0e1401428b3fda5a716fbd22"
+      },
+      {
+        "name": "build (windows-2022, 3.13)",
+        "job_id": 115536403216,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "c22692de234235c71c0c62b066927b5d330bce1725cced128552c135da60825a"
+      },
+      {
+        "name": "build (windows-2022, 3.11)",
+        "job_id": 115536403193,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "31f943f6dbe452be97eff13680edd38ffb816f70d12d3291cce5163c87033816"
+      },
+      {
+        "name": "build (macos-15-intel, 3.11)",
+        "job_id": 115536403188,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "a9918512023d1625ec08f66f34ca711d83e7ba1d6ebaff37110855e39dc16c4a"
+      },
+      {
+        "name": "build (windows-2022, 3.12)",
+        "job_id": 115536403185,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "806b4eb1662de7d81e96be1d8cc6b33b313e28e3060c92923eaf2ca673e97aac"
+      },
+      {
+        "name": "build (macos-15, 3.13)",
+        "job_id": 115536403178,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "064760bbe2fe69b0be6c971ee12a1eb6d533e46b9f35e773c88d72efaf98c338"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.12)",
+        "job_id": 115536403176,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "7deb2200a56f466515ca007fef05b75dba50ca3c6f822e5458312e1af514051d"
+      },
+      {
+        "name": "build (macos-15, 3.11)",
+        "job_id": 115536403164,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "e612401477ac5ed57ace2c47879fbaa67e0c7f8fe539b2a1e712a57b8c1d02ef"
+      },
+      {
+        "name": "build (macos-15, 3.12)",
+        "job_id": 115536403134,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "a30aa12affc729d31fe7fa88a02d9ba6de620e6ce17cca6a794da9fcf96f86a3"
+      },
+      {
+        "name": "build (ubuntu-24.04, 3.13)",
+        "job_id": 115536402954,
+        "conclusion": "success",
+        "installation_check_status": "PASS",
+        "installation_report": {
+          "first_install": "INSTALLED",
+          "update": "INSTALLED",
+          "idempotent": "CURRENT",
+          "final_version": "0.1.47",
+          "bad_checksum_preserves_old": true,
+          "missing_download_preserves_old": true,
+          "failed_smoke_preserves_old": true
+        },
+        "log_sha256": "cb8424230986040b403f1867c3e656c069ccb9c56d98f1e4e50be01a53e54c80"
+      }
+    ]
+  },
+  "installed_windows": {
+    "status": "PASS",
+    "from_version": "0.1.45",
+    "version": "0.1.46",
+    "payload_files_matching": 68,
+    "source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "wheel_sha256": "1c2ca85036bfb090bbd307963c328a57adf36832c1a5b640eb4d11430acd2101",
+    "archive_sha256": "c5488cf6bc71ccf5fa97394f22db779761015a99f6a42aa22ecd386104d7b9cf",
+    "private_install_report_sha256": "7c7bfc83e87d91e54776c669b52b7166d40a5ef0cb9c48559dab48a31ca5fbbe",
+    "steps": [
+      {
+        "name": "update-current-source",
+        "exit_code": 0,
+        "wall_seconds": 42.420929400017485
+      },
+      {
+        "name": "installed-version",
+        "exit_code": 0,
+        "wall_seconds": 0.27317780000157654
+      },
+      {
+        "name": "installed-capabilities",
+        "exit_code": 0,
+        "wall_seconds": 0.6306549001019448
+      },
+      {
+        "name": "installed-self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.734312399988994
+      },
+      {
+        "name": "installed-doctor",
+        "exit_code": 2,
+        "wall_seconds": 19.295351200038567
+      },
+      {
+        "name": "repeat-current-source",
+        "exit_code": 0,
+        "wall_seconds": 3.345493400003761
+      }
+    ],
+    "doctor": {
+      "exit_code": 2,
+      "reason": "SSH Session0 has no interactive desktop."
+    },
+    "self_test_scope": "Deterministic fixture control flow; not GUI-task accuracy or reaction performance."
+  },
+  "limited_desktop_token": {
+    "status": "PASS",
+    "scope": "Immutable installed .45 windowless CLI/hash access under an actual desktop token; no capture, GUI action or OS input, no model request",
+    "runtime_version": "0.1.46",
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "offline_self_test",
+        "exit_code": 0
+      }
+    ],
+    "capability_runtime_version": "0.1.46",
+    "offline_fixture_samples_successful": true,
+    "global_config_bytes_preserved": true,
+    "native_task_exit_code": 0,
+    "owned_task_removed": true,
+    "private_result_sha256": "6531cbfa56fc8b7eb51a26cb5b56e9b513c09cf7b068d11b7000ad050b5dab4b",
+    "private_controller_sha256": "ef8e9d133e091f81fba409862fd504476cb16a12f13b985edb478cd8dad6d4af"
+  },
+  "actual_codex_model_batch": {
+    "status": "FAIL",
+    "caller_locale": "cp1252",
+    "installed_payload_files_verified": 68,
+    "protected_config_bytes_preserved": true,
+    "case_count": 3,
+    "invocations_per_original_case": 1,
+    "private_result_sha256": "4fcb94ac6aaeff498a212df7726bde98decd620f2e279492c65a415712cc766b",
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "load_before_invoke": false,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": false,
+        "protected_config_bytes_preserved": true,
+        "private_trace_sha256": "55c216654a1a761144813a7af5076791acd2fd66fce44a86d885644a7099c6f5"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": false,
+        "runtime_before_guide": true,
+        "capability_catalog_verified": true,
+        "protected_config_bytes_preserved": true,
+        "private_trace_sha256": "2753221e635ec5febfb5835354e459e106f75bf8fa411292d8c39ac793edcdb2"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "load_before_invoke": false,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": false,
+        "protected_config_bytes_preserved": true,
+        "private_trace_sha256": "c341ba7d8ccf7302a526182ba2d013f7913d9a413bd7aa7aef698739adc1d510"
+      }
+    ],
+    "interpretation": "Explicit completes with agent messages only: no native runtime tool attempt or observable full guide load. Natural successfully invokes current matching capabilities but no observable full guide load/order. Negative makes no GUI guide/tool attempt. Native silent guide-body injection/provider context is NOT_PROVEN; lack of a read event is not proof a body was never supplied.",
+    "scope": "Actual native model sessions using installed CLI; no GUI-task, capture or OS input requested. Protected configuration checks do not prove every native cache/database/auth file unchanged."
+  },
+  "installed_browser_parser_component": {
+    "classification": "OBSERVED_ONE_OFFSCREEN_RETAINED_REQUEST_NOT_WHOLE_GUI_TASK",
+    "status": "PASS",
+    "runtime_version": "0.1.46",
+    "request_sha256": "74e6de0c817c3ca66093cc53996f3f84b7881ec8280f13f87a4eab1060e37434",
+    "request_bytes": 199965,
+    "installed_payload_files_verified": 68,
+    "native_worker_sha256": "70cd42a1dc579a5d15602bdf4f70f05e58c2e6d5321c0161cdaabc02599c260e",
+    "reply_sha256": "34d887d6a6ba301c1fdd58cdcf4d368cfd98d34acfba4fb9fc1daf5dfb6ab4ed",
+    "reply_objects": 52,
+    "worker_metrics": {
+      "worker_start_ms": 10725.970099912956,
+      "upstream_import_ms": 7215.176500147209,
+      "effective_torch_threads": 12,
+      "detector_load_ms": 1013.8763999566436,
+      "processor_load_ms": 308.9497999753803,
+      "caption_load_ms": 915.2389001101255,
+      "total_load_ms": 10596.99929994531
+    },
+    "telemetry": {
+      "decode_ms": 19.474999979138374,
+      "ocr_ms": 7933.3371999673545,
+      "ocr_count": 14,
+      "detection_ms": 996.2041999679059,
+      "detected_count": 87,
+      "fusion_ms": 10.629700031131506,
+      "object_count": 52,
+      "caption_ms": 52205.03460010514,
+      "caption_cache_ms": 3.5535998176783323,
+      "caption_regions": 38,
+      "cache_hits": 0,
+      "unique_misses": 38,
+      "duplicate_misses": 0,
+      "total_ms": 61168.30769996159
+    },
+    "wall_seconds": 71.9114093,
+    "worker_closed": true,
+    "global_config_bytes_preserved": true,
+    "later_replay_config_equal": false,
+    "later_replay_config_equal_except_activity_overlay": true,
+    "different_config_fields": [
+      "activity_overlay"
+    ],
+    "activity_overlay_current": true,
+    "activity_overlay_later_replay": false,
+    "later_replay_config_sha256": "5feb1758cd537a26b55f9d3b76ea2e7cf1c6f29abb54d4f53a98a01931ba67b0",
+    "backend_timeout_seconds": 180,
+    "private_result_sha256": "98eb2c4cdce4b793a8c6612e5058b9cf44f26565d9624984a7c05bab6ff4d0f2",
+    "initial_attempt": {
+      "status": "NOT_RUN",
+      "reason": "Full configuration equality assertion fails before constructing JsonWorker or starting inference. Only activity_overlay differs; retained stderr proves the assertion. Original attempt is not a parser failure.",
+      "private_stderr_sha256": "6ad742955e25635deb53d0847d85685a3d26448863a6f8ef62d60a669b5d03ad"
+    },
+    "configuration_limit": "Original-at-task configuration was not retained. Later .40 replay snapshots differ only by activity_overlay. Current user config is preserved. Source shows ActivityOverlay is created outside this direct JsonWorker/native parser path; that separation is INFERRED, and full configuration/quality equivalence is not claimed.",
+    "measurement_limit": "Single uncontrolled wall/native telemetry, concurrent readonly verification. Exact retained request completes with52objects/38captions/effectiveTorch12. No baseline distribution, state-change-to-correct-input, p95, task-completion, coverage, goodput or full quality equivalence is measured."
+  },
+  "new_gui_input_trials": {
+    "status": "NOT_RUN",
+    "reason": "Shared Windows desktop ownership remains unresolved after observed foreign foreground activation. Actual prior GUI failures remain separate."
+  },
+  "reaction_accuracy_coverage_goodput": {
+    "status": "NOT_RUN",
+    "reason": "The complete identical pinned task suite,1000predeclared opportunities and independent correct OS receiver/quality evidence have not executed."
+  },
+  "public_release": {
+    "status": "NOT_RUN",
+    "reason": "Existing feature-branch guard skips public deploy; no main/tag bypass."
+  },
+  "completion_claim": false
+}

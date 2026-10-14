@@ -1,0 +1,125 @@
+{
+  "classification": "OBSERVED",
+  "status": "FAIL",
+  "requirement": "E2E-02",
+  "candidate": "FINAL15",
+  "scope": "Exactlytwo own native Firefox-form/Tk-text-editor tasks through actual installed RuntimeClient.run\u2192matchingservice\u2192default DesktopCapture/OmniParser/CLEF/DesktopAction;no substitutes/no retry",
+  "artifact": {
+    "archive_sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c",
+    "wheel_sha256": "525bb3bd714f51d75e08fe9d64345bda5ab0e9c93ff5c3ac23f8dc5340bf0933",
+    "driver_sha256": "ebf4ae000f718b34645d6a9d3d0e892a74a0c2d300153b24927bf153ca1ae687",
+    "declaration_sha256": "a17848cbad5c8e0569cb788507518388d29b7c765fb85b4b072c740cdfec0f6c",
+    "root_START_sha256": "5a4785129693494c346ccf72f4948b6d091048d0d2a2a5a89fa512da5242bf99",
+    "installed_python_source_files_exact_bound": 46,
+    "worker_source_sha256": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3"
+  },
+  "policy": {
+    "max_steps_each": 5,
+    "confidence_threshold": 0.9,
+    "max_candidates": 16,
+    "visual_grounding": false,
+    "decision_model": "Cloudflare/clef-flash",
+    "decision_revision": "17f0b0ad64efb65d273590632833508766b2aae6",
+    "omni_revision": "f55d0750e5b94db2125ef0b45b0fa4a85ddc59b4",
+    "clef_device": "cuda/NF4 4bit",
+    "parser_device": "cpu",
+    "actual_parser_threads": 8,
+    "unchanged_gates": true
+  },
+  "cases": {
+    "browser": {
+      "status": "FAIL",
+      "canonical_terminal": "LOW_CONFIDENCE",
+      "reason": "execution mode confidence below threshold",
+      "actions": 0,
+      "rounds": 1,
+      "mode": "ACT",
+      "mode_confidence": 0.7271,
+      "action_confidence": 0.9232,
+      "replan_probability": 0.6234,
+      "independent_native_oracle": {
+        "submissions": [],
+        "last_input": null,
+        "auth_refusals": []
+      },
+      "native_effect_verified": false,
+      "false_completion": false,
+      "actual_CLEF_responses": 1,
+      "actual_Omni_stage_records": 1,
+      "native_input_events": 0,
+      "session_wall_seconds": 38.96305634896271
+    },
+    "editor": {
+      "status": "FAIL",
+      "canonical_terminal": "NEEDS_REPLAN",
+      "reason": "executor needs planner guidance",
+      "actions": 0,
+      "rounds": 1,
+      "mode": "ACT",
+      "mode_confidence": 0.4355,
+      "action_confidence": 0.9442,
+      "replan_probability": 0.9041,
+      "independent_native_oracle": {
+        "widget": {
+          "text": "",
+          "save_calls": [],
+          "status_label": "Not saved",
+          "visible": true
+        },
+        "saved_file_sha256": null,
+        "saved_bytes_exact": false
+      },
+      "native_effect_verified": false,
+      "false_completion": false,
+      "actual_CLEF_responses": 1,
+      "actual_Omni_stage_records": 1,
+      "native_input_events": 0,
+      "session_wall_seconds": 14.493426761007868
+    }
+  },
+  "native_task_accuracy": {
+    "completed_and_independently_verified": 0,
+    "attempts": 2,
+    "native_effects_verified": 0,
+    "completed_claims": 0,
+    "false_completion_claims": 0,
+    "false_completion_rate_among_completed": "UNDEFINED:zero completedclaims;0/2 falsecompletion does not establish taskaccuracy"
+  },
+  "actual_backend_proof": {
+    "Omni_and_CLEF_service_child_argv_source_interpreter_matches": true,
+    "all_thread_children_and_PPID_intersection": true,
+    "bounded_phase_snapshots": 16,
+    "phase_names": [
+      "browser",
+      "editor"
+    ],
+    "actual_CLEF_response_records": 2,
+    "actual_Omni_stage_records": 2,
+    "model_runtime_ERROR": 0
+  },
+  "actual_native_input_events": 0,
+  "cleanup": {
+    "service_endpoint_removed": true,
+    "native_observer_stopped": true,
+    "native_held_input_empty": true,
+    "owned_children_exited": true,
+    "owned_form_listener_closed": true,
+    "private_xvfb_socket_removed": true
+  },
+  "preservation": "HostfilesystemRO/privateHOME,authenticatedXvfb/privatePID+net+IPC;V2/old/Blenderunreachable throughprivateendpoint/display;no canonical source/globalconfig/PATHmutations",
+  "timing_scope": "Diagnostic own-session wall times only,twoattempts;no p95/100ms/goodput generalclaim",
+  "scene_reviewed_by_root": true,
+  "raw_evidence": {
+    "report.json": "6cf075c28ed64e9c8530458b940b72d00b869b22d2d1b24f7de12d7f2c415079",
+    "state/steps.jsonl": "c083943d449b0df33a0177a27eca738b05ce9e72ad4640caab813b3af36b860a",
+    "native-events.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "scene-ready.json": "96cd1f4121a40b27f1f9c2a15c435116e19dc305a6ec71bd5c19af8b0db9de44",
+    "browser-before.png": "f91347634e01964d1ecfadb5403f84005c87f3264154d45784145f803b478c7b",
+    "browser-after.png": "f91347634e01964d1ecfadb5403f84005c87f3264154d45784145f803b478c7b",
+    "editor-before.png": "25fbc709ea35ddf11e328563516e176882be72345cac8c0529c38cc74cccbc13",
+    "editor-after.png": "c5d0e90e2307fcdc60a2ab5a6678d36089df30051e581059e3eb981a2730e0d9",
+    "config.toml": "f57cd786e112aaf9ab64fabe769282d12ca88ca708d6b6bcee59f24ed2111d89"
+  },
+  "preserved_prior_attempts": "Windowsconversion0NOT_RUN andnative-modePASS evidence unchanged;earlierinput-onlybrowser smoke not countedascanonicalE2E",
+  "received_native_artifact_sha256": "0b1bd2f979b978941e9768e047b93f75492e9d69a28f27d3cf871fab8e22e0a1"
+}

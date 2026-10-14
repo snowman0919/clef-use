@@ -1,0 +1,402 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ACTUAL_WINDOWS_INSTALLATION_MCP_PROTOCOL_AND_NATIVE_CODEX_MODEL_CASES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.48",
+  "source_commit": "da5bbc7fd22b64bc3433f25714a5ddaeee329004",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "GUIDE-03",
+    "HARNESS-01",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; native paths, identities, commands, prompts, configuration/auth contents and raw traces remain private.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38480710726,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38480710726",
+    "assembled_artifact_id": 11858090369,
+    "assembled_artifact_sha256": "76c1f89ffed9de6833ae729c60502fa518c06752a748d59bdf63fe155024ba5e",
+    "native_installer_reports_passed": 15,
+    "archive_count": 15,
+    "passed_archives": 15,
+    "git_payload_file_count": 68,
+    "private_verification_sha256": "bacc8dce5c7cb97b4655b16e1231eb54f28b2cc733cbaa2ea816745781c9629b",
+    "manifest_sha256": "de34d6ab2b8636297e6313857b591d7a9ee50107ca57e8510027e28165baca4f",
+    "sha256sums_sha256": "10ca80edb484aadb4a87e91057d24a4e5ca137b6d3a7afe9d14ca5b835645ae0",
+    "workflow_dispatch_count": 1,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "installer_update_fixture_final_version": "0.1.49",
+    "scope": "All fifteen archives match Git and guide/schema/contract hashes. Actual native installer logs prove first/update/current and three failure-preservation cases. Synthetic fixture update is not the published runtime.",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.48-darwin-arm64-py311.zip",
+        "sha256": "691cd86dcdaf79a61a17121bc857b5dc5bce9589b53ca7ddb276e98ed761929c",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-darwin-arm64-py312.zip",
+        "sha256": "52f87e1d789082f88374fc04d901107c39baf52edfe3cb24cb5d1bbeffbbb063",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-darwin-arm64-py313.zip",
+        "sha256": "63290de86f14d41291d433be19bffdeec406ab50988ef8cc936ca2491d47f089",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-darwin-x86_64-py311.zip",
+        "sha256": "fc293e6601d8f39fe32bc23d0bb81032c9ab4bd48babd257f937d4215c649563",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-darwin-x86_64-py312.zip",
+        "sha256": "9b1a546e9f9a2c120018c4421e65741c01ffb7c66bafa0f9194600fd9198ca34",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-darwin-x86_64-py313.zip",
+        "sha256": "d26b53370ee334bf73286509c7726a2052064b284909e1680f49ce3245cb8e5a",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-arm64-py311.zip",
+        "sha256": "2d7f60dd8896dd8ccfc897179c31394872f0272b8b7af3ff2866fcba8c081beb",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-arm64-py312.zip",
+        "sha256": "09b38acc61c935b094b7b6943ab43253845a81a14fe1b78c2f0df40dbbef128c",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-arm64-py313.zip",
+        "sha256": "25a7373863b0123e0ba213336c3bb2a2766560cb808aaaec649e7f8d599fed2b",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-x86_64-py311.zip",
+        "sha256": "a1c675d3f6c2830ae262f093f711c05583b7a30cc5db770d68ffaa225ffffa0e",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-x86_64-py312.zip",
+        "sha256": "fc5aaaa8da1a49353bf45dfd1ed7c4729b4ee734184af4d383671a4c0b239e68",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-linux-x86_64-py313.zip",
+        "sha256": "4c4689d404b2e109f60e5dbe4d9c51487fef5c4070ef7faf48f0bd32c8f2eb04",
+        "wheel_sha256": "1d3bfc14d9e88d1adbb94d22ce052b18ec283f3e4571b416297838b1a6c9a93e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-win32-x86_64-py311.zip",
+        "sha256": "38ab2bf6033fcbde677e300df571014421892a6b91dafceac15732b6e2c4a563",
+        "wheel_sha256": "837809c7ec991dc137546409e37ca4efe86fdeb8d04203e20c017f9213a79730",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-win32-x86_64-py312.zip",
+        "sha256": "7a21d4e50839b66bbe0e83ff4f41b9ef5af5a598c7f760320116a3b9ec0dbd6f",
+        "wheel_sha256": "837809c7ec991dc137546409e37ca4efe86fdeb8d04203e20c017f9213a79730",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.48-win32-x86_64-py313.zip",
+        "sha256": "c6f172e588718793d90e7a3ee370225615e2c74728b59f830cc4918561039139",
+        "wheel_sha256": "837809c7ec991dc137546409e37ca4efe86fdeb8d04203e20c017f9213a79730",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      }
+    ]
+  },
+  "actual_windows_installation": {
+    "status": "PASS",
+    "before_version": "0.1.47",
+    "version": "0.1.48",
+    "immutable_windows_artifact_id": 11855904156,
+    "archive_sha256": "38ab2bf6033fcbde677e300df571014421892a6b91dafceac15732b6e2c4a563",
+    "wheel_sha256": "837809c7ec991dc137546409e37ca4efe86fdeb8d04203e20c017f9213a79730",
+    "bound_source_files": 68,
+    "installed_source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "steps": [
+      {
+        "name": "update-current-source",
+        "exit_code": 0,
+        "wall_seconds": 45.768807699903846
+      },
+      {
+        "name": "installed-version",
+        "exit_code": 0,
+        "wall_seconds": 0.288944800151512
+      },
+      {
+        "name": "installed-capabilities",
+        "exit_code": 0,
+        "wall_seconds": 0.692564900033176
+      },
+      {
+        "name": "installed-self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.7483578000683337
+      },
+      {
+        "name": "installed-doctor",
+        "exit_code": 2,
+        "wall_seconds": 16.18163269991055
+      },
+      {
+        "name": "repeat-current-source",
+        "exit_code": 0,
+        "wall_seconds": 3.4510816999245435
+      }
+    ],
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "private_report_sha256": "adb5d169cb92ff73a8b90d368ce5ba9ead3846194aa2b03e8e48b0878eb36586",
+    "scope": "Actual candidate update with only immutable archive URLs projected to an owned loopback server. Not public URL proof. SSH Session0 doctor exit2 is the absent interactive desktop."
+  },
+  "actual_limited_token_installation": {
+    "status": "PASS",
+    "runtime_version": "0.1.48",
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "offline_self_test",
+        "exit_code": 0
+      }
+    ],
+    "global_config_bytes_preserved": true,
+    "offline_fixture_samples_successful": true,
+    "owned_task_removed": true,
+    "private_result_sha256": "031b1ddecccf5c3be21aa83ad12b8d6a6031637bc64a824123560fe9371cf069",
+    "scope": "Real LIMITED token, windowless native CLI and offline executable fixtures; no model/GUI/input. Offline fixtures are not real-task completion."
+  },
+  "actual_installed_stdio": {
+    "classification": "OBSERVED_IMMUTABLE_INSTALLED_WINDOWS_0148_STDIO_INITIALIZE_TOOLS_RESOURCES",
+    "runtime_version": "0.1.48",
+    "mcp_server_sha256": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+    "tools": [
+      "computer_capabilities",
+      "computer_status"
+    ],
+    "resources": [
+      "clef-use://api/schema",
+      "clef-use://guides/clef-use-blender/SKILL.md",
+      "clef-use://guides/clef-use-blender/references/OPERATIONS.md",
+      "clef-use://guides/clef-use-diagnostics/SKILL.md",
+      "clef-use://guides/clef-use-diagnostics/references/FAILURES.md",
+      "clef-use://guides/clef-use/SKILL.md",
+      "clef-use://guides/clef-use/references/API_BASELINE.md",
+      "clef-use://guides/clef-use/references/LIVE_API.md"
+    ],
+    "instructions_sha256": "c9f3485b72b56549f008df84944b364348e5d892bd02f18b32897ad15ccf0bf8",
+    "unadvertised_instruction_tool_names": [],
+    "new_model_requests": 0,
+    "gui_or_input_actions": 0,
+    "runtime_endpoint_absent": true,
+    "status": "PASS",
+    "private_result_sha256": "1049b205b6217b779502e8f2627f29d2f04edf2a121c8f8a9a0133563cbdc8ec"
+  },
+  "actual_installed_codex_model_batch": {
+    "status": "PASS",
+    "runtime_version": "0.1.48",
+    "native_codex_version": "codex-cli 0.151.0",
+    "native_codex_executable_sha256": "cf68265897197ac5f3bff6a10c168eec159842b353129726da5e3ed6b91ef0f4",
+    "native_codex_executable_unchanged": true,
+    "context": "LIMITED_INTERACTIVE_DESKTOP_TOKEN",
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "installed_payload_files_verified": 68,
+    "protected_configuration_and_auth_bytes_preserved": true,
+    "owned_task_removed": true,
+    "cases_per_original_trigger": 1,
+    "private_result_sha256": "09e5d968fb72e986c169cc330f74a9120bd8cdb9b7d7d4afc16ec6b25fed725e",
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "aca6c62ee907ac48029f496a6c37863bcf7cda18492f8cd52b0142368f895567",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use",
+          "clef-use-blender"
+        ],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "fb9ebf9e39e807d5cbcaf1277ba05d7724e467e552d5dda40c1ebbb2b499bd2f",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "load_before_invoke": false,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": false,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "ea1833b77ae5200d57e84dccf86a7f0eee9820939f917b5f6a266f49e14190f2",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "scope": "Actual native model calls through the immutable installed CLI with current guide/catalog body linkage and original canonical requests/provider/budget. No GUI task/capture/focus/OS input. Protected file checks do not prove all native cache/session databases unchanged."
+  },
+  "source_native_harness_evidence": {
+    "receipt": "docs/validation/2026-10-14/mcp-instruction-scope-0148.json",
+    "sha256": "03168ac47d409ee8a85da66737024211fdfa3048da43916921388db867d966b6",
+    "actual_source_runtime": "0.1.48",
+    "hermes_case_statuses": {
+      "explicit": "PASS",
+      "natural": "PASS",
+      "negative": "PASS"
+    },
+    "omp_case_statuses": {
+      "explicit": "FAIL",
+      "natural": "FAIL",
+      "negative": "PASS"
+    },
+    "scope": "Frozen final source48 actual Hermes/OMP sessions already executed; no repeat after Windows update. OMP auth-row changes/unknown credential material are retained separately."
+  },
+  "not_run": [
+    "actual Codex GUI TASK_VERIFIED after desktop ownership coordination",
+    "complete identical pinned task accuracy/1000 opportunities/correct OS-input p95/coverage/goodput",
+    "Blender hidden-state operation admission and real whole tasks",
+    "Reici separate-session evidence",
+    "guarded public URL/hash/fresh-install/update proof"
+  ],
+  "completion_claim": false
+}

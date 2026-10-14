@@ -1,0 +1,417 @@
+{
+  "classification": "OBSERVED",
+  "status": "SETUP_OBSERVED_FAIL",
+  "scope": "Single authorized native held-out acquisition; stopped at first setup invariant failure. No retry/root reuse/source change.",
+  "driver_sha256": "50365be5a110ba960cf741aade080a73a6911f280321b1537e19aa99b90f347d",
+  "declaration_sha256": "4ea03373b83cd3ea53928287084806da164f8fb9f34c3aec5fedf27af2d80e38",
+  "private_original_report_sha256": "0ef71c9049236901499ba3cbd677b39e19780660bfe983fe71ca8351ed6ab9b9",
+  "worker_log_sha256": "00bdf4f690fec7667522958d0d57ae4f6ba3ab7e9fa0a4331e29548d037bc93f",
+  "planned_screens": 36,
+  "planned_queries": 72,
+  "captured_screens": 0,
+  "NOT_RUN_screens": 36,
+  "NOT_RUN_queries": 72,
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "OS_accuracy_task_inputs": 0,
+  "attempted_setup": {
+    "app": "browser",
+    "layout_seed": 17,
+    "display_number": 260,
+    "resolution": [
+      1200,
+      800
+    ],
+    "stage": "Bubblewrap worker enabling private loopback; actual Firefox process not launched.",
+    "failure_type": "PermissionError",
+    "failure_errno": 1,
+    "failure_message": "Operation not permitted",
+    "syscall": "fcntl.ioctl(SIOCSIFFLAGS=0x8914)",
+    "underlying_cause": "NOT_DETERMINED: this execution cannot infer whether loopback was already up, effective capability handling or platform policy caused the refusal."
+  },
+  "subsequent_native_app_launches": 0,
+  "source_matrix_preserved": true,
+  "matrix": [
+    {
+      "screen_id": "browser-01",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-01-1",
+        "browser-01-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-02",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-02-1",
+        "browser-02-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-03",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-03-1",
+        "browser-03-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-04",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-04-1",
+        "browser-04-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-05",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-05-1",
+        "browser-05-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-06",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-06-1",
+        "browser-06-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-07",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-07-1",
+        "browser-07-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-08",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-08-1",
+        "browser-08-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-09",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-09-1",
+        "browser-09-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-10",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-10-1",
+        "browser-10-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-11",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-11-1",
+        "browser-11-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "browser-12",
+      "application": "browser",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "browser-12-1",
+        "browser-12-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-01",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-01-1",
+        "tk_editor-01-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-02",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-02-1",
+        "tk_editor-02-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-03",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-03-1",
+        "tk_editor-03-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-04",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-04-1",
+        "tk_editor-04-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-05",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-05-1",
+        "tk_editor-05-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-06",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-06-1",
+        "tk_editor-06-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-07",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-07-1",
+        "tk_editor-07-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-08",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-08-1",
+        "tk_editor-08-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-09",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-09-1",
+        "tk_editor-09-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-10",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-10-1",
+        "tk_editor-10-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-11",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-11-1",
+        "tk_editor-11-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "tk_editor-12",
+      "application": "tk_editor",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "tk_editor-12-1",
+        "tk_editor-12-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-01",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-01-1",
+        "blender-01-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-02",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-02-1",
+        "blender-02-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-03",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-03-1",
+        "blender-03-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-04",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-04-1",
+        "blender-04-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-05",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-05-1",
+        "blender-05-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-06",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-06-1",
+        "blender-06-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-07",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-07-1",
+        "blender-07-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-08",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-08-1",
+        "blender-08-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-09",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-09-1",
+        "blender-09-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-10",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-10-1",
+        "blender-10-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-11",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-11-1",
+        "blender-11-2"
+      ],
+      "query_execution": "NOT_RUN"
+    },
+    {
+      "screen_id": "blender-12",
+      "application": "blender",
+      "screen_status": "NOT_RUN",
+      "query_ids": [
+        "blender-12-1",
+        "blender-12-2"
+      ],
+      "query_execution": "NOT_RUN"
+    }
+  ],
+  "original_group_status_note": "Original report retains group status RUNNING at its setup exception; top-level status FAIL and waited-process cleanup are terminal. This artifact does not claim a running remaining group.",
+  "original_cleanup": [
+    {
+      "application": "browser",
+      "seed": 17,
+      "worker_stopped": true,
+      "xvfb_stopped": true,
+      "owned_X_socket_removed": true,
+      "owned_X_lock_removed": true,
+      "cleanup_no_errors": true
+    }
+  ],
+  "independent_post_cleanup": {
+    "owned_processes_remaining": [],
+    "declared_X_sockets_and_locks_absent": true,
+    "production_Blender_PID_alive": true
+  },
+  "production_scene_touched": false,
+  "annotation_lock": "NOT_READY: no screenshots or manual boxes exist; no held-out quality/accuracy/adoption claim.",
+  "privacy": "No userpaths, credentials, cookies, modelcache data, raw screenshots or process command lines included.",
+  "received_artifact_sha256": "1b318188fb5707cf4107d7df257451e6948273673e33e15f55d467754cb7a56d"
+}

@@ -15,19 +15,177 @@ and a lazily initialized `SessionRuntime`. ML subprocesses remain resident in
 separate pinned Python 3.11 environments because CLEF and Florence require
 incompatible Transformers versions. They are components of one runtime.
 
+The optional `blender_state_socket` configuration connects the canonical runtime
+factory to the installed read-only `blender_observer.py` producer. The producer
+queues fixed snapshot requests over a private Unix socket and reads public RNA
+only on Blender's UI thread. No client code, file path, supplied fact, operator,
+or scene mutation is accepted. Linux peer credentials must match the X-Resource
+PID of the focused app client inside the captured top-level window; client bounds
+must match the single RNA window. A window manager's decoration PID is not the
+application identity. Unsupported or ambiguous binding leaves facts unknown.
+
+`blender_snapshot.py` records actual selection, mode, transform representations,
+unit settings, viewport matrices, regions and positive modal operator records.
+Selected objects expose all six location/scale scalar properties and a
+process-scoped public `ID.session_uid` identity. The provider publishes
+`selection_identities` only for a complete, unique map matching the selection;
+missing public identity or incoherent maps remain UNKNOWN. Names and RNA pointers
+cannot establish object continuity. Changing operations and owned cancellation
+anchor this map at dispatch, readback and the native input boundary, so reusing a
+selected name for a different object blocks further input. Operation registry v6
+advertises this required fact; request schemas remain unchanged.
+See the [Blender ID API](https://docs.blender.org/api/5.2/bpy.types.ID.html).
+The bound scene exposes validated `scene_units`: scene identity, system,
+default length unit and positive finite scale. These raw settings establish no
+focused field or effective modal unit. `PropertyEdit.value` for location fields
+is a raw `Object.location` coordinate in Blender units. Unit-enabled fields
+receive explicit meters (`value * scale_length`); NONE receives the raw literal.
+Scale fields remain dimensionless and do not require scene-unit evidence.
+Location edits anchor scene units before input, through every refresh and native
+input boundary, and at final readback. Missing settings or conversion range loss
+blocks before input. Existing tolerances still apply to actual application
+readback; conversion does not guarantee arbitrary float precision. Registry v6
+advertises conditional field requirements and value semantics.
+Numeric translation also validates and anchors `scene_units`, even with unit NONE.
+A stable unit label and normalized zero baseline do not detect changed scene scale.
+Runner refresh, native input and final readback must retain the original conversion;
+the native guard also checks it for cancellation of an owned translation modal.
+Rotation and scale do not require scene length conversion. Registry v6 advertises
+these conditional requirements without changing requests or normalized numeric
+readback semantics. Property edits retain their separate raw-coordinate contract.
+The API-assisted Blender fixture normalizes numeric readback/preview for supported
+METERS/CENTIMETERS using the actual scene scale, keeps NONE raw, and converts
+native Euler radians only when declaring DEGREES. Exact properties remain raw RNA.
+Unsupported distance units cannot authorize translation and retain raw coordinates
+only for unchanged-channel comparisons during rotation/scale.
+The collector also retains initialized workspace tool references, bounded at 128.
+It reads native `Context.mode` only when context window, workspace and view layer
+match the owning window; it does not translate `Object.mode`. The provider emits
+`active_tool` for exactly one configured VIEW_3D tool matching that mode, with
+process-bound workspace and complete VIEW_3D area identities. Missing, ambiguous
+or malformed evidence stays UNKNOWN. This is configuration for those areas;
+focused editor and effective dispatch remain explicitly UNKNOWN. Reading never
+creates, refreshes or activates a tool and does not enable an operation.
+It also inventories relevant merged user keymaps, preserving inactive and duplicate
+entries, native tri-state modifiers and a retained-content digest. The provider
+publishes this as `keymap_inventory`, never effective `keymap`/`keymap_version`.
+`editor_layout` converts bottom-left RNA rectangles using the bound native client
+and capture origin; hidden, clipped or off-capture regions have no normalized box.
+It retains separate region identities without guessing editor focus or associating
+quad-view matrices with a region. Bounds are raw evidence, not gesture authority.
+Per owning manager, inventory refuses more than 512 maps, 16384 scanned items or
+256 retained items instead of silently truncating them.
+It refuses window/object/region overflow. Empty operator lists prove no absence
+of UI handlers. Popup, editing, IME, effective keymap and global busy absence are
+not supplied by this partial provider, so all six procedures retain their guards.
+The collector preserves the owning manager's optional public `interface_locked`
+Boolean. Only exact `true` compiles to the positive busy fact `loading=true`, after
+the same native identity, window and freshness checks. False or unavailable does
+not establish global idle and leaves `loading` UNKNOWN; a render modal can remain
+after the lock clears. Malformed native values refuse collection. No new input
+authority or operation readiness follows from this observation.
+Fresh observe responses give the state sample its own observation ID before
+perception parsing, expire delayed facts, and declare foreground-window-only
+association. These are independently sampled facts, not pixel-synchronous scene
+evidence or measured operation readiness. The default configuration remains
+pixels-only; discovery describes optional support without initializing Blender.
+
+With trusted state evidence, operation dispatch and the native input guard compare
+the observed keymap content as well as its version label. Viewport dispatch anchors
+the checked editor geometry; the input guard rechecks its editor surface before
+and during a gesture. A changed surface stops execution and releases owned input.
+These guards do not supply missing state or enable the partial Blender provider.
+Typed modifier gestures use the same explicit-context admission as shortcuts:
+known idle IME and no text focus are required before any movement or press,
+independently of an optional post-input transition guard. Unmodified gestures
+retain pointer behavior; recovery releases retain ownership-based authority.
+Context sampling and native queries cannot renew input authority: cancellation
+and deadline are checked again after sampling. Typed Windows Unicode encodes the
+complete payload before input and invokes the current guard before every UTF-16
+unit, including geometry and unowned-input checks. Releases retain their independent
+recovery authority; this does not add automatic IME discovery.
+X11 clipboard input distinguishes provider arming from the first paste-key attempt.
+Before that attempt, cancellation releases owned modifiers and requests restoration
+with a separate explicit 0.5-second cleanup deadline. Only a native restored/new-owner
+acknowledgement resolves ownership; cleanup failure stays unresolved. The provider
+never reacquires ownership over a concurrent copy. Once V may have been delivered,
+offered text remains available for a queued paste, including failed OS acknowledgement
+and parent EOF. This recovery handshake adds no wait to successful input.
+X11 typed and legacy pointer paths resolve logical buttons and wheel directions
+through the current server pointer map. A disabled logical button refuses input.
+Release and the independent guardian use the physical code acknowledged at press,
+preserving unrelated held input. Mapping lookup and injection are separate native
+requests, so this is not an atomic guarantee against an external concurrent remap.
+Legacy X11 keyboard actions validate the original PyAutoGUI binding against the
+current server map for every chord member and implicit Shift before the first
+press, then revalidate each press. They retain the acknowledged physical code for
+release instead of consulting a mutable logical map. An already-held physical
+key is refused without acquiring or releasing it. The same separate-request
+atomicity limit applies; this adds no legacy process-crash guardian.
+Numeric transforms require finite XYZ readback for translation, rotation and scale
+on every observed object before entry. Dispatch rechecks the transform context;
+the initial values must match before entry and the verified preview before commit.
+Owned entry may preview mouse movement without redefining the initial baseline.
+Phase-specific preview anchors do not restrict later owned cancellation. Property
+readback compares the edited value plus every other observed property and identity,
+including unchanged boolean/string/list metadata; unobserved fields remain outside
+that preservation claim.
+
 `SessionRuntime.execute` captures a fresh frame, parses it into project-owned
 `UIObject` records, builds bounded `ActionCandidate` records, requests typed joint
 CLEF answers, evaluates escalation gates, executes a deterministic adapter, and
 checks progress. Candidate IDs are bound to one observation. CLEF selects
-bounded candidates; the optional Foundation ViT produces screenshot coordinates
+bounded candidates. Model-facing candidates retain their operation and target
+object ID, linking equally labelled controls to their distinct observed geometry.
+This connection supplies evidence; it does not change input or confidence guards.
+Parser object identity retains exact validated geometry and normalized action,
+confidence and source evidence. Only equivalent records deduplicate; nearby boxes
+or conflicting capability/provenance evidence remain separate alternatives.
+Numeric spelling and signed zero do not split equivalent normalized geometry or
+confidence.
+An explicit visual primitive limits eligible structured proposals before budget
+reservation and truncation. Irrelevant literal options cannot evict requested
+clicks/scrolls; observed capabilities and the final runtime filter still apply.
+Capture-derived geometry/window/foreground facts retain the frame's capture time,
+including time spent acquiring the image. Compilation and later perception do not
+renew them. Provider facts keep their independently observed times and pass the
+same age/version checks; a current application fact cannot refresh an older frame.
+The Blender view-effect revision requires one unambiguous non-quad viewport with
+complete finite pose readback. It fingerprints the effective `view_matrix` and
+perspective mode, excluding area/region identities, layout, projection matrices
+and redundant pending pose parameters. A layout-only change cannot establish an
+orbit/pan effect. Missing pose remains UNKNOWN. Blender documents the distinction
+between the current view matrix and the combined projection matrix in
+[RegionView3D](https://docs.blender.org/api/5.2/bpy.types.RegionView3D.html).
+Viewport dispatch anchors the initial view revision through the runner's final
+pre-dispatch refresh and the input executor's pre-button checks. Only a successful
+native button-down acknowledgement switches to the gesture guard that allows
+expected view changes. The executor latches this phase under its ownership lock
+before guardian synchronization; no key delivery receipt is fabricated for a
+gesture. Other context and editor geometry guards remain exact. This prevents
+pre-existing view drift from verifying a no-effect gesture; it does not establish
+causal attribution against simultaneous external input after button acknowledgement.
+All executable target objects must fit the existing 40-object context budget;
+overflow or missing target evidence is refused rather than silently truncated.
+The optional Foundation ViT produces screenshot coordinates
 that become observation-bound pointer candidates. `Frame.point` maps box centers to the
 primary monitor's logical coordinate space, including Retina scaling.
+On Linux, the input extent is the captured monitor's pixel size, not the larger
+multi-monitor X11 root size. The X11 Blender provider refuses frames whose input
+and capture extents disagree instead of publishing inconsistent editor geometry.
 
 The OmniParser wrapper composes official detection, overlap/OCR fusion and
 caption primitives. This avoids its annotation helper's empty-OCR and -1 caption
 index failures. The pinned local Florence model identity must contain lowercase
 `florence` because upstream uses a case-sensitive string to select its prompt
 and documented image generation arguments.
+
+OmniParser preserves the caller's Torch compute-thread budget across upstream
+imports. Eager Paddle initialization can set an absent `OMP_NUM_THREADS` to one,
+even though this worker uses EasyOCR. The worker restores the previously resolved
+Torch budget before detector/Florence loading and task inference; caller budgets
+remain in control. This does not restore Paddle's environment changes or change the model,
+batch, candidate thresholds or backend deadline.
 
 The decision budget counts model rounds, including completion checks; actions
 are counted separately. Completion needs strong predictions for the goal and
@@ -45,6 +203,14 @@ physical capture coordinates and captured foreground identity; UTF-16 text does
 not change the clipboard. Other platforms restore the previous plain-text
 clipboard for Unicode; rich clipboard representations are not preserved.
 See WINDOWS_INPUT.md for the cua reference and native Windows evidence.
+Held Windows keys are compared with acknowledged scan code plus extended flag;
+left/right modifier reports retain their side. Virtual-key fallback ownership is
+separate from scan-code ownership. Unknown held-key layout queries fail closed.
+GetAsyncKeyState cannot distinguish simultaneous presses sharing the same virtual
+key (for example both Enter keys); this is not physical-device provenance.
+The Windows guardian retires each successful key/Unicode release acknowledgement.
+After deadline recovery, later EOF retries only still-pending failures, preventing
+an old acknowledgement from releasing a subsequent owner's hold.
 
 `computer_observe` refreshes the screen/object map while idle and marks cached
 observations while busy. It reserves the shared desktop during parsing, with
@@ -60,6 +226,79 @@ Staging installs offline and runs version/state-machine smoke checks before one
 atomic activation. POSIX uses a `current` symlink; Windows atomically replaces a
 managed CMD launcher. Updated clients restart an idle older resident service and
 refuse to switch a service with active desktop ownership.
+
+On Windows, only the existing installation root can retain a native-proven
+explicit current-user FILE_ALL_ACCESS ACE with flags exactly OI|CI. The complete
+DACL must contain only supported allow ACEs; denies, inherited-only grants,
+no-propagate/inherit-only flags or failed queries keep the original grant path.
+The standalone bootstrap uses only stdlib Win32 bindings. Staged runtime/model
+directories still perform their canonical grant with the same 15-second limit.
+The root proof covers root access and future inheritance, not existing-descendant
+repair. This avoids unnecessary [inheritable ACL propagation](https://learn.microsoft.com/en-us/windows/win32/secauthz/automatic-propagation-of-inheritable-aces)
+over retained versions when the root grant is already correct.
+
+Integration activation retains the metadata/config bytes and targeted guide file
+inventories used for ownership validation. Runtime capability discovery cannot
+renew that ownership: changed bytes, removed files or new guide files produce
+CONFLICT before journaling, including preview and otherwise unchanged plans.
+Journal baselines use the approved bytes; per-file activation checks and existing
+recovery-conflict behavior remain in force. These checks do not make concurrent
+external editors participate in an atomic multi-file transaction.
+
+Harness verification separates selected-tool attempts from successful results.
+Transport completion alone does not establish INVOKED: a nonempty response must
+have no MCP error at the top level or in the OMP details wrapper. Negative trigger
+checks reject attempts, including failed or incomplete calls, independently of
+the successful invocation list. These checks classify trace evidence; they do
+not establish a GUI task or upgrade component traces to real harness evidence.
+An explicit response/transport error records INVOKED=FAIL even when another
+invocation succeeds. Native model adapters retain observed errors and negative-trigger violations
+in the overall outcome independently of later success or process exit. Successful
+tool names remain listed as partial evidence; missing results remain NOT_RUN.
+Native Codex unified-exec startup errors may appear only in stderr, without a
+JSON command event. The consumer recognizes the timestamped router/CreateProcess
+runner pipe timeout and retains `NATIVE_EXECUTOR_STARTUP_TIMEOUT` as overall FAIL,
+including negative controls and later nonzero exits. Exact managed guide paths
+bind attempted reads; failed startup never proves body loading. Published details
+contain only code, phase, milliseconds, attempt flag and line digest; raw commands
+and paths stay in private evidence. Similar prose is not a native error. This
+classification does not identify the underlying runner or authentication cause.
+Native harness JSON subprocess streams use strict UTF-8 decoding, including the
+Codex app-server protocol, instead of the caller's locale-dependent codec.
+Codex recognizes advertised guide resources only when the native event,
+arguments and response identify the canonical server and exact URI, and returned
+content equals the entire managed guide body. Product resource failures and
+negative-trigger resource attempts are retained. File-based loading remains
+bound to the managed path and complete body. A successful call must follow the
+selected guide's load to verify discovery/load/invoke. All three model adapters
+retain any runtime attempt before guide loading, including an invocation that
+starts before loading but completes afterwards. A later successful status call
+cannot repair the earlier sequence violation.
+Capability text is decoded before using the shared runtime/schema/guide digest
+validator, including requested detailed schemas. Codex also requires the native
+read-only two-tool facade. Its ephemeral server configuration sets the read-only
+environment explicitly; inherited parent environment alone is insufficient.
+An operation-specific capability reply is a typed operation record rather than a
+full catalog. Codex binds its exact canonical JSON digest to one matching family
+in a prior verified live catalog. Missing/ambiguous catalogs, changed families,
+schemas or JSON types remain refused. Status-only invocation cannot verify current
+capability metadata; overall positive verification requires a full catalog too.
+Core/Blender guide routing explicitly includes read-only GUI capability questions.
+Their instruction order distinguishes native Skill catalog discovery from runtime
+invocation: load the applicable guide before capability calls. This changes prose
+routing only; it does not add runtime operations, permissions or safety facts.
+MCP initialize instructions use the same task scope: authorized GUI work or
+explicit clef-use capability/schema requests. They do not direct ordinary code
+questions or forbidden runtime access into product tools. Read-only connections
+describe only their advertised capability/status facade and schema/guide resources;
+they do not instruct callers to use removed execution tools. Capability discovery
+works without a GUI service. Status requires an existing service/session and
+does not establish Blender state. Full connections retain bounded execution and
+session-ownership guards. These instructions never authorize local operations.
+OMP linked references retain the native owning-skill `skill://` URI. An observed
+native read succeeds through that protocol; a later valid managed `file://` path
+is rejected before tool execution by workspace validation. The guidance preserves
+the discovered reader and exact resource addresses without relaxing any guard.
 
 ## Visual readiness revision, 0.1.5
 

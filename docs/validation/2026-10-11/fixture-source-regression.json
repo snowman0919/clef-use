@@ -1,0 +1,24 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Frozen fixture source plus four localized document guidance; module source unchanged from FINAL12",
+  "fixture_source_sha256": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+  "full_regression": {
+    "passed": 783,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 45.35,
+    "log_sha256": "f5c3738b10bbadfb56aa94ec2af2b523a9e8402641097e64c124d981f9feb37c"
+  },
+  "scoped_ruff_check": "PASS",
+  "scoped_ruff_format_check": "PASS",
+  "generated_contract_check": {
+    "status": "PASS",
+    "tool_examples": 3,
+    "cli_examples": 11,
+    "published_cli_examples": 194,
+    "published_tool_examples": 12,
+    "guides": 3
+  },
+  "real_smoke": "Actual Codex model/MCP/native Blender operation, independent fresh readback and final cleanup recorded separately; no mock substitute",
+  "original_22_case_fixture_after_change": "NOT_RUN: this commit adds isolated serve mode; previous branch retained without changing operation implementation"
+}

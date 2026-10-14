@@ -1,0 +1,198 @@
+{
+  "classification": "OBSERVED_BOUNDED_REGISTRY_ZERO_WITH_APP_STARTUP_ARGUMENT_ERROR_LIMIT",
+  "date": "2026-10-12",
+  "attempt": "v5",
+  "driver_sha256": "71de9e55e860ada4bad2654b942b55a05c86ee58a2e4dcbdbee61d2288d3f025",
+  "declaration_sha256": "98ef6c26ea7eb38deb9eaa6757f519349cef19f1c043cc1bd0c1a70803b9543e",
+  "root_start_receipt_sha256": "ce2fd8085f226a914c7c6192f3ee104e98b11ab981bb244f0b34bcff0f2190c7",
+  "diff_sha256": "8b56e4d85e6ad781cb3675c80370bea3a48d8ba3fbdf76747445a80e05a34987",
+  "static_closure_receipt_sha256": "74c80dfaf10515097a2d18b992550f59ea4253e0734df3e2bbe136242a9d6115",
+  "executions": 1,
+  "retries": 0,
+  "controller_exit_code": 0,
+  "elapsed_worker_seconds": 2.9011324709281325,
+  "prior_attempts_preserved": [
+    {
+      "basename": "clef-atspi-factory-once-setup-failure-public-20261012.json",
+      "sha256": "57ee1c2a20b81a97debcba1fb8fd79d4e384e1ee077b6344b24f39d6df0ae67d"
+    },
+    {
+      "basename": "clef-atspi-factory-v2-once-setup-failure-public-20261012.json",
+      "sha256": "4bcac60183765909718f6e65163dff15ba3ab4a2e05c2c2eedecd3db645e164f"
+    },
+    {
+      "basename": "clef-atspi-factory-v3-once-setup-failure-public-20261012.json",
+      "sha256": "55d54d578f683548d1525d7f21101906f6fed0d7c451edbf1963d6313a24d15a"
+    },
+    {
+      "basename": "clef-atspi-factory-v4-once-observer-pass-app-setup-failure-public-20261012.json",
+      "sha256": "29c3a7c216116e32a3c21ee07646657dba8a55a94729d4a2b215ad004a7eb268"
+    }
+  ],
+  "stages": {
+    "host_GI_Atspi_import": "PASS",
+    "private_session_and_accessibility_bus_initialization": "PASS",
+    "native_registry_initialization": "PASS",
+    "registry_pid_matches_owned_child": true,
+    "registry_before_app_count": 0,
+    "AT_SPI_observer": "PASS",
+    "official_Blender_ELF_exec_proc_exe_path_and_inode": "PASS",
+    "owned_app_os_window_pid_binding": true,
+    "Blender_AT_SPI_registration_raw_classification": "NOT_OBSERVED_WITHIN_BOUND",
+    "completed_app_tree_samples": 5
+  },
+  "samples": [
+    {
+      "elapsed_worker_seconds": 0.36596883193124086,
+      "registry_app_count": 0,
+      "owned_os_window_count": 1,
+      "matched_app_count": 0,
+      "accessible_nodes_observed": 0
+    },
+    {
+      "elapsed_worker_seconds": 0.8664379589026794,
+      "registry_app_count": 0,
+      "owned_os_window_count": 1,
+      "matched_app_count": 0,
+      "accessible_nodes_observed": 0
+    },
+    {
+      "elapsed_worker_seconds": 1.3670205069938675,
+      "registry_app_count": 0,
+      "owned_os_window_count": 1,
+      "matched_app_count": 0,
+      "accessible_nodes_observed": 0
+    },
+    {
+      "elapsed_worker_seconds": 1.8675855279434472,
+      "registry_app_count": 0,
+      "owned_os_window_count": 1,
+      "matched_app_count": 0,
+      "accessible_nodes_observed": 0
+    },
+    {
+      "elapsed_worker_seconds": 2.3681500679813325,
+      "registry_app_count": 0,
+      "owned_os_window_count": 1,
+      "matched_app_count": 0,
+      "accessible_nodes_observed": 0
+    }
+  ],
+  "worker_report_errors": [],
+  "app_log_limitations": {
+    "classification": "OBSERVED",
+    "startup_diagnostics": [
+      "Translation locale data path not found",
+      "Could not get list of mounted file-systems",
+      "Unknown argument --noaudio treated as file",
+      "Cannot read file named --noaudio under owned home"
+    ],
+    "interpretation": "The exact declared command preserved --factory-startup --noaudio. This deployed Blender treated --noaudio as an unknown file argument and emitted a file-read error. The observer completed five registry-zero samples with one PID-bound OS window, but no clean settled factory UI claim is supported. Raw registration classification is retained without changing it into universal bridge absence or production provider readiness."
+  },
+  "environment_route": {
+    "official_Blender_ELF_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "route": "Direct official deployed ELF within outer owned namespace; bundled libraries plus static-checked host libraries; no nested app bwrap or freedesktop runtime mapping.",
+    "namespace_identity_policy": "DECLARED_POLICY: invoking host caller mapped to namespace UID/GID0; no host root privilege.",
+    "capability_policy": "DECLARED_POLICY: outer --cap-drop ALL; actual CapEff was not read or measured.",
+    "synthetic_account_policy": "Owned synthetic UID/GID0 account and files-only NSS; no host account/auth copy.",
+    "graphics_policy": "SoftwareGL/Mesa vendor selection scoped to Xvfb and app; no causal attribution of historical v1 crash or measured library-load claim."
+  },
+  "raw_artifacts": [
+    {
+      "basename": "a11y-launcher.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "accessibility.conf",
+      "sha256": "b3be803f5747a46ab5356a76532880eca913812da7585384f7b21bc8a7a20971"
+    },
+    {
+      "basename": "blender.private.log",
+      "sha256": "a3c5459ea5b16e6d557da2fd6f9270a7ac7ea6069eb0f5d09ca8db4bf2638869"
+    },
+    {
+      "basename": "cleanup-independent.private.json",
+      "sha256": "9ff8d2079f889393f2e83b9684567e188bacbd6aac9d6fd633d61abba2bf4fb1"
+    },
+    {
+      "basename": "controller.json",
+      "sha256": "b721d1410ce3ac5bcbe003bd5ce83d21a7025cb835b42dae91561ba493d178ff"
+    },
+    {
+      "basename": "group",
+      "sha256": "1c13bb8b36a0b5ab4b8fc69b6819693b23d66ac6fc59274ee2339c02daa20347"
+    },
+    {
+      "basename": "nsswitch.conf",
+      "sha256": "78f23e93b5cf9cd7e0bdf355d4de7124106f368e68a6c2cd783f428302ed61fd"
+    },
+    {
+      "basename": "outer.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "passwd",
+      "sha256": "07c743b4ccc4ab6a4ff9bfdff4198f3d6e256cdbb37bbd1181d13794d42c5857"
+    },
+    {
+      "basename": "registry.private.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae"
+    },
+    {
+      "basename": "report.private.json",
+      "sha256": "653cd6af8190b8e67d2dba0198fce0ff8b302f238ea4f5acf886cb40b06d8ec9"
+    },
+    {
+      "basename": "session-bus.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "session.conf",
+      "sha256": "d3e736010202b2e872ad4af6cca5fa2e5752e301e3f4222093c9b6caaca078e9"
+    },
+    {
+      "basename": "xvfb.private.log",
+      "sha256": "a3a2f06e7cf3eb2e5fc847ac901cbbd728e14526b57ad5809a73ecc43d4a06da"
+    }
+  ],
+  "cleanup": {
+    "outer_waited": true,
+    "outer_namespace_exited": true,
+    "direct_children_waited": 5,
+    "all_direct_children_exited": true,
+    "same_uid_process_mount_namespaces_checked": 380,
+    "owned_mountpoint_process_matches": 0,
+    "permission_denials": 0,
+    "concurrently_vanished": 0,
+    "mountinfo_errors_by_errno": {
+      "22": 5
+    },
+    "unreadable_nonlive_zombies": 5,
+    "unreadable_potentially_live": 0,
+    "owned_root_socket_count": 0,
+    "independent_oracle_method": "Same-host-UID process mountinfo exact owned-root mountpoint; failed mountinfo classified using process state only. No cmdline/environment/UI read."
+  },
+  "scope": {
+    "new_Xvfb_processes": 1,
+    "new_official_Blender_ELF_processes": 1,
+    "app_inputs": 0,
+    "screenshots": 0,
+    "accessible_names_descriptions_text_reads": 0,
+    "model_calls": 0,
+    "MCP_runtime_sessions": 0,
+    "canonical_edits": 0,
+    "production_UI_or_PID_targeting": 0
+  },
+  "claims_NOT_RUN": [
+    "Clean settled factory baseline after valid startup arguments",
+    "Blender AT-SPI interface absence beyond this exact short run",
+    "Popup or edit ownership transitions",
+    "Default production StateCompiler provider",
+    "Six guarded operations"
+  ],
+  "redactions": [
+    "No PIDs, account identifiers, hostnames, cookies, absolute private paths, accessible names or assets included.",
+    "Xauthority and machine-id contents and hashes omitted; app error path replaced with public argument basename."
+  ],
+  "no_fallback_or_changed_driver": true
+}

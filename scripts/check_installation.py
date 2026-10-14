@@ -97,7 +97,7 @@ def check(site):
 
             copy = root / "source"
             copy.mkdir()
-            for name in ("src", "scripts", "requirements"):
+            for name in ("src", "scripts", "requirements", "agent-skills"):
                 shutil.copytree(
                     ROOT / name, copy / name, ignore=shutil.ignore_patterns("__pycache__")
                 )

@@ -1,0 +1,45 @@
+{
+  "classification": "OBSERVED_NATIVE_SCHEMA_PREFLIGHT_AND_INFERRED_SOURCE_PATHS",
+  "date": "2026-10-14",
+  "partial": true,
+  "requirements": ["GUIDE-03", "HARNESS-01"],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration, prompts or message bodies.",
+  "native_schema_preflight": {
+    "status": "OBSERVED",
+    "native_version": "codex-cli 0.151.0",
+    "installed_runtime": "0.1.45",
+    "command": "codex app-server generate-json-schema --experimental --out OWNED_PRIVATE_DIRECTORY",
+    "exit_code": 0,
+    "schema_file_count": 413,
+    "skill_input_required_fields": ["name", "path", "type"],
+    "skill_input_type": "skill",
+    "raw_response_type_schema_present": true,
+    "server_notification_wire_methods": 79,
+    "raw_response_wire_method_advertised": false,
+    "server_notification_schema_sha256": "6c0dbcf9da4ad2561a77adf69000390f5c1319896db329d16ac544025f716cb1",
+    "private_summary_sha256": "bb98f9377768f96afb43f5bc6419b4f742db872e6281dad8a939a40ed2b5ef38",
+    "delivery_limit": "Runtime delivery was not exercised; schema omission alone proves neither available nor unavailable runtime emission."
+  },
+  "source_inference": {
+    "claim": "INFERRED",
+    "tag": "rust-v0.151.0",
+    "commit": "78c290807ce710180111df227df3b7a4fe845452",
+    "interpretation": "Native selected Skill bodies can be injected into user context without a command/resource read event. Plain prompt text is not equivalent to a typed native Skill input. Standard ephemeral exec JSON does not expose every internal context record. Thus absence of a guide read event does not prove absence of a guide body in provider context.",
+    "sources": [
+      "https://github.com/openai/codex/blob/rust-v0.151.0/codex-rs/exec/src/lib.rs#L779-L801",
+      "https://github.com/openai/codex/blob/rust-v0.151.0/codex-rs/skills/src/selection.rs#L31-L109",
+      "https://github.com/openai/codex/blob/rust-v0.151.0/codex-rs/ext/skills/src/host_prompt.rs#L69-L96",
+      "https://github.com/openai/codex/blob/rust-v0.151.0/codex-rs/app-server-protocol/src/protocol/common.rs#L1875-L1878"
+    ]
+  },
+  "native_context_event_prototype": {
+    "status": "NOT_RUN",
+    "reason": "The required wire event is not advertised by the actual generated native ServerNotification schema. Stopped before an appserver session or model turn rather than assuming an internal source type is a live API.",
+    "appserver_sessions": 0,
+    "model_turns": 0,
+    "provider_context_body_hash": "NOT_RUN",
+    "current_capability_linkage": "NOT_RUN",
+    "scope_limit": "This route-level boundary does not block implemented MCP resource or file-read evidence paths."
+  },
+  "completion_claim": false
+}

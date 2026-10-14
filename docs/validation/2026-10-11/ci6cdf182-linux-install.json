@@ -1,0 +1,230 @@
+{
+  "classification": "OBSERVED",
+  "result": "PASS",
+  "scope": "Fresh Linux x86_64 Python3.11 installation from immutable GitHub Actions run38143663561 artifact; actual managed registration preservation, readonly stdio contract and idle runtime compatibility/shutdown. Scoped Linux result only.",
+  "ci": {
+    "run_id": 38143663561,
+    "attempt": 1,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38143663561",
+    "head_sha": "6cdf18281b404663591057b4f1cef9529ebb0294",
+    "event": "workflow_dispatch",
+    "successful_platform_builds": 15,
+    "assembly": "success",
+    "deploy": "skipped",
+    "publish_tag_release_deploy_performed_by_this_probe": false
+  },
+  "artifacts": {
+    "artifact_id": 11704256223,
+    "artifact_zip_sha256": "ed54ba2102db1dbbb241c8335132e1927d986cc79a59a9f500135f4c31e8cbd2",
+    "archive_filename": "clef-use-0.1.30-linux-x86_64-py311.zip",
+    "archive_sha256": "3e0119c7ea6f7283c81a30b0851d2c1c44ec3c9fbf3cc7be7d80bf668ed3ff87",
+    "wheel_sha256": "525bb3bd714f51d75e08fe9d64345bda5ab0e9c93ff5c3ac23f8dc5340bf0933"
+  },
+  "artifact_zip_bytes": 24429694,
+  "bundled_wheel_count": 51,
+  "original_declaration_sha256": "6549554db7c041e5f3bbdd49d418eeb5410c7f1f04336b268e5c51764d02980e",
+  "observed_installation_stages": {
+    "first_install": {
+      "status": "INSTALLED",
+      "version": "0.1.30"
+    },
+    "repeat_install": {
+      "status": "CURRENT",
+      "home_bytes_preserved": true
+    },
+    "source_and_resources": {
+      "python_exact": 46,
+      "resources_exact": 15
+    },
+    "managed_enrollment": {
+      "harnesses": {
+        "codex": "INSTALLED",
+        "hermes": "INSTALLED",
+        "omp": "INSTALLED"
+      },
+      "selected_guides": 3
+    },
+    "managed_preservation": {
+      "repeat_harness_statuses": {
+        "codex": "UNCHANGED",
+        "hermes": "UNCHANGED",
+        "omp": "UNCHANGED"
+      },
+      "all_home_file_bytes_identical_on_repeat": true,
+      "original_seed_count": 6,
+      "comments_and_unrelated_disabled_preserved": true
+    },
+    "managed_compatibility": {
+      "codex": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      },
+      "hermes": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      },
+      "omp": {
+        "compatibility": "MATCH",
+        "harness_model_execution": false
+      }
+    }
+  },
+  "preserved_settings_semantic_readback": {
+    "codex_unrelated_disabled_false_preserved": true,
+    "hermes_unrelated_disabled_preserved": true,
+    "omp_unrelated_disabled_preserved": true
+  },
+  "guide_hashes": {
+    "clef-use": {
+      "sha256": {
+        "SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      "digest": "d3084aaff89c7d989707c500b9967255183c087310fc4e949dbac23713ce05b6"
+    },
+    "clef-use-blender": {
+      "sha256": {
+        "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      "digest": "c1af3408ec928b31dcf87a5033f45d477665fa65c64bdf7ac1134c98297509b8"
+    },
+    "clef-use-diagnostics": {
+      "sha256": {
+        "SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      },
+      "digest": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+    }
+  },
+  "native_mcp": {
+    "scope": "Actual installed stdio server, no native agent harness/model invocation",
+    "tools_list": {
+      "status": "PASS",
+      "names": [
+        "computer_status",
+        "computer_capabilities"
+      ],
+      "parameters_exact_corresponding_full_product_schemas": true
+    },
+    "readonly_capabilities": {
+      "status": "PASS",
+      "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+      "schema_count": 2,
+      "read_only_facade": true
+    },
+    "full_product_contract": {
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+      "tool_names": [
+        "computer_run",
+        "computer_continue",
+        "computer_observe",
+        "computer_status",
+        "computer_abort",
+        "computer_capabilities"
+      ],
+      "schema_count": 6,
+      "source": "actual immutable CI archive agent-contract.json"
+    },
+    "readonly_status": {
+      "status_is_error": true,
+      "status_text": [
+        "Error executing tool computer_status: runtime service is not running"
+      ],
+      "status_created_runtime": false,
+      "official_stdio_context_exited": true
+    }
+  },
+  "current_lazy_service": {
+    "status": {
+      "ok": false,
+      "error_type": "RuntimeError",
+      "error": "no active session; start computer_run first"
+    },
+    "health": {
+      "version": "0.1.30",
+      "busy": false,
+      "api_schema_version": 1,
+      "runtime_protocol_version": 1,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+    },
+    "all_thread_union_child_count": 0,
+    "tid_snapshot_count": 1,
+    "vanished_tid_count": 0
+  },
+  "genuine29_consumer_once": {
+    "native_consumer_invocations": 1,
+    "prior_import_failure_did_not_reach_consumer": true,
+    "actual_response": {
+      "ok": false,
+      "error_type": "RuntimeError",
+      "error": "runtime refused status; inspect session status"
+    },
+    "preservation": {
+      "same_pid_starttime_endpoint": true,
+      "version": "0.1.30",
+      "busy": false,
+      "runtime_protocol_version": 1,
+      "full_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+    },
+    "limitation": "Immutable old client suppresses actionable transport guidance and reports generic runtime refusal. No claim that its text was updated; old executable cannot downgrade this service.",
+    "transport_http_attempt_count": "NOT_OBSERVED; one RuntimeClient.request invocation can issue multiple internal HTTP requests."
+  },
+  "matching_idle_shutdown": {
+    "accepted": true,
+    "service_exit_code": 0,
+    "process_reaped": true,
+    "endpoint_removed": true
+  },
+  "cleanup": {
+    "first_http_server_closed": true,
+    "readonly_status_stdio_context_exited": true,
+    "earlier_current_service_later_proc_entry_absent": true,
+    "earlier_endpoint_absent": true,
+    "final_service_process_reaped": true,
+    "final_endpoint_removed": true
+  },
+  "history_preserved": [
+    {
+      "artifact_basename": "clef-ci38143663561-linux-attempt1-public-20261011.json",
+      "sha256": "c2b3267f686089b00727decd6222d112f12bcf1be3f305ccb257d9a87e29d253",
+      "classification": "DRIVER_CONTAMINATED_PARTIAL_NOT_PRODUCT_FAILURE"
+    },
+    {
+      "artifact_basename": "clef-ci38143663561-linux-continuation2-public-20261011.json",
+      "sha256": "f09b5a0c1674a0e08a9b583446379748bc32f865ac11b3add033820251ae6811",
+      "classification": "DRIVER_CONTAMINATED_PARTIAL_NOT_PRODUCT_FAILURE"
+    },
+    {
+      "artifact_basename": "clef-ci38143663561-linux-remaining3-public-20261011.json",
+      "sha256": "3ae3b3a6a2ca62eaf07499a9cd540ef587d8fe93a950dcafdcae6bafa6a0a914",
+      "classification": "DRIVER_CONTAMINATED_PARTIAL_NOT_PRODUCT_FAILURE"
+    }
+  ],
+  "raw_report_provenance": [
+    {
+      "basename": "actual-install-report-private.json",
+      "sha256": "68b993a16b47b54360c4d7de0571159be8c5772582031a1037426beab8cec834"
+    },
+    {
+      "basename": "continuation-v2-report-private.json",
+      "sha256": "ceeeab37989cb990cbb286a08cfbbcb54c00666c4122c8d71c6d80aa4fb7f7e6"
+    },
+    {
+      "basename": "remaining-v3-report-private.json",
+      "sha256": "3a91906afc41675cc7ce1e1fd499ed8b51c8c4351701d49a87ef8a6f0666131a"
+    },
+    {
+      "basename": "genuine29-final-report-private.json",
+      "sha256": "5fca419849523638f960949cb05f6c6ed2e1d307d59d0e1596672d019c5b2120"
+    }
+  ],
+  "not_run": [
+    "native Codex/Hermes/OMP discovery/load/model-trigger/task completion",
+    "active GUI session update on this CI archive",
+    "Windows/macOS actual installation in this Linux probe",
+    "model inference/GPU/OS input/production deployment/performance gates"
+  ],
+  "privacy": "Only public artifact metadata/schema/guide hashes and owned synthetic settings results included. No auth/account/endpoint/private IDs or paths, raw traces/screenshots/assets."
+}

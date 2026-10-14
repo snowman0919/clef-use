@@ -78,12 +78,16 @@ uv run clef-use doctor
 
 ## Quick start
 
+Choose one harness. Replace `codex` below with `hermes` or `omp` as needed.
+`integrate` manages MCP plus core/diagnostics guides; select the Blender guide
+through [agent setup](docs/en/AGENT_GUIDE.md). Reload the harness after changes.
+
 ```sh
 clef-use models prepare
 clef-use doctor
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort
@@ -101,8 +105,9 @@ needs approximately 55 GB. Cold model loading is separate from inner-loop timing
 {"mcpServers":{"clef-use":{"command":"clef-use","args":["mcp"]}}}
 ```
 
-Five high-level tools: `computer_run`, `computer_continue`, `computer_observe`,
-`computer_status`, and `computer_abort`. No harness-specific executor is required.
+Six high-level tools: read-only `computer_capabilities`, `computer_run`,
+`computer_continue`, `computer_observe`, `computer_status`, and `computer_abort`.
+Discover actual schemas and operation limitations before input.
 The CLI and all stdio MCP processes connect to the same authenticated loopback
 service, sharing loaded models and exclusive desktop input ownership.
 See [MCP](docs/MCP.md) and [harness setup](docs/en/HARNESS_SETUP.md).
@@ -137,6 +142,9 @@ explicitly requests an MCP image. No shell execution tool is exposed.
 - [Architecture and invariants](docs/ARCHITECTURE.md)
 - [Development and testing](docs/DEVELOPMENT.md)
 - [Benchmarks](docs/BENCHMARK.md)
+- Agent Skills and runtime operations: [English](docs/en/AGENT_GUIDE.md),
+  [한국어](docs/ko/AGENT_GUIDE.md), [简体中文](docs/zh-CN/AGENT_GUIDE.md),
+  [日本語](docs/ja/AGENT_GUIDE.md)
 - [English setup](docs/en/INSTALL.md), [한국어](docs/ko/INSTALL.md),
   [简体中文](docs/zh-CN/INSTALL.md), [日本語](docs/ja/INSTALL.md)
 - [Contributing](CONTRIBUTING.md), [security reporting](SECURITY.md),

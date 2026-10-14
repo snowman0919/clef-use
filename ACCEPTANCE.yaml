@@ -1,0 +1,1736 @@
+spec_version: 1
+status: PARTIAL_EXECUTION_EVIDENCE
+baseline_commit: b3f0b23309a7c7ea6a943e0c14e0ae51034552cd
+status_enum:
+- NOT_RUN
+- PASS
+- FAIL
+- BLOCKED
+evidence_levels:
+- static
+- fixture
+- replay
+- native_gui
+- actual_harness
+- installed_release
+- public_release
+integration_stages:
+- INSTALLED
+- DISCOVERED
+- LOADED
+- INVOKED
+- TASK_VERIFIED
+release_gates:
+  warm_local_p95_reaction_ms_max: 100
+  fast_path_coverage_min: 0.8
+  predeclared_opportunities_min: 1000
+  critical_input_leaks_observed_max: 0
+  critical_wrong_scope_actions_observed_max: 0
+  critical_false_completions_observed_max: 0
+  accuracy: no regression against pinned baseline on the same declared suite
+  note: Targets, not measurements. Report limits, all attempts, uncertainty and independent
+    verification.
+scenarios:
+- id: BASE-01
+  category: baseline
+  requirement: Pin actual HEAD, preserve unrelated changes and frozen old, diff against b3f0b233.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: baseline
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: attachment_import
+    claim: OBSERVED
+    partial: false
+  execution_note: OBSERVED repository/attachment snapshot; tracked old/ diff is empty.
+- id: GUIDE-01
+  category: guides
+  requirement: Validate three portable skill names/frontmatter, relative references, bounded body
+    sizes.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: false
+  execution_note: Three matching guide names, bounded bodies and relative references verified
+    against FINAL4 installed bundle.
+- id: GUIDE-02
+  category: guides
+  requirement: Every published tool and CLI example validates against actual installed
+    schemas/parsers.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/guide-path-and-model-stages-0155.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-project-profile-0153.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/operation-schema-0152.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.published_examples
+    claim: OBSERVED
+    partial: false
+  execution_note: Current published 194 CLI and 12 inline tool examples/signatures, generated tool
+    arguments and guide JSON examples validate against FINAL6 installed parser/schema. Historical
+    evidence and unimplemented design specifications are excluded.
+- id: GUIDE-03
+  category: guides
+  requirement: Positive GUI triggers load the correct guide; non-GUI tasks do not over-trigger.
+  status: FAIL
+  evidence:
+  - summary: docs/validation/2026-10-14/native-positive-failure-audit-0156.json
+    section: positive_failures
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: installed_diagnostic_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-14/guide-path-and-model-stages-0155.json
+    section: actual_installed_codex_models
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_installed_codex_models
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-project-profile-0153.json
+    section: actual_installed_codex_models
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/operation-schema-0152.json
+    section: actual_native_models
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: actual_installed_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
+    section: actual_native_model_batches
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: actual_installed_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: installed_native_failure_consumer_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-executor-context-0147.json
+    section: actual_limited_native_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-native-skill-visibility.json
+    section: native_schema_preflight
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: actual_native_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-request-catalog-0142.json
+    section: request_catalog
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: actual_model_cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: hermes
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.omp_actual_model
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.hermes_actual_model_final11
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.codex_actual_model_final11
+    claim: OBSERVED
+    partial: true
+  execution_note: Codex FINAL6 explicit/natural/negative triggers pass. OMP current native default
+    completes positive load/invoke, but its completed non-GUI Python negative case unnecessarily
+    loads GUI guides and invokes capabilities. This observed over-trigger fails the requirement;
+    GUI task completion remains NOT_RUN. Probe fidelity audit subsequently found its fixed
+    systemPrompt replaces native generated skill/catalog blocks. FINAL10 normal native
+    bootstrap executed three auxiliary invocation starts but produced zero successful
+    description entries; zero primary invocations, all three primary cases NOT_RUN.
+    Codex FINAL10 explicit/natural/negative passed. Controlled-probe failure retained.
+    Fresh Hermes FINAL10 explicit passed, but its completed natural Blender assessment
+    omitted the Blender guide; negative remains NOT_RUN after the declared stop.
+    FINAL11 Codex and corrected Hermes each pass fresh explicit/natural/negative
+    read-only batches with actual full guide bodies, reference bytes and capabilities.
+    Earlier failures remain recorded; normal native OMP primary stages remain NOT_RUN.
+    Corrected configured OMP bootstrap returned with all three original previews;
+    primary stages were stopped by a stricter driver all-cache readiness gate.
+    Native compression warnings are nonfatal; this is a probe limitation.
+- id: GUIDE-04
+  category: guides
+  requirement: Cached observation is not used as new input or final-completion proof.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-codex-cache-0142.json
+    section: final_actual_case
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  execution_note: Cache-only/freshness guards have fixture coverage. Installed .42 actual Windows
+    Codex completion-evidence challenge passes with owned real cached/fresh frames and an independent
+    incomplete receiver. Source .48 actual owned Linux Hermes completion challenge passes
+    under an explicit private permission overlay. OMP current-session-default cache behavior
+    passes, but its native case remains FAIL for status before guide load; explicit-ID cases
+    remain FAIL at validation. Authorized-input cache misuse and full matrix remain NOT_RUN.
+    Both earlier private proof-driver failures are retained, including initial cleanup failure.
+- id: CAP-01
+  category: api
+  requirement: Read-only capabilities have no model load/download, inference, capture, focus change
+    or input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.generated_contract_check
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Installed read-only discovery executed; fixture guards cover no runtime/model
+    initialization.
+- id: CAP-02
+  category: api
+  requirement: Version/feature mismatch refuses unsupported actions with actionable current
+    guidance.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_compatibility_final12
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.runtime_binding_final15_native
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual installed CLI stale executable/three-guide compatibility
+    refusal is retained. Genuine immutable .29 cannot replace FINAL15 .30;
+    real HTTP version/protocol/schema control matrix36/36 refuses with409 and reload
+    guidance while preserving PID/starttime/endpoint. Unsupported operation and three
+    invalid bodies return400 and current capability guidance; discovery remains available.
+    Immutable .29 displays its original generic refusal rather than server guidance.
+    Active GUI update is a separate INSTALL-10 condition, not implied by this pass.
+- id: CAP-03
+  category: api
+  requirement: Existing five tools and goal-only contracts retain backward compatibility.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Existing five-tool and goal-only protocol fixtures passed; additive capability
+    tool preserves prior contract.
+- id: INSTALL-01
+  category: installation
+  requirement: Fresh install into isolated HOME deploys selected MCP entry and guides only.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: false
+  execution_note: Disposable selected all-harness install plus default core/diagnostics launcher
+    installation observed.
+- id: INSTALL-02
+  category: installation
+  requirement: Same-version reinstall is idempotent; unrelated bytes/comments/disabled settings
+    survive.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0155.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0154.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0153.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0152.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0151.json
+    section: actual_isolated_windows_installation
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/installer-ownership-0151.json
+    section: actual_native_after
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0150.json
+    section: actual_isolated_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_windows
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0142.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: windows_installation
+    claim: OBSERVED
+    partial: true
+  execution_note: Same-version reinstall UNCHANGED; exact-byte/comments/disabled preservation
+    exercised by integration fixtures.
+    Current Windows 0.1.35 repeat returns CURRENT and managed UNCHANGED with
+    unrelated bytes preserved.
+- id: INSTALL-03
+  category: installation
+  requirement: Update stages and verifies runtime/guide metadata as a compatible release set.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-socket-diagnostic-0156.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0155.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/guide-path-and-model-stages-0155.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0154.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-native-recording-0154.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0153.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-project-profile-0153.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0152.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/operation-schema-0152.json
+    section: actual_native_package
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0151.json
+    section: actual_isolated_windows_installation
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/installer-ownership-0151.json
+    section: actual_native_after
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0150.json
+    section: actual_isolated_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_component
+    claim: OBSERVED
+    level: component
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
+    section: actual_native_sdk
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_windows
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: limited_desktop_token
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
+    section: actual_0143_update
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0142.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installation_lifecycle
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: windows_installation
+    claim: OBSERVED
+    partial: true
+  execution_note: Local staged compatible runtime/guide update fixture observed; synthetic 0.1.31 is
+    not public release.
+    Actual immutable CI Windows 0.1.36 update binds 64 packaged files and refreshes
+    the managed physical executable; public release/deploy remain skipped.
+- id: INSTALL-04
+  category: installation
+  requirement: User-modified guide or config entry is preserved and reported as conflict.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/installer-ownership-0151.json
+    section: regression
+    claim: OBSERVED
+    level: fixture
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  execution_note: Modified managed guide/MCP preservation and conflict reporting exercised by
+    integration fixtures.
+- id: INSTALL-05
+  category: installation
+  requirement: Duplicate realpath/name, project overrides and inactive sources are reported
+    correctly.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.install05_final24_root_policy
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.install05_hermes_boundary_v5_paired
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual native14 covers complete-directory aliases, duplicate names, project
+    overrides and tested inactive sources across Codex/Hermes/OMP; installed preservation
+    reports agree. Codex inactivity is an exact SKILL.md entry, not whole profile/source.
+    Separate paired Hermes8 preserves five FINAL22 mismatches and verifies all eight
+    FINAL24 corrections; original flow-YAML registration additionally parses, trusts and
+    loads the project guide. Conflict outcomes are dry-run reports; no conflicting guide
+    overwrite, whole-session precedence or GUI/model/task proof is claimed.
+- id: INSTALL-06
+  category: installation
+  requirement: Checksum failure, offline download and traversal/symlink-escape archives do not
+    activate.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.linux_installer_boundary
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_installer_boundary
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual immutable Linux install.sh and native Windows install.ps1 refused
+    checksum mismatch, offline connection, traversal, absolute path, backslash path,
+    symlink member and duplicate archive member before activation. Old executable/version,
+    runtime selector and owned HOME bytes remained unchanged. Synthetic 0.1.31 metadata
+    was malformed test input only, never installed or published.
+- id: INSTALL-07
+  category: installation
+  requirement: Crash at each staging/activation phase can resume or rollback without data loss.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.linux_installer_crash_phases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.linux_installer_update_crash_phases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_installer_crash_phases
+    claim: OBSERVED
+    partial: false
+  execution_note: Integration journal crash/recovery fixtures passed. Actual Linux fresh
+    installation and genuine pinned 0.1.29 to immutable CI 0.1.30 update each crashed
+    at eleven staging/activation boundaries and resumed with original user bytes and
+    previous runtime preserved. Native Windows fresh and genuine update each passed
+    eleven corresponding process-exit boundaries with real executable and contract
+    checks after resume. Global V2, user bytes, settings and PATH were preserved.
+    This covers process termination of the immutable installer; power-loss durability
+    is not established, and no FINAL12 model or GUI claim is implied.
+- id: INSTALL-08
+  category: installation
+  requirement: Uninstall removes only unchanged managed entries and preserves later user edits.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: false
+  execution_note: Modified entries preserved by fixture removal; actual shared-owner removal and
+    survivor SDK invocation observed.
+- id: INSTALL-09
+  category: installation
+  requirement: Windows no-symlink, spaces/Unicode HOME, executable launcher and profiles pass.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0155.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0154.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0153.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0152.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0151.json
+    section: actual_limited_token_candidate
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0150.json
+    section: actual_limited_token_candidate
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: actual_limited_token_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: actual_limited_token_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: actual_windows_installation
+    claim: OBSERVED
+    level: installation
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: limited_desktop_token
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
+    section: source_0144_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0142.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ci26d9252_immutable
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: archive_proofs
+    claim: OBSERVED
+    partial: true
+  execution_note: Corrected immutable CI26d9252 actual native Windows spaced/Unicode HOME,
+    executable and three-profile/three-guide managed lifecycle passed. Native Codex isolated
+    user discovery remains FAIL, supported project discovery PASS; native Hermes/OMP unavailable.
+    Actual read-only native walk examined 6625 owned entries and seven ancestor components,
+    with zero reparse points; registered native PE executable launched version 0.1.30.
+    Earlier foreground FAIL is separate; no all-platform GUI PASS implied.
+- id: INSTALL-10
+  category: installation
+  requirement: Active GUI session is not killed during update; stale client gets
+    reload/compatibility result.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.active_gui_update_final15_native
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual genuine installed .29 default-factory ASSESS GUI session remained
+    RUNNING/busy with identical service/session before and after actual FINAL15 installation.
+    Current .30 client refused with matching-old-executable/reload guidance; matching .29
+    abort followed by independently observed busy False, .30 protocol/schema reload and
+    owned cleanup passed. Installation interval sampled48 times; unsampled continuous
+    state and OS effect task completion are not claimed. Both earlier observer failures retained.
+- id: HARNESS-01
+  category: harness
+  requirement: Codex actual fresh session discovers and reads guide, then invokes read-only runtime
+    tool.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: actual_installed_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: actual_installed_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: installed_native_failure_consumer_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-14/codex-executor-context-0147.json
+    section: actual_limited_native_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: retained_installed_codex_trace_replay
+    claim: OBSERVED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: actual_codex_model_batch
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-harness-validation-0145.json
+    section: actual_native_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: native_codex_discovery
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.codex_actual_model
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.codex_final12_native_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
+    claim: OBSERVED
+    partial: true
+  execution_note: Existing authenticated Codex daemon completed fresh explicit/natural turns with
+    FINAL6 and FINAL10 native discovery, actual full guide body reads and successful read-only capabilities.
+    Negative non-GUI trigger passed. Earlier isolated CLI 401 and denied-approval rounds are
+    retained separately. FINAL12 actual Codex native GUI task passed at the private
+    API_ASSISTED fixture scope, including full guide loads, capability/schema discovery, one numeric
+    transform, independent fresh RNA/visual preservation and complete owned cleanup.
+    Whole-goal ASSESS and production provider remain NOT_RUN.
+    Current native Windows Codex explicit/natural discovery-load-invoke and
+    negative non-trigger pass; three complete guides read naturally.
+    Read-only TASK_VERIFIED remains NOT_RUN.
+- id: HARNESS-02
+  category: harness
+  requirement: Hermes actual selected profile discovers and reads guide, then invokes read-only
+    runtime tool.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches.hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
+    section: actual_native_model_batches.hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native.hermes
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: native_linux_linkage
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: hermes_native_refresh
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: hermes
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: false
+  execution_note: Earlier actual fresh Hermes explicit/natural runs read guides and invoked
+    read-only capabilities. FINAL10 native explicit core load and capabilities passed;
+    natural Blender guide selection failed and negative was NOT_RUN. Corrected FINAL11
+    explicit/natural/negative native batches pass with exact guide/reference bytes
+    and capability calls. GUI TASK_VERIFIED NOT_RUN; earlier failures remain recorded.
+- id: HARNESS-03
+  category: harness
+  requirement: OMP actual selected profile discovers and reads guide, then invokes read-only runtime
+    tool.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-14/omp-device-evidence-0150.json
+    section: actual_native_model_batches.omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/read-only-harness-boundary-0149.json
+    section: actual_native_model_batches.omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/linux-native-cache-0148.json
+    section: omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/mcp-instruction-scope-0148.json
+    section: actual_native.omp
+    claim: OBSERVED
+    level: actual_harness
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-validation-0146.json
+    section: actual_linux_native
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: native_linux_linkage
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/native-harness-linkage-0144.json
+    section: cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/omp-native-verification-0142.json
+    section: actual_model_cases
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/hermes-canonical-verification-0141.json
+    section: omp_current_0140
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.omp_actual_model
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.shared_owner_lifecycle
+    claim: OBSERVED
+    partial: true
+  execution_note: FINAL6 actual OMP18.6.1 current native default aipi/dgx-moa-fast completed explicit
+    and natural turns, read full installed guide bodies through native skill URIs and invoked
+    read-only capabilities. Historical existing-local deadline/workspace failures are retained;
+    this is a different route. Negative over-trigger fails GUIDE-03; GUI TASK_VERIFIED NOT_RUN.
+- id: HARNESS-04
+  category: harness
+  requirement: Resources-disabled client still receives essential instructions and can act
+    correctly.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.harnesses
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.hermes_resources_disabled_task
+    claim: OBSERVED
+    partial: false
+  execution_note: Actual native Hermes with resources and prompts disabled delivered complete
+    installed core and Blender guide bodies through skill_view before one exact numeric
+    operation. Independent fresh RNA and pixels verified the controlled API-assisted
+    task and cleanup. One unavailable terminal tool request was refused without execution
+    and is retained as a model tool-selection error. Production and whole-goal verification
+    remain separate NOT_RUN conditions.
+- id: INPUT-01
+  category: input
+  requirement: Key tap/down/up/chord ownership and ordered release work with native OS fixture.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_candidate_gui
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux/X11 native fixture verified key/chord/down/up ownership and release.
+    Historical Windows component checks passed but the whole fixture failed on
+    foreground restoration; no all-platform PASS implied. Current Windows
+    fixed-sleep smoke FAIL is retained; the corrected live-UI fixture verifies
+    full selection before Backspace and exact text, with no input replay.
+    Exact historical timing cause is INFERRED.
+- id: INPUT-02
+  category: input
+  requirement: Exact Unicode text, IME composition and keyboard shortcuts remain separate.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: owned_browser_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_browser
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_editor
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_native_ime
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  execution_note: Actual immutable f440de1 installed Windows input layer observes native
+    composition start/preedit/result/end; literal input during active composition is
+    refused with preedit/widget/input count unchanged. After commit, Ctrl+A selects
+    exact UTF16 and Unicode insertion matches12bytes without clipboard mutation.
+    Independent cancellation releases held Shift without worker release. All6cases
+    and own IMC/HKL/foreground/V2/config/PATH cleanup pass. Original alphanumeric-mode
+    stopped attempt remains NOT_RUN. Caller supplies native-observed trusted context;
+    automatic IMM/TSF discovery and service/model/harness E2E are not implied.
+    Historical Windows foreground failure remains separately retained.
+    Current Windows Unicode and closed-IME shortcut readback pass with a live
+    receiver loop; diagnostic IME closed/no preedit does not re-prove active composition.
+- id: INPUT-03
+  category: input
+  requirement: Left/right/middle button and modifier-held drag/orbit/pan execute in bounded
+    surfaces.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: pointer_and_recovery
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_native_pointer_and_recovery.corrected_typed_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_candidate_typed_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux native button/modifier gesture checks and installed Blender bounded
+    orbit/pan observed. Historical Windows component checks passed but the whole
+    fixture failed on foreground restoration; no all-platform PASS implied.
+    Current installed CI Windows 0.1.36 additionally verifies left/right/middle
+    receiver down/up and bounded Shift+left/middle drag motion with actual held
+    button/Shift state, endpoint and surface readbacks. This owned non-text
+    canvas fixture does not establish Blender orbit/pan semantics.
+- id: INPUT-04
+  category: input
+  requirement: Worker hang/crash, deadline, cancellation and user intervention release owned input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: cli_abort
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: source_native_pointer_and_recovery.corrected_typed_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.windows_ssh_current_e2e
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-service-abort.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_cli_http_abort
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
+  execution_note: Source Linux native deadline/cancel/intervention/guardian failure/process
+    crash/frozen injector release checks passed. Historical Windows component checks
+    passed but the whole fixture failed on foreground restoration; no all-platform
+    PASS implied. Current Windows owned cancellation/release and cleanup pass;
+    earlier fixed-sleep and diagnostic foreground failures remain retained.
+    Current installed CI Windows 0.1.36 observes Shift/middle release while the
+    worker remains blocked after cancellation, and separate guardian recovery
+    after abrupt owned worker process termination, before parent release. Full
+    process suspension/deadline and service CLI abort with held gesture remain
+    NOT_RUN in this Windows slice.
+- id: INPUT-05
+  category: input
+  requirement: Wrong foreground/editor/mode/keymap/text focus blocks input without unsafe retry.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: compiled_keyboard
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_native_input
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
+  execution_note: Native foreground/intervention and installed editor/keymap/text-focus guards plus
+    fixture mode checks observed; full native application-state matrix incomplete.
+- id: STATE-01
+  category: state
+  requirement: Unknown/false, source, version, timestamp and validity remain distinguishable.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: blender_default_provider_chain
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: installed_ime
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
+    claim: OBSERVED
+    partial: true
+  execution_note: State compiler fixtures distinguish unknown/false, provenance, version, timestamp,
+    uncertainty and invalidation.
+- id: STATE-02
+  category: state
+  requirement: Menu open/absent/wrong menu/duplicate label assessed without sending input.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: Menu absent/open/wrong-menu native read-only observations and duplicate-label
+    fixture assessment passed without operation input.
+- id: OP-01
+  category: operations
+  requirement: Command search uses observed keymap and only authorized registered command.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: API-assisted installed search uses verified binding and registered command;
+    nonregistered command refused by fixture.
+- id: OP-02
+  category: operations
+  requirement: Numeric transform verifies selection, axis/space/unit, preview, commit and readback.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: API-assisted installed translation/scale/rotation preview, commit/cancel/readback
+    and guard cases passed.
+- id: OP-03
+  category: operations
+  requirement: Property edit validates exact intended field and final literal value.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: API-assisted installed exact focused property and final numeric readback passed.
+- id: OP-04
+  category: operations
+  requirement: Viewport gesture invalidates old projected target and reacquires before edit.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: Installed orbit/pan invalidation and subsequent fresh observations plus
+    reused-geometry/partial-gesture fixture refusal passed.
+- id: OP-05
+  category: operations
+  requirement: Cancel applies only to known owned modal and verifies no unintended commit.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  execution_note: Known same-session modal cancellation verified unchanged readback; foreign modal
+    and interrupted entry/closure authority fixtures passed.
+- id: DEC-01
+  category: decision
+  requirement: Singleton, uniform probability and repeat invariance classified separately; coverage
+    before pruning.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.source_regression
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
+    claim: OBSERVED
+    partial: true
+  execution_note: Distribution diagnostics and pre-pruning candidate retention fixture tests passed;
+    target accuracy remains explicitly unknown.
+- id: DEC-02
+  category: decision
+  requirement: d1/CLEF compare under same live task conditions without weakening confidence gates.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.blender_menu_clef_d1_final10
+    claim: OBSERVED
+    partial: false
+  execution_note: Fixed 30 actual canonical ASSESS trials use identical FINAL10 installed code,
+    contract and paired pixels for CLEF and d1 across File-open/Edit-open/absent states,
+    five repeats each. No threshold changes or input. File completion is 0/5 each;
+    comparison condition executed, original menu quality requirement remains FAIL.
+- id: PERF-01
+  category: performance
+  requirement: Predeclare workload/hardware/split; record at least 1000 reaction opportunities.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_browser_parser_component
+    claim: MEASURED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: 1005 opportunities/variant in five predeclared Tk sessions observed; full
+    production task workload/hardware/split gate NOT_RUN.
+- id: PERF-02
+  category: performance
+  requirement: Warm profile p95 reaction<=100ms and fast coverage>=0.80; report p99/misses/all
+    attempts.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  execution_note: FINAL4/FINAL5 editor p95 failures retained. FINAL10 installed warm Tk
+    1000/1000 correct, p95 20.234534 ms, goodput_100 1.0; separate Text single-key 50/50,
+    p95 20.319422 ms. Historical fast_coverage was deadline success ratio (goodput_100),
+    corrected in curated evidence; eligibility coverage remains NOT_MEASURED.
+    Overall model/Blender/harness task-profile gate NOT_RUN.
+- id: PERF-03
+  category: performance
+  requirement: Accuracy >= pinned baseline on identical suite; critical errors individually block
+    release.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-pointer-recipient.json
+    section: verification
+    claim: OBSERVED
+    partial: true
+  execution_note: Zero reported critical errors and 1005/1005 correct per bounded variant; full
+    pinned runtime/model/task accuracy comparison NOT_RUN.
+- id: E2E-01
+  category: e2e
+  requirement: Installed release repeats real Blender menu/transform/property/viewport workflows.
+  status: FAIL
+  evidence:
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: blender_default_provider_chain
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_blender
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.actual_original_menu
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.blender_menu_context_pixel_final12
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-blender-observation.json
+    section: attempts
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0138.json
+    section: installed_codex_gui
+    claim: OBSERVED
+    partial: true
+  execution_note: FINAL5 API-assisted operation fixture passes 22 cases. In a fixed actual
+    parser/model ASSESS comparison, full pinned .29 and FINAL6 installed .30 both refuse all
+    five File-open trials, with all 30 scheduled trials executed and no native input. The
+    original menu workflow is observed FAIL; remaining production/harness/public-release
+    workflows are NOT_RUN. No confidence threshold was relaxed.
+    FINAL12 executes all fifteen canonical installed model trials without forward
+    errors, but File completion remains 0/5; ten negative cases have no false
+    completion, without proving correct wrong-menu/absent classification.
+- id: E2E-02
+  category: e2e
+  requirement: Browser form and independent editor validate non-Blender generality.
+  status: FAIL
+  evidence:
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: installed_browser_parser_component
+    claim: OBSERVED
+    level: replay
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: installed_parser_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-omni-thread-budget-0143.json
+    section: candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-editor-task-0142.json
+    section: actual_task
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: owned_browser_component
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-compiled-keyboard.json
+    section: final_native_script_run
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: codex_gui
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_browser
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_editor
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.reaction
+    claim: MEASURED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.general_gui_final15_native
+    claim: OBSERVED
+    partial: false
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.general_gui_final15_diagnostic
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-state-input-dpi.json
+    section: source_uia_textedit
+    claim: OBSERVED
+    partial: true
+  execution_note: Actual FINAL15 default-runtime Omni/CLEF Firefox form and independent Tk
+    editor tasks completed0/2, with native input0/effects0/false completion0. Browser ACT-mode
+    confidence .7271 below unchanged .9 guard; editor replan probability .9041 caused
+    NEEDS_REPLAN. All6 owned cleanup checks passed. Actual distributions NONUNIFORM;
+    candidate rosters/request lengths not retained, so correct-target coverage remains unknown.
+    Earlier input-only Firefox/Code/Tk effects remain separate and do not establish task success.
+    Installed .40 Windows Chrome original task fails first-parser inference timeout with zero
+    decisions/input and no independent Save readback. Captioning remains unfinished after
+    OCR/detection. Actual Codex GUI reaches stage1, then refuses Confirm at ACT .6958 below .9;
+    both correct targets are retained with independently matching geometry. Native input
+    delivery and harness invocation passes do not close either task failure.
+- id: E2E-03
+  category: e2e
+  requirement: Reici GUI edits have actual matched-view evidence and independent review status.
+  status: NOT_RUN
+  evidence: []
+  execution_note: No Reici matched-view evidence or independent review performed.
+- id: RELEASE-01
+  category: release
+  requirement: Public version downloads and hashes match; fresh install/update use that release.
+  status: NOT_RUN
+  evidence:
+  - summary: docs/validation/2026-10-14/native-ci-0156.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0155.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/native-ci-0154.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0153.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/ci-and-windows-transport-0152.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0151.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-isolated-ci-0150.json
+    section: ci
+    claim: OBSERVED
+    level: release_artifact
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0149.json
+    section: ci
+    claim: OBSERVED
+    level: release_artifact
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0148.json
+    section: ci
+    claim: OBSERVED
+    level: release_artifact
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0147.json
+    section: ci
+    claim: OBSERVED
+    level: release_artifact
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0146.json
+    section: ci
+    claim: OBSERVED
+    level: installed_release
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0145.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0144.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installer-root-access-0144.json
+    section: immutable_0143_ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-14/windows-installed-ci-0142.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0141.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0140.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-13/windows-installed-ci-0139.json
+    section: ci
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installed_candidate
+    claim: OBSERVED
+    partial: true
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.installation_lifecycle
+    claim: OBSERVED
+    partial: true
+  execution_note: Local candidate install/update only; public release download/hash/fresh install
+    NOT_RUN.
+- id: RELEASE-02
+  category: release
+  requirement: EN/KO/zh-CN/ja setup/usage/troubleshooting examples remain contract-consistent.
+  status: PASS
+  evidence:
+  - summary: docs/validation/2026-10-11/summary.json
+    section: evidence.published_examples
+    claim: OBSERVED
+    partial: false
+  execution_note: EN/KO/zh-CN/ja generated guide blocks match, managed integration replaces legacy
+    setup examples, and current published setup/usage/troubleshooting CLI and inline tool examples
+    validate against FINAL6 installed parser/schema. This is documentation contract validation,
+    not a localized GUI task or public release certificate.
+evidence_summary: docs/validation/2026-10-11/summary.json
+latest_native_harness_evidence: docs/validation/2026-10-11/final6.json
+latest_native_reaction_evidence: docs/validation/2026-10-11/reaction-final5.json

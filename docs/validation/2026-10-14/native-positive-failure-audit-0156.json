@@ -1,0 +1,73 @@
+{
+  "classification": "OBSERVED_RETAINED_NATIVE_HARNESS_FAILURE_AUDIT",
+  "date": "2026-10-14",
+  "current_runtime_version": "0.1.56",
+  "record_runtime_version": "0.1.55",
+  "partial": true,
+  "requirements": ["GUIDE-03"],
+  "publication_policy": "Safe error classes and public tool/URI names only; raw transcripts, other write targets, identities, addresses and config/auth values remain private.",
+  "positive_failures": {
+    "explicit": {
+      "retained_outcome": "FAIL",
+      "failed_native_calls": 3,
+      "skill_uri_write": {
+        "tool": "write",
+        "target": "skill://clef-use",
+        "native_is_error": true,
+        "cause": "SKILL_URI_READ_ONLY_TOOL_POLICY"
+      },
+      "other_write_attempts": {
+        "count": 2,
+        "native_is_error": true,
+        "cause": "USER_POLICY_WRITE_DENY"
+      }
+    },
+    "natural": {
+      "retained_outcome": "FAIL",
+      "failed_native_calls": 2,
+      "tool": "mcp__clef_use_computer_status",
+      "native_is_error": true,
+      "safe_native_error": "Error: Error executing tool computer_status: runtime service is not running",
+      "runtime_before_required_guide": true
+    },
+    "successful_native_results_misclassified_as_errors": false,
+    "error_evidence_scope": "Retained authoritative native tool_execution_end records; not a fresh model run or verifier replay."
+  },
+  "current_source_contract": {
+    "classification": "OBSERVED_SOURCE",
+    "read_only_mcp_starts_runtime": false,
+    "computer_status_requires_existing_runtime": true,
+    "computer_capabilities_requires_running_gui_service": false,
+    "error_is_expected_for_status_without_runtime": true,
+    "permission_or_error_guard_weakened": false
+  },
+  "current_external_state": {
+    "classification": "OBSERVED_PASSIVE_LOCAL_NATIVE_PEER_STATE",
+    "observed_at_utc": "2026-10-14T08:22:41.296809+00:00",
+    "ssh_target_match_unique": true,
+    "local_backend": "Running",
+    "local_online": true,
+    "target_online": false,
+    "input_owner": "OTHER_SESSION_USER_CONFIRMED",
+    "remote_commands": 0,
+    "ssh_or_ping_network_probes": 0,
+    "model_or_gui_or_input_actions": 0
+  },
+  "scope_limits": {
+    "fresh_harness_e2e": "NOT_RUN",
+    "fresh_windows_gui_e2e": "NOT_RUN",
+    "same_task_accuracy_coverage_goodput_and_correct_os_input_p95_100ms": "NOT_RUN",
+    "blender_unknown_dispatch_states": "BLOCKED_PENDING_PROVEN_OBSERVATIONS",
+    "reici_separate_session_result": "NOT_RUN_PENDING",
+    "public_release": "NOT_RUN_FEATURE_GUARD_PRESERVED"
+  },
+  "goal_audit": {
+    "previous_turn": "PROGRESS_SOURCE_REGRESSION_INSTALLATION_AND_PUBLICATION",
+    "current_turn": "NO_ACCEPTANCE_PROGRESS_FAILURE_CAUSES_AND_IMPASSE_REVALIDATED",
+    "consecutive_impasse_turns": 1,
+    "verified_wait": false,
+    "reason": "Own CI and agents are terminal. Source and native call errors agree; no supported source correction is identified. Remote access and exclusive input/proven observations remain unavailable. Repeating unchanged models/builds or weakening permission/state guards would not satisfy acceptance.",
+    "goal_status": "ACTIVE",
+    "completion_claim": false
+  }
+}

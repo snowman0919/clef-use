@@ -1,0 +1,233 @@
+{
+  "claim": "OBSERVED",
+  "candidate": "FINAL15",
+  "scope": "isolated loopback immutable archive install; no global runtime or model mutation",
+  "archive_sha256": "7e2d9cd731bf49289a0a67a881c47f826e8b8258868992f5d0e5b507f0e6f23c",
+  "wheel_sha256": "525bb3bd714f51d75e08fe9d64345bda5ab0e9c93ff5c3ac23f8dc5340bf0933",
+  "raw_report_sha256": "84b3ff2d0c1096b5fe93bb63940d9b68f804ae81232e53b3665bdcc3d5507af2",
+  "first_status": "INSTALLED",
+  "repeat_status": "CURRENT",
+  "home_files": 26,
+  "repeat_all_home_bytes_preserved": true,
+  "packaged_python_exact_source": true,
+  "packaged_python_modules": 61,
+  "comment_prefixes_preserved": {
+    ".codex/config.toml": true,
+    ".hermes/config.yaml": true,
+    ".omp/config.yml": true
+  },
+  "owned_loopback_stopped": true,
+  "protocol_version": 1,
+  "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+  "guides": {
+    "clef-use": {
+      "sha256": {
+        "SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+        "references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      "digest": "d3084aaff89c7d989707c500b9967255183c087310fc4e949dbac23713ce05b6"
+    },
+    "clef-use-blender": {
+      "sha256": {
+        "SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      "digest": "c1af3408ec928b31dcf87a5033f45d477665fa65c64bdf7ac1134c98297509b8"
+    },
+    "clef-use-diagnostics": {
+      "sha256": {
+        "SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      },
+      "digest": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
+    }
+  },
+  "source_sha256": {
+    "src/clef_use/client.py": "3b15c16d5a2888d1987d19926082bd8e825fb151e0210b90a9f5f26a16d4687f",
+    "src/clef_use/service.py": "812871cc3075f99c266fefdc6451775183000ce4b935b6535dfe00b3f69e9841",
+    "src/clef_use/capabilities.py": "5e3e4b4eed6b4701892f968c3813b05dde537345841ce05a7b4922d0378c3733",
+    "tests/test_runtime_compatibility.py": "b32f703db8add0ccf50c2e9f816ac33ce797f387d0406ced0d4edd023207b8d2"
+  },
+  "regression": {
+    "passed": 792,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 52.53,
+    "log_sha256": "70c403ffe97763519cfce8cfde7afeb372ef16ac15f098281bc88010fce02499"
+  },
+  "build_history": "Initial incomplete dependency-wheelhouse preparation artifact was never installed; complete candidate archive above was built after correcting the local input path. No GUI/model retry.",
+  "actual_harness_stages": "NOT_RUN for FINAL15 at this install stage; historical FINAL12 native tasks retain their own archive/guide hashes.",
+  "explicit_three": [
+    {
+      "status": "INSTALLED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ],
+  "explicit_three_repeat": [
+    {
+      "status": "UNCHANGED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,201 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Raw Blender public-RNA inventory/editor-layout and native Linux coordinate components; not whole-task E2E or model/performance proof",
+  "source_base": "8809f13d7911bb67013266bb753f4f2e9ec16244",
+  "source_sha256": {
+    "src/clef_use/backends.py": "a0914dab359baa98869af434a9126edb3976ab5887a561435446e8806216fcb5",
+    "src/clef_use/blender_snapshot.py": "ab644335c833b0f56cf6d7e27880b3768816260311bf025d5ec267c7c8d1a6c4",
+    "src/clef_use/blender_state.py": "09a69c2cbdb7ac4c16cd95b567275786b1641bac56a5c2ce23e73e7c92ad7f5a",
+    "src/clef_use/state.py": "5651506657a4e647b2298a1fb057d1d13ea8107faff1c2b81e07d4abea138de5",
+    "src/clef_use/capabilities.py": "138a8c90ef5823b94cb4b7343c2c06bdb892d045e3abb9931ba7253ae664d947",
+    "tests/test_adapters.py": "50d37f33759eaef4718576ca870f49da6b59766951a3b3da6b43b4eaa935b8d8",
+    "tests/test_blender_snapshot.py": "1bfadc72072a2c51fa4f7caebfee97732e661641945fde4760fb4bd2fdc0abaf",
+    "tests/test_blender_state.py": "fd300a83e617940d817e18a40261ddf2ff4394250fefc2419756c975dade4e9f"
+  },
+  "blender_native": {
+    "scope": "Owned factory Blender 5.2 LTS and authenticated private Xvfb; canonical UI-thread collector/private Unix socket/peer-XRes-bound provider",
+    "status": "PASS",
+    "samples": 3,
+    "inventory": {
+      "source": "KEYCONFIGS_USER",
+      "effective_dispatch": "UNKNOWN",
+      "user_config_name": "Blender user",
+      "active_preset_name": "Blender",
+      "scanned_maps": 280,
+      "scanned_items": 3228,
+      "content_sha256": "f531874fcc67c6c34a9f0c176f5ecbc8bdf4a892bf2f7c16ea06e788ef982704",
+      "retained_maps": 43,
+      "retained_items": 164,
+      "wildcard_modifier_values": 80
+    },
+    "layout": {
+      "areas": 4,
+      "regions": 18,
+      "normalized_regions": 18,
+      "focused_editor": "UNKNOWN"
+    },
+    "blender_elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "report_sha256": "32d20fbb103c9636c7e9fb430112c3c575065d90f1787470354cb6d2474fa5db",
+    "driver_sha256": "71f97063e786be2197a3296e3fb96345f72e8f1eb60ce8de315e3c681add361a",
+    "earlier_pre_scale_guard_component_report_sha256": "1a19add1fbf44ccdac2dd5e91cf2c4e1a2897edd39783cef05603504e1d5a154",
+    "unknown_retained": [
+      "editor",
+      "popup",
+      "modal_absence",
+      "text_focus",
+      "ime_composing",
+      "keymap",
+      "keymap_version",
+      "loading",
+      "unit",
+      "space"
+    ],
+    "native_focus_setup_calls": 1,
+    "keyboard_pointer_inputs": 0,
+    "wrong_peer_resize_stream_loss_refusals": "PASS",
+    "cleanup": {
+      "owned_children_waited": 2,
+      "all_owned_children_exited": true
+    },
+    "exact_home_process_scan": {
+      "scope": "Two exact owned Blender component HOME values only",
+      "matching_pids": [],
+      "other_entries_unreadable": 415
+    }
+  },
+  "linux_monitor_native": {
+    "classification": "OBSERVED_NATIVE_COMPONENT_REGRESSION",
+    "status": "PASS_AFTER_OBSERVED_BEFORE_FAILURE",
+    "scope": "Actual DesktopCapture.capture Linux selected-monitor pixel mapping -> Frame.point -> DesktopAction.execute -> native ownedTk ButtonPress under authenticated private Xvfb+Xephyr Xinerama. No E2E/models/production display.",
+    "source_backends_sha256_before_and_after_run": "a0914dab359baa98869af434a9126edb3976ab5887a561435446e8806216fcb5",
+    "before": {
+      "raw_report_sha256": "8773b1d2da104b58cfffbe3023a779c547ff89dae9f5bebe04b11e4d23a5c06b",
+      "driver_sha256": "e4db50c2a7014982d88fe21c6bccf2edbffbafb0978f76166d33d095fe1a8908",
+      "frame_image_size": [
+        800,
+        600
+      ],
+      "frame_logical_size": [
+        1600,
+        600
+      ],
+      "expected_target": [
+        320,
+        300
+      ],
+      "received_event": [
+        640,
+        300
+      ],
+      "target_hit": false,
+      "action_ok": true
+    },
+    "after": {
+      "raw_report_sha256": "5615ae4efbb33fed5c724f48f23ce1fdab9c905df64a61a714d9d004d314c8bd",
+      "driver_sha256": "855bdd692fed2174b60a329e7e0f4944d01bda0e5d6a43d06e4e3f2572f488b5",
+      "frame_image_size": [
+        800,
+        600
+      ],
+      "frame_logical_size": [
+        800,
+        600
+      ],
+      "x_root_extent": [
+        1600,
+        600
+      ],
+      "frame_origin": [
+        0,
+        0
+      ],
+      "point": [
+        320,
+        300
+      ],
+      "received_events": [
+        {
+          "x_root": 320,
+          "y_root": 300,
+          "target_hit": true
+        }
+      ],
+      "action_ok": true
+    },
+    "driver_delta": {
+      "authority": "Root explicitly approved separate named post-fix diagnostic driver",
+      "only_change": "Remove `and point!=expected` from diagnostic input predicate so fixed mapping still exercises one real click. Same target/bbox/canonicalcapture/action/native-eventoracle.",
+      "diff_sha256": "f31e6542910fa361fd4ae0b00eb2949a9db58e26803796d83af9c00540fc6731",
+      "original_failure_driver_unmodified": true
+    },
+    "actual_native_clicks_after_fix": 1,
+    "automatic_retries": 0,
+    "cleanup": {
+      "owned_processes_exited": true,
+      "owned_sockets_absent": true,
+      "production_process_actions": 0
+    },
+    "not_run": [
+      "Darwin Retina",
+      "Windows native geometry",
+      "Broader multi-monitor layouts",
+      "End-to-end model/harness tasks"
+    ],
+    "source_edits_by_worker": 0,
+    "public_privacy": "No credentials/cookies, user data or production display/process identifiers included."
+  },
+  "regression": {
+    "focused_passed": 136,
+    "full_passed": 946,
+    "full_skipped": 34,
+    "warnings": 41,
+    "seconds": 54.44,
+    "full_log_sha256": "b5669e4faabb28d8027def447a9e1a2d1405e3f4736a4e3070a52b07e6cc28fe",
+    "monitor_mapping_before_fix": {
+      "failed": 2,
+      "passed": 1,
+      "scope": "Synthetic deterministic capture geometry with negative-origin and Retina cases",
+      "log_sha256": "3956402646313992b0bfec394579c117fc1be23442da505ecacd797f03a556e9"
+    },
+    "intermediate_inventory_suite": {
+      "passed": 942,
+      "skipped": 34,
+      "log_sha256": "34742fc0e99d0e56a2e6c8f2f640f05d49ef99385b22bcb1c2aa7efd53e94875",
+      "scope": "Before final coordinate-scale guard and monitor correction; not final-source proof"
+    },
+    "ruff_check": "PASS",
+    "ruff_format": "PASS",
+    "contract_generation": "PASS"
+  },
+  "discovery": {
+    "scope": "Actual source CLI capabilities command; no model or desktop input",
+    "raw_observations": [
+      "application_snapshot",
+      "editor_layout",
+      "keymap_inventory"
+    ],
+    "output_sha256": "9a918b774ba1cdb64624e705f9b1af5ba94d3c59e42a2168938a9278244c80bd"
+  },
+  "inventory_boundaries": {
+    "maps": 512,
+    "scanned_items": 16384,
+    "retained_items": 256,
+    "overflow": "REFUSE_SNAPSHOT; no truncation",
+    "effective_dispatch": "UNKNOWN"
+  },
+  "invariants": {
+    "old_changed_paths": [],
+    "active_v2": "PRESERVED",
+    "acceptance_requirements_and_numeric_gates": "UNCHANGED",
+    "model_calls": 0,
+    "production_display_touched": false
+  },
+  "not_run": {
+    "whole_task_model_harness_E2E": "Owned by other session under user scope update",
+    "whole_task_p95_goodput_coverage": "Owned by other session; no performance claim from component timings",
+    "changed_source_installed_E2E": "Owned by other session; not executed here",
+    "automatic_Blender_effective_dispatch_popup_IME_busy": "Not implemented; raw inventory/layout do not authorize operations",
+    "broader_monitor_layouts_and_native_Darwin_Windows": "Native proof restricted to two horizontal Xinerama monitors; Darwin scaling has deterministic regression only",
+    "public_release": "Existing branch deployment guards retained; no release performed"
+  }
+}

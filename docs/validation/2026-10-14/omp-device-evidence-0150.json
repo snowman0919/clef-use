@@ -1,0 +1,346 @@
+{
+  "classification": "SOURCE_0150_NATIVE_DEVICE_EVIDENCE_BINDING_WITH_SEPARATE_COMPONENT_REPLAY_AND_ACTUAL_MODEL_CHECKS",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.50",
+  "parent_commit": "c05dd6615d357e39e2f640686de718041c90cb60",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-02",
+    "HARNESS-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Whitelisted facts/enums/digests only; raw native identities, paths, messages, prompts, configuration/auth contents and traces remain private.",
+  "change": "OMP write xd:// transports only the two allowed MCP readers. Evidence binds exact original start/end name/id, validated known arguments, native device mode/target, selected server/MCP name, native success and exact consumer/raw-content equality before credit. The native string intent annotation is removed as native dispatch does; ordinary writes/unknown arguments/mismatches remain violations. Guide-before-invoke remains sticky. No native permissions, model/provider/request/deadline/input/confidence guard change.",
+  "source_files": {
+    "src/clef_use/integrations.py": "601cf37c5f621d0565ec7db2449dc449b5ed97d06a91cd71d929c9f8b7a6cdec",
+    "src/clef_use/__init__.py": "353a13945bfde27da05fcdfa53e1d4832c23c9ef6bf6ba97bf5b6dca6425fbad",
+    "pyproject.toml": "589fbe56883a136d58a0f76d885c0bf44404dec35fe2f6abf9b56792d2c33c9a",
+    "uv.lock": "b38f07d743bb607f870690b63b0707c82fccadbc6a3ad07d9ac3fb24d42fae72",
+    "agent-skills/manifest.json": "a41d90dc7aabb07efa1ca756fee54a781cf147905fef3c425df3ee542263bdc4",
+    "tests/test_omp_device_evidence.py": "767cbbb62504de3f89cceca4b808da991a8659f7bede1953164dd655e388f3e1"
+  },
+  "regression": {
+    "initial_device_and_sequence_tests_failed_before": 2,
+    "unpaired_result_regression_failed_before_correction": 1,
+    "native_intent_regression_failed_before_correction": 1,
+    "device_boundary_tests_passed": 11,
+    "full_passed": 1682,
+    "full_skipped": 55,
+    "full_warnings": 41,
+    "full_wall_seconds": 80.79,
+    "full_log_sha256": "e3a59b9137a4332663aace68c3fddb2db23ee59acb956086e88be0267e8d413a",
+    "ruff": "PASS",
+    "formatted_files": 167,
+    "generated_cli_examples": 198,
+    "generated_tool_examples": 12,
+    "scope": "Permanent parser behavior fixtures are not real harness/model proof. Actual native dispatch, exact actual-trace replay and fresh canonical model batches are separate below."
+  },
+  "actual_native_component": {
+    "classification": "ACTUAL_NATIVE_MCP_MANAGER_XDEV_DISPATCH_COMPONENT_WITH_EVIDENCE_PARSER",
+    "status": "PASS",
+    "version": "0.1.50",
+    "native_exit_code": 0,
+    "model_requests": 0,
+    "actual_dispatch_count": 2,
+    "parser_verified_invocation_count": 2,
+    "protected_file_bytes_preserved": true,
+    "runtime_endpoint_absent": true,
+    "wall_seconds": 0.5925515959970653,
+    "scope": "Actual installed native modules, MCP schemas/handler and device dispatcher. Native permission decorators/model stream/whole GUI session NOT_RUN; parser packet assembled from actual dispatcher outputs, not canonical model events."
+  },
+  "actual_native_component_digests": {
+    "probe_sha256": "beae5cb747eb3106faa253031af8536f1eb4d05b5fa52afd15c053b9b83fa3e8",
+    "dispatch_result_sha256": "a512ccfa2a6a28114118f44da8da83f650031fc122625fc914e3378e1b578df2",
+    "parser_result_sha256": "cd07848e8888064f8e0e52e1c0439ec2d42c2002279b872b88b0771b93d82347",
+    "native_payloads_read_only_facade": true,
+    "native_intent_removal_observed": true
+  },
+  "exact_actual_trace_replay": {
+    "classification": "EXACT_RETAINED_ACTUAL_SOURCE49_NATIVE_TRACE_REPLAY",
+    "new_model_requests": 0,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "trace_sha256": "f1be74d5bf6bf1664c27116974ce8f82c07dcc812489e902a010778ff5b50bb5",
+        "before": {
+          "status": "FAIL",
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_status",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "invalid_inventory": false,
+          "runtime_before_guide": false,
+          "load_before_invoke": true
+        },
+        "after": {
+          "status": "FAIL",
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "invalid_inventory": false,
+          "runtime_before_guide": false,
+          "load_before_invoke": true
+        },
+        "before_failed_call_count": 4,
+        "after_failed_call_count": 4
+      },
+      {
+        "trigger": "natural",
+        "trace_sha256": "1794cba06789604dfde7ca4d35cecb638cf738074c7fa98722e97bf904ae321c",
+        "before": {
+          "status": "FAIL",
+          "loaded": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "read_only_violations": [],
+          "invalid_inventory": false,
+          "runtime_before_guide": true,
+          "load_before_invoke": false
+        },
+        "after": {
+          "status": "FAIL",
+          "loaded": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "read_only_violations": [],
+          "invalid_inventory": false,
+          "runtime_before_guide": true,
+          "load_before_invoke": false
+        },
+        "before_failed_call_count": 0,
+        "after_failed_call_count": 0
+      },
+      {
+        "trigger": "negative",
+        "trace_sha256": "6551a4d0575ae1b80f243e4d026fc240487b6e34ab5baf30a70370d6c3f54856",
+        "before": {
+          "status": "PASS",
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "read_only_violations": [],
+          "invalid_inventory": false,
+          "runtime_before_guide": false,
+          "load_before_invoke": false
+        },
+        "after": {
+          "status": "PASS",
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "read_only_violations": [],
+          "invalid_inventory": false,
+          "runtime_before_guide": false,
+          "load_before_invoke": false
+        },
+        "before_failed_call_count": 0,
+        "after_failed_call_count": 0
+      }
+    ],
+    "private_replay_summary_sha256": "ff5fc55afe9ec4e534c45b43e83ab46c2a857430b9a3e564950dfdf82d2caaaa",
+    "scope": "Identical retained source49 native traces and managed manifest through historical/candidate parsers; no new model, prompt edit or native request. Explicit capability evidence increases1to3, failed calls remain4 and overall FAIL; naturalFAIL/negativePASS unchanged."
+  },
+  "actual_native_model_batches": {
+    "hermes": {
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 24.19910817791242,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "failed_call_tools": [],
+          "read_only_violations": [],
+          "trace_sha256": "aa2731fe1f1c4e395ab0f244b607a6fe0bca0dc27a0afec6a816463f126260ab",
+          "actual_api_request_count": 4,
+          "management_absent_all_actual_api_requests": true,
+          "canonical_transcript_file_sha256": "b3a00a4556638373c12a13bc1164f09e013efa92a499d792c1d788be398b2409",
+          "canonical_transcript_body_digest_verified": true
+        },
+        {
+          "trigger": "natural",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 30.182979744975455,
+          "loaded": [
+            "clef-use-diagnostics",
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "failed_call_tools": [],
+          "read_only_violations": [],
+          "trace_sha256": "09bab9dd201c0a691f960e65135bcf3eb5b562240a794a6ce91e2d4e20916d06",
+          "actual_api_request_count": 4,
+          "management_absent_all_actual_api_requests": true,
+          "canonical_transcript_file_sha256": "001545fb7926c2876d4cfdf25f692f16a3d2a19fb26b6d40a8d95e597fd7649f",
+          "canonical_transcript_body_digest_verified": true
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 17.00253227702342,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "failed_call_tools": [],
+          "read_only_violations": [],
+          "trace_sha256": "133a4c91cfeefe7b200f1039f0495a7a0a504303f8c27acc7a502b0328933766",
+          "actual_api_request_count": 1,
+          "management_absent_all_actual_api_requests": true,
+          "canonical_transcript_file_sha256": "437cd08eb56edaeed6abe349fa85d4d3fe0bb7a53fec8882312d9407db0e79cb",
+          "canonical_transcript_body_digest_verified": true
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_result_sha256": "6ee3d20e2d2d156c4d432e2c67d15b7f3f5883510b231cbaeb7a28372020ce5c",
+      "preservation_scope": "Protected file bytes and exact managed guide hashes; generated native usage/database state is not claimed unchanged."
+    },
+    "omp": {
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.11568471998908,
+          "loaded": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_status"
+          ],
+          "load_before_invoke": true,
+          "runtime_before_guide": false,
+          "failed_call_tools": [
+            "write",
+            "write",
+            "mcp__clef_use_computer_status",
+            "mcp__clef_use_computer_status",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "read_only_violations": [
+            "write"
+          ],
+          "trace_sha256": "3965ac3a1877733acefb0fe71c84d64fc7e0aecd3b5854ebc96bbce226c0e451"
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 0,
+          "wall_seconds": 31.626841332996264,
+          "loaded": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "attempted": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "failed_call_tools": [],
+          "read_only_violations": [],
+          "trace_sha256": "5af2036a1b60e39d9bf193fc9d8ab67460cda1544c73d1384b342b095ee9a914"
+        },
+        {
+          "trigger": "negative",
+          "status": "NOT_RUN",
+          "native_exit_code": 1,
+          "wall_seconds": 44.022247585933656,
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "failed_call_tools": [],
+          "read_only_violations": [],
+          "trace_sha256": "2f929daccc5d2cbcf4d00091a6b2839925a751f249cd2f56539e6f065afde007",
+          "native_error": "The socket connection was closed unexpectedly. For more information, pass `verbose: true` in the second argument to fetch()",
+          "native_error_sha256": "91b0f6d1372f8bc3e878d76a1b5361494d76033cb502bf63b1809e9a695357a9",
+          "scope": "Native transport failure before any guide/runtime attempt; not a completed negative case, not diagnosed as authentication, no retry."
+        }
+      ],
+      "protected_configuration_file_bytes_preserved": true,
+      "source_frozen": true,
+      "runtime_endpoint_absent": true,
+      "private_result_sha256": "0b9a7b848196288456fb72dfd0d5d5c7edfe1fc7a734dbb88b9a9ae9dad46695",
+      "native_database_complete_rows_changed": [
+        "cache",
+        "model_perf"
+      ],
+      "preservation_scope": "This batch changes only cache/model_perf complete rows. Current auth/settings comparisons unchanged do not erase source49 auth-row/credential-material uncertainty; prior credentials never restored."
+    }
+  },
+  "installation_release": {
+    "immutable_source_0150_ci": "NOT_RUN",
+    "actual_installed_windows_0150": "NOT_RUN",
+    "current_actual_windows_runtime": "0.1.49",
+    "prior_verified_receipt": "docs/validation/2026-10-14/windows-installed-ci-0149.json",
+    "public_deploy": "NOT_RUN_FEATURE_BRANCH_GUARD_UNCHANGED"
+  },
+  "not_run": [
+    "Whole Windows GUI and independent input abort after desktop ownership coordination",
+    "Original Blender hidden-state/task retries with independent result evidence",
+    "Same-task1000-opportunity accuracy/correctOS-inputp95<=100ms/coverage/goodput",
+    "Reici separate-session result",
+    "Guarded public URL/hash/fresh-install/update proof"
+  ]
+}

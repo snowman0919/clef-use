@@ -1,0 +1,487 @@
+{
+  "classification": "OBSERVED",
+  "source_base": "f409fae80b6120c890f5779a4eaaf63cb4f3228b",
+  "scope": "Standalone actual API-assisted fixture state producer, not whole fixture/E2E/model/input verification",
+  "integrated_source_sha256": {
+    "scripts/blender_operations_fixture.py": "2184038636221368f3ae0f293030cf4ca949b66f7210bcba88b054ca922186e6",
+    "tests/test_blender_fixture_state.py": "d68b3ab90c82b19f7e2e91e99fb7b5b657dde45f1a19d25db796b61143186b94"
+  },
+  "contract": "Supported numeric translation/rotation readback and preview use declared operation units and actual scene scale. NONE/raw properties/dimensionless scale retain their existing semantics. No unsupported distance request or ADAPTIVE inference added.",
+  "regression": {
+    "before": {
+      "failed": 4,
+      "passed": 4,
+      "method": "New permanent tests load immutable Git f409fae producer through a temporary runpy redirect; canonical tree never reverted",
+      "log_sha256": "90ed4b54aa5a83f03e838e4bf999834c3dcbb839832b6ea293eb7ddc43db5681"
+    },
+    "after": {
+      "passed": 8,
+      "log_sha256": "1aa0e443d6a2862389f7bee3ed0eda88e529d0c587a357ebc29f39d56207d12e"
+    },
+    "method": "Execute actual embedded state reader AST with controlled data; no native claim from these tests. Independently execute complete native STARTUP below.",
+    "integrated": {
+      "passed": 1216,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 62.83,
+      "log_sha256": "db47f7ad4d702edd22916fcde1d02227a4449233b1bcbddd5796becd30f01f9b"
+    },
+    "lint_format": "PASS: fixture and regression file",
+    "producer_compile": "PASS: actual embedded STARTUP compiled with literal placeholders substituted; no execution claimed",
+    "generated_contract": "PASS",
+    "review": "Scoped static review found no additional concrete defect; no review execution claimed"
+  },
+  "native_receipt_sha256": "da9f5219b7315f09feb02c7b27efd1dd35ecd687b8558450bb2a1dc85f773d9d",
+  "native": {
+    "classification": "OBSERVED_NATIVE_PRODUCER_COMPONENT",
+    "scope": "Actual original Blender operations fixture STARTUP producer executed alone in owned authenticated private factory Blender. Fixed API-assisted unit/object setup, real token-authenticated127.0.0.1 readback, independent public RNA oracle. No fixture.main, SessionRuntime, OperationRunner, harness/model, keyboard/pointer, wholeE2E or productionprovider claims.",
+    "historical_commit": "f409fae80b6120c890f5779a4eaaf63cb4f3228b",
+    "driver_sha256": "672e44263628904b53cbbe900fc022848d9cbb5d9b9aadf39ba73e2b67c46a8b",
+    "executable_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "raw_report_sha256": {
+      "before": "6a5ed89b9d6412190a8fd230bfc9a50763376bd343f8ab24750772bf2973fd4b",
+      "after": "8b6fd6f0110067f2c54d5aa9a57de443bfc2349649689481ef5d72e9c2010745"
+    },
+    "source_binding": {
+      "before": {
+        "fixture_sha256": "2924f92d0575e6854f04bf2166e69c7f32b418608564ca426339500983c0627a",
+        "startup_sha256": "d03606be7e26543336c0f71d3f8c0c7c4acb7c3cf104f4a2f02cd2972ea2d32f",
+        "fixture_sha256_at_end": "2924f92d0575e6854f04bf2166e69c7f32b418608564ca426339500983c0627a",
+        "producer_source_unchanged": true
+      },
+      "after": {
+        "fixture_sha256": "2184038636221368f3ae0f293030cf4ca949b66f7210bcba88b054ca922186e6",
+        "startup_sha256": "04708f8852386c710a4017ddee95e79747395eadce86733d1fc59ef4d9c41d84",
+        "fixture_sha256_at_end": "2184038636221368f3ae0f293030cf4ca949b66f7210bcba88b054ca922186e6",
+        "producer_source_unchanged": true
+      }
+    },
+    "cleanup": {
+      "before": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      },
+      "after": {
+        "children_waited": 2,
+        "children_exited": true,
+        "children_absent": true,
+        "x_socket_removed": true,
+        "production_blender_after": true
+      }
+    },
+    "independent_cleanup": {
+      "before": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      },
+      "after": {
+        "owned_root_process_count": 0,
+        "production_blender_alive": true
+      }
+    },
+    "native_inputs": 0,
+    "retained_setup_failures": [],
+    "limits": [
+      "Controlled fixture producer evidence only, not an executable production state provider or operation readiness.",
+      "No numeric keyboard entry or OS transform effect is tested. Observations compare genuinely native RNA against producer normalized numeric values.",
+      "Only existing supported request units NONE/METERS/CENTIMETERS/DEGREES/RADIANS exercised. No ADAPTIVE unit inference or unsupported request support.",
+      "Exact property values remain raw RNA; numeric transform values and preview use their advertised operation unit.",
+      "Factory setup writes only owned disposable scene units and Cube transform; original production scene/V2 unchanged."
+    ],
+    "phases": {
+      "before": {
+        "component_execution_status": "PASS",
+        "cell_count": 7,
+        "numeric_contract_pass_count": 3,
+        "numeric_contract_observed_fail_count": 4,
+        "cases": [
+          {
+            "case": "none_raw",
+            "native_units": {
+              "system": "NONE",
+              "length_unit": "ADAPTIVE",
+              "scale_length": 100.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "NONE",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_small",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 0.009999999776482582,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 0.019999999552965164,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [
+              "translate.X",
+              "translate.Y",
+              "translate.Z"
+            ],
+            "numeric_contract_status": "OBSERVED_FAIL",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_one",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_large",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 100.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 200.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [
+              "translate.X",
+              "translate.Y",
+              "translate.Z"
+            ],
+            "numeric_contract_status": "OBSERVED_FAIL",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "centimeters",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "CENTIMETERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "CENTIMETERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 200.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [
+              "translate.X",
+              "translate.Y",
+              "translate.Z"
+            ],
+            "numeric_contract_status": "OBSERVED_FAIL",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "rotation_degrees",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "rotation_radians",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "RADIANS"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "RADIANS",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 0.10000000149011612,
+            "mismatched_components": [
+              "rotate.X"
+            ],
+            "numeric_contract_status": "OBSERVED_FAIL",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          }
+        ]
+      },
+      "after": {
+        "component_execution_status": "PASS",
+        "cell_count": 7,
+        "numeric_contract_pass_count": 7,
+        "numeric_contract_observed_fail_count": 0,
+        "cases": [
+          {
+            "case": "none_raw",
+            "native_units": {
+              "system": "NONE",
+              "length_unit": "ADAPTIVE",
+              "scale_length": 100.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "NONE",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_small",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 0.009999999776482582,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 0.019999999552965164,
+            "expected_translate_x": 0.019999999552965164,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_one",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "meters_large",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 100.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 200.0,
+            "expected_translate_x": 200.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "centimeters",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "CENTIMETERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "CENTIMETERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 200.0,
+            "expected_translate_x": 200.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "rotation_degrees",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "DEGREES"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "DEGREES",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 5.729578036685597,
+            "expected_rotate_x": 5.729578036685597,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          },
+          {
+            "case": "rotation_radians",
+            "native_units": {
+              "system": "METRIC",
+              "length_unit": "METERS",
+              "scale_length": 1.0,
+              "system_rotation": "RADIANS"
+            },
+            "raw_location_x": 2.0,
+            "raw_rotation_radians_x": 0.10000000149011612,
+            "advertised_units": {
+              "translate": "METERS",
+              "rotate": "RADIANS",
+              "scale": "NONE"
+            },
+            "producer_translate_x": 2.0,
+            "expected_translate_x": 2.0,
+            "producer_rotate_x": 0.10000000149011612,
+            "expected_rotate_x": 0.10000000149011612,
+            "mismatched_components": [],
+            "numeric_contract_status": "PASS",
+            "preview_equals_values": true,
+            "property_raw_location_preserved": true,
+            "property_raw_scale_preserved": true
+          }
+        ]
+      }
+    }
+  },
+  "native_curation": "Selected scalar examples are retained here; mismatch lists and pass counts cover complete XYZ vectors. Full sanitized native receipt and private raw reports are bound by their digests.",
+  "resolves_historical_finding": "The separate fixture unit-normalization issue recorded in numeric-scene-units.json is corrected by this later source/evidence; the historical receipt is preserved unchanged.",
+  "not_run": [
+    "Whole fixture tasks and native numeric keyboard/modal input",
+    "Installed-current/harness E2E and models: owned by other sessions",
+    "Windows/Darwin native execution",
+    "Full-task accuracy/reaction p95/goodput/coverage",
+    "Public release"
+  ],
+  "acceptance": "No scenario status or release gate promoted"
+}

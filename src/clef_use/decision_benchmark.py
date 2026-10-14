@@ -120,6 +120,14 @@ def score_answers(expected: dict, answers: dict) -> dict:
             lower, upper = truth["range"]
             value = answer.get("score", answer.get("noul"))
             correct += value is not None and lower <= value <= upper
+            if (
+                name == "complete"
+                and "noul" in answer
+                and upper < 0.9
+                and value is not None
+                and value >= 0.9
+            ):
+                false_complete += 1
         else:
             raise ValueError("truth must be an option identifier or explicit numeric range")
     return {

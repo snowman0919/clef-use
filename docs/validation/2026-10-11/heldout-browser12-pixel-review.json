@@ -1,0 +1,196 @@
+{
+  "claim": "OBSERVED",
+  "scope": "Root visually inspected all12 actual unmodified Firefox PNGs with local view_image. Localization pixel/semantic review only, no model/task/input/quality completion or final data lock.",
+  "records": [
+    {
+      "screen_id": "browser-01",
+      "encoded_sha256": "689332423d35903c91a6119cbfb762ca4afc6930df94eabbcbf71eb303210cae",
+      "decoded_rgb_sha256": "686e450b0146e090fb6eb74e1802d0ab56227ec6970d5fe4e2a9b9e519d49f6f",
+      "resolution": [
+        1200,
+        800
+      ],
+      "query_ids": [
+        "browser-01-1",
+        "browser-01-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-02",
+      "encoded_sha256": "0addeecaf703758432434a28b5f7e3980a98fee9f763eff64ae4ad52893c1adc",
+      "decoded_rgb_sha256": "96f860bc8bc467e2cfed3786f4fbfbcff3800c74c1f8a5dc0bbc9d144a4d28e8",
+      "resolution": [
+        1360,
+        900
+      ],
+      "query_ids": [
+        "browser-02-1",
+        "browser-02-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-03",
+      "encoded_sha256": "2e3d06d44d8b8968e05f7b7f20d7f82dcc8fb348db2645ff9d453c566b7d3f32",
+      "decoded_rgb_sha256": "5e9b4214ed287885e7fdfa465c7f008efeeb9d4b9641da3326519acc760d79e1",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "query_ids": [
+        "browser-03-1",
+        "browser-03-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-04",
+      "encoded_sha256": "4f682ac79184b6d126e02469d4039909bdbd65d75983ac141a3e84b8cd403f12",
+      "decoded_rgb_sha256": "2ab57f2618ccb9f9203f149ad271ecab36cce4ffc68b20ef797b428ee6a3de38",
+      "resolution": [
+        1200,
+        800
+      ],
+      "query_ids": [
+        "browser-04-1",
+        "browser-04-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-05",
+      "encoded_sha256": "1695402d1d64645258445bce4f175d7ef09d734cce0e8770010af9a0e17d534b",
+      "decoded_rgb_sha256": "15ac7e77dc88c08d516accffaa1c95b712bcb961c9fc5c57d5b5cc8235b9a56a",
+      "resolution": [
+        1360,
+        900
+      ],
+      "query_ids": [
+        "browser-05-1",
+        "browser-05-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-06",
+      "encoded_sha256": "e34734f0647cee21c49de6327df7d092ec53cd69ad20bdd3ee298e8ff6c3ef8d",
+      "decoded_rgb_sha256": "a70698b110194e436944ad0644f50c5cf09bfaa76efeea40a5c460cd3e5f25d7",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "query_ids": [
+        "browser-06-1",
+        "browser-06-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-07",
+      "encoded_sha256": "3f6c1879bdb2051f70e11b4fc4fcd063e1e1878debee5799cad4b3ecacdca289",
+      "decoded_rgb_sha256": "5e5bb54f4bfac46ea91e174ad8dc13bae13690bc7efb496689c437d2ad787521",
+      "resolution": [
+        1200,
+        800
+      ],
+      "query_ids": [
+        "browser-07-1",
+        "browser-07-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-08",
+      "encoded_sha256": "5b8117b5a05b68e99aea36f6dd7a8050cae46231a4f72855225b222f1cd9cdc1",
+      "decoded_rgb_sha256": "a44ba7c5c352ba5a0d10ef41e609a0d2eaa5113434c1aa86558267285f118509",
+      "resolution": [
+        1360,
+        900
+      ],
+      "query_ids": [
+        "browser-08-1",
+        "browser-08-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-09",
+      "encoded_sha256": "52e449e1e39b4dc0c79ce89d19883126c6e4ef040adec4d645f721936621ec96",
+      "decoded_rgb_sha256": "158cc58664153ba61cb37c0c3274a69453c4a54a29a2019ff0a9b8a5bc38804e",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "query_ids": [
+        "browser-09-1",
+        "browser-09-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": true
+    },
+    {
+      "screen_id": "browser-10",
+      "encoded_sha256": "5ae4f4cca0c4c7a8ef512ddcd5d51cace94e4b68cba2501f2cce3a6c9e9ec156",
+      "decoded_rgb_sha256": "10a32440de819f78361c9ca0415e25844d89f87f763551ac48013ebc210f3d1d",
+      "resolution": [
+        1200,
+        800
+      ],
+      "query_ids": [
+        "browser-10-1",
+        "browser-10-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-11",
+      "encoded_sha256": "d75a5de74e58b6f91aa1592b7f442ad34c52c9e10a32a9d57552d22b1c6f79ed",
+      "decoded_rgb_sha256": "d5804ebd87ba4c629e907ac403bd2fe71fbcf80e1c19c37a35c8a7508e4bbdda",
+      "resolution": [
+        1360,
+        900
+      ],
+      "query_ids": [
+        "browser-11-1",
+        "browser-11-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": false
+    },
+    {
+      "screen_id": "browser-12",
+      "encoded_sha256": "b280704f8272e5030cac1f4deae476fddd9337a0dbf9adfd20c9d7a7bce9c4f2",
+      "decoded_rgb_sha256": "40956e1e0b316c9e0b0e2215a05da0e6b31a0894cbf04dd18e3bda7918ce9978",
+      "resolution": [
+        1600,
+        1000
+      ],
+      "query_ids": [
+        "browser-12-1",
+        "browser-12-2"
+      ],
+      "pixel_review": "OBSERVED matching visible target/control names, absent button cases and duplicate controls; native DOM boxes retained unchanged",
+      "trainval_near_duplicate_review_required": true
+    }
+  ],
+  "annotations": "Actual native DOM rectangles preserved; structural heading rectangles include native element whitespace, not glyph-only boxes. Disabled visible controls remain localization targets without action authorization.",
+  "browser_02_role_correction": "Actual DOM Privacy element is BUTTON with explicit ARIA role tab; earlier root statement roleNone was wrong (that belongs to Save changes). Visible unique Privacy and declared role support localization; functional tab behavior not executed. No query/UI relabel or invalidation based on the wrong role statement.",
+  "negative_review": "Export control not visible; Delete item words are document text, no deletion button; Publish covered by review overlay. Duplicate Open/settings/Edit controls visible; safe abstention required for ambiguous queries.",
+  "local_leakage_review": "PENDING independent review of5dHash<=8 flags and known development image; encoded/decoded exact trainval nonoverlap recorded separately. Does not prove unseen public pretraining.",
+  "captured_screens": 12,
+  "remaining_screens_NOT_RUN": 24,
+  "planned_queries": 72,
+  "model_queries_NOT_RUN": 72,
+  "final_annotation_lock": "NOT_READY",
+  "received_artifact_sha256": "c8a32681146b88091cb7f489a9783c4bb9442d1fefb201f6373a0ee3f79ffe0f"
+}

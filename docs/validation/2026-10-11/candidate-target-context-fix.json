@@ -1,0 +1,95 @@
+{
+  "classification": "OBSERVED",
+  "date": "2026-10-12",
+  "scope": "Source candidate identity and bounded observed-target context; not installed runtime or GUI/model efficacy",
+  "source_base": "a3dd0cf2ee3dc0d759d43453d143c0145841bacc",
+  "files": {
+    "src/clef_use/backends.py": "440708d3439ef7d809fef2376d4d6d228c945f060a6ee14a5fe04403df8eea91",
+    "src/clef_use/router.py": "c019b4ec239e80eafac1bc3d01ea034ea8d2e9655a37e9b0830218febe9cbefb",
+    "tests/test_decision_models.py": "1fdcbeadc9a393866ea67c8b648522019c11d72c6aace92dd05eb7173a601459",
+    "tests/test_decision_context.py": "d8ef72d537f7fd57527f4f60a5ccda256fd14e3f20a723cd70dad69e24c3d190",
+    "tests/test_router.py": "0243954808e385624cf390ec22862b12921435721ccefe1e158d174a03162859"
+  },
+  "reproduced_before": {
+    "equal_label_packet": "KeyError: operation",
+    "target_context_33_and_40": "Executable target preservation assertions failed",
+    "target_context_41": "Expected budget refusal did not occur"
+  },
+  "canonical_smoke": {
+    "path": "CandidateBuilder -> ExecutionRouter.decision_observation -> decision_request -> JSON",
+    "equal_label_actions": [
+      {
+        "id": "a0",
+        "operation": "click",
+        "target": "left",
+        "bbox": [
+          10,
+          20,
+          20,
+          40
+        ]
+      },
+      {
+        "id": "a1",
+        "operation": "click",
+        "target": "right",
+        "bbox": [
+          70,
+          20,
+          80,
+          40
+        ]
+      }
+    ],
+    "budget_cases": [
+      {
+        "targets": 33,
+        "serialized_targets": 33,
+        "dangling_targets": 0
+      },
+      {
+        "targets": 40,
+        "serialized_targets": 40,
+        "dangling_targets": 0
+      },
+      {
+        "targets": 41,
+        "result": "REFUSED",
+        "reason": "executable targets exceed the bounded decision object budget"
+      }
+    ],
+    "model_calls": 0,
+    "OS_inputs": 0
+  },
+  "verification": {
+    "focused": {
+      "passed": 124,
+      "warnings": 4,
+      "seconds": 2.51
+    },
+    "full_source": {
+      "passed": 880,
+      "skipped": 34,
+      "warnings": 41,
+      "seconds": 50.55
+    },
+    "ruff_check": "PASS",
+    "ruff_format_check": "PASS"
+  },
+  "invariants": {
+    "object_budget": 40,
+    "text_budget_utf8_bytes": 32768,
+    "confidence_guards": "UNCHANGED",
+    "candidate_roster_overflow": "Explicit replan before model call; no silent action pruning",
+    "missing_non_null_target": "Refused by canonical serializer",
+    "pointer_representation": "PRESERVED"
+  },
+  "not_run": [
+    "Identical real native model tasks on this changed source",
+    "New candidate installation",
+    "CI/release of this changed source",
+    "Production state provider",
+    "Full task accuracy/p95/goodput/coverage"
+  ],
+  "causal_limit": "Historical native task failures are retained; this serializer correction alone does not establish their cause or an E2E improvement."
+}

@@ -1,0 +1,112 @@
+{
+  "claim": "OBSERVED",
+  "scope": "Actual FINAL12 installed CLI versus genuine pinned 0.1.29 launcher and actual CI26d9252 managed guide installation. Isolated HOME, no native harness/model/GUI execution.",
+  "cases": [
+    {
+      "name": "genuine 0.1.29 selected executable",
+      "status": "INCOMPATIBLE",
+      "reason": "selected runtime capability probe failed",
+      "home_bytes_preserved": true,
+      "exit_code": 2
+    },
+    {
+      "name": "codex genuine stale guide binding",
+      "status": "FAIL",
+      "compatibility": {
+        "status": "MISMATCH",
+        "reload_required": true,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": "refresh this managed integration and start a fresh harness session"
+      },
+      "reason": "refresh this managed integration and start a fresh harness session",
+      "home_bytes_preserved": true,
+      "exit_code": 0,
+      "harness_started": false
+    },
+    {
+      "name": "hermes genuine stale guide binding",
+      "status": "FAIL",
+      "compatibility": {
+        "status": "MISMATCH",
+        "reload_required": true,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": "refresh this managed integration and start a fresh harness session"
+      },
+      "reason": "refresh this managed integration and start a fresh harness session",
+      "home_bytes_preserved": true,
+      "exit_code": 0,
+      "harness_started": false
+    },
+    {
+      "name": "omp genuine stale guide binding",
+      "status": "FAIL",
+      "compatibility": {
+        "status": "MISMATCH",
+        "reload_required": true,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": "refresh this managed integration and start a fresh harness session"
+      },
+      "reason": "refresh this managed integration and start a fresh harness session",
+      "home_bytes_preserved": true,
+      "exit_code": 0,
+      "harness_started": false
+    },
+    {
+      "name": "refresh retains previously approved incompatible launcher",
+      "status": "PARTIAL",
+      "home_bytes_preserved": true,
+      "harness_started": false
+    },
+    {
+      "name": "explicit different launcher preserves approved registration",
+      "status": "CONFLICT",
+      "home_bytes_preserved": true,
+      "harness_started": false
+    },
+    {
+      "name": "codex refreshed guide binding",
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "harness_started": false
+    },
+    {
+      "name": "hermes refreshed guide binding",
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "harness_started": false
+    },
+    {
+      "name": "omp refreshed guide binding",
+      "compatibility": {
+        "status": "MATCH",
+        "reload_required": false,
+        "installed_release": "0.1.30",
+        "runtime_release": "0.1.30",
+        "action": null
+      },
+      "harness_started": false
+    }
+  ],
+  "status": "PASS",
+  "runtime_state_not_created": true,
+  "gui_inputs": 0,
+  "prior_fixture_failures": [
+    "First runner expected a single result rather than the native integrations array; genuine INCOMPATIBLE refusal occurred and was preserved.",
+    "Second runner counted empty transaction lock files as managed activation. They contain no user data and are excluded from the activation check; all original user files remain in the comparison. No product change.",
+    "Third runner expected refresh to replace the previously approved immutable launcher. Native refresh correctly preserved that launcher and refused its older guide binding. Explicit selection of the current executable is required.",
+    "Fourth runner expected explicit launcher rebinding to overwrite an approved registration. Existing managed ownership policy correctly refused; safe removal of unchanged managed entries precedes re-enrollment."
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "claim": "OBSERVED",
+  "source_commit": "a1606efe510d98dc63c1df7763e044e32094a633",
+  "candidate": "FINAL6 local unpublished 0.1.30",
+  "changes_since_FINAL5": "Only harness/profile resolution, regression tests and localized setup guidance; eight Blender/input core modules unchanged.",
+  "evidence": {
+    "source_regression": {
+      "artifact": "clef-use-full-regression-final6-20261011.log",
+      "sha256": "7ce58d89ff26856640e016f8617230d12a785fd09ee74d09af77d1320326e691",
+      "result": "772 passed, 34 skipped, 41 warnings in 41.60s"
+    },
+    "installed_candidate": {
+      "artifact": "report.json",
+      "sha256": "6f7b82ee15072e9f03506b237cac4c07b2f2ac1d76ade24d02acca9ec584c2a1",
+      "status": "PASS",
+      "preserved_unrelated_config": true
+    },
+    "codex_native": {
+      "artifact": "clef-use-final6-codex-native.json",
+      "sha256": "31522d82fbf2eaef21fb4552838825e9396e9aad595686faef06a0195a6e387b",
+      "status": "NOT_RUN",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "NOT_RUN",
+        "INVOKED": "NOT_RUN",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false
+    },
+    "hermes_native": {
+      "artifact": "clef-use-final6-hermes-native.json",
+      "sha256": "e986214282a7aa50fc54f6b40ffbfc219e9770b35b3dbe2b9332ca5fcd2b79fc",
+      "status": "PASS",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false
+    },
+    "omp_native": {
+      "artifact": "clef-use-final6-omp-native.json",
+      "sha256": "b6f45e4fb990c50183727784d2089028cadd962b2176471ac996c750356ebe90",
+      "status": "PASS",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false
+    },
+    "omp_custom_native": {
+      "artifact": "clef-use-final6-omp-custom-native.json",
+      "sha256": "b4decd70a084d6c3f21c799eebaf9cc71d8b4a17b88974e59f10b26fc02bde29",
+      "status": "PASS",
+      "stages": {
+        "INSTALLED": "PASS",
+        "DISCOVERED": "PASS",
+        "LOADED": "PASS",
+        "INVOKED": "PASS",
+        "TASK_VERIFIED": "NOT_RUN"
+      },
+      "model_driven": false
+    }
+  },
+  "limitations": [
+    "Native adapters do not establish model triggering or GUI task verification.",
+    "Codex model load/invoke remains NOT_RUN after a separate isolated codex-cli 0.160.1 request returned 401. No authentication failure is established for the active desktop chat.",
+    "No public artifact or latest switch; release gates remain open.",
+    "Earlier FINAL5 Windows overall FAIL is preserved."
+  ]
+}

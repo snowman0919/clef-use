@@ -1,0 +1,46 @@
+{
+  "classification": "OBSERVED",
+  "status": "FAIL",
+  "scope": "Exactlyoneauthorizedv3nativeacquisition, firstfailurestop, no retries.",
+  "driver_sha256": "c7c67fbb61f524b30d736b818aa13686bcdcd8fe3f20e63049f5f6bbf43ef370",
+  "declaration_sha256": "ec1a33dbdca8d69e97eb92a12ef7fbd495c2355c826206e087ce0f79fe73c9c6",
+  "report_sha256": "70d693335f1efd920c85621a92671c08f3ce3580b5869c0a8cbb21e91664f673",
+  "screens": 36,
+  "queries": 72,
+  "captured": 0,
+  "NOT_RUN_screens": 36,
+  "NOT_RUN_queries": 72,
+  "model_calls": 0,
+  "GPU_calls": 0,
+  "OS_accuracy_task_inputs": 0,
+  "first_failure": {
+    "top_error": "Owned native app capture readiness failed: browser-01",
+    "actual_worker_error": "ModuleNotFoundError: No module named Xlib",
+    "at": "owned_firefox_geometry import Xlib",
+    "worker_log_sha256": "6c03d573a54373cadbe24db8496d44ff5138e916c56796a43f114af8c1d363a9",
+    "DOM_oracle_exists": false,
+    "native_geometry_receipt_exists": false,
+    "screenshot_exists": false
+  },
+  "cleanup": {
+    "recorded": [
+      {
+        "application": "browser",
+        "seed": 17,
+        "worker_stopped": true,
+        "xvfb_stopped": true,
+        "owned_X_socket_removed": true,
+        "owned_X_lock_removed": true,
+        "cleanup_no_errors": true
+      }
+    ],
+    "independent_remaining_owned_pids": [],
+    "all_declared_X_sockets_absent": true,
+    "all_declared_X_locks_absent": true,
+    "production_Blender_PID_alive": true,
+    "supervisor_exit_code": 1
+  },
+  "group_status_note": "RUNNING historicalfield preserved at exception; overallFAIL terminal, workerwaited.",
+  "ground_truth_lock": "NOT_READY",
+  "received_artifact_sha256": "bbe4c30efe7541ae43b00b01ee80526aa63b130d62a9ad819ddb38c07e4dc37e"
+}

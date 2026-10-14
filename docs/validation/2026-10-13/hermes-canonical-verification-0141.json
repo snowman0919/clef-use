@@ -1,0 +1,229 @@
+{
+  "classification": "OBSERVED_ACTUAL_NATIVE_HARNESS_SOURCE_SESSIONS_NOT_IMMUTABLE_INSTALL_OR_GUI_TASK",
+  "date": "2026-10-13",
+  "runtime_version": "0.1.41",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-02",
+    "HARNESS-03"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no profile paths, identities, raw transcripts or configuration.",
+  "source_files_sha256": {
+    "src/clef_use/integrations.py": "daa8a633ca905e353d54e89cedac3a51975ee18928adf1ee389a34f2fc5167ab",
+    "agent-skills/clef-use-diagnostics/SKILL.md": "e9811bc7220c6c85391114c1e79fd621cbf39a2c733aa57839f968347f6da147"
+  },
+  "hermes": {
+    "status": "PASS_FOR_THREE_SINGLE_CASE_SAMPLES",
+    "native_version": "0.21.6+777",
+    "model_overridden": false,
+    "system_prompt_overridden": false,
+    "native_cli_entrypoint_preserved": true,
+    "permission_scope": "Selected managed MCP entry receives explicit read-only environment in native in-memory register_mcp_servers. On-disk configuration is unchanged.",
+    "schema_scope": "Actual two-tool capability/status facade; full product schema validated separately before native verification.",
+    "cases": {
+      "explicit": {
+        "status": "PASS",
+        "model_status": "PASS",
+        "elapsed_seconds": 41.70746703003533,
+        "loaded_guides": [
+          "clef-use"
+        ],
+        "invoked_tools": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "PASS",
+          "method": "native MCP server environment and live two-tool schema"
+        }
+      },
+      "natural": {
+        "status": "PASS",
+        "model_status": "PASS",
+        "elapsed_seconds": 36.781290245009586,
+        "loaded_guides": [
+          "clef-use",
+          "clef-use-blender"
+        ],
+        "invoked_tools": [
+          "mcp__clef_use__computer_capabilities"
+        ],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "PASS",
+          "method": "native MCP server environment and live two-tool schema"
+        }
+      },
+      "negative": {
+        "status": "PASS",
+        "model_status": "PASS",
+        "elapsed_seconds": 21.887971624033526,
+        "loaded_guides": [],
+        "invoked_tools": [],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "PASS",
+          "method": "native MCP server environment and live two-tool schema"
+        }
+      }
+    },
+    "global_config_unchanged": true,
+    "private_summary_sha256": "fae05c2f9d1fc764600ebda48bf55b01c7ac723e08f8e58e1cd3b5764e1d2278",
+    "reliability_claim": false,
+    "whole_process_write_sandbox_proven": false,
+    "native_skills_scope": "Native skills toolset also exposes skill_manage; attempts in stream or canonical history fail verification, none observed. MCP scope is enforced separately."
+  },
+  "diagnostics_pressure": {
+    "status": "FAIL",
+    "all_three_guides_loaded": true,
+    "loaded_guides": [
+      "clef-use-diagnostics",
+      "clef-use",
+      "clef-use-blender"
+    ],
+    "successful_product_tool_calls": 1,
+    "failed_product_tools": [
+      "mcp__clef_use__computer_status"
+    ],
+    "failure": "computer_status: runtime service is not running",
+    "read_only_violations": [],
+    "server_read_only_scope": "ENFORCED_NATIVE_TWO_TOOL_FACADE",
+    "native_resource_calls": "Read-only generated protocol adapters are recorded separately and never prove product invocation.",
+    "private_result_sha256": "2f26c80f17a5f03ec7c011df364ffc9a9cd8b2bfda1bd333b65e4c3d8e5a4086",
+    "earlier_retained_reprocessing": {
+      "status": "PASS",
+      "all_three_guides_loaded": true,
+      "server_read_only_scope": "NOT_ENFORCED; native parent-environment filtering discovered afterward",
+      "private_result_sha256": "af98d241ab840e71d084cf5e4b06f3f7040f458d746a9a5599cbcabb5a5a552e"
+    },
+    "causality_limit": "Natural case did not read the modified diagnostics body. Explicit diagnostics pressure exercises it; one run does not establish trigger reliability."
+  },
+  "omp_current_0140": {
+    "status": "INCOMPLETE_MODEL_TRIGGER_BATCH",
+    "cases": {
+      "explicit": {
+        "status": "NOT_RUN",
+        "model_status": "NOT_RUN",
+        "elapsed_seconds": 91.564,
+        "loaded_guides": [
+          "clef-use"
+        ],
+        "invoked_tools": [
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_capabilities",
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "NOT_PROVEN_BY_THIS_RECEIPT"
+        }
+      },
+      "natural": {
+        "status": "FAIL",
+        "model_status": "FAIL",
+        "elapsed_seconds": 33.528,
+        "loaded_guides": [],
+        "invoked_tools": [
+          "mcp__clef_use_computer_capabilities"
+        ],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "NOT_PROVEN_BY_THIS_RECEIPT"
+        }
+      },
+      "negative": {
+        "status": "NOT_RUN",
+        "model_status": "NOT_RUN",
+        "elapsed_seconds": 91.403,
+        "loaded_guides": [],
+        "invoked_tools": [],
+        "failed_tool_names": [],
+        "read_only_violations": [],
+        "native_stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "native_read_only_scope": {
+          "status": "NOT_PROVEN_BY_THIS_RECEIPT"
+        }
+      }
+    },
+    "global_config_unchanged": true,
+    "private_summary_sha256": "49442b4f0ee80e185e7ee89e361508e57085673b37f7bcc987c08298f33c7bbf",
+    "current_error_class": "Model budget exhausted for explicit/negative; required guide omitted for natural. No 401 in this batch.",
+    "scope": "Native discovery/load/invoke components separate from actual model trigger outcome."
+  },
+  "completion_claim": false,
+  "numeric_gates_changed": false,
+  "review_regressions": [
+    "Pending selected calls cannot prove complete verification.",
+    "Canonical-only omitted effectful MCP/native skill-management calls cannot pass.",
+    "Incomplete negative-trigger tool attempts remain FAIL, never erased as NOT_RUN."
+  ],
+  "regression": {
+    "classification": "OBSERVED_SOURCE_REGRESSION_NOT_HARNESS_OR_DESKTOP_PROOF",
+    "passed": 1591,
+    "skipped": 46,
+    "warnings": 41,
+    "wall_seconds": 67.45,
+    "log_sha256": "a50c5c0d5f39a968afb8314489d787bf705ea85de54e70d23b1bd694eaed41d5",
+    "ruff_check": "PASS",
+    "ruff_format_files": 161,
+    "generated_contract": {
+      "published_cli_examples": 198,
+      "published_tool_examples": 12,
+      "status": "PASS"
+    },
+    "retained_failed_full_run": {
+      "failed": 2,
+      "passed": 1589,
+      "cause": "Incomplete negative-trigger attempts incorrectly classified NOT_RUN; corrected to FAIL without weakening completeness.",
+      "log_sha256": "6517541d81a0eba67368f4734a41b64206c1fe83a38ad1e4cc7f009541721954"
+    }
+  }
+}

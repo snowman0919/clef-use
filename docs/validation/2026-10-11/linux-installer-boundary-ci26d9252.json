@@ -1,0 +1,98 @@
+{
+  "claim": "OBSERVED",
+  "scope": "Actual immutable CI install.sh update refusal against owned loopback synthetic0.1.31 malformed archives; currently active0.1.30 installed runtime/config preserved",
+  "ci_head": "26d9252e3f169112789c920eb1c9507d5d9e9d0a",
+  "cases": [
+    {
+      "name": "checksum",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "SHA-256 mismatch",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "13068897afa6225e586d5a0edcfc7b9c1663218b8ab0abe52174e0ae4b492961",
+      "passed": true
+    },
+    {
+      "name": "traversal",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "unsafe archive member",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c9b7bc8657f46b495d485eb49281325852ef5d6c6193edfd12772ac35e5a61a2",
+      "passed": true
+    },
+    {
+      "name": "absolute",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "unsafe archive member",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c9b7bc8657f46b495d485eb49281325852ef5d6c6193edfd12772ac35e5a61a2",
+      "passed": true
+    },
+    {
+      "name": "backslash",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "unsafe archive member",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c9b7bc8657f46b495d485eb49281325852ef5d6c6193edfd12772ac35e5a61a2",
+      "passed": true
+    },
+    {
+      "name": "symlink",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "unsafe archive member",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c9b7bc8657f46b495d485eb49281325852ef5d6c6193edfd12772ac35e5a61a2",
+      "passed": true
+    },
+    {
+      "name": "duplicate",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "unsafe archive member",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "c9b7bc8657f46b495d485eb49281325852ef5d6c6193edfd12772ac35e5a61a2",
+      "passed": true
+    },
+    {
+      "name": "offline",
+      "exit_code": 1,
+      "refusal_reason_matched": true,
+      "expected_refusal": "Connection refused",
+      "old_wrapper_current_and_home_bytes_preserved": true,
+      "old_runtime_launch": true,
+      "escape_files_absent": true,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "cfa748b466ea2c07988badece76ab5b69974372895386dea425021bef458ffad",
+      "passed": true
+    }
+  ],
+  "production_changes": false,
+  "status": "PASS",
+  "owned_server_stopped": true,
+  "raw_report_sha256": "4c284e8bfc9857d25b3b8755e4d16a0fe084be14dc2d8df62d33eaf349e91803",
+  "platform": "linux",
+  "inference_or_model_downloads": false,
+  "synthetic_version_note": "0.1.31 is malformed test metadata only, never a published or installed release."
+}

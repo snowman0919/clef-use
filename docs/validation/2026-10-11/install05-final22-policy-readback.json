@@ -1,0 +1,139 @@
+{
+  "classification": "OBSERVED_NATIVE_REPORTS_ROOT_POLICY_INTERPRETATION",
+  "candidate": "FINAL22",
+  "input_sha256": "4324bb719949b2492e94e4c9fa0c7f7fe8260016b4e8233e030b30d6867de83b",
+  "policy_scope": "Preservation conflict reports, including duplicates in configured active sources even when native precedence retains the managed source. Whole-directory aliases and actually disabled individual entries do not conflict. No whole-source/profile disable or GUI/task proof.",
+  "cases": [
+    {
+      "case": "codex/SAME_REALPATH",
+      "classification": "OBSERVED",
+      "installed_status": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "SAME_REALPATH"
+    },
+    {
+      "case": "codex/DUPLICATE_NAME",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "DUPLICATE_NAME"
+    },
+    {
+      "case": "codex/PROJECT_OVERRIDE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "PROJECT_OVERRIDE"
+    },
+    {
+      "case": "codex/INACTIVE_SOURCE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": false,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "INDIVIDUAL_SKILL_ENTRY_ONLY"
+    },
+    {
+      "case": "hermes/SAME_REALPATH",
+      "classification": "OBSERVED",
+      "installed_status": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "SAME_REALPATH"
+    },
+    {
+      "case": "hermes/DUPLICATE_NAME",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "DUPLICATE_NAME"
+    },
+    {
+      "case": "hermes/PROJECT_OVERRIDE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "PROJECT_OVERRIDE"
+    },
+    {
+      "case": "hermes/INACTIVE_SOURCE",
+      "classification": "OBSERVED",
+      "installed_status": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "INACTIVE_SOURCE"
+    },
+    {
+      "case": "omp/SAME_REALPATH",
+      "classification": "OBSERVED",
+      "installed_status": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "SAME_REALPATH"
+    },
+    {
+      "case": "omp/DUPLICATE_NAME",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "DUPLICATE_NAME"
+    },
+    {
+      "case": "omp/PROJECT_OVERRIDE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "PROJECT_OVERRIDE"
+    },
+    {
+      "case": "omp/INACTIVE_SOURCE",
+      "classification": "OBSERVED",
+      "installed_status": "PREVIEW",
+      "expected_preservation_report": "PREVIEW",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "INACTIVE_SOURCE"
+    },
+    {
+      "case": "hermes/CREATE_SOURCE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "CREATE_SOURCE"
+    },
+    {
+      "case": "hermes/EXTERNAL_SOURCE",
+      "classification": "OBSERVED",
+      "installed_status": "CONFLICT",
+      "expected_preservation_report": "CONFLICT",
+      "policy_agreement": true,
+      "preserved_fixture_guide_bytes": true,
+      "scope": "EXTERNAL_SOURCE"
+    }
+  ],
+  "agreement": 13,
+  "mismatch": 1,
+  "mismatch_evidence": "Codex native skills/list reports project SKILL.md enabled:false and managed user SKILL.md enabled:true; enrollment nevertheless returns CONFLICT. Directory-targeted disable from FINAL20 is separately retained as NOT_ESTABLISHED.",
+  "source_correction": "FINAL23 source tests now match individual SKILL.md disables and ignore directory-only entries; actual FINAL23 native execution still required.",
+  "acceptance": "INSTALL-05 remains NOT_RUN for incomplete full native scope, with this executed product mismatch explicitly retained."
+}

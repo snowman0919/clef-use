@@ -1,0 +1,93 @@
+{
+  "classification": "OBSERVED",
+  "scope": "One genuine retained .29 RuntimeClient status against actual idle installed FINAL12 .30 service, own state, no GUI/models/factory substitution",
+  "result": "FAIL_STALE_CLIENT_REPLACES_NEWER_IDLE_SERVICE_WITH_OLD_VERSION",
+  "baseline": {
+    "commit": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+    "version": "0.1.29",
+    "wheel_basename": "clef_use-0.1.29-py3-none-any.whl",
+    "wheel_sha256": "99fd4ed28317002894a1c0fb9f1cd796b297730f9c7cb49c817014294889b64e",
+    "installed_python_source_files_compared": 37,
+    "installed_python_source_files_exact_wheel_match": true,
+    "genuine_installed_record_version": "0.1.29",
+    "genuine_installed_record_archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e"
+  },
+  "new_service": {
+    "candidate": "FINAL12",
+    "version": "0.1.30",
+    "actual_entry": "python -m clef_use.service",
+    "factory_substituted": false,
+    "runtime_created": false,
+    "model_calls": 0,
+    "gui_sessions": 0
+  },
+  "sequence": [
+    {
+      "step": 1,
+      "action": "Start actual installed .30 service in fresh own HOME/STATE/config, with desktop variables absent",
+      "health": {
+        "ok": true,
+        "version": "0.1.30",
+        "busy": false,
+        "desktop_scope": null
+      }
+    },
+    {
+      "step": 2,
+      "action": "Invoke genuine immutable .29 RuntimeClient.request(status) exactly once",
+      "native_reply": {
+        "ok": false,
+        "error_type": "RuntimeError",
+        "error": "no active session; start computer_run first"
+      }
+    },
+    {
+      "step": 3,
+      "action": "Observe actual service identity and version after old request",
+      "health": {
+        "ok": true,
+        "version": "0.1.29",
+        "busy": false,
+        "desktop_scope": null
+      },
+      "service_pid_changed": true,
+      "process_start_time_changed": true,
+      "original_new_service_exit_code": 0
+    }
+  ],
+  "actual_downgrade_reproduced": true,
+  "cleanup": {
+    "shutdown_reply": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "endpoint_removed": true,
+    "own_initial_service_exited": true,
+    "owned_replacement_process_exited": true
+  },
+  "production_changes": false,
+  "repeat_count": 1,
+  "raw_evidence_bindings": [
+    {
+      "basename": "declaration.json",
+      "sha256": "11873a3dc911ed35f62730c1e99905f6dd35584f961b5c2e82a1146e368ba132"
+    },
+    {
+      "basename": "report.json",
+      "sha256": "dc65bbf628ff951f801b2501af7b9337d892d1dc94a546d0ff21533cd1b109ab"
+    }
+  ],
+  "source_reasoning": {
+    "classification": "INFERRED_FROM_READ_SOURCE_AND_CONFIRMED_SEQUENCE",
+    "source_file": "src/clef_use/client.py",
+    "line": 60,
+    "reason": "Version mismatch is symmetric. When service is idle, _ensure sends shutdown_idle then launches its own interpreter, including an older retained client. Final health loop does not require matching version.",
+    "legacy_409_observation": "NOT_RUN",
+    "legacy_409_design_risk": "HTTPError is an OSError; immutable old _ensure swallows shutdown refusal and may attempt a child start. Retained service.lock must prevent endpoint overwrite; non-health stale control requests need actionable compatibility rejection."
+  },
+  "active_gui_update_test": "NOT_RUN_PENDING_ROOT_REVIEW_AND_AUTHORIZATION",
+  "privacy": "Public basenames/hashes and safe status only; no auth/token, endpoints, account data, process IDs, raw payloads, screenshots, private assets or absolute private paths",
+  "received_native_artifact_sha256": "14129b876e3a8bf3669eb663619e44a1248326695ff9d7a843cfa7ffd3e5d172"
+}

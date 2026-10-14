@@ -1,12 +1,13 @@
 from __future__ import annotations
 
 import hashlib
-from dataclasses import dataclass
+import time
+from dataclasses import dataclass, field
 from enum import StrEnum
 from typing import Literal
 
 from PIL import Image
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, model_validator
 
 
 class StrictModel(BaseModel):
@@ -28,9 +29,16 @@ class Contract(StrictModel):
     pointer_inputs: list[PointerInput] = Field(default_factory=list, max_length=8)
     execution_mode: Literal["AUTO", "STRUCTURED", "VISUAL", "CANVAS", "ASSESS"] = "AUTO"
     visual_intent: VisualIntent | None = None
+    operation: dict[str, JsonValue] | None = None
 
     @model_validator(mode="after")
     def bounded_strings(self):
+        if self.operation is not None:
+            from .operations import parse_operation_request
+
+            request = parse_operation_request(self.operation)
+            if self.execution_mode == "ASSESS" and request.family != "menu_assess":
+                raise ValueError("ASSESS permits only read-only registered operations")
         if not self.goal.strip() or any(
             not s.strip() or len(s) > 1000 for s in self.success_conditions + self.constraints
         ):
@@ -192,6 +200,7 @@ class Decision(StrictModel):
     progress: float = Field(default=0, ge=0, le=1)
     condition_probabilities: tuple[float, ...] = ()
     entropy: float | None = Field(default=None, ge=0)
+    diagnostics: dict[str, JsonValue] = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def valid_conditions(self):
@@ -240,6 +249,7 @@ class Frame:
     logical_size: tuple[int, int] | None = None
     foreground_window: int | None = None
     foreground_bounds: tuple[int, int, int, int] | None = None
+    captured_at: float = field(default_factory=lambda: time.time())
 
     def reference(self) -> FrameReference:
         return FrameReference(
@@ -278,6 +288,14 @@ class Observation:
     evidence: tuple[object, ...] | None = None
 
 
+class InputDelivery(StrictModel):
+    execution_id: str = Field(min_length=1, max_length=100)
+    kind: Literal["key", "chord"]
+    keys: tuple[str, ...] = Field(min_length=1, max_length=5)
+    acknowledged_at_ns: int = Field(gt=0)
+
+
 class ActionResult(StrictModel):
     ok: bool
     reason: str = "executed"
+    delivery: InputDelivery | None = None

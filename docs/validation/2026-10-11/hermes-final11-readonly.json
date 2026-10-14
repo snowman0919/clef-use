@@ -1,0 +1,346 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL11",
+  "harness": "Hermes native AIAgent SDK",
+  "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+  "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+  "scope": "Native model discovery/full guide body load/read-only capabilities stages only; no GUI or task completion claim",
+  "status": "PASS_AT_DECLARED_READ_ONLY_SCOPE",
+  "route": {
+    "model": "qwen3.8-flash-next",
+    "provider": "custom",
+    "api_mode": "chat_completions"
+  },
+  "route_mechanism": "native HERMES_MANAGED_DIR reader + resolve_runtime_provider; source override removed before native agent creation",
+  "normal_native_generated_prompt": true,
+  "native_generated_prompt_preflight": {
+    "status": "PASS",
+    "native_generated_prompt": true,
+    "prompt_sha256": "9ece1b3932cd0ee6a113caa32e9295e7273304a4979d3815505c33cfa2b2e562",
+    "catalog_names": [
+      "clef-use",
+      "clef-use-blender",
+      "clef-use-diagnostics"
+    ],
+    "native_tool_names": [
+      "mcp__clef_use__computer_capabilities",
+      "mcp__clef_use__computer_status",
+      "skill_view",
+      "skills_list"
+    ],
+    "canonical_source_removed": true,
+    "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "case_invocations": 0
+  },
+  "native_adapted_schema_sha256": "4c165b57a236ebe7b6c35a61167d08308e29fe3966b03f75c41b6085bbb5bbd1",
+  "guides": {
+    "clef-use-blender": {
+      "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "native_full_body_preflight": true
+    },
+    "clef-use-diagnostics": {
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+      "native_full_body_preflight": true
+    },
+    "clef-use": {
+      "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+      "native_full_body_preflight": true
+    }
+  },
+  "case_invocations": 3,
+  "native_primary_api_calls": 8,
+  "case_order": [
+    "explicit",
+    "natural",
+    "negative"
+  ],
+  "limits": {
+    "max_iterations_per_case": 8,
+    "run_budget_seconds_per_case": 90,
+    "application_api_attempts": 1,
+    "stop_after_first_failed_case": true,
+    "batch_count": 1,
+    "retries": 0
+  },
+  "isolation": {
+    "fresh_owned_home_workspace": true,
+    "os_root_read_only": true,
+    "writable_scope": "owned artifact root only",
+    "canonical_config_auth_mutated": false,
+    "credential_values_copied_or_printed": false,
+    "native_readonly_tools": [
+      "mcp__clef_use__computer_capabilities",
+      "mcp__clef_use__computer_status",
+      "skill_view",
+      "skills_list"
+    ],
+    "native_optional_resource_prompt_utilities_disabled": true,
+    "native_tool_search_disabled": true,
+    "skill_manage_deregistered_in_memory": true,
+    "no_source_edits": true
+  },
+  "cases": [
+    {
+      "case": "explicit",
+      "status": "PASS",
+      "elapsed_seconds": 29.795,
+      "loaded": [
+        "clef-use"
+      ],
+      "successful_invocations": [
+        "mcp__clef_use__computer_capabilities"
+      ],
+      "requested_tool_names": [
+        "skill_view",
+        "skill_view",
+        "skill_view",
+        "mcp__clef_use__computer_capabilities",
+        "mcp__clef_use__computer_status"
+      ],
+      "tool_names": [
+        "skill_view",
+        "skill_view",
+        "skill_view",
+        "mcp__clef_use__computer_capabilities",
+        "mcp__clef_use__computer_status"
+      ],
+      "native_result_metadata": {
+        "completed": true,
+        "failed": false,
+        "partial": false,
+        "interrupted": false,
+        "turn_exit_reason": "text_response(finish_reason=stop)",
+        "api_calls": 4,
+        "model": "qwen3.8-flash-next",
+        "requested_model": "qwen3.8-flash-next",
+        "served_model": null,
+        "provider": "custom"
+      },
+      "skill_reads": [
+        {
+          "name": "clef-use",
+          "file_path": null,
+          "success": true,
+          "content_chars": 4654
+        }
+      ],
+      "reference_reads": [
+        {
+          "name": "clef-use",
+          "file_path": "references/LIVE_API.md",
+          "success": true,
+          "content_chars": 1137,
+          "full_file_content_matches": true,
+          "file_sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+        },
+        {
+          "name": "clef-use",
+          "file_path": "references/API_BASELINE.md",
+          "success": true,
+          "content_chars": 2200,
+          "full_file_content_matches": true,
+          "file_sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4"
+        }
+      ],
+      "status_refusal": "Error executing tool computer_status: runtime service is not running",
+      "capabilities": {
+        "success": true,
+        "runtime_version": "0.1.30",
+        "read_only_facade": true,
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "default_trusted_provider": "NONE",
+        "default_operation_availability": "BLOCKED"
+      }
+    },
+    {
+      "case": "natural",
+      "status": "PASS",
+      "elapsed_seconds": 29.828,
+      "loaded": [
+        "clef-use-blender",
+        "clef-use"
+      ],
+      "successful_invocations": [
+        "mcp__clef_use__computer_capabilities"
+      ],
+      "requested_tool_names": [
+        "skill_view",
+        "skill_view",
+        "mcp__clef_use__computer_capabilities",
+        "mcp__clef_use__computer_status"
+      ],
+      "tool_names": [
+        "skill_view",
+        "skill_view",
+        "mcp__clef_use__computer_capabilities",
+        "mcp__clef_use__computer_status"
+      ],
+      "native_result_metadata": {
+        "completed": true,
+        "failed": false,
+        "partial": false,
+        "interrupted": false,
+        "turn_exit_reason": "text_response(finish_reason=stop)",
+        "api_calls": 3,
+        "model": "qwen3.8-flash-next",
+        "requested_model": "qwen3.8-flash-next",
+        "served_model": null,
+        "provider": "custom"
+      },
+      "skill_reads": [
+        {
+          "name": "clef-use-blender",
+          "file_path": null,
+          "success": true,
+          "content_chars": 3590
+        },
+        {
+          "name": "clef-use",
+          "file_path": null,
+          "success": true,
+          "content_chars": 4654
+        }
+      ],
+      "reference_reads": [],
+      "status_refusal": "Error executing tool computer_status: runtime service is not running",
+      "capabilities": {
+        "success": true,
+        "runtime_version": "0.1.30",
+        "read_only_facade": true,
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        },
+        "default_trusted_provider": "NONE",
+        "default_operation_availability": "BLOCKED"
+      }
+    },
+    {
+      "case": "negative",
+      "status": "PASS",
+      "elapsed_seconds": 12.584,
+      "loaded": [],
+      "successful_invocations": [],
+      "requested_tool_names": [],
+      "tool_names": [],
+      "native_result_metadata": {
+        "completed": true,
+        "failed": false,
+        "partial": false,
+        "interrupted": false,
+        "turn_exit_reason": "text_response(finish_reason=stop)",
+        "api_calls": 1,
+        "model": "qwen3.8-flash-next",
+        "requested_model": "qwen3.8-flash-next",
+        "served_model": null,
+        "provider": "custom"
+      },
+      "skill_reads": [],
+      "reference_reads": [],
+      "status_refusal": null
+    }
+  ],
+  "cleanup": {
+    "native_agents_closed": true,
+    "native_mcp_shutdown": true,
+    "native_process_exit_code": 0,
+    "owned_process_count": 0,
+    "own_auth_metadata_absent": true,
+    "own_runtime_state_created": false,
+    "GUI_or_runtime_session_started": false
+  },
+  "prior_failures_preserved": {
+    "candidate": "FINAL10",
+    "explicit": "PASS",
+    "natural": "FAIL; core only, Blender guide not loaded, reference path supplied as skill name failed",
+    "negative": "NOT_RUN after stop-on-first-failure",
+    "public_evidence_basename": "clef-hermes-final10-readonly-public-20261011.json",
+    "public_evidence_sha256": "a18a441f7e6f2ca45c1a2068d88a11f186fb253bacffd3af7bfc81b2073ce549",
+    "reference_diagnosis_basename": "clef-hermes-final10-reference-diagnosis-public-20261011.json",
+    "reference_diagnosis_sha256": "0188667711bdbd800d0751001c3ea9c961e9386eb418205e794a71d92a9de862",
+    "unchanged_and_not_rescored": true
+  },
+  "limitations": [
+    "One bounded batch establishes these actual cases only; no statistical trigger-reliability claim.",
+    "Fresh native generated prompt can include fresh context paths/time; its hash is recorded without overriding its contents.",
+    "No provider/runtime/package defect was claimed from the prior model tool-call failure.",
+    "GUI TASK_VERIFIED remains NOT_RUN; default trusted provider availability is not established by guide verification."
+  ],
+  "evidence_files": [
+    {
+      "basename": "run-declaration.json",
+      "sha256": "f94835c375a0a53b47aa2bee203552fbc81dc1bd92324281e23ce84c40bebbe7",
+      "raw_private": true
+    },
+    {
+      "basename": "summary.json",
+      "sha256": "4f9856436515774d7741a58066ae5206ee284773e7083c6a77330c3edbcb5567",
+      "raw_private": true
+    },
+    {
+      "basename": "cleanup.json",
+      "sha256": "1d9a3324118ed29282df65cec01d11c1edf73d34a88de2398ba7b81429dc06b4",
+      "raw_private": true
+    },
+    {
+      "basename": "actual-public-schemas.json",
+      "sha256": "34f26be965e457792558f7dcedb9a5b6ae4b191a5b90a38a2112ab7749296144",
+      "raw_private": true
+    },
+    {
+      "basename": "explicit-private-result.json",
+      "sha256": "41a562e867fc58f28eb21cdd7c7996aec0d767aaa57c54ea39bc8ecc44ee71a1",
+      "raw_private": true
+    },
+    {
+      "basename": "explicit-private-tools.json",
+      "sha256": "2959231fa25db57a717b6b99ac0f1039e495f516ba727cf39f17403190c2d58d",
+      "raw_private": true
+    },
+    {
+      "basename": "natural-private-result.json",
+      "sha256": "c8be393f8c2c1a290af12f9c5ae2fcf471626860198114c062fa0f33e9aa1784",
+      "raw_private": true
+    },
+    {
+      "basename": "natural-private-tools.json",
+      "sha256": "508778c0668c3e973cfc76214dac6f7bb19e249975e709be0767f546d39a8851",
+      "raw_private": true
+    },
+    {
+      "basename": "negative-private-result.json",
+      "sha256": "484a56fdb46e69244fbdd6c95ae8c081c08f5b091eba7895a7fb2f041db8301c",
+      "raw_private": true
+    },
+    {
+      "basename": "negative-private-tools.json",
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "raw_private": true
+    },
+    {
+      "basename": "clef-hermes-final11-predeclaration-public-20261011.json",
+      "sha256": "1db9e2ae75e6c3ad908d5dacafb11cda393df2b5429babda77c7cb1b95232037",
+      "raw_private": false
+    },
+    {
+      "basename": "clef-hermes-final11-preflight-public-20261011.json",
+      "sha256": "b5a2f717d55e098d68e4da2845eb67e73259c56c3c1b504a39d46ee04d66e970",
+      "raw_private": false
+    }
+  ]
+}

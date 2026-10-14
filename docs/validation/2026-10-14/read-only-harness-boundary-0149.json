@@ -1,0 +1,244 @@
+{
+  "classification": "OBSERVED_SOURCE_0149_READ_ONLY_HARNESS_PERMISSION_CORRECTION",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.49",
+  "parent_commit": "8e501bbf46fb62f2768a03ef22cb4f15de740554",
+  "partial": true,
+  "requirements": [
+    "GUIDE-03",
+    "HARNESS-02",
+    "HARNESS-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Whitelisted facts/digests only; raw paths, identifiers, model prompts/responses, configurations, credentials and all native private traces excluded.",
+  "change": "Read-only Hermes native definition factory removes skill_manage on initial, refresh and deferred catalog paths; central native registry dispatch denies it. Readers retain original native schemas/handlers. OMP temporary read-only policy uses supported startupTimeoutMs0 to await live discovery. No saved setting/provider/model/request/deadline/input/confidence/sequence-guard change.",
+  "reproduced_before": {
+    "actual_native_advertisement_receipt": "docs/validation/2026-10-14/linux-native-cache-0148.json",
+    "consumer_regression": "Historical adapter executes the attempted fixture replacement and fails user-file preservation; corrected adapter preserves actual owned file bytes and its reader after schema refresh.",
+    "before_regression_exit_code": 1,
+    "after_regression_passed": 1,
+    "fixture_scope": "Isolated native-interface adapter boundary with actual filesystem write/read effects; not a real harness/model proof."
+  },
+  "actual_native_sdk": {
+    "classification": "ACTUAL_NATIVE_HERMES_DEFINITION_FACTORY_AND_REGISTRY_DISPATCH",
+    "status": "PASS",
+    "native_exit_code": 0,
+    "management_absent_every_catalog": true,
+    "management_dispatch_denied": true,
+    "native_reader_loads_full_body": true,
+    "managed_skill_file_bytes_preserved": true,
+    "new_skill_absent": true,
+    "native_usage_ledger_changed": true,
+    "protected_config_file_bytes_preserved": true,
+    "runtime_endpoint_absent": true,
+    "private_probe_source_sha256": "ddd1663411250754efe4601e9c13d555e39974cb297b947b8d27c85da74ce104"
+  },
+  "native_sdk_details": {
+    "schema_catalog_count": 3,
+    "actual_schema_names": [
+      "mcp__clef_use__computer_capabilities",
+      "mcp__clef_use__computer_status",
+      "mcp__clef_use__get_prompt",
+      "mcp__clef_use__list_prompts",
+      "mcp__clef_use__list_resources",
+      "mcp__clef_use__read_resource",
+      "skill_view",
+      "skills_list"
+    ],
+    "writer_attempt": "Actual native registry skill_manage create dispatch returns native error before staging/creation. No fake manager/backend; existing managed Skill file bytes are preserved.",
+    "scope_correction": "First proof mistakenly compared every file in the native skills root as managed guide content. Native skill_view updates .usage.json. Original broader preservation failure retained; corrected proof compares exact managed files and reports native usage metadata separately. No model rerun or policy weakening.",
+    "private_first_result_sha256": "b135b2cfa92766467b6e9382726fcfd6851c18b8b6f4f562f6575790c4931767",
+    "private_final_result_sha256": "b5cc11c5f0744e5abf653812ff1708ea69b838f95d2e6ccb12c00bd702417274"
+  },
+  "actual_native_model_batches": {
+    "hermes": {
+      "status": "FAIL",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 21.345343342982233,
+          "actual_api_attempts": 4,
+          "management_absent_all_actual_api_requests": true,
+          "loaded_guides": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_tools": [],
+          "deadline_reached": false,
+          "private_case_result_sha256": "bd6da08f4d5759e8bfd956d28267641c72b02cf91a78962f80d5baaf011c5a7e",
+          "actual_api_schema_names": [
+            "skill_view",
+            "skills_list",
+            "tool_call",
+            "tool_describe",
+            "tool_search"
+          ],
+          "private_api_audit_sha256": "6c7e0ba47c47abb39bf614070c84019abc835ba7043989fd9bc859c8c6339b49"
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 0,
+          "wall_seconds": 24.240981313982047,
+          "actual_api_attempts": 3,
+          "management_absent_all_actual_api_requests": true,
+          "loaded_guides": [],
+          "invoked": [
+            "mcp__clef_use__computer_capabilities"
+          ],
+          "runtime_before_guide": true,
+          "read_only_violations": [],
+          "failed_tools": [],
+          "deadline_reached": false,
+          "private_case_result_sha256": "cbfa11fe3355d560354c5784175cd39a4adcb2780ea4bdb502f28b894888914c",
+          "actual_api_schema_names": [
+            "skill_view",
+            "skills_list",
+            "tool_call",
+            "tool_describe",
+            "tool_search"
+          ],
+          "private_api_audit_sha256": "4db1945a71a0025809e864b671c7182c09000bc9dc5f893bb4abc2309779c253"
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 13.42888708296232,
+          "actual_api_attempts": 1,
+          "management_absent_all_actual_api_requests": true,
+          "loaded_guides": [],
+          "invoked": [],
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_tools": [],
+          "deadline_reached": false,
+          "private_case_result_sha256": "43df62fefc587fa2145fdd44fe16bf564030fec6d60e5639411ce43ff10d38f9",
+          "actual_api_schema_names": [
+            "skill_view",
+            "skills_list",
+            "tool_call",
+            "tool_describe",
+            "tool_search"
+          ],
+          "private_api_audit_sha256": "9d0dee074f04658762a0d90a058262d3b1e1ae7f4db7f198a6ee34bb313af8e7"
+        }
+      ],
+      "canonical_task_provider_model_budget_unchanged": true,
+      "protected_configuration_file_bytes_preserved": true,
+      "source_unchanged_during_batch": true,
+      "runtime_endpoint_absent": true,
+      "native_database_tables_changed": [],
+      "native_database_material_limit": "No generated native state/database preservation claim; reader usage metadata is allowed to change.",
+      "private_batch_result_sha256": "0cb4f6b85f981af09ea3bc523be367f5c95521748be089b2468ffac202931f78"
+    },
+    "omp": {
+      "status": "FAIL",
+      "cases": [
+        {
+          "trigger": "explicit",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.22671929304488,
+          "loaded_guides": [
+            "clef-use"
+          ],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "runtime_before_guide": false,
+          "read_only_violations": [
+            "write"
+          ],
+          "failed_tools": [
+            "mcp__clef_use_computer_status",
+            "write",
+            "write",
+            "write"
+          ],
+          "deadline_reached": true,
+          "private_case_result_sha256": "d2fd258c23cb491af044ce2ffe4d68471648e7574eb0ef40aabd206d8f8377ed"
+        },
+        {
+          "trigger": "natural",
+          "status": "FAIL",
+          "native_exit_code": 1,
+          "wall_seconds": 91.07390132895671,
+          "loaded_guides": [],
+          "invoked": [
+            "mcp__clef_use_computer_capabilities",
+            "mcp__clef_use_computer_capabilities"
+          ],
+          "runtime_before_guide": true,
+          "read_only_violations": [],
+          "failed_tools": [],
+          "deadline_reached": true,
+          "private_case_result_sha256": "8dff0eebbb0eca60d39a743b3aaa8d2b1b12ed2e97ec9ff86cdf9c3a759702e3"
+        },
+        {
+          "trigger": "negative",
+          "status": "PASS",
+          "native_exit_code": 0,
+          "wall_seconds": 50.74971297499724,
+          "loaded_guides": [],
+          "invoked": [],
+          "runtime_before_guide": false,
+          "read_only_violations": [],
+          "failed_tools": [],
+          "deadline_reached": false,
+          "private_case_result_sha256": "e0482db4388812b6c82e8bf65a81f1e9ff06b29710eb38d4a7b8ad3b41e2d5d5"
+        }
+      ],
+      "canonical_task_provider_model_budget_unchanged": true,
+      "protected_configuration_file_bytes_preserved": true,
+      "source_unchanged_during_batch": true,
+      "runtime_endpoint_absent": true,
+      "native_database_tables_changed": [
+        "auth_change_revision",
+        "auth_credentials",
+        "cache",
+        "model_perf"
+      ],
+      "native_database_material_limit": "Auth credential rows change; changed columns/material preservation/writer NOT_PROVEN. Complete settings rows and standalone files remain unchanged. No prior credentials restored.",
+      "private_batch_result_sha256": "52e49c8e157a7431458205d1e42bbd4c4c8c0f25e1a8ecbcd2aeab4d1894a6ba"
+    }
+  },
+  "regression": {
+    "passed": 1671,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 73.59,
+    "focused_passed": 271,
+    "new_file_preservation_regression": 1,
+    "ruff": "PASS",
+    "generated_published_cli_examples": 198,
+    "generated_published_tool_examples": 12,
+    "private_full_log_sha256": "7c552e492018295fcc6f8e0ade383b1af5041e9a667e00a7543ad81cb82db808"
+  },
+  "source_binding": {
+    "src/clef_use/integrations.py": "dec72f2ad2d384ecc6d59fa3c4d86fcc856b9570e3ed43e4137fbbe28582360b",
+    "src/clef_use/mcp_server.py": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+    "agent-skills/manifest.json": "f10805e12fcd97373fa4e48f0de1bd97aa6cd9f89cc353d2dcd0760bf7ec1d89",
+    "pyproject.toml": "f49b181a232ddafe67bd170dcd7762b9c3a3fa1277c3be8d010fe25921dab9bc",
+    "tests/test_read_only_harness_boundary.py": "d579f9953597f63b02c86eb932ecb485c3f91e95f9cbf2740c8f6c47d7cc7284"
+  },
+  "not_run": {
+    "immutable_0149_ci": "NOT_RUN; source publication lacks Git credentials and GitHub integration code-write permission.",
+    "installed_0149_windows": "NOT_RUN; installed standard Windows launcher remains actual0.1.48 and its windowless capabilities succeed.",
+    "full_gui_accuracy_and_100ms": "NOT_RUN; no new Windows GUI ownership established, hidden Blender state remains unknown, full identical1000opportunity suite outstanding.",
+    "public_release": "NOT_RUN; feature-branch deployment guard retained, full original gates not met."
+  },
+  "publication_failure": {
+    "https_git": "Could not read Username; noninteractive credential unavailable.",
+    "ssh_git": "Official GitHub Ed25519 fingerprint verified with private ephemeral known_hosts; authentication rejects publickey. Persistent SSH configuration unchanged.",
+    "github_connector": "403 Resource not accessible by integration on Git blob writes; authenticated public PR read works.",
+    "model_authentication": "Not implicated; actual native model calls execute. No secrets requested, logged or restored."
+  },
+  "acceptance_scope": "Original44 scenarios34PASS/3FAIL/7NOT_RUN and all numeric gates unchanged. Permission fix success does not erase actual routing/order/write-attempt/deadline failures or constitute whole-goal completion."
+}

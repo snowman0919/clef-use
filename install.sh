@@ -179,7 +179,25 @@ def atomic_text(path, text, mode=0o600):
         Path(temporary).unlink(missing_ok=True)
 
 
-def smoke(executable, expected_version):
+def verify_contract(expected, actual):
+    for key in (
+        "api_schema_version",
+        "schema_sha256",
+        "guide_contract_version",
+        "operation_registry_version",
+    ):
+        if key in expected and actual.get(key) != expected[key]:
+            raise ValueError(f"installed release contract mismatch: {key}")
+    if "guide_bundle_sha256" in expected:
+        skills = actual.get("guides", {}).get("skills", {})
+        digest = hashlib.sha256(
+            json.dumps(skills, sort_keys=True, separators=(",", ":")).encode()
+        ).hexdigest()
+        if digest != expected["guide_bundle_sha256"]:
+            raise ValueError("installed release contract mismatch: guide bundle")
+
+
+def smoke(executable, expected_version, contract=None):
     environment = clean_environment()
     version = subprocess.run(
         [str(executable), "version"], capture_output=True, text=True, timeout=30, env=environment
@@ -191,6 +209,20 @@ def smoke(executable, expected_version):
     )
     if result.returncode:
         raise RuntimeError("installed runtime state-machine smoke check failed")
+    if contract and "api_schema_version" in contract:
+        discovery = subprocess.run(
+            [str(executable), "capabilities", "--json"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+            env=environment,
+        )
+        if discovery.returncode:
+            raise RuntimeError("installed runtime capability check failed")
+        advertised = json.loads(discovery.stdout)
+        if advertised.get("runtime_version") != expected_version:
+            raise ValueError("installed release runtime version mismatch")
+        verify_contract(contract, advertised)
 
 
 def clean_environment():
@@ -229,7 +261,70 @@ def install_lock(path):
             yield
 
 
-def windows_user_access(path):
+def windows_existing_user_access(path, sid):
+    """Prove an explicit full-control root grant without changing descendant ACLs."""
+    import ctypes
+
+    handle, dword = ctypes.c_void_p, ctypes.c_uint32
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    security = ctypes.WinDLL("advapi32", use_last_error=True)
+    kernel.LocalFree.argtypes, kernel.LocalFree.restype = [handle], handle
+    signatures = (
+        (
+            "GetNamedSecurityInfoW",
+            [ctypes.c_wchar_p, ctypes.c_int, dword, *([ctypes.POINTER(handle)] * 5)],
+            dword,
+        ),
+        ("ConvertStringSidToSidW", [ctypes.c_wchar_p, ctypes.POINTER(handle)], ctypes.c_int),
+        ("GetAce", [handle, dword, ctypes.POINTER(handle)], ctypes.c_int),
+        ("EqualSid", [handle, handle], ctypes.c_int),
+    )
+    for name, arguments, result in signatures:
+        function = getattr(security, name)
+        function.argtypes, function.restype = arguments, result
+    descriptor, acl, user = handle(), handle(), handle()
+    try:
+        if not security.ConvertStringSidToSidW(sid, ctypes.byref(user)):
+            return False
+        if (
+            security.GetNamedSecurityInfoW(
+                str(path), 1, 4, None, None, ctypes.byref(acl), None, ctypes.byref(descriptor)
+            )
+            or not acl
+        ):
+            return False
+        size = ctypes.c_uint16.from_address(acl.value + 2).value
+        count = ctypes.c_uint16.from_address(acl.value + 4).value
+        if size < 8 or count > (size - 8) // 4:
+            return False
+        proven = False
+        for index in range(count):
+            ace = handle()
+            if not security.GetAce(acl, index, ctypes.byref(ace)):
+                return False
+            if not ace.value or not acl.value + 8 <= ace.value <= acl.value + size - 4:
+                return False
+            kind = ctypes.c_ubyte.from_address(ace.value).value
+            flags = ctypes.c_ubyte.from_address(ace.value + 1).value
+            length = ctypes.c_uint16.from_address(ace.value + 2).value
+            if kind != 0 or flags & ~0x1F or length < 16 or ace.value + length > acl.value + size:
+                return False
+            revision = ctypes.c_ubyte.from_address(ace.value + 8).value
+            subauthorities = ctypes.c_ubyte.from_address(ace.value + 9).value
+            if revision != 1 or subauthorities > 15 or 16 + subauthorities * 4 > length:
+                return False
+            mask = dword.from_address(ace.value + 4).value
+            if flags == 3 and mask == 0x1F01FF and security.EqualSid(ace.value + 8, user):
+                proven = True
+        return proven
+    finally:
+        if descriptor:
+            kernel.LocalFree(descriptor)
+        if user:
+            kernel.LocalFree(user)
+
+
+def windows_user_access(path, *, preserve_existing=False):
     # OpenSSH can create OWNER RIGHTS directories owned by Administrators. The
     # same account's limited desktop token then cannot traverse its installation.
     system = Path(os.environ["SystemRoot"]) / "System32"
@@ -247,6 +342,8 @@ def windows_user_access(path):
     sid = rows[0][1]
     if not re.fullmatch(r"S-1(?:-\d+){2,14}", sid):
         raise RuntimeError("invalid Windows installation user SID")
+    if preserve_existing and windows_existing_user_access(path, sid):
+        return
     result = subprocess.run(
         [str(system / "icacls.exe"), str(path), "/grant:r", f"*{sid}:(OI)(CI)F", "/Q"],
         capture_output=True,
@@ -288,7 +385,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
             "existing executable belongs to another installation; choose CLEF_USE_BIN_DIR"
         )
     if windows:
-        windows_user_access(root)
+        windows_user_access(root, preserve_existing=True)
     with install_lock(root / "install.lock"):
         report("Checking the latest version...")
         raw = fetch(base_url + "/latest/manifest.json", allow_local, 1024 * 1024)
@@ -302,16 +399,39 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
         if f"{artifact['sha256']}  {artifact['filename']}" not in sums.splitlines():
             raise ValueError("release checksum metadata is inconsistent")
         current = root / "current"
+        previous_commands = []
         if windows and launcher.exists():
-            match = re.search(r'^@"([^"\r\n]+)" %\*$', launcher.read_text(), re.MULTILINE)
-            if not match:
-                raise ValueError("managed Windows launcher is malformed")
-            target = match[1]
-            if target.startswith("%~dp0"):
-                target = os.path.normpath(str(bindir / target[5:]))
-            current = Path(target).parent.parent
+            current = launcher_target(launcher).parent.parent
+        if launcher.exists() and not current.exists():
+            raise ValueError(
+                "managed launcher belongs to another installation or lacks its release; "
+                "choose CLEF_USE_BIN_DIR"
+            )
         if current.exists():
+            if current.resolve().parent != (root / "versions").resolve():
+                raise ValueError(
+                    "current runtime belongs to another installation; choose its installation root"
+                )
             installed = json.loads((current / "installed.json").read_text())
+            old_launcher = installed.get("launcher")
+            if not isinstance(old_launcher, str) or not Path(old_launcher).is_absolute():
+                raise ValueError("previous installation launcher ownership is unavailable")
+            previous_binary = environment_binary(current, "clef-use")
+            if launcher.exists() and (
+                Path(old_launcher).resolve() != launcher.resolve()
+                or launcher_target(launcher).resolve() != previous_binary.resolve()
+            ):
+                raise ValueError(
+                    "managed launcher belongs to another installation; choose CLEF_USE_BIN_DIR"
+                )
+            # Freeze both the public alias and physical executable before a
+            # POSIX current symlink or Windows launcher switches releases.
+            previous_commands = list(
+                dict.fromkeys(
+                    str(path.absolute())
+                    for path in (Path(old_launcher), previous_binary, previous_binary.resolve())
+                )
+            )
             if release_version(installed["version"]) > release_version(manifest["version"]):
                 raise ValueError("refusing release downgrade")
             if installed["version"] == manifest["version"]:
@@ -327,11 +447,12 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 ):
                     raise ValueError("immutable release changed checksum")
                 report("Checking your existing installation...")
-                smoke(environment_binary(current, "clef-use"), installed["version"])
+                smoke(environment_binary(current, "clef-use"), installed["version"], artifact)
                 return {
                     "status": "CURRENT",
                     "version": installed["version"],
                     "executable": str(launcher),
+                    "previous_commands": previous_commands,
                 }
             report(f"Updating {installed['version']} -> {manifest['version']}...")
         versions = root / "versions"
@@ -382,7 +503,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                         "verified offline wheel installation failed; previous version preserved"
                     )
             report("Checking that clef-use runs correctly...")
-            smoke(environment_binary(staged, "clef-use"), manifest["version"])
+            smoke(environment_binary(staged, "clef-use"), manifest["version"], artifact)
             report("Activating the installation...")
             atomic_text(
                 staged / "installed.json",
@@ -431,6 +552,7 @@ def install(base_url=DEFAULT_BASE, allow_local=False, progress=None):
                 "status": "INSTALLED",
                 "version": manifest["version"],
                 "executable": str(launcher),
+                "previous_commands": previous_commands,
                 "path_hint": (
                     f"Add {bindir} to PATH if needed. "
                     "Previous versions and model cache are retained."
@@ -525,6 +647,144 @@ def prepare_installed_models(executable, json_mode=False):
     return 0
 
 
+def configure_integrations(executable, targets, skills=None, preview_only=False):
+    """Only explicit selected harnesses receive new MCP entries and guide copies."""
+    reports = {}
+    if not targets:
+        return reports
+    executable = integration_executable(executable)
+    for target in targets:
+        if target not in {"codex", "hermes", "omp", "all"}:
+            raise ValueError("unknown integration target")
+        arguments = [
+            str(executable),
+            "integrate",
+            target,
+            "--scope",
+            "user",
+            "--non-interactive",
+            "--command-path",
+            str(executable),
+        ]
+        for skill in skills or []:
+            if skill not in {"core", "blender", "diagnostics"}:
+                raise ValueError("unknown guide selection")
+            arguments += ["--skills", skill]
+        preview = subprocess.run(
+            arguments + ["--dry-run"], capture_output=True, text=True, timeout=60
+        )
+        if preview.returncode not in (0, 2):
+            raise RuntimeError(f"{target} integration preview failed; configuration preserved")
+        reports[target] = json.loads(preview.stdout)
+        if not preview_only and integrations_ready(reports[target]):
+            applied = subprocess.run(arguments, capture_output=True, text=True, timeout=60)
+            if applied.returncode not in (0, 2):
+                raise RuntimeError(f"{target} integration failed; inspect integrations status")
+            reports[target] = json.loads(applied.stdout)
+    return reports
+
+
+def launcher_target(path):
+    path = Path(path)
+    text = path.read_text()
+    if "clef-use managed launcher" not in text:
+        raise ValueError("managed launcher ownership marker is missing")
+    if path.suffix.lower() != ".cmd":
+        commands = [
+            shlex.split(line)
+            for line in text.splitlines()
+            if line.strip() and not line.lstrip().startswith("#")
+        ]
+        if (
+            len(commands) != 1
+            or len(commands[0]) != 3
+            or commands[0][0] != "exec"
+            or commands[0][2] != "$@"
+            or not Path(commands[0][1]).is_absolute()
+            or text
+            != "#!/bin/sh\n# clef-use managed launcher\nexec "
+            + shlex.quote(commands[0][1])
+            + ' "$@"\n'
+        ):
+            raise ValueError("managed POSIX launcher is malformed")
+        return Path(commands[0][1])
+    match = re.fullmatch(r'@echo off\nrem clef-use managed launcher\n@"([^"\r\n]+)" %\*\n', text)
+    if not match:
+        raise ValueError("managed Windows launcher is malformed")
+    target = match[1]
+    if target.startswith("%~dp0"):
+        target = str(path.parent / target[5:])
+    if "%" in target or not Path(target).is_absolute():
+        raise ValueError("managed Windows executable path is unsafe")
+    return Path(os.path.normpath(target))
+
+
+def integration_executable(executable):
+    path = Path(executable)
+    return (
+        str(launcher_target(path))
+        if sys.platform == "win32" and path.suffix.lower() == ".cmd"
+        else str(path)
+    )
+
+
+def integrations_ready(report):
+    values = report.get("integrations", [report])
+    return all(item.get("status") in {"PREVIEW", "INSTALLED", "UNCHANGED"} for item in values)
+
+
+def refresh_integrations(result):
+    """Refresh approved profiles bound to this installation before activation."""
+    previous = result.get("previous_commands")
+    if not isinstance(previous, list) or not all(
+        isinstance(command, str) and Path(command).is_absolute() for command in previous
+    ):
+        result["managed_refresh"] = {
+            "status": "NOT_RUN",
+            "reason": "previous installation ownership unavailable",
+        }
+        result["integration_status"] = "DEGRADED"
+        return result
+    if not previous:
+        result["managed_refresh"] = {
+            "status": "NOT_APPLICABLE",
+            "reason": "selected installation has no previous executable",
+        }
+        return result
+    try:
+        command = integration_executable(result["executable"])
+        refreshed = subprocess.run(
+            [
+                command,
+                "integrations",
+                "refresh",
+                "--managed-only",
+                "--command-path",
+                command,
+                *[
+                    argument
+                    for previous_command in previous
+                    for argument in ("--previous-command", previous_command)
+                ],
+            ],
+            capture_output=True,
+            text=True,
+            timeout=90,
+        )
+    except (OSError, subprocess.TimeoutExpired):
+        result["managed_refresh"] = {"status": "NOT_RUN", "reason": "managed refresh unavailable"}
+        result["integration_status"] = "DEGRADED"
+        return result
+    try:
+        report = json.loads(refreshed.stdout)
+    except (ValueError, TypeError):
+        report = {"status": "NOT_RUN", "reason": "managed refresh unavailable"}
+    result["managed_refresh"] = report
+    if refreshed.returncode or not integrations_ready(report):
+        result["integration_status"] = "DEGRADED"
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description="Install or update clef-use without root")
     parser.add_argument(
@@ -532,6 +792,18 @@ def main():
     )
     parser.add_argument("--allow-insecure-localhost", action="store_true")
     parser.add_argument("--json", action="store_true", help="Emit JSON without progress messages")
+    parser.add_argument(
+        "--integrate",
+        choices=["codex", "hermes", "omp", "all"],
+        action="append",
+        help="explicitly select MCP and Agent Skill installation targets",
+    )
+    parser.add_argument("--skills", choices=["core", "blender", "diagnostics"], action="append")
+    parser.add_argument(
+        "--integration-preview",
+        action="store_true",
+        help="preview selected integration paths without modifying them",
+    )
     models = parser.add_mutually_exclusive_group()
     models.add_argument(
         "--prepare-models",
@@ -558,6 +830,19 @@ def main():
             args.base_url,
             args.allow_insecure_localhost,
             progress=None if args.json else progress,
+        )
+        result["integrations"] = configure_integrations(
+            result["executable"], args.integrate or [], args.skills, args.integration_preview
+        )
+        if not args.integration_preview:
+            refresh_integrations(result)
+        result["integration_status"] = (
+            "DEGRADED"
+            if result.get("integration_status") == "DEGRADED"
+            or any(not integrations_ready(item) for item in result["integrations"].values())
+            else "SELECTED_TARGETS_APPLIED"
+            if result["integrations"]
+            else "NO_NEW_TARGETS_SELECTED"
         )
         if args.json:
             print(json.dumps(result))
@@ -596,6 +881,14 @@ def main():
                 f"\nFirst-use setup:\n  {command} models prepare\n  {command} doctor\n"
                 f"\nModel setup options:\n  {command} models prepare --help"
             )
+            print(
+                f"\nAgent setup (MCP plus portable guides):\n"
+                f"  {command} integrate codex --dry-run\n"
+                f"  {command} integrate codex --scope user\n"
+                f"  {command} integrations verify codex --live --read-only"
+            )
+            if result["integrations"]:
+                print(json.dumps(result["integrations"], ensure_ascii=False, indent=2))
         choice = args.prepare_models
         if choice is None and not args.json:
             choice = ask_model_preparation()

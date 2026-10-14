@@ -1,0 +1,331 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_AND_ISOLATED_NATIVE_WINDOWS_INSTALLATION_OWNERSHIP",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.51",
+  "source_commit": "f0871604b84ce5ea0b9324e4b4c59c6e0acf3ef6",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts, enums and digests only; raw paths, identities, configuration/auth contents, prompts and traces remain private.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38505383417,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38505383417",
+    "assembled_artifact_id": 11867283986,
+    "assembled_artifact_sha256": "fa1fbc8eaee2a5b7d1cc360d314aa750aebe6e100c3ca135545ebb4ce4dc20cf",
+    "assembled_artifact_bytes": 383249620,
+    "native_build_install_jobs_passed": 15,
+    "native_installer_reports_passed": 15,
+    "archive_count": 15,
+    "git_payload_file_count": 68,
+    "source_and_contract_verification": "PASS",
+    "native_first_update_current_failure_preservation": "PASS",
+    "synthetic_installer_fixture_final_version": "0.1.52",
+    "actual_candidate_version": "0.1.51",
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "workflow_dispatch_count": 1,
+    "manifest_sha256": "e6a8b5302f0a4958b9d77911a659b8298ab3596c49c6a73687c6e6c03125ec78",
+    "sha256sums_sha256": "0164727033bf2d1f3caf1ee56b1a2c8284324b352f179978b98d79969e1e02e5",
+    "private_archive_verification_sha256": "19d62b42c4edea1c109548d07242cf3dd41a8c244c31bb8eb5e3e423932469b1",
+    "private_native_log_verification_sha256": "5f35f972c26dee33d484ef314ac6e99fb6591d23ad3fecc916aed4640ea4edb6",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.51-darwin-arm64-py311.zip",
+        "sha256": "541893699259e93c262006c5b0170504eb5edfa3e39579ff9caf6e2efef2a96e",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-darwin-arm64-py312.zip",
+        "sha256": "2a15155c297f8879bae6ce45f60336bcfbacf9f30839702df60cc197bdaa3820",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-darwin-arm64-py313.zip",
+        "sha256": "b035515a1300010d60c7fc62d53be0d78f54cc44196378cd4139bc06c12e66aa",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-darwin-x86_64-py311.zip",
+        "sha256": "50f19172c1003e309c54a5f99eddb4a76ab251d121527587dd0556d82301b154",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-darwin-x86_64-py312.zip",
+        "sha256": "a6e1c5d610b13a6ff7a3de29f8a93fc322dc950a0cbdca136c2f1701321b6072",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-darwin-x86_64-py313.zip",
+        "sha256": "d6f99ef813b71933d423e609260df7c520fea094c0deb2e8ad1a77b92622bd82",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-arm64-py311.zip",
+        "sha256": "328ecda92bcc4ac743dfe18646aa264d29bb0d76313806fc83e9aae65a30a0d7",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-arm64-py312.zip",
+        "sha256": "e1ef9fd8f069bd77e9dd10431a4d5e8c67a2ed98e9e00f9ab1e28c56c25b066b",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-arm64-py313.zip",
+        "sha256": "505fda2147367ae288eb75a187354015aa4936981af6d45ca7a613ad8b3e960c",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-x86_64-py311.zip",
+        "sha256": "177805f32f924c525cbcb4d66133ae27dd2de348dee544d4962c62e15c242c92",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-x86_64-py312.zip",
+        "sha256": "fb8e4847029e6bbd07ddba8bdb1bcb42d64df8466d89e2aadc2f3b7864cf6eb0",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-linux-x86_64-py313.zip",
+        "sha256": "cb2b813fdfcd83fd2187db4b95b5f30e74e09a29f628c911527a4e99caf98126",
+        "wheel_sha256": "fc9e3eae7fafdf4c5bf46857b715e85dc25f6b4baf4dcc44bd0cbe0d6248d602",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-win32-x86_64-py311.zip",
+        "sha256": "0232c493b42a4c541e0d6310aa2d4d4d3db0305fb1def60556794bb33ba12b1e",
+        "wheel_sha256": "c9f767b18503fb832a2bfc1e2d5b187e3ccdde42396008e48563df8c26380685",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-win32-x86_64-py312.zip",
+        "sha256": "f5dc020a39dfa491f8f8eb0aaca746a6b69951b99effa3bd358ae8a787bc0865",
+        "wheel_sha256": "c9f767b18503fb832a2bfc1e2d5b187e3ccdde42396008e48563df8c26380685",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.51-win32-x86_64-py313.zip",
+        "sha256": "2c44086bd4fa67e3e14e14d60a6b3a234afeaedebdd66c429ecca42493dcb8f8",
+        "wheel_sha256": "c9f767b18503fb832a2bfc1e2d5b187e3ccdde42396008e48563df8c26380685",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      }
+    ]
+  },
+  "actual_isolated_windows_installation": {
+    "status": "PASS",
+    "method": "Canonical .51 PowerShell bootstrap, owned alternate root/bin/config/state, WITHOUT integration-preview, no enrollment/model/GUI/input. Real CURRENT re-execution. Shared Windows operator confirmed.",
+    "steps": [
+      {
+        "name": "isolated-install",
+        "exit_code": 0,
+        "wall_seconds": 54.702320700045675
+      },
+      {
+        "name": "version",
+        "exit_code": 0,
+        "wall_seconds": 0.3184833999257535
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0,
+        "wall_seconds": 0.6717596999369562
+      },
+      {
+        "name": "offline-self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.7857365000527352
+      },
+      {
+        "name": "repeat-current",
+        "exit_code": 0,
+        "wall_seconds": 2.5334073998965323
+      }
+    ],
+    "registration_refresh": {
+      "fresh": "NOT_APPLICABLE",
+      "current": "REFRESHED",
+      "current_profiles_changed": 0,
+      "protected_file_count": 13668
+    },
+    "preservation": {
+      "shared_launcher_and_configuration_auth_bytes_preserved": true,
+      "active_previous_package_files_preserved": true,
+      "owned_loopback_server_stopped": true,
+      "owned_runtime_endpoint_absent": true
+    },
+    "source_files_exact": 68,
+    "capabilities": "PASS",
+    "offline_executable_fixtures": "PASS",
+    "no_new_harness_enrollment": true,
+    "no_shared_standard_update": true,
+    "fresh_standard_launcher_version": "0.1.49",
+    "private_summary_sha256": "122003bebdb2526399b0a85859304eaf21f121b7f1ff933434483fb194ae2baf"
+  },
+  "actual_limited_token_candidate": {
+    "status": "PASS",
+    "method": "Actual native interactive LIMITED token; owned pythonw task; windowless installed CLI, payload and read-only stdio MCP with real capability call. No model/capture/focus/input.",
+    "runtime_version": "0.1.51",
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "installed_payload_files_verified": 68,
+    "global_config_bytes_preserved": true,
+    "mcp_tools": 2,
+    "mcp_resources": 8,
+    "live_capability_call": "PASS",
+    "mcp_endpoint_absent": true,
+    "task_absent_observed": true,
+    "task_absence_method": "Native Schedule.Service GetTask reports file-not-found HRESULT 0x80070002.",
+    "native_task_last_result": null,
+    "native_task_last_result_classification": "NOT_RUN_UNAVAILABLE_AFTER_TIMED_OUT_COLLECTOR",
+    "private_token_sha256": "3f6970122ccc3e47af961ce75dfea7030655cce2d5bf8c43433d92dcbedbd729",
+    "private_mcp_sha256": "630f420bac9e3c102153c74346cfdc53fcceb408b6d8164c9902d3022a96ec34",
+    "private_recovery_metadata_sha256": "975137ee9520cddfa6b44f6d083ca980b4d42fcbdab5656eb7ba2665ae53f2fc"
+  },
+  "actual_windows_launcher_guards": {
+    "status": "PASS",
+    "scope": "Owned candidate .51 launcher guards; no shared replacement, model or GUI/input",
+    "steps": [
+      {
+        "name": "edited-launcher-refusal",
+        "exit_code": 1
+      },
+      {
+        "name": "foreign-launcher-refusal",
+        "exit_code": 1
+      }
+    ],
+    "edited_launcher_refused_and_preserved": true,
+    "foreign_fresh_root_refused_and_preserved": true,
+    "owned_test_launcher_restored": true,
+    "owned_loopback_stopped": true,
+    "owned_runtime_endpoint_absent": true
+  },
+  "retained_controller_attempts": {
+    "scheduled_start_ssh": "TIMEOUT_180_SECONDS_REMOTE_COMPLETION_INITIALLY_NOT_PROVEN",
+    "initial_collector_ssh": "TIMEOUT_180_SECONDS",
+    "first_recovery_controller": "POWERSHELL_AUTOMATIC_VARIABLE_ERROR_CONFLICT_REJECTED",
+    "read_only_result_inspection": "PASS_ACTUAL_NATIVE_LIMITED_RESULTS_FOUND",
+    "corrected_recovery_controller": "PASS_NATIVE_RESULTS_COLLECTED_AND_TASK_ABSENCE_OBSERVED",
+    "native_task_last_result": "UNAVAILABLE_NOT_INFERRED_AS_ZERO",
+    "native_checks_reexecuted_to_obtain_pass": false,
+    "private_controller_failures_retained": true
+  },
+  "not_run": [
+    "SHARED_WINDOWS_49_TO_51_UPDATE",
+    "NATIVE_CODEX_MODEL_0151",
+    "WINDOWS_GUI_ABORT_BROWSER_EDITOR_0151",
+    "SAME_TASK_1000_OPPORTUNITIES_ACCURACY_CORRECT_OS_INPUT_P95_100MS_COVERAGE_GOODPUT",
+    "PUBLIC_URL_HASH_FRESH_INSTALL_UPDATE_0151"
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "User confirms another session currently operates Windows. Shared installation and GUI are preserved; coordinate exclusive input before full native abort/task/1000-opportunity comparisons."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "INPUT-05"
+      ],
+      "status": "BLOCKED_FOR_UNPROVEN_BLENDER_STATES",
+      "condition": "Prior File-menu0/5 and unknown popup/IME/input-owner/effective-keymap facts remain. Public Blender/OS evidence does not prove those states; no guard/threshold weakened. External Blender host build remains outside user scope."
+    },
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_AND_PARTIAL_NOT_RUN",
+      "condition": "OMP positive cases retain deadline/guide-order/native-error failures; negative native socket failure before tool attempts is NOT_RUN. Historical failures remain, no retry-until-pass or credential restoration."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN_SEPARATE_SESSION_RESULT_PENDING",
+      "condition": "Reici edits/review evidence belongs to the separate session; its matched-view independent result has not arrived."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY_GUARDED",
+      "condition": "Existing feature branch guard skips public deployment; public URL/hash/fresh-install/update proof is not obtained by CI or owned loopback installation."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

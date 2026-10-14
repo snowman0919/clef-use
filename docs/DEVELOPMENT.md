@@ -29,3 +29,20 @@ PYTHONPATH=src uv run --no-sync python scripts/model_smoke.py --output model-smo
 
 Run actual GUI tests only in an operator-provided window. Preserve private logs
 locally. Do not commit real screenshots, user configs, secrets or cache files.
+
+For native harness task verification, `scripts/blender_operations_fixture.py`
+can expose the selected installed package's real authenticated loopback service
+on a disposable factory Blender/Xvfb desktop. Invoke the script with that
+installation's `runtime/current/bin/python`, `--runtime`, a newly owned
+`--output`, unused `--display`/`--port`, and `--serve-seconds 1..600`. The ready
+descriptor declares its `API_ASSISTED_FIXTURE_ONLY` provider and one bounded
+numeric-transform task. Keep the endpoint token private. Use the descriptor's
+`CLEF_USE_STATE_DIR`, `DISPLAY` and Xauthority for the actual MCP process; verify
+the installed schemas and full guide loads before allowing input. Check fresh
+external RNA and pixels after the call, then request `shutdown_idle`.
+
+Deadline or signal cleanup releases owned input, cancels only an observed modal
+owned by this fixture, closes its service and removes its endpoint. Reports also
+require owned Blender/Xvfb exit. A typed operation `SUCCEEDED` with session
+`NEEDS_REPLAN` verifies the effect only; the fixture has no whole-goal perception
+or decision backend and does not establish a production provider or latency gate.

@@ -1,0 +1,110 @@
+{
+  "classification": "OBSERVED_ACTUAL_IMMUTABLE_INSTALLED_WINDOWS_INDEPENDENT_EDITOR_TASK_FAILURE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.42",
+  "installed_source_commit": "d8b521884d12acd5a110aec29851a0afc9c006bc",
+  "partial": true,
+  "requirements": [
+    "E2E-02",
+    "STATE-01",
+    "INPUT-05"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; private paths, native identities, configuration, screen content and model packets stay private.",
+  "method": {
+    "entrypoint": "Actual installed RuntimeClient.run -> service -> default runtime factory; actual OmniParser/CLEF configuration retained.",
+    "original_contract": {
+      "goal": "Enter the exact text 123 in the Text input field and click Save.",
+      "success_conditions": [
+        "The Text input field contains exactly 123.",
+        "Saved: 123 is visible."
+      ],
+      "constraints": [
+        "Use only this disposable owned application.",
+        "Click Save once after entering the exact supplied text."
+      ],
+      "max_steps": 5,
+      "confidence_threshold": 0.9,
+      "text_inputs": [
+        {
+          "value": "123",
+          "target_label": "Text input"
+        }
+      ],
+      "execution_mode": "AUTO"
+    },
+    "original_contract_sha256": "8165d5e906efb8a1fe005b69542f333e019743f664923e3233d8a9bef20705f8",
+    "same_original_task_contract": true,
+    "receiver": "Independent native RichEdit, static labels and Save button. Real WM_COMMAND callbacks and GetWindowTextW/UTF8 saved-file oracle; no action bridge, candidate injection, parser substitution or direct proof input.",
+    "native_harness": "NOT_RUN for this case; independent actual-runtime task, separate from Codex native harness results.",
+    "paired_baseline": "NOT_RUN; Windows receiver does not establish a paired pinned Linux benchmark."
+  },
+  "actual_task": {
+    "status": "FAIL",
+    "runtime_status": "ERROR",
+    "runtime_reason": "TimeoutError in runtime backend",
+    "actions": 0,
+    "decisions": 0,
+    "false_completion": false,
+    "runtime_status_observation_interval_seconds": 195.579,
+    "interval_scope": "First observed RUNNING to observed ERROR; not a state-change-to-input latency.",
+    "startup_vs_inference_timeout_subdivision": "NOT_RUN",
+    "private_worker_counts": {
+      "enabled": true,
+      "installed_files_modified": false,
+      "scope": "Transparent worker request/reply archive; not a timing comparison",
+      "hook_receipts": 3,
+      "capture_receipts": 1,
+      "worker_requests": 1,
+      "worker_replies": 0
+    },
+    "candidate_target_coverage": "NOT_RUN; first parser request produced no reply, so no decision/candidate roster was reached.",
+    "typing_focus_ime_guard": "NOT_RUN; no typing decision or input was reached.",
+    "candidate_flattening": "NOT_RUN; no decision distribution was produced."
+  },
+  "independent_receiver": {
+    "text_remained_empty": true,
+    "status_remained_not_saved": true,
+    "save_callback_count": 0,
+    "saved_bytes_exact": false,
+    "callback_error_count": 0,
+    "task_complete": false,
+    "foreground_owned_at_final_readback": false,
+    "os_wide_input_monitor": "NOT_RUN; receiver callbacks and runtime action count do not prove global OS-input critical-error coverage."
+  },
+  "cleanup": {
+    "endpoint_removed": true,
+    "gui_exit_code": 1,
+    "owned_gui_process_exited": true,
+    "pointer_restored": true,
+    "foreground_restored": false,
+    "inputs_released": true,
+    "global_config_bytes_preserved": true
+  },
+  "independent_fixture_cleanup": {
+    "status": "FAIL",
+    "task_input_implemented": false,
+    "loopback_listener_closed": true,
+    "external_foreground_intervention": true,
+    "foreground_restoration_attempted": false,
+    "foreground_restored": false,
+    "native_callback_removed": true,
+    "owned_window_closed": true,
+    "native_fonts_released": true
+  },
+  "foreground_failure": {
+    "classification": "OBSERVED_OWNER_CHANGE_WITH_UNPROVEN_ORIGIN",
+    "cause": "Another process owned foreground before cleanup. Fixture preserved that ownership and did not request restoration. The initiating actor/process-launch cause is not yet proven.",
+    "restoration_attempted": false,
+    "no_automatic_refocus": "OBSERVED",
+    "observed_application": "brave.exe",
+    "observed_non_receiver_transitions": 5,
+    "owned_runtime_or_receiver_process": false,
+    "owned_passive_hook_process": false,
+    "originating_actor": "NOT_PROVEN",
+    "resource_coordination": "PENDING_USER_INFORMATION; no automatic refocus or new GUI input pending ownership clarification."
+  },
+  "private_result_sha256": "90b8078a01fec493fb2ee97db356b960f7b80172b8a885017033dee80677788c",
+  "proof_controller_sha256": "9ee20e20fdd1aaafa00412e4ae840f9c181c412271a7a9467d2ff1d8e70f7990",
+  "receiver_script_sha256": "1fb9aa12577cdbcd5f02b1a58275d499cd82851e52491fd565e147bbbcd5e389",
+  "completion_claim": false
+}

@@ -1,0 +1,191 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-11",
+  "classification": "OBSERVED",
+  "scope": "FINAL6 installed public guides; existing Codex daemon; read-only harness triggers only",
+  "model": "gpt-6.1-sol",
+  "model_substitution": false,
+  "route": "Existing local daemon completed all nine model turns; no credential or global configuration change. This does not identify the current desktop stdio transport.",
+  "guides": [
+    {
+      "basename": "agent-skills/clef-use/SKILL.md",
+      "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+    },
+    {
+      "basename": "agent-skills/clef-use-blender/SKILL.md",
+      "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+    },
+    {
+      "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "rounds": [
+    {
+      "round": 1,
+      "cases": {
+        "explicit": {
+          "result": "FAIL",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "FAIL",
+          "loaded_guides": [],
+          "INVOKED": "FAIL",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "natural": {
+          "result": "FAIL",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "FAIL",
+          "loaded_guides": [],
+          "INVOKED": "FAIL",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "negative": {
+          "result": "PASS",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "loaded_guides": [],
+          "INVOKED": "NOT_RUN",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        }
+      },
+      "evidence": {
+        "basename": "summary.json",
+        "sha256": "9b8b8a46095b9ec375fbf4c98f154e0d708afd7496e1ba4ec5c7ce99666762e2"
+      },
+      "failure": "MCP tool call requires approval, but approval policy is never; full guide body load was not observed."
+    },
+    {
+      "round": 2,
+      "cases": {
+        "explicit": {
+          "result": "FAIL",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "loaded_guides": [
+            "clef-use"
+          ],
+          "INVOKED": "FAIL",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "natural": {
+          "result": "FAIL",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "loaded_guides": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "INVOKED": "FAIL",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "negative": {
+          "result": "PASS",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "loaded_guides": [],
+          "INVOKED": "NOT_RUN",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        }
+      },
+      "evidence": {
+        "basename": "summary.json",
+        "sha256": "42465d168a7259c6d3e19b461395343d8f2e3c7e43f811bed20b2500f62d404d"
+      },
+      "failure": "Full guide bodies loaded; native MCP elicitation was not handled and was safely rejected. No successful runtime call."
+    },
+    {
+      "round": 3,
+      "cases": {
+        "explicit": {
+          "result": "PASS",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "loaded_guides": [
+            "clef-use"
+          ],
+          "INVOKED": "PASS",
+          "successful_tools": [
+            "computer_capabilities"
+          ],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "natural": {
+          "result": "PASS",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "loaded_guides": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "INVOKED": "PASS",
+          "successful_tools": [
+            "computer_capabilities"
+          ],
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "negative": {
+          "result": "PASS",
+          "turn_status": "completed",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "loaded_guides": [],
+          "INVOKED": "NOT_RUN",
+          "successful_tools": [],
+          "TASK_VERIFIED": "NOT_RUN"
+        }
+      },
+      "evidence": {
+        "basename": "summary.json",
+        "sha256": "4ed1b33da80c81a422ee544a24d03eac8ed2d223ba2499782fbf678d63d8d425"
+      },
+      "approval": "Documented native MCP elicitation accepted for a single owned-thread/turn capabilities/status call after server, tool, arguments and exact schema validation; all other approvals refused."
+    }
+  ],
+  "status_refusal": {
+    "case": "final natural",
+    "tool": "computer_status",
+    "result": "FAIL",
+    "reason": "no active session; start computer_run first",
+    "session_started": false
+  },
+  "cleanup": {
+    "known_owned_ephemeral_sessions_checked": 10,
+    "remaining_loaded_owned_sessions": 0,
+    "persisted_records_across_three_private_projects": 0,
+    "all_final_unsubscribe_responses": "unsubscribed",
+    "evidence": {
+      "basename": "cleanup.json",
+      "sha256": "1053a694a14e3b0f1600767f66538dbc4755f9fc7d7d2a1e368944c057b18d12"
+    }
+  },
+  "limits": {
+    "GUI_TASK_VERIFIED": "NOT_RUN",
+    "general_trusted_state_provider": "NOT_RUN",
+    "release_gate": "NOT_RUN",
+    "negative_case": "No guide body load, shell command or MCP invocation observed."
+  },
+  "privacy": {
+    "raw_payloads_included": false,
+    "auth_or_account_data_included": false,
+    "ephemeral_ids_included": false,
+    "private_code_assets_or_screenshots_included": false,
+    "repository_edits": false
+  }
+}

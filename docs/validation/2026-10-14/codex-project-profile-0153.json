@@ -1,0 +1,515 @@
+{
+  "classification": "OBSERVED_NATIVE_CODEX_PROJECT_CONFIGURATION_AND_INSTALLED_READ_ONLY_CASES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.53",
+  "partial": true,
+  "requirements": [
+    "GUIDE-02",
+    "GUIDE-03",
+    "INSTALL-03"
+  ],
+  "publication_policy": "Whitelisted facts/enums/digests only; raw paths, identities, native transcripts and config/auth values remain private.",
+  "actual_before": {
+    "classification": "ACTUAL_NATIVE_CODEX_PROJECT_CONFIGURATION_RESOLUTION",
+    "runtime_version": "0.1.52",
+    "native_cli_version": "codex-cli 0.162.1",
+    "model_requests": 0,
+    "server_or_tool_invocations": 0,
+    "gui_or_input_actions": 0,
+    "native_list_exit_code": 1,
+    "native_stderr_sha256": "eff8a13e5d6821c1f2fa306762d0696d26e580d12a25ae644d4ef941d5bcd7d9",
+    "native_stderr_bytes": 115,
+    "global_config_auth_bytes_preserved": true,
+    "status": "FAIL"
+  },
+  "actual_before_error": "invalid transport in mcp_servers.clef-use",
+  "actual_native_configuration_component": {
+    "classification": "ACTUAL_NATIVE_CODEX_EPHEMERAL_PROFILE_COMPONENT",
+    "model_requests": 0,
+    "server_or_tool_invocations": 0,
+    "gui_or_input_actions": 0,
+    "native_exit_code": 0,
+    "profile_permissions_private": true,
+    "other_enabled_servers": 0,
+    "selected_matches_approved_command": true,
+    "selected_matches_approved_args": true,
+    "read_only_server_env_matches": true,
+    "status": "PASS",
+    "owned_profile_removed": true,
+    "saved_config_auth_project_bytes_preserved": true
+  },
+  "trusted_project_reproduction_and_correction": {
+    "classification": "OBSERVED_ACTUAL_NATIVE_CLI_WITH_ISOLATED_CONFIG",
+    "before": "2 FAIL / 6 PASS: actual consumer cwd exposes enabled foreign project server",
+    "after": "8 PASS: trusted/untrusted, selected absent/disabled, arbitrary names, readonly env precedence, approved transport, config preservation and cleanup",
+    "before_log_sha256": "680270033cfd2efcadfd6dc0a3e0f2d9b70a0096619e44834c24a3a9a5e72953",
+    "after_log_sha256": "af8640ce0367d63cf939eaed1f42b7f12373d57c410fba23ee669f78471b5327",
+    "model_requests": 0,
+    "gui_or_input_actions": false,
+    "limitations": "Native catalog snapshot is verified; a non-cooperative configuration edit adding a new server between preflight and exec is not atomically excluded."
+  },
+  "actual_native_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.1842640020186082
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.4092525279847905
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.53",
+    "source_files_exact": 68,
+    "artifact_sha256": "cf2dcbc3fb1d4e9d3330296948828fa13b2ee743b3abd5ba3f2ba1394ce9ed38",
+    "owned_loopback_stopped": true,
+    "private_result_sha256": "39afe48611722d97c3a617c80c449bd0e51a76c90e63e51fcf7e495ad137d502"
+  },
+  "actual_installed_codex_models": {
+    "classification": "ACTUAL_INSTALLED_LINUX_NATIVE_CODEX_CANONICAL_READ_ONLY_CASES",
+    "runtime_version": "0.1.53",
+    "native_cli_version": "codex-cli 0.162.1",
+    "status": "FAIL",
+    "provider_model_request_budget_override": false,
+    "gui_or_input_requested": false,
+    "integration_status": "INSTALLED",
+    "protected_config_auth_native_binary_bytes_preserved": true,
+    "source_unchanged_during_batch": true,
+    "owned_temporary_profiles_removed": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 17.535587575053796,
+        "discovery_status": "PASS",
+        "reason_code": "GUIDE_ORIGIN_NOT_VERIFIED",
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [
+            "clef-use"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "5e1408e3159825c7763493aa32836844359f62ecef3617672d3f343a9b49a94e",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 21.438198495074175,
+        "discovery_status": "PASS",
+        "reason_code": "GUIDE_ORIGIN_NOT_VERIFIED",
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [
+            "clef-use",
+            "clef-use-blender"
+          ],
+          "observed_body_before_invoke": true,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "8739f26e4c2dbcf2b5b61271dd51b8bcd2b6e0f159395c091ef7f28f57566f61",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 13.4005457139574,
+        "discovery_status": "PASS",
+        "reason_code": null,
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": [],
+          "observed_body_before_invoke": false,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "931cbcd8b58fe1c957544b99197ce7200a61425e1a0183f4f7aebb5796d6077f",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "private_result_sha256": "a7ffa91a07f25ec33f9cdcc46bae3ebee77cffb388b1fbefc99e27c814b74be2"
+  },
+  "retained_initial_source_package": {
+    "classification": "ACTUAL_PACKAGED_INSTALLATION_AND_LIVE_MCP",
+    "status": "PASS",
+    "steps": [
+      {
+        "name": "build",
+        "exit_code": 0,
+        "wall_seconds": 1.1534416900249198
+      },
+      {
+        "name": "install",
+        "exit_code": 0,
+        "wall_seconds": 4.352832617936656
+      }
+    ],
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "installation": "PASS",
+    "mcp_modes": [
+      {
+        "status": "PASS",
+        "read_only": false,
+        "tool_count": 6,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      },
+      {
+        "status": "PASS",
+        "read_only": true,
+        "tool_count": 2,
+        "schema_sha256": "661d9715889dfd62f966d05c65d5337bdb9525004bc17dfbef32ae81558ecba6",
+        "registered_families_verified": [
+          "menu_assess",
+          "command_search",
+          "numeric_transform",
+          "property_edit",
+          "viewport_gesture",
+          "modal_cancel"
+        ],
+        "optional_omitted_and_null": "PASS",
+        "unregistered_blender_rejected_by_schema": true,
+        "domain_unknown_operation_error_retained": true,
+        "missing_state_stays_blocked": true
+      }
+    ],
+    "runtime_endpoint_absent": true,
+    "runtime_version": "0.1.53",
+    "source_files_exact": 68,
+    "artifact_sha256": "b5d08ad93645622b9b1b143a043d18304069e1a97975d41f712b047f5c6aa4cf",
+    "owned_loopback_stopped": true,
+    "private_result_sha256": "524ce1764c66a9ace56265f3adbadb1684a832df5c7d5346ae4bd66abc5bf16a"
+  },
+  "retained_initial_source_models": {
+    "classification": "ACTUAL_INSTALLED_LINUX_NATIVE_CODEX_CANONICAL_READ_ONLY_CASES",
+    "runtime_version": "0.1.53",
+    "native_cli_version": "codex-cli 0.162.1",
+    "status": "FAIL",
+    "provider_model_request_budget_override": false,
+    "gui_or_input_requested": false,
+    "integration_status": "INSTALLED",
+    "protected_config_auth_native_binary_bytes_preserved": true,
+    "source_unchanged_during_batch": true,
+    "owned_temporary_profiles_removed": true,
+    "runtime_endpoint_absent": true,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 14.904432382900268,
+        "discovery_status": "PASS",
+        "reason_code": null,
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "c1248d18e517376cf57fb6e07b98f89cc92419e1215fb508a6e0b65645c253b8",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "native_exit_code": 0,
+        "wall_seconds": 21.032141385017894,
+        "discovery_status": "PASS",
+        "reason_code": null,
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "runtime_before_guide": true,
+          "capability_catalog_verified": true,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "d4e00c570f871b174069e6c5f41b7bf0b51dbb1a39182c0cdcf9a717f17cf46e",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "native_exit_code": 0,
+        "wall_seconds": 13.83702032500878,
+        "discovery_status": "PASS",
+        "reason_code": null,
+        "evidence": {
+          "loaded": [],
+          "observed_guide_bodies": null,
+          "observed_body_before_invoke": null,
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "runtime_before_guide": false,
+          "capability_catalog_verified": false,
+          "native_executor_failures": []
+        },
+        "stage_statuses": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "trace_sha256": "4354e944b159de3764f7c4d40d8fa186b8f825bfd0a0552cd581522cf2618843",
+        "stderr_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "private_result_sha256": "b000c6b1bad96fbc44a857d0d2c0a20ac32e83501225d08bc9f0182d1fa73bc2"
+  },
+  "provenance_policy": {
+    "complete_body_observed_before_runtime": "OBSERVED in both final positive cases",
+    "installed_file_origin": "NOT_PROVEN: JSON command events omit per-call cwd; relative-path output cannot prove selected installed origin",
+    "verified_load_stage": "NOT_RUN",
+    "positive_overall_status": "FAIL",
+    "actual_late_read_claim": false,
+    "origin_or_order_guard_weakened": false,
+    "final_models": "Each original canonical case executed once after working-context/scope correction; initial cases retained separately. No unchanged retry for PASS."
+  },
+  "regression": {
+    "classification": "OBSERVED",
+    "passed": 1704,
+    "skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 71.62,
+    "scoped_passed": 286,
+    "full_log_sha256": "3d41180786ecbc5da17008a8c9df0c6b6b049c2f0d85528924d96828bab95a7b",
+    "ruff_and_format": "PASS167_FILES",
+    "generated_contract": "PASS4_TOOL_11_CLI",
+    "published_examples": "PASS198_CLI_12_TOOL",
+    "initial_controlled_trace_fixture_incompatibility": "64 FAIL / 1636 PASS / 55 SKIP; fixture did not implement native configuration producer, corrected without weakening trace assertions",
+    "native_review": "INFERRED_READ_ONLY: no further actionable finding; catalog/exec configuration race limitation retained"
+  },
+  "retained_unexecuted_or_failed_probes": [
+    {
+      "check": "initial installed library controller via current symlink",
+      "status": "NOT_RUN_MODEL",
+      "cause": "existing symlink guard refuses path before model; physical installed interpreter used without guard change"
+    },
+    {
+      "check": "final installed controller at guessed non-existent version directory",
+      "status": "NOT_RUN_MODEL",
+      "cause": "shell exit127 before Python; actual resolved physical directory used"
+    },
+    {
+      "check": "optional native config/read effective profile comparison",
+      "status": "NOT_PROVEN",
+      "cause": "app-server initialize receives no response for attempted profile selection; queue.Empty at30s twice, zero models"
+    },
+    {
+      "check": "early profile transport prototypes",
+      "status": "FAIL_RETAINED",
+      "cause": "incomplete transport profiles fail native config parsing; selected-only profile leaves foreign servers enabled"
+    }
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_ORIGIN_UNPROVEN",
+      "condition": "Actual final .53 Codex positive cases observe full selected body before matching capabilities but lack native filesystem-origin proof; negative passes. Auth failure is not observed. LOADED remains NOT_RUN."
+    },
+    {
+      "requirements": [
+        "INSTALL-03",
+        "INSTALL-09",
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "Last bounded SSH port22 and Tailscale peer checks fail before remote execution; user confirms another session owns Windows input. No .53 remote installation/model/GUI/abort/performance execution."
+    },
+    {
+      "requirements": [
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "User confirms another session currently operates Windows. Shared installation and GUI are preserved; coordinate exclusive input before full native abort/task/1000-opportunity comparisons."
+    },
+    {
+      "requirements": [
+        "E2E-01",
+        "INPUT-05"
+      ],
+      "status": "BLOCKED_FOR_UNPROVEN_BLENDER_STATES",
+      "condition": "Prior File-menu0/5 and unknown popup/IME/input-owner/effective-keymap facts remain. Public Blender/OS evidence does not prove those states; no guard/threshold weakened. External Blender host build remains outside user scope."
+    },
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_POSITIVE_CANONICAL_MODEL_CASES",
+      "condition": "Final source .52 OMP explicit retains stopped-service status, denied write and native deadline; natural invokes capabilities before guide. Negative passes. Pre-overlay .52/.50 failures and .49 credential uncertainty remain; no unchanged retry or credential restoration."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN_SEPARATE_SESSION_RESULT_PENDING",
+      "condition": "Reici edits/review evidence belongs to the separate session; its matched-view independent result has not arrived."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY_GUARDED",
+      "condition": "Existing feature branch guard skips public deployment; public URL/hash/fresh-install/update proof is not obtained by CI or owned loopback installation."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

@@ -1,0 +1,328 @@
+{
+  "classification": "OBSERVED",
+  "candidate": "FINAL11",
+  "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+  "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+  "scope": "Actual native Codex discovery/full public guide body load/read-only capabilities trigger stages only; no GUI task",
+  "status": "PASS_AT_DECLARED_READ_ONLY_SCOPE",
+  "model": "gpt-6.1-sol",
+  "model_provider": "openai",
+  "transport": "Existing owned restricted Unix socket over WebSocket",
+  "auth_type_only": "chatgpt",
+  "auth_or_global_config_mutation": false,
+  "auth_repair_needed": false,
+  "account_or_token_values_in_public_evidence": false,
+  "model_case_invocations": 3,
+  "model_api_request_count": "NOT_OBSERVED; native app-server completed-turn count recorded separately",
+  "limits": {
+    "case_deadline_seconds": 180,
+    "effort": "low",
+    "batch_count": 1,
+    "retry": false,
+    "first_failed_case_stops": true
+  },
+  "native_discovery": "PASS",
+  "discovery": [
+    {
+      "name": "clef-use",
+      "enabled": true,
+      "exact_installed_path": true
+    },
+    {
+      "name": "clef-use-blender",
+      "enabled": true,
+      "exact_installed_path": true
+    },
+    {
+      "name": "clef-use-diagnostics",
+      "enabled": true,
+      "exact_installed_path": true
+    }
+  ],
+  "guides": {
+    "clef-use": {
+      "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+      "source": "exact frozen FINAL11 installed bundle via own project native discovery"
+    },
+    "clef-use-blender": {
+      "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "source": "exact frozen FINAL11 installed bundle via own project native discovery"
+    },
+    "clef-use-diagnostics": {
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+      "source": "exact frozen FINAL11 installed bundle via own project native discovery"
+    }
+  },
+  "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+  "schemas_exact_selected_installed_match": true,
+  "public_file_reads": [
+    {
+      "case": "explicit",
+      "command": "cat",
+      "public_relative_files": [
+        "clef-use/SKILL.md"
+      ],
+      "output_exact_public_file_concat": true,
+      "output_bytes": 4654,
+      "file_sha256": {
+        "clef-use/SKILL.md": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      }
+    },
+    {
+      "case": "explicit",
+      "command": "cat",
+      "public_relative_files": [
+        "clef-use/references/API_BASELINE.md",
+        "clef-use/references/LIVE_API.md"
+      ],
+      "output_exact_public_file_concat": true,
+      "output_bytes": 3337,
+      "file_sha256": {
+        "clef-use/references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "clef-use/references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      }
+    },
+    {
+      "case": "natural",
+      "command": "cat",
+      "public_relative_files": [
+        "clef-use/SKILL.md",
+        "clef-use-blender/SKILL.md",
+        "clef-use-diagnostics/SKILL.md"
+      ],
+      "output_exact_public_file_concat": true,
+      "output_bytes": 11341,
+      "file_sha256": {
+        "clef-use/SKILL.md": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    },
+    {
+      "case": "natural",
+      "command": "cat",
+      "public_relative_files": [
+        "clef-use/references/API_BASELINE.md",
+        "clef-use/references/LIVE_API.md",
+        "clef-use-blender/references/OPERATIONS.md",
+        "clef-use-diagnostics/references/FAILURES.md"
+      ],
+      "output_exact_public_file_concat": true,
+      "output_bytes": 7986,
+      "file_sha256": {
+        "clef-use/references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "clef-use/references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "clef-use-blender/references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "clef-use-diagnostics/references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      }
+    }
+  ],
+  "cases": {
+    "explicit": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [
+        "clef-use"
+      ],
+      "INVOKED": [
+        "computer_capabilities"
+      ],
+      "requested_tool_item_types": [
+        "commandExecution",
+        "commandExecution",
+        "mcpToolCall"
+      ],
+      "completed_shell_command_count": 2,
+      "tool_results": [
+        {
+          "tool": "computer_capabilities",
+          "status": "completed",
+          "runtime_version": "0.1.30",
+          "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "default_trusted_provider": "NONE",
+          "default_operation_availability": "BLOCKED"
+        }
+      ],
+      "approved_exact_readonly_calls": 1,
+      "approvals": [
+        {
+          "server": "clef-use",
+          "tool": "computer_capabilities",
+          "arguments": {
+            "detail": true
+          },
+          "single_call": true,
+          "schema_validated": true
+        }
+      ],
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "explicit-private-trace.jsonl",
+        "sha256": "b4f0dcbdfbe4c3601255056f0b58db69584213a238a4951a298b05cedf914817"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "natural": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "INVOKED": [
+        "computer_capabilities"
+      ],
+      "requested_tool_item_types": [
+        "commandExecution",
+        "commandExecution",
+        "mcpToolCall",
+        "mcpToolCall"
+      ],
+      "completed_shell_command_count": 2,
+      "tool_results": [
+        {
+          "tool": "computer_capabilities",
+          "status": "completed",
+          "runtime_version": "0.1.30",
+          "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "default_trusted_provider": "NONE",
+          "default_operation_availability": "BLOCKED"
+        },
+        {
+          "tool": "computer_status",
+          "status": "REFUSED",
+          "reason": "no active session; start computer_run first",
+          "session_or_GUI_started": false
+        }
+      ],
+      "approved_exact_readonly_calls": 2,
+      "approvals": [
+        {
+          "server": "clef-use",
+          "tool": "computer_capabilities",
+          "arguments": {
+            "detail": true
+          },
+          "single_call": true,
+          "schema_validated": true
+        },
+        {
+          "server": "clef-use",
+          "tool": "computer_status",
+          "arguments": {},
+          "single_call": true,
+          "schema_validated": true
+        }
+      ],
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "natural-private-trace.jsonl",
+        "sha256": "cd218267b4be0b87b9e207b4e16aa08dc0efe4284fe132068c5ea0f460adb19a"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "negative": {
+      "status": "PASS",
+      "turn_status": "completed",
+      "DISCOVERED": "PASS",
+      "LOADED": [],
+      "INVOKED": [],
+      "requested_tool_item_types": [],
+      "completed_shell_command_count": 0,
+      "tool_results": [],
+      "approved_exact_readonly_calls": 0,
+      "approvals": [],
+      "denied_approval_requests": 0,
+      "ephemeral": true,
+      "read_only_sandbox": true,
+      "sandbox_network_access": false,
+      "hooks_started": false,
+      "cleanup": "unsubscribed",
+      "trace": {
+        "basename": "negative-private-trace.jsonl",
+        "sha256": "ba07918668c560d3221cb3eafde705e987fd5a4c6dbfad17ddf01d5baca938a6"
+      },
+      "TASK_VERIFIED": "NOT_RUN"
+    }
+  },
+  "GUI_TASK_VERIFIED": {
+    "status": "NOT_RUN",
+    "reason": "Only public guide reads and computer_capabilities/status; no GUI/runtime session activation"
+  },
+  "repository_changes": false,
+  "cleanup": {
+    "native_process_exit_code": 0,
+    "all_own_ephemeral_threads_unsubscribed": true,
+    "own_runtime_home_created": false
+  },
+  "prior_history_preserved": [
+    {
+      "basename": "clef-codex-final10-readonly-public-20261011.json",
+      "sha256": "1e0b9cdf2112f700f03b6a7d9c2178f1cab6efa07b7fd806eda064bb8cbd6dab",
+      "unchanged": true,
+      "scope": "Prior FINAL10 actual scoped3/3 and all its earlier failures/isolated CLI401 interpretation retained without rescore"
+    }
+  ],
+  "evidence_files": [
+    {
+      "basename": "summary.json",
+      "sha256": "930c9036ba4eb7c468006bd66d8a459374dfb133b55d161e9e81de3232dfc787",
+      "raw_private": true
+    },
+    {
+      "basename": "public-read-verification.json",
+      "sha256": "90eba82ee81884bbbd4fecd20805af9f6109a8656998532f92a190b5d628b6e0",
+      "raw_private": false
+    },
+    {
+      "basename": "driver.js",
+      "sha256": "67571acd2d004380d4d32a8369200afcf6ad456f27261a8b4ad0e69974663b5c",
+      "raw_private": true
+    },
+    {
+      "basename": "explicit-private-trace.jsonl",
+      "sha256": "b4f0dcbdfbe4c3601255056f0b58db69584213a238a4951a298b05cedf914817",
+      "raw_private": true
+    },
+    {
+      "basename": "natural-private-trace.jsonl",
+      "sha256": "cd218267b4be0b87b9e207b4e16aa08dc0efe4284fe132068c5ea0f460adb19a",
+      "raw_private": true
+    },
+    {
+      "basename": "negative-private-trace.jsonl",
+      "sha256": "ba07918668c560d3221cb3eafde705e987fd5a4c6dbfad17ddf01d5baca938a6",
+      "raw_private": true
+    },
+    {
+      "basename": "clef-codex-final11-predeclaration-public-20261011.json",
+      "sha256": "154d5d02b59e4253a2b5f035ce94b9b526273047eb8b2c7f7949f3ab01509ce5",
+      "raw_private": false
+    },
+    {
+      "basename": "clef-codex-final11-preflight-public-20261011.json",
+      "sha256": "4b62b0511e863ad18137f57895b115d4ba0391db9c70e421fa599c90cf1809c5",
+      "raw_private": false
+    }
+  ],
+  "limitations": [
+    "One bounded three-case batch only; no statistical trigger reliability or production GUI claim.",
+    "Requested model/provider and native thread acknowledgements are recorded; independently served backend model identity was not observed.",
+    "Runtime default trusted provider remains NONE/guarded operations BLOCKED in returned capabilities."
+  ]
+}

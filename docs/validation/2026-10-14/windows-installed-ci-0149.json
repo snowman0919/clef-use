@@ -1,0 +1,422 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ACTUAL_WINDOWS_INSTALLATION_MCP_AND_NATIVE_CODEX_MODEL_CASES",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.49",
+  "source_commit": "cccadb1567f51e9ea6393d11b9a28f6b7a0e771b",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "GUIDE-03",
+    "HARNESS-01",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts/enums/digests only. Native paths, identities, credentials, configuration/auth contents, prompts/responses and raw traces remain private.",
+  "publication_recovery": {
+    "status": "PASS",
+    "route": "GH_CLI_STORED_AUTH_AND_PER_INVOCATION_GIT_CREDENTIAL_HELPER",
+    "published_commits": [
+      "8e501bbf46fb62f2768a03ef22cb4f15de740554",
+      "cccadb1567f51e9ea6393d11b9a28f6b7a0e771b"
+    ],
+    "remote_head_verified": true,
+    "push": "NORMAL_FAST_FORWARD_EXISTING_FEATURE_BRANCH",
+    "existing_draft_pr_updated": true,
+    "gh_pr_edit": "FAIL_OBSOLETE_PROJECTS_GRAPHQL",
+    "gh_rest_pr_update": "PASS",
+    "prior_publication_blocker": "CLOSED",
+    "scope": "No credential printed/transferred; no persistent Git config change, force push, new branch, release tag or public deployment guard bypass."
+  },
+  "ci": {
+    "status": "PASS",
+    "run_id": 38494012983,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38494012983",
+    "assembled_artifact_id": 11863720392,
+    "assembled_artifact_sha256": "06a17da9a24504f2ad424821d51aff72f7f01dad061566d25e60c9ecfb02334a",
+    "native_installer_reports_passed": 15,
+    "archive_count": 15,
+    "passed_archives": 15,
+    "git_payload_file_count": 68,
+    "private_verification_sha256": "d38f4a10bd83ce68a878be11b71b8123ba92a79917466ae854bc841714612d4d",
+    "native_installer_log_verification_sha256": "c4a1703d9089a387cbec1a541ddb0dffa75c6aa34604f8ce99eeb7932fde09cd",
+    "manifest_sha256": "f45c20c994c6e1c22e04202237ed6c2a27e0739333e110102a5218984427152b",
+    "sha256sums_sha256": "9fc1ea7145a402ee70558fa2b44fb3838bf8a1b814c5d334be1639c7786821bc",
+    "workflow_dispatch_count": 1,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "installer_update_fixture_final_versions": [
+      "0.1.50"
+    ],
+    "scope": "All fifteen immutable archives match 68 source/guide payloads in the exact Git commit and guide/schema/contract metadata. Actual native installer logs prove first/update/current and three failure-preservation checks. Synthetic update fixture is separate from the .49 published candidate.",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.49-darwin-arm64-py311.zip",
+        "sha256": "6b81b16613821ebae1bd2c2082b018185d66c3886b9d6a2eae5fe16ae16ff189",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-darwin-arm64-py312.zip",
+        "sha256": "36de4e0370a80182f10646b221a5e32fbc09ac4c7f4eb4377eadf8f9e199eda9",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-darwin-arm64-py313.zip",
+        "sha256": "7a74d23220c7c74d7d7f465dd2ef09849782f25f6acbc43035c9aa8fc5dfe066",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-darwin-x86_64-py311.zip",
+        "sha256": "a266c2e82cc50de5990da0208503c9b1e2401780f8c7950b661dad609f2683a8",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-darwin-x86_64-py312.zip",
+        "sha256": "e762ffd489f49141602e518e0e63ba0070814dd330968525111ae0f1755b904e",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-darwin-x86_64-py313.zip",
+        "sha256": "c0518ededb9de97594429be2314baf413315d02bba118c22d5fff7fbd790e246",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-arm64-py311.zip",
+        "sha256": "d375494ad4f16e7322ec0f5ff79bd60a9387108facecb4cf57882ba96ab14b25",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-arm64-py312.zip",
+        "sha256": "5d856ee463e9ded772d9fda841ed1e4be74e3da0c4ff6904008038ce34a27cc9",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-arm64-py313.zip",
+        "sha256": "ebb8a4a9f60c5c695bd6dc59d8581d7bf51a57a00630325a3ee1033ffc885f86",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-x86_64-py311.zip",
+        "sha256": "9d5af7039254394dff9ebe8126b855eb3f719a54cc307ced689fb658080e7420",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-x86_64-py312.zip",
+        "sha256": "b64a80cac35da59bce197bf3af0577fd8944bd86450f2c693ea467502a1ccbb0",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-linux-x86_64-py313.zip",
+        "sha256": "52c7f6c79af39c70edb206b8a15440ba9c781d029c4bef37fd43bb931242ea1e",
+        "wheel_sha256": "6947bf0f88e3919293891fa6601d126d419ad966c3440fe4ce963e7c0eb808e6",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-win32-x86_64-py311.zip",
+        "sha256": "47d4406f82640ecfeb7a7ee9c5678d44917cf1d95c9f3e137183f1b5870e4d66",
+        "wheel_sha256": "45c13ebb83a0e6899b066ae5a2d13081546500ad4b920c5984a002227f212dc1",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-win32-x86_64-py312.zip",
+        "sha256": "f912b0f28fadbdb7e786cbe0f1102af628e5a2c582f1873b5ceb6e9526d0a0ef",
+        "wheel_sha256": "45c13ebb83a0e6899b066ae5a2d13081546500ad4b920c5984a002227f212dc1",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      },
+      {
+        "filename": "clef-use-0.1.49-win32-x86_64-py313.zip",
+        "sha256": "7c11d298d8764f36ba7568163d98ee32e20b8b5d61008b54368fd14d1a264790",
+        "wheel_sha256": "45c13ebb83a0e6899b066ae5a2d13081546500ad4b920c5984a002227f212dc1",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+        "guide_bundle_sha256": "61e2dc422d1739ea37fec26f9e90ba2a1a873a18996bff1f3f845fd3b075ad0a"
+      }
+    ]
+  },
+  "actual_windows_installation": {
+    "status": "PASS",
+    "before_version": "0.1.48",
+    "version": "0.1.49",
+    "immutable_windows_artifact_id": 11862898499,
+    "archive_sha256": "47d4406f82640ecfeb7a7ee9c5678d44917cf1d95c9f3e137183f1b5870e4d66",
+    "wheel_sha256": "45c13ebb83a0e6899b066ae5a2d13081546500ad4b920c5984a002227f212dc1",
+    "bound_source_files": 68,
+    "installed_source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "steps": [
+      {
+        "name": "update-current-source",
+        "exit_code": 0,
+        "wall_seconds": 51.50902370014228
+      },
+      {
+        "name": "installed-version",
+        "exit_code": 0,
+        "wall_seconds": 0.302679399959743
+      },
+      {
+        "name": "installed-capabilities",
+        "exit_code": 0,
+        "wall_seconds": 0.6447449000552297
+      },
+      {
+        "name": "installed-self-test",
+        "exit_code": 0,
+        "wall_seconds": 0.7551645000930876
+      },
+      {
+        "name": "installed-doctor",
+        "exit_code": 2,
+        "wall_seconds": 48.46266780002043
+      },
+      {
+        "name": "repeat-current-source",
+        "exit_code": 0,
+        "wall_seconds": 3.6491109000053257
+      }
+    ],
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "private_report_sha256": "af965c9bf36dd734a6634cb0d05ce015b6cce60f3cc3f3ef137190f8c4117e1d",
+    "initial_controller_attempt": "NOT_RUN_BEFORE_INSTALL_LAUNCHER_CRLF_CHECK_FAILED",
+    "scope": "Actual standard installation .48 -> .49 via canonical installer. Only immutable archive URLs projected to an owned loopback server; not public URL proof. First controller regex rejected CRLF before mutation, corrected without changing the installer. SSH Session0 doctor exit2 is absent interactive desktop."
+  },
+  "actual_limited_token_installation": {
+    "status": "PASS",
+    "runtime_version": "0.1.49",
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "offline_self_test",
+        "exit_code": 0
+      }
+    ],
+    "global_config_bytes_preserved": true,
+    "offline_fixture_samples_successful": true,
+    "owned_task_removed": true,
+    "private_result_sha256": "c5ae6b70c1d53615ab7cd72c512385df457ce9ba32797ee8db77235498f38232",
+    "scope": "Actual LIMITED desktop token and installed payload/CLI/offline executable fixture checks. No capture, GUI action, OS input or model in this subcheck."
+  },
+  "actual_installed_stdio": {
+    "classification": "OBSERVED_IMMUTABLE_INSTALLED_WINDOWS_0149_STDIO_INITIALIZE_TOOLS_RESOURCES",
+    "runtime_version": "0.1.49",
+    "mcp_server_sha256": "75325382449b570fd2f3a0be7ac614cf9a525f6ba81c0984782bd42dbc3dabb2",
+    "tools": [
+      "computer_capabilities",
+      "computer_status"
+    ],
+    "resources": [
+      "clef-use://api/schema",
+      "clef-use://guides/clef-use-blender/SKILL.md",
+      "clef-use://guides/clef-use-blender/references/OPERATIONS.md",
+      "clef-use://guides/clef-use-diagnostics/SKILL.md",
+      "clef-use://guides/clef-use-diagnostics/references/FAILURES.md",
+      "clef-use://guides/clef-use/SKILL.md",
+      "clef-use://guides/clef-use/references/API_BASELINE.md",
+      "clef-use://guides/clef-use/references/LIVE_API.md"
+    ],
+    "instructions_sha256": "c9f3485b72b56549f008df84944b364348e5d892bd02f18b32897ad15ccf0bf8",
+    "unadvertised_instruction_tool_names": [],
+    "new_model_requests": 0,
+    "gui_or_input_actions": 0,
+    "runtime_endpoint_absent": true,
+    "status": "PASS",
+    "private_result_sha256": "db4149d16cfdde242af87a9fc003f273d11b49ae2209bb40830b579ad944e7a8"
+  },
+  "actual_installed_codex_model_batch": {
+    "status": "PASS",
+    "runtime_version": "0.1.49",
+    "native_codex_version": "codex-cli 0.151.0",
+    "native_codex_executable_sha256": "cf68265897197ac5f3bff6a10c168eec159842b353129726da5e3ed6b91ef0f4",
+    "native_codex_executable_unchanged": true,
+    "context": "LIMITED_INTERACTIVE_DESKTOP_TOKEN",
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "installed_payload_files_verified": 68,
+    "protected_configuration_and_auth_bytes_preserved": true,
+    "owned_task_removed": true,
+    "native_scheduler_last_task_result": "NOT_PROVEN_COLLECTION_TIMEOUT_THEN_TASK_ALREADY_ABSENT",
+    "private_result_sha256": "78d1c60902d6e1c2ff85a7984ca661a5527da1bf63f75a8ded0e5d097a165228",
+    "cases_per_original_trigger": 1,
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use"
+        ],
+        "invoked": [
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "163bc2724ec463a9b80000d9921a29d8455ece4c5c45cc87c6e5322d74b5e6bb",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "natural",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [
+          "clef-use",
+          "clef-use-blender"
+        ],
+        "invoked": [
+          "computer_capabilities",
+          "computer_capabilities"
+        ],
+        "attempted": [
+          "computer_capabilities"
+        ],
+        "load_before_invoke": true,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": true,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "c64ac996bf349da5eb3f5896d1b73594cbb844ce6dde571722dce96231b38016",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "loaded": [],
+        "invoked": [],
+        "attempted": [],
+        "load_before_invoke": false,
+        "runtime_before_guide": false,
+        "capability_catalog_verified": false,
+        "native_executor_failures": [],
+        "protected_configuration_and_auth_bytes_preserved": true,
+        "private_stdout_trace_sha256": "dc03f0a02c2e9629e65e2f1833da0cd9293343c4bb05e083ced15693af737728",
+        "private_stderr_trace_sha256": "1aa26269eb1cc57f86b235a03cda53c004edb5b1e9fc99d4da4f00843293d721"
+      }
+    ],
+    "scope": "Actual original native requests once each with canonical installed adapter/provider/model/context; no replay, substituted model, GUI capture/focus/input or repeated-until-pass case. TASK_VERIFIED remains NOT_RUN."
+  },
+  "source_harness_results": {
+    "receipt": "docs/validation/2026-10-14/read-only-harness-boundary-0149.json",
+    "hermes": {
+      "explicit": "PASS",
+      "natural": "FAIL",
+      "negative": "PASS"
+    },
+    "omp": {
+      "explicit": "FAIL",
+      "natural": "FAIL",
+      "negative": "PASS"
+    },
+    "scope": "Frozen final source .49 sessions already executed, no repeat. OMP auth-row/unknown credential-material changes remain recorded; Windows passes do not erase Linux/native failures."
+  },
+  "not_run": [
+    "Windows GUI task/input and independent abort after desktop ownership coordination",
+    "Original failing Blender menu/transform/viewport work with independently proven hidden state",
+    "Same-task full 1000-opportunity accuracy/correct OS-input p95<=100ms/coverage/goodput",
+    "Reici separate-session result",
+    "Guarded public URL/hash/fresh-install/update proof"
+  ]
+}

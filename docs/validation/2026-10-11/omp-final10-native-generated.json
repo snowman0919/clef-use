@@ -1,0 +1,133 @@
+{
+  "classification": "OBSERVED",
+  "scope": "FINAL10 native generated OMP catalog bootstrap with bounded genuine native description-compression; primary three-case batch stopped before primary inference",
+  "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+  "primary_route": {
+    "provider": "aipi",
+    "model": "dgx-moa-fast"
+  },
+  "historical_existing_local_route_retested": false,
+  "normal_native_runtime_test_flag": false,
+  "guides": [
+    {
+      "basename": "agent-skills/clef-use/SKILL.md",
+      "sha256": "9445a4fbdda323b25a823132c285f15f85961f39bdcf324326d428aeb830855f"
+    },
+    {
+      "basename": "agent-skills/clef-use-blender/SKILL.md",
+      "sha256": "8b7399c2c18cf203b6465d4258ffa312aaa3709e0fd515f253878272b5bf63a6"
+    },
+    {
+      "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+      "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  ],
+  "native_discovery": "PASS",
+  "native_generated_prompt": {
+    "mode": "native-generated-plus-permissions-only-append",
+    "sha256": "f0e7712cbbf7da2f2ee24f590a7eca366afcc9a7fc86bb6914211f57b454d062",
+    "block_count": 2,
+    "matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI editing, selection, transforms, viewport gestures, materials, or rig\u2026",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+    ],
+    "no_fixed_system_prompt": true,
+    "preflight_test_child": false,
+    "inference_invocations": 3
+  },
+  "native_auxiliary_invocation_starts": 3,
+  "native_auxiliary_routes": [
+    {
+      "provider": "omniroute",
+      "model": "cx/gpt-5.6-luna-max",
+      "invocation_starts": 3
+    }
+  ],
+  "completed_auxiliary_HTTP_requests": "NOT_OBSERVED: invocation-start telemetry is not completion or independent wire evidence",
+  "native_description_generation": {
+    "entries": [
+      {
+        "guide": "clef-use",
+        "native_cache_entry_present": false
+      },
+      {
+        "guide": "clef-use-blender",
+        "native_cache_entry_present": false
+      },
+      {
+        "guide": "clef-use-diagnostics",
+        "native_cache_entry_present": false
+      }
+    ],
+    "successful_entries": 0,
+    "auxiliary_invocation_starts": 3,
+    "waiting_before_primary": true,
+    "no_fabricated_cache": true
+  },
+  "native_description_database_actual_rows": 0,
+  "primary_invocation_starts": 0,
+  "cases": {
+    "explicit": {
+      "status": "NOT_RUN",
+      "DISCOVERED": "PASS",
+      "LOADED": "NOT_RUN",
+      "INVOKED": "NOT_RUN",
+      "TASK_VERIFIED": "NOT_RUN",
+      "reason": "First native catalog compression produced no successful native cache entries; bounded stop before any primary model request or subsequent session"
+    },
+    "natural": {
+      "status": "NOT_RUN",
+      "DISCOVERED": "PASS",
+      "LOADED": "NOT_RUN",
+      "INVOKED": "NOT_RUN",
+      "TASK_VERIFIED": "NOT_RUN",
+      "reason": "First native catalog compression produced no successful native cache entries; bounded stop before any primary model request or subsequent session"
+    },
+    "negative": {
+      "status": "NOT_RUN",
+      "DISCOVERED": "PASS",
+      "LOADED": "NOT_RUN",
+      "INVOKED": "NOT_RUN",
+      "TASK_VERIFIED": "NOT_RUN",
+      "reason": "First native catalog compression produced no successful native cache entries; bounded stop before any primary model request or subsequent session"
+    }
+  },
+  "error": "Native description generation incomplete; stop without retry",
+  "underlying_error_inspection": {
+    "classification": "NOT_RUN",
+    "reason": "No HTTP/status/completion metadata persisted; native warnings use central file logger outside writable owned root, namespace process log absent; private run log contains only bounded-stop error",
+    "inspection_observed": [
+      "Native cache database contains zero rows",
+      "Owned summary records three auxiliary invocation starts and zero primary starts",
+      "Native SDK logs compression errors through file logger; no logger sink was captured in this already completed run"
+    ],
+    "inference_not_made": "No provider/auth/HTTP cause is inferred"
+  },
+  "host_schema_preflight": {
+    "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "model_invoked": false
+  },
+  "cleanup": "Native sessions disposed; MCP disconnected; in-memory sessions not persisted",
+  "credential_or_global_config_changes": false,
+  "repository_changes": false,
+  "no_retry_or_provider_substitution": true,
+  "prior_history_preserved": {
+    "basename": "clef-omp-public-evidence-20261011.json",
+    "sha256": "d7b9341359e0bbc6fcef8abf9e8712473fd6fbbb733855e621742935195fb353"
+  },
+  "prior_history_interpretation": "Prior actual positive stages and negative overtrigger failure remain observed; fixed-systemPrompt trigger evaluation was confounded, not rescored",
+  "artifacts": [
+    {
+      "basename": "summary.json",
+      "sha256": "86bb2c7d7470d23a0bd3ee51a1d45e43ea8d4862412c006b84b287d55f8bf198"
+    },
+    {
+      "basename": "driver.ts",
+      "sha256": "c3c646130895437cba7b9fd1afd7bbf6156df83ccbe358d206dd45277bb3685a"
+    }
+  ],
+  "GUI_TASK_VERIFIED": "NOT_RUN"
+}

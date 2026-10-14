@@ -1,0 +1,225 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT; NOT_INSTALLED_E2E",
+  "status": "PASS_PARTIAL_OBSERVATION",
+  "source_parent_commit": "4932557713c290f7b63860e044c06587d227eae8",
+  "source_sha256": {
+    "src/clef_use/blender_snapshot.py": "b02358d23edcef345be9264fabab264e08410acdb6d54a62c4e3b372677a59fa",
+    "src/clef_use/blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+    "src/clef_use/blender_state.py": "31b1bae8969af90da10487a786b19006cb55c02cc4fa415367948af1c9046110",
+    "src/clef_use/runtime.py": "a770d21e088b7b9fb7b7aa7f712dc01caefe9829f831254439c54a425724f9de",
+    "src/clef_use/state.py": "6f4b20eb9173422a411afd2f8bc317e7b4cc66b4abff8302e42103cbbbffcbf1",
+    "src/clef_use/config.py": "c7f609b73a98eaeace811557422600a7c99c2bce550b5f77b7a7e98543d20cdf",
+    "src/clef_use/capabilities.py": "43bebe00529c5a8368c5babaf9fa9ac5df857b9e9201c2bbabb2835fcd618f4d",
+    "src/clef_use/backends.py": "7f0f2de21ec2400f51c57424f555e3d3aaa7b8433d46db5f765da07573cc12bf",
+    "src/clef_use/cli.py": "3f06a050563f0c0fbdc6695afc55c16d12bc83bc381355b6e662bbe37209c043"
+  },
+  "native_component": {
+    "actual_application": "Official Blender 5.2.0 LTS factory UI on owned authenticated Xvfb",
+    "official_elf_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "producer": "Actual public RNA on UI thread; fixed Unix snapshot protocol",
+    "native_samples": 3,
+    "verified_facts": [
+      "application",
+      "application_snapshot",
+      "mode",
+      "properties",
+      "selection",
+      "view_revision"
+    ],
+    "guard_facts_retained_UNKNOWN": [
+      "popup",
+      "modal",
+      "text_focus",
+      "ime_composing",
+      "keymap",
+      "loading",
+      "unit",
+      "space"
+    ],
+    "actual_popup_visible_during_sample": "Factory Quick Setup visible, root directly inspected actual PNG; empty modal operator roster was not absence",
+    "decorated_window_binding": {
+      "status": "PASS",
+      "actual_WM_and_app_PIDs_distinct": true,
+      "client_geometry_used": true
+    },
+    "wrong_actual_peer_refused": {
+      "status": "UNAVAILABLE",
+      "provider": "BLENDER_PUBLIC_RNA",
+      "reason": "Native peer/window binding or fresh snapshot unavailable",
+      "failed_check": "observer_peer",
+      "error_type": "ValueError",
+      "errno": null,
+      "detail": "observer peer does not own foreground client"
+    },
+    "actual_resize_old_capture_refused": {
+      "status": "UNAVAILABLE",
+      "provider": "BLENDER_PUBLIC_RNA",
+      "reason": "Native peer/window binding or fresh snapshot unavailable",
+      "failed_check": "foreground_identity",
+      "error_type": "ValueError",
+      "errno": null,
+      "detail": "foreground changed before state sample"
+    },
+    "native_query_stream_loss_refused": {
+      "status": "UNAVAILABLE",
+      "provider": "BLENDER_PUBLIC_RNA",
+      "reason": "Native peer/window binding or fresh snapshot unavailable",
+      "failed_check": "foreground_identity",
+      "error_type": "RuntimeError",
+      "errno": null,
+      "detail": null
+    },
+    "producer_and_provider_functions_replaced": false,
+    "profiling_in_final_native_run": false,
+    "models": 0,
+    "keyboard_pointer_inputs": 0,
+    "native_focus_setup_calls": 1,
+    "owned_window_reparent_and_resize": "Component setup only; no production display or scene access",
+    "startup_settle_seconds": 5.044010946992785,
+    "performance_claim": false,
+    "raw_report_sha256": "063092ff82a46e19f672e0e7bef0e1e80f9e8a8ff3bec1863fa000867be09481",
+    "driver_sha256": "19c55ae7a8c666a38ee0944906bd05f5eaed5a06168691bb0289cf7800c0d854",
+    "cleanup": {
+      "owned_children_waited": 2,
+      "all_owned_children_exited": true
+    }
+  },
+  "regression": {
+    "passed": 907,
+    "skipped": 34,
+    "warnings": 41,
+    "elapsed_seconds": 51.5,
+    "scope": "Full source suite before documentation-only Blender guide reference correction; targeted guide/integration suite follows",
+    "scoped_ruff_check": "PASS",
+    "scoped_ruff_format": "PASS",
+    "targeted_guide_integration_suite_after_documentation_change": {
+      "passed": 105,
+      "elapsed_seconds": 3.88
+    }
+  },
+  "package_component": {
+    "wheel_sha256": "116ec61416084cb697ca85f65114568de2133e2e72eff3ba2421ff85454ab405",
+    "new_collector_observer_provider_and_callers_exact": true,
+    "installation_execution": "NOT_RUN for this newer producer source; prior CI493 installation is separate"
+  },
+  "limitations": [
+    "Linux X11 only; unsupported native association is UNKNOWN",
+    "One RNA window; no popup/text/IME/effective-keymap/global-busy absence reader",
+    "Partial observations do not enable any of the six guarded operations",
+    "Compiled state has an independent observation ID and explicit foreground-window-only association; not pixel-synchronous scene evidence",
+    "No whole task, model quality, harness E2E or reaction profile claim"
+  ],
+  "user_scope_update": "2026-10-12: this session owns clef-use improvements and component/regression verification; whole E2E and model production/evaluation belong to other sessions",
+  "retained_setup_diagnostics": [
+    {
+      "raw_report_sha256": "989257557a5686cdffdf5f49a5d7cbc06ba807328c8fc1fdf6deacf2b5dea873",
+      "status": "FAIL",
+      "error_type": "DisplayConnectionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "6930171a0dc2d578a86526bd5934ea5a2b7da5c94dac3f4aadf54dd0eee890cc",
+      "status": "FAIL",
+      "error_type": "ValueError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "ccb7fd9f76130b3189357ad2c09a117c2746348b3bb4b7e2397a97cf403bf773",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "c5160f7b12a4d9c0afded877111ab0ef2e000495efb6a684f86c5587d693627c",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "54acae9b851e989a8b40e8fcc08580b46442bade9ed8dff2e91de86e9e38c386",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "89007838dc98a1bd4decb845edd473001c20f5247e92f9b3a8dcf4331c909669",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "7eb827cd8cd4a159afed9829a847d6884bd89537f563a675e948f5e20cb6d4ed",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "0d897b3b53fe47f3b9f36f8e28f4c7b2e27c82f79f708205bacb815c4a67d5c4",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "dc9bea41f48d18062b0ae25a45bf02927c24db168e1f3bf7f2203330af0adc30",
+      "status": "FAIL",
+      "error_type": "AssertionError",
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "5eded0cef2ffe3421be1032f7f7fddbe60239c97dd27aa154154a40eff713a26",
+      "status": "PASS",
+      "error_type": null,
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    },
+    {
+      "raw_report_sha256": "063092ff82a46e19f672e0e7bef0e1e80f9e8a8ff3bec1863fa000867be09481",
+      "status": "PASS",
+      "error_type": null,
+      "cleanup": {
+        "owned_children_waited": 2,
+        "all_owned_children_exited": true
+      },
+      "scope": "Earlier bounded diagnostic; never substituted for final source proof"
+    }
+  ]
+}

@@ -19,6 +19,12 @@ def build_release(output, base_url, wheelhouse=None):
         "version"
     ]
     subprocess.run([sys.executable, str(ROOT / "scripts/build_installer.py")], check=True)
+    subprocess.run([sys.executable, str(ROOT / "scripts/generate_agent_contract.py")], check=True)
+    from clef_use.capabilities import capabilities, digest
+
+    contract = capabilities(detail=True)
+    contract["runtime_version"] = version
+    contract["guides"]["runtime_version"] = version
     if wheelhouse is None:
         wheelhouse = ROOT / "dist/wheelhouse"
         wheelhouse.mkdir(parents=True, exist_ok=True)
@@ -79,6 +85,7 @@ def build_release(output, base_url, wheelhouse=None):
         for name in ("LICENSE", "THIRD_PARTY_NOTICES.md"):
             if (ROOT / name).exists():
                 payload.write(ROOT / name, name)
+        payload.writestr("agent-contract.json", json.dumps(contract, indent=2) + "\n")
     manifest = {
         "schema_version": 1,
         "version": version,
@@ -92,6 +99,11 @@ def build_release(output, base_url, wheelhouse=None):
                 "python": python,
                 "url": f"{base_url.rstrip('/')}/releases/{version}/{filename}",
                 "sha256": hashlib.sha256(archive.read_bytes()).hexdigest(),
+                "api_schema_version": contract["api_schema_version"],
+                "schema_sha256": contract["schema_sha256"],
+                "guide_contract_version": contract["guide_contract_version"],
+                "guide_bundle_sha256": digest(contract["guides"]["skills"]),
+                "operation_registry_version": contract["operation_registry_version"],
             }
         ],
     }

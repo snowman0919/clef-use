@@ -1,0 +1,28 @@
+{
+  "claim": "OBSERVED",
+  "status": "PASS_REANALYSIS_ONLY",
+  "candidate": "FINAL17 source",
+  "scope": "Changed real native benchmark scorer executed against retained actual FINAL10 receiver/effect rows. No new GUI, input, model, task, latency measurement or prospective eligibility facts.",
+  "retained_input_sha256": {
+    "session-0.json": "7e5f262822934be5a01ca4cbaff646a4250386f5f7176522acf8803f266dd530",
+    "session-1.json": "50fb1bdfe365e2f2635ea649eedf988fcb9836aa2dd75c7d6d80bd102750c89b",
+    "session-2.json": "7a7311d689837d463d3f041732b02921ef7e83c5064143a946f09ab3a16e6a32",
+    "session-3.json": "33f209fc05636f5fad12869a7401a67dde8a9d885b1fcca3831ff462418cacea",
+    "session-4.json": "9576b9776b24e1472a538e6d77c7f91909409b539052663fe7700d356e4351bb",
+    "REPORT.json": "6d77516166553eeb93f0348f5abeae3d65d9fe9bedcac1610cad62356e930dc3"
+  },
+  "reaction_rows": 3015,
+  "editor_rows": 50,
+  "summaries_checked": 25,
+  "original_noncoverage_values_equal": true,
+  "fast_coverage": null,
+  "fast_coverage_status": "NOT_MEASURED",
+  "reason": "Actual historical rows did not record prospective eligibility or policy-decision/dispatch provenance. No fields were backfilled.",
+  "release_gate": "NOT_RUN",
+  "inputs_unchanged": true,
+  "source_sha256": {
+    "src/clef_use/reaction_metrics.py": "2ff1c649752fefaf2762ee42f9ed8343bbc38ce9ee0f84bf007b5fc6b1d8c48a",
+    "scripts/native_reaction_benchmark.py": "5898fd819c652f046127c87d7b5babeeca0516302864e66f655f64af6df19c29"
+  },
+  "received_artifact_sha256": "352ea8e06b2c47e2a53b2663480f93dec28e9ca319a48c236bb2d43883283d7b"
+}

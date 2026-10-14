@@ -1,0 +1,234 @@
+{
+  "claim": "OBSERVED",
+  "scope": "Linux genuine source-built pinned0.1.29 installation then actual immutableCI0.1.30 update crash/resume at eleven native boundaries; Windows matrix NOT_RUN",
+  "source_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+  "archive_manifest_sha256": "08f9967c040da10eca2f52be97b9ba234afb289eb9d61e8f887fe6c0400e647b",
+  "cases": [
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "staging_directory_created",
+      "line": 355,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "archive_downloaded",
+      "line": 362,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "archive_verified",
+      "line": 364,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "archive_extracted",
+      "line": 369,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "venv_created",
+      "line": 372,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "offline_wheels_installed",
+      "line": 398,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "staged_runtime_smoked",
+      "line": 400,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "installed_record_written",
+      "line": 412,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "launcher_written",
+      "line": 439,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "next_pointer_written",
+      "line": 442,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.29",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "INSTALLED",
+      "expected_resume_status": "INSTALLED",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    },
+    {
+      "previous_real_runtime_preserved": true,
+      "checkpoint": "current_pointer_switched",
+      "line": 443,
+      "crash_exit_code": 87,
+      "pre_resume": {
+        "native_version": "0.1.30",
+        "current_exists": true,
+        "launcher_exists": true,
+        "original_user_bytes_preserved": true
+      },
+      "resume_status": "CURRENT",
+      "expected_resume_status": "CURRENT",
+      "native_launch_version_correct": true,
+      "installed_record_version": "0.1.30",
+      "user_bytes_preserved": true,
+      "pointer_has_complete_environment": true,
+      "source_unchanged": true,
+      "passed": true
+    }
+  ],
+  "production_changes": false,
+  "baseline_wheel_sha256": "99fd4ed28317002894a1c0fb9f1cd796b297730f9c7cb49c817014294889b64e",
+  "baseline_source_commit": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+  "baseline_archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e",
+  "status": "PASS",
+  "owned_server_stopped": true
+}

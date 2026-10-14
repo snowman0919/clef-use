@@ -69,6 +69,7 @@ async def test_real_stdio_mcp_runs_same_service_and_lists_only_high_level_tools(
                 "computer_observe",
                 "computer_status",
                 "computer_abort",
+                "computer_capabilities",
             }
             result = await session.call_tool(
                 "computer_run", {"goal": "Open Settings and apply size 16", "max_steps": 8}

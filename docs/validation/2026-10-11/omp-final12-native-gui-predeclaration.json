@@ -1,0 +1,1302 @@
+{
+  "classification": "OBSERVED_ZERO_INFERENCE_AND_PROPOSED_FUTURE_TASK_DISTINGUISHED",
+  "scope": "One FUTURE native OMP controlled API_ASSISTED fixture task generic caller; preflight only, no model or fixture start",
+  "model_GUI_task_status": "NOT_RUN_AWAITING_ROOT_FRESH_FIXTURE_AND_START",
+  "candidate": {
+    "install_basename": "clef-use-installed-final12-20261011",
+    "installation_report_sha256": "321888899b3aed46b4ab6838094e77b43a4b49949248dfbfea4bd3624dc7a363",
+    "reported_ci_artifact_sha256": "b2feb3b69340de567244015276c01072528d48e75546a80d552ef5288359a3e6",
+    "manifest": {
+      "harness": "omp",
+      "profile": "default",
+      "scope": "project",
+      "selection": [
+        "blender",
+        "core",
+        "diagnostics"
+      ],
+      "release": "0.1.30",
+      "guide_contract_version": 1,
+      "api_schema_version": 1,
+      "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+    },
+    "copied_managed_files": [
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "clef-use/references/API_BASELINE.md",
+        "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4"
+      },
+      {
+        "basename": "clef-use/references/LIVE_API.md",
+        "sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0"
+      },
+      {
+        "basename": "clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "clef-use-blender/references/OPERATIONS.md",
+        "sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877"
+      },
+      {
+        "basename": "clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      },
+      {
+        "basename": "clef-use-diagnostics/references/FAILURES.md",
+        "sha256": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+      }
+    ]
+  },
+  "code_bindings": [
+    {
+      "basename": "clef_omp_native_fixture_caller_20261011.py",
+      "sha256": "04a9e9deba6bda9c7f21f8e27fbe4ee96064547cfe2666b7de5ec3b96738a76d"
+    },
+    {
+      "basename": "clef_omp_native_fixture_caller_20261011.ts",
+      "sha256": "fa1697ff2754e4dcf6778f69011429f2f1ef9112cc7248160872678f698f4559"
+    },
+    {
+      "basename": "clef_fixture_mcp_entry_20261011.py",
+      "sha256": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f"
+    },
+    {
+      "basename": "clef_omp_native_public_read_guard_20261011.ts",
+      "sha256": "b0e102828ab485ad98d1a77fd53efea280e7b2b117bc220b63dcc29f931d642b"
+    }
+  ],
+  "root_fixture_source_binding": {
+    "basename": "scripts/blender_operations_fixture.py",
+    "sha256": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce",
+    "not_executed_by_this_preflight": true
+  },
+  "observed_zero_inference": {
+    "result": {
+      "result": "PASS",
+      "model_starts": 0,
+      "run_status_abort_calls": 0,
+      "fixture_started": false,
+      "live_provider_READY": "NOT_RUN",
+      "descriptor_is_declaration_only": true
+    },
+    "actual_installed_CLI_project_statuses": [
+      "INSTALLED",
+      "UNCHANGED"
+    ],
+    "manifest_sha256": "e63dc0c2fb6c0c799ca8db3cd739881ab84deead68b56711b42ac358ecc0b078",
+    "managed_project_MCP_file_sha256": "1f081d9c81644478409c2033213845cd0b62e6820a03fc5651f8119b56831907",
+    "managed_project_discovery": {
+      "skill_root_relative": ".omp/skills",
+      "config_relative": ".omp/mcp.json",
+      "source_provider": "native",
+      "source_level": "project",
+      "original_managed_entry_matches_installed_launcher": true,
+      "all_skill_realpaths_inside_project": true,
+      "additional_directories": [],
+      "native_source_paths": [
+        {
+          "name": "clef-use",
+          "project_relative": ".omp/skills/clef-use/SKILL.md"
+        },
+        {
+          "name": "clef-use-blender",
+          "project_relative": ".omp/skills/clef-use-blender/SKILL.md"
+        },
+        {
+          "name": "clef-use-diagnostics",
+          "project_relative": ".omp/skills/clef-use-diagnostics/SKILL.md"
+        }
+      ]
+    },
+    "generated_native_prompt": {
+      "mode": "native-generated-plus-permissions-only-append",
+      "sha256": "7a706ef602509d8568a4d004418e011e36547d0ee50c66853083293e5728f06f",
+      "native_catalog_present": true,
+      "matching_skill_instruction_present": true,
+      "public_catalog_lines": [
+        "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+        "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,\u2026",
+        "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+      ],
+      "no_fixed_system_prompt": true,
+      "preflight_test_child": true
+    },
+    "profile": {
+      "reader": "Settings.loadReadOnly",
+      "overlay": "nonpersistent safety bounds only",
+      "public_roles": {
+        "default": {
+          "selector": "aipi/dgx-moa-fast",
+          "provenance": "global"
+        },
+        "smol": {
+          "selector": "aipi/dgx-moa-fast",
+          "provenance": "global"
+        },
+        "tiny": {
+          "selector": null,
+          "provenance": "default"
+        }
+      },
+      "selected_default": {
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "api": "openai-completions"
+      },
+      "selected_smol": {
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "api": "openai-completions"
+      },
+      "priority_fallback_permitted": false
+    },
+    "active_tools": [
+      "read",
+      "mcp__clef_use_computer_abort",
+      "mcp__clef_use_computer_capabilities",
+      "mcp__clef_use_computer_run",
+      "mcp__clef_use_computer_status"
+    ],
+    "actual_four_original_MCP_schemas": {
+      "computer_capabilities": {
+        "properties": {
+          "detail": {
+            "default": false,
+            "title": "Detail",
+            "type": "boolean"
+          },
+          "operation_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Operation Id"
+          }
+        },
+        "title": "computer_capabilitiesArguments",
+        "type": "object"
+      },
+      "computer_run": {
+        "$defs": {
+          "BoundingBox": {
+            "additionalProperties": false,
+            "properties": {
+              "x1": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "X1",
+                "type": "number"
+              },
+              "y1": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Y1",
+                "type": "number"
+              },
+              "x2": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "X2",
+                "type": "number"
+              },
+              "y2": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Y2",
+                "type": "number"
+              }
+            },
+            "required": [
+              "x1",
+              "y1",
+              "x2",
+              "y2"
+            ],
+            "title": "BoundingBox",
+            "type": "object"
+          },
+          "CommandSearch": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "command_search",
+                "default": "command_search",
+                "title": "Family",
+                "type": "string"
+              },
+              "command": {
+                "enum": [
+                  "object.shade_smooth",
+                  "object.shade_flat"
+                ],
+                "title": "Command",
+                "type": "string"
+              },
+              "target_id": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Target Id",
+                "type": "string"
+              },
+              "keymap_version": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Keymap Version",
+                "type": "string"
+              }
+            },
+            "required": [
+              "command",
+              "target_id",
+              "keymap_version"
+            ],
+            "title": "CommandSearch",
+            "type": "object"
+          },
+          "FrameReference": {
+            "additionalProperties": false,
+            "properties": {
+              "image_sha256": {
+                "pattern": "^[0-9a-f]{64}$",
+                "title": "Image Sha256",
+                "type": "string"
+              },
+              "image_size": {
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ],
+                "title": "Image Size",
+                "type": "array"
+              },
+              "image_mode": {
+                "default": "RGB",
+                "title": "Image Mode",
+                "type": "string"
+              },
+              "origin": {
+                "default": [
+                  0,
+                  0
+                ],
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "integer"
+                  }
+                ],
+                "title": "Origin",
+                "type": "array"
+              },
+              "logical_size": {
+                "anyOf": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Logical Size"
+              },
+              "foreground_window": {
+                "anyOf": [
+                  {
+                    "type": "integer"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Foreground Window"
+              },
+              "foreground_bounds": {
+                "anyOf": [
+                  {
+                    "maxItems": 4,
+                    "minItems": 4,
+                    "prefixItems": [
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "integer"
+                      },
+                      {
+                        "type": "integer"
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Foreground Bounds"
+              }
+            },
+            "required": [
+              "image_sha256",
+              "image_size"
+            ],
+            "title": "FrameReference",
+            "type": "object"
+          },
+          "MenuAssess": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "menu_assess",
+                "default": "menu_assess",
+                "title": "Family",
+                "type": "string"
+              },
+              "menu": {
+                "enum": [
+                  "File",
+                  "Edit",
+                  "Render",
+                  "Window",
+                  "Help"
+                ],
+                "title": "Menu",
+                "type": "string"
+              }
+            },
+            "required": [
+              "menu"
+            ],
+            "title": "MenuAssess",
+            "type": "object"
+          },
+          "ModalCancel": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "modal_cancel",
+                "default": "modal_cancel",
+                "title": "Family",
+                "type": "string"
+              },
+              "modal_id": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Modal Id",
+                "type": "string"
+              }
+            },
+            "required": [
+              "modal_id"
+            ],
+            "title": "ModalCancel",
+            "type": "object"
+          },
+          "NumericTransform": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "numeric_transform",
+                "default": "numeric_transform",
+                "title": "Family",
+                "type": "string"
+              },
+              "target_id": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Target Id",
+                "type": "string"
+              },
+              "operation": {
+                "enum": [
+                  "translate",
+                  "rotate",
+                  "scale"
+                ],
+                "title": "Operation",
+                "type": "string"
+              },
+              "axis": {
+                "enum": [
+                  "X",
+                  "Y",
+                  "Z"
+                ],
+                "title": "Axis",
+                "type": "string"
+              },
+              "space": {
+                "enum": [
+                  "GLOBAL",
+                  "LOCAL"
+                ],
+                "title": "Space",
+                "type": "string"
+              },
+              "unit": {
+                "enum": [
+                  "NONE",
+                  "METERS",
+                  "CENTIMETERS",
+                  "DEGREES",
+                  "RADIANS"
+                ],
+                "title": "Unit",
+                "type": "string"
+              },
+              "amount": {
+                "maximum": 100000,
+                "minimum": -100000,
+                "title": "Amount",
+                "type": "number"
+              },
+              "keymap_version": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Keymap Version",
+                "type": "string"
+              },
+              "commit": {
+                "default": true,
+                "title": "Commit",
+                "type": "boolean"
+              },
+              "tolerance": {
+                "default": 1e-05,
+                "exclusiveMinimum": 0,
+                "maximum": 0.001,
+                "title": "Tolerance",
+                "type": "number"
+              }
+            },
+            "required": [
+              "target_id",
+              "operation",
+              "axis",
+              "space",
+              "unit",
+              "amount",
+              "keymap_version"
+            ],
+            "title": "NumericTransform",
+            "type": "object"
+          },
+          "PointerInput": {
+            "additionalProperties": false,
+            "properties": {
+              "operation": {
+                "enum": [
+                  "click",
+                  "double_click",
+                  "drag",
+                  "move",
+                  "scroll",
+                  "stroke"
+                ],
+                "title": "Operation",
+                "type": "string"
+              },
+              "label": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Label",
+                "type": "string"
+              },
+              "reference": {
+                "$ref": "#/$defs/FrameReference"
+              },
+              "surface": {
+                "$ref": "#/$defs/BoundingBox"
+              },
+              "points": {
+                "items": {
+                  "$ref": "#/$defs/PointerPoint"
+                },
+                "maxItems": 128,
+                "minItems": 1,
+                "title": "Points",
+                "type": "array"
+              },
+              "duration": {
+                "default": 0.5,
+                "maximum": 5,
+                "minimum": 0.05,
+                "title": "Duration",
+                "type": "number"
+              },
+              "scroll_direction": {
+                "default": "down",
+                "enum": [
+                  "up",
+                  "down",
+                  "left",
+                  "right"
+                ],
+                "title": "Scroll Direction",
+                "type": "string"
+              },
+              "scroll_magnitude": {
+                "default": 3,
+                "maximum": 100,
+                "minimum": 1,
+                "title": "Scroll Magnitude",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "operation",
+              "label",
+              "reference",
+              "surface",
+              "points"
+            ],
+            "title": "PointerInput",
+            "type": "object"
+          },
+          "PointerPoint": {
+            "additionalProperties": false,
+            "properties": {
+              "x": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "X",
+                "type": "number"
+              },
+              "y": {
+                "maximum": 1,
+                "minimum": 0,
+                "title": "Y",
+                "type": "number"
+              }
+            },
+            "required": [
+              "x",
+              "y"
+            ],
+            "title": "PointerPoint",
+            "type": "object"
+          },
+          "PropertyEdit": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "property_edit",
+                "default": "property_edit",
+                "title": "Family",
+                "type": "string"
+              },
+              "target_id": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Target Id",
+                "type": "string"
+              },
+              "field": {
+                "enum": [
+                  "location_x",
+                  "location_y",
+                  "location_z",
+                  "scale_x",
+                  "scale_y",
+                  "scale_z"
+                ],
+                "title": "Field",
+                "type": "string"
+              },
+              "value": {
+                "maximum": 100000,
+                "minimum": -100000,
+                "title": "Value",
+                "type": "number"
+              },
+              "keymap_version": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Keymap Version",
+                "type": "string"
+              },
+              "tolerance": {
+                "default": 1e-05,
+                "exclusiveMinimum": 0,
+                "maximum": 0.001,
+                "title": "Tolerance",
+                "type": "number"
+              }
+            },
+            "required": [
+              "target_id",
+              "field",
+              "value",
+              "keymap_version"
+            ],
+            "title": "PropertyEdit",
+            "type": "object"
+          },
+          "TextInput": {
+            "additionalProperties": false,
+            "properties": {
+              "value": {
+                "maxLength": 2048,
+                "minLength": 1,
+                "title": "Value",
+                "type": "string"
+              },
+              "target_label": {
+                "anyOf": [
+                  {
+                    "maxLength": 200,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "Target Label"
+              }
+            },
+            "required": [
+              "value"
+            ],
+            "title": "TextInput",
+            "type": "object"
+          },
+          "ViewportGesture": {
+            "additionalProperties": false,
+            "properties": {
+              "family": {
+                "const": "viewport_gesture",
+                "default": "viewport_gesture",
+                "title": "Family",
+                "type": "string"
+              },
+              "gesture": {
+                "enum": [
+                  "orbit",
+                  "pan"
+                ],
+                "title": "Gesture",
+                "type": "string"
+              },
+              "points": {
+                "maxItems": 2,
+                "minItems": 2,
+                "prefixItems": [
+                  {
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "array"
+                  },
+                  {
+                    "maxItems": 2,
+                    "minItems": 2,
+                    "prefixItems": [
+                      {
+                        "type": "number"
+                      },
+                      {
+                        "type": "number"
+                      }
+                    ],
+                    "type": "array"
+                  }
+                ],
+                "title": "Points",
+                "type": "array"
+              },
+              "surface": {
+                "maxItems": 4,
+                "minItems": 4,
+                "prefixItems": [
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  },
+                  {
+                    "type": "number"
+                  }
+                ],
+                "title": "Surface",
+                "type": "array"
+              },
+              "duration": {
+                "default": 0.15,
+                "maximum": 0.25,
+                "minimum": 0.05,
+                "title": "Duration",
+                "type": "number"
+              },
+              "keymap_version": {
+                "maxLength": 200,
+                "minLength": 1,
+                "title": "Keymap Version",
+                "type": "string"
+              }
+            },
+            "required": [
+              "gesture",
+              "points",
+              "surface",
+              "keymap_version"
+            ],
+            "title": "ViewportGesture",
+            "type": "object"
+          },
+          "VisualIntent": {
+            "additionalProperties": false,
+            "properties": {
+              "query": {
+                "maxLength": 1000,
+                "minLength": 1,
+                "title": "Query",
+                "type": "string"
+              },
+              "coarse_strategy": {
+                "default": "tiled",
+                "enum": [
+                  "tiled",
+                  "overview"
+                ],
+                "title": "Coarse Strategy",
+                "type": "string"
+              },
+              "target_geometry": {
+                "default": "point",
+                "enum": [
+                  "point",
+                  "horizontal_line"
+                ],
+                "title": "Target Geometry",
+                "type": "string"
+              },
+              "operation": {
+                "default": "click",
+                "enum": [
+                  "click",
+                  "double_click",
+                  "drag",
+                  "move",
+                  "scroll",
+                  "stroke",
+                  "wait"
+                ],
+                "title": "Operation",
+                "type": "string"
+              },
+              "end_query": {
+                "anyOf": [
+                  {
+                    "maxLength": 1000,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "title": "End Query"
+              },
+              "path_queries": {
+                "default": [],
+                "items": {
+                  "type": "string"
+                },
+                "maxItems": 126,
+                "title": "Path Queries",
+                "type": "array"
+              },
+              "region": {
+                "anyOf": [
+                  {
+                    "$ref": "#/$defs/BoundingBox"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null
+              },
+              "duration": {
+                "default": 0.5,
+                "maximum": 5,
+                "minimum": 0.05,
+                "title": "Duration",
+                "type": "number"
+              },
+              "scroll_direction": {
+                "default": "down",
+                "enum": [
+                  "up",
+                  "down",
+                  "left",
+                  "right"
+                ],
+                "title": "Scroll Direction",
+                "type": "string"
+              },
+              "scroll_magnitude": {
+                "default": 3,
+                "maximum": 100,
+                "minimum": 1,
+                "title": "Scroll Magnitude",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "query"
+            ],
+            "title": "VisualIntent",
+            "type": "object"
+          }
+        },
+        "properties": {
+          "goal": {
+            "title": "Goal",
+            "type": "string"
+          },
+          "success_conditions": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Success Conditions"
+          },
+          "constraints": {
+            "anyOf": [
+              {
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Constraints"
+          },
+          "max_steps": {
+            "anyOf": [
+              {
+                "type": "integer"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Max Steps"
+          },
+          "confidence_threshold": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Confidence Threshold"
+          },
+          "text_inputs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/$defs/TextInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Text Inputs"
+          },
+          "pointer_inputs": {
+            "anyOf": [
+              {
+                "items": {
+                  "$ref": "#/$defs/PointerInput"
+                },
+                "type": "array"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Pointer Inputs"
+          },
+          "execution_mode": {
+            "default": "AUTO",
+            "title": "Execution Mode",
+            "type": "string"
+          },
+          "visual_intent": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/VisualIntent"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null
+          },
+          "operation": {
+            "anyOf": [
+              {
+                "discriminator": {
+                  "mapping": {
+                    "command_search": "#/$defs/CommandSearch",
+                    "menu_assess": "#/$defs/MenuAssess",
+                    "modal_cancel": "#/$defs/ModalCancel",
+                    "numeric_transform": "#/$defs/NumericTransform",
+                    "property_edit": "#/$defs/PropertyEdit",
+                    "viewport_gesture": "#/$defs/ViewportGesture"
+                  },
+                  "propertyName": "family"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/$defs/MenuAssess"
+                  },
+                  {
+                    "$ref": "#/$defs/CommandSearch"
+                  },
+                  {
+                    "$ref": "#/$defs/NumericTransform"
+                  },
+                  {
+                    "$ref": "#/$defs/PropertyEdit"
+                  },
+                  {
+                    "$ref": "#/$defs/ViewportGesture"
+                  },
+                  {
+                    "$ref": "#/$defs/ModalCancel"
+                  }
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Operation"
+          }
+        },
+        "required": [
+          "goal"
+        ],
+        "title": "computer_runArguments",
+        "type": "object"
+      },
+      "computer_status": {
+        "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Session Id"
+          }
+        },
+        "title": "computer_statusArguments",
+        "type": "object"
+      },
+      "computer_abort": {
+        "properties": {
+          "session_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Session Id"
+          }
+        },
+        "title": "computer_abortArguments",
+        "type": "object"
+      }
+    },
+    "actual_full_product_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "actual_default_runtime_state": {
+      "provider": "NONE",
+      "observation_access_level": "PIXELS_ONLY",
+      "trusted_application_evidence": "UNAVAILABLE",
+      "provider_configuration_path": "UNAVAILABLE",
+      "operation_availability": "BLOCKED",
+      "live_probe": "NOT_PROBED",
+      "verified_operation_scope": "API_ASSISTED_FIXTURE_ONLY",
+      "native_state": "Window identity may be available; desktop permissions are not probed."
+    },
+    "all_seven_native_full_public_reads": [
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use/references/API_BASELINE.md",
+        "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use/references/LIVE_API.md",
+        "sha256": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use-blender/references/OPERATIONS.md",
+        "sha256": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use-diagnostics/references/FAILURES.md",
+        "sha256": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b",
+        "full_body_observed": true
+      }
+    ],
+    "prerequisite_events": [
+      {
+        "event": "original_full_guide_read",
+        "guide": "clef-use",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "event": "original_full_guide_read",
+        "guide": "clef-use-blender",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "event": "original_detail_capabilities_after_actual_bodies",
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+      }
+    ],
+    "genuine_prerequisite_receipt": {
+      "classification": "OBSERVED",
+      "value": {
+        "ready": true,
+        "guide_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+        },
+        "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91"
+      },
+      "scope": "Actual full public guide reads followed by original detail capabilities only; NOT live fixture/provider READY",
+      "mode": 384
+    },
+    "receipt_observation_method": "Wrappers call ORIGINAL native read and ORIGINAL capabilities, inspect returned public bodies/hashes, write own0600 receipt after both bodies and subsequent detailcap, and return original results unchanged",
+    "MCP_run_status_abort_calls": 0,
+    "MCP_operation_event_receipt_exists": false,
+    "runtime_state_scope": {
+      "supported_key": "CLEF_USE_STATE_DIR",
+      "matches_policy": true,
+      "preflight_declaration_only": true,
+      "endpoint_before_exists": false,
+      "service_start": false,
+      "endpoint_after_exists": false
+    },
+    "live_descriptor_proof": "NOT_RUN: declaration-only policy, unstarted display and nonexistent owned STATE",
+    "test_mode": "PI_TEST_RUNTIME=1; bwrap network unshared; 0 native auxiliary/primary starts",
+    "cleanup": "Native in-memory sessions disposed and MCP disconnected; no task success inferred"
+  },
+  "test_transport_override": {
+    "declared": true,
+    "command": "installed runtime/current/bin/python",
+    "entry_basename": "clef_fixture_mcp_entry_20261011.py",
+    "entry_sha256": "e5933bef25163f6b6e5dcc3e829f0e2463c0ee26c66539fe63589c0e5580a58f",
+    "managed_MCP_entry_matches_overridden_transport": false,
+    "managed_project_files_modified_after_enrollment": false,
+    "provider_scope": "API_ASSISTED_FIXTURE_ONLY",
+    "production_provider_available": false
+  },
+  "proposed_future_task": {
+    "cases": 1,
+    "operation": {
+      "family": "numeric_transform",
+      "target_id": "Cube",
+      "operation": "translate",
+      "axis": "X",
+      "space": "GLOBAL",
+      "unit": "METERS",
+      "amount": 2.0,
+      "keymap_version": "7dde70e665443a1a4babb6568d525760dd35b17396b732ca8e672dca5aeda9a3",
+      "commit": true,
+      "tolerance": 1e-05
+    },
+    "max_steps": 4,
+    "confidence_threshold": 0.9,
+    "execution_mode": "STRUCTURED",
+    "raw_text_pointer_visual_inputs_allowed": false,
+    "max_primary_native_starts": 8,
+    "max_native_auxiliary_starts": 3,
+    "primary_case_deadline_ms": 180000,
+    "configured_default_and_smol": {
+      "reader": "Settings.loadReadOnly",
+      "overlay": "nonpersistent safety bounds only",
+      "public_roles": {
+        "default": {
+          "selector": "aipi/dgx-moa-fast",
+          "provenance": "global"
+        },
+        "smol": {
+          "selector": "aipi/dgx-moa-fast",
+          "provenance": "global"
+        },
+        "tiny": {
+          "selector": null,
+          "provenance": "default"
+        }
+      },
+      "selected_default": {
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "api": "openai-completions"
+      },
+      "selected_smol": {
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "api": "openai-completions"
+      },
+      "priority_fallback_permitted": false
+    },
+    "native_prompt_generation": true,
+    "permissions_only_append": true,
+    "fixed_system_prompt": false,
+    "additionalDirectories": [],
+    "auxiliary_cache_readiness_gate": false,
+    "cache_seed_or_repair": false,
+    "driver_retry_added": false,
+    "native_transport_retries_preserved": true,
+    "stop_first_primary_case_or_native_fatal_failure": true,
+    "fetch_observer": "Transparent original fetch args/return; phases+statuses only, no headers/URL/body; phase counts not guaranteed model-only HTTP attempts",
+    "underlying_HTTP_attempt_count": "NOT_OBSERVED",
+    "tool_allowlist": [
+      "read",
+      "mcp__clef_use_computer_abort",
+      "mcp__clef_use_computer_capabilities",
+      "mcp__clef_use_computer_run",
+      "mcp__clef_use_computer_status"
+    ],
+    "read_guard": "Official parser/native original output, exact seven copied project public realpaths only",
+    "policy_guard": "Actual root fixture entry admits one exact operation after genuine guide+cap receipt; only its identified own-session status/abort; canonical validation retained",
+    "live_fixture_admission_before_any_models": [
+      "Root supplies NEW real policy and actual fixture-ready descriptor; closed example is schema-only and never reused.",
+      "Descriptor allowed_operation/schema/provider API_ASSISTED_FIXTURE_ONLY/production=false/runtime version/state_dir/display must match supplied policy and immutable candidate.",
+      "Actual supplied before facts must be Blender/OBJECT/Cube-only/no modal/GLOBAL/METERS/initial globalX0. Missing facts refuse; no null-to-false.",
+      "Descriptor imported_package must resolve to actual installed candidate import; actual before.keymap digest must equal declared operation keymap_version.",
+      "Keymap digest uses fixture canonical sha256(json.dumps(keymap, sort_keys=True).encode()); fixture source line580, NOT compact product schema digest.",
+      "Live installed RuntimeClient(start=false) health must match version/desktop identity and busy=false; no service bootstrap. Root owns actual scene/window/frame freshness and independent readback; runtime operation guards remain authoritative.",
+      "Fresh caller gets separate actual managed project copies and separate receipts; zero-preflight guide observations/receipt are not reused for model prerequisites."
+    ],
+    "model_prompt_contract": "Explicit one-operation fixture task; full core+Blender and required references then detailcap; exactly one bounded run with exact operation JSON. Actual root-provided public before facts appended. No private paths/auth/provider payloads in prompt. Finish honestly with local operation result; NEEDS_REPLAN is not whole-goal completion.",
+    "success_not_inferred_from": [
+      "tool result alone",
+      "prerequisite ready=true",
+      "assistant final claim",
+      "operation success implies whole-goal success"
+    ],
+    "independent_GUI_task_verification_owner": "root fixture controller; actual RNA/pixel readback + input/modal/session cleanup; not inferred by generic caller",
+    "whole_goal_assess": "NOT_RUN"
+  },
+  "future_reusable_command_template": "python3 /tmp/clef_omp_native_fixture_caller_20261011.py --install-root /tmp/clef-use-installed-final12-20261011 --fixture-policy <ROOT_FRESH_POLICY> --fixture-descriptor <ROOT_FRESH_ACTUAL_DESCRIPTOR> --run-models",
+  "zero_inference_command": "python3 /tmp/clef_omp_native_fixture_caller_20261011.py --install-root /tmp/clef-use-installed-final12-20261011 --preflight-only",
+  "preserved_history": {
+    "last_readonly_batch_basename": "clef-omp-native-schemafaithful-consumer-readonly-public-20261011.json",
+    "last_readonly_batch_sha256": "accc5841a80363ab5c14ecd6e4e3e68571e02436474977654ca89102af2264d0",
+    "state_isolation_addendum_basename": "clef-omp-native-state-isolation-addendum-public-20261011.json",
+    "state_isolation_addendum_sha256": "d12e0d697a7066f92c227c6da95236bfdab074c136568b8f894f674fd609957e",
+    "all_prior_hashes_unchanged": true
+  },
+  "private_evidence": {
+    "summary_basename": "summary.json",
+    "summary_sha256": "0a1c8402372620ff93f0bf243d1a24cbf4a3892f4e42d50a189564fa6f7b31f4",
+    "preparation_metadata_basename": "preparation-public-metadata.json",
+    "preparation_metadata_sha256": "ccd05f1333c4954f6f3b1162f6d8efe9c40c4ddcc6aa2670b6a86e8d9154ebc5"
+  },
+  "credential_or_global_configuration_changes": false,
+  "repository_changes": false,
+  "production_provider_ready": "NOT_RUN_UNAVAILABLE",
+  "GUI_TASK_VERIFIED": "NOT_RUN",
+  "received_native_artifact_sha256": "cb36d206f2cc64bc959054b7aef145012a8f8c14c4bcbe5ebdfaa71bccbc767a"
+}

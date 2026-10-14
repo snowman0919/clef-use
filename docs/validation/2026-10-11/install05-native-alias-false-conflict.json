@@ -1,0 +1,146 @@
+{
+  "classification": "OBSERVED",
+  "acceptance_id": "INSTALL-05",
+  "status": "FAIL_PRODUCT_FALSE_CONFLICT_SAME_REALPATH",
+  "candidate": "FINAL17",
+  "archive_sha256": "b4ae260038bd239a58da33605ddfc16c224b1c61dbdc776284363070d668dcda",
+  "driver_sha256": "9a7daceb39f6fabda6216a4eca730ae059ea30bd91e345d2b2dc33541e3199fa",
+  "declaration_sha256": "080993c4320a3623adc59d743824665813175b83b853d8a1caf4a5ef1621e6c6",
+  "root_authorization_sha256": "3e716806517f70c7c90358cedb45dcfa257b6b5db5671e9edf3043a85eb79ee0",
+  "raw_matrix_sha256": "f6f002ae8928a21d2b10da41ea0049bd9cf92472499075555f8b803d5c88386b",
+  "case": "codex/SAME_REALPATH",
+  "install": {
+    "exit": 0,
+    "status": "INSTALLED",
+    "guide_hashes_equal_immutable": {
+      "clef-use": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+    }
+  },
+  "native_before": {
+    "actual_public_discovery_calls": 1,
+    "total_roster_rows": 8,
+    "clef_rows": [
+      {
+        "name": "clef-use",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "2a0e87661120fb41c778d5d6bac44bec6689a8433ab39c998c69270736d32f9e"
+      },
+      {
+        "name": "clef-use-blender",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "2a46357d0e3153ffde00f16b45fa5876cfb9d3bbd8b32627c02fe45983d65dac"
+      },
+      {
+        "name": "clef-use-diagnostics",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "3d83bbf0406ae027ffd1c2a3f2c6f998abff6c4e4851f83e23e9d7d7335d9c7f"
+      }
+    ],
+    "errors": [],
+    "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE"
+  },
+  "native_after": {
+    "actual_public_discovery_calls": 1,
+    "total_roster_rows": 8,
+    "clef_rows": [
+      {
+        "name": "clef-use",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "2a0e87661120fb41c778d5d6bac44bec6689a8433ab39c998c69270736d32f9e"
+      },
+      {
+        "name": "clef-use-blender",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "2a46357d0e3153ffde00f16b45fa5876cfb9d3bbd8b32627c02fe45983d65dac"
+      },
+      {
+        "name": "clef-use-diagnostics",
+        "scope": "user",
+        "enabled": true,
+        "source": "OWNED_USER_GUIDE",
+        "path_sha256": "3d83bbf0406ae027ffd1c2a3f2c6f998abff6c4e4851f83e23e9d7d7335d9c7f"
+      }
+    ],
+    "errors": [],
+    "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE"
+  },
+  "native_raw_before_after_identical": true,
+  "owned_alias_realpath_equals_managed_guide": true,
+  "installed_dry_run": {
+    "exit": 2,
+    "status": "CONFLICT",
+    "reason": "existing active-source skill may shadow or duplicate this target; preserved",
+    "shadowed_count": 1,
+    "shadowed_realpath_is_same_managed_core": true
+  },
+  "stop_cause": "Actual installed dry-run returned CONFLICT with exit2 for same physical alias. Private driver asserted exit==0 and stopped before status command. Product false conflict confirmed by root independent interpretation.",
+  "actual_call_counts": {
+    "installed_initial_integration": 1,
+    "installed_dry_run": 1,
+    "installed_status": 0,
+    "runtime_capability_subprocesses": 1,
+    "native_Codex_skills_list_attempts": 2,
+    "native_Codex_skills_list_responses": 2,
+    "native_Hermes_discovery": 0,
+    "native_OMP_discovery": 0,
+    "models": 0,
+    "services": 0,
+    "GUI": 0,
+    "OS_inputs": 0,
+    "automatic_retries": 0
+  },
+  "remaining_cases_NOT_RUN": 11,
+  "first_case_report_completion": "NOT_RUN_AFTER_DRY_RUN_EXIT",
+  "cleanup": {
+    "all_outer_processes_waited": true,
+    "all_after_wait_all_thread_children": 0,
+    "all_after_wait_direct_PPID_children": 0,
+    "all_after_wait_sets_agree": true,
+    "own_root_argv_matches": 0,
+    "process_scan_permission_denials": 0,
+    "owned_filesystem_sockets": 0,
+    "live_sequential_snapshot_disagreements_retained": 1
+  },
+  "immutable_bound_source_hashes_verified": 23,
+  "raw_artifact_sha256": {
+    "install.receipt.json": "d5dddf2b93a777f30dcb5e95944fa4c70532e52e84b18c4b0e5e4b11a8df0e22",
+    "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-before.receipt.json": "290d749528478033701846d48ad131160fe8b2ecde33fe155f805416eaa902ed",
+    "install.stdout": "28d0f4774dfa24ce8e3b22fa2234c6c7d4ca4aa602fd74f958784b83a90a8c9c",
+    "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dry-run.stdout": "0f6ef95067b128610a9c8e16a292168067bff0c29f909cb9d31504f778742709",
+    "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "native-after.receipt.json": "0fdae178f5a3fc8b9992d0c78a30071486f1e9d75b6afbafb47c1771b388f34c",
+    "native-after.stdout": "1ef5b35aab568c5feca5e15c55605dea07d940f4a9a6059ea3dba4627cedb32c",
+    "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "dry-run.audit.json": "3f8f8f2ccbf4c197a665cc63e2fcbafddaf6af7f0cb500bd60a46c6c04ff5b7b",
+    "dry-run.receipt.json": "71fbde159cdae1525a3e4d80e57b0fcc542e3ee3b83ec4d72d0065bc765ff021",
+    "native-before.stdout": "1ef5b35aab568c5feca5e15c55605dea07d940f4a9a6059ea3dba4627cedb32c",
+    "install.audit.json": "b37873cc914ebcd2746957ea100490777c5746b7b8487ebaf021ca263f027fe0"
+  },
+  "limits": [
+    "No native load/body proof from Codex skills/list.",
+    "No genuine INSTALL-05 completion; eleven cases NOT_RUN and first case status report NOT_RUN.",
+    "No user/global config/PATH/V2/old changes; only fresh owned namespace inputs and native outputs.",
+    "Prior actual matrix setup failure and all admission failures preserved.",
+    "No repair or follow-on execution performed."
+  ],
+  "interpretation": {
+    "classification": "ROOT_REVIEWED_ACTUAL_NATIVE_POLICY",
+    "finding": "Actual Codex deduplicates the same physical guide, while installed integration CONFLICT blocks that harmless alias. Genuine product false conflict; separate files must remain protected.",
+    "private_driver_boundary": "Unexpected exit==0 assertion also prevented subsequent status collection; original raw stop unchanged. Known CONFLICT exit2 will be retained as semantic report by separately reviewed driver.",
+    "first_interpretation_preserved_sha256": "04857e5be7dc5b5a22b6f9a103638d8495b0534da80760db3e5849d4598bbeba"
+  }
+}

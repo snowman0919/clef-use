@@ -64,7 +64,12 @@ def test_decision_packet_retains_context_provenance_without_action_authority():
     )
     obs = Observation("same_epoch", Frame(Image.new("RGB", (100, 50))), (obj,))
     packet = decision_request(obs, Contract(goal="Inspect"), (), [])
-    assert packet["state"]["objects"] == [obj.model_dump(mode="json")]
+    seen = packet["state"]["object_defaults"] | packet["state"]["objects"][0]
+    raw = obj.model_dump(mode="json")
+    assert {k: v for k, v in seen.items() if k != "bbox"} == {
+        k: v for k, v in raw.items() if k != "bbox"
+    }
+    assert seen["bbox"] == {"x1": 1, "y1": 1, "x2": 3, "y2": 2}
     assert packet["state"]["observation_id"] == obs.id
     assert packet["state"]["frame_reference"] == obs.frame.reference().model_dump(mode="json")
     assert packet["state"]["allowed_candidates"] == []
@@ -74,6 +79,47 @@ def test_decision_packet_retains_context_provenance_without_action_authority():
     huge = obj.model_copy(update={"label": "x" * 40000})
     with pytest.raises(ValueError, match="bounded text budget"):
         decision_request(Observation(obs.id, obs.frame, (huge,)), Contract(goal="Inspect"), (), [])
+
+
+@pytest.mark.parametrize("size", [(1280, 900), (900, 1280)])
+def test_decision_evidence_preserves_known_and_unknown_facts_and_native_geometry(size):
+    from PIL import Image
+
+    from clef_use.backends import decision_request
+    from clef_use.schema import BoundingBox, Frame, UIObject
+
+    obj = UIObject(
+        id="observed",
+        label="Actual label",
+        bbox=BoundingBox(x1=0.01125, y1=0.22125, x2=0.31425, y2=0.41925),
+        confidence=0.84,
+        visible=False,
+        enabled=None,
+        editable=True,
+        focused=False,
+        sensitive=True,
+        source=("ocr",),
+    )
+    raw = obj.model_dump(mode="json")
+    frame = Frame(Image.new("RGB", size), origin=(91, -23), logical_size=(640, 450))
+    packet = decision_request(
+        Observation("pixels", frame, (obj,)), Contract(goal="Inspect"), (), []
+    )
+    state = packet["state"]
+    seen = state["object_defaults"] | state["objects"][0]
+    assert seen["visible"] is False and seen["enabled"] is None
+    assert seen["editable"] is True and seen["focused"] is False
+    assert seen["sensitive"] is True and seen["confidence"] == 0.84
+    assert seen["label"] == "Actual label" and seen["source"] == ["ocr"]
+    assert state["bbox_coordinate_space"] == "image_pixels_outward_envelope"
+    box = seen["bbox"]
+    for edge, extent in (("x1", size[0]), ("y1", size[1])):
+        assert 0 <= raw["bbox"][edge] * extent - box[edge] < 1
+    for edge, extent in (("x2", size[0]), ("y2", size[1])):
+        assert 0 <= box[edge] - raw["bbox"][edge] * extent < 1
+    assert obj.model_dump(mode="json") == raw
+    assert frame.origin == (91, -23) and frame.logical_size == (640, 450)
+    assert state["allowed_candidates"] == []
 
 
 def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():
@@ -88,6 +134,134 @@ def test_decision_packet_refuses_roster_overflow_instead_of_dropping_facts():
     )
     with pytest.raises(ValueError, match="bounded object budget"):
         decision_request(obs, Contract(goal="Inspect"), (), [])
+
+
+def test_same_label_actions_remain_bound_to_distinct_observed_controls():
+    import json
+
+    from PIL import Image
+
+    from clef_use.backends import decision_request
+    from clef_use.candidates import CandidateBuilder
+    from clef_use.schema import BoundingBox, Frame, UIObject
+
+    controls = tuple(
+        UIObject(
+            id=identity,
+            label="Apply",
+            role="button",
+            actions=("click",),
+            bbox=BoundingBox(x1=left, y1=0.2, x2=left + 0.1, y2=0.4),
+        )
+        for identity, left in (("left-control", 0.1), ("right-control", 0.7))
+    )
+    observation = Observation("same-label", Frame(Image.new("RGB", (100, 100))), controls)
+    contract = Contract(goal="Click the right Apply button")
+    candidates = CandidateBuilder().build(observation, contract)
+    packet = json.loads(json.dumps(decision_request(observation, contract, candidates, [])))
+    state = packet["state"]
+    objects = {obj["id"]: obj for obj in state["objects"]}
+    right_actions = [
+        action
+        for action in state["allowed_candidates"]
+        if action["operation"] == "click" and objects[action["target"]]["bbox"]["x1"] >= 70
+    ]
+    assert [action["id"] for action in right_actions] == ["a1"]
+    assert right_actions[0]["target"] == "right-control"
+    assert (
+        packet["questions"]["action"]["criteria"]["a0"]
+        == packet["questions"]["action"]["criteria"]["a1"]
+    )
+
+
+def test_decision_packet_refuses_an_action_without_its_observed_target():
+    from clef_use.backends import decision_request
+    from clef_use.candidates import CandidateBuilder
+
+    desktop = FixtureDesktop()
+    observation = Observation("epoch", desktop.capture(), desktop.parse(None))
+    contract = Contract(goal="Open Settings")
+    candidates = CandidateBuilder().build(observation, contract)
+    target = candidates[0].target
+    missing = Observation(
+        observation.id,
+        observation.frame,
+        tuple(obj for obj in observation.objects if obj.id != target),
+    )
+    with pytest.raises(ValueError, match="target missing from observed decision context"):
+        decision_request(missing, contract, candidates, [])
+
+
+def test_unicode_request_budget_counts_utf8_bytes_and_refuses_the_next_character():
+    import json
+
+    from clef_use.backends import decision_request
+
+    desktop = FixtureDesktop()
+    obj = desktop.parse(None)[0].model_copy(update={"label": ""})
+    observation = Observation("epoch", desktop.capture(), (obj,))
+    metrics = {}
+    packet = decision_request(observation, Contract(goal="Inspect"), (), [], metrics=metrics)
+    serialized = json.dumps(
+        {"state": packet["state"], "questions": packet["questions"]}, ensure_ascii=False
+    )
+    remaining = 32768 - len(serialized.encode("utf-8"))
+    label = "\uac00" * (remaining // 3) + "x" * (remaining % 3)
+    observation = Observation(
+        "epoch", observation.frame, (obj.model_copy(update={"label": label}),)
+    )
+    accepted = decision_request(observation, Contract(goal="Inspect"), (), [], metrics=metrics)
+    assert accepted["state"]["objects"][0]["label"] == label
+    assert metrics["request_text_bytes"] == 32768
+    assert metrics["request_object_count"] == len(observation.objects)
+    assert metrics["request_question_count"] == len(accepted["questions"])
+    overflow = Observation(
+        "epoch", observation.frame, (obj.model_copy(update={"label": label + "x"}),)
+    )
+    with pytest.raises(ValueError, match="bounded text budget"):
+        decision_request(overflow, Contract(goal="Inspect"), (), [])
+
+
+@pytest.mark.parametrize(
+    ("usage", "tokens", "source"),
+    [
+        (None, None, "UNAVAILABLE"),
+        ({"output_tokens": 0}, None, "UNAVAILABLE"),
+        ({"input_tokens": 1, "output_tokens": 0}, 1, "SDK_USAGE"),
+        ({"input_tokens": 8192, "output_tokens": 0}, 8192, "SDK_USAGE"),
+        *[
+            ({"input_tokens": value, "output_tokens": 0}, None, "INVALID")
+            for value in (None, True, 0, -1, 8193, 1.0, "17")
+        ],
+    ],
+)
+def test_decision_usage_never_invents_token_measurements_or_changes_answers(usage, tokens, source):
+    desktop = FixtureDesktop()
+    observation = Observation("epoch", desktop.capture(), desktop.parse(None))
+    backend = DecisionBackend(Config())
+    reply = {
+        "answers": {
+            "mode": {"choice": "WAIT", "confidence": 0.8},
+            "effect": {"noul": 0.1},
+            "action": {"choice": "none", "confidence": 1.0, "probabilities": {"none": 1.0}},
+            "complete": {"noul": 0.2},
+            "replan": {"noul": 0.3},
+            "unsafe": {"noul": 0.4},
+            "progress": {"score": 2.5},
+        }
+    }
+    if usage is not None:
+        reply["usage"] = usage
+    # The external worker supplies native answers; exercise their validation,
+    # metric classification and unchanged decision meaning at the consumer.
+    backend.worker.request = lambda _: reply
+    decision = backend.decide(observation, Contract(goal="Inspect"), (), [])
+    assert decision.diagnostics["input_tokens"] == tokens
+    assert decision.diagnostics["input_tokens_source"] == source
+    assert decision.mode == "WAIT" and decision.mode_confidence == 0.8
+    assert decision.action is None and decision.confidence == 1.0
+    assert decision.goal_probability == 0.2 and decision.replan_probability == 0.3
+    assert decision.safety_probability == 0.4 and decision.effect_probability == 0.1
 
 
 @pytest.mark.parametrize("tokens", [8192, 8193, 16384])

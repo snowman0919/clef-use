@@ -1,0 +1,489 @@
+{
+  "classification": "OFFLINE_ANALYSIS",
+  "scope": "One fixed structural-witness diagnostic using the actual existing H2 screenshots and 412 unflattened objects plus declared synthetic counterexamples; no new model, GUI, native input or project-source changes.",
+  "status": "WITNESS_FEASIBILITY_OBSERVED_SEMANTIC_PROMOTION_REJECTED",
+  "models": 0,
+  "native_inputs": 0,
+  "product_source_edits": 0,
+  "state_facts_emitted": 0,
+  "all_state_fact_eligibility": "UNKNOWN",
+  "production_provider_implemented": false,
+  "algorithm": {
+    "scope": "One offline structural-witness analysis on existing H2 captures; zero new model/GUI/OS input; no source edits",
+    "algorithm": "Direct OCR-source objects only. Derive text height from current objects. Enumerate the 16 most frequent exact RGB background colors, fill enclosed holes, and open by twice median text height to separate narrow bars. Find rectangular components, associate nearby observed header and contained member boxes dynamically. Preserve IDs and boxes. No app vocabulary, fixed screenshot coordinates, filename labels, captions or probability. UNKNOWN state facts for all results.",
+    "fixed_geometry_rules": {
+      "palette_colors": 16,
+      "min_dimensions_text_heights": [
+        4,
+        3
+      ],
+      "min_pixel_background_occupancy": 0.6,
+      "min_distinct_member_bands": 3,
+      "header_raster_tolerance_pixels": 2
+    },
+    "counterexamples": [
+      "actual natural absent",
+      "synthetic header-only",
+      "synthetic ordinary body text",
+      "synthetic multiple rectangles",
+      "synthetic bottom-clipped rectangle",
+      "synthetic stale parser metadata"
+    ],
+    "limits": "Shape thresholds are uncalibrated geometry heuristics, not confidence. No ABSENT or VALID claim. Historical images are not live facts; counterexamples are synthetic and cannot certify real coverage."
+  },
+  "matrix": [
+    {
+      "case": "00-MENU_OPEN-0-clef",
+      "provenance": "ACTUAL_H2_CAPTURE",
+      "structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+      "candidate_count": 1,
+      "header_label": "File",
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "01-EDIT_WRONG-0-clef",
+      "provenance": "ACTUAL_H2_CAPTURE",
+      "structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+      "candidate_count": 1,
+      "header_label": "Edit",
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "02-ABSENT-0-clef",
+      "provenance": "ACTUAL_H2_CAPTURE",
+      "structural_outcome": "NO_WITNESS",
+      "candidate_count": 0,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "header_only",
+      "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+      "structural_outcome": "NO_WITNESS",
+      "candidate_count": 0,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "ordinary_body_text",
+      "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+      "structural_outcome": "NO_WITNESS",
+      "candidate_count": 0,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "multiple",
+      "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+      "structural_outcome": "MULTIPLE_UNRESOLVED_WITNESSES",
+      "candidate_count": 2,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "clipped",
+      "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+      "structural_outcome": "CLIPPED_WITNESS",
+      "candidate_count": 1,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "stale_parse",
+      "provenance": "SYNTHETIC_METADATA_COUNTEREXAMPLE",
+      "structural_outcome": "STALE_OR_MISMATCHED_PARSE",
+      "candidate_count": 0,
+      "header_label": null,
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": false
+    },
+    {
+      "case": "ordinary_menu_shaped_body_panel",
+      "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+      "structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+      "candidate_count": 1,
+      "header_label": "File",
+      "state_fact": "UNKNOWN",
+      "semantic_false_positive_if_promoted": true
+    }
+  ],
+  "actual_derived_witnesses": [
+    {
+      "case": "00-MENU_OPEN-0-clef",
+      "image_pixel_sha256": "f22f97d181fed15533c5be2c69b37e2efc0cf04482ceeb1a47c403150926f25a",
+      "text_height_pixels": 16,
+      "structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+      "witness_header_label": "File",
+      "candidates": [
+        {
+          "bbox_pixels": [
+            27,
+            25,
+            242,
+            472
+          ],
+          "background_rgb": [
+            24,
+            24,
+            24
+          ],
+          "background_occupancy": 0.860746058997971,
+          "clipped": false,
+          "header_candidates": [
+            {
+              "id": "obj_e2465f67c766",
+              "label": "File ",
+              "original_bbox": {
+                "x1": 0.0023739307653158903,
+                "y1": 0.002935214666649699,
+                "x2": 0.047474659979343414,
+                "y2": 0.026920707896351814
+              }
+            }
+          ],
+          "members": [
+            {
+              "id": "obj_ad26b6d1b8eb",
+              "label": "Qpen_",
+              "original_bbox": {
+                "x1": 0.04453125,
+                "y1": 0.058888888888888886,
+                "x2": 0.07734375,
+                "y2": 0.07666666666666666
+              }
+            },
+            {
+              "id": "obj_bb2ca62c149b",
+              "label": "Ctrl 0",
+              "original_bbox": {
+                "x1": 0.15234375,
+                "y1": 0.058888888888888886,
+                "x2": 0.17890625,
+                "y2": 0.07444444444444444
+              }
+            },
+            {
+              "id": "obj_98142dfb8c39",
+              "label": "Open Recent",
+              "original_bbox": {
+                "x1": 0.04453125,
+                "y1": 0.08333333333333333,
+                "x2": 0.10390625,
+                "y2": 0.09888888888888889
+              }
+            },
+            {
+              "id": "obj_66984028997d",
+              "label": "Shift Ctrl 0",
+              "original_bbox": {
+                "x1": 0.12890625,
+                "y1": 0.0811111111111111,
+                "x2": 0.17890625,
+                "y2": 0.09666666666666666
+              }
+            },
+            {
+              "id": "obj_a2b640cfa84d",
+              "label": "Link _",
+              "original_bbox": {
+                "x1": 0.04453125,
+                "y1": 0.2611111111111111,
+                "x2": 0.06640625,
+                "y2": 0.2788888888888889
+              }
+            },
+            {
+              "id": "obj_5c5cb6d64da1",
+              "label": "Quit",
+              "original_bbox": {
+                "x1": 0.04453125,
+                "y1": 0.5011111111111111,
+                "x2": 0.06640625,
+                "y2": 0.5188888888888888
+              }
+            },
+            {
+              "id": "obj_916570f409c4",
+              "label": "Ctrl 0",
+              "original_bbox": {
+                "x1": 0.15078125,
+                "y1": 0.5011111111111111,
+                "x2": 0.17890625,
+                "y2": 0.5166666666666667
+              }
+            },
+            {
+              "id": "obj_cd583b19e948",
+              "label": "Defaults ",
+              "original_bbox": {
+                "x1": 0.022926712408661842,
+                "y1": 0.4624182879924774,
+                "x2": 0.18783874809741974,
+                "y2": 0.49249395728111267
+              }
+            },
+            {
+              "id": "obj_cf3776afaa49",
+              "label": "External Data Clean Up ",
+              "original_bbox": {
+                "x1": 0.02309226430952549,
+                "y1": 0.40816569328308105,
+                "x2": 0.18787311017513275,
+                "y2": 0.46140366792678833
+              }
+            },
+            {
+              "id": "obj_f4075bf3853d",
+              "label": "Save Ctrl $ Save As_ Shift Ctrl $ Save Copy_ Save Incremental Ctrl Alt $ ",
+              "original_bbox": {
+                "x1": 0.022911930456757545,
+                "y1": 0.14708571135997772,
+                "x2": 0.18937118351459503,
+                "y2": 0.2514057755470276
+              }
+            },
+            {
+              "id": "obj_5c7eca186862",
+              "label": "Import ",
+              "original_bbox": {
+                "x1": 0.03899088501930237,
+                "y1": 0.33374568819999695,
+                "x2": 0.18715813755989075,
+                "y2": 0.3563253879547119
+              }
+            },
+            {
+              "id": "obj_182b1b68ffc0",
+              "label": "Export ",
+              "original_bbox": {
+                "x1": 0.04020317643880844,
+                "y1": 0.355839341878891,
+                "x2": 0.1849547177553177,
+                "y2": 0.3806069493293762
+              }
+            },
+            {
+              "id": "obj_414a782f9700",
+              "label": "Data Previews ",
+              "original_bbox": {
+                "x1": 0.042706336826086044,
+                "y1": 0.3040866553783417,
+                "x2": 0.186899796128273,
+                "y2": 0.3260166645050049
+              }
+            },
+            {
+              "id": "obj_f9dc66dc20e5",
+              "label": "Export All Collections ",
+              "original_bbox": {
+                "x1": 0.025379616767168045,
+                "y1": 0.3797443211078644,
+                "x2": 0.18712851405143738,
+                "y2": 0.407022088766098
+              }
+            },
+            {
+              "id": "obj_5b7bbcf0000a",
+              "label": "New ",
+              "original_bbox": {
+                "x1": 0.045566804707050323,
+                "y1": 0.03360426053404808,
+                "x2": 0.06673656404018402,
+                "y2": 0.0508837029337883
+              }
+            },
+            {
+              "id": "obj_bd7f8c53cbf3",
+              "label": "Append_ ",
+              "original_bbox": {
+                "x1": 0.034195300191640854,
+                "y1": 0.2811058461666107,
+                "x2": 0.18562766909599304,
+                "y2": 0.30156847834587097
+              }
+            }
+          ],
+          "member_band_count": 13
+        }
+      ]
+    },
+    {
+      "case": "01-EDIT_WRONG-0-clef",
+      "image_pixel_sha256": "55ed6cc19fc402965c7e865a22d9489bce9befa01ba4dfe51fc0598bf14ae222",
+      "text_height_pixels": 17,
+      "structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+      "witness_header_label": "Edit",
+      "candidates": [
+        {
+          "bbox_pixels": [
+            63,
+            25,
+            275,
+            297
+          ],
+          "background_rgb": [
+            24,
+            24,
+            24
+          ],
+          "background_occupancy": 0.816159128745838,
+          "clipped": false,
+          "header_candidates": [
+            {
+              "id": "obj_9702ac2743c2",
+              "label": "Edit ",
+              "original_bbox": {
+                "x1": 0.04822632670402527,
+                "y1": 0.003830278292298317,
+                "x2": 0.07452420890331268,
+                "y2": 0.025878025218844414
+              }
+            }
+          ],
+          "members": [
+            {
+              "id": "obj_4ea961113376",
+              "label": "Ctrl Z",
+              "original_bbox": {
+                "x1": 0.17890625,
+                "y1": 0.034444444444444444,
+                "x2": 0.20546875,
+                "y2": 0.052222222222222225
+              }
+            },
+            {
+              "id": "obj_4b14437355e4",
+              "label": "Lock Object Modes ",
+              "original_bbox": {
+                "x1": 0.05265439674258232,
+                "y1": 0.26744651794433594,
+                "x2": 0.2117031365633011,
+                "y2": 0.298954039812088
+              }
+            },
+            {
+              "id": "obj_caef8136eb3c",
+              "label": "Menu Search_ ",
+              "original_bbox": {
+                "x1": 0.05432878062129021,
+                "y1": 0.18138444423675537,
+                "x2": 0.21027310192584991,
+                "y2": 0.21318309009075165
+              }
+            },
+            {
+              "id": "obj_4765d8068c31",
+              "label": "Rename Active Item:.. Batch Rename_ Ctrl F2 ",
+              "original_bbox": {
+                "x1": 0.0499340184032917,
+                "y1": 0.21339070796966553,
+                "x2": 0.21147391200065613,
+                "y2": 0.26792019605636597
+              }
+            },
+            {
+              "id": "obj_200c746a9369",
+              "label": "Preferences_. Ctrl ",
+              "original_bbox": {
+                "x1": 0.048797447234392166,
+                "y1": 0.29973721504211426,
+                "x2": 0.21226711571216583,
+                "y2": 0.3307608366012573
+              }
+            },
+            {
+              "id": "obj_dd2955afbc75",
+              "label": "Adjust Last Operation__. Repeat Last Shift R Repeat History_ ",
+              "original_bbox": {
+                "x1": 0.052105534821748734,
+                "y1": 0.10371595621109009,
+                "x2": 0.21275930106639862,
+                "y2": 0.18037661910057068
+              }
+            },
+            {
+              "id": "obj_195e81458147",
+              "label": "Redo Shift Ctrl Z ",
+              "original_bbox": {
+                "x1": 0.07140660285949707,
+                "y1": 0.05559936538338661,
+                "x2": 0.20911848545074463,
+                "y2": 0.07860453426837921
+              }
+            },
+            {
+              "id": "obj_d9976659241c",
+              "label": "Undo History ",
+              "original_bbox": {
+                "x1": 0.06262477487325668,
+                "y1": 0.07914625108242035,
+                "x2": 0.21323780715465546,
+                "y2": 0.10276923328638077
+              }
+            },
+            {
+              "id": "obj_09f7fafa7709",
+              "label": "Undo ",
+              "original_bbox": {
+                "x1": 0.07439403235912323,
+                "y1": 0.03228781744837761,
+                "x2": 0.19953395426273346,
+                "y2": 0.05323721840977669
+              }
+            }
+          ],
+          "member_band_count": 8
+        }
+      ]
+    },
+    {
+      "case": "02-ABSENT-0-clef",
+      "image_pixel_sha256": "f28b893ec7d04e934215d01fc284e8338396f9953a729311cbeed7f4d63ef16a",
+      "text_height_pixels": 15,
+      "structural_outcome": "NO_WITNESS",
+      "witness_header_label": null,
+      "candidates": []
+    }
+  ],
+  "geometric_limit": "The extracted component envelope follows flat popup interior pixels after morphology. It is not a verified complete popup outline, UI role, root-menubar identity, occlusion boundary or coverage certificate. Original UIObjects, action sets and normalized boxes were not changed.",
+  "hard_counterexample": {
+    "case": "ordinary_menu_shaped_body_panel",
+    "provenance": "SYNTHETIC_COUNTEREXAMPLE",
+    "expected_semantic_interpretation": "Ordinary document body panel, not an actual app menu",
+    "observed_structural_outcome": "UNIQUE_STRUCTURAL_WITNESS",
+    "observed_header_label": "File",
+    "semantic_false_positive_if_promoted": true,
+    "meaning": "A menu-shaped ordinary body panel satisfies the same geometry/text relation. Promoting this heuristic to VALID OPEN or WRONG_MENU would create a false menu-state claim."
+  },
+  "positive_evidence": "The unchanged procedure separated File/Edit popup witnesses and found no witness on the actual absent image, while preserving each supporting original ID and bbox. This demonstrates useful grouping of existing perception evidence without candidate flattening or thresholds weakened.",
+  "remaining_required_boundary": [
+    "Independently establish that the header belongs to the actual root menubar, rather than ordinary content. Current flat UIObject schema supplies no such UI-role relationship. A dynamic window-bound row/context detector needs its own real counterexample validation, or a trustworthy native/accessibility relationship.",
+    "Validate full relevant popup coverage, parent/submenu relationships, clipping and occlusion before uniqueness or WRONG_MENU claims. No-witness remains UNKNOWN, never ABSENT by detector failure.",
+    "Retain reliable evidence uncertainty and real capture freshness; current actual objects all have confidence=null, and historical images cannot become live StateFacts.",
+    "Real additional varied captures for themes/locales/scales/window geometry and menu-shaped content. Nine offline examples provide no calibrated probability or production accuracy guarantee."
+  ],
+  "offline_compute_scope": {
+    "actual_analysis_seconds": [
+      0.3693632789654657,
+      0.36751645791810006,
+      0.3680935630109161
+    ],
+    "note": "Descriptive offline geometry processing only; no runtime latency, p95, speedup or 100ms claim."
+  },
+  "sha256": {
+    "declaration": "848a408d3f5ca32e581b36d98cdb6253394250fc59d10b7a79bdd71b273b3bed",
+    "fixed_analysis_script": "6d6c607d55e90c9c494c43c92995bb9a9f00b61f9ba15a859de45f89e9a7aac5",
+    "initial_full_analysis": "c684641a6d3680320241fbc654b65a69a329f7ec3b2a290481776454858e63c5",
+    "hard_body_panel_counterexample": "d2ac47e6a9b7714068f4d42558bffd9faca29829b5afebd28875d350bde45561",
+    "frozen_fixture_source": "cd19db9e18b8f81efbd7c6b9175d8a598cf1014b459a2b7913e98337aaacefce"
+  },
+  "privacy": "Raw screenshots, private paths, scene data, model text, auth and tokens excluded. Derived boxes and labels refer only to the explicitly owned factory fixture and declared synthetic cases.",
+  "received_native_artifact_sha256": "cd067ce20ecec4884393e62e3ef1ecd37ba95f7c966bad1f554a9eb43c2a98c7"
+}

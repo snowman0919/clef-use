@@ -1,0 +1,312 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Corrected native configured OMP profile; frozen FINAL11 installed public three-guide bundle and read-only two-tool facade only",
+  "overall_harness_trigger_status": "NOT_RUN",
+  "candidate": {
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+    "no_future_worktree_comparison": true
+  },
+  "predeclaration": {
+    "basename": "clef-omp-native-profile-predeclaration-public-20261011.json",
+    "sha256": "b0a94aa69b58922c9443ecc77dcaad628a4dc06d3f09cce029f705027cea5153"
+  },
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "normal_runtime": {
+    "PI_TEST_RUNTIME_enabled": false,
+    "fixed_system_prompt": false,
+    "append_permissions_only": true,
+    "native_bootstrap_returned": true,
+    "native_matching_skill_instruction_present": true,
+    "native_catalog_present": true,
+    "public_initial_catalog_lines": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,\u2026",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+    ],
+    "initial_prompt_sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed"
+  },
+  "declared_budget": {
+    "auxiliary_compressions": 3,
+    "auxiliary_native_completion_invocations_per_skill": 1,
+    "primary_cases": 3,
+    "primary_invocations_per_case": 8,
+    "primary_invocations_total": 24,
+    "case_deadline_ms": 180000,
+    "driver_or_session_retry_enabled": false,
+    "native_transport_retry_policy_preserved": true,
+    "actual_http_attempt_count": "NOT_OBSERVED",
+    "hard_http_attempt_ceiling": "NOT_OBSERVED",
+    "stop_first_failed_case": true,
+    "normal_runtime_required_for_models": true
+  },
+  "actual_auxiliary": {
+    "completion_invocation_starts": 3,
+    "final_completion_spans": 3,
+    "final_finish_reasons": [
+      [
+        "stop"
+      ],
+      [
+        "stop"
+      ],
+      [
+        "stop"
+      ]
+    ],
+    "route": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "native_cache": {
+      "entries": [
+        {
+          "guide": "clef-use",
+          "native_cache_entry_present": false
+        },
+        {
+          "guide": "clef-use-blender",
+          "native_cache_entry_present": true
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "native_cache_entry_present": true
+        }
+      ],
+      "successful_entries": 2,
+      "auxiliary_invocation_starts": 3,
+      "waiting_before_primary": true,
+      "no_fabricated_cache": true
+    },
+    "failed_skill": "clef-use",
+    "failure_category": "INVALID_COMPRESSION",
+    "native_validation_failure_message": "Invalid single-line skill description (max 12 words, 160 chars)",
+    "which_validation_constraint_failed": "NOT_OBSERVED; auxiliary message content intentionally not captured",
+    "sanitized_warning_events": [
+      {
+        "event": "skill_description_compression_failed",
+        "skill": "clef-use",
+        "category": "INVALID_COMPRESSION",
+        "http_status_from_error": null,
+        "error_message_recorded": false
+      }
+    ]
+  },
+  "actual_transport": {
+    "observation_unit": "process-local original-fetch calls during native auxiliary catalog phase; not guaranteed model-only HTTP requests",
+    "phase_fetch_calls": [
+      {
+        "phase": "native_auxiliary_catalog",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "native_auxiliary_catalog",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      },
+      {
+        "phase": "native_auxiliary_catalog",
+        "case": "explicit",
+        "delivered_status": 200,
+        "resolved": true,
+        "rejected": false
+      }
+    ],
+    "delivered_status_codes": [
+      200,
+      200,
+      200
+    ],
+    "rejected_phase_fetch_calls": 0,
+    "actual_model_only_http_attempt_count": "NOT_OBSERVED",
+    "underlying_retry_reason": "NOT_OBSERVED",
+    "extra_fetch_calls_observed_in_other_phases": 0,
+    "original_fetch_arguments_and_return_preserved": true,
+    "native_retry_configuration_preserved": true,
+    "headers_urls_request_or_response_bodies_recorded": false
+  },
+  "actual_primary": {
+    "completion_invocations": 0,
+    "cases": {
+      "explicit": {
+        "status": "NOT_RUN",
+        "discovery": "OBSERVED_NATIVE_CATALOG_PRESENT",
+        "model_selected_body_load": "NOT_RUN",
+        "read_only_capabilities_invocation": "NOT_RUN",
+        "reason": "Stopped by predeclared driver all-three-successful-compression-cache gate before any primary model turn; no retry"
+      },
+      "natural": {
+        "status": "NOT_RUN",
+        "discovery": "OBSERVED_NATIVE_CATALOG_PRESENT",
+        "model_selected_body_load": "NOT_RUN",
+        "read_only_capabilities_invocation": "NOT_RUN",
+        "reason": "Stopped by predeclared driver all-three-successful-compression-cache gate before any primary model turn; no retry"
+      },
+      "negative": {
+        "status": "NOT_RUN",
+        "discovery": "OBSERVED_NATIVE_CATALOG_PRESENT",
+        "model_selected_body_load": "NOT_RUN",
+        "read_only_capabilities_invocation": "NOT_RUN",
+        "reason": "Stopped by predeclared driver all-three-successful-compression-cache gate before any primary model turn; no retry"
+      }
+    }
+  },
+  "probe_limitation": {
+    "classification": "INFERRED_FROM_NATIVE_SOURCE_PLUS_OBSERVED_BOOTSTRAP_RETURN",
+    "driver_all_cache_gate_stricter_than_native_consumer": true,
+    "native_behavior": "Catalog render immediately freezes an original-description preview of at most 100 characters, schedules compression in background, catches compression failure as a warning, and does not gate primary turns on successful cache entries. The same session retains its initial preview snapshot; later sessions can read successful cache entries.",
+    "current_stopped_batch_relabelled_or_resumed": false,
+    "fatal_native_bootstrap_failure_established": false
+  },
+  "cleanup": {
+    "native_sessions_disposed": true,
+    "mcp_disconnected": true,
+    "owned_driver_processes_remaining": 0,
+    "runtime_home_created": false,
+    "session_manager": "in-memory",
+    "global_config_or_credentials_changed": false,
+    "source_or_repo_edits": false,
+    "gui_or_runtime_sessions_started": false,
+    "private_raw_payloads_auth_or_assets_in_public_artifact": false,
+    "native_retry_added_by_driver": false
+  },
+  "prior_failure_history_preserved": [
+    {
+      "basename": "clef-omp-final10-native-generated-public-20261011.json",
+      "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784",
+      "unchanged": true
+    },
+    {
+      "basename": "clef-omp-public-evidence-20261011.json",
+      "sha256": "d7b9341359e0bbc6fcef8abf9e8712473fd6fbbb733855e621742935195fb353",
+      "unchanged": true
+    }
+  ],
+  "evidence": {
+    "private_summary_basename": "summary.json",
+    "private_summary_sha256": "10a85c290f3e821b86fd896b3311053ee367e494ba1c5a3419ab25a5e81fd714",
+    "native_driver_basename": "driver.ts",
+    "native_driver_sha256": "6d1a235505be015212be440ae46f638988e258147514fee02c9c5ccc08a54996",
+    "reusable_wrapper_basename": "clef_omp_native_profile_verify_20261011.py",
+    "reusable_wrapper_sha256": "eb54a6d197965bc7c7c9d0740bff015f7023d4fca560e1a2eb2410a6a194026a",
+    "native_source_bindings": [
+      {
+        "basename": "pi-coding-agent/src/extensibility/skill-descriptions.ts",
+        "sha256": "4488d960c4f49986b6b63da34c9a012833a5241b14138208ac697901c5534f61",
+        "lines": [
+          43,
+          55,
+          96,
+          106,
+          291,
+          295,
+          301,
+          327
+        ]
+      },
+      {
+        "basename": "pi-coding-agent/src/system-prompt.ts",
+        "sha256": "f4ed018ddccc543c0b43692bfc0ef97fc49e1d91d5ca26ec9c1a8de60b919aa8",
+        "lines": [
+          943
+        ]
+      },
+      {
+        "basename": "pi-coding-agent/src/sdk.ts",
+        "sha256": "dda4ce89749f365c2d51c52f38fcb502ef7577cf753b6a5bbc0f7c80b771222b",
+        "lines": [
+          3656,
+          3666,
+          4598,
+          4601
+        ]
+      },
+      {
+        "basename": "pi-agent-core/src/telemetry.ts",
+        "sha256": "687575ee428a3ecb089535a8a4072cf3b2e2fc2c4688e7062ff88315eafbda07",
+        "lines": [
+          1182,
+          1190,
+          1201,
+          1836,
+          1917
+        ]
+      },
+      {
+        "basename": "pi-utils/src/logger.ts",
+        "sha256": "625fd04d5d43d8c362ac41d4aa5a11784508c9220f1ab6720c2d3eaa67cd91f1",
+        "lines": [
+          42,
+          377
+        ]
+      },
+      {
+        "basename": "pi-ai/src/utils/openai-http.ts",
+        "sha256": "ce20fa99ffa019df49a9680f8291d07f2b2b0050b0e7475cc369396dd4eb3e39",
+        "lines": [
+          33,
+          105
+        ]
+      },
+      {
+        "basename": "pi-ai/src/utils/empty-completion-retry.ts",
+        "sha256": "708ff97b526c683ab2e189dabc129febd80f30ab89c301c4ba5487d4b05478bc",
+        "lines": [
+          21,
+          144,
+          155
+        ]
+      }
+    ]
+  },
+  "GUI_TASK_VERIFIED": "NOT_RUN"
+}

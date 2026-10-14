@@ -391,7 +391,7 @@ def test_dense_ocr_target_uses_bounded_clef_selection_before_visual_grounding():
     assert "visual_grounding" not in first
 
 
-def test_semantic_subset_cannot_drop_ambiguous_targets_at_the_action_budget():
+def test_semantic_subset_preserves_every_requested_primitive_target_at_the_action_budget():
     class AmbiguousMenus(DenseDesktop):
         def _object(self, i):
             obj = super()._object(i)
@@ -423,9 +423,14 @@ def test_semantic_subset_cannot_drop_ambiguous_targets_at_the_action_budget():
             max_steps=1,
         )
     )
-    result = executor.execute(session)
-    assert result["status"] == "NEEDS_REPLAN"
-    assert result["steps"] == 0
+    from clef_use.schema import Observation
+
+    frame = desktop.capture()
+    observation = Observation("ambiguous", frame, desktop.parse(frame.image))
+    candidates, decision = executor._choose(observation, session, [], {})
+    assert {candidate.target for candidate in candidates} == {str(i) for i in range(12)}
+    assert {candidate.operation for candidate in candidates} == {"click"}
+    assert decision.action in {candidate.id for candidate in candidates}
     assert desktop.stage == 0
 
 

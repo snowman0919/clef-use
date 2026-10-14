@@ -1,0 +1,447 @@
+{
+  "kind": "NATIVE_WINDOWS_IMMUTABLE_CI_MANAGED_INSTALL",
+  "claim": "OBSERVED",
+  "status": "PARTIAL",
+  "ci_run": 38132441002,
+  "commit": "26d9252e3f169112789c920eb1c9507d5d9e9d0a",
+  "artifact_name": "site-windows-2022-3.11",
+  "artifact_filename": "clef-use-0.1.30-win32-x86_64-py311.zip",
+  "artifact_sha256": "e2f514469772bc680fc5315e68ee32bdb789326e2fa1e4f452b423cf04fa5e7a",
+  "immutable_artifact": true,
+  "package_source_modified": false,
+  "native_platform": "win32",
+  "native_python": "3.11.9 (tags/v3.11.9:de54cf5, Apr  2 2024, 10:12:12) [MSC v.1938 64 bit (AMD64)]",
+  "scope": "Actual native Windows PowerShell install.ps1, managed wrapper and selected-profile lifecycle; hosted CI results alone are separate",
+  "environment": "New owned spaced-Unicode installroot/bin/HOME/USERPROFILE/CODEX_HOME/HERMES_HOME, named Hermes/OMP profile, relative PI_CONFIG_DIR=.omp, private empty workspace; no PATH update; loopback-only owned short-lived artifact server",
+  "observed_checks": {
+    "native_managed_install_status": "PASS",
+    "version": "0.1.30",
+    "final_version": "0.1.30",
+    "contract_checks": {
+      "api_schema_version": true,
+      "schema_sha256": true,
+      "guide_contract_version": true,
+      "operation_registry_version": true,
+      "guide_bundle_sha256": true
+    },
+    "bootstrap_idempotent_config_bytes_preserved": true,
+    "idempotent_config_bytes_preserved": true,
+    "modified_guide_bytes_preserved": true,
+    "disabled_flags_and_config_bytes_preserved": true,
+    "modified_guide_still_preserved": true,
+    "checksum_failure": {
+      "exit_code": 1,
+      "expected_error_observed": true,
+      "wrapper_bytes_preserved": true
+    },
+    "native_atomic_write_exact_bytes": true,
+    "CRLF_comment_prefixes_preserved": {
+      "codex": true,
+      "hermes": true
+    },
+    "owned_server_stopped": true,
+    "user_path_preserved": true,
+    "global_install_and_configs_preserved": true,
+    "wheel_sha256": "4c04b6d1a31a79f53ad5c9fae58e2dfb8d47122bdf9a831672240e986f9f6943"
+  },
+  "packaged_installed_source_files": 61,
+  "all_packaged_installed_source_files_identical": true,
+  "guide_names": [
+    "clef-use",
+    "clef-use-blender",
+    "clef-use-diagnostics"
+  ],
+  "guide_deployment": {
+    "codex": {
+      "clef-use": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/API_BASELINE.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/LIVE_API.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/FAILURES.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-blender": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/OPERATIONS.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      }
+    },
+    "hermes": {
+      "clef-use": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/API_BASELINE.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/LIVE_API.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/FAILURES.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-blender": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/OPERATIONS.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      }
+    },
+    "omp": {
+      "clef-use": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/API_BASELINE.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/LIVE_API.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-diagnostics": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/FAILURES.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      },
+      "clef-use-blender": {
+        "SKILL.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        },
+        "references/OPERATIONS.md": {
+          "packaged_equals_deployed": true,
+          "manifest_hash_matches": true
+        }
+      }
+    }
+  },
+  "contract_manifest": {
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "guide_bundle_sha256": "6fb13916a21958621e25b5bcf57cecfb582683d0c0e941fc23e7dfb545233761",
+    "operation_registry_version": 2
+  },
+  "explicit_selection_command": "Exact already registered native Scripts/clef-use.exe with args mcp; no replacement with .cmd wrapper",
+  "three_guide_enrollment_statuses": [
+    "INSTALLED",
+    "INSTALLED",
+    "INSTALLED"
+  ],
+  "three_guide_idempotence_statuses": [
+    "UNCHANGED",
+    "UNCHANGED",
+    "UNCHANGED"
+  ],
+  "disabled_preservation_statuses": [
+    "DISABLED",
+    "DISABLED",
+    "DISABLED"
+  ],
+  "modified_guide_statuses": [
+    "CONFLICT",
+    "UNCHANGED",
+    "UNCHANGED"
+  ],
+  "steps": [
+    {
+      "name": "fresh-install",
+      "exit_code": 0,
+      "wall_seconds": 45.92200000002049
+    },
+    {
+      "name": "wrapper-version",
+      "exit_code": 0,
+      "wall_seconds": 0.28100000019185245
+    },
+    {
+      "name": "self-test",
+      "exit_code": 0,
+      "wall_seconds": 0.75
+    },
+    {
+      "name": "capabilities",
+      "exit_code": 0,
+      "wall_seconds": 0.6099999998696148
+    },
+    {
+      "name": "bootstrap-idempotent",
+      "exit_code": 0,
+      "wall_seconds": 9.922000000020489
+    },
+    {
+      "name": "explicit-three-guides",
+      "exit_code": 0,
+      "wall_seconds": 2.625
+    },
+    {
+      "name": "native-codex",
+      "exit_code": 0,
+      "wall_seconds": 0.9220000000204891
+    },
+    {
+      "name": "native-hermes",
+      "exit_code": 0,
+      "wall_seconds": 0.6880000000819564
+    },
+    {
+      "name": "native-omp",
+      "exit_code": 0,
+      "wall_seconds": 0.671000000089407
+    },
+    {
+      "name": "project-codex-install",
+      "exit_code": 0,
+      "wall_seconds": 1.375
+    },
+    {
+      "name": "project-codex-native",
+      "exit_code": 0,
+      "wall_seconds": 0.8439999998081475
+    },
+    {
+      "name": "atomic-write-mixed-newlines",
+      "exit_code": 0,
+      "wall_seconds": 0.125
+    },
+    {
+      "name": "idempotent-integrate-three",
+      "exit_code": 0,
+      "wall_seconds": 2.547000000020489
+    },
+    {
+      "name": "modified-guide-integrate",
+      "exit_code": 2,
+      "wall_seconds": 1.906999999890104
+    },
+    {
+      "name": "disabled-integrate",
+      "exit_code": 2,
+      "wall_seconds": 0.3279999999795109
+    },
+    {
+      "name": "checksum-update-rejection",
+      "exit_code": 1,
+      "wall_seconds": 0.8599999998696148
+    },
+    {
+      "name": "final-wrapper-version",
+      "exit_code": 0,
+      "wall_seconds": 0.2809999999590218
+    }
+  ],
+  "harnesses": {
+    "codex": {
+      "scope": "isolated selected user profile",
+      "status": "FAIL",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "FAIL"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "reason": "Expected selected user guide paths absent from actual native catalog"
+    },
+    "hermes": {
+      "scope": "isolated selected user profile",
+      "status": "NOT_RUN",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "reason": "harness executable is unavailable"
+    },
+    "omp": {
+      "scope": "isolated selected user profile",
+      "status": "NOT_RUN",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "reason": "harness executable is unavailable"
+    },
+    "codex_project": {
+      "scope": "new isolated supported project",
+      "status": "NOT_RUN",
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "PASS"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      },
+      "discovered_guide_names": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ]
+    }
+  },
+  "failure_history": [
+    {
+      "status": "FAIL",
+      "native_managed_install_status": "FAIL",
+      "cause_classification": "FIXTURE_ERROR_WITH_OBSERVED_SAFETY_REFUSAL",
+      "cause": "Fixture expected3 while installer default2; fixture cwdHOME made existing .agents an active project source, so OMP correctly refused shadowing",
+      "raw_report_sha256": "c49deaf48b7dc86984ca96efc0246a346e11d94aefe25d22b9b16a3f4e7e1409",
+      "global_and_PATH_preserved": true,
+      "owned_server_stopped": true
+    },
+    {
+      "status": "FAIL",
+      "native_managed_install_status": "FAIL",
+      "cause_classification": "FIXTURE_ERROR_WITH_OBSERVED_SAFETY_REFUSAL",
+      "cause": "Fixture requested .cmd command differing from registered managed native .exe; all3 explicit enrollments correctly refused existing-entry replacement",
+      "raw_report_sha256": "26f50928f62f1e171c95dd6e1eb63677fd5c37d3ff7255a53ec38d82cfd1b7da",
+      "global_and_PATH_preserved": true,
+      "owned_server_stopped": true
+    },
+    {
+      "status": "FAIL_RETAINED",
+      "scope": "Earlier immutable pre-fix newline/integration failure and Windows foreground admission failure remain separate; source-patched intermediate proof is not used for this immutable gate"
+    }
+  ],
+  "raw_private_report_sha256": "efd9b1f573e3121f9121f4b0af5fa25c2487b53f7b5bfd332e15969a87663179",
+  "not_run": {
+    "Windows_desktop_input": "Not replayed in this installation slice; prior actual foreground admission FAIL remains retained and this installation PASS does not supersede it",
+    "model_skill_load_invoke_task": "No authentication copied/repaired or model requests authorized in this bounded installation proof; native catalogue only",
+    "Hermes_OMP_native_stages": "Existing native executables unavailable; no harness installation performed"
+  },
+  "production_preservation": "Global clef0.24/V2, user configuration hashes and user PATH unchanged; no existing user directories deleted",
+  "no_symlink_observation": {
+    "package_config_modified": false,
+    "method": "Native Windows FileAttributes.ReparsePoint walk without traversing reparse entries, plus every ownedroot ancestor component",
+    "owned_tree_reparse_relative_paths": [],
+    "ancestor_components_examined": 7,
+    "owned_tree_reparse_count": 0,
+    "ancestor_reparse_count": 0,
+    "claim": "OBSERVED",
+    "owned_tree_entries_examined": 6625,
+    "managed_executable_MZ": true
+  },
+  "native_registered_executable_launch": {
+    "claim": "OBSERVED",
+    "native_registered_executable_basename": "clef-use.exe",
+    "exit_code": 0,
+    "version": "0.1.30",
+    "no_configuration_write_requested": true
+  },
+  "observed_profiles": {
+    "codex": {
+      "profile": "default",
+      "scope": "user"
+    },
+    "hermes": {
+      "profile": "native-selected",
+      "scope": "user"
+    },
+    "omp": {
+      "profile": "native-selected",
+      "scope": "user"
+    }
+  },
+  "INSTALL-09": {
+    "status": "PASS",
+    "claim": "OBSERVED",
+    "conditions": [
+      "Owned native Windows tree6625entries and7ancestorcomponents:0reparsepoints",
+      "Actual spaced-Unicode HOME/installroot/bin succeeded",
+      "Registered native clef-use.exe version launched0.1.30 exit0; managed .cmd wrapper also launched0.1.30",
+      "Explicit Codexdefault and namedHermes/OMPnative-selected profiles enrolled3guides and idempotence preservedbytes"
+    ],
+    "scope_boundary": "Windows native installation condition only; separate CodexUSER discoveryFAIL and Windows foregroundFAIL remain visible"
+  }
+}

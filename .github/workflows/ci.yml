@@ -28,6 +28,9 @@ jobs:
       - run: uv run --no-sync pytest -q
         env:
           PYTHONPATH: src
+      - run: uv run --no-sync python scripts/generate_agent_contract.py --check
+        env:
+          PYTHONPATH: src
       - run: uv run --no-sync python scripts/build_installer.py
       - run: git diff --exit-code install.sh install.ps1
       - run: uv run --no-sync python scripts/build_release.py --output release-site

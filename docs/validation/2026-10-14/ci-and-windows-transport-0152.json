@@ -1,0 +1,292 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_NATIVE_CI_AND_WINDOWS_TRANSPORT_FAILURE",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.52",
+  "source_commit": "b022b6d3eccf1da7a997b8d7dd3028ea3d78340f",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted observations and digests only. Raw transport targets, paths, identities, configuration/auth values and logs remain private.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38512786427,
+    "source_commit": "b022b6d3eccf1da7a997b8d7dd3028ea3d78340f",
+    "assembled_artifact_id": 11870833646,
+    "assembled_artifact_sha256": "5b7be85f635ca155df76432296a4dd71c816e75c7171b0a20ff18c268b191a41",
+    "assembled_artifact_bytes": 383255580,
+    "native_build_install_jobs_passed": 15,
+    "native_installer_reports_passed": 15,
+    "public_deploy": "SKIPPED_FEATURE_BRANCH_GUARD",
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38512786427",
+    "archive_count": 15,
+    "git_payload_file_count": 68,
+    "source_and_contract_verification": "PASS",
+    "native_first_update_current_failure_preservation": "PASS",
+    "synthetic_installer_fixture_final_version": "0.1.53",
+    "actual_candidate_version": "0.1.52",
+    "workflow_dispatch_count": 1,
+    "manifest_sha256": "ecbf716c004c3f015bfb5d5273134caebe99e6079faaf8b2cc079bcf96814132",
+    "sha256sums_sha256": "d79125e59ce2bac90c1a36363d43ac8509f23205735532c2634a334958ba0354",
+    "private_archive_verification_sha256": "29b28ff89aa351663339c259267fef0bd99ef819f556ff1c7b90a86fc5a89a98",
+    "private_native_log_verification_sha256": "3da2a758383f6b8ed20e9c742f7f8c78f973b1a0ca449595ae288ec7dd4263f6",
+    "artifacts": [
+      {
+        "filename": "clef-use-0.1.52-darwin-arm64-py311.zip",
+        "sha256": "c3ed0ff4bbd0c2b50463131e8e7e2cf25fb93575c32695ddc8c9210a78d1699f",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-darwin-arm64-py312.zip",
+        "sha256": "b50d7ae05e93468401758e198e343ae29e1245980a0f4ebbeff7102b9128d096",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-darwin-arm64-py313.zip",
+        "sha256": "6d1dfc2f31ddc95fa1018bbcbc5025efd8ba8691a17cb1f91c6ec7ba257d82cd",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-darwin-x86_64-py311.zip",
+        "sha256": "75f042d9ffb3df163ce26cf3e663b030be2747707742bb47712df23702b413e9",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-darwin-x86_64-py312.zip",
+        "sha256": "23e3472e0f61d1f5546b436c5665f7feed92a24b9af4c5db5c7e3422d98eeeb3",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-darwin-x86_64-py313.zip",
+        "sha256": "805a002de7557fdd6cd0bce0cfd87aaefceb3136b97b4c6c061271767fdff64a",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-arm64-py311.zip",
+        "sha256": "f01811254f2795a10fc1e7644c804d31ef1187159c399a2c8d90f5dd11f7faeb",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-arm64-py312.zip",
+        "sha256": "1e578343c9e6ba140457655d722ca98f2e27e0c954925c0eb4bc275d22b99599",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-arm64-py313.zip",
+        "sha256": "a49f3f796488110782ec4ad59afa9704d3a1c4115059251498b605394c532394",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-x86_64-py311.zip",
+        "sha256": "79b8afb1fc6df442c643457a7870ec7fd1d2c50464895e11ebcfbd88624cc878",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-x86_64-py312.zip",
+        "sha256": "04cd28cb7a88f7b376bdc1033e0dabb15c38dfe6b9427bbb40e3e91c7b0bf6b3",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-linux-x86_64-py313.zip",
+        "sha256": "16f4090be79e472da9db0a0d7ecce5483a4fa0e7f7579bdea49cdf81a8498ca6",
+        "wheel_sha256": "9e436befd5e2f6277ab7c21f4c63f103b6917283fba015c90df2a051e81fc10d",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-win32-x86_64-py311.zip",
+        "sha256": "4ac2f1060308bd5e6a7b85f6246cba28fb16d47027d7d4c037e437b3976a4458",
+        "wheel_sha256": "5059a9a2da7e5adad5751b57a5b51165d9c95ce3a24a7f96bfe34e243cfd3f8e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-win32-x86_64-py312.zip",
+        "sha256": "4a6df5fe6484720c97f268696a7611f6209bf7984444e26dffd1b716a81b6481",
+        "wheel_sha256": "5059a9a2da7e5adad5751b57a5b51165d9c95ce3a24a7f96bfe34e243cfd3f8e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      },
+      {
+        "filename": "clef-use-0.1.52-win32-x86_64-py313.zip",
+        "sha256": "bad675f618de0152b613a4f93bc2d62fa1591dde472d0db96b12cb51fba465e9",
+        "wheel_sha256": "5059a9a2da7e5adad5751b57a5b51165d9c95ce3a24a7f96bfe34e243cfd3f8e",
+        "status": "PASS",
+        "source_files_exact": 68,
+        "schema_sha256": "62cf085083431bcfdc150df712db9ba7d9739fd208f39a02b4f54d19d9a423e6",
+        "guide_bundle_sha256": "3e1408adde76685688337beb35e7e5fa6904a218d1a215ce8f908d0bd5fe975d"
+      }
+    ]
+  },
+  "windows_transport": {
+    "classification": "OBSERVED_CONNECTION_FAILURE_BEFORE_REMOTE_EXECUTION",
+    "status": "NOT_RUN",
+    "initial_owned_root_preparation": "SSH_CONNECTION_TIMEOUT_BEFORE_COMMAND_EXECUTION",
+    "bounded_read_only_ssh": "EXIT_255_TCP_PORT_22_CONNECTION_TIMED_OUT",
+    "local_tailscale_backend": "Running",
+    "local_tailscale_online": true,
+    "win_peer_reported_online": false,
+    "native_tailscale_ping_exit_code": 1,
+    "native_tailscale_ping_timeout_reported": true,
+    "remote_command_execution": "NOT_RUN_SSH_TCP_CONNECTION_NOT_ESTABLISHED",
+    "owned_root_metadata_written": false,
+    "candidate_installation": "NOT_RUN",
+    "limited_cli_mcp": "NOT_RUN",
+    "model_requests": 0,
+    "capture_focus_or_input_requested": false,
+    "shared_standard_update_requested": false,
+    "new_harness_enrollment_requested": false,
+    "technical_limit": "Cannot establish SSH transport to win; local peer status and native ping independently report unavailable. Machine power state and outage cause are NOT_PROVEN.",
+    "private_observation_sha256": "19bfb52f44085d70324e5ff69e5bd6320b5278e3c21468369de5e345d7399ac7"
+  },
+  "historical_windows_checkpoint": {
+    "receipt": "docs/validation/2026-10-14/windows-isolated-ci-0151.json",
+    "last_observed_shared_runtime": "0.1.49",
+    "last_observed_owned_candidate_runtime": "0.1.51",
+    "revalidated_at_current_checkpoint": false,
+    "current_shared_launcher_config_auth_payload_preservation": "NOT_RUN_TRANSPORT_UNAVAILABLE"
+  },
+  "source_and_harness_checkpoint": {
+    "receipt": "docs/validation/2026-10-14/operation-schema-0152.json",
+    "full_regression": {
+      "passed": 1698,
+      "skipped": 55,
+      "warnings": 41,
+      "seconds": 76.76
+    },
+    "actual_packaged_linux_normal_read_only_mcp": "PASS",
+    "hermes_pre_omp_policy_canonical_cases": [
+      "PASS",
+      "PASS",
+      "PASS"
+    ],
+    "omp_final_canonical_cases": [
+      "FAIL",
+      "FAIL",
+      "PASS"
+    ],
+    "prior_positive_failures_and_credential_material_uncertainty_retained": true
+  },
+  "not_run": [
+    "OWNED_WINDOWS_51_TO_52_UPDATE",
+    "WINDOWS_LIMITED_CLI_MCP_0152",
+    "SHARED_WINDOWS_49_TO_52_UPDATE",
+    "NATIVE_CODEX_MODEL_0152",
+    "WINDOWS_GUI_ABORT_BROWSER_EDITOR_0152",
+    "SAME_TASK_1000_OPPORTUNITIES_ACCURACY_CORRECT_OS_INPUT_P95_100MS_COVERAGE_GOODPUT",
+    "REICI_SEPARATE_SESSION_MATCHED_VIEW_REVIEW",
+    "PUBLIC_URL_HASH_FRESH_INSTALL_UPDATE_0152"
+  ],
+  "remaining_conditions": [
+    {
+      "requirements": [
+        "INSTALL-02",
+        "INSTALL-03",
+        "INSTALL-09"
+      ],
+      "status": "NOT_RUN_WINDOWS_TRANSPORT_UNAVAILABLE",
+      "condition": "win SSH port22 connection and native Tailscale ping time out; local backend is online but peer reports offline. Outage cause and machine power state are NOT_PROVEN. Inspect existing owned state when transport recovers before another mutation."
+    },
+    {
+      "requirements": [
+        "INPUT-04",
+        "INPUT-05",
+        "E2E-01",
+        "E2E-02",
+        "PERF-01",
+        "PERF-02",
+        "PERF-03"
+      ],
+      "status": "NOT_RUN_NEW_WINDOWS_CHECKS",
+      "condition": "User confirmed another session operates Windows. Exclusive input coordination remains necessary even after transport recovers. No shared installation, enrollment or GUI/input action is attempted."
+    },
+    {
+      "requirements": [
+        "INPUT-05",
+        "E2E-01"
+      ],
+      "status": "BLOCKED_FOR_UNPROVEN_BLENDER_STATES",
+      "condition": "File-menu0/5 and unknown popup/IME/input-owner/effective-keymap facts remain. Public OS/Blender observations do not prove them. External host builds remain outside user scope; guards and thresholds are not weakened."
+    },
+    {
+      "requirements": [
+        "GUIDE-03"
+      ],
+      "status": "FAIL_CURRENT_POSITIVE_CASES",
+      "condition": "Final .52 OMP explicit fails stopped-service status, denied write and native deadline; natural invokes before loading its Blender guide. Current negative passes. Earlier failures and credential-material uncertainty remain; no unchanged retry or auth restoration."
+    },
+    {
+      "requirements": [
+        "E2E-03"
+      ],
+      "status": "NOT_RUN_SEPARATE_SESSION_RESULT_PENDING",
+      "condition": "Reici matched-view independent review belongs to another session and has not arrived."
+    },
+    {
+      "requirements": [
+        "RELEASE-01"
+      ],
+      "status": "NOT_RUN_PUBLIC_DEPLOY_GUARDED",
+      "condition": "Feature-branch guard skips public deployment. Native CI and loopback package checks do not prove public URL/hash/fresh-install/update. No main/tag/force/guard bypass."
+    }
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

@@ -1,0 +1,159 @@
+{
+  "classification": "OBSERVED_METADATA_AND_INFERRED_FEASIBILITY_SEPARATED",
+  "date": "2026-10-12",
+  "scope": {
+    "imports": 0,
+    "live_bus_calls": 0,
+    "app_launches": 0,
+    "UI_tree_reads": 0,
+    "screenshots": 0,
+    "input_calls": 0,
+    "model_calls": 0,
+    "canonical_edits": 0
+  },
+  "observed_packages": {
+    "at-spi2-core": "2.52.0-1build1",
+    "libatspi2.0-0t64": "2.52.0-1build1",
+    "libatk-bridge2.0-0t64": "2.52.0-1build1",
+    "gir1.2-atspi-2.0": "2.52.0-1build1",
+    "python3-gi": "3.48.2-1",
+    "python3-dbus": "1.3.2-5build3",
+    "python3-pyatspi": "NOT_INSTALLED"
+  },
+  "artifact_sha256": {
+    "Atspi-2.0.gir": "e44e8178b424f370c02452d9e88f46e27e34ca9e3107b26dfb9773cce0d36e97",
+    "Atspi-2.0.typelib": "e0577f7eb3ce969032661d201eed028de5944dbab35ed2f8a799342a2fa3aa36",
+    "GI-cpython312": "ccea8fd632c76c13635f6a81b2dc5e7e22a8de396821607e96a236880c3c0ecc",
+    "libatspi": "4af877d2d235b7eaab015abe6d81b82c82fe506a5d71403b9bbdfcbce99e8141",
+    "at-spi-bus-launcher": "e4ae0aa34c45888afeb585a4fb1596d70630875946758afc6cdd6af91e3911a4",
+    "at-spi2-registryd": "2a26dcb326dda41a6637dbac063f5cf23b1e3c44088ca33b5fa543b4172b1856",
+    "Blender-ELF": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "Flatpak-metadata": "3b34492931123fb5d222bbca8b1a8d1211e22de7bd8b703be262580fea63ea88",
+    "Flatpak-manifest": "fdce30b6ad7bf25adc5dc329745ef3aea209e649f5cc425b0d0f1168369f1949"
+  },
+  "official_archive": {
+    "url": "https://download.blender.org/release/Blender5.2/blender-5.2.0-linux-x64.tar.xz",
+    "sha256_from_installed_manifest": "96f6c181a30f4950607839dc84d42a354b250d8a0231b098b59b7bc69c351c48",
+    "archive_bytes_downloaded_or_verified_this_slice": false
+  },
+  "observed_metadata": {
+    "GI_native_ABI": "cpython-312; product Python3.11 import NOT_RUN",
+    "client_interfaces": [
+      "Accessible.get_process_id",
+      "get_state_set",
+      "get_role",
+      "Text/EditableText interfaces",
+      "Component geometry",
+      "EventListener.register_with_app"
+    ],
+    "ELF_direct_needed_atk_atspi_gtk_dbus": [],
+    "ELF_dynamic_symbols_or_strings_atspi_atk_bridge_org_a11y": [],
+    "unrelated_USD_accessibility_symbols_not_counted": true,
+    "flatpak_display_sockets": [
+      "fallback-x11",
+      "wayland"
+    ],
+    "live_accessibility_bus_reachability": "NOT_RUN"
+  },
+  "method": [
+    "dpkg-query selected AT-SPI/GI/DBus package metadata",
+    "read selected installed headers and Atspi GIR/typelib filenames",
+    "read installed public Flatpak application metadata and manifest",
+    "readelf -d and --dyn-syms on the public Blender ELF; filtered accessibility dependencies/symbols",
+    "strings -a on public Blender ELF; filtered AT-SPI/ATK/org.a11y identifiers",
+    "sha256sum exact installed public artifacts; no import or bus initialization"
+  ],
+  "primary_sources": [
+    {
+      "url": "https://gnome.pages.gitlab.gnome.org/at-spi2-core/devel-docs/architecture.html",
+      "lines": [
+        25,
+        30,
+        35,
+        39,
+        51
+      ],
+      "fact": "Application/toolkit must implement the accessible interfaces; observer infrastructure alone does not create them."
+    },
+    {
+      "url": "https://gnome.pages.gitlab.gnome.org/at-spi2-core/libatspi/method.Accessible.get_process_id.html",
+      "lines": [
+        73,
+        78
+      ],
+      "fact": "PID comes from accessible application DBus connection; errors yield undetermined value."
+    },
+    {
+      "url": "https://gnome.pages.gitlab.gnome.org/at-spi2-core/libatspi/method.EventListener.register_with_app.html",
+      "lines": [
+        100,
+        105
+      ],
+      "fact": "Subscriptions can be app-scoped."
+    },
+    {
+      "url": "https://gnome.pages.gitlab.gnome.org/at-spi2-core/libatspi/enum.StateType.html",
+      "fact": "EDITABLE is a capability; HAS_POPUP does not mean currently showing; MODAL is cross-window modal semantics."
+    },
+    {
+      "url": "https://raw.githubusercontent.com/blender/blender/blender-v5.2-release/intern/ghost/CMakeLists.txt",
+      "lines": [
+        162,
+        173,
+        235,
+        282
+      ],
+      "fact": "Reviewed Linux platform build lists X11/Wayland GHOST paths; this is not an exhaustive bridge-absence proof."
+    }
+  ],
+  "local_source_refs": [
+    {
+      "file": "src/clef_use/runtime.py",
+      "lines": [
+        102,
+        124,
+        137
+      ]
+    },
+    {
+      "file": "src/clef_use/state.py",
+      "lines": [
+        23,
+        52,
+        53,
+        58,
+        115
+      ]
+    },
+    {
+      "file": "scripts/blender_operations_fixture.py",
+      "lines": [
+        385,
+        392,
+        393
+      ]
+    }
+  ],
+  "inferred_feasibility": {
+    "classification": "INFERRED_NOT_IMPLEMENTED",
+    "available_observer_side": "Installed libatspi native C client, or host Python3.12 GI, supports scoped read-only collection if the app publishes it.",
+    "unverified_prerequisites": [
+      "Blender registers a real accessible application on an isolated reachable bus",
+      "Perwindow accessible tree exposes actual edit ownership/property identity and shown popups/transitions",
+      "OS window identity binds to the same accessible process and window",
+      "Fresh authoritative absence evidence, not incomplete/stale tree absence"
+    ],
+    "still_missing_facts": [
+      "ime_composing",
+      "complete loading/event-quiescence",
+      "effective context/modal keymap",
+      "text_focus/focused_property/popup/menu absence until app publication verified"
+    ],
+    "limits": [
+      "No universal Blender accessibility impossibility claim",
+      "No dynamic/static/custom bridge absence claim from ELF metadata",
+      "No default production provider or six-operation authorization",
+      "No UI transitions were observed"
+    ]
+  }
+}

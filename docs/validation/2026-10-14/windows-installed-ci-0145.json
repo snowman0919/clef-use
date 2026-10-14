@@ -1,0 +1,320 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ACTUAL_INSTALLATION_NATIVE_COMPONENTS_AND_FAILED_MODEL_BATCH",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.45",
+  "source_commit": "c382d8855d8cafa701ed2eb6906db755c963419b",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "GUIDE-03",
+    "HARNESS-01",
+    "HARNESS-02",
+    "HARNESS-03",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration, message bodies or raw traces.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38458214088,
+    "artifact_id": 11844647989,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38458214088",
+    "artifact_zip_sha256": "e2f7dc1da7df0d743aac66a36cfaf6656322ece8f22b82995fa6b2c1dba991e7",
+    "artifact_zip_bytes": 383187380,
+    "builds_passed": 15,
+    "archives_verified": 15,
+    "source_payload_files_exact": 68,
+    "private_verification_sha256": "8f8da06dde984f74888f913ae44c8d8a5b60b3386e71a56a6de0758461869dbc",
+    "assemble": "PASS",
+    "deploy": "SKIPPED_FEATURE_BRANCH"
+  },
+  "installed_windows": {
+    "status": "PASS",
+    "from_version": "0.1.44",
+    "version": "0.1.45",
+    "payload_files_matching": 68,
+    "source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "wheel_sha256": "526d25e05cb1dbddba341bafffa7664527f9e2eacc4f15062947706dcf3df87b",
+    "archive_sha256": "bce22f90208146e3006d71f1bcf3a1d0d4f2fe5f7cbd86910e6862e8d9f6267f",
+    "private_install_report_sha256": "7c5ed10cace779f4988550b76aa0f2f5b8d380fc0c415b7a8b353086b85961c0",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "doctor": {
+      "exit_code": 2,
+      "reason": "SSH Session 0 has no interactive desktop."
+    },
+    "self_test_scope": "Deterministic fixture control flow, not model accuracy or native GUI reaction performance."
+  },
+  "limited_desktop_token": {
+    "status": "PASS",
+    "scope": "Immutable installed .45 windowless CLI/hash access under an actual desktop token; no capture, GUI action or OS input, no model request",
+    "runtime_version": "0.1.45",
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "offline_self_test",
+        "exit_code": 0
+      }
+    ],
+    "capability_runtime_version": "0.1.45",
+    "offline_fixture_samples_successful": true,
+    "global_config_bytes_preserved": true,
+    "native_task_exit_code": 0,
+    "owned_task_removed": true,
+    "private_result_sha256": "f2a2e139acb1b7e9e03d2b9dacd8be8ca370a1327d5c7f2b67368659be3d579d",
+    "private_controller_sha256": "40cb87ea9c18961dd2d7c284df0d6868b05e0db9336c140a1b9c153eb9e43c07",
+    "probe_source_sha256": "15fc320fc98d2dac90707eb762950c151071a5cbeccd6d0d733a0ffa4d94a8f3",
+    "controller_source_sha256": "8b8e2829c859e4f5a4bae12dc272048012ff19016766af43dce96717fc935789"
+  },
+  "actual_codex_model_batch": {
+    "status": "FAIL",
+    "caller_locale": "cp1252",
+    "installed_payload_files_verified": 68,
+    "global_config_bytes_preserved": true,
+    "scope": "Canonical immutable installed .45 Codex explicit/natural/negative model cases; no GUI task, capture or OS input requested",
+    "cases": [
+      {
+        "trigger": "explicit",
+        "status": "FAIL",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "model_result": {
+          "case": "explicit",
+          "status": "FAIL",
+          "loaded": [],
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "stages": {
+            "LOADED": {
+              "status": "NOT_RUN",
+              "skills": []
+            },
+            "INVOKED": {
+              "status": "PASS",
+              "tools": [
+                "computer_capabilities"
+              ]
+            }
+          }
+        },
+        "global_config_bytes_preserved": true,
+        "private_trace_sha256": "0bce8b2eea4dcd831e061c7c48f95148fd18ec13dcc13779b41c815200e94237"
+      },
+      {
+        "trigger": "natural",
+        "status": "FAIL",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "FAIL",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "model_result": {
+          "case": "natural",
+          "status": "FAIL",
+          "loaded": [],
+          "invoked": [
+            "computer_capabilities"
+          ],
+          "attempted": [
+            "computer_capabilities"
+          ],
+          "load_before_invoke": false,
+          "stages": {
+            "LOADED": {
+              "status": "NOT_RUN",
+              "skills": []
+            },
+            "INVOKED": {
+              "status": "FAIL",
+              "tools": [
+                "computer_capabilities"
+              ]
+            }
+          }
+        },
+        "global_config_bytes_preserved": true,
+        "private_trace_sha256": "1451fe95f5b6c5eb5ae8e9f189a65d54deeb212088e4d8ecd8e0a80324446e05"
+      },
+      {
+        "trigger": "negative",
+        "status": "PASS",
+        "cli_exit_code": 0,
+        "native_model_exit_code": 0,
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "NOT_RUN",
+          "INVOKED": "NOT_RUN",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "model_result": {
+          "case": "negative",
+          "status": "PASS",
+          "loaded": [],
+          "invoked": [],
+          "attempted": [],
+          "load_before_invoke": false,
+          "stages": {
+            "LOADED": {
+              "status": "NOT_RUN",
+              "skills": []
+            },
+            "INVOKED": {
+              "status": "NOT_RUN",
+              "tools": []
+            }
+          }
+        },
+        "global_config_bytes_preserved": true,
+        "private_trace_sha256": "f1ce7f0f05cfacad519c6b6a3d8bb54aeb0051c2600966f2f81b5f1f393fefd8"
+      }
+    ],
+    "private_result_sha256": "06a1fe37e887dbb00ccdf302029d0b1e1616bc7d471a2da3eb4569a0d2485557",
+    "probe_source_sha256": "ff799da338c175d040814f189a8f1206d1b62957d1336187699379d0a1703aa2",
+    "controller_source_sha256": "a82e4f275498435852ac188aecc54e3b4956a5bb71ca87c6aa0f80b10d0bf8f4",
+    "body_load_interpretation": "No full guide command/resource load is observed in these traces. Model-context auto-injection is not proven by this driver; absence of a load event alone is not proof that no hidden native context supplied a body.",
+    "natural_consumer_issue": "The valid operation_id=menu_assess response is a typed operation record. The new catalog-only capability validator rejects it for lacking full-catalog metadata. This is a consumer proof defect, not a failed MCP operation call; the independent lack of observed guide load/order still prevents overall PASS."
+  },
+  "native_linux_linkage": {
+    "classification": "OBSERVED_NATIVE_ONLY_COMPONENT_LINKAGE",
+    "runtime_version": "0.1.45",
+    "source_commit": "c382d8855d8cafa701ed2eb6906db755c963419b",
+    "native_component_status": "PASS",
+    "configuration_preservation_status": "PASS",
+    "all_profile_files_unchanged_status": "FAIL",
+    "global_config_bytes_unchanged": true,
+    "owned_profile_config_unchanged": true,
+    "native_generated_profile_changes": [
+      "cache/mcp_schema_cache.json",
+      "logs/mcp-stderr.log"
+    ],
+    "unexpected_profile_changes": 0,
+    "provider_model_gui": "NOT_RUN",
+    "cases": {
+      "hermes": {
+        "status": "PASS",
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "linkage": {
+          "checks": {
+            "manifest_release_current": true,
+            "manifest_schema_current": true,
+            "capability_runtime_current": true,
+            "capability_schema_current": true,
+            "capability_guides_current": true,
+            "full_guide_hash_load_agreement": true,
+            "read_only_facade": true,
+            "exact_two_tool_facade": true,
+            "native_probe_script_absent": true,
+            "runtime_endpoint_absent": true
+          },
+          "method": "Installed native _skill_catalog + skill_view full-body load; native MCP registry actual capability handler(detail=True). No provider context/model request.",
+          "loaded_guides": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "actual_capability_sha256": "bb6600af796c71943598b7c12f03e4a331e88bf99d9e0c4cda2b2e5dfff9d3f2",
+          "native_trace_sha256": "cf6319843f82ffe7123a19b47b1aa8ca6ee4e7635a641d2d8988857db378848c",
+          "temporary_model_policy": {
+            "status": "NOT_APPLICABLE",
+            "reason": "trigger=native never enters model approval-overlay path",
+            "absent_after": true
+          }
+        }
+      },
+      "omp": {
+        "status": "PASS",
+        "stages": {
+          "INSTALLED": "PASS",
+          "DISCOVERED": "PASS",
+          "LOADED": "PASS",
+          "INVOKED": "PASS",
+          "TASK_VERIFIED": "NOT_RUN"
+        },
+        "linkage": {
+          "checks": {
+            "manifest_release_current": true,
+            "manifest_schema_current": true,
+            "capability_runtime_current": true,
+            "capability_schema_current": true,
+            "capability_guides_current": true,
+            "full_guide_hash_load_agreement": true,
+            "read_only_facade": true,
+            "exact_two_tool_facade": true,
+            "native_probe_script_absent": true,
+            "runtime_endpoint_absent": true
+          },
+          "method": "Installed OMP SDK loadSkills + buildSkillPromptMessage; direct Bun.file full-guide byte/hash read verifies native prompt construction. Native MCPManager actual capability execute({}). No provider context/model request.",
+          "loaded_guides": [
+            "clef-use",
+            "clef-use-blender",
+            "clef-use-diagnostics"
+          ],
+          "actual_capability_sha256": "3b22c8d99283abdab1c0b46a3f541fb79311ca4deb317b7c5903e9df36d2f712",
+          "native_trace_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "temporary_model_policy": {
+            "status": "NOT_APPLICABLE",
+            "reason": "trigger=native never enters model approval-overlay path",
+            "absent_after": true
+          }
+        }
+      }
+    },
+    "private_summary_sha256": "5ae9649771b521c70fbf3ccb553f79bae7561f7eadd7658a506a0bd281f61f4c"
+  },
+  "native_gui_tasks_this_installation": {
+    "status": "NOT_RUN",
+    "reason": "Shared Windows desktop ownership remains unresolved after observed foreign foreground activation. Prior actual GUI failures and .44 offscreen parser proof remain separate."
+  },
+  "reaction_accuracy_coverage_goodput": {
+    "status": "NOT_RUN",
+    "reason": "Full identical pinned real-task suite, 1000 predeclared opportunities and paired independent OS receiver/quality measurements are not executed."
+  },
+  "public_release": {
+    "status": "NOT_RUN",
+    "reason": "Existing feature-branch deployment guard skips public deploy; no tag/main bypass."
+  },
+  "completion_claim": false
+}

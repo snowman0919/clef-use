@@ -1,0 +1,140 @@
+{
+  "classification": "OBSERVED_SOURCE_COMPONENT",
+  "source_base": "0a26cfd0e5aa039ce05e3d4d5e12f2a2855d6efc",
+  "scope": "Actual DesktopAction/InputExecutor and SessionRuntime input consumers with a deterministic stateful device. No native OS, real IME, model, installed-current, whole E2E or performance claim.",
+  "integrated_source_sha256": {
+    "src/clef_use/input_ir.py": "612f6f282cb00793685c82cabfe1eb2a238099c12bb4eafcf91f51c2f736d15b",
+    "tests/test_input_ir.py": "7a08a778b0fd98f297a037b884b01881fb6f6667118a4bd83f144876574a7e78"
+  },
+  "contract": "An explicit InputContext admits modified gestures only with known idle IME and no text focus, independently of optional after_input_guard. Existing exact text-control exceptions are key/chord-only. Unmodified pointer gestures, absent context and owned-up recovery retain prior behavior.",
+  "before": {
+    "source_sha256": {
+      "input_ir.py": "b2455621c56fa9609f67354286a9f3c009099b9c34dabd458b6fabb71d735f9e",
+      "runtime.py": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4"
+    },
+    "direct_unsafe_modified_gestures": [
+      {
+        "text_focus": true,
+        "ime_composing": false,
+        "ok": true,
+        "stroke_count": 1
+      },
+      {
+        "text_focus": false,
+        "ime_composing": true,
+        "ok": true,
+        "stroke_count": 1
+      },
+      {
+        "text_focus": null,
+        "ime_composing": null,
+        "ok": true,
+        "stroke_count": 1
+      }
+    ],
+    "registered_viewport_already_blocked": true
+  },
+  "after": {
+    "source_sha256": {
+      "input_ir.py": "612f6f282cb00793685c82cabfe1eb2a238099c12bb4eafcf91f51c2f736d15b",
+      "runtime.py": "f1302fc5d8c1d87a63b7a65774ad6d2d14da7ab83d63e8202558efde752a17c4"
+    },
+    "direct_unsafe_modified_gestures": [
+      {
+        "text_focus": true,
+        "ime_composing": false,
+        "ok": false,
+        "stroke_count": 0
+      },
+      {
+        "text_focus": false,
+        "ime_composing": true,
+        "ok": false,
+        "stroke_count": 0
+      },
+      {
+        "text_focus": null,
+        "ime_composing": null,
+        "ok": false,
+        "stroke_count": 0
+      }
+    ],
+    "idle_modified_gesture_actual_strokes": [
+      [
+        [
+          20,
+          30
+        ],
+        [
+          60,
+          30
+        ],
+        [
+          "shift"
+        ]
+      ]
+    ],
+    "direct_cases_input_released": true,
+    "registered_viewport_remains_blocked": true,
+    "registered_idle_control_strokes": [
+      [
+        [
+          20,
+          30
+        ],
+        [
+          60,
+          30
+        ],
+        [
+          "shift"
+        ]
+      ]
+    ]
+  },
+  "regression": {
+    "prior_immutable_source": {
+      "failed": 7,
+      "passed": 3,
+      "deselected": 30,
+      "seconds": 0.13
+    },
+    "final_scoped": {
+      "passed": 88,
+      "seconds": 0.42
+    },
+    "permanent_cases": "Seven explicit unsafe/UNKNOWN contexts produce zero movement, key/button presses and strokes; three controls preserve idle modifier, absent-context and unmodified-pointer behavior with input release. Existing owned-up and registered-operation tests pass."
+  },
+  "integrated_regression": {
+    "passed": 1263,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 58.56
+  },
+  "static_checks": {
+    "two_python_ruff": "PASS",
+    "two_python_format": "PASS",
+    "generated_contract": "PASS: 3 tool / 11 CLI / 198 published CLI / 12 published tool"
+  },
+  "not_run": {
+    "native_ime_and_input": "No native/IME engine execution in this slice; context facts are supplied controlled component data.",
+    "installed_current_harness_whole_e2e_models": "Outside current software slice; whole E2E/models owned by other sessions.",
+    "full_task_accuracy_p95_goodput_coverage": "No full-task/model/performance trials in this slice.",
+    "public_release": "Existing feature branch and draft PR only; no release execution."
+  },
+  "limits": [
+    "No MCP/registered-operation bypass was demonstrated: existing viewport upper guards already refused active contexts.",
+    "This correction supplies no missing production Blender popup/text/IME/effective keymap/global busy/focused editor observation."
+  ],
+  "acceptance_or_release_status_changed": false,
+  "private_evidence_copied": false,
+  "retained_artifact_sha256": {
+    "clef-modifier-gesture-context-audit-20261012.json": "514677c337352873997c41beee9cbf88babb169ba34c962f5d4750b339d337fd",
+    "clef-modifier-gesture-context-audit-after-20261012.json": "cf341d730b0342fba58b88c9d3a953b79c3f21bac1d66e8d6c1ae98c1e026bbe",
+    "clef-modifier-gesture-context-audit-20261012.py": "87664618b841260f1fa2d18beefcf753ce1557371c89f4755875cb413d5ba82c",
+    "clef-modifier-gesture-context-audit-after-20261012.py": "d6c7fbd76ae7b7f4591522e06b3deb1dedd0227dafa1aec49f6a1abfc24bd9e8",
+    "clef-modifier-gesture-context-red-20261012.log": "91996da0ee3297fa0828bbaf87b3d62bc27897af71ab04c33190533a9c083368",
+    "clef-modifier-gesture-context-green-20261012.log": "6193ef41f69ab427b3caa901aa51a452600702ae9f6cf46ba8423ac3cc390789",
+    "clef-modifier-gesture-context-integrated-20261012.log": "98a74b2e0fc7882fbe7401608d316895d225b274d3ca1b00b9bef4862068ab0e"
+  }
+}

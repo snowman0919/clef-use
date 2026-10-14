@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-11",
+  "claim": "OBSERVED",
+  "candidate": "FINAL10 isolated local unpublished .30",
+  "archive_sha256": "a09efd9d001e1c85e7f86357824a08f9199c0800a27359430bb3acf6cc2e36df",
+  "runtime_version": "0.1.30",
+  "contract": {
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "installed_source_sha256": {
+    "input_ir.py": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+    "x11_input_state.py": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+    "x11_clipboard.py": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3",
+    "runtime.py": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+    "capabilities.py": "cccb8d7bdc6cde73dd1de11e5ca3707bf773e10a4ce22618335935a55f5f4257",
+    "harness.py": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+    "operations.py": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+    "state.py": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8"
+  },
+  "installed_matches_frozen_source": true,
+  "install": {
+    "initial": "INSTALLED",
+    "repeat": "CURRENT",
+    "explicit_three_guides": [
+      {
+        "harness": "codex",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "hermes",
+        "status": "INSTALLED"
+      },
+      {
+        "harness": "omp",
+        "status": "INSTALLED"
+      }
+    ],
+    "three_guide_repeat": [
+      {
+        "harness": "codex",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "hermes",
+        "status": "UNCHANGED"
+      },
+      {
+        "harness": "omp",
+        "status": "UNCHANGED"
+      }
+    ],
+    "owned_home_files_byte_identical": 26,
+    "comment_prefixes_preserved": true,
+    "owned_loopback_stopped": true
+  },
+  "native_input": {
+    "scope": "actual installed package/native Xvfb widgets and protocol; source fixture programs only, no mocked backend",
+    "fixture_source_sha256": "7d9c245e84bf91739d585c661b9e610ffffc4615143e6d52395d25770acc944c",
+    "cases": {
+      "NATIVE_PROGRAM": {
+        "status": "PASS",
+        "native_checks": 35,
+        "evidence_sha256": "39fe0db720d706c995106867dc511a6a8376889c2ba6436370cd6c5ae58a5af5",
+        "owned_xvfb_stopped": true
+      },
+      "CLIPBOARD_PROGRAM": {
+        "status": "PASS",
+        "native_checks": 8,
+        "evidence_sha256": "358514437368ea5f72b8eef47418f03722a4f77edaa89197128cf608ef2bc223",
+        "owned_xvfb_stopped": true
+      }
+    },
+    "installed_source_sha256": {
+      "input_ir.py": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+      "x11_input_state.py": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+      "x11_clipboard.py": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3"
+    },
+    "status": "PASS"
+  },
+  "native_ime_literal": {
+    "status": "PASS",
+    "claim": "OBSERVED",
+    "scope": "installed runtime with API_ASSISTED owned GtkEntry/private actual Hangul IME; context=None only fixture checkpoint keys, no production composition provider",
+    "input_ir_sha256": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+    "cases": [
+      {
+        "case": "idle_hangul_unicode_keyboard_refused",
+        "ok": true,
+        "reason": "exact native Unicode unavailable; select clipboard explicitly",
+        "widget_unchanged": true
+      },
+      {
+        "case": "idle_hangul_explicit_clipboard",
+        "ok": true,
+        "exact_committed": true,
+        "no_preedit": true,
+        "engine_unchanged": true
+      },
+      {
+        "case": "idle_hangul_explicit_clipboard",
+        "ok": true,
+        "exact_committed": true,
+        "no_preedit": true,
+        "engine_unchanged": true
+      },
+      {
+        "case": "active_hangul_clipboard_refused",
+        "ok": true,
+        "reason": "literal insertion requires known idle IME",
+        "widget_and_preedit_unchanged": true
+      }
+    ],
+    "formal_composition_support": "NOT_RUN: no shipped trusted owner-app observer/composition transaction"
+  },
+  "generated_published_examples": {
+    "status": "PASS",
+    "generated_tools": 3,
+    "generated_cli": 11,
+    "published_cli": 194,
+    "published_inline_tools": 12,
+    "interpreter": "actual FINAL10 runtime/current/bin/python"
+  },
+  "not_run": {
+    "formal_ime_composition": "No shipped trusted observer/composition transaction; owned checkpoint keys context=None are fixture-only",
+    "harness_GUI_tasks": "NOT_RUN",
+    "reaction_release_gate": "NOT_RUN pending fresh declared measurements; no100msgrade",
+    "public_release": "NOT_RUN; local archive only",
+    "production_state_provider": "NOT_RUN; default six operations remain guarded/BLOCKED without observed state"
+  }
+}

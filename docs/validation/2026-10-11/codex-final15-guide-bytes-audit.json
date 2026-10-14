@@ -1,0 +1,61 @@
+{
+  "classification": "OBSERVED read-only retained native trace audit; no new models or inputs",
+  "candidate": "FINAL15",
+  "guide_audit": {
+    "clef-use": {
+      "packaged_SKILL_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "original_body_sha256_meaning": "UTF-8 decoded text.strip() only; this prior normalized-body hash intentionally differs from packaged file hash",
+      "normalized_body_sha256": "d64b5dd9c99a0fd6913b1d5c88e6b41ca14bf773f7f3a256a1297e34cd40d912",
+      "removed_leading_bytes": 0,
+      "removed_trailing_bytes": 1,
+      "exact_full_packaged_bytes_contained_in_native_tool_result": true,
+      "exact_matches": [
+        {
+          "trace_event_index": 38,
+          "exact_packaged_bytes_offset": 0,
+          "exact_packaged_bytes_length": 4887,
+          "extracted_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+          "native_output_sha256": "0a7da59911d39b306ce7c94eb21c9035cde74f55446975eb26588a282ba92d67"
+        }
+      ]
+    },
+    "clef-use-blender": {
+      "packaged_SKILL_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "original_body_sha256_meaning": "UTF-8 decoded text.strip() only; this prior normalized-body hash intentionally differs from packaged file hash",
+      "normalized_body_sha256": "30f1fa8a6c1efb4c1405febd24d03f6c9296e86ab4721d1d0cc850e290300c09",
+      "removed_leading_bytes": 0,
+      "removed_trailing_bytes": 1,
+      "exact_full_packaged_bytes_contained_in_native_tool_result": true,
+      "exact_matches": [
+        {
+          "trace_event_index": 38,
+          "exact_packaged_bytes_offset": 4887,
+          "exact_packaged_bytes_length": 3590,
+          "extracted_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "native_output_sha256": "0a7da59911d39b306ce7c94eb21c9035cde74f55446975eb26588a282ba92d67"
+        }
+      ]
+    },
+    "clef-use-diagnostics": {
+      "packaged_SKILL_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+      "original_body_sha256_meaning": "UTF-8 decoded text.strip() only; this prior normalized-body hash intentionally differs from packaged file hash",
+      "normalized_body_sha256": "d2396e3aca79fe033e8e1358d0a9e8ed36da3b552dab16472d752851c06391a1",
+      "removed_leading_bytes": 0,
+      "removed_trailing_bytes": 1,
+      "exact_full_packaged_bytes_contained_in_native_tool_result": true,
+      "exact_matches": [
+        {
+          "trace_event_index": 38,
+          "exact_packaged_bytes_offset": 8477,
+          "exact_packaged_bytes_length": 3097,
+          "extracted_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+          "native_output_sha256": "0a7da59911d39b306ce7c94eb21c9035cde74f55446975eb26588a282ba92d67"
+        }
+      ]
+    }
+  },
+  "native_trace_sha256": "84d8dfc05e971a27f4bae7e349d543ad7b006a14b2af5d686cf35991f94005db",
+  "scope": "Exact UTF-8 packaged byte sequence searched within successful native commandExecution aggregatedOutput; full file including whitespace, not heading or marker search",
+  "privacy": "No private paths, raw tool output or identifiers",
+  "received_native_artifact_sha256": "5d0469a803765bb905bce1b306f90ab1128dc91cd25451a9afbb415660a113f0"
+}

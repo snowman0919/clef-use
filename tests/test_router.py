@@ -58,7 +58,7 @@ def test_actionless_context_uses_unique_observed_anchor_not_roster_prefix():
     bounded = router.decision_observation(obs, (), contract)
     ids = {o.id for o in bounded.objects}
     assert {o.id for o in items[-4:]} <= ids
-    assert len(bounded.objects) <= 8
+    assert len(bounded.objects) <= 40
     assert all(o == next(x for x in items if x.id == o.id) for o in bounded.objects)
     assert all(not o.actions and o.confidence is None for o in bounded.objects)
     assert bounded.id == obs.id and bounded.frame is obs.frame
@@ -83,7 +83,7 @@ def test_bounded_context_keeps_native_pixel_nearest_hint_on_rectangular_frames(s
         )
 
     anchor = item("anchor", "Anchor ", 100, 100)
-    overlap = tuple(item(f"overlap_{i}", f"Observed {i}", 100, 100) for i in range(6))
+    overlap = tuple(item(f"overlap_{i}", f"Observed {i}", 100, 100) for i in range(38))
     near_xy, far_xy = ((100, 120), (128, 100)) if width > height else ((120, 100), (100, 128))
     near = item("near_raw", "Near_Raw_", *near_xy)
     far = item("far", "Farther", *far_xy)
@@ -100,7 +100,7 @@ def test_bounded_context_keeps_native_pixel_nearest_hint_on_rectangular_frames(s
     bounded = router.decision_observation(obs, (), contract)
     assert near in bounded.objects  # Native rectangle gaps: near10 pixels, far18 pixels.
     assert far not in bounded.objects
-    assert len(bounded.objects) == 8 and bounded.objects[0] is anchor
+    assert len(bounded.objects) == 40 and bounded.objects[0] is anchor
     assert all(not obj.actions and obj.confidence is None for obj in bounded.objects)
     assert bounded.frame is frame and bounded.id == obs.id
     assert bounded.evidence is evidence
@@ -140,7 +140,7 @@ def test_context_uses_unique_success_condition_label_without_visual_intent():
     router = ExecutionRouter(Config())
     bounded = router.decision_observation(obs, (), contract)
     assert {o.id for o in items[-4:]} <= {o.id for o in bounded.objects}
-    assert len(bounded.objects) == 8
+    assert len(bounded.objects) == len(items)
     assert bounded.objects[0] is items[-4]
     by_id = {o.id: o for o in items}
     assert all(o is by_id[o.id] for o in bounded.objects)
@@ -172,7 +172,7 @@ def test_success_condition_context_fallback_does_not_invent_or_override_anchor(v
             label=f"Other {i}",
             bbox=BoundingBox(x1=0.7, y1=0.6, x2=0.8, y2=0.7),
         )
-        for i in range(8)
+        for i in range(40)
     )
     anchor = UIObject(
         id="raw_anchor", label="Tools", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.05, y2=0.02)
@@ -225,7 +225,7 @@ def test_success_condition_label_is_literal_and_unicode_safe(label, condition):
     anchor = UIObject(id="literal", label=label, bbox=BoundingBox(x1=0, y1=0, x2=0.1, y2=0.1))
     far = tuple(
         UIObject(id=str(i), label=f"Other {i}", bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8))
-        for i in range(8)
+        for i in range(40)
     )
     obs = Observation("literal_epoch", Frame(Image.new("RGB", (1000, 500))), (*far, anchor))
     contract = Contract(goal="Show the requested menu", success_conditions=[condition])
@@ -236,7 +236,7 @@ def test_success_condition_label_is_literal_and_unicode_safe(label, condition):
 def test_exact_goal_anchor_precedes_literal_success_condition_fallback(duplicate):
     prefix = tuple(
         UIObject(id=str(i), label=f"Other {i}", bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8))
-        for i in range(8)
+        for i in range(40)
     )
     goal_anchor = UIObject(
         id="goal", label="Exact Goal", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.05, y2=0.02)
@@ -258,7 +258,8 @@ def test_exact_goal_anchor_precedes_literal_success_condition_fallback(duplicate
         assert bounded.objects[0] is goal_anchor
 
 
-def test_condition_context_fallback_preserves_executable_targets_and_bound():
+@pytest.mark.parametrize("target_count", [32, 33, 40])
+def test_condition_context_fallback_preserves_executable_targets_and_bound(target_count):
     from clef_use.backends import decision_request
 
     targets = tuple(
@@ -268,7 +269,7 @@ def test_condition_context_fallback_preserves_executable_targets_and_bound():
             actions=frozenset({"click"}),
             bbox=BoundingBox(x1=0.7, y1=0.7, x2=0.8, y2=0.8),
         )
-        for i in range(32)
+        for i in range(target_count)
     )
     far = tuple(
         UIObject(id=f"hint_{i}", label=f"Other {i}", bbox=targets[0].bbox) for i in range(9)
@@ -298,12 +299,33 @@ def test_condition_context_fallback_preserves_executable_targets_and_bound():
     bounded = ExecutionRouter(Config()).decision_observation(obs, candidates, contract)
     assert len(bounded.objects) == 40
     assert all(
-        actual is expected for actual, expected in zip(bounded.objects[:32], targets, strict=True)
+        actual is expected
+        for actual, expected in zip(bounded.objects[:target_count], targets, strict=True)
     )
-    assert bounded.objects[32] is anchor and near in bounded.objects[32:]
+    if target_count < 40:
+        assert bounded.objects[target_count] is anchor and near in bounded.objects[target_count:]
     packet = decision_request(bounded, contract, candidates, [])
     assert [a["id"] for a in packet["state"]["allowed_candidates"]] == [a.id for a in candidates]
     assert list(packet["questions"]["action"]["criteria"]) == [a.id for a in candidates]
+    assert {a["target"] for a in packet["state"]["allowed_candidates"]} <= {
+        obj["id"] for obj in packet["state"]["objects"]
+    }
+
+
+def test_target_budget_overflow_is_refused_without_silently_pruning_actions():
+    obs = observation(41)
+    candidates = tuple(
+        ActionCandidate(
+            id=f"action_{i}",
+            operation="click",
+            observation_id=obs.id,
+            target=obj.id,
+            description=obj.label,
+        )
+        for i, obj in enumerate(obs.objects)
+    )
+    with pytest.raises(GroundingUncertain, match="executable targets exceed"):
+        ExecutionRouter(Config()).decision_observation(obs, candidates, Contract(goal="Inspect"))
 
 
 def test_raw_candidate_explosion_routes_before_truncation():
@@ -311,6 +333,43 @@ def test_raw_candidate_explosion_routes_before_truncation():
     route = router.route(observation(160), Contract(goal="Settings"))
     assert route.mode == "VISUAL"
     assert route.candidate_count == 160
+
+
+def test_assessment_retains_deeper_dropdown_evidence_within_total_packet_budget():
+    # A long popup can put its distinguishing rows beyond the nearest eight
+    # objects. Read-only assessment has no executable targets reserving space.
+    anchor = UIObject(
+        id="header", label="Tools", bbox=BoundingBox(x1=0.02, y1=0.01, x2=0.06, y2=0.03)
+    )
+    rows = tuple(
+        UIObject(
+            id=f"row_{i}",
+            label=f"Observed command {i}",
+            bbox=BoundingBox(x1=0.03, y1=0.04 + i * 0.02, x2=0.18, y2=0.055 + i * 0.02),
+            source=("box_ocr_content_ocr",),
+        )
+        for i in range(20)
+    )
+    far = tuple(
+        UIObject(
+            id=f"unrelated_{i}",
+            label=f"Other panel {i}",
+            bbox=BoundingBox(x1=0.8, y1=0.7, x2=0.9, y2=0.8),
+        )
+        for i in range(40)
+    )
+    obs = Observation("long_popup", Frame(Image.new("RGB", (1280, 900))), (*far, anchor, *rows))
+    contract = Contract(
+        goal="Assess whether the Tools menu is open",
+        success_conditions=["The Tools menu is visibly open"],
+        execution_mode="ASSESS",
+    )
+    router = ExecutionRouter(Config())
+    bounded = router.decision_observation(obs, (), contract)
+    assert all(row in bounded.objects for row in rows)
+    assert len(bounded.objects) == 40
+    assert bounded.objects[0] is anchor
+    assert router.route(bounded, contract).mode == "ASSESS"
 
 
 def test_sparse_and_native_semantic_precedence():

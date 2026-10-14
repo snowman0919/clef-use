@@ -1,0 +1,15 @@
+{
+  "classification": "OBSERVED_OUTER_COMPLETION_AND_READONLY_PROCESS_READBACK",
+  "outer_command_exit_code": 0,
+  "exit_observation": "write_stdin returned completed exit_code0 after outer Popen.wait returned the bwrap status; reviewed driver unchanged",
+  "own_uid_processes_with_exact_owned_root_argv": [],
+  "own_uid_FINAL16_model_worker_processes": [],
+  "permission_denied_own_uid_processes": 0,
+  "vanished_during_snapshot": 0,
+  "owned_process_absence_observed": true,
+  "namespace_lifecycle": "Outer bwrap wait completed; no live owned-root argv or FINAL16 modelworker observed. A live namespace inode was not sampled before the23srun completed; no claim of an independently tracked namespace inode. Kernel PIDnamespace exit reaping is the declared isolation mechanism.",
+  "driver_sha256": "cc0500d81d9b2ce24a51d3eeef9133f736b2f5ea30949ed1d8d9369feaad27da",
+  "report_sha256": "403811959868ce810bce325117a167c11bc600348a0fe7a042e995f9f1938549",
+  "no_retry": true,
+  "received_native_artifact_sha256": "d461bc471529e71f16fe249eb6dd48a13237fbbe7a9302b8f0fe44a8e6228fc9"
+}

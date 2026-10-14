@@ -1,0 +1,823 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Consumer-faithful native OMP public-guide/read-only capability batch, frozen FINAL11 bundle; no GUI/task verification",
+  "overall_status": "NOT_RUN",
+  "reason": "Explicit native turn exhausted predeclared8-completion invocation budget without final answer; remaining cases not started",
+  "candidate": {
+    "archive_sha256": "2d063fbcec0536ef3a63302721c1845a512028bcd2a67d26f80bb9d9b37d9899",
+    "wheel_sha256": "0ae199f62ccf2109d07d2481932dd67b0e3a164a5f235a9b1916eac64703c834",
+    "guides": [
+      {
+        "basename": "agent-skills/clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73"
+      },
+      {
+        "basename": "agent-skills/clef-use-blender/SKILL.md",
+        "sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+      },
+      {
+        "basename": "agent-skills/clef-use-diagnostics/SKILL.md",
+        "sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+      }
+    ],
+    "readonly_schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a"
+  },
+  "predeclaration": {
+    "basename": "clef-omp-native-consumer-predeclaration-public-20261011.json",
+    "sha256": "6fc0363eb1e44b3a1d17bbd3636272102de45bded1ee5e3a38208c417dc53aee"
+  },
+  "profile": {
+    "reader": "Settings.loadReadOnly",
+    "overlay": "nonpersistent safety bounds only",
+    "public_roles": {
+      "default": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "smol": {
+        "selector": "aipi/dgx-moa-fast",
+        "provenance": "global"
+      },
+      "tiny": {
+        "selector": null,
+        "provenance": "default"
+      }
+    },
+    "selected_default": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "selected_smol": {
+      "provider": "aipi",
+      "model": "dgx-moa-fast",
+      "api": "openai-completions"
+    },
+    "priority_fallback_permitted": false
+  },
+  "native_generated_prompt": {
+    "fixed_system_prompt": false,
+    "normal_runtime_flag": true,
+    "native_catalog_present": true,
+    "initial_preview_catalog": [
+      "- clef-use: Use clef-use for authorized desktop or browser GUI tasks through its MCP or CLI.",
+      "- clef-use-blender: Use clef-use for Blender GUI work, read-only menu or scene-state assessment, selection,\u2026",
+      "- clef-use-diagnostics: Diagnose clef-use setup, missing skills/tools, ambiguous choices, stale state, wrong focus or\u2026"
+    ],
+    "sha256": "4c02394bbc5c02b4c9416fdce77d9f4fa3f5279126d2a95af0e77812bfc3e8ed",
+    "cache_readiness_gate": false
+  },
+  "cases": {
+    "explicit": {
+      "status": "NOT_RUN",
+      "reason": "Primary invocation budget exhausted before native send",
+      "loaded": [
+        "clef-use"
+      ],
+      "invoked": [
+        "mcp__clef_use_computer_capabilities"
+      ],
+      "tool_calls": 8,
+      "requested_tool_calls": 8,
+      "stop_reason": "toolUse"
+    },
+    "natural": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    },
+    "negative": {
+      "status": "NOT_RUN",
+      "reason": "Case not started"
+    }
+  },
+  "partial_evidence": {
+    "read_checks": [
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      },
+      {
+        "basename": "clef-use/references/API_BASELINE.md",
+        "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+        "full_body_observed": true,
+        "comparison": "Full reference text present after removing terminal newline, which native ReadTool omits in formatted output; source hash remains exact original bytes"
+      },
+      {
+        "basename": "clef-use/SKILL.md",
+        "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+        "full_body_observed": true
+      }
+    ],
+    "caps_checks": [
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        }
+      },
+      {
+        "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+        "read_only_facade": true,
+        "tools": [
+          "computer_status",
+          "computer_capabilities"
+        ],
+        "guide_body_hashes": {
+          "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+          "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+        }
+      }
+    ],
+    "public_event_order": [
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": [
+          "detail"
+        ],
+        "detail": true
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 20526,
+        "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_status",
+        "arg_keys": []
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_status",
+        "is_error": true,
+        "output_chars": 88,
+        "output_sha256": "356c7599c60c8cd75ef171f94e46b80e56eddae2c306b1e661082da2b93dfc32",
+        "known_no_session_refusal": true
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "public_uri": "skill://clef-use/SKILL.md"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 4756,
+        "output_sha256": "6d50dddcdda389a4e8bdf854123b83d4ee925c3bf850568e3938eb3e2d9963c6",
+        "public_file_check": {
+          "basename": "clef-use/SKILL.md",
+          "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "full_body_observed": true
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "public_uri": "skill://clef-use/references/API_BASELINE.md"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 2320,
+        "output_sha256": "913f44c147ded74d9062d2724ae1d906ebd3acd3b1bc51cff1bc540b4224dc3a",
+        "public_file_check": {
+          "basename": "clef-use/references/API_BASELINE.md",
+          "sha256": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+          "full_body_observed": true,
+          "comparison": "Full reference text present after removing terminal newline; source hash binds exact original bytes"
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "public_uri": "skill://clef-use/SKILL.md"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": false,
+        "output_chars": 4756,
+        "output_sha256": "6d50dddcdda389a4e8bdf854123b83d4ee925c3bf850568e3938eb3e2d9963c6",
+        "public_file_check": {
+          "basename": "clef-use/SKILL.md",
+          "sha256": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+          "full_body_observed": true
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "arg_keys": [
+          "detail"
+        ],
+        "detail": true
+      },
+      {
+        "stage": "completed",
+        "tool": "mcp__clef_use_computer_capabilities",
+        "is_error": false,
+        "output_chars": 20526,
+        "output_sha256": "79d018a4ffef5a14b294be8e559a7636cb859ce9d8efa12bc0e137ae9613de9a",
+        "caps_check": {
+          "schema_sha256": "4b751c04e65b9046ac1f062ef727af376ef6be6f914b4437a84252baa65ab96a",
+          "read_only_facade": true,
+          "tools": [
+            "computer_status",
+            "computer_capabilities"
+          ],
+          "guide_body_hashes": {
+            "clef-use": "89eef7dc6de09280af9fc9842dbb311bb4d96013e686e7d42f3ae52353e87a73",
+            "clef-use-blender": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+            "clef-use-diagnostics": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        }
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "public_uri": "skill://clef-use/SKILL.md:26-"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": true,
+        "output_chars": 189,
+        "output_sha256": "361a1e610d650cf2301cf3655a63e9763a28d53071a382a09579707728590c90",
+        "driver_selector_guard_refusal": true
+      },
+      {
+        "stage": "requested",
+        "tool": "read",
+        "arg_keys": [
+          "path"
+        ],
+        "public_uri": "skill://clef-use/SKILL.md:44-120"
+      },
+      {
+        "stage": "completed",
+        "tool": "read",
+        "is_error": true,
+        "output_chars": 192,
+        "output_sha256": "32f3fb30ce5ead3c6ede35d4926a0dd1c9f24382c2927847af482606ef245e04",
+        "driver_selector_guard_refusal": true
+      }
+    ],
+    "initial_caps_before_guide_read": true,
+    "later_exact_caps_after_full_core_read": true,
+    "completed_final_answer": false
+  },
+  "actual_attempts": {
+    "native_completion_invocation_starts": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 359.558111
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 360.810907
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": -1,
+        "elapsed_ms": 360.932442
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 0,
+        "elapsed_ms": 431.56323100000003
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 1,
+        "elapsed_ms": 7489.58705
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 2,
+        "elapsed_ms": 21518.452044999998
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 3,
+        "elapsed_ms": 28205.15729
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 4,
+        "elapsed_ms": 35156.730063
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 5,
+        "elapsed_ms": 45642.953997
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 6,
+        "elapsed_ms": 56983.768699
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "provider": "aipi",
+        "model": "dgx-moa-fast",
+        "step_number": 7,
+        "elapsed_ms": 65428.719114
+      }
+    ],
+    "completed_spans": [
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6656.464772,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2304,
+          "gen_ai.usage.output_tokens": 13
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6830.365557,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2318,
+          "gen_ai.usage.output_tokens": 21
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "native_auxiliary",
+        "elapsed_ms": 6852.10377,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "stop"
+          ],
+          "omp.gen_ai.oneshot.kind": "skill_description",
+          "omp.gen_ai.agent.step.number": -1,
+          "gen_ai.usage.input_tokens": 2308,
+          "gen_ai.usage.output_tokens": 19
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 7479.363258,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 0,
+          "gen_ai.usage.input_tokens": 8353,
+          "gen_ai.usage.output_tokens": 47
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 21511.358239,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 1,
+          "gen_ai.usage.input_tokens": 21403,
+          "gen_ai.usage.output_tokens": 36
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 28198.587004,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 2,
+          "gen_ai.usage.input_tokens": 17002,
+          "gen_ai.usage.output_tokens": 49
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 35154.566102,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 3,
+          "gen_ai.usage.input_tokens": 17162,
+          "gen_ai.usage.output_tokens": 48
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 45640.826757,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 4,
+          "gen_ai.usage.input_tokens": 18497,
+          "gen_ai.usage.output_tokens": 49
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 56978.36716,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 5,
+          "gen_ai.usage.input_tokens": 19805,
+          "gen_ai.usage.output_tokens": 49
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 65426.893796,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 6,
+          "gen_ai.usage.input_tokens": 21124,
+          "gen_ai.usage.output_tokens": 52
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      },
+      {
+        "case": "explicit",
+        "scope": "primary",
+        "elapsed_ms": 73731.281283,
+        "attributes": {
+          "gen_ai.provider.name": "aipi",
+          "gen_ai.request.model": "dgx-moa-fast",
+          "gen_ai.response.model": "dgx-moa-fast",
+          "gen_ai.response.finish_reasons": [
+            "tool_calls"
+          ],
+          "omp.gen_ai.agent.step.number": 7,
+          "gen_ai.usage.input_tokens": 20711,
+          "gen_ai.usage.output_tokens": 53
+        },
+        "status_code": 0,
+        "category": "OTHER",
+        "http_status_from_error": null,
+        "error_message_recorded": false,
+        "exception_categories": []
+      }
+    ],
+    "auxiliary_count": 3,
+    "primary_count": 8,
+    "phase_fetch_counts": {
+      "primary_turn": {
+        "calls": 8,
+        "delivered_statuses": [
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200,
+          200
+        ]
+      },
+      "create_native_session": {
+        "calls": 3,
+        "delivered_statuses": [
+          200,
+          200,
+          200
+        ]
+      }
+    },
+    "phase_fetch_calls_are_guaranteed_model_only_http": false,
+    "model_only_http_attempt_count": "NOT_OBSERVED",
+    "underlying_retry_reasons": "NOT_OBSERVED",
+    "added_driver_retries": false,
+    "native_retries_preserved": true
+  },
+  "auxiliary_warnings": [
+    {
+      "event": "skill_description_compression_failed",
+      "skill": "clef-use-diagnostics",
+      "category": "INVALID_COMPRESSION",
+      "http_status_from_error": null,
+      "error_message_recorded": false
+    }
+  ],
+  "cache_timeline": [
+    {
+      "stage": "before_create_session",
+      "case": "explicit",
+      "elapsed_ms": 317.25818799999996,
+      "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+      "entries": [
+        {
+          "guide": "clef-use",
+          "present": false
+        },
+        {
+          "guide": "clef-use-blender",
+          "present": false
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "present": false
+        }
+      ]
+    },
+    {
+      "stage": "after_create_session_return",
+      "case": "explicit",
+      "elapsed_ms": 375.61073400000004,
+      "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+      "entries": [
+        {
+          "guide": "clef-use",
+          "present": false
+        },
+        {
+          "guide": "clef-use-blender",
+          "present": false
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "present": false
+        }
+      ]
+    },
+    {
+      "stage": "before_primary_no_wait",
+      "case": "explicit",
+      "elapsed_ms": 379.82973,
+      "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+      "entries": [
+        {
+          "guide": "clef-use",
+          "present": false
+        },
+        {
+          "guide": "clef-use-blender",
+          "present": false
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "present": false
+        }
+      ]
+    },
+    {
+      "stage": "after_primary_before_dispose",
+      "case": "explicit",
+      "elapsed_ms": 73739.87788900001,
+      "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+      "entries": [
+        {
+          "guide": "clef-use",
+          "present": true
+        },
+        {
+          "guide": "clef-use-blender",
+          "present": true
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "present": false
+        }
+      ]
+    },
+    {
+      "stage": "after_background_cleanup_wait",
+      "case": "explicit",
+      "elapsed_ms": 73748.38938000001,
+      "state": "OWNED_NATIVE_CACHE_METADATA_OBSERVATION",
+      "entries": [
+        {
+          "guide": "clef-use",
+          "present": true
+        },
+        {
+          "guide": "clef-use-blender",
+          "present": true
+        },
+        {
+          "guide": "clef-use-diagnostics",
+          "present": false
+        }
+      ]
+    }
+  ],
+  "driver_limitation": {
+    "stopped_batch_preserved_without_rescore_or_resume": true,
+    "native_fatal_failure_established": false,
+    "two_model_requested_native_selector_uris_refused_by_driver": true,
+    "uris": [
+      "skill://clef-use/SKILL.md:26-",
+      "skill://clef-use/SKILL.md:44-120"
+    ],
+    "reason": "Guard resolved inline selectors as literal filenames before native selector parser; source ReadTool schema supports inline selectors and SkillProtocolHandler declares lines selectors",
+    "effect_on_whether_turn_would_have_completed_within_budget": "NOT_OBSERVED",
+    "zero_inference_complete_fidelity_audit": "PENDING; no model retry authorized"
+  },
+  "cleanup": {
+    "native_sessions_disposed": true,
+    "mcp_disconnected": true,
+    "native_background_work_waited_only_at_cleanup": true,
+    "runtime_home_created": false,
+    "gui_or_runtime_sessions_started": false,
+    "source_edits": false,
+    "credentials_global_configuration_changes": false,
+    "native_session_manager": "in-memory"
+  },
+  "history_preserved": [
+    {
+      "basename": "clef-omp-native-profile-readonly-public-20261011.json",
+      "sha256": "250ec54196f160a7e1007374f84b33a61549af43814b5d9c0aab6e5b380a1316",
+      "unchanged": true
+    },
+    {
+      "basename": "clef-omp-final10-native-generated-public-20261011.json",
+      "sha256": "7c4128415f9baa1551681f42e03d8603a479bb0d42f21a556210cb56e5ac4784",
+      "unchanged": true
+    },
+    {
+      "basename": "clef-omp-public-evidence-20261011.json",
+      "sha256": "d7b9341359e0bbc6fcef8abf9e8712473fd6fbbb733855e621742935195fb353",
+      "unchanged": true
+    }
+  ],
+  "evidence": {
+    "summary_sha256": "363f2fcbfbd9f2698e5b8daa60a0fab3c2f46cf8277568a431ede987bee387f2",
+    "private_trace_basename": "explicit-private-trace.jsonl",
+    "private_trace_sha256": "986ef566376e9b8f7cbd71417c87a797680e3a5b2422c5b7b6a4f4da86e3ad11",
+    "executed_driver_sha256": "e4d66032b6689e4e0ff09d302b08ee6daf27caea68b34ed3f673f63a0a411446"
+  },
+  "GUI_TASK_VERIFIED": "NOT_RUN"
+}

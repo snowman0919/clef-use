@@ -14,6 +14,20 @@ def merge(inputs, output):
     versions = {manifest["version"] for manifest in manifests}
     if len(versions) != 1:
         raise ValueError("release merge requires one version")
+    contract_keys = (
+        "api_schema_version",
+        "schema_sha256",
+        "guide_contract_version",
+        "guide_bundle_sha256",
+        "operation_registry_version",
+    )
+    contracts = {
+        tuple(artifact.get(key) for key in contract_keys)
+        for manifest in manifests
+        for artifact in manifest["artifacts"]
+    }
+    if len(contracts) != 1:
+        raise ValueError("platform runtime/guide contracts differ")
     version = versions.pop()
     artifacts, keys = [], set()
     release = output / "releases" / version

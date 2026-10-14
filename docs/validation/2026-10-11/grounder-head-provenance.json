@@ -1,0 +1,92 @@
+{
+  "classification": "OBSERVED_METADATA_AND_CONFIG_PROVENANCE_CORRECTION",
+  "heads": [
+    {
+      "sha256": "c3c2109fd106377bef3edb86ee7ae0fd20a65f7e449a1033acd95660690dc087",
+      "format": "clef-use-grounding-head-v3",
+      "backbone_model": "google/siglip2-base-patch16-512",
+      "backbone_revision": "a89f5c5093f902bf39d3cd4d81d2c09867f0724b",
+      "trained_steps": 55800,
+      "training_manifest_sha256": "ad88e54851d0dfd6c52ae572ca0af920b3a3653f393ba8906c09b8914b5dc0d4",
+      "coarse_strategy_audit": {
+        "overview": {
+          "train": {
+            "negative": 1,
+            "positive": 5
+          },
+          "validation": {
+            "negative": 1,
+            "positive": 2
+          }
+        },
+        "tiled": {
+          "train": {
+            "negative": 34,
+            "positive": 15
+          },
+          "validation": {
+            "negative": 17,
+            "positive": 5
+          }
+        }
+      },
+      "format_matches_current_loader": true,
+      "fully_loaded_and_exercised": "NOT_RUN; metadata-only inventory"
+    },
+    {
+      "sha256": "c34940b3f4256298e35a4df95956d9e495ff6768bde9ff6bb57d11c85c35ec12",
+      "format": "clef-use-grounding-head-v2",
+      "backbone_model": "google/siglip2-base-patch16-512",
+      "backbone_revision": "a89f5c5093f902bf39d3cd4d81d2c09867f0724b",
+      "trained_steps": 57000,
+      "training_manifest_sha256": "4db747a775e04038c11883e438827111b38db88241ae5577d5d6b6170f21f39d",
+      "coarse_strategy_audit": null,
+      "format_matches_current_loader": false,
+      "fully_loaded_and_exercised": "NOT_RUN; metadata-only inventory"
+    }
+  ],
+  "current_global_config_selected_fields": {
+    "visual_grounding": true,
+    "visual_model_explicit": false,
+    "visual_revision_explicit": false,
+    "visual_device_explicit": false,
+    "configured_head_sha256": "c34940b3f4256298e35a4df95956d9e495ff6768bde9ff6bb57d11c85c35ec12"
+  },
+  "paired_canonical_E2E_config": {
+    "visual_grounding": false,
+    "configured_head_sha256": "c34940b3f4256298e35a4df95956d9e495ff6768bde9ff6bb57d11c85c35ec12"
+  },
+  "canonical_source": {
+    "loader_path": "src/clef_use/grounding.py",
+    "sha256": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+    "required_head_format": "clef-use-grounding-head-v3",
+    "query_policy": "query.strip().lower(), fixed tokenizer padding, truncation=False and explicit maximum position refusal",
+    "default_policy": "fullimage regionNone, pointgeometry, coarse tiled, canonical refinement0..2 until confidence>=.55; presencefloor.9"
+  },
+  "interpretation": "Configured historical c349v2 does not establish an actually served current comparator. Current canonical loader would refuse it (INFERRED from source/metadata; not loaded here). Supported V3 c3 metadata exists, not proof of current service use; substitution requires root decision and separate declaration. Existing E2E used visualgroundingFalse.",
+  "existing_artifact_state_search": {
+    "supported_v3_exact_hash_or_path_matched_docs": [
+      "docs/HYBRID_VALIDATION.md"
+    ],
+    "matching_global_state_files": 0,
+    "served_current_head": "UNAVAILABLE"
+  },
+  "leakage_index_check": {
+    "V3_local_unique_PNGs": 20,
+    "existing_index_unique_encoded_images": 20,
+    "all_V3_local_encoded_hashes_covered_by_existing_index": true,
+    "audit_image_hash_convention": "sha256(str(image.size).encode(ascii)+bRGB+RGBbytes), distinct from bare encoded/decoded index hashes; zero direct audit-v-index hash intersection does not indicate image independence"
+  },
+  "models_GPU_GUI_native_input_executed": false,
+  "source_or_global_config_modified": false,
+  "pinned_current_loader_source_check": {
+    "pinned_revision": "b3f0b23309a7c7ea6a943e0c14e0ae51034552cd",
+    "current_grounding_file_sha256": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+    "pinned_grounding_file_sha256": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+    "load_grounding_head_source_equal": true,
+    "current_loader_sha256": "3442d5970bb25176732304d0c13a73346f4ff4474963687512c143247b507715",
+    "pinned_loader_sha256": "3442d5970bb25176732304d0c13a73346f4ff4474963687512c143247b507715",
+    "head_constructor_or_inference": "NOT_RUN"
+  },
+  "received_artifact_sha256": "f8f371bc4ab6fae01802764be428dbb2f5cca05c2b0c8b4c06b506bdb8774a6c"
+}

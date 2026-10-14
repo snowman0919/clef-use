@@ -1,0 +1,158 @@
+{
+  "classification": "OBSERVED_PRIVATE_OBSERVER_PASS_APP_LAUNCH_SETUP_FAILURE",
+  "date": "2026-10-12",
+  "attempt": "v4",
+  "driver_sha256": "c6a04086175f869f6b9cb6a94fff240641b2611c5995a91ac26a20f91ffc8847",
+  "declaration_sha256": "3f5b4f3ae07b2621fc25a361415f5bb94cc5c00ff21a822e01cb208f5ef7c420",
+  "root_start_receipt_sha256": "e711b9810f41ca2c9710ecdeaf54d59f9e1c5863d51eaea094561f9c47c75005",
+  "diff_sha256": "8d7e2c504cde1d674d075854aecfe19ae1d4b61d491e6fbfcf965684d26dddee",
+  "executions": 1,
+  "retries": 0,
+  "controller_exit_code": 1,
+  "elapsed_worker_seconds": 0.2707256490830332,
+  "prior_attempts_preserved": [
+    {
+      "basename": "clef-atspi-factory-once-setup-failure-public-20261012.json",
+      "sha256": "57ee1c2a20b81a97debcba1fb8fd79d4e384e1ee077b6344b24f39d6df0ae67d"
+    },
+    {
+      "basename": "clef-atspi-factory-v2-once-setup-failure-public-20261012.json",
+      "sha256": "4bcac60183765909718f6e65163dff15ba3ab4a2e05c2c2eedecd3db645e164f"
+    },
+    {
+      "basename": "clef-atspi-factory-v3-once-setup-failure-public-20261012.json",
+      "sha256": "55d54d578f683548d1525d7f21101906f6fed0d7c451edbf1963d6313a24d15a"
+    }
+  ],
+  "stages": {
+    "host_GI_Atspi_import": "PASS",
+    "private_X11_socket_directory_UID_GID_zero_mode01777": "OBSERVED",
+    "own_cookie_readable": "OBSERVED",
+    "Xvfb_exec_and_OS_socket": "OBSERVED",
+    "private_session_bus_connection": "PASS",
+    "isolated_accessibility_bus_GetAddress_under_owned_root": "PASS",
+    "native_registry_initialization": "PASS",
+    "registry_pid_matches_owned_child": true,
+    "registry_before_app_count": 0,
+    "AT_SPI_observer": "PASS",
+    "Blender_launcher_bwrap_started": "OBSERVED",
+    "Blender_launcher_namespace_creation": "FAIL",
+    "Blender_ELF_exec": "NOT_RUN",
+    "Blender_OS_window_binding": "NOT_RUN",
+    "Blender_AT_SPI_registration": "INCONCLUSIVE",
+    "app_tree_samples": 0
+  },
+  "failure": {
+    "worker_error_type": "RuntimeError",
+    "worker_error": "Blender exited during startup",
+    "app_launcher_stderr": "bwrap: Creating new namespace failed: Operation not permitted",
+    "interpretation": "Real private bus, registry identity check and AT-SPI desktop observer initialization succeeded with an empty baseline. The separate app launcher bubblewrap failed during namespace creation before Blender ELF exec. No OS window binding or app tree observation occurred; this does not establish app bridge absence. The exact kernel/policy cause of app namespace creation refusal was not established."
+  },
+  "environment_route": {
+    "outer_namespace_UID_GID": 0,
+    "mapping": "New owned user namespace maps invoking host caller to namespace UID/GID0; no host root privilege.",
+    "outer_retained_capability": "CAP_SYS_ADMIN within new owned user namespace",
+    "inner_app_exec_policy": "ALL capabilities dropped by declared policy; app exec not reached.",
+    "identity_difference_from_v1_v2": "Observer/DBus/registry/app namespace identity changed; no same-UID comparison claim.",
+    "Xvfb_only_Mesa_selection": "Unchanged from v2; Xvfb process started and socket observed, but no vendor/library loading oracle or sustained server health result was collected.",
+    "synthetic_account_resolution": "Three owned synthetic passwd/group/files-only nsswitch files read-only mounted into outer namespace; no host account/auth copy. Successful bus/registry initialization observed, no causal exclusivity claim."
+  },
+  "raw_artifacts": [
+    {
+      "basename": "a11y-launcher.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "accessibility.conf",
+      "sha256": "719c1cb0ba2b95200ca36fd2cc7f698b5c335be2cf6ec61237e4ce5ede551ff4"
+    },
+    {
+      "basename": "blender.private.log",
+      "sha256": "5ab5eca32bffcc046716b4ab133630c99469b67c3c397ae92373a54a7a155c93"
+    },
+    {
+      "basename": "cleanup-independent.private.json",
+      "sha256": "c6eb04229295567bb30ca019645b6529ea1d7bc03c109414bdf69734e2fe4b98"
+    },
+    {
+      "basename": "controller.json",
+      "sha256": "0cd8a2397eafe5fac98d8b8c12a46b117bd8f69e7627f372d464288a9c5f7014"
+    },
+    {
+      "basename": "group",
+      "sha256": "1c13bb8b36a0b5ab4b8fc69b6819693b23d66ac6fc59274ee2339c02daa20347"
+    },
+    {
+      "basename": "nsswitch.conf",
+      "sha256": "78f23e93b5cf9cd7e0bdf355d4de7124106f368e68a6c2cd783f428302ed61fd"
+    },
+    {
+      "basename": "outer.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "passwd",
+      "sha256": "8ece151adfafb1c3bf60f23298c65949f400341247a4627ecea4362c9a544cc3"
+    },
+    {
+      "basename": "registry.private.log",
+      "sha256": "9d307ed556499f37fcb1517732638144b4ee8125619c1a443295c570b34c6bae"
+    },
+    {
+      "basename": "report.private.json",
+      "sha256": "e8387f80c5c0dba8185829216bdb1b23d20efdf8451b28c8463910f52f653829"
+    },
+    {
+      "basename": "session-bus.private.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "basename": "session.conf",
+      "sha256": "184c1f81b5d71e3160ce8887e7e41190fabb798d3ae72b2d080b50b75ba9f65e"
+    },
+    {
+      "basename": "xvfb.private.log",
+      "sha256": "a3a2f06e7cf3eb2e5fc847ac901cbbd728e14526b57ad5809a73ecc43d4a06da"
+    }
+  ],
+  "cleanup": {
+    "outer_waited": true,
+    "outer_namespace_exited": true,
+    "direct_children_waited": 5,
+    "all_direct_children_exited": true,
+    "same_uid_process_mount_namespaces_checked": 386,
+    "owned_mountpoint_process_matches": 0,
+    "permission_denials": 0,
+    "concurrently_vanished": 0,
+    "mountinfo_errors_by_errno": {
+      "22": 5
+    },
+    "unreadable_nonlive_zombies": 5,
+    "unreadable_potentially_live": 0,
+    "owned_root_socket_count": 0,
+    "independent_oracle_method": "Same-host-UID process mountinfo exact owned-root mountpoint; failed mountinfo classified using process state only. No cmdline/environment/UI read."
+  },
+  "scope": {
+    "new_Xvfb_processes": 1,
+    "new_factory_Blender_processes": 0,
+    "app_inputs": 0,
+    "screenshots": 0,
+    "accessible_names_descriptions_text_reads": 0,
+    "model_calls": 0,
+    "MCP_runtime_sessions": 0,
+    "canonical_edits": 0,
+    "production_UI_or_PID_targeting": 0
+  },
+  "claims_NOT_RUN": [
+    "Blender AT-SPI publishing or absence",
+    "Popup or edit ownership transitions",
+    "Software Mesa correction causal effectiveness or v1 crash root cause",
+    "Default production StateCompiler provider",
+    "Six guarded operations"
+  ],
+  "redactions": [
+    "No PIDs, account identifiers, hostnames, cookies, absolute private paths, accessible names or assets included.",
+    "Xauthority and machine-id contents and hashes omitted."
+  ],
+  "no_fallback_or_changed_driver": true
+}

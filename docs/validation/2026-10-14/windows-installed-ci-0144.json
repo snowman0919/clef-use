@@ -1,0 +1,197 @@
+{
+  "classification": "OBSERVED_IMMUTABLE_CI_ACTUAL_INSTALLATION_AND_NATIVE_COMPONENTS",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.44",
+  "source_commit": "d4f1c8e1e8c4e8659388326edac0febe0f79cc74",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-09",
+    "HARNESS-01",
+    "E2E-02",
+    "RELEASE-01"
+  ],
+  "publication_policy": "Whitelisted facts and digests only; no native paths, identities, configuration, message bodies or raw traces.",
+  "ci": {
+    "status": "PASS",
+    "run_id": 38448473500,
+    "artifact_id": 11839283847,
+    "url": "https://github.com/snowman0919/clef-use/actions/runs/38448473500",
+    "artifact_zip_sha256": "2b8e707dbf5e5811d88f7b161ccdb917340d68c121f491e406af2e5b0b642afe",
+    "artifact_zip_bytes": 383176342,
+    "builds_passed": 15,
+    "archives_verified": 15,
+    "source_payload_files_exact": 68,
+    "private_verification_sha256": "b65b9c2c69e5587a26300c08a505d2fa98b991998d68c52fa500966bfdf96a5b",
+    "assemble": "PASS",
+    "deploy": "SKIPPED_FEATURE_BRANCH"
+  },
+  "installed_windows": {
+    "status": "PASS",
+    "from_version": "0.1.42",
+    "version": "0.1.44",
+    "payload_files_matching": 68,
+    "source_hashes_match": true,
+    "managed_codex_command_updated": true,
+    "preservation": {
+      "unrelated_configs_unchanged": true,
+      "codex_unrelated_bytes_preserved": true,
+      "old_version_files_preserved": true,
+      "local_server_stopped": true
+    },
+    "wheel_sha256": "0aee4c3930f24f88f0624c1fb022d2901c182e9799e13a030d56223b041e988e",
+    "archive_sha256": "188cfbf2549246f752116f10e84cf51658f4c3dc4fab0ee0d90b1e9da6650740",
+    "private_install_report_sha256": "31cf812074c75eb39e8011bb6db8bc26dc4b578b2bced6f27132bfb98d3353a1",
+    "update_status": "INSTALLED",
+    "repeat_status": "CURRENT",
+    "doctor": {
+      "exit_code": 2,
+      "reason": "SSH Session 0 has no interactive desktop."
+    },
+    "self_test_scope": "Deterministic fixture control flow, not model accuracy or native GUI reaction performance.",
+    "prior_0143_update": {
+      "status": "FAIL",
+      "reason": "Unchanged root icacls grant exceeded 15 seconds before download; retained separately in source root-access receipt."
+    }
+  },
+  "limited_desktop_token": {
+    "status": "PASS",
+    "scope": "Immutable installed .44 windowless CLI/hash access under an actual desktop token; no capture, GUI action or OS input, no model request",
+    "runtime_version": "0.1.44",
+    "desktop_session_matches_expected": true,
+    "user_sid_digest_matches_expected": true,
+    "native_token_elevation_type": "LIMITED",
+    "native_token_is_elevated": false,
+    "installed_payload_files_verified": 68,
+    "commands": [
+      {
+        "name": "version",
+        "exit_code": 0
+      },
+      {
+        "name": "capabilities",
+        "exit_code": 0
+      },
+      {
+        "name": "offline_self_test",
+        "exit_code": 0
+      }
+    ],
+    "capability_runtime_version": "0.1.44",
+    "offline_fixture_samples_successful": true,
+    "global_config_bytes_preserved": true,
+    "native_task_exit_code": 0,
+    "owned_task_removed": true,
+    "private_result_sha256": "322417a22d1f1aeaf08db53cee8fb7062e5a0790a4736aa59ab31af25e83b1cd",
+    "private_controller_sha256": "285732f58d9de2e1ebe0beac54ccfa252ad021c971568705e3cfbfba3f89a884",
+    "probe_source_sha256": "aacc8edae334ff8086dd3245be88d58a3056b506dbcda784bb86dca16aaec45f",
+    "controller_source_sha256": "3940387e3afeb3ec44f76556fd7e95caff914848c1927be14142f4cb23ae4126",
+    "first_preparation": {
+      "status": "NOT_RUN",
+      "phase": "before_scheduled_task",
+      "error_type": "AttributeError",
+      "error": "function 'GetActiveConsoleSessionId' not found",
+      "correction": "Use WTSGetActiveConsoleSessionId",
+      "native_task_started": false,
+      "model_or_gui_input_started": false,
+      "private_failure_sha256": "58575b14f5d70310e455538edf21c44ed715458d3f19de55e06361941b856b3f",
+      "owned_empty_preparation_directory_removed": true,
+      "private_cleanup_sha256": "490809d29e1eb7997d17a0c4e84eb85d0ba8ed4a745ab79c5bbc3dd7ab85c213"
+    }
+  },
+  "installed_parser_component": {
+    "status": "PASS",
+    "scope": "Actual immutable installed .44 unmodified JsonWorker/native worker, one preserved editor parser request, no capture/GUI/OS input; component only, not whole task or controlled performance",
+    "runtime_version": "0.1.44",
+    "source_commit": "d4f1c8e1e8c4e8659388326edac0febe0f79cc74",
+    "request_sha256": "52c28dc4adbe990b4d26bc59b2bad60ebadd42dfb4ab7426ddeb06f69ce2a889",
+    "installed_payload_files_verified": 68,
+    "current_control_config_equal": true,
+    "native_worker_sha256": "70cd42a1dc579a5d15602bdf4f70f05e58c2e6d5321c0161cdaabc02599c260e",
+    "reply_sha256": "a10c6d83a2f8be534170d91b09af8e11a27dd3c4e6b4e2b9bcd694e0fa94c045",
+    "reply_objects": 81,
+    "worker_closed": true,
+    "wall_seconds": 94.1627088,
+    "worker_metrics": {
+      "worker_start_ms": 10285.306799924001,
+      "upstream_import_ms": 6893.927100114524,
+      "effective_torch_threads": 12,
+      "detector_load_ms": 1047.5914999842644,
+      "processor_load_ms": 281.26679989509284,
+      "caption_load_ms": 852.2795999888331,
+      "total_load_ms": 10183.461899869144
+    },
+    "telemetry": {
+      "decode_ms": 23.594000143930316,
+      "ocr_ms": 8055.890399962664,
+      "ocr_count": 22,
+      "detection_ms": 991.6159000713378,
+      "detected_count": 139,
+      "fusion_ms": 25.846000062301755,
+      "object_count": 81,
+      "caption_ms": 74759.32929990813,
+      "caption_cache_ms": 5.973100196570158,
+      "caption_regions": 59,
+      "cache_hits": 0,
+      "unique_misses": 59,
+      "duplicate_misses": 0,
+      "total_ms": 83862.31790017337
+    },
+    "private_result_sha256": "7992c40842e118a506dfaa3fdf5005f8ebaca8d42b79e73784f63542c4a1b81f",
+    "probe_source_sha256": "3e4570cdadd36b731c9250111ad272d108d49eb6a7fd1f380d3646f5d8bf4c36",
+    "controller_source_sha256": "525c65fe55114d823c461ebd4c32ff382f7cfd68ff1e531e70c95a05b4397190",
+    "measurement_scope": "One offscreen preserved real parser request; canonical installed JsonWorker and worker unmodified, no capture or input. Outer controller uses CREATE_NO_WINDOW. Timings are uncontrolled single observations, not comparative performance or state-change-to-input p95.",
+    "complete_baseline_quality_equivalence": "NOT_RUN",
+    "complete_baseline_quality_reason": "Original control captions were censored by its timeout; whole task and complete outputs cannot be paired."
+  },
+  "native_codex_discovery": {
+    "status": "PASS",
+    "exit_code": 0,
+    "skills_discovered": 3,
+    "stages": {
+      "INSTALLED": "PASS",
+      "DISCOVERED": "PASS",
+      "LOADED": "NOT_RUN",
+      "INVOKED": "NOT_RUN",
+      "TASK_VERIFIED": "NOT_RUN"
+    },
+    "compatibility": {
+      "status": "MATCH",
+      "reload_required": false,
+      "installed_release": "0.1.44",
+      "runtime_release": "0.1.44",
+      "action": null
+    },
+    "global_config_bytes_preserved": true,
+    "method": "Real Codex app-server skills/list; no model, guide body load or capability invocation in this native-only run.",
+    "private_result_sha256": "a4b0333b8e32513ae919f63ad1f68a7a53d1d2bcea40e878cb35a5b856d59e20",
+    "probe_source_sha256": "1b5c48c65f38b9dbb9e5a2fa72ab2a9461dac0b5acadadc17beef9c666f2c772"
+  },
+  "native_gui_tasks_this_installation": {
+    "status": "NOT_RUN",
+    "reason": "Shared Windows desktop ownership is unresolved after observed foreign foreground activation. Earlier actual GUI failures remain FAIL; offscreen parser success is not whole-task success."
+  },
+  "reaction_accuracy_coverage_goodput": {
+    "status": "NOT_RUN",
+    "reason": "Full identical pinned real-task suite, 1000 predeclared opportunities and paired independent OS receiver/quality measurements are not executed."
+  },
+  "public_release": {
+    "status": "NOT_RUN",
+    "reason": "Existing feature-branch deployment guard skips public deploy; no tag/main bypass."
+  },
+  "completion_claim": false,
+  "actual_codex_natural_model_probe": {
+    "status": "NOT_RUN",
+    "scope": "Canonical installed Windows .44 natural read-only model-verification attempt; no GUI task or OS input requested. Load/invoke outcome is unavailable.",
+    "native_cli_result": "ERROR AttributeError",
+    "transport_error": "UnicodeDecodeError: 'charmap' codec cannot decode byte 0x9d at position 833; native subprocess reader uses the default locale codec.",
+    "proof_driver_followup": "JSONDecodeError because the failed CLI wrote no stdout JSON.",
+    "authentication_cause": "NOT_PROVEN; captured stderr contains no invalid_api_key error.",
+    "global_config_preservation": "NOT_PROVEN_BY_THIS_DRIVER",
+    "private_result_sha256": "9ab95dcc86146046dbd2b3279c330ac8279a19d778020bc4f29ff4b4d09cb021",
+    "private_stderr_sha256": "abf0283e32ebce41b1c2c279a18c3d0e5cf38811cf62105fe7d0484ffdb06b24",
+    "probe_source_sha256": "fc27aca9d1a55db7cdd89a3d921ca970dc53a8e745c4166f2799a485e2a1d58a",
+    "controller_source_sha256": "3af26358431bd27e57c1bbcf5c38189fd9269d3e8098369e2c762ec436ff041c"
+  }
+}

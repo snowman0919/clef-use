@@ -1,0 +1,25 @@
+{
+  "classification": "OBSERVED",
+  "scope": "FINAL22 source regression including actual-directory validation for Hermes TERMINAL_CWD. This suite does not certify installed native harness/task/release acceptance.",
+  "command": ".venv/bin/python -m pytest -q",
+  "passed": 848,
+  "skipped": 34,
+  "warnings": 41,
+  "elapsed_seconds": 50.68,
+  "raw_log_sha256": "92b4b0b72bebf707c1b2fcf02451a6c1d9c0b8df3a0856ad46355e243a3bee3d",
+  "source_sha256": {
+    "src/clef_use/integrations.py": "df8f69e2fe2d0da69deb7f1433d46b19e768db31e4792b041044f12b4d6b7a59",
+    "tests/test_integrations.py": "22bd755fd01200a867bb2e4d2e6254198762fc23ddaa33a62d7ef0bbb6caf3fb"
+  },
+  "checks": {
+    "integration_consumer_regressions": 67,
+    "terminal_cwd_regressions_before_fix": "3 FAILED",
+    "terminal_cwd_regressions_after_fix": "3 PASSED",
+    "ruff": "PASS",
+    "generated_contract_build_check": "PASS",
+    "tracked_old_diff_empty": true
+  },
+  "limits": [
+    "No native model/harness full task, reaction p95/goodput/coverage, Windows or public release inferred from source tests."
+  ]
+}

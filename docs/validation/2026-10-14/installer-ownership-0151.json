@@ -1,0 +1,146 @@
+{
+  "classification": "OBSERVED_ACTUAL_NATIVE_INSTALLATION_OWNERSHIP_AND_FIXTURE_REGRESSION",
+  "date": "2026-10-14",
+  "runtime_version": "0.1.51",
+  "partial": true,
+  "requirements": [
+    "INSTALL-02",
+    "INSTALL-03",
+    "INSTALL-04"
+  ],
+  "publication_policy": "Whitelisted facts, enums and digests only; raw paths, identities, configuration/auth contents, messages and traces remain private.",
+  "actual_before": {
+    "runtime_version": "0.1.50",
+    "method": "Immutable native Linux311 bootstrap, separate owned root/bin, real Codex approval; no enrollment requested for second install.",
+    "status": "REPRODUCED",
+    "fresh_install_redirected_foreign_profile": true,
+    "approved_profile_bytes_changed": true,
+    "private_summary_sha256": "cc5245fa6821cc9718c90ba9916e12925b67f8751020942e9b5be0d7471d1fed"
+  },
+  "actual_native_after": {
+    "status": "PASS",
+    "platform": "linux-x86_64-py311",
+    "method": "Actual packaged .51 CLI and bootstrap; original immutable .50 bootstrap/CLI update; owned child user-profile fixture, real managed files; no model or GUI.",
+    "steps": [
+      {
+        "name": "build-0151",
+        "exit_code": 0,
+        "wall_seconds": 1.2304741670377553
+      },
+      {
+        "name": "a-first",
+        "exit_code": 0,
+        "wall_seconds": 4.667099819984287
+      },
+      {
+        "name": "enroll-codex-a",
+        "exit_code": 0,
+        "wall_seconds": 0.5721704820170999
+      },
+      {
+        "name": "b-old-bootstrap",
+        "exit_code": 0,
+        "wall_seconds": 4.480492308968678
+      },
+      {
+        "name": "enroll-hermes-b",
+        "exit_code": 0,
+        "wall_seconds": 0.5702702990965918
+      },
+      {
+        "name": "a-old-cli-update",
+        "exit_code": 0,
+        "wall_seconds": 5.042167598963715
+      },
+      {
+        "name": "a-current",
+        "exit_code": 0,
+        "wall_seconds": 1.6408063699491322
+      },
+      {
+        "name": "c-new-bootstrap",
+        "exit_code": 0,
+        "wall_seconds": 4.720933956908993
+      },
+      {
+        "name": "a-edited-launcher-refusal",
+        "exit_code": 1,
+        "wall_seconds": 0.03380419302266091
+      }
+    ],
+    "checks": {
+      "old_bootstrap_fresh_b_preserves_a_profile_bytes": true,
+      "old_cli_updates_owned_guide_release": true,
+      "old_cli_preserves_foreign_hermes_bytes": true,
+      "owned_codex_command_preserved": true,
+      "current_preserves_foreign_hermes_bytes": true,
+      "new_bootstrap_fresh_c_preserves_all_profile_bytes": true,
+      "user_launcher_edit_preserved": true,
+      "owned_runtime_endpoint_absent": true,
+      "owned_loopback_stopped": true
+    },
+    "source_files_exact": 68,
+    "artifact_sha256": "abf41d2ad102b9e02c194364029c8e977cce828260489bb616dd3fd9d10bee27",
+    "foreign_public_launcher_refused": true,
+    "foreign_launcher_and_receipt_preserved": true,
+    "stdio_mcp": {
+      "status": "PASS",
+      "runtime_version": "0.1.51",
+      "tool_count": 2,
+      "resource_count": 8,
+      "read_only_facade": true
+    },
+    "offline_executable_fixtures": "PASS",
+    "model_requests": 0,
+    "gui_or_input_requested": false,
+    "private_summary_sha256": "0c44dfa6b39c41e905f026ccb96502baf5a80a034990bad4cb621451171a912b",
+    "private_supplement_sha256": "6e71630f99cbda9e1c367de9ae79697c5fdbe335b4a8e1e6a6c7b832ac0387df",
+    "source_payload_sha256": "48ebc204dc94879d2aa53f9d2093985e59d20b75e9e615cda1894b4e72e6f385"
+  },
+  "regression": {
+    "classification": "OBSERVED_FIXTURE_REGRESSION",
+    "red_cases": [
+      "foreign-profile-redirection",
+      "user-edited-launcher",
+      "foreign-current-release",
+      "fresh-root-foreign-public-launcher",
+      "concurrent-remove-enroll-before-mutation-lock"
+    ],
+    "focused_passed": 337,
+    "full_passed": 1696,
+    "full_skipped": 55,
+    "warnings": 41,
+    "wall_seconds": 74.82,
+    "log_sha256": "eae4d2b7a0451b093218f46ef8476c9c32ec43723bdf5e7580bd493c94c433a9",
+    "ruff": "PASS",
+    "format_files": 167,
+    "generated_cli_examples": 198,
+    "generated_tool_examples": 12,
+    "independent_review": "Found concurrent-registration ownership race; scoped fix and focused regression verified, no remaining material scoped finding."
+  },
+  "retained_attempts": {
+    "pre_concurrency_source_native_run": "Real supported install/update/profile checks passed; refusal evaluator expected exit2 instead of actual exit1. Retained separately; final changed source executed in new owned root with corrected evaluator.",
+    "native_runtime_refusal_failure": false
+  },
+  "limits": [
+    "Previously downloaded .50 bootstrap can overwrite a shared public launcher before new CLI executes. Use new .51 installer for launcher ownership protection; old-bootstrap distinct-root/bin and same-installation old-CLI update were executed.",
+    "Fixture/runtime SDK/native package checks do not establish harness model or GUI success.",
+    "Shared Windows49 preserved while confirmed other session owns GUI input; Windows51 candidate and immutable51CI NOT_RUN at source checkpoint.",
+    "Original Blender menu0/5/hidden-state, OMP native failures, Reici evidence and quality/performance/public-release acceptance remain open."
+  ],
+  "not_run": [
+    "IMMUTABLE_CI_0151",
+    "WINDOWS_CANDIDATE_0151",
+    "SHARED_WINDOWS_UPDATE_0151",
+    "NATIVE_CODEX_MODEL_0151",
+    "GUI_ABORT_BROWSER_EDITOR_0151",
+    "SAME_TASK_1000_OPPORTUNITIES_ACCURACY_P95_100MS_COVERAGE_GOODPUT",
+    "PUBLIC_RELEASE_0151"
+  ],
+  "original_acceptance_status_counts": {
+    "PASS": 34,
+    "FAIL": 3,
+    "NOT_RUN": 7
+  },
+  "completion_claim": false
+}

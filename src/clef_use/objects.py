@@ -22,7 +22,21 @@ def normalize_omni(raw: list[dict]) -> tuple[UIObject, ...]:
                 actions.update(("focus", "type"))
             if re.search(r"scrollbar|scroll bar", label, re.I):
                 actions.add("scroll")
-        identity = json.dumps([role, label, [round(c, 4) for c in coords]])
+        confidence = item.get("confidence")
+        confidence = (float(confidence) or 0.0) if confidence is not None else None
+        source = str(item.get("source", "vision"))
+        # Deduplicate equivalent observations, not nearby geometry or conflicting
+        # action/provenance evidence. IDs remain scoped to their observation.
+        identity = json.dumps(
+            [
+                role,
+                label,
+                [value or 0.0 for value in (box.x1, box.y1, box.x2, box.y2)],
+                sorted(actions),
+                confidence,
+                source,
+            ]
+        )
         object_id = "obj_" + hashlib.sha256(identity.encode()).hexdigest()[:12]
         if object_id in seen:
             continue
@@ -33,9 +47,9 @@ def normalize_omni(raw: list[dict]) -> tuple[UIObject, ...]:
                 bbox=box,
                 label=label,
                 role=role,
-                confidence=item.get("confidence"),
+                confidence=confidence,
                 actions=frozenset(actions),
-                source=(str(item.get("source", "vision")),),
+                source=(source,),
                 sensitive=sensitive,
             )
         )

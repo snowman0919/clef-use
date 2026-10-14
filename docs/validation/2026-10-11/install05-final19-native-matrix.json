@@ -1,0 +1,289 @@
+{
+  "classification": "OBSERVED",
+  "acceptance_id": "INSTALL-05",
+  "candidate": "FINAL19",
+  "status": "STOPPED_REMAINING_NOT_RUN",
+  "scope": "Actual FINAL19 installed canonical CLI integration reports plus real Codex app-server skills/list in private native namespaces; model/bodyload/invoke/wholeacceptance not exercised.",
+  "archive_sha256": "6a1046942c68cbc7bd8198f8cd9dcc8d46a0c1c79c9c45355ea0425d98360b25",
+  "wheel_sha256": "a52bb8e4cedac8f5855aa05d8ded793464704b77cd39ee526fc31adf6560addf",
+  "installed_integrations_sha256": "5ba716b5428b14e3452a90570114dd07d476c28632da8bddcb6cb462e6cbd53f",
+  "driver_sha256": "a6d8c6f6e2f160bbc6f867ba15e23d98f7f8fa18dc4348382d5c6cf49e3a2e26",
+  "declaration_sha256": "60d8b3dcfaaf24fbb14f082e2f0e3bc4a72fb432201f89318a58ee288aa695a8",
+  "message_authorized_receipt_sha256": "9b2f6487d9cc4ad1b240f9060324bce396ac8f6d78227f72c9e2a68a6cfe16df",
+  "authorization_provenance": "Child-bound exact receipt from parent explicit ROOT_MESSAGE execute authorization; not represented as independently root-written.",
+  "raw_matrix_sha256": "6c51ae3701dbb6a704432b3c46753011871b76ccdf9b55c0a63f46c298da61e0",
+  "cases": [
+    {
+      "case_id": "codex/SAME_REALPATH",
+      "status": "OBSERVED_PENDING_ROOT_POLICY_REVIEW",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "actual_public_discovery_calls": 1,
+        "clef_rows": [
+          {
+            "name": "clef-use",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use/SKILL.md",
+            "physical_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+          },
+          {
+            "name": "clef-use-blender",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-blender/SKILL.md",
+            "physical_guide_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+          },
+          {
+            "name": "clef-use-diagnostics",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-diagnostics/SKILL.md",
+            "physical_guide_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "errors": [
+          []
+        ],
+        "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE",
+        "raw_sha256": "f07fdc631a54b19b68fe39167a3235cfaf45ce9539ff5daccb8edbc677e78b80"
+      },
+      "native_after": {
+        "method": "skills/list",
+        "actual_public_discovery_calls": 1,
+        "clef_rows": [
+          {
+            "name": "clef-use",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use/SKILL.md",
+            "physical_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+          },
+          {
+            "name": "clef-use-blender",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-blender/SKILL.md",
+            "physical_guide_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+          },
+          {
+            "name": "clef-use-diagnostics",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-diagnostics/SKILL.md",
+            "physical_guide_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "errors": [
+          []
+        ],
+        "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE",
+        "raw_sha256": "f07fdc631a54b19b68fe39167a3235cfaf45ce9539ff5daccb8edbc677e78b80"
+      },
+      "installed_dry_run": {
+        "status": "PREVIEW",
+        "changed": [],
+        "reported_shadowed": []
+      },
+      "installed_status": [
+        {
+          "harness": "codex",
+          "profile": "default",
+          "status": "INSTALLED",
+          "modified": [],
+          "disabled": []
+        },
+        {
+          "harness": "hermes",
+          "status": "NOT_INSTALLED"
+        },
+        {
+          "harness": "omp",
+          "status": "NOT_INSTALLED"
+        }
+      ],
+      "raw_artifact_sha256": {
+        "install.receipt.json": "cda127512f297256c532c9a6503e899102c3b2be43d072fea61d103c2cafed77",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "c11056fe91f0c3261f7ae6157d6876acaa94ca6a36984cb68647df53433a23b9",
+        "install.stdout": "eb890a41defab12fe01fc5ee594247746365f3c0f4e2c62ec65b6c32d33d4d1b",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "8a6dcaebbdcbb6e992847224a2cc16d5de1d8705d843f09582128cf2ff9b69da",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "fda951e4a02c9f151f1074dedc822a41f9408ec43962229ee48bbbc120d20669",
+        "native-after.stdout": "f07fdc631a54b19b68fe39167a3235cfaf45ce9539ff5daccb8edbc677e78b80",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "9b54889afa2f8aa7d84eee0983adabd880013e3a36d19cf1e77ac229f92e3e47",
+        "dry-run.audit.json": "21824ea19cdf7053df93763e71c0d021ae56a84deaa301c5f6ccbe0a5555fba9",
+        "dry-run.receipt.json": "c89e6e5254a55353fd76ec75019884205c0123eb7f236439e390bbd93ace2231",
+        "native-before.stdout": "f07fdc631a54b19b68fe39167a3235cfaf45ce9539ff5daccb8edbc677e78b80",
+        "status.audit.json": "8d628be50a720bf8f520ae9b3ed4bcc5a7856b9b01f863e8b6cb3cacc21c585a",
+        "install.audit.json": "21824ea19cdf7053df93763e71c0d021ae56a84deaa301c5f6ccbe0a5555fba9"
+      }
+    },
+    {
+      "case_id": "codex/DUPLICATE_NAME",
+      "status": "FAIL_DISCOVERY_REPORT_MISMATCH",
+      "installed_report_exit": 0,
+      "preserved_fixture_guide_bytes": true,
+      "native_before": {
+        "method": "skills/list",
+        "actual_public_discovery_calls": 1,
+        "clef_rows": [
+          {
+            "name": "clef-use",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use/SKILL.md",
+            "physical_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+          },
+          {
+            "name": "clef-use-blender",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-blender/SKILL.md",
+            "physical_guide_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+          },
+          {
+            "name": "clef-use-diagnostics",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-diagnostics/SKILL.md",
+            "physical_guide_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "errors": [
+          []
+        ],
+        "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE",
+        "raw_sha256": "fdd48c6e92202594175bdac1899316dcb83818287b18bbbcca71d6654e36210e"
+      },
+      "native_after": {
+        "method": "skills/list",
+        "actual_public_discovery_calls": 1,
+        "clef_rows": [
+          {
+            "name": "clef-use",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use/SKILL.md",
+            "physical_guide_sha256": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a"
+          },
+          {
+            "name": "clef-use",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/duplicate-clef/SKILL.md",
+            "physical_guide_sha256": "4b93084bdb686b0b9b1e154590ab908da7fb2626613be7d020e5f33984b6dd8c"
+          },
+          {
+            "name": "clef-use-blender",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-blender/SKILL.md",
+            "physical_guide_sha256": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70"
+          },
+          {
+            "name": "clef-use-diagnostics",
+            "scope": "user",
+            "enabled": true,
+            "source": "home/.agents/skills/clef-use-diagnostics/SKILL.md",
+            "physical_guide_sha256": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2"
+          }
+        ],
+        "errors": [
+          []
+        ],
+        "warnings": "NOT_EXPOSED_IN_THIS_RESPONSE",
+        "raw_sha256": "e568b4f292466db445de13a605f52de6c157048e98ac153131ef5a45381705ed"
+      },
+      "installed_dry_run": {
+        "status": "PREVIEW",
+        "changed": [],
+        "reported_shadowed": []
+      },
+      "installed_status": [
+        {
+          "harness": "codex",
+          "profile": "default",
+          "status": "INSTALLED",
+          "modified": [],
+          "disabled": []
+        },
+        {
+          "harness": "hermes",
+          "status": "NOT_INSTALLED"
+        },
+        {
+          "harness": "omp",
+          "status": "NOT_INSTALLED"
+        }
+      ],
+      "raw_artifact_sha256": {
+        "install.receipt.json": "58d4b550ba9a87b37a1002b9d4b96ec31a066005819b25ff951804fb3274aa0c",
+        "dry-run.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "native-before.receipt.json": "641e401f3c88bb506703a307ac80b3f43c696bf6e3427d9f2a030f9c81aaf2d1",
+        "install.stdout": "afd61eb5822f231bd569277e578a61fbe3a36c8f798c44a91ef83af02f55a5e0",
+        "install.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "dry-run.stdout": "d7aa57bddaa732356a091a2acf4cd763395ad3d84993f1cbbbabaa18283ee9ca",
+        "native-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.stdout": "83f3f843f242f32c794794ee9532e0926c7000eb4ee6cf6d1696e6fe490fa884",
+        "native-after.receipt.json": "4a507adfc479ca3276e7a8145fecafdc7a5bae23ac5a56347342dca51ded5e18",
+        "native-after.stdout": "e568b4f292466db445de13a605f52de6c157048e98ac153131ef5a45381705ed",
+        "native-before.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "status.receipt.json": "abacf5f8cebe88e09dfd912718c68d20d80159f54afd6202932798b79400b36b",
+        "dry-run.audit.json": "21824ea19cdf7053df93763e71c0d021ae56a84deaa301c5f6ccbe0a5555fba9",
+        "dry-run.receipt.json": "c69852f1342b72f9a74b7d61613ebc44e0f685f69c8a0f7650fed9ef3161d686",
+        "native-before.stdout": "fdd48c6e92202594175bdac1899316dcb83818287b18bbbcca71d6654e36210e",
+        "status.audit.json": "8d628be50a720bf8f520ae9b3ed4bcc5a7856b9b01f863e8b6cb3cacc21c585a",
+        "install.audit.json": "21824ea19cdf7053df93763e71c0d021ae56a84deaa301c5f6ccbe0a5555fba9"
+      }
+    }
+  ],
+  "actual_counts": {
+    "Codex_skills_list_attempts": 4,
+    "Codex_skills_list_successful_responses": 4,
+    "runtime_capability_subprocesses": 4,
+    "installed_initial_integrations": 2,
+    "installed_dry_run_reports": 2,
+    "installed_status_reports": 2,
+    "Hermes_discovery": 0,
+    "OMP_discovery": 0,
+    "model_inferences": 0,
+    "services": 0,
+    "GUI": 0,
+    "OS_inputs": 0,
+    "automatic_retries": 0
+  },
+  "stop_finding": "Actual Codex returned two enabled same-name core rows from distinct physical guides; installed dry-run PREVIEW exit0 and status INSTALLED omitted that duplicate-name conflict. Driver stopped with FAIL_DISCOVERY_REPORT_MISMATCH; remaining cases were not executed.",
+  "same_realpath_result": "Actual native dedup retained one core user row; FINAL19 installed dry-run PREVIEW exit0 with changed[] instead of historical FINAL17 CONFLICT exit2. Observation retained for independent root interpretation.",
+  "remaining_cases_NOT_RUN": 10,
+  "cleanup": {
+    "outer_processes_waited": 10,
+    "all_after_wait_thread_children": 0,
+    "all_after_wait_direct_PPID_children": 0,
+    "all_after_wait_sets_agree": true,
+    "own_install_and_matrix_root_process_matches": 0,
+    "process_scan_permission_denials": 0,
+    "owned_filesystem_sockets": 0,
+    "live_sequential_snapshot_disagreements_preserved": 0
+  },
+  "install_public_evidence_sha256": "d051a63cb0bd48abad3992c14e1cb130f404daa6f46060375b46a4719de91d4c",
+  "history": {
+    "FINAL17_first_setup_failure_preserved": true,
+    "FINAL17_actual_false_conflict_preserved": true,
+    "FINAL18_execution": "NEVER_STARTED_SUPERSEDED",
+    "all_admission_failures_preserved": true
+  },
+  "limitations": [
+    "Codex native body/load/invoke interfaces not exercised; skills/list only.",
+    "Hermes/OMP and project override/inactive-source cases NOT_RUN after declared first concrete failure.",
+    "No automatic policy PASS for observed first case; root owns final interpretation.",
+    "No model, GUI, OS-input, release or latency claim."
+  ]
+}

@@ -1,5 +1,17 @@
 # インストール
 
+0.1.51 以降、ガイド/MCP の自動更新は更新対象のインストールに属する登録に限定します。
+別の root/bin への新規インストールは他の承認済みプロファイルを変更しません。
+ユーザーが編集した launcher や別 root の launcher は保持して拒否します。
+別の `CLEF_USE_BIN_DIR` を指定してください。登録ロック内で所有関係を再確認します。
+launcher 保護には新しいインストーラーが必要です。0.1.50 bootstrap または CLI は
+新 CLI の登録チェック前に旧インストーラーを実行するため、この保護は遡及できません。
+旧 CLI による自身の更新では新 CLI の登録所有チェックが適用されます。
+手動移行では `integrations refresh --managed-only --command-path` に
+`--previous-command` を明示できます。
+[実パッケージ検証](../validation/2026-10-14/installer-ownership-0151.json)は
+モデル/GUI の成功や入力遅延の合格を示すものではありません。
+
 ランタイムのインストール後、**`Prepare models now? [Y/n]`** と表示されます。Enter または Y でモデル準備を実行し、N で省略します。Y を選ぶ前にキャッシュを設定してください。対話端末がない場合や `--json` 使用時は既定で省略します。自動化では `--prepare-models` または `--skip-models` を指定できます。後から `clef-use models prepare` を実行することもできます。
 
 venv/pip を含む Python 3.11-3.13 をインストールしてください。モデル準備には Python 3.11/3.12 と Git が必要です（Windows ROCm は 3.12 が必要）。root や管理者権限は不要です。ダウンロード URL を使う前に公開配備の検証結果を確認してください。
@@ -11,6 +23,12 @@ curl -fsSL https://ftp.kotori9.dev/clef-use/install.sh | sh
 ```powershell
 irm https://ftp.kotori9.dev/clef-use/install.ps1 | iex
 ```
+
+Windows 更新は、インストール root に現在のユーザーの明示的で継承可能な
+完全制御を確認できる場合、保持した旧バージョン全体の ACL を再設定しません。
+新しい runtime ディレクトリとモデル準備では従来の権限設定を実行します。
+不足・拒否・継承のみ・未対応の権限では既存の grant 経路を使用し、
+権限や timeout の検査を迂回しません。
 
 更新では以前のランタイム、モデルキャッシュ、設定を保持します。有効化前に Ctrl-C で
 中断すると、後処理は未使用の一時環境だけを削除し、既存のランタイムは有効なままです。
@@ -31,17 +49,38 @@ confidence_threshold = 0.55
 
 models prepare はバージョン固定の独立 ML 環境を二つ作り、公式 snapshot を取得します。更新時もキャッシュを維持します。Python 3.11 が見つからない場合は --python に実行ファイルの絶対パスを指定してください。
 
+使用する harness を選び、必要に応じて下記の `codex` を `hermes` または `omp` に置き換えてください。管理対象の統合は MCP と選択したガイドを一緒にインストールします。harness を再起動して各検証段階を確認してください。`NOT_RUN` はタスク成功ではありません。
+
 ```sh
 clef-use models prepare --python python3.11
 clef-use doctor
-clef-use install-mcp codex
-clef-use install-mcp hermes
-clef-use install-mcp omp
+clef-use integrate codex --dry-run
+clef-use integrate codex --scope user
+clef-use integrations verify codex --live --read-only
 clef-use run 'In the open Calculator, compute 123 * 456' --success 'Calculator shows 56088'
 clef-use status
 clef-use abort
 clef-use update
 ```
+
+再登録では、同じ管理対象スキルディレクトリ全体を指す有効なソースの別名を競合と扱いません。
+同名スキルでも資料ディレクトリが別なら競合を報告します。`SKILL.md` だけが同じファイルを
+指していても、相対参照の資料が異なる可能性があるためです。ユーザーのファイルと設定は保持します。
+選択したソースと他の有効なソースの `SKILL.md` に同名が宣言されている場合は、
+入れ子のディレクトリ名が異なっていても競合を報告します。
+Hermes は設定された create/external ディレクトリと、現在の信頼済み Git プロジェクトの
+`.hermes/skills`、`.agents/skills` を確認します。無効なプロジェクト検出設定は保持します。
+プロジェクトを明示しない場合、`TERMINAL_CWD` の前後の空白を除きホームを展開し、
+存在するディレクトリの場合だけ使用します。それ以外は起動ディレクトリを使用します。
+この保護検査は競合の可能性を報告し、実際の検出・読み込みの検証は別の段階です。
+Hermes の競合検査はディレクトリ名の別名と従来の名前付き Markdown ガイドも確認します。
+ガイド内の資料は独立ガイドと扱いません。キャッシュ・依存関係の除外フォルダは
+`SKILL.md` 一覧の検索で省きますが、従来の Markdown は native 検索で読み込める場所なら
+確認します。不正な frontmatter の名前は Hermes の代替解析に従います。
+Hermes の MCP 登録は YAML のフローマッピング、末尾のカンマ、コメントと文書終端を
+保持し、既存の設定と同じ YAML 文書内に追加します。
+Codex は個別の `SKILL.md` 項目を無効にします。無効なプロジェクトファイルは有効な
+管理対象ガイドと競合せず、ディレクトリ項目だけで無効になったとは判断しません。
 
 macOS では実際のターミナルまたは harness に画面収録とアクセシビリティ権限を与え、再起動します。Linux はアクセス可能なグラフィカル画面が必要で、Wayland ではキャプチャと入力が制限される場合があります。Windows のパッケージングは CI 対象ですが、実際の ML/GUI 互換性は実験段階です。加速検出だけではモデル動作の証明になりません。
 

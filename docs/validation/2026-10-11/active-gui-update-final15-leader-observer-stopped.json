@@ -1,0 +1,132 @@
+{
+  "classification": "OBSERVED",
+  "overall": "INSTALL10_NOT_RUN_THREAD_CHILD_OBSERVER_DEFECT",
+  "scope": "Separately authorized v2 genuine .29 canonical GUI ASSESS attempt; .30 update never started",
+  "driver": {
+    "basename": "clef_active_gui_update_final15_desktop_bound_v2_20261011.py",
+    "sha256": "eeed4adecb07263c54e1fc34bdf05267b7758e2adc62803fbf586a9779eb7b5a"
+  },
+  "declaration_sha256": "2a3c965248ead5c6fb5748f1842fa09eb91f6b138906cf71c393b59e5bf3aeb2",
+  "raw_evidence": [
+    {
+      "basename": "report.json",
+      "sha256": "4fc59799f1cd8b9a5dad978d386e1999cac9d744f489af4766304dcff2c0dec5"
+    },
+    {
+      "basename": "old-run-result-private.json",
+      "sha256": "dccc8ef2ec5025c1ac2945b7dee6f979e1c51d7ca144ab4ceb09f4d1b7f8c3fc"
+    },
+    {
+      "basename": "old-install-private.log",
+      "sha256": "e9aa241be0ec7daa4ae34eee4719f34e04bdd99ea2d3a86a0dff21041290c200"
+    }
+  ],
+  "desktop_transport_preflight": {
+    "classification": "OBSERVED",
+    "raw_status": {
+      "status": 404,
+      "body": {
+        "error": "NO_ACTIVE_SESSION"
+      }
+    },
+    "genuine_native_transport_status": {
+      "ok": true,
+      "result": {
+        "http_status": 404,
+        "body": {
+          "error": "NO_ACTIVE_SESSION"
+        }
+      }
+    },
+    "genuine_consumer_status": {
+      "ok": false,
+      "error_type": "RuntimeError",
+      "error": "no active session; start computer_run first"
+    },
+    "desktop_scope_from_actual_owned_environment": true,
+    "health_scope_matches_owned_environment": true,
+    "before_any_model_or_gui_run": true
+  },
+  "genuine_old_install": {
+    "status": "PASS",
+    "record_version": "0.1.29",
+    "archive_sha256": "d7c60c75016c3f8c3abfcb80354335061930d32393fce772da8d87308e718a2e",
+    "absolute_version_retained": true
+  },
+  "driver_failure": {
+    "type": "RuntimeError",
+    "message": "real old GUI session ended before active update gate; no retry"
+  },
+  "native_terminal_elapsed_seconds": 44.738928,
+  "actual_native_old_gui_result": {
+    "status": "LOW_CONFIDENCE",
+    "steps": 0,
+    "rounds": 1,
+    "confidence": 1.0,
+    "reason": "execution mode confidence below threshold",
+    "blocker": {
+      "kind": "CONFIDENCE_BELOW_THRESHOLD",
+      "observed": {
+        "source": "execution_mode",
+        "probability": 0.4598,
+        "required_probability": 0.9,
+        "action_selection_confidence": 1.0,
+        "mode": "BLOCKED",
+        "mode_confidence": 0.4598,
+        "goal_probability": 0.0909,
+        "condition_probabilities": [
+          0.0639
+        ]
+      },
+      "resume_when": "new relevant evidence or planner clarification; do not repeat already-delivered input"
+    },
+    "activity": {
+      "phase": "Low Confidence"
+    },
+    "summary": "LOW_CONFIDENCE after 0 actions, 1 decisions"
+  },
+  "observer_limitation": {
+    "leader_only_child_path_used": true,
+    "native_subprocesses_spawn_in_execution_thread": true,
+    "pre_gate_poll_snapshots_discarded_by_driver": true,
+    "cannot_attribute_missed_active_gate_to_model_terminal_alone": true,
+    "independent_kernel_mechanism_proven_without_models": "Leader task children omits a live child spawned by another thread; all-thread union and independent PPID scan both observe it; vanished captured TID explicitly recorded"
+  },
+  "stages": {
+    "genuine_fresh_old_install": "PASS",
+    "desktop_native_raw_status_agreement": "PASS",
+    "genuine_old_gui_assessment": "OBSERVED_ONE_DECISION_LOW_CONFIDENCE_INPUT0",
+    "all_thread_worker_observer": "NOT_RUN_IN_V2",
+    "actual_30_update": "NOT_RUN",
+    "active_survival_new_client_refusal_matching_abort_busy_drain_reload": "NOT_RUN"
+  },
+  "threshold": 0.9,
+  "model_retries_added": 0,
+  "independent_native": {
+    "recorded_input_event_count": 0,
+    "record_start_ack": "NOT_OBSERVED_SEPARATELY",
+    "pixels_unchanged": true,
+    "key_button_maps_unchanged": true
+  },
+  "cleanup": {
+    "matching_shutdown": {
+      "ok": true,
+      "result": {
+        "ok": true
+      }
+    },
+    "all_observed_owned_service_workers_exited": true,
+    "all_direct_children_exited": true,
+    "endpoint_removed": true,
+    "xvfb_socket_removed": true,
+    "http_server_closed": true
+  },
+  "elapsed_seconds": 46.161083,
+  "production_changes": false,
+  "first_attempt_preserved": {
+    "basename": "clef-active-gui-update-final15-attempt1-public-20261011.json",
+    "sha256": "4cc5e9493e975d1912804f9ff43ab886c3570b9d764025c9cd1975324a06a390"
+  },
+  "privacy": "No private paths/endpoints/auth/account/raw payloads/process or session IDs/screenshots/assets",
+  "received_native_artifact_sha256": "923532180b3e04d0cfe230164f1d45678f65008a23707b1faf305017f6184650"
+}

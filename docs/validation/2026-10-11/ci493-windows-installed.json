@@ -1,0 +1,252 @@
+{
+  "classification": "OBSERVED_NATIVE_WINDOWS_IMMUTABLE_CI_INSTALLATION",
+  "status": "PASS_WITH_EXPLICIT_SCOPE_LIMITS",
+  "scope": "Actual Windows immutable CI source493 fresh/repeat installer, CLI capability/schema/nativephysicalidentity, three guides across three enrolled harness configurations and byte preservation. Native harness discovery/model/runtime service/GUI/input not exercised.",
+  "source_commit": "4932557713c290f7b63860e044c06587d227eae8",
+  "ci_run": 38183395770,
+  "ci_artifact_id": 11718508020,
+  "ci_artifact_name": "site-windows-2022-3.11",
+  "ci_original_snapshot": {
+    "status": "in_progress",
+    "conclusion": null,
+    "whole_workflow_success": "NOT_ESTABLISHED unless completedSUCCESS snapshot"
+  },
+  "actual_Windows311_job_admission": {
+    "id": 114600522011,
+    "run_id": 38183395770,
+    "name": "build (windows-2022, 3.11)",
+    "head_sha": "4932557713c290f7b63860e044c06587d227eae8",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "digests": {
+    "outer_artifact_sha256": "20aac31a6b276c0d6d209686099974644565a2b9fcb262eac3c63d6734373307",
+    "inner_archive_sha256": "44c1763146327fa8c48dd566ed15b1a1ca54fb63748829a3ada2164a6caa801f",
+    "wheel_sha256": "dcaf30d4b1b05d9e2000e193b51622fe67981523075aec02a6597db3d2b23049",
+    "installer_ps1_sha256": "6be6ee10fe40796777395b967cdfd455ce1ffb9b4b0032803ae51bfae7b7c3fc",
+    "decoded_and_packaged_installer_sha256": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+    "manifest_sha256": "b9fab41046247f0b43c735e95f2f7ff6ff02020cb3353357e94533d41bece254"
+  },
+  "native_platform": "win32",
+  "native_python": "3.11.9",
+  "fresh_install_status": "INSTALLED",
+  "repeat_install_status": "CURRENT",
+  "native_required_command_count": 10,
+  "commands": [
+    {
+      "name": "fresh-install",
+      "exit_code": 0
+    },
+    {
+      "name": "native-installed-read-config-first",
+      "exit_code": 0
+    },
+    {
+      "name": "wrapper-version",
+      "exit_code": 0
+    },
+    {
+      "name": "native-version",
+      "exit_code": 0
+    },
+    {
+      "name": "capabilities-detail",
+      "exit_code": 0
+    },
+    {
+      "name": "explicit-three-guides",
+      "exit_code": 0
+    },
+    {
+      "name": "native-installed-read-config-explicit-three",
+      "exit_code": 0
+    },
+    {
+      "name": "repeat-bootstrap",
+      "exit_code": 0
+    },
+    {
+      "name": "repeat-explicit-three",
+      "exit_code": 0
+    },
+    {
+      "name": "native-installed-read-config-repeat-enrollment",
+      "exit_code": 0
+    }
+  ],
+  "native_read_config_processes_included_in_ten_commands": 3,
+  "git_wheel_installed_exact_files": 61,
+  "python_modules": 46,
+  "resource_files": 15,
+  "source_ordering_exception": false,
+  "all_files_exact": true,
+  "checks": {
+    "live_contract_matches": true,
+    "actual_schema_digest_matches": true,
+    "guide_bundle_matches": true,
+    "registered_native_physical_identity_verified": true,
+    "preexisting_config_comments_preserved": true,
+    "preexisting_CRLF_prefixes_preserved": true,
+    "OMP_disabled_agents_setting_preserved": true,
+    "repeat_config_bytes_preserved": true,
+    "repeat_guide_bytes_preserved": true,
+    "repeat_HOME_bytes_preserved": true,
+    "user_note_bytes_preserved": true,
+    "owned_tree_no_reparse_links": true,
+    "native_installed_read_config_three_phases": true
+  },
+  "first_explicit_guide_enrollment": [
+    {
+      "harness": "codex",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "hermes",
+      "status": "INSTALLED"
+    },
+    {
+      "harness": "omp",
+      "status": "INSTALLED"
+    }
+  ],
+  "repeat_explicit_guide_enrollment": [
+    {
+      "harness": "codex",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "hermes",
+      "status": "UNCHANGED"
+    },
+    {
+      "harness": "omp",
+      "status": "UNCHANGED"
+    }
+  ],
+  "three_guides_exact_by_harness": {
+    "codex": {
+      "clef-use": true,
+      "clef-use-diagnostics": true,
+      "clef-use-blender": true
+    },
+    "hermes": {
+      "clef-use": true,
+      "clef-use-diagnostics": true,
+      "clef-use-blender": true
+    },
+    "omp": {
+      "clef-use": true,
+      "clef-use-diagnostics": true,
+      "clef-use-blender": true
+    }
+  },
+  "live_contract": {
+    "api_schema_version": 1,
+    "schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+    "guide_contract_version": 1,
+    "operation_registry_version": 2
+  },
+  "actual_schema_tool_names": [
+    "computer_abort",
+    "computer_capabilities",
+    "computer_continue",
+    "computer_observe",
+    "computer_run",
+    "computer_status"
+  ],
+  "actual_installed_read_config": [
+    {
+      "module_sha256": "fc3bee99ea42e6988ac029f91b53ef8a79f85468d9817ef8cd7580eb742178f9",
+      "config_sha256": "b7ddacec83348cad072b931871f61716db89deb5b0d1b5d8233f6577713d5873",
+      "project_discovery": false,
+      "user_note_sha256": "226b826a61115f2417a157fa603042fb4dfeb05727268b8de9fb9bbaa2239a47",
+      "registered_entry_exists": true,
+      "phase": "first",
+      "child_program_sha256": "21eca8857ef7c90c5c2e1a1f9103c0907d82bd0276dafb6397342dc4d1618fbc",
+      "actual_installed_module_verified": true,
+      "unrelated_original_prefix_and_suffix_bytes_preserved": true
+    },
+    {
+      "module_sha256": "fc3bee99ea42e6988ac029f91b53ef8a79f85468d9817ef8cd7580eb742178f9",
+      "config_sha256": "b7ddacec83348cad072b931871f61716db89deb5b0d1b5d8233f6577713d5873",
+      "project_discovery": false,
+      "user_note_sha256": "226b826a61115f2417a157fa603042fb4dfeb05727268b8de9fb9bbaa2239a47",
+      "registered_entry_exists": true,
+      "phase": "explicit-three",
+      "child_program_sha256": "21eca8857ef7c90c5c2e1a1f9103c0907d82bd0276dafb6397342dc4d1618fbc",
+      "actual_installed_module_verified": true,
+      "unrelated_original_prefix_and_suffix_bytes_preserved": true
+    },
+    {
+      "module_sha256": "fc3bee99ea42e6988ac029f91b53ef8a79f85468d9817ef8cd7580eb742178f9",
+      "config_sha256": "b7ddacec83348cad072b931871f61716db89deb5b0d1b5d8233f6577713d5873",
+      "project_discovery": false,
+      "user_note_sha256": "226b826a61115f2417a157fa603042fb4dfeb05727268b8de9fb9bbaa2239a47",
+      "registered_entry_exists": true,
+      "phase": "repeat-enrollment",
+      "child_program_sha256": "21eca8857ef7c90c5c2e1a1f9103c0907d82bd0276dafb6397342dc4d1618fbc",
+      "actual_installed_module_verified": true,
+      "unrelated_original_prefix_and_suffix_bytes_preserved": true
+    }
+  ],
+  "preservation": {
+    "global_wrapper_and_config_bytes": true,
+    "bootstrap_parent_parent_tree_bytes": true,
+    "full_active_V2_identity": "NOT_ESTABLISHED: old helper snapshots bootstrap.parent.parent; this is not authoritative full active production runtime identity.",
+    "global_user_PATH": true,
+    "prior_customized_fixture_HOME": true,
+    "prior_fixture_runtime": true,
+    "new_selected_HOME_config_comment_CRLF_repeat": "OBSERVED exactchecks; seeded owned inputs only, not user global configuration exposure"
+  },
+  "cleanup": {
+    "owned_loopback_stopped_reported": true,
+    "independent_readonly_exact_owned_marker_verified": true,
+    "independent_exact_owned_root_process_count": 0,
+    "no_global_kill_or_mutation": true,
+    "private_evidence_retained": true
+  },
+  "budgets": {
+    "native_required_command_phase_seconds": 600,
+    "remote_preparation_outside_command_phase": "Archive/source checks, read-only preservation snapshots and own config seeding precede native command deadline. No shared600whole-batch claim.",
+    "outer_SSH_execution_timeout_seconds": 660,
+    "transfer_calls": 4,
+    "each_transfer_timeout_seconds": 90,
+    "create_call_timeout_seconds": 30,
+    "fetch_calls": 2,
+    "each_fetch_timeout_seconds": 30,
+    "total_external_call_wait_seconds_upper_bound": 1110,
+    "added_retries": 0,
+    "models": 0,
+    "harness_invocations": 0,
+    "GUI_input_service_actions": 0,
+    "SSH_timeout_policy": "Stop; client timeout does not prove native process termination. Independent read-only exact-owned-root process readback required; never claim cleanup without observing it."
+  },
+  "additional_independent_postrun_readonly_SSH_bound_seconds": 30,
+  "controller_invocations": 1,
+  "added_retries": 0,
+  "models": 0,
+  "harness_discovery_or_invocations": 0,
+  "runtime_service_actions": 0,
+  "GUI_or_input_actions": 0,
+  "canonical_source_edits": 0,
+  "not_run": [
+    "Native harness discovery/load/invoke",
+    "Model inference",
+    "Runtime service and GUI/input actions",
+    "Full active production Windows V2 runtime identity",
+    "Overall CI success beyond preserved snapshot; root may record later observation separately"
+  ],
+  "evidence_bindings": {
+    "root-start-once.json": "d2da228476d6671f8db87e563f9f3ca023c8ce69783d55b8b3c61ccdaae163a7",
+    "predeclaration-before-ROOT-START.json": "86abc66dd0feab0421d677958983d490075082d1e7661e78fb7d4ed92f2e35c5",
+    "predeclaration.json": "27ca2a38cc0e6a6474e4f749120b9fd11408c57e2f58b7a9c953764e0798b115",
+    "remote_verify.py": "eca56f2d8e9fb690d8dce65e0be30649e342a4309cab6b3479bd32fcfe571479",
+    "execute_after_start.py": "2d7c9af653e33abc5ddc5ba62516709accc19342bd19458f9f0cdd5d6034d31f",
+    "payload-proof.json": "ba406b7f69839341d735fca2c1b120a9e337a538d44e3862daf12de2ea8633a2",
+    "received-report.json": "1a452d246731aa08bb77237f21f8aec6a4bfa90a42715b1d38643f1a9815aa78",
+    "received-predeclaration.json": "3974eb7c7a3b2083bb8ba8806d7baf4b035b7d54482d0717d888631c788baf1f",
+    "postrun-readonly.py": "97bdaba2dd7c539d3cf828ab780ceeaa3a503f4d0c9d45cc1d1d008ca275f90c",
+    "postrun-readonly-public.json": "58a52fe21ca2c843c45856347055368b8bc2880544869210da1a36890b9248d5"
+  },
+  "privacy": "No credentials, native private paths, raw config/guide bodies, or process command lines included. Actual output retained privately; hash-only bindings published."
+}

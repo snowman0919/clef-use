@@ -1,0 +1,58 @@
+{
+  "classification": "OBSERVED_DEVELOPMENT_RESOURCE_FORMAT_SMOKE",
+  "model": "ByteDance-Seed/UI-TARS-2B-SFT",
+  "revision": "f366a1db3e7f29635f5b236d6a71dea367a0a700",
+  "image_sha256": "f91347634e01964d1ecfadb5403f84005c87f3264154d45784145f803b478c7b",
+  "image_split": "DEVELOPMENT_EXCLUDED_FROM_HELDOUT",
+  "query": "Click the Save button.",
+  "prompt": "Output only the coordinate of one point in your response. What element matches the following task: ",
+  "source": "bytedance/UI-TARS README_v1.md @f6a526935bac043fd02bef26ba5b035116ad26a5",
+  "dtype": "bfloat16",
+  "device": "cuda:0",
+  "seed": 17,
+  "decoding": {
+    "do_sample": false,
+    "max_new_tokens": 128
+  },
+  "upstream_frequency_penalty": "Original OpenAI-compatible example uses frequency_penalty=1; standard Transformers generate has no equivalent parameter. No equivalence claim.",
+  "trust_remote_code": false,
+  "model_loaded": true,
+  "OS_inputs": 0,
+  "production_changes": 0,
+  "accuracy_comparison": "NOT_RUN",
+  "acceptance": "NOT_RUN",
+  "torch": "2.11.0+cu130",
+  "transformers": "5.10.2",
+  "cuda": "13.0",
+  "hardware": "NVIDIA GeForce RTX 3080",
+  "initial_free_total_bytes": [
+    8326414336,
+    10347741184
+  ],
+  "load_seconds": 1.4923131759278476,
+  "load_peak_allocated_bytes": 5119145472,
+  "load_peak_reserved_bytes": 5171576832,
+  "input_tokens": 1516,
+  "image_size": [
+    1280,
+    900
+  ],
+  "image_grid_thw": [
+    [
+      1,
+      64,
+      92
+    ]
+  ],
+  "status": "PASS_RESOURCE_AND_FORWARD_ONLY",
+  "inference_seconds": 1.300549314939417,
+  "output": "<|box_start|>(441,465)<|box_end|><|im_end|>",
+  "peak_allocated_bytes": 5119145472,
+  "peak_reserved_bytes": 5236588544,
+  "final_free_total_bytes": [
+    3020423168,
+    10347741184
+  ],
+  "elapsed_seconds": 5.66505622304976,
+  "received_native_artifact_sha256": "f4d6de59f4c77cb2beb6003fb94f67b182ae49894266bdac3c24d2f3c440a33a"
+}

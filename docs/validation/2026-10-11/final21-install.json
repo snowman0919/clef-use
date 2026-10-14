@@ -1,0 +1,318 @@
+{
+  "candidate": "FINAL21",
+  "namespace_capabilities": {
+    "CapInh": 0,
+    "CapPrm": 0,
+    "CapEff": 0,
+    "CapBnd": 0,
+    "CapAmb": 0,
+    "NoNewPrivs": 1
+  },
+  "status": "PASS",
+  "models": 0,
+  "services": 0,
+  "GUI": 0,
+  "OS_inputs": 0,
+  "native_harness_discovery": 0,
+  "version": "0.1.30",
+  "repeat_all_home_bytes_preserved": true,
+  "home_files": 26,
+  "comment_prefixes_preserved": {
+    ".codex/config.toml": true,
+    ".hermes/config.yaml": true,
+    ".omp/config.yml": true
+  },
+  "file_proof": {
+    "packaged_file_count": 61,
+    "bundled_wheel_count": 51,
+    "archive_sha256": "d43f08316655e87304e40137487ab949cc3197dac6ba851fcf24a15cbf51e90c",
+    "wheel_sha256": "f1ef81698847ab7f620aee90e434ca791103112fdf09ac03d65af522b5bf9890",
+    "files_exact": {
+      "clef_use/__init__.py": "1ae22733b78bd09254de860a6963c83323e18e3aaf4861fde024efea68f66687",
+      "clef_use/activity.py": "c5af31d0faec6d49049deda27f0bc5c13a027eb943295df6c7615e7ce857878b",
+      "clef_use/activity_display.py": "2d917e7b5e521d5fadfddc7d7caa5eab90521385a505991da630b6bf6534bfbc",
+      "clef_use/activity_macos.py": "d6d5892140129ad881c3e9e2931943c286830c9f82a18e72c530f79e2adf5d84",
+      "clef_use/activity_windows.py": "adf724071b9d914785dc72963fad5c9e20d6115f46dfb5f0fcae5f893ef39290",
+      "clef_use/activity_x11.py": "c94060c1541532f02dd0f4c4733361a9ba8d819f88072280b5586848a1343f12",
+      "clef_use/backends.py": "52073a9dfe5a9709efbf368be2d21ed6f572870c6b8e511df6195d0faa448fe1",
+      "clef_use/benchmark.py": "b3bd4f91b32c8b7cd7564d3f6501c7f0eb4e5020cac6e5e28509816879e2f66d",
+      "clef_use/candidates.py": "d304844949d97322424ff0c481ba849b0f27ba08edc13496aa6c9f7e96e66372",
+      "clef_use/capabilities.py": "eea0dd536827ad682b5e10e0cdcf1a8b6bfe93c1819d384acf82b81cb18e9290",
+      "clef_use/cli.py": "5899761fbdb4ae3a75584eeef3adee745ee49ffb3ed91fa32b3da83ff994b5ad",
+      "clef_use/client.py": "3b15c16d5a2888d1987d19926082bd8e825fb151e0210b90a9f5f26a16d4687f",
+      "clef_use/config.py": "ae1497a5ccbf7d57c054b19fb3f9363765ccb4184e554e3f5c31ae91d3100aa1",
+      "clef_use/decision_benchmark.py": "ce858a1253c77b5c49354bbb46d164ca142c1f99e34bd088599e81ab1b01e0b2",
+      "clef_use/decision_contract.py": "62681e6033c9a0841612a11fb4a4e3d86363481d9230a528f7b54ef5282ddb76",
+      "clef_use/decision_diagnostics.py": "e5b2826b53ee81adae9ed4429099bc2dcd12be0a9d7e7f5ba6f22f8833f91f10",
+      "clef_use/deployment_profiles.py": "fc3fb57bb94c07cd25b36551632b07af973412998385fdccdc0b15c5d689e37f",
+      "clef_use/doctor.py": "e85556ecb54d89596b0ca19f423a31b573527b02a655268c963d387b656ac7f7",
+      "clef_use/grounding.py": "678d48443f2f591cb3e4e53547dffc9afc1127ed7e23bff0daa3310a572644a0",
+      "clef_use/harness.py": "c3468be4eb183e253e4699d1753178704e12f343c033d1dacd0788afcc98be87",
+      "clef_use/head_trace.py": "a7a0e737a2a3e9b42cd854473930cef40b60888aa9884b34a170e243cf964e1d",
+      "clef_use/input_ir.py": "a95bf78d870e42ffa8caf68974ad72ce871b3336051c820a03154e97cb619195",
+      "clef_use/installer.py": "8732f776f145741d4e1cd870575b4e728595212d3bcddcaf5265ca4f712f351e",
+      "clef_use/integrations.py": "176943c3e4329674e04f636d2626be28d050ef6026d12c9e120be03302d3917b",
+      "clef_use/interfaces.py": "ee414e43b5815bd2dc30dd9a099440fef6cda31b80df536bce2de0fd0be1e107",
+      "clef_use/maintenance.py": "fb706c7363117f980f525b0607ffd21fe2031cfe512c7e0c8a3138cd8b811392",
+      "clef_use/mcp_server.py": "1409a64ef97d13f3202a465152f426908203622ab1e453ba5404cc6d45bb0f37",
+      "clef_use/ml_probe.py": "7f6b10ee79a9e66a66b6d7820ad05ab7c094ef8bdf903b1ddddd47b14b491c51",
+      "clef_use/model_worker.py": "2895437c03207ed564ea4895fa016469737b3a0099c0ec93b1279fca06d78ec3",
+      "clef_use/models.py": "4e6b2eb224a509ddab5eea3734eefb29627ced1fcf01cb2a7ab003f4bafb5853",
+      "clef_use/native_dependencies.py": "4a02f30caa60cf3b1d6bbe77a07edd09fa39147bb913aa1b2aaa4c03a2846f1d",
+      "clef_use/objects.py": "898d3b9213d4075b98d7f35eae53c375d980e2ec8fe4f74a873bf365e170766e",
+      "clef_use/operations.py": "e89e43c51d802572013246497e93cdc4734a74fc3eb0217e52ece18b51649b67",
+      "clef_use/preparation_progress.py": "43bfd8043f28e0322bfab15991a025eb710461fb2f7e034c907208d8c7e8277a",
+      "clef_use/provision.py": "45d9d171009bab467224d4e071d3f51309592de9bb6f533fa8b1574547ddacd6",
+      "clef_use/reaction_metrics.py": "2ff1c649752fefaf2762ee42f9ed8343bbc38ce9ee0f84bf007b5fc6b1d8c48a",
+      "clef_use/router.py": "350435e54d329812d06928149db7fe2e65847742c33a50dffe5f05c0160e63b5",
+      "clef_use/runtime.py": "5d57066ab14a3dbd51333a3ccbfbe30276aac1f7862f21f7e296db70b4ad682b",
+      "clef_use/schema.py": "0e7baa5c3b8d37f8fbccb6d573007346a8f337b1829091369a61b55c206f32a1",
+      "clef_use/service.py": "812871cc3075f99c266fefdc6451775183000ce4b935b6535dfe00b3f69e9841",
+      "clef_use/state.py": "1092cdf95d4e2b352014d04054d4843d33fe24398761c95adc44c17a42c19ba8",
+      "clef_use/update_notice.py": "8a6b76eaafa906c208e4125a55762bbd1c87b9bed1692294e28fdc33502749fe",
+      "clef_use/verification.py": "00d307a77785227457d40ce27ab691aeb0028d412aaa632043e5722f5aa7b94d",
+      "clef_use/windows_input.py": "a9557521069d8a6aebba2cee4634c4284f7d401c525bc311a3a5dc30dee73648",
+      "clef_use/x11_clipboard.py": "5961f94a807a8610dfa73110007bde6c1e2c6d93d7a194b037feefd2111e54e3",
+      "clef_use/x11_input_state.py": "4eb57fa127f87f560224383f4881e20e4be7987a7c339e8fdbd73804cc1e2b6b",
+      "clef_use/assets/ml-clef.txt": "6bb2ad97596b97cbd80aaf351d3e8c514a5c4c85a34e0c188ae8d7d38e0384cb",
+      "clef_use/assets/ml-d1.txt": "7aeb4d4afd612ff6be878745d89f596a62da8f2a8a811e4c4043018fba0b0f5e",
+      "clef_use/assets/ml-omni.txt": "20e31b2828f4923ec8c1bb2656381d31a8b99c1a9c31bdc0ba9cbcfab47b70e4",
+      "clef_use/assets/ml-windows-nf4.txt": "479225a0abce94b7387205a62d0d991548cf5ddeb915066b7501bc129c780ba2",
+      "clef_use/assets/ml-windows-rocm.txt": "049dd697db89beae75047c0ec83e91b937c046f6fb0d4286bfc88a40224fe138",
+      "clef_use/assets/ml-windows-torch-cpu.txt": "ede3f01100c69b59c29ee0c707ea41287c8f99b43666d8ab84f36d8f3436f2e3",
+      "clef_use/agent-skills/examples.json": "b208836816c129f46b779164cbbf0393f0a7ca691461e1b75a080520e1460f2c",
+      "clef_use/agent-skills/manifest.json": "1a84039cfecffbee554391b091465b7bc9c78ef2f80ceed139e01937c8703e5f",
+      "clef_use/agent-skills/clef-use/SKILL.md": "f07635446f60f5e8f254528bdc0bec1508db58ee50ea4c072f445bc12109627a",
+      "clef_use/agent-skills/clef-use/references/API_BASELINE.md": "800265d7c457687d640abd6f344678711874f727e813d4532945dc801462b0e4",
+      "clef_use/agent-skills/clef-use/references/LIVE_API.md": "ce068b07f3eaa6d3e05537ffd9ae19e537c42cba9bc37993e4cf969a2cb662f0",
+      "clef_use/agent-skills/clef-use-blender/SKILL.md": "4c39dd3c77bf91631aee67ede013395df437eb8d10c187988759edacbec84a70",
+      "clef_use/agent-skills/clef-use-blender/references/OPERATIONS.md": "1e7c9a01e70576b244246bdd0a8c4a65be7eed073976aa8ca2d60469ce0b5877",
+      "clef_use/agent-skills/clef-use-diagnostics/SKILL.md": "9dafba5b95093b01b9ad3ac64dee9396ba0ce00e676572ad4abc7f6d7498f4c2",
+      "clef_use/agent-skills/clef-use-diagnostics/references/FAILURES.md": "b91eb1a901ffb794d3bc8d4cdb137676283ceed404a969f28f9debf53e1bcc3b"
+    }
+  },
+  "owned_loopback_closed_observed": true,
+  "owned_server_thread_joined": true,
+  "invocations": [
+    {
+      "label": "first",
+      "exit": 0,
+      "stdout_sha256": "ea7e35673386eba6e98e51b997832201eaa000e8698ad3a04841086cd51ac656",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "repeat",
+      "exit": 0,
+      "stdout_sha256": "b87a09d6599d5d27eeb0f62b6bf16be2f623c44039ae563d051caa6dbf52a05b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "version",
+      "exit": 0,
+      "stdout_sha256": "2622ca328c7b1324e68d4116c0765138da26de706f9945b903c20ea4e99d491e",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "capabilities",
+      "exit": 0,
+      "stdout_sha256": "a74ec5e5d3401e2c87d264d7337e20fa07b475b3dc81c5981a7e9c0c25a68582",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "explicit-three",
+      "exit": 0,
+      "stdout_sha256": "efa3c5a5fb2b1b74f0bd333c6486269f9d4c89cd2009c514ad92c7131462d46c",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "label": "explicit-three-repeat",
+      "exit": 0,
+      "stdout_sha256": "0ac72cd48494f6e4049dedad5ca63838ba305fe60d04c67c4eb29053a25076ad",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "classification": "OBSERVED",
+  "scope": "Actual fresh and repeat shell install from immutable local FINAL21 release inside private net/PID/HOME namespace; all three guides in three selected harness profiles; no native harness discovery or models.",
+  "first_status": "INSTALLED",
+  "repeat_status": "CURRENT",
+  "raw_report_sha256": "6291d84bd17ff81021d9ad9c86b270269a8b461e07bafc7819776b54964eeda9",
+  "outer_receipt_sha256": "6c7cc1ced557f341692b97f9b3f98008620255694106603002f7bf0703549f1a",
+  "declaration_sha256": "ff9089d3c4c81bdffb5d763159fd5961d49e0f3825c9923a3b67915e525f5d59",
+  "actual_console_sha256": "148402ce54aedadb5a39b3a9d4138dab9a3d10bb49b4f83d687cbaec779e4018",
+  "actual_lexical_versioned_VENV_shebang_verified": true,
+  "outer_waited": true,
+  "afterwait_allthread_children": 0,
+  "afterwait_PPID_children": 0,
+  "explicit_three": [
+    {
+      "status": "INSTALLED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "INSTALLED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ],
+  "explicit_three_repeat": [
+    {
+      "status": "UNCHANGED",
+      "harness": "codex",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "hermes",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    },
+    {
+      "status": "UNCHANGED",
+      "harness": "omp",
+      "profile": "default",
+      "scope": "user",
+      "skills": [
+        "clef-use",
+        "clef-use-blender",
+        "clef-use-diagnostics"
+      ],
+      "stages": {
+        "INSTALLED": {
+          "status": "PASS"
+        },
+        "DISCOVERED": {
+          "status": "NOT_RUN"
+        },
+        "LOADED": {
+          "status": "NOT_RUN"
+        },
+        "INVOKED": {
+          "status": "NOT_RUN"
+        },
+        "TASK_VERIFIED": {
+          "status": "NOT_RUN"
+        }
+      }
+    }
+  ]
+}

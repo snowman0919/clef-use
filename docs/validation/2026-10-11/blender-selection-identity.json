@@ -1,0 +1,289 @@
+{
+  "classification": "OBSERVED",
+  "scope": "Stable selected-object identity and complete location/scale properties: software regression plus owned factory Blender collector/provider and API-assisted native Tk input-boundary components. Not E2E or model work.",
+  "source_base": "aa27d5c4a780ac40f7a66fa8717398c15b6cef40",
+  "official_api_source": "https://docs.blender.org/api/5.2/bpy.types.ID.html",
+  "operation_registry_version": 4,
+  "api_schema_sha256": "df0899e3691cd7ba6f4d6b30760766ba5d349e06ce4504ee4a2cba914937ea91",
+  "factory_blender_before": {
+    "status": "EXPECTED_GAP",
+    "checks": {
+      "complete_six_axis_readback": false,
+      "stable_native_identity_published": false,
+      "actual_rename_preserved_uid": true,
+      "actual_same_name_replacement_changed_uid": true,
+      "replacement_transform_unchanged": true,
+      "unavailable_guards_unknown": true,
+      "expected_before_gap_observed": true
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "child_proc_absent": true,
+      "observer_socket_removed": true,
+      "x_socket_removed": true,
+      "production_blender_preserved": true
+    },
+    "source_sha256": {
+      "blender_state.py": "c5327bd55323f82a512c700a78cb32266a388b1b802e936ba211adf5217534c2",
+      "blender_snapshot.py": "e5d8efbab5bcb7873ccc687d67d177c89ae60002fb87645b7ed6403a21986ce8",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+      "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "state.py": "898bc8cf6b68c4063ce9c7026897475286bc2479f323f51fd62cec79859bbe29",
+      "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4"
+    },
+    "collector_sha256": {
+      "blender_snapshot.py": "ab644335c833b0f56cf6d7e27880b3768816260311bf025d5ec267c7c8d1a6c4",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06"
+    },
+    "blender_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "keyboard_pointer_inputs": 0,
+    "models": 0,
+    "native_focus_calls": 1,
+    "production_display_access": 0,
+    "private_report_sha256": "4a6e22869ef3627937a938e74fffa9e5b07116aa0794c6b168f22ffc7bfdb1e4"
+  },
+  "factory_blender_after": {
+    "status": "PASS",
+    "checks": {
+      "complete_six_axis_readback": true,
+      "stable_native_identity_published": true,
+      "actual_rename_preserved_uid": true,
+      "actual_same_name_replacement_changed_uid": true,
+      "replacement_transform_unchanged": true,
+      "unavailable_guards_unknown": true,
+      "expected_before_gap_observed": false
+    },
+    "cleanup": {
+      "children_waited": 2,
+      "children_exited": true,
+      "child_proc_absent": true,
+      "observer_socket_removed": true,
+      "x_socket_removed": true,
+      "production_blender_preserved": true
+    },
+    "source_sha256": {
+      "blender_state.py": "c5327bd55323f82a512c700a78cb32266a388b1b802e936ba211adf5217534c2",
+      "blender_snapshot.py": "e5d8efbab5bcb7873ccc687d67d177c89ae60002fb87645b7ed6403a21986ce8",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06",
+      "schema.py": "fdef2ed80bea7d6415ccf32f1d78b24a7d593b473f9b495590f11412ab8e87dd",
+      "state.py": "898bc8cf6b68c4063ce9c7026897475286bc2479f323f51fd62cec79859bbe29",
+      "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4"
+    },
+    "collector_sha256": {
+      "blender_snapshot.py": "e5d8efbab5bcb7873ccc687d67d177c89ae60002fb87645b7ed6403a21986ce8",
+      "blender_observer.py": "7e4bee64b0fd67c76f85c0c4e1a61ba54f02c803f216fcf0f4d605fc9e4e6d06"
+    },
+    "blender_sha256": "83e8261eace07a5337f71b52d156c1eece1a6ba913403cc6406182ae58bacf27",
+    "keyboard_pointer_inputs": 0,
+    "models": 0,
+    "native_focus_calls": 1,
+    "production_display_access": 0,
+    "private_report_sha256": "12f5298a9775e46ff9543e4605cf91e39b4819f9f3d38a94bddfe8ddab4b7a5e"
+  },
+  "factory_fixture_setup": "Explicit public RNA setters on a new private factory scene: nonuniform location/scale, rename original, link its copy under original name. No production scene/display access or model execution.",
+  "factory_samples_after": {
+    "baseline": {
+      "identity_matches_native_session_uid": true,
+      "properties": {
+        "location_x": 1.25,
+        "location_y": -2.5,
+        "location_z": 3.75,
+        "scale_x": 0.5,
+        "scale_y": 1.5,
+        "scale_z": 2.5,
+        "shading": "FLAT",
+        "shading_observed": true
+      },
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    },
+    "renamed": {
+      "identity_matches_native_session_uid": true,
+      "properties": {
+        "location_x": 1.25,
+        "location_y": -2.5,
+        "location_z": 3.75,
+        "scale_x": 0.5,
+        "scale_y": 1.5,
+        "scale_z": 2.5,
+        "shading": "FLAT",
+        "shading_observed": true
+      },
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    },
+    "same_name_replacement": {
+      "identity_matches_native_session_uid": true,
+      "properties": {
+        "location_x": 1.25,
+        "location_y": -2.5,
+        "location_z": 3.75,
+        "scale_x": 0.5,
+        "scale_y": 1.5,
+        "scale_z": 2.5,
+        "shading": "FLAT",
+        "shading_observed": true
+      },
+      "unknowns": {
+        "popup": "UNKNOWN",
+        "text_focus": "UNKNOWN",
+        "ime_composing": "UNKNOWN",
+        "keymap": "UNKNOWN",
+        "loading": "UNKNOWN",
+        "editor": "UNKNOWN"
+      }
+    }
+  },
+  "native_input_boundary": {
+    "PASS": {
+      "scope": "API_ASSISTED native Tk identity guard component; direct canonical input boundary, not complete operation or Blender context proof",
+      "same_name_replacement": "CONTEXT_CHANGED_BEFORE_INPUT",
+      "unchanged_identity_entry_delivered": true,
+      "owned_cancel_after_replacement": "CONTEXT_CHANGED_BEFORE_INPUT",
+      "status": "PASS",
+      "native_events": [
+        "g",
+        "escape"
+      ],
+      "owned_keys": [],
+      "owned_buttons": [],
+      "models": 0,
+      "production_display_access": 0,
+      "private_report_sha256": "f1a0c9367acdc94d03a14cbd1749b777f8015e6c4415b03483b4da16eb8d66c8",
+      "source": {
+        "exit_code": 0,
+        "source_sha256": {
+          "operations.py": "678b876e1a5749086acf43d10819d028010ac0a42be4ed98d1f7e55d07b01d5f",
+          "runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970",
+          "input_ir.py": "b83414837d051883cdb758e09d02dce86707f4a17175285ca5d0da4dfe91e7b4",
+          "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+          "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+        },
+        "driver_sha256": "91ce8852d0d084bcd86c619a88b89fd3a0662c5d06538aa78b2b7219cb8dd385"
+      }
+    },
+    "EXPECTED_GAP": {
+      "scope": "API_ASSISTED native Tk identity guard component; direct canonical input boundary, not complete operation or Blender context proof",
+      "same_name_replacement": "OLD_NATIVE_INPUT_DELIVERED",
+      "unchanged_identity_entry_delivered": true,
+      "owned_cancel_after_replacement": "OLD_NATIVE_ESCAPE_DELIVERED",
+      "status": "EXPECTED_GAP",
+      "native_events": [
+        "g",
+        "escape"
+      ],
+      "owned_keys": [],
+      "owned_buttons": [],
+      "models": 0,
+      "production_display_access": 0,
+      "private_report_sha256": "aad6a8eec5af1b4cbd394f85c87f38d6bf6ae2fe598cc13b015c2a0e6428c91c",
+      "source": {
+        "exit_code": 0,
+        "source_sha256": {
+          "operations.py": "678b876e1a5749086acf43d10819d028010ac0a42be4ed98d1f7e55d07b01d5f",
+          "runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970",
+          "input_ir.py": "b83414837d051883cdb758e09d02dce86707f4a17175285ca5d0da4dfe91e7b4",
+          "backends.py": "2d49a295669080a7001eee9ae3c4698ce849d5eb3b97ff9facca4c54d9ad7de4",
+          "x11_input_state.py": "7b08b3253e249dffedd1351bfb762fdf71aed3e6f2c62b2c693cb5f6af88f139"
+        },
+        "driver_sha256": "91ce8852d0d084bcd86c619a88b89fd3a0662c5d06538aa78b2b7219cb8dd385"
+      },
+      "immutable_baseline_runtime_sha256": "8e4881dec1aa5d2a7b4f6c8c5fdaff4bcf8fd08fad0096ca3b93e2370fc6df24"
+    }
+  },
+  "native_input_cleanup": {
+    "owned_home_process_matches": 0,
+    "unreadable_unrelated_process_entries": 417,
+    "owned_private_sockets_absent": true,
+    "owned_x_sockets_absent": true,
+    "production_blender_preserved": true
+  },
+  "source_counterexample": {
+    "classification": "OBSERVED_PURE_COMPONENT",
+    "before_application_snapshot": {
+      "objects": {
+        "Cube": {
+          "type": "MESH",
+          "mode": "OBJECT",
+          "properties": {
+            "location_x": 0.0
+          }
+        }
+      }
+    },
+    "after_application_snapshot": {
+      "objects": {
+        "Cube": {
+          "type": "EMPTY",
+          "mode": "OBJECT",
+          "properties": {
+            "location_x": 0.0
+          }
+        }
+      }
+    },
+    "selected_name_unchanged": true,
+    "operation_status": "SUCCEEDED",
+    "input_count": 4,
+    "final_X": 2.0,
+    "limitation": "Controlled replacement counterexample; no native Blender execution. Existing raw object mode/type changes are ignored and no stable object identity guard exists."
+  },
+  "initial_red_suite": {
+    "failed": 17,
+    "passed": 78,
+    "log_sha256": "b82e458bdd54f91e825b066bc13f5aef580eea1ab60aa2f4953882ebbd4035ef"
+  },
+  "closure_readback_red_log_sha256": "5da655917f7c70dbb176af1f2b324d14f768137550fe791e706acf30c09cdb76",
+  "scoped_regression": {
+    "passed": 105,
+    "log_sha256": "c8ff861766afb9c40bf4d73f8742b1044f253602cf0b296a1233ffd82dbbbdf2"
+  },
+  "driver_sha256": {
+    "clef_blender_identity_native_20261012.py": "e950fdcb34391b37f9435035d3a21831d0563e0def7412c90cbe328ba334f616",
+    "clef-identity-input-native-20261012.py": "91ce8852d0d084bcd86c619a88b89fd3a0662c5d06538aa78b2b7219cb8dd385",
+    "clef-identity-input-native-driver-20261012.py": "f8a070fa3a15c663a2f8566762fb86ce5cde6d6f794d50b689138046cf04b46f"
+  },
+  "not_run": {
+    "whole_task_e2e_and_models": "Owned by other sessions under direct user scope.",
+    "installed_current_harness_e2e": "Not executed in software component slice.",
+    "full_accuracy_reaction_p95_goodput_coverage": "Not measured by these components.",
+    "windows_darwin_native_identity": "Linux X11 components only.",
+    "production_blender_operation": "Partial observer cannot establish popup/text/IME/effective dispatch/global busy absence; UNKNOWN guards retained."
+  },
+  "acceptance_status_promotions": [],
+  "integrated_regression": {
+    "passed": 1062,
+    "skipped": 34,
+    "warnings": 41,
+    "seconds": 54.13,
+    "log_sha256": "e05fe3068f3ba286fc3cf84895b3aa7bc42851882e4fd8a1643e1357948b972f",
+    "ruff_and_format": "PASS ten changed Python files",
+    "generated_contract": "PASS",
+    "scope": "Integrated software source with stable identities and six-axis properties; no whole E2E or model execution."
+  },
+  "final_source_sha256": {
+    "src/clef_use/state.py": "898bc8cf6b68c4063ce9c7026897475286bc2479f323f51fd62cec79859bbe29",
+    "src/clef_use/blender_snapshot.py": "ae96ae9ca37ceb6459c402957e8dbdf54e1517a0527a56d191b706b2351e2b12",
+    "src/clef_use/blender_state.py": "c5327bd55323f82a512c700a78cb32266a388b1b802e936ba211adf5217534c2",
+    "src/clef_use/operations.py": "c03d8ca654413bad0574c7090403dae0331ecf265b094ec2903de95aeb4f5818",
+    "src/clef_use/runtime.py": "2c1a3410601abf5577be370a16d67e097ff928f61e011ad5d8201e9c6d220970",
+    "src/clef_use/capabilities.py": "d27b4eb126ba255fceb3f37f7d2ae2b0a3155a7222f9c4d5ae25c4e4a2a5416f",
+    "tests/test_blender_snapshot.py": "8417f0cab6298d8299b1ca139508fefcfc21f6ef6c211329f50fe925adab0727",
+    "tests/test_blender_state.py": "cd93d4e3fe74008e1e208c10a20ad3ff4881a211de4d41fe3aac6bf2486f4109",
+    "tests/test_operations.py": "084fffb3bef067e8205063095340778eac55b24a732bc025c9df015c2b56d8db",
+    "tests/test_operation_runtime.py": "2f2fc5411dc27fe512b1dd1b33e099d53f7b20ad7122bbfd09e32ecc678d54db"
+  }
+}
