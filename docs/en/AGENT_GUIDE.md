@@ -1,5 +1,12 @@
 # Agent setup, use and recovery
 
+Immutable .50 CI passes fifteen platform installation/archive checks. An owned
+Windows candidate passes CLI installation, CURRENT, payload and LIMITED-token
+MCP checks with `--integration-preview`, preserving shared .49 and active harness
+registrations while another session operates Windows. Standard update, native
+Codex .50 and GUI E2E remain NOT_RUN. See
+[the candidate receipt](../validation/2026-10-14/windows-isolated-ci-0150.json).
+
 OMP can carry a read-only MCP call through `write xd://<tool>`. Verification
 requires matching native target/arguments/server/result and exact consumer
 payload before credit; the method name alone cannot prove a file write or a

@@ -1,5 +1,11 @@
 # 代理安装、使用与恢复
 
+不可变 .50 CI 已通过 15 个平台的安装与归档检查。专用 Windows 候选安装使用
+`--integration-preview`，通过 CLI 安装、CURRENT、文件和 LIMITED 令牌下的 MCP 检查。
+另一会话正在操作 Windows，因此保留共享 .49 和活动工具环境注册。标准更新、
+原生 Codex .50 与 GUI E2E 仍为 NOT_RUN。
+参见[候选验证记录](../validation/2026-10-14/windows-isolated-ci-0150.json)。
+
 OMP 也能用 `write xd://<tool>` 传输只读 MCP 调用。验证只认可原生目标、参数、服务器、
 结果和实际消费者载荷完全匹配的调用；不能仅凭方法名称判断文件写入或安全读取。
 加载指南前的调用、实际被拒绝的写入以及不匹配仍判定失败。

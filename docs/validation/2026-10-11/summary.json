@@ -58,6 +58,7 @@
     "clef-use-diagnostics": "6b09069ecf20521d6ecb14b4ee3c84c0b499b3181d50088253652ba988c8c0ad"
   },
   "artifacts": {
+    "windows_isolated_ci_0150_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-isolated-ci-0150.json", "sha256": "d8942e5733e4b242dc00e7882770a4cb8177d2049451a7a779a173582b63c6c8", "raw_artifact_committed": true},
     "omp_device_evidence_0150_20261014": {"local_artifact": "docs/validation/2026-10-14/omp-device-evidence-0150.json", "sha256": "8e37c7267d36a3199b419040e2da9fedced13cc55f7a833211c488bf457f5353", "raw_artifact_committed": true},
     "windows_installed_ci_0149_20261014": {"local_artifact": "docs/validation/2026-10-14/windows-installed-ci-0149.json", "sha256": "3598c662d08aba91b53cc398b4900ef689f87adbe67ea15aeccf129d8c713c4b", "raw_artifact_committed": true},
     "read_only_harness_boundary_0149_20261014": {"local_artifact": "docs/validation/2026-10-14/read-only-harness-boundary-0149.json", "sha256": "c3fd7ede357f8db7ac57d76860a836dea755e717e61dec29331579b29130ef8b", "raw_artifact_committed": true},

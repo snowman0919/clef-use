@@ -6,6 +6,9 @@
   execution result and consumer payload are bound. Preserve early-invocation,
   ordinary-write, unpaired-result and native-error failures. Record source .50
   native component, exact .49 replay and fresh model cases separately.
+- Verify immutable .50 CI and an isolated native Windows candidate with LIMITED
+  token and MCP checks. Preserve shared .49 and active harness registrations while
+  another session operates Windows; standard update and GUI E2E remain pending.
 - Filter native Hermes skill management from read-only verification's initial,
   refreshed and deferred tool definitions; deny its central registry dispatch
   while preserving native readers. Verify actual SDK denial and byte preservation

@@ -1,5 +1,46 @@
 # Reactive runtime execution status
 
+## Immutable .50 CI and isolated Windows candidate, 2026-10-14
+
+**OBSERVED / immutable CI:** [run 38498619741](https://github.com/snowman0919/clef-use/actions/runs/38498619741)
+passes all fifteen native build/install jobs and assembly for source
+17eed1bc47e5f318f7d3c3ca5c1d3a3bcc0839ac. All fifteen archives match 68 Git
+source/guide payloads and current contracts. Fifteen native installer logs prove
+first/update/CURRENT and three failure-preservation checks. The synthetic update
+fixture ends at .51; the actual candidate runtime is .50. Public deployment
+remains SKIPPED by the existing feature guard.
+
+**OBSERVED / isolated native Windows:** the user confirms another session is
+currently operating Windows. The shared standard installation, active older
+package and GUI are therefore preserved. An exclusively owned alternate root
+installs actual .50 through the canonical CLI with integration-preview, then
+reports CURRENT on repeat. That flag avoids automatic refresh of shared approved
+harness profiles. No new harness enrollment or shared standard update occurs.
+Only artifact URLs are projected to an owned loopback server; archive bytes and
+other metadata remain verified. Payload hashes for 68 files, capabilities and
+offline executable fixtures pass. Shared launcher/configuration/auth bytes and
+old package files remain unchanged; the owned server stops and endpoint is absent.
+
+The actual LIMITED desktop token verifies candidate payload access, version,
+capabilities, offline fixtures and read-only stdio MCP. The native scheduled task
+exits0 and is removed. These windowless checks request no model, capture, focus
+or input. A separate standard-launcher version command confirms .49 remains
+active. This candidate proof does not close user harness enrollment, standard
+.49 -> .50 update, installed Codex .50 or GUI task verification.
+
+**Current remaining conditions:** new Windows GUI/abort/browser/editor and
+1000-opportunity accuracy/correct-input p95<=100ms/coverage/goodput checks await
+input coordination with the confirmed other session. Blender's prior File-menu
+0/5 and unproven popup/IME/input-owner/effective-keymap states remain; no guard or
+threshold is weakened, and external host development stays outside scope. OMP
+positive cases retain their native errors/deadline/guide-order failures; the .50
+negative socket failure remains NOT_RUN, not an authentication diagnosis. Reici
+matched-view/review evidence is pending from the separate session. Public URL,
+hash and fresh-install/update proof remains NOT_RUN behind the feature guard.
+Original acceptance statuses and numeric gates remain unchanged. See the
+[CI/candidate receipt](validation/2026-10-14/windows-isolated-ci-0150.json), whose
+remaining_conditions maps these limitations to the original acceptance IDs.
+
 ## Source .50 OMP virtual-device evidence, 2026-10-14
 
 **OBSERVED / correction:** native OMP uses write xd://<tool> for virtual tool
@@ -40,8 +81,8 @@ Protected configuration bytes, frozen source and absent GUI endpoints pass.
 This OMP batch changes only cache/model_perf complete rows; its unchanged auth
 rows do not repair the earlier .49 credential-material uncertainty.
 
-**NOT_RUN / remaining validation:** .50 immutable CI and installed Windows .50
-are not yet executed. The verified Windows installation remains .49. New GUI
+**NOT_RUN / validation at this earlier checkpoint:** .50 immutable CI and Windows
+.50 candidate checks were not yet executed. The standard installation remains .49. New GUI
 input/abort, original Blender work, full same-task accuracy/100ms/coverage/goodput,
 Reici and guarded public verification remain open. Original acceptance statuses
 and gates remain unchanged. See the

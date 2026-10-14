@@ -1,5 +1,11 @@
 # 에이전트 설치·사용·복구
 
+불변 .50 CI의 15개 플랫폼 설치·아카이브 검사가 통과했습니다. 전용 Windows 후보
+설치본은 `--integration-preview`로 CLI 설치, CURRENT, 파일·LIMITED 토큰 MCP 검사를
+통과했습니다. 다른 세션이 Windows를 조작하므로 공유 .49와 활성 하네스 등록은 보존합니다.
+표준 설치 업데이트, native Codex .50과 GUI E2E는 NOT_RUN입니다.
+[후보 설치 기록](../validation/2026-10-14/windows-isolated-ci-0150.json)을 확인하세요.
+
 OMP는 읽기 전용 MCP 호출도 `write xd://<tool>`로 운반할 수 있습니다. 검증은 native
 대상·인자·서버·결과와 실제 소비자 응답이 모두 일치할 때만 호출을 인정합니다.
 메서드 이름만으로 파일 쓰기나 안전한 읽기를 판정하지 않습니다. 지침 이전 호출,
